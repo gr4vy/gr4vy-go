@@ -3,7 +3,7 @@ package gr4vy
 import (
 	"net/http"
 	"golang.org/x/net/context"
-	. "github.com/steve-gr4vy/gr4vy/api"
+	. "github.com/gr4vy/gr4vy-go/api"
 )
 
 type Gr4vyListPaymentOptionsParams ListPaymentOptionsParams

@@ -2,7 +2,7 @@ package gr4vy
 
 import (
 	"fmt"
-	. "github.com/steve-gr4vy/gr4vy/api"
+	. "github.com/gr4vy/gr4vy-go/api"
 	"github.com/deepmap/oapi-codegen/pkg/securityprovider"
 	"github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/ssh"

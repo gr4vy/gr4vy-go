@@ -1,4 +1,4 @@
-module github.com/steve-gr4vy/gr4vy
+module github.com/gr4vy/gr4vy-go
 
 go 1.16
 

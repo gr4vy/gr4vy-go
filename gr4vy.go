@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"runtime"
 	"strings"
-	. "github.com/steve-gr4vy/gr4vy/api"
+	. "github.com/gr4vy/gr4vy-go/api"
 )
 
 const VERSION = "0.0.1"
