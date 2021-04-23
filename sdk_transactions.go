@@ -9,8 +9,7 @@ import (
 type Gr4vyListTransactionsParams ListTransactionsParams
 type Gr4vyAuthorizeNewTransaction AuthorizeNewTransactionJSONRequestBody
 type Gr4vyCaptureTransaction CaptureTransactionJSONRequestBody
-// type Gr4vyUpdateBuyer UpdateBuyerJSONRequestBody
-// type Gr4vyBuyer Buyer
+type Gr4vyTransaction Transaction
 
 func (c *Gr4vyClient) ListTransactions(params Gr4vyListTransactionsParams) (*http.Response, error) {
     client, err := GetClient(c)

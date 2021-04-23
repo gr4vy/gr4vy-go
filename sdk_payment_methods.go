@@ -9,7 +9,7 @@ import (
 type Gr4vyListPaymentMethodsParams ListPaymentMethodsParams
 type Gr4vyStorePaymentMethod StorePaymentMethodJSONRequestBody
 type Gr4vyPaymentMethod CardRequest
-
+type Gr4vyCard Card
 
 func (c *Gr4vyClient) ListPaymentMethods(params Gr4vyListPaymentMethodsParams) (*http.Response, error) {
     client, err := GetClient(c)

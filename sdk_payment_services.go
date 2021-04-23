@@ -10,6 +10,7 @@ type Gr4vyListPaymentServicesParams ListPaymentServicesParams
 type Gr4vyAddPaymentService AddPaymentServiceJSONRequestBody
 type Gr4vyUpdatePaymentService UpdatePaymentServiceJSONRequestBody
 type Gr4vyPaymentService PaymentService
+type Gr4vyPaymentServices PaymentServices
 
 func (c *Gr4vyClient) ListPaymentServices(params Gr4vyListPaymentServicesParams) (*http.Response, error) {
     client, err := GetClient(c)
