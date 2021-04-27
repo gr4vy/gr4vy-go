@@ -104,6 +104,10 @@ func lastString(ss []string) string {
     return ss[len(ss)-1]
 }
 
-func GetKeyFromFile(fileName string) ([]byte, error) {
-	return ioutil.ReadFile(fileName)
+func GetKeyFromFile(fileName string) (string, error) {
+	b, err := ioutil.ReadFile(fileName)
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
 }
