@@ -37,26 +37,19 @@ import (
 )
 
 func main() {
-  key, err := ioutil.ReadFile("privateKey.pem")
+  key, err := gr4vy.GetKeyFromFile(PRIVATE_KEY)
   if err != nil {
     fmt.Println(err)
     return
   }
-  client := gr4vy.NewGr4vyClient("YOUR_GR4VY_ID", string(key))
-  var params ListBuyersParams
+  client := gr4vy.NewGr4vyClient("YOUR_GR4VY_ID", key)
+  client.Debug = true
+
+  params := gr4vy.Gr4vyListBuyersParams{
+    Limit: gr4vy.Int32(2),
+  }
   response, error := client.ListBuyers(params)
-  
-  if error != nil {
-    fmt.Println(error)
-    return
-  }
-  defer response.Body.Close()
-  body, err := io.ReadAll(response.Body)
-  if err != nil {
-    fmt.Println(err)
-  } else {
-    fmt.Println(string(body))
-  }
+  ..
 }
 ```
 
@@ -66,9 +59,7 @@ To create a token for Gr4vy Embed, call the `client.GetEmbedToken(embed)` functi
 
 ```golang
   embed := map[string]string{"amount": "200", "currency": "USD", "buyer_id": "d757c76a-cbd7-4b56-95a3-40125b51b29c"}
-  client := gr4vy.NewGr4vyClient("YOUR_GR4VY_ID", string(key))
-  responseStr, err := client.GetEmbedToken(embed)
-
+  token, err = client.GetEmbedToken(embed)
 ```
 
 You can now pass this token to your frontend where it can be used to authenticate Gr4vy Embed.
@@ -76,15 +67,15 @@ You can now pass this token to your frontend where it can be used to authenticat
 The `buyer_id` and/or `buyer_external_identifier` fields can be used to allow the token to pull in previously stored payment methods for a user. A buyer needs to be created before it can be used in this way.
 
 ```golang
-  var req AddBuyerJSONRequestBody
-  helper := string("Jane Smith")
-  req.DisplayName = &helper
+  req := gr4vy.Gr4vyAddBuyer{
+    DisplayName: gr4vy.String("Jane Smith"),
+  }
   response, err := client.AddBuyer(req)
   if err != nil {
     fmt.Println(err)
     return
   }
-  var p Buyer
+  var p Gr4vyBuyer
   defer response.Body.Close()
   err = json.NewDecoder(response.Body).Decode(&p)
   if err != nil {
@@ -128,32 +119,31 @@ Your API private key can be created in your admin panel on the **Integrations** 
 This library conveniently maps every API path to a seperate function. For example, `GET /buyers?limit=100` would be:
 
 ```golang
-  var params ListBuyersParams
-  helper := int32(5)
-  params.Limit = &helper  
+  params := gr4vy.Gr4vyListBuyersParams{
+    Limit: gr4vy.Int32(2),
+  }
   response, error := client.ListBuyers(params)
 ```
 
 To create or update a resource, the API requires a request object for that
-resource that is conventiently named `<Resource>JsonRequestBody`.
+resource that is conventiently named `Gr4vy<Resource>`.
 
-For example, to create a buyer you will need to pass a `AddBuyerJsonRequestBody` object to
+For example, to create a buyer you will need to pass a `Gr4vyAddBuyer` object to
 the `AddBuyer` method.
 
 ```golang
-  var req AddBuyerJSONRequestBody
-  helper := string("Jane Smith")
-  req.DisplayName = &helper
+  req := gr4vy.Gr4vyAddBuyer{
+    DisplayName: gr4vy.String("Jane Smith"),
+  }
   response, error := client.AddBuyer(req)
 ```
 
-Similarly, to update a buyer you will need to pass in the `UpdateBuyerJsonRequestBody` to the `UpdateBuyer` method.
+Similarly, to update a buyer you will need to pass in the `Gr4vyUpdateBuyer` to the `UpdateBuyer` method.
 
 ```golang
-  var req UpdateBuyerJSONRequestBody
-  helper := string("Jane Smith")
-  req.DisplayName = &helper
-  response, error := client.UpdateBuyer(buyer.id, req)
+  var req Gr4vyUpdateBuyer
+  req.DisplayName = String("Janet Smith")
+  response, err := client.UpdateBuyer(buyerId, req)
 ```
 
 ## Response 
@@ -195,25 +185,12 @@ This will output the request parameters and response to the console as follows.
   Gr4vy - Response - {"items":[{"id":"b8433347-a16f-46b5-958f-d681876546a6","type":"buyer","display_name":"Jane Smith","external_identifier":null,"created_at":"2021-04-22T06:51:16.910297+00:00","updated_at":"2021-04-22T07:18:49.816242+00:00"}],"limit":1,"next_cursor":"fAA0YjY5NmU2My00NzY5LTQ2OGMtOTEyNC0xODVjMDdjZTY5MzEAMjAyMS0wNC0yMlQwNjozNTowNy4yNTMxMDY","previous_cursor":null}
 ```
 
-## Available APIs
-
-* ListBuyers
-* ListBuyer
-
 ## Development
 
 ### Adding new APIs
 
 To add new APIs, run the following command to update the models and APIs based
 on the API spec.
-
-```sh
-  go get github.com/deepmap/oapi-codegen/cmd/oapi-codegen
-  
-  download https://raw.githubusercontent.com/gr4vy/gr4vy-openapi/sdks/openapi.v1.json
-  
-  oapi-codegen gr4vy-openapi.v1.json > api/gr4vy.gen.go
-```
 
 ```sh
   ./openapi-generator-generate.sh

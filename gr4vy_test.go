@@ -40,9 +40,9 @@ func TestAddBuyerAndEmbed(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var req Gr4vyAddBuyer
-	helper := string("Jane Smith")
-	req.DisplayName = &helper
+	req := Gr4vyAddBuyer{
+		DisplayName: String("Jane Smith"),
+	}
 	response, err := client.AddBuyer(req)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -86,9 +86,9 @@ func TestListBuyers(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var params Gr4vyListBuyersParams{Limit: &helper}
-	helper := int32(5)
-    params.Limit = &helper
+    params := Gr4vyListBuyersParams{
+		Limit: Int32(5),
+	}
 	_, err = client.ListBuyers(params)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -103,9 +103,9 @@ func TestAddBuyer(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var req Gr4vyAddBuyer
-	helper := string("Jane Smith")
-	req.DisplayName = &helper
+	req := Gr4vyAddBuyer{
+		DisplayName: String("Jane Smith"),
+	}
 	response, err := client.AddBuyer(req)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -154,8 +154,8 @@ func TestUpdateBuyer(t *testing.T) {
 	client := NewGr4vyClient("demo", key)
 	
 	var req Gr4vyUpdateBuyer
-	helper := string("Jane Smith")
-	req.DisplayName = &helper
+	req.DisplayName = String("Jane Smith")
+
 	_, err = client.UpdateBuyer(buyerId, req)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -187,7 +187,8 @@ func TestListPaymentMethods(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var params Gr4vyListPaymentMethodsParams
+	params := Gr4vyListPaymentMethodsParams{
+	}
 	_, err = client.ListPaymentMethods(params)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -202,11 +203,13 @@ func TestStorePaymentMethod(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var req Gr4vyStorePaymentMethod
-	req.Method = "card"
-	req.Number = "4111111111111111"
-	req.ExpirationDate = "12/24"
-	req.SecurityCode = "123"
+	req := Gr4vyStorePaymentMethod{
+		Method: "card",
+		Number: "4111111111111111",
+		ExpirationDate: "12/24",
+		SecurityCode: "123",
+	}
+
 	response, err := client.StorePaymentMethod(req)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -271,7 +274,8 @@ func TestListPaymentOptions(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var params Gr4vyListPaymentOptionsParams
+	params := Gr4vyListPaymentOptionsParams{
+	}
 	_, err = client.ListPaymentOptions(params)	
 	if err != nil {
 		t.Errorf(err.Error())
@@ -287,7 +291,8 @@ func TestListPaymentServiceDefinitions(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var params Gr4vyListPaymentServiceDefinitionsParams
+	params := Gr4vyListPaymentServiceDefinitionsParams{
+	}
 	_, err = client.ListPaymentServiceDefinitions(params)	
 	if err != nil {
 		t.Errorf(err.Error())
@@ -317,7 +322,8 @@ func TestListPaymentServices(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var params Gr4vyListPaymentServicesParams
+	params := Gr4vyListPaymentServicesParams{
+	}
 	response, err := client.ListPaymentServices(params)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -357,15 +363,14 @@ func TestAddPaymentService(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var req Gr4vyAddPaymentService
-	helper := string("stripe-card")
-	req.PaymentServiceDefinitionId = &helper
-	helper1 := string("Test")
-	req.DisplayName = &helper1
-	helper2 := []string{"GBP"}
-	req.AcceptedCurrencies = &helper2
-	helper3 := []string{"GB"}
-	req.AcceptedCountries = &helper3
+	req := Gr4vyAddPaymentService{
+		PaymentServiceDefinitionId: String("stripe-card"),
+	}
+	req.DisplayName = String("Test")
+	helper1 := []string{"GBP"}
+	req.AcceptedCurrencies = &helper1
+	helper2 := []string{"GB"}
+	req.AcceptedCountries = &helper2
 
 	fields := &[]struct {
 		Key string `json:"key"`
@@ -399,9 +404,9 @@ func TestUpdatePaymentService(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var req Gr4vyUpdatePaymentService
-	helper := string("Braintree UK")
-	req.DisplayName = &helper
+	req := Gr4vyUpdatePaymentService{
+		DisplayName: String("Braintree UK"),
+	}
 	response, err := client.UpdatePaymentService(paymentServiceIdDelete, req)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -442,7 +447,8 @@ func TestListCardRules(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var params Gr4vyListCardsRulesParams
+	params := Gr4vyListCardsRulesParams{
+	}
 	_, err = client.ListCardsRules(params)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -546,7 +552,8 @@ func TestListTransactions(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var params Gr4vyListTransactionsParams
+	params := Gr4vyListTransactionsParams{
+	}
 	_, err = client.ListTransactions(params)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -561,17 +568,17 @@ func TestAuthorizeNewTransaction(t *testing.T) {
 	}
 	client := NewGr4vyClient("demo", key)
 	
-	var req Gr4vyAuthorizeNewTransaction
-	req.Amount = 12.99
-	req.Currency = "USD"
-	var paymentMethod Gr4vyTransactionPaymentMethodRequest
-	paymentMethod.Method = "card"
-	helper1 := "4111111111111111"
-	paymentMethod.Number = &helper1
-	helper2 := "12/24"
-	paymentMethod.ExpirationDate = &helper2
-	helper3 := "123"
-	paymentMethod.SecurityCode = &helper3
+	req := Gr4vyAuthorizeNewTransaction{
+		Amount: 12.99,
+		Currency: "USD",
+	}
+	paymentMethod := Gr4vyTransactionPaymentMethodRequest{
+		Method: "card",
+		Number: String("4111111111111111"),
+		ExpirationDate: String("12/24"),
+		SecurityCode: String("123"),
+	}
+
 	response, err := client.AuthorizeNewTransaction(req, paymentMethod)
 	if err != nil {
 		t.Errorf(err.Error())
