@@ -28,27 +28,12 @@
   ],
   "tags": [
     {
-      "name": "API Key Pairs",
-      "description": "In Gr4vy, an API key pair is used to sign and validate JSON Web Tokens (JWT).\nJWTs are used as a HTTP `bearer` token to authenticate to the API. For more\ninformation please visit our [in-depth authentication](/guides/authentication)\nguide.",
-      "x-internal": true
-    },
-    {
-      "name": "Async APIs",
-      "x-internal": true,
-      "description": "The asynchronous (async) APIs are convenience APIs that function as an\nalternative way to create transactions and register payment methods\nwithout having to wait for the API to complete. Each of thee APIs returns\ndirectly without processing the request fully, allowing you to render a\nnew page for the buyer while the request is processed."
-    },
-    {
       "name": "Buyers",
       "description": "In Gr4vy, a buyer represents your customer, the shopper who's performing\na checkout and making a purchase.\n\nA buyer can be used by you to:\n\n* Display a human readable name (`display_name`) for a buyer in the Gr4vy\nadmin panel\n* Associate multiple tokenized payment methods with a single user\n* Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the\n  buyer's previously stored payment methods, allowing for faster checkout."
     },
     {
       "name": "Card Rules",
       "description": "In Gr4vy, a card rule defines how a card transaction is processed. It\ndetermines which payment services are used, and with what priority, based\non the transaction amount, card type, and many more attributes."
-    },
-    {
-      "name": "Merchants",
-      "description": "In Gr4vy, a merchant represents the customer that controls the instance.",
-      "x-internal": true
     },
     {
       "name": "Payment Methods",
@@ -67,712 +52,11 @@
       "description": "In Gr4vy, a payment service represents a configured payment provider\n(Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,\netc)\n\nThe payment services API can be used to:\n\n* Provide Gr4vy with the payment credentials for a payment provider.\n* Set a display name for a payment provider."
     },
     {
-      "name": "Sessions",
-      "description": "The sessions APIs are used to facilitate user authentication for the Gr4vy\ndashboard.",
-      "x-internal": true
-    },
-    {
       "name": "Transactions",
       "description": "In Gr4vy, a transaction represents a payment in any state, either before it\nis authorized, once it is captured, or after it has been refunded.\n\nThe transactions API can be used to:\n\n- Authorize, capture, and store cards.\n- Authorize, capture, and store alternative payment methods like PayPal.\n- Refund, void, and otherwise cancel existing transactions."
-    },
-    {
-      "name": "Users",
-      "description": "In Gr4vy, a user represents an employee of the merchant with access to the\ndashboard.",
-      "x-internal": true
     }
   ],
   "paths": {
-    "/async/payment-methods": {
-      "post": {
-        "operationId": "async-store-payment-method",
-        "summary": "Store a new payment method",
-        "description": "Stores and tokenizes a new payment method.",
-        "x-internal": true,
-        "tags": [
-          "Async APIs"
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/CardRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "202": {
-            "description": "Returns a status object.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                },
-                "examples": {
-                  "A status": {
-                    "value": {
-                      "type": "status",
-                      "status": "pending",
-                      "resource_type": "payment-method",
-                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                      "external_identifier": "user-789123"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/async/transactions": {
-      "post": {
-        "operationId": "async-create-transaction",
-        "summary": "Create transaction",
-        "tags": [
-          "Async APIs"
-        ],
-        "x-internal": true,
-        "description": "Attempts to create an authorization for a payment method.\n\nThis endpoint accepts a few additional fields that allow for simultaneous\ncapturing and storage of the payment method.\n\n* `payment_method.store` - Use this field to store the payment method for\nfuture use. Not all payment methods support this feature.\n* `capture` - Use this method to also perform a capture of the transaction\nafter it has been authorized.\n",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionRequest"
-              },
-              "examples": {
-                "Authorize a new card": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "payment_method": {
-                      "method": "card",
-                      "number": "4111111111111111",
-                      "expiration_date": "11/25",
-                      "security_code": "123"
-                    }
-                  }
-                },
-                "Authorized and tokenize a card": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "store": true,
-                    "payment_method": {
-                      "method": "card",
-                      "number": "4111111111111111",
-                      "expiration_date": "11/25",
-                      "security_code": "123"
-                    }
-                  }
-                },
-                "Authorize, capture, and tokenize a card": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "intent": "capture",
-                    "store": true,
-                    "payment_method": {
-                      "method": "card",
-                      "number": "4111111111111111",
-                      "expiration_date": "11/25",
-                      "security_code": "123"
-                    }
-                  }
-                },
-                "Authorize and capture a PayPal transaction": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "intent": "capture",
-                    "payment_method": {
-                      "method": "paypal",
-                      "redirect_url": "https://example.com/callback"
-                    }
-                  }
-                },
-                "Authorize and capture using a previously tokenized card": {
-                  "value": {
-                    "amount": 1299,
-                    "currency": "USD",
-                    "intent": "capture",
-                    "payment_method": {
-                      "method": "id",
-                      "id": "46973e9d-88a7-44a6-abfe-be4ff0134ff4"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "202": {
-            "description": "Returns a status object.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error400IncorrectJson"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/async/transactions/{transaction_id}/authorize": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "post": {
-        "operationId": "async-authorize-transaction",
-        "summary": "Authorize approved transaction",
-        "tags": [
-          "Async APIs"
-        ],
-        "x-internal": true,
-        "description": "Authorize a previously approved transaction.\n\nThis API returns asynchronously, returning status object with the ID of the\npending `Transaction` resource.",
-        "responses": {
-          "202": {
-            "description": "Returns a status object.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                },
-                "examples": {
-                  "Pending transaction": {
-                    "value": {
-                      "type": "status",
-                      "status": "pending",
-                      "resource_type": "transaction",
-                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                      "external_identifier": "user-789123"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error400IncorrectJson"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/async/transactions/{transaction_id}/capture": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "post": {
-        "operationId": "async-capture-transaction",
-        "summary": "Capture transaction",
-        "tags": [
-          "Async APIs"
-        ],
-        "x-internal": true,
-        "description": "Captures a previously authorized transaction.\n\nThis API returns asynchronously, returning status object with the ID of the\npending `Transaction` resource.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/TransactionCaptureRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "202": {
-            "description": "Returns a status object.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Status"
-                },
-                "examples": {
-                  "Pending transaction": {
-                    "value": {
-                      "type": "status",
-                      "status": "pending",
-                      "resource_type": "transaction",
-                      "resource_id": "8724fd24-5489-4a5d-90fd-0604df7d3b83",
-                      "external_identifier": "user-789123"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error400IncorrectJson"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/async/transactions/batch-capture": {
-      "post": {
-        "operationId": "async-batch-capture-transactions",
-        "summary": "Batch capture transactions",
-        "tags": [
-          "Async APIs"
-        ],
-        "x-internal": true,
-        "description": "The body of this API takes a list of items as a JSON object.\n\nThis API returns asynchronously, returning a list of status objects with the\nIDs of the pending `Transaction` resources.",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "object",
-                "properties": {
-                  "items": {
-                    "type": "array",
-                    "items": {
-                      "$ref": "#/components/schemas/TransactionsBatchCaptureRequest"
-                    }
-                  }
-                }
-              }
-            }
-          }
-        },
-        "responses": {
-          "202": {
-            "description": "Returns a status object.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Statuses"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error400IncorrectJson"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/auth/sessions": {
-      "post": {
-        "operationId": "login",
-        "summary": "Create a user session (Login)",
-        "description": "Authenticate a user using an email address and password.\n",
-        "tags": [
-          "Sessions"
-        ],
-        "x-internal": true,
-        "security": [],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SessionRequest"
-              }
-            }
-          }
-        },
-        "responses": {
-          "200": {
-            "description": "Returns a session object.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Session"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if the credentials provided were not valid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "refresh-session",
-        "summary": "Renew a user session",
-        "description": "Re-authenticate a user using a refresh token.\n",
-        "tags": [
-          "Sessions"
-        ],
-        "x-internal": true,
-        "responses": {
-          "200": {
-            "description": "Returns a session object.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Session"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Returns an error if the request was badly formatted or missing required fields.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if the refresh token provided was not valid.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      },
-      "delete": {
-        "operationId": "logout",
-        "summary": "Ends a user session (Logout)",
-        "description": "Ends a user's session by invalidating the used access token.",
-        "tags": [
-          "Sessions"
-        ],
-        "x-internal": true,
-        "responses": {
-          "204": {
-            "description": "Returns an empty response."
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api-key-pairs": {
-      "get": {
-        "operationId": "list-api-key-pairs",
-        "summary": "List API key-pairs",
-        "description": "Returns a list of active API key-pairs.",
-        "tags": [
-          "API Key Pairs"
-        ],
-        "x-internal": true,
-        "parameters": [
-          {
-            "schema": {
-              "type": "integer",
-              "default": 20,
-              "example": 1,
-              "minimum": 1,
-              "maximum": 100,
-              "format": "int32"
-            },
-            "in": "query",
-            "name": "limit",
-            "description": "Defines the maximum number of items to return for this request."
-          },
-          {
-            "schema": {
-              "type": "string",
-              "format": "",
-              "example": "ZXhhbXBsZTE"
-            },
-            "in": "query",
-            "name": "cursor",
-            "description": "A cursor that identifies the page of results to return. This is used to\npaginate the results of this API.\n\nFor the first page of results, this parameter can be left out.\nFor additional pages, use the value returned by the API in\nthe `next_cursor` field. Similarly the `previous_cursor` can be used to\nreverse backwards in the list."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a list of active key pairs.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/APIKeyPairs"
-                },
-                "examples": {
-                  "A list of key pairs": {
-                    "value": {
-                      "items": [
-                        {
-                          "type": "api-key-pair",
-                          "id": "SopiN5XU0IWy8Xe9mwx1ICQbKh4-ydCDPx3LIyArkVI",
-                          "private_key": null,
-                          "created_at": "2012-12-12T10:53:43+00:00",
-                          "updated_at": "2012-12-12T10:53:43+00:00"
-                        },
-                        {
-                          "type": "api-key-pair",
-                          "id": "Wy8Xe9mwx1ICQbKh4SopiN5XU0I-yArkVIydCDPx3LI",
-                          "private_key": null,
-                          "created_at": "2012-12-12T10:53:12+00:00",
-                          "updated_at": "2012-12-12T10:53:12+00:00"
-                        }
-                      ]
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      },
-      "post": {
-        "operationId": "create-api-key-pair",
-        "summary": "Create an API key-pair",
-        "description": "Creates a new API key-pair.",
-        "tags": [
-          "API Key Pairs"
-        ],
-        "x-internal": true,
-        "responses": {
-          "201": {
-            "description": "Returns a newly created key pair.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/APIKeyPair"
-                },
-                "examples": {
-                  "A newly created API key pair": {
-                    "value": {
-                      "type": "api-key-pair",
-                      "id": "SopiN5XU0IWy8Xe9mwx1ICQbKh4-ydCDPx3LIyArkVI",
-                      "private_key": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----",
-                      "created_at": "2012-12-12T10:53:43+00:00",
-                      "updated_at": "2012-12-12T10:53:43+00:00"
-                    }
-                  }
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/api-key-pairs/{api_key_pair_id}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "gg9ILy"
-          },
-          "name": "api_key_pair_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the API key pair."
-        }
-      ],
-      "delete": {
-        "operationId": "delete-api-key-pair",
-        "summary": "Delete an API key-pair",
-        "description": "Deletes an API key-pair.",
-        "tags": [
-          "API Key Pairs"
-        ],
-        "x-internal": true,
-        "responses": {
-          "204": {
-            "description": "Returns an empty response."
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/buyers": {
       "get": {
         "operationId": "list-buyers",
@@ -878,15 +162,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -1018,15 +294,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -1182,49 +450,6 @@
         }
       }
     },
-    "/merchants/main": {
-      "get": {
-        "operationId": "get-current-merchant",
-        "summary": "Get current merchant details",
-        "description": "Gets the information about the current merchant account.",
-        "tags": [
-          "Merchants"
-        ],
-        "x-internal": true,
-        "responses": {
-          "200": {
-            "description": "Returns the information about the merchant.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Merchant"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/payment-methods": {
       "get": {
         "operationId": "list-payment-methods",
@@ -1346,15 +571,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -1399,15 +616,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "PaymentMethod",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Card"
-                    },
-                    {
-                      "$ref": "#/components/schemas/PayPal"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/PaymentMethod"
                 }
               }
             }
@@ -1680,15 +889,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -1791,15 +992,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -2074,15 +1267,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -2186,15 +1371,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -2596,15 +1773,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -2668,15 +1837,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error404NotFound"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error404PendingCreation"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -2737,15 +1898,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -2765,15 +1918,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error404NotFound"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error404PendingCreation"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -2817,15 +1962,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error400BadRequest"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error400IncorrectJson"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -2845,15 +1982,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error404NotFound"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error404PendingCreation"
-                    }
-                  ]
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -2907,146 +2036,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "x-model-name": "ErrorGeneric",
-                  "oneOf": [
-                    {
-                      "$ref": "#/components/schemas/Error404NotFound"
-                    },
-                    {
-                      "$ref": "#/components/schemas/Error404PendingCreation"
-                    }
-                  ]
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/transactions/{transaction_id}/approve": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9"
-          },
-          "name": "transaction_id",
-          "in": "path",
-          "required": true,
-          "description": "The ID for the transaction to get the information for."
-        }
-      ],
-      "get": {
-        "operationId": "approve-transaction",
-        "summary": "Buyer approval callback",
-        "description": "Internal API used as a redirect endpoint for transactions that require\nbuyer authorization.\n\nFor example, when a buyer tries to create a PayPal transaction, the buyer\nneeds to be sent to PayPal, after which they are sent back to this endpoint\nupon completion.\n\nThis API applies any required updates for the transaction based on its\nquery parameters and then redirects the browser back to the `redirect_url`\nspecified when the payment method was first created.",
-        "tags": [
-          "Transactions"
-        ],
-        "x-internal": true,
-        "security": [],
-        "responses": {
-          "302": {
-            "description": "Redirects the browser back to the `redirect_url` specified\nwhen the transaction was first created. It appends the transaction's\nID and status.",
-            "headers": {
-              "location": {
-                "description": "The URL to redirect the browser to. This is the `redirect_url`\nspecified when the transaction was first created with some\nadditional query parameters appended.\n\n* `transaction_id` - The ID of the transaction\n* `transaction_status` - The current value of the\n  `status`  field of the transaction.",
-                "schema": {
-                  "type": "string",
-                  "format": "url",
-                  "example": "https://example.com/callback?transaction_id=77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5&transaction_status=tokenized"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/transactions/approvals/{transaction_approval_token}": {
-      "parameters": [
-        {
-          "schema": {
-            "type": "string",
-            "example": "NDY5NzNlOWQtODhhNy00NGE2LWFiZmUtYmU0ZmYwMTM0ZmY0"
-          },
-          "name": "transaction_approval_token",
-          "in": "path",
-          "required": true,
-          "description": "The token used to redirect the buyer for approval of a transaction. This token\ndoes not represent anything to the consumer and no value should be derived\nfrom it except for internal use."
-        }
-      ],
-      "get": {
-        "operationId": "redirect-transaction-approval",
-        "summary": "Approve payment method",
-        "description": "Redirect a buyer to an alternative payment provider to approve their\ntransaction. This is mainly used with providers like PayPal and Klarna to\nredirect a buyer to their sites.",
-        "tags": [
-          "Transactions"
-        ],
-        "x-internal": true,
-        "security": [],
-        "responses": {
-          "302": {
-            "description": "Redirect the buyer to approve this transaction.",
-            "headers": {
-              "location": {
-                "description": "The URL to redirect the browser to. This is the approval URL for an\nalternative payment method like PayPal.",
-                "schema": {
-                  "type": "string",
-                  "format": "url",
-                  "example": "https://paypal.com/..."
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Returns an error if the resource can not be found.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error404NotFound"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/users/me": {
-      "get": {
-        "operationId": "get-current-user",
-        "summary": "Get current",
-        "description": "Get current user information.",
-        "tags": [
-          "Users"
-        ],
-        "x-internal": true,
-        "responses": {
-          "200": {
-            "description": "Returns the currently authenticated user.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/User"
-                }
-              }
-            }
-          },
-          "401": {
-            "description": "Returns an error if no valid authentication was provided.",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Error401Unauthorized"
+                  "$ref": "#/components/schemas/ErrorGeneric"
                 }
               }
             }
@@ -3469,15 +2459,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
-              "x-model-name": "CardRule",
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/CardRuleTextCondition"
-                },
-                {
-                  "$ref": "#/components/schemas/CardRuleNumberCondition"
-                }
-              ]
+              "$ref": "#/components/schemas/CardRuleCondition"
             }
           },
           "payment_service_ids": {
@@ -3575,6 +2557,52 @@
           }
         }
       },
+      "CardRuleCondition": {
+        "title": "Card rule (Generic condition)",
+        "type": "object",
+        "description": "Generic card rule condition.",
+        "x-tags": [
+          "Card Workflows"
+        ],
+        "required": [
+          "match",
+          "key",
+          "operator",
+          "value"
+        ],
+        "properties": {
+          "match": {
+            "type": "string",
+            "description": "The type of match made for this rule.",
+            "example": "number",
+            "enum": [
+              "number",
+              "text"
+            ]
+          },
+          "key": {
+            "type": "string",
+            "description": "The transaction field to filter by.",
+            "example": "amount",
+            "enum": [
+              "amount",
+              "currency",
+              "scheme"
+            ]
+          },
+          "operator": {
+            "type": "string",
+            "description": "The comparison to make to `value` property.",
+            "example": ">=",
+
+          },
+          "value": {
+            "type": "string",
+            "description": "The values to compare the `key` to.",
+            "example": "200"
+          }
+        }
+      },
       "CardRuleNumberCondition": {
         "title": "Card rule (Number condition)",
         "type": "object",
@@ -3608,7 +2636,8 @@
           "operator": {
             "type": "string",
             "description": "The comparison to make to `value` property.",
-            "example": ">="
+            "example": ">=",
+
           },
           "value": {
             "type": "number",
@@ -3716,15 +2745,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
-              "x-model-name": "CardRule",
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/CardRuleTextCondition"
-                },
-                {
-                  "$ref": "#/components/schemas/CardRuleNumberCondition"
-                }
-              ]
+              "$ref": "#/components/schemas/CardRule"
             }
           },
           "payment_service_ids": {
@@ -3797,15 +2818,7 @@
             "description": "One or more conditions that apply for this rule. Each condition\nneeds to match for this rule to go into effect.",
             "minItems": 1,
             "items": {
-              "x-model-name": "CardRule",
-              "oneOf": [
-                {
-                  "$ref": "#/components/schemas/CardRuleTextCondition"
-                },
-                {
-                  "$ref": "#/components/schemas/CardRuleNumberCondition"
-                }
-              ]
+              "$ref": "#/components/schemas/CardRule"
             }
           },
           "payment_service_ids": {
@@ -4216,122 +3229,6 @@
           }
         }
       },
-      "APIKeyPair": {
-        "title": "API Key Pair",
-        "type": "object",
-        "description": "Details about an API key pair.",
-        "x-internal": true,
-        "x-tags": [
-          "API Key Pairs"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "`api-key-pair`.",
-            "example": "api-key-pair",
-            "enum": [
-              "api-key-pair"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "maxLength": 43,
-            "minLength": 43,
-            "pattern": "^[A-Za-z0-9-_]+$",
-            "description": "A unique ID for this key-pair. This ID is the thumbprint of the key.",
-            "example": "SopiN5XU0IWy8Xe9mwx1ICQbKh4-ydCDPx3LIyArkVI"
-          },
-          "private_key": {
-            "type": "string",
-            "nullable": true,
-            "description": "The private key for the key-pair. This is only returned after\nthe key is initially requested. For subsequent API calls this value is\n`null`.",
-            "example": "-----BEGIN PRIVATE KEY-----\n...\n-----END PRIVATE KEY-----"
-          },
-          "created_at": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2012-12-12T10:53:43+00:00",
-            "description": "The date and time when this key pair was created."
-          },
-          "updated_at": {
-            "type": "string",
-            "format": "date-time",
-            "example": "2012-12-12T10:53:43+00:00",
-            "description": "The date and time when this key pair was last updated."
-          }
-        }
-      },
-      "APIKeyPairs": {
-        "title": "A list of active API key pairs",
-        "type": "object",
-        "description": "A list of the currently active API key pairs.",
-        "x-internal": true,
-        "x-tags": [
-          "API Key Pairs"
-        ],
-        "properties": {
-          "items": {
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/APIKeyPair"
-            }
-          },
-          "limit": {
-            "type": "integer",
-            "description": "The limit applied to request. This represents the number of items that are at\nmaximum returned by this request.",
-            "format": "int32",
-            "minimum": 1,
-            "maximum": 100,
-            "example": 1,
-            "default": 20
-          },
-          "next_cursor": {
-            "type": "string",
-            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-            "example": "ZXhhbXBsZTE",
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 1000
-          },
-          "previous_cursor": {
-            "type": "string",
-            "description": "The cursor that represents the next page of results. Use the `cursor` query\nparameter to fetch this page of items.",
-            "example": null,
-            "nullable": true,
-            "minLength": 1,
-            "maxLength": 1000
-          }
-        }
-      },
-      "Merchant": {
-        "title": "Merchant",
-        "type": "object",
-        "description": "A merchant.",
-        "x-internal": true,
-        "x-tags": [
-          "Merchants"
-        ],
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "`merchant`.",
-            "example": "merchant",
-            "enum": [
-              "merchant"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "description": "The unique short-name of the merchant.",
-            "example": "plantly"
-          },
-          "display_name": {
-            "type": "string",
-            "description": "The name of this merchant as it will be displayed in the admin UI.",
-            "example": "Plantly Inc"
-          }
-        }
-      },
       "PaymentMethod": {
         "title": "Payment method",
         "description": "A generic payment method.",
@@ -4446,7 +3343,6 @@
               },
               "approval_url": {
                 "type": "string",
-                "format": "uri",
                 "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
                 "description": "The optional URL that the buyer needs to be redirected to to further authorize the payment method.",
                 "nullable": true
@@ -4765,7 +3661,7 @@
           },
           "fields": {
             "type": "array",
-            "description": "A list of fields, each containing a key-value pair for each field defined by the definition for this payment service.",
+            "description": "A list of fields, each containing a key-value pair for each field defined by the definition for this payment service e.g. for stripe-card `secret_key` is required and so must be sent with in this field.",
             "items": {
               "type": "object",
               "description": "A field containing a key-value pair for a required field defined by the service for this payment service.",
@@ -4923,7 +3819,8 @@
                 "format": {
                   "type": "string",
                   "example": "text",
-                  "description": "Defines the type of input that needs to be rendered for this field."
+                  "description": "Defines the type of input that needs to be rendered for this field.",
+
                 }
               }
             }
@@ -5147,7 +4044,6 @@
           },
           "approval_url": {
             "type": "string",
-            "format": "uri",
             "example": "https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve",
             "description": "The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.",
             "nullable": true
@@ -5176,7 +4072,6 @@
           },
           "redirect_url": {
             "type": "string",
-            "format": "uri",
             "description": "The redirect URL to redirect a buyer to after they have authorized their\nPayPal transaction.",
             "example": "https://example.com/callback"
           },
@@ -5196,74 +4091,6 @@
             "type": "string",
             "description": "The `external_identifier` of the buyer to associate this payment method\nto. If this field is provided then the `buyer_id` field\nneeds to be unset.",
             "example": "user-789123"
-          }
-        }
-      },
-      "Session": {
-        "title": "Session",
-        "description": "A user session.",
-        "type": "object",
-        "x-tags": [
-          "Authentication"
-        ],
-        "x-internal": true,
-        "properties": {
-          "type": {
-            "type": "string",
-            "example": "auth.session",
-            "description": "`auth.session`.",
-            "enum": [
-              "auth.session"
-            ]
-          },
-          "token_type": {
-            "type": "string",
-            "enum": [
-              "bearer"
-            ],
-            "example": "bearer",
-            "description": "`bearer`."
-          },
-          "access_token": {
-            "type": "string",
-            "description": "A server-signed JWT that can be used as the bearer token in any\nAPI calls.",
-            "example": "c3FIOG9vSGV4VHo4QzAyg5T1JvNnJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ"
-          },
-          "refresh_token": {
-            "type": "string",
-            "description": "A server-signed JWT that can be used as the bearer token to refresh the\naccess token.",
-            "example": "nJoZ3ExaVNyQWw6WjRsanRKZG5lQk9qUE1BVQ3FIOG9vSGV4VHo4QzAyg5T1JvNc"
-          },
-          "expires_in": {
-            "type": "integer",
-            "format": "int64",
-            "example": 3600,
-            "description": "The time in seconds in seconds by which the `access_token` token will\nexpire."
-          }
-        }
-      },
-      "SessionRequest": {
-        "title": "Session (Create)",
-        "type": "object",
-        "description": "A request to create a session using an email address and password.",
-        "x-internal": true,
-        "x-tags": [
-          "Authentication"
-        ],
-        "required": [
-          "email_address",
-          "password"
-        ],
-        "properties": {
-          "email_address": {
-            "type": "string",
-            "description": "The email address of the user to log in as.",
-            "example": "john@example.com"
-          },
-          "password": {
-            "type": "string",
-            "description": "The password the user to log in as.",
-            "example": "this-is-n0t-a-secure-passw0rd"
           }
         }
       },
@@ -5415,15 +4242,7 @@
             "description": "The currency code for this transaction."
           },
           "payment_method": {
-            "x-model-name": "PaymentMethod",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/Card"
-              },
-              {
-                "$ref": "#/components/schemas/PayPal"
-              }
-            ]
+            "$ref": "#/components/schemas/PaymentMethod"
           },
           "created_at": {
             "type": "string",
@@ -5560,19 +4379,7 @@
             "description": "A supported ISO-4217 currency code."
           },
           "payment_method": {
-            "x-model-name": "TransactionPaymentMethodRequest",
-            "oneOf": [
-              {
-                "$ref": "#/components/schemas/CardRequest"
-              },
-              {
-                "$ref": "#/components/schemas/PayPalRequest"
-              },
-              {
-                "$ref": "#/components/schemas/TokenizedRequest"
-              }
-            ],
-            "description": "The optional payment method details to create an authorization for. This field is required for processing a card."
+            "$ref": "#/components/schemas/TransactionPaymentMethodRequest"
           },
           "store": {
             "type": "boolean",
@@ -5704,7 +4511,6 @@
           },
           "redirect_url": {
             "type": "string",
-            "format": "uri",
             "description": "The redirect URL to redirect a buyer to after they have authorized their\ntransaction or payment method. This only applies to payment methods that\nrequire buyer approval.",
             "example": "https://example.com/callback"
           },
@@ -5712,39 +4518,6 @@
             "type": "string",
             "description": "A Gr4vy token that represents a previously tokenized payment method.\nThis token can represent any type of payment method.",
             "example": "77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5"
-          }
-        }
-      },
-      "User": {
-        "title": "User",
-        "type": "object",
-        "x-tags": [
-          "Users"
-        ],
-        "x-internal": true,
-        "properties": {
-          "type": {
-            "type": "string",
-            "description": "`user`.",
-            "example": "user",
-            "enum": [
-              "user"
-            ]
-          },
-          "id": {
-            "type": "string",
-            "example": "fe26475d-ec3e-4884-9553-f7356683f7f9",
-            "description": "The unique Gr4vy ID for this user."
-          },
-          "name": {
-            "type": "string",
-            "description": "The full name of this user.",
-            "example": "John Gravy"
-          },
-          "email_adress": {
-            "type": "string",
-            "description": "The email address for this user.",
-            "example": "john@example.com"
           }
         }
       }

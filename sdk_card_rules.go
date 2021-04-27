@@ -9,8 +9,7 @@ import (
 type Gr4vyListCardsRulesParams ListCardsRulesParams
 type Gr4vyAddCardRule AddCardRuleJSONRequestBody
 type Gr4vyUpdateCardRule UpdateCardRuleJSONRequestBody
-type Gr4vyCardRuleNumberCondition CardRuleNumberCondition
-type Gr4vyCardRuleTextCondition CardRuleTextCondition
+type Gr4vyCardRuleCondition CardRuleCondition
 type Gr4vyCardRule CardRule
 
 func (c *Gr4vyClient) ListCardsRules(params Gr4vyListCardsRulesParams) (*http.Response, error) {

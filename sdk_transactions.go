@@ -10,6 +10,7 @@ type Gr4vyListTransactionsParams ListTransactionsParams
 type Gr4vyAuthorizeNewTransaction AuthorizeNewTransactionJSONRequestBody
 type Gr4vyCaptureTransaction CaptureTransactionJSONRequestBody
 type Gr4vyTransaction Transaction
+type Gr4vyTransactionPaymentMethodRequest TransactionPaymentMethodRequest
 
 func (c *Gr4vyClient) ListTransactions(params Gr4vyListTransactionsParams) (*http.Response, error) {
     client, err := GetClient(c)
@@ -29,13 +30,13 @@ func (c *Gr4vyClient) GetTransaction(transaction_id string) (*http.Response, err
     return c.HandleResponse(client.GetTransaction(context.TODO(), transaction_id))
 }
 
-func (c *Gr4vyClient) AuthorizeNewTransaction(body Gr4vyAuthorizeNewTransaction, pm Gr4vyPaymentMethod) (*http.Response, error) {
+func (c *Gr4vyClient) AuthorizeNewTransaction(body Gr4vyAuthorizeNewTransaction, pm Gr4vyTransactionPaymentMethodRequest) (*http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
     	return nil, err
     }
     var b AuthorizeNewTransactionJSONRequestBody = AuthorizeNewTransactionJSONRequestBody(body)
-    var p CardRequest = CardRequest(pm)
+    var p TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
     b.PaymentMethod = p
     return c.HandleResponse(client.AuthorizeNewTransaction(context.TODO(), b))
 }

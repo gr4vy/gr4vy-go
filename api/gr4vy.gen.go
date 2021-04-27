@@ -27,11 +27,6 @@ const (
 	BearerAuthScopes = "BearerAuth.Scopes"
 )
 
-// Defines values for APIKeyPairType.
-const (
-	APIKeyPairTypeApiKeyPair APIKeyPairType = "api-key-pair"
-)
-
 // Defines values for BuyerType.
 const (
 	BuyerTypeBuyer BuyerType = "buyer"
@@ -148,14 +143,20 @@ const (
 	CardRuleUnprocessableFallbackStrategyUseAllProviders CardRuleUnprocessableFallbackStrategy = "use_all_providers"
 )
 
-// Defines values for CardRuleNumberConditionKey.
+// Defines values for CardRuleConditionKey.
 const (
-	CardRuleNumberConditionKeyAmount CardRuleNumberConditionKey = "amount"
+	CardRuleConditionKeyAmount CardRuleConditionKey = "amount"
+
+	CardRuleConditionKeyCurrency CardRuleConditionKey = "currency"
+
+	CardRuleConditionKeyScheme CardRuleConditionKey = "scheme"
 )
 
-// Defines values for CardRuleNumberConditionMatch.
+// Defines values for CardRuleConditionMatch.
 const (
-	CardRuleNumberConditionMatchNumber CardRuleNumberConditionMatch = "number"
+	CardRuleConditionMatchNumber CardRuleConditionMatch = "number"
+
+	CardRuleConditionMatchText CardRuleConditionMatch = "text"
 )
 
 // Defines values for CardRuleRequestEnvironment.
@@ -181,25 +182,6 @@ const (
 	CardRuleRequestUnprocessableFallbackStrategyDecline CardRuleRequestUnprocessableFallbackStrategy = "decline"
 
 	CardRuleRequestUnprocessableFallbackStrategyUseAllProviders CardRuleRequestUnprocessableFallbackStrategy = "use_all_providers"
-)
-
-// Defines values for CardRuleTextConditionKey.
-const (
-	CardRuleTextConditionKeyCurrency CardRuleTextConditionKey = "currency"
-
-	CardRuleTextConditionKeyScheme CardRuleTextConditionKey = "scheme"
-)
-
-// Defines values for CardRuleTextConditionMatch.
-const (
-	CardRuleTextConditionMatchText CardRuleTextConditionMatch = "text"
-)
-
-// Defines values for CardRuleTextConditionOperator.
-const (
-	CardRuleTextConditionOperatorIN CardRuleTextConditionOperator = "IN"
-
-	CardRuleTextConditionOperatorNOTIN CardRuleTextConditionOperator = "NOT IN"
 )
 
 // Defines values for CardRuleUpdateEnvironment.
@@ -242,21 +224,6 @@ const (
 	Error400BadRequestTypeError Error400BadRequestType = "error"
 )
 
-// Defines values for Error400IncorrectJsonCode.
-const (
-	Error400IncorrectJsonCodeIncorrectJson Error400IncorrectJsonCode = "incorrect_json"
-)
-
-// Defines values for Error400IncorrectJsonStatus.
-const (
-	Error400IncorrectJsonStatusN00 Error400IncorrectJsonStatus = 400
-)
-
-// Defines values for Error400IncorrectJsonType.
-const (
-	Error400IncorrectJsonTypeError Error400IncorrectJsonType = "error"
-)
-
 // Defines values for Error401UnauthorizedCode.
 const (
 	Error401UnauthorizedCodeUnauthorized Error401UnauthorizedCode = "unauthorized"
@@ -297,26 +264,6 @@ const (
 	Error404NotFoundTypeError Error404NotFoundType = "error"
 )
 
-// Defines values for Error404PendingCreationCode.
-const (
-	Error404PendingCreationCodePendingCreation Error404PendingCreationCode = "pending_creation"
-)
-
-// Defines values for Error404PendingCreationMessage.
-const (
-	Error404PendingCreationMessageTheResourceIsStillPending Error404PendingCreationMessage = "The resource is still pending"
-)
-
-// Defines values for Error404PendingCreationStatus.
-const (
-	Error404PendingCreationStatusN04 Error404PendingCreationStatus = 404
-)
-
-// Defines values for Error404PendingCreationType.
-const (
-	Error404PendingCreationTypeError Error404PendingCreationType = "error"
-)
-
 // Defines values for Error409DuplicateRecordCode.
 const (
 	Error409DuplicateRecordCodeDuplicateRecord Error409DuplicateRecordCode = "duplicate_record"
@@ -348,52 +295,62 @@ const (
 	ErrorGenericTypeError ErrorGenericType = "error"
 )
 
-// Defines values for MerchantType.
+// Defines values for PaymentMethodDetailsScheme.
 const (
-	MerchantTypeMerchant MerchantType = "merchant"
+	PaymentMethodDetailsSchemeAmericanExpress PaymentMethodDetailsScheme = "american-express"
+
+	PaymentMethodDetailsSchemeDinersClub PaymentMethodDetailsScheme = "diners-club"
+
+	PaymentMethodDetailsSchemeDiscover PaymentMethodDetailsScheme = "discover"
+
+	PaymentMethodDetailsSchemeElo PaymentMethodDetailsScheme = "elo"
+
+	PaymentMethodDetailsSchemeHiper PaymentMethodDetailsScheme = "hiper"
+
+	PaymentMethodDetailsSchemeHipercard PaymentMethodDetailsScheme = "hipercard"
+
+	PaymentMethodDetailsSchemeJcb PaymentMethodDetailsScheme = "jcb"
+
+	PaymentMethodDetailsSchemeMaestro PaymentMethodDetailsScheme = "maestro"
+
+	PaymentMethodDetailsSchemeMastercard PaymentMethodDetailsScheme = "mastercard"
+
+	PaymentMethodDetailsSchemeMir PaymentMethodDetailsScheme = "mir"
+
+	PaymentMethodDetailsSchemeUnionpay PaymentMethodDetailsScheme = "unionpay"
+
+	PaymentMethodDetailsSchemeVisa PaymentMethodDetailsScheme = "visa"
 )
 
-// Defines values for PayPalEnvironment.
+// Defines values for PaymentMethodMethod.
 const (
-	PayPalEnvironmentDevelopment PayPalEnvironment = "development"
+	PaymentMethodMethodCard PaymentMethodMethod = "card"
 
-	PayPalEnvironmentProduction PayPalEnvironment = "production"
-
-	PayPalEnvironmentStaging PayPalEnvironment = "staging"
+	PaymentMethodMethodPaypal PaymentMethodMethod = "paypal"
 )
 
-// Defines values for PayPalMethod.
+// Defines values for PaymentMethodStatus.
 const (
-	PayPalMethodPaypal PayPalMethod = "paypal"
+	PaymentMethodStatusBuyerApprovalDeclined PaymentMethodStatus = "buyer_approval_declined"
+
+	PaymentMethodStatusBuyerApprovalPending PaymentMethodStatus = "buyer_approval_pending"
+
+	PaymentMethodStatusBuyerApprovalTimedout PaymentMethodStatus = "buyer_approval_timedout"
+
+	PaymentMethodStatusBuyerApproved PaymentMethodStatus = "buyer_approved"
+
+	PaymentMethodStatusProcessing PaymentMethodStatus = "processing"
+
+	PaymentMethodStatusProcessingFailed PaymentMethodStatus = "processing_failed"
+
+	PaymentMethodStatusStored PaymentMethodStatus = "stored"
+
+	PaymentMethodStatusUsed PaymentMethodStatus = "used"
 )
 
-// Defines values for PayPalStatus.
+// Defines values for PaymentMethodType.
 const (
-	PayPalStatusBuyerApprovalDeclined PayPalStatus = "buyer_approval_declined"
-
-	PayPalStatusBuyerApprovalPending PayPalStatus = "buyer_approval_pending"
-
-	PayPalStatusBuyerApprovalTimedout PayPalStatus = "buyer_approval_timedout"
-
-	PayPalStatusBuyerApproved PayPalStatus = "buyer_approved"
-
-	PayPalStatusProcessing PayPalStatus = "processing"
-
-	PayPalStatusProcessingFailed PayPalStatus = "processing_failed"
-
-	PayPalStatusStored PayPalStatus = "stored"
-
-	PayPalStatusUsed PayPalStatus = "used"
-)
-
-// Defines values for PayPalType.
-const (
-	PayPalTypePaymentMethod PayPalType = "payment-method"
-)
-
-// Defines values for PayPalRequestMethod.
-const (
-	PayPalRequestMethodPaypal PayPalRequestMethod = "paypal"
+	PaymentMethodTypePaymentMethod PaymentMethodType = "payment-method"
 )
 
 // Defines values for PaymentOptionMethod.
@@ -468,38 +425,6 @@ const (
 	PaymentServiceUpdateEnvironmentsStaging PaymentServiceUpdateEnvironments = "staging"
 )
 
-// Defines values for SessionTokenType.
-const (
-	SessionTokenTypeBearer SessionTokenType = "bearer"
-)
-
-// Defines values for SessionType.
-const (
-	SessionTypeAuthSession SessionType = "auth.session"
-)
-
-// Defines values for StatusResourceType.
-const (
-	StatusResourceTypePaymentMethod StatusResourceType = "payment-method"
-
-	StatusResourceTypeTransaction StatusResourceType = "transaction"
-)
-
-// Defines values for StatusStatus.
-const (
-	StatusStatusPending StatusStatus = "pending"
-)
-
-// Defines values for StatusType.
-const (
-	StatusTypeStatus StatusType = "status"
-)
-
-// Defines values for TokenizedRequestMethod.
-const (
-	TokenizedRequestMethodId TokenizedRequestMethod = "id"
-)
-
 // Defines values for TransactionEnvironment.
 const (
 	TransactionEnvironmentDevelopment TransactionEnvironment = "development"
@@ -547,6 +472,15 @@ const (
 	TransactionTypeTransaction TransactionType = "transaction"
 )
 
+// Defines values for TransactionPaymentMethodRequestMethod.
+const (
+	TransactionPaymentMethodRequestMethodCard TransactionPaymentMethodRequestMethod = "card"
+
+	TransactionPaymentMethodRequestMethodPaypal TransactionPaymentMethodRequestMethod = "paypal"
+
+	TransactionPaymentMethodRequestMethodToken TransactionPaymentMethodRequestMethod = "token"
+)
+
 // Defines values for TransactionRequestEnvironment.
 const (
 	TransactionRequestEnvironmentDevelopment TransactionRequestEnvironment = "development"
@@ -564,52 +498,6 @@ const (
 
 	TransactionRequestIntentCapture TransactionRequestIntent = "capture"
 )
-
-// Defines values for UserType.
-const (
-	UserTypeUser UserType = "user"
-)
-
-// Details about an API key pair.
-type APIKeyPair struct {
-
-	// The date and time when this key pair was created.
-	CreatedAt *time.Time `json:"created_at,omitempty"`
-
-	// A unique ID for this key-pair. This ID is the thumbprint of the key.
-	Id *string `json:"id,omitempty"`
-
-	// The private key for the key-pair. This is only returned after
-	// the key is initially requested. For subsequent API calls this value is
-	// `null`.
-	PrivateKey *string `json:"private_key"`
-
-	// `api-key-pair`.
-	Type *APIKeyPairType `json:"type,omitempty"`
-
-	// The date and time when this key pair was last updated.
-	UpdatedAt *time.Time `json:"updated_at,omitempty"`
-}
-
-// `api-key-pair`.
-type APIKeyPairType string
-
-// A list of the currently active API key pairs.
-type APIKeyPairs struct {
-	Items *[]APIKeyPair `json:"items,omitempty"`
-
-	// The limit applied to request. This represents the number of items that are at
-	// maximum returned by this request.
-	Limit *int32 `json:"limit,omitempty"`
-
-	// The cursor that represents the next page of results. Use the `cursor` query
-	// parameter to fetch this page of items.
-	NextCursor *string `json:"next_cursor"`
-
-	// The cursor that represents the next page of results. Use the `cursor` query
-	// parameter to fetch this page of items.
-	PreviousCursor *string `json:"previous_cursor"`
-}
 
 // Buyer defines model for Buyer.
 type Buyer struct {
@@ -818,7 +706,7 @@ type CardRule struct {
 
 	// One or more conditions that apply for this rule. Each condition
 	// needs to match for this rule to go into effect.
-	Conditions *[]interface{} `json:"conditions,omitempty"`
+	Conditions *[]CardRuleCondition `json:"conditions,omitempty"`
 
 	// The date and time when this rule was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
@@ -894,28 +782,27 @@ type CardRuleType string
 // * `decline` - Decline the transaction.
 type CardRuleUnprocessableFallbackStrategy string
 
-// Part of a rule that matches numeric fields. It defines the condition under
-// which this rule applies.
-type CardRuleNumberCondition struct {
+// Generic card rule condition.
+type CardRuleCondition struct {
 
 	// The transaction field to filter by.
-	Key CardRuleNumberConditionKey `json:"key"`
+	Key CardRuleConditionKey `json:"key"`
 
-	// `number`.
-	Match CardRuleNumberConditionMatch `json:"match"`
+	// The type of match made for this rule.
+	Match CardRuleConditionMatch `json:"match"`
 
 	// The comparison to make to `value` property.
 	Operator string `json:"operator"`
 
 	// The values to compare the `key` to.
-	Value float32 `json:"value"`
+	Value string `json:"value"`
 }
 
 // The transaction field to filter by.
-type CardRuleNumberConditionKey string
+type CardRuleConditionKey string
 
-// `number`.
-type CardRuleNumberConditionMatch string
+// The type of match made for this rule.
+type CardRuleConditionMatch string
 
 // Creates a new rule for a card transactions.
 type CardRuleRequest struct {
@@ -926,7 +813,7 @@ type CardRuleRequest struct {
 
 	// One or more conditions that apply for this rule. Each condition
 	// needs to match for this rule to go into effect.
-	Conditions []interface{} `json:"conditions"`
+	Conditions []CardRule `json:"conditions"`
 
 	// The environment to use this rule in. This rule will only be used
 	// for transactions created in that environment.
@@ -989,32 +876,6 @@ type CardRuleRequestInvalidRuleFallbackStrategy string
 // * `decline` - Decline the transaction.
 type CardRuleRequestUnprocessableFallbackStrategy string
 
-// Part of a rule that matches text fields. It defines the condition under
-// which this rule applies.
-type CardRuleTextCondition struct {
-
-	// The transaction field to filter by.
-	Key CardRuleTextConditionKey `json:"key"`
-
-	// `text`.
-	Match CardRuleTextConditionMatch `json:"match"`
-
-	// The comparison to make to `value` property.
-	Operator CardRuleTextConditionOperator `json:"operator"`
-
-	// The values to compare the `key` to.
-	Values []string `json:"values"`
-}
-
-// The transaction field to filter by.
-type CardRuleTextConditionKey string
-
-// `text`.
-type CardRuleTextConditionMatch string
-
-// The comparison to make to `value` property.
-type CardRuleTextConditionOperator string
-
 // Updates a rule for a card transactions.
 type CardRuleUpdate struct {
 
@@ -1024,7 +885,7 @@ type CardRuleUpdate struct {
 
 	// One or more conditions that apply for this rule. Each condition
 	// needs to match for this rule to go into effect.
-	Conditions *[]interface{} `json:"conditions,omitempty"`
+	Conditions *[]CardRule `json:"conditions,omitempty"`
 
 	// The environment to use this rule in. This rule will only be used
 	// for transactions created in that environment.
@@ -1134,35 +995,6 @@ type Error400BadRequestStatus int
 // `error`.
 type Error400BadRequestType string
 
-// Incorrect JSON (HTTP 400).
-type Error400IncorrectJson struct {
-
-	// `incorrect_json`.
-	Code *Error400IncorrectJsonCode `json:"code,omitempty"`
-
-	// A list of detail objects that further clarify the reason for the error.
-	// Not every error supports more detail.
-	Details *[]ErrorDetail `json:"details,omitempty"`
-
-	// Incorrect JSON. The request body could not be parsed as valid JSON.
-	Message *string `json:"message,omitempty"`
-
-	// `400`.
-	Status *Error400IncorrectJsonStatus `json:"status,omitempty"`
-
-	// `error`.
-	Type *Error400IncorrectJsonType `json:"type,omitempty"`
-}
-
-// `incorrect_json`.
-type Error400IncorrectJsonCode string
-
-// `400`.
-type Error400IncorrectJsonStatus int
-
-// `error`.
-type Error400IncorrectJsonType string
-
 // Unauthorized Error (HTTP 401).
 type Error401Unauthorized struct {
 
@@ -1226,38 +1058,6 @@ type Error404NotFoundStatus int
 
 // `error`.
 type Error404NotFoundType string
-
-// Pending Creation Error (HTTP 404).
-type Error404PendingCreation struct {
-
-	// `pending_creation`.
-	Code *Error404PendingCreationCode `json:"code,omitempty"`
-
-	// A list of detail objects that further clarify the reason for the error.
-	// Not every error supports more detail.
-	Details *[]ErrorDetail `json:"details,omitempty"`
-
-	// The resource is still pending.
-	Message *Error404PendingCreationMessage `json:"message,omitempty"`
-
-	// `404`.
-	Status *Error404PendingCreationStatus `json:"status,omitempty"`
-
-	// `error`.
-	Type *Error404PendingCreationType `json:"type,omitempty"`
-}
-
-// `pending_creation`.
-type Error404PendingCreationCode string
-
-// The resource is still pending.
-type Error404PendingCreationMessage string
-
-// `404`.
-type Error404PendingCreationStatus int
-
-// `error`.
-type Error404PendingCreationType string
 
 // Duplicate Record Error (HTTP 409).
 type Error409DuplicateRecord struct {
@@ -1332,24 +1132,8 @@ type ErrorGeneric struct {
 // The type of this object. This is always `error`.
 type ErrorGenericType string
 
-// A merchant.
-type Merchant struct {
-
-	// The name of this merchant as it will be displayed in the admin UI.
-	DisplayName *string `json:"display_name,omitempty"`
-
-	// The unique short-name of the merchant.
-	Id *string `json:"id,omitempty"`
-
-	// `merchant`.
-	Type *MerchantType `json:"type,omitempty"`
-}
-
-// `merchant`.
-type MerchantType string
-
-// A stored PayPal account.
-type PayPal struct {
+// A generic payment method.
+type PaymentMethod struct {
 
 	// The optional buyer for which this payment method has been stored.
 	Buyer *struct {
@@ -1361,12 +1145,25 @@ type PayPal struct {
 	// system.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 
-	// Additional details about a stored PayPal account.
-	Details *PayPalDetails `json:"details,omitempty"`
+	// Additional details about a payment method.
+	Details *struct {
 
-	// The environment this payment method has been stored for. This will be null
-	// of the payment method was not stored.
-	Environment *PayPalEnvironment `json:"environment"`
+		// The optional URL that the buyer needs to be redirected to to further authorize the payment method.
+		ApprovalUrl *string `json:"approval_url"`
+
+		// The email address associated to the payment method.
+		EmailAddress *string `json:"email_address"`
+
+		// The expiration date for a card.
+		ExpirationDate *string `json:"expiration_date,omitempty"`
+
+		// Partial number details for a stored card, hiding all but the last few
+		// numbers.
+		Number *string `json:"number,omitempty"`
+
+		// The type of the card.
+		Scheme *PaymentMethodDetailsScheme `json:"scheme,omitempty"`
+	} `json:"details,omitempty"`
 
 	// An external identifier that can be used to match the payment method
 	// against your own records.
@@ -1375,73 +1172,30 @@ type PayPal struct {
 	// The unique ID of the payment method.
 	Id *string `json:"id,omitempty"`
 
-	// `paypal`.
-	Method *PayPalMethod `json:"method,omitempty"`
+	// The type of this payment method.
+	Method *PaymentMethodMethod `json:"method,omitempty"`
 
-	// The state of the account tokenization. After the first call this will
-	// be set to `buyer_approval_pending` and the response will include
-	// an `approval_url`. The buyer needs to be redirected to this URL
-	// to authorize the future payments.
-	Status *PayPalStatus `json:"status,omitempty"`
+	// The state of the payment method.
+	Status *PaymentMethodStatus `json:"status,omitempty"`
 
 	// `payment-method`.
-	Type *PayPalType `json:"type,omitempty"`
+	Type *PaymentMethodType `json:"type,omitempty"`
 
 	// The date and time when this payment method was last updated in our system.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
-// The environment this payment method has been stored for. This will be null
-// of the payment method was not stored.
-type PayPalEnvironment string
+// The type of the card.
+type PaymentMethodDetailsScheme string
 
-// `paypal`.
-type PayPalMethod string
+// The type of this payment method.
+type PaymentMethodMethod string
 
-// The state of the account tokenization. After the first call this will
-// be set to `buyer_approval_pending` and the response will include
-// an `approval_url`. The buyer needs to be redirected to this URL
-// to authorize the future payments.
-type PayPalStatus string
+// The state of the payment method.
+type PaymentMethodStatus string
 
 // `payment-method`.
-type PayPalType string
-
-// Additional details about a stored PayPal account.
-type PayPalDetails struct {
-
-	// The optional URL that the buyer needs to be redirected to to further authorize their PayPal payments.
-	ApprovalUrl *string `json:"approval_url"`
-
-	// The email address associated to the PayPal account.
-	EmailAddress *string `json:"email_address"`
-}
-
-// PayPal request to use in a transaction or to register a new payment method.
-type PayPalRequest struct {
-
-	// The `external_identifier` of the buyer to associate this payment method
-	// to. If this field is provided then the `buyer_id` field
-	// needs to be unset.
-	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
-
-	// The ID of the buyer to associate this payment method to. If this field is
-	// provided then the `buyer_external_identifier` field needs to be unset.
-	BuyerId *string `json:"buyer_id,omitempty"`
-
-	// An external identifier that can be used to match the account against your own records.
-	ExternalIdentifier *string `json:"external_identifier"`
-
-	// `paypal`.
-	Method PayPalRequestMethod `json:"method"`
-
-	// The redirect URL to redirect a buyer to after they have authorized their
-	// PayPal transaction.
-	RedirectUrl string `json:"redirect_url"`
-}
-
-// `paypal`.
-type PayPalRequestMethod string
+type PaymentMethodType string
 
 // A list of stored payment methods.
 type PaymentMethods struct {
@@ -1668,7 +1422,7 @@ type PaymentServiceUpdate struct {
 	// transactions through this service.
 	Environments *[]PaymentServiceUpdateEnvironments `json:"environments,omitempty"`
 
-	// A list of fields, each containing a key-value pair for each field defined by the definition for this payment service.
+	// A list of fields, each containing a key-value pair for each field defined by the definition for this payment service e.g. for stripe-card `secret_key` is required and so must be sent with in this field.
 	Fields *[]struct {
 
 		// The key of the field to set a value for.
@@ -1710,97 +1464,6 @@ type PaymentServices struct {
 	PreviousCursor *string `json:"previous_cursor"`
 }
 
-// A user session.
-type Session struct {
-
-	// A server-signed JWT that can be used as the bearer token in any
-	// API calls.
-	AccessToken *string `json:"access_token,omitempty"`
-
-	// The time in seconds in seconds by which the `access_token` token will
-	// expire.
-	ExpiresIn *int64 `json:"expires_in,omitempty"`
-
-	// A server-signed JWT that can be used as the bearer token to refresh the
-	// access token.
-	RefreshToken *string `json:"refresh_token,omitempty"`
-
-	// `bearer`.
-	TokenType *SessionTokenType `json:"token_type,omitempty"`
-
-	// `auth.session`.
-	Type *SessionType `json:"type,omitempty"`
-}
-
-// `bearer`.
-type SessionTokenType string
-
-// `auth.session`.
-type SessionType string
-
-// A request to create a session using an email address and password.
-type SessionRequest struct {
-
-	// The email address of the user to log in as.
-	EmailAddress string `json:"email_address"`
-
-	// The password the user to log in as.
-	Password string `json:"password"`
-}
-
-// In many cases the Gr4vy API returns asynchronously, kicking off a job to
-// create an authorization or a transaction, and returning a `Status` object with
-// the ID of the pending object. The ID of this resource can be used to query an
-// objects status, or additionally the client can use Pub/Sub to subscribe to the
-// creation of the pending object.
-type Status struct {
-
-	// An external identifier that can be used to match the record against your own records.
-	ExternalIdentifier *string `json:"external_identifier"`
-
-	// The ID of the object for which this status has been created.
-	ResourceId *string `json:"resource_id,omitempty"`
-
-	// The type of the object that is pending.
-	ResourceType *StatusResourceType `json:"resource_type,omitempty"`
-
-	// The status of this resource being created. This is always `pending`.
-	Status *StatusStatus `json:"status,omitempty"`
-
-	// The type of this object. This is always `status`.
-	Type *StatusType `json:"type,omitempty"`
-}
-
-// The type of the object that is pending.
-type StatusResourceType string
-
-// The status of this resource being created. This is always `pending`.
-type StatusStatus string
-
-// The type of this object. This is always `status`.
-type StatusType string
-
-// A list of status resources.
-type Statuses struct {
-
-	// A list of authorizations.
-	Items *[]Status `json:"items,omitempty"`
-}
-
-// Details for a previously tokenized payment method.
-type TokenizedRequest struct {
-
-	// A ID that represents a previously tokenized payment method.
-	// This token can represent any type of payment method.
-	Id string `json:"id"`
-
-	// `id`.
-	Method TokenizedRequestMethod `json:"method"`
-}
-
-// `id`.
-type TokenizedRequestMethod string
-
 // A transaction record.
 type Transaction struct {
 
@@ -1820,8 +1483,10 @@ type Transaction struct {
 	ExternalIdentifier *string `json:"external_identifier"`
 
 	// The unique identifier for this transaction.
-	Id            *string      `json:"id,omitempty"`
-	PaymentMethod *interface{} `json:"payment_method,omitempty"`
+	Id *string `json:"id,omitempty"`
+
+	// A generic payment method.
+	PaymentMethod *PaymentMethod `json:"payment_method,omitempty"`
 
 	// An active, configured payment service.
 	PaymentService *PaymentService `json:"payment_service,omitempty"`
@@ -1864,6 +1529,59 @@ type TransactionCaptureRequest struct {
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 }
 
+// Payment method details to use in a transaction or to register
+// a new payment method.
+type TransactionPaymentMethodRequest struct {
+
+	// The `external_identifier` of the buyer to associate this payment method
+	// to. If this field is provided then the `buyer_id` field
+	// needs to be unset.
+	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
+
+	// The ID of the buyer to associate this payment method to. If this field is
+	// provided then the `buyer_external_identifier` field needs to be unset.
+	BuyerId *string `json:"buyer_id,omitempty"`
+
+	// The expiration date of the card, formatted `MM/YY`. If a card has been
+	// previously stored with us this value is optional.
+	//
+	// If the `number` of this card represents a tokenized card, then this value
+	// is ignored.
+	ExpirationDate *string `json:"expiration_date,omitempty"`
+
+	// An external identifier that can be used to match the card against your own records.
+	ExternalIdentifier *string `json:"external_identifier"`
+
+	// The method to use for this request.
+	Method TransactionPaymentMethodRequestMethod `json:"method"`
+
+	// The 15-16 digit number for this credit card as it can be found on the
+	// front of the card.
+	//
+	// If a card has been stored with us previously, this number will represent
+	// the unique tokenized card ID provided via our API.
+	Number *string `json:"number,omitempty"`
+
+	// The redirect URL to redirect a buyer to after they have authorized their
+	// transaction or payment method. This only applies to payment methods that
+	// require buyer approval.
+	RedirectUrl *string `json:"redirect_url,omitempty"`
+
+	// The 3 or 4 digit security code often found on the card. This often
+	// referred to as the CVV or CVD.
+	//
+	// If the `number` of this card represents a tokenized card, then this value
+	// is ignored.
+	SecurityCode *string `json:"security_code,omitempty"`
+
+	// A Gr4vy token that represents a previously tokenized payment method.
+	// This token can represent any type of payment method.
+	Token *string `json:"token,omitempty"`
+}
+
+// The method to use for this request.
+type TransactionPaymentMethodRequestMethod string
+
 // A request to create a transaction.
 type TransactionRequest struct {
 
@@ -1898,8 +1616,9 @@ type TransactionRequest struct {
 	// funds of the transaction.
 	Intent *TransactionRequestIntent `json:"intent,omitempty"`
 
-	// The optional payment method details to create an authorization for. This field is required for processing a card.
-	PaymentMethod interface{} `json:"payment_method"`
+	// Payment method details to use in a transaction or to register
+	// a new payment method.
+	PaymentMethod TransactionPaymentMethodRequest `json:"payment_method"`
 
 	// Whether or not to also try and store the payment method with us so that
 	// it can be used again for future use. This is only supported for payment
@@ -1942,76 +1661,6 @@ type Transactions struct {
 	// parameter to fetch this page of items.
 	PreviousCursor *string `json:"previous_cursor"`
 }
-
-// A request to capture multiple previously authorized transactions.
-type TransactionsBatchCaptureRequest struct {
-
-	// The (partial) amount to capture.
-	//
-	// When left blank, this will capture the entire amount.
-	Amount float32 `json:"amount"`
-
-	// A supported ISO-4217 currency code.
-	Currency string `json:"currency"`
-
-	// An external identifier that can be used to match the transaction against your own records.
-	ExternalIdentifier *string `json:"external_identifier,omitempty"`
-
-	// The ID of the transaction to capture.
-	TransactionId string `json:"transaction_id"`
-}
-
-// User defines model for User.
-type User struct {
-
-	// The email address for this user.
-	EmailAdress *string `json:"email_adress,omitempty"`
-
-	// The unique Gr4vy ID for this user.
-	Id *string `json:"id,omitempty"`
-
-	// The full name of this user.
-	Name *string `json:"name,omitempty"`
-
-	// `user`.
-	Type *UserType `json:"type,omitempty"`
-}
-
-// `user`.
-type UserType string
-
-// ListApiKeyPairsParams defines parameters for ListApiKeyPairs.
-type ListApiKeyPairsParams struct {
-
-	// Defines the maximum number of items to return for this request.
-	Limit *int32 `json:"limit,omitempty"`
-
-	// A cursor that identifies the page of results to return. This is used to
-	// paginate the results of this API.
-	//
-	// For the first page of results, this parameter can be left out.
-	// For additional pages, use the value returned by the API in
-	// the `next_cursor` field. Similarly the `previous_cursor` can be used to
-	// reverse backwards in the list.
-	Cursor *string `json:"cursor,omitempty"`
-}
-
-// AsyncStorePaymentMethodJSONBody defines parameters for AsyncStorePaymentMethod.
-type AsyncStorePaymentMethodJSONBody CardRequest
-
-// AsyncCreateTransactionJSONBody defines parameters for AsyncCreateTransaction.
-type AsyncCreateTransactionJSONBody TransactionRequest
-
-// AsyncBatchCaptureTransactionsJSONBody defines parameters for AsyncBatchCaptureTransactions.
-type AsyncBatchCaptureTransactionsJSONBody struct {
-	Items *[]TransactionsBatchCaptureRequest `json:"items,omitempty"`
-}
-
-// AsyncCaptureTransactionJSONBody defines parameters for AsyncCaptureTransaction.
-type AsyncCaptureTransactionJSONBody TransactionCaptureRequest
-
-// LoginJSONBody defines parameters for Login.
-type LoginJSONBody SessionRequest
 
 // ListBuyersParams defines parameters for ListBuyers.
 type ListBuyersParams struct {
@@ -2246,21 +1895,6 @@ type AuthorizeNewTransactionJSONBody TransactionRequest
 // CaptureTransactionJSONBody defines parameters for CaptureTransaction.
 type CaptureTransactionJSONBody TransactionCaptureRequest
 
-// AsyncStorePaymentMethodJSONRequestBody defines body for AsyncStorePaymentMethod for application/json ContentType.
-type AsyncStorePaymentMethodJSONRequestBody AsyncStorePaymentMethodJSONBody
-
-// AsyncCreateTransactionJSONRequestBody defines body for AsyncCreateTransaction for application/json ContentType.
-type AsyncCreateTransactionJSONRequestBody AsyncCreateTransactionJSONBody
-
-// AsyncBatchCaptureTransactionsJSONRequestBody defines body for AsyncBatchCaptureTransactions for application/json ContentType.
-type AsyncBatchCaptureTransactionsJSONRequestBody AsyncBatchCaptureTransactionsJSONBody
-
-// AsyncCaptureTransactionJSONRequestBody defines body for AsyncCaptureTransaction for application/json ContentType.
-type AsyncCaptureTransactionJSONRequestBody AsyncCaptureTransactionJSONBody
-
-// LoginJSONRequestBody defines body for Login for application/json ContentType.
-type LoginJSONRequestBody LoginJSONBody
-
 // AddBuyerJSONRequestBody defines body for AddBuyer for application/json ContentType.
 type AddBuyerJSONRequestBody AddBuyerJSONBody
 
@@ -2361,49 +1995,6 @@ func WithRequestEditorFn(fn RequestEditorFn) ClientOption {
 
 // The interface specification for the client above.
 type ClientInterface interface {
-	// ListApiKeyPairs request
-	ListApiKeyPairs(ctx context.Context, params *ListApiKeyPairsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// CreateApiKeyPair request
-	CreateApiKeyPair(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// DeleteApiKeyPair request
-	DeleteApiKeyPair(ctx context.Context, apiKeyPairId string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// AsyncStorePaymentMethod request  with any body
-	AsyncStorePaymentMethodWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	AsyncStorePaymentMethod(ctx context.Context, body AsyncStorePaymentMethodJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// AsyncCreateTransaction request  with any body
-	AsyncCreateTransactionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	AsyncCreateTransaction(ctx context.Context, body AsyncCreateTransactionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// AsyncBatchCaptureTransactions request  with any body
-	AsyncBatchCaptureTransactionsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	AsyncBatchCaptureTransactions(ctx context.Context, body AsyncBatchCaptureTransactionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// AsyncAuthorizeTransaction request
-	AsyncAuthorizeTransaction(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// AsyncCaptureTransaction request  with any body
-	AsyncCaptureTransactionWithBody(ctx context.Context, transactionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	AsyncCaptureTransaction(ctx context.Context, transactionId string, body AsyncCaptureTransactionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// Logout request
-	Logout(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// Login request  with any body
-	LoginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	Login(ctx context.Context, body LoginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// RefreshSession request
-	RefreshSession(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// ListBuyers request
 	ListBuyers(ctx context.Context, params *ListBuyersParams, reqEditors ...RequestEditorFn) (*http.Response, error)
 
@@ -2444,9 +2035,6 @@ type ClientInterface interface {
 	UpdateCardRuleWithBody(ctx context.Context, cardRuleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	UpdateCardRule(ctx context.Context, cardRuleId string, body UpdateCardRuleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetCurrentMerchant request
-	GetCurrentMerchant(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// ListPaymentMethods request
 	ListPaymentMethods(ctx context.Context, params *ListPaymentMethodsParams, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -2498,14 +2086,8 @@ type ClientInterface interface {
 
 	AuthorizeNewTransaction(ctx context.Context, body AuthorizeNewTransactionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error)
 
-	// RedirectTransactionApproval request
-	RedirectTransactionApproval(ctx context.Context, transactionApprovalToken string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
 	// GetTransaction request
 	GetTransaction(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// ApproveTransaction request
-	ApproveTransaction(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*http.Response, error)
 
 	// AuthorizeTransaction request
 	AuthorizeTransaction(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*http.Response, error)
@@ -2517,201 +2099,6 @@ type ClientInterface interface {
 
 	// RefundTransaction request
 	RefundTransaction(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*http.Response, error)
-
-	// GetCurrentUser request
-	GetCurrentUser(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error)
-}
-
-func (c *Client) ListApiKeyPairs(ctx context.Context, params *ListApiKeyPairsParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewListApiKeyPairsRequest(c.Server, params)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) CreateApiKeyPair(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewCreateApiKeyPairRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) DeleteApiKeyPair(ctx context.Context, apiKeyPairId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewDeleteApiKeyPairRequest(c.Server, apiKeyPairId)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) AsyncStorePaymentMethodWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAsyncStorePaymentMethodRequestWithBody(c.Server, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) AsyncStorePaymentMethod(ctx context.Context, body AsyncStorePaymentMethodJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAsyncStorePaymentMethodRequest(c.Server, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) AsyncCreateTransactionWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAsyncCreateTransactionRequestWithBody(c.Server, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) AsyncCreateTransaction(ctx context.Context, body AsyncCreateTransactionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAsyncCreateTransactionRequest(c.Server, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) AsyncBatchCaptureTransactionsWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAsyncBatchCaptureTransactionsRequestWithBody(c.Server, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) AsyncBatchCaptureTransactions(ctx context.Context, body AsyncBatchCaptureTransactionsJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAsyncBatchCaptureTransactionsRequest(c.Server, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) AsyncAuthorizeTransaction(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAsyncAuthorizeTransactionRequest(c.Server, transactionId)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) AsyncCaptureTransactionWithBody(ctx context.Context, transactionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAsyncCaptureTransactionRequestWithBody(c.Server, transactionId, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) AsyncCaptureTransaction(ctx context.Context, transactionId string, body AsyncCaptureTransactionJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewAsyncCaptureTransactionRequest(c.Server, transactionId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) Logout(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewLogoutRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) LoginWithBody(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewLoginRequestWithBody(c.Server, contentType, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) Login(ctx context.Context, body LoginJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewLoginRequest(c.Server, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) RefreshSession(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRefreshSessionRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
 }
 
 func (c *Client) ListBuyers(ctx context.Context, params *ListBuyersParams, reqEditors ...RequestEditorFn) (*http.Response, error) {
@@ -2884,18 +2271,6 @@ func (c *Client) UpdateCardRuleWithBody(ctx context.Context, cardRuleId string, 
 
 func (c *Client) UpdateCardRule(ctx context.Context, cardRuleId string, body UpdateCardRuleJSONRequestBody, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewUpdateCardRuleRequest(c.Server, cardRuleId, body)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) GetCurrentMerchant(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetCurrentMerchantRequest(c.Server)
 	if err != nil {
 		return nil, err
 	}
@@ -3122,32 +2497,8 @@ func (c *Client) AuthorizeNewTransaction(ctx context.Context, body AuthorizeNewT
 	return c.Client.Do(req)
 }
 
-func (c *Client) RedirectTransactionApproval(ctx context.Context, transactionApprovalToken string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewRedirectTransactionApprovalRequest(c.Server, transactionApprovalToken)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
 func (c *Client) GetTransaction(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
 	req, err := NewGetTransactionRequest(c.Server, transactionId)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-func (c *Client) ApproveTransaction(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewApproveTransactionRequest(c.Server, transactionId)
 	if err != nil {
 		return nil, err
 	}
@@ -3204,437 +2555,6 @@ func (c *Client) RefundTransaction(ctx context.Context, transactionId string, re
 		return nil, err
 	}
 	return c.Client.Do(req)
-}
-
-func (c *Client) GetCurrentUser(ctx context.Context, reqEditors ...RequestEditorFn) (*http.Response, error) {
-	req, err := NewGetCurrentUserRequest(c.Server)
-	if err != nil {
-		return nil, err
-	}
-	req = req.WithContext(ctx)
-	if err := c.applyEditors(ctx, req, reqEditors); err != nil {
-		return nil, err
-	}
-	return c.Client.Do(req)
-}
-
-// NewListApiKeyPairsRequest generates requests for ListApiKeyPairs
-func NewListApiKeyPairsRequest(server string, params *ListApiKeyPairsParams) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api-key-pairs")
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	queryValues := queryURL.Query()
-
-	if params.Limit != nil {
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "limit", runtime.ParamLocationQuery, *params.Limit); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-	}
-
-	if params.Cursor != nil {
-
-		if queryFrag, err := runtime.StyleParamWithLocation("form", true, "cursor", runtime.ParamLocationQuery, *params.Cursor); err != nil {
-			return nil, err
-		} else if parsed, err := url.ParseQuery(queryFrag); err != nil {
-			return nil, err
-		} else {
-			for k, v := range parsed {
-				for _, v2 := range v {
-					queryValues.Add(k, v2)
-				}
-			}
-		}
-
-	}
-
-	queryURL.RawQuery = queryValues.Encode()
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewCreateApiKeyPairRequest generates requests for CreateApiKeyPair
-func NewCreateApiKeyPairRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api-key-pairs")
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("POST", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewDeleteApiKeyPairRequest generates requests for DeleteApiKeyPair
-func NewDeleteApiKeyPairRequest(server string, apiKeyPairId string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "api_key_pair_id", runtime.ParamLocationPath, apiKeyPairId)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/api-key-pairs/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewAsyncStorePaymentMethodRequest calls the generic AsyncStorePaymentMethod builder with application/json body
-func NewAsyncStorePaymentMethodRequest(server string, body AsyncStorePaymentMethodJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewAsyncStorePaymentMethodRequestWithBody(server, "application/json", bodyReader)
-}
-
-// NewAsyncStorePaymentMethodRequestWithBody generates requests for AsyncStorePaymentMethod with any type of body
-func NewAsyncStorePaymentMethodRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/async/payment-methods")
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewAsyncCreateTransactionRequest calls the generic AsyncCreateTransaction builder with application/json body
-func NewAsyncCreateTransactionRequest(server string, body AsyncCreateTransactionJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewAsyncCreateTransactionRequestWithBody(server, "application/json", bodyReader)
-}
-
-// NewAsyncCreateTransactionRequestWithBody generates requests for AsyncCreateTransaction with any type of body
-func NewAsyncCreateTransactionRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/async/transactions")
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewAsyncBatchCaptureTransactionsRequest calls the generic AsyncBatchCaptureTransactions builder with application/json body
-func NewAsyncBatchCaptureTransactionsRequest(server string, body AsyncBatchCaptureTransactionsJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewAsyncBatchCaptureTransactionsRequestWithBody(server, "application/json", bodyReader)
-}
-
-// NewAsyncBatchCaptureTransactionsRequestWithBody generates requests for AsyncBatchCaptureTransactions with any type of body
-func NewAsyncBatchCaptureTransactionsRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/async/transactions/batch-capture")
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewAsyncAuthorizeTransactionRequest generates requests for AsyncAuthorizeTransaction
-func NewAsyncAuthorizeTransactionRequest(server string, transactionId string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "transaction_id", runtime.ParamLocationPath, transactionId)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/async/transactions/%s/authorize", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("POST", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewAsyncCaptureTransactionRequest calls the generic AsyncCaptureTransaction builder with application/json body
-func NewAsyncCaptureTransactionRequest(server string, transactionId string, body AsyncCaptureTransactionJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewAsyncCaptureTransactionRequestWithBody(server, transactionId, "application/json", bodyReader)
-}
-
-// NewAsyncCaptureTransactionRequestWithBody generates requests for AsyncCaptureTransaction with any type of body
-func NewAsyncCaptureTransactionRequestWithBody(server string, transactionId string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "transaction_id", runtime.ParamLocationPath, transactionId)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/async/transactions/%s/capture", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewLogoutRequest generates requests for Logout
-func NewLogoutRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/auth/sessions")
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("DELETE", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewLoginRequest calls the generic Login builder with application/json body
-func NewLoginRequest(server string, body LoginJSONRequestBody) (*http.Request, error) {
-	var bodyReader io.Reader
-	buf, err := json.Marshal(body)
-	if err != nil {
-		return nil, err
-	}
-	bodyReader = bytes.NewReader(buf)
-	return NewLoginRequestWithBody(server, "application/json", bodyReader)
-}
-
-// NewLoginRequestWithBody generates requests for Login with any type of body
-func NewLoginRequestWithBody(server string, contentType string, body io.Reader) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/auth/sessions")
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("POST", queryURL.String(), body)
-	if err != nil {
-		return nil, err
-	}
-
-	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewRefreshSessionRequest generates requests for RefreshSession
-func NewRefreshSessionRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/auth/sessions")
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("PUT", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
 }
 
 // NewListBuyersRequest generates requests for ListBuyers
@@ -4212,33 +3132,6 @@ func NewUpdateCardRuleRequestWithBody(server string, cardRuleId string, contentT
 	}
 
 	req.Header.Add("Content-Type", contentType)
-
-	return req, nil
-}
-
-// NewGetCurrentMerchantRequest generates requests for GetCurrentMerchant
-func NewGetCurrentMerchantRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/merchants/main")
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
 
 	return req, nil
 }
@@ -5087,40 +3980,6 @@ func NewAuthorizeNewTransactionRequestWithBody(server string, contentType string
 	return req, nil
 }
 
-// NewRedirectTransactionApprovalRequest generates requests for RedirectTransactionApproval
-func NewRedirectTransactionApprovalRequest(server string, transactionApprovalToken string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "transaction_approval_token", runtime.ParamLocationPath, transactionApprovalToken)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/transactions/approvals/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
 // NewGetTransactionRequest generates requests for GetTransaction
 func NewGetTransactionRequest(server string, transactionId string) (*http.Request, error) {
 	var err error
@@ -5138,40 +3997,6 @@ func NewGetTransactionRequest(server string, transactionId string) (*http.Reques
 	}
 
 	operationPath := fmt.Sprintf("/transactions/%s", pathParam0)
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
-// NewApproveTransactionRequest generates requests for ApproveTransaction
-func NewApproveTransactionRequest(server string, transactionId string) (*http.Request, error) {
-	var err error
-
-	var pathParam0 string
-
-	pathParam0, err = runtime.StyleParamWithLocation("simple", false, "transaction_id", runtime.ParamLocationPath, transactionId)
-	if err != nil {
-		return nil, err
-	}
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/transactions/%s/approve", pathParam0)
 	if operationPath[0] == '/' {
 		operationPath = operationPath[1:]
 	}
@@ -5304,33 +4129,6 @@ func NewRefundTransactionRequest(server string, transactionId string) (*http.Req
 	return req, nil
 }
 
-// NewGetCurrentUserRequest generates requests for GetCurrentUser
-func NewGetCurrentUserRequest(server string) (*http.Request, error) {
-	var err error
-
-	serverURL, err := url.Parse(server)
-	if err != nil {
-		return nil, err
-	}
-
-	operationPath := fmt.Sprintf("/users/me")
-	if operationPath[0] == '/' {
-		operationPath = operationPath[1:]
-	}
-	operationURL := url.URL{
-		Path: operationPath,
-	}
-
-	queryURL := serverURL.ResolveReference(&operationURL)
-
-	req, err := http.NewRequest("GET", queryURL.String(), nil)
-	if err != nil {
-		return nil, err
-	}
-
-	return req, nil
-}
-
 func (c *Client) applyEditors(ctx context.Context, req *http.Request, additionalEditors []RequestEditorFn) error {
 	for _, r := range c.RequestEditors {
 		if err := r(ctx, req); err != nil {
@@ -5374,49 +4172,6 @@ func WithBaseURL(baseURL string) ClientOption {
 
 // ClientWithResponsesInterface is the interface specification for the client with responses above.
 type ClientWithResponsesInterface interface {
-	// ListApiKeyPairs request
-	ListApiKeyPairsWithResponse(ctx context.Context, params *ListApiKeyPairsParams, reqEditors ...RequestEditorFn) (*ListApiKeyPairsResponse, error)
-
-	// CreateApiKeyPair request
-	CreateApiKeyPairWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*CreateApiKeyPairResponse, error)
-
-	// DeleteApiKeyPair request
-	DeleteApiKeyPairWithResponse(ctx context.Context, apiKeyPairId string, reqEditors ...RequestEditorFn) (*DeleteApiKeyPairResponse, error)
-
-	// AsyncStorePaymentMethod request  with any body
-	AsyncStorePaymentMethodWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AsyncStorePaymentMethodResponse, error)
-
-	AsyncStorePaymentMethodWithResponse(ctx context.Context, body AsyncStorePaymentMethodJSONRequestBody, reqEditors ...RequestEditorFn) (*AsyncStorePaymentMethodResponse, error)
-
-	// AsyncCreateTransaction request  with any body
-	AsyncCreateTransactionWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AsyncCreateTransactionResponse, error)
-
-	AsyncCreateTransactionWithResponse(ctx context.Context, body AsyncCreateTransactionJSONRequestBody, reqEditors ...RequestEditorFn) (*AsyncCreateTransactionResponse, error)
-
-	// AsyncBatchCaptureTransactions request  with any body
-	AsyncBatchCaptureTransactionsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AsyncBatchCaptureTransactionsResponse, error)
-
-	AsyncBatchCaptureTransactionsWithResponse(ctx context.Context, body AsyncBatchCaptureTransactionsJSONRequestBody, reqEditors ...RequestEditorFn) (*AsyncBatchCaptureTransactionsResponse, error)
-
-	// AsyncAuthorizeTransaction request
-	AsyncAuthorizeTransactionWithResponse(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*AsyncAuthorizeTransactionResponse, error)
-
-	// AsyncCaptureTransaction request  with any body
-	AsyncCaptureTransactionWithBodyWithResponse(ctx context.Context, transactionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AsyncCaptureTransactionResponse, error)
-
-	AsyncCaptureTransactionWithResponse(ctx context.Context, transactionId string, body AsyncCaptureTransactionJSONRequestBody, reqEditors ...RequestEditorFn) (*AsyncCaptureTransactionResponse, error)
-
-	// Logout request
-	LogoutWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LogoutResponse, error)
-
-	// Login request  with any body
-	LoginWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LoginResponse, error)
-
-	LoginWithResponse(ctx context.Context, body LoginJSONRequestBody, reqEditors ...RequestEditorFn) (*LoginResponse, error)
-
-	// RefreshSession request
-	RefreshSessionWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*RefreshSessionResponse, error)
-
 	// ListBuyers request
 	ListBuyersWithResponse(ctx context.Context, params *ListBuyersParams, reqEditors ...RequestEditorFn) (*ListBuyersResponse, error)
 
@@ -5457,9 +4212,6 @@ type ClientWithResponsesInterface interface {
 	UpdateCardRuleWithBodyWithResponse(ctx context.Context, cardRuleId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*UpdateCardRuleResponse, error)
 
 	UpdateCardRuleWithResponse(ctx context.Context, cardRuleId string, body UpdateCardRuleJSONRequestBody, reqEditors ...RequestEditorFn) (*UpdateCardRuleResponse, error)
-
-	// GetCurrentMerchant request
-	GetCurrentMerchantWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentMerchantResponse, error)
 
 	// ListPaymentMethods request
 	ListPaymentMethodsWithResponse(ctx context.Context, params *ListPaymentMethodsParams, reqEditors ...RequestEditorFn) (*ListPaymentMethodsResponse, error)
@@ -5511,14 +4263,8 @@ type ClientWithResponsesInterface interface {
 
 	AuthorizeNewTransactionWithResponse(ctx context.Context, body AuthorizeNewTransactionJSONRequestBody, reqEditors ...RequestEditorFn) (*AuthorizeNewTransactionResponse, error)
 
-	// RedirectTransactionApproval request
-	RedirectTransactionApprovalWithResponse(ctx context.Context, transactionApprovalToken string, reqEditors ...RequestEditorFn) (*RedirectTransactionApprovalResponse, error)
-
 	// GetTransaction request
 	GetTransactionWithResponse(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*GetTransactionResponse, error)
-
-	// ApproveTransaction request
-	ApproveTransactionWithResponse(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*ApproveTransactionResponse, error)
 
 	// AuthorizeTransaction request
 	AuthorizeTransactionWithResponse(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*AuthorizeTransactionResponse, error)
@@ -5530,268 +4276,6 @@ type ClientWithResponsesInterface interface {
 
 	// RefundTransaction request
 	RefundTransactionWithResponse(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*RefundTransactionResponse, error)
-
-	// GetCurrentUser request
-	GetCurrentUserWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentUserResponse, error)
-}
-
-type ListApiKeyPairsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *APIKeyPairs
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r ListApiKeyPairsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r ListApiKeyPairsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type CreateApiKeyPairResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON201      *APIKeyPair
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r CreateApiKeyPairResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r CreateApiKeyPairResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type DeleteApiKeyPairResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON401      *Error401Unauthorized
-	JSON404      *Error404NotFound
-}
-
-// Status returns HTTPResponse.Status
-func (r DeleteApiKeyPairResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r DeleteApiKeyPairResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type AsyncStorePaymentMethodResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON202      *Status
-	JSON400      *interface{}
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r AsyncStorePaymentMethodResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r AsyncStorePaymentMethodResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type AsyncCreateTransactionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON202      *Status
-	JSON400      *Error400IncorrectJson
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r AsyncCreateTransactionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r AsyncCreateTransactionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type AsyncBatchCaptureTransactionsResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON202      *Statuses
-	JSON400      *Error400IncorrectJson
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r AsyncBatchCaptureTransactionsResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r AsyncBatchCaptureTransactionsResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type AsyncAuthorizeTransactionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON202      *Status
-	JSON400      *Error400IncorrectJson
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r AsyncAuthorizeTransactionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r AsyncAuthorizeTransactionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type AsyncCaptureTransactionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON202      *Status
-	JSON400      *Error400IncorrectJson
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r AsyncCaptureTransactionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r AsyncCaptureTransactionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type LogoutResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r LogoutResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r LogoutResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type LoginResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *Session
-	JSON400      *interface{}
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r LoginResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r LoginResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type RefreshSessionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *Session
-	JSON400      *interface{}
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r RefreshSessionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r RefreshSessionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
 }
 
 type ListBuyersResponse struct {
@@ -5821,7 +4305,7 @@ type AddBuyerResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON201      *Buyer
-	JSON400      *interface{}
+	JSON400      *ErrorGeneric
 	JSON401      *Error401Unauthorized
 	JSON409      *Error409DuplicateRecord
 }
@@ -5918,7 +4402,7 @@ type UpdateBuyerResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *Buyer
-	JSON400      *interface{}
+	JSON400      *ErrorGeneric
 	JSON401      *Error401Unauthorized
 	JSON404      *Error404NotFound
 }
@@ -5966,7 +4450,7 @@ type AddCardRuleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON201      *CardRule
-	JSON400      *interface{}
+	JSON400      *ErrorGeneric
 	JSON401      *Error401Unauthorized
 }
 
@@ -6038,7 +4522,7 @@ type UpdateCardRuleResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *CardRule
-	JSON400      *interface{}
+	JSON400      *ErrorGeneric
 	JSON401      *Error401Unauthorized
 	JSON404      *Error404NotFound
 }
@@ -6053,30 +4537,6 @@ func (r UpdateCardRuleResponse) Status() string {
 
 // StatusCode returns HTTPResponse.StatusCode
 func (r UpdateCardRuleResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-type GetCurrentMerchantResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *Merchant
-	JSON401      *Error401Unauthorized
-	JSON404      *Error404NotFound
-}
-
-// Status returns HTTPResponse.Status
-func (r GetCurrentMerchantResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetCurrentMerchantResponse) StatusCode() int {
 	if r.HTTPResponse != nil {
 		return r.HTTPResponse.StatusCode
 	}
@@ -6110,7 +4570,7 @@ type StorePaymentMethodResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON201      *Card
-	JSON400      *interface{}
+	JSON400      *ErrorGeneric
 	JSON401      *Error401Unauthorized
 }
 
@@ -6156,7 +4616,7 @@ func (r DeletePaymentMethodResponse) StatusCode() int {
 type GetPaymentMethodResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
-	JSON200      *interface{}
+	JSON200      *PaymentMethod
 	JSON401      *Error401Unauthorized
 	JSON404      *Error404NotFound
 }
@@ -6275,7 +4735,7 @@ type AddPaymentServiceResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON201      *PaymentService
-	JSON400      *interface{}
+	JSON400      *ErrorGeneric
 	JSON401      *Error401Unauthorized
 }
 
@@ -6346,7 +4806,7 @@ type UpdatePaymentServiceResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON201      *PaymentService
-	JSON400      *interface{}
+	JSON400      *ErrorGeneric
 	JSON401      *Error401Unauthorized
 	JSON404      *Error404NotFound
 }
@@ -6394,7 +4854,7 @@ type AuthorizeNewTransactionResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON201      *Transaction
-	JSON400      *interface{}
+	JSON400      *ErrorGeneric
 	JSON401      *Error401Unauthorized
 }
 
@@ -6414,34 +4874,12 @@ func (r AuthorizeNewTransactionResponse) StatusCode() int {
 	return 0
 }
 
-type RedirectTransactionApprovalResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON404      *Error404NotFound
-}
-
-// Status returns HTTPResponse.Status
-func (r RedirectTransactionApprovalResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r RedirectTransactionApprovalResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type GetTransactionResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *Transaction
 	JSON401      *Error401Unauthorized
-	JSON404      *interface{}
+	JSON404      *ErrorGeneric
 }
 
 // Status returns HTTPResponse.Status
@@ -6460,35 +4898,13 @@ func (r GetTransactionResponse) StatusCode() int {
 	return 0
 }
 
-type ApproveTransactionResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON404      *Error404NotFound
-}
-
-// Status returns HTTPResponse.Status
-func (r ApproveTransactionResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r ApproveTransactionResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
 type AuthorizeTransactionResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *Transaction
-	JSON400      *interface{}
+	JSON400      *ErrorGeneric
 	JSON401      *Error401Unauthorized
-	JSON404      *interface{}
+	JSON404      *ErrorGeneric
 }
 
 // Status returns HTTPResponse.Status
@@ -6511,9 +4927,9 @@ type CaptureTransactionResponse struct {
 	Body         []byte
 	HTTPResponse *http.Response
 	JSON200      *Transaction
-	JSON400      *interface{}
+	JSON400      *ErrorGeneric
 	JSON401      *Error401Unauthorized
-	JSON404      *interface{}
+	JSON404      *ErrorGeneric
 }
 
 // Status returns HTTPResponse.Status
@@ -6537,7 +4953,7 @@ type RefundTransactionResponse struct {
 	HTTPResponse *http.Response
 	JSON200      *Transaction
 	JSON401      *Error401Unauthorized
-	JSON404      *interface{}
+	JSON404      *ErrorGeneric
 }
 
 // Status returns HTTPResponse.Status
@@ -6554,168 +4970,6 @@ func (r RefundTransactionResponse) StatusCode() int {
 		return r.HTTPResponse.StatusCode
 	}
 	return 0
-}
-
-type GetCurrentUserResponse struct {
-	Body         []byte
-	HTTPResponse *http.Response
-	JSON200      *User
-	JSON401      *Error401Unauthorized
-}
-
-// Status returns HTTPResponse.Status
-func (r GetCurrentUserResponse) Status() string {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.Status
-	}
-	return http.StatusText(0)
-}
-
-// StatusCode returns HTTPResponse.StatusCode
-func (r GetCurrentUserResponse) StatusCode() int {
-	if r.HTTPResponse != nil {
-		return r.HTTPResponse.StatusCode
-	}
-	return 0
-}
-
-// ListApiKeyPairsWithResponse request returning *ListApiKeyPairsResponse
-func (c *ClientWithResponses) ListApiKeyPairsWithResponse(ctx context.Context, params *ListApiKeyPairsParams, reqEditors ...RequestEditorFn) (*ListApiKeyPairsResponse, error) {
-	rsp, err := c.ListApiKeyPairs(ctx, params, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseListApiKeyPairsResponse(rsp)
-}
-
-// CreateApiKeyPairWithResponse request returning *CreateApiKeyPairResponse
-func (c *ClientWithResponses) CreateApiKeyPairWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*CreateApiKeyPairResponse, error) {
-	rsp, err := c.CreateApiKeyPair(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseCreateApiKeyPairResponse(rsp)
-}
-
-// DeleteApiKeyPairWithResponse request returning *DeleteApiKeyPairResponse
-func (c *ClientWithResponses) DeleteApiKeyPairWithResponse(ctx context.Context, apiKeyPairId string, reqEditors ...RequestEditorFn) (*DeleteApiKeyPairResponse, error) {
-	rsp, err := c.DeleteApiKeyPair(ctx, apiKeyPairId, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseDeleteApiKeyPairResponse(rsp)
-}
-
-// AsyncStorePaymentMethodWithBodyWithResponse request with arbitrary body returning *AsyncStorePaymentMethodResponse
-func (c *ClientWithResponses) AsyncStorePaymentMethodWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AsyncStorePaymentMethodResponse, error) {
-	rsp, err := c.AsyncStorePaymentMethodWithBody(ctx, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseAsyncStorePaymentMethodResponse(rsp)
-}
-
-func (c *ClientWithResponses) AsyncStorePaymentMethodWithResponse(ctx context.Context, body AsyncStorePaymentMethodJSONRequestBody, reqEditors ...RequestEditorFn) (*AsyncStorePaymentMethodResponse, error) {
-	rsp, err := c.AsyncStorePaymentMethod(ctx, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseAsyncStorePaymentMethodResponse(rsp)
-}
-
-// AsyncCreateTransactionWithBodyWithResponse request with arbitrary body returning *AsyncCreateTransactionResponse
-func (c *ClientWithResponses) AsyncCreateTransactionWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AsyncCreateTransactionResponse, error) {
-	rsp, err := c.AsyncCreateTransactionWithBody(ctx, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseAsyncCreateTransactionResponse(rsp)
-}
-
-func (c *ClientWithResponses) AsyncCreateTransactionWithResponse(ctx context.Context, body AsyncCreateTransactionJSONRequestBody, reqEditors ...RequestEditorFn) (*AsyncCreateTransactionResponse, error) {
-	rsp, err := c.AsyncCreateTransaction(ctx, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseAsyncCreateTransactionResponse(rsp)
-}
-
-// AsyncBatchCaptureTransactionsWithBodyWithResponse request with arbitrary body returning *AsyncBatchCaptureTransactionsResponse
-func (c *ClientWithResponses) AsyncBatchCaptureTransactionsWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AsyncBatchCaptureTransactionsResponse, error) {
-	rsp, err := c.AsyncBatchCaptureTransactionsWithBody(ctx, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseAsyncBatchCaptureTransactionsResponse(rsp)
-}
-
-func (c *ClientWithResponses) AsyncBatchCaptureTransactionsWithResponse(ctx context.Context, body AsyncBatchCaptureTransactionsJSONRequestBody, reqEditors ...RequestEditorFn) (*AsyncBatchCaptureTransactionsResponse, error) {
-	rsp, err := c.AsyncBatchCaptureTransactions(ctx, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseAsyncBatchCaptureTransactionsResponse(rsp)
-}
-
-// AsyncAuthorizeTransactionWithResponse request returning *AsyncAuthorizeTransactionResponse
-func (c *ClientWithResponses) AsyncAuthorizeTransactionWithResponse(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*AsyncAuthorizeTransactionResponse, error) {
-	rsp, err := c.AsyncAuthorizeTransaction(ctx, transactionId, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseAsyncAuthorizeTransactionResponse(rsp)
-}
-
-// AsyncCaptureTransactionWithBodyWithResponse request with arbitrary body returning *AsyncCaptureTransactionResponse
-func (c *ClientWithResponses) AsyncCaptureTransactionWithBodyWithResponse(ctx context.Context, transactionId string, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*AsyncCaptureTransactionResponse, error) {
-	rsp, err := c.AsyncCaptureTransactionWithBody(ctx, transactionId, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseAsyncCaptureTransactionResponse(rsp)
-}
-
-func (c *ClientWithResponses) AsyncCaptureTransactionWithResponse(ctx context.Context, transactionId string, body AsyncCaptureTransactionJSONRequestBody, reqEditors ...RequestEditorFn) (*AsyncCaptureTransactionResponse, error) {
-	rsp, err := c.AsyncCaptureTransaction(ctx, transactionId, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseAsyncCaptureTransactionResponse(rsp)
-}
-
-// LogoutWithResponse request returning *LogoutResponse
-func (c *ClientWithResponses) LogoutWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*LogoutResponse, error) {
-	rsp, err := c.Logout(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseLogoutResponse(rsp)
-}
-
-// LoginWithBodyWithResponse request with arbitrary body returning *LoginResponse
-func (c *ClientWithResponses) LoginWithBodyWithResponse(ctx context.Context, contentType string, body io.Reader, reqEditors ...RequestEditorFn) (*LoginResponse, error) {
-	rsp, err := c.LoginWithBody(ctx, contentType, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseLoginResponse(rsp)
-}
-
-func (c *ClientWithResponses) LoginWithResponse(ctx context.Context, body LoginJSONRequestBody, reqEditors ...RequestEditorFn) (*LoginResponse, error) {
-	rsp, err := c.Login(ctx, body, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseLoginResponse(rsp)
-}
-
-// RefreshSessionWithResponse request returning *RefreshSessionResponse
-func (c *ClientWithResponses) RefreshSessionWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*RefreshSessionResponse, error) {
-	rsp, err := c.RefreshSession(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseRefreshSessionResponse(rsp)
 }
 
 // ListBuyersWithResponse request returning *ListBuyersResponse
@@ -6847,15 +5101,6 @@ func (c *ClientWithResponses) UpdateCardRuleWithResponse(ctx context.Context, ca
 		return nil, err
 	}
 	return ParseUpdateCardRuleResponse(rsp)
-}
-
-// GetCurrentMerchantWithResponse request returning *GetCurrentMerchantResponse
-func (c *ClientWithResponses) GetCurrentMerchantWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentMerchantResponse, error) {
-	rsp, err := c.GetCurrentMerchant(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetCurrentMerchantResponse(rsp)
 }
 
 // ListPaymentMethodsWithResponse request returning *ListPaymentMethodsResponse
@@ -7016,15 +5261,6 @@ func (c *ClientWithResponses) AuthorizeNewTransactionWithResponse(ctx context.Co
 	return ParseAuthorizeNewTransactionResponse(rsp)
 }
 
-// RedirectTransactionApprovalWithResponse request returning *RedirectTransactionApprovalResponse
-func (c *ClientWithResponses) RedirectTransactionApprovalWithResponse(ctx context.Context, transactionApprovalToken string, reqEditors ...RequestEditorFn) (*RedirectTransactionApprovalResponse, error) {
-	rsp, err := c.RedirectTransactionApproval(ctx, transactionApprovalToken, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseRedirectTransactionApprovalResponse(rsp)
-}
-
 // GetTransactionWithResponse request returning *GetTransactionResponse
 func (c *ClientWithResponses) GetTransactionWithResponse(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*GetTransactionResponse, error) {
 	rsp, err := c.GetTransaction(ctx, transactionId, reqEditors...)
@@ -7032,15 +5268,6 @@ func (c *ClientWithResponses) GetTransactionWithResponse(ctx context.Context, tr
 		return nil, err
 	}
 	return ParseGetTransactionResponse(rsp)
-}
-
-// ApproveTransactionWithResponse request returning *ApproveTransactionResponse
-func (c *ClientWithResponses) ApproveTransactionWithResponse(ctx context.Context, transactionId string, reqEditors ...RequestEditorFn) (*ApproveTransactionResponse, error) {
-	rsp, err := c.ApproveTransaction(ctx, transactionId, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseApproveTransactionResponse(rsp)
 }
 
 // AuthorizeTransactionWithResponse request returning *AuthorizeTransactionResponse
@@ -7076,420 +5303,6 @@ func (c *ClientWithResponses) RefundTransactionWithResponse(ctx context.Context,
 		return nil, err
 	}
 	return ParseRefundTransactionResponse(rsp)
-}
-
-// GetCurrentUserWithResponse request returning *GetCurrentUserResponse
-func (c *ClientWithResponses) GetCurrentUserWithResponse(ctx context.Context, reqEditors ...RequestEditorFn) (*GetCurrentUserResponse, error) {
-	rsp, err := c.GetCurrentUser(ctx, reqEditors...)
-	if err != nil {
-		return nil, err
-	}
-	return ParseGetCurrentUserResponse(rsp)
-}
-
-// ParseListApiKeyPairsResponse parses an HTTP response from a ListApiKeyPairsWithResponse call
-func ParseListApiKeyPairsResponse(rsp *http.Response) (*ListApiKeyPairsResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ListApiKeyPairsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest APIKeyPairs
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseCreateApiKeyPairResponse parses an HTTP response from a CreateApiKeyPairWithResponse call
-func ParseCreateApiKeyPairResponse(rsp *http.Response) (*CreateApiKeyPairResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &CreateApiKeyPairResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 201:
-		var dest APIKeyPair
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON201 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseDeleteApiKeyPairResponse parses an HTTP response from a DeleteApiKeyPairWithResponse call
-func ParseDeleteApiKeyPairResponse(rsp *http.Response) (*DeleteApiKeyPairResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &DeleteApiKeyPairResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest Error404NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseAsyncStorePaymentMethodResponse parses an HTTP response from a AsyncStorePaymentMethodWithResponse call
-func ParseAsyncStorePaymentMethodResponse(rsp *http.Response) (*AsyncStorePaymentMethodResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &AsyncStorePaymentMethodResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
-		var dest Status
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON202 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseAsyncCreateTransactionResponse parses an HTTP response from a AsyncCreateTransactionWithResponse call
-func ParseAsyncCreateTransactionResponse(rsp *http.Response) (*AsyncCreateTransactionResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &AsyncCreateTransactionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
-		var dest Status
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON202 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest Error400IncorrectJson
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseAsyncBatchCaptureTransactionsResponse parses an HTTP response from a AsyncBatchCaptureTransactionsWithResponse call
-func ParseAsyncBatchCaptureTransactionsResponse(rsp *http.Response) (*AsyncBatchCaptureTransactionsResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &AsyncBatchCaptureTransactionsResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
-		var dest Statuses
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON202 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest Error400IncorrectJson
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseAsyncAuthorizeTransactionResponse parses an HTTP response from a AsyncAuthorizeTransactionWithResponse call
-func ParseAsyncAuthorizeTransactionResponse(rsp *http.Response) (*AsyncAuthorizeTransactionResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &AsyncAuthorizeTransactionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
-		var dest Status
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON202 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest Error400IncorrectJson
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseAsyncCaptureTransactionResponse parses an HTTP response from a AsyncCaptureTransactionWithResponse call
-func ParseAsyncCaptureTransactionResponse(rsp *http.Response) (*AsyncCaptureTransactionResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &AsyncCaptureTransactionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 202:
-		var dest Status
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON202 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest Error400IncorrectJson
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseLogoutResponse parses an HTTP response from a LogoutWithResponse call
-func ParseLogoutResponse(rsp *http.Response) (*LogoutResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &LogoutResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseLoginResponse parses an HTTP response from a LoginWithResponse call
-func ParseLoginResponse(rsp *http.Response) (*LoginResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &LoginResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Session
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseRefreshSessionResponse parses an HTTP response from a RefreshSessionWithResponse call
-func ParseRefreshSessionResponse(rsp *http.Response) (*RefreshSessionResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &RefreshSessionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Session
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
 }
 
 // ParseListBuyersResponse parses an HTTP response from a ListBuyersWithResponse call
@@ -7547,7 +5360,7 @@ func ParseAddBuyerResponse(rsp *http.Response) (*AddBuyerResponse, error) {
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -7714,7 +5527,7 @@ func ParseUpdateBuyerResponse(rsp *http.Response) (*UpdateBuyerResponse, error) 
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -7794,7 +5607,7 @@ func ParseAddCardRuleResponse(rsp *http.Response) (*AddCardRuleResponse, error) 
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -7914,51 +5727,11 @@ func ParseUpdateCardRuleResponse(rsp *http.Response) (*UpdateCardRuleResponse, e
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
 		response.JSON400 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest Error404NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseGetCurrentMerchantResponse parses an HTTP response from a GetCurrentMerchantWithResponse call
-func ParseGetCurrentMerchantResponse(rsp *http.Response) (*GetCurrentMerchantResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetCurrentMerchantResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest Merchant
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
 		var dest Error401Unauthorized
@@ -8034,7 +5807,7 @@ func ParseStorePaymentMethodResponse(rsp *http.Response) (*StorePaymentMethodRes
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8100,7 +5873,7 @@ func ParseGetPaymentMethodResponse(rsp *http.Response) (*GetPaymentMethodRespons
 
 	switch {
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest interface{}
+		var dest PaymentMethod
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8293,7 +6066,7 @@ func ParseAddPaymentServiceResponse(rsp *http.Response) (*AddPaymentServiceRespo
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8406,7 +6179,7 @@ func ParseUpdatePaymentServiceResponse(rsp *http.Response) (*UpdatePaymentServic
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8486,7 +6259,7 @@ func ParseAuthorizeNewTransactionResponse(rsp *http.Response) (*AuthorizeNewTran
 		response.JSON201 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8498,32 +6271,6 @@ func ParseAuthorizeNewTransactionResponse(rsp *http.Response) (*AuthorizeNewTran
 			return nil, err
 		}
 		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseRedirectTransactionApprovalResponse parses an HTTP response from a RedirectTransactionApprovalWithResponse call
-func ParseRedirectTransactionApprovalResponse(rsp *http.Response) (*RedirectTransactionApprovalResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &RedirectTransactionApprovalResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest Error404NotFound
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
 
 	}
 
@@ -8559,33 +6306,7 @@ func ParseGetTransactionResponse(rsp *http.Response) (*GetTransactionResponse, e
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest interface{}
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON404 = &dest
-
-	}
-
-	return response, nil
-}
-
-// ParseApproveTransactionResponse parses an HTTP response from a ApproveTransactionWithResponse call
-func ParseApproveTransactionResponse(rsp *http.Response) (*ApproveTransactionResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &ApproveTransactionResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest Error404NotFound
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8618,7 +6339,7 @@ func ParseAuthorizeTransactionResponse(rsp *http.Response) (*AuthorizeTransactio
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8632,7 +6353,7 @@ func ParseAuthorizeTransactionResponse(rsp *http.Response) (*AuthorizeTransactio
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8665,7 +6386,7 @@ func ParseCaptureTransactionResponse(rsp *http.Response) (*CaptureTransactionRes
 		response.JSON200 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 400:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8679,7 +6400,7 @@ func ParseCaptureTransactionResponse(rsp *http.Response) (*CaptureTransactionRes
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8719,7 +6440,7 @@ func ParseRefundTransactionResponse(rsp *http.Response) (*RefundTransactionRespo
 		response.JSON401 = &dest
 
 	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 404:
-		var dest interface{}
+		var dest ErrorGeneric
 		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
 			return nil, err
 		}
@@ -8730,74 +6451,8 @@ func ParseRefundTransactionResponse(rsp *http.Response) (*RefundTransactionRespo
 	return response, nil
 }
 
-// ParseGetCurrentUserResponse parses an HTTP response from a GetCurrentUserWithResponse call
-func ParseGetCurrentUserResponse(rsp *http.Response) (*GetCurrentUserResponse, error) {
-	bodyBytes, err := ioutil.ReadAll(rsp.Body)
-	defer rsp.Body.Close()
-	if err != nil {
-		return nil, err
-	}
-
-	response := &GetCurrentUserResponse{
-		Body:         bodyBytes,
-		HTTPResponse: rsp,
-	}
-
-	switch {
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 200:
-		var dest User
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON200 = &dest
-
-	case strings.Contains(rsp.Header.Get("Content-Type"), "json") && rsp.StatusCode == 401:
-		var dest Error401Unauthorized
-		if err := json.Unmarshal(bodyBytes, &dest); err != nil {
-			return nil, err
-		}
-		response.JSON401 = &dest
-
-	}
-
-	return response, nil
-}
-
 // ServerInterface represents all server handlers.
 type ServerInterface interface {
-	// List API key-pairs
-	// (GET /api-key-pairs)
-	ListApiKeyPairs(ctx echo.Context, params ListApiKeyPairsParams) error
-	// Create an API key-pair
-	// (POST /api-key-pairs)
-	CreateApiKeyPair(ctx echo.Context) error
-	// Delete an API key-pair
-	// (DELETE /api-key-pairs/{api_key_pair_id})
-	DeleteApiKeyPair(ctx echo.Context, apiKeyPairId string) error
-	// Store a new payment method
-	// (POST /async/payment-methods)
-	AsyncStorePaymentMethod(ctx echo.Context) error
-	// Create transaction
-	// (POST /async/transactions)
-	AsyncCreateTransaction(ctx echo.Context) error
-	// Batch capture transactions
-	// (POST /async/transactions/batch-capture)
-	AsyncBatchCaptureTransactions(ctx echo.Context) error
-	// Authorize approved transaction
-	// (POST /async/transactions/{transaction_id}/authorize)
-	AsyncAuthorizeTransaction(ctx echo.Context, transactionId string) error
-	// Capture transaction
-	// (POST /async/transactions/{transaction_id}/capture)
-	AsyncCaptureTransaction(ctx echo.Context, transactionId string) error
-	// Ends a user session (Logout)
-	// (DELETE /auth/sessions)
-	Logout(ctx echo.Context) error
-	// Create a user session (Login)
-	// (POST /auth/sessions)
-	Login(ctx echo.Context) error
-	// Renew a user session
-	// (PUT /auth/sessions)
-	RefreshSession(ctx echo.Context) error
 	// List buyers
 	// (GET /buyers)
 	ListBuyers(ctx echo.Context, params ListBuyersParams) error
@@ -8831,9 +6486,6 @@ type ServerInterface interface {
 	// Update card rule
 	// (PUT /card-rules/{card_rule_id})
 	UpdateCardRule(ctx echo.Context, cardRuleId string) error
-	// Get current merchant details
-	// (GET /merchants/main)
-	GetCurrentMerchant(ctx echo.Context) error
 	// List payment methods
 	// (GET /payment-methods)
 	ListPaymentMethods(ctx echo.Context, params ListPaymentMethodsParams) error
@@ -8876,15 +6528,9 @@ type ServerInterface interface {
 	// New transaction
 	// (POST /transactions)
 	AuthorizeNewTransaction(ctx echo.Context) error
-	// Approve payment method
-	// (GET /transactions/approvals/{transaction_approval_token})
-	RedirectTransactionApproval(ctx echo.Context, transactionApprovalToken string) error
 	// Get transaction
 	// (GET /transactions/{transaction_id})
 	GetTransaction(ctx echo.Context, transactionId string) error
-	// Buyer approval callback
-	// (GET /transactions/{transaction_id}/approve)
-	ApproveTransaction(ctx echo.Context, transactionId string) error
 	// Authorize approved transaction
 	// (POST /transactions/{transaction_id}/authorize)
 	AuthorizeTransaction(ctx echo.Context, transactionId string) error
@@ -8894,170 +6540,11 @@ type ServerInterface interface {
 	// Refund or void transaction
 	// (POST /transactions/{transaction_id}/refund)
 	RefundTransaction(ctx echo.Context, transactionId string) error
-	// Get current
-	// (GET /users/me)
-	GetCurrentUser(ctx echo.Context) error
 }
 
 // ServerInterfaceWrapper converts echo contexts to parameters.
 type ServerInterfaceWrapper struct {
 	Handler ServerInterface
-}
-
-// ListApiKeyPairs converts echo context to params.
-func (w *ServerInterfaceWrapper) ListApiKeyPairs(ctx echo.Context) error {
-	var err error
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Parameter object where we will unmarshal all parameters from the context
-	var params ListApiKeyPairsParams
-	// ------------- Optional query parameter "limit" -------------
-
-	err = runtime.BindQueryParameter("form", true, false, "limit", ctx.QueryParams(), &params.Limit)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter limit: %s", err))
-	}
-
-	// ------------- Optional query parameter "cursor" -------------
-
-	err = runtime.BindQueryParameter("form", true, false, "cursor", ctx.QueryParams(), &params.Cursor)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter cursor: %s", err))
-	}
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.ListApiKeyPairs(ctx, params)
-	return err
-}
-
-// CreateApiKeyPair converts echo context to params.
-func (w *ServerInterfaceWrapper) CreateApiKeyPair(ctx echo.Context) error {
-	var err error
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.CreateApiKeyPair(ctx)
-	return err
-}
-
-// DeleteApiKeyPair converts echo context to params.
-func (w *ServerInterfaceWrapper) DeleteApiKeyPair(ctx echo.Context) error {
-	var err error
-	// ------------- Path parameter "api_key_pair_id" -------------
-	var apiKeyPairId string
-
-	err = runtime.BindStyledParameterWithLocation("simple", false, "api_key_pair_id", runtime.ParamLocationPath, ctx.Param("api_key_pair_id"), &apiKeyPairId)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter api_key_pair_id: %s", err))
-	}
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.DeleteApiKeyPair(ctx, apiKeyPairId)
-	return err
-}
-
-// AsyncStorePaymentMethod converts echo context to params.
-func (w *ServerInterfaceWrapper) AsyncStorePaymentMethod(ctx echo.Context) error {
-	var err error
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.AsyncStorePaymentMethod(ctx)
-	return err
-}
-
-// AsyncCreateTransaction converts echo context to params.
-func (w *ServerInterfaceWrapper) AsyncCreateTransaction(ctx echo.Context) error {
-	var err error
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.AsyncCreateTransaction(ctx)
-	return err
-}
-
-// AsyncBatchCaptureTransactions converts echo context to params.
-func (w *ServerInterfaceWrapper) AsyncBatchCaptureTransactions(ctx echo.Context) error {
-	var err error
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.AsyncBatchCaptureTransactions(ctx)
-	return err
-}
-
-// AsyncAuthorizeTransaction converts echo context to params.
-func (w *ServerInterfaceWrapper) AsyncAuthorizeTransaction(ctx echo.Context) error {
-	var err error
-	// ------------- Path parameter "transaction_id" -------------
-	var transactionId string
-
-	err = runtime.BindStyledParameterWithLocation("simple", false, "transaction_id", runtime.ParamLocationPath, ctx.Param("transaction_id"), &transactionId)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter transaction_id: %s", err))
-	}
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.AsyncAuthorizeTransaction(ctx, transactionId)
-	return err
-}
-
-// AsyncCaptureTransaction converts echo context to params.
-func (w *ServerInterfaceWrapper) AsyncCaptureTransaction(ctx echo.Context) error {
-	var err error
-	// ------------- Path parameter "transaction_id" -------------
-	var transactionId string
-
-	err = runtime.BindStyledParameterWithLocation("simple", false, "transaction_id", runtime.ParamLocationPath, ctx.Param("transaction_id"), &transactionId)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter transaction_id: %s", err))
-	}
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.AsyncCaptureTransaction(ctx, transactionId)
-	return err
-}
-
-// Logout converts echo context to params.
-func (w *ServerInterfaceWrapper) Logout(ctx echo.Context) error {
-	var err error
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.Logout(ctx)
-	return err
-}
-
-// Login converts echo context to params.
-func (w *ServerInterfaceWrapper) Login(ctx echo.Context) error {
-	var err error
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.Login(ctx)
-	return err
-}
-
-// RefreshSession converts echo context to params.
-func (w *ServerInterfaceWrapper) RefreshSession(ctx echo.Context) error {
-	var err error
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.RefreshSession(ctx)
-	return err
 }
 
 // ListBuyers converts echo context to params.
@@ -9303,17 +6790,6 @@ func (w *ServerInterfaceWrapper) UpdateCardRule(ctx echo.Context) error {
 
 	// Invoke the callback with all the unmarshalled arguments
 	err = w.Handler.UpdateCardRule(ctx, cardRuleId)
-	return err
-}
-
-// GetCurrentMerchant converts echo context to params.
-func (w *ServerInterfaceWrapper) GetCurrentMerchant(ctx echo.Context) error {
-	var err error
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.GetCurrentMerchant(ctx)
 	return err
 }
 
@@ -9677,22 +7153,6 @@ func (w *ServerInterfaceWrapper) AuthorizeNewTransaction(ctx echo.Context) error
 	return err
 }
 
-// RedirectTransactionApproval converts echo context to params.
-func (w *ServerInterfaceWrapper) RedirectTransactionApproval(ctx echo.Context) error {
-	var err error
-	// ------------- Path parameter "transaction_approval_token" -------------
-	var transactionApprovalToken string
-
-	err = runtime.BindStyledParameterWithLocation("simple", false, "transaction_approval_token", runtime.ParamLocationPath, ctx.Param("transaction_approval_token"), &transactionApprovalToken)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter transaction_approval_token: %s", err))
-	}
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.RedirectTransactionApproval(ctx, transactionApprovalToken)
-	return err
-}
-
 // GetTransaction converts echo context to params.
 func (w *ServerInterfaceWrapper) GetTransaction(ctx echo.Context) error {
 	var err error
@@ -9708,22 +7168,6 @@ func (w *ServerInterfaceWrapper) GetTransaction(ctx echo.Context) error {
 
 	// Invoke the callback with all the unmarshalled arguments
 	err = w.Handler.GetTransaction(ctx, transactionId)
-	return err
-}
-
-// ApproveTransaction converts echo context to params.
-func (w *ServerInterfaceWrapper) ApproveTransaction(ctx echo.Context) error {
-	var err error
-	// ------------- Path parameter "transaction_id" -------------
-	var transactionId string
-
-	err = runtime.BindStyledParameterWithLocation("simple", false, "transaction_id", runtime.ParamLocationPath, ctx.Param("transaction_id"), &transactionId)
-	if err != nil {
-		return echo.NewHTTPError(http.StatusBadRequest, fmt.Sprintf("Invalid format for parameter transaction_id: %s", err))
-	}
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.ApproveTransaction(ctx, transactionId)
 	return err
 }
 
@@ -9781,17 +7225,6 @@ func (w *ServerInterfaceWrapper) RefundTransaction(ctx echo.Context) error {
 	return err
 }
 
-// GetCurrentUser converts echo context to params.
-func (w *ServerInterfaceWrapper) GetCurrentUser(ctx echo.Context) error {
-	var err error
-
-	ctx.Set(BearerAuthScopes, []string{""})
-
-	// Invoke the callback with all the unmarshalled arguments
-	err = w.Handler.GetCurrentUser(ctx)
-	return err
-}
-
 // This is a simple interface which specifies echo.Route addition functions which
 // are present on both echo.Echo and echo.Group, since we want to allow using
 // either of them for path registration
@@ -9820,17 +7253,6 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 		Handler: si,
 	}
 
-	router.GET(baseURL+"/api-key-pairs", wrapper.ListApiKeyPairs)
-	router.POST(baseURL+"/api-key-pairs", wrapper.CreateApiKeyPair)
-	router.DELETE(baseURL+"/api-key-pairs/:api_key_pair_id", wrapper.DeleteApiKeyPair)
-	router.POST(baseURL+"/async/payment-methods", wrapper.AsyncStorePaymentMethod)
-	router.POST(baseURL+"/async/transactions", wrapper.AsyncCreateTransaction)
-	router.POST(baseURL+"/async/transactions/batch-capture", wrapper.AsyncBatchCaptureTransactions)
-	router.POST(baseURL+"/async/transactions/:transaction_id/authorize", wrapper.AsyncAuthorizeTransaction)
-	router.POST(baseURL+"/async/transactions/:transaction_id/capture", wrapper.AsyncCaptureTransaction)
-	router.DELETE(baseURL+"/auth/sessions", wrapper.Logout)
-	router.POST(baseURL+"/auth/sessions", wrapper.Login)
-	router.PUT(baseURL+"/auth/sessions", wrapper.RefreshSession)
 	router.GET(baseURL+"/buyers", wrapper.ListBuyers)
 	router.POST(baseURL+"/buyers", wrapper.AddBuyer)
 	router.GET(baseURL+"/buyers/payment-methods", wrapper.ListBuyerPaymentMethods)
@@ -9842,7 +7264,6 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 	router.DELETE(baseURL+"/card-rules/:card_rule_id", wrapper.DeleteCardRule)
 	router.GET(baseURL+"/card-rules/:card_rule_id", wrapper.GetCardRule)
 	router.PUT(baseURL+"/card-rules/:card_rule_id", wrapper.UpdateCardRule)
-	router.GET(baseURL+"/merchants/main", wrapper.GetCurrentMerchant)
 	router.GET(baseURL+"/payment-methods", wrapper.ListPaymentMethods)
 	router.POST(baseURL+"/payment-methods", wrapper.StorePaymentMethod)
 	router.DELETE(baseURL+"/payment-methods/:payment_method_id", wrapper.DeletePaymentMethod)
@@ -9857,285 +7278,221 @@ func RegisterHandlersWithBaseURL(router EchoRouter, si ServerInterface, baseURL 
 	router.PUT(baseURL+"/payment-services/:payment_service_id", wrapper.UpdatePaymentService)
 	router.GET(baseURL+"/transactions", wrapper.ListTransactions)
 	router.POST(baseURL+"/transactions", wrapper.AuthorizeNewTransaction)
-	router.GET(baseURL+"/transactions/approvals/:transaction_approval_token", wrapper.RedirectTransactionApproval)
 	router.GET(baseURL+"/transactions/:transaction_id", wrapper.GetTransaction)
-	router.GET(baseURL+"/transactions/:transaction_id/approve", wrapper.ApproveTransaction)
 	router.POST(baseURL+"/transactions/:transaction_id/authorize", wrapper.AuthorizeTransaction)
 	router.POST(baseURL+"/transactions/:transaction_id/capture", wrapper.CaptureTransaction)
 	router.POST(baseURL+"/transactions/:transaction_id/refund", wrapper.RefundTransaction)
-	router.GET(baseURL+"/users/me", wrapper.GetCurrentUser)
 
 }
 
 // Base64 encoded, gzipped, json marshaled Swagger object
 var swaggerSpec = []string{
 
-	"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",
-	"/w8AAP//iPlj+CvBAQA=",
+	"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",
+	"AA==",
 }
 
 // GetSwagger returns the content of the embedded swagger specification file
