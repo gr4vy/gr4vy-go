@@ -75,7 +75,7 @@ You can now pass this token to your frontend where it can be used to authenticat
 
 The `buyer_id` and/or `buyer_external_identifier` fields can be used to allow the token to pull in previously stored payment methods for a user. A buyer needs to be created before it can be used in this way.
 
-```
+```golang
   var req AddBuyerJSONRequestBody
   helper := string("Jane Smith")
   req.DisplayName = &helper
