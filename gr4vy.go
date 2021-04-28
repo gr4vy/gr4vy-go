@@ -18,6 +18,7 @@ type Gr4vyClient struct {
 	privateKey string
 	baseUrl string
 	Debug bool
+	accessToken string
 }
 
 func NewGr4vyClient(gr4vy_id string, private_key string) (*Gr4vyClient) {
@@ -38,7 +39,7 @@ func NewGr4vyClientWithBaseUrl(base_url string, private_key string) (*Gr4vyClien
 	return &client
 }
 
-func GetClient(c *Gr4vyClient) (*Client, error) {
+func GetClient(c *Gr4vyClient) (*APIClient, error) {
 
 	if c.Debug {
 		pc, _, _, _ := runtime.Caller(1)
@@ -46,38 +47,67 @@ func GetClient(c *Gr4vyClient) (*Client, error) {
       	fmt.Println("Gr4vy - Request - " + lastString(strings.Split(funcName, ".")))
     }
 
-	authRequestEditorFn, err := authentication(c.privateKey, c.Debug)
-
+	bearerToken, err := authentication(c.privateKey, c.Debug)
     if err != nil {
     	return nil, err
     }
+    c.accessToken = bearerToken
 
+    config := NewConfiguration()
+    config.Servers[0].URL = c.BaseUrl()
 
-	client, clientErr := NewClient(c.BaseUrl(), 
-		[]ClientOption{
-			WithRequestEditorFn(authRequestEditorFn),
-		}...,
-	)
+	client := NewAPIClient(config)
 
-	if clientErr != nil {
-		return nil, clientErr
-	}
+	//TODO: check if nil?
 
 	return client, nil
 }
+
+// func GetClientWithResponses(c *Gr4vyClient) (*ClientWithResponses, error) {
+
+// 	if c.Debug {
+// 		pc, _, _, _ := runtime.Caller(1)
+// 		funcName := runtime.FuncForPC(pc).Name()
+//       	fmt.Println("Gr4vy - Request - " + lastString(strings.Split(funcName, ".")))
+//     }
+
+// 	authRequestEditorFn, err := authentication(c.privateKey, c.Debug)
+
+//     if err != nil {
+//     	return nil, err
+//     }
+
+
+// 	client, clientErr := NewClientWithResponses(c.BaseUrl(), 
+// 		[]ClientOption{
+// 			WithRequestEditorFn(authRequestEditorFn),
+// 		}...,
+// 	)
+
+// 	if clientErr != nil {
+// 		return nil, clientErr
+// 	}
+
+// 	return client, nil
+// }
 
 func (c *Gr4vyClient) GetEmbedToken(params map[string]string) (string, error) {
 	scopes := []string{"embed"}
 	return getToken(c.privateKey, scopes, params)
 }
 
-func (c *Gr4vyClient) HandleResponse(response *http.Response, error error) (*http.Response, error) {
+func (c *Gr4vyClient) HandleResponse(response *http.Response, error error) {
 	if c.Debug {
 		var sb strings.Builder
 		sb.WriteString("Gr4vy - Response - ")
 
 		if error != nil {
 			sb.WriteString("error: " + error.Error())
+			body, err := io.ReadAll(response.Body)
+			if err == nil {
+				sb.WriteString(string(body))
+				response.Body = ioutil.NopCloser(bytes.NewBuffer(body))
+			}
 		} else {
 			body, err := io.ReadAll(response.Body)
 			if err != nil {
@@ -90,7 +120,6 @@ func (c *Gr4vyClient) HandleResponse(response *http.Response, error error) (*htt
 
 		fmt.Println(sb.String())
 	}
-	return response, error
 }
 
 func (c *Gr4vyClient) BaseUrl() string {
@@ -112,7 +141,11 @@ func GetKeyFromFile(fileName string) (string, error) {
 	return string(b), nil
 }
 
-func String(v string) *string {
+func String(v string) (NullableString) {
+	return *NewNullableString(&v)
+}
+
+func StringPtr(v string) (*string) {
 	return &v
 }
 
@@ -123,3 +156,8 @@ func Int32(v int32) *int32 {
 func Int64(v int64) *int64 {
 	return &v
 }
+
+func Bool(v bool) *bool {
+	return &v
+}
+

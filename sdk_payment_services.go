@@ -6,51 +6,104 @@ import (
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
-type Gr4vyListPaymentServicesParams ListPaymentServicesParams
-type Gr4vyAddPaymentService AddPaymentServiceJSONRequestBody
-type Gr4vyUpdatePaymentService UpdatePaymentServiceJSONRequestBody
+type Gr4vyPaymentServiceUpdateFields PaymentServiceUpdateFields
+type Gr4vyPaymentServiceRequest PaymentServiceRequest
+type Gr4vyPaymentServiceUpdate PaymentServiceUpdate
 type Gr4vyPaymentService PaymentService
 type Gr4vyPaymentServices PaymentServices
 
-func (c *Gr4vyClient) ListPaymentServices(params Gr4vyListPaymentServicesParams) (*http.Response, error) {
+func (c *Gr4vyClient) ListPaymentServices(limit *int32) (*Gr4vyPaymentServices, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-    	return nil, err
+        return nil, nil, err
     }
-    var p ListPaymentServicesParams = ListPaymentServicesParams(params)
-    return c.HandleResponse(client.ListPaymentServices(context.TODO(), &p))
+
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.PaymentServicesApi.ListPaymentServices(auth)
+    if (limit != nil) {
+        p.Limit(*limit)
+    }
+    
+    response, http, err := p.Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyPaymentServices = Gr4vyPaymentServices(response)
+    return &r, http, err
 }
 
-func (c *Gr4vyClient) GetPaymentService(payment_service_id string) (*http.Response, error) {
+func (c *Gr4vyClient) GetPaymentService(payment_service_id string) (*Gr4vyPaymentService, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-      return nil, err
+        return nil, nil, err
     }
-    return c.HandleResponse(client.GetPaymentService(context.TODO(), payment_service_id))
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.PaymentServicesApi.GetPaymentService(auth, payment_service_id)
+
+    response, http, err := p.Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyPaymentService = Gr4vyPaymentService(response)
+    return &r, http, err
 }
 
-func (c *Gr4vyClient) AddPaymentService(body Gr4vyAddPaymentService) (*http.Response, error) {
+func (c *Gr4vyClient) AddPaymentService(body Gr4vyPaymentServiceRequest, fields []Gr4vyPaymentServiceUpdateFields) (*Gr4vyPaymentService, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-        return nil, err
+        return nil, nil, err
     }
-    var b AddPaymentServiceJSONRequestBody = AddPaymentServiceJSONRequestBody(body)
-    return c.HandleResponse(client.AddPaymentService(context.TODO(), b))
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.PaymentServicesApi.AddPaymentService(auth)
+
+    var b PaymentServiceRequest = PaymentServiceRequest(body)
+	var f []PaymentServiceUpdateFields
+    for _, element := range fields {
+        var c PaymentServiceUpdateFields = PaymentServiceUpdateFields(element)
+        f = append(f, c)
+    }
+    b.Fields = f
+    response, http, err := p.PaymentServiceRequest(b).Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyPaymentService = Gr4vyPaymentService(response)
+    return &r, http, err
 }
 
-func (c *Gr4vyClient) UpdatePaymentService(payment_service_id string, body Gr4vyUpdatePaymentService) (*http.Response, error) {
+func (c *Gr4vyClient) UpdatePaymentService(payment_service_id string, body Gr4vyPaymentServiceUpdate) (*Gr4vyPaymentService, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-      return nil, err
+        return nil, nil, err
     }
-    var b UpdatePaymentServiceJSONRequestBody = UpdatePaymentServiceJSONRequestBody(body)
-    return c.HandleResponse(client.UpdatePaymentService(context.TODO(), payment_service_id, b))
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.PaymentServicesApi.UpdatePaymentService(auth, payment_service_id)
+
+    var b PaymentServiceUpdate = PaymentServiceUpdate(body)
+    response, http, err := p.PaymentServiceUpdate(b).Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyPaymentService = Gr4vyPaymentService(response)
+    return &r, http, err
 }
 
 func (c *Gr4vyClient) DeletePaymentService(payment_service_id string) (*http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-      return nil, err
+        return nil, err
     }
-    return c.HandleResponse(client.DeletePaymentService(context.TODO(), payment_service_id))
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.PaymentServicesApi.DeletePaymentService(auth, payment_service_id)
+
+    http, err := p.Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return http, err
+    }
+    return http, err
 }

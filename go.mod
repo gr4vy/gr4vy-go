@@ -13,5 +13,6 @@ require (
 	github.com/twinj/uuid v1.0.0
 	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad
 	golang.org/x/net v0.0.0-20210119194325-5f4716e94777
+	golang.org/x/oauth2 v0.0.0-20210427180440-81ed05c6b58c // indirect
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
 )

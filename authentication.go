@@ -2,8 +2,6 @@ package gr4vy
 
 import (
 	"fmt"
-	. "github.com/gr4vy/gr4vy-go/api"
-	"github.com/deepmap/oapi-codegen/pkg/securityprovider"
 	"github.com/dgrijalva/jwt-go"
 	"golang.org/x/crypto/ssh"
 	"time"
@@ -18,7 +16,7 @@ func getToken(private_key string, scopes []string, embed map[string]string) (str
 	claims := jwt.MapClaims{
 		"iss": fmt.Sprintf("Gr4vy SDK %v - %v", VERSION, runtime.Version()), 
 		"nbf": float64(time.Now().Unix()),
-		"exp": float64(time.Now().Unix() + 30),
+		"exp": float64(time.Now().Unix() + 3000),
 		"scopes": scopes,
 		"jti": uuid.NewV4(),
 	}
@@ -52,23 +50,18 @@ func getToken(private_key string, scopes []string, embed map[string]string) (str
 	return tokenString, nil
 }
 
-func authentication(private_key string, Debug bool) (RequestEditorFn, error) {
+func authentication(private_key string, Debug bool) (string, error) {
 
 	scopes := []string{"*.read", "*.write"}
 	tokenString, err := getToken(private_key, scopes, nil)
 	if err != nil {
-		return nil, err
+		return "", err
 	}
 	if Debug {
 		fmt.Printf("Gr4vy - Auth Token - %v\n", tokenString)
 	}
 
-	bearerTokenProvider, bearerTokenProviderErr := securityprovider.NewSecurityProviderBearerToken(tokenString)
-	if bearerTokenProviderErr != nil {
-		return nil, bearerTokenProviderErr
-	}
-
-	return bearerTokenProvider.Intercept, nil
+	return tokenString, nil
 }
 
 func jwkEncode(pub ecdsa.PublicKey) (string, error) {

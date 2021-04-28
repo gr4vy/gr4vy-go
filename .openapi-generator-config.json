@@ -1,0 +1,7 @@
+{
+    "moduleName": "Gr4vy",
+    "npmName": "@gr4vy/go",
+    "npmVersion": "0.1.0",
+    "packageName": "Openapi",
+    "isGoSubmodule": true
+}

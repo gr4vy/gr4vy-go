@@ -1,44 +1,19 @@
 <?php
-$FILENAME = 'openapi.v1.json';
+$FILENAME = 'api/model_card.go';
 
 $FIND = <<<EOF
-            "enum": [
-              "==",
-              "!=",
-              "<=",
-              ">=",
-              ">",
-              "<",
-              "IN",
-              "NOT IN"
-            ]
+var environment ENVIRONMENT = "production"
 EOF;
 
 $str=file_get_contents($FILENAME);
-$str=str_replace($FIND, "",$str);
+$str=str_replace($FIND, 'var environment string = "production"',$str);
 
-$FIND = <<<EOF
-            "enum": [
-              "==",
-              "!=",
-              "<=",
-              ">=",
-              ">",
-              "<"
-            ]
-EOF;
+file_put_contents($FILENAME, $str);
 
-$str=str_replace($FIND, "",$str);
+$FILENAME = 'api/model_pay_pal.go';
 
-$FIND = <<<EOF
-                  "enum": [
-                    "text",
-                    "multiline",
-                    "number"
-                  ]
-EOF;
-
-$str=str_replace($FIND, "",$str);
+$str=file_get_contents($FILENAME);
+$str=str_replace($FIND, 'var environment string = "production"',$str);
 
 //write the entire string
 file_put_contents($FILENAME, $str);

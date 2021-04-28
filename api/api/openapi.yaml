@@ -1,0 +1,4618 @@
+openapi: 3.0.0
+info:
+  contact:
+    email: code@gr4vy.com
+    name: Gr4vy Support
+    url: https://gr4vy.com
+  description: |-
+    Welcome to the Gr4vy API reference documentation.
+    Our API is still very much a work in product and subject to change.
+  license:
+    name: MIT
+    url: https://raw.githubusercontent.com/gr4vy/gr4vy-openapi/main/LICENSE
+  termsOfService: https://gr4vy.com
+  title: Gr4vy API (Beta)
+  version: "1.0"
+servers:
+- url: https://api.{gr4vy_id}.gr4vy.app
+  variables:
+    gr4vy_id:
+      default: plantly
+      description: The subdomain for your Gr4vy instance.
+security:
+- BearerAuth: []
+tags:
+- description: |-
+    In Gr4vy, a buyer represents your customer, the shopper who's performing
+    a checkout and making a purchase.
+
+    A buyer can be used by you to:
+
+    * Display a human readable name (`display_name`) for a buyer in the Gr4vy
+    admin panel
+    * Associate multiple tokenized payment methods with a single user
+    * Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the
+      buyer's previously stored payment methods, allowing for faster checkout.
+  name: Buyers
+- description: |-
+    In Gr4vy, a card rule defines how a card transaction is processed. It
+    determines which payment services are used, and with what priority, based
+    on the transaction amount, card type, and many more attributes.
+  name: Card Rules
+- description: |-
+    In Gr4vy, a payment method represents a way in which a payment can be
+    processed, for example a card payment, a PayPal payment, or a Bitcoin
+    payment.
+
+    The payment method API can be used to:
+
+    * List all the available payment methods
+    * Filter the available payment method for a buyer in a specific currency
+    and country.
+    * Store (also known as tokenize) a payment method for a buyer.
+    * Fetch all previously tokenized payment methods for a buyer.
+  name: Payment Methods
+- description: |-
+    In Gr4vy, a payment option represents a list of methods (card, PayPal,
+    etc) that are available for a given locale.
+
+    The payment options API can be used to:
+
+    * Determine what types of payments can be processed in a specific locale.
+    * Display a list options to a buyer to choose from.
+  name: Payment Options
+- description: |-
+    Payment service definitions describe the fields required for a payment
+    service to be configured.
+  name: Payment Service Definitions
+- description: |-
+    In Gr4vy, a payment service represents a configured payment provider
+    (Stripe, PayPal, Adyen, etc) for a specific payment type (card, bitcoin,
+    etc)
+
+    The payment services API can be used to:
+
+    * Provide Gr4vy with the payment credentials for a payment provider.
+    * Set a display name for a payment provider.
+  name: Payment Services
+- description: |-
+    In Gr4vy, a transaction represents a payment in any state, either before it
+    is authorized, once it is captured, or after it has been refunded.
+
+    The transactions API can be used to:
+
+    - Authorize, capture, and store cards.
+    - Authorize, capture, and store alternative payment methods like PayPal.
+    - Refund, void, and otherwise cancel existing transactions.
+  name: Transactions
+paths:
+  /buyers:
+    get:
+      description: Returns a list of buyers.
+      operationId: list-buyers
+      parameters:
+      - description: |-
+          Filters the results to only the buyers for which the `display_name` or
+          `external_identifier` matches this value. This field allows for a partial
+          match, matching any buyer for which either of the fields partially or
+          completely matches.
+        explode: true
+        in: query
+        name: search
+        required: false
+        schema:
+          example: John
+          type: string
+        style: form
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Buyers'
+          description: Returns a list of buyers.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List buyers
+      tags:
+      - Buyers
+    post:
+      description: |
+        Adds a buyer, allowing for payment methods and transactions to be associated
+        to this buyer.
+      operationId: add-buyer
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Create a buyer:
+                value:
+                  external_identifier: "412231123"
+                  display_name: John L.
+            schema:
+              $ref: '#/components/schemas/BuyerRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Buyer'
+          description: Returns the buyer that was added.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409DuplicateRecord'
+          description: Returns an error if duplicate resource has been found.
+      summary: New buyer
+      tags:
+      - Buyers
+  /buyers/{buyer_id}:
+    delete:
+      description: |-
+        Deletes a buyer record. Any associated tokenized payment methods will remain
+        in the system but no longer associated to the buyer.
+      operationId: delete-buyer
+      parameters:
+      - description: The unique ID for a buyer.
+        explode: false
+        in: path
+        name: buyer_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Returns an empty response.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Delete buyer
+      tags:
+      - Buyers
+    get:
+      description: Gets the information about a buyer.
+      operationId: get-buyer
+      parameters:
+      - description: The unique ID for a buyer.
+        explode: false
+        in: path
+        name: buyer_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Buyer'
+          description: Returns the information about a buyer.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns a generic error.
+      summary: Get buyer
+      tags:
+      - Buyers
+    put:
+      description: |
+        Updates a buyer's details.
+      operationId: update-buyer
+      parameters:
+      - description: The unique ID for a buyer.
+        explode: false
+        in: path
+        name: buyer_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Update a buyer:
+                value:
+                  external_identifier: "42623266"
+                  display_name: John D.
+            schema:
+              $ref: '#/components/schemas/BuyerUpdate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Buyer'
+          description: Returns the updated buyer record.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Update buyer
+      tags:
+      - Buyers
+  /buyers/payment-methods:
+    get:
+      description: |-
+        Returns a list of stored (tokenized) payment methods for a buyer in
+        a short tokenized format.
+      operationId: list-buyer-payment-methods
+      parameters:
+      - description: |-
+          Filters the results to only the items for which the `buyer` has an
+          `id` that matches this value.
+        explode: true
+        in: query
+        name: buyer_id
+        required: false
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the items for which the `buyer` has an
+          `external_identifier` that matches this value.
+        explode: true
+        in: query
+        name: buyer_external_identifier
+        required: false
+        schema:
+          example: user-12345
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the items which support this country code. A
+          country is formatted as 2-letter ISO country code.
+        explode: true
+        in: query
+        name: country
+        required: false
+        schema:
+          example: US
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the items which support this currency code. A
+          currency is formatted as 3-letter ISO currency code.
+        explode: true
+        in: query
+        name: currency
+        required: false
+        schema:
+          example: USD
+          type: string
+        style: form
+      - description: Filters the results to only the items available in this environment.
+        explode: true
+        in: query
+        name: environment
+        required: false
+        schema:
+          default: production
+          enum:
+          - development
+          - staging
+          - production
+          example: staging
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethods--Tokenized'
+          description: |-
+            Returns a list of available payment methods for a buyer, filtered by the
+            the given currency and country code.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: List stored payment methods for a buyer
+      tags:
+      - Payment Methods
+  /payment-methods:
+    get:
+      description: Returns a list of stored (tokenized) payment methods.
+      operationId: list-payment-methods
+      parameters:
+      - description: Filters the results to only the items available in this environment.
+        explode: true
+        in: query
+        name: environment
+        required: false
+        schema:
+          default: production
+          enum:
+          - development
+          - staging
+          - production
+          example: staging
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the items for which the `buyer` has an
+          `id` that matches this value.
+        explode: true
+        in: query
+        name: buyer_id
+        required: false
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the items for which the `buyer` has an
+          `external_identifier` that matches this value.
+        explode: true
+        in: query
+        name: buyer_external_identifier
+        required: false
+        schema:
+          example: user-12345
+          type: string
+        style: form
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethods'
+          description: Returns a list of payment methods.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List payment methods
+      tags:
+      - Payment Methods
+    post:
+      description: Stores and tokenizes a new payment method.
+      operationId: store-payment-method
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Card'
+          description: Returns the created payment method.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: New payment method
+      tags:
+      - Payment Methods
+  /payment-methods/{payment_method_id}:
+    delete:
+      description: Removes a stored payment method.
+      operationId: delete-payment-method
+      parameters:
+      - description: The ID of the payment method.
+        explode: false
+        in: path
+        name: payment_method_id
+        required: true
+        schema:
+          example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Returns an empty response.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Delete payment method
+      tags:
+      - Payment Methods
+    get:
+      description: Gets the details for a stored payment method.
+      operationId: get-payment-method
+      parameters:
+      - description: The ID of the payment method.
+        explode: false
+        in: path
+        name: payment_method_id
+        required: true
+        schema:
+          example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethod'
+          description: Returns a payment method.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Get stored payment method
+      tags:
+      - Payment Methods
+  /payment-options:
+    get:
+      description: |-
+        Returns a list of available payment method options for a currency
+        and country.
+      operationId: list-payment-options
+      parameters:
+      - description: |-
+          Filters the results to only the items which support this country code. A
+          country is formatted as 2-letter ISO country code.
+        explode: true
+        in: query
+        name: country
+        required: false
+        schema:
+          example: US
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the items which support this currency code. A
+          currency is formatted as 3-letter ISO currency code.
+        explode: true
+        in: query
+        name: currency
+        required: false
+        schema:
+          example: USD
+          type: string
+        style: form
+      - description: Filters the results to only the items available in this environment.
+        explode: true
+        in: query
+        name: environment
+        required: false
+        schema:
+          default: production
+          enum:
+          - development
+          - staging
+          - production
+          example: staging
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentOptions'
+          description: |-
+            Returns a list of available payment options for the given query
+            parameters.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400BadRequest'
+          description: Returns an error if  any of the query parameters are not recognised.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List payment options
+      tags:
+      - Payment Options
+  /payment-services:
+    get:
+      description: Lists the currently configured and activated payment services.
+      operationId: list-payment-services
+      parameters:
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the items for which the `method` has been set to
+          this value.
+        explode: true
+        in: query
+        name: method
+        required: false
+        schema:
+          enum:
+          - card
+          - paypal
+          example: card
+          type: string
+        style: form
+      - description: Filters the results to only the items available in this environment.
+        explode: true
+        in: query
+        name: environment
+        required: false
+        schema:
+          default: production
+          enum:
+          - development
+          - staging
+          - production
+          example: staging
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentServices'
+          description: Returns a list of payment services.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List payment services
+      tags:
+      - Payment Services
+    post:
+      description: Adds a new payment service by providing a custom name and a value
+        for each of the required fields.
+      operationId: add-payment-service
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentServiceRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                Stripe:
+                  value:
+                    id: faaad066-30b4-4997-a438-242b0752d7e1
+                    type: payment-service
+                    payment_service_definition_id: stripe
+                    method: card
+                    display_name: Stripe
+                    status: pending
+                    accepted_currencies:
+                    - EUR
+                    accepted_countries:
+                    - DE
+                    environment: production
+              schema:
+                $ref: '#/components/schemas/PaymentService'
+          description: Returns the created payment service.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: New payment service
+      tags:
+      - Payment Services
+  /payment-services/{payment_service_id}:
+    delete:
+      description: Deletes a specific active payment service.
+      operationId: delete-payment-service
+      parameters:
+      - description: The ID of the payment service.
+        explode: false
+        in: path
+        name: payment_service_id
+        required: true
+        schema:
+          example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Returns an empty response.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Delete payment service
+      tags:
+      - Payment Services
+    get:
+      description: Retrieves the details of a single configured payment service.
+      operationId: get-payment-service
+      parameters:
+      - description: The ID of the payment service.
+        explode: false
+        in: path
+        name: payment_service_id
+        required: true
+        schema:
+          example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentService'
+          description: Returns a payment service.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Get payment service
+      tags:
+      - Payment Services
+    put:
+      description: Updates an existing payment service. Allows all fields to be changed
+        except for the service ID.
+      operationId: update-payment-service
+      parameters:
+      - description: The ID of the payment service.
+        explode: false
+        in: path
+        name: payment_service_id
+        required: true
+        schema:
+          example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentServiceUpdate'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentService'
+          description: Returns the updated payment service.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Update payment service
+      tags:
+      - Payment Services
+  /payment-service-definitions:
+    get:
+      description: Returns a list of all available payment service definitions.
+      operationId: list-payment-service-definitions
+      parameters:
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentServiceDefinitions'
+          description: Returns a list of payment service definitions.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List payment service definitions
+      tags:
+      - Payment Service Definitions
+  /payment-service-definitions/{payment_service_definition_id}:
+    get:
+      description: Gets the definition for a payment service.
+      operationId: get-payment-service-definition
+      parameters:
+      - description: The unique ID of the payment service definition.
+        explode: false
+        in: path
+        name: payment_service_definition_id
+        required: true
+        schema:
+          example: stripe-card
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentServiceDefinition'
+          description: Returns a payment service definition.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Get payment service definition
+      tags:
+      - Payment Service Definitions
+  /card-rules:
+    get:
+      description: Returns a list of rules for card transactions.
+      operationId: list-cards-rules
+      parameters:
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      - description: Filters the results to only the items available in this environment.
+        explode: true
+        in: query
+        name: environment
+        required: false
+        schema:
+          default: production
+          enum:
+          - development
+          - staging
+          - production
+          example: staging
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardRules'
+          description: Returns a list of card rules.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List card rules
+      tags:
+      - Card Rules
+    post:
+      description: Creates a new rule that is used for card transactions.
+      operationId: add-card-rule
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardRuleRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardRule'
+          description: Returns the newly created rule.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: Create card rule
+      tags:
+      - Card Rules
+  /card-rules/{card_rule_id}:
+    delete:
+      description: Deletes a specific card rule.
+      operationId: delete-card-rule
+      parameters:
+      - description: The unique ID for a card rule.
+        explode: false
+        in: path
+        name: card_rule_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Returns an empty response.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "403":
+          content:
+            application/json:
+              examples:
+                Workflow is active:
+                  value:
+                    type: error
+                    code: forbidden
+                    status: 403
+                    message: The resource could not be removed as it's currently active.
+                    details: []
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the rule could not be deleted.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Delete card rule
+      tags:
+      - Card Rules
+    get:
+      description: Returns a rule that can be used for card transactions.
+      operationId: get-card-rule
+      parameters:
+      - description: The unique ID for a card rule.
+        explode: false
+        in: path
+        name: card_rule_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardRule'
+          description: Returns a card rule.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Get card rule
+      tags:
+      - Card Rules
+    put:
+      description: Updates a rule that can be used for card transactions.
+      operationId: update-card-rule
+      parameters:
+      - description: The unique ID for a card rule.
+        explode: false
+        in: path
+        name: card_rule_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CardRuleUpdate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardRule'
+          description: Returns the updated card rule.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Update card rule
+      tags:
+      - Card Rules
+  /transactions:
+    get:
+      description: Lists all transactions for an account. Sorted by last `updated_at`
+        status.
+      operationId: list-transactions
+      parameters:
+      - description: |-
+          Filters the transactions to only the items for which the `id` or
+          `external_identifier` matches this value. This field allows for a partial
+          match, matching any transaction for which either of the fields partially or
+          completely matches.
+        explode: true
+        in: query
+        name: search
+        required: false
+        schema:
+          example: be828248-56de-481e-a580-44b6e1d4df81
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the transactions for which the `status`
+          matches this value.
+        explode: true
+        in: query
+        name: transaction_status
+        required: false
+        schema:
+          enum:
+          - processing
+          - processing_failed
+          - captured
+          - capture_pending
+          - capture_declined
+          - authorized
+          - authorization_pending
+          - authorization_declined
+          - authorization_expired
+          - authorization_voided
+          - refunded
+          - buyer_approval_pending
+          - buyer_approval_declined
+          - buyer_approval_timedout
+          example: captured
+          type: string
+        style: form
+      - description: Filters the results to only transactions created before this
+          ISO date-time string.
+        explode: true
+        in: query
+        name: before_created_at
+        required: false
+        schema:
+          example: 2012-12-12T10:53:43+00:00
+          type: string
+        style: form
+      - description: Filters the results to only transactions created after this ISO
+          date-time string.
+        explode: true
+        in: query
+        name: after_created_at
+        required: false
+        schema:
+          example: 2012-12-12T10:53:43+00:00
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only transactions last updated before this ISO
+          date-time string.
+        explode: true
+        in: query
+        name: before_updated_at
+        required: false
+        schema:
+          example: 2012-12-12T10:53:43+00:00
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only transactions last updated after this ISO
+          date-time string.
+        explode: true
+        in: query
+        name: after_updated_at
+        required: false
+        schema:
+          example: 2012-12-12T10:53:43+00:00
+          type: string
+        style: form
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 500
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transactions'
+          description: Returns a paginated list of transactions for an account.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List transactions
+      tags:
+      - Transactions
+    post:
+      description: |
+        Attempts to create an authorization for a payment method. In some cases it is
+        not possible to create the authorization without redirecting the user for
+        their authorization. In these cases the status is set to
+        `buyer_approval_pending` and an `approval_url` is returned.
+
+        Additionally, this endpoint accepts a few additional fields that allow for
+        simultaneous capturing and storage of the payment method.
+
+        * `store` - Use this field to store the payment method for
+        future use. Not all payment methods support this feature.
+        * `capture` - Use this method to also perform a capture of the transaction
+        after it has been authorized.
+      operationId: authorize-new-transaction
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Authorize a new card:
+                value:
+                  amount: 1299
+                  currency: USD
+                  payment_method:
+                    method: card
+                    number: "4111111111111111"
+                    expiration_date: 11/25
+                    security_code: "123"
+              Authorized and tokenize a card:
+                value:
+                  amount: 1299
+                  currency: USD
+                  store: true
+                  payment_method:
+                    method: card
+                    number: "4111111111111111"
+                    expiration_date: 11/25
+                    security_code: "123"
+              Authorize, capture, and tokenize a card:
+                value:
+                  amount: 1299
+                  currency: USD
+                  intent: capture
+                  store: true
+                  payment_method:
+                    method: card
+                    number: "4111111111111111"
+                    expiration_date: 11/25
+                    security_code: "123"
+              Authorize and capture a PayPal transaction:
+                value:
+                  amount: 1299
+                  currency: USD
+                  intent: capture
+                  payment_method:
+                    method: paypal
+                    redirect_url: https://example.com/callback
+              Authorize and capture using a previously tokenized card:
+                value:
+                  amount: 1299
+                  currency: USD
+                  intent: capture
+                  payment_method:
+                    method: id
+                    id: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+            schema:
+              $ref: '#/components/schemas/TransactionRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                Card transaction:
+                  value:
+                    type: transaction
+                    id: fe26475d-ec3e-4884-9553-f7356683f7f9
+                    status: authorized
+                    amount: 1299
+                    currency: USD
+                    payment_method:
+                      type: payment-method
+                      id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+                      method: card
+                      status: stored
+                      details:
+                        number: XXXX XXXX XXXX 1111
+                        expiration_date: 11/25
+                        scheme: visa
+                      created_at: 2013-07-16T19:23:00.000+00:00
+                      updated_at: 2013-07-16T19:23:00.000+00:00
+                      external_identifier: user-789123
+                      buyer:
+                        type: buyer
+                        id: fe26475d-ec3e-4884-9553-f7356683f7f9
+                        external_identifier: user-789123
+                        display_name: John L.
+                        created_at: 2013-07-16T19:23:00.000+00:00
+                        updated_at: 2013-07-16T19:23:00.000+00:00
+                    created_at: 2013-07-16T19:23:00.000+00:00
+                    external_identifier: user-789123
+                    updated_at: 2019-08-24T14:15:22+00:00
+                    payment_service:
+                      id: 169f5226-4644-4d1e-ac36-14999e73601f
+                      type: payment-service
+                      payment_service_definition_id: stripe-card
+                      method: card
+                      display_name: Stripe (Main)
+                      status: pending
+                      accepted_currencies:
+                      - EUR
+                      accepted_countries:
+                      - DE
+                      environment: production
+                PayPal transaction:
+                  value:
+                    type: transaction
+                    id: fe26475d-ec3e-4884-9553-f7356683f7f9
+                    status: buyer_approval_pending
+                    amount: 1299
+                    currency: USD
+                    payment_method:
+                      type: payment-method
+                      id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+                      method: paypal
+                      status: buyer_approval_pending
+                      details:
+                        email_address: null
+                        approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+                      created_at: 2013-07-16T19:23:00.000+00:00
+                      updated_at: 2013-07-16T19:23:00.000+00:00
+                      external_identifier: user-789123
+                      buyer:
+                        type: buyer
+                        id: fe26475d-ec3e-4884-9553-f7356683f7f9
+                        external_identifier: user-789123
+                        display_name: John L.
+                        created_at: 2013-07-16T19:23:00.000+00:00
+                        updated_at: 2013-07-16T19:23:00.000+00:00
+                    created_at: 2013-07-16T19:23:00.000+00:00
+                    external_identifier: user-789123
+                    updated_at: 2019-08-24T14:15:22+00:00
+                    payment_service:
+                      id: 169f5226-4644-4d1e-ac36-14999e73601f
+                      type: payment-service
+                      payment_service_definition_id: stripe-card
+                      method: card
+                      display_name: Stripe (Main)
+                      status: pending
+                      accepted_currencies:
+                      - EUR
+                      accepted_countries:
+                      - DE
+                      environment: production
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: Returns the created transaction.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: New transaction
+      tags:
+      - Transactions
+  /transactions/{transaction_id}:
+    get:
+      description: Get information about a transaction.
+      operationId: get-transaction
+      parameters:
+      - description: The ID for the transaction to get the information for.
+        explode: false
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: Returns a transaction resource.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the resource can not be found or has not
+            yet been created.
+      summary: Get transaction
+      tags:
+      - Transactions
+  /transactions/{transaction_id}/capture:
+    post:
+      description: Captures a previously authorized transaction.
+      operationId: capture-transaction
+      parameters:
+      - description: The ID for the transaction to get the information for.
+        explode: false
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Capture an authorization:
+                value:
+                  amount: 1299
+                  currency: USD
+            schema:
+              $ref: '#/components/schemas/TransactionCaptureRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: Returns the captured transaction.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the resource can not be found or has not
+            yet been created.
+      summary: Capture transaction
+      tags:
+      - Transactions
+  /transactions/{transaction_id}/authorize:
+    post:
+      description: Authorize a previously approved transaction.
+      operationId: authorize-transaction
+      parameters:
+      - description: The ID for the transaction to get the information for.
+        explode: false
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: Returns the authorized transaction.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the resource can not be found or has not
+            yet been created.
+      summary: Authorize approved transaction
+      tags:
+      - Transactions
+  /transactions/{transaction_id}/refund:
+    post:
+      description: |-
+        Refunds or voids transaction. If this transaction was already captured, it
+        will issue a refund. If the transaction was not yet captured the authorization
+        will instead be voided.
+      operationId: refund-transaction
+      parameters:
+      - description: The ID for the transaction to get the information for.
+        explode: false
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: Returns cancelled transaction.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the resource can not be found or has not
+            yet been created.
+      summary: Refund or void transaction
+      tags:
+      - Transactions
+components:
+  schemas:
+    Buyer:
+      example:
+        external_identifier: user-789123
+        updated_at: 2013-07-16T19:23:00Z
+        created_at: 2013-07-16T19:23:00Z
+        id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        type: buyer
+        display_name: John L.
+      properties:
+        type:
+          description: The type of this resource. Is always `buyer`.
+          enum:
+          - buyer
+          example: buyer
+          type: string
+        id:
+          description: The unique Gr4vy ID for this buyer.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the buyer
+            against your own records.
+          example: user-789123
+          maxLength: 200
+          minLength: 1
+          nullable: true
+          type: string
+        display_name:
+          description: A unique name for this buyer which is used in the Gr4vy admin
+            panel to give a buyer a human readable name.
+          example: John L.
+          maxLength: 200
+          minLength: 1
+          nullable: true
+          type: string
+        created_at:
+          description: |-
+            The date and time
+            when this buyer was created in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: |-
+            The date and time
+            when this buyer was last updated in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+      title: Buyer
+      type: object
+      x-tags:
+      - Buyers
+    Buyers:
+      description: A list of buyers.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - external_identifier: user-789123
+          updated_at: 2013-07-16T19:23:00Z
+          created_at: 2013-07-16T19:23:00Z
+          id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: buyer
+          display_name: John L.
+        - external_identifier: user-789123
+          updated_at: 2013-07-16T19:23:00Z
+          created_at: 2013-07-16T19:23:00Z
+          id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: buyer
+          display_name: John L.
+      properties:
+        items:
+          description: A list of buyers.
+          items:
+            $ref: '#/components/schemas/Buyer'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Buyers
+      type: object
+      x-tags:
+      - Buyers
+    BuyerRequest:
+      description: A request to create a buyer.
+      example:
+        external_identifier: user-789123
+        display_name: John L.
+      properties:
+        external_identifier:
+          description: An external identifier that can be used to match the buyer
+            against your own records. This value needs to be unique for all buyers.
+          example: user-789123
+          maxLength: 200
+          minLength: 1
+          nullable: true
+          type: string
+        display_name:
+          description: A unique name for this buyer which is used in the Gr4vy admin
+            panel to give a buyer a human readable name.
+          example: John L.
+          maxLength: 200
+          minLength: 1
+          nullable: true
+          type: string
+      title: Buyer (Create)
+      type: object
+      x-tags:
+      - Buyers
+    BuyerUpdate:
+      allOf:
+      - $ref: '#/components/schemas/BuyerRequest'
+      description: A request to update a buyer.
+      title: Buyer (Update)
+      type: object
+      x-tags:
+      - Buyers
+    Card:
+      description: A stored card.
+      example:
+        external_identifier: user-789123
+        environment: production
+        method: card
+        updated_at: 2013-07-16T19:23:00Z
+        created_at: 2013-07-16T19:23:00Z
+        details:
+          scheme: visa
+          suffix: "1111"
+          expiration_date: 11/25
+        id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+        type: payment-method
+        status: stored
+        buyer: ""
+      properties:
+        type:
+          description: '`payment-method`.'
+          enum:
+          - payment-method
+          example: payment-method
+          type: string
+        id:
+          description: The unique ID of the payment method.
+          example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          format: uuid
+          type: string
+        status:
+          description: The state of the card tokenization.
+          enum:
+          - processing
+          - processing_failed
+          - stored
+          - used
+          example: stored
+          type: string
+        method:
+          description: '`card`.'
+          enum:
+          - card
+          example: card
+          type: string
+        created_at:
+          description: |-
+            The date and time when this payment method was first created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time when this payment method was last updated
+            in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        external_identifier:
+          description: |-
+            An external identifier that can be used to match the payment method
+            against your own records.
+          example: user-789123
+          nullable: true
+          type: string
+        buyer:
+          allOf:
+          - $ref: '#/components/schemas/Buyer'
+          description: The optional buyer for which this payment method has been stored.
+          nullable: true
+        details:
+          $ref: '#/components/schemas/CardDetails'
+        environment:
+          default: production
+          description: |-
+            The environment this payment method has been stored for. This will be null
+            of the payment method was not stored.
+          enum:
+          - development
+          - staging
+          - production
+          example: production
+          nullable: true
+          type: string
+      title: Card
+      type: object
+      x-tags:
+      - Payment Methods
+    Card--Tokenized:
+      description: A mini format version of the card.
+      example:
+        method: card
+        details:
+          scheme: visa
+          suffix: "1111"
+          expiration_date: 11/25
+        id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+        type: payment-method
+      properties:
+        type:
+          description: '`payment-method`.'
+          enum:
+          - payment-method
+          example: payment-method
+          type: string
+        id:
+          description: The unique ID of the payment method.
+          example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          format: uuid
+          type: string
+        method:
+          description: '`card`.'
+          enum:
+          - card
+          example: card
+          type: string
+        details:
+          $ref: '#/components/schemas/CardDetails'
+      title: Card (Tokenized)
+      type: object
+      x-tags:
+      - Payment Methods
+    CardDetails:
+      description: Additional details about a stored card.
+      example:
+        scheme: visa
+        suffix: "1111"
+        expiration_date: 11/25
+      properties:
+        suffix:
+          description: The last 4 digits of the card number.
+          example: "1111"
+          type: string
+        scheme:
+          description: The type of the card.
+          enum:
+          - visa
+          - mastercard
+          - american-express
+          - diners-club
+          - discover
+          - jcb
+          - unionpay
+          - maestro
+          - elo
+          - mir
+          - hiper
+          - hipercard
+          example: visa
+          type: string
+        expiration_date:
+          description: The expiration date for a card.
+          example: 11/25
+          maxLength: 5
+          minLength: 5
+          pattern: ^\d{2}/\d{2}$
+          type: string
+      title: Card details
+      type: object
+      x-tags:
+      - Payment Methods
+    CardRequest:
+      description: Card details to use in a transaction or to register a new payment
+        method.
+      example:
+        number: "4111111111111111"
+        external_identifier: user-789123
+        buyer_external_identifier: user-789123
+        environment: staging
+        security_code: "123"
+        method: card
+        expiration_date: 11/25
+        buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
+      properties:
+        method:
+          description: '`card`.'
+          enum:
+          - card
+          example: card
+          type: string
+        number:
+          description: |-
+            The 15-16 digit number for this card as it can be found on the
+            front of the card.
+          example: "4111111111111111"
+          maxLength: 16
+          minLength: 14
+          pattern: ^[0-9]{14,16}$
+          type: string
+        expiration_date:
+          description: The expiration date of the card, formatted `MM/YY`.
+          example: 11/25
+          maxLength: 5
+          minLength: 5
+          pattern: ^\d{2}/\d{2}$
+          type: string
+        security_code:
+          description: |-
+            The 3 or 4 digit security code often found on the card. This often
+            referred to as the CVV or CVD.
+          example: "123"
+          maxLength: 4
+          minLength: 3
+          pattern: ^\d{3,4}$
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the card against
+            your own records.
+          example: user-789123
+          nullable: true
+          type: string
+        buyer_id:
+          description: |-
+            The ID of the buyer to associate this payment method to. If this field is
+            provided then the `buyer_external_identifier` field needs to be unset.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        buyer_external_identifier:
+          description: |-
+            The `external_identifier` of the buyer to associate this payment method
+            to. If this field is provided then the `buyer_id` field
+            needs to be unset.
+          example: user-789123
+          type: string
+        environment:
+          description: |-
+            Defines the environment to store this card for. Setting this to
+            anything other than `production` will force Gr4vy to use the payment
+            services configured for that environment.
+          enum:
+          - development
+          - staging
+          - production
+          example: staging
+          type: string
+      required:
+      - expiration_date
+      - method
+      - number
+      - security_code
+      title: Card
+      type: object
+      x-tags:
+      - Request Bodies
+    CardRule:
+      description: |-
+        A card rule that defines a custom payment provider to use for a card
+        transaction. Multiple rules can exists at any time and they are processed by
+        priority.
+      example:
+        environment: production
+        invalid_rule_fallback_strategy: use_all_providers
+        updated_at: 2012-12-12T10:53:43Z
+        payment_service_ids:
+        - f47db210-8e30-4f74-8123-b834604f2042
+        - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+        active: true
+        created_at: 2012-12-12T10:53:43Z
+        id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+        position: 1
+        unprocessable_fallback_strategy: use_all_providers
+        type: card-rule
+        conditions:
+        - match: number
+          value: "200"
+          key: amount
+          operator: '>='
+        - match: number
+          value: "200"
+          key: amount
+          operator: '>='
+      properties:
+        type:
+          description: '`card-rule`.'
+          enum:
+          - card-rule
+          example: card-rule
+          type: string
+        id:
+          description: The ID of the rule.
+          example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          format: uuid
+          type: string
+        active:
+          description: |-
+            Whether this rule is currently in use. Rules can be deactivated to allow
+            for them to be kept around and re-activated at a later date.
+          example: true
+          type: boolean
+        environment:
+          default: production
+          description: |-
+            The environment to use this rule in. This rule will only be used
+            for transactions created in that environment.
+          enum:
+          - development
+          - staging
+          - production
+          example: production
+          type: string
+        conditions:
+          description: |-
+            One or more conditions that apply for this rule. Each condition
+            needs to match for this rule to go into effect.
+          items:
+            $ref: '#/components/schemas/CardRuleCondition'
+          minItems: 1
+          type: array
+        payment_service_ids:
+          description: |-
+            A list of IDs for the payment services to use, in order of priority.
+            The payment services all need to process cards.
+          example:
+          - f47db210-8e30-4f74-8123-b834604f2042
+          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+          items:
+            maxLength: 100
+            minLength: 1
+            type: string
+          type: array
+        position:
+          description: |-
+            The numeric rank of a rule. Rules with a lower position value
+            are processed first.
+          example: 1
+          type: number
+        unprocessable_fallback_strategy:
+          default: use_all_providers
+          description: |-
+            Defines what strategy to use when all of the payment services defined in
+            this rule declined or otherwise were not able to process the card.
+
+            * `use_all_providers` - Try all payment services enabled for this currency in
+            order of priority, even if they are not listed in this rule. This is the
+            default behaviour for a rule.
+            * `decline` - Decline the transaction.
+          enum:
+          - use_all_providers
+          - decline
+          example: use_all_providers
+          type: string
+        invalid_rule_fallback_strategy:
+          default: use_all_providers
+          description: |-
+            Defines what strategy to use when this rule is not valid. This can happen
+            when the rule has triggered for a certain transaction but none of the
+            listed payment services are eligible to process that transaction currency.
+
+            * `use_all_providers` - Try all payment services enabled for this currency in
+            order of priority, even if they are not listed in this rule. This is the
+            default behaviour for a rule.
+            * `skip` - Skip this rule and instead move on to the next highest priority
+            rule.
+            * `decline` - Decline the transaction.
+          enum:
+          - use_all_providers
+          - skip
+          - decline
+          example: use_all_providers
+          type: string
+        created_at:
+          description: The date and time when this rule was created.
+          example: 2012-12-12T10:53:43Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time when this rule was last updated.
+          example: 2012-12-12T10:53:43Z
+          format: date-time
+          type: string
+      title: Card Rule
+      type: object
+      x-tags:
+      - Card Rules
+    CardRules:
+      description: A list of card rules.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - environment: production
+          invalid_rule_fallback_strategy: use_all_providers
+          updated_at: 2012-12-12T10:53:43Z
+          payment_service_ids:
+          - f47db210-8e30-4f74-8123-b834604f2042
+          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+          active: true
+          created_at: 2012-12-12T10:53:43Z
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          position: 1
+          unprocessable_fallback_strategy: use_all_providers
+          type: card-rule
+          conditions:
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+        - environment: production
+          invalid_rule_fallback_strategy: use_all_providers
+          updated_at: 2012-12-12T10:53:43Z
+          payment_service_ids:
+          - f47db210-8e30-4f74-8123-b834604f2042
+          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+          active: true
+          created_at: 2012-12-12T10:53:43Z
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          position: 1
+          unprocessable_fallback_strategy: use_all_providers
+          type: card-rule
+          conditions:
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+      properties:
+        items:
+          description: A list of card rules.
+          items:
+            $ref: '#/components/schemas/CardRule'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Card Rules
+      type: object
+      x-tags:
+      - Card Rules
+    CardRuleCondition:
+      description: Generic card rule condition.
+      example:
+        match: number
+        value: "200"
+        key: amount
+        operator: '>='
+      properties:
+        match:
+          description: The type of match made for this rule.
+          enum:
+          - number
+          - text
+          example: number
+          type: string
+        key:
+          description: The transaction field to filter by.
+          enum:
+          - amount
+          - currency
+          - scheme
+          example: amount
+          type: string
+        operator:
+          description: The comparison to make to `value` property.
+          enum:
+          - ==
+          - '!='
+          - <=
+          - '>='
+          - '>'
+          - <
+          - IN
+          - NOT IN
+          example: '>='
+          type: string
+        value:
+          description: The values to compare the `key` to.
+          example: "200"
+          type: string
+      required:
+      - key
+      - match
+      - operator
+      - value
+      title: Card rule (Generic condition)
+      type: object
+      x-tags:
+      - Card Workflows
+    CardRuleNumberCondition:
+      description: |-
+        Part of a rule that matches numeric fields. It defines the condition under
+        which this rule applies.
+      properties:
+        match:
+          description: '`number`.'
+          enum:
+          - number
+          example: number
+          type: string
+        key:
+          description: The transaction field to filter by.
+          enum:
+          - amount
+          example: amount
+          type: string
+        operator:
+          description: The comparison to make to `value` property.
+          enum:
+          - ==
+          - '!='
+          - <=
+          - '>='
+          - '>'
+          - <
+          example: '>='
+          type: string
+        value:
+          description: The values to compare the `key` to.
+          example: 200
+          maximum: 99999
+          minimum: 0
+          type: number
+      required:
+      - key
+      - match
+      - operator
+      - value
+      title: Card rule (Number condition)
+      type: object
+      x-tags:
+      - Card Workflows
+    CardRuleTextCondition:
+      description: |-
+        Part of a rule that matches text fields. It defines the condition under
+        which this rule applies.
+      properties:
+        match:
+          description: '`text`.'
+          enum:
+          - text
+          example: text
+          type: string
+        key:
+          description: The transaction field to filter by.
+          enum:
+          - currency
+          - scheme
+          example: currency
+          type: string
+        operator:
+          description: The comparison to make to `value` property.
+          enum:
+          - IN
+          - NOT IN
+          example: IN
+          type: string
+        values:
+          description: The values to compare the `key` to.
+          example:
+          - USD
+          - EUR
+          - amex
+          - visa
+          items:
+            maxLength: 50
+            minLength: 1
+            type: string
+          maxItems: 100
+          minItems: 1
+          type: array
+      required:
+      - key
+      - match
+      - operator
+      - values
+      title: Card rule (Text)
+      type: object
+      x-tags:
+      - Card Rules
+    CardRuleRequest:
+      description: Creates a new rule for a card transactions.
+      example:
+        environment: production
+        invalid_rule_fallback_strategy: use_all_providers
+        payment_service_ids:
+        - f47db210-8e30-4f74-8123-b834604f2042
+        - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+        active: true
+        position: 1
+        unprocessable_fallback_strategy: use_all_providers
+        conditions:
+        - environment: production
+          invalid_rule_fallback_strategy: use_all_providers
+          updated_at: 2012-12-12T10:53:43Z
+          payment_service_ids:
+          - f47db210-8e30-4f74-8123-b834604f2042
+          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+          active: true
+          created_at: 2012-12-12T10:53:43Z
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          position: 1
+          unprocessable_fallback_strategy: use_all_providers
+          type: card-rule
+          conditions:
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+        - environment: production
+          invalid_rule_fallback_strategy: use_all_providers
+          updated_at: 2012-12-12T10:53:43Z
+          payment_service_ids:
+          - f47db210-8e30-4f74-8123-b834604f2042
+          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+          active: true
+          created_at: 2012-12-12T10:53:43Z
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          position: 1
+          unprocessable_fallback_strategy: use_all_providers
+          type: card-rule
+          conditions:
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+      properties:
+        active:
+          description: |-
+            Whether this rule is currently in use. Rules can be deactivated to allow
+            for them to be kept around and re-activated at a later date.
+          example: true
+          type: boolean
+        environment:
+          default: production
+          description: |-
+            The environment to use this rule in. This rule will only be used
+            for transactions created in that environment.
+          enum:
+          - development
+          - staging
+          - production
+          example: production
+          type: string
+        position:
+          description: |-
+            The numeric rank of a rule. Rules with a lower position value
+            are processed first. When a rule is inserted at a position, any rules with
+            the the same value or higher are down a position accordingly. When left
+            out, the rule is inserted at the end of the list.
+          example: 1
+          type: number
+        conditions:
+          description: |-
+            One or more conditions that apply for this rule. Each condition
+            needs to match for this rule to go into effect.
+          items:
+            $ref: '#/components/schemas/CardRule'
+          minItems: 1
+          type: array
+        payment_service_ids:
+          description: |-
+            A list of IDs for the payment services to use, in order of priority.
+            The payment services all need to process cards.
+          example:
+          - f47db210-8e30-4f74-8123-b834604f2042
+          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+          items:
+            maxLength: 100
+            minLength: 1
+            type: string
+          type: array
+        unprocessable_fallback_strategy:
+          default: use_all_providers
+          description: |-
+            Defines what strategy to use when all of the payment services defined in
+            this rule declined or otherwise were not able to process the card.
+
+            * `use_all_providers` - Try all payment services enabled for this currency in
+            order of priority, even if they are not listed in this rule. This is the
+            default behaviour for a rule.
+            * `decline` - Decline the transaction.
+          enum:
+          - use_all_providers
+          - decline
+          example: use_all_providers
+          type: string
+        invalid_rule_fallback_strategy:
+          default: use_all_providers
+          description: |-
+            Defines what strategy to use when this rule is not valid. This can happen
+            when the rule has triggered for a certain transaction but none of the
+            listed payment services are eligible to process that transaction currency.
+
+            * `use_all_providers` - Try all payment services enabled for this currency in
+            order of priority, even if they are not listed in this rule. This is the
+            default behaviour for a rule.
+            * `skip` - Skip this rule and instead move on to the next highest priority
+            rule.
+            * `decline` - Decline the transaction.
+          enum:
+          - use_all_providers
+          - skip
+          - decline
+          example: use_all_providers
+          type: string
+      required:
+      - conditions
+      - payment_service_ids
+      title: Card Rule (Create)
+      type: object
+      x-tags:
+      - Card Rules
+    CardRuleUpdate:
+      description: Updates a rule for a card transactions.
+      example:
+        environment: production
+        invalid_rule_fallback_strategy: use_all_providers
+        payment_service_ids:
+        - f47db210-8e30-4f74-8123-b834604f2042
+        - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+        active: true
+        position: 1
+        unprocessable_fallback_strategy: use_all_providers
+        conditions:
+        - environment: production
+          invalid_rule_fallback_strategy: use_all_providers
+          updated_at: 2012-12-12T10:53:43Z
+          payment_service_ids:
+          - f47db210-8e30-4f74-8123-b834604f2042
+          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+          active: true
+          created_at: 2012-12-12T10:53:43Z
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          position: 1
+          unprocessable_fallback_strategy: use_all_providers
+          type: card-rule
+          conditions:
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+        - environment: production
+          invalid_rule_fallback_strategy: use_all_providers
+          updated_at: 2012-12-12T10:53:43Z
+          payment_service_ids:
+          - f47db210-8e30-4f74-8123-b834604f2042
+          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+          active: true
+          created_at: 2012-12-12T10:53:43Z
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          position: 1
+          unprocessable_fallback_strategy: use_all_providers
+          type: card-rule
+          conditions:
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+          - match: number
+            value: "200"
+            key: amount
+            operator: '>='
+      properties:
+        active:
+          description: |-
+            Whether this rule is currently in use. Rules can be deactivated to allow
+            for them to be kept around and re-activated at a later date.
+          example: true
+          type: boolean
+        environment:
+          default: production
+          description: |-
+            The environment to use this rule in. This rule will only be used
+            for transactions created in that environment.
+          enum:
+          - development
+          - staging
+          - production
+          example: production
+          type: string
+        position:
+          description: |-
+            The numeric rank of a rule. Rules with a lower position value
+            are processed first. When a rule is inserted at a position, any rules with
+            the the same value or higher are down a position accordingly.
+          example: 1
+          type: number
+        conditions:
+          description: |-
+            One or more conditions that apply for this rule. Each condition
+            needs to match for this rule to go into effect.
+          items:
+            $ref: '#/components/schemas/CardRule'
+          minItems: 1
+          type: array
+        payment_service_ids:
+          description: |-
+            A list of IDs for the payment services to use, in order of priority.
+            The payment services all need to process cards.
+          example:
+          - f47db210-8e30-4f74-8123-b834604f2042
+          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
+          items:
+            maxLength: 100
+            minLength: 1
+            type: string
+          type: array
+        unprocessable_fallback_strategy:
+          default: use_all_providers
+          description: |-
+            Defines what strategy to use when all of the payment services defined in
+            this rule declined or otherwise were not able to process the card.
+
+            * `use_all_providers` - Try all payment services enabled for this currency in
+            order of priority, even if they are not listed in this rule. This is the
+            default behaviour for a rule.
+            * `decline` - Decline the transaction.
+          enum:
+          - use_all_providers
+          - decline
+          example: use_all_providers
+          type: string
+        invalid_rule_fallback_strategy:
+          default: use_all_providers
+          description: |-
+            Defines what strategy to use when this rule is not valid. This can happen
+            when the rule has triggered for a certain transaction but none of the
+            listed payment services are eligible to process that transaction currency.
+
+            * `use_all_providers` - Try all payment services enabled for this currency in
+            order of priority, even if they are not listed in this rule. This is the
+            default behaviour for a rule.
+            * `skip` - Skip this rule and instead move on to the next highest priority
+            rule.
+            * `decline` - Decline the transaction.
+          enum:
+          - use_all_providers
+          - skip
+          - decline
+          example: use_all_providers
+          type: string
+      title: Card Rule (Update)
+      type: object
+      x-tags:
+      - Card Rules
+    ErrorGeneric:
+      description: A generic client error.
+      properties:
+        type:
+          default: error
+          description: The type of this object. This is always `error`.
+          enum:
+          - error
+          example: error
+          type: string
+        code:
+          description: A custom code to further describe the type of error being returned.
+            This code provides further specification within the HTTP `status` code
+            and can be used by a program to define logic based on the error.
+          example: incorrect_json
+          type: string
+        status:
+          default: 0
+          description: The HTTP status code of this error.
+          example: 499
+          exclusiveMaximum: true
+          format: int32
+          maximum: 600
+          minimum: 200
+          type: integer
+        message:
+          description: 'A human readable message that describes the error. The content
+            of this field should not be used to determine any business logic. '
+          example: The request body was not valid JSON.
+          type: string
+        details:
+          description: |-
+            A list of detail objects that further clarify the reason for the error.
+            Not every error supports more detail.
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+      title: Generic Error
+      type: object
+      x-tags:
+      - Errors
+    Error400BadRequest:
+      description: Bad Request (HTTP 400).
+      properties:
+        type:
+          description: '`error`.'
+          enum:
+          - error
+          example: error
+          type: string
+        code:
+          description: '`bad_request`.'
+          enum:
+          - bad_request
+          example: bad_request
+          type: string
+        status:
+          description: '`400`.'
+          enum:
+          - 400
+          example: 400
+          type: integer
+        message:
+          description: |-
+            Describes the fields that are missing or incorrectly formatted in the API
+            request.
+          example: Missing '****' field
+          type: string
+        details:
+          description: A list of detail objects that further clarify the reason for
+            the error.
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+      title: Bad Request
+      type: object
+      x-tags:
+      - Errors
+    Error400IncorrectJson:
+      description: Incorrect JSON (HTTP 400).
+      properties:
+        type:
+          description: '`error`.'
+          enum:
+          - error
+          example: error
+          type: string
+        code:
+          description: '`incorrect_json`.'
+          enum:
+          - incorrect_json
+          example: incorrect_json
+          type: string
+        status:
+          description: '`400`.'
+          enum:
+          - 400
+          example: 400
+          type: integer
+        message:
+          description: Incorrect JSON. The request body could not be parsed as valid
+            JSON.
+          example: Incorrect JSON. The request body could not be parsed as valid JSON.
+          type: string
+        details:
+          description: |-
+            A list of detail objects that further clarify the reason for the error.
+            Not every error supports more detail.
+          example: []
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+      title: Incorrect JSON
+      type: object
+      x-tags:
+      - Errors
+    Error401Unauthorized:
+      description: Unauthorized Error (HTTP 401).
+      properties:
+        type:
+          description: '`error`.'
+          enum:
+          - error
+          example: error
+          type: string
+        code:
+          description: '`unauthorized`.'
+          enum:
+          - unauthorized
+          example: unauthorized
+          type: string
+        status:
+          description: '`401`.'
+          enum:
+          - 401
+          example: 401
+          type: integer
+        message:
+          description: No valid API authentication found.
+          enum:
+          - No valid API authentication found
+          example: No valid API authentication found
+          type: string
+        details:
+          description: |-
+            A list of detail objects that further clarify the reason for the error.
+            Not every error supports more detail.
+          example: []
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+      title: Unauthorized Error
+      type: object
+      x-tags:
+      - Errors
+    Error404PendingCreation:
+      description: Pending Creation Error (HTTP 404).
+      properties:
+        type:
+          description: '`error`.'
+          enum:
+          - error
+          example: error
+          type: string
+        code:
+          description: '`pending_creation`.'
+          enum:
+          - pending_creation
+          example: pending_creation
+          type: string
+        status:
+          description: '`404`.'
+          enum:
+          - 404
+          example: 404
+          type: integer
+        message:
+          description: The resource is still pending.
+          enum:
+          - The resource is still pending
+          example: The resource is still pending
+          type: string
+        details:
+          description: |-
+            A list of detail objects that further clarify the reason for the error.
+            Not every error supports more detail.
+          example: []
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+      title: Pending Creation Error
+      type: object
+      x-tags:
+      - Errors
+    Error404NotFound:
+      description: Not Found Error (HTTP 404).
+      properties:
+        type:
+          description: '`error`.'
+          enum:
+          - error
+          example: error
+          type: string
+        code:
+          description: '`not_found`.'
+          enum:
+          - not_found
+          example: not_found
+          type: string
+        status:
+          description: '`404`.'
+          enum:
+          - 404
+          example: 404
+          type: integer
+        message:
+          description: The resource could not be found.
+          enum:
+          - The resource could not be found
+          example: The resource could not be found
+          type: string
+        details:
+          description: |-
+            A list of detail objects that further clarify the reason for the error.
+            Not every error supports more detail.
+          example: []
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+      title: Not Found Error
+      type: object
+      x-tags:
+      - Errors
+    Error409DuplicateRecord:
+      description: Duplicate Record Error (HTTP 409).
+      properties:
+        type:
+          description: '`error`.'
+          enum:
+          - error
+          example: error
+          type: string
+        code:
+          description: '`duplicate_record`.'
+          enum:
+          - duplicate_record
+          example: duplicate_record
+          type: string
+        status:
+          description: '`409`.'
+          enum:
+          - 409
+          example: 409
+          type: integer
+        message:
+          description: Further details on the field that triggered the error.
+          example: A duplicate ecord exists with this external_identifier value
+          type: string
+        details:
+          description: |-
+            A list of detail objects that further clarify the reason for the error.
+            Not every error supports more detail.
+          example: []
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+      title: Duplicate Record Error
+      type: object
+      x-tags:
+      - Errors
+    ErrorDetail:
+      description: Additional detail about the part of a request body that caused
+        an issue.
+      properties:
+        location:
+          description: The location where the error caused an issue.
+          enum:
+          - query
+          - body
+          - path
+          - header
+          example: body
+          type: string
+        type:
+          description: A unique identifier for the type of error that occurred.
+          example: value_error.missing
+          type: string
+        pointer:
+          description: |-
+            The exact item for which the validation did not succeed. This is a JSON
+            pointer for request bodies, while for query, path, and header parameters
+            it is the name of the parameter.
+          example: /payment_method/number
+          type: string
+        message:
+          description: A human readable message for this error detail.
+          example: field required
+          type: string
+      title: Error details
+      type: object
+      x-tags:
+      - Errors
+    PaymentMethod:
+      description: A generic payment method.
+      example:
+        external_identifier: user-789123
+        method: card
+        updated_at: 2013-07-16T19:23:00Z
+        created_at: 2013-07-16T19:23:00Z
+        details:
+          number: XXXX XXXX XXXX 1111
+          email_address: john@example.com
+          scheme: visa
+          expiration_date: 11 / 21
+          approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+        id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+        type: payment-method
+        status: stored
+        buyer: ""
+      properties:
+        type:
+          description: '`payment-method`.'
+          enum:
+          - payment-method
+          example: payment-method
+          type: string
+        id:
+          description: The unique ID of the payment method.
+          example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          format: uuid
+          type: string
+        status:
+          description: The state of the payment method.
+          enum:
+          - processing
+          - processing_failed
+          - buyer_approval_pending
+          - buyer_approval_declined
+          - buyer_approval_timedout
+          - buyer_approved
+          - stored
+          - used
+          example: stored
+          type: string
+        method:
+          description: The type of this payment method.
+          enum:
+          - card
+          - paypal
+          example: card
+          type: string
+        created_at:
+          description: |-
+            The date and time when this payment method was first created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time when this payment method was last updated
+            in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        external_identifier:
+          description: |-
+            An external identifier that can be used to match the payment method
+            against your own records.
+          example: user-789123
+          nullable: true
+          type: string
+        buyer:
+          allOf:
+          - $ref: '#/components/schemas/Buyer'
+          description: The optional buyer for which this payment method has been stored.
+          nullable: true
+        details:
+          $ref: '#/components/schemas/PaymentMethod_details'
+      title: Payment method
+      type: object
+      x-tags:
+      - Payment Methods
+    PaymentMethods:
+      description: A list of stored payment methods.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - external_identifier: user-789123
+          environment: production
+          method: card
+          updated_at: 2013-07-16T19:23:00Z
+          created_at: 2013-07-16T19:23:00Z
+          details:
+            scheme: visa
+            suffix: "1111"
+            expiration_date: 11/25
+          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          type: payment-method
+          status: stored
+          buyer: ""
+        - external_identifier: user-789123
+          environment: production
+          method: card
+          updated_at: 2013-07-16T19:23:00Z
+          created_at: 2013-07-16T19:23:00Z
+          details:
+            scheme: visa
+            suffix: "1111"
+            expiration_date: 11/25
+          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          type: payment-method
+          status: stored
+          buyer: ""
+      properties:
+        items:
+          description: A list of stored payment methods.
+          items:
+            $ref: '#/components/schemas/Card'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Payment Methods
+      type: object
+      x-tags:
+      - Payment Methods
+    PaymentMethods--Tokenized:
+      description: A list of stored payment methods in token format.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - method: card
+          details:
+            scheme: visa
+            suffix: "1111"
+            expiration_date: 11/25
+          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          type: payment-method
+        - method: card
+          details:
+            scheme: visa
+            suffix: "1111"
+            expiration_date: 11/25
+          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          type: payment-method
+      properties:
+        items:
+          description: A list of stored payment methods in token format.
+          items:
+            $ref: '#/components/schemas/Card--Tokenized'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Payment Methods (Token only)
+      type: object
+      x-tags:
+      - Payment Methods
+    PaymentService:
+      description: An active, configured payment service.
+      example:
+        method: card
+        environments:
+        - production
+        active: true
+        created_at: 2012-12-12T10:53:43Z
+        type: payment-service
+        display_name: Stripe (Main)
+        payment_service_definition_id: stripe-card
+        updated_at: 2012-12-12T10:53:43Z
+        accepted_countries:
+        - DE
+        credentials_mode: live
+        id: faaad066-30b4-4997-a438-242b0752d7e1
+        position: 1
+        accepted_currencies:
+        - EUR
+        status: pending
+      properties:
+        id:
+          description: The ID of this payment service.
+          example: faaad066-30b4-4997-a438-242b0752d7e1
+          format: uuid
+          maxLength: 200
+          minLength: 1
+          type: string
+        type:
+          description: The type of this resource.
+          enum:
+          - payment-service
+          example: payment-service
+          type: string
+        payment_service_definition_id:
+          description: |
+            The ID of the payment service definition used to create this service.
+          example: stripe-card
+          maxLength: 50
+          minLength: 1
+          type: string
+        method:
+          description: Defines the ID of the payment method that this service handles.
+          enum:
+          - card
+          - paypal
+          example: card
+          type: string
+        display_name:
+          description: The custom name set for this service.
+          example: Stripe (Main)
+          maxLength: 50
+          minLength: 1
+          type: string
+        status:
+          description: |
+            The current status of this service. This will start off as pending, move
+            to created, and might eventually move to an error status if and when the
+            credentials are no longer valid.
+          enum:
+          - pending
+          - created
+          - failed
+          type: string
+        accepted_currencies:
+          description: |-
+            A list of currencies for which this service is enabled, in ISO 4217
+            three-letter code format.
+          example:
+          - EUR
+          items:
+            maxLength: 3
+            minLength: 3
+            type: string
+          minItems: 1
+          type: array
+        accepted_countries:
+          description: |-
+            A list of countries for which this service is enabled, in ISO two-letter
+            code format.
+          example:
+          - DE
+          items:
+            maxLength: 2
+            minLength: 2
+            type: string
+          minItems: 1
+          type: array
+        credentials_mode:
+          default: live
+          description: |-
+            Defines if the credentials are intended for the service's live API or
+            sandbox/test API.
+          enum:
+          - sandbox
+          - live
+          example: live
+          type: string
+        active:
+          default: true
+          description: Defines if this service is currently active or not.
+          example: true
+          type: boolean
+        environments:
+          default:
+          - production
+          description: |-
+            Determines the Gr4vy environments in which this service should be
+            available. This can be used in combination with the `environment`
+            parameters in the payment method and transaction APIs to route
+            transactions through this service.
+          example:
+          - production
+          items:
+            enum:
+            - development
+            - staging
+            - production
+            type: string
+          maxItems: 3
+          minItems: 0
+          type: array
+        position:
+          description: |-
+            The numeric rank of a payment service. Payment services with a lower
+            position value are processed first.
+          example: 1
+          type: number
+        created_at:
+          description: The date and time when this service was created.
+          example: 2012-12-12T10:53:43Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time when this service was last updated.
+          example: 2012-12-12T10:53:43Z
+          format: date-time
+          type: string
+      title: A payment service
+      type: object
+      x-tags:
+      - Payment Services
+    PaymentServices:
+      description: A list of active, configured payment services.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - method: card
+          environments:
+          - production
+          active: true
+          created_at: 2012-12-12T10:53:43Z
+          type: payment-service
+          display_name: Stripe (Main)
+          payment_service_definition_id: stripe-card
+          updated_at: 2012-12-12T10:53:43Z
+          accepted_countries:
+          - DE
+          credentials_mode: live
+          id: faaad066-30b4-4997-a438-242b0752d7e1
+          position: 1
+          accepted_currencies:
+          - EUR
+          status: pending
+        - method: card
+          environments:
+          - production
+          active: true
+          created_at: 2012-12-12T10:53:43Z
+          type: payment-service
+          display_name: Stripe (Main)
+          payment_service_definition_id: stripe-card
+          updated_at: 2012-12-12T10:53:43Z
+          accepted_countries:
+          - DE
+          credentials_mode: live
+          id: faaad066-30b4-4997-a438-242b0752d7e1
+          position: 1
+          accepted_currencies:
+          - EUR
+          status: pending
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PaymentService'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: A list of active payment services
+      type: object
+      x-tags:
+      - Payment Services
+    PaymentServiceRequest:
+      allOf:
+      - $ref: '#/components/schemas/PaymentServiceUpdate'
+      - $ref: '#/components/schemas/PaymentServiceRequest_allOf'
+      description: Request body for activating a payment service.
+      required:
+      - accepted_countries
+      - accepted_currencies
+      - display_name
+      - fields
+      - payment_service_definition_id
+      title: Payment Service (Create)
+      type: object
+      x-tags:
+      - Request Bodies
+    PaymentServiceUpdate:
+      description: Request body for updating an active payment service.
+      example:
+        environments:
+        - production
+        accepted_countries:
+        - US
+        - GB
+        - DE
+        credentials_mode: live
+        active: true
+        position: 1
+        display_name: Stripe (Main)
+        fields:
+        - value: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+          key: private_key
+        - value: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+          key: private_key
+        accepted_currencies:
+        - EUR
+        - USD
+        - GBP
+      properties:
+        display_name:
+          description: A custom name for the payment service. This will be shown in
+            the Admin UI.
+          example: Stripe (Main)
+          maxLength: 50
+          minLength: 1
+          type: string
+        fields:
+          description: A list of fields, each containing a key-value pair for each
+            field defined by the definition for this payment service e.g. for stripe-card
+            `secret_key` is required and so must be sent with in this field.
+          items:
+            $ref: '#/components/schemas/PaymentServiceUpdate_fields'
+          type: array
+        accepted_countries:
+          description: A list of countries that this payment service needs to support
+            in ISO two-letter code format.
+          example:
+          - US
+          - GB
+          - DE
+          items:
+            maxLength: 2
+            minLength: 2
+            type: string
+          minItems: 1
+          type: array
+        accepted_currencies:
+          description: A list of currencies that this payment service needs to support
+            in ISO 4217 three-letter code format.
+          example:
+          - EUR
+          - USD
+          - GBP
+          items:
+            maxLength: 3
+            minLength: 3
+            type: string
+          minItems: 1
+          type: array
+        credentials_mode:
+          default: live
+          description: |-
+            Defines if the credentials are intended for the service's live API or
+            sandbox/test API.
+          enum:
+          - sandbox
+          - live
+          example: live
+          type: string
+        active:
+          default: true
+          description: Defines if this service is currently active or not.
+          example: true
+          type: boolean
+        environments:
+          default:
+          - production
+          description: |-
+            Determines the Gr4vy environments in which this service should be
+            available. This can be used in combination with the `environment`
+            parameters in the payment method and transaction APIs to route
+            transactions through this service.
+          example:
+          - production
+          items:
+            enum:
+            - development
+            - staging
+            - production
+            type: string
+          maxItems: 3
+          minItems: 0
+          type: array
+        position:
+          description: |-
+            The numeric rank of a payment service. Payment services with a lower
+            position value are processed first. When a payment services is inserted at
+            a position, any payment services with the the same value or higher are
+            shifted down a position accordingly. When left out, the payment service is
+            inserted at the end of the list.
+          example: 1
+          type: number
+      title: Payment Service (Update)
+      type: object
+      x-tags:
+      - Request Bodies
+    PaymentServiceDefinition:
+      description: An available payment service that can be configured.
+      example:
+        method: card
+        supported_countries:
+        - US
+        - GB
+        - DE
+        id: stripe-card
+        type: payment-service-definition
+        display_name: Stripe
+        fields:
+        - format: text
+          display_name: Private API key
+          key: private_api_key
+          required: true
+        - format: text
+          display_name: Private API key
+          key: private_api_key
+          required: true
+        supported_currencies:
+        - USD
+        - GBP
+        - EUR
+      properties:
+        id:
+          description: The ID of the payment service. This is the underlying provider
+            followed by a dash followed by the payment method ID.
+          example: stripe-card
+          type: string
+        type:
+          default: payment-service-definition
+          description: '`payment-service-definition`.'
+          example: payment-service-definition
+          type: string
+        display_name:
+          description: The display name of this service.
+          example: Stripe
+          type: string
+        method:
+          description: The ID of the payment method that this services handles.
+          enum:
+          - card
+          - paypal
+          example: card
+          type: string
+        fields:
+          description: A list of fields that need to be submitted when activating
+            the payment. service.
+          items:
+            $ref: '#/components/schemas/PaymentServiceDefinition_fields'
+          minItems: 1
+          type: array
+        supported_currencies:
+          description: A list of three-letter ISO currency codes that this service
+            supports.
+          example:
+          - USD
+          - GBP
+          - EUR
+          items:
+            maxLength: 3
+            minLength: 3
+            type: string
+          minItems: 1
+          type: array
+        supported_countries:
+          description: A list of two-letter ISO country codes that this service supports.
+          example:
+          - US
+          - GB
+          - DE
+          items:
+            type: string
+          minItems: 1
+          type: array
+      title: Payment Service Definition
+      type: object
+      x-tags:
+      - Discovery
+    PaymentServiceDefinitions:
+      description: A list of available payment services definitions.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - method: card
+          supported_countries:
+          - US
+          - GB
+          - DE
+          id: stripe-card
+          type: payment-service-definition
+          display_name: Stripe
+          fields:
+          - format: text
+            display_name: Private API key
+            key: private_api_key
+            required: true
+          - format: text
+            display_name: Private API key
+            key: private_api_key
+            required: true
+          supported_currencies:
+          - USD
+          - GBP
+          - EUR
+        - method: card
+          supported_countries:
+          - US
+          - GB
+          - DE
+          id: stripe-card
+          type: payment-service-definition
+          display_name: Stripe
+          fields:
+          - format: text
+            display_name: Private API key
+            key: private_api_key
+            required: true
+          - format: text
+            display_name: Private API key
+            key: private_api_key
+            required: true
+          supported_currencies:
+          - USD
+          - GBP
+          - EUR
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PaymentServiceDefinition'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Payment service definitions
+      type: object
+      x-tags:
+      - Discovery
+    PaymentOption:
+      description: An available payment option for a locale.
+      example:
+        method: card
+        type: payment-option
+      properties:
+        type:
+          description: '`payment-option`.'
+          enum:
+          - payment-option
+          example: payment-option
+          type: string
+        method:
+          description: The type of payment method that is available.
+          enum:
+          - card
+          - paypal
+          example: card
+          type: string
+      title: Payment option
+      type: object
+      x-tags:
+      - Payment Option
+    PaymentOptions:
+      description: A list of payment options.
+      example:
+        items:
+        - method: card
+          type: payment-option
+        - method: card
+          type: payment-option
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PaymentOption'
+          type: array
+      title: A list of payment options
+      type: object
+      x-tags:
+      - Payment Options
+    PayPal:
+      description: A stored PayPal account.
+      properties:
+        type:
+          description: '`payment-method`.'
+          enum:
+          - payment-method
+          example: payment-method
+          type: string
+        id:
+          description: The unique ID of the payment method.
+          example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          format: uuid
+          type: string
+        status:
+          description: |-
+            The state of the account tokenization. After the first call this will
+            be set to `buyer_approval_pending` and the response will include
+            an `approval_url`. The buyer needs to be redirected to this URL
+            to authorize the future payments.
+          enum:
+          - processing
+          - processing_failed
+          - buyer_approval_pending
+          - buyer_approval_declined
+          - buyer_approval_timedout
+          - buyer_approved
+          - stored
+          - used
+          example: buyer_approval_pending
+          type: string
+        method:
+          description: '`paypal`.'
+          enum:
+          - paypal
+          example: paypal
+          type: string
+        created_at:
+          description: |-
+            The date and time when this payment method was first created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time when this payment method was last updated
+            in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        external_identifier:
+          description: |-
+            An external identifier that can be used to match the payment method
+            against your own records.
+          example: user-789123
+          nullable: true
+          type: string
+        buyer:
+          allOf:
+          - $ref: '#/components/schemas/Buyer'
+          description: The optional buyer for which this payment method has been stored.
+          nullable: true
+        details:
+          $ref: '#/components/schemas/PayPalDetails'
+        environment:
+          default: production
+          description: |-
+            The environment this payment method has been stored for. This will be null
+            of the payment method was not stored.
+          enum:
+          - development
+          - staging
+          - production
+          example: production
+          nullable: true
+          type: string
+      title: PayPal Account
+      type: object
+      x-tags:
+      - Payment Methods
+    PayPalDetails:
+      description: Additional details about a stored PayPal account.
+      properties:
+        email_address:
+          description: The email address associated to the PayPal account.
+          example: john@example.com
+          nullable: true
+          type: string
+        approval_url:
+          description: The optional URL that the buyer needs to be redirected to to
+            further authorize their PayPal payments.
+          example: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          nullable: true
+          type: string
+      title: PayPal account details
+      type: object
+      x-tags:
+      - Payment Methods
+    PayPalRequest:
+      description: PayPal request to use in a transaction or to register a new payment
+        method.
+      properties:
+        method:
+          description: '`paypal`.'
+          enum:
+          - paypal
+          example: paypal
+          type: string
+        redirect_url:
+          description: |-
+            The redirect URL to redirect a buyer to after they have authorized their
+            PayPal transaction.
+          example: https://example.com/callback
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the account
+            against your own records.
+          example: user-789123
+          nullable: true
+          type: string
+        buyer_id:
+          description: |-
+            The ID of the buyer to associate this payment method to. If this field is
+            provided then the `buyer_external_identifier` field needs to be unset.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        buyer_external_identifier:
+          description: |-
+            The `external_identifier` of the buyer to associate this payment method
+            to. If this field is provided then the `buyer_id` field
+            needs to be unset.
+          example: user-789123
+          type: string
+      required:
+      - method
+      - redirect_url
+      title: PayPal Account
+      type: object
+      x-tags:
+      - Request Bodies
+    Status:
+      description: |-
+        In many cases the Gr4vy API returns asynchronously, kicking off a job to
+        create an authorization or a transaction, and returning a `Status` object with
+        the ID of the pending object. The ID of this resource can be used to query an
+        objects status, or additionally the client can use Pub/Sub to subscribe to the
+        creation of the pending object.
+      properties:
+        type:
+          description: The type of this object. This is always `status`.
+          enum:
+          - status
+          example: status
+          type: string
+        status:
+          description: The status of this resource being created. This is always `pending`.
+          enum:
+          - pending
+          example: pending
+          type: string
+        resource_type:
+          description: |
+            The type of the object that is pending.
+          enum:
+          - transaction
+          - payment-method
+          example: transaction
+          type: string
+        resource_id:
+          description: The ID of the object for which this status has been created.
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the record
+            against your own records.
+          example: user-789123
+          nullable: true
+          type: string
+      title: Status
+      type: object
+      x-tags:
+      - Statuses
+    Statuses:
+      description: A list of status resources.
+      properties:
+        items:
+          description: A list of authorizations.
+          items:
+            $ref: '#/components/schemas/Status'
+          type: array
+      title: Statuses
+      type: object
+      x-tags:
+      - Statuses
+    TokenizedRequest:
+      description: Details for a previously tokenized payment method.
+      properties:
+        method:
+          description: '`id`.'
+          enum:
+          - id
+          example: id
+          type: string
+        id:
+          description: |-
+            A ID that represents a previously tokenized payment method.
+            This token can represent any type of payment method.
+          example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          type: string
+      required:
+      - id
+      - method
+      title: Tokenized payment method request
+      type: object
+      x-tags:
+      - Request Bodies
+    Transaction:
+      description: A transaction record.
+      example:
+        amount: 1299
+        external_identifier: user-789123
+        environment: production
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        payment_service:
+          method: card
+          environments:
+          - production
+          active: true
+          created_at: 2012-12-12T10:53:43Z
+          type: payment-service
+          display_name: Stripe (Main)
+          payment_service_definition_id: stripe-card
+          updated_at: 2012-12-12T10:53:43Z
+          accepted_countries:
+          - DE
+          credentials_mode: live
+          id: faaad066-30b4-4997-a438-242b0752d7e1
+          position: 1
+          accepted_currencies:
+          - EUR
+          status: pending
+        created_at: 2013-07-16T19:23:00Z
+        currency: USD
+        id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        type: transaction
+        payment_method:
+          external_identifier: user-789123
+          method: card
+          updated_at: 2013-07-16T19:23:00Z
+          created_at: 2013-07-16T19:23:00Z
+          details:
+            number: XXXX XXXX XXXX 1111
+            email_address: john@example.com
+            scheme: visa
+            expiration_date: 11 / 21
+            approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          type: payment-method
+          status: stored
+          buyer: ""
+        status: processing
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction`.
+          enum:
+          - transaction
+          example: transaction
+          type: string
+        id:
+          description: The unique identifier for this transaction.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        status:
+          description: |-
+            The status of the transaction being processed. This is different from the
+            `status` field in that it represents the status of the transaction at the
+            payment processor, not the status of the transaction created in Gr4vy.
+          enum:
+          - processing
+          - processing_failed
+          - captured
+          - capture_pending
+          - capture_declined
+          - authorized
+          - authorization_pending
+          - authorization_declined
+          - authorization_expired
+          - authorization_voided
+          - refunded
+          - buyer_approval_pending
+          - buyer_approval_declined
+          - buyer_approval_timedout
+          - buyer_approved
+          example: processing
+          type: string
+        amount:
+          description: The currency amount captured by this transaction.
+          example: 1299
+          maximum: 99999999
+          minimum: 0.0000010
+          type: number
+        currency:
+          description: The currency code for this transaction.
+          example: USD
+          type: string
+        payment_method:
+          $ref: '#/components/schemas/PaymentMethod'
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the transaction
+            against your own records.
+          example: user-789123
+          nullable: true
+          type: string
+        updated_at:
+          description: Defines when the transaction was last updated.
+          format: date-time
+          type: string
+        payment_service:
+          $ref: '#/components/schemas/PaymentService'
+        environment:
+          default: production
+          description: The environment this transaction has been created in.
+          enum:
+          - development
+          - staging
+          - production
+          example: production
+          type: string
+      title: Transaction
+      type: object
+      x-tags:
+      - Transactions
+    Transactions:
+      description: A list of transactions.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - amount: 1299
+          external_identifier: user-789123
+          environment: production
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          payment_service:
+            method: card
+            environments:
+            - production
+            active: true
+            created_at: 2012-12-12T10:53:43Z
+            type: payment-service
+            display_name: Stripe (Main)
+            payment_service_definition_id: stripe-card
+            updated_at: 2012-12-12T10:53:43Z
+            accepted_countries:
+            - DE
+            credentials_mode: live
+            id: faaad066-30b4-4997-a438-242b0752d7e1
+            position: 1
+            accepted_currencies:
+            - EUR
+            status: pending
+          created_at: 2013-07-16T19:23:00Z
+          currency: USD
+          id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: transaction
+          payment_method:
+            external_identifier: user-789123
+            method: card
+            updated_at: 2013-07-16T19:23:00Z
+            created_at: 2013-07-16T19:23:00Z
+            details:
+              number: XXXX XXXX XXXX 1111
+              email_address: john@example.com
+              scheme: visa
+              expiration_date: 11 / 21
+              approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+            id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+            type: payment-method
+            status: stored
+            buyer: ""
+          status: processing
+        - amount: 1299
+          external_identifier: user-789123
+          environment: production
+          updated_at: 2000-01-23T04:56:07.000+00:00
+          payment_service:
+            method: card
+            environments:
+            - production
+            active: true
+            created_at: 2012-12-12T10:53:43Z
+            type: payment-service
+            display_name: Stripe (Main)
+            payment_service_definition_id: stripe-card
+            updated_at: 2012-12-12T10:53:43Z
+            accepted_countries:
+            - DE
+            credentials_mode: live
+            id: faaad066-30b4-4997-a438-242b0752d7e1
+            position: 1
+            accepted_currencies:
+            - EUR
+            status: pending
+          created_at: 2013-07-16T19:23:00Z
+          currency: USD
+          id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: transaction
+          payment_method:
+            external_identifier: user-789123
+            method: card
+            updated_at: 2013-07-16T19:23:00Z
+            created_at: 2013-07-16T19:23:00Z
+            details:
+              number: XXXX XXXX XXXX 1111
+              email_address: john@example.com
+              scheme: visa
+              expiration_date: 11 / 21
+              approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+            id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+            type: payment-method
+            status: stored
+            buyer: ""
+          status: processing
+      properties:
+        items:
+          description: A list of transactions.
+          items:
+            $ref: '#/components/schemas/Transaction'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 500
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Transactions
+      type: object
+      x-tags:
+      - Transactions
+    TransactionsBatchCaptureRequest:
+      description: A request to capture multiple previously authorized transactions.
+      properties:
+        amount:
+          description: |-
+            The (partial) amount to capture.
+
+            When left blank, this will capture the entire amount.
+          example: 1299
+          maximum: 99999999
+          minimum: 0.0000010
+          type: number
+        currency:
+          description: |
+            A supported ISO-4217 currency code.
+          example: USD
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the transaction
+            against your own records.
+          example: user-789123
+          type: string
+        transaction_id:
+          description: The ID of the transaction to capture.
+          type: string
+      required:
+      - amount
+      - currency
+      - transaction_id
+      title: Batch Capture (Create)
+      type: object
+      x-tags:
+      - Request Bodies
+    TransactionRequest:
+      description: A request to create a transaction.
+      example:
+        amount: 1299
+        external_identifier: user-789123
+        environment: staging
+        currency: USD
+        store: true
+        intent: capture
+        payment_method:
+          number: "4111111111111111"
+          external_identifier: user-789123
+          buyer_external_identifier: user-789123
+          security_code: "123"
+          method: card
+          expiration_date: 11/15
+          buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          redirect_url: https://example.com/callback
+          token: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+      properties:
+        amount:
+          description: |-
+            The monetary amount to create an authorization for, in the smallest
+            currency unit for the given currency, for example `1299` cents to create
+            an authorization for `$12.99`.
+
+            For BitCoin, this value will be a decimal point number, for example
+            `0.0039`.
+          example: 1299
+          type: number
+        currency:
+          description: A supported ISO-4217 currency code.
+          example: USD
+          type: string
+        payment_method:
+          $ref: '#/components/schemas/TransactionPaymentMethodRequest'
+        store:
+          default: false
+          description: |-
+            Whether or not to also try and store the payment method with us so that
+            it can be used again for future use. This is only supported for payment
+            methods that support this feature.
+          example: true
+          type: boolean
+        intent:
+          default: authorize
+          description: |-
+            Defines the intent of this API call. This determines the desired initial
+            state of the transaction.
+
+            * `approve` - Captures approval for the transaction from the user but does
+            not authorize it. This is only available to payment methods that require
+            explicit approval, like PayPal.
+            * `authorize` - (Default) Optionally approves and then authorizes a
+            transaction but does not capture the funds.
+            * `capture` - Optionally approves and then authorizes and captures the
+            funds of the transaction.
+          enum:
+          - approve
+          - authorize
+          - capture
+          example: capture
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the transaction
+            against your own records.
+          example: user-789123
+          nullable: true
+          type: string
+        environment:
+          description: |-
+            Defines the environment to create this transaction in. Setting this to
+            anything other than `production` will force Gr4vy to use the payment
+            a service configured for that environment.
+          enum:
+          - development
+          - staging
+          - production
+          example: staging
+          type: string
+      required:
+      - amount
+      - currency
+      - payment_method
+      title: Transaction (Create)
+      type: object
+      x-tags:
+      - Request Bodies
+    TransactionCaptureRequest:
+      description: A request to capture a transaction.
+      example:
+        amount: 1299
+        external_identifier: user-789123
+        currency: USD
+      properties:
+        amount:
+          description: |-
+            The (partial) amount to capture.
+
+            When left blank, this will capture the entire amount.
+          example: 1299
+          maximum: 99999999
+          minimum: 0.0000010
+          type: number
+        currency:
+          description: |
+            A supported ISO-4217 currency code.
+          example: USD
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the transaction
+            against your own records.
+          example: user-789123
+          type: string
+      required:
+      - amount
+      - currency
+      title: Capture a transaction
+      type: object
+      x-tags:
+      - Request Bodies
+    TransactionPaymentMethodRequest:
+      description: |-
+        Payment method details to use in a transaction or to register
+        a new payment method.
+      example:
+        number: "4111111111111111"
+        external_identifier: user-789123
+        buyer_external_identifier: user-789123
+        security_code: "123"
+        method: card
+        expiration_date: 11/15
+        buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        redirect_url: https://example.com/callback
+        token: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+      properties:
+        method:
+          description: The method to use for this request.
+          enum:
+          - card
+          - paypal
+          - token
+          example: card
+          type: string
+        number:
+          description: |-
+            The 15-16 digit number for this credit card as it can be found on the
+            front of the card.
+
+            If a card has been stored with us previously, this number will represent
+            the unique tokenized card ID provided via our API.
+          example: "4111111111111111"
+          maxLength: 16
+          minLength: 14
+          pattern: ^[0-9]{14,16}$
+          type: string
+        expiration_date:
+          description: |-
+            The expiration date of the card, formatted `MM/YY`. If a card has been
+            previously stored with us this value is optional.
+
+            If the `number` of this card represents a tokenized card, then this value
+            is ignored.
+          example: 11/15
+          maxLength: 5
+          minLength: 5
+          pattern: ^\d\d/\d\d$
+          type: string
+        security_code:
+          description: |-
+            The 3 or 4 digit security code often found on the card. This often
+            referred to as the CVV or CVD.
+
+            If the `number` of this card represents a tokenized card, then this value
+            is ignored.
+          example: "123"
+          maxLength: 4
+          minLength: 3
+          pattern: ^\d{3,4}$
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the card against
+            your own records.
+          example: user-789123
+          nullable: true
+          type: string
+        buyer_id:
+          description: |-
+            The ID of the buyer to associate this payment method to. If this field is
+            provided then the `buyer_external_identifier` field needs to be unset.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        buyer_external_identifier:
+          description: |-
+            The `external_identifier` of the buyer to associate this payment method
+            to. If this field is provided then the `buyer_id` field
+            needs to be unset.
+          example: user-789123
+          type: string
+        redirect_url:
+          description: |-
+            The redirect URL to redirect a buyer to after they have authorized their
+            transaction or payment method. This only applies to payment methods that
+            require buyer approval.
+          example: https://example.com/callback
+          type: string
+        token:
+          description: |-
+            A Gr4vy token that represents a previously tokenized payment method.
+            This token can represent any type of payment method.
+          example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          type: string
+      required:
+      - method
+      title: Transaction payment method request
+      type: object
+      x-tags:
+      - Request Bodies
+    PaymentMethod_details:
+      description: Additional details about a payment method.
+      example:
+        number: XXXX XXXX XXXX 1111
+        email_address: john@example.com
+        scheme: visa
+        expiration_date: 11 / 21
+        approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+      properties:
+        number:
+          description: |-
+            Partial number details for a stored card, hiding all but the last few
+            numbers.
+          example: XXXX XXXX XXXX 1111
+          type: string
+        scheme:
+          description: The type of the card.
+          enum:
+          - visa
+          - mastercard
+          - american-express
+          - diners-club
+          - discover
+          - jcb
+          - unionpay
+          - maestro
+          - elo
+          - mir
+          - hiper
+          - hipercard
+          example: visa
+          type: string
+        expiration_date:
+          description: The expiration date for a card.
+          example: 11 / 21
+          type: string
+        email_address:
+          description: The email address associated to the payment method.
+          example: john@example.com
+          nullable: true
+          type: string
+        approval_url:
+          description: The optional URL that the buyer needs to be redirected to to
+            further authorize the payment method.
+          example: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          nullable: true
+          type: string
+      type: object
+    PaymentServiceRequest_allOf:
+      properties:
+        payment_service_definition_id:
+          description: The ID of the payment service to use.
+          example: stripe-card
+          maxLength: 50
+          minLength: 1
+          type: string
+      type: object
+    PaymentServiceUpdate_fields:
+      description: A field containing a key-value pair for a required field defined
+        by the service for this payment service.
+      example:
+        value: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+        key: private_key
+      properties:
+        key:
+          description: The key of the field to set a value for.
+          example: private_key
+          maxLength: 50
+          minLength: 1
+          type: string
+        value:
+          description: The value of a field to set.
+          example: sk_test_4eC39HqLyjWDarjtT1zdp7dc
+          maxLength: 1500
+          minLength: 1
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    PaymentServiceDefinition_fields:
+      description: |-
+        A single field that needs to be submitted for a payment service when it
+        is created.
+      example:
+        format: text
+        display_name: Private API key
+        key: private_api_key
+        required: true
+      properties:
+        key:
+          description: The key of a field that needs to be submitted.
+          example: private_api_key
+          type: string
+        display_name:
+          description: The name to display for a field in the dashboard.
+          example: Private API key
+          type: string
+        required:
+          description: Defines if this field is required when the service is created.
+          example: true
+          type: boolean
+        format:
+          description: Defines the type of input that needs to be rendered for this
+            field.
+          enum:
+          - text
+          - multiline
+          - number
+          example: text
+          type: string
+      type: object
+  securitySchemes:
+    BearerAuth:
+      bearerFormat: JWT
+      scheme: bearer
+      type: http

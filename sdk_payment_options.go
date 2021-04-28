@@ -6,13 +6,22 @@ import (
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
-type Gr4vyListPaymentOptionsParams ListPaymentOptionsParams
+type Gr4vyPaymentOptions PaymentOptions
 
-func (c *Gr4vyClient) ListPaymentOptions(params Gr4vyListPaymentOptionsParams) (*http.Response, error) {
+func (c *Gr4vyClient) ListPaymentOptions() (*Gr4vyPaymentOptions, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-    	return nil, err
+        return nil, nil, err
     }
-    var p ListPaymentOptionsParams = ListPaymentOptionsParams(params)
-    return c.HandleResponse(client.ListPaymentOptions(context.TODO(), &p))
+
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.PaymentOptionsApi.ListPaymentOptions(auth)
+    
+    response, http, err := p.Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyPaymentOptions = Gr4vyPaymentOptions(response)
+    return &r, http, err
 }

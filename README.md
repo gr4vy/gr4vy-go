@@ -42,14 +42,16 @@ func main() {
     fmt.Println(err)
     return
   }
-  client := gr4vy.NewGr4vyClient("YOUR_GR4VY_ID", key)
+  client := gr4vy.NewGr4vyClient("demo", key)
   client.Debug = true
-
-  params := gr4vy.Gr4vyListBuyersParams{
-    Limit: gr4vy.Int32(2),
+  
+  var response *gr4vy.Gr4vyBuyers
+  response, _, err = client.ListBuyers(gr4vy.Int32(2))
+  if err != nil {
+    fmt.Println(err.Error())
+    return;
   }
-  response, error := client.ListBuyers(params)
-  ..
+  fmt.Printf("%+v\n", (*response.Items)[0].GetId())
 }
 ```
 
@@ -67,48 +69,50 @@ You can now pass this token to your frontend where it can be used to authenticat
 The `buyer_id` and/or `buyer_external_identifier` fields can be used to allow the token to pull in previously stored payment methods for a user. A buyer needs to be created before it can be used in this way.
 
 ```golang
-  req := gr4vy.Gr4vyAddBuyer{
+  key, err := gr4vy.GetKeyFromFile(PRIVATE_KEY)
+  if err != nil {
+    fmt.Println(err)
+    return
+  }
+  client := gr4vy.NewGr4vyClient("demo", key)
+  client.Debug = true
+  req := gr4vy.Gr4vyBuyerRequest{
     DisplayName: gr4vy.String("Jane Smith"),
   }
-  response, err := client.AddBuyer(req)
+  var response *gr4vy.Gr4vyBuyer
+  response, _, err = client.AddBuyer(req)
   if err != nil {
     fmt.Println(err)
     return
   }
-  var p Gr4vyBuyer
-  defer response.Body.Close()
-  err = json.NewDecoder(response.Body).Decode(&p)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  
-  embed := map[string]string{"amount": "200", "currency": "USD", "buyer_id": *p.Id}
-  
-  client = gr4vy.NewGr4vyClient("YOUR_GR4VY_ID", string(key))
+
+  embed := map[string]string{"amount": "200", "currency": "USD", "buyer_id": (*response.Id)}
+
+  client = gr4vy.NewGr4vyClient("demo", key)
+  client.Debug = true
   var responseStr string
   responseStr, err = client.GetEmbedToken(embed)
-  
+
   if err != nil {
     fmt.Println(err)
     return;
   }
-  
+
   fmt.Println("embed token: " + responseStr)
 ```
 
 ## Initialization
 
-The client can be initialized with the Gr4vy ID (`gr4vyId`) and the private key.
+The client can be initialized with the Gr4vy ID (`gr4vyId`) and the private key string.
 
 ```golang
-  client := gr4vy.NewGr4vyClient("acme", string(key))
+  client := gr4vy.NewGr4vyClient("acme", key)
 ```
 
 Alternatively, instead of the `gr4vyId` it can be initialized with the `baseUrl` of the server to use directly.
 
 ```golang
-  client := gr4vy.NewGr4vyClientWithBaseUrl("https://api.acme.gr4vy.app", string(key))
+  client := gr4vy.NewGr4vyClientWithBaseUrl("https://api.acme.gr4vy.app", key)
 ```
 
 Your API private key can be created in your admin panel on the **Integrations** tab.
@@ -119,53 +123,42 @@ Your API private key can be created in your admin panel on the **Integrations** 
 This library conveniently maps every API path to a seperate function. For example, `GET /buyers?limit=100` would be:
 
 ```golang
-  params := gr4vy.Gr4vyListBuyersParams{
-    Limit: gr4vy.Int32(2),
-  }
-  response, error := client.ListBuyers(params)
+  response, _, error := client.ListBuyers(2)
 ```
 
-To create or update a resource, the API requires a request object for that
-resource that is conventiently named `Gr4vy<Resource>`.
+To create, the API requires a request object for that resource that is conventiently 
+named `Gr4vy<Resource>Request`.  To update, the API requires a request object for that resource that is named `Gr4vy<Resource>Update`.
 
-For example, to create a buyer you will need to pass a `Gr4vyAddBuyer` object to
+For example, to create a buyer you will need to pass a `Gr4vyBuyerRequest` object to
 the `AddBuyer` method.
 
 ```golang
-  req := gr4vy.Gr4vyAddBuyer{
+  req := gr4vy.Gr4vyBuyerRequest{
     DisplayName: gr4vy.String("Jane Smith"),
   }
-  response, error := client.AddBuyer(req)
+  response, _, error := client.AddBuyer(req)
 ```
 
-Similarly, to update a buyer you will need to pass in the `Gr4vyUpdateBuyer` to the `UpdateBuyer` method.
+So to update a buyer you will need to pass in the `Gr4vyBuyerUpdate` to the `UpdateBuyer` method.
 
 ```golang
-  var req Gr4vyUpdateBuyer
-  req.DisplayName = String("Janet Smith")
+  req := gr4vy.Gr4vyBuyerUpdate{
+    DisplayName: gr4vy.String("Janet Smith"),
+  }
   response, err := client.UpdateBuyer(buyerId, req)
 ```
 
 ## Response 
 
-Every resolved API call returns both a `*http.Response` object from the "net/http" 
-package and an `error` object. where the response object contains a `Body` attribute 
-with the parsed JSON body other attributes such as the HTTP response status code.
+Every resolved API call returns the requested resource, a `*http.Response` object from the "net/http" package and an `error` object.
 
 
 ```golang
-  response, error := client.ListBuyers(params)
-  if error != nil {
-    fmt.Println(error)
-    return
-  }
-
-  defer response.Body.Close()
-  body, err := io.ReadAll(response.Body)
+  var response *gr4vy.Gr4vyBuyers
+  response, http, err = client.ListBuyers(gr4vy.Int32(2))
   if err != nil {
-    fmt.Println(err)
-  } else {
-    fmt.Println(string(body))
+    fmt.Println(err.Error())
+    return;
   }
 ```
 
@@ -174,7 +167,7 @@ with the parsed JSON body other attributes such as the HTTP response status code
 The SDK makes it easy possible to the requests and responses to the console.
 
 ```golang
-  client := gr4vy.NewGr4vyClient("YOUR_GR4VY_ID", string(key))
+  client := gr4vy.NewGr4vyClient("YOUR_GR4VY_ID", key)
   client.Debug = true
 ```
 

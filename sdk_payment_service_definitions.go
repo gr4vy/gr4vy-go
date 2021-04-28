@@ -6,22 +6,43 @@ import (
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
-type Gr4vyListPaymentServiceDefinitionsParams ListPaymentServiceDefinitionsParams
 type Gr4vyPaymentServiceDefinition PaymentServiceDefinition
+type Gr4vyPaymentServiceDefinitions PaymentServiceDefinitions
 
-func (c *Gr4vyClient) ListPaymentServiceDefinitions(params Gr4vyListPaymentServiceDefinitionsParams) (*http.Response, error) {
+func (c *Gr4vyClient) ListPaymentServiceDefinitions(limit *int32) (*Gr4vyPaymentServiceDefinitions, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-    	return nil, err
+        return nil, nil, err
     }
-    var p ListPaymentServiceDefinitionsParams = ListPaymentServiceDefinitionsParams(params)
-    return c.HandleResponse(client.ListPaymentServiceDefinitions(context.TODO(), &p))
+
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.PaymentServiceDefinitionsApi.ListPaymentServiceDefinitions(auth)
+    if (limit != nil) {
+        p.Limit(*limit)
+    }
+    
+    response, http, err := p.Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyPaymentServiceDefinitions = Gr4vyPaymentServiceDefinitions(response)
+    return &r, http, err
 }
 
-func (c *Gr4vyClient) GetPaymentServiceDefinition(payment_service_definition_id string) (*http.Response, error) {
+func (c *Gr4vyClient) GetPaymentServiceDefinition(payment_service_definition_id string) (*Gr4vyPaymentServiceDefinition, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-      return nil, err
+        return nil, nil, err
     }
-    return c.HandleResponse(client.GetPaymentServiceDefinition(context.TODO(), payment_service_definition_id))
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.PaymentServiceDefinitionsApi.GetPaymentServiceDefinition(auth, payment_service_definition_id)
+
+    response, http, err := p.Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyPaymentServiceDefinition = Gr4vyPaymentServiceDefinition(response)
+    return &r, http, err
 }

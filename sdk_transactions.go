@@ -6,62 +6,118 @@ import (
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
-type Gr4vyListTransactionsParams ListTransactionsParams
-type Gr4vyAuthorizeNewTransaction AuthorizeNewTransactionJSONRequestBody
-type Gr4vyCaptureTransaction CaptureTransactionJSONRequestBody
-type Gr4vyTransaction Transaction
 type Gr4vyTransactionPaymentMethodRequest TransactionPaymentMethodRequest
+type Gr4vyTransactionRequest TransactionRequest
+type Gr4vyTransactionCaptureRequest TransactionCaptureRequest
+type Gr4vyTransactions Transactions
+type Gr4vyTransaction Transaction
 
-func (c *Gr4vyClient) ListTransactions(params Gr4vyListTransactionsParams) (*http.Response, error) {
+func (c *Gr4vyClient) ListTransactions(limit *int32) (*Gr4vyTransactions, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-    	return nil, err
+        return nil, nil, err
     }
-    var p ListTransactionsParams = ListTransactionsParams(params)
-	
-    return c.HandleResponse(client.ListTransactions(context.TODO(), &p))
+
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.TransactionsApi.ListTransactions(auth)
+    if (limit != nil) {
+        p.Limit(*limit)
+    }
+    
+    response, http, err := p.Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyTransactions = Gr4vyTransactions(response)
+    return &r, http, err
 }
 
-func (c *Gr4vyClient) GetTransaction(transaction_id string) (*http.Response, error) {
+func (c *Gr4vyClient) GetTransaction(transaction_id string) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-      return nil, err
+        return nil, nil, err
     }
-    return c.HandleResponse(client.GetTransaction(context.TODO(), transaction_id))
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.TransactionsApi.GetTransaction(auth, transaction_id)
+
+    response, http, err := p.Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyTransaction = Gr4vyTransaction(response)
+    return &r, http, err
 }
 
-func (c *Gr4vyClient) AuthorizeNewTransaction(body Gr4vyAuthorizeNewTransaction, pm Gr4vyTransactionPaymentMethodRequest) (*http.Response, error) {
+func (c *Gr4vyClient) AuthorizeNewTransaction(body Gr4vyTransactionRequest, pm Gr4vyTransactionPaymentMethodRequest) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-    	return nil, err
+        return nil, nil, err
     }
-    var b AuthorizeNewTransactionJSONRequestBody = AuthorizeNewTransactionJSONRequestBody(body)
-    var p TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
-    b.PaymentMethod = p
-    return c.HandleResponse(client.AuthorizeNewTransaction(context.TODO(), b))
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.TransactionsApi.AuthorizeNewTransaction(auth)
+
+    var b TransactionRequest = TransactionRequest(body)
+    var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
+    b.PaymentMethod = tpm
+    response, http, err := p.TransactionRequest(b).Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyTransaction = Gr4vyTransaction(response)
+    return &r, http, err
 }
 
-func (c *Gr4vyClient) CaptureTransaction(transaction_id string, body Gr4vyCaptureTransaction) (*http.Response, error) {
+func (c *Gr4vyClient) CaptureTransaction(transaction_id string, body Gr4vyTransactionCaptureRequest) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-        return nil, err
+        return nil, nil, err
     }
-    var b CaptureTransactionJSONRequestBody = CaptureTransactionJSONRequestBody(body)
-    return c.HandleResponse(client.CaptureTransaction(context.TODO(), transaction_id, b))
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.TransactionsApi.CaptureTransaction(auth, transaction_id)
+
+    var b TransactionCaptureRequest = TransactionCaptureRequest(body)
+    response, http, err := p.TransactionCaptureRequest(b).Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyTransaction = Gr4vyTransaction(response)
+    return &r, http, err
 }
 
-func (c *Gr4vyClient) AuthorizeTransaction(transaction_id string,) (*http.Response, error) {
+func (c *Gr4vyClient) AuthorizeTransaction(transaction_id string,) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-        return nil, err
+        return nil, nil, err
     }
-    return c.HandleResponse(client.AuthorizeTransaction(context.TODO(), transaction_id))
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.TransactionsApi.AuthorizeTransaction(auth, transaction_id)
+
+    response, http, err := p.Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyTransaction = Gr4vyTransaction(response)
+    return &r, http, err
 }
 
-func (c *Gr4vyClient) RefundTransaction(transaction_id string,) (*http.Response, error) {
+func (c *Gr4vyClient) RefundTransaction(transaction_id string,) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-        return nil, err
+        return nil, nil, err
     }
-    return c.HandleResponse(client.RefundTransaction(context.TODO(), transaction_id))
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.TransactionsApi.RefundTransaction(auth, transaction_id)
+
+    response, http, err := p.Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyTransaction = Gr4vyTransaction(response)
+    return &r, http, err
 }
