@@ -1,3 +1,3 @@
 *.pem
 /test
-oepnapi.v1.json
+openapi.v1.json

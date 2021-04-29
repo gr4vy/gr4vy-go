@@ -2,7 +2,6 @@ package gr4vy
 
 import (
 	"net/http"
-    // "errors"
 	"golang.org/x/net/context"
 	. "github.com/gr4vy/gr4vy-go/api"
 )

@@ -58,38 +58,8 @@ func GetClient(c *Gr4vyClient) (*APIClient, error) {
 
 	client := NewAPIClient(config)
 
-	//TODO: check if nil?
-
 	return client, nil
 }
-
-// func GetClientWithResponses(c *Gr4vyClient) (*ClientWithResponses, error) {
-
-// 	if c.Debug {
-// 		pc, _, _, _ := runtime.Caller(1)
-// 		funcName := runtime.FuncForPC(pc).Name()
-//       	fmt.Println("Gr4vy - Request - " + lastString(strings.Split(funcName, ".")))
-//     }
-
-// 	authRequestEditorFn, err := authentication(c.privateKey, c.Debug)
-
-//     if err != nil {
-//     	return nil, err
-//     }
-
-
-// 	client, clientErr := NewClientWithResponses(c.BaseUrl(), 
-// 		[]ClientOption{
-// 			WithRequestEditorFn(authRequestEditorFn),
-// 		}...,
-// 	)
-
-// 	if clientErr != nil {
-// 		return nil, clientErr
-// 	}
-
-// 	return client, nil
-// }
 
 func (c *Gr4vyClient) GetEmbedToken(params map[string]string) (string, error) {
 	scopes := []string{"embed"}

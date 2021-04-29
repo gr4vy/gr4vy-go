@@ -13,4 +13,4 @@ docker run --rm \
 rm -rf api/go.mod
 rm -rf api/go.sum
 
-php replace.php
+sh replace.sh
