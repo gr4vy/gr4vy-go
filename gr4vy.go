@@ -66,6 +66,11 @@ func (c *Gr4vyClient) GetEmbedToken(params map[string]string) (string, error) {
 	return getToken(c.privateKey, scopes, params)
 }
 
+func (c *Gr4vyClient) GetToken() (string, error) {
+	scopes := []string{"*.read", "*.write"}
+	return getToken(c.privateKey, scopes, nil)
+}
+
 func (c *Gr4vyClient) HandleResponse(response *http.Response, error error) {
 	if c.Debug {
 		var sb strings.Builder
