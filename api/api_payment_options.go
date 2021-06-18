@@ -33,6 +33,7 @@ type ApiListPaymentOptionsRequest struct {
 	country *string
 	currency *string
 	environment *string
+	locale *string
 }
 
 func (r ApiListPaymentOptionsRequest) Country(country string) ApiListPaymentOptionsRequest {
@@ -45,6 +46,10 @@ func (r ApiListPaymentOptionsRequest) Currency(currency string) ApiListPaymentOp
 }
 func (r ApiListPaymentOptionsRequest) Environment(environment string) ApiListPaymentOptionsRequest {
 	r.environment = &environment
+	return r
+}
+func (r ApiListPaymentOptionsRequest) Locale(locale string) ApiListPaymentOptionsRequest {
+	r.locale = &locale
 	return r
 }
 
@@ -99,6 +104,9 @@ func (a *PaymentOptionsApiService) ListPaymentOptionsExecute(r ApiListPaymentOpt
 	}
 	if r.environment != nil {
 		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
+	}
+	if r.locale != nil {
+		localVarQueryParams.Add("locale", parameterToString(*r.locale, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

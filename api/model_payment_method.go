@@ -22,7 +22,7 @@ type PaymentMethod struct {
 	Type *string `json:"type,omitempty"`
 	// The unique ID of the payment method.
 	Id *string `json:"id,omitempty"`
-	// The state of the payment method.
+	// The state of the payment method.  - `processing` - The payment method is still being stored. - `processing_failed` - Storing the payment method did not succeed. - `buyer_approval_pending` - Storing the payment method requires   the buyer to provide approval. Follow the `approval_url` for next steps. - `buyer_approval_declined` - The buyer declined to approve the payment   method. This can happen after the buyer has been redirect to the   `approval_url`. - `buyer_approval_timedout` - The buyer did  not approve the payment   method in time. This can happen after the buyer has been redirect to the   `approval_url`. - `stored` - The payment method is approved and stored with all relevant   payment services. - `partially_stored` - The payment method is approved and stored with only   some of the relevant payment services. - `used` - The payment method was used for a transaction once and   not stored.
 	Status *string `json:"status,omitempty"`
 	// The type of this payment method.
 	Method *string `json:"method,omitempty"`
@@ -34,7 +34,16 @@ type PaymentMethod struct {
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// The optional buyer for which this payment method has been stored.
 	Buyer NullableBuyer `json:"buyer,omitempty"`
-	Details *PaymentMethodDetails `json:"details,omitempty"`
+	// A label for the card or the account. For a `paypal` payment method this is the user's email address. For a card it is the last 4 digits of the card.
+	Label NullableString `json:"label,omitempty"`
+	// The scheme of the card. Only applies to card payments.
+	Scheme NullableString `json:"scheme,omitempty"`
+	// The expiration date for the payment method.
+	ExpirationDate NullableString `json:"expiration_date,omitempty"`
+	// The optional URL that the buyer needs to be redirected to to further authorize their payment.
+	ApprovalUrl NullableString `json:"approval_url,omitempty"`
+	// The environment this payment method has been stored for. This will be null of the payment method was not stored.
+	Environment NullableString `json:"environment,omitempty"`
 }
 
 // NewPaymentMethod instantiates a new PaymentMethod object
@@ -43,6 +52,8 @@ type PaymentMethod struct {
 // will change when the set of required properties is changed
 func NewPaymentMethod() *PaymentMethod {
 	this := PaymentMethod{}
+	var environment string = "production"
+	this.Environment = *NewNullableString(&environment)
 	return &this
 }
 
@@ -51,6 +62,8 @@ func NewPaymentMethod() *PaymentMethod {
 // but it doesn't guarantee that properties required by API are set
 func NewPaymentMethodWithDefaults() *PaymentMethod {
 	this := PaymentMethod{}
+	var environment string = "production"
+	this.Environment = *NewNullableString(&environment)
 	return &this
 }
 
@@ -330,36 +343,214 @@ func (o *PaymentMethod) UnsetBuyer() {
 	o.Buyer.Unset()
 }
 
-// GetDetails returns the Details field value if set, zero value otherwise.
-func (o *PaymentMethod) GetDetails() PaymentMethodDetails {
-	if o == nil || o.Details == nil {
-		var ret PaymentMethodDetails
+// GetLabel returns the Label field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethod) GetLabel() string {
+	if o == nil || o.Label.Get() == nil {
+		var ret string
 		return ret
 	}
-	return *o.Details
+	return *o.Label.Get()
 }
 
-// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
+// GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentMethod) GetDetailsOk() (*PaymentMethodDetails, bool) {
-	if o == nil || o.Details == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethod) GetLabelOk() (*string, bool) {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Details, true
+	return o.Label.Get(), o.Label.IsSet()
 }
 
-// HasDetails returns a boolean if a field has been set.
-func (o *PaymentMethod) HasDetails() bool {
-	if o != nil && o.Details != nil {
+// HasLabel returns a boolean if a field has been set.
+func (o *PaymentMethod) HasLabel() bool {
+	if o != nil && o.Label.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDetails gets a reference to the given PaymentMethodDetails and assigns it to the Details field.
-func (o *PaymentMethod) SetDetails(v PaymentMethodDetails) {
-	o.Details = &v
+// SetLabel gets a reference to the given NullableString and assigns it to the Label field.
+func (o *PaymentMethod) SetLabel(v string) {
+	o.Label.Set(&v)
+}
+// SetLabelNil sets the value for Label to be an explicit nil
+func (o *PaymentMethod) SetLabelNil() {
+	o.Label.Set(nil)
+}
+
+// UnsetLabel ensures that no value is present for Label, not even an explicit nil
+func (o *PaymentMethod) UnsetLabel() {
+	o.Label.Unset()
+}
+
+// GetScheme returns the Scheme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethod) GetScheme() string {
+	if o == nil || o.Scheme.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Scheme.Get()
+}
+
+// GetSchemeOk returns a tuple with the Scheme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethod) GetSchemeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Scheme.Get(), o.Scheme.IsSet()
+}
+
+// HasScheme returns a boolean if a field has been set.
+func (o *PaymentMethod) HasScheme() bool {
+	if o != nil && o.Scheme.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetScheme gets a reference to the given NullableString and assigns it to the Scheme field.
+func (o *PaymentMethod) SetScheme(v string) {
+	o.Scheme.Set(&v)
+}
+// SetSchemeNil sets the value for Scheme to be an explicit nil
+func (o *PaymentMethod) SetSchemeNil() {
+	o.Scheme.Set(nil)
+}
+
+// UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
+func (o *PaymentMethod) UnsetScheme() {
+	o.Scheme.Unset()
+}
+
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethod) GetExpirationDate() string {
+	if o == nil || o.ExpirationDate.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ExpirationDate.Get()
+}
+
+// GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethod) GetExpirationDateOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
+}
+
+// HasExpirationDate returns a boolean if a field has been set.
+func (o *PaymentMethod) HasExpirationDate() bool {
+	if o != nil && o.ExpirationDate.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExpirationDate gets a reference to the given NullableString and assigns it to the ExpirationDate field.
+func (o *PaymentMethod) SetExpirationDate(v string) {
+	o.ExpirationDate.Set(&v)
+}
+// SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
+func (o *PaymentMethod) SetExpirationDateNil() {
+	o.ExpirationDate.Set(nil)
+}
+
+// UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
+func (o *PaymentMethod) UnsetExpirationDate() {
+	o.ExpirationDate.Unset()
+}
+
+// GetApprovalUrl returns the ApprovalUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethod) GetApprovalUrl() string {
+	if o == nil || o.ApprovalUrl.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ApprovalUrl.Get()
+}
+
+// GetApprovalUrlOk returns a tuple with the ApprovalUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethod) GetApprovalUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ApprovalUrl.Get(), o.ApprovalUrl.IsSet()
+}
+
+// HasApprovalUrl returns a boolean if a field has been set.
+func (o *PaymentMethod) HasApprovalUrl() bool {
+	if o != nil && o.ApprovalUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetApprovalUrl gets a reference to the given NullableString and assigns it to the ApprovalUrl field.
+func (o *PaymentMethod) SetApprovalUrl(v string) {
+	o.ApprovalUrl.Set(&v)
+}
+// SetApprovalUrlNil sets the value for ApprovalUrl to be an explicit nil
+func (o *PaymentMethod) SetApprovalUrlNil() {
+	o.ApprovalUrl.Set(nil)
+}
+
+// UnsetApprovalUrl ensures that no value is present for ApprovalUrl, not even an explicit nil
+func (o *PaymentMethod) UnsetApprovalUrl() {
+	o.ApprovalUrl.Unset()
+}
+
+// GetEnvironment returns the Environment field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethod) GetEnvironment() string {
+	if o == nil || o.Environment.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Environment.Get()
+}
+
+// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethod) GetEnvironmentOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Environment.Get(), o.Environment.IsSet()
+}
+
+// HasEnvironment returns a boolean if a field has been set.
+func (o *PaymentMethod) HasEnvironment() bool {
+	if o != nil && o.Environment.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEnvironment gets a reference to the given NullableString and assigns it to the Environment field.
+func (o *PaymentMethod) SetEnvironment(v string) {
+	o.Environment.Set(&v)
+}
+// SetEnvironmentNil sets the value for Environment to be an explicit nil
+func (o *PaymentMethod) SetEnvironmentNil() {
+	o.Environment.Set(nil)
+}
+
+// UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
+func (o *PaymentMethod) UnsetEnvironment() {
+	o.Environment.Unset()
 }
 
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
@@ -388,8 +579,20 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	if o.Buyer.IsSet() {
 		toSerialize["buyer"] = o.Buyer.Get()
 	}
-	if o.Details != nil {
-		toSerialize["details"] = o.Details
+	if o.Label.IsSet() {
+		toSerialize["label"] = o.Label.Get()
+	}
+	if o.Scheme.IsSet() {
+		toSerialize["scheme"] = o.Scheme.Get()
+	}
+	if o.ExpirationDate.IsSet() {
+		toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	}
+	if o.ApprovalUrl.IsSet() {
+		toSerialize["approval_url"] = o.ApprovalUrl.Get()
+	}
+	if o.Environment.IsSet() {
+		toSerialize["environment"] = o.Environment.Get()
 	}
 	return json.Marshal(toSerialize)
 }

@@ -24,7 +24,7 @@ type CardRuleUpdate struct {
 	// The numeric rank of a rule. Rules with a lower position value are processed first. When a rule is inserted at a position, any rules with the the same value or higher are down a position accordingly.
 	Position *float32 `json:"position,omitempty"`
 	// One or more conditions that apply for this rule. Each condition needs to match for this rule to go into effect.
-	Conditions *[]CardRule `json:"conditions,omitempty"`
+	Conditions *[]CardRuleCondition `json:"conditions,omitempty"`
 	// A list of IDs for the payment services to use, in order of priority. The payment services all need to process cards.
 	PaymentServiceIds *[]string `json:"payment_service_ids,omitempty"`
 	// Defines what strategy to use when all of the payment services defined in this rule declined or otherwise were not able to process the card.  * `use_all_providers` - Try all payment services enabled for this currency in order of priority, even if they are not listed in this rule. This is the default behaviour for a rule. * `decline` - Decline the transaction.
@@ -159,9 +159,9 @@ func (o *CardRuleUpdate) SetPosition(v float32) {
 }
 
 // GetConditions returns the Conditions field value if set, zero value otherwise.
-func (o *CardRuleUpdate) GetConditions() []CardRule {
+func (o *CardRuleUpdate) GetConditions() []CardRuleCondition {
 	if o == nil || o.Conditions == nil {
-		var ret []CardRule
+		var ret []CardRuleCondition
 		return ret
 	}
 	return *o.Conditions
@@ -169,7 +169,7 @@ func (o *CardRuleUpdate) GetConditions() []CardRule {
 
 // GetConditionsOk returns a tuple with the Conditions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardRuleUpdate) GetConditionsOk() (*[]CardRule, bool) {
+func (o *CardRuleUpdate) GetConditionsOk() (*[]CardRuleCondition, bool) {
 	if o == nil || o.Conditions == nil {
 		return nil, false
 	}
@@ -185,8 +185,8 @@ func (o *CardRuleUpdate) HasConditions() bool {
 	return false
 }
 
-// SetConditions gets a reference to the given []CardRule and assigns it to the Conditions field.
-func (o *CardRuleUpdate) SetConditions(v []CardRule) {
+// SetConditions gets a reference to the given []CardRuleCondition and assigns it to the Conditions field.
+func (o *CardRuleUpdate) SetConditions(v []CardRuleCondition) {
 	o.Conditions = &v
 }
 

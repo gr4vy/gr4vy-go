@@ -6,13 +6,17 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;payment-method&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique ID of the payment method. | [optional] 
-**Status** | Pointer to **string** | The state of the payment method. | [optional] 
+**Status** | Pointer to **string** | The state of the payment method.  - &#x60;processing&#x60; - The payment method is still being stored. - &#x60;processing_failed&#x60; - Storing the payment method did not succeed. - &#x60;buyer_approval_pending&#x60; - Storing the payment method requires   the buyer to provide approval. Follow the &#x60;approval_url&#x60; for next steps. - &#x60;buyer_approval_declined&#x60; - The buyer declined to approve the payment   method. This can happen after the buyer has been redirect to the   &#x60;approval_url&#x60;. - &#x60;buyer_approval_timedout&#x60; - The buyer did  not approve the payment   method in time. This can happen after the buyer has been redirect to the   &#x60;approval_url&#x60;. - &#x60;stored&#x60; - The payment method is approved and stored with all relevant   payment services. - &#x60;partially_stored&#x60; - The payment method is approved and stored with only   some of the relevant payment services. - &#x60;used&#x60; - The payment method was used for a transaction once and   not stored. | [optional] 
 **Method** | Pointer to **string** | The type of this payment method. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this payment method was first created in our system. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this payment method was last updated in our system. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the payment method against your own records. | [optional] 
 **Buyer** | Pointer to [**NullableBuyer**](Buyer.md) | The optional buyer for which this payment method has been stored. | [optional] 
-**Details** | Pointer to [**PaymentMethodDetails**](PaymentMethodDetails.md) |  | [optional] 
+**Label** | Pointer to **NullableString** | A label for the card or the account. For a &#x60;paypal&#x60; payment method this is the user&#39;s email address. For a card it is the last 4 digits of the card. | [optional] 
+**Scheme** | Pointer to **NullableString** | The scheme of the card. Only applies to card payments. | [optional] 
+**ExpirationDate** | Pointer to **NullableString** | The expiration date for the payment method. | [optional] 
+**ApprovalUrl** | Pointer to **NullableString** | The optional URL that the buyer needs to be redirected to to further authorize their payment. | [optional] 
+**Environment** | Pointer to **NullableString** | The environment this payment method has been stored for. This will be null of the payment method was not stored. | [optional] [default to "production"]
 
 ## Methods
 
@@ -253,31 +257,181 @@ HasBuyer returns a boolean if a field has been set.
 `func (o *PaymentMethod) UnsetBuyer()`
 
 UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
-### GetDetails
+### GetLabel
 
-`func (o *PaymentMethod) GetDetails() PaymentMethodDetails`
+`func (o *PaymentMethod) GetLabel() string`
 
-GetDetails returns the Details field if non-nil, zero value otherwise.
+GetLabel returns the Label field if non-nil, zero value otherwise.
 
-### GetDetailsOk
+### GetLabelOk
 
-`func (o *PaymentMethod) GetDetailsOk() (*PaymentMethodDetails, bool)`
+`func (o *PaymentMethod) GetLabelOk() (*string, bool)`
 
-GetDetailsOk returns a tuple with the Details field if it's non-nil, zero value otherwise
+GetLabelOk returns a tuple with the Label field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDetails
+### SetLabel
 
-`func (o *PaymentMethod) SetDetails(v PaymentMethodDetails)`
+`func (o *PaymentMethod) SetLabel(v string)`
 
-SetDetails sets Details field to given value.
+SetLabel sets Label field to given value.
 
-### HasDetails
+### HasLabel
 
-`func (o *PaymentMethod) HasDetails() bool`
+`func (o *PaymentMethod) HasLabel() bool`
 
-HasDetails returns a boolean if a field has been set.
+HasLabel returns a boolean if a field has been set.
 
+### SetLabelNil
+
+`func (o *PaymentMethod) SetLabelNil(b bool)`
+
+ SetLabelNil sets the value for Label to be an explicit nil
+
+### UnsetLabel
+`func (o *PaymentMethod) UnsetLabel()`
+
+UnsetLabel ensures that no value is present for Label, not even an explicit nil
+### GetScheme
+
+`func (o *PaymentMethod) GetScheme() string`
+
+GetScheme returns the Scheme field if non-nil, zero value otherwise.
+
+### GetSchemeOk
+
+`func (o *PaymentMethod) GetSchemeOk() (*string, bool)`
+
+GetSchemeOk returns a tuple with the Scheme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheme
+
+`func (o *PaymentMethod) SetScheme(v string)`
+
+SetScheme sets Scheme field to given value.
+
+### HasScheme
+
+`func (o *PaymentMethod) HasScheme() bool`
+
+HasScheme returns a boolean if a field has been set.
+
+### SetSchemeNil
+
+`func (o *PaymentMethod) SetSchemeNil(b bool)`
+
+ SetSchemeNil sets the value for Scheme to be an explicit nil
+
+### UnsetScheme
+`func (o *PaymentMethod) UnsetScheme()`
+
+UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
+### GetExpirationDate
+
+`func (o *PaymentMethod) GetExpirationDate() string`
+
+GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
+
+### GetExpirationDateOk
+
+`func (o *PaymentMethod) GetExpirationDateOk() (*string, bool)`
+
+GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationDate
+
+`func (o *PaymentMethod) SetExpirationDate(v string)`
+
+SetExpirationDate sets ExpirationDate field to given value.
+
+### HasExpirationDate
+
+`func (o *PaymentMethod) HasExpirationDate() bool`
+
+HasExpirationDate returns a boolean if a field has been set.
+
+### SetExpirationDateNil
+
+`func (o *PaymentMethod) SetExpirationDateNil(b bool)`
+
+ SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
+
+### UnsetExpirationDate
+`func (o *PaymentMethod) UnsetExpirationDate()`
+
+UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
+### GetApprovalUrl
+
+`func (o *PaymentMethod) GetApprovalUrl() string`
+
+GetApprovalUrl returns the ApprovalUrl field if non-nil, zero value otherwise.
+
+### GetApprovalUrlOk
+
+`func (o *PaymentMethod) GetApprovalUrlOk() (*string, bool)`
+
+GetApprovalUrlOk returns a tuple with the ApprovalUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApprovalUrl
+
+`func (o *PaymentMethod) SetApprovalUrl(v string)`
+
+SetApprovalUrl sets ApprovalUrl field to given value.
+
+### HasApprovalUrl
+
+`func (o *PaymentMethod) HasApprovalUrl() bool`
+
+HasApprovalUrl returns a boolean if a field has been set.
+
+### SetApprovalUrlNil
+
+`func (o *PaymentMethod) SetApprovalUrlNil(b bool)`
+
+ SetApprovalUrlNil sets the value for ApprovalUrl to be an explicit nil
+
+### UnsetApprovalUrl
+`func (o *PaymentMethod) UnsetApprovalUrl()`
+
+UnsetApprovalUrl ensures that no value is present for ApprovalUrl, not even an explicit nil
+### GetEnvironment
+
+`func (o *PaymentMethod) GetEnvironment() string`
+
+GetEnvironment returns the Environment field if non-nil, zero value otherwise.
+
+### GetEnvironmentOk
+
+`func (o *PaymentMethod) GetEnvironmentOk() (*string, bool)`
+
+GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetEnvironment
+
+`func (o *PaymentMethod) SetEnvironment(v string)`
+
+SetEnvironment sets Environment field to given value.
+
+### HasEnvironment
+
+`func (o *PaymentMethod) HasEnvironment() bool`
+
+HasEnvironment returns a boolean if a field has been set.
+
+### SetEnvironmentNil
+
+`func (o *PaymentMethod) SetEnvironmentNil(b bool)`
+
+ SetEnvironmentNil sets the value for Environment to be an explicit nil
+
+### UnsetEnvironment
+`func (o *PaymentMethod) UnsetEnvironment()`
+
+UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

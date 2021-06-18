@@ -7,13 +7,13 @@ Name | Type | Description | Notes
 **Match** | **string** | &#x60;text&#x60;. | 
 **Key** | **string** | The transaction field to filter by. | 
 **Operator** | **string** | The comparison to make to &#x60;value&#x60; property. | 
-**Values** | **[]string** | The values to compare the &#x60;key&#x60; to. | 
+**Value** | **[]string** | The values to compare the &#x60;key&#x60; to. | 
 
 ## Methods
 
 ### NewCardRuleTextCondition
 
-`func NewCardRuleTextCondition(match string, key string, operator string, values []string, ) *CardRuleTextCondition`
+`func NewCardRuleTextCondition(match string, key string, operator string, value []string, ) *CardRuleTextCondition`
 
 NewCardRuleTextCondition instantiates a new CardRuleTextCondition object
 This constructor will assign default values to properties that have it defined,
@@ -88,24 +88,24 @@ and a boolean to check if the value has been set.
 SetOperator sets Operator field to given value.
 
 
-### GetValues
+### GetValue
 
-`func (o *CardRuleTextCondition) GetValues() []string`
+`func (o *CardRuleTextCondition) GetValue() []string`
 
-GetValues returns the Values field if non-nil, zero value otherwise.
+GetValue returns the Value field if non-nil, zero value otherwise.
 
-### GetValuesOk
+### GetValueOk
 
-`func (o *CardRuleTextCondition) GetValuesOk() (*[]string, bool)`
+`func (o *CardRuleTextCondition) GetValueOk() (*[]string, bool)`
 
-GetValuesOk returns a tuple with the Values field if it's non-nil, zero value otherwise
+GetValueOk returns a tuple with the Value field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetValues
+### SetValue
 
-`func (o *CardRuleTextCondition) SetValues(v []string)`
+`func (o *CardRuleTextCondition) SetValue(v []string)`
 
-SetValues sets Values field to given value.
+SetValue sets Value field to given value.
 
 
 

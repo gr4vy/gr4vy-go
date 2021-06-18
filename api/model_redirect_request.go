@@ -15,11 +15,11 @@ import (
 	"encoding/json"
 )
 
-// PayPalRequest PayPal request to use in a transaction or to register a new payment method.
-type PayPalRequest struct {
-	// `paypal`.
+// RedirectRequest Request to use a redirect flow in a transaction or to register a new payment method.
+type RedirectRequest struct {
+	// The method to use, this can be any of the methods that support redirect requests.
 	Method string `json:"method"`
-	// The redirect URL to redirect a buyer to after they have authorized their PayPal transaction.
+	// The redirect URL to redirect a buyer to after they have authorized their transaction.
 	RedirectUrl string `json:"redirect_url"`
 	// An external identifier that can be used to match the account against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
@@ -29,27 +29,27 @@ type PayPalRequest struct {
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 }
 
-// NewPayPalRequest instantiates a new PayPalRequest object
+// NewRedirectRequest instantiates a new RedirectRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPayPalRequest(method string, redirectUrl string) *PayPalRequest {
-	this := PayPalRequest{}
+func NewRedirectRequest(method string, redirectUrl string) *RedirectRequest {
+	this := RedirectRequest{}
 	this.Method = method
 	this.RedirectUrl = redirectUrl
 	return &this
 }
 
-// NewPayPalRequestWithDefaults instantiates a new PayPalRequest object
+// NewRedirectRequestWithDefaults instantiates a new RedirectRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPayPalRequestWithDefaults() *PayPalRequest {
-	this := PayPalRequest{}
+func NewRedirectRequestWithDefaults() *RedirectRequest {
+	this := RedirectRequest{}
 	return &this
 }
 
 // GetMethod returns the Method field value
-func (o *PayPalRequest) GetMethod() string {
+func (o *RedirectRequest) GetMethod() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -60,7 +60,7 @@ func (o *PayPalRequest) GetMethod() string {
 
 // GetMethodOk returns a tuple with the Method field value
 // and a boolean to check if the value has been set.
-func (o *PayPalRequest) GetMethodOk() (*string, bool) {
+func (o *RedirectRequest) GetMethodOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -68,12 +68,12 @@ func (o *PayPalRequest) GetMethodOk() (*string, bool) {
 }
 
 // SetMethod sets field value
-func (o *PayPalRequest) SetMethod(v string) {
+func (o *RedirectRequest) SetMethod(v string) {
 	o.Method = v
 }
 
 // GetRedirectUrl returns the RedirectUrl field value
-func (o *PayPalRequest) GetRedirectUrl() string {
+func (o *RedirectRequest) GetRedirectUrl() string {
 	if o == nil {
 		var ret string
 		return ret
@@ -84,7 +84,7 @@ func (o *PayPalRequest) GetRedirectUrl() string {
 
 // GetRedirectUrlOk returns a tuple with the RedirectUrl field value
 // and a boolean to check if the value has been set.
-func (o *PayPalRequest) GetRedirectUrlOk() (*string, bool) {
+func (o *RedirectRequest) GetRedirectUrlOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -92,12 +92,12 @@ func (o *PayPalRequest) GetRedirectUrlOk() (*string, bool) {
 }
 
 // SetRedirectUrl sets field value
-func (o *PayPalRequest) SetRedirectUrl(v string) {
+func (o *RedirectRequest) SetRedirectUrl(v string) {
 	o.RedirectUrl = v
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PayPalRequest) GetExternalIdentifier() string {
+func (o *RedirectRequest) GetExternalIdentifier() string {
 	if o == nil || o.ExternalIdentifier.Get() == nil {
 		var ret string
 		return ret
@@ -108,7 +108,7 @@ func (o *PayPalRequest) GetExternalIdentifier() string {
 // GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PayPalRequest) GetExternalIdentifierOk() (*string, bool) {
+func (o *RedirectRequest) GetExternalIdentifierOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -116,7 +116,7 @@ func (o *PayPalRequest) GetExternalIdentifierOk() (*string, bool) {
 }
 
 // HasExternalIdentifier returns a boolean if a field has been set.
-func (o *PayPalRequest) HasExternalIdentifier() bool {
+func (o *RedirectRequest) HasExternalIdentifier() bool {
 	if o != nil && o.ExternalIdentifier.IsSet() {
 		return true
 	}
@@ -125,21 +125,21 @@ func (o *PayPalRequest) HasExternalIdentifier() bool {
 }
 
 // SetExternalIdentifier gets a reference to the given NullableString and assigns it to the ExternalIdentifier field.
-func (o *PayPalRequest) SetExternalIdentifier(v string) {
+func (o *RedirectRequest) SetExternalIdentifier(v string) {
 	o.ExternalIdentifier.Set(&v)
 }
 // SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
-func (o *PayPalRequest) SetExternalIdentifierNil() {
+func (o *RedirectRequest) SetExternalIdentifierNil() {
 	o.ExternalIdentifier.Set(nil)
 }
 
 // UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
-func (o *PayPalRequest) UnsetExternalIdentifier() {
+func (o *RedirectRequest) UnsetExternalIdentifier() {
 	o.ExternalIdentifier.Unset()
 }
 
 // GetBuyerId returns the BuyerId field value if set, zero value otherwise.
-func (o *PayPalRequest) GetBuyerId() string {
+func (o *RedirectRequest) GetBuyerId() string {
 	if o == nil || o.BuyerId == nil {
 		var ret string
 		return ret
@@ -149,7 +149,7 @@ func (o *PayPalRequest) GetBuyerId() string {
 
 // GetBuyerIdOk returns a tuple with the BuyerId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PayPalRequest) GetBuyerIdOk() (*string, bool) {
+func (o *RedirectRequest) GetBuyerIdOk() (*string, bool) {
 	if o == nil || o.BuyerId == nil {
 		return nil, false
 	}
@@ -157,7 +157,7 @@ func (o *PayPalRequest) GetBuyerIdOk() (*string, bool) {
 }
 
 // HasBuyerId returns a boolean if a field has been set.
-func (o *PayPalRequest) HasBuyerId() bool {
+func (o *RedirectRequest) HasBuyerId() bool {
 	if o != nil && o.BuyerId != nil {
 		return true
 	}
@@ -166,12 +166,12 @@ func (o *PayPalRequest) HasBuyerId() bool {
 }
 
 // SetBuyerId gets a reference to the given string and assigns it to the BuyerId field.
-func (o *PayPalRequest) SetBuyerId(v string) {
+func (o *RedirectRequest) SetBuyerId(v string) {
 	o.BuyerId = &v
 }
 
 // GetBuyerExternalIdentifier returns the BuyerExternalIdentifier field value if set, zero value otherwise.
-func (o *PayPalRequest) GetBuyerExternalIdentifier() string {
+func (o *RedirectRequest) GetBuyerExternalIdentifier() string {
 	if o == nil || o.BuyerExternalIdentifier == nil {
 		var ret string
 		return ret
@@ -181,7 +181,7 @@ func (o *PayPalRequest) GetBuyerExternalIdentifier() string {
 
 // GetBuyerExternalIdentifierOk returns a tuple with the BuyerExternalIdentifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PayPalRequest) GetBuyerExternalIdentifierOk() (*string, bool) {
+func (o *RedirectRequest) GetBuyerExternalIdentifierOk() (*string, bool) {
 	if o == nil || o.BuyerExternalIdentifier == nil {
 		return nil, false
 	}
@@ -189,7 +189,7 @@ func (o *PayPalRequest) GetBuyerExternalIdentifierOk() (*string, bool) {
 }
 
 // HasBuyerExternalIdentifier returns a boolean if a field has been set.
-func (o *PayPalRequest) HasBuyerExternalIdentifier() bool {
+func (o *RedirectRequest) HasBuyerExternalIdentifier() bool {
 	if o != nil && o.BuyerExternalIdentifier != nil {
 		return true
 	}
@@ -198,11 +198,11 @@ func (o *PayPalRequest) HasBuyerExternalIdentifier() bool {
 }
 
 // SetBuyerExternalIdentifier gets a reference to the given string and assigns it to the BuyerExternalIdentifier field.
-func (o *PayPalRequest) SetBuyerExternalIdentifier(v string) {
+func (o *RedirectRequest) SetBuyerExternalIdentifier(v string) {
 	o.BuyerExternalIdentifier = &v
 }
 
-func (o PayPalRequest) MarshalJSON() ([]byte, error) {
+func (o RedirectRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["method"] = o.Method
@@ -222,38 +222,38 @@ func (o PayPalRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullablePayPalRequest struct {
-	value *PayPalRequest
+type NullableRedirectRequest struct {
+	value *RedirectRequest
 	isSet bool
 }
 
-func (v NullablePayPalRequest) Get() *PayPalRequest {
+func (v NullableRedirectRequest) Get() *RedirectRequest {
 	return v.value
 }
 
-func (v *NullablePayPalRequest) Set(val *PayPalRequest) {
+func (v *NullableRedirectRequest) Set(val *RedirectRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePayPalRequest) IsSet() bool {
+func (v NullableRedirectRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePayPalRequest) Unset() {
+func (v *NullableRedirectRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePayPalRequest(val *PayPalRequest) *NullablePayPalRequest {
-	return &NullablePayPalRequest{value: val, isSet: true}
+func NewNullableRedirectRequest(val *RedirectRequest) *NullableRedirectRequest {
+	return &NullableRedirectRequest{value: val, isSet: true}
 }
 
-func (v NullablePayPalRequest) MarshalJSON() ([]byte, error) {
+func (v NullableRedirectRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePayPalRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableRedirectRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

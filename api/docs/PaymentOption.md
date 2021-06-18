@@ -6,6 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;payment-option&#x60;. | [optional] 
 **Method** | Pointer to **string** | The type of payment method that is available. | [optional] 
+**IconUrl** | Pointer to **NullableString** | An icon to display for the payment option. | [optional] 
+**Mode** | Pointer to **string** | The mode of how the payment option should be displayed. | [optional] 
+**Label** | Pointer to **string** | A label that describes this payment option. This label is returned in the language defined by the &#x60;locale&#x60; query parameter. The label can be used to display a list of payment options to the buyer in their language. | [optional] 
 
 ## Methods
 
@@ -75,6 +78,91 @@ SetMethod sets Method field to given value.
 `func (o *PaymentOption) HasMethod() bool`
 
 HasMethod returns a boolean if a field has been set.
+
+### GetIconUrl
+
+`func (o *PaymentOption) GetIconUrl() string`
+
+GetIconUrl returns the IconUrl field if non-nil, zero value otherwise.
+
+### GetIconUrlOk
+
+`func (o *PaymentOption) GetIconUrlOk() (*string, bool)`
+
+GetIconUrlOk returns a tuple with the IconUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIconUrl
+
+`func (o *PaymentOption) SetIconUrl(v string)`
+
+SetIconUrl sets IconUrl field to given value.
+
+### HasIconUrl
+
+`func (o *PaymentOption) HasIconUrl() bool`
+
+HasIconUrl returns a boolean if a field has been set.
+
+### SetIconUrlNil
+
+`func (o *PaymentOption) SetIconUrlNil(b bool)`
+
+ SetIconUrlNil sets the value for IconUrl to be an explicit nil
+
+### UnsetIconUrl
+`func (o *PaymentOption) UnsetIconUrl()`
+
+UnsetIconUrl ensures that no value is present for IconUrl, not even an explicit nil
+### GetMode
+
+`func (o *PaymentOption) GetMode() string`
+
+GetMode returns the Mode field if non-nil, zero value otherwise.
+
+### GetModeOk
+
+`func (o *PaymentOption) GetModeOk() (*string, bool)`
+
+GetModeOk returns a tuple with the Mode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMode
+
+`func (o *PaymentOption) SetMode(v string)`
+
+SetMode sets Mode field to given value.
+
+### HasMode
+
+`func (o *PaymentOption) HasMode() bool`
+
+HasMode returns a boolean if a field has been set.
+
+### GetLabel
+
+`func (o *PaymentOption) GetLabel() string`
+
+GetLabel returns the Label field if non-nil, zero value otherwise.
+
+### GetLabelOk
+
+`func (o *PaymentOption) GetLabelOk() (*string, bool)`
+
+GetLabelOk returns a tuple with the Label field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabel
+
+`func (o *PaymentOption) SetLabel(v string)`
+
+SetLabel sets Label field to given value.
+
+### HasLabel
+
+`func (o *PaymentOption) HasLabel() bool`
+
+HasLabel returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

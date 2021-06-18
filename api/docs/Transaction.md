@@ -7,13 +7,16 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;transaction&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this transaction. | [optional] 
 **Status** | Pointer to **string** | The status of the transaction being processed. This is different from the &#x60;status&#x60; field in that it represents the status of the transaction at the payment processor, not the status of the transaction created in Gr4vy. | [optional] 
-**Amount** | Pointer to **float32** | The currency amount captured by this transaction. | [optional] 
+**Amount** | Pointer to **float32** | The authorized amount for this transaction. This can be different than the actual captured amount and part of this amount may be refunded. | [optional] 
+**CapturedAmount** | Pointer to **float32** | The captured amount for this transaction. This can be a part and in some cases even more than the authorized amount. | [optional] 
+**RefundedAmount** | Pointer to **float32** | The refunded amount for this transaction. This can be a part or all of the captured amount. | [optional] 
 **Currency** | Pointer to **string** | The currency code for this transaction. | [optional] 
-**PaymentMethod** | Pointer to [**PaymentMethod**](PaymentMethod.md) |  | [optional] 
+**PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) | The payment method used for this transaction. | [optional] 
+**Buyer** | Pointer to [**NullableBuyerSnapshot**](Buyer--Snapshot.md) | The buyer used for this transaction. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this transaction was created in our system. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
-**PaymentService** | Pointer to [**PaymentService**](PaymentService.md) |  | [optional] 
+**PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) | The payment service used for this transaction. | [optional] 
 **Environment** | Pointer to **string** | The environment this transaction has been created in. | [optional] [default to "production"]
 
 ## Methods
@@ -135,6 +138,56 @@ SetAmount sets Amount field to given value.
 
 HasAmount returns a boolean if a field has been set.
 
+### GetCapturedAmount
+
+`func (o *Transaction) GetCapturedAmount() float32`
+
+GetCapturedAmount returns the CapturedAmount field if non-nil, zero value otherwise.
+
+### GetCapturedAmountOk
+
+`func (o *Transaction) GetCapturedAmountOk() (*float32, bool)`
+
+GetCapturedAmountOk returns a tuple with the CapturedAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapturedAmount
+
+`func (o *Transaction) SetCapturedAmount(v float32)`
+
+SetCapturedAmount sets CapturedAmount field to given value.
+
+### HasCapturedAmount
+
+`func (o *Transaction) HasCapturedAmount() bool`
+
+HasCapturedAmount returns a boolean if a field has been set.
+
+### GetRefundedAmount
+
+`func (o *Transaction) GetRefundedAmount() float32`
+
+GetRefundedAmount returns the RefundedAmount field if non-nil, zero value otherwise.
+
+### GetRefundedAmountOk
+
+`func (o *Transaction) GetRefundedAmountOk() (*float32, bool)`
+
+GetRefundedAmountOk returns a tuple with the RefundedAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRefundedAmount
+
+`func (o *Transaction) SetRefundedAmount(v float32)`
+
+SetRefundedAmount sets RefundedAmount field to given value.
+
+### HasRefundedAmount
+
+`func (o *Transaction) HasRefundedAmount() bool`
+
+HasRefundedAmount returns a boolean if a field has been set.
+
 ### GetCurrency
 
 `func (o *Transaction) GetCurrency() string`
@@ -162,20 +215,20 @@ HasCurrency returns a boolean if a field has been set.
 
 ### GetPaymentMethod
 
-`func (o *Transaction) GetPaymentMethod() PaymentMethod`
+`func (o *Transaction) GetPaymentMethod() PaymentMethodSnapshot`
 
 GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
 
 ### GetPaymentMethodOk
 
-`func (o *Transaction) GetPaymentMethodOk() (*PaymentMethod, bool)`
+`func (o *Transaction) GetPaymentMethodOk() (*PaymentMethodSnapshot, bool)`
 
 GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentMethod
 
-`func (o *Transaction) SetPaymentMethod(v PaymentMethod)`
+`func (o *Transaction) SetPaymentMethod(v PaymentMethodSnapshot)`
 
 SetPaymentMethod sets PaymentMethod field to given value.
 
@@ -185,6 +238,41 @@ SetPaymentMethod sets PaymentMethod field to given value.
 
 HasPaymentMethod returns a boolean if a field has been set.
 
+### GetBuyer
+
+`func (o *Transaction) GetBuyer() BuyerSnapshot`
+
+GetBuyer returns the Buyer field if non-nil, zero value otherwise.
+
+### GetBuyerOk
+
+`func (o *Transaction) GetBuyerOk() (*BuyerSnapshot, bool)`
+
+GetBuyerOk returns a tuple with the Buyer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuyer
+
+`func (o *Transaction) SetBuyer(v BuyerSnapshot)`
+
+SetBuyer sets Buyer field to given value.
+
+### HasBuyer
+
+`func (o *Transaction) HasBuyer() bool`
+
+HasBuyer returns a boolean if a field has been set.
+
+### SetBuyerNil
+
+`func (o *Transaction) SetBuyerNil(b bool)`
+
+ SetBuyerNil sets the value for Buyer to be an explicit nil
+
+### UnsetBuyer
+`func (o *Transaction) UnsetBuyer()`
+
+UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *Transaction) GetCreatedAt() time.Time`
@@ -272,20 +360,20 @@ HasUpdatedAt returns a boolean if a field has been set.
 
 ### GetPaymentService
 
-`func (o *Transaction) GetPaymentService() PaymentService`
+`func (o *Transaction) GetPaymentService() PaymentServiceSnapshot`
 
 GetPaymentService returns the PaymentService field if non-nil, zero value otherwise.
 
 ### GetPaymentServiceOk
 
-`func (o *Transaction) GetPaymentServiceOk() (*PaymentService, bool)`
+`func (o *Transaction) GetPaymentServiceOk() (*PaymentServiceSnapshot, bool)`
 
 GetPaymentServiceOk returns a tuple with the PaymentService field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentService
 
-`func (o *Transaction) SetPaymentService(v PaymentService)`
+`func (o *Transaction) SetPaymentService(v PaymentServiceSnapshot)`
 
 SetPaymentService sets PaymentService field to given value.
 

@@ -13,4 +13,6 @@ docker run --rm \
 rm -rf api/go.mod
 rm -rf api/go.sum
 
-sh replace.sh
+var1='var environment ENVIRONMENT = "production"'
+rep1='var environment string = "production"'
+sed -i '' "s/$var1/$rep1/g" ./api/*.go

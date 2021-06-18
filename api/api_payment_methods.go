@@ -591,7 +591,7 @@ func (r ApiStorePaymentMethodRequest) CardRequest(cardRequest CardRequest) ApiSt
 	return r
 }
 
-func (r ApiStorePaymentMethodRequest) Execute() (Card, *_nethttp.Response, error) {
+func (r ApiStorePaymentMethodRequest) Execute() (PaymentMethod, *_nethttp.Response, error) {
 	return r.ApiService.StorePaymentMethodExecute(r)
 }
 
@@ -610,16 +610,16 @@ func (a *PaymentMethodsApiService) StorePaymentMethod(ctx _context.Context) ApiS
 
 /*
  * Execute executes the request
- * @return Card
+ * @return PaymentMethod
  */
-func (a *PaymentMethodsApiService) StorePaymentMethodExecute(r ApiStorePaymentMethodRequest) (Card, *_nethttp.Response, error) {
+func (a *PaymentMethodsApiService) StorePaymentMethodExecute(r ApiStorePaymentMethodRequest) (PaymentMethod, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Card
+		localVarReturnValue  PaymentMethod
 	)
 
 	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentMethodsApiService.StorePaymentMethod")

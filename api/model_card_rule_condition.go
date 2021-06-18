@@ -23,7 +23,6 @@ type CardRuleCondition struct {
 	Key string `json:"key"`
 	// The comparison to make to `value` property.
 	Operator string `json:"operator"`
-	// The values to compare the `key` to.
 	Value string `json:"value"`
 }
 

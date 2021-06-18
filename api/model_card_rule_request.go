@@ -24,7 +24,7 @@ type CardRuleRequest struct {
 	// The numeric rank of a rule. Rules with a lower position value are processed first. When a rule is inserted at a position, any rules with the the same value or higher are down a position accordingly. When left out, the rule is inserted at the end of the list.
 	Position *float32 `json:"position,omitempty"`
 	// One or more conditions that apply for this rule. Each condition needs to match for this rule to go into effect.
-	Conditions []CardRule `json:"conditions"`
+	Conditions []CardRuleCondition `json:"conditions"`
 	// A list of IDs for the payment services to use, in order of priority. The payment services all need to process cards.
 	PaymentServiceIds []string `json:"payment_service_ids"`
 	// Defines what strategy to use when all of the payment services defined in this rule declined or otherwise were not able to process the card.  * `use_all_providers` - Try all payment services enabled for this currency in order of priority, even if they are not listed in this rule. This is the default behaviour for a rule. * `decline` - Decline the transaction.
@@ -37,7 +37,7 @@ type CardRuleRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCardRuleRequest(conditions []CardRule, paymentServiceIds []string) *CardRuleRequest {
+func NewCardRuleRequest(conditions []CardRuleCondition, paymentServiceIds []string) *CardRuleRequest {
 	this := CardRuleRequest{}
 	var environment string = "production"
 	this.Environment = &environment
@@ -161,9 +161,9 @@ func (o *CardRuleRequest) SetPosition(v float32) {
 }
 
 // GetConditions returns the Conditions field value
-func (o *CardRuleRequest) GetConditions() []CardRule {
+func (o *CardRuleRequest) GetConditions() []CardRuleCondition {
 	if o == nil {
-		var ret []CardRule
+		var ret []CardRuleCondition
 		return ret
 	}
 
@@ -172,7 +172,7 @@ func (o *CardRuleRequest) GetConditions() []CardRule {
 
 // GetConditionsOk returns a tuple with the Conditions field value
 // and a boolean to check if the value has been set.
-func (o *CardRuleRequest) GetConditionsOk() (*[]CardRule, bool) {
+func (o *CardRuleRequest) GetConditionsOk() (*[]CardRuleCondition, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -180,7 +180,7 @@ func (o *CardRuleRequest) GetConditionsOk() (*[]CardRule, bool) {
 }
 
 // SetConditions sets field value
-func (o *CardRuleRequest) SetConditions(v []CardRule) {
+func (o *CardRuleRequest) SetConditions(v []CardRuleCondition) {
 	o.Conditions = v
 }
 

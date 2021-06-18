@@ -11,7 +11,7 @@ import (
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
-const VERSION = "0.0.1"
+const VERSION = "0.1.0"
 
 type Gr4vyClient struct {
 	gr4vyId string
@@ -90,7 +90,7 @@ func (c *Gr4vyClient) HandleResponse(response *http.Response, error error) {
 			} else {
 				sb.WriteString(string(body))
 				response.Body = ioutil.NopCloser(bytes.NewBuffer(body))
-			}	
+			}
 		}
 
 		fmt.Println(sb.String())

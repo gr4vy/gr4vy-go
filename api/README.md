@@ -85,11 +85,6 @@ Class | Method | HTTP request | Description
 *BuyersApi* | [**GetBuyer**](docs/BuyersApi.md#getbuyer) | **Get** /buyers/{buyer_id} | Get buyer
 *BuyersApi* | [**ListBuyers**](docs/BuyersApi.md#listbuyers) | **Get** /buyers | List buyers
 *BuyersApi* | [**UpdateBuyer**](docs/BuyersApi.md#updatebuyer) | **Put** /buyers/{buyer_id} | Update buyer
-*CardRulesApi* | [**AddCardRule**](docs/CardRulesApi.md#addcardrule) | **Post** /card-rules | Create card rule
-*CardRulesApi* | [**DeleteCardRule**](docs/CardRulesApi.md#deletecardrule) | **Delete** /card-rules/{card_rule_id} | Delete card rule
-*CardRulesApi* | [**GetCardRule**](docs/CardRulesApi.md#getcardrule) | **Get** /card-rules/{card_rule_id} | Get card rule
-*CardRulesApi* | [**ListCardsRules**](docs/CardRulesApi.md#listcardsrules) | **Get** /card-rules | List card rules
-*CardRulesApi* | [**UpdateCardRule**](docs/CardRulesApi.md#updatecardrule) | **Put** /card-rules/{card_rule_id} | Update card rule
 *PaymentMethodsApi* | [**DeletePaymentMethod**](docs/PaymentMethodsApi.md#deletepaymentmethod) | **Delete** /payment-methods/{payment_method_id} | Delete payment method
 *PaymentMethodsApi* | [**GetPaymentMethod**](docs/PaymentMethodsApi.md#getpaymentmethod) | **Get** /payment-methods/{payment_method_id} | Get stored payment method
 *PaymentMethodsApi* | [**ListBuyerPaymentMethods**](docs/PaymentMethodsApi.md#listbuyerpaymentmethods) | **Get** /buyers/payment-methods | List stored payment methods for a buyer
@@ -104,21 +99,20 @@ Class | Method | HTTP request | Description
 *PaymentServicesApi* | [**ListPaymentServices**](docs/PaymentServicesApi.md#listpaymentservices) | **Get** /payment-services | List payment services
 *PaymentServicesApi* | [**UpdatePaymentService**](docs/PaymentServicesApi.md#updatepaymentservice) | **Put** /payment-services/{payment_service_id} | Update payment service
 *TransactionsApi* | [**AuthorizeNewTransaction**](docs/TransactionsApi.md#authorizenewtransaction) | **Post** /transactions | New transaction
-*TransactionsApi* | [**AuthorizeTransaction**](docs/TransactionsApi.md#authorizetransaction) | **Post** /transactions/{transaction_id}/authorize | Authorize approved transaction
 *TransactionsApi* | [**CaptureTransaction**](docs/TransactionsApi.md#capturetransaction) | **Post** /transactions/{transaction_id}/capture | Capture transaction
 *TransactionsApi* | [**GetTransaction**](docs/TransactionsApi.md#gettransaction) | **Get** /transactions/{transaction_id} | Get transaction
 *TransactionsApi* | [**ListTransactions**](docs/TransactionsApi.md#listtransactions) | **Get** /transactions | List transactions
-*TransactionsApi* | [**RefundTransaction**](docs/TransactionsApi.md#refundtransaction) | **Post** /transactions/{transaction_id}/refund | Refund or void transaction
+*TransactionsApi* | [**RefundTransaction**](docs/TransactionsApi.md#refundtransaction) | **Post** /transactions/{transaction_id}/refund | Refund or void transactions
+*UsersApi* | [**DeleteUser**](docs/UsersApi.md#deleteuser) | **Delete** /users/{user_id} | Delete user
 
 
 ## Documentation For Models
 
  - [Buyer](docs/Buyer.md)
  - [BuyerRequest](docs/BuyerRequest.md)
+ - [BuyerSnapshot](docs/BuyerSnapshot.md)
  - [BuyerUpdate](docs/BuyerUpdate.md)
  - [Buyers](docs/Buyers.md)
- - [Card](docs/Card.md)
- - [CardDetails](docs/CardDetails.md)
  - [CardRequest](docs/CardRequest.md)
  - [CardRule](docs/CardRule.md)
  - [CardRuleCondition](docs/CardRuleCondition.md)
@@ -127,20 +121,18 @@ Class | Method | HTTP request | Description
  - [CardRuleTextCondition](docs/CardRuleTextCondition.md)
  - [CardRuleUpdate](docs/CardRuleUpdate.md)
  - [CardRules](docs/CardRules.md)
- - [CardTokenized](docs/CardTokenized.md)
  - [Error400BadRequest](docs/Error400BadRequest.md)
  - [Error400IncorrectJson](docs/Error400IncorrectJson.md)
  - [Error401Unauthorized](docs/Error401Unauthorized.md)
+ - [Error403Forbidden](docs/Error403Forbidden.md)
  - [Error404NotFound](docs/Error404NotFound.md)
  - [Error404PendingCreation](docs/Error404PendingCreation.md)
  - [Error409DuplicateRecord](docs/Error409DuplicateRecord.md)
  - [ErrorDetail](docs/ErrorDetail.md)
  - [ErrorGeneric](docs/ErrorGeneric.md)
- - [PayPal](docs/PayPal.md)
- - [PayPalDetails](docs/PayPalDetails.md)
- - [PayPalRequest](docs/PayPalRequest.md)
  - [PaymentMethod](docs/PaymentMethod.md)
- - [PaymentMethodDetails](docs/PaymentMethodDetails.md)
+ - [PaymentMethodSnapshot](docs/PaymentMethodSnapshot.md)
+ - [PaymentMethodTokenized](docs/PaymentMethodTokenized.md)
  - [PaymentMethods](docs/PaymentMethods.md)
  - [PaymentMethodsTokenized](docs/PaymentMethodsTokenized.md)
  - [PaymentOption](docs/PaymentOption.md)
@@ -151,18 +143,24 @@ Class | Method | HTTP request | Description
  - [PaymentServiceDefinitions](docs/PaymentServiceDefinitions.md)
  - [PaymentServiceRequest](docs/PaymentServiceRequest.md)
  - [PaymentServiceRequestAllOf](docs/PaymentServiceRequestAllOf.md)
+ - [PaymentServiceSnapshot](docs/PaymentServiceSnapshot.md)
  - [PaymentServiceUpdate](docs/PaymentServiceUpdate.md)
  - [PaymentServiceUpdateFields](docs/PaymentServiceUpdateFields.md)
  - [PaymentServices](docs/PaymentServices.md)
+ - [RedirectRequest](docs/RedirectRequest.md)
+ - [ResetPasswordRequest](docs/ResetPasswordRequest.md)
+ - [SetPasswordRequest](docs/SetPasswordRequest.md)
  - [Status](docs/Status.md)
  - [Statuses](docs/Statuses.md)
  - [TokenizedRequest](docs/TokenizedRequest.md)
  - [Transaction](docs/Transaction.md)
  - [TransactionCaptureRequest](docs/TransactionCaptureRequest.md)
  - [TransactionPaymentMethodRequest](docs/TransactionPaymentMethodRequest.md)
+ - [TransactionRefundRequest](docs/TransactionRefundRequest.md)
  - [TransactionRequest](docs/TransactionRequest.md)
  - [Transactions](docs/Transactions.md)
  - [TransactionsBatchCaptureRequest](docs/TransactionsBatchCaptureRequest.md)
+ - [UserRequest](docs/UserRequest.md)
 
 
 ## Documentation For Authorization

@@ -23,7 +23,7 @@ func (c *Gr4vyClient) ListTransactions(limit *int32) (*Gr4vyTransactions, *http.
     if (limit != nil) {
         p.Limit(*limit)
     }
-    
+
     response, http, err := p.Execute()
     c.HandleResponse(http, err)
     if (err != nil) {
@@ -80,23 +80,6 @@ func (c *Gr4vyClient) CaptureTransaction(transaction_id string, body Gr4vyTransa
 
     var b TransactionCaptureRequest = TransactionCaptureRequest(body)
     response, http, err := p.TransactionCaptureRequest(b).Execute()
-    c.HandleResponse(http, err)
-    if (err != nil) {
-        return nil, http, err
-    }
-    var r Gr4vyTransaction = Gr4vyTransaction(response)
-    return &r, http, err
-}
-
-func (c *Gr4vyClient) AuthorizeTransaction(transaction_id string,) (*Gr4vyTransaction, *http.Response, error) {
-    client, err := GetClient(c)
-    if err != nil {
-        return nil, nil, err
-    }
-    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
-    p := client.TransactionsApi.AuthorizeTransaction(auth, transaction_id)
-
-    response, http, err := p.Execute()
     c.HandleResponse(http, err)
     if (err != nil) {
         return nil, http, err

@@ -4,9 +4,7 @@ import (
 	"testing"
 )
 
-// const keyPath = "./test/gr4vy-private-key-kH4ndJM8QHyfYGpKdgfAhq2j9RySIOWa3kY_urrI5PI.pem"
-const keyPath = "./test/dev-key.pem"
-// const gr4vyId = "demo"
+const keyPath = "./private_key.pem"
 const gr4vyId = "spider"
 
 var buyerId string
@@ -17,14 +15,14 @@ var paymentServiceIdDelete string
 var transactionId string
 
 func TestEmbedToken(t *testing.T) {
-	
+
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
 		t.Errorf(err.Error())
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	embed := map[string]string{"amount": "200", "currency": "USD", "buyer_id": "d757c76a-cbd7-4b56-95a3-40125b51b29c"}
 	_, err = client.GetEmbedToken(embed)
 
@@ -40,7 +38,7 @@ func TestAddBuyerAndEmbed(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	req := Gr4vyBuyerRequest{
 		DisplayName: String("Jane Smith"),
 	}
@@ -50,12 +48,12 @@ func TestAddBuyerAndEmbed(t *testing.T) {
 		t.Errorf(err.Error())
 		return
 	}
-	
+
 	buyerId = *response.Id
 	embed := map[string]string{"amount": "200", "currency": "USD", "buyer_id": buyerId}
 
 	client = NewGr4vyClient(gr4vyId, key)
-	
+
 	_, err = client.GetEmbedToken(embed)
 
 	if err != nil {
@@ -65,7 +63,7 @@ func TestAddBuyerAndEmbed(t *testing.T) {
 
 	//Clean up
 	client = NewGr4vyClient(gr4vyId, key)
-	
+
 	_, err = client.DeleteBuyer(buyerId)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -80,7 +78,7 @@ func TestListBuyers(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	var response *Gr4vyBuyers
 	response, _, err = client.ListBuyers(Int32(5))
 	if err != nil {
@@ -96,7 +94,7 @@ func TestAddBuyer(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	req := Gr4vyBuyerRequest{
 		DisplayName: String("Jane Smith"),
 	}
@@ -132,7 +130,7 @@ func TestUpdateBuyer(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	req := Gr4vyBuyerUpdate{
 		DisplayName: String("Janet Smith"),
 	}
@@ -151,7 +149,7 @@ func TestDeleteBuyer(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	_, err = client.DeleteBuyer(buyerId)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -167,7 +165,7 @@ func TestListPaymentMethods(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	_, _, err = client.ListPaymentMethods(nil)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -181,7 +179,7 @@ func TestStorePaymentMethod(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	req := Gr4vyPaymentMethodRequest{
 		Method: "card",
 		Number: "4111111111111111",
@@ -189,7 +187,7 @@ func TestStorePaymentMethod(t *testing.T) {
 		SecurityCode: "123"	,
 	}
 
-	var response *Gr4vyCard
+	var response *Gr4vyPaymentMethod
 	response, _, err = client.StorePaymentMethod(req)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -206,14 +204,14 @@ func TestGetPaymentMethod(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	var response *Gr4vyPaymentMethod
 	response, _, err = client.GetPaymentMethod(paymentMethodId)
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
 	}
-	
+
 	t.Log("Retrieved paymentMethod: " + *response.Id)
 }
 func TestDeletePaymentMethod(t *testing.T) {
@@ -223,7 +221,7 @@ func TestDeletePaymentMethod(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	_, err = client.DeletePaymentMethod(paymentMethodId)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -239,8 +237,8 @@ func TestListPaymentOptions(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
-	_, _, err = client.ListPaymentOptions()	
+
+	_, _, err = client.ListPaymentOptions()
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
@@ -254,8 +252,8 @@ func TestListPaymentServiceDefinitions(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
-	_, _, err = client.ListPaymentServiceDefinitions(nil)	
+
+	_, _, err = client.ListPaymentServiceDefinitions(nil)
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
@@ -282,7 +280,7 @@ func TestListPaymentServices(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	var response *Gr4vyPaymentServices
 	response, _, err = client.ListPaymentServices(nil)
 	if err != nil {
@@ -313,7 +311,7 @@ func TestAddPaymentService(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	req := Gr4vyPaymentServiceRequest{
 		PaymentServiceDefinitionId: "stripe-card",
 		DisplayName: "Test",
@@ -340,7 +338,7 @@ func TestUpdatePaymentService(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	req := Gr4vyPaymentServiceUpdate{
 		DisplayName: StringPtr("Braintree UK"),
 	}
@@ -360,7 +358,7 @@ func TestDeletePaymentService(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	_, err = client.DeletePaymentService(paymentServiceIdDelete)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -377,7 +375,7 @@ func TestListCardRules(t *testing.T) {
 	// 	return
 	// }
 	// client := NewGr4vyClient(gr4vyId, key)
-	
+
 	// _, _, err = client.ListCardsRules(nil)
 	// if err != nil {
 	// 	t.Errorf(err.Error())
@@ -414,15 +412,15 @@ func TestAddCardRule(t *testing.T) {
 	// cardRuleId = *p.Id
 	// t.Log("Set cardRuleId: " + cardRuleId)
 }
-func TestGetCardRule(t *testing.T) {
-	t.Skip("skipping test for now")
+// func TestGetCardRule(t *testing.T) {
+// 	t.Skip("skipping test for now")
 	// key, err := GetKeyFromFile(keyPath)
 	// if err != nil {
 	// 	t.Errorf(err.Error())
 	// 	return
 	// }
 	// client := NewGr4vyClient(gr4vyId, key)
-	
+
 	// response, err := client.GetCardRule(cardRuleId)
 	// if err != nil {
 	// 	t.Errorf(err.Error())
@@ -436,16 +434,16 @@ func TestGetCardRule(t *testing.T) {
 	// 	return
 	// }
 	// t.Log("Retrieved cardRule: " + *p.Id)
-}
-func TestUpdateCardRule(t *testing.T) {
-	t.Skip("skipping test for now")
+// }
+// func TestUpdateCardRule(t *testing.T) {
+// 	t.Skip("skipping test for now")
 	// key, err := GetKeyFromFile(keyPath)
 	// if err != nil {
 	// 	t.Errorf(err.Error())
 	// 	return
 	// }
 	// client := NewGr4vyClient(gr4vyId, key)
-	
+
 	// var req Gr4vyUpdateCardRule
 	// helper := true
 	// req.Active = &helper
@@ -455,23 +453,23 @@ func TestUpdateCardRule(t *testing.T) {
 	// 	return;
 	// }
 	// t.Log("Updated cardRule: " + cardRuleId)
-}
-func TestDeleteCardRule(t *testing.T) {
-	t.Skip("skipping test for now")
+// }
+// func TestDeleteCardRule(t *testing.T) {
+// 	t.Skip("skipping test for now")
 	// key, err := GetKeyFromFile(keyPath)
 	// if err != nil {
 	// 	t.Errorf(err.Error())
 	// 	return
 	// }
 	// client := NewGr4vyClient(gr4vyId, key)
-	
+
 	// _, err = client.DeleteCardRule(cardRuleId)
 	// if err != nil {
 	// 	t.Errorf(err.Error())
 	// 	return;
 	// }
 	// t.Log("Deleted cardRule: " + cardRuleId)
-}
+// }
 
 func TestListTransactions(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
@@ -480,7 +478,7 @@ func TestListTransactions(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	_, _, err = client.ListTransactions(nil)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -494,9 +492,9 @@ func TestAuthorizeNewTransaction(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	req := Gr4vyTransactionRequest{
-		Amount: 12.99,
+		Amount: 1299,
 		Currency: "USD",
 	}
 
@@ -525,7 +523,7 @@ func TestGetTransaction(t *testing.T) {
 		return
 	}
 	client := NewGr4vyClient(gr4vyId, key)
-	
+
 	var response *Gr4vyTransaction
 	response, _, err = client.GetTransaction(transactionId)
 	if err != nil {
@@ -543,7 +541,7 @@ func TestCaptureTransaction(t *testing.T) {
 	// 	return
 	// }
 	// client := NewGr4vyClient(gr4vyId, key)
-	
+
 	// var req Gr4vyCaptureTransaction
 	// req.Amount = 12.99
 	// req.Currency = "USD"
@@ -564,7 +562,7 @@ func TestAuthorizeTransaction(t *testing.T) {
 	// 	return
 	// }
 	// client := NewGr4vyClient(gr4vyId, key)
-	
+
 	// response, err := client.AuthorizeTransaction(transactionId)
 	// if err != nil {
 	// 	t.Errorf(err.Error())
@@ -582,7 +580,7 @@ func TestRefundTransaction(t *testing.T) {
 	// 	return
 	// }
 	// client := NewGr4vyClient(gr4vyId, key)
-	
+
 	// response, err := client.RefundTransaction(transactionId)
 	// if err != nil {
 	// 	t.Errorf(err.Error())

@@ -18,7 +18,7 @@ import (
 // PaymentMethods A list of stored payment methods.
 type PaymentMethods struct {
 	// A list of stored payment methods.
-	Items *[]Card `json:"items,omitempty"`
+	Items *[]PaymentMethod `json:"items,omitempty"`
 	// The limit applied to request. This represents the number of items that are at maximum returned by this request.
 	Limit *int32 `json:"limit,omitempty"`
 	// The cursor that represents the next page of results. Use the `cursor` query parameter to fetch this page of items.
@@ -49,9 +49,9 @@ func NewPaymentMethodsWithDefaults() *PaymentMethods {
 }
 
 // GetItems returns the Items field value if set, zero value otherwise.
-func (o *PaymentMethods) GetItems() []Card {
+func (o *PaymentMethods) GetItems() []PaymentMethod {
 	if o == nil || o.Items == nil {
-		var ret []Card
+		var ret []PaymentMethod
 		return ret
 	}
 	return *o.Items
@@ -59,7 +59,7 @@ func (o *PaymentMethods) GetItems() []Card {
 
 // GetItemsOk returns a tuple with the Items field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentMethods) GetItemsOk() (*[]Card, bool) {
+func (o *PaymentMethods) GetItemsOk() (*[]PaymentMethod, bool) {
 	if o == nil || o.Items == nil {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *PaymentMethods) HasItems() bool {
 	return false
 }
 
-// SetItems gets a reference to the given []Card and assigns it to the Items field.
-func (o *PaymentMethods) SetItems(v []Card) {
+// SetItems gets a reference to the given []PaymentMethod and assigns it to the Items field.
+func (o *PaymentMethods) SetItems(v []PaymentMethod) {
 	o.Items = &v
 }
 

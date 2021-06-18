@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Match** | **string** | The type of match made for this rule. | 
 **Key** | **string** | The transaction field to filter by. | 
 **Operator** | **string** | The comparison to make to &#x60;value&#x60; property. | 
-**Value** | **string** | The values to compare the &#x60;key&#x60; to. | 
+**Value** | [**string**](string.md) |  | 
 
 ## Methods
 

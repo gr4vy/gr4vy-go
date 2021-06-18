@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 
 ## StorePaymentMethod
 
-> Card StorePaymentMethod(ctx).CardRequest(cardRequest).Execute()
+> PaymentMethod StorePaymentMethod(ctx).CardRequest(cardRequest).Execute()
 
 New payment method
 
@@ -328,7 +328,7 @@ func main() {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentMethodsApi.StorePaymentMethod``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `StorePaymentMethod`: Card
+    // response from `StorePaymentMethod`: PaymentMethod
     fmt.Fprintf(os.Stdout, "Response from `PaymentMethodsApi.StorePaymentMethod`: %v\n", resp)
 }
 ```
@@ -348,7 +348,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**Card**](Card.md)
+[**PaymentMethod**](PaymentMethod.md)
 
 ### Authorization
 

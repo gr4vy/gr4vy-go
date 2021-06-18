@@ -24,18 +24,26 @@ type Transaction struct {
 	Id *string `json:"id,omitempty"`
 	// The status of the transaction being processed. This is different from the `status` field in that it represents the status of the transaction at the payment processor, not the status of the transaction created in Gr4vy.
 	Status *string `json:"status,omitempty"`
-	// The currency amount captured by this transaction.
+	// The authorized amount for this transaction. This can be different than the actual captured amount and part of this amount may be refunded.
 	Amount *float32 `json:"amount,omitempty"`
+	// The captured amount for this transaction. This can be a part and in some cases even more than the authorized amount.
+	CapturedAmount *float32 `json:"captured_amount,omitempty"`
+	// The refunded amount for this transaction. This can be a part or all of the captured amount.
+	RefundedAmount *float32 `json:"refunded_amount,omitempty"`
 	// The currency code for this transaction.
 	Currency *string `json:"currency,omitempty"`
-	PaymentMethod *PaymentMethod `json:"payment_method,omitempty"`
+	// The payment method used for this transaction.
+	PaymentMethod *PaymentMethodSnapshot `json:"payment_method,omitempty"`
+	// The buyer used for this transaction.
+	Buyer NullableBuyerSnapshot `json:"buyer,omitempty"`
 	// The date and time when this transaction was created in our system.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// An external identifier that can be used to match the transaction against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// Defines when the transaction was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
-	PaymentService *PaymentService `json:"payment_service,omitempty"`
+	// The payment service used for this transaction.
+	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
 	// The environment this transaction has been created in.
 	Environment *string `json:"environment,omitempty"`
 }
@@ -189,6 +197,70 @@ func (o *Transaction) SetAmount(v float32) {
 	o.Amount = &v
 }
 
+// GetCapturedAmount returns the CapturedAmount field value if set, zero value otherwise.
+func (o *Transaction) GetCapturedAmount() float32 {
+	if o == nil || o.CapturedAmount == nil {
+		var ret float32
+		return ret
+	}
+	return *o.CapturedAmount
+}
+
+// GetCapturedAmountOk returns a tuple with the CapturedAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetCapturedAmountOk() (*float32, bool) {
+	if o == nil || o.CapturedAmount == nil {
+		return nil, false
+	}
+	return o.CapturedAmount, true
+}
+
+// HasCapturedAmount returns a boolean if a field has been set.
+func (o *Transaction) HasCapturedAmount() bool {
+	if o != nil && o.CapturedAmount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCapturedAmount gets a reference to the given float32 and assigns it to the CapturedAmount field.
+func (o *Transaction) SetCapturedAmount(v float32) {
+	o.CapturedAmount = &v
+}
+
+// GetRefundedAmount returns the RefundedAmount field value if set, zero value otherwise.
+func (o *Transaction) GetRefundedAmount() float32 {
+	if o == nil || o.RefundedAmount == nil {
+		var ret float32
+		return ret
+	}
+	return *o.RefundedAmount
+}
+
+// GetRefundedAmountOk returns a tuple with the RefundedAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetRefundedAmountOk() (*float32, bool) {
+	if o == nil || o.RefundedAmount == nil {
+		return nil, false
+	}
+	return o.RefundedAmount, true
+}
+
+// HasRefundedAmount returns a boolean if a field has been set.
+func (o *Transaction) HasRefundedAmount() bool {
+	if o != nil && o.RefundedAmount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRefundedAmount gets a reference to the given float32 and assigns it to the RefundedAmount field.
+func (o *Transaction) SetRefundedAmount(v float32) {
+	o.RefundedAmount = &v
+}
+
 // GetCurrency returns the Currency field value if set, zero value otherwise.
 func (o *Transaction) GetCurrency() string {
 	if o == nil || o.Currency == nil {
@@ -222,9 +294,9 @@ func (o *Transaction) SetCurrency(v string) {
 }
 
 // GetPaymentMethod returns the PaymentMethod field value if set, zero value otherwise.
-func (o *Transaction) GetPaymentMethod() PaymentMethod {
+func (o *Transaction) GetPaymentMethod() PaymentMethodSnapshot {
 	if o == nil || o.PaymentMethod == nil {
-		var ret PaymentMethod
+		var ret PaymentMethodSnapshot
 		return ret
 	}
 	return *o.PaymentMethod
@@ -232,7 +304,7 @@ func (o *Transaction) GetPaymentMethod() PaymentMethod {
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetPaymentMethodOk() (*PaymentMethod, bool) {
+func (o *Transaction) GetPaymentMethodOk() (*PaymentMethodSnapshot, bool) {
 	if o == nil || o.PaymentMethod == nil {
 		return nil, false
 	}
@@ -248,9 +320,51 @@ func (o *Transaction) HasPaymentMethod() bool {
 	return false
 }
 
-// SetPaymentMethod gets a reference to the given PaymentMethod and assigns it to the PaymentMethod field.
-func (o *Transaction) SetPaymentMethod(v PaymentMethod) {
+// SetPaymentMethod gets a reference to the given PaymentMethodSnapshot and assigns it to the PaymentMethod field.
+func (o *Transaction) SetPaymentMethod(v PaymentMethodSnapshot) {
 	o.PaymentMethod = &v
+}
+
+// GetBuyer returns the Buyer field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetBuyer() BuyerSnapshot {
+	if o == nil || o.Buyer.Get() == nil {
+		var ret BuyerSnapshot
+		return ret
+	}
+	return *o.Buyer.Get()
+}
+
+// GetBuyerOk returns a tuple with the Buyer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetBuyerOk() (*BuyerSnapshot, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Buyer.Get(), o.Buyer.IsSet()
+}
+
+// HasBuyer returns a boolean if a field has been set.
+func (o *Transaction) HasBuyer() bool {
+	if o != nil && o.Buyer.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetBuyer gets a reference to the given NullableBuyerSnapshot and assigns it to the Buyer field.
+func (o *Transaction) SetBuyer(v BuyerSnapshot) {
+	o.Buyer.Set(&v)
+}
+// SetBuyerNil sets the value for Buyer to be an explicit nil
+func (o *Transaction) SetBuyerNil() {
+	o.Buyer.Set(nil)
+}
+
+// UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
+func (o *Transaction) UnsetBuyer() {
+	o.Buyer.Unset()
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -360,9 +474,9 @@ func (o *Transaction) SetUpdatedAt(v time.Time) {
 }
 
 // GetPaymentService returns the PaymentService field value if set, zero value otherwise.
-func (o *Transaction) GetPaymentService() PaymentService {
+func (o *Transaction) GetPaymentService() PaymentServiceSnapshot {
 	if o == nil || o.PaymentService == nil {
-		var ret PaymentService
+		var ret PaymentServiceSnapshot
 		return ret
 	}
 	return *o.PaymentService
@@ -370,7 +484,7 @@ func (o *Transaction) GetPaymentService() PaymentService {
 
 // GetPaymentServiceOk returns a tuple with the PaymentService field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetPaymentServiceOk() (*PaymentService, bool) {
+func (o *Transaction) GetPaymentServiceOk() (*PaymentServiceSnapshot, bool) {
 	if o == nil || o.PaymentService == nil {
 		return nil, false
 	}
@@ -386,8 +500,8 @@ func (o *Transaction) HasPaymentService() bool {
 	return false
 }
 
-// SetPaymentService gets a reference to the given PaymentService and assigns it to the PaymentService field.
-func (o *Transaction) SetPaymentService(v PaymentService) {
+// SetPaymentService gets a reference to the given PaymentServiceSnapshot and assigns it to the PaymentService field.
+func (o *Transaction) SetPaymentService(v PaymentServiceSnapshot) {
 	o.PaymentService = &v
 }
 
@@ -437,11 +551,20 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	if o.Amount != nil {
 		toSerialize["amount"] = o.Amount
 	}
+	if o.CapturedAmount != nil {
+		toSerialize["captured_amount"] = o.CapturedAmount
+	}
+	if o.RefundedAmount != nil {
+		toSerialize["refunded_amount"] = o.RefundedAmount
+	}
 	if o.Currency != nil {
 		toSerialize["currency"] = o.Currency
 	}
 	if o.PaymentMethod != nil {
 		toSerialize["payment_method"] = o.PaymentMethod
+	}
+	if o.Buyer.IsSet() {
+		toSerialize["buyer"] = o.Buyer.Get()
 	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt

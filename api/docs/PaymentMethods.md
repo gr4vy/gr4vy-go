@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Items** | Pointer to [**[]Card**](Card.md) | A list of stored payment methods. | [optional] 
+**Items** | Pointer to [**[]PaymentMethod**](PaymentMethod.md) | A list of stored payment methods. | [optional] 
 **Limit** | Pointer to **int32** | The limit applied to request. This represents the number of items that are at maximum returned by this request. | [optional] [default to 20]
 **NextCursor** | Pointer to **NullableString** | The cursor that represents the next page of results. Use the &#x60;cursor&#x60; query parameter to fetch this page of items. | [optional] 
 **PreviousCursor** | Pointer to **NullableString** | The cursor that represents the next page of results. Use the &#x60;cursor&#x60; query parameter to fetch this page of items. | [optional] 
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetItems
 
-`func (o *PaymentMethods) GetItems() []Card`
+`func (o *PaymentMethods) GetItems() []PaymentMethod`
 
 GetItems returns the Items field if non-nil, zero value otherwise.
 
 ### GetItemsOk
 
-`func (o *PaymentMethods) GetItemsOk() (*[]Card, bool)`
+`func (o *PaymentMethods) GetItemsOk() (*[]PaymentMethod, bool)`
 
 GetItemsOk returns a tuple with the Items field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetItems
 
-`func (o *PaymentMethods) SetItems(v []Card)`
+`func (o *PaymentMethods) SetItems(v []PaymentMethod)`
 
 SetItems sets Items field to given value.
 

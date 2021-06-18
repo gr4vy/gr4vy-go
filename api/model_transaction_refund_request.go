@@ -15,31 +15,31 @@ import (
 	"encoding/json"
 )
 
-// TransactionCaptureRequest A request to capture a transaction.
-type TransactionCaptureRequest struct {
-	// The (partial) amount to capture.  When omitted blank, this will capture the entire amount.
+// TransactionRefundRequest A request to refund a transaction.
+type TransactionRefundRequest struct {
+	// The (partial) amount to refund.  When omitted blank, this will refund the entire amount.
 	Amount *float32 `json:"amount,omitempty"`
 }
 
-// NewTransactionCaptureRequest instantiates a new TransactionCaptureRequest object
+// NewTransactionRefundRequest instantiates a new TransactionRefundRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransactionCaptureRequest() *TransactionCaptureRequest {
-	this := TransactionCaptureRequest{}
+func NewTransactionRefundRequest() *TransactionRefundRequest {
+	this := TransactionRefundRequest{}
 	return &this
 }
 
-// NewTransactionCaptureRequestWithDefaults instantiates a new TransactionCaptureRequest object
+// NewTransactionRefundRequestWithDefaults instantiates a new TransactionRefundRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTransactionCaptureRequestWithDefaults() *TransactionCaptureRequest {
-	this := TransactionCaptureRequest{}
+func NewTransactionRefundRequestWithDefaults() *TransactionRefundRequest {
+	this := TransactionRefundRequest{}
 	return &this
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *TransactionCaptureRequest) GetAmount() float32 {
+func (o *TransactionRefundRequest) GetAmount() float32 {
 	if o == nil || o.Amount == nil {
 		var ret float32
 		return ret
@@ -49,7 +49,7 @@ func (o *TransactionCaptureRequest) GetAmount() float32 {
 
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransactionCaptureRequest) GetAmountOk() (*float32, bool) {
+func (o *TransactionRefundRequest) GetAmountOk() (*float32, bool) {
 	if o == nil || o.Amount == nil {
 		return nil, false
 	}
@@ -57,7 +57,7 @@ func (o *TransactionCaptureRequest) GetAmountOk() (*float32, bool) {
 }
 
 // HasAmount returns a boolean if a field has been set.
-func (o *TransactionCaptureRequest) HasAmount() bool {
+func (o *TransactionRefundRequest) HasAmount() bool {
 	if o != nil && o.Amount != nil {
 		return true
 	}
@@ -66,11 +66,11 @@ func (o *TransactionCaptureRequest) HasAmount() bool {
 }
 
 // SetAmount gets a reference to the given float32 and assigns it to the Amount field.
-func (o *TransactionCaptureRequest) SetAmount(v float32) {
+func (o *TransactionRefundRequest) SetAmount(v float32) {
 	o.Amount = &v
 }
 
-func (o TransactionCaptureRequest) MarshalJSON() ([]byte, error) {
+func (o TransactionRefundRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Amount != nil {
 		toSerialize["amount"] = o.Amount
@@ -78,38 +78,38 @@ func (o TransactionCaptureRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableTransactionCaptureRequest struct {
-	value *TransactionCaptureRequest
+type NullableTransactionRefundRequest struct {
+	value *TransactionRefundRequest
 	isSet bool
 }
 
-func (v NullableTransactionCaptureRequest) Get() *TransactionCaptureRequest {
+func (v NullableTransactionRefundRequest) Get() *TransactionRefundRequest {
 	return v.value
 }
 
-func (v *NullableTransactionCaptureRequest) Set(val *TransactionCaptureRequest) {
+func (v *NullableTransactionRefundRequest) Set(val *TransactionRefundRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTransactionCaptureRequest) IsSet() bool {
+func (v NullableTransactionRefundRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTransactionCaptureRequest) Unset() {
+func (v *NullableTransactionRefundRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTransactionCaptureRequest(val *TransactionCaptureRequest) *NullableTransactionCaptureRequest {
-	return &NullableTransactionCaptureRequest{value: val, isSet: true}
+func NewNullableTransactionRefundRequest(val *TransactionRefundRequest) *NullableTransactionRefundRequest {
+	return &NullableTransactionRefundRequest{value: val, isSet: true}
 }
 
-func (v NullableTransactionCaptureRequest) MarshalJSON() ([]byte, error) {
+func (v NullableTransactionRefundRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTransactionCaptureRequest) UnmarshalJSON(src []byte) error {
+func (v *NullableTransactionRefundRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

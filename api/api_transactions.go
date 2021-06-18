@@ -168,141 +168,6 @@ func (a *TransactionsApiService) AuthorizeNewTransactionExecute(r ApiAuthorizeNe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAuthorizeTransactionRequest struct {
-	ctx _context.Context
-	ApiService *TransactionsApiService
-	transactionId string
-}
-
-
-func (r ApiAuthorizeTransactionRequest) Execute() (Transaction, *_nethttp.Response, error) {
-	return r.ApiService.AuthorizeTransactionExecute(r)
-}
-
-/*
- * AuthorizeTransaction Authorize approved transaction
- * Authorize a previously approved transaction.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param transactionId The ID for the transaction to get the information for.
- * @return ApiAuthorizeTransactionRequest
- */
-func (a *TransactionsApiService) AuthorizeTransaction(ctx _context.Context, transactionId string) ApiAuthorizeTransactionRequest {
-	return ApiAuthorizeTransactionRequest{
-		ApiService: a,
-		ctx: ctx,
-		transactionId: transactionId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return Transaction
- */
-func (a *TransactionsApiService) AuthorizeTransactionExecute(r ApiAuthorizeTransactionRequest) (Transaction, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Transaction
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionsApiService.AuthorizeTransaction")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/transactions/{transaction_id}/authorize"
-	localVarPath = strings.Replace(localVarPath, "{"+"transaction_id"+"}", _neturl.PathEscape(parameterToString(r.transactionId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error401Unauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v ErrorGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiCaptureTransactionRequest struct {
 	ctx _context.Context
 	ApiService *TransactionsApiService
@@ -575,6 +440,8 @@ type ApiListTransactionsRequest struct {
 	ApiService *TransactionsApiService
 	search *string
 	transactionStatus *string
+	buyerId *string
+	buyerExternalIdentifier *string
 	beforeCreatedAt *string
 	afterCreatedAt *string
 	beforeUpdatedAt *string
@@ -589,6 +456,14 @@ func (r ApiListTransactionsRequest) Search(search string) ApiListTransactionsReq
 }
 func (r ApiListTransactionsRequest) TransactionStatus(transactionStatus string) ApiListTransactionsRequest {
 	r.transactionStatus = &transactionStatus
+	return r
+}
+func (r ApiListTransactionsRequest) BuyerId(buyerId string) ApiListTransactionsRequest {
+	r.buyerId = &buyerId
+	return r
+}
+func (r ApiListTransactionsRequest) BuyerExternalIdentifier(buyerExternalIdentifier string) ApiListTransactionsRequest {
+	r.buyerExternalIdentifier = &buyerExternalIdentifier
 	return r
 }
 func (r ApiListTransactionsRequest) BeforeCreatedAt(beforeCreatedAt string) ApiListTransactionsRequest {
@@ -663,6 +538,12 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	}
 	if r.transactionStatus != nil {
 		localVarQueryParams.Add("transaction_status", parameterToString(*r.transactionStatus, ""))
+	}
+	if r.buyerId != nil {
+		localVarQueryParams.Add("buyer_id", parameterToString(*r.buyerId, ""))
+	}
+	if r.buyerExternalIdentifier != nil {
+		localVarQueryParams.Add("buyer_external_identifier", parameterToString(*r.buyerExternalIdentifier, ""))
 	}
 	if r.beforeCreatedAt != nil {
 		localVarQueryParams.Add("before_created_at", parameterToString(*r.beforeCreatedAt, ""))
@@ -749,15 +630,20 @@ type ApiRefundTransactionRequest struct {
 	ctx _context.Context
 	ApiService *TransactionsApiService
 	transactionId string
+	transactionRefundRequest *TransactionRefundRequest
 }
 
+func (r ApiRefundTransactionRequest) TransactionRefundRequest(transactionRefundRequest TransactionRefundRequest) ApiRefundTransactionRequest {
+	r.transactionRefundRequest = &transactionRefundRequest
+	return r
+}
 
 func (r ApiRefundTransactionRequest) Execute() (Transaction, *_nethttp.Response, error) {
 	return r.ApiService.RefundTransactionExecute(r)
 }
 
 /*
- * RefundTransaction Refund or void transaction
+ * RefundTransaction Refund or void transactions
  * Refunds or voids transaction. If this transaction was already captured, it
 will issue a refund. If the transaction was not yet captured the authorization
 will instead be voided.
@@ -800,7 +686,7 @@ func (a *TransactionsApiService) RefundTransactionExecute(r ApiRefundTransaction
 	localVarFormParams := _neturl.Values{}
 
 	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
+	localVarHTTPContentTypes := []string{"application/json"}
 
 	// set Content-Type header
 	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
@@ -816,6 +702,8 @@ func (a *TransactionsApiService) RefundTransactionExecute(r ApiRefundTransaction
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	// body params
+	localVarPostBody = r.transactionRefundRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -24,19 +24,19 @@ type CardRuleTextCondition struct {
 	// The comparison to make to `value` property.
 	Operator string `json:"operator"`
 	// The values to compare the `key` to.
-	Values []string `json:"values"`
+	Value []string `json:"value"`
 }
 
 // NewCardRuleTextCondition instantiates a new CardRuleTextCondition object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCardRuleTextCondition(match string, key string, operator string, values []string) *CardRuleTextCondition {
+func NewCardRuleTextCondition(match string, key string, operator string, value []string) *CardRuleTextCondition {
 	this := CardRuleTextCondition{}
 	this.Match = match
 	this.Key = key
 	this.Operator = operator
-	this.Values = values
+	this.Value = value
 	return &this
 }
 
@@ -120,28 +120,28 @@ func (o *CardRuleTextCondition) SetOperator(v string) {
 	o.Operator = v
 }
 
-// GetValues returns the Values field value
-func (o *CardRuleTextCondition) GetValues() []string {
+// GetValue returns the Value field value
+func (o *CardRuleTextCondition) GetValue() []string {
 	if o == nil {
 		var ret []string
 		return ret
 	}
 
-	return o.Values
+	return o.Value
 }
 
-// GetValuesOk returns a tuple with the Values field value
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *CardRuleTextCondition) GetValuesOk() (*[]string, bool) {
+func (o *CardRuleTextCondition) GetValueOk() (*[]string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.Values, true
+	return &o.Value, true
 }
 
-// SetValues sets field value
-func (o *CardRuleTextCondition) SetValues(v []string) {
-	o.Values = v
+// SetValue sets field value
+func (o *CardRuleTextCondition) SetValue(v []string) {
+	o.Value = v
 }
 
 func (o CardRuleTextCondition) MarshalJSON() ([]byte, error) {
@@ -156,7 +156,7 @@ func (o CardRuleTextCondition) MarshalJSON() ([]byte, error) {
 		toSerialize["operator"] = o.Operator
 	}
 	if true {
-		toSerialize["values"] = o.Values
+		toSerialize["value"] = o.Value
 	}
 	return json.Marshal(toSerialize)
 }

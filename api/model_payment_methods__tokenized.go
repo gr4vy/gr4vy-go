@@ -18,7 +18,7 @@ import (
 // PaymentMethodsTokenized A list of stored payment methods in token format.
 type PaymentMethodsTokenized struct {
 	// A list of stored payment methods in token format.
-	Items *[]CardTokenized `json:"items,omitempty"`
+	Items *[]PaymentMethodTokenized `json:"items,omitempty"`
 	// The limit applied to request. This represents the number of items that are at maximum returned by this request.
 	Limit *int32 `json:"limit,omitempty"`
 	// The cursor that represents the next page of results. Use the `cursor` query parameter to fetch this page of items.
@@ -49,9 +49,9 @@ func NewPaymentMethodsTokenizedWithDefaults() *PaymentMethodsTokenized {
 }
 
 // GetItems returns the Items field value if set, zero value otherwise.
-func (o *PaymentMethodsTokenized) GetItems() []CardTokenized {
+func (o *PaymentMethodsTokenized) GetItems() []PaymentMethodTokenized {
 	if o == nil || o.Items == nil {
-		var ret []CardTokenized
+		var ret []PaymentMethodTokenized
 		return ret
 	}
 	return *o.Items
@@ -59,7 +59,7 @@ func (o *PaymentMethodsTokenized) GetItems() []CardTokenized {
 
 // GetItemsOk returns a tuple with the Items field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentMethodsTokenized) GetItemsOk() (*[]CardTokenized, bool) {
+func (o *PaymentMethodsTokenized) GetItemsOk() (*[]PaymentMethodTokenized, bool) {
 	if o == nil || o.Items == nil {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *PaymentMethodsTokenized) HasItems() bool {
 	return false
 }
 
-// SetItems gets a reference to the given []CardTokenized and assigns it to the Items field.
-func (o *PaymentMethodsTokenized) SetItems(v []CardTokenized) {
+// SetItems gets a reference to the given []PaymentMethodTokenized and assigns it to the Items field.
+func (o *PaymentMethodsTokenized) SetItems(v []PaymentMethodTokenized) {
 	o.Items = &v
 }
 

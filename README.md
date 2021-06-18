@@ -1,12 +1,12 @@
 # Gr4vy SDK for Go
 
-<!-- [![Module Version](https://badge.fury.io/js/%40gr4vy%2Fnode.svg)][npm] -->
-
-Gr4vy provides any of your payment integrations through one unified API. For more details, visit [gr4vy.com](https://gr4vy.com).
+Gr4vy provides any of your payment integrations through one unified API. For
+more details, visit [gr4vy.com](https://gr4vy.com).
 
 ## Installation
 
-To add Gr4vy to your project, add the `github.com/gr4vy/gr4vy-go` package to your project.
+To add Gr4vy to your project, add the `github.com/gr4vy/gr4vy-go` package to
+your project.
 
 ```sh
 go get github.com/gr4vy/gr4vy-go
@@ -14,17 +14,18 @@ go get github.com/gr4vy/gr4vy-go
 
 Add import:
 
-```sh
-import (
-	"github.com/gr4vy/gr4vy-go"
-)
+```golang
+import "github.com/gr4vy/gr4vy-go"
 ```
 
 ## Getting Started
 
-To make your first API call, you will need to [request](https://gr4vy.com) a Gr4vy instance to be set up. Please contact our sales team for a demo.
+To make your first API call, you will need to [request](https://gr4vy.com) a
+Gr4vy instance to be set up. Please contact our sales team for a demo.
 
-Once you have been set up with a Gr4vy account you will need to head over to the **Integrations** panel and generate a private key. We recommend storing this key in a secure location but in this code sample we simply read the file from disk.
+Once you have been set up with a Gr4vy account you will need to head over to the
+**Integrations** panel and generate a private key. We recommend storing this key
+in a secure location but in this code sample we simply read the file from disk.
 
 ```golang
 package main
@@ -37,14 +38,14 @@ import (
 )
 
 func main() {
-  key, err := gr4vy.GetKeyFromFile(PRIVATE_KEY)
+  key, err := gr4vy.GetKeyFromFile(PRIVATE_KEY_FILENAME)
   if err != nil {
     fmt.Println(err)
     return
   }
   client := gr4vy.NewGr4vyClient("demo", key)
   client.Debug = true
-  
+
   var response *gr4vy.Gr4vyBuyers
   response, _, err = client.ListBuyers(gr4vy.Int32(2))
   if err != nil {
@@ -57,16 +58,21 @@ func main() {
 
 ## Gr4vy Embed
 
-To create a token for Gr4vy Embed, call the `client.GetEmbedToken(embed)` function with the amount, currency, and optional buyer information for Gr4vy Embed.
+To create a token for Gr4vy Embed, call the `client.GetEmbedToken(embed)`
+function with the amount, currency, and optional buyer information for Gr4vy
+Embed.
 
 ```golang
-  embed := map[string]string{"amount": "200", "currency": "USD", "buyer_id": "d757c76a-cbd7-4b56-95a3-40125b51b29c"}
-  token, err = client.GetEmbedToken(embed)
+embed := map[string]string{"amount": "200", "currency": "USD", "buyer_id": "d757c76a-cbd7-4b56-95a3-40125b51b29c"}
+token, err = client.GetEmbedToken(embed)
 ```
 
-You can now pass this token to your frontend where it can be used to authenticate Gr4vy Embed.
+You can now pass this token to your frontend where it can be used to
+authenticate Gr4vy Embed.
 
-The `buyer_id` and/or `buyer_external_identifier` fields can be used to allow the token to pull in previously stored payment methods for a user. A buyer needs to be created before it can be used in this way.
+The `buyer_id` and/or `buyer_external_identifier` fields can be used to allow
+the token to pull in previously stored payment methods for a user. A buyer
+needs to be created before it can be used in this way.
 
 ```golang
   key, err := gr4vy.GetKeyFromFile(PRIVATE_KEY)
@@ -103,31 +109,36 @@ The `buyer_id` and/or `buyer_external_identifier` fields can be used to allow th
 
 ## Initialization
 
-The client can be initialized with the Gr4vy ID (`gr4vyId`) and the private key string.
+The client can be initialized with the Gr4vy ID (`gr4vyId`) and the private key
+string.
 
 ```golang
   client := gr4vy.NewGr4vyClient("acme", key)
 ```
 
-Alternatively, instead of the `gr4vyId` it can be initialized with the `baseUrl` of the server to use directly.
+Alternatively, instead of the `gr4vyId` it can be initialized with the `baseUrl`
+of the server to use directly.
 
 ```golang
   client := gr4vy.NewGr4vyClientWithBaseUrl("https://api.acme.gr4vy.app", key)
 ```
 
-Your API private key can be created in your admin panel on the **Integrations** tab.
+Your API private key can be created in your admin panel on the **Integrations**
+tab.
 
 
 ## Making API calls
 
-This library conveniently maps every API path to a seperate function. For example, `GET /buyers?limit=100` would be:
+This library conveniently maps every API path to a seperate function. For
+example, `GET /buyers?limit=100` would be:
 
 ```golang
   response, _, error := client.ListBuyers(2)
 ```
 
-To create, the API requires a request object for that resource that is conventiently 
-named `Gr4vy<Resource>Request`.  To update, the API requires a request object for that resource that is named `Gr4vy<Resource>Update`.
+To create, the API requires a request object for that resource that is conventiently
+named `Gr4vy<Resource>Request`.  To update, the API requires a request object
+for that resource that is named `Gr4vy<Resource>Update`.
 
 For example, to create a buyer you will need to pass a `Gr4vyBuyerRequest` object to
 the `AddBuyer` method.
@@ -139,7 +150,8 @@ the `AddBuyer` method.
   response, _, error := client.AddBuyer(req)
 ```
 
-So to update a buyer you will need to pass in the `Gr4vyBuyerUpdate` to the `UpdateBuyer` method.
+So to update a buyer you will need to pass in the `Gr4vyBuyerUpdate` to the
+`UpdateBuyer` method.
 
 ```golang
   req := gr4vy.Gr4vyBuyerUpdate{
@@ -148,9 +160,10 @@ So to update a buyer you will need to pass in the `Gr4vyBuyerUpdate` to the `Upd
   response, err := client.UpdateBuyer(buyerId, req)
 ```
 
-## Response 
+## Response
 
-Every resolved API call returns the requested resource, a `*http.Response` object from the "net/http" package and an `error` object.
+Every resolved API call returns the requested resource, a `*http.Response`
+object from the "net/http" package and an `error` object.
 
 
 ```golang
@@ -174,8 +187,8 @@ The SDK makes it easy possible to the requests and responses to the console.
 This will output the request parameters and response to the console as follows.
 
 ```sh
-  Gr4vy - Request - ListBuyers
-  Gr4vy - Response - {"items":[{"id":"b8433347-a16f-46b5-958f-d681876546a6","type":"buyer","display_name":"Jane Smith","external_identifier":null,"created_at":"2021-04-22T06:51:16.910297+00:00","updated_at":"2021-04-22T07:18:49.816242+00:00"}],"limit":1,"next_cursor":"fAA0YjY5NmU2My00NzY5LTQ2OGMtOTEyNC0xODVjMDdjZTY5MzEAMjAyMS0wNC0yMlQwNjozNTowNy4yNTMxMDY","previous_cursor":null}
+Gr4vy - Request - ListBuyers
+Gr4vy - Response - {"items":[{"id":"b8433347-a16f-46b5-958f-d681876546a6","type":"buyer","display_name":"Jane Smith","external_identifier":null,"created_at":"2021-04-22T06:51:16.910297+00:00","updated_at":"2021-04-22T07:18:49.816242+00:00"}],"limit":1,"next_cursor":"fAA0YjY5NmU2My00NzY5LTQ2OGMtOTEyNC0xODVjMDdjZTY5MzEAMjAyMS0wNC0yMlQwNjozNTowNy4yNTMxMDY","previous_cursor":null}
 ```
 
 ## Development
@@ -186,11 +199,17 @@ To add new APIs, run the following command to update the models and APIs based
 on the API spec.
 
 ```sh
-  ./openapi-generator-generate.sh
+./openapi-generator-generate.sh
 ```
 
 Next, update `sdk_<object_name>.go` to bind any new APIs or remove any APIs that are no
 longer available.
+
+Run the tests to ensure the changes do not break any existing tests.
+
+```sh
+go test
+```
 
 ### Publishing
 

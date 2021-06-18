@@ -5,11 +5,10 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AuthorizeNewTransaction**](TransactionsApi.md#AuthorizeNewTransaction) | **Post** /transactions | New transaction
-[**AuthorizeTransaction**](TransactionsApi.md#AuthorizeTransaction) | **Post** /transactions/{transaction_id}/authorize | Authorize approved transaction
 [**CaptureTransaction**](TransactionsApi.md#CaptureTransaction) | **Post** /transactions/{transaction_id}/capture | Capture transaction
 [**GetTransaction**](TransactionsApi.md#GetTransaction) | **Get** /transactions/{transaction_id} | Get transaction
 [**ListTransactions**](TransactionsApi.md#ListTransactions) | **Get** /transactions | List transactions
-[**RefundTransaction**](TransactionsApi.md#RefundTransaction) | **Post** /transactions/{transaction_id}/refund | Refund or void transaction
+[**RefundTransaction**](TransactionsApi.md#RefundTransaction) | **Post** /transactions/{transaction_id}/refund | Refund or void transactions
 
 
 
@@ -79,76 +78,6 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## AuthorizeTransaction
-
-> Transaction AuthorizeTransaction(ctx, transactionId).Execute()
-
-Authorize approved transaction
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    transactionId := "fe26475d-ec3e-4884-9553-f7356683f7f9" // string | The ID for the transaction to get the information for.
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransactionsApi.AuthorizeTransaction(context.Background(), transactionId).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.AuthorizeTransaction``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AuthorizeTransaction`: Transaction
-    fmt.Fprintf(os.Stdout, "Response from `TransactionsApi.AuthorizeTransaction`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**transactionId** | **string** | The ID for the transaction to get the information for. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAuthorizeTransactionRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
-
-### Return type
-
-[**Transaction**](Transaction.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
 ## CaptureTransaction
 
 > Transaction CaptureTransaction(ctx, transactionId).TransactionCaptureRequest(transactionCaptureRequest).Execute()
@@ -171,7 +100,7 @@ import (
 
 func main() {
     transactionId := "fe26475d-ec3e-4884-9553-f7356683f7f9" // string | The ID for the transaction to get the information for.
-    transactionCaptureRequest := *openapiclient.NewTransactionCaptureRequest(float32(1299), "USD") // TransactionCaptureRequest |  (optional)
+    transactionCaptureRequest := *openapiclient.NewTransactionCaptureRequest() // TransactionCaptureRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -293,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListTransactions
 
-> Transactions ListTransactions(ctx).Search(search).TransactionStatus(transactionStatus).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).Limit(limit).Cursor(cursor).Execute()
+> Transactions ListTransactions(ctx).Search(search).TransactionStatus(transactionStatus).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).Limit(limit).Cursor(cursor).Execute()
 
 List transactions
 
@@ -313,7 +242,9 @@ import (
 
 func main() {
     search := "be828248-56de-481e-a580-44b6e1d4df81" // string | Filters the transactions to only the items for which the `id` or `external_identifier` matches this value. This field allows for a partial match, matching any transaction for which either of the fields partially or completely matches. (optional)
-    transactionStatus := "captured" // string | Filters the results to only the transactions for which the `status` matches this value. (optional)
+    transactionStatus := "capture_succeeded" // string | Filters the results to only the transactions for which the `status` matches this value. (optional)
+    buyerId := "8724fd24-5489-4a5d-90fd-0604df7d3b83" // string | Filters the results to only the items for which the `buyer` has an `id` that matches this value. (optional)
+    buyerExternalIdentifier := "user-12345" // string | Filters the results to only the items for which the `buyer` has an `external_identifier` that matches this value. (optional)
     beforeCreatedAt := "2012-12-12T10:53:43+00:00" // string | Filters the results to only transactions created before this ISO date-time string. (optional)
     afterCreatedAt := "2012-12-12T10:53:43+00:00" // string | Filters the results to only transactions created after this ISO date-time string. (optional)
     beforeUpdatedAt := "2012-12-12T10:53:43+00:00" // string | Filters the results to only transactions last updated before this ISO date-time string. (optional)
@@ -323,7 +254,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).Search(search).TransactionStatus(transactionStatus).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).Limit(limit).Cursor(cursor).Execute()
+    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).Search(search).TransactionStatus(transactionStatus).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).Limit(limit).Cursor(cursor).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.ListTransactions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -346,6 +277,8 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **search** | **string** | Filters the transactions to only the items for which the &#x60;id&#x60; or &#x60;external_identifier&#x60; matches this value. This field allows for a partial match, matching any transaction for which either of the fields partially or completely matches. | 
  **transactionStatus** | **string** | Filters the results to only the transactions for which the &#x60;status&#x60; matches this value. | 
+ **buyerId** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;id&#x60; that matches this value. | 
+ **buyerExternalIdentifier** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;external_identifier&#x60; that matches this value. | 
  **beforeCreatedAt** | **string** | Filters the results to only transactions created before this ISO date-time string. | 
  **afterCreatedAt** | **string** | Filters the results to only transactions created after this ISO date-time string. | 
  **beforeUpdatedAt** | **string** | Filters the results to only transactions last updated before this ISO date-time string. | 
@@ -373,9 +306,9 @@ Name | Type | Description  | Notes
 
 ## RefundTransaction
 
-> Transaction RefundTransaction(ctx, transactionId).Execute()
+> Transaction RefundTransaction(ctx, transactionId).TransactionRefundRequest(transactionRefundRequest).Execute()
 
-Refund or void transaction
+Refund or void transactions
 
 
 
@@ -393,10 +326,11 @@ import (
 
 func main() {
     transactionId := "fe26475d-ec3e-4884-9553-f7356683f7f9" // string | The ID for the transaction to get the information for.
+    transactionRefundRequest := *openapiclient.NewTransactionRefundRequest() // TransactionRefundRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransactionsApi.RefundTransaction(context.Background(), transactionId).Execute()
+    resp, r, err := api_client.TransactionsApi.RefundTransaction(context.Background(), transactionId).TransactionRefundRequest(transactionRefundRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.RefundTransaction``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -422,6 +356,7 @@ Other parameters are passed through a pointer to a apiRefundTransactionRequest s
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **transactionRefundRequest** | [**TransactionRefundRequest**](TransactionRefundRequest.md) |  | 
 
 ### Return type
 
@@ -433,7 +368,7 @@ Name | Type | Description  | Notes
 
 ### HTTP request headers
 
-- **Content-Type**: Not defined
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
