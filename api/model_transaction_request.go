@@ -24,7 +24,7 @@ type TransactionRequest struct {
 	PaymentMethod TransactionPaymentMethodRequest `json:"payment_method"`
 	// Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature.
 	Store *bool `json:"store,omitempty"`
-	// Defines the intent of this API call. This determines the desired initial state of the transaction.  * `approve` - Captures approval for the transaction from the user but does not authorize it. This is only available to payment methods that require explicit approval, like PayPal. * `authorize` - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * `capture` - Optionally approves and then authorizes and captures the funds of the transaction.
+	// Defines the intent of this API call. This determines the desired initial state of the transaction.  * `authorize` - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * `capture` - Optionally approves and then authorizes and captures the funds of the transaction.
 	Intent *string `json:"intent,omitempty"`
 	// An external identifier that can be used to match the transaction against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
