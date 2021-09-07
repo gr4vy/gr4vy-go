@@ -4,7 +4,8 @@ import (
 	"testing"
 )
 
-const keyPath = "./private_key.pem"
+// const keyPath = "./private_key.pem"
+const keyPath = "./test/dev-key.pem"
 const gr4vyId = "spider"
 
 var buyerId string
