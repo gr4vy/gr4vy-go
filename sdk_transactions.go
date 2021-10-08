@@ -2,7 +2,7 @@ package gr4vy
 
 import (
 	"net/http"
-	"golang.org/x/net/context"
+	"context"
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
@@ -32,7 +32,7 @@ func (c *Gr4vyClient) ListTransactions(limit *int32) (*Gr4vyTransactions, *http.
     var r Gr4vyTransactions = Gr4vyTransactions(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) ListTransactionsWithContext(limit *int32, ctx context.Context) (*Gr4vyTransactions, *http.Response, error) {
+func (c *Gr4vyClient) ListTransactionsContext(ctx context.Context, limit *int32) (*Gr4vyTransactions, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -69,7 +69,7 @@ func (c *Gr4vyClient) GetTransaction(transaction_id string) (*Gr4vyTransaction, 
     var r Gr4vyTransaction = Gr4vyTransaction(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) GetTransactionWithContext(transaction_id string, ctx context.Context) (*Gr4vyTransaction, *http.Response, error) {
+func (c *Gr4vyClient) GetTransactionContext(ctx context.Context, transaction_id string) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -105,7 +105,7 @@ func (c *Gr4vyClient) AuthorizeNewTransaction(body Gr4vyTransactionRequest, pm G
     var r Gr4vyTransaction = Gr4vyTransaction(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) AuthorizeNewTransactionWithContext(body Gr4vyTransactionRequest, pm Gr4vyTransactionPaymentMethodRequest, ctx context.Context) (*Gr4vyTransaction, *http.Response, error) {
+func (c *Gr4vyClient) AuthorizeNewTransactionContext(ctx context.Context, body Gr4vyTransactionRequest, pm Gr4vyTransactionPaymentMethodRequest) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -142,7 +142,7 @@ func (c *Gr4vyClient) CaptureTransaction(transaction_id string, body Gr4vyTransa
     var r Gr4vyTransaction = Gr4vyTransaction(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) CaptureTransactionWithContext(transaction_id string, body Gr4vyTransactionCaptureRequest, ctx context.Context) (*Gr4vyTransaction, *http.Response, error) {
+func (c *Gr4vyClient) CaptureTransactionContext(ctx context.Context, transaction_id string, body Gr4vyTransactionCaptureRequest) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -176,7 +176,7 @@ func (c *Gr4vyClient) RefundTransaction(transaction_id string) (*Gr4vyTransactio
     var r Gr4vyTransaction = Gr4vyTransaction(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) RefundTransactionWithContext(transaction_id string, ctx context.Context) (*Gr4vyTransaction, *http.Response, error) {
+func (c *Gr4vyClient) RefundTransactionContext(ctx context.Context, transaction_id string) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err

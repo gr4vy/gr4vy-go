@@ -2,7 +2,7 @@ package gr4vy
 
 import (
 	"net/http"
-	"golang.org/x/net/context"
+	"context"
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
@@ -32,7 +32,7 @@ func (c *Gr4vyClient) ListPaymentServices(limit *int32) (*Gr4vyPaymentServices, 
     var r Gr4vyPaymentServices = Gr4vyPaymentServices(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) ListPaymentServicesWithContext(limit *int32, ctx context.Context) (*Gr4vyPaymentServices, *http.Response, error) {
+func (c *Gr4vyClient) ListPaymentServicesContext(ctx context.Context, limit *int32) (*Gr4vyPaymentServices, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -69,7 +69,7 @@ func (c *Gr4vyClient) GetPaymentService(payment_service_id string) (*Gr4vyPaymen
     var r Gr4vyPaymentService = Gr4vyPaymentService(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) GetPaymentServiceWithContext(payment_service_id string, ctx context.Context) (*Gr4vyPaymentService, *http.Response, error) {
+func (c *Gr4vyClient) GetPaymentServiceContext(ctx context.Context, payment_service_id string) (*Gr4vyPaymentService, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -109,7 +109,7 @@ func (c *Gr4vyClient) AddPaymentService(body Gr4vyPaymentServiceRequest, fields 
     var r Gr4vyPaymentService = Gr4vyPaymentService(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) AddPaymentServiceWithContext(body Gr4vyPaymentServiceRequest, fields []Gr4vyPaymentServiceUpdateFields, ctx context.Context) (*Gr4vyPaymentService, *http.Response, error) {
+func (c *Gr4vyClient) AddPaymentServiceContext(ctx context.Context, body Gr4vyPaymentServiceRequest, fields []Gr4vyPaymentServiceUpdateFields) (*Gr4vyPaymentService, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -150,7 +150,7 @@ func (c *Gr4vyClient) UpdatePaymentService(payment_service_id string, body Gr4vy
     var r Gr4vyPaymentService = Gr4vyPaymentService(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) UpdatePaymentServiceWithContext(payment_service_id string, body Gr4vyPaymentServiceUpdate, ctx context.Context) (*Gr4vyPaymentService, *http.Response, error) {
+func (c *Gr4vyClient) UpdatePaymentServiceContext(ctx context.Context, payment_service_id string, body Gr4vyPaymentServiceUpdate) (*Gr4vyPaymentService, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -183,7 +183,7 @@ func (c *Gr4vyClient) DeletePaymentService(payment_service_id string) (*http.Res
     }
     return http, err
 }
-func (c *Gr4vyClient) DeletePaymentServiceWithContext(payment_service_id string, ctx context.Context) (*http.Response, error) {
+func (c *Gr4vyClient) DeletePaymentServiceContext(ctx context.Context, payment_service_id string) (*http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, err

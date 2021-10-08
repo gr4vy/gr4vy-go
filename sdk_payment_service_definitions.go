@@ -2,7 +2,7 @@ package gr4vy
 
 import (
 	"net/http"
-	"golang.org/x/net/context"
+	"context"
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
@@ -29,7 +29,7 @@ func (c *Gr4vyClient) ListPaymentServiceDefinitions(limit *int32) (*Gr4vyPayment
     var r Gr4vyPaymentServiceDefinitions = Gr4vyPaymentServiceDefinitions(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) ListPaymentServiceDefinitionsWithContext(limit *int32, ctx context.Context) (*Gr4vyPaymentServiceDefinitions, *http.Response, error) {
+func (c *Gr4vyClient) ListPaymentServiceDefinitionsContext(ctx context.Context, limit *int32) (*Gr4vyPaymentServiceDefinitions, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -66,7 +66,7 @@ func (c *Gr4vyClient) GetPaymentServiceDefinition(payment_service_definition_id 
     var r Gr4vyPaymentServiceDefinition = Gr4vyPaymentServiceDefinition(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) GetPaymentServiceDefinitionWithContext(payment_service_definition_id string, ctx context.Context) (*Gr4vyPaymentServiceDefinition, *http.Response, error) {
+func (c *Gr4vyClient) GetPaymentServiceDefinitionContext(ctx context.Context, payment_service_definition_id string) (*Gr4vyPaymentServiceDefinition, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err

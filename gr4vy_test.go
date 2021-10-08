@@ -2,7 +2,7 @@ package gr4vy
 
 import (
 	"testing"
-	"golang.org/x/net/context"
+	"context"
 )
 
 const keyPath = "./private_key.pem"
@@ -87,7 +87,7 @@ func TestListBuyers(t *testing.T) {
 	}
 	t.Logf("%+v\n", *response)
 }
-func TestListBuyersWithContext(t *testing.T) {
+func TestListBuyersContext(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -96,7 +96,7 @@ func TestListBuyersWithContext(t *testing.T) {
 	client := NewGr4vyClient(gr4vyId, key)
 
 	var response *Gr4vyBuyers
-	response, _, err = client.ListBuyersWithContext(Int32(5), context.Background())
+	response, _, err = client.ListBuyersContext(context.Background(), Int32(5))
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
@@ -188,7 +188,7 @@ func TestListPaymentMethods(t *testing.T) {
 		return;
 	}
 }
-func TestListPaymentMethodsWithContext(t *testing.T) {
+func TestListPaymentMethodsContext(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -196,7 +196,7 @@ func TestListPaymentMethodsWithContext(t *testing.T) {
 	}
 	client := NewGr4vyClient(gr4vyId, key)
 
-	_, _, err = client.ListPaymentMethodsWithContext(nil, context.Background())
+	_, _, err = client.ListPaymentMethodsContext(context.Background(), nil)
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
@@ -274,7 +274,7 @@ func TestListPaymentOptions(t *testing.T) {
 		return;
 	}
 }
-func TestListPaymentOptionsWithContext(t *testing.T) {
+func TestListPaymentOptionsContext(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -282,7 +282,7 @@ func TestListPaymentOptionsWithContext(t *testing.T) {
 	}
 	client := NewGr4vyClient(gr4vyId, key)
 
-	_, _, err = client.ListPaymentOptionsWithContext(context.Background())
+	_, _, err = client.ListPaymentOptionsContext(context.Background())
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
@@ -303,7 +303,7 @@ func TestListPaymentServiceDefinitions(t *testing.T) {
 		return;
 	}
 }
-func TestListPaymentServiceDefinitionsWithContext(t *testing.T) {
+func TestListPaymentServiceDefinitionsContext(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -311,7 +311,7 @@ func TestListPaymentServiceDefinitionsWithContext(t *testing.T) {
 	}
 	client := NewGr4vyClient(gr4vyId, key)
 
-	_, _, err = client.ListPaymentServiceDefinitionsWithContext(nil, context.Background())
+	_, _, err = client.ListPaymentServiceDefinitionsContext(context.Background(), nil)
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
@@ -348,7 +348,7 @@ func TestListPaymentServices(t *testing.T) {
 	paymentServiceId = (*response.Items)[0].GetId()
 	t.Log("Set paymentServiceId: " + paymentServiceId)
 }
-func TestListPaymentServicesWithContext(t *testing.T) {
+func TestListPaymentServicesContext(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -357,7 +357,7 @@ func TestListPaymentServicesWithContext(t *testing.T) {
 	client := NewGr4vyClient(gr4vyId, key)
 
 	var response *Gr4vyPaymentServices
-	response, _, err = client.ListPaymentServicesWithContext(nil, context.Background())
+	response, _, err = client.ListPaymentServicesContext(context.Background(), nil)
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
@@ -456,7 +456,7 @@ func TestListTransactions(t *testing.T) {
 		return;
 	}
 }
-func TestListTransactionsWithContext(t *testing.T) {
+func TestListTransactionsContext(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
 		t.Errorf(err.Error())
@@ -464,7 +464,7 @@ func TestListTransactionsWithContext(t *testing.T) {
 	}
 	client := NewGr4vyClient(gr4vyId, key)
 
-	_, _, err = client.ListTransactionsWithContext(nil, context.Background())
+	_, _, err = client.ListTransactionsContext(context.Background(), nil)
 	if err != nil {
 		t.Errorf(err.Error())
 		return;

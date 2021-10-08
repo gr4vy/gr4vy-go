@@ -2,7 +2,7 @@ package gr4vy
 
 import (
 	"net/http"
-	"golang.org/x/net/context"
+	"context"
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
@@ -25,7 +25,7 @@ func (c *Gr4vyClient) ListPaymentOptions() (*Gr4vyPaymentOptions, *http.Response
     var r Gr4vyPaymentOptions = Gr4vyPaymentOptions(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) ListPaymentOptionsWithContext(ctx context.Context) (*Gr4vyPaymentOptions, *http.Response, error) {
+func (c *Gr4vyClient) ListPaymentOptionsContext(ctx context.Context) (*Gr4vyPaymentOptions, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err

@@ -2,7 +2,7 @@ package gr4vy
 
 import (
 	"net/http"
-	"golang.org/x/net/context"
+	"context"
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
@@ -30,7 +30,7 @@ func (c *Gr4vyClient) ListPaymentMethods(limit *int32) (*Gr4vyPaymentMethods, *h
     var r Gr4vyPaymentMethods = Gr4vyPaymentMethods(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) ListPaymentMethodsWithContext(limit *int32, ctx context.Context) (*Gr4vyPaymentMethods, *http.Response, error) {
+func (c *Gr4vyClient) ListPaymentMethodsContext(ctx context.Context, limit *int32) (*Gr4vyPaymentMethods, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -67,7 +67,7 @@ func (c *Gr4vyClient) GetPaymentMethod(payment_method_id string) (*Gr4vyPaymentM
     var r Gr4vyPaymentMethod = Gr4vyPaymentMethod(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) GetPaymentMethodWithContext(payment_method_id string, ctx context.Context) (*Gr4vyPaymentMethod, *http.Response, error) {
+func (c *Gr4vyClient) GetPaymentMethodContext(ctx context.Context, payment_method_id string) (*Gr4vyPaymentMethod, *http.Response, error) {
    client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -101,7 +101,7 @@ func (c *Gr4vyClient) StorePaymentMethod(body Gr4vyPaymentMethodRequest) (*Gr4vy
     var r Gr4vyPaymentMethod = Gr4vyPaymentMethod(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) StorePaymentMethodWithContext(body Gr4vyPaymentMethodRequest, ctx context.Context) (*Gr4vyPaymentMethod, *http.Response, error) {
+func (c *Gr4vyClient) StorePaymentMethodContext(ctx context.Context, body Gr4vyPaymentMethodRequest) (*Gr4vyPaymentMethod, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -134,7 +134,7 @@ func (c *Gr4vyClient) DeletePaymentMethod(payment_method_id string) (*http.Respo
     }
     return http, err
 }
-func (c *Gr4vyClient) DeletePaymentMethodWithContext(payment_method_id string, ctx context.Context) (*http.Response, error) {
+func (c *Gr4vyClient) DeletePaymentMethodContext(ctx context.Context, payment_method_id string) (*http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, err
