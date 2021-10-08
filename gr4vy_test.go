@@ -2,6 +2,7 @@ package gr4vy
 
 import (
 	"testing"
+	"context"
 )
 
 const keyPath = "./private_key.pem"
@@ -70,7 +71,6 @@ func TestAddBuyerAndEmbed(t *testing.T) {
 		return;
 	}
 }
-
 func TestListBuyers(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
@@ -81,6 +81,22 @@ func TestListBuyers(t *testing.T) {
 
 	var response *Gr4vyBuyers
 	response, _, err = client.ListBuyers(Int32(5))
+	if err != nil {
+		t.Errorf(err.Error())
+		return;
+	}
+	t.Logf("%+v\n", *response)
+}
+func TestListBuyersContext(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key)
+
+	var response *Gr4vyBuyers
+	response, _, err = client.ListBuyersContext(context.Background(), Int32(5))
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
@@ -172,6 +188,20 @@ func TestListPaymentMethods(t *testing.T) {
 		return;
 	}
 }
+func TestListPaymentMethodsContext(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key)
+
+	_, _, err = client.ListPaymentMethodsContext(context.Background(), nil)
+	if err != nil {
+		t.Errorf(err.Error())
+		return;
+	}
+}
 func TestStorePaymentMethod(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
@@ -244,6 +274,20 @@ func TestListPaymentOptions(t *testing.T) {
 		return;
 	}
 }
+func TestListPaymentOptionsContext(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key)
+
+	_, _, err = client.ListPaymentOptionsContext(context.Background())
+	if err != nil {
+		t.Errorf(err.Error())
+		return;
+	}
+}
 
 func TestListPaymentServiceDefinitions(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
@@ -254,6 +298,20 @@ func TestListPaymentServiceDefinitions(t *testing.T) {
 	client := NewGr4vyClient(gr4vyId, key)
 
 	_, _, err = client.ListPaymentServiceDefinitions(nil)
+	if err != nil {
+		t.Errorf(err.Error())
+		return;
+	}
+}
+func TestListPaymentServiceDefinitionsContext(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key)
+
+	_, _, err = client.ListPaymentServiceDefinitionsContext(context.Background(), nil)
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
@@ -283,6 +341,23 @@ func TestListPaymentServices(t *testing.T) {
 
 	var response *Gr4vyPaymentServices
 	response, _, err = client.ListPaymentServices(nil)
+	if err != nil {
+		t.Errorf(err.Error())
+		return;
+	}
+	paymentServiceId = (*response.Items)[0].GetId()
+	t.Log("Set paymentServiceId: " + paymentServiceId)
+}
+func TestListPaymentServicesContext(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key)
+
+	var response *Gr4vyPaymentServices
+	response, _, err = client.ListPaymentServicesContext(context.Background(), nil)
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
@@ -367,110 +442,6 @@ func TestDeletePaymentService(t *testing.T) {
 	t.Log("Deleted paymentService: " + paymentServiceIdDelete)
 }
 
-func TestListCardRules(t *testing.T) {
-	t.Skip("skipping test for now")
-	// key, err := GetKeyFromFile(keyPath)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return
-	// }
-	// client := NewGr4vyClient(gr4vyId, key)
-
-	// _, _, err = client.ListCardsRules(nil)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return;
-	// }
-}
-func TestAddCardRule(t *testing.T) {
-	t.Skip("skipping test for now")
-	// key, err := GetKeyFromFile(keyPath)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return
-	// }
-	// client := NewGr4vyClient(gr4vyId, key)
-	// var req Gr4vyAddCardRule
-	// helper := true
-	// req.Active = &helper
-	// var conditions []interface{}
-	// conditions = append(conditions, Gr4vyCardRuleCondition{Match: "number", Key: "amount", Operator: ">", Value: 100})
-	// req.Conditions = conditions
-	// req.PaymentServiceIds = []string{paymentServiceId}
-	// response, err := client.AddCardRule(req)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return;
-	// }
-	// var p Gr4vyCardRule
-	// defer response.Body.Close()
-	// err = json.NewDecoder(response.Body).Decode(&p)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return
-	// }
-	// cardRuleId = *p.Id
-	// t.Log("Set cardRuleId: " + cardRuleId)
-}
-// func TestGetCardRule(t *testing.T) {
-// 	t.Skip("skipping test for now")
-	// key, err := GetKeyFromFile(keyPath)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return
-	// }
-	// client := NewGr4vyClient(gr4vyId, key)
-
-	// response, err := client.GetCardRule(cardRuleId)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return;
-	// }
-	// var p Gr4vyCardRule
-	// defer response.Body.Close()
-	// err = json.NewDecoder(response.Body).Decode(&p)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return
-	// }
-	// t.Log("Retrieved cardRule: " + *p.Id)
-// }
-// func TestUpdateCardRule(t *testing.T) {
-// 	t.Skip("skipping test for now")
-	// key, err := GetKeyFromFile(keyPath)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return
-	// }
-	// client := NewGr4vyClient(gr4vyId, key)
-
-	// var req Gr4vyUpdateCardRule
-	// helper := true
-	// req.Active = &helper
-	// _, err = client.UpdateCardRule(cardRuleId, req)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return;
-	// }
-	// t.Log("Updated cardRule: " + cardRuleId)
-// }
-// func TestDeleteCardRule(t *testing.T) {
-// 	t.Skip("skipping test for now")
-	// key, err := GetKeyFromFile(keyPath)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return
-	// }
-	// client := NewGr4vyClient(gr4vyId, key)
-
-	// _, err = client.DeleteCardRule(cardRuleId)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return;
-	// }
-	// t.Log("Deleted cardRule: " + cardRuleId)
-// }
-
 func TestListTransactions(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
@@ -480,6 +451,20 @@ func TestListTransactions(t *testing.T) {
 	client := NewGr4vyClient(gr4vyId, key)
 
 	_, _, err = client.ListTransactions(nil)
+	if err != nil {
+		t.Errorf(err.Error())
+		return;
+	}
+}
+func TestListTransactionsContext(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key)
+
+	_, _, err = client.ListTransactionsContext(context.Background(), nil)
 	if err != nil {
 		t.Errorf(err.Error())
 		return;
