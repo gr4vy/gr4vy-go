@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -27,6 +27,8 @@ type PaymentOption struct {
 	Mode *string `json:"mode,omitempty"`
 	// A label that describes this payment option. This label is returned in the language defined by the `locale` query parameter. The label can be used to display a list of payment options to the buyer in their language.
 	Label *string `json:"label,omitempty"`
+	// A flag to indicate if storing the payment method is supported.
+	CanStorePaymentMethod *bool `json:"can_store_payment_method,omitempty"`
 }
 
 // NewPaymentOption instantiates a new PaymentOption object
@@ -216,6 +218,38 @@ func (o *PaymentOption) SetLabel(v string) {
 	o.Label = &v
 }
 
+// GetCanStorePaymentMethod returns the CanStorePaymentMethod field value if set, zero value otherwise.
+func (o *PaymentOption) GetCanStorePaymentMethod() bool {
+	if o == nil || o.CanStorePaymentMethod == nil {
+		var ret bool
+		return ret
+	}
+	return *o.CanStorePaymentMethod
+}
+
+// GetCanStorePaymentMethodOk returns a tuple with the CanStorePaymentMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentOption) GetCanStorePaymentMethodOk() (*bool, bool) {
+	if o == nil || o.CanStorePaymentMethod == nil {
+		return nil, false
+	}
+	return o.CanStorePaymentMethod, true
+}
+
+// HasCanStorePaymentMethod returns a boolean if a field has been set.
+func (o *PaymentOption) HasCanStorePaymentMethod() bool {
+	if o != nil && o.CanStorePaymentMethod != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCanStorePaymentMethod gets a reference to the given bool and assigns it to the CanStorePaymentMethod field.
+func (o *PaymentOption) SetCanStorePaymentMethod(v bool) {
+	o.CanStorePaymentMethod = &v
+}
+
 func (o PaymentOption) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -232,6 +266,9 @@ func (o PaymentOption) MarshalJSON() ([]byte, error) {
 	}
 	if o.Label != nil {
 		toSerialize["label"] = o.Label
+	}
+	if o.CanStorePaymentMethod != nil {
+		toSerialize["can_store_payment_method"] = o.CanStorePaymentMethod
 	}
 	return json.Marshal(toSerialize)
 }

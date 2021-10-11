@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -29,6 +29,8 @@ type PaymentMethodTokenized struct {
 	Scheme NullableString `json:"scheme,omitempty"`
 	// The expiration date for the payment method.
 	ExpirationDate NullableString `json:"expiration_date,omitempty"`
+	// The optional URL that the buyer needs to be redirected to to further authorize their payment.
+	ApprovalUrl NullableString `json:"approval_url,omitempty"`
 }
 
 // NewPaymentMethodTokenized instantiates a new PaymentMethodTokenized object
@@ -260,6 +262,48 @@ func (o *PaymentMethodTokenized) UnsetExpirationDate() {
 	o.ExpirationDate.Unset()
 }
 
+// GetApprovalUrl returns the ApprovalUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethodTokenized) GetApprovalUrl() string {
+	if o == nil || o.ApprovalUrl.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ApprovalUrl.Get()
+}
+
+// GetApprovalUrlOk returns a tuple with the ApprovalUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethodTokenized) GetApprovalUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ApprovalUrl.Get(), o.ApprovalUrl.IsSet()
+}
+
+// HasApprovalUrl returns a boolean if a field has been set.
+func (o *PaymentMethodTokenized) HasApprovalUrl() bool {
+	if o != nil && o.ApprovalUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetApprovalUrl gets a reference to the given NullableString and assigns it to the ApprovalUrl field.
+func (o *PaymentMethodTokenized) SetApprovalUrl(v string) {
+	o.ApprovalUrl.Set(&v)
+}
+// SetApprovalUrlNil sets the value for ApprovalUrl to be an explicit nil
+func (o *PaymentMethodTokenized) SetApprovalUrlNil() {
+	o.ApprovalUrl.Set(nil)
+}
+
+// UnsetApprovalUrl ensures that no value is present for ApprovalUrl, not even an explicit nil
+func (o *PaymentMethodTokenized) UnsetApprovalUrl() {
+	o.ApprovalUrl.Unset()
+}
+
 func (o PaymentMethodTokenized) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -279,6 +323,9 @@ func (o PaymentMethodTokenized) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExpirationDate.IsSet() {
 		toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	}
+	if o.ApprovalUrl.IsSet() {
+		toSerialize["approval_url"] = o.ApprovalUrl.Get()
 	}
 	return json.Marshal(toSerialize)
 }

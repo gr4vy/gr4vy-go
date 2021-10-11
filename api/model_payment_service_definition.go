@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -31,6 +31,9 @@ type PaymentServiceDefinition struct {
 	SupportedCurrencies *[]string `json:"supported_currencies,omitempty"`
 	// A list of two-letter ISO country codes that this service supports.
 	SupportedCountries *[]string `json:"supported_countries,omitempty"`
+	SupportedFeatures *PaymentServiceDefinitionSupportedFeatures `json:"supported_features,omitempty"`
+	// An icon to display for the payment service.
+	IconUrl NullableString `json:"icon_url,omitempty"`
 }
 
 // NewPaymentServiceDefinition instantiates a new PaymentServiceDefinition object
@@ -278,6 +281,80 @@ func (o *PaymentServiceDefinition) SetSupportedCountries(v []string) {
 	o.SupportedCountries = &v
 }
 
+// GetSupportedFeatures returns the SupportedFeatures field value if set, zero value otherwise.
+func (o *PaymentServiceDefinition) GetSupportedFeatures() PaymentServiceDefinitionSupportedFeatures {
+	if o == nil || o.SupportedFeatures == nil {
+		var ret PaymentServiceDefinitionSupportedFeatures
+		return ret
+	}
+	return *o.SupportedFeatures
+}
+
+// GetSupportedFeaturesOk returns a tuple with the SupportedFeatures field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinition) GetSupportedFeaturesOk() (*PaymentServiceDefinitionSupportedFeatures, bool) {
+	if o == nil || o.SupportedFeatures == nil {
+		return nil, false
+	}
+	return o.SupportedFeatures, true
+}
+
+// HasSupportedFeatures returns a boolean if a field has been set.
+func (o *PaymentServiceDefinition) HasSupportedFeatures() bool {
+	if o != nil && o.SupportedFeatures != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSupportedFeatures gets a reference to the given PaymentServiceDefinitionSupportedFeatures and assigns it to the SupportedFeatures field.
+func (o *PaymentServiceDefinition) SetSupportedFeatures(v PaymentServiceDefinitionSupportedFeatures) {
+	o.SupportedFeatures = &v
+}
+
+// GetIconUrl returns the IconUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentServiceDefinition) GetIconUrl() string {
+	if o == nil || o.IconUrl.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.IconUrl.Get()
+}
+
+// GetIconUrlOk returns a tuple with the IconUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentServiceDefinition) GetIconUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.IconUrl.Get(), o.IconUrl.IsSet()
+}
+
+// HasIconUrl returns a boolean if a field has been set.
+func (o *PaymentServiceDefinition) HasIconUrl() bool {
+	if o != nil && o.IconUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetIconUrl gets a reference to the given NullableString and assigns it to the IconUrl field.
+func (o *PaymentServiceDefinition) SetIconUrl(v string) {
+	o.IconUrl.Set(&v)
+}
+// SetIconUrlNil sets the value for IconUrl to be an explicit nil
+func (o *PaymentServiceDefinition) SetIconUrlNil() {
+	o.IconUrl.Set(nil)
+}
+
+// UnsetIconUrl ensures that no value is present for IconUrl, not even an explicit nil
+func (o *PaymentServiceDefinition) UnsetIconUrl() {
+	o.IconUrl.Unset()
+}
+
 func (o PaymentServiceDefinition) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -300,6 +377,12 @@ func (o PaymentServiceDefinition) MarshalJSON() ([]byte, error) {
 	}
 	if o.SupportedCountries != nil {
 		toSerialize["supported_countries"] = o.SupportedCountries
+	}
+	if o.SupportedFeatures != nil {
+		toSerialize["supported_features"] = o.SupportedFeatures
+	}
+	if o.IconUrl.IsSet() {
+		toSerialize["icon_url"] = o.IconUrl.Get()
 	}
 	return json.Marshal(toSerialize)
 }

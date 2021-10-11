@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -18,7 +18,7 @@ import (
 // TransactionRefundRequest A request to refund a transaction.
 type TransactionRefundRequest struct {
 	// The (partial) amount to refund.  When omitted blank, this will refund the entire amount.
-	Amount *float32 `json:"amount,omitempty"`
+	Amount *int32 `json:"amount,omitempty"`
 }
 
 // NewTransactionRefundRequest instantiates a new TransactionRefundRequest object
@@ -39,9 +39,9 @@ func NewTransactionRefundRequestWithDefaults() *TransactionRefundRequest {
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *TransactionRefundRequest) GetAmount() float32 {
+func (o *TransactionRefundRequest) GetAmount() int32 {
 	if o == nil || o.Amount == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Amount
@@ -49,7 +49,7 @@ func (o *TransactionRefundRequest) GetAmount() float32 {
 
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransactionRefundRequest) GetAmountOk() (*float32, bool) {
+func (o *TransactionRefundRequest) GetAmountOk() (*int32, bool) {
 	if o == nil || o.Amount == nil {
 		return nil, false
 	}
@@ -65,8 +65,8 @@ func (o *TransactionRefundRequest) HasAmount() bool {
 	return false
 }
 
-// SetAmount gets a reference to the given float32 and assigns it to the Amount field.
-func (o *TransactionRefundRequest) SetAmount(v float32) {
+// SetAmount gets a reference to the given int32 and assigns it to the Amount field.
+func (o *TransactionRefundRequest) SetAmount(v int32) {
 	o.Amount = &v
 }
 

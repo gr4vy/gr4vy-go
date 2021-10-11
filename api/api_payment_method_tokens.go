@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -25,54 +25,56 @@ var (
 	_ _context.Context
 )
 
-// UsersApiService UsersApi service
-type UsersApiService service
+// PaymentMethodTokensApiService PaymentMethodTokensApi service
+type PaymentMethodTokensApiService service
 
-type ApiDeleteUserRequest struct {
+type ApiListPaymentMethodTokensRequest struct {
 	ctx _context.Context
-	ApiService *UsersApiService
-	userId string
+	ApiService *PaymentMethodTokensApiService
+	paymentMethodId string
 }
 
 
-func (r ApiDeleteUserRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteUserExecute(r)
+func (r ApiListPaymentMethodTokensRequest) Execute() (PaymentMethodTokens, *_nethttp.Response, error) {
+	return r.ApiService.ListPaymentMethodTokensExecute(r)
 }
 
 /*
- * DeleteUser Delete user
- * Deletes a user record. Any associated sessions will also be deleted.
+ * ListPaymentMethodTokens List payment method tokens
+ * Returns a list of PSP tokens for a given payment method.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param userId The unique ID for a user.
- * @return ApiDeleteUserRequest
+ * @param paymentMethodId The ID of the payment method.
+ * @return ApiListPaymentMethodTokensRequest
  */
-func (a *UsersApiService) DeleteUser(ctx _context.Context, userId string) ApiDeleteUserRequest {
-	return ApiDeleteUserRequest{
+func (a *PaymentMethodTokensApiService) ListPaymentMethodTokens(ctx _context.Context, paymentMethodId string) ApiListPaymentMethodTokensRequest {
+	return ApiListPaymentMethodTokensRequest{
 		ApiService: a,
 		ctx: ctx,
-		userId: userId,
+		paymentMethodId: paymentMethodId,
 	}
 }
 
 /*
  * Execute executes the request
+ * @return PaymentMethodTokens
  */
-func (a *UsersApiService) DeleteUserExecute(r ApiDeleteUserRequest) (*_nethttp.Response, error) {
+func (a *PaymentMethodTokensApiService) ListPaymentMethodTokensExecute(r ApiListPaymentMethodTokensRequest) (PaymentMethodTokens, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodDelete
+		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
+		localVarReturnValue  PaymentMethodTokens
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "UsersApiService.DeleteUser")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentMethodTokensApiService.ListPaymentMethodTokens")
 	if err != nil {
-		return nil, GenericOpenAPIError{error: err.Error()}
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/users/{user_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"user_id"+"}", _neturl.PathEscape(parameterToString(r.userId, "")), -1)
+	localVarPath := localBasePath + "/payment-methods/{payment_method_id}/tokens"
+	localVarPath = strings.Replace(localVarPath, "{"+"payment_method_id"+"}", _neturl.PathEscape(parameterToString(r.paymentMethodId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -97,19 +99,19 @@ func (a *UsersApiService) DeleteUserExecute(r ApiDeleteUserRequest) (*_nethttp.R
 	}
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
-		return nil, err
+		return localVarReturnValue, nil, err
 	}
 
 	localVarHTTPResponse, err := a.client.callAPI(req)
 	if err != nil || localVarHTTPResponse == nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
 	localVarHTTPResponse.Body.Close()
 	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
 	if err != nil {
-		return localVarHTTPResponse, err
+		return localVarReturnValue, localVarHTTPResponse, err
 	}
 
 	if localVarHTTPResponse.StatusCode >= 300 {
@@ -122,22 +124,31 @@ func (a *UsersApiService) DeleteUserExecute(r ApiDeleteUserRequest) (*_nethttp.R
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarHTTPResponse, newErr
+			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v Error404NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
-				return localVarHTTPResponse, newErr
+				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
 		}
-		return localVarHTTPResponse, newErr
+		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
-	return localVarHTTPResponse, nil
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
 }

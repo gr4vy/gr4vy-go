@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers. | [optional] 
 **DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
+**BillingDetails** | Pointer to [**NullableBillingDetails**](BillingDetails.md) | The optional billing details to create a buyer. | [optional] 
 
 ## Methods
 
@@ -96,6 +97,41 @@ HasDisplayName returns a boolean if a field has been set.
 `func (o *BuyerRequest) UnsetDisplayName()`
 
 UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
+### GetBillingDetails
+
+`func (o *BuyerRequest) GetBillingDetails() BillingDetails`
+
+GetBillingDetails returns the BillingDetails field if non-nil, zero value otherwise.
+
+### GetBillingDetailsOk
+
+`func (o *BuyerRequest) GetBillingDetailsOk() (*BillingDetails, bool)`
+
+GetBillingDetailsOk returns a tuple with the BillingDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBillingDetails
+
+`func (o *BuyerRequest) SetBillingDetails(v BillingDetails)`
+
+SetBillingDetails sets BillingDetails field to given value.
+
+### HasBillingDetails
+
+`func (o *BuyerRequest) HasBillingDetails() bool`
+
+HasBillingDetails returns a boolean if a field has been set.
+
+### SetBillingDetailsNil
+
+`func (o *BuyerRequest) SetBillingDetailsNil(b bool)`
+
+ SetBillingDetailsNil sets the value for BillingDetails to be an explicit nil
+
+### UnsetBillingDetails
+`func (o *BuyerRequest) UnsetBillingDetails()`
+
+UnsetBillingDetails ensures that no value is present for BillingDetails, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

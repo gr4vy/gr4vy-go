@@ -16,3 +16,7 @@ rm -rf api/go.sum
 var1='var environment ENVIRONMENT = "production"'
 rep1='var environment string = "production"'
 sed -i '' "s/$var1/$rep1/g" ./api/*.go
+
+var1='Undefined'
+rep1='ThreeDSecureDataV2'
+sed -i '' "s/$var1/$rep1/g" ./api/model_transaction_request.go

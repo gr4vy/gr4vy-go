@@ -11,6 +11,8 @@ Name | Type | Description | Notes
 **Fields** | Pointer to [**[]PaymentServiceDefinitionFields**](PaymentServiceDefinitionFields.md) | A list of fields that need to be submitted when activating the payment. service. | [optional] 
 **SupportedCurrencies** | Pointer to **[]string** | A list of three-letter ISO currency codes that this service supports. | [optional] 
 **SupportedCountries** | Pointer to **[]string** | A list of two-letter ISO country codes that this service supports. | [optional] 
+**SupportedFeatures** | Pointer to [**PaymentServiceDefinitionSupportedFeatures**](PaymentServiceDefinitionSupportedFeatures.md) |  | [optional] 
+**IconUrl** | Pointer to **NullableString** | An icon to display for the payment service. | [optional] 
 
 ## Methods
 
@@ -206,6 +208,66 @@ SetSupportedCountries sets SupportedCountries field to given value.
 
 HasSupportedCountries returns a boolean if a field has been set.
 
+### GetSupportedFeatures
+
+`func (o *PaymentServiceDefinition) GetSupportedFeatures() PaymentServiceDefinitionSupportedFeatures`
+
+GetSupportedFeatures returns the SupportedFeatures field if non-nil, zero value otherwise.
+
+### GetSupportedFeaturesOk
+
+`func (o *PaymentServiceDefinition) GetSupportedFeaturesOk() (*PaymentServiceDefinitionSupportedFeatures, bool)`
+
+GetSupportedFeaturesOk returns a tuple with the SupportedFeatures field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSupportedFeatures
+
+`func (o *PaymentServiceDefinition) SetSupportedFeatures(v PaymentServiceDefinitionSupportedFeatures)`
+
+SetSupportedFeatures sets SupportedFeatures field to given value.
+
+### HasSupportedFeatures
+
+`func (o *PaymentServiceDefinition) HasSupportedFeatures() bool`
+
+HasSupportedFeatures returns a boolean if a field has been set.
+
+### GetIconUrl
+
+`func (o *PaymentServiceDefinition) GetIconUrl() string`
+
+GetIconUrl returns the IconUrl field if non-nil, zero value otherwise.
+
+### GetIconUrlOk
+
+`func (o *PaymentServiceDefinition) GetIconUrlOk() (*string, bool)`
+
+GetIconUrlOk returns a tuple with the IconUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIconUrl
+
+`func (o *PaymentServiceDefinition) SetIconUrl(v string)`
+
+SetIconUrl sets IconUrl field to given value.
+
+### HasIconUrl
+
+`func (o *PaymentServiceDefinition) HasIconUrl() bool`
+
+HasIconUrl returns a boolean if a field has been set.
+
+### SetIconUrlNil
+
+`func (o *PaymentServiceDefinition) SetIconUrlNil(b bool)`
+
+ SetIconUrlNil sets the value for IconUrl to be an explicit nil
+
+### UnsetIconUrl
+`func (o *PaymentServiceDefinition) UnsetIconUrl()`
+
+UnsetIconUrl ensures that no value is present for IconUrl, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

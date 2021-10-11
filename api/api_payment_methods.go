@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -304,8 +304,9 @@ func (r ApiListBuyerPaymentMethodsRequest) Execute() (PaymentMethodsTokenized, *
 
 /*
  * ListBuyerPaymentMethods List stored payment methods for a buyer
- * Returns a list of stored (tokenized) payment methods for a buyer in
-a short tokenized format.
+ * Returns a list of stored (tokenized) payment methods for a buyer in a short
+tokenized format. Only payment methods that are compatible with at least one
+active payment service in that region are shown.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListBuyerPaymentMethodsRequest
  */
@@ -583,11 +584,11 @@ func (a *PaymentMethodsApiService) ListPaymentMethodsExecute(r ApiListPaymentMet
 type ApiStorePaymentMethodRequest struct {
 	ctx _context.Context
 	ApiService *PaymentMethodsApiService
-	cardRequest *CardRequest
+	paymentMethodRequest *PaymentMethodRequest
 }
 
-func (r ApiStorePaymentMethodRequest) CardRequest(cardRequest CardRequest) ApiStorePaymentMethodRequest {
-	r.cardRequest = &cardRequest
+func (r ApiStorePaymentMethodRequest) PaymentMethodRequest(paymentMethodRequest PaymentMethodRequest) ApiStorePaymentMethodRequest {
+	r.paymentMethodRequest = &paymentMethodRequest
 	return r
 }
 
@@ -651,7 +652,7 @@ func (a *PaymentMethodsApiService) StorePaymentMethodExecute(r ApiStorePaymentMe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.cardRequest
+	localVarPostBody = r.paymentMethodRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -18,7 +18,7 @@ import (
 // TransactionsBatchCaptureRequest A request to capture multiple previously authorized transactions.
 type TransactionsBatchCaptureRequest struct {
 	// The (partial) amount to capture.  When left blank, this will capture the entire amount.
-	Amount float32 `json:"amount"`
+	Amount int32 `json:"amount"`
 	// A supported ISO-4217 currency code. 
 	Currency string `json:"currency"`
 	// An external identifier that can be used to match the transaction against your own records.
@@ -31,7 +31,7 @@ type TransactionsBatchCaptureRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransactionsBatchCaptureRequest(amount float32, currency string, transactionId string) *TransactionsBatchCaptureRequest {
+func NewTransactionsBatchCaptureRequest(amount int32, currency string, transactionId string) *TransactionsBatchCaptureRequest {
 	this := TransactionsBatchCaptureRequest{}
 	this.Amount = amount
 	this.Currency = currency
@@ -48,9 +48,9 @@ func NewTransactionsBatchCaptureRequestWithDefaults() *TransactionsBatchCaptureR
 }
 
 // GetAmount returns the Amount field value
-func (o *TransactionsBatchCaptureRequest) GetAmount() float32 {
+func (o *TransactionsBatchCaptureRequest) GetAmount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -59,7 +59,7 @@ func (o *TransactionsBatchCaptureRequest) GetAmount() float32 {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *TransactionsBatchCaptureRequest) GetAmountOk() (*float32, bool) {
+func (o *TransactionsBatchCaptureRequest) GetAmountOk() (*int32, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -67,7 +67,7 @@ func (o *TransactionsBatchCaptureRequest) GetAmountOk() (*float32, bool) {
 }
 
 // SetAmount sets field value
-func (o *TransactionsBatchCaptureRequest) SetAmount(v float32) {
+func (o *TransactionsBatchCaptureRequest) SetAmount(v int32) {
 	o.Amount = v
 }
 
