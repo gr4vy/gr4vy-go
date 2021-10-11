@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -41,7 +41,7 @@ var (
 	xmlCheck  = regexp.MustCompile(`(?i:(?:application|text)/xml)`)
 )
 
-// APIClient manages communication with the Gr4vy API (Beta) API v1.0
+// APIClient manages communication with the Gr4vy API API v1.1.0-beta
 // In most cases there should be only one, shared, APIClient.
 type APIClient struct {
 	cfg    *Configuration
@@ -50,6 +50,8 @@ type APIClient struct {
 	// API Services
 
 	BuyersApi *BuyersApiService
+
+	PaymentMethodTokensApi *PaymentMethodTokensApiService
 
 	PaymentMethodsApi *PaymentMethodsApiService
 
@@ -60,8 +62,6 @@ type APIClient struct {
 	PaymentServicesApi *PaymentServicesApiService
 
 	TransactionsApi *TransactionsApiService
-
-	UsersApi *UsersApiService
 }
 
 type service struct {
@@ -81,12 +81,12 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.BuyersApi = (*BuyersApiService)(&c.common)
+	c.PaymentMethodTokensApi = (*PaymentMethodTokensApiService)(&c.common)
 	c.PaymentMethodsApi = (*PaymentMethodsApiService)(&c.common)
 	c.PaymentOptionsApi = (*PaymentOptionsApiService)(&c.common)
 	c.PaymentServiceDefinitionsApi = (*PaymentServiceDefinitionsApiService)(&c.common)
 	c.PaymentServicesApi = (*PaymentServicesApiService)(&c.common)
 	c.TransactionsApi = (*TransactionsApiService)(&c.common)
-	c.UsersApi = (*UsersApiService)(&c.common)
 
 	return c
 }

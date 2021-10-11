@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Method** | **string** | &#x60;id&#x60;. | 
 **Id** | **string** | A ID that represents a previously tokenized payment method. This token can represent any type of payment method. | 
+**RedirectUrl** | Pointer to **string** | We strongly recommended providing a &#x60;redirect_url&#x60; for stored cards when 3-D Secure is enabled and &#x60;three_d_secure_data&#x60; is not provided. This will be appended with both a transaction ID and status (e.g. &#x60;https://example.com/callback? gr4vy_transaction_id&#x3D;123&amp;gr4vy_transaction_status&#x3D;capture_succeeded&#x60;) after 3-D Secure has completed. | [optional] 
 
 ## Methods
 
@@ -65,6 +66,31 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+
+### GetRedirectUrl
+
+`func (o *TokenizedRequest) GetRedirectUrl() string`
+
+GetRedirectUrl returns the RedirectUrl field if non-nil, zero value otherwise.
+
+### GetRedirectUrlOk
+
+`func (o *TokenizedRequest) GetRedirectUrlOk() (*string, bool)`
+
+GetRedirectUrlOk returns a tuple with the RedirectUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRedirectUrl
+
+`func (o *TokenizedRequest) SetRedirectUrl(v string)`
+
+SetRedirectUrl sets RedirectUrl field to given value.
+
+### HasRedirectUrl
+
+`func (o *TokenizedRequest) HasRedirectUrl() bool`
+
+HasRedirectUrl returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 
 ## StorePaymentMethod
 
-> PaymentMethod StorePaymentMethod(ctx).CardRequest(cardRequest).Execute()
+> PaymentMethod StorePaymentMethod(ctx).PaymentMethodRequest(paymentMethodRequest).Execute()
 
 New payment method
 
@@ -319,11 +319,11 @@ import (
 )
 
 func main() {
-    cardRequest := *openapiclient.NewCardRequest("card", "4111111111111111", "11/25", "123") // CardRequest |  (optional)
+    paymentMethodRequest := *openapiclient.NewPaymentMethodRequest("card") // PaymentMethodRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentMethodsApi.StorePaymentMethod(context.Background()).CardRequest(cardRequest).Execute()
+    resp, r, err := api_client.PaymentMethodsApi.StorePaymentMethod(context.Background()).PaymentMethodRequest(paymentMethodRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentMethodsApi.StorePaymentMethod``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -344,7 +344,7 @@ Other parameters are passed through a pointer to a apiStorePaymentMethodRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **cardRequest** | [**CardRequest**](CardRequest.md) |  | 
+ **paymentMethodRequest** | [**PaymentMethodRequest**](PaymentMethodRequest.md) |  | 
 
 ### Return type
 

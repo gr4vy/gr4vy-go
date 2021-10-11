@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -25,11 +25,11 @@ type Transaction struct {
 	// The status of the transaction being processed. This is different from the `status` field in that it represents the status of the transaction at the payment processor, not the status of the transaction created in Gr4vy.
 	Status *string `json:"status,omitempty"`
 	// The authorized amount for this transaction. This can be different than the actual captured amount and part of this amount may be refunded.
-	Amount *float32 `json:"amount,omitempty"`
+	Amount *int32 `json:"amount,omitempty"`
 	// The captured amount for this transaction. This can be a part and in some cases even more than the authorized amount.
-	CapturedAmount *float32 `json:"captured_amount,omitempty"`
+	CapturedAmount *int32 `json:"captured_amount,omitempty"`
 	// The refunded amount for this transaction. This can be a part or all of the captured amount.
-	RefundedAmount *float32 `json:"refunded_amount,omitempty"`
+	RefundedAmount *int32 `json:"refunded_amount,omitempty"`
 	// The currency code for this transaction.
 	Currency *string `json:"currency,omitempty"`
 	// The payment method used for this transaction.
@@ -166,9 +166,9 @@ func (o *Transaction) SetStatus(v string) {
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *Transaction) GetAmount() float32 {
+func (o *Transaction) GetAmount() int32 {
 	if o == nil || o.Amount == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Amount
@@ -176,7 +176,7 @@ func (o *Transaction) GetAmount() float32 {
 
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetAmountOk() (*float32, bool) {
+func (o *Transaction) GetAmountOk() (*int32, bool) {
 	if o == nil || o.Amount == nil {
 		return nil, false
 	}
@@ -192,15 +192,15 @@ func (o *Transaction) HasAmount() bool {
 	return false
 }
 
-// SetAmount gets a reference to the given float32 and assigns it to the Amount field.
-func (o *Transaction) SetAmount(v float32) {
+// SetAmount gets a reference to the given int32 and assigns it to the Amount field.
+func (o *Transaction) SetAmount(v int32) {
 	o.Amount = &v
 }
 
 // GetCapturedAmount returns the CapturedAmount field value if set, zero value otherwise.
-func (o *Transaction) GetCapturedAmount() float32 {
+func (o *Transaction) GetCapturedAmount() int32 {
 	if o == nil || o.CapturedAmount == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.CapturedAmount
@@ -208,7 +208,7 @@ func (o *Transaction) GetCapturedAmount() float32 {
 
 // GetCapturedAmountOk returns a tuple with the CapturedAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetCapturedAmountOk() (*float32, bool) {
+func (o *Transaction) GetCapturedAmountOk() (*int32, bool) {
 	if o == nil || o.CapturedAmount == nil {
 		return nil, false
 	}
@@ -224,15 +224,15 @@ func (o *Transaction) HasCapturedAmount() bool {
 	return false
 }
 
-// SetCapturedAmount gets a reference to the given float32 and assigns it to the CapturedAmount field.
-func (o *Transaction) SetCapturedAmount(v float32) {
+// SetCapturedAmount gets a reference to the given int32 and assigns it to the CapturedAmount field.
+func (o *Transaction) SetCapturedAmount(v int32) {
 	o.CapturedAmount = &v
 }
 
 // GetRefundedAmount returns the RefundedAmount field value if set, zero value otherwise.
-func (o *Transaction) GetRefundedAmount() float32 {
+func (o *Transaction) GetRefundedAmount() int32 {
 	if o == nil || o.RefundedAmount == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.RefundedAmount
@@ -240,7 +240,7 @@ func (o *Transaction) GetRefundedAmount() float32 {
 
 // GetRefundedAmountOk returns a tuple with the RefundedAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetRefundedAmountOk() (*float32, bool) {
+func (o *Transaction) GetRefundedAmountOk() (*int32, bool) {
 	if o == nil || o.RefundedAmount == nil {
 		return nil, false
 	}
@@ -256,8 +256,8 @@ func (o *Transaction) HasRefundedAmount() bool {
 	return false
 }
 
-// SetRefundedAmount gets a reference to the given float32 and assigns it to the RefundedAmount field.
-func (o *Transaction) SetRefundedAmount(v float32) {
+// SetRefundedAmount gets a reference to the given int32 and assigns it to the RefundedAmount field.
+func (o *Transaction) SetRefundedAmount(v int32) {
 	o.RefundedAmount = &v
 }
 

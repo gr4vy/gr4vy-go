@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float32** | The (partial) amount to refund.  When omitted blank, this will refund the entire amount. | [optional] 
+**Amount** | Pointer to **int32** | The (partial) amount to refund.  When omitted blank, this will refund the entire amount. | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAmount
 
-`func (o *TransactionRefundRequest) GetAmount() float32`
+`func (o *TransactionRefundRequest) GetAmount() int32`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *TransactionRefundRequest) GetAmountOk() (*float32, bool)`
+`func (o *TransactionRefundRequest) GetAmountOk() (*int32, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *TransactionRefundRequest) SetAmount(v float32)`
+`func (o *TransactionRefundRequest) SetAmount(v int32)`
 
 SetAmount sets Amount field to given value.
 

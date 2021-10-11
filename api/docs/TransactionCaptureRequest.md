@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | Pointer to **float32** | The (partial) amount to capture.  When omitted blank, this will capture the entire amount. | [optional] 
+**Amount** | Pointer to **int32** | The monetary amount to capture an authorization for, in the smallest currency unit for the given currency, for example &#x60;1299&#x60; cents to create an authorization for &#x60;$12.99&#x60;.  When omitted blank, this will capture the entire amount. | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAmount
 
-`func (o *TransactionCaptureRequest) GetAmount() float32`
+`func (o *TransactionCaptureRequest) GetAmount() int32`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *TransactionCaptureRequest) GetAmountOk() (*float32, bool)`
+`func (o *TransactionCaptureRequest) GetAmountOk() (*int32, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *TransactionCaptureRequest) SetAmount(v float32)`
+`func (o *TransactionCaptureRequest) SetAmount(v int32)`
 
 SetAmount sets Amount field to given value.
 

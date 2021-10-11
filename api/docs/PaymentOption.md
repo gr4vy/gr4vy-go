@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **IconUrl** | Pointer to **NullableString** | An icon to display for the payment option. | [optional] 
 **Mode** | Pointer to **string** | The mode of how the payment option should be displayed. | [optional] 
 **Label** | Pointer to **string** | A label that describes this payment option. This label is returned in the language defined by the &#x60;locale&#x60; query parameter. The label can be used to display a list of payment options to the buyer in their language. | [optional] 
+**CanStorePaymentMethod** | Pointer to **bool** | A flag to indicate if storing the payment method is supported. | [optional] 
 
 ## Methods
 
@@ -163,6 +164,31 @@ SetLabel sets Label field to given value.
 `func (o *PaymentOption) HasLabel() bool`
 
 HasLabel returns a boolean if a field has been set.
+
+### GetCanStorePaymentMethod
+
+`func (o *PaymentOption) GetCanStorePaymentMethod() bool`
+
+GetCanStorePaymentMethod returns the CanStorePaymentMethod field if non-nil, zero value otherwise.
+
+### GetCanStorePaymentMethodOk
+
+`func (o *PaymentOption) GetCanStorePaymentMethodOk() (*bool, bool)`
+
+GetCanStorePaymentMethodOk returns a tuple with the CanStorePaymentMethod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanStorePaymentMethod
+
+`func (o *PaymentOption) SetCanStorePaymentMethod(v bool)`
+
+SetCanStorePaymentMethod sets CanStorePaymentMethod field to given value.
+
+### HasCanStorePaymentMethod
+
+`func (o *PaymentOption) HasCanStorePaymentMethod() bool`
+
+HasCanStorePaymentMethod returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -4,19 +4,20 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **float32** | The monetary amount to create an authorization for, in the smallest currency unit for the given currency, for example &#x60;1299&#x60; cents to create an authorization for &#x60;$12.99&#x60;.  For BitCoin, this value will be a decimal point number, for example &#x60;0.0039&#x60;. | 
+**Amount** | **int32** | The monetary amount to create an authorization for, in the smallest currency unit for the given currency, for example &#x60;1299&#x60; cents to create an authorization for &#x60;$12.99&#x60;.  For BitCoin, this value will be a decimal point number, for example &#x60;0.0039&#x60;. | 
 **Currency** | **string** | A supported ISO-4217 currency code. | 
 **PaymentMethod** | [**TransactionPaymentMethodRequest**](TransactionPaymentMethodRequest.md) |  | 
 **Store** | Pointer to **bool** | Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. | [optional] [default to false]
 **Intent** | Pointer to **string** | Defines the intent of this API call. This determines the desired initial state of the transaction.  * &#x60;authorize&#x60; - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * &#x60;capture&#x60; - Optionally approves and then authorizes and captures the funds of the transaction. | [optional] [default to "authorize"]
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **Environment** | Pointer to **string** | Defines the environment to create this transaction in. Setting this to anything other than &#x60;production&#x60; will force Gr4vy to use the payment a service configured for that environment. | [optional] 
+**ThreeDSecureData** | Pointer to [**Undefined**](Undefined.md) |  | [optional] 
 
 ## Methods
 
 ### NewTransactionRequest
 
-`func NewTransactionRequest(amount float32, currency string, paymentMethod TransactionPaymentMethodRequest, ) *TransactionRequest`
+`func NewTransactionRequest(amount int32, currency string, paymentMethod TransactionPaymentMethodRequest, ) *TransactionRequest`
 
 NewTransactionRequest instantiates a new TransactionRequest object
 This constructor will assign default values to properties that have it defined,
@@ -33,20 +34,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAmount
 
-`func (o *TransactionRequest) GetAmount() float32`
+`func (o *TransactionRequest) GetAmount() int32`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *TransactionRequest) GetAmountOk() (*float32, bool)`
+`func (o *TransactionRequest) GetAmountOk() (*int32, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *TransactionRequest) SetAmount(v float32)`
+`func (o *TransactionRequest) SetAmount(v int32)`
 
 SetAmount sets Amount field to given value.
 
@@ -200,6 +201,31 @@ SetEnvironment sets Environment field to given value.
 `func (o *TransactionRequest) HasEnvironment() bool`
 
 HasEnvironment returns a boolean if a field has been set.
+
+### GetThreeDSecureData
+
+`func (o *TransactionRequest) GetThreeDSecureData() Undefined`
+
+GetThreeDSecureData returns the ThreeDSecureData field if non-nil, zero value otherwise.
+
+### GetThreeDSecureDataOk
+
+`func (o *TransactionRequest) GetThreeDSecureDataOk() (*Undefined, bool)`
+
+GetThreeDSecureDataOk returns a tuple with the ThreeDSecureData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetThreeDSecureData
+
+`func (o *TransactionRequest) SetThreeDSecureData(v Undefined)`
+
+SetThreeDSecureData sets ThreeDSecureData field to given value.
+
+### HasThreeDSecureData
+
+`func (o *TransactionRequest) HasThreeDSecureData() bool`
+
+HasThreeDSecureData returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

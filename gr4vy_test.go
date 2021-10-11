@@ -212,9 +212,9 @@ func TestStorePaymentMethod(t *testing.T) {
 
 	req := Gr4vyPaymentMethodRequest{
 		Method: "card",
-		Number: "4111111111111111",
-		ExpirationDate: "12/24",
-		SecurityCode: "123"	,
+		Number: StringPtr("4111111111111111"),
+		ExpirationDate: StringPtr("12/24"),
+		SecurityCode: StringPtr("123"),
 	}
 
 	var response *Gr4vyPaymentMethod
@@ -519,25 +519,22 @@ func TestGetTransaction(t *testing.T) {
 	t.Log("Retrieved transaction: " + *response.Id)
 }
 func TestCaptureTransaction(t *testing.T) {
-	t.Skip("skipping test for now")
-	// key, err := GetKeyFromFile(keyPath)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return
-	// }
-	// client := NewGr4vyClient(gr4vyId, key)
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key)
 
-	// var req Gr4vyCaptureTransaction
-	// req.Amount = 12.99
-	// req.Currency = "USD"
-	// response, err := client.CaptureTransaction(transactionId, req)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return;
-	// }
-	// if (response.StatusCode != 200) {
-	// 	t.Errorf("expected StatusCode 200: received: " + strconv.Itoa(response.StatusCode))
-	// }
+	req := Gr4vyTransactionCaptureRequest{
+		Amount: Int32(1299),
+	}
+	response, _, err := client.CaptureTransaction(transactionId, req)
+	if err != nil {
+		t.Errorf(err.Error())
+		return;
+	}
+	t.Log("Capture status: " + *response.Status)
 }
 func TestAuthorizeTransaction(t *testing.T) {
 	t.Skip("skipping test for now")

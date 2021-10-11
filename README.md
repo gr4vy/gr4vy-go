@@ -208,7 +208,7 @@ longer available.
 Run the tests to ensure the changes do not break any existing tests.
 
 ```sh
-go test
+go test -v
 ```
 
 ### Publishing

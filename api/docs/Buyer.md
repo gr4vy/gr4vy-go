@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The unique Gr4vy ID for this buyer. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. | [optional] 
 **DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
+**BillingDetails** | Pointer to [**NullableBillingDetails**](BillingDetails.md) | The billing details associated with a buyer. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this buyer was created in our system. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this buyer was last updated in our system. | [optional] 
 
@@ -150,6 +151,41 @@ HasDisplayName returns a boolean if a field has been set.
 `func (o *Buyer) UnsetDisplayName()`
 
 UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
+### GetBillingDetails
+
+`func (o *Buyer) GetBillingDetails() BillingDetails`
+
+GetBillingDetails returns the BillingDetails field if non-nil, zero value otherwise.
+
+### GetBillingDetailsOk
+
+`func (o *Buyer) GetBillingDetailsOk() (*BillingDetails, bool)`
+
+GetBillingDetailsOk returns a tuple with the BillingDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBillingDetails
+
+`func (o *Buyer) SetBillingDetails(v BillingDetails)`
+
+SetBillingDetails sets BillingDetails field to given value.
+
+### HasBillingDetails
+
+`func (o *Buyer) HasBillingDetails() bool`
+
+HasBillingDetails returns a boolean if a field has been set.
+
+### SetBillingDetailsNil
+
+`func (o *Buyer) SetBillingDetailsNil(b bool)`
+
+ SetBillingDetailsNil sets the value for BillingDetails to be an explicit nil
+
+### UnsetBillingDetails
+`func (o *Buyer) UnsetBillingDetails()`
+
+UnsetBillingDetails ensures that no value is present for BillingDetails, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *Buyer) GetCreatedAt() time.Time`

@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -33,6 +33,8 @@ type CardRequest struct {
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 	// Defines the environment to store this card for. Setting this to anything other than `production` will force Gr4vy to use the payment services configured for that environment.
 	Environment *string `json:"environment,omitempty"`
+	// The redirect URL to redirect a buyer after a 3D Secure flow has been completed. This will be appended with both a transaction ID and status (e.g. `https://example.com/callback? gr4vy_transaction_id=123&gr4vy_transaction_status=capture_succeeded`). This is required if the transaction request body does not include `three_d_secure_data`.
+	RedirectUrl *string `json:"redirect_url,omitempty"`
 }
 
 // NewCardRequest instantiates a new CardRequest object
@@ -290,6 +292,38 @@ func (o *CardRequest) SetEnvironment(v string) {
 	o.Environment = &v
 }
 
+// GetRedirectUrl returns the RedirectUrl field value if set, zero value otherwise.
+func (o *CardRequest) GetRedirectUrl() string {
+	if o == nil || o.RedirectUrl == nil {
+		var ret string
+		return ret
+	}
+	return *o.RedirectUrl
+}
+
+// GetRedirectUrlOk returns a tuple with the RedirectUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardRequest) GetRedirectUrlOk() (*string, bool) {
+	if o == nil || o.RedirectUrl == nil {
+		return nil, false
+	}
+	return o.RedirectUrl, true
+}
+
+// HasRedirectUrl returns a boolean if a field has been set.
+func (o *CardRequest) HasRedirectUrl() bool {
+	if o != nil && o.RedirectUrl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRedirectUrl gets a reference to the given string and assigns it to the RedirectUrl field.
+func (o *CardRequest) SetRedirectUrl(v string) {
+	o.RedirectUrl = &v
+}
+
 func (o CardRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -315,6 +349,9 @@ func (o CardRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
+	}
+	if o.RedirectUrl != nil {
+		toSerialize["redirect_url"] = o.RedirectUrl
 	}
 	return json.Marshal(toSerialize)
 }

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Amount** | **float32** | The (partial) amount to capture.  When left blank, this will capture the entire amount. | 
+**Amount** | **int32** | The (partial) amount to capture.  When left blank, this will capture the entire amount. | 
 **Currency** | **string** | A supported ISO-4217 currency code.  | 
 **ExternalIdentifier** | Pointer to **string** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **TransactionId** | **string** | The ID of the transaction to capture. | 
@@ -13,7 +13,7 @@ Name | Type | Description | Notes
 
 ### NewTransactionsBatchCaptureRequest
 
-`func NewTransactionsBatchCaptureRequest(amount float32, currency string, transactionId string, ) *TransactionsBatchCaptureRequest`
+`func NewTransactionsBatchCaptureRequest(amount int32, currency string, transactionId string, ) *TransactionsBatchCaptureRequest`
 
 NewTransactionsBatchCaptureRequest instantiates a new TransactionsBatchCaptureRequest object
 This constructor will assign default values to properties that have it defined,
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetAmount
 
-`func (o *TransactionsBatchCaptureRequest) GetAmount() float32`
+`func (o *TransactionsBatchCaptureRequest) GetAmount() int32`
 
 GetAmount returns the Amount field if non-nil, zero value otherwise.
 
 ### GetAmountOk
 
-`func (o *TransactionsBatchCaptureRequest) GetAmountOk() (*float32, bool)`
+`func (o *TransactionsBatchCaptureRequest) GetAmountOk() (*int32, bool)`
 
 GetAmountOk returns a tuple with the Amount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetAmount
 
-`func (o *TransactionsBatchCaptureRequest) SetAmount(v float32)`
+`func (o *TransactionsBatchCaptureRequest) SetAmount(v int32)`
 
 SetAmount sets Amount field to given value.
 

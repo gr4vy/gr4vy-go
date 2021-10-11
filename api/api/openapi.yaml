@@ -11,8 +11,8 @@ info:
     name: MIT
     url: https://raw.githubusercontent.com/gr4vy/gr4vy-openapi/main/LICENSE
   termsOfService: https://gr4vy.com
-  title: Gr4vy API (Beta)
-  version: "1.0"
+  title: Gr4vy API
+  version: 1.1.0-beta
 servers:
 - url: https://api.{gr4vy_id}.gr4vy.app
   variables:
@@ -35,10 +35,15 @@ tags:
       buyer's previously stored payment methods, allowing for faster checkout.
   name: Buyers
 - description: |-
-    In Gr4vy, a card rule defines how a card transaction is processed. It
-    determines which payment services are used, and with what priority, based
-    on the transaction amount, card type, and many more attributes.
-  name: Card Rules
+    In Gr4vy, a payment method token represents the token created by a payment
+    service for a payment method.
+
+    The payment method token API can be used to:
+
+    * List all the available tokens for a payment method
+    * Use these tokens to make direct API calls to that payment service,
+    without the need to go through Gr4vy.
+  name: Payment Method Tokens
 - description: |-
     In Gr4vy, a payment method represents a way in which a payment can be
     processed, for example a card payment, a PayPal payment, or a Bitcoin
@@ -327,8 +332,9 @@ paths:
   /buyers/payment-methods:
     get:
       description: |-
-        Returns a list of stored (tokenized) payment methods for a buyer in
-        a short tokenized format.
+        Returns a list of stored (tokenized) payment methods for a buyer in a short
+        tokenized format. Only payment methods that are compatible with at least one
+        active payment service in that region are shown.
       operationId: list-buyer-payment-methods
       parameters:
       - description: |-
@@ -397,7 +403,7 @@ paths:
                 $ref: '#/components/schemas/PaymentMethods--Tokenized'
           description: |-
             Returns a list of available payment methods for a buyer, filtered by the
-            the given currency and country code.
+            given currency and country code.
         "401":
           content:
             application/json:
@@ -506,7 +512,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/CardRequest'
+              $ref: '#/components/schemas/PaymentMethodRequest'
       responses:
         "201":
           content:
@@ -599,6 +605,43 @@ paths:
       summary: Get stored payment method
       tags:
       - Payment Methods
+  /payment-methods/{payment_method_id}/tokens:
+    get:
+      description: Returns a list of PSP tokens for a given payment method.
+      operationId: list-payment-method-tokens
+      parameters:
+      - description: The ID of the payment method.
+        explode: false
+        in: path
+        name: payment_method_id
+        required: true
+        schema:
+          example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodTokens'
+          description: Returns a list of payment method tokens.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: List payment method tokens
+      tags:
+      - Payment Method Tokens
   /payment-options:
     get:
       description: |-
@@ -1194,6 +1237,7 @@ paths:
                     number: "4111111111111111"
                     expiration_date: 11/25
                     security_code: "123"
+                    redirect_url: https://example.com/callback
               Authorized and tokenize a card:
                 value:
                   amount: 1299
@@ -1204,6 +1248,7 @@ paths:
                     number: "4111111111111111"
                     expiration_date: 11/25
                     security_code: "123"
+                    redirect_url: https://example.com/callback
               Authorize, capture, and tokenize a card:
                 value:
                   amount: 1299
@@ -1215,6 +1260,7 @@ paths:
                     number: "4111111111111111"
                     expiration_date: 11/25
                     security_code: "123"
+                    redirect_url: https://example.com/callback
               Authorize and capture a PayPal transaction:
                 value:
                   amount: 1299
@@ -1392,44 +1438,171 @@ paths:
       summary: Refund or void transactions
       tags:
       - Transactions
-  /users/{user_id}:
-    delete:
-      description: Deletes a user record. Any associated sessions will also be deleted.
-      operationId: delete-user
-      parameters:
-      - description: The unique ID for a user.
-        explode: false
-        in: path
-        name: user_id
-        required: true
-        schema:
-          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: Returns an empty response.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error401Unauthorized'
-          description: Returns an error if no valid authentication was provided.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error404NotFound'
-          description: Returns an error if the resource can not be found.
-      summary: Delete user
-      tags:
-      - Users
 components:
   schemas:
+    Address:
+      description: Billing details associated to a buyer.
+      properties:
+        city:
+          description: The city for the billing address.
+          example: London
+          maxLength: 100
+          minLength: 1
+          nullable: false
+          type: string
+        country:
+          description: The country for the billing address.
+          example: GB
+          maxLength: 2
+          minLength: 1
+          nullable: false
+          type: string
+        postal_code:
+          description: The postal code or zip code for the billing address.
+          example: "789123"
+          maxLength: 50
+          minLength: 1
+          nullable: false
+          type: string
+        state:
+          description: The state, county, or province for the billing address.
+          example: Greater London
+          maxLength: 255
+          minLength: 1
+          nullable: false
+          type: string
+        state_code:
+          description: |-
+            The code of state, county, or province for the billing address in
+            ISO 3166-2 format.
+          example: GB-LND
+          maxLength: 6
+          minLength: 4
+          nullable: true
+          type: string
+        house_number_or_name:
+          description: |-
+            The house number or name for the billing address. Not all payment
+            services use this field but some do.
+          example: "10"
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        line1:
+          description: The first line of the billing address.
+          example: 10 Oxford Street
+          maxLength: 255
+          minLength: 1
+          nullable: false
+          type: string
+        line2:
+          description: The second line of the billing address.
+          example: New Oxford Court
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        organization:
+          description: |-
+            The optional name of the company or organisation to add
+            to the billing address.
+          example: Gr4vy
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+      required:
+      - city
+      - country
+      - line1
+      - postal_code
+      - state
+      title: Address
+      type: object
+      x-tags:
+      - Buyers
+    AddressUpdate:
+      allOf:
+      - $ref: '#/components/schemas/Address'
+      required:
+      - city
+      - country
+      - house_number_or_name
+      - line1
+      - line2
+      - organization
+      - postal_code
+      - state
+      title: Address (Update)
+      type: object
+      x-tags:
+      - Buyers
+    BillingDetails:
+      description: Billing details to use associated to a buyer.
+      properties:
+        first_name:
+          description: The first name(s) or given name for the buyer.
+          example: John
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        last_name:
+          description: The last name, or family name, of the buyer.
+          example: Lunn
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        email_address:
+          description: The email address for the buyer.
+          example: john@example.com
+          maxLength: 320
+          minLength: 1
+          nullable: true
+          type: string
+        phone_number:
+          description: |-
+            The phone number to use for this request. This expect the number in the
+            [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
+          example: +1234567890
+          maxLength: 50
+          minLength: 1
+          nullable: true
+          pattern: ^\+[1-9]\d{1,14}$
+          type: string
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The billing address for the buyer.
+          nullable: true
+        tax_id:
+          allOf:
+          - $ref: '#/components/schemas/TaxId'
+          description: The tax information associated with the billing details.
+          nullable: true
+      title: Billing details request
+      type: object
+      x-tags:
+      - Buyers
+    BillingDetailsUpdateRequest:
+      allOf:
+      - $ref: '#/components/schemas/BillingDetails'
+      properties:
+        address:
+          allOf:
+          - $ref: '#/components/schemas/AddressUpdate'
+          description: Address associated with the billing details.
+          nullable: true
+      title: Billing Details Update Request
+      type: object
+      x-tags:
+      - Buyers
     Buyer:
       example:
         external_identifier: user-789123
+        billing_details: ""
         updated_at: 2013-07-16T19:23:00Z
         created_at: 2013-07-16T19:23:00Z
         id: fe26475d-ec3e-4884-9553-f7356683f7f9
@@ -1463,6 +1636,11 @@ components:
           minLength: 1
           nullable: true
           type: string
+        billing_details:
+          allOf:
+          - $ref: '#/components/schemas/BillingDetails'
+          description: The billing details associated with a buyer.
+          nullable: true
         created_at:
           description: |-
             The date and time
@@ -1489,12 +1667,14 @@ components:
         limit: 1
         items:
         - external_identifier: user-789123
+          billing_details: ""
           updated_at: 2013-07-16T19:23:00Z
           created_at: 2013-07-16T19:23:00Z
           id: fe26475d-ec3e-4884-9553-f7356683f7f9
           type: buyer
           display_name: John L.
         - external_identifier: user-789123
+          billing_details: ""
           updated_at: 2013-07-16T19:23:00Z
           created_at: 2013-07-16T19:23:00Z
           id: fe26475d-ec3e-4884-9553-f7356683f7f9
@@ -1569,6 +1749,12 @@ components:
           minLength: 1
           nullable: true
           type: string
+        billing_details:
+          allOf:
+          - $ref: '#/components/schemas/BillingDetails'
+          description: The billing details associated with the buyer, which include
+            the address and tax ID.
+          nullable: true
       title: Buyer (Snapshot)
       type: object
       x-tags:
@@ -1577,6 +1763,7 @@ components:
       description: A request to create a buyer.
       example:
         external_identifier: user-789123
+        billing_details: ""
         display_name: John L.
       properties:
         external_identifier:
@@ -1595,6 +1782,11 @@ components:
           minLength: 1
           nullable: true
           type: string
+        billing_details:
+          allOf:
+          - $ref: '#/components/schemas/BillingDetails'
+          description: The optional billing details to create a buyer.
+          nullable: true
       title: Buyer (Create)
       type: object
       x-tags:
@@ -1603,6 +1795,14 @@ components:
       allOf:
       - $ref: '#/components/schemas/BuyerRequest'
       description: A request to update a buyer.
+      example:
+        billing_details: ""
+      properties:
+        billing_details:
+          allOf:
+          - $ref: '#/components/schemas/BillingDetailsUpdateRequest'
+          description: The optional billing details to update a buyer.
+          nullable: true
       title: Buyer (Update)
       type: object
       x-tags:
@@ -1610,15 +1810,6 @@ components:
     CardRequest:
       description: Card details to use in a transaction or to register a new payment
         method.
-      example:
-        number: "4111111111111111"
-        external_identifier: user-789123
-        buyer_external_identifier: user-789123
-        environment: staging
-        security_code: "123"
-        method: card
-        expiration_date: 11/25
-        buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
       properties:
         method:
           description: '`card`.'
@@ -1654,7 +1845,7 @@ components:
         external_identifier:
           description: An external identifier that can be used to match the card against
             your own records.
-          example: user-789123
+          example: card-323444
           nullable: true
           type: string
         buyer_id:
@@ -1682,6 +1873,16 @@ components:
           - production
           example: staging
           type: string
+        redirect_url:
+          description: |-
+            The redirect URL to redirect a buyer after a 3D Secure flow
+            has been completed. This will be appended with both a
+            transaction ID and status (e.g. `https://example.com/callback?
+            gr4vy_transaction_id=123&gr4vy_transaction_status=capture_succeeded`).
+            This is required if the transaction request body does not
+            include `three_d_secure_data`.
+          example: https://example.com/callback
+          type: string
       required:
       - expiration_date
       - method
@@ -1691,460 +1892,6 @@ components:
       type: object
       x-tags:
       - Request Bodies
-    CardRule:
-      description: |-
-        A card rule that defines a custom payment provider to use for a card
-        transaction. Multiple rules can exists at any time and they are processed by
-        priority.
-      properties:
-        type:
-          description: '`card-rule`.'
-          enum:
-          - card-rule
-          example: card-rule
-          type: string
-        id:
-          description: The ID of the rule.
-          example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
-          format: uuid
-          type: string
-        active:
-          description: |-
-            Whether this rule is currently in use. Rules can be deactivated to allow
-            for them to be kept around and re-activated at a later date.
-          example: true
-          type: boolean
-        environment:
-          default: production
-          description: |-
-            The environment to use this rule in. This rule will only be used
-            for transactions created in that environment.
-          enum:
-          - development
-          - staging
-          - production
-          example: production
-          type: string
-        conditions:
-          description: |-
-            One or more conditions that apply for this rule. Each condition
-            needs to match for this rule to go into effect.
-          items:
-            $ref: '#/components/schemas/CardRuleCondition'
-          minItems: 1
-          type: array
-        payment_service_ids:
-          description: |-
-            A list of IDs for the payment services to use, in order of priority.
-            The payment services all need to process cards.
-          example:
-          - f47db210-8e30-4f74-8123-b834604f2042
-          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
-          items:
-            maxLength: 100
-            minLength: 1
-            type: string
-          type: array
-        position:
-          description: |-
-            The numeric rank of a rule. Rules with a lower position value
-            are processed first.
-          example: 1
-          type: number
-        unprocessable_fallback_strategy:
-          default: use_all_providers
-          description: |-
-            Defines what strategy to use when all of the payment services defined in
-            this rule declined or otherwise were not able to process the card.
-
-            * `use_all_providers` - Try all payment services enabled for this currency in
-            order of priority, even if they are not listed in this rule. This is the
-            default behaviour for a rule.
-            * `decline` - Decline the transaction.
-          enum:
-          - use_all_providers
-          - decline
-          example: use_all_providers
-          type: string
-        invalid_rule_fallback_strategy:
-          default: use_all_providers
-          description: |-
-            Defines what strategy to use when this rule is not valid. This can happen
-            when the rule has triggered for a certain transaction but none of the
-            listed payment services are eligible to process that transaction currency.
-
-            * `use_all_providers` - Try all payment services enabled for this currency in
-            order of priority, even if they are not listed in this rule. This is the
-            default behaviour for a rule.
-            * `skip` - Skip this rule and instead move on to the next highest priority
-            rule.
-            * `decline` - Decline the transaction.
-          enum:
-          - use_all_providers
-          - skip
-          - decline
-          example: use_all_providers
-          type: string
-        created_at:
-          description: The date and time when this rule was created.
-          example: 2012-12-12T10:53:43Z
-          format: date-time
-          type: string
-        updated_at:
-          description: The date and time when this rule was last updated.
-          example: 2012-12-12T10:53:43Z
-          format: date-time
-          type: string
-      title: Card Rule
-      type: object
-      x-tags:
-      - Card Rules
-    CardRules:
-      description: A list of card rules.
-      properties:
-        items:
-          description: A list of card rules.
-          items:
-            $ref: '#/components/schemas/CardRule'
-          type: array
-        limit:
-          default: 20
-          description: |-
-            The limit applied to request. This represents the number of items that are at
-            maximum returned by this request.
-          example: 1
-          format: int32
-          maximum: 100
-          minimum: 1
-          type: integer
-        next_cursor:
-          description: |-
-            The cursor that represents the next page of results. Use the `cursor` query
-            parameter to fetch this page of items.
-          example: ZXhhbXBsZTE
-          maxLength: 1000
-          minLength: 1
-          nullable: true
-          type: string
-        previous_cursor:
-          description: |-
-            The cursor that represents the next page of results. Use the `cursor` query
-            parameter to fetch this page of items.
-          maxLength: 1000
-          minLength: 1
-          nullable: true
-          type: string
-      title: Card Rules
-      type: object
-      x-tags:
-      - Card Rules
-    CardRuleCondition:
-      description: Generic card rule condition.
-      properties:
-        match:
-          description: The type of match made for this rule.
-          enum:
-          - number
-          - text
-          example: number
-          type: string
-        key:
-          description: The transaction field to filter by.
-          enum:
-          - amount
-          - currency
-          - scheme
-          example: amount
-          type: string
-        operator:
-          description: The comparison to make to `value` property.
-          enum:
-          - ==
-          - '!='
-          - <=
-          - '>='
-          - '>'
-          - <
-          - IN
-          - NOT IN
-          example: '>='
-          type: string
-        value:
-          $ref: '#/components/schemas/undefined'
-      required:
-      - key
-      - match
-      - operator
-      - value
-      title: Card rule (Generic condition)
-      type: object
-      x-tags:
-      - Card Workflows
-    CardRuleNumberCondition:
-      description: |-
-        Part of a rule that matches numeric fields. It defines the condition under
-        which this rule applies.
-      properties:
-        match:
-          description: '`number`.'
-          enum:
-          - number
-          example: number
-          type: string
-        key:
-          description: The transaction field to filter by.
-          enum:
-          - amount
-          example: amount
-          type: string
-        operator:
-          description: The comparison to make to `value` property.
-          enum:
-          - ==
-          - '!='
-          - <=
-          - '>='
-          - '>'
-          - <
-          example: '>='
-          type: string
-        value:
-          description: The values to compare the `key` to.
-          example: 200
-          maximum: 99999
-          minimum: 0
-          type: number
-      required:
-      - key
-      - match
-      - operator
-      - value
-      title: Card rule (Number condition)
-      type: object
-      x-tags:
-      - Card Workflows
-    CardRuleTextCondition:
-      description: |-
-        Part of a rule that matches text fields. It defines the condition under
-        which this rule applies.
-      properties:
-        match:
-          description: '`text`.'
-          enum:
-          - text
-          example: text
-          type: string
-        key:
-          description: The transaction field to filter by.
-          enum:
-          - currency
-          - scheme
-          example: currency
-          type: string
-        operator:
-          description: The comparison to make to `value` property.
-          enum:
-          - IN
-          - NOT IN
-          example: IN
-          type: string
-        value:
-          description: The values to compare the `key` to.
-          example:
-          - USD
-          - EUR
-          - amex
-          - visa
-          items:
-            maxLength: 50
-            minLength: 1
-            type: string
-          maxItems: 100
-          minItems: 1
-          type: array
-      required:
-      - key
-      - match
-      - operator
-      - value
-      title: Card rule (Text)
-      type: object
-      x-tags:
-      - Card Rules
-    CardRuleRequest:
-      description: Creates a new rule for a card transactions.
-      properties:
-        active:
-          description: |-
-            Whether this rule is currently in use. Rules can be deactivated to allow
-            for them to be kept around and re-activated at a later date.
-          example: true
-          type: boolean
-        environment:
-          default: production
-          description: |-
-            The environment to use this rule in. This rule will only be used
-            for transactions created in that environment.
-          enum:
-          - development
-          - staging
-          - production
-          example: production
-          type: string
-        position:
-          description: |-
-            The numeric rank of a rule. Rules with a lower position value
-            are processed first. When a rule is inserted at a position, any rules with
-            the the same value or higher are down a position accordingly. When left
-            out, the rule is inserted at the end of the list.
-          example: 1
-          type: number
-        conditions:
-          description: |-
-            One or more conditions that apply for this rule. Each condition
-            needs to match for this rule to go into effect.
-          items:
-            $ref: '#/components/schemas/CardRuleCondition'
-          minItems: 1
-          type: array
-        payment_service_ids:
-          description: |-
-            A list of IDs for the payment services to use, in order of priority.
-            The payment services all need to process cards.
-          example:
-          - f47db210-8e30-4f74-8123-b834604f2042
-          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
-          items:
-            maxLength: 100
-            minLength: 1
-            type: string
-          type: array
-        unprocessable_fallback_strategy:
-          default: use_all_providers
-          description: |-
-            Defines what strategy to use when all of the payment services defined in
-            this rule declined or otherwise were not able to process the card.
-
-            * `use_all_providers` - Try all payment services enabled for this currency in
-            order of priority, even if they are not listed in this rule. This is the
-            default behaviour for a rule.
-            * `decline` - Decline the transaction.
-          enum:
-          - use_all_providers
-          - decline
-          example: use_all_providers
-          type: string
-        invalid_rule_fallback_strategy:
-          default: use_all_providers
-          description: |-
-            Defines what strategy to use when this rule is not valid. This can happen
-            when the rule has triggered for a certain transaction but none of the
-            listed payment services are eligible to process that transaction currency.
-
-            * `use_all_providers` - Try all payment services enabled for this currency in
-            order of priority, even if they are not listed in this rule. This is the
-            default behaviour for a rule.
-            * `skip` - Skip this rule and instead move on to the next highest priority
-            rule.
-            * `decline` - Decline the transaction.
-          enum:
-          - use_all_providers
-          - skip
-          - decline
-          example: use_all_providers
-          type: string
-      required:
-      - conditions
-      - payment_service_ids
-      title: Card Rule (Create)
-      type: object
-      x-tags:
-      - Card Rules
-    CardRuleUpdate:
-      description: Updates a rule for a card transactions.
-      properties:
-        active:
-          description: |-
-            Whether this rule is currently in use. Rules can be deactivated to allow
-            for them to be kept around and re-activated at a later date.
-          example: true
-          type: boolean
-        environment:
-          default: production
-          description: |-
-            The environment to use this rule in. This rule will only be used
-            for transactions created in that environment.
-          enum:
-          - development
-          - staging
-          - production
-          example: production
-          type: string
-        position:
-          description: |-
-            The numeric rank of a rule. Rules with a lower position value
-            are processed first. When a rule is inserted at a position, any rules with
-            the the same value or higher are down a position accordingly.
-          example: 1
-          type: number
-        conditions:
-          description: |-
-            One or more conditions that apply for this rule. Each condition
-            needs to match for this rule to go into effect.
-          items:
-            $ref: '#/components/schemas/CardRuleCondition'
-          minItems: 1
-          type: array
-        payment_service_ids:
-          description: |-
-            A list of IDs for the payment services to use, in order of priority.
-            The payment services all need to process cards.
-          example:
-          - f47db210-8e30-4f74-8123-b834604f2042
-          - 0bb93ab0-86ef-4ad5-addf-b69913128d96
-          items:
-            maxLength: 100
-            minLength: 1
-            type: string
-          type: array
-        unprocessable_fallback_strategy:
-          default: use_all_providers
-          description: |-
-            Defines what strategy to use when all of the payment services defined in
-            this rule declined or otherwise were not able to process the card.
-
-            * `use_all_providers` - Try all payment services enabled for this currency in
-            order of priority, even if they are not listed in this rule. This is the
-            default behaviour for a rule.
-            * `decline` - Decline the transaction.
-          enum:
-          - use_all_providers
-          - decline
-          example: use_all_providers
-          type: string
-        invalid_rule_fallback_strategy:
-          default: use_all_providers
-          description: |-
-            Defines what strategy to use when this rule is not valid. This can happen
-            when the rule has triggered for a certain transaction but none of the
-            listed payment services are eligible to process that transaction currency.
-
-            * `use_all_providers` - Try all payment services enabled for this currency in
-            order of priority, even if they are not listed in this rule. This is the
-            default behaviour for a rule.
-            * `skip` - Skip this rule and instead move on to the next highest priority
-            rule.
-            * `decline` - Decline the transaction.
-          enum:
-          - use_all_providers
-          - skip
-          - decline
-          example: use_all_providers
-          type: string
-      title: Card Rule (Update)
-      type: object
-      x-tags:
-      - Card Rules
     ErrorGeneric:
       description: A generic client error.
       properties:
@@ -2628,6 +2375,7 @@ components:
         label: "1111"
         type: payment-method
         expiration_date: 11/25
+        approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
       properties:
         type:
           description: '`payment-method`.'
@@ -2679,6 +2427,12 @@ components:
           minLength: 5
           nullable: true
           pattern: ^\d{2}/\d{2}$
+          type: string
+        approval_url:
+          description: The optional URL that the buyer needs to be redirected to to
+            further authorize their payment.
+          example: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          nullable: true
           type: string
       title: Payment Method (Tokenized)
       type: object
@@ -2823,9 +2577,6 @@ components:
     PaymentMethods--Tokenized:
       description: A list of stored payment methods in token format.
       example:
-        previous_cursor: previous_cursor
-        next_cursor: ZXhhbXBsZTE
-        limit: 1
         items:
         - method: card
           scheme: visa
@@ -2833,66 +2584,221 @@ components:
           label: "1111"
           type: payment-method
           expiration_date: 11/25
+          approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
         - method: card
           scheme: visa
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           label: "1111"
           type: payment-method
           expiration_date: 11/25
+          approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
       properties:
         items:
           description: A list of stored payment methods in token format.
           items:
             $ref: '#/components/schemas/PaymentMethod--Tokenized'
           type: array
-        limit:
-          default: 20
-          description: |-
-            The limit applied to request. This represents the number of items that are at
-            maximum returned by this request.
-          example: 1
-          format: int32
-          maximum: 100
-          minimum: 1
-          type: integer
-        next_cursor:
-          description: |-
-            The cursor that represents the next page of results. Use the `cursor` query
-            parameter to fetch this page of items.
-          example: ZXhhbXBsZTE
-          maxLength: 1000
-          minLength: 1
-          nullable: true
-          type: string
-        previous_cursor:
-          description: |-
-            The cursor that represents the next page of results. Use the `cursor` query
-            parameter to fetch this page of items.
-          maxLength: 1000
-          minLength: 1
-          nullable: true
-          type: string
       title: Payment Methods (Token only)
       type: object
       x-tags:
       - Payment Methods
+    PaymentMethodToken:
+      description: A token for a payment method.
+      example:
+        payment_service: ""
+        id: cus_4QEiU0VT5E3Whi
+        type: payment-method-token
+        token: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
+      properties:
+        type:
+          description: '`payment-method-token`.'
+          enum:
+          - payment-method-token
+          example: payment-method-token
+          type: string
+        id:
+          description: |-
+            The external ID of this payment method as it has been registered with the
+            payment service, which can be used directly in combination with the
+            `token` without the need to go through Gr4vy for a transaction.
+
+            In some cases this is a different value to the `token` while in others
+            this value is identical. Please see the documentation for the payment
+            service for more details.
+          example: cus_4QEiU0VT5E3Whi
+          type: string
+        token:
+          description: |-
+            The token of this payment method as it has been registered with the
+            payment service, which can be used directly in combination with the
+            `id` without the need to go through Gr4vy for a transaction.
+
+            In some cases this is a different value to the `id` while in others
+            this value is identical. Please see the documentation for the payment
+            service for more details.
+          example: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
+          type: string
+        payment_service:
+          allOf:
+          - $ref: '#/components/schemas/PaymentService--Snapshot'
+          description: The payment service used for this transaction.
+      title: Payment method token
+      type: object
+      x-tags:
+      - Payment Method Tokens
+    PaymentMethodTokens:
+      description: A list of tokens for a payment method.
+      example:
+        items:
+        - payment_service: ""
+          id: cus_4QEiU0VT5E3Whi
+          type: payment-method-token
+          token: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
+        - payment_service: ""
+          id: cus_4QEiU0VT5E3Whi
+          type: payment-method-token
+          token: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
+      properties:
+        items:
+          description: A list of stored tokens for payment methods.
+          items:
+            $ref: '#/components/schemas/PaymentMethodToken'
+          type: array
+      title: Payment Method Tokens
+      type: object
+      x-tags:
+      - Payment Method Tokens
+    PaymentMethodRequest:
+      description: |-
+        Payment method details used to. register
+        a new payment method.
+      example:
+        number: "4111111111111111"
+        external_identifier: account-23423423
+        buyer_external_identifier: user-789123
+        environment: staging
+        security_code: "123"
+        method: card
+        expiration_date: 11/15
+        buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        redirect_url: https://example.com/callback
+      properties:
+        method:
+          description: The method to use for this request.
+          enum:
+          - card
+          - paypal
+          - banked
+          - token
+          example: card
+          type: string
+        number:
+          description: |-
+            The 15-16 digit number for this credit card as it can be found on the
+            front of the card.
+
+            If a card has been stored with us previously, this number will represent
+            the unique tokenized card ID provided via our API.
+          example: "4111111111111111"
+          maxLength: 16
+          minLength: 14
+          pattern: ^[0-9]{14,16}$
+          type: string
+        expiration_date:
+          description: |-
+            The expiration date of the card, formatted `MM/YY`. If a card has been
+            previously stored with us this value is optional.
+
+            If the `number` of this card represents a tokenized card, then this value
+            is ignored.
+          example: 11/15
+          maxLength: 5
+          minLength: 5
+          pattern: ^\d\d/\d\d$
+          type: string
+        security_code:
+          description: |-
+            The 3 or 4 digit security code often found on the card. This often
+            referred to as the CVV or CVD.
+
+            If the `number` of this card represents a tokenized card, then this value
+            is ignored.
+          example: "123"
+          maxLength: 4
+          minLength: 3
+          pattern: ^\d{3,4}$
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the card against
+            your own records.
+          example: account-23423423
+          nullable: true
+          type: string
+        buyer_id:
+          description: |-
+            The ID of the buyer to associate this payment method to. If this field is
+            provided then the `buyer_external_identifier` field needs to be unset.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        buyer_external_identifier:
+          description: |-
+            The `external_identifier` of the buyer to associate this payment method
+            to. If this field is provided then the `buyer_id` field
+            needs to be unset.
+          example: user-789123
+          type: string
+        redirect_url:
+          description: |-
+            The redirect URL to redirect a buyer to after they have authorized their
+            transaction or payment method. This only applies to payment methods that
+            require buyer approval.
+          example: https://example.com/callback
+          type: string
+        environment:
+          description: |-
+            Defines the environment to store this payment method in. Setting this to
+            anything other than `production` will force Gr4vy to use a payment
+            a service configured for that environment.
+          enum:
+          - development
+          - staging
+          - production
+          example: staging
+          type: string
+      required:
+      - method
+      title: Payment method request
+      type: object
+      x-tags:
+      - Request Bodies
     PaymentService:
       description: An active, configured payment service.
       example:
         method: card
         environments:
         - production
+        merchant_category_code: "5045"
+        acquirer_bin_discover: acquirer_bin_discover
+        acquirer_merchant_id: acquirer_merchant_id
+        merchant_name: gr4vy
         active: true
         created_at: 2012-12-12T10:53:43Z
         type: payment-service
         display_name: Stripe (Main)
+        acquirer_bin_visa: acquirer_bin_visa
         payment_service_definition_id: stripe-card
+        three_d_secure_enabled: true
+        acquirer_bin_amex: acquirer_bin_amex
+        merchant_country_code: "840"
         updated_at: 2012-12-12T10:53:43Z
         accepted_countries:
         - DE
         credentials_mode: live
         id: faaad066-30b4-4997-a438-242b0752d7e1
         position: 1
+        merchant_url: http://example.com/aeiou
+        acquirer_bin_mastercard: acquirer_bin_mastercard
         accepted_currencies:
         - EUR
         status: pending
@@ -2965,6 +2871,68 @@ components:
             type: string
           minItems: 1
           type: array
+        three_d_secure_enabled:
+          default: false
+          description: |-
+            Defines if 3-D Secure is enabled for the service (can only be
+            enabled if the payment service definition supports
+            the `three_d_secure_hosted` feature).
+            This does not affect pass through 3-D Secure data.
+          example: true
+          type: boolean
+        acquirer_bin_visa:
+          description: Acquiring institution identification code for VISA.
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_bin_mastercard:
+          description: Acquiring institution identification code for Mastercard.
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_bin_amex:
+          description: Acquiring institution identification code for Amex.
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_bin_discover:
+          description: Acquiring institution identification code for Discover.
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_merchant_id:
+          description: |-
+            Merchant identifier used in authorisation
+            requests (assigned by the acquirer).
+          maxLength: 35
+          nullable: true
+          type: string
+        merchant_name:
+          description: Merchant name (assigned by the acquirer).
+          example: gr4vy
+          maxLength: 40
+          nullable: true
+          type: string
+        merchant_country_code:
+          description: ISO 3166-1 numeric three-digit country code.
+          example: "840"
+          nullable: true
+          pattern: ^\d{3}$
+          type: string
+        merchant_category_code:
+          description: Merchant category code that describes the business.
+          example: "5045"
+          maxLength: 4
+          minLength: 4
+          nullable: true
+          type: string
+        merchant_url:
+          description: Fully qualified URL of 3-D Secure requestor website or customer
+            care site.
+          format: url
+          maxLength: 2048
+          nullable: true
+          type: string
         credentials_mode:
           default: live
           description: |-
@@ -3063,34 +3031,54 @@ components:
         - method: card
           environments:
           - production
+          merchant_category_code: "5045"
+          acquirer_bin_discover: acquirer_bin_discover
+          acquirer_merchant_id: acquirer_merchant_id
+          merchant_name: gr4vy
           active: true
           created_at: 2012-12-12T10:53:43Z
           type: payment-service
           display_name: Stripe (Main)
+          acquirer_bin_visa: acquirer_bin_visa
           payment_service_definition_id: stripe-card
+          three_d_secure_enabled: true
+          acquirer_bin_amex: acquirer_bin_amex
+          merchant_country_code: "840"
           updated_at: 2012-12-12T10:53:43Z
           accepted_countries:
           - DE
           credentials_mode: live
           id: faaad066-30b4-4997-a438-242b0752d7e1
           position: 1
+          merchant_url: http://example.com/aeiou
+          acquirer_bin_mastercard: acquirer_bin_mastercard
           accepted_currencies:
           - EUR
           status: pending
         - method: card
           environments:
           - production
+          merchant_category_code: "5045"
+          acquirer_bin_discover: acquirer_bin_discover
+          acquirer_merchant_id: acquirer_merchant_id
+          merchant_name: gr4vy
           active: true
           created_at: 2012-12-12T10:53:43Z
           type: payment-service
           display_name: Stripe (Main)
+          acquirer_bin_visa: acquirer_bin_visa
           payment_service_definition_id: stripe-card
+          three_d_secure_enabled: true
+          acquirer_bin_amex: acquirer_bin_amex
+          merchant_country_code: "840"
           updated_at: 2012-12-12T10:53:43Z
           accepted_countries:
           - DE
           credentials_mode: live
           id: faaad066-30b4-4997-a438-242b0752d7e1
           position: 1
+          merchant_url: http://example.com/aeiou
+          acquirer_bin_mastercard: acquirer_bin_mastercard
           accepted_currencies:
           - EUR
           status: pending
@@ -3150,19 +3138,29 @@ components:
       example:
         environments:
         - production
+        merchant_category_code: "5045"
+        acquirer_bin_discover: acquirer_bin_discover
+        acquirer_merchant_id: acquirer_merchant_id
+        merchant_name: gr4vy
+        active: true
+        display_name: Stripe (Main)
+        acquirer_bin_visa: acquirer_bin_visa
+        three_d_secure_enabled: true
+        acquirer_bin_amex: acquirer_bin_amex
+        merchant_country_code: "840"
         accepted_countries:
         - US
         - GB
         - DE
         credentials_mode: live
-        active: true
         position: 1
-        display_name: Stripe (Main)
         fields:
         - value: sk_test_4eC39HqLyjWDarjtT1zdp7dc
           key: private_key
         - value: sk_test_4eC39HqLyjWDarjtT1zdp7dc
           key: private_key
+        merchant_url: http://example.com/aeiou
+        acquirer_bin_mastercard: acquirer_bin_mastercard
         accepted_currencies:
         - EUR
         - USD
@@ -3208,6 +3206,68 @@ components:
             type: string
           minItems: 1
           type: array
+        three_d_secure_enabled:
+          default: false
+          description: |-
+            Defines if 3-D Secure is enabled for the service (can only be
+            enabled if the payment service definition supports
+            the `three_d_secure_hosted` feature).
+            This does not affect pass through 3-D Secure data.
+          example: true
+          type: boolean
+        acquirer_bin_visa:
+          description: Acquiring institution identification code for VISA.
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_bin_mastercard:
+          description: Acquiring institution identification code for Mastercard.
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_bin_amex:
+          description: Acquiring institution identification code for Amex.
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_bin_discover:
+          description: Acquiring institution identification code for Discover.
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_merchant_id:
+          description: |-
+            Merchant identifier used in authorisation
+            requests (assigned by the acquirer).
+          maxLength: 35
+          nullable: true
+          type: string
+        merchant_name:
+          description: Merchant name (assigned by the acquirer).
+          example: gr4vy
+          maxLength: 40
+          nullable: true
+          type: string
+        merchant_country_code:
+          description: ISO 3166-1 numeric three-digit country code.
+          example: "840"
+          nullable: true
+          pattern: ^\d{3}$
+          type: string
+        merchant_category_code:
+          description: Merchant category code that describes the business.
+          example: "5045"
+          maxLength: 4
+          minLength: 4
+          nullable: true
+          type: string
+        merchant_url:
+          description: Fully qualified URL of 3-D Secure requestor website or customer
+            care site.
+          format: url
+          maxLength: 2048
+          nullable: true
+          type: string
         credentials_mode:
           default: live
           description: |-
@@ -3258,7 +3318,12 @@ components:
     PaymentServiceDefinition:
       description: An available payment service that can be configured.
       example:
+        icon_url: https://cdn.gr4vy.app/stripe.svg
         method: card
+        supported_features:
+          three_d_secure_hosted: true
+          payment_method_tokenization: true
+          three_d_secure_pass_through: false
         supported_countries:
         - US
         - GB
@@ -3332,6 +3397,13 @@ components:
             type: string
           minItems: 1
           type: array
+        supported_features:
+          $ref: '#/components/schemas/PaymentServiceDefinition_supported_features'
+        icon_url:
+          description: An icon to display for the payment service.
+          example: https://cdn.gr4vy.app/stripe.svg
+          nullable: true
+          type: string
       title: Payment Service Definition
       type: object
       x-tags:
@@ -3343,7 +3415,12 @@ components:
         next_cursor: ZXhhbXBsZTE
         limit: 1
         items:
-        - method: card
+        - icon_url: https://cdn.gr4vy.app/stripe.svg
+          method: card
+          supported_features:
+            three_d_secure_hosted: true
+            payment_method_tokenization: true
+            three_d_secure_pass_through: false
           supported_countries:
           - US
           - GB
@@ -3364,7 +3441,12 @@ components:
           - USD
           - GBP
           - EUR
-        - method: card
+        - icon_url: https://cdn.gr4vy.app/stripe.svg
+          method: card
+          supported_features:
+            three_d_secure_hosted: true
+            payment_method_tokenization: true
+            three_d_secure_pass_through: false
           supported_countries:
           - US
           - GB
@@ -3429,6 +3511,7 @@ components:
         method: card
         label: Pay by Card
         type: payment-option
+        can_store_payment_method: true
       properties:
         type:
           description: '`payment-option`.'
@@ -3463,6 +3546,9 @@ components:
             to display a list of payment options to the buyer in their language.
           example: Pay by Card
           type: string
+        can_store_payment_method:
+          description: A flag to indicate if storing the payment method is supported.
+          type: boolean
       title: Payment option
       type: object
       x-tags:
@@ -3476,11 +3562,13 @@ components:
           method: card
           label: Pay by Card
           type: payment-option
+          can_store_payment_method: true
         - icon_url: https://cdn.gr4vy.app/card.svg
           mode: card
           method: card
           label: Pay by Card
           type: payment-option
+          can_store_payment_method: true
       properties:
         items:
           items:
@@ -3502,6 +3590,7 @@ components:
           enum:
           - paypal
           - banked
+          - gocardless
           example: paypal
           type: string
         redirect_url:
@@ -3513,7 +3602,7 @@ components:
         external_identifier:
           description: An external identifier that can be used to match the account
             against your own records.
-          example: user-789123
+          example: account-23423423
           nullable: true
           type: string
         buyer_id:
@@ -3529,6 +3618,17 @@ components:
             to. If this field is provided then the `buyer_id` field
             needs to be unset.
           example: user-789123
+          type: string
+        environment:
+          description: |-
+            Defines the environment to store this payment method in. Setting this to
+            anything other than `production` will force Gr4vy to use a payment
+            a service configured for that environment.
+          enum:
+          - development
+          - staging
+          - production
+          example: staging
           type: string
       required:
       - method
@@ -3592,6 +3692,135 @@ components:
       type: object
       x-tags:
       - Statuses
+    TaxId:
+      description: The tax ID information associated to a buyer.
+      properties:
+        id:
+          description: The tax ID for the buyer.
+          example: "12345678931"
+          maxLength: 50
+          minLength: 1
+          type: string
+        kind:
+          description: The kind of tax ID.
+          enum:
+          - ae.trn
+          - au.abn
+          - br.cnpj
+          - br.cpf
+          - ca.bn
+          - ca.gst_hst
+          - ca.pst_bc
+          - ca.pst_mb
+          - ca.pst_sk
+          - ca.qst
+          - ch.vat
+          - cl.tin
+          - es.cif
+          - eu.vat
+          - gb.vat
+          - hk.br
+          - id.npwp
+          - in.gst
+          - jp.cn
+          - jp.rn
+          - kr.brn
+          - li.uid
+          - mx.rfc
+          - my.frp
+          - my.itn
+          - my.sst
+          - no.vat
+          - nz.gst
+          - ru.inn
+          - ru.kpp
+          - sa.vat
+          - sg.gst
+          - sg.uen
+          - th.vat
+          - tw.vat
+          - us.ein
+          - za.vat
+          example: gb.vat
+          type: string
+      required:
+      - kind
+      - value
+      title: Tax ID
+      type: object
+      x-tags:
+      - Buyers
+    ThreeDSecureData:
+      properties:
+        cavv:
+          description: The cardholder authentication value or AAV.
+          example: 3q2+78r+ur7erb7vyv66vv8=
+          type: string
+        eci:
+          description: The electronic commerce indicator for the 3DS transaction.
+          example: "05"
+          maxLength: 2
+          minLength: 1
+          pattern: ^0?\d$
+          type: string
+        version:
+          description: The version of 3-D Secure that was used.
+          pattern: ^[1-2].?[\d+.?]{0,3}$
+          type: string
+        directory_response:
+          description: For 3-D Secure version 1, the enrolment response. For 3-D Secure
+            version , the transaction status from the `ARes`.
+          example: C
+          maxLength: 1
+          type: string
+      required:
+      - cavv
+      - directory_response
+      - eci
+      - version
+      title: 3-D Secure Data
+      type: object
+    ThreeDSecureDataV1:
+      allOf:
+      - $ref: '#/components/schemas/ThreeDSecureData'
+      properties:
+        authentication_response:
+          description: The authentication response.
+          example: "Y"
+          maxLength: 1
+          type: string
+        cavv_algorithm:
+          description: The CAVV Algorithm used.
+          maxLength: 1
+          type: string
+        xid:
+          description: The transaction identifier.
+          type: string
+      required:
+      - authentication_response
+      - cavv_algorithm
+      - xid
+      title: 3-D Secure Data Version 1
+      type: object
+    ThreeDSecureDataV2:
+      allOf:
+      - $ref: '#/components/schemas/ThreeDSecureData'
+      properties:
+        authentication_response:
+          description: |-
+            The transaction status from the challenge result
+            (not required for frictionless).
+          example: "Y"
+          maxLength: 1
+          type: string
+        directory_transaction_id:
+          description: The transaction identifier.
+          example: c4e59ceb-a382-4d6a-bc87-385d591fa09d
+          type: string
+      required:
+      - directory_transaction_id
+      title: 3-D Secure Data Version 2
+      type: object
     TokenizedRequest:
       description: Details for a previously tokenized payment method.
       properties:
@@ -3606,6 +3835,16 @@ components:
             A ID that represents a previously tokenized payment method.
             This token can represent any type of payment method.
           example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          type: string
+        redirect_url:
+          description: |-
+            We strongly recommended providing a `redirect_url` for
+            stored cards when 3-D Secure is enabled and `three_d_secure_data`
+            is not provided. This will be appended with both a
+            transaction ID and status (e.g. `https://example.com/callback?
+            gr4vy_transaction_id=123&gr4vy_transaction_status=capture_succeeded`)
+            after 3-D Secure has completed.
+          example: https://example.com/callback
           type: string
       required:
       - id
@@ -3678,8 +3917,8 @@ components:
             actual captured amount and part of this amount may be refunded.
           example: 1299
           maximum: 99999999
-          minimum: 0.0000010
-          type: number
+          minimum: 0
+          type: integer
         captured_amount:
           description: |-
             The captured amount for this transaction. This can be a part and in some
@@ -3687,7 +3926,7 @@ components:
           example: 999
           maximum: 99999999
           minimum: 0
-          type: number
+          type: integer
         refunded_amount:
           description: |-
             The refunded amount for this transaction. This can be a part or all of the
@@ -3695,7 +3934,7 @@ components:
           example: 100
           maximum: 99999999
           minimum: 0
-          type: number
+          type: integer
         currency:
           description: The currency code for this transaction.
           example: USD
@@ -3824,8 +4063,8 @@ components:
             When left blank, this will capture the entire amount.
           example: 1299
           maximum: 99999999
-          minimum: 0.0000010
-          type: number
+          minimum: 0
+          type: integer
         currency:
           description: |
             A supported ISO-4217 currency code.
@@ -3853,6 +4092,7 @@ components:
         amount: 1299
         external_identifier: user-789123
         environment: staging
+        three_d_secure_data: '{}'
         currency: USD
         store: true
         intent: capture
@@ -3876,7 +4116,9 @@ components:
             For BitCoin, this value will be a decimal point number, for example
             `0.0039`.
           example: 1299
-          type: number
+          maximum: 99999999
+          minimum: 0
+          type: integer
         currency:
           description: A supported ISO-4217 currency code.
           example: USD
@@ -3923,6 +4165,8 @@ components:
           - production
           example: staging
           type: string
+        three_d_secure_data:
+          $ref: '#/components/schemas/undefined'
       required:
       - amount
       - currency
@@ -3938,13 +4182,15 @@ components:
       properties:
         amount:
           description: |-
-            The (partial) amount to capture.
+            The monetary amount to capture an authorization for, in the smallest
+            currency unit for the given currency, for example `1299` cents to create
+            an authorization for `$12.99`.
 
             When omitted blank, this will capture the entire amount.
           example: 1299
           maximum: 99999999
-          minimum: 0.0000010
-          type: number
+          minimum: 0
+          type: integer
       title: Capture a transaction
       type: object
       x-tags:
@@ -3961,8 +4207,8 @@ components:
             When omitted blank, this will refund the entire amount.
           example: 1299
           maximum: 99999999
-          minimum: 0.0000010
-          type: number
+          minimum: 0
+          type: integer
       title: Refund a transaction
       type: object
       x-tags:
@@ -4181,6 +4427,26 @@ components:
           - number
           example: text
           type: string
+      type: object
+    PaymentServiceDefinition_supported_features:
+      description: Features supported by the payment definition.
+      example:
+        three_d_secure_hosted: true
+        payment_method_tokenization: true
+        three_d_secure_pass_through: false
+      properties:
+        payment_method_tokenization:
+          description: Supports storing a payment method via tokenization.
+          example: true
+          type: boolean
+        three_d_secure_hosted:
+          description: Supports hosted 3-D Secure with a redirect.
+          example: true
+          type: boolean
+        three_d_secure_pass_through:
+          description: Supports passing 3-D Secure data to the underlying processor.
+          example: false
+          type: boolean
       type: object
   securitySchemes:
     BearerAuth:

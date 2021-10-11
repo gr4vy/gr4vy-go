@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -17,8 +17,8 @@ import (
 
 // TransactionCaptureRequest A request to capture a transaction.
 type TransactionCaptureRequest struct {
-	// The (partial) amount to capture.  When omitted blank, this will capture the entire amount.
-	Amount *float32 `json:"amount,omitempty"`
+	// The monetary amount to capture an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.  When omitted blank, this will capture the entire amount.
+	Amount *int32 `json:"amount,omitempty"`
 }
 
 // NewTransactionCaptureRequest instantiates a new TransactionCaptureRequest object
@@ -39,9 +39,9 @@ func NewTransactionCaptureRequestWithDefaults() *TransactionCaptureRequest {
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *TransactionCaptureRequest) GetAmount() float32 {
+func (o *TransactionCaptureRequest) GetAmount() int32 {
 	if o == nil || o.Amount == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 	return *o.Amount
@@ -49,7 +49,7 @@ func (o *TransactionCaptureRequest) GetAmount() float32 {
 
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransactionCaptureRequest) GetAmountOk() (*float32, bool) {
+func (o *TransactionCaptureRequest) GetAmountOk() (*int32, bool) {
 	if o == nil || o.Amount == nil {
 		return nil, false
 	}
@@ -65,8 +65,8 @@ func (o *TransactionCaptureRequest) HasAmount() bool {
 	return false
 }
 
-// SetAmount gets a reference to the given float32 and assigns it to the Amount field.
-func (o *TransactionCaptureRequest) SetAmount(v float32) {
+// SetAmount gets a reference to the given int32 and assigns it to the Amount field.
+func (o *TransactionCaptureRequest) SetAmount(v int32) {
 	o.Amount = &v
 }
 

@@ -1,9 +1,9 @@
 /*
- * Gr4vy API (Beta)
+ * Gr4vy API
  *
  * Welcome to the Gr4vy API reference documentation. Our API is still very much a work in product and subject to change.
  *
- * API version: 1.0
+ * API version: 1.1.0-beta
  * Contact: code@gr4vy.com
  */
 
@@ -18,7 +18,7 @@ import (
 // TransactionRequest A request to create a transaction.
 type TransactionRequest struct {
 	// The monetary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.  For BitCoin, this value will be a decimal point number, for example `0.0039`.
-	Amount float32 `json:"amount"`
+	Amount int32 `json:"amount"`
 	// A supported ISO-4217 currency code.
 	Currency string `json:"currency"`
 	PaymentMethod TransactionPaymentMethodRequest `json:"payment_method"`
@@ -30,13 +30,14 @@ type TransactionRequest struct {
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// Defines the environment to create this transaction in. Setting this to anything other than `production` will force Gr4vy to use the payment a service configured for that environment.
 	Environment *string `json:"environment,omitempty"`
+	ThreeDSecureData *ThreeDSecureDataV2 `json:"three_d_secure_data,omitempty"`
 }
 
 // NewTransactionRequest instantiates a new TransactionRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransactionRequest(amount float32, currency string, paymentMethod TransactionPaymentMethodRequest) *TransactionRequest {
+func NewTransactionRequest(amount int32, currency string, paymentMethod TransactionPaymentMethodRequest) *TransactionRequest {
 	this := TransactionRequest{}
 	this.Amount = amount
 	this.Currency = currency
@@ -61,9 +62,9 @@ func NewTransactionRequestWithDefaults() *TransactionRequest {
 }
 
 // GetAmount returns the Amount field value
-func (o *TransactionRequest) GetAmount() float32 {
+func (o *TransactionRequest) GetAmount() int32 {
 	if o == nil {
-		var ret float32
+		var ret int32
 		return ret
 	}
 
@@ -72,7 +73,7 @@ func (o *TransactionRequest) GetAmount() float32 {
 
 // GetAmountOk returns a tuple with the Amount field value
 // and a boolean to check if the value has been set.
-func (o *TransactionRequest) GetAmountOk() (*float32, bool) {
+func (o *TransactionRequest) GetAmountOk() (*int32, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -80,7 +81,7 @@ func (o *TransactionRequest) GetAmountOk() (*float32, bool) {
 }
 
 // SetAmount sets field value
-func (o *TransactionRequest) SetAmount(v float32) {
+func (o *TransactionRequest) SetAmount(v int32) {
 	o.Amount = v
 }
 
@@ -270,6 +271,38 @@ func (o *TransactionRequest) SetEnvironment(v string) {
 	o.Environment = &v
 }
 
+// GetThreeDSecureData returns the ThreeDSecureData field value if set, zero value otherwise.
+func (o *TransactionRequest) GetThreeDSecureData() ThreeDSecureDataV2 {
+	if o == nil || o.ThreeDSecureData == nil {
+		var ret ThreeDSecureDataV2
+		return ret
+	}
+	return *o.ThreeDSecureData
+}
+
+// GetThreeDSecureDataOk returns a tuple with the ThreeDSecureData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRequest) GetThreeDSecureDataOk() (*ThreeDSecureDataV2, bool) {
+	if o == nil || o.ThreeDSecureData == nil {
+		return nil, false
+	}
+	return o.ThreeDSecureData, true
+}
+
+// HasThreeDSecureData returns a boolean if a field has been set.
+func (o *TransactionRequest) HasThreeDSecureData() bool {
+	if o != nil && o.ThreeDSecureData != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetThreeDSecureData gets a reference to the given ThreeDSecureDataV2 and assigns it to the ThreeDSecureData field.
+func (o *TransactionRequest) SetThreeDSecureData(v ThreeDSecureDataV2) {
+	o.ThreeDSecureData = &v
+}
+
 func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -292,6 +325,9 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment
+	}
+	if o.ThreeDSecureData != nil {
+		toSerialize["three_d_secure_data"] = o.ThreeDSecureData
 	}
 	return json.Marshal(toSerialize)
 }
