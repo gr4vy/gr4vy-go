@@ -46,8 +46,7 @@ tags:
   name: Payment Method Tokens
 - description: |-
     In Gr4vy, a payment method represents a way in which a payment can be
-    processed, for example a card payment, a PayPal payment, or a Bitcoin
-    payment.
+    processed, for example a card, a PayPal account, or a bank account.
 
     The payment method API can be used to:
 
@@ -4102,19 +4101,16 @@ components:
           buyer_external_identifier: user-789123
           security_code: "123"
           method: card
+          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           expiration_date: 11/15
           buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
           redirect_url: https://example.com/callback
-          token: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
       properties:
         amount:
           description: |-
             The monetary amount to create an authorization for, in the smallest
             currency unit for the given currency, for example `1299` cents to create
             an authorization for `$12.99`.
-
-            For BitCoin, this value will be a decimal point number, for example
-            `0.0039`.
           example: 1299
           maximum: 99999999
           minimum: 0
@@ -4223,10 +4219,10 @@ components:
         buyer_external_identifier: user-789123
         security_code: "123"
         method: card
+        id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
         expiration_date: 11/15
         buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
         redirect_url: https://example.com/callback
-        token: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
       properties:
         method:
           description: The method to use for this request.
@@ -4234,7 +4230,8 @@ components:
           - card
           - paypal
           - banked
-          - token
+          - gocardless
+          - id
           example: card
           type: string
         number:
@@ -4300,10 +4297,10 @@ components:
             require buyer approval.
           example: https://example.com/callback
           type: string
-        token:
+        id:
           description: |-
-            A Gr4vy token that represents a previously tokenized payment method.
-            This token can represent any type of payment method.
+            An identifier for a previously tokenized payment method.
+            This id can represent any type of payment method.
           example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           type: string
       required:

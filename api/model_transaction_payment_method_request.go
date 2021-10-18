@@ -33,8 +33,8 @@ type TransactionPaymentMethodRequest struct {
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 	// The redirect URL to redirect a buyer to after they have authorized their transaction or payment method. This only applies to payment methods that require buyer approval.
 	RedirectUrl *string `json:"redirect_url,omitempty"`
-	// A Gr4vy token that represents a previously tokenized payment method. This token can represent any type of payment method.
-	Token *string `json:"token,omitempty"`
+	// An identifier for a previously tokenized payment method. This id can represent any type of payment method.
+	Id *string `json:"id,omitempty"`
 }
 
 // NewTransactionPaymentMethodRequest instantiates a new TransactionPaymentMethodRequest object
@@ -313,36 +313,36 @@ func (o *TransactionPaymentMethodRequest) SetRedirectUrl(v string) {
 	o.RedirectUrl = &v
 }
 
-// GetToken returns the Token field value if set, zero value otherwise.
-func (o *TransactionPaymentMethodRequest) GetToken() string {
-	if o == nil || o.Token == nil {
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *TransactionPaymentMethodRequest) GetId() string {
+	if o == nil || o.Id == nil {
 		var ret string
 		return ret
 	}
-	return *o.Token
+	return *o.Id
 }
 
-// GetTokenOk returns a tuple with the Token field value if set, nil otherwise
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransactionPaymentMethodRequest) GetTokenOk() (*string, bool) {
-	if o == nil || o.Token == nil {
+func (o *TransactionPaymentMethodRequest) GetIdOk() (*string, bool) {
+	if o == nil || o.Id == nil {
 		return nil, false
 	}
-	return o.Token, true
+	return o.Id, true
 }
 
-// HasToken returns a boolean if a field has been set.
-func (o *TransactionPaymentMethodRequest) HasToken() bool {
-	if o != nil && o.Token != nil {
+// HasId returns a boolean if a field has been set.
+func (o *TransactionPaymentMethodRequest) HasId() bool {
+	if o != nil && o.Id != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetToken gets a reference to the given string and assigns it to the Token field.
-func (o *TransactionPaymentMethodRequest) SetToken(v string) {
-	o.Token = &v
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *TransactionPaymentMethodRequest) SetId(v string) {
+	o.Id = &v
 }
 
 func (o TransactionPaymentMethodRequest) MarshalJSON() ([]byte, error) {
@@ -371,8 +371,8 @@ func (o TransactionPaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	if o.RedirectUrl != nil {
 		toSerialize["redirect_url"] = o.RedirectUrl
 	}
-	if o.Token != nil {
-		toSerialize["token"] = o.Token
+	if o.Id != nil {
+		toSerialize["id"] = o.Id
 	}
 	return json.Marshal(toSerialize)
 }

@@ -17,7 +17,7 @@ import (
 
 // TransactionRequest A request to create a transaction.
 type TransactionRequest struct {
-	// The monetary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.  For BitCoin, this value will be a decimal point number, for example `0.0039`.
+	// The monetary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.
 	Amount int32 `json:"amount"`
 	// A supported ISO-4217 currency code.
 	Currency string `json:"currency"`

@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 **BuyerId** | Pointer to **string** | The ID of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_external_identifier&#x60; field needs to be unset. | [optional] 
 **BuyerExternalIdentifier** | Pointer to **string** | The &#x60;external_identifier&#x60; of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_id&#x60; field needs to be unset. | [optional] 
 **RedirectUrl** | Pointer to **string** | The redirect URL to redirect a buyer to after they have authorized their transaction or payment method. This only applies to payment methods that require buyer approval. | [optional] 
-**Token** | Pointer to **string** | A Gr4vy token that represents a previously tokenized payment method. This token can represent any type of payment method. | [optional] 
+**Id** | Pointer to **string** | An identifier for a previously tokenized payment method. This id can represent any type of payment method. | [optional] 
 
 ## Methods
 
@@ -238,30 +238,30 @@ SetRedirectUrl sets RedirectUrl field to given value.
 
 HasRedirectUrl returns a boolean if a field has been set.
 
-### GetToken
+### GetId
 
-`func (o *TransactionPaymentMethodRequest) GetToken() string`
+`func (o *TransactionPaymentMethodRequest) GetId() string`
 
-GetToken returns the Token field if non-nil, zero value otherwise.
+GetId returns the Id field if non-nil, zero value otherwise.
 
-### GetTokenOk
+### GetIdOk
 
-`func (o *TransactionPaymentMethodRequest) GetTokenOk() (*string, bool)`
+`func (o *TransactionPaymentMethodRequest) GetIdOk() (*string, bool)`
 
-GetTokenOk returns a tuple with the Token field if it's non-nil, zero value otherwise
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetToken
+### SetId
 
-`func (o *TransactionPaymentMethodRequest) SetToken(v string)`
+`func (o *TransactionPaymentMethodRequest) SetId(v string)`
 
-SetToken sets Token field to given value.
+SetId sets Id field to given value.
 
-### HasToken
+### HasId
 
-`func (o *TransactionPaymentMethodRequest) HasToken() bool`
+`func (o *TransactionPaymentMethodRequest) HasId() bool`
 
-HasToken returns a boolean if a field has been set.
+HasId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
