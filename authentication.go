@@ -12,7 +12,7 @@ import (
 	"runtime"
 )
 
-func getToken(private_key string, scopes []string, embed map[string]string) (string, error) {
+func getToken(private_key string, scopes []string, embed map[string]interface{}) (string, error) {
 	claims := jwt.MapClaims{
 		"iss": fmt.Sprintf("Gr4vy SDK %v - %v", VERSION, runtime.Version()), 
 		"nbf": float64(time.Now().Unix()),

@@ -24,7 +24,7 @@ func TestEmbedToken(t *testing.T) {
 	}
 	client := NewGr4vyClient(gr4vyId, key)
 
-	embed := map[string]string{"amount": "200", "currency": "USD", "buyer_id": "d757c76a-cbd7-4b56-95a3-40125b51b29c"}
+	embed := map[string]interface{}{"amount": 200, "currency": "USD", "buyer_id": "d757c76a-cbd7-4b56-95a3-40125b51b29c"}
 	_, err = client.GetEmbedToken(embed)
 
 	if err != nil {

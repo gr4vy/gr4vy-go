@@ -61,7 +61,7 @@ func GetClient(c *Gr4vyClient) (*APIClient, error) {
 	return client, nil
 }
 
-func (c *Gr4vyClient) GetEmbedToken(params map[string]string) (string, error) {
+func (c *Gr4vyClient) GetEmbedToken(params map[string]interface{}) (string, error) {
 	scopes := []string{"embed"}
 	return getToken(c.privateKey, scopes, params)
 }
