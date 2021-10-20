@@ -8,11 +8,30 @@ import (
 	"crypto/ecdsa"
 	"crypto/sha256"
 	"encoding/base64"
+	"encoding/json"
 	"github.com/twinj/uuid"
 	"runtime"
 )
 
-func getToken(private_key string, scopes []string, embed map[string]interface{}) (string, error) {
+func getEmbedToken(private_key string, embed EmbedParams) (string, error) {
+	claims := jwt.MapClaims{
+		"iss": fmt.Sprintf("Gr4vy SDK %v - %v", VERSION, runtime.Version()), 
+		"nbf": float64(time.Now().Unix()),
+		"exp": float64(time.Now().Unix() + 3000),
+		"scopes": []string{"embed"},
+		"jti": uuid.NewV4(),
+	}
+
+	var inInterface map[string]interface{}
+    inrec, _ := json.Marshal(embed)
+    json.Unmarshal(inrec, &inInterface)
+
+	claims["embed"] = inInterface
+
+	return getTokenWithClaims(private_key, claims)
+}
+
+func getToken(private_key string, scopes []string) (string, error) {
 	claims := jwt.MapClaims{
 		"iss": fmt.Sprintf("Gr4vy SDK %v - %v", VERSION, runtime.Version()), 
 		"nbf": float64(time.Now().Unix()),
@@ -21,10 +40,10 @@ func getToken(private_key string, scopes []string, embed map[string]interface{})
 		"jti": uuid.NewV4(),
 	}
 
-	if embed != nil {
-		claims["embed"] = embed
-	}
+	return getTokenWithClaims(private_key, claims)
+}
 
+func getTokenWithClaims(private_key string, claims jwt.MapClaims) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodES512, claims)
 	
 	parsedKey, err := ssh.ParseRawPrivateKey([]byte(private_key))
@@ -53,7 +72,7 @@ func getToken(private_key string, scopes []string, embed map[string]interface{})
 func authentication(private_key string, Debug bool) (string, error) {
 
 	scopes := []string{"*.read", "*.write"}
-	tokenString, err := getToken(private_key, scopes, nil)
+	tokenString, err := getToken(private_key, scopes)
 	if err != nil {
 		return "", err
 	}

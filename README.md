@@ -63,7 +63,11 @@ function with the amount, currency, and optional buyer information for Gr4vy
 Embed.
 
 ```golang
-embed := map[string]interface{}{"amount": 200, "currency": "USD", "buyer_id": "d757c76a-cbd7-4b56-95a3-40125b51b29c"}
+embed := gr4vy.EmbedParams{
+  Amount:   200,
+  Currency: "USD",
+  BuyerID:  "d757c76a-cbd7-4b56-95a3-40125b51b29c",
+}
 token, err = client.GetEmbedToken(embed)
 ```
 
@@ -92,8 +96,11 @@ needs to be created before it can be used in this way.
     return
   }
 
-  embed := map[string]interface{}{"amount": 200, "currency": "USD", "buyer_id": (*response.Id)}
-
+  embed := gr4vy.EmbedParams{
+    Amount:   200,
+    Currency: "USD",
+    BuyerID:  (*response.Id),
+  }
   client = gr4vy.NewGr4vyClient("demo", key)
   client.Debug = true
   var responseStr string

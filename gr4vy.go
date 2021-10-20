@@ -21,6 +21,12 @@ type Gr4vyClient struct {
 	accessToken string
 }
 
+type EmbedParams struct {
+	Amount int32
+	Currency string
+	BuyerID string
+}
+
 func NewGr4vyClient(gr4vy_id string, private_key string) (*Gr4vyClient) {
 	client := Gr4vyClient{
 		gr4vyId: gr4vy_id,
@@ -61,14 +67,13 @@ func GetClient(c *Gr4vyClient) (*APIClient, error) {
 	return client, nil
 }
 
-func (c *Gr4vyClient) GetEmbedToken(params map[string]interface{}) (string, error) {
-	scopes := []string{"embed"}
-	return getToken(c.privateKey, scopes, params)
+func (c *Gr4vyClient) GetEmbedToken(params EmbedParams) (string, error) {
+	return getEmbedToken(c.privateKey, params)
 }
 
 func (c *Gr4vyClient) GetToken() (string, error) {
 	scopes := []string{"*.read", "*.write"}
-	return getToken(c.privateKey, scopes, nil)
+	return getToken(c.privateKey, scopes)
 }
 
 func (c *Gr4vyClient) HandleResponse(response *http.Response, error error) {
