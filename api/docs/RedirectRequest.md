@@ -4,8 +4,10 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Method** | **string** | The method to use, this can be any of the methods that support redirect requests. | 
+**Method** | **string** | The method to use, this can be any of the methods that support redirect requests.  When storing a new payment method, only &#x60;gocardless&#x60; is currently supported. | 
 **RedirectUrl** | **string** | The redirect URL to redirect a buyer to after they have authorized their transaction. | 
+**Currency** | **string** | The ISO-4217 currency code to use this payment method for. This is used to select the payment service to use. | 
+**Country** | **string** | The 2-letter ISO code of the country to use this payment method for. This is used to select the payment service to use. | 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the account against your own records. | [optional] 
 **BuyerId** | Pointer to **string** | The ID of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_external_identifier&#x60; field needs to be unset. | [optional] 
 **BuyerExternalIdentifier** | Pointer to **string** | The &#x60;external_identifier&#x60; of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_id&#x60; field needs to be unset. | [optional] 
@@ -15,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewRedirectRequest
 
-`func NewRedirectRequest(method string, redirectUrl string, ) *RedirectRequest`
+`func NewRedirectRequest(method string, redirectUrl string, currency string, country string, ) *RedirectRequest`
 
 NewRedirectRequest instantiates a new RedirectRequest object
 This constructor will assign default values to properties that have it defined,
@@ -68,6 +70,46 @@ and a boolean to check if the value has been set.
 `func (o *RedirectRequest) SetRedirectUrl(v string)`
 
 SetRedirectUrl sets RedirectUrl field to given value.
+
+
+### GetCurrency
+
+`func (o *RedirectRequest) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *RedirectRequest) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *RedirectRequest) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+
+### GetCountry
+
+`func (o *RedirectRequest) GetCountry() string`
+
+GetCountry returns the Country field if non-nil, zero value otherwise.
+
+### GetCountryOk
+
+`func (o *RedirectRequest) GetCountryOk() (*string, bool)`
+
+GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountry
+
+`func (o *RedirectRequest) SetCountry(v string)`
+
+SetCountry sets Country field to given value.
 
 
 ### GetExternalIdentifier

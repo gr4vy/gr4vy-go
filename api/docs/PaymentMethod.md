@@ -6,8 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;payment-method&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique ID of the payment method. | [optional] 
-**Status** | Pointer to **string** | The state of the payment method.  - &#x60;processing&#x60; - The payment method is still being stored. - &#x60;processing_failed&#x60; - Storing the payment method did not succeed. - &#x60;buyer_approval_pending&#x60; - Storing the payment method requires   the buyer to provide approval. Follow the &#x60;approval_url&#x60; for next steps. - &#x60;buyer_approval_declined&#x60; - The buyer declined to approve the payment   method. This can happen after the buyer has been redirect to the   &#x60;approval_url&#x60;. - &#x60;buyer_approval_timedout&#x60; - The buyer did  not approve the payment   method in time. This can happen after the buyer has been redirect to the   &#x60;approval_url&#x60;. - &#x60;stored&#x60; - The payment method is approved and stored with all relevant   payment services. - &#x60;partially_stored&#x60; - The payment method is approved and stored with only   some of the relevant payment services. - &#x60;used&#x60; - The payment method was used for a transaction once and   not stored. | [optional] 
+**Status** | Pointer to **string** | The state of the payment method.  - &#x60;processing&#x60; - The payment method is still being stored. - &#x60;buyer_approval_required&#x60; - Storing the payment method requires   the buyer to provide approval. Follow the &#x60;approval_url&#x60; for next steps. - &#x60;succeeded&#x60; - The payment method is approved and stored with all   relevant payment services. - &#x60;failed&#x60; - Storing the payment method did not succeed. | [optional] 
 **Method** | Pointer to **string** | The type of this payment method. | [optional] 
+**Mode** | Pointer to **string** | The mode to use with this payment method. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this payment method was first created in our system. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this payment method was last updated in our system. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the payment method against your own records. | [optional] 
@@ -136,6 +137,31 @@ SetMethod sets Method field to given value.
 `func (o *PaymentMethod) HasMethod() bool`
 
 HasMethod returns a boolean if a field has been set.
+
+### GetMode
+
+`func (o *PaymentMethod) GetMode() string`
+
+GetMode returns the Mode field if non-nil, zero value otherwise.
+
+### GetModeOk
+
+`func (o *PaymentMethod) GetModeOk() (*string, bool)`
+
+GetModeOk returns a tuple with the Mode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMode
+
+`func (o *PaymentMethod) SetMode(v string)`
+
+SetMode sets Mode field to given value.
+
+### HasMode
+
+`func (o *PaymentMethod) HasMode() bool`
+
+HasMode returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

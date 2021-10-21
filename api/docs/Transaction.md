@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;transaction&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this transaction. | [optional] 
-**Status** | Pointer to **string** | The status of the transaction being processed. This is different from the &#x60;status&#x60; field in that it represents the status of the transaction at the payment processor, not the status of the transaction created in Gr4vy. | [optional] 
+**Status** | Pointer to **string** | The status of the transaction. The status may change over time as asynchronous  processing events occur. | [optional] 
 **Amount** | Pointer to **int32** | The authorized amount for this transaction. This can be different than the actual captured amount and part of this amount may be refunded. | [optional] 
 **CapturedAmount** | Pointer to **int32** | The captured amount for this transaction. This can be a part and in some cases even more than the authorized amount. | [optional] 
 **RefundedAmount** | Pointer to **int32** | The refunded amount for this transaction. This can be a part or all of the captured amount. | [optional] 

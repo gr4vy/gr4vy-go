@@ -15,12 +15,16 @@ import (
 	"encoding/json"
 )
 
-// RedirectRequest Request to use a redirect flow in a transaction or to register a new payment method.
+// RedirectRequest Request to use a redirect payment method in a transaction.
 type RedirectRequest struct {
-	// The method to use, this can be any of the methods that support redirect requests.
+	// The method to use, this can be any of the methods that support redirect requests.  When storing a new payment method, only `gocardless` is currently supported.
 	Method string `json:"method"`
 	// The redirect URL to redirect a buyer to after they have authorized their transaction.
 	RedirectUrl string `json:"redirect_url"`
+	// The ISO-4217 currency code to use this payment method for. This is used to select the payment service to use.
+	Currency string `json:"currency"`
+	// The 2-letter ISO code of the country to use this payment method for. This is used to select the payment service to use.
+	Country string `json:"country"`
 	// An external identifier that can be used to match the account against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// The ID of the buyer to associate this payment method to. If this field is provided then the `buyer_external_identifier` field needs to be unset.
@@ -35,10 +39,12 @@ type RedirectRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewRedirectRequest(method string, redirectUrl string) *RedirectRequest {
+func NewRedirectRequest(method string, redirectUrl string, currency string, country string) *RedirectRequest {
 	this := RedirectRequest{}
 	this.Method = method
 	this.RedirectUrl = redirectUrl
+	this.Currency = currency
+	this.Country = country
 	return &this
 }
 
@@ -96,6 +102,54 @@ func (o *RedirectRequest) GetRedirectUrlOk() (*string, bool) {
 // SetRedirectUrl sets field value
 func (o *RedirectRequest) SetRedirectUrl(v string) {
 	o.RedirectUrl = v
+}
+
+// GetCurrency returns the Currency field value
+func (o *RedirectRequest) GetCurrency() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Currency
+}
+
+// GetCurrencyOk returns a tuple with the Currency field value
+// and a boolean to check if the value has been set.
+func (o *RedirectRequest) GetCurrencyOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Currency, true
+}
+
+// SetCurrency sets field value
+func (o *RedirectRequest) SetCurrency(v string) {
+	o.Currency = v
+}
+
+// GetCountry returns the Country field value
+func (o *RedirectRequest) GetCountry() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Country
+}
+
+// GetCountryOk returns a tuple with the Country field value
+// and a boolean to check if the value has been set.
+func (o *RedirectRequest) GetCountryOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Country, true
+}
+
+// SetCountry sets field value
+func (o *RedirectRequest) SetCountry(v string) {
+	o.Country = v
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -243,6 +297,12 @@ func (o RedirectRequest) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["redirect_url"] = o.RedirectUrl
+	}
+	if true {
+		toSerialize["currency"] = o.Currency
+	}
+	if true {
+		toSerialize["country"] = o.Country
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()

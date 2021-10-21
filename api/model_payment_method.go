@@ -22,10 +22,12 @@ type PaymentMethod struct {
 	Type *string `json:"type,omitempty"`
 	// The unique ID of the payment method.
 	Id *string `json:"id,omitempty"`
-	// The state of the payment method.  - `processing` - The payment method is still being stored. - `processing_failed` - Storing the payment method did not succeed. - `buyer_approval_pending` - Storing the payment method requires   the buyer to provide approval. Follow the `approval_url` for next steps. - `buyer_approval_declined` - The buyer declined to approve the payment   method. This can happen after the buyer has been redirect to the   `approval_url`. - `buyer_approval_timedout` - The buyer did  not approve the payment   method in time. This can happen after the buyer has been redirect to the   `approval_url`. - `stored` - The payment method is approved and stored with all relevant   payment services. - `partially_stored` - The payment method is approved and stored with only   some of the relevant payment services. - `used` - The payment method was used for a transaction once and   not stored.
+	// The state of the payment method.  - `processing` - The payment method is still being stored. - `buyer_approval_required` - Storing the payment method requires   the buyer to provide approval. Follow the `approval_url` for next steps. - `succeeded` - The payment method is approved and stored with all   relevant payment services. - `failed` - Storing the payment method did not succeed.
 	Status *string `json:"status,omitempty"`
 	// The type of this payment method.
 	Method *string `json:"method,omitempty"`
+	// The mode to use with this payment method.
+	Mode *string `json:"mode,omitempty"`
 	// The date and time when this payment method was first created in our system.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this payment method was last updated in our system.
@@ -193,6 +195,38 @@ func (o *PaymentMethod) HasMethod() bool {
 // SetMethod gets a reference to the given string and assigns it to the Method field.
 func (o *PaymentMethod) SetMethod(v string) {
 	o.Method = &v
+}
+
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *PaymentMethod) GetMode() string {
+	if o == nil || o.Mode == nil {
+		var ret string
+		return ret
+	}
+	return *o.Mode
+}
+
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetModeOk() (*string, bool) {
+	if o == nil || o.Mode == nil {
+		return nil, false
+	}
+	return o.Mode, true
+}
+
+// HasMode returns a boolean if a field has been set.
+func (o *PaymentMethod) HasMode() bool {
+	if o != nil && o.Mode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMode gets a reference to the given string and assigns it to the Mode field.
+func (o *PaymentMethod) SetMode(v string) {
+	o.Mode = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -566,6 +600,9 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	}
 	if o.Method != nil {
 		toSerialize["method"] = o.Method
+	}
+	if o.Mode != nil {
+		toSerialize["mode"] = o.Mode
 	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt

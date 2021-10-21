@@ -446,6 +446,7 @@ type ApiListTransactionsRequest struct {
 	afterCreatedAt *string
 	beforeUpdatedAt *string
 	afterUpdatedAt *string
+	environment *string
 	limit *int32
 	cursor *string
 }
@@ -480,6 +481,10 @@ func (r ApiListTransactionsRequest) BeforeUpdatedAt(beforeUpdatedAt string) ApiL
 }
 func (r ApiListTransactionsRequest) AfterUpdatedAt(afterUpdatedAt string) ApiListTransactionsRequest {
 	r.afterUpdatedAt = &afterUpdatedAt
+	return r
+}
+func (r ApiListTransactionsRequest) Environment(environment string) ApiListTransactionsRequest {
+	r.environment = &environment
 	return r
 }
 func (r ApiListTransactionsRequest) Limit(limit int32) ApiListTransactionsRequest {
@@ -556,6 +561,9 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	}
 	if r.afterUpdatedAt != nil {
 		localVarQueryParams.Add("after_updated_at", parameterToString(*r.afterUpdatedAt, ""))
+	}
+	if r.environment != nil {
+		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	}
 	if r.limit != nil {
 		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))

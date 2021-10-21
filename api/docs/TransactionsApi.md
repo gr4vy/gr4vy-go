@@ -222,7 +222,7 @@ Name | Type | Description  | Notes
 
 ## ListTransactions
 
-> Transactions ListTransactions(ctx).Search(search).TransactionStatus(transactionStatus).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).Limit(limit).Cursor(cursor).Execute()
+> Transactions ListTransactions(ctx).Search(search).TransactionStatus(transactionStatus).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).Environment(environment).Limit(limit).Cursor(cursor).Execute()
 
 List transactions
 
@@ -249,12 +249,13 @@ func main() {
     afterCreatedAt := "2012-12-12T10:53:43+00:00" // string | Filters the results to only transactions created after this ISO date-time string. (optional)
     beforeUpdatedAt := "2012-12-12T10:53:43+00:00" // string | Filters the results to only transactions last updated before this ISO date-time string. (optional)
     afterUpdatedAt := "2012-12-12T10:53:43+00:00" // string | Filters the results to only transactions last updated after this ISO date-time string. (optional)
+    environment := "staging" // string | Filters the results to only the items available in this environment. (optional) (default to "production")
     limit := int32(1) // int32 | Defines the maximum number of items to return for this request. (optional) (default to 20)
     cursor := "ZXhhbXBsZTE" // string | A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the `next_cursor` field. Similarly the `previous_cursor` can be used to reverse backwards in the list. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).Search(search).TransactionStatus(transactionStatus).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).Limit(limit).Cursor(cursor).Execute()
+    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).Search(search).TransactionStatus(transactionStatus).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).Environment(environment).Limit(limit).Cursor(cursor).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.ListTransactions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -283,6 +284,7 @@ Name | Type | Description  | Notes
  **afterCreatedAt** | **string** | Filters the results to only transactions created after this ISO date-time string. | 
  **beforeUpdatedAt** | **string** | Filters the results to only transactions last updated before this ISO date-time string. | 
  **afterUpdatedAt** | **string** | Filters the results to only transactions last updated after this ISO date-time string. | 
+ **environment** | **string** | Filters the results to only the items available in this environment. | [default to &quot;production&quot;]
  **limit** | **int32** | Defines the maximum number of items to return for this request. | [default to 20]
  **cursor** | **string** | A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the &#x60;next_cursor&#x60; field. Similarly the &#x60;previous_cursor&#x60; can be used to reverse backwards in the list. | 
 

@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// PaymentMethodRequest Payment method details used to. register a new payment method.
+// PaymentMethodRequest Payment method details used to register a new payment method.
 type PaymentMethodRequest struct {
 	// The method to use for this request.
 	Method string `json:"method"`
@@ -33,6 +33,10 @@ type PaymentMethodRequest struct {
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 	// The redirect URL to redirect a buyer to after they have authorized their transaction or payment method. This only applies to payment methods that require buyer approval.
 	RedirectUrl *string `json:"redirect_url,omitempty"`
+	// The ISO-4217 currency code to store this payment method for. This is used to select the payment service to use.  This only applies to `redirect` mode payment methods like `gocardless`.
+	Currency *string `json:"currency,omitempty"`
+	// The 2-letter ISO code of the country to store this payment method for. This is used to select the payment service to use.  This only applies to `redirect` mode payment methods like `gocardless`.
+	Country *string `json:"country,omitempty"`
 	// Defines the environment to store this payment method in. Setting this to anything other than `production` will force Gr4vy to use a payment a service configured for that environment.
 	Environment *string `json:"environment,omitempty"`
 }
@@ -313,6 +317,70 @@ func (o *PaymentMethodRequest) SetRedirectUrl(v string) {
 	o.RedirectUrl = &v
 }
 
+// GetCurrency returns the Currency field value if set, zero value otherwise.
+func (o *PaymentMethodRequest) GetCurrency() string {
+	if o == nil || o.Currency == nil {
+		var ret string
+		return ret
+	}
+	return *o.Currency
+}
+
+// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodRequest) GetCurrencyOk() (*string, bool) {
+	if o == nil || o.Currency == nil {
+		return nil, false
+	}
+	return o.Currency, true
+}
+
+// HasCurrency returns a boolean if a field has been set.
+func (o *PaymentMethodRequest) HasCurrency() bool {
+	if o != nil && o.Currency != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrency gets a reference to the given string and assigns it to the Currency field.
+func (o *PaymentMethodRequest) SetCurrency(v string) {
+	o.Currency = &v
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise.
+func (o *PaymentMethodRequest) GetCountry() string {
+	if o == nil || o.Country == nil {
+		var ret string
+		return ret
+	}
+	return *o.Country
+}
+
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodRequest) GetCountryOk() (*string, bool) {
+	if o == nil || o.Country == nil {
+		return nil, false
+	}
+	return o.Country, true
+}
+
+// HasCountry returns a boolean if a field has been set.
+func (o *PaymentMethodRequest) HasCountry() bool {
+	if o != nil && o.Country != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given string and assigns it to the Country field.
+func (o *PaymentMethodRequest) SetCountry(v string) {
+	o.Country = &v
+}
+
 // GetEnvironment returns the Environment field value if set, zero value otherwise.
 func (o *PaymentMethodRequest) GetEnvironment() string {
 	if o == nil || o.Environment == nil {
@@ -370,6 +438,12 @@ func (o PaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.RedirectUrl != nil {
 		toSerialize["redirect_url"] = o.RedirectUrl
+	}
+	if o.Currency != nil {
+		toSerialize["currency"] = o.Currency
+	}
+	if o.Country != nil {
+		toSerialize["country"] = o.Country
 	}
 	if o.Environment != nil {
 		toSerialize["environment"] = o.Environment

@@ -22,7 +22,7 @@ type Transaction struct {
 	Type *string `json:"type,omitempty"`
 	// The unique identifier for this transaction.
 	Id *string `json:"id,omitempty"`
-	// The status of the transaction being processed. This is different from the `status` field in that it represents the status of the transaction at the payment processor, not the status of the transaction created in Gr4vy.
+	// The status of the transaction. The status may change over time as asynchronous  processing events occur.
 	Status *string `json:"status,omitempty"`
 	// The authorized amount for this transaction. This can be different than the actual captured amount and part of this amount may be refunded.
 	Amount *int32 `json:"amount,omitempty"`
