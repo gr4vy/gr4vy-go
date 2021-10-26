@@ -128,6 +128,16 @@ SetPaymentService sets PaymentService field to given value.
 
 HasPaymentService returns a boolean if a field has been set.
 
+### SetPaymentServiceNil
+
+`func (o *PaymentMethodToken) SetPaymentServiceNil(b bool)`
+
+ SetPaymentServiceNil sets the value for PaymentService to be an explicit nil
+
+### UnsetPaymentService
+`func (o *PaymentMethodToken) UnsetPaymentService()`
+
+UnsetPaymentService ensures that no value is present for PaymentService, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

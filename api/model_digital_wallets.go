@@ -15,32 +15,33 @@ import (
 	"encoding/json"
 )
 
-// PaymentOptions A list of payment options.
-type PaymentOptions struct {
-	Items *[]PaymentOption `json:"items,omitempty"`
+// DigitalWallets A list of registered digital wallets.
+type DigitalWallets struct {
+	// A list of registered digital wallets.
+	Items *[]DigitalWallet `json:"items,omitempty"`
 }
 
-// NewPaymentOptions instantiates a new PaymentOptions object
+// NewDigitalWallets instantiates a new DigitalWallets object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentOptions() *PaymentOptions {
-	this := PaymentOptions{}
+func NewDigitalWallets() *DigitalWallets {
+	this := DigitalWallets{}
 	return &this
 }
 
-// NewPaymentOptionsWithDefaults instantiates a new PaymentOptions object
+// NewDigitalWalletsWithDefaults instantiates a new DigitalWallets object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewPaymentOptionsWithDefaults() *PaymentOptions {
-	this := PaymentOptions{}
+func NewDigitalWalletsWithDefaults() *DigitalWallets {
+	this := DigitalWallets{}
 	return &this
 }
 
 // GetItems returns the Items field value if set, zero value otherwise.
-func (o *PaymentOptions) GetItems() []PaymentOption {
+func (o *DigitalWallets) GetItems() []DigitalWallet {
 	if o == nil || o.Items == nil {
-		var ret []PaymentOption
+		var ret []DigitalWallet
 		return ret
 	}
 	return *o.Items
@@ -48,7 +49,7 @@ func (o *PaymentOptions) GetItems() []PaymentOption {
 
 // GetItemsOk returns a tuple with the Items field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentOptions) GetItemsOk() (*[]PaymentOption, bool) {
+func (o *DigitalWallets) GetItemsOk() (*[]DigitalWallet, bool) {
 	if o == nil || o.Items == nil {
 		return nil, false
 	}
@@ -56,7 +57,7 @@ func (o *PaymentOptions) GetItemsOk() (*[]PaymentOption, bool) {
 }
 
 // HasItems returns a boolean if a field has been set.
-func (o *PaymentOptions) HasItems() bool {
+func (o *DigitalWallets) HasItems() bool {
 	if o != nil && o.Items != nil {
 		return true
 	}
@@ -64,12 +65,12 @@ func (o *PaymentOptions) HasItems() bool {
 	return false
 }
 
-// SetItems gets a reference to the given []PaymentOption and assigns it to the Items field.
-func (o *PaymentOptions) SetItems(v []PaymentOption) {
+// SetItems gets a reference to the given []DigitalWallet and assigns it to the Items field.
+func (o *DigitalWallets) SetItems(v []DigitalWallet) {
 	o.Items = &v
 }
 
-func (o PaymentOptions) MarshalJSON() ([]byte, error) {
+func (o DigitalWallets) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Items != nil {
 		toSerialize["items"] = o.Items
@@ -77,38 +78,38 @@ func (o PaymentOptions) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullablePaymentOptions struct {
-	value *PaymentOptions
+type NullableDigitalWallets struct {
+	value *DigitalWallets
 	isSet bool
 }
 
-func (v NullablePaymentOptions) Get() *PaymentOptions {
+func (v NullableDigitalWallets) Get() *DigitalWallets {
 	return v.value
 }
 
-func (v *NullablePaymentOptions) Set(val *PaymentOptions) {
+func (v *NullableDigitalWallets) Set(val *DigitalWallets) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullablePaymentOptions) IsSet() bool {
+func (v NullableDigitalWallets) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullablePaymentOptions) Unset() {
+func (v *NullableDigitalWallets) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullablePaymentOptions(val *PaymentOptions) *NullablePaymentOptions {
-	return &NullablePaymentOptions{value: val, isSet: true}
+func NewNullableDigitalWallets(val *DigitalWallets) *NullableDigitalWallets {
+	return &NullableDigitalWallets{value: val, isSet: true}
 }
 
-func (v NullablePaymentOptions) MarshalJSON() ([]byte, error) {
+func (v NullableDigitalWallets) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullablePaymentOptions) UnmarshalJSON(src []byte) error {
+func (v *NullableDigitalWallets) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

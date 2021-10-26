@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **LastName** | Pointer to **NullableString** | The last name, or family name, of the buyer. | [optional] 
 **EmailAddress** | Pointer to **NullableString** | The email address for the buyer. | [optional] 
 **PhoneNumber** | Pointer to **NullableString** | The phone number to use for this request. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
-**Address** | Pointer to [**NullableAddress**](Address.md) | The billing address for the buyer. | [optional] 
-**TaxId** | Pointer to [**NullableTaxId**](TaxId.md) | The tax information associated with the billing details. | [optional] 
+**Address** | Pointer to [**Address**](Address.md) | The billing address for the buyer. | [optional] 
+**TaxId** | Pointer to [**TaxId**](TaxId.md) | The tax information associated with the billing details. | [optional] 
 
 ## Methods
 

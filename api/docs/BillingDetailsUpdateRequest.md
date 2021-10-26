@@ -4,12 +4,12 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | Pointer to [**NullableAddressUpdate**](AddressUpdate.md) | Address associated with the billing details. | [optional] 
+**Address** | Pointer to [**AddressUpdate**](AddressUpdate.md) | Address associated with the billing details. | [optional] 
 **FirstName** | Pointer to **NullableString** | The first name(s) or given name for the buyer. | [optional] 
 **LastName** | Pointer to **NullableString** | The last name, or family name, of the buyer. | [optional] 
 **EmailAddress** | Pointer to **NullableString** | The email address for the buyer. | [optional] 
 **PhoneNumber** | Pointer to **NullableString** | The phone number to use for this request. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
-**TaxId** | Pointer to [**NullableTaxId**](TaxId.md) | The tax information associated with the billing details. | [optional] 
+**TaxId** | Pointer to [**TaxId**](TaxId.md) | The tax information associated with the billing details. | [optional] 
 
 ## Methods
 

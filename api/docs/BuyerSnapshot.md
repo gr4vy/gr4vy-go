@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The unique Gr4vy ID for this buyer. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. | [optional] 
 **DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
-**BillingDetails** | Pointer to [**NullableBillingDetails**](BillingDetails.md) | The billing details associated with the buyer, which include the address and tax ID. | [optional] 
+**BillingDetails** | Pointer to [**BillingDetails**](BillingDetails.md) | The billing details associated with the buyer, which include the address and tax ID. | [optional] 
 
 ## Methods
 

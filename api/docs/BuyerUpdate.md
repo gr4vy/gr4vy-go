@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**BillingDetails** | Pointer to [**NullableBillingDetailsUpdateRequest**](BillingDetailsUpdateRequest.md) | The optional billing details to update a buyer. | [optional] 
+**BillingDetails** | Pointer to [**BillingDetailsUpdateRequest**](BillingDetailsUpdateRequest.md) | The optional billing details to update a buyer. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers. | [optional] 
 **DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
 

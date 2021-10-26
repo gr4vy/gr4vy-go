@@ -60,7 +60,7 @@ Note, enum values are always validated and all unused variables are silently ign
 ### URLs Configuration per Operation
 
 Each operation can use different server URL defined using `OperationServers` map in the `Configuration`.
-An operation is uniquely identifield by `"{classname}Service.{nickname}"` string.
+An operation is uniquely identified by `"{classname}Service.{nickname}"` string.
 Similar rules for overriding default operation server index and variables applies by using `sw.ContextOperationServerIndices` and `sw.ContextOperationServerVariables` context maps.
 
 ```
@@ -85,6 +85,11 @@ Class | Method | HTTP request | Description
 *BuyersApi* | [**GetBuyer**](docs/BuyersApi.md#getbuyer) | **Get** /buyers/{buyer_id} | Get buyer
 *BuyersApi* | [**ListBuyers**](docs/BuyersApi.md#listbuyers) | **Get** /buyers | List buyers
 *BuyersApi* | [**UpdateBuyer**](docs/BuyersApi.md#updatebuyer) | **Put** /buyers/{buyer_id} | Update buyer
+*DigitalWalletsApi* | [**DeregisterDigitalWallet**](docs/DigitalWalletsApi.md#deregisterdigitalwallet) | **Delete** /digital-wallets/{digital_wallet_id} | De-register digital wallet
+*DigitalWalletsApi* | [**GetDigitalWallet**](docs/DigitalWalletsApi.md#getdigitalwallet) | **Get** /digital-wallets/{digital_wallet_id} | Get digital wallet
+*DigitalWalletsApi* | [**ListDigitalWallets**](docs/DigitalWalletsApi.md#listdigitalwallets) | **Get** /digital-wallets | List digital wallets
+*DigitalWalletsApi* | [**RegisterDigitalWallet**](docs/DigitalWalletsApi.md#registerdigitalwallet) | **Post** /digital-wallets | Register digital wallet
+*DigitalWalletsApi* | [**UpdateDigitalWallet**](docs/DigitalWalletsApi.md#updatedigitalwallet) | **Put** /digital-wallets/{digital_wallet_id} | Update digital wallet
 *PaymentMethodTokensApi* | [**ListPaymentMethodTokens**](docs/PaymentMethodTokensApi.md#listpaymentmethodtokens) | **Get** /payment-methods/{payment_method_id}/tokens | List payment method tokens
 *PaymentMethodsApi* | [**DeletePaymentMethod**](docs/PaymentMethodsApi.md#deletepaymentmethod) | **Delete** /payment-methods/{payment_method_id} | Delete payment method
 *PaymentMethodsApi* | [**GetPaymentMethod**](docs/PaymentMethodsApi.md#getpaymentmethod) | **Get** /payment-methods/{payment_method_id} | Get stored payment method
@@ -118,6 +123,10 @@ Class | Method | HTTP request | Description
  - [BuyerUpdate](docs/BuyerUpdate.md)
  - [Buyers](docs/Buyers.md)
  - [CardRequest](docs/CardRequest.md)
+ - [DigitalWallet](docs/DigitalWallet.md)
+ - [DigitalWalletRequest](docs/DigitalWalletRequest.md)
+ - [DigitalWalletUpdate](docs/DigitalWalletUpdate.md)
+ - [DigitalWallets](docs/DigitalWallets.md)
  - [Error400BadRequest](docs/Error400BadRequest.md)
  - [Error400IncorrectJson](docs/Error400IncorrectJson.md)
  - [Error401Unauthorized](docs/Error401Unauthorized.md)
@@ -128,7 +137,6 @@ Class | Method | HTTP request | Description
  - [ErrorDetail](docs/ErrorDetail.md)
  - [ErrorGeneric](docs/ErrorGeneric.md)
  - [PaymentMethod](docs/PaymentMethod.md)
- - [PaymentMethodRequest](docs/PaymentMethodRequest.md)
  - [PaymentMethodSnapshot](docs/PaymentMethodSnapshot.md)
  - [PaymentMethodToken](docs/PaymentMethodToken.md)
  - [PaymentMethodTokenized](docs/PaymentMethodTokenized.md)
@@ -151,8 +159,6 @@ Class | Method | HTTP request | Description
  - [RedirectRequest](docs/RedirectRequest.md)
  - [ResetPasswordRequest](docs/ResetPasswordRequest.md)
  - [SetPasswordRequest](docs/SetPasswordRequest.md)
- - [Status](docs/Status.md)
- - [Statuses](docs/Statuses.md)
  - [TaxId](docs/TaxId.md)
  - [ThreeDSecureData](docs/ThreeDSecureData.md)
  - [ThreeDSecureDataV1](docs/ThreeDSecureDataV1.md)
@@ -160,11 +166,9 @@ Class | Method | HTTP request | Description
  - [TokenizedRequest](docs/TokenizedRequest.md)
  - [Transaction](docs/Transaction.md)
  - [TransactionCaptureRequest](docs/TransactionCaptureRequest.md)
- - [TransactionPaymentMethodRequest](docs/TransactionPaymentMethodRequest.md)
  - [TransactionRefundRequest](docs/TransactionRefundRequest.md)
  - [TransactionRequest](docs/TransactionRequest.md)
  - [Transactions](docs/Transactions.md)
- - [TransactionsBatchCaptureRequest](docs/TransactionsBatchCaptureRequest.md)
  - [UserRequest](docs/UserRequest.md)
 
 

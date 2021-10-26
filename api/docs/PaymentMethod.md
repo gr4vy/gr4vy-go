@@ -12,12 +12,12 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **time.Time** | The date and time when this payment method was first created in our system. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this payment method was last updated in our system. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the payment method against your own records. | [optional] 
-**Buyer** | Pointer to [**NullableBuyer**](Buyer.md) | The optional buyer for which this payment method has been stored. | [optional] 
+**Buyer** | Pointer to [**Buyer**](Buyer.md) | The optional buyer for which this payment method has been stored. | [optional] 
 **Label** | Pointer to **NullableString** | A label for the card or the account. For a &#x60;paypal&#x60; payment method this is the user&#39;s email address. For a card it is the last 4 digits of the card. | [optional] 
 **Scheme** | Pointer to **NullableString** | The scheme of the card. Only applies to card payments. | [optional] 
 **ExpirationDate** | Pointer to **NullableString** | The expiration date for the payment method. | [optional] 
 **ApprovalUrl** | Pointer to **NullableString** | The optional URL that the buyer needs to be redirected to to further authorize their payment. | [optional] 
-**Environment** | Pointer to **NullableString** | The environment this payment method has been stored for. This will be null of the payment method was not stored. | [optional] [default to "production"]
+**Environment** | Pointer to **NullableString** | The environment this payment method has been stored for. This will be null of the payment method was not stored. | [optional] 
 
 ## Methods
 

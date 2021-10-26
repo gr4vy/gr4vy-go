@@ -12,12 +12,12 @@ Name | Type | Description | Notes
 **RefundedAmount** | Pointer to **int32** | The refunded amount for this transaction. This can be a part or all of the captured amount. | [optional] 
 **Currency** | Pointer to **string** | The currency code for this transaction. | [optional] 
 **PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) | The payment method used for this transaction. | [optional] 
-**Buyer** | Pointer to [**NullableBuyerSnapshot**](Buyer--Snapshot.md) | The buyer used for this transaction. | [optional] 
+**Buyer** | Pointer to [**BuyerSnapshot**](Buyer--Snapshot.md) | The buyer used for this transaction. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this transaction was created in our system. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
 **PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) | The payment service used for this transaction. | [optional] 
-**Environment** | Pointer to **string** | The environment this transaction has been created in. | [optional] [default to "production"]
+**Environment** | Pointer to **string** | The environment this transaction has been created in. | [optional] 
 
 ## Methods
 
@@ -238,6 +238,16 @@ SetPaymentMethod sets PaymentMethod field to given value.
 
 HasPaymentMethod returns a boolean if a field has been set.
 
+### SetPaymentMethodNil
+
+`func (o *Transaction) SetPaymentMethodNil(b bool)`
+
+ SetPaymentMethodNil sets the value for PaymentMethod to be an explicit nil
+
+### UnsetPaymentMethod
+`func (o *Transaction) UnsetPaymentMethod()`
+
+UnsetPaymentMethod ensures that no value is present for PaymentMethod, not even an explicit nil
 ### GetBuyer
 
 `func (o *Transaction) GetBuyer() BuyerSnapshot`
@@ -383,6 +393,16 @@ SetPaymentService sets PaymentService field to given value.
 
 HasPaymentService returns a boolean if a field has been set.
 
+### SetPaymentServiceNil
+
+`func (o *Transaction) SetPaymentServiceNil(b bool)`
+
+ SetPaymentServiceNil sets the value for PaymentService to be an explicit nil
+
+### UnsetPaymentService
+`func (o *Transaction) UnsetPaymentService()`
+
+UnsetPaymentService ensures that no value is present for PaymentService, not even an explicit nil
 ### GetEnvironment
 
 `func (o *Transaction) GetEnvironment() string`

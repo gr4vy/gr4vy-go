@@ -22,7 +22,7 @@ Name | Type | Description | Notes
 **MerchantCountryCode** | Pointer to **NullableString** | ISO 3166-1 numeric three-digit country code. | [optional] 
 **MerchantCategoryCode** | Pointer to **NullableString** | Merchant category code that describes the business. | [optional] 
 **MerchantUrl** | Pointer to **NullableString** | Fully qualified URL of 3-D Secure requestor website or customer care site. | [optional] 
-**CredentialsMode** | Pointer to **string** | Defines if the credentials are intended for the service&#39;s live API or sandbox/test API. | [optional] [default to "live"]
+**CredentialsMode** | Pointer to **string** | Defines if the credentials are intended for the service&#39;s live API or sandbox/test API. | [optional] 
 **Active** | Pointer to **bool** | Defines if this service is currently active or not. | [optional] [default to true]
 **Environments** | Pointer to **[]string** | Determines the Gr4vy environments in which this service should be available. This can be used in combination with the &#x60;environment&#x60; parameters in the payment method and transaction APIs to route transactions through this service. | [optional] [default to ["production"]]
 **Position** | Pointer to **float32** | The numeric rank of a payment service. Payment services with a lower position value are processed first. | [optional] 

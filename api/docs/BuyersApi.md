@@ -99,7 +99,7 @@ import (
 )
 
 func main() {
-    buyerId := TODO // string | The unique ID for a buyer.
+    buyerId := "8724fd24-5489-4a5d-90fd-0604df7d3b83" // string | The unique ID for a buyer.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -117,7 +117,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**buyerId** | [**string**](.md) | The unique ID for a buyer. | 
+**buyerId** | **string** | The unique ID for a buyer. | 
 
 ### Other Parameters
 
@@ -167,7 +167,7 @@ import (
 )
 
 func main() {
-    buyerId := TODO // string | The unique ID for a buyer.
+    buyerId := "8724fd24-5489-4a5d-90fd-0604df7d3b83" // string | The unique ID for a buyer.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -187,7 +187,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**buyerId** | [**string**](.md) | The unique ID for a buyer. | 
+**buyerId** | **string** | The unique ID for a buyer. | 
 
 ### Other Parameters
 
@@ -307,7 +307,7 @@ import (
 )
 
 func main() {
-    buyerId := TODO // string | The unique ID for a buyer.
+    buyerId := "8724fd24-5489-4a5d-90fd-0604df7d3b83" // string | The unique ID for a buyer.
     buyerUpdate := *openapiclient.NewBuyerUpdate() // BuyerUpdate |  (optional)
 
     configuration := openapiclient.NewConfiguration()
@@ -328,7 +328,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**buyerId** | [**string**](.md) | The unique ID for a buyer. | 
+**buyerId** | **string** | The unique ID for a buyer. | 
 
 ### Other Parameters
 

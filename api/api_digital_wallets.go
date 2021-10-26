@@ -25,170 +25,41 @@ var (
 	_ _context.Context
 )
 
-// BuyersApiService BuyersApi service
-type BuyersApiService service
+// DigitalWalletsApiService DigitalWalletsApi service
+type DigitalWalletsApiService service
 
-type ApiAddBuyerRequest struct {
+type ApiDeregisterDigitalWalletRequest struct {
 	ctx _context.Context
-	ApiService *BuyersApiService
-	buyerRequest *BuyerRequest
+	ApiService *DigitalWalletsApiService
+	digitalWalletId string
 }
 
-func (r ApiAddBuyerRequest) BuyerRequest(buyerRequest BuyerRequest) ApiAddBuyerRequest {
-	r.buyerRequest = &buyerRequest
-	return r
-}
 
-func (r ApiAddBuyerRequest) Execute() (Buyer, *_nethttp.Response, error) {
-	return r.ApiService.AddBuyerExecute(r)
+func (r ApiDeregisterDigitalWalletRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeregisterDigitalWalletExecute(r)
 }
 
 /*
-AddBuyer New buyer
+DeregisterDigitalWallet De-register digital wallet
 
-Adds a buyer, allowing for payment methods and transactions to be associated
-to this buyer.
-
+De-registers a digital wallet with a provider. Upon successful
+de-registration, the digital wallet's record is deleted and will no
+longer be available.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiAddBuyerRequest
+ @param digitalWalletId The ID of the registered digital wallet.
+ @return ApiDeregisterDigitalWalletRequest
 */
-func (a *BuyersApiService) AddBuyer(ctx _context.Context) ApiAddBuyerRequest {
-	return ApiAddBuyerRequest{
+func (a *DigitalWalletsApiService) DeregisterDigitalWallet(ctx _context.Context, digitalWalletId string) ApiDeregisterDigitalWalletRequest {
+	return ApiDeregisterDigitalWalletRequest{
 		ApiService: a,
 		ctx: ctx,
+		digitalWalletId: digitalWalletId,
 	}
 }
 
 // Execute executes the request
-//  @return Buyer
-func (a *BuyersApiService) AddBuyerExecute(r ApiAddBuyerRequest) (Buyer, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Buyer
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.AddBuyer")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/buyers"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.buyerRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v OneOfError400BadRequestError400IncorrectJson
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error401Unauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiDeleteBuyerRequest struct {
-	ctx _context.Context
-	ApiService *BuyersApiService
-	buyerId string
-}
-
-
-func (r ApiDeleteBuyerRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteBuyerExecute(r)
-}
-
-/*
-DeleteBuyer Delete buyer
-
-Deletes a buyer record. Any associated tokenized payment methods will remain
-in the system but no longer associated to the buyer.
-
- @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param buyerId The unique ID for a buyer.
- @return ApiDeleteBuyerRequest
-*/
-func (a *BuyersApiService) DeleteBuyer(ctx _context.Context, buyerId string) ApiDeleteBuyerRequest {
-	return ApiDeleteBuyerRequest{
-		ApiService: a,
-		ctx: ctx,
-		buyerId: buyerId,
-	}
-}
-
-// Execute executes the request
-func (a *BuyersApiService) DeleteBuyerExecute(r ApiDeleteBuyerRequest) (*_nethttp.Response, error) {
+func (a *DigitalWalletsApiService) DeregisterDigitalWalletExecute(r ApiDeregisterDigitalWalletRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -197,13 +68,13 @@ func (a *BuyersApiService) DeleteBuyerExecute(r ApiDeleteBuyerRequest) (*_nethtt
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.DeleteBuyer")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DigitalWalletsApiService.DeregisterDigitalWallet")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/buyers/{buyer_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"buyer_id"+"}", _neturl.PathEscape(parameterToString(r.buyerId, "")), -1)
+	localVarPath := localBasePath + "/digital-wallets/{digital_wallet_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"digital_wallet_id"+"}", _neturl.PathEscape(parameterToString(r.digitalWalletId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -273,53 +144,53 @@ func (a *BuyersApiService) DeleteBuyerExecute(r ApiDeleteBuyerRequest) (*_nethtt
 	return localVarHTTPResponse, nil
 }
 
-type ApiGetBuyerRequest struct {
+type ApiGetDigitalWalletRequest struct {
 	ctx _context.Context
-	ApiService *BuyersApiService
-	buyerId string
+	ApiService *DigitalWalletsApiService
+	digitalWalletId string
 }
 
 
-func (r ApiGetBuyerRequest) Execute() (Buyer, *_nethttp.Response, error) {
-	return r.ApiService.GetBuyerExecute(r)
+func (r ApiGetDigitalWalletRequest) Execute() (DigitalWallet, *_nethttp.Response, error) {
+	return r.ApiService.GetDigitalWalletExecute(r)
 }
 
 /*
-GetBuyer Get buyer
+GetDigitalWallet Get digital wallet
 
-Gets the information about a buyer.
+Returns a registered digital wallet.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param buyerId The unique ID for a buyer.
- @return ApiGetBuyerRequest
+ @param digitalWalletId The ID of the registered digital wallet.
+ @return ApiGetDigitalWalletRequest
 */
-func (a *BuyersApiService) GetBuyer(ctx _context.Context, buyerId string) ApiGetBuyerRequest {
-	return ApiGetBuyerRequest{
+func (a *DigitalWalletsApiService) GetDigitalWallet(ctx _context.Context, digitalWalletId string) ApiGetDigitalWalletRequest {
+	return ApiGetDigitalWalletRequest{
 		ApiService: a,
 		ctx: ctx,
-		buyerId: buyerId,
+		digitalWalletId: digitalWalletId,
 	}
 }
 
 // Execute executes the request
-//  @return Buyer
-func (a *BuyersApiService) GetBuyerExecute(r ApiGetBuyerRequest) (Buyer, *_nethttp.Response, error) {
+//  @return DigitalWallet
+func (a *DigitalWalletsApiService) GetDigitalWalletExecute(r ApiGetDigitalWalletRequest) (DigitalWallet, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Buyer
+		localVarReturnValue  DigitalWallet
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.GetBuyer")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DigitalWalletsApiService.GetDigitalWallet")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/buyers/{buyer_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"buyer_id"+"}", _neturl.PathEscape(parameterToString(r.buyerId, "")), -1)
+	localVarPath := localBasePath + "/digital-wallets/{digital_wallet_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"digital_wallet_id"+"}", _neturl.PathEscape(parameterToString(r.digitalWalletId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -398,81 +269,54 @@ func (a *BuyersApiService) GetBuyerExecute(r ApiGetBuyerRequest) (Buyer, *_netht
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiListBuyersRequest struct {
+type ApiListDigitalWalletsRequest struct {
 	ctx _context.Context
-	ApiService *BuyersApiService
-	search *string
-	limit *int32
-	cursor *string
+	ApiService *DigitalWalletsApiService
 }
 
-// Filters the results to only the buyers for which the &#x60;display_name&#x60; or &#x60;external_identifier&#x60; matches this value. This field allows for a partial match, matching any buyer for which either of the fields partially or completely matches.
-func (r ApiListBuyersRequest) Search(search string) ApiListBuyersRequest {
-	r.search = &search
-	return r
-}
-// Defines the maximum number of items to return for this request.
-func (r ApiListBuyersRequest) Limit(limit int32) ApiListBuyersRequest {
-	r.limit = &limit
-	return r
-}
-// A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the &#x60;next_cursor&#x60; field. Similarly the &#x60;previous_cursor&#x60; can be used to reverse backwards in the list.
-func (r ApiListBuyersRequest) Cursor(cursor string) ApiListBuyersRequest {
-	r.cursor = &cursor
-	return r
-}
 
-func (r ApiListBuyersRequest) Execute() (Buyers, *_nethttp.Response, error) {
-	return r.ApiService.ListBuyersExecute(r)
+func (r ApiListDigitalWalletsRequest) Execute() (DigitalWallets, *_nethttp.Response, error) {
+	return r.ApiService.ListDigitalWalletsExecute(r)
 }
 
 /*
-ListBuyers List buyers
+ListDigitalWallets List digital wallets
 
-Returns a list of buyers.
+Returns a list of all registered digital wallets.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @return ApiListBuyersRequest
+ @return ApiListDigitalWalletsRequest
 */
-func (a *BuyersApiService) ListBuyers(ctx _context.Context) ApiListBuyersRequest {
-	return ApiListBuyersRequest{
+func (a *DigitalWalletsApiService) ListDigitalWallets(ctx _context.Context) ApiListDigitalWalletsRequest {
+	return ApiListDigitalWalletsRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
 }
 
 // Execute executes the request
-//  @return Buyers
-func (a *BuyersApiService) ListBuyersExecute(r ApiListBuyersRequest) (Buyers, *_nethttp.Response, error) {
+//  @return DigitalWallets
+func (a *DigitalWalletsApiService) ListDigitalWalletsExecute(r ApiListDigitalWalletsRequest) (DigitalWallets, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Buyers
+		localVarReturnValue  DigitalWallets
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.ListBuyers")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DigitalWalletsApiService.ListDigitalWallets")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/buyers"
+	localVarPath := localBasePath + "/digital-wallets"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.search != nil {
-		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
-	}
-	if r.limit != nil {
-		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
-	}
-	if r.cursor != nil {
-		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -536,59 +380,54 @@ func (a *BuyersApiService) ListBuyersExecute(r ApiListBuyersRequest) (Buyers, *_
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateBuyerRequest struct {
+type ApiRegisterDigitalWalletRequest struct {
 	ctx _context.Context
-	ApiService *BuyersApiService
-	buyerId string
-	buyerUpdate *BuyerUpdate
+	ApiService *DigitalWalletsApiService
+	digitalWalletRequest *DigitalWalletRequest
 }
 
-func (r ApiUpdateBuyerRequest) BuyerUpdate(buyerUpdate BuyerUpdate) ApiUpdateBuyerRequest {
-	r.buyerUpdate = &buyerUpdate
+func (r ApiRegisterDigitalWalletRequest) DigitalWalletRequest(digitalWalletRequest DigitalWalletRequest) ApiRegisterDigitalWalletRequest {
+	r.digitalWalletRequest = &digitalWalletRequest
 	return r
 }
 
-func (r ApiUpdateBuyerRequest) Execute() (Buyer, *_nethttp.Response, error) {
-	return r.ApiService.UpdateBuyerExecute(r)
+func (r ApiRegisterDigitalWalletRequest) Execute() (DigitalWallet, *_nethttp.Response, error) {
+	return r.ApiService.RegisterDigitalWalletExecute(r)
 }
 
 /*
-UpdateBuyer Update buyer
+RegisterDigitalWallet Register digital wallet
 
-Updates a buyer's details.
-
+Register with a digital wallet provider.
 
  @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- @param buyerId The unique ID for a buyer.
- @return ApiUpdateBuyerRequest
+ @return ApiRegisterDigitalWalletRequest
 */
-func (a *BuyersApiService) UpdateBuyer(ctx _context.Context, buyerId string) ApiUpdateBuyerRequest {
-	return ApiUpdateBuyerRequest{
+func (a *DigitalWalletsApiService) RegisterDigitalWallet(ctx _context.Context) ApiRegisterDigitalWalletRequest {
+	return ApiRegisterDigitalWalletRequest{
 		ApiService: a,
 		ctx: ctx,
-		buyerId: buyerId,
 	}
 }
 
 // Execute executes the request
-//  @return Buyer
-func (a *BuyersApiService) UpdateBuyerExecute(r ApiUpdateBuyerRequest) (Buyer, *_nethttp.Response, error) {
+//  @return DigitalWallet
+func (a *DigitalWalletsApiService) RegisterDigitalWalletExecute(r ApiRegisterDigitalWalletRequest) (DigitalWallet, *_nethttp.Response, error) {
 	var (
-		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  Buyer
+		localVarReturnValue  DigitalWallet
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.UpdateBuyer")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DigitalWalletsApiService.RegisterDigitalWallet")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/buyers/{buyer_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"buyer_id"+"}", _neturl.PathEscape(parameterToString(r.buyerId, "")), -1)
+	localVarPath := localBasePath + "/digital-wallets"
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -612,7 +451,140 @@ func (a *BuyersApiService) UpdateBuyerExecute(r ApiUpdateBuyerRequest) (Buyer, *
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.buyerUpdate
+	localVarPostBody = r.digitalWalletRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v OneOfError400BadRequestError400IncorrectJson
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiUpdateDigitalWalletRequest struct {
+	ctx _context.Context
+	ApiService *DigitalWalletsApiService
+	digitalWalletId string
+	digitalWalletUpdate *DigitalWalletUpdate
+}
+
+func (r ApiUpdateDigitalWalletRequest) DigitalWalletUpdate(digitalWalletUpdate DigitalWalletUpdate) ApiUpdateDigitalWalletRequest {
+	r.digitalWalletUpdate = &digitalWalletUpdate
+	return r
+}
+
+func (r ApiUpdateDigitalWalletRequest) Execute() (DigitalWallet, *_nethttp.Response, error) {
+	return r.ApiService.UpdateDigitalWalletExecute(r)
+}
+
+/*
+UpdateDigitalWallet Update digital wallet
+
+Updates the values a digital wallet was registered with, and the Gr4vy
+environments in which a registered digital wallet should be available.
+
+ @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ @param digitalWalletId The ID of the registered digital wallet.
+ @return ApiUpdateDigitalWalletRequest
+*/
+func (a *DigitalWalletsApiService) UpdateDigitalWallet(ctx _context.Context, digitalWalletId string) ApiUpdateDigitalWalletRequest {
+	return ApiUpdateDigitalWalletRequest{
+		ApiService: a,
+		ctx: ctx,
+		digitalWalletId: digitalWalletId,
+	}
+}
+
+// Execute executes the request
+//  @return DigitalWallet
+func (a *DigitalWalletsApiService) UpdateDigitalWalletExecute(r ApiUpdateDigitalWalletRequest) (DigitalWallet, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPut
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  DigitalWallet
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DigitalWalletsApiService.UpdateDigitalWallet")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/digital-wallets/{digital_wallet_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"digital_wallet_id"+"}", _neturl.PathEscape(parameterToString(r.digitalWalletId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.digitalWalletUpdate
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

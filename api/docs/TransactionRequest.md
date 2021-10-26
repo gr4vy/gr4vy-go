@@ -6,18 +6,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amount** | **int32** | The monetary amount to create an authorization for, in the smallest currency unit for the given currency, for example &#x60;1299&#x60; cents to create an authorization for &#x60;$12.99&#x60;. | 
 **Currency** | **string** | A supported ISO-4217 currency code. | 
-**PaymentMethod** | [**TransactionPaymentMethodRequest**](TransactionPaymentMethodRequest.md) |  | 
+**PaymentMethod** | [**OneOfCardRequestRedirectRequestTokenizedRequest**](oneOf&lt;CardRequest,RedirectRequest,TokenizedRequest&gt;.md) | The optional payment method details to create an authorization for. This field is required for processing a card. | 
 **Store** | Pointer to **bool** | Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. | [optional] [default to false]
-**Intent** | Pointer to **string** | Defines the intent of this API call. This determines the desired initial state of the transaction.  * &#x60;authorize&#x60; - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * &#x60;capture&#x60; - Optionally approves and then authorizes and captures the funds of the transaction. | [optional] [default to "authorize"]
+**Intent** | Pointer to **string** | Defines the intent of this API call. This determines the desired initial state of the transaction.  * &#x60;authorize&#x60; - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * &#x60;capture&#x60; - Optionally approves and then authorizes and captures the funds of the transaction. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **Environment** | Pointer to **string** | Defines the environment to create this transaction in. Setting this to anything other than &#x60;production&#x60; will force Gr4vy to use the payment a service configured for that environment. | [optional] 
-**ThreeDSecureData** | Pointer to [**Undefined**](Undefined.md) |  | [optional] 
+**ThreeDSecureData** | Pointer to [**OneOfThreeDSecureDataV1ThreeDSecureDataV2**](oneOf&lt;ThreeDSecureDataV1,ThreeDSecureDataV2&gt;.md) | Pass through 3-D Secure data to support external 3-D Secure authorisation. If using an external 3-D Secure provider, you should not pass a &#x60;redirect_url&#x60; in the &#x60;payment_method&#x60; object for a transaction. | [optional] 
 
 ## Methods
 
 ### NewTransactionRequest
 
-`func NewTransactionRequest(amount int32, currency string, paymentMethod TransactionPaymentMethodRequest, ) *TransactionRequest`
+`func NewTransactionRequest(amount int32, currency string, paymentMethod OneOfCardRequestRedirectRequestTokenizedRequest, ) *TransactionRequest`
 
 NewTransactionRequest instantiates a new TransactionRequest object
 This constructor will assign default values to properties that have it defined,
@@ -74,24 +74,34 @@ SetCurrency sets Currency field to given value.
 
 ### GetPaymentMethod
 
-`func (o *TransactionRequest) GetPaymentMethod() TransactionPaymentMethodRequest`
+`func (o *TransactionRequest) GetPaymentMethod() OneOfCardRequestRedirectRequestTokenizedRequest`
 
 GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
 
 ### GetPaymentMethodOk
 
-`func (o *TransactionRequest) GetPaymentMethodOk() (*TransactionPaymentMethodRequest, bool)`
+`func (o *TransactionRequest) GetPaymentMethodOk() (*OneOfCardRequestRedirectRequestTokenizedRequest, bool)`
 
 GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentMethod
 
-`func (o *TransactionRequest) SetPaymentMethod(v TransactionPaymentMethodRequest)`
+`func (o *TransactionRequest) SetPaymentMethod(v OneOfCardRequestRedirectRequestTokenizedRequest)`
 
 SetPaymentMethod sets PaymentMethod field to given value.
 
 
+### SetPaymentMethodNil
+
+`func (o *TransactionRequest) SetPaymentMethodNil(b bool)`
+
+ SetPaymentMethodNil sets the value for PaymentMethod to be an explicit nil
+
+### UnsetPaymentMethod
+`func (o *TransactionRequest) UnsetPaymentMethod()`
+
+UnsetPaymentMethod ensures that no value is present for PaymentMethod, not even an explicit nil
 ### GetStore
 
 `func (o *TransactionRequest) GetStore() bool`
@@ -204,20 +214,20 @@ HasEnvironment returns a boolean if a field has been set.
 
 ### GetThreeDSecureData
 
-`func (o *TransactionRequest) GetThreeDSecureData() Undefined`
+`func (o *TransactionRequest) GetThreeDSecureData() OneOfThreeDSecureDataV1ThreeDSecureDataV2`
 
 GetThreeDSecureData returns the ThreeDSecureData field if non-nil, zero value otherwise.
 
 ### GetThreeDSecureDataOk
 
-`func (o *TransactionRequest) GetThreeDSecureDataOk() (*Undefined, bool)`
+`func (o *TransactionRequest) GetThreeDSecureDataOk() (*OneOfThreeDSecureDataV1ThreeDSecureDataV2, bool)`
 
 GetThreeDSecureDataOk returns a tuple with the ThreeDSecureData field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetThreeDSecureData
 
-`func (o *TransactionRequest) SetThreeDSecureData(v Undefined)`
+`func (o *TransactionRequest) SetThreeDSecureData(v OneOfThreeDSecureDataV1ThreeDSecureDataV2)`
 
 SetThreeDSecureData sets ThreeDSecureData field to given value.
 
@@ -227,6 +237,16 @@ SetThreeDSecureData sets ThreeDSecureData field to given value.
 
 HasThreeDSecureData returns a boolean if a field has been set.
 
+### SetThreeDSecureDataNil
+
+`func (o *TransactionRequest) SetThreeDSecureDataNil(b bool)`
+
+ SetThreeDSecureDataNil sets the value for ThreeDSecureData to be an explicit nil
+
+### UnsetThreeDSecureData
+`func (o *TransactionRequest) UnsetThreeDSecureData()`
+
+UnsetThreeDSecureData ensures that no value is present for ThreeDSecureData, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

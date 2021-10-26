@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-    paymentMethodId := TODO // string | The ID of the payment method.
+    paymentMethodId := "46973e9d-88a7-44a6-abfe-be4ff0134ff4" // string | The ID of the payment method.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -51,7 +51,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**paymentMethodId** | [**string**](.md) | The ID of the payment method. | 
+**paymentMethodId** | **string** | The ID of the payment method. | 
 
 ### Other Parameters
 
@@ -101,7 +101,7 @@ import (
 )
 
 func main() {
-    paymentMethodId := TODO // string | The ID of the payment method.
+    paymentMethodId := "46973e9d-88a7-44a6-abfe-be4ff0134ff4" // string | The ID of the payment method.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -121,7 +121,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**paymentMethodId** | [**string**](.md) | The ID of the payment method. | 
+**paymentMethodId** | **string** | The ID of the payment method. | 
 
 ### Other Parameters
 
@@ -300,7 +300,7 @@ Name | Type | Description  | Notes
 
 ## StorePaymentMethod
 
-> PaymentMethod StorePaymentMethod(ctx).PaymentMethodRequest(paymentMethodRequest).Execute()
+> PaymentMethod StorePaymentMethod(ctx).UNKNOWNBASETYPE(uNKNOWNBASETYPE).Execute()
 
 New payment method
 
@@ -319,11 +319,11 @@ import (
 )
 
 func main() {
-    paymentMethodRequest := *openapiclient.NewPaymentMethodRequest("card") // PaymentMethodRequest |  (optional)
+    uNKNOWNBASETYPE := TODO // UNKNOWN_BASE_TYPE |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentMethodsApi.StorePaymentMethod(context.Background()).PaymentMethodRequest(paymentMethodRequest).Execute()
+    resp, r, err := api_client.PaymentMethodsApi.StorePaymentMethod(context.Background()).UNKNOWNBASETYPE(uNKNOWNBASETYPE).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentMethodsApi.StorePaymentMethod``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -344,7 +344,7 @@ Other parameters are passed through a pointer to a apiStorePaymentMethodRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **paymentMethodRequest** | [**PaymentMethodRequest**](PaymentMethodRequest.md) |  | 
+ **uNKNOWNBASETYPE** | [**UNKNOWN_BASE_TYPE**](UNKNOWN_BASE_TYPE.md) |  | 
 
 ### Return type
 

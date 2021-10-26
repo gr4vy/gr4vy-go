@@ -29,7 +29,7 @@ import (
 )
 
 func main() {
-    paymentMethodId := TODO // string | The ID of the payment method.
+    paymentMethodId := "46973e9d-88a7-44a6-abfe-be4ff0134ff4" // string | The ID of the payment method.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
@@ -49,7 +49,7 @@ func main() {
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**paymentMethodId** | [**string**](.md) | The ID of the payment method. | 
+**paymentMethodId** | **string** | The ID of the payment method. | 
 
 ### Other Parameters
 
