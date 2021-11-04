@@ -2,6 +2,7 @@ package gr4vy
 
 import (
 	"fmt"
+	"os"
 	"io"
 	"io/ioutil"
 	"bytes"
@@ -114,6 +115,10 @@ func lastString(ss []string) string {
 }
 
 func GetKeyFromFile(fileName string) (string, error) {
+	value, exists := os.LookupEnv("PRIVATE_KEY")
+    if exists {
+        return string(value), nil
+    }
 	b, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		return "", err
