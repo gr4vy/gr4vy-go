@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-    transactionRequest := *openapiclient.NewTransactionRequest(int32(1299), "USD", *openapiclient.NewTransactionPaymentMethodRequest("card")) // TransactionRequest |  (optional)
+    transactionRequest := *openapiclient.NewTransactionRequest(int32(1299), "USD", *openapiclient.NewTransactionPaymentMethodRequest(string(123))) // TransactionRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

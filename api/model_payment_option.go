@@ -19,16 +19,15 @@ import (
 type PaymentOption struct {
 	// `payment-option`.
 	Type *string `json:"type,omitempty"`
-	// The type of payment method that is available.
 	Method *string `json:"method,omitempty"`
 	// An icon to display for the payment option.
 	IconUrl NullableString `json:"icon_url,omitempty"`
-	// The mode of how the payment option should be displayed.
 	Mode *string `json:"mode,omitempty"`
 	// A label that describes this payment option. This label is returned in the language defined by the `locale` query parameter. The label can be used to display a list of payment options to the buyer in their language.
 	Label *string `json:"label,omitempty"`
 	// A flag to indicate if storing the payment method is supported.
 	CanStorePaymentMethod *bool `json:"can_store_payment_method,omitempty"`
+	Context *PaymentOptionContext `json:"context,omitempty"`
 }
 
 // NewPaymentOption instantiates a new PaymentOption object
@@ -250,6 +249,38 @@ func (o *PaymentOption) SetCanStorePaymentMethod(v bool) {
 	o.CanStorePaymentMethod = &v
 }
 
+// GetContext returns the Context field value if set, zero value otherwise.
+func (o *PaymentOption) GetContext() PaymentOptionContext {
+	if o == nil || o.Context == nil {
+		var ret PaymentOptionContext
+		return ret
+	}
+	return *o.Context
+}
+
+// GetContextOk returns a tuple with the Context field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentOption) GetContextOk() (*PaymentOptionContext, bool) {
+	if o == nil || o.Context == nil {
+		return nil, false
+	}
+	return o.Context, true
+}
+
+// HasContext returns a boolean if a field has been set.
+func (o *PaymentOption) HasContext() bool {
+	if o != nil && o.Context != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetContext gets a reference to the given PaymentOptionContext and assigns it to the Context field.
+func (o *PaymentOption) SetContext(v PaymentOptionContext) {
+	o.Context = &v
+}
+
 func (o PaymentOption) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -269,6 +300,9 @@ func (o PaymentOption) MarshalJSON() ([]byte, error) {
 	}
 	if o.CanStorePaymentMethod != nil {
 		toSerialize["can_store_payment_method"] = o.CanStorePaymentMethod
+	}
+	if o.Context != nil {
+		toSerialize["context"] = o.Context
 	}
 	return json.Marshal(toSerialize)
 }

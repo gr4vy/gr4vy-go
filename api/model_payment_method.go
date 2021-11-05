@@ -24,9 +24,7 @@ type PaymentMethod struct {
 	Id *string `json:"id,omitempty"`
 	// The state of the payment method.  - `processing` - The payment method is still being stored. - `buyer_approval_required` - Storing the payment method requires   the buyer to provide approval. Follow the `approval_url` for next steps. - `succeeded` - The payment method is approved and stored with all   relevant payment services. - `failed` - Storing the payment method did not succeed.
 	Status *string `json:"status,omitempty"`
-	// The type of this payment method.
 	Method *string `json:"method,omitempty"`
-	// The mode to use with this payment method.
 	Mode *string `json:"mode,omitempty"`
 	// The date and time when this payment method was first created in our system.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
@@ -34,8 +32,7 @@ type PaymentMethod struct {
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// An external identifier that can be used to match the payment method against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
-	// The optional buyer for which this payment method has been stored.
-	Buyer NullableBuyer `json:"buyer,omitempty"`
+	Buyer *Buyer `json:"buyer,omitempty"`
 	// A label for the card or the account. For a `paypal` payment method this is the user's email address. For a card it is the last 4 digits of the card.
 	Label NullableString `json:"label,omitempty"`
 	// The scheme of the card. Only applies to card payments.
@@ -335,46 +332,36 @@ func (o *PaymentMethod) UnsetExternalIdentifier() {
 	o.ExternalIdentifier.Unset()
 }
 
-// GetBuyer returns the Buyer field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetBuyer returns the Buyer field value if set, zero value otherwise.
 func (o *PaymentMethod) GetBuyer() Buyer {
-	if o == nil || o.Buyer.Get() == nil {
+	if o == nil || o.Buyer == nil {
 		var ret Buyer
 		return ret
 	}
-	return *o.Buyer.Get()
+	return *o.Buyer
 }
 
 // GetBuyerOk returns a tuple with the Buyer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentMethod) GetBuyerOk() (*Buyer, bool) {
-	if o == nil  {
+	if o == nil || o.Buyer == nil {
 		return nil, false
 	}
-	return o.Buyer.Get(), o.Buyer.IsSet()
+	return o.Buyer, true
 }
 
 // HasBuyer returns a boolean if a field has been set.
 func (o *PaymentMethod) HasBuyer() bool {
-	if o != nil && o.Buyer.IsSet() {
+	if o != nil && o.Buyer != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetBuyer gets a reference to the given NullableBuyer and assigns it to the Buyer field.
+// SetBuyer gets a reference to the given Buyer and assigns it to the Buyer field.
 func (o *PaymentMethod) SetBuyer(v Buyer) {
-	o.Buyer.Set(&v)
-}
-// SetBuyerNil sets the value for Buyer to be an explicit nil
-func (o *PaymentMethod) SetBuyerNil() {
-	o.Buyer.Set(nil)
-}
-
-// UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
-func (o *PaymentMethod) UnsetBuyer() {
-	o.Buyer.Unset()
+	o.Buyer = &v
 }
 
 // GetLabel returns the Label field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -613,8 +600,8 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
 	}
-	if o.Buyer.IsSet() {
-		toSerialize["buyer"] = o.Buyer.Get()
+	if o.Buyer != nil {
+		toSerialize["buyer"] = o.Buyer
 	}
 	if o.Label.IsSet() {
 		toSerialize["label"] = o.Label.Get()

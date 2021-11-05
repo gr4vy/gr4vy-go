@@ -4,19 +4,19 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AuthenticationResponse** | **string** | The authentication response. | 
-**CavvAlgorithm** | **string** | The CAVV Algorithm used. | 
-**Xid** | **string** | The transaction identifier. | 
 **Cavv** | **string** | The cardholder authentication value or AAV. | 
 **Eci** | **string** | The electronic commerce indicator for the 3DS transaction. | 
 **Version** | **string** | The version of 3-D Secure that was used. | 
 **DirectoryResponse** | **string** | For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the &#x60;ARes&#x60;. | 
+**AuthenticationResponse** | **string** | The authentication response. | 
+**CavvAlgorithm** | **string** | The CAVV Algorithm used. | 
+**Xid** | **string** | The transaction identifier. | 
 
 ## Methods
 
 ### NewThreeDSecureDataV1
 
-`func NewThreeDSecureDataV1(authenticationResponse string, cavvAlgorithm string, xid string, cavv string, eci string, version string, directoryResponse string, ) *ThreeDSecureDataV1`
+`func NewThreeDSecureDataV1(cavv string, eci string, version string, directoryResponse string, authenticationResponse string, cavvAlgorithm string, xid string, ) *ThreeDSecureDataV1`
 
 NewThreeDSecureDataV1 instantiates a new ThreeDSecureDataV1 object
 This constructor will assign default values to properties that have it defined,
@@ -30,66 +30,6 @@ will change when the set of required properties is changed
 NewThreeDSecureDataV1WithDefaults instantiates a new ThreeDSecureDataV1 object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAuthenticationResponse
-
-`func (o *ThreeDSecureDataV1) GetAuthenticationResponse() string`
-
-GetAuthenticationResponse returns the AuthenticationResponse field if non-nil, zero value otherwise.
-
-### GetAuthenticationResponseOk
-
-`func (o *ThreeDSecureDataV1) GetAuthenticationResponseOk() (*string, bool)`
-
-GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthenticationResponse
-
-`func (o *ThreeDSecureDataV1) SetAuthenticationResponse(v string)`
-
-SetAuthenticationResponse sets AuthenticationResponse field to given value.
-
-
-### GetCavvAlgorithm
-
-`func (o *ThreeDSecureDataV1) GetCavvAlgorithm() string`
-
-GetCavvAlgorithm returns the CavvAlgorithm field if non-nil, zero value otherwise.
-
-### GetCavvAlgorithmOk
-
-`func (o *ThreeDSecureDataV1) GetCavvAlgorithmOk() (*string, bool)`
-
-GetCavvAlgorithmOk returns a tuple with the CavvAlgorithm field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCavvAlgorithm
-
-`func (o *ThreeDSecureDataV1) SetCavvAlgorithm(v string)`
-
-SetCavvAlgorithm sets CavvAlgorithm field to given value.
-
-
-### GetXid
-
-`func (o *ThreeDSecureDataV1) GetXid() string`
-
-GetXid returns the Xid field if non-nil, zero value otherwise.
-
-### GetXidOk
-
-`func (o *ThreeDSecureDataV1) GetXidOk() (*string, bool)`
-
-GetXidOk returns a tuple with the Xid field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetXid
-
-`func (o *ThreeDSecureDataV1) SetXid(v string)`
-
-SetXid sets Xid field to given value.
-
 
 ### GetCavv
 
@@ -169,6 +109,66 @@ and a boolean to check if the value has been set.
 `func (o *ThreeDSecureDataV1) SetDirectoryResponse(v string)`
 
 SetDirectoryResponse sets DirectoryResponse field to given value.
+
+
+### GetAuthenticationResponse
+
+`func (o *ThreeDSecureDataV1) GetAuthenticationResponse() string`
+
+GetAuthenticationResponse returns the AuthenticationResponse field if non-nil, zero value otherwise.
+
+### GetAuthenticationResponseOk
+
+`func (o *ThreeDSecureDataV1) GetAuthenticationResponseOk() (*string, bool)`
+
+GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthenticationResponse
+
+`func (o *ThreeDSecureDataV1) SetAuthenticationResponse(v string)`
+
+SetAuthenticationResponse sets AuthenticationResponse field to given value.
+
+
+### GetCavvAlgorithm
+
+`func (o *ThreeDSecureDataV1) GetCavvAlgorithm() string`
+
+GetCavvAlgorithm returns the CavvAlgorithm field if non-nil, zero value otherwise.
+
+### GetCavvAlgorithmOk
+
+`func (o *ThreeDSecureDataV1) GetCavvAlgorithmOk() (*string, bool)`
+
+GetCavvAlgorithmOk returns a tuple with the CavvAlgorithm field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCavvAlgorithm
+
+`func (o *ThreeDSecureDataV1) SetCavvAlgorithm(v string)`
+
+SetCavvAlgorithm sets CavvAlgorithm field to given value.
+
+
+### GetXid
+
+`func (o *ThreeDSecureDataV1) GetXid() string`
+
+GetXid returns the Xid field if non-nil, zero value otherwise.
+
+### GetXidOk
+
+`func (o *ThreeDSecureDataV1) GetXidOk() (*string, bool)`
+
+GetXidOk returns a tuple with the Xid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetXid
+
+`func (o *ThreeDSecureDataV1) SetXid(v string)`
+
+SetXid sets Xid field to given value.
 
 
 

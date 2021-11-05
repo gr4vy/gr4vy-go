@@ -7,10 +7,11 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The ID of the payment service. This is the underlying provider followed by a dash followed by the payment method ID. | [optional] 
 **Type** | Pointer to **string** | &#x60;payment-service-definition&#x60;. | [optional] [default to "payment-service-definition"]
 **DisplayName** | Pointer to **string** | The display name of this service. | [optional] 
-**Method** | Pointer to **string** | The ID of the payment method that this services handles. | [optional] 
+**Method** | Pointer to **string** |  | [optional] 
 **Fields** | Pointer to [**[]PaymentServiceDefinitionFields**](PaymentServiceDefinitionFields.md) | A list of fields that need to be submitted when activating the payment. service. | [optional] 
 **SupportedCurrencies** | Pointer to **[]string** | A list of three-letter ISO currency codes that this service supports. | [optional] 
 **SupportedCountries** | Pointer to **[]string** | A list of two-letter ISO country codes that this service supports. | [optional] 
+**Mode** | Pointer to **string** |  | [optional] 
 **SupportedFeatures** | Pointer to [**PaymentServiceDefinitionSupportedFeatures**](PaymentServiceDefinitionSupportedFeatures.md) |  | [optional] 
 **IconUrl** | Pointer to **NullableString** | An icon to display for the payment service. | [optional] 
 
@@ -207,6 +208,31 @@ SetSupportedCountries sets SupportedCountries field to given value.
 `func (o *PaymentServiceDefinition) HasSupportedCountries() bool`
 
 HasSupportedCountries returns a boolean if a field has been set.
+
+### GetMode
+
+`func (o *PaymentServiceDefinition) GetMode() string`
+
+GetMode returns the Mode field if non-nil, zero value otherwise.
+
+### GetModeOk
+
+`func (o *PaymentServiceDefinition) GetModeOk() (*string, bool)`
+
+GetModeOk returns a tuple with the Mode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMode
+
+`func (o *PaymentServiceDefinition) SetMode(v string)`
+
+SetMode sets Mode field to given value.
+
+### HasMode
+
+`func (o *PaymentServiceDefinition) HasMode() bool`
+
+HasMode returns a boolean if a field has been set.
 
 ### GetSupportedFeatures
 

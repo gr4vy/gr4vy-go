@@ -17,7 +17,6 @@ import (
 
 // RedirectRequest Request to use a redirect payment method in a transaction.
 type RedirectRequest struct {
-	// The method to use, this can be any of the methods that support redirect requests.  When storing a new payment method, only `gocardless` is currently supported.
 	Method string `json:"method"`
 	// The redirect URL to redirect a buyer to after they have authorized their transaction.
 	RedirectUrl string `json:"redirect_url"`

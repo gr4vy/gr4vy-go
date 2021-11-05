@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The ID of this payment service. | [optional] 
 **Type** | Pointer to **string** | The type of this resource. | [optional] 
 **PaymentServiceDefinitionId** | Pointer to **string** | The ID of the payment service definition used to create this service.  | [optional] 
-**Method** | Pointer to **string** | Defines the ID of the payment method that this service handles. | [optional] 
+**Method** | Pointer to **string** |  | [optional] 
 
 ## Methods
 

@@ -21,8 +21,7 @@ type BuyerRequest struct {
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.
 	DisplayName NullableString `json:"display_name,omitempty"`
-	// The optional billing details to create a buyer.
-	BillingDetails NullableBillingDetails `json:"billing_details,omitempty"`
+	BillingDetails *BillingDetails `json:"billing_details,omitempty"`
 }
 
 // NewBuyerRequest instantiates a new BuyerRequest object
@@ -126,46 +125,36 @@ func (o *BuyerRequest) UnsetDisplayName() {
 	o.DisplayName.Unset()
 }
 
-// GetBillingDetails returns the BillingDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+// GetBillingDetails returns the BillingDetails field value if set, zero value otherwise.
 func (o *BuyerRequest) GetBillingDetails() BillingDetails {
-	if o == nil || o.BillingDetails.Get() == nil {
+	if o == nil || o.BillingDetails == nil {
 		var ret BillingDetails
 		return ret
 	}
-	return *o.BillingDetails.Get()
+	return *o.BillingDetails
 }
 
 // GetBillingDetailsOk returns a tuple with the BillingDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BuyerRequest) GetBillingDetailsOk() (*BillingDetails, bool) {
-	if o == nil  {
+	if o == nil || o.BillingDetails == nil {
 		return nil, false
 	}
-	return o.BillingDetails.Get(), o.BillingDetails.IsSet()
+	return o.BillingDetails, true
 }
 
 // HasBillingDetails returns a boolean if a field has been set.
 func (o *BuyerRequest) HasBillingDetails() bool {
-	if o != nil && o.BillingDetails.IsSet() {
+	if o != nil && o.BillingDetails != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetBillingDetails gets a reference to the given NullableBillingDetails and assigns it to the BillingDetails field.
+// SetBillingDetails gets a reference to the given BillingDetails and assigns it to the BillingDetails field.
 func (o *BuyerRequest) SetBillingDetails(v BillingDetails) {
-	o.BillingDetails.Set(&v)
-}
-// SetBillingDetailsNil sets the value for BillingDetails to be an explicit nil
-func (o *BuyerRequest) SetBillingDetailsNil() {
-	o.BillingDetails.Set(nil)
-}
-
-// UnsetBillingDetails ensures that no value is present for BillingDetails, not even an explicit nil
-func (o *BuyerRequest) UnsetBillingDetails() {
-	o.BillingDetails.Unset()
+	o.BillingDetails = &v
 }
 
 func (o BuyerRequest) MarshalJSON() ([]byte, error) {
@@ -176,8 +165,8 @@ func (o BuyerRequest) MarshalJSON() ([]byte, error) {
 	if o.DisplayName.IsSet() {
 		toSerialize["display_name"] = o.DisplayName.Get()
 	}
-	if o.BillingDetails.IsSet() {
-		toSerialize["billing_details"] = o.BillingDetails.Get()
+	if o.BillingDetails != nil {
+		toSerialize["billing_details"] = o.BillingDetails
 	}
 	return json.Marshal(toSerialize)
 }

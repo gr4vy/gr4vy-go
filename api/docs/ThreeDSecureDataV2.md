@@ -4,18 +4,18 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AuthenticationResponse** | Pointer to **string** | The transaction status from the challenge result (not required for frictionless). | [optional] 
-**DirectoryTransactionId** | **string** | The transaction identifier. | 
 **Cavv** | **string** | The cardholder authentication value or AAV. | 
 **Eci** | **string** | The electronic commerce indicator for the 3DS transaction. | 
 **Version** | **string** | The version of 3-D Secure that was used. | 
 **DirectoryResponse** | **string** | For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the &#x60;ARes&#x60;. | 
+**AuthenticationResponse** | Pointer to **string** | The transaction status from the challenge result (not required for frictionless). | [optional] 
+**DirectoryTransactionId** | **string** | The transaction identifier. | 
 
 ## Methods
 
 ### NewThreeDSecureDataV2
 
-`func NewThreeDSecureDataV2(directoryTransactionId string, cavv string, eci string, version string, directoryResponse string, ) *ThreeDSecureDataV2`
+`func NewThreeDSecureDataV2(cavv string, eci string, version string, directoryResponse string, directoryTransactionId string, ) *ThreeDSecureDataV2`
 
 NewThreeDSecureDataV2 instantiates a new ThreeDSecureDataV2 object
 This constructor will assign default values to properties that have it defined,
@@ -29,51 +29,6 @@ will change when the set of required properties is changed
 NewThreeDSecureDataV2WithDefaults instantiates a new ThreeDSecureDataV2 object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAuthenticationResponse
-
-`func (o *ThreeDSecureDataV2) GetAuthenticationResponse() string`
-
-GetAuthenticationResponse returns the AuthenticationResponse field if non-nil, zero value otherwise.
-
-### GetAuthenticationResponseOk
-
-`func (o *ThreeDSecureDataV2) GetAuthenticationResponseOk() (*string, bool)`
-
-GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAuthenticationResponse
-
-`func (o *ThreeDSecureDataV2) SetAuthenticationResponse(v string)`
-
-SetAuthenticationResponse sets AuthenticationResponse field to given value.
-
-### HasAuthenticationResponse
-
-`func (o *ThreeDSecureDataV2) HasAuthenticationResponse() bool`
-
-HasAuthenticationResponse returns a boolean if a field has been set.
-
-### GetDirectoryTransactionId
-
-`func (o *ThreeDSecureDataV2) GetDirectoryTransactionId() string`
-
-GetDirectoryTransactionId returns the DirectoryTransactionId field if non-nil, zero value otherwise.
-
-### GetDirectoryTransactionIdOk
-
-`func (o *ThreeDSecureDataV2) GetDirectoryTransactionIdOk() (*string, bool)`
-
-GetDirectoryTransactionIdOk returns a tuple with the DirectoryTransactionId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDirectoryTransactionId
-
-`func (o *ThreeDSecureDataV2) SetDirectoryTransactionId(v string)`
-
-SetDirectoryTransactionId sets DirectoryTransactionId field to given value.
-
 
 ### GetCavv
 
@@ -153,6 +108,51 @@ and a boolean to check if the value has been set.
 `func (o *ThreeDSecureDataV2) SetDirectoryResponse(v string)`
 
 SetDirectoryResponse sets DirectoryResponse field to given value.
+
+
+### GetAuthenticationResponse
+
+`func (o *ThreeDSecureDataV2) GetAuthenticationResponse() string`
+
+GetAuthenticationResponse returns the AuthenticationResponse field if non-nil, zero value otherwise.
+
+### GetAuthenticationResponseOk
+
+`func (o *ThreeDSecureDataV2) GetAuthenticationResponseOk() (*string, bool)`
+
+GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthenticationResponse
+
+`func (o *ThreeDSecureDataV2) SetAuthenticationResponse(v string)`
+
+SetAuthenticationResponse sets AuthenticationResponse field to given value.
+
+### HasAuthenticationResponse
+
+`func (o *ThreeDSecureDataV2) HasAuthenticationResponse() bool`
+
+HasAuthenticationResponse returns a boolean if a field has been set.
+
+### GetDirectoryTransactionId
+
+`func (o *ThreeDSecureDataV2) GetDirectoryTransactionId() string`
+
+GetDirectoryTransactionId returns the DirectoryTransactionId field if non-nil, zero value otherwise.
+
+### GetDirectoryTransactionIdOk
+
+`func (o *ThreeDSecureDataV2) GetDirectoryTransactionIdOk() (*string, bool)`
+
+GetDirectoryTransactionIdOk returns a tuple with the DirectoryTransactionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDirectoryTransactionId
+
+`func (o *ThreeDSecureDataV2) SetDirectoryTransactionId(v string)`
+
+SetDirectoryTransactionId sets DirectoryTransactionId field to given value.
 
 
 

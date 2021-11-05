@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | &#x60;payment-method-token&#x60;. | [optional] 
 **Id** | Pointer to **string** | The external ID of this payment method as it has been registered with the payment service, which can be used directly in combination with the &#x60;token&#x60; without the need to go through Gr4vy for a transaction.  In some cases this is a different value to the &#x60;token&#x60; while in others this value is identical. Please see the documentation for the payment service for more details. | [optional] 
 **Token** | Pointer to **string** | The token of this payment method as it has been registered with the payment service, which can be used directly in combination with the &#x60;id&#x60; without the need to go through Gr4vy for a transaction.  In some cases this is a different value to the &#x60;id&#x60; while in others this value is identical. Please see the documentation for the payment service for more details. | [optional] 
-**PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) | The payment service used for this transaction. | [optional] 
+**PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) |  | [optional] 
 
 ## Methods
 

@@ -23,7 +23,6 @@ type PaymentServiceDefinition struct {
 	Type *string `json:"type,omitempty"`
 	// The display name of this service.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The ID of the payment method that this services handles.
 	Method *string `json:"method,omitempty"`
 	// A list of fields that need to be submitted when activating the payment. service.
 	Fields *[]PaymentServiceDefinitionFields `json:"fields,omitempty"`
@@ -31,6 +30,7 @@ type PaymentServiceDefinition struct {
 	SupportedCurrencies *[]string `json:"supported_currencies,omitempty"`
 	// A list of two-letter ISO country codes that this service supports.
 	SupportedCountries *[]string `json:"supported_countries,omitempty"`
+	Mode *string `json:"mode,omitempty"`
 	SupportedFeatures *PaymentServiceDefinitionSupportedFeatures `json:"supported_features,omitempty"`
 	// An icon to display for the payment service.
 	IconUrl NullableString `json:"icon_url,omitempty"`
@@ -281,6 +281,38 @@ func (o *PaymentServiceDefinition) SetSupportedCountries(v []string) {
 	o.SupportedCountries = &v
 }
 
+// GetMode returns the Mode field value if set, zero value otherwise.
+func (o *PaymentServiceDefinition) GetMode() string {
+	if o == nil || o.Mode == nil {
+		var ret string
+		return ret
+	}
+	return *o.Mode
+}
+
+// GetModeOk returns a tuple with the Mode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinition) GetModeOk() (*string, bool) {
+	if o == nil || o.Mode == nil {
+		return nil, false
+	}
+	return o.Mode, true
+}
+
+// HasMode returns a boolean if a field has been set.
+func (o *PaymentServiceDefinition) HasMode() bool {
+	if o != nil && o.Mode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMode gets a reference to the given string and assigns it to the Mode field.
+func (o *PaymentServiceDefinition) SetMode(v string) {
+	o.Mode = &v
+}
+
 // GetSupportedFeatures returns the SupportedFeatures field value if set, zero value otherwise.
 func (o *PaymentServiceDefinition) GetSupportedFeatures() PaymentServiceDefinitionSupportedFeatures {
 	if o == nil || o.SupportedFeatures == nil {
@@ -377,6 +409,9 @@ func (o PaymentServiceDefinition) MarshalJSON() ([]byte, error) {
 	}
 	if o.SupportedCountries != nil {
 		toSerialize["supported_countries"] = o.SupportedCountries
+	}
+	if o.Mode != nil {
+		toSerialize["mode"] = o.Mode
 	}
 	if o.SupportedFeatures != nil {
 		toSerialize["supported_features"] = o.SupportedFeatures

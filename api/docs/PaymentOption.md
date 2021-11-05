@@ -5,11 +5,12 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;payment-option&#x60;. | [optional] 
-**Method** | Pointer to **string** | The type of payment method that is available. | [optional] 
+**Method** | Pointer to **string** |  | [optional] 
 **IconUrl** | Pointer to **NullableString** | An icon to display for the payment option. | [optional] 
-**Mode** | Pointer to **string** | The mode of how the payment option should be displayed. | [optional] 
+**Mode** | Pointer to **string** |  | [optional] 
 **Label** | Pointer to **string** | A label that describes this payment option. This label is returned in the language defined by the &#x60;locale&#x60; query parameter. The label can be used to display a list of payment options to the buyer in their language. | [optional] 
 **CanStorePaymentMethod** | Pointer to **bool** | A flag to indicate if storing the payment method is supported. | [optional] 
+**Context** | Pointer to [**PaymentOptionContext**](PaymentOptionContext.md) |  | [optional] 
 
 ## Methods
 
@@ -189,6 +190,31 @@ SetCanStorePaymentMethod sets CanStorePaymentMethod field to given value.
 `func (o *PaymentOption) HasCanStorePaymentMethod() bool`
 
 HasCanStorePaymentMethod returns a boolean if a field has been set.
+
+### GetContext
+
+`func (o *PaymentOption) GetContext() PaymentOptionContext`
+
+GetContext returns the Context field if non-nil, zero value otherwise.
+
+### GetContextOk
+
+`func (o *PaymentOption) GetContextOk() (*PaymentOptionContext, bool)`
+
+GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetContext
+
+`func (o *PaymentOption) SetContext(v PaymentOptionContext)`
+
+SetContext sets Context field to given value.
+
+### HasContext
+
+`func (o *PaymentOption) HasContext() bool`
+
+HasContext returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

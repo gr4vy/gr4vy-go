@@ -17,12 +17,6 @@ import (
 
 // ThreeDSecureDataV1 struct for ThreeDSecureDataV1
 type ThreeDSecureDataV1 struct {
-	// The authentication response.
-	AuthenticationResponse string `json:"authentication_response"`
-	// The CAVV Algorithm used.
-	CavvAlgorithm string `json:"cavv_algorithm"`
-	// The transaction identifier.
-	Xid string `json:"xid"`
 	// The cardholder authentication value or AAV.
 	Cavv string `json:"cavv"`
 	// The electronic commerce indicator for the 3DS transaction.
@@ -31,18 +25,27 @@ type ThreeDSecureDataV1 struct {
 	Version string `json:"version"`
 	// For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the `ARes`.
 	DirectoryResponse string `json:"directory_response"`
+	// The authentication response.
+	AuthenticationResponse string `json:"authentication_response"`
+	// The CAVV Algorithm used.
+	CavvAlgorithm string `json:"cavv_algorithm"`
+	// The transaction identifier.
+	Xid string `json:"xid"`
 }
 
 // NewThreeDSecureDataV1 instantiates a new ThreeDSecureDataV1 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewThreeDSecureDataV1(authenticationResponse string, cavvAlgorithm string, xid string, cavv string, eci string, version string, directoryResponse string) *ThreeDSecureDataV1 {
+func NewThreeDSecureDataV1(cavv string, eci string, version string, directoryResponse string, authenticationResponse string, cavvAlgorithm string, xid string) *ThreeDSecureDataV1 {
 	this := ThreeDSecureDataV1{}
 	this.Cavv = cavv
 	this.Eci = eci
 	this.Version = version
 	this.DirectoryResponse = directoryResponse
+	this.AuthenticationResponse = authenticationResponse
+	this.CavvAlgorithm = cavvAlgorithm
+	this.Xid = xid
 	return &this
 }
 
@@ -52,78 +55,6 @@ func NewThreeDSecureDataV1(authenticationResponse string, cavvAlgorithm string, 
 func NewThreeDSecureDataV1WithDefaults() *ThreeDSecureDataV1 {
 	this := ThreeDSecureDataV1{}
 	return &this
-}
-
-// GetAuthenticationResponse returns the AuthenticationResponse field value
-func (o *ThreeDSecureDataV1) GetAuthenticationResponse() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.AuthenticationResponse
-}
-
-// GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field value
-// and a boolean to check if the value has been set.
-func (o *ThreeDSecureDataV1) GetAuthenticationResponseOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.AuthenticationResponse, true
-}
-
-// SetAuthenticationResponse sets field value
-func (o *ThreeDSecureDataV1) SetAuthenticationResponse(v string) {
-	o.AuthenticationResponse = v
-}
-
-// GetCavvAlgorithm returns the CavvAlgorithm field value
-func (o *ThreeDSecureDataV1) GetCavvAlgorithm() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.CavvAlgorithm
-}
-
-// GetCavvAlgorithmOk returns a tuple with the CavvAlgorithm field value
-// and a boolean to check if the value has been set.
-func (o *ThreeDSecureDataV1) GetCavvAlgorithmOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.CavvAlgorithm, true
-}
-
-// SetCavvAlgorithm sets field value
-func (o *ThreeDSecureDataV1) SetCavvAlgorithm(v string) {
-	o.CavvAlgorithm = v
-}
-
-// GetXid returns the Xid field value
-func (o *ThreeDSecureDataV1) GetXid() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.Xid
-}
-
-// GetXidOk returns a tuple with the Xid field value
-// and a boolean to check if the value has been set.
-func (o *ThreeDSecureDataV1) GetXidOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.Xid, true
-}
-
-// SetXid sets field value
-func (o *ThreeDSecureDataV1) SetXid(v string) {
-	o.Xid = v
 }
 
 // GetCavv returns the Cavv field value
@@ -222,17 +153,80 @@ func (o *ThreeDSecureDataV1) SetDirectoryResponse(v string) {
 	o.DirectoryResponse = v
 }
 
+// GetAuthenticationResponse returns the AuthenticationResponse field value
+func (o *ThreeDSecureDataV1) GetAuthenticationResponse() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.AuthenticationResponse
+}
+
+// GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field value
+// and a boolean to check if the value has been set.
+func (o *ThreeDSecureDataV1) GetAuthenticationResponseOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.AuthenticationResponse, true
+}
+
+// SetAuthenticationResponse sets field value
+func (o *ThreeDSecureDataV1) SetAuthenticationResponse(v string) {
+	o.AuthenticationResponse = v
+}
+
+// GetCavvAlgorithm returns the CavvAlgorithm field value
+func (o *ThreeDSecureDataV1) GetCavvAlgorithm() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.CavvAlgorithm
+}
+
+// GetCavvAlgorithmOk returns a tuple with the CavvAlgorithm field value
+// and a boolean to check if the value has been set.
+func (o *ThreeDSecureDataV1) GetCavvAlgorithmOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.CavvAlgorithm, true
+}
+
+// SetCavvAlgorithm sets field value
+func (o *ThreeDSecureDataV1) SetCavvAlgorithm(v string) {
+	o.CavvAlgorithm = v
+}
+
+// GetXid returns the Xid field value
+func (o *ThreeDSecureDataV1) GetXid() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.Xid
+}
+
+// GetXidOk returns a tuple with the Xid field value
+// and a boolean to check if the value has been set.
+func (o *ThreeDSecureDataV1) GetXidOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.Xid, true
+}
+
+// SetXid sets field value
+func (o *ThreeDSecureDataV1) SetXid(v string) {
+	o.Xid = v
+}
+
 func (o ThreeDSecureDataV1) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["authentication_response"] = o.AuthenticationResponse
-	}
-	if true {
-		toSerialize["cavv_algorithm"] = o.CavvAlgorithm
-	}
-	if true {
-		toSerialize["xid"] = o.Xid
-	}
 	if true {
 		toSerialize["cavv"] = o.Cavv
 	}
@@ -244,6 +238,15 @@ func (o ThreeDSecureDataV1) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["directory_response"] = o.DirectoryResponse
+	}
+	if true {
+		toSerialize["authentication_response"] = o.AuthenticationResponse
+	}
+	if true {
+		toSerialize["cavv_algorithm"] = o.CavvAlgorithm
+	}
+	if true {
+		toSerialize["xid"] = o.Xid
 	}
 	return json.Marshal(toSerialize)
 }

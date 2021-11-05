@@ -17,10 +17,6 @@ import (
 
 // ThreeDSecureDataV2 struct for ThreeDSecureDataV2
 type ThreeDSecureDataV2 struct {
-	// The transaction status from the challenge result (not required for frictionless).
-	AuthenticationResponse *string `json:"authentication_response,omitempty"`
-	// The transaction identifier.
-	DirectoryTransactionId string `json:"directory_transaction_id"`
 	// The cardholder authentication value or AAV.
 	Cavv string `json:"cavv"`
 	// The electronic commerce indicator for the 3DS transaction.
@@ -29,18 +25,23 @@ type ThreeDSecureDataV2 struct {
 	Version string `json:"version"`
 	// For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the `ARes`.
 	DirectoryResponse string `json:"directory_response"`
+	// The transaction status from the challenge result (not required for frictionless).
+	AuthenticationResponse *string `json:"authentication_response,omitempty"`
+	// The transaction identifier.
+	DirectoryTransactionId string `json:"directory_transaction_id"`
 }
 
 // NewThreeDSecureDataV2 instantiates a new ThreeDSecureDataV2 object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewThreeDSecureDataV2(directoryTransactionId string, cavv string, eci string, version string, directoryResponse string) *ThreeDSecureDataV2 {
+func NewThreeDSecureDataV2(cavv string, eci string, version string, directoryResponse string, directoryTransactionId string) *ThreeDSecureDataV2 {
 	this := ThreeDSecureDataV2{}
 	this.Cavv = cavv
 	this.Eci = eci
 	this.Version = version
 	this.DirectoryResponse = directoryResponse
+	this.DirectoryTransactionId = directoryTransactionId
 	return &this
 }
 
@@ -50,62 +51,6 @@ func NewThreeDSecureDataV2(directoryTransactionId string, cavv string, eci strin
 func NewThreeDSecureDataV2WithDefaults() *ThreeDSecureDataV2 {
 	this := ThreeDSecureDataV2{}
 	return &this
-}
-
-// GetAuthenticationResponse returns the AuthenticationResponse field value if set, zero value otherwise.
-func (o *ThreeDSecureDataV2) GetAuthenticationResponse() string {
-	if o == nil || o.AuthenticationResponse == nil {
-		var ret string
-		return ret
-	}
-	return *o.AuthenticationResponse
-}
-
-// GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ThreeDSecureDataV2) GetAuthenticationResponseOk() (*string, bool) {
-	if o == nil || o.AuthenticationResponse == nil {
-		return nil, false
-	}
-	return o.AuthenticationResponse, true
-}
-
-// HasAuthenticationResponse returns a boolean if a field has been set.
-func (o *ThreeDSecureDataV2) HasAuthenticationResponse() bool {
-	if o != nil && o.AuthenticationResponse != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAuthenticationResponse gets a reference to the given string and assigns it to the AuthenticationResponse field.
-func (o *ThreeDSecureDataV2) SetAuthenticationResponse(v string) {
-	o.AuthenticationResponse = &v
-}
-
-// GetDirectoryTransactionId returns the DirectoryTransactionId field value
-func (o *ThreeDSecureDataV2) GetDirectoryTransactionId() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.DirectoryTransactionId
-}
-
-// GetDirectoryTransactionIdOk returns a tuple with the DirectoryTransactionId field value
-// and a boolean to check if the value has been set.
-func (o *ThreeDSecureDataV2) GetDirectoryTransactionIdOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.DirectoryTransactionId, true
-}
-
-// SetDirectoryTransactionId sets field value
-func (o *ThreeDSecureDataV2) SetDirectoryTransactionId(v string) {
-	o.DirectoryTransactionId = v
 }
 
 // GetCavv returns the Cavv field value
@@ -204,14 +149,64 @@ func (o *ThreeDSecureDataV2) SetDirectoryResponse(v string) {
 	o.DirectoryResponse = v
 }
 
+// GetAuthenticationResponse returns the AuthenticationResponse field value if set, zero value otherwise.
+func (o *ThreeDSecureDataV2) GetAuthenticationResponse() string {
+	if o == nil || o.AuthenticationResponse == nil {
+		var ret string
+		return ret
+	}
+	return *o.AuthenticationResponse
+}
+
+// GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ThreeDSecureDataV2) GetAuthenticationResponseOk() (*string, bool) {
+	if o == nil || o.AuthenticationResponse == nil {
+		return nil, false
+	}
+	return o.AuthenticationResponse, true
+}
+
+// HasAuthenticationResponse returns a boolean if a field has been set.
+func (o *ThreeDSecureDataV2) HasAuthenticationResponse() bool {
+	if o != nil && o.AuthenticationResponse != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthenticationResponse gets a reference to the given string and assigns it to the AuthenticationResponse field.
+func (o *ThreeDSecureDataV2) SetAuthenticationResponse(v string) {
+	o.AuthenticationResponse = &v
+}
+
+// GetDirectoryTransactionId returns the DirectoryTransactionId field value
+func (o *ThreeDSecureDataV2) GetDirectoryTransactionId() string {
+	if o == nil {
+		var ret string
+		return ret
+	}
+
+	return o.DirectoryTransactionId
+}
+
+// GetDirectoryTransactionIdOk returns a tuple with the DirectoryTransactionId field value
+// and a boolean to check if the value has been set.
+func (o *ThreeDSecureDataV2) GetDirectoryTransactionIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return &o.DirectoryTransactionId, true
+}
+
+// SetDirectoryTransactionId sets field value
+func (o *ThreeDSecureDataV2) SetDirectoryTransactionId(v string) {
+	o.DirectoryTransactionId = v
+}
+
 func (o ThreeDSecureDataV2) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AuthenticationResponse != nil {
-		toSerialize["authentication_response"] = o.AuthenticationResponse
-	}
-	if true {
-		toSerialize["directory_transaction_id"] = o.DirectoryTransactionId
-	}
 	if true {
 		toSerialize["cavv"] = o.Cavv
 	}
@@ -223,6 +218,12 @@ func (o ThreeDSecureDataV2) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["directory_response"] = o.DirectoryResponse
+	}
+	if o.AuthenticationResponse != nil {
+		toSerialize["authentication_response"] = o.AuthenticationResponse
+	}
+	if true {
+		toSerialize["directory_transaction_id"] = o.DirectoryTransactionId
 	}
 	return json.Marshal(toSerialize)
 }

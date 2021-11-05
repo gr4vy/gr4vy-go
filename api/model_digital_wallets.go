@@ -15,33 +15,33 @@ import (
 	"encoding/json"
 )
 
-// Statuses A list of status resources.
-type Statuses struct {
-	// A list of authorizations.
-	Items *[]Status `json:"items,omitempty"`
+// DigitalWallets A list of registered digital wallets.
+type DigitalWallets struct {
+	// A list of registered digital wallets.
+	Items *[]DigitalWallet `json:"items,omitempty"`
 }
 
-// NewStatuses instantiates a new Statuses object
+// NewDigitalWallets instantiates a new DigitalWallets object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewStatuses() *Statuses {
-	this := Statuses{}
+func NewDigitalWallets() *DigitalWallets {
+	this := DigitalWallets{}
 	return &this
 }
 
-// NewStatusesWithDefaults instantiates a new Statuses object
+// NewDigitalWalletsWithDefaults instantiates a new DigitalWallets object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewStatusesWithDefaults() *Statuses {
-	this := Statuses{}
+func NewDigitalWalletsWithDefaults() *DigitalWallets {
+	this := DigitalWallets{}
 	return &this
 }
 
 // GetItems returns the Items field value if set, zero value otherwise.
-func (o *Statuses) GetItems() []Status {
+func (o *DigitalWallets) GetItems() []DigitalWallet {
 	if o == nil || o.Items == nil {
-		var ret []Status
+		var ret []DigitalWallet
 		return ret
 	}
 	return *o.Items
@@ -49,7 +49,7 @@ func (o *Statuses) GetItems() []Status {
 
 // GetItemsOk returns a tuple with the Items field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Statuses) GetItemsOk() (*[]Status, bool) {
+func (o *DigitalWallets) GetItemsOk() (*[]DigitalWallet, bool) {
 	if o == nil || o.Items == nil {
 		return nil, false
 	}
@@ -57,7 +57,7 @@ func (o *Statuses) GetItemsOk() (*[]Status, bool) {
 }
 
 // HasItems returns a boolean if a field has been set.
-func (o *Statuses) HasItems() bool {
+func (o *DigitalWallets) HasItems() bool {
 	if o != nil && o.Items != nil {
 		return true
 	}
@@ -65,12 +65,12 @@ func (o *Statuses) HasItems() bool {
 	return false
 }
 
-// SetItems gets a reference to the given []Status and assigns it to the Items field.
-func (o *Statuses) SetItems(v []Status) {
+// SetItems gets a reference to the given []DigitalWallet and assigns it to the Items field.
+func (o *DigitalWallets) SetItems(v []DigitalWallet) {
 	o.Items = &v
 }
 
-func (o Statuses) MarshalJSON() ([]byte, error) {
+func (o DigitalWallets) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Items != nil {
 		toSerialize["items"] = o.Items
@@ -78,38 +78,38 @@ func (o Statuses) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableStatuses struct {
-	value *Statuses
+type NullableDigitalWallets struct {
+	value *DigitalWallets
 	isSet bool
 }
 
-func (v NullableStatuses) Get() *Statuses {
+func (v NullableDigitalWallets) Get() *DigitalWallets {
 	return v.value
 }
 
-func (v *NullableStatuses) Set(val *Statuses) {
+func (v *NullableDigitalWallets) Set(val *DigitalWallets) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableStatuses) IsSet() bool {
+func (v NullableDigitalWallets) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableStatuses) Unset() {
+func (v *NullableDigitalWallets) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableStatuses(val *Statuses) *NullableStatuses {
-	return &NullableStatuses{value: val, isSet: true}
+func NewNullableDigitalWallets(val *DigitalWallets) *NullableDigitalWallets {
+	return &NullableDigitalWallets{value: val, isSet: true}
 }
 
-func (v NullableStatuses) MarshalJSON() ([]byte, error) {
+func (v NullableDigitalWallets) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableStatuses) UnmarshalJSON(src []byte) error {
+func (v *NullableDigitalWallets) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -51,6 +51,8 @@ type APIClient struct {
 
 	BuyersApi *BuyersApiService
 
+	DigitalWalletsApi *DigitalWalletsApiService
+
 	PaymentMethodTokensApi *PaymentMethodTokensApiService
 
 	PaymentMethodsApi *PaymentMethodsApiService
@@ -81,6 +83,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.BuyersApi = (*BuyersApiService)(&c.common)
+	c.DigitalWalletsApi = (*DigitalWalletsApiService)(&c.common)
 	c.PaymentMethodTokensApi = (*PaymentMethodTokensApiService)(&c.common)
 	c.PaymentMethodsApi = (*PaymentMethodsApiService)(&c.common)
 	c.PaymentOptionsApi = (*PaymentOptionsApiService)(&c.common)

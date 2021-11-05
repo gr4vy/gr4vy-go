@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **PaymentMethodTokenization** | Pointer to **bool** | Supports storing a payment method via tokenization. | [optional] 
 **ThreeDSecureHosted** | Pointer to **bool** | Supports hosted 3-D Secure with a redirect. | [optional] 
 **ThreeDSecurePassThrough** | Pointer to **bool** | Supports passing 3-D Secure data to the underlying processor. | [optional] 
+**ApplePay** | Pointer to **bool** | Supports passing decrypted apple pay token to the underlying processor. | [optional] 
 
 ## Methods
 
@@ -101,6 +102,31 @@ SetThreeDSecurePassThrough sets ThreeDSecurePassThrough field to given value.
 `func (o *PaymentServiceDefinitionSupportedFeatures) HasThreeDSecurePassThrough() bool`
 
 HasThreeDSecurePassThrough returns a boolean if a field has been set.
+
+### GetApplePay
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetApplePay() bool`
+
+GetApplePay returns the ApplePay field if non-nil, zero value otherwise.
+
+### GetApplePayOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetApplePayOk() (*bool, bool)`
+
+GetApplePayOk returns a tuple with the ApplePay field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApplePay
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetApplePay(v bool)`
+
+SetApplePay sets ApplePay field to given value.
+
+### HasApplePay
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasApplePay() bool`
+
+HasApplePay returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

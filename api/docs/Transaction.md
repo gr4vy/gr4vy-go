@@ -11,12 +11,12 @@ Name | Type | Description | Notes
 **CapturedAmount** | Pointer to **int32** | The captured amount for this transaction. This can be a part and in some cases even more than the authorized amount. | [optional] 
 **RefundedAmount** | Pointer to **int32** | The refunded amount for this transaction. This can be a part or all of the captured amount. | [optional] 
 **Currency** | Pointer to **string** | The currency code for this transaction. | [optional] 
-**PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) | The payment method used for this transaction. | [optional] 
-**Buyer** | Pointer to [**NullableBuyerSnapshot**](Buyer--Snapshot.md) | The buyer used for this transaction. | [optional] 
+**PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) |  | [optional] 
+**Buyer** | Pointer to [**BuyerSnapshot**](Buyer--Snapshot.md) |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this transaction was created in our system. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
-**PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) | The payment service used for this transaction. | [optional] 
+**PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) |  | [optional] 
 **Environment** | Pointer to **string** | The environment this transaction has been created in. | [optional] [default to "production"]
 
 ## Methods
@@ -263,16 +263,6 @@ SetBuyer sets Buyer field to given value.
 
 HasBuyer returns a boolean if a field has been set.
 
-### SetBuyerNil
-
-`func (o *Transaction) SetBuyerNil(b bool)`
-
- SetBuyerNil sets the value for Buyer to be an explicit nil
-
-### UnsetBuyer
-`func (o *Transaction) UnsetBuyer()`
-
-UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *Transaction) GetCreatedAt() time.Time`

@@ -7,12 +7,12 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | &#x60;payment-method&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique ID of the payment method. | [optional] 
 **Status** | Pointer to **string** | The state of the payment method.  - &#x60;processing&#x60; - The payment method is still being stored. - &#x60;buyer_approval_required&#x60; - Storing the payment method requires   the buyer to provide approval. Follow the &#x60;approval_url&#x60; for next steps. - &#x60;succeeded&#x60; - The payment method is approved and stored with all   relevant payment services. - &#x60;failed&#x60; - Storing the payment method did not succeed. | [optional] 
-**Method** | Pointer to **string** | The type of this payment method. | [optional] 
-**Mode** | Pointer to **string** | The mode to use with this payment method. | [optional] 
+**Method** | Pointer to **string** |  | [optional] 
+**Mode** | Pointer to **string** |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this payment method was first created in our system. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this payment method was last updated in our system. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the payment method against your own records. | [optional] 
-**Buyer** | Pointer to [**NullableBuyer**](Buyer.md) | The optional buyer for which this payment method has been stored. | [optional] 
+**Buyer** | Pointer to [**Buyer**](Buyer.md) |  | [optional] 
 **Label** | Pointer to **NullableString** | A label for the card or the account. For a &#x60;paypal&#x60; payment method this is the user&#39;s email address. For a card it is the last 4 digits of the card. | [optional] 
 **Scheme** | Pointer to **NullableString** | The scheme of the card. Only applies to card payments. | [optional] 
 **ExpirationDate** | Pointer to **NullableString** | The expiration date for the payment method. | [optional] 
@@ -273,16 +273,6 @@ SetBuyer sets Buyer field to given value.
 
 HasBuyer returns a boolean if a field has been set.
 
-### SetBuyerNil
-
-`func (o *PaymentMethod) SetBuyerNil(b bool)`
-
- SetBuyerNil sets the value for Buyer to be an explicit nil
-
-### UnsetBuyer
-`func (o *PaymentMethod) UnsetBuyer()`
-
-UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
 ### GetLabel
 
 `func (o *PaymentMethod) GetLabel() string`

@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The ID of this payment service. | [optional] 
 **Type** | Pointer to **string** | The type of this resource. | [optional] 
 **PaymentServiceDefinitionId** | Pointer to **string** | The ID of the payment service definition used to create this service.  | [optional] 
-**Method** | Pointer to **string** | Defines the ID of the payment method that this service handles. | [optional] 
+**Method** | Pointer to **string** |  | [optional] 
 **DisplayName** | Pointer to **string** | The custom name set for this service. | [optional] 
 **Status** | Pointer to **string** | The current status of this service. This will start off as pending, move to created, and might eventually move to an error status if and when the credentials are no longer valid.  | [optional] 
 **AcceptedCurrencies** | Pointer to **[]string** | A list of currencies for which this service is enabled, in ISO 4217 three-letter code format. | [optional] 

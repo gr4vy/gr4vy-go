@@ -4,6 +4,7 @@
 README.md
 api/openapi.yaml
 api_buyers.go
+api_digital_wallets.go
 api_payment_method_tokens.go
 api_payment_methods.go
 api_payment_options.go
@@ -14,6 +15,8 @@ client.go
 configuration.go
 docs/Address.md
 docs/AddressUpdate.md
+docs/ApplePayRequest.md
+docs/ApplePaySessionRequest.md
 docs/BillingDetails.md
 docs/BillingDetailsUpdateRequest.md
 docs/Buyer.md
@@ -23,6 +26,11 @@ docs/BuyerUpdate.md
 docs/Buyers.md
 docs/BuyersApi.md
 docs/CardRequest.md
+docs/DigitalWallet.md
+docs/DigitalWalletRequest.md
+docs/DigitalWalletUpdate.md
+docs/DigitalWallets.md
+docs/DigitalWalletsApi.md
 docs/Error400BadRequest.md
 docs/Error400IncorrectJson.md
 docs/Error401Unauthorized.md
@@ -43,6 +51,7 @@ docs/PaymentMethods.md
 docs/PaymentMethodsApi.md
 docs/PaymentMethodsTokenized.md
 docs/PaymentOption.md
+docs/PaymentOptionContext.md
 docs/PaymentOptions.md
 docs/PaymentOptionsApi.md
 docs/PaymentService.md
@@ -61,12 +70,13 @@ docs/PaymentServicesApi.md
 docs/RedirectRequest.md
 docs/ResetPasswordRequest.md
 docs/SetPasswordRequest.md
-docs/Status.md
-docs/Statuses.md
 docs/TaxId.md
 docs/ThreeDSecureData.md
 docs/ThreeDSecureDataV1.md
+docs/ThreeDSecureDataV1AllOf.md
+docs/ThreeDSecureDataV1V2.md
 docs/ThreeDSecureDataV2.md
+docs/ThreeDSecureDataV2AllOf.md
 docs/TokenizedRequest.md
 docs/Transaction.md
 docs/TransactionCaptureRequest.md
@@ -82,6 +92,8 @@ go.mod
 go.sum
 model_address.go
 model_address_update.go
+model_apple_pay_request.go
+model_apple_pay_session_request.go
 model_billing_details.go
 model_billing_details_update_request.go
 model_buyer.go
@@ -90,6 +102,10 @@ model_buyer_request.go
 model_buyer_update.go
 model_buyers.go
 model_card_request.go
+model_digital_wallet.go
+model_digital_wallet_request.go
+model_digital_wallet_update.go
+model_digital_wallets.go
 model_error400_bad_request.go
 model_error400_incorrect_json.go
 model_error401_unauthorized.go
@@ -108,6 +124,7 @@ model_payment_method_tokens.go
 model_payment_methods.go
 model_payment_methods__tokenized.go
 model_payment_option.go
+model_payment_option_context.go
 model_payment_options.go
 model_payment_service.go
 model_payment_service__snapshot.go
@@ -123,12 +140,13 @@ model_payment_services.go
 model_redirect_request.go
 model_reset_password_request.go
 model_set_password_request.go
-model_status.go
-model_statuses.go
 model_tax_id.go
 model_three_d_secure_data.go
 model_three_d_secure_data_v1.go
+model_three_d_secure_data_v1_all_of.go
+model_three_d_secure_data_v1_v2.go
 model_three_d_secure_data_v2.go
+model_three_d_secure_data_v2_all_of.go
 model_tokenized_request.go
 model_transaction.go
 model_transaction_capture_request.go

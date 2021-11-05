@@ -21,7 +21,6 @@ type PaymentMethodTokenized struct {
 	Type *string `json:"type,omitempty"`
 	// The unique ID of the payment method.
 	Id *string `json:"id,omitempty"`
-	// The type of this payment method.
 	Method *string `json:"method,omitempty"`
 	// A label for the payment method. For a `card` payment method this is the last 4 digits on the card. For others it would be the email address.
 	Label *string `json:"label,omitempty"`

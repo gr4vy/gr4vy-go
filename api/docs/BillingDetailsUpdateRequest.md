@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **LastName** | Pointer to **NullableString** | The last name, or family name, of the buyer. | [optional] 
 **EmailAddress** | Pointer to **NullableString** | The email address for the buyer. | [optional] 
 **PhoneNumber** | Pointer to **NullableString** | The phone number to use for this request. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
-**TaxId** | Pointer to [**NullableTaxId**](TaxId.md) | The tax information associated with the billing details. | [optional] 
+**TaxId** | Pointer to [**TaxId**](TaxId.md) |  | [optional] 
 
 ## Methods
 
@@ -230,16 +230,6 @@ SetTaxId sets TaxId field to given value.
 
 HasTaxId returns a boolean if a field has been set.
 
-### SetTaxIdNil
-
-`func (o *BillingDetailsUpdateRequest) SetTaxIdNil(b bool)`
-
- SetTaxIdNil sets the value for TaxId to be an explicit nil
-
-### UnsetTaxId
-`func (o *BillingDetailsUpdateRequest) UnsetTaxId()`
-
-UnsetTaxId ensures that no value is present for TaxId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

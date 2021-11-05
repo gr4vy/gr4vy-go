@@ -35,6 +35,17 @@ tags:
       buyer's previously stored payment methods, allowing for faster checkout.
   name: Buyers
 - description: |-
+    In Gr4vy, a digital wallet represents a way for a buyer to pay using
+    card details already stored on their device via a digital wallet service
+    such as Apple Pay or Google Pay. The buyer will not have to fill in their
+    card details on checkout.
+
+    The digital wallets API can be used to:
+
+    * Register with a digital wallet provider.
+    * List digital wallets currently registered.
+  name: Digital Wallets
+- description: |-
     In Gr4vy, a payment method token represents the token created by a payment
     service for a payment method.
 
@@ -768,6 +779,8 @@ paths:
           - paypal
           - banked
           - gocardless
+          - stripedd
+          - applepay
           example: card
           type: string
         style: form
@@ -1048,6 +1061,176 @@ paths:
       summary: Get payment service definition
       tags:
       - Payment Service Definitions
+  /digital-wallets:
+    get:
+      description: Returns a list of all registered digital wallets.
+      operationId: list-digital-wallets
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalWallets'
+          description: Returns a list of registered digital wallets.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List digital wallets
+      tags:
+      - Digital Wallets
+    post:
+      description: Register with a digital wallet provider.
+      operationId: register-digital-wallet
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DigitalWalletRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalWallet'
+          description: Returns the newly registered digital wallet.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: Register digital wallet
+      tags:
+      - Digital Wallets
+  /digital-wallets/{digital_wallet_id}:
+    delete:
+      description: |-
+        De-registers a digital wallet with a provider. Upon successful
+        de-registration, the digital wallet's record is deleted and will no
+        longer be available.
+      operationId: deregister-digital-wallet
+      parameters:
+      - description: The ID of the registered digital wallet.
+        explode: false
+        in: path
+        name: digital_wallet_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Returns an empty response.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: De-register digital wallet
+      tags:
+      - Digital Wallets
+    get:
+      description: Returns a registered digital wallet.
+      operationId: get-digital-wallet
+      parameters:
+      - description: The ID of the registered digital wallet.
+        explode: false
+        in: path
+        name: digital_wallet_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalWallet'
+          description: Returns a registered digital wallet.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Get digital wallet
+      tags:
+      - Digital Wallets
+    put:
+      description: |-
+        Updates the values a digital wallet was registered with, and the Gr4vy
+        environments in which a registered digital wallet should be available.
+      operationId: update-digital-wallet
+      parameters:
+      - description: The ID of the registered digital wallet.
+        explode: false
+        in: path
+        name: digital_wallet_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/DigitalWalletUpdate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/DigitalWallet'
+          description: Returns the updated digital wallet.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Update digital wallet
+      tags:
+      - Digital Wallets
   /transactions:
     get:
       description: Lists all transactions for an account. Sorted by last `updated_at`
@@ -1554,6 +1737,45 @@ components:
       type: object
       x-tags:
       - Buyers
+    ApplePayRequest:
+      description: Details for a Apple Pay payment method.
+      properties:
+        method:
+          description: '`applepay`.'
+          enum:
+          - applepay
+          example: applepay
+          type: string
+        token:
+          description: |-
+            The encrypted (opaque) token that was passed to the `onpaymentauthorized`
+            callback by the Apple Pay integration.
+          type: object
+      required:
+      - method
+      - token
+      title: Apple Pay payment method request
+      type: object
+      x-tags:
+      - Request Bodies
+    ApplePaySessionRequest:
+      description: Initiates a new session with Apple Pay.
+      properties:
+        validation_url:
+          description: |-
+            Validation URL obtained from the event passed to a
+            `onvalidatemerchant` callback.
+          type: string
+        domain_name:
+          description: Fully qualified domain name of the merchant.
+          type: string
+      required:
+      - domain_name
+      - validation_url
+      title: Apple Pay session request
+      type: object
+      x-tags:
+      - Request Bodies
     BillingDetails:
       description: Billing details to use associated to a buyer.
       properties:
@@ -1591,13 +1813,13 @@ components:
         address:
           allOf:
           - $ref: '#/components/schemas/Address'
-          description: The billing address for the buyer.
-          nullable: true
+          - description: The billing address for the buyer.
+            nullable: true
         tax_id:
           allOf:
           - $ref: '#/components/schemas/TaxId'
-          description: The tax information associated with the billing details.
-          nullable: true
+          - description: The tax information associated with the billing details.
+            nullable: true
       title: Billing details request
       type: object
       x-tags:
@@ -1655,8 +1877,8 @@ components:
         billing_details:
           allOf:
           - $ref: '#/components/schemas/BillingDetails'
-          description: The billing details associated with a buyer.
-          nullable: true
+          - description: The billing details associated with a buyer.
+            nullable: true
         created_at:
           description: |-
             The date and time
@@ -1768,9 +1990,9 @@ components:
         billing_details:
           allOf:
           - $ref: '#/components/schemas/BillingDetails'
-          description: The billing details associated with the buyer, which include
-            the address and tax ID.
-          nullable: true
+          - description: The billing details associated with the buyer, which include
+              the address and tax ID.
+            nullable: true
       title: Buyer (Snapshot)
       type: object
       x-tags:
@@ -1801,8 +2023,8 @@ components:
         billing_details:
           allOf:
           - $ref: '#/components/schemas/BillingDetails'
-          description: The optional billing details to create a buyer.
-          nullable: true
+          - description: The optional billing details to create a buyer.
+            nullable: true
       title: Buyer (Create)
       type: object
       x-tags:
@@ -1908,6 +2130,248 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    DigitalWallet:
+      description: A digital wallet (e.g. Apple Pay) that has been registered.
+      example:
+        updated_at: 2012-12-12T10:53:43Z
+        provider: apple
+        environments:
+        - production
+        merchant_name: Gr4vy
+        created_at: 2012-12-12T10:53:43Z
+        id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+        type: digital-wallet
+        merchant_url: https://example.com
+        domain_names:
+        - example.com
+      properties:
+        type:
+          description: '`digital-wallet`.'
+          enum:
+          - digital-wallet
+          example: digital-wallet
+          type: string
+        provider:
+          description: The name of the digital wallet provider.
+          enum:
+          - apple
+          example: apple
+          type: string
+        id:
+          description: The ID of the registered digital wallet.
+          example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          format: uuid
+          type: string
+        merchant_name:
+          description: The name of the merchant the digital wallet is registered to.
+          example: Gr4vy
+          type: string
+        merchant_url:
+          default: "null"
+          description: The main URL of the merchant.
+          example: https://example.com
+          format: url
+          nullable: true
+          type: string
+        domain_names:
+          description: |-
+            The list of fully qualified domain names that a digital wallet provider
+            processes payments for.
+          example:
+          - example.com
+          items:
+            type: string
+          maxItems: 99
+          minItems: 1
+          type: array
+        created_at:
+          description: The date and time when this digital wallet was registered.
+          example: 2012-12-12T10:53:43Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time when this digital wallet was last updated.
+          example: 2012-12-12T10:53:43Z
+          format: date-time
+          type: string
+        environments:
+          default:
+          - production
+          description: The Gr4vy environments in which this digital wallet is available.
+          example:
+          - production
+          items:
+            enum:
+            - development
+            - staging
+            - production
+            type: string
+          maxItems: 3
+          minItems: 0
+          type: array
+      title: Digital Wallet
+      type: object
+      x-tags:
+      - Digital Wallets
+    DigitalWallets:
+      description: A list of registered digital wallets.
+      example:
+        items:
+        - updated_at: 2012-12-12T10:53:43Z
+          provider: apple
+          environments:
+          - production
+          merchant_name: Gr4vy
+          created_at: 2012-12-12T10:53:43Z
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          type: digital-wallet
+          merchant_url: https://example.com
+          domain_names:
+          - example.com
+        - updated_at: 2012-12-12T10:53:43Z
+          provider: apple
+          environments:
+          - production
+          merchant_name: Gr4vy
+          created_at: 2012-12-12T10:53:43Z
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          type: digital-wallet
+          merchant_url: https://example.com
+          domain_names:
+          - example.com
+      properties:
+        items:
+          description: A list of registered digital wallets.
+          items:
+            $ref: '#/components/schemas/DigitalWallet'
+          type: array
+      title: Digital Wallets
+      type: object
+      x-tags:
+      - Digital Wallets
+    DigitalWalletRequest:
+      description: Merchant details used to register with a digital wallet provider.
+      example:
+        provider: apple
+        environments:
+        - production
+        merchant_name: Gr4vy
+        accept_terms_and_conditions: true
+        merchant_url: https://example.com
+        domain_names:
+        - example.com
+      properties:
+        provider:
+          description: The name of the digital wallet provider.
+          enum:
+          - apple
+          example: apple
+          type: string
+        merchant_name:
+          description: |-
+            The name of the merchant. This is used to register the merchant with a
+            digital wallet provider and this name is not displayed to the buyer.
+          example: Gr4vy
+          type: string
+        merchant_url:
+          default: "null"
+          description: |-
+            The main URL of the merchant. This is used to register the merchant with
+            a digital wallet provider and this URL is not displayed to the buyer.
+          example: https://example.com
+          format: url
+          nullable: true
+          type: string
+        domain_names:
+          description: |-
+            The list of fully qualified domain names that a digital wallet provider
+            should process payments for.
+          example:
+          - example.com
+          items:
+            type: string
+          maxItems: 99
+          minItems: 1
+          type: array
+        accept_terms_and_conditions:
+          description: |-
+            The explicit acceptance of the digital wallet provider's terms and
+            conditions by the merchant. Needs to be `true` to register a new digital
+            wallet.
+          example: true
+          type: boolean
+        environments:
+          default:
+          - production
+          description: |-
+            Determines the Gr4vy environments in which this digital wallet should
+            be available.
+          example:
+          - production
+          items:
+            enum:
+            - development
+            - staging
+            - production
+            type: string
+          maxItems: 3
+          minItems: 0
+          type: array
+      required:
+      - accept_terms_and_conditions
+      - domain_names
+      - merchant_name
+      - provider
+      title: Digital Wallet (Register)
+      type: object
+      x-tags:
+      - Request Bodies
+    DigitalWalletUpdate:
+      description: Request body to update a registered digital wallet's details.
+      example:
+        environments:
+        - production
+        merchant_name: Gr4vy
+        domain_names:
+        - example.com
+      properties:
+        merchant_name:
+          description: |-
+            The name of the merchant. This is used to update the value initially
+            used to register with a digital wallet provider and this name is not
+            displayed to the buyer.
+          example: Gr4vy
+          type: string
+        domain_names:
+          description: |-
+            The list of fully qualified domain names that a digital wallet provider
+            should process payments for.
+          example:
+          - example.com
+          items:
+            type: string
+          maxItems: 99
+          minItems: 1
+          type: array
+        environments:
+          description: |-
+            Determines the Gr4vy environments in which this digital wallet should
+            be available.
+          example:
+          - production
+          items:
+            enum:
+            - development
+            - staging
+            - production
+            type: string
+          maxItems: 3
+          minItems: 0
+          type: array
+      title: Digital Wallet (Update)
+      type: object
+      x-tags:
+      - Request Bodies
     ErrorGeneric:
       description: A generic client error.
       properties:
@@ -1925,7 +2389,6 @@ components:
           example: incorrect_json
           type: string
         status:
-          default: 0
           description: The HTTP status code of this error.
           example: 499
           exclusiveMaximum: true
@@ -2253,15 +2716,15 @@ components:
       description: A generic payment method.
       example:
         external_identifier: user-789123
-        method: card
+        method: ""
         scheme: scheme
         created_at: 2013-07-16T19:23:00Z
         label: john@example.com
         type: payment-method
         expiration_date: expiration_date
-        approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+        approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
         buyer: ""
-        mode: card
+        mode: ""
         environment: production
         updated_at: 2013-07-16T19:23:00Z
         id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
@@ -2296,22 +2759,26 @@ components:
           example: succeeded
           type: string
         method:
-          description: The type of this payment method.
-          enum:
-          - card
-          - gocardless
-          - paypal
-          - banked
-          - gocardless
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - paypal
+            - banked
+            - gocardless
+            - stripedd
+            - applepay
+            example: card
+            type: string
+          - description: The type of this payment method.
         mode:
-          description: The mode to use with this payment method.
-          enum:
-          - card
-          - redirect
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - redirect
+            - applepay
+            example: card
+            type: string
+          - description: The mode to use with this payment method.
         created_at:
           description: |-
             The date and time when this payment method was first created in our
@@ -2335,8 +2802,9 @@ components:
         buyer:
           allOf:
           - $ref: '#/components/schemas/Buyer'
-          description: The optional buyer for which this payment method has been stored.
-          nullable: true
+          - description: The optional buyer for which this payment method has been
+              stored.
+            nullable: true
         label:
           description: |-
             A label for the card or the account. For a `paypal` payment method this
@@ -2359,7 +2827,7 @@ components:
         approval_url:
           description: The optional URL that the buyer needs to be redirected to to
             further authorize their payment.
-          example: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          example: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           nullable: true
           type: string
         environment:
@@ -2381,13 +2849,13 @@ components:
     PaymentMethod--Tokenized:
       description: A mini format version of a payment method.
       example:
-        method: card
+        method: ""
         scheme: visa
         id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
         label: "1111"
         type: payment-method
         expiration_date: 11/25
-        approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+        approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
       properties:
         type:
           description: '`payment-method`.'
@@ -2401,14 +2869,17 @@ components:
           format: uuid
           type: string
         method:
-          description: The type of this payment method.
-          enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - paypal
+            - banked
+            - gocardless
+            - stripedd
+            - applepay
+            example: card
+            type: string
+          - description: The type of this payment method.
         label:
           description: |-
             A label for the payment method. For a `card` payment method this is the
@@ -2444,7 +2915,7 @@ components:
         approval_url:
           description: The optional URL that the buyer needs to be redirected to to
             further authorize their payment.
-          example: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          example: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           nullable: true
           type: string
       title: Payment Method (Tokenized)
@@ -2459,29 +2930,29 @@ components:
         limit: 1
         items:
         - external_identifier: user-789123
-          method: card
+          method: ""
           scheme: scheme
           created_at: 2013-07-16T19:23:00Z
           label: john@example.com
           type: payment-method
           expiration_date: expiration_date
-          approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           buyer: ""
-          mode: card
+          mode: ""
           environment: production
           updated_at: 2013-07-16T19:23:00Z
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           status: succeeded
         - external_identifier: user-789123
-          method: card
+          method: ""
           scheme: scheme
           created_at: 2013-07-16T19:23:00Z
           label: john@example.com
           type: payment-method
           expiration_date: expiration_date
-          approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           buyer: ""
-          mode: card
+          mode: ""
           environment: production
           updated_at: 2013-07-16T19:23:00Z
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
@@ -2541,14 +3012,17 @@ components:
           nullable: true
           type: string
         method:
-          description: The type of this payment method.
-          enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - paypal
+            - banked
+            - gocardless
+            - stripedd
+            - applepay
+            example: card
+            type: string
+          - description: The type of this payment method.
         external_identifier:
           description: |-
             An external identifier that can be used to match the payment method
@@ -2583,7 +3057,7 @@ components:
         approval_url:
           description: The optional URL that the buyer needs to be redirected to to
             further authorize their payment.
-          example: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          example: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           nullable: true
           type: string
       title: Payment method (Snapshot)
@@ -2594,20 +3068,20 @@ components:
       description: A list of stored payment methods in token format.
       example:
         items:
-        - method: card
+        - method: ""
           scheme: visa
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           label: "1111"
           type: payment-method
           expiration_date: 11/25
-          approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
-        - method: card
+          approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+        - method: ""
           scheme: visa
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           label: "1111"
           type: payment-method
           expiration_date: 11/25
-          approval_url: https://api.{merchant}.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
       properties:
         items:
           description: A list of stored payment methods in token format.
@@ -2657,7 +3131,7 @@ components:
         payment_service:
           allOf:
           - $ref: '#/components/schemas/PaymentService--Snapshot'
-          description: The payment service used for this transaction.
+          - description: The payment service used for this transaction.
       title: Payment method token
       type: object
       x-tags:
@@ -2695,22 +3169,24 @@ components:
         buyer_external_identifier: user-789123
         environment: staging
         security_code: "123"
-        method: card
+        method: ""
         currency: USD
         expiration_date: 11/15
         buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
         redirect_url: https://example.com/callback
       properties:
         method:
-          description: The method to use for this request.
-          enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          - token
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - paypal
+            - banked
+            - gocardless
+            - stripedd
+            - applepay
+            example: card
+            type: string
+          - description: The method to use for this request.
         number:
           description: |-
             The 15-16 digit number for this credit card as it can be found on the
@@ -2810,7 +3286,7 @@ components:
     PaymentService:
       description: An active, configured payment service.
       example:
-        method: card
+        method: ""
         environments:
         - production
         merchant_category_code: "5045"
@@ -2859,14 +3335,17 @@ components:
           minLength: 1
           type: string
         method:
-          description: Defines the ID of the payment method that this service handles.
-          enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - paypal
+            - banked
+            - gocardless
+            - stripedd
+            - applepay
+            example: card
+            type: string
+          - description: The payment method that this service handles.
         display_name:
           description: The custom name set for this service.
           example: Stripe (Main)
@@ -3046,14 +3525,17 @@ components:
           minLength: 1
           type: string
         method:
-          description: Defines the ID of the payment method that this service handles.
-          enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - paypal
+            - banked
+            - gocardless
+            - stripedd
+            - applepay
+            example: card
+            type: string
+          - description: The payment method that this services handles.
       title: A payment service
       type: object
       x-tags:
@@ -3065,7 +3547,7 @@ components:
         next_cursor: ZXhhbXBsZTE
         limit: 1
         items:
-        - method: card
+        - method: ""
           environments:
           - production
           merchant_category_code: "5045"
@@ -3092,7 +3574,7 @@ components:
           accepted_currencies:
           - EUR
           status: pending
-        - method: card
+        - method: ""
           environments:
           - production
           merchant_category_code: "5045"
@@ -3355,10 +3837,12 @@ components:
     PaymentServiceDefinition:
       description: An available payment service that can be configured.
       example:
+        mode: ""
         icon_url: https://cdn.gr4vy.app/stripe.svg
-        method: card
+        method: ""
         supported_features:
           three_d_secure_hosted: true
+          apple_pay: false
           payment_method_tokenization: true
           three_d_secure_pass_through: false
         supported_countries:
@@ -3397,14 +3881,17 @@ components:
           example: Stripe
           type: string
         method:
-          description: The ID of the payment method that this services handles.
-          enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - paypal
+            - banked
+            - gocardless
+            - stripedd
+            - applepay
+            example: card
+            type: string
+          - description: The ID of the payment method that this services handles.
         fields:
           description: A list of fields that need to be submitted when activating
             the payment. service.
@@ -3435,6 +3922,15 @@ components:
             type: string
           minItems: 1
           type: array
+        mode:
+          allOf:
+          - enum:
+            - card
+            - redirect
+            - applepay
+            example: card
+            type: string
+          - description: The mode of this payment service.
         supported_features:
           $ref: '#/components/schemas/PaymentServiceDefinition_supported_features'
         icon_url:
@@ -3453,10 +3949,12 @@ components:
         next_cursor: ZXhhbXBsZTE
         limit: 1
         items:
-        - icon_url: https://cdn.gr4vy.app/stripe.svg
-          method: card
+        - mode: ""
+          icon_url: https://cdn.gr4vy.app/stripe.svg
+          method: ""
           supported_features:
             three_d_secure_hosted: true
+            apple_pay: false
             payment_method_tokenization: true
             three_d_secure_pass_through: false
           supported_countries:
@@ -3479,10 +3977,12 @@ components:
           - USD
           - GBP
           - EUR
-        - icon_url: https://cdn.gr4vy.app/stripe.svg
-          method: card
+        - mode: ""
+          icon_url: https://cdn.gr4vy.app/stripe.svg
+          method: ""
           supported_features:
             three_d_secure_hosted: true
+            apple_pay: false
             payment_method_tokenization: true
             three_d_secure_pass_through: false
           supported_countries:
@@ -3545,8 +4045,13 @@ components:
       description: An available payment option for a locale.
       example:
         icon_url: https://cdn.gr4vy.app/card.svg
-        mode: card
-        method: card
+        mode: ""
+        method: ""
+        context:
+          merchant_name: merchant_name
+          supported_schemes:
+          - amex
+          - amex
         label: Pay by Card
         type: payment-option
         can_store_payment_method: true
@@ -3558,26 +4063,31 @@ components:
           example: payment-option
           type: string
         method:
-          description: The type of payment method that is available.
-          enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - paypal
+            - banked
+            - gocardless
+            - stripedd
+            - applepay
+            example: card
+            type: string
+          - description: The type of payment method that is available.
         icon_url:
           description: An icon to display for the payment option.
           example: https://cdn.gr4vy.app/card.svg
           nullable: true
           type: string
         mode:
-          description: The mode of how the payment option should be displayed.
-          enum:
-          - card
-          - redirect
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - redirect
+            - applepay
+            example: card
+            type: string
+          - description: The mode to use with this payment option.
         label:
           description: |-
             A label that describes this payment option. This label is returned in the
@@ -3588,6 +4098,8 @@ components:
         can_store_payment_method:
           description: A flag to indicate if storing the payment method is supported.
           type: boolean
+        context:
+          $ref: '#/components/schemas/PaymentOption_context'
       title: Payment option
       type: object
       x-tags:
@@ -3597,14 +4109,24 @@ components:
       example:
         items:
         - icon_url: https://cdn.gr4vy.app/card.svg
-          mode: card
-          method: card
+          mode: ""
+          method: ""
+          context:
+            merchant_name: merchant_name
+            supported_schemes:
+            - amex
+            - amex
           label: Pay by Card
           type: payment-option
           can_store_payment_method: true
         - icon_url: https://cdn.gr4vy.app/card.svg
-          mode: card
-          method: card
+          mode: ""
+          method: ""
+          context:
+            merchant_name: merchant_name
+            supported_schemes:
+            - amex
+            - amex
           label: Pay by Card
           type: payment-option
           can_store_payment_method: true
@@ -3621,18 +4143,20 @@ components:
       description: Request to use a redirect payment method in a transaction.
       properties:
         method:
-          description: |-
-            The method to use, this can be any of the methods that
-            support redirect requests.
+          allOf:
+          - enum:
+            - paypal
+            - banked
+            - gocardless
+            - stripedd
+            example: paypal
+            type: string
+          - description: |-
+              The method to use, this can be any of the methods that
+              support redirect requests.
 
-            When storing a new payment method, only `gocardless` is currently
-            supported.
-          enum:
-          - gocardless
-          - paypal
-          - banked
-          example: gocardless
-          type: string
+              When storing a new payment method, only `gocardless` and `stripedd`
+              are currently supported.
         redirect_url:
           description: |-
             The redirect URL to redirect a buyer to after they have authorized their
@@ -3691,61 +4215,6 @@ components:
       type: object
       x-tags:
       - Request Bodies
-    Status:
-      description: |-
-        In many cases the Gr4vy API returns asynchronously, kicking off a job to
-        create an authorization or a transaction, and returning a `Status` object with
-        the ID of the pending object. The ID of this resource can be used to query an
-        objects status, or additionally the client can use Pub/Sub to subscribe to the
-        creation of the pending object.
-      properties:
-        type:
-          description: The type of this object. This is always `status`.
-          enum:
-          - status
-          example: status
-          type: string
-        status:
-          description: The status of this resource being created. This is always `pending`.
-          enum:
-          - pending
-          example: pending
-          type: string
-        resource_type:
-          description: |
-            The type of the object that is pending.
-          enum:
-          - transaction
-          - payment-method
-          example: transaction
-          type: string
-        resource_id:
-          description: The ID of the object for which this status has been created.
-          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
-          format: uuid
-          type: string
-        external_identifier:
-          description: An external identifier that can be used to match the record
-            against your own records.
-          example: user-789123
-          nullable: true
-          type: string
-      title: Status
-      type: object
-      x-tags:
-      - Statuses
-    Statuses:
-      description: A list of status resources.
-      properties:
-        items:
-          description: A list of authorizations.
-          items:
-            $ref: '#/components/schemas/Status'
-          type: array
-      title: Statuses
-      type: object
-      x-tags:
-      - Statuses
     TaxId:
       description: The tax ID information associated to a buyer.
       properties:
@@ -3837,43 +4306,20 @@ components:
     ThreeDSecureDataV1:
       allOf:
       - $ref: '#/components/schemas/ThreeDSecureData'
-      properties:
-        authentication_response:
-          description: The authentication response.
-          example: "Y"
-          maxLength: 1
-          type: string
-        cavv_algorithm:
-          description: The CAVV Algorithm used.
-          maxLength: 1
-          type: string
-        xid:
-          description: The transaction identifier.
-          type: string
-      required:
-      - authentication_response
-      - cavv_algorithm
-      - xid
+      - $ref: '#/components/schemas/ThreeDSecureDataV1_allOf'
       title: 3-D Secure Data Version 1
       type: object
     ThreeDSecureDataV2:
       allOf:
       - $ref: '#/components/schemas/ThreeDSecureData'
-      properties:
-        authentication_response:
-          description: |-
-            The transaction status from the challenge result
-            (not required for frictionless).
-          example: "Y"
-          maxLength: 1
-          type: string
-        directory_transaction_id:
-          description: The transaction identifier.
-          example: c4e59ceb-a382-4d6a-bc87-385d591fa09d
-          type: string
-      required:
-      - directory_transaction_id
+      - $ref: '#/components/schemas/ThreeDSecureDataV2_allOf'
       title: 3-D Secure Data Version 2
+      type: object
+    ThreeDSecureDataV1V2:
+      allOf:
+      - $ref: '#/components/schemas/ThreeDSecureDataV1'
+      - $ref: '#/components/schemas/ThreeDSecureDataV2'
+      title: 3-D Secure Data Version 1 & 2
       type: object
     TokenizedRequest:
       description: Details for a previously tokenized payment method.
@@ -3995,12 +4441,12 @@ components:
         payment_method:
           allOf:
           - $ref: '#/components/schemas/PaymentMethod--Snapshot'
-          description: The payment method used for this transaction.
+          - description: The payment method used for this transaction.
         buyer:
           allOf:
           - $ref: '#/components/schemas/Buyer--Snapshot'
-          description: The buyer used for this transaction.
-          nullable: true
+          - description: The buyer used for this transaction.
+            nullable: true
         created_at:
           description: The date and time when this transaction was created in our
             system.
@@ -4020,7 +4466,7 @@ components:
         payment_service:
           allOf:
           - $ref: '#/components/schemas/PaymentService--Snapshot'
-          description: The payment service used for this transaction.
+          - description: The payment service used for this transaction.
         environment:
           default: production
           description: The environment this transaction has been created in.
@@ -4145,7 +4591,6 @@ components:
         amount: 1299
         external_identifier: user-789123
         environment: staging
-        three_d_secure_data: '{}'
         currency: USD
         store: true
         intent: capture
@@ -4154,7 +4599,7 @@ components:
           external_identifier: user-789123
           buyer_external_identifier: user-789123
           security_code: "123"
-          method: card
+          method: ""
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           expiration_date: 11/15
           buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
@@ -4216,7 +4661,7 @@ components:
           example: staging
           type: string
         three_d_secure_data:
-          $ref: '#/components/schemas/undefined'
+          $ref: '#/components/schemas/ThreeDSecureDataV1V2'
       required:
       - amount
       - currency
@@ -4272,22 +4717,24 @@ components:
         external_identifier: user-789123
         buyer_external_identifier: user-789123
         security_code: "123"
-        method: card
+        method: ""
         id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
         expiration_date: 11/15
         buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
         redirect_url: https://example.com/callback
       properties:
         method:
-          description: The method to use for this request.
-          enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          - id
-          example: card
-          type: string
+          allOf:
+          - enum:
+            - card
+            - paypal
+            - banked
+            - gocardless
+            - stripedd
+            - applepay
+            example: card
+            type: string
+          - description: The method to use for this request.
         number:
           description: |-
             The 15-16 digit number for this credit card as it can be found on the
@@ -4483,6 +4930,7 @@ components:
       description: Features supported by the payment definition.
       example:
         three_d_secure_hosted: true
+        apple_pay: false
         payment_method_tokenization: true
         three_d_secure_pass_through: false
       properties:
@@ -4498,7 +4946,80 @@ components:
           description: Supports passing 3-D Secure data to the underlying processor.
           example: false
           type: boolean
+        apple_pay:
+          description: |-
+            Supports passing decrypted apple pay token to the underlying
+            processor.
+          example: false
+          type: boolean
       type: object
+    PaymentOption_context:
+      description: |-
+        Additional context specific to the payment option.
+        This is currently only returned for Apple Pay.
+      example:
+        merchant_name: merchant_name
+        supported_schemes:
+        - amex
+        - amex
+      properties:
+        merchant_name:
+          description: Display name of the merchant for Apple Pay.
+          type: string
+        supported_schemes:
+          description: Supported schemes for Apple Pay.
+          items:
+            enum:
+            - amex
+            - cartesBancaires
+            - discover
+            - eftpos
+            - electron
+            - elo
+            - interac
+            - jcb
+            - mada
+            - maestro
+            - masterCard
+            - privateLabel
+            - visa
+            - vPay
+            type: string
+          type: array
+      type: object
+    ThreeDSecureDataV1_allOf:
+      properties:
+        authentication_response:
+          description: The authentication response.
+          example: "Y"
+          maxLength: 1
+          type: string
+        cavv_algorithm:
+          description: The CAVV Algorithm used.
+          maxLength: 1
+          type: string
+        xid:
+          description: The transaction identifier.
+          type: string
+      required:
+      - authentication_response
+      - cavv_algorithm
+      - xid
+    ThreeDSecureDataV2_allOf:
+      properties:
+        authentication_response:
+          description: |-
+            The transaction status from the challenge result
+            (not required for frictionless).
+          example: "Y"
+          maxLength: 1
+          type: string
+        directory_transaction_id:
+          description: The transaction identifier.
+          example: c4e59ceb-a382-4d6a-bc87-385d591fa09d
+          type: string
+      required:
+      - directory_transaction_id
   securitySchemes:
     BearerAuth:
       bearerFormat: JWT

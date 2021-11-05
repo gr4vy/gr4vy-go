@@ -23,7 +23,6 @@ type PaymentMethodToken struct {
 	Id *string `json:"id,omitempty"`
 	// The token of this payment method as it has been registered with the payment service, which can be used directly in combination with the `id` without the need to go through Gr4vy for a transaction.  In some cases this is a different value to the `id` while in others this value is identical. Please see the documentation for the payment service for more details.
 	Token *string `json:"token,omitempty"`
-	// The payment service used for this transaction.
 	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
 }
 

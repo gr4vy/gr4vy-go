@@ -23,6 +23,8 @@ type PaymentServiceDefinitionSupportedFeatures struct {
 	ThreeDSecureHosted *bool `json:"three_d_secure_hosted,omitempty"`
 	// Supports passing 3-D Secure data to the underlying processor.
 	ThreeDSecurePassThrough *bool `json:"three_d_secure_pass_through,omitempty"`
+	// Supports passing decrypted apple pay token to the underlying processor.
+	ApplePay *bool `json:"apple_pay,omitempty"`
 }
 
 // NewPaymentServiceDefinitionSupportedFeatures instantiates a new PaymentServiceDefinitionSupportedFeatures object
@@ -138,6 +140,38 @@ func (o *PaymentServiceDefinitionSupportedFeatures) SetThreeDSecurePassThrough(v
 	o.ThreeDSecurePassThrough = &v
 }
 
+// GetApplePay returns the ApplePay field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetApplePay() bool {
+	if o == nil || o.ApplePay == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ApplePay
+}
+
+// GetApplePayOk returns a tuple with the ApplePay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetApplePayOk() (*bool, bool) {
+	if o == nil || o.ApplePay == nil {
+		return nil, false
+	}
+	return o.ApplePay, true
+}
+
+// HasApplePay returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasApplePay() bool {
+	if o != nil && o.ApplePay != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetApplePay gets a reference to the given bool and assigns it to the ApplePay field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetApplePay(v bool) {
+	o.ApplePay = &v
+}
+
 func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.PaymentMethodTokenization != nil {
@@ -148,6 +182,9 @@ func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error)
 	}
 	if o.ThreeDSecurePassThrough != nil {
 		toSerialize["three_d_secure_pass_through"] = o.ThreeDSecurePassThrough
+	}
+	if o.ApplePay != nil {
+		toSerialize["apple_pay"] = o.ApplePay
 	}
 	return json.Marshal(toSerialize)
 }

@@ -30,7 +30,7 @@ type TransactionRequest struct {
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// Defines the environment to create this transaction in. Setting this to anything other than `production` will force Gr4vy to use the payment a service configured for that environment.
 	Environment *string `json:"environment,omitempty"`
-	ThreeDSecureData *ThreeDSecureDataV2 `json:"three_d_secure_data,omitempty"`
+	ThreeDSecureData *ThreeDSecureDataV1V2 `json:"three_d_secure_data,omitempty"`
 }
 
 // NewTransactionRequest instantiates a new TransactionRequest object
@@ -272,9 +272,9 @@ func (o *TransactionRequest) SetEnvironment(v string) {
 }
 
 // GetThreeDSecureData returns the ThreeDSecureData field value if set, zero value otherwise.
-func (o *TransactionRequest) GetThreeDSecureData() ThreeDSecureDataV2 {
+func (o *TransactionRequest) GetThreeDSecureData() ThreeDSecureDataV1V2 {
 	if o == nil || o.ThreeDSecureData == nil {
-		var ret ThreeDSecureDataV2
+		var ret ThreeDSecureDataV1V2
 		return ret
 	}
 	return *o.ThreeDSecureData
@@ -282,7 +282,7 @@ func (o *TransactionRequest) GetThreeDSecureData() ThreeDSecureDataV2 {
 
 // GetThreeDSecureDataOk returns a tuple with the ThreeDSecureData field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *TransactionRequest) GetThreeDSecureDataOk() (*ThreeDSecureDataV2, bool) {
+func (o *TransactionRequest) GetThreeDSecureDataOk() (*ThreeDSecureDataV1V2, bool) {
 	if o == nil || o.ThreeDSecureData == nil {
 		return nil, false
 	}
@@ -298,8 +298,8 @@ func (o *TransactionRequest) HasThreeDSecureData() bool {
 	return false
 }
 
-// SetThreeDSecureData gets a reference to the given ThreeDSecureDataV2 and assigns it to the ThreeDSecureData field.
-func (o *TransactionRequest) SetThreeDSecureData(v ThreeDSecureDataV2) {
+// SetThreeDSecureData gets a reference to the given ThreeDSecureDataV1V2 and assigns it to the ThreeDSecureData field.
+func (o *TransactionRequest) SetThreeDSecureData(v ThreeDSecureDataV1V2) {
 	o.ThreeDSecureData = &v
 }
 

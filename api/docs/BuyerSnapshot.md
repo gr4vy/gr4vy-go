@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The unique Gr4vy ID for this buyer. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. | [optional] 
 **DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
-**BillingDetails** | Pointer to [**NullableBillingDetails**](BillingDetails.md) | The billing details associated with the buyer, which include the address and tax ID. | [optional] 
+**BillingDetails** | Pointer to [**BillingDetails**](BillingDetails.md) |  | [optional] 
 
 ## Methods
 
@@ -174,16 +174,6 @@ SetBillingDetails sets BillingDetails field to given value.
 
 HasBillingDetails returns a boolean if a field has been set.
 
-### SetBillingDetailsNil
-
-`func (o *BuyerSnapshot) SetBillingDetailsNil(b bool)`
-
- SetBillingDetailsNil sets the value for BillingDetails to be an explicit nil
-
-### UnsetBillingDetails
-`func (o *BuyerSnapshot) UnsetBillingDetails()`
-
-UnsetBillingDetails ensures that no value is present for BillingDetails, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

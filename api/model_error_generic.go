@@ -37,8 +37,6 @@ func NewErrorGeneric() *ErrorGeneric {
 	this := ErrorGeneric{}
 	var type_ string = "error"
 	this.Type = &type_
-	var status int32 = 0
-	this.Status = &status
 	return &this
 }
 
@@ -49,8 +47,6 @@ func NewErrorGenericWithDefaults() *ErrorGeneric {
 	this := ErrorGeneric{}
 	var type_ string = "error"
 	this.Type = &type_
-	var status int32 = 0
-	this.Status = &status
 	return &this
 }
 
