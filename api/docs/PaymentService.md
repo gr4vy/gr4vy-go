@@ -22,9 +22,7 @@ Name | Type | Description | Notes
 **MerchantCountryCode** | Pointer to **NullableString** | ISO 3166-1 numeric three-digit country code. | [optional] 
 **MerchantCategoryCode** | Pointer to **NullableString** | Merchant category code that describes the business. | [optional] 
 **MerchantUrl** | Pointer to **NullableString** | Fully qualified URL of 3-D Secure requestor website or customer care site. | [optional] 
-**CredentialsMode** | Pointer to **string** | Defines if the credentials are intended for the service&#39;s live API or sandbox/test API. | [optional] [default to "live"]
 **Active** | Pointer to **bool** | Defines if this service is currently active or not. | [optional] [default to true]
-**Environments** | Pointer to **[]string** | Determines the Gr4vy environments in which this service should be available. This can be used in combination with the &#x60;environment&#x60; parameters in the payment method and transaction APIs to route transactions through this service. | [optional] [default to ["production"]]
 **Position** | Pointer to **float32** | The numeric rank of a payment service. Payment services with a lower position value are processed first. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this service was created. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this service was last updated. | [optional] 
@@ -588,31 +586,6 @@ HasMerchantUrl returns a boolean if a field has been set.
 `func (o *PaymentService) UnsetMerchantUrl()`
 
 UnsetMerchantUrl ensures that no value is present for MerchantUrl, not even an explicit nil
-### GetCredentialsMode
-
-`func (o *PaymentService) GetCredentialsMode() string`
-
-GetCredentialsMode returns the CredentialsMode field if non-nil, zero value otherwise.
-
-### GetCredentialsModeOk
-
-`func (o *PaymentService) GetCredentialsModeOk() (*string, bool)`
-
-GetCredentialsModeOk returns a tuple with the CredentialsMode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCredentialsMode
-
-`func (o *PaymentService) SetCredentialsMode(v string)`
-
-SetCredentialsMode sets CredentialsMode field to given value.
-
-### HasCredentialsMode
-
-`func (o *PaymentService) HasCredentialsMode() bool`
-
-HasCredentialsMode returns a boolean if a field has been set.
-
 ### GetActive
 
 `func (o *PaymentService) GetActive() bool`
@@ -637,31 +610,6 @@ SetActive sets Active field to given value.
 `func (o *PaymentService) HasActive() bool`
 
 HasActive returns a boolean if a field has been set.
-
-### GetEnvironments
-
-`func (o *PaymentService) GetEnvironments() []string`
-
-GetEnvironments returns the Environments field if non-nil, zero value otherwise.
-
-### GetEnvironmentsOk
-
-`func (o *PaymentService) GetEnvironmentsOk() (*[]string, bool)`
-
-GetEnvironmentsOk returns a tuple with the Environments field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironments
-
-`func (o *PaymentService) SetEnvironments(v []string)`
-
-SetEnvironments sets Environments field to given value.
-
-### HasEnvironments
-
-`func (o *PaymentService) HasEnvironments() bool`
-
-HasEnvironments returns a boolean if a field has been set.
 
 ### GetPosition
 

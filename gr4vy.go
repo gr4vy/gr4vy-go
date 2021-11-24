@@ -1,47 +1,51 @@
 package gr4vy
 
 import (
+	"bytes"
 	"fmt"
-	"os"
 	"io"
 	"io/ioutil"
-	"bytes"
 	"net/http"
+	"os"
 	"runtime"
 	"strings"
+
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
 const VERSION = "0.1.0"
 
 type Gr4vyClient struct {
-	gr4vyId string
-	privateKey string
-	baseUrl string
-	Debug bool
+	gr4vyId     string
+	privateKey  string
+	baseUrl     string
+	Debug       bool
 	accessToken string
+	environment string
 }
 
 type EmbedParams struct {
-	Amount int32
+	Amount   int32
 	Currency string
-	BuyerID string
+	BuyerID  string
 }
 
-func NewGr4vyClient(gr4vy_id string, private_key string) (*Gr4vyClient) {
+func NewGr4vyClient(gr4vy_id string, private_key string, environment string) *Gr4vyClient {
 	client := Gr4vyClient{
-		gr4vyId: gr4vy_id,
-		privateKey: private_key,
-		Debug: false,
+		gr4vyId:     gr4vy_id,
+		privateKey:  private_key,
+		Debug:       false,
+		environment: environment,
 	}
 	return &client
 }
 
-func NewGr4vyClientWithBaseUrl(base_url string, private_key string) (*Gr4vyClient) {
+func NewGr4vyClientWithBaseUrl(base_url string, private_key string) *Gr4vyClient {
 	client := Gr4vyClient{
-		privateKey: private_key,
-		baseUrl: base_url,
-		Debug: false,
+		privateKey:  private_key,
+		baseUrl:     base_url,
+		Debug:       false,
+		environment: "sandbox",
 	}
 	return &client
 }
@@ -51,17 +55,17 @@ func GetClient(c *Gr4vyClient) (*APIClient, error) {
 	if c.Debug {
 		pc, _, _, _ := runtime.Caller(1)
 		funcName := runtime.FuncForPC(pc).Name()
-      	fmt.Println("Gr4vy - Request - " + lastString(strings.Split(funcName, ".")))
-    }
+		fmt.Println("Gr4vy - Request - " + lastString(strings.Split(funcName, ".")))
+	}
 
 	bearerToken, err := authentication(c.privateKey, c.Debug)
-    if err != nil {
-    	return nil, err
-    }
-    c.accessToken = bearerToken
+	if err != nil {
+		return nil, err
+	}
+	c.accessToken = bearerToken
 
-    config := NewConfiguration()
-    config.Servers[0].URL = c.BaseUrl()
+	config := NewConfiguration()
+	config.Servers[0].URL = c.BaseUrl()
 
 	client := NewAPIClient(config)
 
@@ -104,21 +108,21 @@ func (c *Gr4vyClient) HandleResponse(response *http.Response, error error) {
 }
 
 func (c *Gr4vyClient) BaseUrl() string {
-   if c.baseUrl != "" {
-      return c.baseUrl
-   }
-   return fmt.Sprintf("https://api.%v.gr4vy.app", c.gr4vyId)
+	if c.baseUrl != "" {
+		return c.baseUrl
+	}
+	return fmt.Sprintf("https://api.%v.%v.gr4vy.app", c.environment, c.gr4vyId)
 }
 
 func lastString(ss []string) string {
-    return ss[len(ss)-1]
+	return ss[len(ss)-1]
 }
 
 func GetKeyFromFile(fileName string) (string, error) {
 	value, exists := os.LookupEnv("PRIVATE_KEY")
-    if exists {
-        return string(value), nil
-    }
+	if exists {
+		return string(value), nil
+	}
 	b, err := ioutil.ReadFile(fileName)
 	if err != nil {
 		return "", err
@@ -126,11 +130,11 @@ func GetKeyFromFile(fileName string) (string, error) {
 	return string(b), nil
 }
 
-func String(v string) (NullableString) {
+func String(v string) NullableString {
 	return *NewNullableString(&v)
 }
 
-func StringPtr(v string) (*string) {
+func StringPtr(v string) *string {
 	return &v
 }
 
@@ -145,4 +149,3 @@ func Int64(v int64) *int64 {
 func Bool(v bool) *bool {
 	return &v
 }
-

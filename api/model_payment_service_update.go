@@ -45,12 +45,8 @@ type PaymentServiceUpdate struct {
 	MerchantCategoryCode NullableString `json:"merchant_category_code,omitempty"`
 	// Fully qualified URL of 3-D Secure requestor website or customer care site.
 	MerchantUrl NullableString `json:"merchant_url,omitempty"`
-	// Defines if the credentials are intended for the service's live API or sandbox/test API.
-	CredentialsMode *string `json:"credentials_mode,omitempty"`
 	// Defines if this service is currently active or not.
 	Active *bool `json:"active,omitempty"`
-	// Determines the Gr4vy environments in which this service should be available. This can be used in combination with the `environment` parameters in the payment method and transaction APIs to route transactions through this service.
-	Environments *[]string `json:"environments,omitempty"`
 	// The numeric rank of a payment service. Payment services with a lower position value are processed first. When a payment services is inserted at a position, any payment services with the the same value or higher are shifted down a position accordingly. When left out, the payment service is inserted at the end of the list.
 	Position *float32 `json:"position,omitempty"`
 }
@@ -63,8 +59,6 @@ func NewPaymentServiceUpdate() *PaymentServiceUpdate {
 	this := PaymentServiceUpdate{}
 	var threeDSecureEnabled bool = false
 	this.ThreeDSecureEnabled = &threeDSecureEnabled
-	var credentialsMode string = "live"
-	this.CredentialsMode = &credentialsMode
 	var active bool = true
 	this.Active = &active
 	return &this
@@ -77,8 +71,6 @@ func NewPaymentServiceUpdateWithDefaults() *PaymentServiceUpdate {
 	this := PaymentServiceUpdate{}
 	var threeDSecureEnabled bool = false
 	this.ThreeDSecureEnabled = &threeDSecureEnabled
-	var credentialsMode string = "live"
-	this.CredentialsMode = &credentialsMode
 	var active bool = true
 	this.Active = &active
 	return &this
@@ -622,38 +614,6 @@ func (o *PaymentServiceUpdate) UnsetMerchantUrl() {
 	o.MerchantUrl.Unset()
 }
 
-// GetCredentialsMode returns the CredentialsMode field value if set, zero value otherwise.
-func (o *PaymentServiceUpdate) GetCredentialsMode() string {
-	if o == nil || o.CredentialsMode == nil {
-		var ret string
-		return ret
-	}
-	return *o.CredentialsMode
-}
-
-// GetCredentialsModeOk returns a tuple with the CredentialsMode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentServiceUpdate) GetCredentialsModeOk() (*string, bool) {
-	if o == nil || o.CredentialsMode == nil {
-		return nil, false
-	}
-	return o.CredentialsMode, true
-}
-
-// HasCredentialsMode returns a boolean if a field has been set.
-func (o *PaymentServiceUpdate) HasCredentialsMode() bool {
-	if o != nil && o.CredentialsMode != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCredentialsMode gets a reference to the given string and assigns it to the CredentialsMode field.
-func (o *PaymentServiceUpdate) SetCredentialsMode(v string) {
-	o.CredentialsMode = &v
-}
-
 // GetActive returns the Active field value if set, zero value otherwise.
 func (o *PaymentServiceUpdate) GetActive() bool {
 	if o == nil || o.Active == nil {
@@ -684,38 +644,6 @@ func (o *PaymentServiceUpdate) HasActive() bool {
 // SetActive gets a reference to the given bool and assigns it to the Active field.
 func (o *PaymentServiceUpdate) SetActive(v bool) {
 	o.Active = &v
-}
-
-// GetEnvironments returns the Environments field value if set, zero value otherwise.
-func (o *PaymentServiceUpdate) GetEnvironments() []string {
-	if o == nil || o.Environments == nil {
-		var ret []string
-		return ret
-	}
-	return *o.Environments
-}
-
-// GetEnvironmentsOk returns a tuple with the Environments field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentServiceUpdate) GetEnvironmentsOk() (*[]string, bool) {
-	if o == nil || o.Environments == nil {
-		return nil, false
-	}
-	return o.Environments, true
-}
-
-// HasEnvironments returns a boolean if a field has been set.
-func (o *PaymentServiceUpdate) HasEnvironments() bool {
-	if o != nil && o.Environments != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironments gets a reference to the given []string and assigns it to the Environments field.
-func (o *PaymentServiceUpdate) SetEnvironments(v []string) {
-	o.Environments = &v
 }
 
 // GetPosition returns the Position field value if set, zero value otherwise.
@@ -794,14 +722,8 @@ func (o PaymentServiceUpdate) MarshalJSON() ([]byte, error) {
 	if o.MerchantUrl.IsSet() {
 		toSerialize["merchant_url"] = o.MerchantUrl.Get()
 	}
-	if o.CredentialsMode != nil {
-		toSerialize["credentials_mode"] = o.CredentialsMode
-	}
 	if o.Active != nil {
 		toSerialize["active"] = o.Active
-	}
-	if o.Environments != nil {
-		toSerialize["environments"] = o.Environments
 	}
 	if o.Position != nil {
 		toSerialize["position"] = o.Position

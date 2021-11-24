@@ -526,8 +526,7 @@ func (r ApiUpdateDigitalWalletRequest) Execute() (DigitalWallet, *_nethttp.Respo
 
 /*
  * UpdateDigitalWallet Update digital wallet
- * Updates the values a digital wallet was registered with, and the Gr4vy
-environments in which a registered digital wallet should be available.
+ * Updates the values a digital wallet was registered with.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param digitalWalletId The ID of the registered digital wallet.
  * @return ApiUpdateDigitalWalletRequest

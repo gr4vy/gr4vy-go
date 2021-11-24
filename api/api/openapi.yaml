@@ -391,20 +391,6 @@ paths:
           example: USD
           type: string
         style: form
-      - description: Filters the results to only the items available in this environment.
-        explode: true
-        in: query
-        name: environment
-        required: false
-        schema:
-          default: production
-          enum:
-          - development
-          - staging
-          - production
-          example: staging
-          type: string
-        style: form
       responses:
         "200":
           content:
@@ -434,20 +420,6 @@ paths:
       description: Returns a list of stored (tokenized) payment methods.
       operationId: list-payment-methods
       parameters:
-      - description: Filters the results to only the items available in this environment.
-        explode: true
-        in: query
-        name: environment
-        required: false
-        schema:
-          default: production
-          enum:
-          - development
-          - staging
-          - production
-          example: staging
-          type: string
-        style: form
       - description: |-
           Filters the results to only the items for which the `buyer` has an
           `id` that matches this value.
@@ -681,20 +653,6 @@ paths:
           example: USD
           type: string
         style: form
-      - description: Filters the results to only the items available in this environment.
-        explode: true
-        in: query
-        name: environment
-        required: false
-        schema:
-          default: production
-          enum:
-          - development
-          - staging
-          - production
-          example: staging
-          type: string
-        style: form
       - description: |-
           An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale
           determines the language for the labels returned for every payment option.
@@ -784,20 +742,6 @@ paths:
           example: card
           type: string
         style: form
-      - description: Filters the results to only the items available in this environment.
-        explode: true
-        in: query
-        name: environment
-        required: false
-        schema:
-          default: production
-          enum:
-          - development
-          - staging
-          - production
-          example: staging
-          type: string
-        style: form
       responses:
         "200":
           content:
@@ -840,7 +784,6 @@ paths:
                     - EUR
                     accepted_countries:
                     - DE
-                    environment: production
               schema:
                 $ref: '#/components/schemas/PaymentService'
           description: Returns the created payment service.
@@ -1183,9 +1126,7 @@ paths:
       tags:
       - Digital Wallets
     put:
-      description: |-
-        Updates the values a digital wallet was registered with, and the Gr4vy
-        environments in which a registered digital wallet should be available.
+      description: Updates the values a digital wallet was registered with.
       operationId: update-digital-wallet
       parameters:
       - description: The ID of the registered digital wallet.
@@ -1345,20 +1286,6 @@ paths:
         required: false
         schema:
           example: 2012-12-12T10:53:43+00:00
-          type: string
-        style: form
-      - description: Filters the results to only the items available in this environment.
-        explode: true
-        in: query
-        name: environment
-        required: false
-        schema:
-          default: production
-          enum:
-          - development
-          - staging
-          - production
-          example: staging
           type: string
         style: form
       - description: Defines the maximum number of items to return for this request.
@@ -2100,17 +2027,6 @@ components:
             needs to be unset.
           example: user-789123
           type: string
-        environment:
-          description: |-
-            Defines the environment to store this card for. Setting this to
-            anything other than `production` will force Gr4vy to use the payment
-            services configured for that environment.
-          enum:
-          - development
-          - staging
-          - production
-          example: staging
-          type: string
         redirect_url:
           description: |-
             The redirect URL to redirect a buyer after a 3D Secure flow
@@ -2135,8 +2051,6 @@ components:
       example:
         updated_at: 2012-12-12T10:53:43Z
         provider: apple
-        environments:
-        - production
         merchant_name: Gr4vy
         created_at: 2012-12-12T10:53:43Z
         id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
@@ -2155,6 +2069,7 @@ components:
           description: The name of the digital wallet provider.
           enum:
           - apple
+          - google
           example: apple
           type: string
         id:
@@ -2175,8 +2090,9 @@ components:
           type: string
         domain_names:
           description: |-
-            The list of fully qualified domain names that a digital wallet provider
-            processes payments for.
+            The list of domain names that a digital wallet can be used on. To use a
+            digital wallet on a website, the domain of the site is required to be
+            in this list.
           example:
           - example.com
           items:
@@ -2194,21 +2110,6 @@ components:
           example: 2012-12-12T10:53:43Z
           format: date-time
           type: string
-        environments:
-          default:
-          - production
-          description: The Gr4vy environments in which this digital wallet is available.
-          example:
-          - production
-          items:
-            enum:
-            - development
-            - staging
-            - production
-            type: string
-          maxItems: 3
-          minItems: 0
-          type: array
       title: Digital Wallet
       type: object
       x-tags:
@@ -2219,8 +2120,6 @@ components:
         items:
         - updated_at: 2012-12-12T10:53:43Z
           provider: apple
-          environments:
-          - production
           merchant_name: Gr4vy
           created_at: 2012-12-12T10:53:43Z
           id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
@@ -2230,8 +2129,6 @@ components:
           - example.com
         - updated_at: 2012-12-12T10:53:43Z
           provider: apple
-          environments:
-          - production
           merchant_name: Gr4vy
           created_at: 2012-12-12T10:53:43Z
           id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
@@ -2253,8 +2150,6 @@ components:
       description: Merchant details used to register with a digital wallet provider.
       example:
         provider: apple
-        environments:
-        - production
         merchant_name: Gr4vy
         accept_terms_and_conditions: true
         merchant_url: https://example.com
@@ -2265,6 +2160,7 @@ components:
           description: The name of the digital wallet provider.
           enum:
           - apple
+          - google
           example: apple
           type: string
         merchant_name:
@@ -2284,8 +2180,9 @@ components:
           type: string
         domain_names:
           description: |-
-            The list of fully qualified domain names that a digital wallet provider
-            should process payments for.
+            The list of domain names that a digital wallet can be used on. To use a
+            digital wallet on a website, the domain of the site is required to be
+            in this list.
           example:
           - example.com
           items:
@@ -2300,23 +2197,6 @@ components:
             wallet.
           example: true
           type: boolean
-        environments:
-          default:
-          - production
-          description: |-
-            Determines the Gr4vy environments in which this digital wallet should
-            be available.
-          example:
-          - production
-          items:
-            enum:
-            - development
-            - staging
-            - production
-            type: string
-          maxItems: 3
-          minItems: 0
-          type: array
       required:
       - accept_terms_and_conditions
       - domain_names
@@ -2329,8 +2209,6 @@ components:
     DigitalWalletUpdate:
       description: Request body to update a registered digital wallet's details.
       example:
-        environments:
-        - production
         merchant_name: Gr4vy
         domain_names:
         - example.com
@@ -2344,29 +2222,15 @@ components:
           type: string
         domain_names:
           description: |-
-            The list of fully qualified domain names that a digital wallet provider
-            should process payments for.
+            The list of domain names that a digital wallet can be used on. To use a
+            digital wallet on a website, the domain of the site is required to be
+            in this list.
           example:
           - example.com
           items:
             type: string
           maxItems: 99
           minItems: 1
-          type: array
-        environments:
-          description: |-
-            Determines the Gr4vy environments in which this digital wallet should
-            be available.
-          example:
-          - production
-          items:
-            enum:
-            - development
-            - staging
-            - production
-            type: string
-          maxItems: 3
-          minItems: 0
           type: array
       title: Digital Wallet (Update)
       type: object
@@ -2725,7 +2589,6 @@ components:
         approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
         buyer: ""
         mode: ""
-        environment: production
         updated_at: 2013-07-16T19:23:00Z
         id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
         status: succeeded
@@ -2830,18 +2693,6 @@ components:
           example: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           nullable: true
           type: string
-        environment:
-          default: production
-          description: |-
-            The environment this payment method has been stored for. This will be null
-            of the payment method was not stored.
-          enum:
-          - development
-          - staging
-          - production
-          example: production
-          nullable: true
-          type: string
       title: Payment method
       type: object
       x-tags:
@@ -2939,7 +2790,6 @@ components:
           approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           buyer: ""
           mode: ""
-          environment: production
           updated_at: 2013-07-16T19:23:00Z
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           status: succeeded
@@ -2953,7 +2803,6 @@ components:
           approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           buyer: ""
           mode: ""
-          environment: production
           updated_at: 2013-07-16T19:23:00Z
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           status: succeeded
@@ -3167,7 +3016,6 @@ components:
         country: USD
         external_identifier: account-23423423
         buyer_external_identifier: user-789123
-        environment: staging
         security_code: "123"
         method: ""
         currency: USD
@@ -3266,17 +3114,6 @@ components:
             This only applies to `redirect` mode payment methods like `gocardless`.
           example: USD
           type: string
-        environment:
-          description: |-
-            Defines the environment to store this payment method in. Setting this to
-            anything other than `production` will force Gr4vy to use a payment
-            a service configured for that environment.
-          enum:
-          - development
-          - staging
-          - production
-          example: staging
-          type: string
       required:
       - method
       title: Payment method request
@@ -3287,8 +3124,6 @@ components:
       description: An active, configured payment service.
       example:
         method: ""
-        environments:
-        - production
         merchant_category_code: "5045"
         acquirer_bin_discover: acquirer_bin_discover
         acquirer_merchant_id: acquirer_merchant_id
@@ -3305,7 +3140,6 @@ components:
         updated_at: 2012-12-12T10:53:43Z
         accepted_countries:
         - DE
-        credentials_mode: live
         id: faaad066-30b4-4997-a438-242b0752d7e1
         position: 1
         merchant_url: http://example.com/aeiou
@@ -3448,40 +3282,11 @@ components:
           maxLength: 2048
           nullable: true
           type: string
-        credentials_mode:
-          default: live
-          description: |-
-            Defines if the credentials are intended for the service's live API or
-            sandbox/test API.
-          enum:
-          - sandbox
-          - live
-          example: live
-          type: string
         active:
           default: true
           description: Defines if this service is currently active or not.
           example: true
           type: boolean
-        environments:
-          default:
-          - production
-          description: |-
-            Determines the Gr4vy environments in which this service should be
-            available. This can be used in combination with the `environment`
-            parameters in the payment method and transaction APIs to route
-            transactions through this service.
-          example:
-          - production
-          items:
-            enum:
-            - development
-            - staging
-            - production
-            type: string
-          maxItems: 3
-          minItems: 0
-          type: array
         position:
           description: |-
             The numeric rank of a payment service. Payment services with a lower
@@ -3548,8 +3353,6 @@ components:
         limit: 1
         items:
         - method: ""
-          environments:
-          - production
           merchant_category_code: "5045"
           acquirer_bin_discover: acquirer_bin_discover
           acquirer_merchant_id: acquirer_merchant_id
@@ -3566,7 +3369,6 @@ components:
           updated_at: 2012-12-12T10:53:43Z
           accepted_countries:
           - DE
-          credentials_mode: live
           id: faaad066-30b4-4997-a438-242b0752d7e1
           position: 1
           merchant_url: http://example.com/aeiou
@@ -3575,8 +3377,6 @@ components:
           - EUR
           status: pending
         - method: ""
-          environments:
-          - production
           merchant_category_code: "5045"
           acquirer_bin_discover: acquirer_bin_discover
           acquirer_merchant_id: acquirer_merchant_id
@@ -3593,7 +3393,6 @@ components:
           updated_at: 2012-12-12T10:53:43Z
           accepted_countries:
           - DE
-          credentials_mode: live
           id: faaad066-30b4-4997-a438-242b0752d7e1
           position: 1
           merchant_url: http://example.com/aeiou
@@ -3655,8 +3454,6 @@ components:
     PaymentServiceUpdate:
       description: Request body for updating an active payment service.
       example:
-        environments:
-        - production
         merchant_category_code: "5045"
         acquirer_bin_discover: acquirer_bin_discover
         acquirer_merchant_id: acquirer_merchant_id
@@ -3671,7 +3468,6 @@ components:
         - US
         - GB
         - DE
-        credentials_mode: live
         position: 1
         fields:
         - value: sk_test_4eC39HqLyjWDarjtT1zdp7dc
@@ -3787,40 +3583,11 @@ components:
           maxLength: 2048
           nullable: true
           type: string
-        credentials_mode:
-          default: live
-          description: |-
-            Defines if the credentials are intended for the service's live API or
-            sandbox/test API.
-          enum:
-          - sandbox
-          - live
-          example: live
-          type: string
         active:
           default: true
           description: Defines if this service is currently active or not.
           example: true
           type: boolean
-        environments:
-          default:
-          - production
-          description: |-
-            Determines the Gr4vy environments in which this service should be
-            available. This can be used in combination with the `environment`
-            parameters in the payment method and transaction APIs to route
-            transactions through this service.
-          example:
-          - production
-          items:
-            enum:
-            - development
-            - staging
-            - production
-            type: string
-          maxItems: 3
-          minItems: 0
-          type: array
         position:
           description: |-
             The numeric rank of a payment service. Payment services with a lower
@@ -4195,17 +3962,6 @@ components:
             needs to be unset.
           example: user-789123
           type: string
-        environment:
-          description: |-
-            Defines the environment to store this payment method in. Setting this to
-            anything other than `production` will force Gr4vy to use a payment
-            a service configured for that environment.
-          enum:
-          - development
-          - staging
-          - production
-          example: staging
-          type: string
       required:
       - country
       - currency
@@ -4363,7 +4119,6 @@ components:
         type: transaction
         refunded_amount: 100
         buyer: ""
-        environment: production
         updated_at: 2000-01-23T04:56:07.000+00:00
         captured_amount: 999
         currency: USD
@@ -4467,15 +4222,6 @@ components:
           allOf:
           - $ref: '#/components/schemas/PaymentService--Snapshot'
           - description: The payment service used for this transaction.
-        environment:
-          default: production
-          description: The environment this transaction has been created in.
-          enum:
-          - development
-          - staging
-          - production
-          example: production
-          type: string
       title: Transaction
       type: object
       x-tags:
@@ -4494,7 +4240,6 @@ components:
           type: transaction
           refunded_amount: 100
           buyer: ""
-          environment: production
           updated_at: 2000-01-23T04:56:07.000+00:00
           captured_amount: 999
           currency: USD
@@ -4508,7 +4253,6 @@ components:
           type: transaction
           refunded_amount: 100
           buyer: ""
-          environment: production
           updated_at: 2000-01-23T04:56:07.000+00:00
           captured_amount: 999
           currency: USD
@@ -4590,7 +4334,6 @@ components:
       example:
         amount: 1299
         external_identifier: user-789123
-        environment: staging
         currency: USD
         store: true
         intent: capture
@@ -4648,17 +4391,6 @@ components:
             against your own records.
           example: user-789123
           nullable: true
-          type: string
-        environment:
-          description: |-
-            Defines the environment to create this transaction in. Setting this to
-            anything other than `production` will force Gr4vy to use the payment
-            a service configured for that environment.
-          enum:
-          - development
-          - staging
-          - production
-          example: staging
           type: string
         three_d_secure_data:
           $ref: '#/components/schemas/ThreeDSecureDataV1V2'

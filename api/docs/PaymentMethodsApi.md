@@ -152,7 +152,7 @@ Name | Type | Description  | Notes
 
 ## ListBuyerPaymentMethods
 
-> PaymentMethodsTokenized ListBuyerPaymentMethods(ctx).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Country(country).Currency(currency).Environment(environment).Execute()
+> PaymentMethodsTokenized ListBuyerPaymentMethods(ctx).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Country(country).Currency(currency).Execute()
 
 List stored payment methods for a buyer
 
@@ -175,11 +175,10 @@ func main() {
     buyerExternalIdentifier := "user-12345" // string | Filters the results to only the items for which the `buyer` has an `external_identifier` that matches this value. (optional)
     country := "US" // string | Filters the results to only the items which support this country code. A country is formatted as 2-letter ISO country code. (optional)
     currency := "USD" // string | Filters the results to only the items which support this currency code. A currency is formatted as 3-letter ISO currency code. (optional)
-    environment := "staging" // string | Filters the results to only the items available in this environment. (optional) (default to "production")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentMethodsApi.ListBuyerPaymentMethods(context.Background()).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Country(country).Currency(currency).Environment(environment).Execute()
+    resp, r, err := api_client.PaymentMethodsApi.ListBuyerPaymentMethods(context.Background()).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Country(country).Currency(currency).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentMethodsApi.ListBuyerPaymentMethods``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -204,7 +203,6 @@ Name | Type | Description  | Notes
  **buyerExternalIdentifier** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;external_identifier&#x60; that matches this value. | 
  **country** | **string** | Filters the results to only the items which support this country code. A country is formatted as 2-letter ISO country code. | 
  **currency** | **string** | Filters the results to only the items which support this currency code. A currency is formatted as 3-letter ISO currency code. | 
- **environment** | **string** | Filters the results to only the items available in this environment. | [default to &quot;production&quot;]
 
 ### Return type
 
@@ -226,7 +224,7 @@ Name | Type | Description  | Notes
 
 ## ListPaymentMethods
 
-> PaymentMethods ListPaymentMethods(ctx).Environment(environment).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Limit(limit).Cursor(cursor).Execute()
+> PaymentMethods ListPaymentMethods(ctx).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Limit(limit).Cursor(cursor).Execute()
 
 List payment methods
 
@@ -245,7 +243,6 @@ import (
 )
 
 func main() {
-    environment := "staging" // string | Filters the results to only the items available in this environment. (optional) (default to "production")
     buyerId := "8724fd24-5489-4a5d-90fd-0604df7d3b83" // string | Filters the results to only the items for which the `buyer` has an `id` that matches this value. (optional)
     buyerExternalIdentifier := "user-12345" // string | Filters the results to only the items for which the `buyer` has an `external_identifier` that matches this value. (optional)
     limit := int32(1) // int32 | Defines the maximum number of items to return for this request. (optional) (default to 20)
@@ -253,7 +250,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentMethodsApi.ListPaymentMethods(context.Background()).Environment(environment).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Limit(limit).Cursor(cursor).Execute()
+    resp, r, err := api_client.PaymentMethodsApi.ListPaymentMethods(context.Background()).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Limit(limit).Cursor(cursor).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentMethodsApi.ListPaymentMethods``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -274,7 +271,6 @@ Other parameters are passed through a pointer to a apiListPaymentMethodsRequest 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **environment** | **string** | Filters the results to only the items available in this environment. | [default to &quot;production&quot;]
  **buyerId** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;id&#x60; that matches this value. | 
  **buyerExternalIdentifier** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;external_identifier&#x60; that matches this value. | 
  **limit** | **int32** | Defines the maximum number of items to return for this request. | [default to 20]

@@ -10,7 +10,6 @@ Name | Type | Description | Notes
 **Store** | Pointer to **bool** | Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. | [optional] [default to false]
 **Intent** | Pointer to **string** | Defines the intent of this API call. This determines the desired initial state of the transaction.  * &#x60;authorize&#x60; - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * &#x60;capture&#x60; - Optionally approves and then authorizes and captures the funds of the transaction. | [optional] [default to "authorize"]
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
-**Environment** | Pointer to **string** | Defines the environment to create this transaction in. Setting this to anything other than &#x60;production&#x60; will force Gr4vy to use the payment a service configured for that environment. | [optional] 
 **ThreeDSecureData** | Pointer to [**ThreeDSecureDataV1V2**](ThreeDSecureDataV1V2.md) |  | [optional] 
 
 ## Methods
@@ -177,31 +176,6 @@ HasExternalIdentifier returns a boolean if a field has been set.
 `func (o *TransactionRequest) UnsetExternalIdentifier()`
 
 UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
-### GetEnvironment
-
-`func (o *TransactionRequest) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *TransactionRequest) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *TransactionRequest) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *TransactionRequest) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
-
 ### GetThreeDSecureData
 
 `func (o *TransactionRequest) GetThreeDSecureData() ThreeDSecureDataV1V2`

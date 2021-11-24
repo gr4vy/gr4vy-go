@@ -28,14 +28,12 @@ type DigitalWallet struct {
 	MerchantName *string `json:"merchant_name,omitempty"`
 	// The main URL of the merchant.
 	MerchantUrl NullableString `json:"merchant_url,omitempty"`
-	// The list of fully qualified domain names that a digital wallet provider processes payments for.
+	// The list of domain names that a digital wallet can be used on. To use a digital wallet on a website, the domain of the site is required to be in this list.
 	DomainNames *[]string `json:"domain_names,omitempty"`
 	// The date and time when this digital wallet was registered.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this digital wallet was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
-	// The Gr4vy environments in which this digital wallet is available.
-	Environments *[]string `json:"environments,omitempty"`
 }
 
 // NewDigitalWallet instantiates a new DigitalWallet object
@@ -325,38 +323,6 @@ func (o *DigitalWallet) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
-// GetEnvironments returns the Environments field value if set, zero value otherwise.
-func (o *DigitalWallet) GetEnvironments() []string {
-	if o == nil || o.Environments == nil {
-		var ret []string
-		return ret
-	}
-	return *o.Environments
-}
-
-// GetEnvironmentsOk returns a tuple with the Environments field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DigitalWallet) GetEnvironmentsOk() (*[]string, bool) {
-	if o == nil || o.Environments == nil {
-		return nil, false
-	}
-	return o.Environments, true
-}
-
-// HasEnvironments returns a boolean if a field has been set.
-func (o *DigitalWallet) HasEnvironments() bool {
-	if o != nil && o.Environments != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironments gets a reference to the given []string and assigns it to the Environments field.
-func (o *DigitalWallet) SetEnvironments(v []string) {
-	o.Environments = &v
-}
-
 func (o DigitalWallet) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -382,9 +348,6 @@ func (o DigitalWallet) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updated_at"] = o.UpdatedAt
-	}
-	if o.Environments != nil {
-		toSerialize["environments"] = o.Environments
 	}
 	return json.Marshal(toSerialize)
 }

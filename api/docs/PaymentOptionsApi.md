@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## ListPaymentOptions
 
-> PaymentOptions ListPaymentOptions(ctx).Country(country).Currency(currency).Environment(environment).Locale(locale).Execute()
+> PaymentOptions ListPaymentOptions(ctx).Country(country).Currency(currency).Locale(locale).Execute()
 
 List payment options
 
@@ -31,12 +31,11 @@ import (
 func main() {
     country := "US" // string | Filters the results to only the items which support this country code. A country is formatted as 2-letter ISO country code. (optional)
     currency := "USD" // string | Filters the results to only the items which support this currency code. A currency is formatted as 3-letter ISO currency code. (optional)
-    environment := "staging" // string | Filters the results to only the items available in this environment. (optional) (default to "production")
     locale := "en-US" // string | An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale determines the language for the labels returned for every payment option. (optional) (default to "en-US")
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentOptionsApi.ListPaymentOptions(context.Background()).Country(country).Currency(currency).Environment(environment).Locale(locale).Execute()
+    resp, r, err := api_client.PaymentOptionsApi.ListPaymentOptions(context.Background()).Country(country).Currency(currency).Locale(locale).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentOptionsApi.ListPaymentOptions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -59,7 +58,6 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **country** | **string** | Filters the results to only the items which support this country code. A country is formatted as 2-letter ISO country code. | 
  **currency** | **string** | Filters the results to only the items which support this currency code. A currency is formatted as 3-letter ISO currency code. | 
- **environment** | **string** | Filters the results to only the items available in this environment. | [default to &quot;production&quot;]
  **locale** | **string** | An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale determines the language for the labels returned for every payment option. | [default to &quot;en-US&quot;]
 
 ### Return type

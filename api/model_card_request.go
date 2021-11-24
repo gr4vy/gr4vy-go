@@ -31,8 +31,6 @@ type CardRequest struct {
 	BuyerId *string `json:"buyer_id,omitempty"`
 	// The `external_identifier` of the buyer to associate this payment method to. If this field is provided then the `buyer_id` field needs to be unset.
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
-	// Defines the environment to store this card for. Setting this to anything other than `production` will force Gr4vy to use the payment services configured for that environment.
-	Environment *string `json:"environment,omitempty"`
 	// The redirect URL to redirect a buyer after a 3D Secure flow has been completed. This will be appended with both a transaction ID and status (e.g. `https://example.com/callback? gr4vy_transaction_id=123&gr4vy_transaction_status=capture_succeeded`). This is required if the transaction request body does not include `three_d_secure_data`.
 	RedirectUrl *string `json:"redirect_url,omitempty"`
 }
@@ -260,38 +258,6 @@ func (o *CardRequest) SetBuyerExternalIdentifier(v string) {
 	o.BuyerExternalIdentifier = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *CardRequest) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *CardRequest) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *CardRequest) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *CardRequest) SetEnvironment(v string) {
-	o.Environment = &v
-}
-
 // GetRedirectUrl returns the RedirectUrl field value if set, zero value otherwise.
 func (o *CardRequest) GetRedirectUrl() string {
 	if o == nil || o.RedirectUrl == nil {
@@ -346,9 +312,6 @@ func (o CardRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.BuyerExternalIdentifier != nil {
 		toSerialize["buyer_external_identifier"] = o.BuyerExternalIdentifier
-	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
 	}
 	if o.RedirectUrl != nil {
 		toSerialize["redirect_url"] = o.RedirectUrl

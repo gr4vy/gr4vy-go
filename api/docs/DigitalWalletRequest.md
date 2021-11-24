@@ -7,9 +7,8 @@ Name | Type | Description | Notes
 **Provider** | **string** | The name of the digital wallet provider. | 
 **MerchantName** | **string** | The name of the merchant. This is used to register the merchant with a digital wallet provider and this name is not displayed to the buyer. | 
 **MerchantUrl** | Pointer to **NullableString** | The main URL of the merchant. This is used to register the merchant with a digital wallet provider and this URL is not displayed to the buyer. | [optional] [default to "null"]
-**DomainNames** | **[]string** | The list of fully qualified domain names that a digital wallet provider should process payments for. | 
+**DomainNames** | **[]string** | The list of domain names that a digital wallet can be used on. To use a digital wallet on a website, the domain of the site is required to be in this list. | 
 **AcceptTermsAndConditions** | **bool** | The explicit acceptance of the digital wallet provider&#39;s terms and conditions by the merchant. Needs to be &#x60;true&#x60; to register a new digital wallet. | 
-**Environments** | Pointer to **[]string** | Determines the Gr4vy environments in which this digital wallet should be available. | [optional] [default to ["production"]]
 
 ## Methods
 
@@ -144,31 +143,6 @@ and a boolean to check if the value has been set.
 
 SetAcceptTermsAndConditions sets AcceptTermsAndConditions field to given value.
 
-
-### GetEnvironments
-
-`func (o *DigitalWalletRequest) GetEnvironments() []string`
-
-GetEnvironments returns the Environments field if non-nil, zero value otherwise.
-
-### GetEnvironmentsOk
-
-`func (o *DigitalWalletRequest) GetEnvironmentsOk() (*[]string, bool)`
-
-GetEnvironmentsOk returns a tuple with the Environments field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironments
-
-`func (o *DigitalWalletRequest) SetEnvironments(v []string)`
-
-SetEnvironments sets Environments field to given value.
-
-### HasEnvironments
-
-`func (o *DigitalWalletRequest) HasEnvironments() bool`
-
-HasEnvironments returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
