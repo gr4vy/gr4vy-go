@@ -17,7 +17,6 @@ Name | Type | Description | Notes
 **Scheme** | Pointer to **NullableString** | The scheme of the card. Only applies to card payments. | [optional] 
 **ExpirationDate** | Pointer to **NullableString** | The expiration date for the payment method. | [optional] 
 **ApprovalUrl** | Pointer to **NullableString** | The optional URL that the buyer needs to be redirected to to further authorize their payment. | [optional] 
-**Environment** | Pointer to **NullableString** | The environment this payment method has been stored for. This will be null of the payment method was not stored. | [optional] [default to "production"]
 
 ## Methods
 
@@ -413,41 +412,6 @@ HasApprovalUrl returns a boolean if a field has been set.
 `func (o *PaymentMethod) UnsetApprovalUrl()`
 
 UnsetApprovalUrl ensures that no value is present for ApprovalUrl, not even an explicit nil
-### GetEnvironment
-
-`func (o *PaymentMethod) GetEnvironment() string`
-
-GetEnvironment returns the Environment field if non-nil, zero value otherwise.
-
-### GetEnvironmentOk
-
-`func (o *PaymentMethod) GetEnvironmentOk() (*string, bool)`
-
-GetEnvironmentOk returns a tuple with the Environment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironment
-
-`func (o *PaymentMethod) SetEnvironment(v string)`
-
-SetEnvironment sets Environment field to given value.
-
-### HasEnvironment
-
-`func (o *PaymentMethod) HasEnvironment() bool`
-
-HasEnvironment returns a boolean if a field has been set.
-
-### SetEnvironmentNil
-
-`func (o *PaymentMethod) SetEnvironmentNil(b bool)`
-
- SetEnvironmentNil sets the value for Environment to be an explicit nil
-
-### UnsetEnvironment
-`func (o *PaymentMethod) UnsetEnvironment()`
-
-UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -43,7 +43,7 @@ func main() {
     fmt.Println(err)
     return
   }
-  client := gr4vy.NewGr4vyClient("demo", key)
+  client := gr4vy.NewGr4vyClient("demo", key, "sandbox")
   client.Debug = true
 
   var response *gr4vy.Gr4vyBuyers
@@ -84,7 +84,7 @@ needs to be created before it can be used in this way.
     fmt.Println(err)
     return
   }
-  client := gr4vy.NewGr4vyClient("demo", key)
+  client := gr4vy.NewGr4vyClient("demo", key, "sandbox")
   client.Debug = true
   req := gr4vy.Gr4vyBuyerRequest{
     DisplayName: gr4vy.String("Jane Smith"),
@@ -101,7 +101,7 @@ needs to be created before it can be used in this way.
     Currency: "USD",
     BuyerID:  (*response.Id),
   }
-  client = gr4vy.NewGr4vyClient("demo", key)
+  client = gr4vy.NewGr4vyClient("demo", key, "sandbox")
   client.Debug = true
   var responseStr string
   responseStr, err = client.GetEmbedToken(embed)

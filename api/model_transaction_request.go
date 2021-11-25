@@ -28,8 +28,6 @@ type TransactionRequest struct {
 	Intent *string `json:"intent,omitempty"`
 	// An external identifier that can be used to match the transaction against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
-	// Defines the environment to create this transaction in. Setting this to anything other than `production` will force Gr4vy to use the payment a service configured for that environment.
-	Environment *string `json:"environment,omitempty"`
 	ThreeDSecureData *ThreeDSecureDataV1V2 `json:"three_d_secure_data,omitempty"`
 }
 
@@ -239,38 +237,6 @@ func (o *TransactionRequest) UnsetExternalIdentifier() {
 	o.ExternalIdentifier.Unset()
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *TransactionRequest) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionRequest) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *TransactionRequest) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *TransactionRequest) SetEnvironment(v string) {
-	o.Environment = &v
-}
-
 // GetThreeDSecureData returns the ThreeDSecureData field value if set, zero value otherwise.
 func (o *TransactionRequest) GetThreeDSecureData() ThreeDSecureDataV1V2 {
 	if o == nil || o.ThreeDSecureData == nil {
@@ -322,9 +288,6 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
-	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
 	}
 	if o.ThreeDSecureData != nil {
 		toSerialize["three_d_secure_data"] = o.ThreeDSecureData

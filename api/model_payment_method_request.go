@@ -36,8 +36,6 @@ type PaymentMethodRequest struct {
 	Currency *string `json:"currency,omitempty"`
 	// The 2-letter ISO code of the country to store this payment method for. This is used to select the payment service to use.  This only applies to `redirect` mode payment methods like `gocardless`.
 	Country *string `json:"country,omitempty"`
-	// Defines the environment to store this payment method in. Setting this to anything other than `production` will force Gr4vy to use a payment a service configured for that environment.
-	Environment *string `json:"environment,omitempty"`
 }
 
 // NewPaymentMethodRequest instantiates a new PaymentMethodRequest object
@@ -380,38 +378,6 @@ func (o *PaymentMethodRequest) SetCountry(v string) {
 	o.Country = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *PaymentMethodRequest) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentMethodRequest) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *PaymentMethodRequest) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *PaymentMethodRequest) SetEnvironment(v string) {
-	o.Environment = &v
-}
-
 func (o PaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -443,9 +409,6 @@ func (o PaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Country != nil {
 		toSerialize["country"] = o.Country
-	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
 	}
 	return json.Marshal(toSerialize)
 }

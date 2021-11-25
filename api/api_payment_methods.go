@@ -274,7 +274,6 @@ type ApiListBuyerPaymentMethodsRequest struct {
 	buyerExternalIdentifier *string
 	country *string
 	currency *string
-	environment *string
 }
 
 func (r ApiListBuyerPaymentMethodsRequest) BuyerId(buyerId string) ApiListBuyerPaymentMethodsRequest {
@@ -291,10 +290,6 @@ func (r ApiListBuyerPaymentMethodsRequest) Country(country string) ApiListBuyerP
 }
 func (r ApiListBuyerPaymentMethodsRequest) Currency(currency string) ApiListBuyerPaymentMethodsRequest {
 	r.currency = &currency
-	return r
-}
-func (r ApiListBuyerPaymentMethodsRequest) Environment(environment string) ApiListBuyerPaymentMethodsRequest {
-	r.environment = &environment
 	return r
 }
 
@@ -353,9 +348,6 @@ func (a *PaymentMethodsApiService) ListBuyerPaymentMethodsExecute(r ApiListBuyer
 	}
 	if r.currency != nil {
 		localVarQueryParams.Add("currency", parameterToString(*r.currency, ""))
-	}
-	if r.environment != nil {
-		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -433,17 +425,12 @@ func (a *PaymentMethodsApiService) ListBuyerPaymentMethodsExecute(r ApiListBuyer
 type ApiListPaymentMethodsRequest struct {
 	ctx _context.Context
 	ApiService *PaymentMethodsApiService
-	environment *string
 	buyerId *string
 	buyerExternalIdentifier *string
 	limit *int32
 	cursor *string
 }
 
-func (r ApiListPaymentMethodsRequest) Environment(environment string) ApiListPaymentMethodsRequest {
-	r.environment = &environment
-	return r
-}
 func (r ApiListPaymentMethodsRequest) BuyerId(buyerId string) ApiListPaymentMethodsRequest {
 	r.buyerId = &buyerId
 	return r
@@ -503,9 +490,6 @@ func (a *PaymentMethodsApiService) ListPaymentMethodsExecute(r ApiListPaymentMet
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.environment != nil {
-		localVarQueryParams.Add("environment", parameterToString(*r.environment, ""))
-	}
 	if r.buyerId != nil {
 		localVarQueryParams.Add("buyer_id", parameterToString(*r.buyerId, ""))
 	}

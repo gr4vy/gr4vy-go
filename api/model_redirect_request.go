@@ -30,8 +30,6 @@ type RedirectRequest struct {
 	BuyerId *string `json:"buyer_id,omitempty"`
 	// The `external_identifier` of the buyer to associate this payment method to. If this field is provided then the `buyer_id` field needs to be unset.
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
-	// Defines the environment to store this payment method in. Setting this to anything other than `production` will force Gr4vy to use a payment a service configured for that environment.
-	Environment *string `json:"environment,omitempty"`
 }
 
 // NewRedirectRequest instantiates a new RedirectRequest object
@@ -257,38 +255,6 @@ func (o *RedirectRequest) SetBuyerExternalIdentifier(v string) {
 	o.BuyerExternalIdentifier = &v
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise.
-func (o *RedirectRequest) GetEnvironment() string {
-	if o == nil || o.Environment == nil {
-		var ret string
-		return ret
-	}
-	return *o.Environment
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *RedirectRequest) GetEnvironmentOk() (*string, bool) {
-	if o == nil || o.Environment == nil {
-		return nil, false
-	}
-	return o.Environment, true
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *RedirectRequest) HasEnvironment() bool {
-	if o != nil && o.Environment != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given string and assigns it to the Environment field.
-func (o *RedirectRequest) SetEnvironment(v string) {
-	o.Environment = &v
-}
-
 func (o RedirectRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -311,9 +277,6 @@ func (o RedirectRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.BuyerExternalIdentifier != nil {
 		toSerialize["buyer_external_identifier"] = o.BuyerExternalIdentifier
-	}
-	if o.Environment != nil {
-		toSerialize["environment"] = o.Environment
 	}
 	return json.Marshal(toSerialize)
 }

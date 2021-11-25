@@ -41,8 +41,6 @@ type PaymentMethod struct {
 	ExpirationDate NullableString `json:"expiration_date,omitempty"`
 	// The optional URL that the buyer needs to be redirected to to further authorize their payment.
 	ApprovalUrl NullableString `json:"approval_url,omitempty"`
-	// The environment this payment method has been stored for. This will be null of the payment method was not stored.
-	Environment NullableString `json:"environment,omitempty"`
 }
 
 // NewPaymentMethod instantiates a new PaymentMethod object
@@ -51,8 +49,6 @@ type PaymentMethod struct {
 // will change when the set of required properties is changed
 func NewPaymentMethod() *PaymentMethod {
 	this := PaymentMethod{}
-	var environment string = "production"
-	this.Environment = *NewNullableString(&environment)
 	return &this
 }
 
@@ -61,8 +57,6 @@ func NewPaymentMethod() *PaymentMethod {
 // but it doesn't guarantee that properties required by API are set
 func NewPaymentMethodWithDefaults() *PaymentMethod {
 	this := PaymentMethod{}
-	var environment string = "production"
-	this.Environment = *NewNullableString(&environment)
 	return &this
 }
 
@@ -532,48 +526,6 @@ func (o *PaymentMethod) UnsetApprovalUrl() {
 	o.ApprovalUrl.Unset()
 }
 
-// GetEnvironment returns the Environment field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentMethod) GetEnvironment() string {
-	if o == nil || o.Environment.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.Environment.Get()
-}
-
-// GetEnvironmentOk returns a tuple with the Environment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentMethod) GetEnvironmentOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.Environment.Get(), o.Environment.IsSet()
-}
-
-// HasEnvironment returns a boolean if a field has been set.
-func (o *PaymentMethod) HasEnvironment() bool {
-	if o != nil && o.Environment.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironment gets a reference to the given NullableString and assigns it to the Environment field.
-func (o *PaymentMethod) SetEnvironment(v string) {
-	o.Environment.Set(&v)
-}
-// SetEnvironmentNil sets the value for Environment to be an explicit nil
-func (o *PaymentMethod) SetEnvironmentNil() {
-	o.Environment.Set(nil)
-}
-
-// UnsetEnvironment ensures that no value is present for Environment, not even an explicit nil
-func (o *PaymentMethod) UnsetEnvironment() {
-	o.Environment.Unset()
-}
-
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -614,9 +566,6 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	}
 	if o.ApprovalUrl.IsSet() {
 		toSerialize["approval_url"] = o.ApprovalUrl.Get()
-	}
-	if o.Environment.IsSet() {
-		toSerialize["environment"] = o.Environment.Get()
 	}
 	return json.Marshal(toSerialize)
 }

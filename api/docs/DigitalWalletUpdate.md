@@ -5,8 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MerchantName** | Pointer to **string** | The name of the merchant. This is used to update the value initially used to register with a digital wallet provider and this name is not displayed to the buyer. | [optional] 
-**DomainNames** | Pointer to **[]string** | The list of fully qualified domain names that a digital wallet provider should process payments for. | [optional] 
-**Environments** | Pointer to **[]string** | Determines the Gr4vy environments in which this digital wallet should be available. | [optional] 
+**DomainNames** | Pointer to **[]string** | The list of domain names that a digital wallet can be used on. To use a digital wallet on a website, the domain of the site is required to be in this list. | [optional] 
 
 ## Methods
 
@@ -76,31 +75,6 @@ SetDomainNames sets DomainNames field to given value.
 `func (o *DigitalWalletUpdate) HasDomainNames() bool`
 
 HasDomainNames returns a boolean if a field has been set.
-
-### GetEnvironments
-
-`func (o *DigitalWalletUpdate) GetEnvironments() []string`
-
-GetEnvironments returns the Environments field if non-nil, zero value otherwise.
-
-### GetEnvironmentsOk
-
-`func (o *DigitalWalletUpdate) GetEnvironmentsOk() (*[]string, bool)`
-
-GetEnvironmentsOk returns a tuple with the Environments field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetEnvironments
-
-`func (o *DigitalWalletUpdate) SetEnvironments(v []string)`
-
-SetEnvironments sets Environments field to given value.
-
-### HasEnvironments
-
-`func (o *DigitalWalletUpdate) HasEnvironments() bool`
-
-HasEnvironments returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

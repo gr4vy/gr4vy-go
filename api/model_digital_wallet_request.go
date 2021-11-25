@@ -23,12 +23,10 @@ type DigitalWalletRequest struct {
 	MerchantName string `json:"merchant_name"`
 	// The main URL of the merchant. This is used to register the merchant with a digital wallet provider and this URL is not displayed to the buyer.
 	MerchantUrl NullableString `json:"merchant_url,omitempty"`
-	// The list of fully qualified domain names that a digital wallet provider should process payments for.
+	// The list of domain names that a digital wallet can be used on. To use a digital wallet on a website, the domain of the site is required to be in this list.
 	DomainNames []string `json:"domain_names"`
 	// The explicit acceptance of the digital wallet provider's terms and conditions by the merchant. Needs to be `true` to register a new digital wallet.
 	AcceptTermsAndConditions bool `json:"accept_terms_and_conditions"`
-	// Determines the Gr4vy environments in which this digital wallet should be available.
-	Environments *[]string `json:"environments,omitempty"`
 }
 
 // NewDigitalWalletRequest instantiates a new DigitalWalletRequest object
@@ -194,38 +192,6 @@ func (o *DigitalWalletRequest) SetAcceptTermsAndConditions(v bool) {
 	o.AcceptTermsAndConditions = v
 }
 
-// GetEnvironments returns the Environments field value if set, zero value otherwise.
-func (o *DigitalWalletRequest) GetEnvironments() []string {
-	if o == nil || o.Environments == nil {
-		var ret []string
-		return ret
-	}
-	return *o.Environments
-}
-
-// GetEnvironmentsOk returns a tuple with the Environments field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DigitalWalletRequest) GetEnvironmentsOk() (*[]string, bool) {
-	if o == nil || o.Environments == nil {
-		return nil, false
-	}
-	return o.Environments, true
-}
-
-// HasEnvironments returns a boolean if a field has been set.
-func (o *DigitalWalletRequest) HasEnvironments() bool {
-	if o != nil && o.Environments != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetEnvironments gets a reference to the given []string and assigns it to the Environments field.
-func (o *DigitalWalletRequest) SetEnvironments(v []string) {
-	o.Environments = &v
-}
-
 func (o DigitalWalletRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -242,9 +208,6 @@ func (o DigitalWalletRequest) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["accept_terms_and_conditions"] = o.AcceptTermsAndConditions
-	}
-	if o.Environments != nil {
-		toSerialize["environments"] = o.Environments
 	}
 	return json.Marshal(toSerialize)
 }
