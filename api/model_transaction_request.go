@@ -29,6 +29,14 @@ type TransactionRequest struct {
 	// An external identifier that can be used to match the transaction against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	ThreeDSecureData *ThreeDSecureDataV1V2 `json:"three_d_secure_data,omitempty"`
+	// Indicates whether the transaction was initiated by the merchant (true) or customer (false).
+	MerchantInitiated *bool `json:"merchant_initiated,omitempty"`
+	// The source of the transaction. Defaults to 'ecommerce'.
+	PaymentSource *string `json:"payment_source,omitempty"`
+	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with payment_source set to [recurring, installment, card_on_file] and will be ignored for other values or if payment_source is not present.
+	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
+	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://gr4vy.com/docs/ under `Connections` for more information on how specific providers support metadata.
+	Metadata *map[string]string `json:"metadata,omitempty"`
 }
 
 // NewTransactionRequest instantiates a new TransactionRequest object
@@ -44,6 +52,10 @@ func NewTransactionRequest(amount int32, currency string, paymentMethod Transact
 	this.Store = &store
 	var intent string = "authorize"
 	this.Intent = &intent
+	var merchantInitiated bool = false
+	this.MerchantInitiated = &merchantInitiated
+	var isSubsequentPayment bool = false
+	this.IsSubsequentPayment = &isSubsequentPayment
 	return &this
 }
 
@@ -56,6 +68,10 @@ func NewTransactionRequestWithDefaults() *TransactionRequest {
 	this.Store = &store
 	var intent string = "authorize"
 	this.Intent = &intent
+	var merchantInitiated bool = false
+	this.MerchantInitiated = &merchantInitiated
+	var isSubsequentPayment bool = false
+	this.IsSubsequentPayment = &isSubsequentPayment
 	return &this
 }
 
@@ -269,6 +285,134 @@ func (o *TransactionRequest) SetThreeDSecureData(v ThreeDSecureDataV1V2) {
 	o.ThreeDSecureData = &v
 }
 
+// GetMerchantInitiated returns the MerchantInitiated field value if set, zero value otherwise.
+func (o *TransactionRequest) GetMerchantInitiated() bool {
+	if o == nil || o.MerchantInitiated == nil {
+		var ret bool
+		return ret
+	}
+	return *o.MerchantInitiated
+}
+
+// GetMerchantInitiatedOk returns a tuple with the MerchantInitiated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRequest) GetMerchantInitiatedOk() (*bool, bool) {
+	if o == nil || o.MerchantInitiated == nil {
+		return nil, false
+	}
+	return o.MerchantInitiated, true
+}
+
+// HasMerchantInitiated returns a boolean if a field has been set.
+func (o *TransactionRequest) HasMerchantInitiated() bool {
+	if o != nil && o.MerchantInitiated != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantInitiated gets a reference to the given bool and assigns it to the MerchantInitiated field.
+func (o *TransactionRequest) SetMerchantInitiated(v bool) {
+	o.MerchantInitiated = &v
+}
+
+// GetPaymentSource returns the PaymentSource field value if set, zero value otherwise.
+func (o *TransactionRequest) GetPaymentSource() string {
+	if o == nil || o.PaymentSource == nil {
+		var ret string
+		return ret
+	}
+	return *o.PaymentSource
+}
+
+// GetPaymentSourceOk returns a tuple with the PaymentSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRequest) GetPaymentSourceOk() (*string, bool) {
+	if o == nil || o.PaymentSource == nil {
+		return nil, false
+	}
+	return o.PaymentSource, true
+}
+
+// HasPaymentSource returns a boolean if a field has been set.
+func (o *TransactionRequest) HasPaymentSource() bool {
+	if o != nil && o.PaymentSource != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentSource gets a reference to the given string and assigns it to the PaymentSource field.
+func (o *TransactionRequest) SetPaymentSource(v string) {
+	o.PaymentSource = &v
+}
+
+// GetIsSubsequentPayment returns the IsSubsequentPayment field value if set, zero value otherwise.
+func (o *TransactionRequest) GetIsSubsequentPayment() bool {
+	if o == nil || o.IsSubsequentPayment == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsSubsequentPayment
+}
+
+// GetIsSubsequentPaymentOk returns a tuple with the IsSubsequentPayment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRequest) GetIsSubsequentPaymentOk() (*bool, bool) {
+	if o == nil || o.IsSubsequentPayment == nil {
+		return nil, false
+	}
+	return o.IsSubsequentPayment, true
+}
+
+// HasIsSubsequentPayment returns a boolean if a field has been set.
+func (o *TransactionRequest) HasIsSubsequentPayment() bool {
+	if o != nil && o.IsSubsequentPayment != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSubsequentPayment gets a reference to the given bool and assigns it to the IsSubsequentPayment field.
+func (o *TransactionRequest) SetIsSubsequentPayment(v bool) {
+	o.IsSubsequentPayment = &v
+}
+
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *TransactionRequest) GetMetadata() map[string]string {
+	if o == nil || o.Metadata == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRequest) GetMetadataOk() (*map[string]string, bool) {
+	if o == nil || o.Metadata == nil {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *TransactionRequest) HasMetadata() bool {
+	if o != nil && o.Metadata != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
+func (o *TransactionRequest) SetMetadata(v map[string]string) {
+	o.Metadata = &v
+}
+
 func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -291,6 +435,18 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.ThreeDSecureData != nil {
 		toSerialize["three_d_secure_data"] = o.ThreeDSecureData
+	}
+	if o.MerchantInitiated != nil {
+		toSerialize["merchant_initiated"] = o.MerchantInitiated
+	}
+	if o.PaymentSource != nil {
+		toSerialize["payment_source"] = o.PaymentSource
+	}
+	if o.IsSubsequentPayment != nil {
+		toSerialize["is_subsequent_payment"] = o.IsSubsequentPayment
+	}
+	if o.Metadata != nil {
+		toSerialize["metadata"] = o.Metadata
 	}
 	return json.Marshal(toSerialize)
 }

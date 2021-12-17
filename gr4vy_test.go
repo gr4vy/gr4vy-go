@@ -6,7 +6,7 @@ import (
 )
 
 const keyPath = "./private_key.pem"
-const gr4vyId = "example009"
+const gr4vyId = "spider"
 const environment = "sandbox"
 
 var buyerId string

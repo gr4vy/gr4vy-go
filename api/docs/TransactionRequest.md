@@ -11,6 +11,10 @@ Name | Type | Description | Notes
 **Intent** | Pointer to **string** | Defines the intent of this API call. This determines the desired initial state of the transaction.  * &#x60;authorize&#x60; - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * &#x60;capture&#x60; - Optionally approves and then authorizes and captures the funds of the transaction. | [optional] [default to "authorize"]
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **ThreeDSecureData** | Pointer to [**ThreeDSecureDataV1V2**](ThreeDSecureDataV1V2.md) |  | [optional] 
+**MerchantInitiated** | Pointer to **bool** | Indicates whether the transaction was initiated by the merchant (true) or customer (false). | [optional] [default to false]
+**PaymentSource** | Pointer to **string** | The source of the transaction. Defaults to &#39;ecommerce&#39;. | [optional] 
+**IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with payment_source set to [recurring, installment, card_on_file] and will be ignored for other values or if payment_source is not present. | [optional] [default to false]
+**Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://gr4vy.com/docs/ under &#x60;Connections&#x60; for more information on how specific providers support metadata. | [optional] 
 
 ## Methods
 
@@ -200,6 +204,106 @@ SetThreeDSecureData sets ThreeDSecureData field to given value.
 `func (o *TransactionRequest) HasThreeDSecureData() bool`
 
 HasThreeDSecureData returns a boolean if a field has been set.
+
+### GetMerchantInitiated
+
+`func (o *TransactionRequest) GetMerchantInitiated() bool`
+
+GetMerchantInitiated returns the MerchantInitiated field if non-nil, zero value otherwise.
+
+### GetMerchantInitiatedOk
+
+`func (o *TransactionRequest) GetMerchantInitiatedOk() (*bool, bool)`
+
+GetMerchantInitiatedOk returns a tuple with the MerchantInitiated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantInitiated
+
+`func (o *TransactionRequest) SetMerchantInitiated(v bool)`
+
+SetMerchantInitiated sets MerchantInitiated field to given value.
+
+### HasMerchantInitiated
+
+`func (o *TransactionRequest) HasMerchantInitiated() bool`
+
+HasMerchantInitiated returns a boolean if a field has been set.
+
+### GetPaymentSource
+
+`func (o *TransactionRequest) GetPaymentSource() string`
+
+GetPaymentSource returns the PaymentSource field if non-nil, zero value otherwise.
+
+### GetPaymentSourceOk
+
+`func (o *TransactionRequest) GetPaymentSourceOk() (*string, bool)`
+
+GetPaymentSourceOk returns a tuple with the PaymentSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentSource
+
+`func (o *TransactionRequest) SetPaymentSource(v string)`
+
+SetPaymentSource sets PaymentSource field to given value.
+
+### HasPaymentSource
+
+`func (o *TransactionRequest) HasPaymentSource() bool`
+
+HasPaymentSource returns a boolean if a field has been set.
+
+### GetIsSubsequentPayment
+
+`func (o *TransactionRequest) GetIsSubsequentPayment() bool`
+
+GetIsSubsequentPayment returns the IsSubsequentPayment field if non-nil, zero value otherwise.
+
+### GetIsSubsequentPaymentOk
+
+`func (o *TransactionRequest) GetIsSubsequentPaymentOk() (*bool, bool)`
+
+GetIsSubsequentPaymentOk returns a tuple with the IsSubsequentPayment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSubsequentPayment
+
+`func (o *TransactionRequest) SetIsSubsequentPayment(v bool)`
+
+SetIsSubsequentPayment sets IsSubsequentPayment field to given value.
+
+### HasIsSubsequentPayment
+
+`func (o *TransactionRequest) HasIsSubsequentPayment() bool`
+
+HasIsSubsequentPayment returns a boolean if a field has been set.
+
+### GetMetadata
+
+`func (o *TransactionRequest) GetMetadata() map[string]string`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *TransactionRequest) GetMetadataOk() (*map[string]string, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *TransactionRequest) SetMetadata(v map[string]string)`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *TransactionRequest) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
