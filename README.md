@@ -221,7 +221,8 @@ go test -v
 ### Publishing
 
 Once the changes are merged, update the `VERSION` in `gr4vy.go` and push the
-changes to main to release a new version.
+changes to main to release a new version. Then tag that release as the current
+version in git.
 
 ## License
 
