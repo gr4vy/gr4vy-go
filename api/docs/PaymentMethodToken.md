@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | &#x60;payment-method-token&#x60;. | [optional] 
 **Id** | Pointer to **string** | The external ID of this payment method as it has been registered with the payment service, which can be used directly in combination with the &#x60;token&#x60; without the need to go through Gr4vy for a transaction.  In some cases this is a different value to the &#x60;token&#x60; while in others this value is identical. Please see the documentation for the payment service for more details. | [optional] 
 **Token** | Pointer to **string** | The token of this payment method as it has been registered with the payment service, which can be used directly in combination with the &#x60;id&#x60; without the need to go through Gr4vy for a transaction.  In some cases this is a different value to the &#x60;id&#x60; while in others this value is identical. Please see the documentation for the payment service for more details. | [optional] 
+**Status** | Pointer to **string** | The state of the payment method.  - &#x60;processing&#x60; - The payment method is still being stored. - &#x60;buyer_approval_required&#x60; - The buyer still needs to provide   approval before the payment method can be stored. - &#x60;succeeded&#x60; - The payment method is approved and stored with all   relevant payment services. - &#x60;failed&#x60; - Storing the payment method did not succeed. | [optional] 
 **PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) |  | [optional] 
 
 ## Methods
@@ -102,6 +103,31 @@ SetToken sets Token field to given value.
 `func (o *PaymentMethodToken) HasToken() bool`
 
 HasToken returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *PaymentMethodToken) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *PaymentMethodToken) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *PaymentMethodToken) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *PaymentMethodToken) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
 
 ### GetPaymentService
 

@@ -16,14 +16,8 @@ import (
 	"time"
 )
 
-// Transaction A transaction record.
-type Transaction struct {
-	// Indicates whether the transaction was initiated by the merchant (true) or customer (false).
-	MerchantInitiated *bool `json:"merchant_initiated,omitempty"`
-	// The source of the transaction. Defaults to 'ecommerce'.
-	PaymentSource *string `json:"payment_source,omitempty"`
-	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with payment_source set to [recurring, installment, card_on_file] and will be ignored for other values or if payment_source is not present.
-	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
+// TransactionSummary A transaction record.
+type TransactionSummary struct {
 	// The type of this resource. Is always `transaction`.
 	Type *string `json:"type,omitempty"`
 	// The unique identifier for this transaction.
@@ -49,125 +43,25 @@ type Transaction struct {
 	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
 }
 
-// NewTransaction instantiates a new Transaction object
+// NewTransactionSummary instantiates a new TransactionSummary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransaction() *Transaction {
-	this := Transaction{}
+func NewTransactionSummary() *TransactionSummary {
+	this := TransactionSummary{}
 	return &this
 }
 
-// NewTransactionWithDefaults instantiates a new Transaction object
+// NewTransactionSummaryWithDefaults instantiates a new TransactionSummary object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewTransactionWithDefaults() *Transaction {
-	this := Transaction{}
-	var merchantInitiated bool = false
-	this.MerchantInitiated = &merchantInitiated
-	var isSubsequentPayment bool = false
-	this.IsSubsequentPayment = &isSubsequentPayment
+func NewTransactionSummaryWithDefaults() *TransactionSummary {
+	this := TransactionSummary{}
 	return &this
-}
-
-// GetMerchantInitiated returns the MerchantInitiated field value if set, zero value otherwise.
-func (o *Transaction) GetMerchantInitiated() bool {
-	if o == nil || o.MerchantInitiated == nil {
-		var ret bool
-		return ret
-	}
-	return *o.MerchantInitiated
-}
-
-// GetMerchantInitiatedOk returns a tuple with the MerchantInitiated field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetMerchantInitiatedOk() (*bool, bool) {
-	if o == nil || o.MerchantInitiated == nil {
-		return nil, false
-	}
-	return o.MerchantInitiated, true
-}
-
-// HasMerchantInitiated returns a boolean if a field has been set.
-func (o *Transaction) HasMerchantInitiated() bool {
-	if o != nil && o.MerchantInitiated != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantInitiated gets a reference to the given bool and assigns it to the MerchantInitiated field.
-func (o *Transaction) SetMerchantInitiated(v bool) {
-	o.MerchantInitiated = &v
-}
-
-// GetPaymentSource returns the PaymentSource field value if set, zero value otherwise.
-func (o *Transaction) GetPaymentSource() string {
-	if o == nil || o.PaymentSource == nil {
-		var ret string
-		return ret
-	}
-	return *o.PaymentSource
-}
-
-// GetPaymentSourceOk returns a tuple with the PaymentSource field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetPaymentSourceOk() (*string, bool) {
-	if o == nil || o.PaymentSource == nil {
-		return nil, false
-	}
-	return o.PaymentSource, true
-}
-
-// HasPaymentSource returns a boolean if a field has been set.
-func (o *Transaction) HasPaymentSource() bool {
-	if o != nil && o.PaymentSource != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPaymentSource gets a reference to the given string and assigns it to the PaymentSource field.
-func (o *Transaction) SetPaymentSource(v string) {
-	o.PaymentSource = &v
-}
-
-// GetIsSubsequentPayment returns the IsSubsequentPayment field value if set, zero value otherwise.
-func (o *Transaction) GetIsSubsequentPayment() bool {
-	if o == nil || o.IsSubsequentPayment == nil {
-		var ret bool
-		return ret
-	}
-	return *o.IsSubsequentPayment
-}
-
-// GetIsSubsequentPaymentOk returns a tuple with the IsSubsequentPayment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetIsSubsequentPaymentOk() (*bool, bool) {
-	if o == nil || o.IsSubsequentPayment == nil {
-		return nil, false
-	}
-	return o.IsSubsequentPayment, true
-}
-
-// HasIsSubsequentPayment returns a boolean if a field has been set.
-func (o *Transaction) HasIsSubsequentPayment() bool {
-	if o != nil && o.IsSubsequentPayment != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIsSubsequentPayment gets a reference to the given bool and assigns it to the IsSubsequentPayment field.
-func (o *Transaction) SetIsSubsequentPayment(v bool) {
-	o.IsSubsequentPayment = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *Transaction) GetType() string {
+func (o *TransactionSummary) GetType() string {
 	if o == nil || o.Type == nil {
 		var ret string
 		return ret
@@ -177,7 +71,7 @@ func (o *Transaction) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetTypeOk() (*string, bool) {
+func (o *TransactionSummary) GetTypeOk() (*string, bool) {
 	if o == nil || o.Type == nil {
 		return nil, false
 	}
@@ -185,7 +79,7 @@ func (o *Transaction) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *Transaction) HasType() bool {
+func (o *TransactionSummary) HasType() bool {
 	if o != nil && o.Type != nil {
 		return true
 	}
@@ -194,12 +88,12 @@ func (o *Transaction) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *Transaction) SetType(v string) {
+func (o *TransactionSummary) SetType(v string) {
 	o.Type = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *Transaction) GetId() string {
+func (o *TransactionSummary) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -209,7 +103,7 @@ func (o *Transaction) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetIdOk() (*string, bool) {
+func (o *TransactionSummary) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -217,7 +111,7 @@ func (o *Transaction) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *Transaction) HasId() bool {
+func (o *TransactionSummary) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -226,12 +120,12 @@ func (o *Transaction) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *Transaction) SetId(v string) {
+func (o *TransactionSummary) SetId(v string) {
 	o.Id = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
-func (o *Transaction) GetStatus() string {
+func (o *TransactionSummary) GetStatus() string {
 	if o == nil || o.Status == nil {
 		var ret string
 		return ret
@@ -241,7 +135,7 @@ func (o *Transaction) GetStatus() string {
 
 // GetStatusOk returns a tuple with the Status field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetStatusOk() (*string, bool) {
+func (o *TransactionSummary) GetStatusOk() (*string, bool) {
 	if o == nil || o.Status == nil {
 		return nil, false
 	}
@@ -249,7 +143,7 @@ func (o *Transaction) GetStatusOk() (*string, bool) {
 }
 
 // HasStatus returns a boolean if a field has been set.
-func (o *Transaction) HasStatus() bool {
+func (o *TransactionSummary) HasStatus() bool {
 	if o != nil && o.Status != nil {
 		return true
 	}
@@ -258,12 +152,12 @@ func (o *Transaction) HasStatus() bool {
 }
 
 // SetStatus gets a reference to the given string and assigns it to the Status field.
-func (o *Transaction) SetStatus(v string) {
+func (o *TransactionSummary) SetStatus(v string) {
 	o.Status = &v
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
-func (o *Transaction) GetAmount() int32 {
+func (o *TransactionSummary) GetAmount() int32 {
 	if o == nil || o.Amount == nil {
 		var ret int32
 		return ret
@@ -273,7 +167,7 @@ func (o *Transaction) GetAmount() int32 {
 
 // GetAmountOk returns a tuple with the Amount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetAmountOk() (*int32, bool) {
+func (o *TransactionSummary) GetAmountOk() (*int32, bool) {
 	if o == nil || o.Amount == nil {
 		return nil, false
 	}
@@ -281,7 +175,7 @@ func (o *Transaction) GetAmountOk() (*int32, bool) {
 }
 
 // HasAmount returns a boolean if a field has been set.
-func (o *Transaction) HasAmount() bool {
+func (o *TransactionSummary) HasAmount() bool {
 	if o != nil && o.Amount != nil {
 		return true
 	}
@@ -290,12 +184,12 @@ func (o *Transaction) HasAmount() bool {
 }
 
 // SetAmount gets a reference to the given int32 and assigns it to the Amount field.
-func (o *Transaction) SetAmount(v int32) {
+func (o *TransactionSummary) SetAmount(v int32) {
 	o.Amount = &v
 }
 
 // GetCapturedAmount returns the CapturedAmount field value if set, zero value otherwise.
-func (o *Transaction) GetCapturedAmount() int32 {
+func (o *TransactionSummary) GetCapturedAmount() int32 {
 	if o == nil || o.CapturedAmount == nil {
 		var ret int32
 		return ret
@@ -305,7 +199,7 @@ func (o *Transaction) GetCapturedAmount() int32 {
 
 // GetCapturedAmountOk returns a tuple with the CapturedAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetCapturedAmountOk() (*int32, bool) {
+func (o *TransactionSummary) GetCapturedAmountOk() (*int32, bool) {
 	if o == nil || o.CapturedAmount == nil {
 		return nil, false
 	}
@@ -313,7 +207,7 @@ func (o *Transaction) GetCapturedAmountOk() (*int32, bool) {
 }
 
 // HasCapturedAmount returns a boolean if a field has been set.
-func (o *Transaction) HasCapturedAmount() bool {
+func (o *TransactionSummary) HasCapturedAmount() bool {
 	if o != nil && o.CapturedAmount != nil {
 		return true
 	}
@@ -322,12 +216,12 @@ func (o *Transaction) HasCapturedAmount() bool {
 }
 
 // SetCapturedAmount gets a reference to the given int32 and assigns it to the CapturedAmount field.
-func (o *Transaction) SetCapturedAmount(v int32) {
+func (o *TransactionSummary) SetCapturedAmount(v int32) {
 	o.CapturedAmount = &v
 }
 
 // GetRefundedAmount returns the RefundedAmount field value if set, zero value otherwise.
-func (o *Transaction) GetRefundedAmount() int32 {
+func (o *TransactionSummary) GetRefundedAmount() int32 {
 	if o == nil || o.RefundedAmount == nil {
 		var ret int32
 		return ret
@@ -337,7 +231,7 @@ func (o *Transaction) GetRefundedAmount() int32 {
 
 // GetRefundedAmountOk returns a tuple with the RefundedAmount field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetRefundedAmountOk() (*int32, bool) {
+func (o *TransactionSummary) GetRefundedAmountOk() (*int32, bool) {
 	if o == nil || o.RefundedAmount == nil {
 		return nil, false
 	}
@@ -345,7 +239,7 @@ func (o *Transaction) GetRefundedAmountOk() (*int32, bool) {
 }
 
 // HasRefundedAmount returns a boolean if a field has been set.
-func (o *Transaction) HasRefundedAmount() bool {
+func (o *TransactionSummary) HasRefundedAmount() bool {
 	if o != nil && o.RefundedAmount != nil {
 		return true
 	}
@@ -354,12 +248,12 @@ func (o *Transaction) HasRefundedAmount() bool {
 }
 
 // SetRefundedAmount gets a reference to the given int32 and assigns it to the RefundedAmount field.
-func (o *Transaction) SetRefundedAmount(v int32) {
+func (o *TransactionSummary) SetRefundedAmount(v int32) {
 	o.RefundedAmount = &v
 }
 
 // GetCurrency returns the Currency field value if set, zero value otherwise.
-func (o *Transaction) GetCurrency() string {
+func (o *TransactionSummary) GetCurrency() string {
 	if o == nil || o.Currency == nil {
 		var ret string
 		return ret
@@ -369,7 +263,7 @@ func (o *Transaction) GetCurrency() string {
 
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetCurrencyOk() (*string, bool) {
+func (o *TransactionSummary) GetCurrencyOk() (*string, bool) {
 	if o == nil || o.Currency == nil {
 		return nil, false
 	}
@@ -377,7 +271,7 @@ func (o *Transaction) GetCurrencyOk() (*string, bool) {
 }
 
 // HasCurrency returns a boolean if a field has been set.
-func (o *Transaction) HasCurrency() bool {
+func (o *TransactionSummary) HasCurrency() bool {
 	if o != nil && o.Currency != nil {
 		return true
 	}
@@ -386,12 +280,12 @@ func (o *Transaction) HasCurrency() bool {
 }
 
 // SetCurrency gets a reference to the given string and assigns it to the Currency field.
-func (o *Transaction) SetCurrency(v string) {
+func (o *TransactionSummary) SetCurrency(v string) {
 	o.Currency = &v
 }
 
 // GetPaymentMethod returns the PaymentMethod field value if set, zero value otherwise.
-func (o *Transaction) GetPaymentMethod() PaymentMethodSnapshot {
+func (o *TransactionSummary) GetPaymentMethod() PaymentMethodSnapshot {
 	if o == nil || o.PaymentMethod == nil {
 		var ret PaymentMethodSnapshot
 		return ret
@@ -401,7 +295,7 @@ func (o *Transaction) GetPaymentMethod() PaymentMethodSnapshot {
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetPaymentMethodOk() (*PaymentMethodSnapshot, bool) {
+func (o *TransactionSummary) GetPaymentMethodOk() (*PaymentMethodSnapshot, bool) {
 	if o == nil || o.PaymentMethod == nil {
 		return nil, false
 	}
@@ -409,7 +303,7 @@ func (o *Transaction) GetPaymentMethodOk() (*PaymentMethodSnapshot, bool) {
 }
 
 // HasPaymentMethod returns a boolean if a field has been set.
-func (o *Transaction) HasPaymentMethod() bool {
+func (o *TransactionSummary) HasPaymentMethod() bool {
 	if o != nil && o.PaymentMethod != nil {
 		return true
 	}
@@ -418,12 +312,12 @@ func (o *Transaction) HasPaymentMethod() bool {
 }
 
 // SetPaymentMethod gets a reference to the given PaymentMethodSnapshot and assigns it to the PaymentMethod field.
-func (o *Transaction) SetPaymentMethod(v PaymentMethodSnapshot) {
+func (o *TransactionSummary) SetPaymentMethod(v PaymentMethodSnapshot) {
 	o.PaymentMethod = &v
 }
 
 // GetBuyer returns the Buyer field value if set, zero value otherwise.
-func (o *Transaction) GetBuyer() BuyerSnapshot {
+func (o *TransactionSummary) GetBuyer() BuyerSnapshot {
 	if o == nil || o.Buyer == nil {
 		var ret BuyerSnapshot
 		return ret
@@ -433,7 +327,7 @@ func (o *Transaction) GetBuyer() BuyerSnapshot {
 
 // GetBuyerOk returns a tuple with the Buyer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetBuyerOk() (*BuyerSnapshot, bool) {
+func (o *TransactionSummary) GetBuyerOk() (*BuyerSnapshot, bool) {
 	if o == nil || o.Buyer == nil {
 		return nil, false
 	}
@@ -441,7 +335,7 @@ func (o *Transaction) GetBuyerOk() (*BuyerSnapshot, bool) {
 }
 
 // HasBuyer returns a boolean if a field has been set.
-func (o *Transaction) HasBuyer() bool {
+func (o *TransactionSummary) HasBuyer() bool {
 	if o != nil && o.Buyer != nil {
 		return true
 	}
@@ -450,12 +344,12 @@ func (o *Transaction) HasBuyer() bool {
 }
 
 // SetBuyer gets a reference to the given BuyerSnapshot and assigns it to the Buyer field.
-func (o *Transaction) SetBuyer(v BuyerSnapshot) {
+func (o *TransactionSummary) SetBuyer(v BuyerSnapshot) {
 	o.Buyer = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *Transaction) GetCreatedAt() time.Time {
+func (o *TransactionSummary) GetCreatedAt() time.Time {
 	if o == nil || o.CreatedAt == nil {
 		var ret time.Time
 		return ret
@@ -465,7 +359,7 @@ func (o *Transaction) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetCreatedAtOk() (*time.Time, bool) {
+func (o *TransactionSummary) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil || o.CreatedAt == nil {
 		return nil, false
 	}
@@ -473,7 +367,7 @@ func (o *Transaction) GetCreatedAtOk() (*time.Time, bool) {
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
-func (o *Transaction) HasCreatedAt() bool {
+func (o *TransactionSummary) HasCreatedAt() bool {
 	if o != nil && o.CreatedAt != nil {
 		return true
 	}
@@ -482,12 +376,12 @@ func (o *Transaction) HasCreatedAt() bool {
 }
 
 // SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *Transaction) SetCreatedAt(v time.Time) {
+func (o *TransactionSummary) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Transaction) GetExternalIdentifier() string {
+func (o *TransactionSummary) GetExternalIdentifier() string {
 	if o == nil || o.ExternalIdentifier.Get() == nil {
 		var ret string
 		return ret
@@ -498,7 +392,7 @@ func (o *Transaction) GetExternalIdentifier() string {
 // GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Transaction) GetExternalIdentifierOk() (*string, bool) {
+func (o *TransactionSummary) GetExternalIdentifierOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -506,7 +400,7 @@ func (o *Transaction) GetExternalIdentifierOk() (*string, bool) {
 }
 
 // HasExternalIdentifier returns a boolean if a field has been set.
-func (o *Transaction) HasExternalIdentifier() bool {
+func (o *TransactionSummary) HasExternalIdentifier() bool {
 	if o != nil && o.ExternalIdentifier.IsSet() {
 		return true
 	}
@@ -515,21 +409,21 @@ func (o *Transaction) HasExternalIdentifier() bool {
 }
 
 // SetExternalIdentifier gets a reference to the given NullableString and assigns it to the ExternalIdentifier field.
-func (o *Transaction) SetExternalIdentifier(v string) {
+func (o *TransactionSummary) SetExternalIdentifier(v string) {
 	o.ExternalIdentifier.Set(&v)
 }
 // SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
-func (o *Transaction) SetExternalIdentifierNil() {
+func (o *TransactionSummary) SetExternalIdentifierNil() {
 	o.ExternalIdentifier.Set(nil)
 }
 
 // UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
-func (o *Transaction) UnsetExternalIdentifier() {
+func (o *TransactionSummary) UnsetExternalIdentifier() {
 	o.ExternalIdentifier.Unset()
 }
 
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
-func (o *Transaction) GetUpdatedAt() time.Time {
+func (o *TransactionSummary) GetUpdatedAt() time.Time {
 	if o == nil || o.UpdatedAt == nil {
 		var ret time.Time
 		return ret
@@ -539,7 +433,7 @@ func (o *Transaction) GetUpdatedAt() time.Time {
 
 // GetUpdatedAtOk returns a tuple with the UpdatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetUpdatedAtOk() (*time.Time, bool) {
+func (o *TransactionSummary) GetUpdatedAtOk() (*time.Time, bool) {
 	if o == nil || o.UpdatedAt == nil {
 		return nil, false
 	}
@@ -547,7 +441,7 @@ func (o *Transaction) GetUpdatedAtOk() (*time.Time, bool) {
 }
 
 // HasUpdatedAt returns a boolean if a field has been set.
-func (o *Transaction) HasUpdatedAt() bool {
+func (o *TransactionSummary) HasUpdatedAt() bool {
 	if o != nil && o.UpdatedAt != nil {
 		return true
 	}
@@ -556,12 +450,12 @@ func (o *Transaction) HasUpdatedAt() bool {
 }
 
 // SetUpdatedAt gets a reference to the given time.Time and assigns it to the UpdatedAt field.
-func (o *Transaction) SetUpdatedAt(v time.Time) {
+func (o *TransactionSummary) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
 // GetPaymentService returns the PaymentService field value if set, zero value otherwise.
-func (o *Transaction) GetPaymentService() PaymentServiceSnapshot {
+func (o *TransactionSummary) GetPaymentService() PaymentServiceSnapshot {
 	if o == nil || o.PaymentService == nil {
 		var ret PaymentServiceSnapshot
 		return ret
@@ -571,7 +465,7 @@ func (o *Transaction) GetPaymentService() PaymentServiceSnapshot {
 
 // GetPaymentServiceOk returns a tuple with the PaymentService field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetPaymentServiceOk() (*PaymentServiceSnapshot, bool) {
+func (o *TransactionSummary) GetPaymentServiceOk() (*PaymentServiceSnapshot, bool) {
 	if o == nil || o.PaymentService == nil {
 		return nil, false
 	}
@@ -579,7 +473,7 @@ func (o *Transaction) GetPaymentServiceOk() (*PaymentServiceSnapshot, bool) {
 }
 
 // HasPaymentService returns a boolean if a field has been set.
-func (o *Transaction) HasPaymentService() bool {
+func (o *TransactionSummary) HasPaymentService() bool {
 	if o != nil && o.PaymentService != nil {
 		return true
 	}
@@ -588,21 +482,12 @@ func (o *Transaction) HasPaymentService() bool {
 }
 
 // SetPaymentService gets a reference to the given PaymentServiceSnapshot and assigns it to the PaymentService field.
-func (o *Transaction) SetPaymentService(v PaymentServiceSnapshot) {
+func (o *TransactionSummary) SetPaymentService(v PaymentServiceSnapshot) {
 	o.PaymentService = &v
 }
 
-func (o Transaction) MarshalJSON() ([]byte, error) {
+func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.MerchantInitiated != nil {
-		toSerialize["merchant_initiated"] = o.MerchantInitiated
-	}
-	if o.PaymentSource != nil {
-		toSerialize["payment_source"] = o.PaymentSource
-	}
-	if o.IsSubsequentPayment != nil {
-		toSerialize["is_subsequent_payment"] = o.IsSubsequentPayment
-	}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
 	}
@@ -645,38 +530,38 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableTransaction struct {
-	value *Transaction
+type NullableTransactionSummary struct {
+	value *TransactionSummary
 	isSet bool
 }
 
-func (v NullableTransaction) Get() *Transaction {
+func (v NullableTransactionSummary) Get() *TransactionSummary {
 	return v.value
 }
 
-func (v *NullableTransaction) Set(val *Transaction) {
+func (v *NullableTransactionSummary) Set(val *TransactionSummary) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableTransaction) IsSet() bool {
+func (v NullableTransactionSummary) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableTransaction) Unset() {
+func (v *NullableTransactionSummary) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableTransaction(val *Transaction) *NullableTransaction {
-	return &NullableTransaction{value: val, isSet: true}
+func NewNullableTransactionSummary(val *TransactionSummary) *NullableTransactionSummary {
+	return &NullableTransactionSummary{value: val, isSet: true}
 }
 
-func (v NullableTransaction) MarshalJSON() ([]byte, error) {
+func (v NullableTransactionSummary) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableTransaction) UnmarshalJSON(src []byte) error {
+func (v *NullableTransactionSummary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

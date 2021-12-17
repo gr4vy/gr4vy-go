@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Items** | Pointer to [**[]Transaction**](Transaction.md) | A list of transactions. | [optional] 
+**Items** | Pointer to [**[]TransactionSummary**](TransactionSummary.md) | A list of transactions. | [optional] 
 **Limit** | Pointer to **int32** | The limit applied to request. This represents the number of items that are at maximum returned by this request. | [optional] [default to 20]
 **NextCursor** | Pointer to **NullableString** | The cursor that represents the next page of results. Use the &#x60;cursor&#x60; query parameter to fetch this page of items. | [optional] 
 **PreviousCursor** | Pointer to **NullableString** | The cursor that represents the next page of results. Use the &#x60;cursor&#x60; query parameter to fetch this page of items. | [optional] 
@@ -30,20 +30,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetItems
 
-`func (o *Transactions) GetItems() []Transaction`
+`func (o *Transactions) GetItems() []TransactionSummary`
 
 GetItems returns the Items field if non-nil, zero value otherwise.
 
 ### GetItemsOk
 
-`func (o *Transactions) GetItemsOk() (*[]Transaction, bool)`
+`func (o *Transactions) GetItemsOk() (*[]TransactionSummary, bool)`
 
 GetItemsOk returns a tuple with the Items field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetItems
 
-`func (o *Transactions) SetItems(v []Transaction)`
+`func (o *Transactions) SetItems(v []TransactionSummary)`
 
 SetItems sets Items field to given value.
 

@@ -83,6 +83,7 @@ docs/TransactionCaptureRequest.md
 docs/TransactionPaymentMethodRequest.md
 docs/TransactionRefundRequest.md
 docs/TransactionRequest.md
+docs/TransactionSummary.md
 docs/Transactions.md
 docs/TransactionsApi.md
 docs/TransactionsBatchCaptureRequest.md
@@ -153,6 +154,7 @@ model_transaction_capture_request.go
 model_transaction_payment_method_request.go
 model_transaction_refund_request.go
 model_transaction_request.go
+model_transaction_summary.go
 model_transactions.go
 model_transactions_batch_capture_request.go
 model_user_request.go

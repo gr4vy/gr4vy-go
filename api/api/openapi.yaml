@@ -2948,6 +2948,7 @@ components:
         id: cus_4QEiU0VT5E3Whi
         type: payment-method-token
         token: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
+        status: succeeded
       properties:
         type:
           description: '`payment-method-token`.'
@@ -2977,6 +2978,23 @@ components:
             service for more details.
           example: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
           type: string
+        status:
+          description: |-
+            The state of the payment method.
+
+            - `processing` - The payment method is still being stored.
+            - `buyer_approval_required` - The buyer still needs to provide
+              approval before the payment method can be stored.
+            - `succeeded` - The payment method is approved and stored with all
+              relevant payment services.
+            - `failed` - Storing the payment method did not succeed.
+          enum:
+          - processing
+          - buyer_approval_required
+          - succeeded
+          - failed
+          example: succeeded
+          type: string
         payment_service:
           allOf:
           - $ref: '#/components/schemas/PaymentService--Snapshot'
@@ -2993,10 +3011,12 @@ components:
           id: cus_4QEiU0VT5E3Whi
           type: payment-method-token
           token: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
+          status: succeeded
         - payment_service: ""
           id: cus_4QEiU0VT5E3Whi
           type: payment-method-token
           token: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
+          status: succeeded
       properties:
         items:
           description: A list of stored tokens for payment methods.
@@ -4110,6 +4130,47 @@ components:
       x-tags:
       - Request Bodies
     Transaction:
+      allOf:
+      - $ref: '#/components/schemas/TransactionSummary'
+      - type: object
+      description: A transaction record.
+      example:
+        is_subsequent_payment: true
+        merchant_initiated: true
+        payment_source: ecommerce
+      properties:
+        merchant_initiated:
+          default: false
+          description: |-
+            Indicates whether the transaction was initiated by the merchant (true)
+            or customer (false).
+          example: true
+          type: boolean
+        payment_source:
+          description: The source of the transaction. Defaults to 'ecommerce'.
+          enum:
+          - ecommerce
+          - moto
+          - recurring
+          - installment
+          - card_on_file
+          example: ecommerce
+          type: string
+        is_subsequent_payment:
+          default: false
+          description: |-
+            Indicates whether the transaction represents a subsequent payment
+            coming from a setup recurring payment.
+            Please note this flag is only compatible with payment_source set to
+            [recurring, installment, card_on_file] and will be ignored for other
+            values or if payment_source is not present.
+          example: true
+          type: boolean
+      title: Transaction
+      type: object
+      x-tags:
+      - Transactions
+    TransactionSummary:
       description: A transaction record.
       example:
         amount: 1299
@@ -4263,7 +4324,7 @@ components:
         items:
           description: A list of transactions.
           items:
-            $ref: '#/components/schemas/Transaction'
+            $ref: '#/components/schemas/TransactionSummary'
           type: array
         limit:
           default: 20
@@ -4334,8 +4395,13 @@ components:
       example:
         amount: 1299
         external_identifier: user-789123
+        metadata:
+          key: value
         currency: USD
+        is_subsequent_payment: true
         store: true
+        merchant_initiated: true
+        payment_source: ecommerce
         intent: capture
         payment_method:
           number: "4111111111111111"
@@ -4394,6 +4460,46 @@ components:
           type: string
         three_d_secure_data:
           $ref: '#/components/schemas/ThreeDSecureDataV1V2'
+        merchant_initiated:
+          default: false
+          description: |-
+            Indicates whether the transaction was initiated by the merchant (true)
+            or customer (false).
+          example: true
+          type: boolean
+        payment_source:
+          description: The source of the transaction. Defaults to 'ecommerce'.
+          enum:
+          - ecommerce
+          - moto
+          - recurring
+          - installment
+          - card_on_file
+          example: ecommerce
+          type: string
+        is_subsequent_payment:
+          default: false
+          description: |-
+            Indicates whether the transaction represents a subsequent payment
+            coming from a setup recurring payment.
+            Please note this flag is only compatible with payment_source set to
+            [recurring, installment, card_on_file] and will be ignored for other
+            values or if payment_source is not present.
+          example: true
+          type: boolean
+        metadata:
+          additionalProperties:
+            type: string
+          description: |-
+            Any additional information about the transaction that you would like to
+            store as key-value pairs. This data is passed to payment service
+            providers that support it. Please visit https://gr4vy.com/docs/ under
+            `Connections` for more information on how specific providers support
+            metadata.
+          example:
+            key: value
+          maxProperties: 20
+          type: object
       required:
       - amount
       - currency

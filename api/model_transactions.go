@@ -18,7 +18,7 @@ import (
 // Transactions A list of transactions.
 type Transactions struct {
 	// A list of transactions.
-	Items *[]Transaction `json:"items,omitempty"`
+	Items *[]TransactionSummary `json:"items,omitempty"`
 	// The limit applied to request. This represents the number of items that are at maximum returned by this request.
 	Limit *int32 `json:"limit,omitempty"`
 	// The cursor that represents the next page of results. Use the `cursor` query parameter to fetch this page of items.
@@ -49,9 +49,9 @@ func NewTransactionsWithDefaults() *Transactions {
 }
 
 // GetItems returns the Items field value if set, zero value otherwise.
-func (o *Transactions) GetItems() []Transaction {
+func (o *Transactions) GetItems() []TransactionSummary {
 	if o == nil || o.Items == nil {
-		var ret []Transaction
+		var ret []TransactionSummary
 		return ret
 	}
 	return *o.Items
@@ -59,7 +59,7 @@ func (o *Transactions) GetItems() []Transaction {
 
 // GetItemsOk returns a tuple with the Items field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transactions) GetItemsOk() (*[]Transaction, bool) {
+func (o *Transactions) GetItemsOk() (*[]TransactionSummary, bool) {
 	if o == nil || o.Items == nil {
 		return nil, false
 	}
@@ -75,8 +75,8 @@ func (o *Transactions) HasItems() bool {
 	return false
 }
 
-// SetItems gets a reference to the given []Transaction and assigns it to the Items field.
-func (o *Transactions) SetItems(v []Transaction) {
+// SetItems gets a reference to the given []TransactionSummary and assigns it to the Items field.
+func (o *Transactions) SetItems(v []TransactionSummary) {
 	o.Items = &v
 }
 

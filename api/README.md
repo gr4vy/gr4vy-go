@@ -176,6 +176,7 @@ Class | Method | HTTP request | Description
  - [TransactionPaymentMethodRequest](docs/TransactionPaymentMethodRequest.md)
  - [TransactionRefundRequest](docs/TransactionRefundRequest.md)
  - [TransactionRequest](docs/TransactionRequest.md)
+ - [TransactionSummary](docs/TransactionSummary.md)
  - [Transactions](docs/Transactions.md)
  - [TransactionsBatchCaptureRequest](docs/TransactionsBatchCaptureRequest.md)
  - [UserRequest](docs/UserRequest.md)

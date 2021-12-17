@@ -220,7 +220,8 @@ go test -v
 
 ### Publishing
 
-Create a PR for your change to the master branch of github.com/gr4vy/gr4vy-go
+Once the changes are merged, update the `VERSION` in `gr4vy.go` and push the
+changes to main to release a new version.
 
 ## License
 

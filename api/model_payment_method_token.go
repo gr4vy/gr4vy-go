@@ -23,6 +23,8 @@ type PaymentMethodToken struct {
 	Id *string `json:"id,omitempty"`
 	// The token of this payment method as it has been registered with the payment service, which can be used directly in combination with the `id` without the need to go through Gr4vy for a transaction.  In some cases this is a different value to the `id` while in others this value is identical. Please see the documentation for the payment service for more details.
 	Token *string `json:"token,omitempty"`
+	// The state of the payment method.  - `processing` - The payment method is still being stored. - `buyer_approval_required` - The buyer still needs to provide   approval before the payment method can be stored. - `succeeded` - The payment method is approved and stored with all   relevant payment services. - `failed` - Storing the payment method did not succeed.
+	Status *string `json:"status,omitempty"`
 	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
 }
 
@@ -139,6 +141,38 @@ func (o *PaymentMethodToken) SetToken(v string) {
 	o.Token = &v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *PaymentMethodToken) GetStatus() string {
+	if o == nil || o.Status == nil {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodToken) GetStatusOk() (*string, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *PaymentMethodToken) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *PaymentMethodToken) SetStatus(v string) {
+	o.Status = &v
+}
+
 // GetPaymentService returns the PaymentService field value if set, zero value otherwise.
 func (o *PaymentMethodToken) GetPaymentService() PaymentServiceSnapshot {
 	if o == nil || o.PaymentService == nil {
@@ -181,6 +215,9 @@ func (o PaymentMethodToken) MarshalJSON() ([]byte, error) {
 	}
 	if o.Token != nil {
 		toSerialize["token"] = o.Token
+	}
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
 	if o.PaymentService != nil {
 		toSerialize["payment_service"] = o.PaymentService
