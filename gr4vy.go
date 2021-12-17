@@ -13,7 +13,7 @@ import (
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
-const VERSION = "0.8.0"
+const VERSION = "0.9.0"
 
 type Gr4vyClient struct {
 	gr4vyId     string
@@ -28,6 +28,7 @@ type EmbedParams struct {
 	Amount   int32
 	Currency string
 	BuyerID  string
+	Metadata map[string]string
 }
 
 func NewGr4vyClient(gr4vy_id string, private_key string, environment string) *Gr4vyClient {

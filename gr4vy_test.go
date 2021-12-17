@@ -29,6 +29,7 @@ func TestEmbedToken(t *testing.T) {
 		Amount:   200,
 		Currency: "USD",
 		BuyerID:  "d757c76a-cbd7-4b56-95a3-40125b51b29c",
+		Metadata: map[string]string{"key": "value"},
 	}
 	_, err = client.GetEmbedToken(embed)
 
@@ -61,6 +62,7 @@ func TestAddBuyerAndEmbed(t *testing.T) {
 		Amount:   200,
 		Currency: "USD",
 		BuyerID:  buyerId,
+		Metadata: map[string]string{"key": "value"},
 	}
 
 	client = NewGr4vyClient(gr4vyId, key, environment)
