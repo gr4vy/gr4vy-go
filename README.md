@@ -116,18 +116,18 @@ needs to be created before it can be used in this way.
 
 ## Initialization
 
-The client can be initialized with the Gr4vy ID (`gr4vyId`) and the private key
-string.
+The client can be initialized with the Gr4vy ID (`gr4vyId`), the private key
+string and the environment (`sandbox` or `production`).
 
 ```golang
-  client := gr4vy.NewGr4vyClient("acme", key)
+  client := gr4vy.NewGr4vyClient("acme", key, "sandbox")
 ```
 
 Alternatively, instead of the `gr4vyId` it can be initialized with the `baseUrl`
 of the server to use directly.
 
 ```golang
-  client := gr4vy.NewGr4vyClientWithBaseUrl("https://api.acme.gr4vy.app", key)
+  client := gr4vy.NewGr4vyClientWithBaseUrl("https://api.acme.gr4vy.app", key, "sandbox")
 ```
 
 Your API private key can be created in your admin panel on the **Integrations**
