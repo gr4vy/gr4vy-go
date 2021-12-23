@@ -13,7 +13,7 @@ import (
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
-const VERSION = "0.9.0"
+const VERSION = "0.10.0"
 
 type Gr4vyClient struct {
 	gr4vyId     string
@@ -112,7 +112,15 @@ func (c *Gr4vyClient) BaseUrl() string {
 	if c.baseUrl != "" {
 		return c.baseUrl
 	}
-	return fmt.Sprintf("https://api.%v.%v.gr4vy.app", c.environment, c.gr4vyId)
+
+	var baseUrl string
+	if c.environment == "sandbox" {
+		baseUrl = fmt.Sprintf("https://api.%v.%v.gr4vy.app", c.environment, c.gr4vyId)
+	} else {
+		baseUrl = fmt.Sprintf("https://api.%v.gr4vy.app", c.gr4vyId)
+	}
+
+	return baseUrl
 }
 
 func lastString(ss []string) string {
