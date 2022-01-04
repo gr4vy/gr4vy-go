@@ -1,43 +1,48 @@
 package gr4vy
 
 import (
-	"fmt"
-	"github.com/golang-jwt/jwt"
-	"golang.org/x/crypto/ssh"
-	"time"
 	"crypto/ecdsa"
 	"crypto/sha256"
 	"encoding/base64"
 	"encoding/json"
-	"github.com/twinj/uuid"
+	"fmt"
 	"runtime"
+	"time"
+
+	"github.com/golang-jwt/jwt"
+	"github.com/twinj/uuid"
+	"golang.org/x/crypto/ssh"
 )
+
+func getEmbedClaims(embed EmbedParams) map[string]interface{} {
+	var inInterface map[string]interface{}
+	inrec, _ := json.Marshal(embed)
+	json.Unmarshal(inrec, &inInterface)
+
+	return inInterface
+}
 
 func getEmbedToken(private_key string, embed EmbedParams) (string, error) {
 	claims := jwt.MapClaims{
-		"iss": fmt.Sprintf("Gr4vy SDK %v - %v", VERSION, runtime.Version()), 
-		"nbf": float64(time.Now().Unix()),
-		"exp": float64(time.Now().Unix() + 3000),
+		"iss":    fmt.Sprintf("Gr4vy SDK %v - %v", VERSION, runtime.Version()),
+		"nbf":    float64(time.Now().Unix()),
+		"exp":    float64(time.Now().Unix() + 3000),
 		"scopes": []string{"embed"},
-		"jti": uuid.NewV4(),
+		"jti":    uuid.NewV4(),
 	}
 
-	var inInterface map[string]interface{}
-    inrec, _ := json.Marshal(embed)
-    json.Unmarshal(inrec, &inInterface)
-
-	claims["embed"] = inInterface
+	claims["embed"] = getEmbedClaims(embed)
 
 	return getTokenWithClaims(private_key, claims)
 }
 
 func getToken(private_key string, scopes []string) (string, error) {
 	claims := jwt.MapClaims{
-		"iss": fmt.Sprintf("Gr4vy SDK %v - %v", VERSION, runtime.Version()), 
-		"nbf": float64(time.Now().Unix()),
-		"exp": float64(time.Now().Unix() + 3000),
+		"iss":    fmt.Sprintf("Gr4vy SDK %v - %v", VERSION, runtime.Version()),
+		"nbf":    float64(time.Now().Unix()),
+		"exp":    float64(time.Now().Unix() + 3000),
 		"scopes": scopes,
-		"jti": uuid.NewV4(),
+		"jti":    uuid.NewV4(),
 	}
 
 	return getTokenWithClaims(private_key, claims)
@@ -45,7 +50,7 @@ func getToken(private_key string, scopes []string) (string, error) {
 
 func getTokenWithClaims(private_key string, claims jwt.MapClaims) (string, error) {
 	token := jwt.NewWithClaims(jwt.SigningMethodES512, claims)
-	
+
 	parsedKey, err := ssh.ParseRawPrivateKey([]byte(private_key))
 	if err != nil {
 		return "", err
