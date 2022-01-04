@@ -16,6 +16,19 @@ var paymentServiceId string
 var paymentServiceIdDelete string
 var transactionId string
 
+func TestEmbedClaimsSerialization(t *testing.T) {
+	embed := EmbedParams{
+		Amount:   200,
+		Currency: "USD",
+		BuyerID:  "d757c76a-cbd7-4b56-95a3-40125b51b29c",
+	}
+
+	serialized := getEmbedClaims(embed)
+
+	if _, present := serialized["buyer_id"]; !present {
+		t.Error("EmbedParams serialization is not snake_casing keys")
+	}
+}
 func TestEmbedToken(t *testing.T) {
 
 	key, err := GetKeyFromFile(keyPath)
@@ -31,6 +44,7 @@ func TestEmbedToken(t *testing.T) {
 		BuyerID:  "d757c76a-cbd7-4b56-95a3-40125b51b29c",
 		Metadata: map[string]string{"key": "value"},
 	}
+
 	_, err = client.GetEmbedToken(embed)
 
 	if err != nil {
