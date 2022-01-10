@@ -26,6 +26,7 @@ docs/BuyerUpdate.md
 docs/Buyers.md
 docs/BuyersApi.md
 docs/CardRequest.md
+docs/CartItem.md
 docs/DigitalWallet.md
 docs/DigitalWalletRequest.md
 docs/DigitalWalletUpdate.md
@@ -103,6 +104,7 @@ model_buyer_request.go
 model_buyer_update.go
 model_buyers.go
 model_card_request.go
+model_cart_item.go
 model_digital_wallet.go
 model_digital_wallet_request.go
 model_digital_wallet_update.go

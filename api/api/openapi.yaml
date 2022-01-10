@@ -2046,6 +2046,152 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    CartItem:
+      description: |-
+        A cart item that represents a single cart line item for a transaction.
+        Note that some optional properties are required for certain payment
+        service providers. If no value is set for these properties, we will use
+        their default value.
+
+        If the total due to be paid for the item is required by the payment service
+        provider, generally referred to as the "total amount", the formula below
+        will usually be used to calculate this amount:
+
+        `(unit_amount * quantity) - discount_amount + tax_amount`
+
+        It's highly recommended that the total amount to pay for all items
+        should match the transaction's amount to reduce the risk of the
+        transaction being declined by the payment service provider.
+      example:
+        tax_amount: 0
+        external_identifier: item-789123
+        quantity: 1
+        product_url: https://example.com/items/gopro
+        product_type: physical
+        discount_amount: 0
+        image_url: https://example.com/images/items/gopro.png
+        name: GoPro HERO9 Camcorder
+        unit_amount: 37999
+        categories:
+        - categories
+        - categories
+        - categories
+        - categories
+        - categories
+        sku: sku-789123
+      properties:
+        name:
+          description: |-
+            The name of the cart item. The value you set for this property may
+            be truncated if the maximum length accepted by a payment service
+            provider is less than 255 characters.
+          example: GoPro HERO9 Camcorder
+          maxLength: 255
+          type: string
+        quantity:
+          description: |-
+            The quantity of this item in the cart. This value cannot be negative
+            or zero.
+          example: 1
+          maximum: 99999999
+          minimum: 1
+          type: integer
+        unit_amount:
+          description: |-
+            The amount for an individual item represented as a monetary amount
+            in the smallest currency unit for the given currency, for example
+            `1299` USD cents represents `$12.99`.
+          example: 37999
+          maximum: 99999999
+          minimum: 0
+          type: integer
+        discount_amount:
+          default: 0
+          description: |-
+            The amount discounted for this item represented as a monetary amount
+            in the smallest currency unit for the given currency, for example `1299`
+            USD cents represents `$12.99`.
+
+            Important: this amount is for the total of the cart item and not for
+            an individual item. For example, if the quantity is 5, this value
+            should be the total discount amount for 5 of the cart item.
+          example: 0
+          maximum: 99999999
+          minimum: 0
+          nullable: true
+          type: integer
+        tax_amount:
+          default: 0
+          description: |-
+            The tax amount for this item represented as a monetary amount
+            in the smallest currency unit for the given currency, for example `1299`
+            USD cents represents `$12.99`.
+
+            Important: this amount is for the total of the cart item and not for
+            an individual item. For example, if the quantity is 5, this value
+            should be the total tax amount for 5 of the cart item.
+          example: 0
+          maximum: 99999999
+          minimum: 0
+          nullable: true
+          type: integer
+        external_identifier:
+          description: An external identifier for the cart item. This can be set to
+            any value and is not sent to the payment service.
+          example: item-789123
+          maxLength: 200
+          nullable: true
+          type: string
+        sku:
+          description: The SKU for the item.
+          example: sku-789123
+          maxLength: 200
+          nullable: true
+          type: string
+        product_url:
+          description: The product URL for the item.
+          example: https://example.com/items/gopro
+          format: url
+          maxLength: 2083
+          nullable: true
+          type: string
+        image_url:
+          description: The URL for the image of the item.
+          example: https://example.com/images/items/gopro.png
+          format: url
+          maxLength: 2083
+          nullable: true
+          type: string
+        categories:
+          description: |-
+            A list of strings containing product categories for the item.
+            Max length per item: 50.
+          items:
+            maxLength: 50
+            type: string
+          maxItems: 100
+          nullable: true
+          type: array
+        product_type:
+          description: The product type of the cart item.
+          enum:
+          - physical
+          - discount
+          - shipping_fee
+          - sales_tax
+          - digital
+          - gift_card
+          - store_credit
+          - surcharge
+          example: physical
+          nullable: true
+          type: string
+      required:
+      - name
+      - quantity
+      - unit_amount
+      title: Cart Item
+      type: object
     DigitalWallet:
       description: A digital wallet (e.g. Apple Pay) that has been registered.
       example:
@@ -4130,15 +4276,154 @@ components:
       x-tags:
       - Request Bodies
     Transaction:
-      allOf:
-      - $ref: '#/components/schemas/TransactionSummary'
-      - type: object
       description: A transaction record.
       example:
+        amount: 1299
+        external_identifier: user-789123
+        payment_service: ""
+        cart_items:
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        created_at: 2013-07-16T19:23:00Z
         is_subsequent_payment: true
+        type: transaction
+        refunded_amount: 100
+        buyer: ""
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        captured_amount: 999
+        currency: USD
+        id: fe26475d-ec3e-4884-9553-f7356683f7f9
         merchant_initiated: true
         payment_source: ecommerce
+        payment_method: ""
+        status: processing
       properties:
+        type:
+          description: The type of this resource. Is always `transaction`.
+          enum:
+          - transaction
+          example: transaction
+          type: string
+        id:
+          description: The unique identifier for this transaction.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        status:
+          description: |-
+            The status of the transaction. The status may change over time as
+            asynchronous  processing events occur.
+          enum:
+          - processing
+          - processing_failed
+          - capture_succeeded
+          - capture_pending
+          - capture_declined
+          - capture_failed
+          - authorization_succeeded
+          - authorization_pending
+          - authorization_declined
+          - authorization_failed
+          - authorization_expired
+          - authorization_voided
+          - refund_succeeded
+          - refund_pending
+          - refund_declined
+          - refund_failed
+          - buyer_approval_succeeded
+          - buyer_approval_pending
+          - buyer_approval_declined
+          - buyer_approval_failed
+          - buyer_approval_timedout
+          example: processing
+          type: string
+        amount:
+          description: |-
+            The authorized amount for this transaction. This can be different than the
+            actual captured amount and part of this amount may be refunded.
+          example: 1299
+          maximum: 99999999
+          minimum: 0
+          type: integer
+        captured_amount:
+          description: |-
+            The captured amount for this transaction. This can be a part and in some
+            cases even more than the authorized amount.
+          example: 999
+          maximum: 99999999
+          minimum: 0
+          type: integer
+        refunded_amount:
+          description: |-
+            The refunded amount for this transaction. This can be a part or all of the
+            captured amount.
+          example: 100
+          maximum: 99999999
+          minimum: 0
+          type: integer
+        currency:
+          description: The currency code for this transaction.
+          example: USD
+          type: string
+        payment_method:
+          allOf:
+          - $ref: '#/components/schemas/PaymentMethod--Snapshot'
+          - description: The payment method used for this transaction.
+        buyer:
+          allOf:
+          - $ref: '#/components/schemas/Buyer--Snapshot'
+          - description: The buyer used for this transaction.
+            nullable: true
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the transaction
+            against your own records.
+          example: user-789123
+          nullable: true
+          type: string
+        updated_at:
+          description: Defines when the transaction was last updated.
+          format: date-time
+          type: string
+        payment_service:
+          allOf:
+          - $ref: '#/components/schemas/PaymentService--Snapshot'
+          - description: The payment service used for this transaction.
         merchant_initiated:
           default: false
           description: |-
@@ -4147,7 +4432,7 @@ components:
           example: true
           type: boolean
         payment_source:
-          description: The source of the transaction. Defaults to 'ecommerce'.
+          description: The source of the transaction. Defaults to `ecommerce`.
           enum:
           - ecommerce
           - moto
@@ -4161,11 +4446,18 @@ components:
           description: |-
             Indicates whether the transaction represents a subsequent payment
             coming from a setup recurring payment.
-            Please note this flag is only compatible with payment_source set to
-            [recurring, installment, card_on_file] and will be ignored for other
-            values or if payment_source is not present.
+            Please note this flag is only compatible with `payment_source` set to
+            `recurring`, `installment`, or `card_on_file` and will be ignored for
+            other values or if `payment_source` is not present.
           example: true
           type: boolean
+        cart_items:
+          description: An array of cart items that represents the line items of a
+            transaction.
+          items:
+            $ref: '#/components/schemas/CartItem'
+          maxLength: 249
+          type: array
       title: Transaction
       type: object
       x-tags:
@@ -4397,6 +4689,87 @@ components:
         external_identifier: user-789123
         metadata:
           key: value
+        cart_items:
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
         currency: USD
         is_subsequent_payment: true
         store: true
@@ -4468,7 +4841,7 @@ components:
           example: true
           type: boolean
         payment_source:
-          description: The source of the transaction. Defaults to 'ecommerce'.
+          description: The source of the transaction. Defaults to `ecommerce`.
           enum:
           - ecommerce
           - moto
@@ -4482,9 +4855,9 @@ components:
           description: |-
             Indicates whether the transaction represents a subsequent payment
             coming from a setup recurring payment.
-            Please note this flag is only compatible with payment_source set to
-            [recurring, installment, card_on_file] and will be ignored for other
-            values or if payment_source is not present.
+            Please note this flag is only compatible with `payment_source` set to
+            `recurring`, `installment`, or `card_on_file` and will be ignored for
+            other values or if `payment_source` is not present.
           example: true
           type: boolean
         metadata:
@@ -4500,6 +4873,13 @@ components:
             key: value
           maxProperties: 20
           type: object
+        cart_items:
+          description: An array of cart items that represents the line items of a
+            transaction.
+          items:
+            $ref: '#/components/schemas/CartItem'
+          maxItems: 249
+          type: array
       required:
       - amount
       - currency
