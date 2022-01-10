@@ -31,12 +31,14 @@ type TransactionRequest struct {
 	ThreeDSecureData *ThreeDSecureDataV1V2 `json:"three_d_secure_data,omitempty"`
 	// Indicates whether the transaction was initiated by the merchant (true) or customer (false).
 	MerchantInitiated *bool `json:"merchant_initiated,omitempty"`
-	// The source of the transaction. Defaults to 'ecommerce'.
+	// The source of the transaction. Defaults to `ecommerce`.
 	PaymentSource *string `json:"payment_source,omitempty"`
-	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with payment_source set to [recurring, installment, card_on_file] and will be ignored for other values or if payment_source is not present.
+	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with `payment_source` set to `recurring`, `installment`, or `card_on_file` and will be ignored for other values or if `payment_source` is not present.
 	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://gr4vy.com/docs/ under `Connections` for more information on how specific providers support metadata.
 	Metadata *map[string]string `json:"metadata,omitempty"`
+	// An array of cart items that represents the line items of a transaction.
+	CartItems *[]CartItem `json:"cart_items,omitempty"`
 }
 
 // NewTransactionRequest instantiates a new TransactionRequest object
@@ -413,6 +415,38 @@ func (o *TransactionRequest) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
+// GetCartItems returns the CartItems field value if set, zero value otherwise.
+func (o *TransactionRequest) GetCartItems() []CartItem {
+	if o == nil || o.CartItems == nil {
+		var ret []CartItem
+		return ret
+	}
+	return *o.CartItems
+}
+
+// GetCartItemsOk returns a tuple with the CartItems field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRequest) GetCartItemsOk() (*[]CartItem, bool) {
+	if o == nil || o.CartItems == nil {
+		return nil, false
+	}
+	return o.CartItems, true
+}
+
+// HasCartItems returns a boolean if a field has been set.
+func (o *TransactionRequest) HasCartItems() bool {
+	if o != nil && o.CartItems != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCartItems gets a reference to the given []CartItem and assigns it to the CartItems field.
+func (o *TransactionRequest) SetCartItems(v []CartItem) {
+	o.CartItems = &v
+}
+
 func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -447,6 +481,9 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.CartItems != nil {
+		toSerialize["cart_items"] = o.CartItems
 	}
 	return json.Marshal(toSerialize)
 }

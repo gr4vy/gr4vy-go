@@ -4,9 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MerchantInitiated** | Pointer to **bool** | Indicates whether the transaction was initiated by the merchant (true) or customer (false). | [optional] [default to false]
-**PaymentSource** | Pointer to **string** | The source of the transaction. Defaults to &#39;ecommerce&#39;. | [optional] 
-**IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with payment_source set to [recurring, installment, card_on_file] and will be ignored for other values or if payment_source is not present. | [optional] [default to false]
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;transaction&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this transaction. | [optional] 
 **Status** | Pointer to **string** | The status of the transaction. The status may change over time as asynchronous  processing events occur. | [optional] 
@@ -20,6 +17,10 @@ Name | Type | Description | Notes
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
 **PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) |  | [optional] 
+**MerchantInitiated** | Pointer to **bool** | Indicates whether the transaction was initiated by the merchant (true) or customer (false). | [optional] [default to false]
+**PaymentSource** | Pointer to **string** | The source of the transaction. Defaults to &#x60;ecommerce&#x60;. | [optional] 
+**IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with &#x60;payment_source&#x60; set to &#x60;recurring&#x60;, &#x60;installment&#x60;, or &#x60;card_on_file&#x60; and will be ignored for other values or if &#x60;payment_source&#x60; is not present. | [optional] [default to false]
+**CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 
 ## Methods
 
@@ -39,81 +40,6 @@ will change when the set of required properties is changed
 NewTransactionWithDefaults instantiates a new Transaction object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetMerchantInitiated
-
-`func (o *Transaction) GetMerchantInitiated() bool`
-
-GetMerchantInitiated returns the MerchantInitiated field if non-nil, zero value otherwise.
-
-### GetMerchantInitiatedOk
-
-`func (o *Transaction) GetMerchantInitiatedOk() (*bool, bool)`
-
-GetMerchantInitiatedOk returns a tuple with the MerchantInitiated field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMerchantInitiated
-
-`func (o *Transaction) SetMerchantInitiated(v bool)`
-
-SetMerchantInitiated sets MerchantInitiated field to given value.
-
-### HasMerchantInitiated
-
-`func (o *Transaction) HasMerchantInitiated() bool`
-
-HasMerchantInitiated returns a boolean if a field has been set.
-
-### GetPaymentSource
-
-`func (o *Transaction) GetPaymentSource() string`
-
-GetPaymentSource returns the PaymentSource field if non-nil, zero value otherwise.
-
-### GetPaymentSourceOk
-
-`func (o *Transaction) GetPaymentSourceOk() (*string, bool)`
-
-GetPaymentSourceOk returns a tuple with the PaymentSource field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPaymentSource
-
-`func (o *Transaction) SetPaymentSource(v string)`
-
-SetPaymentSource sets PaymentSource field to given value.
-
-### HasPaymentSource
-
-`func (o *Transaction) HasPaymentSource() bool`
-
-HasPaymentSource returns a boolean if a field has been set.
-
-### GetIsSubsequentPayment
-
-`func (o *Transaction) GetIsSubsequentPayment() bool`
-
-GetIsSubsequentPayment returns the IsSubsequentPayment field if non-nil, zero value otherwise.
-
-### GetIsSubsequentPaymentOk
-
-`func (o *Transaction) GetIsSubsequentPaymentOk() (*bool, bool)`
-
-GetIsSubsequentPaymentOk returns a tuple with the IsSubsequentPayment field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIsSubsequentPayment
-
-`func (o *Transaction) SetIsSubsequentPayment(v bool)`
-
-SetIsSubsequentPayment sets IsSubsequentPayment field to given value.
-
-### HasIsSubsequentPayment
-
-`func (o *Transaction) HasIsSubsequentPayment() bool`
-
-HasIsSubsequentPayment returns a boolean if a field has been set.
 
 ### GetType
 
@@ -449,6 +375,106 @@ SetPaymentService sets PaymentService field to given value.
 `func (o *Transaction) HasPaymentService() bool`
 
 HasPaymentService returns a boolean if a field has been set.
+
+### GetMerchantInitiated
+
+`func (o *Transaction) GetMerchantInitiated() bool`
+
+GetMerchantInitiated returns the MerchantInitiated field if non-nil, zero value otherwise.
+
+### GetMerchantInitiatedOk
+
+`func (o *Transaction) GetMerchantInitiatedOk() (*bool, bool)`
+
+GetMerchantInitiatedOk returns a tuple with the MerchantInitiated field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantInitiated
+
+`func (o *Transaction) SetMerchantInitiated(v bool)`
+
+SetMerchantInitiated sets MerchantInitiated field to given value.
+
+### HasMerchantInitiated
+
+`func (o *Transaction) HasMerchantInitiated() bool`
+
+HasMerchantInitiated returns a boolean if a field has been set.
+
+### GetPaymentSource
+
+`func (o *Transaction) GetPaymentSource() string`
+
+GetPaymentSource returns the PaymentSource field if non-nil, zero value otherwise.
+
+### GetPaymentSourceOk
+
+`func (o *Transaction) GetPaymentSourceOk() (*string, bool)`
+
+GetPaymentSourceOk returns a tuple with the PaymentSource field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentSource
+
+`func (o *Transaction) SetPaymentSource(v string)`
+
+SetPaymentSource sets PaymentSource field to given value.
+
+### HasPaymentSource
+
+`func (o *Transaction) HasPaymentSource() bool`
+
+HasPaymentSource returns a boolean if a field has been set.
+
+### GetIsSubsequentPayment
+
+`func (o *Transaction) GetIsSubsequentPayment() bool`
+
+GetIsSubsequentPayment returns the IsSubsequentPayment field if non-nil, zero value otherwise.
+
+### GetIsSubsequentPaymentOk
+
+`func (o *Transaction) GetIsSubsequentPaymentOk() (*bool, bool)`
+
+GetIsSubsequentPaymentOk returns a tuple with the IsSubsequentPayment field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsSubsequentPayment
+
+`func (o *Transaction) SetIsSubsequentPayment(v bool)`
+
+SetIsSubsequentPayment sets IsSubsequentPayment field to given value.
+
+### HasIsSubsequentPayment
+
+`func (o *Transaction) HasIsSubsequentPayment() bool`
+
+HasIsSubsequentPayment returns a boolean if a field has been set.
+
+### GetCartItems
+
+`func (o *Transaction) GetCartItems() []CartItem`
+
+GetCartItems returns the CartItems field if non-nil, zero value otherwise.
+
+### GetCartItemsOk
+
+`func (o *Transaction) GetCartItemsOk() (*[]CartItem, bool)`
+
+GetCartItemsOk returns a tuple with the CartItems field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCartItems
+
+`func (o *Transaction) SetCartItems(v []CartItem)`
+
+SetCartItems sets CartItems field to given value.
+
+### HasCartItems
+
+`func (o *Transaction) HasCartItems() bool`
+
+HasCartItems returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

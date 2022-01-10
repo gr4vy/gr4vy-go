@@ -125,6 +125,7 @@ Class | Method | HTTP request | Description
  - [BuyerUpdate](docs/BuyerUpdate.md)
  - [Buyers](docs/Buyers.md)
  - [CardRequest](docs/CardRequest.md)
+ - [CartItem](docs/CartItem.md)
  - [DigitalWallet](docs/DigitalWallet.md)
  - [DigitalWalletRequest](docs/DigitalWalletRequest.md)
  - [DigitalWalletUpdate](docs/DigitalWalletUpdate.md)

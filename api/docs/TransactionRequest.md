@@ -12,9 +12,10 @@ Name | Type | Description | Notes
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **ThreeDSecureData** | Pointer to [**ThreeDSecureDataV1V2**](ThreeDSecureDataV1V2.md) |  | [optional] 
 **MerchantInitiated** | Pointer to **bool** | Indicates whether the transaction was initiated by the merchant (true) or customer (false). | [optional] [default to false]
-**PaymentSource** | Pointer to **string** | The source of the transaction. Defaults to &#39;ecommerce&#39;. | [optional] 
-**IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with payment_source set to [recurring, installment, card_on_file] and will be ignored for other values or if payment_source is not present. | [optional] [default to false]
+**PaymentSource** | Pointer to **string** | The source of the transaction. Defaults to &#x60;ecommerce&#x60;. | [optional] 
+**IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with &#x60;payment_source&#x60; set to &#x60;recurring&#x60;, &#x60;installment&#x60;, or &#x60;card_on_file&#x60; and will be ignored for other values or if &#x60;payment_source&#x60; is not present. | [optional] [default to false]
 **Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://gr4vy.com/docs/ under &#x60;Connections&#x60; for more information on how specific providers support metadata. | [optional] 
+**CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 
 ## Methods
 
@@ -304,6 +305,31 @@ SetMetadata sets Metadata field to given value.
 `func (o *TransactionRequest) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetCartItems
+
+`func (o *TransactionRequest) GetCartItems() []CartItem`
+
+GetCartItems returns the CartItems field if non-nil, zero value otherwise.
+
+### GetCartItemsOk
+
+`func (o *TransactionRequest) GetCartItemsOk() (*[]CartItem, bool)`
+
+GetCartItemsOk returns a tuple with the CartItems field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCartItems
+
+`func (o *TransactionRequest) SetCartItems(v []CartItem)`
+
+SetCartItems sets CartItems field to given value.
+
+### HasCartItems
+
+`func (o *TransactionRequest) HasCartItems() bool`
+
+HasCartItems returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

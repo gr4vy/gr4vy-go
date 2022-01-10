@@ -18,12 +18,6 @@ import (
 
 // Transaction A transaction record.
 type Transaction struct {
-	// Indicates whether the transaction was initiated by the merchant (true) or customer (false).
-	MerchantInitiated *bool `json:"merchant_initiated,omitempty"`
-	// The source of the transaction. Defaults to 'ecommerce'.
-	PaymentSource *string `json:"payment_source,omitempty"`
-	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with payment_source set to [recurring, installment, card_on_file] and will be ignored for other values or if payment_source is not present.
-	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
 	// The type of this resource. Is always `transaction`.
 	Type *string `json:"type,omitempty"`
 	// The unique identifier for this transaction.
@@ -47,6 +41,14 @@ type Transaction struct {
 	// Defines when the transaction was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
+	// Indicates whether the transaction was initiated by the merchant (true) or customer (false).
+	MerchantInitiated *bool `json:"merchant_initiated,omitempty"`
+	// The source of the transaction. Defaults to `ecommerce`.
+	PaymentSource *string `json:"payment_source,omitempty"`
+	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with `payment_source` set to `recurring`, `installment`, or `card_on_file` and will be ignored for other values or if `payment_source` is not present.
+	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
+	// An array of cart items that represents the line items of a transaction.
+	CartItems *[]CartItem `json:"cart_items,omitempty"`
 }
 
 // NewTransaction instantiates a new Transaction object
@@ -55,6 +57,10 @@ type Transaction struct {
 // will change when the set of required properties is changed
 func NewTransaction() *Transaction {
 	this := Transaction{}
+	var merchantInitiated bool = false
+	this.MerchantInitiated = &merchantInitiated
+	var isSubsequentPayment bool = false
+	this.IsSubsequentPayment = &isSubsequentPayment
 	return &this
 }
 
@@ -68,102 +74,6 @@ func NewTransactionWithDefaults() *Transaction {
 	var isSubsequentPayment bool = false
 	this.IsSubsequentPayment = &isSubsequentPayment
 	return &this
-}
-
-// GetMerchantInitiated returns the MerchantInitiated field value if set, zero value otherwise.
-func (o *Transaction) GetMerchantInitiated() bool {
-	if o == nil || o.MerchantInitiated == nil {
-		var ret bool
-		return ret
-	}
-	return *o.MerchantInitiated
-}
-
-// GetMerchantInitiatedOk returns a tuple with the MerchantInitiated field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetMerchantInitiatedOk() (*bool, bool) {
-	if o == nil || o.MerchantInitiated == nil {
-		return nil, false
-	}
-	return o.MerchantInitiated, true
-}
-
-// HasMerchantInitiated returns a boolean if a field has been set.
-func (o *Transaction) HasMerchantInitiated() bool {
-	if o != nil && o.MerchantInitiated != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantInitiated gets a reference to the given bool and assigns it to the MerchantInitiated field.
-func (o *Transaction) SetMerchantInitiated(v bool) {
-	o.MerchantInitiated = &v
-}
-
-// GetPaymentSource returns the PaymentSource field value if set, zero value otherwise.
-func (o *Transaction) GetPaymentSource() string {
-	if o == nil || o.PaymentSource == nil {
-		var ret string
-		return ret
-	}
-	return *o.PaymentSource
-}
-
-// GetPaymentSourceOk returns a tuple with the PaymentSource field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetPaymentSourceOk() (*string, bool) {
-	if o == nil || o.PaymentSource == nil {
-		return nil, false
-	}
-	return o.PaymentSource, true
-}
-
-// HasPaymentSource returns a boolean if a field has been set.
-func (o *Transaction) HasPaymentSource() bool {
-	if o != nil && o.PaymentSource != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPaymentSource gets a reference to the given string and assigns it to the PaymentSource field.
-func (o *Transaction) SetPaymentSource(v string) {
-	o.PaymentSource = &v
-}
-
-// GetIsSubsequentPayment returns the IsSubsequentPayment field value if set, zero value otherwise.
-func (o *Transaction) GetIsSubsequentPayment() bool {
-	if o == nil || o.IsSubsequentPayment == nil {
-		var ret bool
-		return ret
-	}
-	return *o.IsSubsequentPayment
-}
-
-// GetIsSubsequentPaymentOk returns a tuple with the IsSubsequentPayment field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Transaction) GetIsSubsequentPaymentOk() (*bool, bool) {
-	if o == nil || o.IsSubsequentPayment == nil {
-		return nil, false
-	}
-	return o.IsSubsequentPayment, true
-}
-
-// HasIsSubsequentPayment returns a boolean if a field has been set.
-func (o *Transaction) HasIsSubsequentPayment() bool {
-	if o != nil && o.IsSubsequentPayment != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetIsSubsequentPayment gets a reference to the given bool and assigns it to the IsSubsequentPayment field.
-func (o *Transaction) SetIsSubsequentPayment(v bool) {
-	o.IsSubsequentPayment = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -592,17 +502,136 @@ func (o *Transaction) SetPaymentService(v PaymentServiceSnapshot) {
 	o.PaymentService = &v
 }
 
+// GetMerchantInitiated returns the MerchantInitiated field value if set, zero value otherwise.
+func (o *Transaction) GetMerchantInitiated() bool {
+	if o == nil || o.MerchantInitiated == nil {
+		var ret bool
+		return ret
+	}
+	return *o.MerchantInitiated
+}
+
+// GetMerchantInitiatedOk returns a tuple with the MerchantInitiated field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetMerchantInitiatedOk() (*bool, bool) {
+	if o == nil || o.MerchantInitiated == nil {
+		return nil, false
+	}
+	return o.MerchantInitiated, true
+}
+
+// HasMerchantInitiated returns a boolean if a field has been set.
+func (o *Transaction) HasMerchantInitiated() bool {
+	if o != nil && o.MerchantInitiated != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantInitiated gets a reference to the given bool and assigns it to the MerchantInitiated field.
+func (o *Transaction) SetMerchantInitiated(v bool) {
+	o.MerchantInitiated = &v
+}
+
+// GetPaymentSource returns the PaymentSource field value if set, zero value otherwise.
+func (o *Transaction) GetPaymentSource() string {
+	if o == nil || o.PaymentSource == nil {
+		var ret string
+		return ret
+	}
+	return *o.PaymentSource
+}
+
+// GetPaymentSourceOk returns a tuple with the PaymentSource field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetPaymentSourceOk() (*string, bool) {
+	if o == nil || o.PaymentSource == nil {
+		return nil, false
+	}
+	return o.PaymentSource, true
+}
+
+// HasPaymentSource returns a boolean if a field has been set.
+func (o *Transaction) HasPaymentSource() bool {
+	if o != nil && o.PaymentSource != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentSource gets a reference to the given string and assigns it to the PaymentSource field.
+func (o *Transaction) SetPaymentSource(v string) {
+	o.PaymentSource = &v
+}
+
+// GetIsSubsequentPayment returns the IsSubsequentPayment field value if set, zero value otherwise.
+func (o *Transaction) GetIsSubsequentPayment() bool {
+	if o == nil || o.IsSubsequentPayment == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsSubsequentPayment
+}
+
+// GetIsSubsequentPaymentOk returns a tuple with the IsSubsequentPayment field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetIsSubsequentPaymentOk() (*bool, bool) {
+	if o == nil || o.IsSubsequentPayment == nil {
+		return nil, false
+	}
+	return o.IsSubsequentPayment, true
+}
+
+// HasIsSubsequentPayment returns a boolean if a field has been set.
+func (o *Transaction) HasIsSubsequentPayment() bool {
+	if o != nil && o.IsSubsequentPayment != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsSubsequentPayment gets a reference to the given bool and assigns it to the IsSubsequentPayment field.
+func (o *Transaction) SetIsSubsequentPayment(v bool) {
+	o.IsSubsequentPayment = &v
+}
+
+// GetCartItems returns the CartItems field value if set, zero value otherwise.
+func (o *Transaction) GetCartItems() []CartItem {
+	if o == nil || o.CartItems == nil {
+		var ret []CartItem
+		return ret
+	}
+	return *o.CartItems
+}
+
+// GetCartItemsOk returns a tuple with the CartItems field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetCartItemsOk() (*[]CartItem, bool) {
+	if o == nil || o.CartItems == nil {
+		return nil, false
+	}
+	return o.CartItems, true
+}
+
+// HasCartItems returns a boolean if a field has been set.
+func (o *Transaction) HasCartItems() bool {
+	if o != nil && o.CartItems != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCartItems gets a reference to the given []CartItem and assigns it to the CartItems field.
+func (o *Transaction) SetCartItems(v []CartItem) {
+	o.CartItems = &v
+}
+
 func (o Transaction) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.MerchantInitiated != nil {
-		toSerialize["merchant_initiated"] = o.MerchantInitiated
-	}
-	if o.PaymentSource != nil {
-		toSerialize["payment_source"] = o.PaymentSource
-	}
-	if o.IsSubsequentPayment != nil {
-		toSerialize["is_subsequent_payment"] = o.IsSubsequentPayment
-	}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
 	}
@@ -641,6 +670,18 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.PaymentService != nil {
 		toSerialize["payment_service"] = o.PaymentService
+	}
+	if o.MerchantInitiated != nil {
+		toSerialize["merchant_initiated"] = o.MerchantInitiated
+	}
+	if o.PaymentSource != nil {
+		toSerialize["payment_source"] = o.PaymentSource
+	}
+	if o.IsSubsequentPayment != nil {
+		toSerialize["is_subsequent_payment"] = o.IsSubsequentPayment
+	}
+	if o.CartItems != nil {
+		toSerialize["cart_items"] = o.CartItems
 	}
 	return json.Marshal(toSerialize)
 }
