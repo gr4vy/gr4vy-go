@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **PaymentSource** | Pointer to **string** | The source of the transaction. Defaults to &#x60;ecommerce&#x60;. | [optional] 
 **IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with &#x60;payment_source&#x60; set to &#x60;recurring&#x60;, &#x60;installment&#x60;, or &#x60;card_on_file&#x60; and will be ignored for other values or if &#x60;payment_source&#x60; is not present. | [optional] [default to false]
 **Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://gr4vy.com/docs/ under &#x60;Connections&#x60; for more information on how specific providers support metadata. | [optional] 
+**StatementDescriptor** | Pointer to [**StatementDescriptor**](StatementDescriptor.md) |  | [optional] 
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 
 ## Methods
@@ -305,6 +306,31 @@ SetMetadata sets Metadata field to given value.
 `func (o *TransactionRequest) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetStatementDescriptor
+
+`func (o *TransactionRequest) GetStatementDescriptor() StatementDescriptor`
+
+GetStatementDescriptor returns the StatementDescriptor field if non-nil, zero value otherwise.
+
+### GetStatementDescriptorOk
+
+`func (o *TransactionRequest) GetStatementDescriptorOk() (*StatementDescriptor, bool)`
+
+GetStatementDescriptorOk returns a tuple with the StatementDescriptor field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatementDescriptor
+
+`func (o *TransactionRequest) SetStatementDescriptor(v StatementDescriptor)`
+
+SetStatementDescriptor sets StatementDescriptor field to given value.
+
+### HasStatementDescriptor
+
+`func (o *TransactionRequest) HasStatementDescriptor() bool`
+
+HasStatementDescriptor returns a boolean if a field has been set.
 
 ### GetCartItems
 

@@ -47,6 +47,7 @@ type Transaction struct {
 	PaymentSource *string `json:"payment_source,omitempty"`
 	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with `payment_source` set to `recurring`, `installment`, or `card_on_file` and will be ignored for other values or if `payment_source` is not present.
 	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
+	StatementDescriptor *StatementDescriptor `json:"statement_descriptor,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
 	CartItems *[]CartItem `json:"cart_items,omitempty"`
 }
@@ -598,6 +599,38 @@ func (o *Transaction) SetIsSubsequentPayment(v bool) {
 	o.IsSubsequentPayment = &v
 }
 
+// GetStatementDescriptor returns the StatementDescriptor field value if set, zero value otherwise.
+func (o *Transaction) GetStatementDescriptor() StatementDescriptor {
+	if o == nil || o.StatementDescriptor == nil {
+		var ret StatementDescriptor
+		return ret
+	}
+	return *o.StatementDescriptor
+}
+
+// GetStatementDescriptorOk returns a tuple with the StatementDescriptor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetStatementDescriptorOk() (*StatementDescriptor, bool) {
+	if o == nil || o.StatementDescriptor == nil {
+		return nil, false
+	}
+	return o.StatementDescriptor, true
+}
+
+// HasStatementDescriptor returns a boolean if a field has been set.
+func (o *Transaction) HasStatementDescriptor() bool {
+	if o != nil && o.StatementDescriptor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatementDescriptor gets a reference to the given StatementDescriptor and assigns it to the StatementDescriptor field.
+func (o *Transaction) SetStatementDescriptor(v StatementDescriptor) {
+	o.StatementDescriptor = &v
+}
+
 // GetCartItems returns the CartItems field value if set, zero value otherwise.
 func (o *Transaction) GetCartItems() []CartItem {
 	if o == nil || o.CartItems == nil {
@@ -679,6 +712,9 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.IsSubsequentPayment != nil {
 		toSerialize["is_subsequent_payment"] = o.IsSubsequentPayment
+	}
+	if o.StatementDescriptor != nil {
+		toSerialize["statement_descriptor"] = o.StatementDescriptor
 	}
 	if o.CartItems != nil {
 		toSerialize["cart_items"] = o.CartItems

@@ -164,6 +164,7 @@ Class | Method | HTTP request | Description
  - [RedirectRequest](docs/RedirectRequest.md)
  - [ResetPasswordRequest](docs/ResetPasswordRequest.md)
  - [SetPasswordRequest](docs/SetPasswordRequest.md)
+ - [StatementDescriptor](docs/StatementDescriptor.md)
  - [TaxId](docs/TaxId.md)
  - [ThreeDSecureData](docs/ThreeDSecureData.md)
  - [ThreeDSecureDataV1](docs/ThreeDSecureDataV1.md)

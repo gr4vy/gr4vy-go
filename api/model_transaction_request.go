@@ -37,6 +37,7 @@ type TransactionRequest struct {
 	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://gr4vy.com/docs/ under `Connections` for more information on how specific providers support metadata.
 	Metadata *map[string]string `json:"metadata,omitempty"`
+	StatementDescriptor *StatementDescriptor `json:"statement_descriptor,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
 	CartItems *[]CartItem `json:"cart_items,omitempty"`
 }
@@ -415,6 +416,38 @@ func (o *TransactionRequest) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
+// GetStatementDescriptor returns the StatementDescriptor field value if set, zero value otherwise.
+func (o *TransactionRequest) GetStatementDescriptor() StatementDescriptor {
+	if o == nil || o.StatementDescriptor == nil {
+		var ret StatementDescriptor
+		return ret
+	}
+	return *o.StatementDescriptor
+}
+
+// GetStatementDescriptorOk returns a tuple with the StatementDescriptor field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRequest) GetStatementDescriptorOk() (*StatementDescriptor, bool) {
+	if o == nil || o.StatementDescriptor == nil {
+		return nil, false
+	}
+	return o.StatementDescriptor, true
+}
+
+// HasStatementDescriptor returns a boolean if a field has been set.
+func (o *TransactionRequest) HasStatementDescriptor() bool {
+	if o != nil && o.StatementDescriptor != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatementDescriptor gets a reference to the given StatementDescriptor and assigns it to the StatementDescriptor field.
+func (o *TransactionRequest) SetStatementDescriptor(v StatementDescriptor) {
+	o.StatementDescriptor = &v
+}
+
 // GetCartItems returns the CartItems field value if set, zero value otherwise.
 func (o *TransactionRequest) GetCartItems() []CartItem {
 	if o == nil || o.CartItems == nil {
@@ -481,6 +514,9 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.StatementDescriptor != nil {
+		toSerialize["statement_descriptor"] = o.StatementDescriptor
 	}
 	if o.CartItems != nil {
 		toSerialize["cart_items"] = o.CartItems

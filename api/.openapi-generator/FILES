@@ -71,6 +71,7 @@ docs/PaymentServicesApi.md
 docs/RedirectRequest.md
 docs/ResetPasswordRequest.md
 docs/SetPasswordRequest.md
+docs/StatementDescriptor.md
 docs/TaxId.md
 docs/ThreeDSecureData.md
 docs/ThreeDSecureDataV1.md
@@ -143,6 +144,7 @@ model_payment_services.go
 model_redirect_request.go
 model_reset_password_request.go
 model_set_password_request.go
+model_statement_descriptor.go
 model_tax_id.go
 model_three_d_secure_data.go
 model_three_d_secure_data_v1.go
