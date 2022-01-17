@@ -4137,6 +4137,81 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    StatementDescriptor:
+      description: |-
+        The statement descriptor is the text to be shown on the buyer's statements.
+
+        The specific usage of these fields will depend on the capabilities of
+        the underlying PSP and bank. As a typical example, 'name' and
+        'description' could be concatenated using '* ' as a separator, and
+        then the resulting descriptor would be truncated to 22 characters by
+        the issuing bank.
+      properties:
+        name:
+          description: |-
+            Reflects your doing business as (DBA) name.
+
+            Other validations:
+            1. Contains only Latin characters.
+            2. Contain at least one letter
+            3. Does not contain any of the special characters `< > \ ' " *`
+            4. Supports:
+              1. Lowercase: `a-z`
+              2. Uppercase: `A-Z`
+              3. Numbers: `0-9`
+              4. Spaces: ` `
+              5. Special characters: `. , _ - ? + /`
+          example: GR4VY
+          maxLength: 22
+          minLength: 5
+          nullable: true
+          type: string
+        description:
+          description: |-
+            A short description about the purchase.
+
+            Other validations:
+            1. Contains only Latin characters.
+            2. Contain at least one letter
+            3. Does not contain any of the special characters `< > \ ' " *`
+            4. Supports:
+              1. Lowercase: `a-z`
+              2. Uppercase: `A-Z`
+              3. Numbers: `0-9`
+              4. Spaces: ` `
+              5. Special characters: `. , _ - ? + /`
+          example: Card payment
+          maxLength: 22
+          minLength: 5
+          nullable: true
+          type: string
+        city:
+          description: City from which the charge originated.
+          example: London
+          maxLength: 13
+          minLength: 1
+          nullable: true
+          type: string
+        phone_number:
+          description: |-
+            The value in the phone number field of a customer's statement.
+            The phone number to use for this request. This expect the number in the
+            [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
+          example: +1234567890
+          maxLength: 20
+          minLength: 5
+          nullable: true
+          pattern: ^\+[1-9]\d{1,14}$
+          type: string
+        url:
+          description: The value in the URL/web address field of a customer's statement.
+          example: www.gr4vy.com
+          maxLength: 13
+          minLength: 1
+          nullable: true
+          type: string
+      title: Statement descriptor
+      type: object
     TaxId:
       description: The tax ID information associated to a buyer.
       properties:
@@ -4319,6 +4394,7 @@ components:
         type: transaction
         refunded_amount: 100
         buyer: ""
+        statement_descriptor: ""
         updated_at: 2000-01-23T04:56:07.000+00:00
         captured_amount: 999
         currency: USD
@@ -4451,6 +4527,10 @@ components:
             other values or if `payment_source` is not present.
           example: true
           type: boolean
+        statement_descriptor:
+          allOf:
+          - $ref: '#/components/schemas/StatementDescriptor'
+          - nullable: true
         cart_items:
           description: An array of cart items that represents the line items of a
             transaction.
@@ -4770,12 +4850,13 @@ components:
           - categories
           - categories
           sku: sku-789123
-        currency: USD
         is_subsequent_payment: true
         store: true
+        intent: capture
+        statement_descriptor: ""
+        currency: USD
         merchant_initiated: true
         payment_source: ecommerce
-        intent: capture
         payment_method:
           number: "4111111111111111"
           external_identifier: user-789123
@@ -4873,6 +4954,10 @@ components:
             key: value
           maxProperties: 20
           type: object
+        statement_descriptor:
+          allOf:
+          - $ref: '#/components/schemas/StatementDescriptor'
+          - nullable: true
         cart_items:
           description: An array of cart items that represents the line items of a
             transaction.
