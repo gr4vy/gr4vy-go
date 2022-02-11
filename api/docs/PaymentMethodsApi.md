@@ -224,7 +224,7 @@ Name | Type | Description  | Notes
 
 ## ListPaymentMethods
 
-> PaymentMethods ListPaymentMethods(ctx).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Limit(limit).Cursor(cursor).Execute()
+> PaymentMethods ListPaymentMethods(ctx).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Status(status).Limit(limit).Cursor(cursor).Execute()
 
 List payment methods
 
@@ -245,12 +245,13 @@ import (
 func main() {
     buyerId := "8724fd24-5489-4a5d-90fd-0604df7d3b83" // string | Filters the results to only the items for which the `buyer` has an `id` that matches this value. (optional)
     buyerExternalIdentifier := "user-12345" // string | Filters the results to only the items for which the `buyer` has an `external_identifier` that matches this value. (optional)
+    status := "succeeded" // string | Filters the results to only the payment methods for which the `status` matches this value. (optional)
     limit := int32(1) // int32 | Defines the maximum number of items to return for this request. (optional) (default to 20)
     cursor := "ZXhhbXBsZTE" // string | A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the `next_cursor` field. Similarly the `previous_cursor` can be used to reverse backwards in the list. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentMethodsApi.ListPaymentMethods(context.Background()).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Limit(limit).Cursor(cursor).Execute()
+    resp, r, err := api_client.PaymentMethodsApi.ListPaymentMethods(context.Background()).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Status(status).Limit(limit).Cursor(cursor).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `PaymentMethodsApi.ListPaymentMethods``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -273,6 +274,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **buyerId** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;id&#x60; that matches this value. | 
  **buyerExternalIdentifier** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;external_identifier&#x60; that matches this value. | 
+ **status** | **string** | Filters the results to only the payment methods for which the &#x60;status&#x60; matches this value. | 
  **limit** | **int32** | Defines the maximum number of items to return for this request. | [default to 20]
  **cursor** | **string** | A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the &#x60;next_cursor&#x60; field. Similarly the &#x60;previous_cursor&#x60; can be used to reverse backwards in the list. | 
 

@@ -427,6 +427,7 @@ type ApiListPaymentMethodsRequest struct {
 	ApiService *PaymentMethodsApiService
 	buyerId *string
 	buyerExternalIdentifier *string
+	status *string
 	limit *int32
 	cursor *string
 }
@@ -437,6 +438,10 @@ func (r ApiListPaymentMethodsRequest) BuyerId(buyerId string) ApiListPaymentMeth
 }
 func (r ApiListPaymentMethodsRequest) BuyerExternalIdentifier(buyerExternalIdentifier string) ApiListPaymentMethodsRequest {
 	r.buyerExternalIdentifier = &buyerExternalIdentifier
+	return r
+}
+func (r ApiListPaymentMethodsRequest) Status(status string) ApiListPaymentMethodsRequest {
+	r.status = &status
 	return r
 }
 func (r ApiListPaymentMethodsRequest) Limit(limit int32) ApiListPaymentMethodsRequest {
@@ -495,6 +500,9 @@ func (a *PaymentMethodsApiService) ListPaymentMethodsExecute(r ApiListPaymentMet
 	}
 	if r.buyerExternalIdentifier != nil {
 		localVarQueryParams.Add("buyer_external_identifier", parameterToString(*r.buyerExternalIdentifier, ""))
+	}
+	if r.status != nil {
+		localVarQueryParams.Add("status", parameterToString(*r.status, ""))
 	}
 	if r.limit != nil {
 		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))

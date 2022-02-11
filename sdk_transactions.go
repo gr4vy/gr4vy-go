@@ -11,6 +11,8 @@ type Gr4vyTransactionRequest TransactionRequest
 type Gr4vyTransactionCaptureRequest TransactionCaptureRequest
 type Gr4vyTransactions Transactions
 type Gr4vyTransaction Transaction
+type Gr4vyRefund Refund
+
 
 func (c *Gr4vyClient) ListTransactions(limit *int32) (*Gr4vyTransactions, *http.Response, error) {
     client, err := GetClient(c)
@@ -160,7 +162,7 @@ func (c *Gr4vyClient) CaptureTransactionContext(ctx context.Context, transaction
     return &r, http, err
 }
 
-func (c *Gr4vyClient) RefundTransaction(transaction_id string) (*Gr4vyTransaction, *http.Response, error) {
+func (c *Gr4vyClient) RefundTransaction(transaction_id string) (*Gr4vyRefund, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -173,10 +175,10 @@ func (c *Gr4vyClient) RefundTransaction(transaction_id string) (*Gr4vyTransactio
     if (err != nil) {
         return nil, http, err
     }
-    var r Gr4vyTransaction = Gr4vyTransaction(response)
+    var r Gr4vyRefund = Gr4vyRefund(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) RefundTransactionContext(ctx context.Context, transaction_id string) (*Gr4vyTransaction, *http.Response, error) {
+func (c *Gr4vyClient) RefundTransactionContext(ctx context.Context, transaction_id string) (*Gr4vyRefund, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -189,6 +191,6 @@ func (c *Gr4vyClient) RefundTransactionContext(ctx context.Context, transaction_
     if (err != nil) {
         return nil, http, err
     }
-    var r Gr4vyTransaction = Gr4vyTransaction(response)
+    var r Gr4vyRefund = Gr4vyRefund(response)
     return &r, http, err
 }

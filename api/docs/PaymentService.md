@@ -26,6 +26,7 @@ Name | Type | Description | Notes
 **Position** | Pointer to **float32** | The numeric rank of a payment service. Payment services with a lower position value are processed first. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this service was created. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this service was last updated. | [optional] 
+**WebhookUrl** | Pointer to **NullableString** | The URL that needs to be configured with this payment service as the receiving endpoint for webhooks from the service to Gr4vy. Currently, Gr4vy does not yet automatically register webhooks on setup, and therefore webhooks need to be registered manually by the merchant. | [optional] 
 
 ## Methods
 
@@ -686,6 +687,41 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 HasUpdatedAt returns a boolean if a field has been set.
 
+### GetWebhookUrl
+
+`func (o *PaymentService) GetWebhookUrl() string`
+
+GetWebhookUrl returns the WebhookUrl field if non-nil, zero value otherwise.
+
+### GetWebhookUrlOk
+
+`func (o *PaymentService) GetWebhookUrlOk() (*string, bool)`
+
+GetWebhookUrlOk returns a tuple with the WebhookUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetWebhookUrl
+
+`func (o *PaymentService) SetWebhookUrl(v string)`
+
+SetWebhookUrl sets WebhookUrl field to given value.
+
+### HasWebhookUrl
+
+`func (o *PaymentService) HasWebhookUrl() bool`
+
+HasWebhookUrl returns a boolean if a field has been set.
+
+### SetWebhookUrlNil
+
+`func (o *PaymentService) SetWebhookUrlNil(b bool)`
+
+ SetWebhookUrlNil sets the value for WebhookUrl to be an explicit nil
+
+### UnsetWebhookUrl
+`func (o *PaymentService) UnsetWebhookUrl()`
+
+UnsetWebhookUrl ensures that no value is present for WebhookUrl, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

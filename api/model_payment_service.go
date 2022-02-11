@@ -61,6 +61,8 @@ type PaymentService struct {
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this service was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// The URL that needs to be configured with this payment service as the receiving endpoint for webhooks from the service to Gr4vy. Currently, Gr4vy does not yet automatically register webhooks on setup, and therefore webhooks need to be registered manually by the merchant.
+	WebhookUrl NullableString `json:"webhook_url,omitempty"`
 }
 
 // NewPaymentService instantiates a new PaymentService object
@@ -882,6 +884,48 @@ func (o *PaymentService) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetWebhookUrl returns the WebhookUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentService) GetWebhookUrl() string {
+	if o == nil || o.WebhookUrl.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.WebhookUrl.Get()
+}
+
+// GetWebhookUrlOk returns a tuple with the WebhookUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentService) GetWebhookUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.WebhookUrl.Get(), o.WebhookUrl.IsSet()
+}
+
+// HasWebhookUrl returns a boolean if a field has been set.
+func (o *PaymentService) HasWebhookUrl() bool {
+	if o != nil && o.WebhookUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetWebhookUrl gets a reference to the given NullableString and assigns it to the WebhookUrl field.
+func (o *PaymentService) SetWebhookUrl(v string) {
+	o.WebhookUrl.Set(&v)
+}
+// SetWebhookUrlNil sets the value for WebhookUrl to be an explicit nil
+func (o *PaymentService) SetWebhookUrlNil() {
+	o.WebhookUrl.Set(nil)
+}
+
+// UnsetWebhookUrl ensures that no value is present for WebhookUrl, not even an explicit nil
+func (o *PaymentService) UnsetWebhookUrl() {
+	o.WebhookUrl.Unset()
+}
+
 func (o PaymentService) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -949,6 +993,9 @@ func (o PaymentService) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if o.WebhookUrl.IsSet() {
+		toSerialize["webhook_url"] = o.WebhookUrl.Get()
 	}
 	return json.Marshal(toSerialize)
 }

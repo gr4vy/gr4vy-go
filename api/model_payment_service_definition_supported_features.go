@@ -23,8 +23,8 @@ type PaymentServiceDefinitionSupportedFeatures struct {
 	ThreeDSecureHosted *bool `json:"three_d_secure_hosted,omitempty"`
 	// Supports passing 3-D Secure data to the underlying processor.
 	ThreeDSecurePassThrough *bool `json:"three_d_secure_pass_through,omitempty"`
-	// Supports passing decrypted apple pay token to the underlying processor.
-	ApplePay *bool `json:"apple_pay,omitempty"`
+	// Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor.
+	NetworkTokens *bool `json:"network_tokens,omitempty"`
 }
 
 // NewPaymentServiceDefinitionSupportedFeatures instantiates a new PaymentServiceDefinitionSupportedFeatures object
@@ -140,36 +140,36 @@ func (o *PaymentServiceDefinitionSupportedFeatures) SetThreeDSecurePassThrough(v
 	o.ThreeDSecurePassThrough = &v
 }
 
-// GetApplePay returns the ApplePay field value if set, zero value otherwise.
-func (o *PaymentServiceDefinitionSupportedFeatures) GetApplePay() bool {
-	if o == nil || o.ApplePay == nil {
+// GetNetworkTokens returns the NetworkTokens field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokens() bool {
+	if o == nil || o.NetworkTokens == nil {
 		var ret bool
 		return ret
 	}
-	return *o.ApplePay
+	return *o.NetworkTokens
 }
 
-// GetApplePayOk returns a tuple with the ApplePay field value if set, nil otherwise
+// GetNetworkTokensOk returns a tuple with the NetworkTokens field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentServiceDefinitionSupportedFeatures) GetApplePayOk() (*bool, bool) {
-	if o == nil || o.ApplePay == nil {
+func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensOk() (*bool, bool) {
+	if o == nil || o.NetworkTokens == nil {
 		return nil, false
 	}
-	return o.ApplePay, true
+	return o.NetworkTokens, true
 }
 
-// HasApplePay returns a boolean if a field has been set.
-func (o *PaymentServiceDefinitionSupportedFeatures) HasApplePay() bool {
-	if o != nil && o.ApplePay != nil {
+// HasNetworkTokens returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokens() bool {
+	if o != nil && o.NetworkTokens != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetApplePay gets a reference to the given bool and assigns it to the ApplePay field.
-func (o *PaymentServiceDefinitionSupportedFeatures) SetApplePay(v bool) {
-	o.ApplePay = &v
+// SetNetworkTokens gets a reference to the given bool and assigns it to the NetworkTokens field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokens(v bool) {
+	o.NetworkTokens = &v
 }
 
 func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error) {
@@ -183,8 +183,8 @@ func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error)
 	if o.ThreeDSecurePassThrough != nil {
 		toSerialize["three_d_secure_pass_through"] = o.ThreeDSecurePassThrough
 	}
-	if o.ApplePay != nil {
-		toSerialize["apple_pay"] = o.ApplePay
+	if o.NetworkTokens != nil {
+		toSerialize["network_tokens"] = o.NetworkTokens
 	}
 	return json.Marshal(toSerialize)
 }
