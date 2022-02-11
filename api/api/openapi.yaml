@@ -442,6 +442,22 @@ paths:
           example: user-12345
           type: string
         style: form
+      - description: |-
+          Filters the results to only the payment methods for which the `status`
+          matches this value.
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          enum:
+          - processing
+          - buyer_approval_required
+          - succeeded
+          - failed
+          example: succeeded
+          type: string
+        style: form
       - description: Defines the maximum number of items to return for this request.
         explode: true
         in: query
@@ -739,6 +755,10 @@ paths:
           - gocardless
           - stripedd
           - applepay
+          - googlepay
+          - afterpay
+          - clearpay
+          - zippay
           example: card
           type: string
         style: form
@@ -1212,6 +1232,9 @@ paths:
           - authorization_failed
           - authorization_expired
           - authorization_voided
+          - authorization_void_pending
+          - authorization_void_declined
+          - authorization_void_failed
           - refund_succeeded
           - refund_pending
           - refund_declined
@@ -1521,11 +1544,16 @@ paths:
       - Transactions
   /transactions/{transaction_id}/refund:
     post:
+      deprecated: true
       description: |-
         Refunds or voids transaction. If this transaction was already captured, it
         will issue a refund. If the transaction was not yet captured the authorization
         will instead be voided.
-      operationId: refund-transaction
+
+        **Warning**: this endpoint will be removed eventually, use
+        [Refund transaction](#operation/refund-transaction) or
+        [Void transaction](#operation/void-transaction) endpoints instead.
+      operationId: refund-transaction-deprecated
       parameters:
       - description: The ID for the transaction to get the information for.
         explode: false
@@ -1540,7 +1568,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/TransactionRefundRequest'
+              $ref: '#/components/schemas/TransactionRefundRequestDeprecated'
       responses:
         "200":
           content:
@@ -1562,6 +1590,224 @@ paths:
           description: Returns an error if the resource can not be found or has not
             yet been created.
       summary: Refund or void transactions
+      tags:
+      - Transactions
+  /transactions/{transaction_id}/refunds:
+    get:
+      description: Lists all refunds associated with a certain transaction.
+      operationId: list-transaction-refunds
+      parameters:
+      - description: The ID for the transaction to get the information for.
+        explode: false
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refunds'
+          description: Returns a list of refunds.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: List transaction refunds
+      tags:
+      - Transactions
+    post:
+      description: |-
+        Refunds a transaction, fully or partially.
+
+        If the transaction was not yet successfully captured, the
+        refund will not be processed. Authorized transactions can be
+        [voided](#operation/void-transaction) instead.
+      operationId: refund-transaction
+      parameters:
+      - description: The ID for the transaction to get the information for.
+        explode: false
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Request a full refund on a transaction:
+                value: {}
+              Request a partial refund on a transaction:
+                value:
+                  amount: 1299
+            schema:
+              $ref: '#/components/schemas/TransactionRefundRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+          description: Returns the created refund.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: |-
+            Returns an error if the request was badly formatted or missing required
+            fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Refund transaction
+      tags:
+      - Transactions
+  /transactions/{transaction_id}/refunds/{refund_id}:
+    get:
+      description: Gets information about a refund associated with a certain transaction.
+      operationId: get-transaction-refund
+      parameters:
+      - description: The ID for the transaction to get the information for.
+        explode: false
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      - description: The unique ID of the refund.
+        explode: false
+        in: path
+        name: refund_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Refund'
+          description: Returns a refund.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Get transaction refund
+      tags:
+      - Transactions
+  /transactions/{transaction_id}/void:
+    post:
+      description: |-
+        Voids a transaction.
+
+        If the transaction was not yet successfully authorized, or was already
+        captured, the void will not be processed. Captured transactions can be
+        [refunded](#operation/refund-transaction) instead.
+      operationId: void-transaction
+      parameters:
+      - description: The ID for the transaction to get the information for.
+        explode: false
+        in: path
+        name: transaction_id
+        required: true
+        schema:
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Transaction'
+          description: Returns the voided transaction.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: |-
+            Returns an error if the request was badly formatted or missing required
+            fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Void transaction
       tags:
       - Transactions
 components:
@@ -2112,9 +2358,16 @@ components:
             in the smallest currency unit for the given currency, for example `1299`
             USD cents represents `$12.99`.
 
-            Important: this amount is for the total of the cart item and not for
-            an individual item. For example, if the quantity is 5, this value
+            Please note that this amount is for the total of the cart item and not
+            for an individual item. For example, if the quantity is 5, this value
             should be the total discount amount for 5 of the cart item.
+
+            You might see unexpected failed transactions if the `discount_amount` can
+            not be equally divided by the `quantity` value. This is due to the fact
+            that some payment services require this amount to be specified per unit.
+
+            In this situation we recommend splitting this item into separate items,
+            each with their own specific discount.
           example: 0
           maximum: 99999999
           minimum: 0
@@ -2127,9 +2380,16 @@ components:
             in the smallest currency unit for the given currency, for example `1299`
             USD cents represents `$12.99`.
 
-            Important: this amount is for the total of the cart item and not for
-            an individual item. For example, if the quantity is 5, this value
+            Please not that this amount is for the total of the cart item and not
+            for an individual item. For example, if the quantity is 5, this value
             should be the total tax amount for 5 of the cart item.
+
+            You might see unexpected failed transactions if the `tax_amount` can
+            not be equally divided by the `quantity` value. This is due to the fact
+            that some payment services require this amount to be specified per unit.
+
+            In this situation we recommend splitting this item into separate items,
+            each with their own specific tax amount.
           example: 0
           maximum: 99999999
           minimum: 0
@@ -2722,6 +2982,39 @@ components:
       type: object
       x-tags:
       - Errors
+    GooglePayRequest:
+      description: Details for a Google Pay payment method.
+      properties:
+        method:
+          description: '`googlepay`.'
+          enum:
+          - googlepay
+          example: googlepay
+          type: string
+        token:
+          description: |-
+            The encrypted (opaque) token returned by the Google Pay API that
+            represents a payment method.
+          type: object
+      required:
+      - method
+      - token
+      title: Google Pay payment method request
+      type: object
+      x-tags:
+      - Request Bodies
+    GooglePaySessionRequest:
+      description: Initiates a new session with Google Pay.
+      properties:
+        origin_domain:
+          description: Fully qualified domain name of the merchant.
+          type: string
+      required:
+      - origin_domain
+      title: Google Pay session request
+      type: object
+      x-tags:
+      - Request Bodies
     PaymentMethod:
       description: A generic payment method.
       example:
@@ -2776,6 +3069,10 @@ components:
             - gocardless
             - stripedd
             - applepay
+            - googlepay
+            - afterpay
+            - clearpay
+            - zippay
             example: card
             type: string
           - description: The type of this payment method.
@@ -2785,6 +3082,7 @@ components:
             - card
             - redirect
             - applepay
+            - googlepay
             example: card
             type: string
           - description: The mode to use with this payment method.
@@ -2874,6 +3172,10 @@ components:
             - gocardless
             - stripedd
             - applepay
+            - googlepay
+            - afterpay
+            - clearpay
+            - zippay
             example: card
             type: string
           - description: The type of this payment method.
@@ -3015,6 +3317,10 @@ components:
             - gocardless
             - stripedd
             - applepay
+            - googlepay
+            - afterpay
+            - clearpay
+            - zippay
             example: card
             type: string
           - description: The type of this payment method.
@@ -3198,6 +3504,10 @@ components:
             - gocardless
             - stripedd
             - applepay
+            - googlepay
+            - afterpay
+            - clearpay
+            - zippay
             example: card
             type: string
           - description: The method to use for this request.
@@ -3290,6 +3600,7 @@ components:
       description: An active, configured payment service.
       example:
         method: ""
+        webhook_url: https://api.example.app.gr4vy.com/inbound-webhook/nIPUyVhkdQMfB6VgqRLQ9CBK5v0FDP3RR9VMz4B4cDPDtjKCQSXYQEIFuUzYfhSqJuX4FNqpwgtx7rsvu7C8xWZI771uowQWkxbh
         merchant_category_code: "5045"
         acquirer_bin_discover: acquirer_bin_discover
         acquirer_merchant_id: acquirer_merchant_id
@@ -3343,6 +3654,10 @@ components:
             - gocardless
             - stripedd
             - applepay
+            - googlepay
+            - afterpay
+            - clearpay
+            - zippay
             example: card
             type: string
           - description: The payment method that this service handles.
@@ -3469,6 +3784,16 @@ components:
           example: 2012-12-12T10:53:43Z
           format: date-time
           type: string
+        webhook_url:
+          description: |-
+            The URL that needs to be configured with this payment service as the
+            receiving endpoint for webhooks from the service to Gr4vy. Currently,
+            Gr4vy does not yet automatically register webhooks on setup, and
+            therefore webhooks need to be registered manually by the merchant.
+          example: https://api.example.app.gr4vy.com/inbound-webhook/nIPUyVhkdQMfB6VgqRLQ9CBK5v0FDP3RR9VMz4B4cDPDtjKCQSXYQEIFuUzYfhSqJuX4FNqpwgtx7rsvu7C8xWZI771uowQWkxbh
+          format: url
+          nullable: true
+          type: string
       title: A payment service
       type: object
       x-tags:
@@ -3504,6 +3829,10 @@ components:
             - gocardless
             - stripedd
             - applepay
+            - googlepay
+            - afterpay
+            - clearpay
+            - zippay
             example: card
             type: string
           - description: The payment method that this services handles.
@@ -3519,6 +3848,7 @@ components:
         limit: 1
         items:
         - method: ""
+          webhook_url: https://api.example.app.gr4vy.com/inbound-webhook/nIPUyVhkdQMfB6VgqRLQ9CBK5v0FDP3RR9VMz4B4cDPDtjKCQSXYQEIFuUzYfhSqJuX4FNqpwgtx7rsvu7C8xWZI771uowQWkxbh
           merchant_category_code: "5045"
           acquirer_bin_discover: acquirer_bin_discover
           acquirer_merchant_id: acquirer_merchant_id
@@ -3543,6 +3873,7 @@ components:
           - EUR
           status: pending
         - method: ""
+          webhook_url: https://api.example.app.gr4vy.com/inbound-webhook/nIPUyVhkdQMfB6VgqRLQ9CBK5v0FDP3RR9VMz4B4cDPDtjKCQSXYQEIFuUzYfhSqJuX4FNqpwgtx7rsvu7C8xWZI771uowQWkxbh
           merchant_category_code: "5045"
           acquirer_bin_discover: acquirer_bin_discover
           acquirer_merchant_id: acquirer_merchant_id
@@ -3775,7 +4106,7 @@ components:
         method: ""
         supported_features:
           three_d_secure_hosted: true
-          apple_pay: false
+          network_tokens: false
           payment_method_tokenization: true
           three_d_secure_pass_through: false
         supported_countries:
@@ -3822,6 +4153,10 @@ components:
             - gocardless
             - stripedd
             - applepay
+            - googlepay
+            - afterpay
+            - clearpay
+            - zippay
             example: card
             type: string
           - description: The ID of the payment method that this services handles.
@@ -3861,6 +4196,7 @@ components:
             - card
             - redirect
             - applepay
+            - googlepay
             example: card
             type: string
           - description: The mode of this payment service.
@@ -3887,7 +4223,7 @@ components:
           method: ""
           supported_features:
             three_d_secure_hosted: true
-            apple_pay: false
+            network_tokens: false
             payment_method_tokenization: true
             three_d_secure_pass_through: false
           supported_countries:
@@ -3915,7 +4251,7 @@ components:
           method: ""
           supported_features:
             three_d_secure_hosted: true
-            apple_pay: false
+            network_tokens: false
             payment_method_tokenization: true
             three_d_secure_pass_through: false
           supported_countries:
@@ -3983,8 +4319,8 @@ components:
         context:
           merchant_name: merchant_name
           supported_schemes:
-          - amex
-          - amex
+          - '{}'
+          - '{}'
         label: Pay by Card
         type: payment-option
         can_store_payment_method: true
@@ -4004,6 +4340,10 @@ components:
             - gocardless
             - stripedd
             - applepay
+            - googlepay
+            - afterpay
+            - clearpay
+            - zippay
             example: card
             type: string
           - description: The type of payment method that is available.
@@ -4018,6 +4358,7 @@ components:
             - card
             - redirect
             - applepay
+            - googlepay
             example: card
             type: string
           - description: The mode to use with this payment option.
@@ -4047,8 +4388,8 @@ components:
           context:
             merchant_name: merchant_name
             supported_schemes:
-            - amex
-            - amex
+            - '{}'
+            - '{}'
           label: Pay by Card
           type: payment-option
           can_store_payment_method: true
@@ -4058,8 +4399,8 @@ components:
           context:
             merchant_name: merchant_name
             supported_schemes:
-            - amex
-            - amex
+            - '{}'
+            - '{}'
           label: Pay by Card
           type: payment-option
           can_store_payment_method: true
@@ -4137,6 +4478,142 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    Refund:
+      description: |-
+        A refund record.
+
+        A refund is always associated with a single transaction, while a transaction
+        can potentially have several refunds.
+      example:
+        transaction_id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        amount: 1299
+        updated_at: 2013-07-16T19:23:00Z
+        created_at: 2013-07-16T19:23:00Z
+        currency: USD
+        id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+        type: refund
+        status: processing
+      properties:
+        type:
+          description: The type of this resource. Is always `refund`.
+          enum:
+          - refund
+          example: refund
+          type: string
+        id:
+          description: The unique ID of the refund.
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        transaction_id:
+          description: The ID of the transaction associated with this refund.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        status:
+          description: |-
+            The status of the refund.
+            It may change over time as asynchronous processing events occur.
+
+            - `processing` - The refund is being processed.
+            - `succeeded` - The refund was successful.
+            - `declined` - The refund was declined by the underlying PSP.
+            - `failed` - The refund could not proceed due to a technical issue.
+            - `voided` - The refund was voided and will not proceed.
+          enum:
+          - processing
+          - succeeded
+          - declined
+          - failed
+          - voided
+          example: processing
+          type: string
+        currency:
+          description: |-
+            The currency code for this refund.
+            Will always match that of the associated transaction.
+          example: USD
+          type: string
+        amount:
+          description: The amount requested for this refund.
+          example: 1299
+          maximum: 99999999
+          minimum: 0
+          type: integer
+        created_at:
+          description: The date and time when this refund was created.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time when this refund was last updated.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+      title: Refund
+      type: object
+      x-tags:
+      - Transactions
+    Refunds:
+      description: A list of refunds.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - transaction_id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          amount: 1299
+          updated_at: 2013-07-16T19:23:00Z
+          created_at: 2013-07-16T19:23:00Z
+          currency: USD
+          id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          type: refund
+          status: processing
+        - transaction_id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          amount: 1299
+          updated_at: 2013-07-16T19:23:00Z
+          created_at: 2013-07-16T19:23:00Z
+          currency: USD
+          id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          type: refund
+          status: processing
+      properties:
+        items:
+          description: A list of refunds.
+          items:
+            $ref: '#/components/schemas/Refund'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Refunds
+      type: object
+      x-tags:
+      - Transactions
     StatementDescriptor:
       description: |-
         The statement descriptor is the text to be shown on the buyer's statements.
@@ -4152,15 +4629,16 @@ components:
             Reflects your doing business as (DBA) name.
 
             Other validations:
+
             1. Contains only Latin characters.
             2. Contain at least one letter
             3. Does not contain any of the special characters `< > \ ' " *`
             4. Supports:
-              1. Lowercase: `a-z`
-              2. Uppercase: `A-Z`
+              1. Lower case: `a-z`
+              2. Upper case: `A-Z`
               3. Numbers: `0-9`
               4. Spaces: ` `
-              5. Special characters: `. , _ - ? + /`
+              5. Special characters: `. , _ - ? + /`.
           example: GR4VY
           maxLength: 22
           minLength: 5
@@ -4175,11 +4653,11 @@ components:
             2. Contain at least one letter
             3. Does not contain any of the special characters `< > \ ' " *`
             4. Supports:
-              1. Lowercase: `a-z`
-              2. Uppercase: `A-Z`
+              1. Lower case: `a-z`
+              2. Upper case: `A-Z`
               3. Numbers: `0-9`
               4. Spaces: ` `
-              5. Special characters: `. , _ - ? + /`
+              5. Special characters: `. , _ - ? + /`.
           example: Card payment
           maxLength: 22
           minLength: 5
@@ -4432,6 +4910,9 @@ components:
           - authorization_failed
           - authorization_expired
           - authorization_voided
+          - authorization_void_pending
+          - authorization_void_declined
+          - authorization_void_failed
           - refund_succeeded
           - refund_pending
           - refund_declined
@@ -4587,6 +5068,9 @@ components:
           - authorization_failed
           - authorization_expired
           - authorization_voided
+          - authorization_void_pending
+          - authorization_void_declined
+          - authorization_void_failed
           - refund_succeeded
           - refund_pending
           - refund_declined
@@ -5000,6 +5484,26 @@ components:
       properties:
         amount:
           description: |-
+            The amount requested to refund.
+
+            If omitted, a full refund will be requested.
+            Otherwise, the amount must be lower than or equal to the remaining balance
+            in the associated transaction. Negative refunds are not supported.
+          example: 1299
+          maximum: 99999999
+          minimum: 0
+          type: integer
+      title: Transaction Refund Request
+      type: object
+      x-tags:
+      - Request Bodies
+    TransactionRefundRequestDeprecated:
+      description: A request to refund a transaction.
+      example:
+        amount: 1299
+      properties:
+        amount:
+          description: |-
             The (partial) amount to refund.
 
             When omitted blank, this will refund the entire amount.
@@ -5035,6 +5539,10 @@ components:
             - gocardless
             - stripedd
             - applepay
+            - googlepay
+            - afterpay
+            - clearpay
+            - zippay
             example: card
             type: string
           - description: The method to use for this request.
@@ -5233,7 +5741,7 @@ components:
       description: Features supported by the payment definition.
       example:
         three_d_secure_hosted: true
-        apple_pay: false
+        network_tokens: false
         payment_method_tokenization: true
         three_d_secure_pass_through: false
       properties:
@@ -5249,45 +5757,32 @@ components:
           description: Supports passing 3-D Secure data to the underlying processor.
           example: false
           type: boolean
-        apple_pay:
+        network_tokens:
           description: |-
-            Supports passing decrypted apple pay token to the underlying
-            processor.
+            Supports passing decrypted digital wallet (e.g. Apple Pay)
+            tokens to the underlying processor.
           example: false
           type: boolean
       type: object
     PaymentOption_context:
       description: |-
         Additional context specific to the payment option.
-        This is currently only returned for Apple Pay.
+        This is currently only returned for Apple Pay and Google Pay.
       example:
         merchant_name: merchant_name
         supported_schemes:
-        - amex
-        - amex
+        - '{}'
+        - '{}'
       properties:
         merchant_name:
-          description: Display name of the merchant for Apple Pay.
+          description: |-
+            Display name of the merchant as registered with the digital wallet
+            provider.
           type: string
         supported_schemes:
-          description: Supported schemes for Apple Pay.
+          description: Card schemes supported by the digital wallet provider.
           items:
-            enum:
-            - amex
-            - cartesBancaires
-            - discover
-            - eftpos
-            - electron
-            - elo
-            - interac
-            - jcb
-            - mada
-            - maestro
-            - masterCard
-            - privateLabel
-            - visa
-            - vPay
-            type: string
+            $ref: '#/components/schemas/undefined'
           type: array
       type: object
     ThreeDSecureDataV1_allOf:

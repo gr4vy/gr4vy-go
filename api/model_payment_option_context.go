@@ -15,11 +15,11 @@ import (
 	"encoding/json"
 )
 
-// PaymentOptionContext Additional context specific to the payment option. This is currently only returned for Apple Pay.
+// PaymentOptionContext Additional context specific to the payment option. This is currently only returned for Apple Pay and Google Pay.
 type PaymentOptionContext struct {
-	// Display name of the merchant for Apple Pay.
+	// Display name of the merchant as registered with the digital wallet provider.
 	MerchantName *string `json:"merchant_name,omitempty"`
-	// Supported schemes for Apple Pay.
+	// Card schemes supported by the digital wallet provider.
 	SupportedSchemes *[]string `json:"supported_schemes,omitempty"`
 }
 

@@ -107,8 +107,12 @@ Class | Method | HTTP request | Description
 *TransactionsApi* | [**AuthorizeNewTransaction**](docs/TransactionsApi.md#authorizenewtransaction) | **Post** /transactions | New transaction
 *TransactionsApi* | [**CaptureTransaction**](docs/TransactionsApi.md#capturetransaction) | **Post** /transactions/{transaction_id}/capture | Capture transaction
 *TransactionsApi* | [**GetTransaction**](docs/TransactionsApi.md#gettransaction) | **Get** /transactions/{transaction_id} | Get transaction
+*TransactionsApi* | [**GetTransactionRefund**](docs/TransactionsApi.md#gettransactionrefund) | **Get** /transactions/{transaction_id}/refunds/{refund_id} | Get transaction refund
+*TransactionsApi* | [**ListTransactionRefunds**](docs/TransactionsApi.md#listtransactionrefunds) | **Get** /transactions/{transaction_id}/refunds | List transaction refunds
 *TransactionsApi* | [**ListTransactions**](docs/TransactionsApi.md#listtransactions) | **Get** /transactions | List transactions
-*TransactionsApi* | [**RefundTransaction**](docs/TransactionsApi.md#refundtransaction) | **Post** /transactions/{transaction_id}/refund | Refund or void transactions
+*TransactionsApi* | [**RefundTransaction**](docs/TransactionsApi.md#refundtransaction) | **Post** /transactions/{transaction_id}/refunds | Refund transaction
+*TransactionsApi* | [**RefundTransactionDeprecated**](docs/TransactionsApi.md#refundtransactiondeprecated) | **Post** /transactions/{transaction_id}/refund | Refund or void transactions
+*TransactionsApi* | [**VoidTransaction**](docs/TransactionsApi.md#voidtransaction) | **Post** /transactions/{transaction_id}/void | Void transaction
 
 
 ## Documentation For Models
@@ -139,6 +143,8 @@ Class | Method | HTTP request | Description
  - [Error409DuplicateRecord](docs/Error409DuplicateRecord.md)
  - [ErrorDetail](docs/ErrorDetail.md)
  - [ErrorGeneric](docs/ErrorGeneric.md)
+ - [GooglePayRequest](docs/GooglePayRequest.md)
+ - [GooglePaySessionRequest](docs/GooglePaySessionRequest.md)
  - [PaymentMethod](docs/PaymentMethod.md)
  - [PaymentMethodRequest](docs/PaymentMethodRequest.md)
  - [PaymentMethodSnapshot](docs/PaymentMethodSnapshot.md)
@@ -162,6 +168,8 @@ Class | Method | HTTP request | Description
  - [PaymentServiceUpdateFields](docs/PaymentServiceUpdateFields.md)
  - [PaymentServices](docs/PaymentServices.md)
  - [RedirectRequest](docs/RedirectRequest.md)
+ - [Refund](docs/Refund.md)
+ - [Refunds](docs/Refunds.md)
  - [ResetPasswordRequest](docs/ResetPasswordRequest.md)
  - [SetPasswordRequest](docs/SetPasswordRequest.md)
  - [StatementDescriptor](docs/StatementDescriptor.md)
@@ -177,6 +185,7 @@ Class | Method | HTTP request | Description
  - [TransactionCaptureRequest](docs/TransactionCaptureRequest.md)
  - [TransactionPaymentMethodRequest](docs/TransactionPaymentMethodRequest.md)
  - [TransactionRefundRequest](docs/TransactionRefundRequest.md)
+ - [TransactionRefundRequestDeprecated](docs/TransactionRefundRequestDeprecated.md)
  - [TransactionRequest](docs/TransactionRequest.md)
  - [TransactionSummary](docs/TransactionSummary.md)
  - [Transactions](docs/Transactions.md)

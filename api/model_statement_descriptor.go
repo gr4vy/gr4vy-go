@@ -17,9 +17,9 @@ import (
 
 // StatementDescriptor The statement descriptor is the text to be shown on the buyer's statements.  The specific usage of these fields will depend on the capabilities of the underlying PSP and bank. As a typical example, 'name' and 'description' could be concatenated using '* ' as a separator, and then the resulting descriptor would be truncated to 22 characters by the issuing bank.
 type StatementDescriptor struct {
-	// Reflects your doing business as (DBA) name.  Other validations: 1. Contains only Latin characters. 2. Contain at least one letter 3. Does not contain any of the special characters `< > \\ ' \" *` 4. Supports:   1. Lowercase: `a-z`   2. Uppercase: `A-Z`   3. Numbers: `0-9`   4. Spaces: ` `   5. Special characters: `. , _ - ? + /`
+	// Reflects your doing business as (DBA) name.  Other validations:  1. Contains only Latin characters. 2. Contain at least one letter 3. Does not contain any of the special characters `< > \\ ' \" *` 4. Supports:   1. Lower case: `a-z`   2. Upper case: `A-Z`   3. Numbers: `0-9`   4. Spaces: ` `   5. Special characters: `. , _ - ? + /`.
 	Name NullableString `json:"name,omitempty"`
-	// A short description about the purchase.  Other validations: 1. Contains only Latin characters. 2. Contain at least one letter 3. Does not contain any of the special characters `< > \\ ' \" *` 4. Supports:   1. Lowercase: `a-z`   2. Uppercase: `A-Z`   3. Numbers: `0-9`   4. Spaces: ` `   5. Special characters: `. , _ - ? + /`
+	// A short description about the purchase.  Other validations: 1. Contains only Latin characters. 2. Contain at least one letter 3. Does not contain any of the special characters `< > \\ ' \" *` 4. Supports:   1. Lower case: `a-z`   2. Upper case: `A-Z`   3. Numbers: `0-9`   4. Spaces: ` `   5. Special characters: `. , _ - ? + /`.
 	Description NullableString `json:"description,omitempty"`
 	// City from which the charge originated.
 	City NullableString `json:"city,omitempty"`

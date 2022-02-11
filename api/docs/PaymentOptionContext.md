@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**MerchantName** | Pointer to **string** | Display name of the merchant for Apple Pay. | [optional] 
-**SupportedSchemes** | Pointer to **[]string** | Supported schemes for Apple Pay. | [optional] 
+**MerchantName** | Pointer to **string** | Display name of the merchant as registered with the digital wallet provider. | [optional] 
+**SupportedSchemes** | Pointer to [**[]Undefined**](Undefined.md) | Card schemes supported by the digital wallet provider. | [optional] 
 
 ## Methods
 
@@ -53,20 +53,20 @@ HasMerchantName returns a boolean if a field has been set.
 
 ### GetSupportedSchemes
 
-`func (o *PaymentOptionContext) GetSupportedSchemes() []string`
+`func (o *PaymentOptionContext) GetSupportedSchemes() []Undefined`
 
 GetSupportedSchemes returns the SupportedSchemes field if non-nil, zero value otherwise.
 
 ### GetSupportedSchemesOk
 
-`func (o *PaymentOptionContext) GetSupportedSchemesOk() (*[]string, bool)`
+`func (o *PaymentOptionContext) GetSupportedSchemesOk() (*[]Undefined, bool)`
 
 GetSupportedSchemesOk returns a tuple with the SupportedSchemes field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetSupportedSchemes
 
-`func (o *PaymentOptionContext) SetSupportedSchemes(v []string)`
+`func (o *PaymentOptionContext) SetSupportedSchemes(v []Undefined)`
 
 SetSupportedSchemes sets SupportedSchemes field to given value.
 

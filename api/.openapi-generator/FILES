@@ -41,6 +41,8 @@ docs/Error404PendingCreation.md
 docs/Error409DuplicateRecord.md
 docs/ErrorDetail.md
 docs/ErrorGeneric.md
+docs/GooglePayRequest.md
+docs/GooglePaySessionRequest.md
 docs/PaymentMethod.md
 docs/PaymentMethodRequest.md
 docs/PaymentMethodSnapshot.md
@@ -69,6 +71,8 @@ docs/PaymentServiceUpdateFields.md
 docs/PaymentServices.md
 docs/PaymentServicesApi.md
 docs/RedirectRequest.md
+docs/Refund.md
+docs/Refunds.md
 docs/ResetPasswordRequest.md
 docs/SetPasswordRequest.md
 docs/StatementDescriptor.md
@@ -84,6 +88,7 @@ docs/Transaction.md
 docs/TransactionCaptureRequest.md
 docs/TransactionPaymentMethodRequest.md
 docs/TransactionRefundRequest.md
+docs/TransactionRefundRequestDeprecated.md
 docs/TransactionRequest.md
 docs/TransactionSummary.md
 docs/Transactions.md
@@ -119,6 +124,8 @@ model_error404_pending_creation.go
 model_error409_duplicate_record.go
 model_error_detail.go
 model_error_generic.go
+model_google_pay_request.go
+model_google_pay_session_request.go
 model_payment_method.go
 model_payment_method__snapshot.go
 model_payment_method__tokenized.go
@@ -142,6 +149,8 @@ model_payment_service_update.go
 model_payment_service_update_fields.go
 model_payment_services.go
 model_redirect_request.go
+model_refund.go
+model_refunds.go
 model_reset_password_request.go
 model_set_password_request.go
 model_statement_descriptor.go
@@ -157,6 +166,7 @@ model_transaction.go
 model_transaction_capture_request.go
 model_transaction_payment_method_request.go
 model_transaction_refund_request.go
+model_transaction_refund_request_deprecated.go
 model_transaction_request.go
 model_transaction_summary.go
 model_transactions.go
