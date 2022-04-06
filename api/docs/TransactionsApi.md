@@ -11,7 +11,6 @@ Method | HTTP request | Description
 [**ListTransactionRefunds**](TransactionsApi.md#ListTransactionRefunds) | **Get** /transactions/{transaction_id}/refunds | List transaction refunds
 [**ListTransactions**](TransactionsApi.md#ListTransactions) | **Get** /transactions | List transactions
 [**RefundTransaction**](TransactionsApi.md#RefundTransaction) | **Post** /transactions/{transaction_id}/refunds | Refund transaction
-[**RefundTransactionDeprecated**](TransactionsApi.md#RefundTransactionDeprecated) | **Post** /transactions/{transaction_id}/refund | Refund or void transactions
 [**VoidTransaction**](TransactionsApi.md#VoidTransaction) | **Post** /transactions/{transaction_id}/void | Void transaction
 
 
@@ -512,78 +511,6 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Refund**](Refund.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## RefundTransactionDeprecated
-
-> Transaction RefundTransactionDeprecated(ctx, transactionId).TransactionRefundRequestDeprecated(transactionRefundRequestDeprecated).Execute()
-
-Refund or void transactions
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    transactionId := "fe26475d-ec3e-4884-9553-f7356683f7f9" // string | The ID for the transaction to get the information for.
-    transactionRefundRequestDeprecated := *openapiclient.NewTransactionRefundRequestDeprecated() // TransactionRefundRequestDeprecated |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransactionsApi.RefundTransactionDeprecated(context.Background(), transactionId).TransactionRefundRequestDeprecated(transactionRefundRequestDeprecated).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.RefundTransactionDeprecated``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `RefundTransactionDeprecated`: Transaction
-    fmt.Fprintf(os.Stdout, "Response from `TransactionsApi.RefundTransactionDeprecated`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**transactionId** | **string** | The ID for the transaction to get the information for. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiRefundTransactionDeprecatedRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **transactionRefundRequestDeprecated** | [**TransactionRefundRequestDeprecated**](TransactionRefundRequestDeprecated.md) |  | 
-
-### Return type
-
-[**Transaction**](Transaction.md)
 
 ### Authorization
 

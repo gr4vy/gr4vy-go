@@ -4,21 +4,21 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**City** | **string** | The city for the billing address. | 
-**Country** | **string** | The country for the billing address. | 
-**PostalCode** | **string** | The postal code or zip code for the billing address. | 
-**State** | **string** | The state, county, or province for the billing address. | 
+**City** | Pointer to **string** | The city for the billing address. | [optional] 
+**Country** | Pointer to **string** | The country for the billing address. | [optional] 
+**PostalCode** | Pointer to **string** | The postal code or zip code for the billing address. | [optional] 
+**State** | Pointer to **string** | The state, county, or province for the billing address. | [optional] 
 **StateCode** | Pointer to **NullableString** | The code of state, county, or province for the billing address in ISO 3166-2 format. | [optional] 
-**HouseNumberOrName** | **NullableString** | The house number or name for the billing address. Not all payment services use this field but some do. | 
-**Line1** | **string** | The first line of the billing address. | 
-**Line2** | **NullableString** | The second line of the billing address. | 
-**Organization** | **NullableString** | The optional name of the company or organisation to add to the billing address. | 
+**HouseNumberOrName** | Pointer to **NullableString** | The house number or name for the billing address. Not all payment services use this field but some do. | [optional] 
+**Line1** | Pointer to **string** | The first line of the billing address. | [optional] 
+**Line2** | Pointer to **NullableString** | The second line of the billing address. | [optional] 
+**Organization** | Pointer to **NullableString** | The optional name of the company or organisation to add to the billing address. | [optional] 
 
 ## Methods
 
 ### NewAddressUpdate
 
-`func NewAddressUpdate(city string, country string, postalCode string, state string, houseNumberOrName NullableString, line1 string, line2 NullableString, organization NullableString, ) *AddressUpdate`
+`func NewAddressUpdate() *AddressUpdate`
 
 NewAddressUpdate instantiates a new AddressUpdate object
 This constructor will assign default values to properties that have it defined,
@@ -52,6 +52,11 @@ and a boolean to check if the value has been set.
 
 SetCity sets City field to given value.
 
+### HasCity
+
+`func (o *AddressUpdate) HasCity() bool`
+
+HasCity returns a boolean if a field has been set.
 
 ### GetCountry
 
@@ -72,6 +77,11 @@ and a boolean to check if the value has been set.
 
 SetCountry sets Country field to given value.
 
+### HasCountry
+
+`func (o *AddressUpdate) HasCountry() bool`
+
+HasCountry returns a boolean if a field has been set.
 
 ### GetPostalCode
 
@@ -92,6 +102,11 @@ and a boolean to check if the value has been set.
 
 SetPostalCode sets PostalCode field to given value.
 
+### HasPostalCode
+
+`func (o *AddressUpdate) HasPostalCode() bool`
+
+HasPostalCode returns a boolean if a field has been set.
 
 ### GetState
 
@@ -112,6 +127,11 @@ and a boolean to check if the value has been set.
 
 SetState sets State field to given value.
 
+### HasState
+
+`func (o *AddressUpdate) HasState() bool`
+
+HasState returns a boolean if a field has been set.
 
 ### GetStateCode
 
@@ -167,6 +187,11 @@ and a boolean to check if the value has been set.
 
 SetHouseNumberOrName sets HouseNumberOrName field to given value.
 
+### HasHouseNumberOrName
+
+`func (o *AddressUpdate) HasHouseNumberOrName() bool`
+
+HasHouseNumberOrName returns a boolean if a field has been set.
 
 ### SetHouseNumberOrNameNil
 
@@ -197,6 +222,11 @@ and a boolean to check if the value has been set.
 
 SetLine1 sets Line1 field to given value.
 
+### HasLine1
+
+`func (o *AddressUpdate) HasLine1() bool`
+
+HasLine1 returns a boolean if a field has been set.
 
 ### GetLine2
 
@@ -217,6 +247,11 @@ and a boolean to check if the value has been set.
 
 SetLine2 sets Line2 field to given value.
 
+### HasLine2
+
+`func (o *AddressUpdate) HasLine2() bool`
+
+HasLine2 returns a boolean if a field has been set.
 
 ### SetLine2Nil
 
@@ -247,6 +282,11 @@ and a boolean to check if the value has been set.
 
 SetOrganization sets Organization field to given value.
 
+### HasOrganization
+
+`func (o *AddressUpdate) HasOrganization() bool`
+
+HasOrganization returns a boolean if a field has been set.
 
 ### SetOrganizationNil
 

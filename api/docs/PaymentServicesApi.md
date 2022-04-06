@@ -33,7 +33,7 @@ import (
 )
 
 func main() {
-    paymentServiceRequest := *openapiclient.NewPaymentServiceRequest("Stripe (Main)", []openapiclient.PaymentServiceUpdateFields{*openapiclient.NewPaymentServiceUpdateFields("private_key", "sk_test_4eC39HqLyjWDarjtT1zdp7dc")}, []string{"AcceptedCountries_example"}, []string{"AcceptedCurrencies_example"}, "stripe-card") // PaymentServiceRequest |  (optional)
+    paymentServiceRequest := *openapiclient.NewPaymentServiceRequest("Stripe (Main)", []openapiclient.PaymentServiceUpdateFields{*openapiclient.NewPaymentServiceUpdateFields("private_key", "sk_test_26PHem9AhJZvU623DfE1x4sd")}, []string{"AcceptedCountries_example"}, []string{"AcceptedCurrencies_example"}, "stripe-card") // PaymentServiceRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)

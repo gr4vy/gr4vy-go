@@ -40,6 +40,8 @@ type TransactionRequest struct {
 	StatementDescriptor *StatementDescriptor `json:"statement_descriptor,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
 	CartItems *[]CartItem `json:"cart_items,omitempty"`
+	// A scheme's transaction identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction.  If not provided, and a qualifying customer initiated transaction has been previously made, then Gr4vy will populate this value with the identifier returned for that transaction.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID.
+	PreviousSchemeTransactionId NullableString `json:"previous_scheme_transaction_id,omitempty"`
 }
 
 // NewTransactionRequest instantiates a new TransactionRequest object
@@ -59,6 +61,8 @@ func NewTransactionRequest(amount int32, currency string, paymentMethod Transact
 	this.MerchantInitiated = &merchantInitiated
 	var isSubsequentPayment bool = false
 	this.IsSubsequentPayment = &isSubsequentPayment
+	var previousSchemeTransactionId string = "null"
+	this.PreviousSchemeTransactionId = *NewNullableString(&previousSchemeTransactionId)
 	return &this
 }
 
@@ -75,6 +79,8 @@ func NewTransactionRequestWithDefaults() *TransactionRequest {
 	this.MerchantInitiated = &merchantInitiated
 	var isSubsequentPayment bool = false
 	this.IsSubsequentPayment = &isSubsequentPayment
+	var previousSchemeTransactionId string = "null"
+	this.PreviousSchemeTransactionId = *NewNullableString(&previousSchemeTransactionId)
 	return &this
 }
 
@@ -480,6 +486,48 @@ func (o *TransactionRequest) SetCartItems(v []CartItem) {
 	o.CartItems = &v
 }
 
+// GetPreviousSchemeTransactionId returns the PreviousSchemeTransactionId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRequest) GetPreviousSchemeTransactionId() string {
+	if o == nil || o.PreviousSchemeTransactionId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.PreviousSchemeTransactionId.Get()
+}
+
+// GetPreviousSchemeTransactionIdOk returns a tuple with the PreviousSchemeTransactionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRequest) GetPreviousSchemeTransactionIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.PreviousSchemeTransactionId.Get(), o.PreviousSchemeTransactionId.IsSet()
+}
+
+// HasPreviousSchemeTransactionId returns a boolean if a field has been set.
+func (o *TransactionRequest) HasPreviousSchemeTransactionId() bool {
+	if o != nil && o.PreviousSchemeTransactionId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPreviousSchemeTransactionId gets a reference to the given NullableString and assigns it to the PreviousSchemeTransactionId field.
+func (o *TransactionRequest) SetPreviousSchemeTransactionId(v string) {
+	o.PreviousSchemeTransactionId.Set(&v)
+}
+// SetPreviousSchemeTransactionIdNil sets the value for PreviousSchemeTransactionId to be an explicit nil
+func (o *TransactionRequest) SetPreviousSchemeTransactionIdNil() {
+	o.PreviousSchemeTransactionId.Set(nil)
+}
+
+// UnsetPreviousSchemeTransactionId ensures that no value is present for PreviousSchemeTransactionId, not even an explicit nil
+func (o *TransactionRequest) UnsetPreviousSchemeTransactionId() {
+	o.PreviousSchemeTransactionId.Unset()
+}
+
 func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -520,6 +568,9 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.CartItems != nil {
 		toSerialize["cart_items"] = o.CartItems
+	}
+	if o.PreviousSchemeTransactionId.IsSet() {
+		toSerialize["previous_scheme_transaction_id"] = o.PreviousSchemeTransactionId.Get()
 	}
 	return json.Marshal(toSerialize)
 }

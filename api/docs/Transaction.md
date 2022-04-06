@@ -22,6 +22,11 @@ Name | Type | Description | Notes
 **IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with &#x60;payment_source&#x60; set to &#x60;recurring&#x60;, &#x60;installment&#x60;, or &#x60;card_on_file&#x60; and will be ignored for other values or if &#x60;payment_source&#x60; is not present. | [optional] [default to false]
 **StatementDescriptor** | Pointer to [**StatementDescriptor**](StatementDescriptor.md) |  | [optional] 
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
+**SchemeTransactionId** | Pointer to **NullableString** | An identifier for the transaction used by the scheme itself, when available.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID. | [optional] [default to "null"]
+**RawResponseCode** | Pointer to **NullableString** | This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
+**RawResponseDescription** | Pointer to **NullableString** | This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
+**AvsResponseCode** | Pointer to **NullableString** | The response code received from the payment service for the Address Verification Check (AVS). This code is mapped to a standardized Gr4vy AVS response code.  - &#x60;no_match&#x60; - neither address or postal code match - &#x60;match&#x60; - both address and postal code match - &#x60;partial_match_address&#x60; - address matches but postal code does not - &#x60;partial_match_postcode&#x60; - postal code matches but address does not - &#x60;unavailable &#x60; - AVS is unavailable for card/country  The value of this field can be &#x60;null&#x60; if the payment service did not provide a response. | [optional] 
+**CvvResponseCode** | Pointer to **NullableString** | The response code received from the payment service for the Card Verification Value (CVV). This code is mapped to a standardized Gr4vy CVV response code.  - &#x60;no_match&#x60; - the CVV does not match the expected value - &#x60;match&#x60; - the CVV matches the expected value - &#x60;unavailable &#x60; - CVV check unavailable for card our country - &#x60;not_provided &#x60; - CVV not provided  The value of this field can be &#x60;null&#x60; if the payment service did not provide a response. | [optional] 
 
 ## Methods
 
@@ -502,6 +507,181 @@ SetCartItems sets CartItems field to given value.
 
 HasCartItems returns a boolean if a field has been set.
 
+### GetSchemeTransactionId
+
+`func (o *Transaction) GetSchemeTransactionId() string`
+
+GetSchemeTransactionId returns the SchemeTransactionId field if non-nil, zero value otherwise.
+
+### GetSchemeTransactionIdOk
+
+`func (o *Transaction) GetSchemeTransactionIdOk() (*string, bool)`
+
+GetSchemeTransactionIdOk returns a tuple with the SchemeTransactionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchemeTransactionId
+
+`func (o *Transaction) SetSchemeTransactionId(v string)`
+
+SetSchemeTransactionId sets SchemeTransactionId field to given value.
+
+### HasSchemeTransactionId
+
+`func (o *Transaction) HasSchemeTransactionId() bool`
+
+HasSchemeTransactionId returns a boolean if a field has been set.
+
+### SetSchemeTransactionIdNil
+
+`func (o *Transaction) SetSchemeTransactionIdNil(b bool)`
+
+ SetSchemeTransactionIdNil sets the value for SchemeTransactionId to be an explicit nil
+
+### UnsetSchemeTransactionId
+`func (o *Transaction) UnsetSchemeTransactionId()`
+
+UnsetSchemeTransactionId ensures that no value is present for SchemeTransactionId, not even an explicit nil
+### GetRawResponseCode
+
+`func (o *Transaction) GetRawResponseCode() string`
+
+GetRawResponseCode returns the RawResponseCode field if non-nil, zero value otherwise.
+
+### GetRawResponseCodeOk
+
+`func (o *Transaction) GetRawResponseCodeOk() (*string, bool)`
+
+GetRawResponseCodeOk returns a tuple with the RawResponseCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawResponseCode
+
+`func (o *Transaction) SetRawResponseCode(v string)`
+
+SetRawResponseCode sets RawResponseCode field to given value.
+
+### HasRawResponseCode
+
+`func (o *Transaction) HasRawResponseCode() bool`
+
+HasRawResponseCode returns a boolean if a field has been set.
+
+### SetRawResponseCodeNil
+
+`func (o *Transaction) SetRawResponseCodeNil(b bool)`
+
+ SetRawResponseCodeNil sets the value for RawResponseCode to be an explicit nil
+
+### UnsetRawResponseCode
+`func (o *Transaction) UnsetRawResponseCode()`
+
+UnsetRawResponseCode ensures that no value is present for RawResponseCode, not even an explicit nil
+### GetRawResponseDescription
+
+`func (o *Transaction) GetRawResponseDescription() string`
+
+GetRawResponseDescription returns the RawResponseDescription field if non-nil, zero value otherwise.
+
+### GetRawResponseDescriptionOk
+
+`func (o *Transaction) GetRawResponseDescriptionOk() (*string, bool)`
+
+GetRawResponseDescriptionOk returns a tuple with the RawResponseDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawResponseDescription
+
+`func (o *Transaction) SetRawResponseDescription(v string)`
+
+SetRawResponseDescription sets RawResponseDescription field to given value.
+
+### HasRawResponseDescription
+
+`func (o *Transaction) HasRawResponseDescription() bool`
+
+HasRawResponseDescription returns a boolean if a field has been set.
+
+### SetRawResponseDescriptionNil
+
+`func (o *Transaction) SetRawResponseDescriptionNil(b bool)`
+
+ SetRawResponseDescriptionNil sets the value for RawResponseDescription to be an explicit nil
+
+### UnsetRawResponseDescription
+`func (o *Transaction) UnsetRawResponseDescription()`
+
+UnsetRawResponseDescription ensures that no value is present for RawResponseDescription, not even an explicit nil
+### GetAvsResponseCode
+
+`func (o *Transaction) GetAvsResponseCode() string`
+
+GetAvsResponseCode returns the AvsResponseCode field if non-nil, zero value otherwise.
+
+### GetAvsResponseCodeOk
+
+`func (o *Transaction) GetAvsResponseCodeOk() (*string, bool)`
+
+GetAvsResponseCodeOk returns a tuple with the AvsResponseCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAvsResponseCode
+
+`func (o *Transaction) SetAvsResponseCode(v string)`
+
+SetAvsResponseCode sets AvsResponseCode field to given value.
+
+### HasAvsResponseCode
+
+`func (o *Transaction) HasAvsResponseCode() bool`
+
+HasAvsResponseCode returns a boolean if a field has been set.
+
+### SetAvsResponseCodeNil
+
+`func (o *Transaction) SetAvsResponseCodeNil(b bool)`
+
+ SetAvsResponseCodeNil sets the value for AvsResponseCode to be an explicit nil
+
+### UnsetAvsResponseCode
+`func (o *Transaction) UnsetAvsResponseCode()`
+
+UnsetAvsResponseCode ensures that no value is present for AvsResponseCode, not even an explicit nil
+### GetCvvResponseCode
+
+`func (o *Transaction) GetCvvResponseCode() string`
+
+GetCvvResponseCode returns the CvvResponseCode field if non-nil, zero value otherwise.
+
+### GetCvvResponseCodeOk
+
+`func (o *Transaction) GetCvvResponseCodeOk() (*string, bool)`
+
+GetCvvResponseCodeOk returns a tuple with the CvvResponseCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCvvResponseCode
+
+`func (o *Transaction) SetCvvResponseCode(v string)`
+
+SetCvvResponseCode sets CvvResponseCode field to given value.
+
+### HasCvvResponseCode
+
+`func (o *Transaction) HasCvvResponseCode() bool`
+
+HasCvvResponseCode returns a boolean if a field has been set.
+
+### SetCvvResponseCodeNil
+
+`func (o *Transaction) SetCvvResponseCodeNil(b bool)`
+
+ SetCvvResponseCodeNil sets the value for CvvResponseCode to be an explicit nil
+
+### UnsetCvvResponseCode
+`func (o *Transaction) UnsetCvvResponseCode()`
+
+UnsetCvvResponseCode ensures that no value is present for CvvResponseCode, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -17,6 +17,7 @@ Name | Type | Description | Notes
 **Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://gr4vy.com/docs/ under &#x60;Connections&#x60; for more information on how specific providers support metadata. | [optional] 
 **StatementDescriptor** | Pointer to [**StatementDescriptor**](StatementDescriptor.md) |  | [optional] 
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
+**PreviousSchemeTransactionId** | Pointer to **NullableString** | A scheme&#39;s transaction identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction.  If not provided, and a qualifying customer initiated transaction has been previously made, then Gr4vy will populate this value with the identifier returned for that transaction.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID. | [optional] [default to "null"]
 
 ## Methods
 
@@ -357,6 +358,41 @@ SetCartItems sets CartItems field to given value.
 
 HasCartItems returns a boolean if a field has been set.
 
+### GetPreviousSchemeTransactionId
+
+`func (o *TransactionRequest) GetPreviousSchemeTransactionId() string`
+
+GetPreviousSchemeTransactionId returns the PreviousSchemeTransactionId field if non-nil, zero value otherwise.
+
+### GetPreviousSchemeTransactionIdOk
+
+`func (o *TransactionRequest) GetPreviousSchemeTransactionIdOk() (*string, bool)`
+
+GetPreviousSchemeTransactionIdOk returns a tuple with the PreviousSchemeTransactionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPreviousSchemeTransactionId
+
+`func (o *TransactionRequest) SetPreviousSchemeTransactionId(v string)`
+
+SetPreviousSchemeTransactionId sets PreviousSchemeTransactionId field to given value.
+
+### HasPreviousSchemeTransactionId
+
+`func (o *TransactionRequest) HasPreviousSchemeTransactionId() bool`
+
+HasPreviousSchemeTransactionId returns a boolean if a field has been set.
+
+### SetPreviousSchemeTransactionIdNil
+
+`func (o *TransactionRequest) SetPreviousSchemeTransactionIdNil(b bool)`
+
+ SetPreviousSchemeTransactionIdNil sets the value for PreviousSchemeTransactionId to be an explicit nil
+
+### UnsetPreviousSchemeTransactionId
+`func (o *TransactionRequest) UnsetPreviousSchemeTransactionId()`
+
+UnsetPreviousSchemeTransactionId ensures that no value is present for PreviousSchemeTransactionId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

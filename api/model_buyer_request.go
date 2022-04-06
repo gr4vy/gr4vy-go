@@ -21,7 +21,7 @@ type BuyerRequest struct {
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.
 	DisplayName NullableString `json:"display_name,omitempty"`
-	BillingDetails *BillingDetails `json:"billing_details,omitempty"`
+	BillingDetails *BillingDetailsRequest `json:"billing_details,omitempty"`
 }
 
 // NewBuyerRequest instantiates a new BuyerRequest object
@@ -126,9 +126,9 @@ func (o *BuyerRequest) UnsetDisplayName() {
 }
 
 // GetBillingDetails returns the BillingDetails field value if set, zero value otherwise.
-func (o *BuyerRequest) GetBillingDetails() BillingDetails {
+func (o *BuyerRequest) GetBillingDetails() BillingDetailsRequest {
 	if o == nil || o.BillingDetails == nil {
-		var ret BillingDetails
+		var ret BillingDetailsRequest
 		return ret
 	}
 	return *o.BillingDetails
@@ -136,7 +136,7 @@ func (o *BuyerRequest) GetBillingDetails() BillingDetails {
 
 // GetBillingDetailsOk returns a tuple with the BillingDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BuyerRequest) GetBillingDetailsOk() (*BillingDetails, bool) {
+func (o *BuyerRequest) GetBillingDetailsOk() (*BillingDetailsRequest, bool) {
 	if o == nil || o.BillingDetails == nil {
 		return nil, false
 	}
@@ -152,8 +152,8 @@ func (o *BuyerRequest) HasBillingDetails() bool {
 	return false
 }
 
-// SetBillingDetails gets a reference to the given BillingDetails and assigns it to the BillingDetails field.
-func (o *BuyerRequest) SetBillingDetails(v BillingDetails) {
+// SetBillingDetails gets a reference to the given BillingDetailsRequest and assigns it to the BillingDetails field.
+func (o *BuyerRequest) SetBillingDetails(v BillingDetailsRequest) {
 	o.BillingDetails = &v
 }
 

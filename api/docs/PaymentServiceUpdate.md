@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DisplayName** | Pointer to **string** | A custom name for the payment service. This will be shown in the Admin UI. | [optional] 
-**Fields** | Pointer to [**[]PaymentServiceUpdateFields**](PaymentServiceUpdateFields.md) | A list of fields, each containing a key-value pair for each field defined by the definition for this payment service e.g. for stripe-card &#x60;secret_key&#x60; is required and so must be sent with in this field. | [optional] 
+**Fields** | Pointer to [**[]PaymentServiceUpdateFields**](PaymentServiceUpdateFields.md) | A list of fields, each containing a key-value pair for each field defined by the definition for this payment service e.g. for stripe-card &#x60;secret_key&#x60; is required and so must be sent within this field. | [optional] 
 **AcceptedCountries** | Pointer to **[]string** | A list of countries that this payment service needs to support in ISO two-letter code format. | [optional] 
 **AcceptedCurrencies** | Pointer to **[]string** | A list of currencies that this payment service needs to support in ISO 4217 three-letter code format. | [optional] 
 **ThreeDSecureEnabled** | Pointer to **bool** | Defines if 3-D Secure is enabled for the service (can only be enabled if the payment service definition supports the &#x60;three_d_secure_hosted&#x60; feature). This does not affect pass through 3-D Secure data. | [optional] [default to false]

@@ -32,6 +32,8 @@ type ApiListPaymentOptionsRequest struct {
 	ApiService *PaymentOptionsApiService
 	country *string
 	currency *string
+	amount *int32
+	metadata *string
 	locale *string
 }
 
@@ -41,6 +43,14 @@ func (r ApiListPaymentOptionsRequest) Country(country string) ApiListPaymentOpti
 }
 func (r ApiListPaymentOptionsRequest) Currency(currency string) ApiListPaymentOptionsRequest {
 	r.currency = &currency
+	return r
+}
+func (r ApiListPaymentOptionsRequest) Amount(amount int32) ApiListPaymentOptionsRequest {
+	r.amount = &amount
+	return r
+}
+func (r ApiListPaymentOptionsRequest) Metadata(metadata string) ApiListPaymentOptionsRequest {
+	r.metadata = &metadata
 	return r
 }
 func (r ApiListPaymentOptionsRequest) Locale(locale string) ApiListPaymentOptionsRequest {
@@ -96,6 +106,12 @@ func (a *PaymentOptionsApiService) ListPaymentOptionsExecute(r ApiListPaymentOpt
 	}
 	if r.currency != nil {
 		localVarQueryParams.Add("currency", parameterToString(*r.currency, ""))
+	}
+	if r.amount != nil {
+		localVarQueryParams.Add("amount", parameterToString(*r.amount, ""))
+	}
+	if r.metadata != nil {
+		localVarQueryParams.Add("metadata", parameterToString(*r.metadata, ""))
 	}
 	if r.locale != nil {
 		localVarQueryParams.Add("locale", parameterToString(*r.locale, ""))
