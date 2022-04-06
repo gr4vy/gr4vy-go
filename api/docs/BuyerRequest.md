@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers. | [optional] 
 **DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
-**BillingDetails** | Pointer to [**BillingDetails**](BillingDetails.md) |  | [optional] 
+**BillingDetails** | Pointer to [**BillingDetailsRequest**](BillingDetailsRequest.md) |  | [optional] 
 
 ## Methods
 
@@ -99,20 +99,20 @@ HasDisplayName returns a boolean if a field has been set.
 UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
 ### GetBillingDetails
 
-`func (o *BuyerRequest) GetBillingDetails() BillingDetails`
+`func (o *BuyerRequest) GetBillingDetails() BillingDetailsRequest`
 
 GetBillingDetails returns the BillingDetails field if non-nil, zero value otherwise.
 
 ### GetBillingDetailsOk
 
-`func (o *BuyerRequest) GetBillingDetailsOk() (*BillingDetails, bool)`
+`func (o *BuyerRequest) GetBillingDetailsOk() (*BillingDetailsRequest, bool)`
 
 GetBillingDetailsOk returns a tuple with the BillingDetails field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetBillingDetails
 
-`func (o *BuyerRequest) SetBillingDetails(v BillingDetails)`
+`func (o *BuyerRequest) SetBillingDetails(v BillingDetailsRequest)`
 
 SetBillingDetails sets BillingDetails field to given value.
 

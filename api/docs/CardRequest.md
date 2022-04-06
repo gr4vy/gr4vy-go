@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the card against your own records. | [optional] 
 **BuyerId** | Pointer to **string** | The ID of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_external_identifier&#x60; field needs to be unset. | [optional] 
 **BuyerExternalIdentifier** | Pointer to **string** | The &#x60;external_identifier&#x60; of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_id&#x60; field needs to be unset. | [optional] 
-**RedirectUrl** | Pointer to **string** | The redirect URL to redirect a buyer after a 3D Secure flow has been completed. This will be appended with both a transaction ID and status (e.g. &#x60;https://example.com/callback? gr4vy_transaction_id&#x3D;123&amp;gr4vy_transaction_status&#x3D;capture_succeeded&#x60;). This is required if the transaction request body does not include &#x60;three_d_secure_data&#x60;. | [optional] 
 
 ## Methods
 
@@ -196,31 +195,6 @@ SetBuyerExternalIdentifier sets BuyerExternalIdentifier field to given value.
 `func (o *CardRequest) HasBuyerExternalIdentifier() bool`
 
 HasBuyerExternalIdentifier returns a boolean if a field has been set.
-
-### GetRedirectUrl
-
-`func (o *CardRequest) GetRedirectUrl() string`
-
-GetRedirectUrl returns the RedirectUrl field if non-nil, zero value otherwise.
-
-### GetRedirectUrlOk
-
-`func (o *CardRequest) GetRedirectUrlOk() (*string, bool)`
-
-GetRedirectUrlOk returns a tuple with the RedirectUrl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRedirectUrl
-
-`func (o *CardRequest) SetRedirectUrl(v string)`
-
-SetRedirectUrl sets RedirectUrl field to given value.
-
-### HasRedirectUrl
-
-`func (o *CardRequest) HasRedirectUrl() bool`
-
-HasRedirectUrl returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -18,7 +18,7 @@ import (
 // TaxId The tax ID information associated to a buyer.
 type TaxId struct {
 	// The tax ID for the buyer.
-	Id *string `json:"id,omitempty"`
+	Value string `json:"value"`
 	// The kind of tax ID.
 	Kind string `json:"kind"`
 }
@@ -27,8 +27,9 @@ type TaxId struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTaxId(kind string) *TaxId {
+func NewTaxId(value string, kind string) *TaxId {
 	this := TaxId{}
+	this.Value = value
 	this.Kind = kind
 	return &this
 }
@@ -41,36 +42,28 @@ func NewTaxIdWithDefaults() *TaxId {
 	return &this
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *TaxId) GetId() string {
-	if o == nil || o.Id == nil {
+// GetValue returns the Value field value
+func (o *TaxId) GetValue() string {
+	if o == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+
+	return o.Value
 }
 
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// GetValueOk returns a tuple with the Value field value
 // and a boolean to check if the value has been set.
-func (o *TaxId) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+func (o *TaxId) GetValueOk() (*string, bool) {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Id, true
+	return &o.Value, true
 }
 
-// HasId returns a boolean if a field has been set.
-func (o *TaxId) HasId() bool {
-	if o != nil && o.Id != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *TaxId) SetId(v string) {
-	o.Id = &v
+// SetValue sets field value
+func (o *TaxId) SetValue(v string) {
+	o.Value = v
 }
 
 // GetKind returns the Kind field value
@@ -99,8 +92,8 @@ func (o *TaxId) SetKind(v string) {
 
 func (o TaxId) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
+	if true {
+		toSerialize["value"] = o.Value
 	}
 	if true {
 		toSerialize["kind"] = o.Kind

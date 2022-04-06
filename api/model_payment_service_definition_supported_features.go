@@ -25,6 +25,14 @@ type PaymentServiceDefinitionSupportedFeatures struct {
 	ThreeDSecurePassThrough *bool `json:"three_d_secure_pass_through,omitempty"`
 	// Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor.
 	NetworkTokens *bool `json:"network_tokens,omitempty"`
+	// Supports verifying the credentials entered while setting up the underlying processor. This is for internal use only.
+	VerifyCredentials *bool `json:"verify_credentials,omitempty"`
+	// Supports [voiding](#operation/void-transaction) authorized transactions.
+	Void *bool `json:"void,omitempty"`
+	// Supports [refunding](#operation/refund-transaction) captured transactions.
+	Refunds *bool `json:"refunds,omitempty"`
+	// Supports [partially refunding](#operation/refund-transaction) captured transactions.
+	PartialRefunds *bool `json:"partial_refunds,omitempty"`
 }
 
 // NewPaymentServiceDefinitionSupportedFeatures instantiates a new PaymentServiceDefinitionSupportedFeatures object
@@ -172,6 +180,134 @@ func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokens(v bool) {
 	o.NetworkTokens = &v
 }
 
+// GetVerifyCredentials returns the VerifyCredentials field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetVerifyCredentials() bool {
+	if o == nil || o.VerifyCredentials == nil {
+		var ret bool
+		return ret
+	}
+	return *o.VerifyCredentials
+}
+
+// GetVerifyCredentialsOk returns a tuple with the VerifyCredentials field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetVerifyCredentialsOk() (*bool, bool) {
+	if o == nil || o.VerifyCredentials == nil {
+		return nil, false
+	}
+	return o.VerifyCredentials, true
+}
+
+// HasVerifyCredentials returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasVerifyCredentials() bool {
+	if o != nil && o.VerifyCredentials != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVerifyCredentials gets a reference to the given bool and assigns it to the VerifyCredentials field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetVerifyCredentials(v bool) {
+	o.VerifyCredentials = &v
+}
+
+// GetVoid returns the Void field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetVoid() bool {
+	if o == nil || o.Void == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Void
+}
+
+// GetVoidOk returns a tuple with the Void field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetVoidOk() (*bool, bool) {
+	if o == nil || o.Void == nil {
+		return nil, false
+	}
+	return o.Void, true
+}
+
+// HasVoid returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasVoid() bool {
+	if o != nil && o.Void != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetVoid gets a reference to the given bool and assigns it to the Void field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetVoid(v bool) {
+	o.Void = &v
+}
+
+// GetRefunds returns the Refunds field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetRefunds() bool {
+	if o == nil || o.Refunds == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Refunds
+}
+
+// GetRefundsOk returns a tuple with the Refunds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetRefundsOk() (*bool, bool) {
+	if o == nil || o.Refunds == nil {
+		return nil, false
+	}
+	return o.Refunds, true
+}
+
+// HasRefunds returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasRefunds() bool {
+	if o != nil && o.Refunds != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRefunds gets a reference to the given bool and assigns it to the Refunds field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetRefunds(v bool) {
+	o.Refunds = &v
+}
+
+// GetPartialRefunds returns the PartialRefunds field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetPartialRefunds() bool {
+	if o == nil || o.PartialRefunds == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PartialRefunds
+}
+
+// GetPartialRefundsOk returns a tuple with the PartialRefunds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetPartialRefundsOk() (*bool, bool) {
+	if o == nil || o.PartialRefunds == nil {
+		return nil, false
+	}
+	return o.PartialRefunds, true
+}
+
+// HasPartialRefunds returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasPartialRefunds() bool {
+	if o != nil && o.PartialRefunds != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPartialRefunds gets a reference to the given bool and assigns it to the PartialRefunds field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetPartialRefunds(v bool) {
+	o.PartialRefunds = &v
+}
+
 func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.PaymentMethodTokenization != nil {
@@ -185,6 +321,18 @@ func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error)
 	}
 	if o.NetworkTokens != nil {
 		toSerialize["network_tokens"] = o.NetworkTokens
+	}
+	if o.VerifyCredentials != nil {
+		toSerialize["verify_credentials"] = o.VerifyCredentials
+	}
+	if o.Void != nil {
+		toSerialize["void"] = o.Void
+	}
+	if o.Refunds != nil {
+		toSerialize["refunds"] = o.Refunds
+	}
+	if o.PartialRefunds != nil {
+		toSerialize["partial_refunds"] = o.PartialRefunds
 	}
 	return json.Marshal(toSerialize)
 }

@@ -50,6 +50,16 @@ type Transaction struct {
 	StatementDescriptor *StatementDescriptor `json:"statement_descriptor,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
 	CartItems *[]CartItem `json:"cart_items,omitempty"`
+	// An identifier for the transaction used by the scheme itself, when available.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID.
+	SchemeTransactionId NullableString `json:"scheme_transaction_id,omitempty"`
+	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
+	RawResponseCode NullableString `json:"raw_response_code,omitempty"`
+	// This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
+	RawResponseDescription NullableString `json:"raw_response_description,omitempty"`
+	// The response code received from the payment service for the Address Verification Check (AVS). This code is mapped to a standardized Gr4vy AVS response code.  - `no_match` - neither address or postal code match - `match` - both address and postal code match - `partial_match_address` - address matches but postal code does not - `partial_match_postcode` - postal code matches but address does not - `unavailable ` - AVS is unavailable for card/country  The value of this field can be `null` if the payment service did not provide a response.
+	AvsResponseCode NullableString `json:"avs_response_code,omitempty"`
+	// The response code received from the payment service for the Card Verification Value (CVV). This code is mapped to a standardized Gr4vy CVV response code.  - `no_match` - the CVV does not match the expected value - `match` - the CVV matches the expected value - `unavailable ` - CVV check unavailable for card our country - `not_provided ` - CVV not provided  The value of this field can be `null` if the payment service did not provide a response.
+	CvvResponseCode NullableString `json:"cvv_response_code,omitempty"`
 }
 
 // NewTransaction instantiates a new Transaction object
@@ -62,6 +72,8 @@ func NewTransaction() *Transaction {
 	this.MerchantInitiated = &merchantInitiated
 	var isSubsequentPayment bool = false
 	this.IsSubsequentPayment = &isSubsequentPayment
+	var schemeTransactionId string = "null"
+	this.SchemeTransactionId = *NewNullableString(&schemeTransactionId)
 	return &this
 }
 
@@ -74,6 +86,8 @@ func NewTransactionWithDefaults() *Transaction {
 	this.MerchantInitiated = &merchantInitiated
 	var isSubsequentPayment bool = false
 	this.IsSubsequentPayment = &isSubsequentPayment
+	var schemeTransactionId string = "null"
+	this.SchemeTransactionId = *NewNullableString(&schemeTransactionId)
 	return &this
 }
 
@@ -663,6 +677,216 @@ func (o *Transaction) SetCartItems(v []CartItem) {
 	o.CartItems = &v
 }
 
+// GetSchemeTransactionId returns the SchemeTransactionId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetSchemeTransactionId() string {
+	if o == nil || o.SchemeTransactionId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.SchemeTransactionId.Get()
+}
+
+// GetSchemeTransactionIdOk returns a tuple with the SchemeTransactionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetSchemeTransactionIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.SchemeTransactionId.Get(), o.SchemeTransactionId.IsSet()
+}
+
+// HasSchemeTransactionId returns a boolean if a field has been set.
+func (o *Transaction) HasSchemeTransactionId() bool {
+	if o != nil && o.SchemeTransactionId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemeTransactionId gets a reference to the given NullableString and assigns it to the SchemeTransactionId field.
+func (o *Transaction) SetSchemeTransactionId(v string) {
+	o.SchemeTransactionId.Set(&v)
+}
+// SetSchemeTransactionIdNil sets the value for SchemeTransactionId to be an explicit nil
+func (o *Transaction) SetSchemeTransactionIdNil() {
+	o.SchemeTransactionId.Set(nil)
+}
+
+// UnsetSchemeTransactionId ensures that no value is present for SchemeTransactionId, not even an explicit nil
+func (o *Transaction) UnsetSchemeTransactionId() {
+	o.SchemeTransactionId.Unset()
+}
+
+// GetRawResponseCode returns the RawResponseCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetRawResponseCode() string {
+	if o == nil || o.RawResponseCode.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RawResponseCode.Get()
+}
+
+// GetRawResponseCodeOk returns a tuple with the RawResponseCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetRawResponseCodeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.RawResponseCode.Get(), o.RawResponseCode.IsSet()
+}
+
+// HasRawResponseCode returns a boolean if a field has been set.
+func (o *Transaction) HasRawResponseCode() bool {
+	if o != nil && o.RawResponseCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRawResponseCode gets a reference to the given NullableString and assigns it to the RawResponseCode field.
+func (o *Transaction) SetRawResponseCode(v string) {
+	o.RawResponseCode.Set(&v)
+}
+// SetRawResponseCodeNil sets the value for RawResponseCode to be an explicit nil
+func (o *Transaction) SetRawResponseCodeNil() {
+	o.RawResponseCode.Set(nil)
+}
+
+// UnsetRawResponseCode ensures that no value is present for RawResponseCode, not even an explicit nil
+func (o *Transaction) UnsetRawResponseCode() {
+	o.RawResponseCode.Unset()
+}
+
+// GetRawResponseDescription returns the RawResponseDescription field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetRawResponseDescription() string {
+	if o == nil || o.RawResponseDescription.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RawResponseDescription.Get()
+}
+
+// GetRawResponseDescriptionOk returns a tuple with the RawResponseDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetRawResponseDescriptionOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.RawResponseDescription.Get(), o.RawResponseDescription.IsSet()
+}
+
+// HasRawResponseDescription returns a boolean if a field has been set.
+func (o *Transaction) HasRawResponseDescription() bool {
+	if o != nil && o.RawResponseDescription.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRawResponseDescription gets a reference to the given NullableString and assigns it to the RawResponseDescription field.
+func (o *Transaction) SetRawResponseDescription(v string) {
+	o.RawResponseDescription.Set(&v)
+}
+// SetRawResponseDescriptionNil sets the value for RawResponseDescription to be an explicit nil
+func (o *Transaction) SetRawResponseDescriptionNil() {
+	o.RawResponseDescription.Set(nil)
+}
+
+// UnsetRawResponseDescription ensures that no value is present for RawResponseDescription, not even an explicit nil
+func (o *Transaction) UnsetRawResponseDescription() {
+	o.RawResponseDescription.Unset()
+}
+
+// GetAvsResponseCode returns the AvsResponseCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetAvsResponseCode() string {
+	if o == nil || o.AvsResponseCode.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.AvsResponseCode.Get()
+}
+
+// GetAvsResponseCodeOk returns a tuple with the AvsResponseCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetAvsResponseCodeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AvsResponseCode.Get(), o.AvsResponseCode.IsSet()
+}
+
+// HasAvsResponseCode returns a boolean if a field has been set.
+func (o *Transaction) HasAvsResponseCode() bool {
+	if o != nil && o.AvsResponseCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAvsResponseCode gets a reference to the given NullableString and assigns it to the AvsResponseCode field.
+func (o *Transaction) SetAvsResponseCode(v string) {
+	o.AvsResponseCode.Set(&v)
+}
+// SetAvsResponseCodeNil sets the value for AvsResponseCode to be an explicit nil
+func (o *Transaction) SetAvsResponseCodeNil() {
+	o.AvsResponseCode.Set(nil)
+}
+
+// UnsetAvsResponseCode ensures that no value is present for AvsResponseCode, not even an explicit nil
+func (o *Transaction) UnsetAvsResponseCode() {
+	o.AvsResponseCode.Unset()
+}
+
+// GetCvvResponseCode returns the CvvResponseCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetCvvResponseCode() string {
+	if o == nil || o.CvvResponseCode.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CvvResponseCode.Get()
+}
+
+// GetCvvResponseCodeOk returns a tuple with the CvvResponseCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetCvvResponseCodeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CvvResponseCode.Get(), o.CvvResponseCode.IsSet()
+}
+
+// HasCvvResponseCode returns a boolean if a field has been set.
+func (o *Transaction) HasCvvResponseCode() bool {
+	if o != nil && o.CvvResponseCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCvvResponseCode gets a reference to the given NullableString and assigns it to the CvvResponseCode field.
+func (o *Transaction) SetCvvResponseCode(v string) {
+	o.CvvResponseCode.Set(&v)
+}
+// SetCvvResponseCodeNil sets the value for CvvResponseCode to be an explicit nil
+func (o *Transaction) SetCvvResponseCodeNil() {
+	o.CvvResponseCode.Set(nil)
+}
+
+// UnsetCvvResponseCode ensures that no value is present for CvvResponseCode, not even an explicit nil
+func (o *Transaction) UnsetCvvResponseCode() {
+	o.CvvResponseCode.Unset()
+}
+
 func (o Transaction) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -718,6 +942,21 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.CartItems != nil {
 		toSerialize["cart_items"] = o.CartItems
+	}
+	if o.SchemeTransactionId.IsSet() {
+		toSerialize["scheme_transaction_id"] = o.SchemeTransactionId.Get()
+	}
+	if o.RawResponseCode.IsSet() {
+		toSerialize["raw_response_code"] = o.RawResponseCode.Get()
+	}
+	if o.RawResponseDescription.IsSet() {
+		toSerialize["raw_response_description"] = o.RawResponseDescription.Get()
+	}
+	if o.AvsResponseCode.IsSet() {
+		toSerialize["avs_response_code"] = o.AvsResponseCode.Get()
+	}
+	if o.CvvResponseCode.IsSet() {
+		toSerialize["cvv_response_code"] = o.CvvResponseCode.Get()
 	}
 	return json.Marshal(toSerialize)
 }

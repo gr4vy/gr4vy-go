@@ -18,6 +18,7 @@ docs/AddressUpdate.md
 docs/ApplePayRequest.md
 docs/ApplePaySessionRequest.md
 docs/BillingDetails.md
+docs/BillingDetailsRequest.md
 docs/BillingDetailsUpdateRequest.md
 docs/Buyer.md
 docs/BuyerRequest.md
@@ -25,6 +26,7 @@ docs/BuyerSnapshot.md
 docs/BuyerUpdate.md
 docs/Buyers.md
 docs/BuyersApi.md
+docs/CardDetails.md
 docs/CardRequest.md
 docs/CartItem.md
 docs/DigitalWallet.md
@@ -34,6 +36,7 @@ docs/DigitalWallets.md
 docs/DigitalWalletsApi.md
 docs/Error400BadRequest.md
 docs/Error400IncorrectJson.md
+docs/Error400InvalidCredentials.md
 docs/Error401Unauthorized.md
 docs/Error403Forbidden.md
 docs/Error404NotFound.md
@@ -88,7 +91,6 @@ docs/Transaction.md
 docs/TransactionCaptureRequest.md
 docs/TransactionPaymentMethodRequest.md
 docs/TransactionRefundRequest.md
-docs/TransactionRefundRequestDeprecated.md
 docs/TransactionRequest.md
 docs/TransactionSummary.md
 docs/Transactions.md
@@ -103,12 +105,14 @@ model_address_update.go
 model_apple_pay_request.go
 model_apple_pay_session_request.go
 model_billing_details.go
+model_billing_details_request.go
 model_billing_details_update_request.go
 model_buyer.go
 model_buyer__snapshot.go
 model_buyer_request.go
 model_buyer_update.go
 model_buyers.go
+model_card_details.go
 model_card_request.go
 model_cart_item.go
 model_digital_wallet.go
@@ -117,6 +121,7 @@ model_digital_wallet_update.go
 model_digital_wallets.go
 model_error400_bad_request.go
 model_error400_incorrect_json.go
+model_error400_invalid_credentials.go
 model_error401_unauthorized.go
 model_error403_forbidden.go
 model_error404_not_found.go
@@ -166,7 +171,6 @@ model_transaction.go
 model_transaction_capture_request.go
 model_transaction_payment_method_request.go
 model_transaction_refund_request.go
-model_transaction_refund_request_deprecated.go
 model_transaction_request.go
 model_transaction_summary.go
 model_transactions.go

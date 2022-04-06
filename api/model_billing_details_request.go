@@ -15,73 +15,39 @@ import (
 	"encoding/json"
 )
 
-// BillingDetails Billing details associated to a buyer.
-type BillingDetails struct {
-	// The type of this resource. Is always `billing-details`.
-	Type *string `json:"type,omitempty"`
-	// The first name(s) or given name of the buyer.
+// BillingDetailsRequest Billing details to use associated to a buyer.
+type BillingDetailsRequest struct {
+	// The first name(s) or given name for the buyer.
 	FirstName NullableString `json:"first_name,omitempty"`
 	// The last name, or family name, of the buyer.
 	LastName NullableString `json:"last_name,omitempty"`
-	// The email address of the buyer.
+	// The email address for the buyer.
 	EmailAddress NullableString `json:"email_address,omitempty"`
-	// The phone number of the buyer. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
+	// The phone number to use for this request. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
 	PhoneNumber NullableString `json:"phone_number,omitempty"`
 	Address *Address `json:"address,omitempty"`
 	TaxId *TaxId `json:"tax_id,omitempty"`
 }
 
-// NewBillingDetails instantiates a new BillingDetails object
+// NewBillingDetailsRequest instantiates a new BillingDetailsRequest object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewBillingDetails() *BillingDetails {
-	this := BillingDetails{}
+func NewBillingDetailsRequest() *BillingDetailsRequest {
+	this := BillingDetailsRequest{}
 	return &this
 }
 
-// NewBillingDetailsWithDefaults instantiates a new BillingDetails object
+// NewBillingDetailsRequestWithDefaults instantiates a new BillingDetailsRequest object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewBillingDetailsWithDefaults() *BillingDetails {
-	this := BillingDetails{}
+func NewBillingDetailsRequestWithDefaults() *BillingDetailsRequest {
+	this := BillingDetailsRequest{}
 	return &this
-}
-
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *BillingDetails) GetType() string {
-	if o == nil || o.Type == nil {
-		var ret string
-		return ret
-	}
-	return *o.Type
-}
-
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *BillingDetails) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
-		return nil, false
-	}
-	return o.Type, true
-}
-
-// HasType returns a boolean if a field has been set.
-func (o *BillingDetails) HasType() bool {
-	if o != nil && o.Type != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *BillingDetails) SetType(v string) {
-	o.Type = &v
 }
 
 // GetFirstName returns the FirstName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BillingDetails) GetFirstName() string {
+func (o *BillingDetailsRequest) GetFirstName() string {
 	if o == nil || o.FirstName.Get() == nil {
 		var ret string
 		return ret
@@ -92,7 +58,7 @@ func (o *BillingDetails) GetFirstName() string {
 // GetFirstNameOk returns a tuple with the FirstName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BillingDetails) GetFirstNameOk() (*string, bool) {
+func (o *BillingDetailsRequest) GetFirstNameOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -100,7 +66,7 @@ func (o *BillingDetails) GetFirstNameOk() (*string, bool) {
 }
 
 // HasFirstName returns a boolean if a field has been set.
-func (o *BillingDetails) HasFirstName() bool {
+func (o *BillingDetailsRequest) HasFirstName() bool {
 	if o != nil && o.FirstName.IsSet() {
 		return true
 	}
@@ -109,21 +75,21 @@ func (o *BillingDetails) HasFirstName() bool {
 }
 
 // SetFirstName gets a reference to the given NullableString and assigns it to the FirstName field.
-func (o *BillingDetails) SetFirstName(v string) {
+func (o *BillingDetailsRequest) SetFirstName(v string) {
 	o.FirstName.Set(&v)
 }
 // SetFirstNameNil sets the value for FirstName to be an explicit nil
-func (o *BillingDetails) SetFirstNameNil() {
+func (o *BillingDetailsRequest) SetFirstNameNil() {
 	o.FirstName.Set(nil)
 }
 
 // UnsetFirstName ensures that no value is present for FirstName, not even an explicit nil
-func (o *BillingDetails) UnsetFirstName() {
+func (o *BillingDetailsRequest) UnsetFirstName() {
 	o.FirstName.Unset()
 }
 
 // GetLastName returns the LastName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BillingDetails) GetLastName() string {
+func (o *BillingDetailsRequest) GetLastName() string {
 	if o == nil || o.LastName.Get() == nil {
 		var ret string
 		return ret
@@ -134,7 +100,7 @@ func (o *BillingDetails) GetLastName() string {
 // GetLastNameOk returns a tuple with the LastName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BillingDetails) GetLastNameOk() (*string, bool) {
+func (o *BillingDetailsRequest) GetLastNameOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -142,7 +108,7 @@ func (o *BillingDetails) GetLastNameOk() (*string, bool) {
 }
 
 // HasLastName returns a boolean if a field has been set.
-func (o *BillingDetails) HasLastName() bool {
+func (o *BillingDetailsRequest) HasLastName() bool {
 	if o != nil && o.LastName.IsSet() {
 		return true
 	}
@@ -151,21 +117,21 @@ func (o *BillingDetails) HasLastName() bool {
 }
 
 // SetLastName gets a reference to the given NullableString and assigns it to the LastName field.
-func (o *BillingDetails) SetLastName(v string) {
+func (o *BillingDetailsRequest) SetLastName(v string) {
 	o.LastName.Set(&v)
 }
 // SetLastNameNil sets the value for LastName to be an explicit nil
-func (o *BillingDetails) SetLastNameNil() {
+func (o *BillingDetailsRequest) SetLastNameNil() {
 	o.LastName.Set(nil)
 }
 
 // UnsetLastName ensures that no value is present for LastName, not even an explicit nil
-func (o *BillingDetails) UnsetLastName() {
+func (o *BillingDetailsRequest) UnsetLastName() {
 	o.LastName.Unset()
 }
 
 // GetEmailAddress returns the EmailAddress field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BillingDetails) GetEmailAddress() string {
+func (o *BillingDetailsRequest) GetEmailAddress() string {
 	if o == nil || o.EmailAddress.Get() == nil {
 		var ret string
 		return ret
@@ -176,7 +142,7 @@ func (o *BillingDetails) GetEmailAddress() string {
 // GetEmailAddressOk returns a tuple with the EmailAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BillingDetails) GetEmailAddressOk() (*string, bool) {
+func (o *BillingDetailsRequest) GetEmailAddressOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -184,7 +150,7 @@ func (o *BillingDetails) GetEmailAddressOk() (*string, bool) {
 }
 
 // HasEmailAddress returns a boolean if a field has been set.
-func (o *BillingDetails) HasEmailAddress() bool {
+func (o *BillingDetailsRequest) HasEmailAddress() bool {
 	if o != nil && o.EmailAddress.IsSet() {
 		return true
 	}
@@ -193,21 +159,21 @@ func (o *BillingDetails) HasEmailAddress() bool {
 }
 
 // SetEmailAddress gets a reference to the given NullableString and assigns it to the EmailAddress field.
-func (o *BillingDetails) SetEmailAddress(v string) {
+func (o *BillingDetailsRequest) SetEmailAddress(v string) {
 	o.EmailAddress.Set(&v)
 }
 // SetEmailAddressNil sets the value for EmailAddress to be an explicit nil
-func (o *BillingDetails) SetEmailAddressNil() {
+func (o *BillingDetailsRequest) SetEmailAddressNil() {
 	o.EmailAddress.Set(nil)
 }
 
 // UnsetEmailAddress ensures that no value is present for EmailAddress, not even an explicit nil
-func (o *BillingDetails) UnsetEmailAddress() {
+func (o *BillingDetailsRequest) UnsetEmailAddress() {
 	o.EmailAddress.Unset()
 }
 
 // GetPhoneNumber returns the PhoneNumber field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BillingDetails) GetPhoneNumber() string {
+func (o *BillingDetailsRequest) GetPhoneNumber() string {
 	if o == nil || o.PhoneNumber.Get() == nil {
 		var ret string
 		return ret
@@ -218,7 +184,7 @@ func (o *BillingDetails) GetPhoneNumber() string {
 // GetPhoneNumberOk returns a tuple with the PhoneNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BillingDetails) GetPhoneNumberOk() (*string, bool) {
+func (o *BillingDetailsRequest) GetPhoneNumberOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -226,7 +192,7 @@ func (o *BillingDetails) GetPhoneNumberOk() (*string, bool) {
 }
 
 // HasPhoneNumber returns a boolean if a field has been set.
-func (o *BillingDetails) HasPhoneNumber() bool {
+func (o *BillingDetailsRequest) HasPhoneNumber() bool {
 	if o != nil && o.PhoneNumber.IsSet() {
 		return true
 	}
@@ -235,21 +201,21 @@ func (o *BillingDetails) HasPhoneNumber() bool {
 }
 
 // SetPhoneNumber gets a reference to the given NullableString and assigns it to the PhoneNumber field.
-func (o *BillingDetails) SetPhoneNumber(v string) {
+func (o *BillingDetailsRequest) SetPhoneNumber(v string) {
 	o.PhoneNumber.Set(&v)
 }
 // SetPhoneNumberNil sets the value for PhoneNumber to be an explicit nil
-func (o *BillingDetails) SetPhoneNumberNil() {
+func (o *BillingDetailsRequest) SetPhoneNumberNil() {
 	o.PhoneNumber.Set(nil)
 }
 
 // UnsetPhoneNumber ensures that no value is present for PhoneNumber, not even an explicit nil
-func (o *BillingDetails) UnsetPhoneNumber() {
+func (o *BillingDetailsRequest) UnsetPhoneNumber() {
 	o.PhoneNumber.Unset()
 }
 
 // GetAddress returns the Address field value if set, zero value otherwise.
-func (o *BillingDetails) GetAddress() Address {
+func (o *BillingDetailsRequest) GetAddress() Address {
 	if o == nil || o.Address == nil {
 		var ret Address
 		return ret
@@ -259,7 +225,7 @@ func (o *BillingDetails) GetAddress() Address {
 
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BillingDetails) GetAddressOk() (*Address, bool) {
+func (o *BillingDetailsRequest) GetAddressOk() (*Address, bool) {
 	if o == nil || o.Address == nil {
 		return nil, false
 	}
@@ -267,7 +233,7 @@ func (o *BillingDetails) GetAddressOk() (*Address, bool) {
 }
 
 // HasAddress returns a boolean if a field has been set.
-func (o *BillingDetails) HasAddress() bool {
+func (o *BillingDetailsRequest) HasAddress() bool {
 	if o != nil && o.Address != nil {
 		return true
 	}
@@ -276,12 +242,12 @@ func (o *BillingDetails) HasAddress() bool {
 }
 
 // SetAddress gets a reference to the given Address and assigns it to the Address field.
-func (o *BillingDetails) SetAddress(v Address) {
+func (o *BillingDetailsRequest) SetAddress(v Address) {
 	o.Address = &v
 }
 
 // GetTaxId returns the TaxId field value if set, zero value otherwise.
-func (o *BillingDetails) GetTaxId() TaxId {
+func (o *BillingDetailsRequest) GetTaxId() TaxId {
 	if o == nil || o.TaxId == nil {
 		var ret TaxId
 		return ret
@@ -291,7 +257,7 @@ func (o *BillingDetails) GetTaxId() TaxId {
 
 // GetTaxIdOk returns a tuple with the TaxId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *BillingDetails) GetTaxIdOk() (*TaxId, bool) {
+func (o *BillingDetailsRequest) GetTaxIdOk() (*TaxId, bool) {
 	if o == nil || o.TaxId == nil {
 		return nil, false
 	}
@@ -299,7 +265,7 @@ func (o *BillingDetails) GetTaxIdOk() (*TaxId, bool) {
 }
 
 // HasTaxId returns a boolean if a field has been set.
-func (o *BillingDetails) HasTaxId() bool {
+func (o *BillingDetailsRequest) HasTaxId() bool {
 	if o != nil && o.TaxId != nil {
 		return true
 	}
@@ -308,15 +274,12 @@ func (o *BillingDetails) HasTaxId() bool {
 }
 
 // SetTaxId gets a reference to the given TaxId and assigns it to the TaxId field.
-func (o *BillingDetails) SetTaxId(v TaxId) {
+func (o *BillingDetailsRequest) SetTaxId(v TaxId) {
 	o.TaxId = &v
 }
 
-func (o BillingDetails) MarshalJSON() ([]byte, error) {
+func (o BillingDetailsRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Type != nil {
-		toSerialize["type"] = o.Type
-	}
 	if o.FirstName.IsSet() {
 		toSerialize["first_name"] = o.FirstName.Get()
 	}
@@ -338,38 +301,38 @@ func (o BillingDetails) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableBillingDetails struct {
-	value *BillingDetails
+type NullableBillingDetailsRequest struct {
+	value *BillingDetailsRequest
 	isSet bool
 }
 
-func (v NullableBillingDetails) Get() *BillingDetails {
+func (v NullableBillingDetailsRequest) Get() *BillingDetailsRequest {
 	return v.value
 }
 
-func (v *NullableBillingDetails) Set(val *BillingDetails) {
+func (v *NullableBillingDetailsRequest) Set(val *BillingDetailsRequest) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableBillingDetails) IsSet() bool {
+func (v NullableBillingDetailsRequest) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableBillingDetails) Unset() {
+func (v *NullableBillingDetailsRequest) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableBillingDetails(val *BillingDetails) *NullableBillingDetails {
-	return &NullableBillingDetails{value: val, isSet: true}
+func NewNullableBillingDetailsRequest(val *BillingDetailsRequest) *NullableBillingDetailsRequest {
+	return &NullableBillingDetailsRequest{value: val, isSet: true}
 }
 
-func (v NullableBillingDetails) MarshalJSON() ([]byte, error) {
+func (v NullableBillingDetailsRequest) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableBillingDetails) UnmarshalJSON(src []byte) error {
+func (v *NullableBillingDetailsRequest) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -111,7 +111,6 @@ Class | Method | HTTP request | Description
 *TransactionsApi* | [**ListTransactionRefunds**](docs/TransactionsApi.md#listtransactionrefunds) | **Get** /transactions/{transaction_id}/refunds | List transaction refunds
 *TransactionsApi* | [**ListTransactions**](docs/TransactionsApi.md#listtransactions) | **Get** /transactions | List transactions
 *TransactionsApi* | [**RefundTransaction**](docs/TransactionsApi.md#refundtransaction) | **Post** /transactions/{transaction_id}/refunds | Refund transaction
-*TransactionsApi* | [**RefundTransactionDeprecated**](docs/TransactionsApi.md#refundtransactiondeprecated) | **Post** /transactions/{transaction_id}/refund | Refund or void transactions
 *TransactionsApi* | [**VoidTransaction**](docs/TransactionsApi.md#voidtransaction) | **Post** /transactions/{transaction_id}/void | Void transaction
 
 
@@ -122,12 +121,14 @@ Class | Method | HTTP request | Description
  - [ApplePayRequest](docs/ApplePayRequest.md)
  - [ApplePaySessionRequest](docs/ApplePaySessionRequest.md)
  - [BillingDetails](docs/BillingDetails.md)
+ - [BillingDetailsRequest](docs/BillingDetailsRequest.md)
  - [BillingDetailsUpdateRequest](docs/BillingDetailsUpdateRequest.md)
  - [Buyer](docs/Buyer.md)
  - [BuyerRequest](docs/BuyerRequest.md)
  - [BuyerSnapshot](docs/BuyerSnapshot.md)
  - [BuyerUpdate](docs/BuyerUpdate.md)
  - [Buyers](docs/Buyers.md)
+ - [CardDetails](docs/CardDetails.md)
  - [CardRequest](docs/CardRequest.md)
  - [CartItem](docs/CartItem.md)
  - [DigitalWallet](docs/DigitalWallet.md)
@@ -136,6 +137,7 @@ Class | Method | HTTP request | Description
  - [DigitalWallets](docs/DigitalWallets.md)
  - [Error400BadRequest](docs/Error400BadRequest.md)
  - [Error400IncorrectJson](docs/Error400IncorrectJson.md)
+ - [Error400InvalidCredentials](docs/Error400InvalidCredentials.md)
  - [Error401Unauthorized](docs/Error401Unauthorized.md)
  - [Error403Forbidden](docs/Error403Forbidden.md)
  - [Error404NotFound](docs/Error404NotFound.md)
@@ -185,7 +187,6 @@ Class | Method | HTTP request | Description
  - [TransactionCaptureRequest](docs/TransactionCaptureRequest.md)
  - [TransactionPaymentMethodRequest](docs/TransactionPaymentMethodRequest.md)
  - [TransactionRefundRequest](docs/TransactionRefundRequest.md)
- - [TransactionRefundRequestDeprecated](docs/TransactionRefundRequestDeprecated.md)
  - [TransactionRequest](docs/TransactionRequest.md)
  - [TransactionSummary](docs/TransactionSummary.md)
  - [Transactions](docs/Transactions.md)

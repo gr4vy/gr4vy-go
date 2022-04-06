@@ -24,6 +24,8 @@ type PaymentServiceSnapshot struct {
 	// The ID of the payment service definition used to create this service. 
 	PaymentServiceDefinitionId *string `json:"payment_service_definition_id,omitempty"`
 	Method *string `json:"method,omitempty"`
+	// The custom name set for this service.
+	DisplayName *string `json:"display_name,omitempty"`
 }
 
 // NewPaymentServiceSnapshot instantiates a new PaymentServiceSnapshot object
@@ -171,6 +173,38 @@ func (o *PaymentServiceSnapshot) SetMethod(v string) {
 	o.Method = &v
 }
 
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+func (o *PaymentServiceSnapshot) GetDisplayName() string {
+	if o == nil || o.DisplayName == nil {
+		var ret string
+		return ret
+	}
+	return *o.DisplayName
+}
+
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceSnapshot) GetDisplayNameOk() (*string, bool) {
+	if o == nil || o.DisplayName == nil {
+		return nil, false
+	}
+	return o.DisplayName, true
+}
+
+// HasDisplayName returns a boolean if a field has been set.
+func (o *PaymentServiceSnapshot) HasDisplayName() bool {
+	if o != nil && o.DisplayName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+func (o *PaymentServiceSnapshot) SetDisplayName(v string) {
+	o.DisplayName = &v
+}
+
 func (o PaymentServiceSnapshot) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -184,6 +218,9 @@ func (o PaymentServiceSnapshot) MarshalJSON() ([]byte, error) {
 	}
 	if o.Method != nil {
 		toSerialize["method"] = o.Method
+	}
+	if o.DisplayName != nil {
+		toSerialize["display_name"] = o.DisplayName
 	}
 	return json.Marshal(toSerialize)
 }

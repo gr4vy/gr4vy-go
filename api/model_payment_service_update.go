@@ -19,7 +19,7 @@ import (
 type PaymentServiceUpdate struct {
 	// A custom name for the payment service. This will be shown in the Admin UI.
 	DisplayName *string `json:"display_name,omitempty"`
-	// A list of fields, each containing a key-value pair for each field defined by the definition for this payment service e.g. for stripe-card `secret_key` is required and so must be sent with in this field.
+	// A list of fields, each containing a key-value pair for each field defined by the definition for this payment service e.g. for stripe-card `secret_key` is required and so must be sent within this field.
 	Fields *[]PaymentServiceUpdateFields `json:"fields,omitempty"`
 	// A list of countries that this payment service needs to support in ISO two-letter code format.
 	AcceptedCountries *[]string `json:"accepted_countries,omitempty"`
