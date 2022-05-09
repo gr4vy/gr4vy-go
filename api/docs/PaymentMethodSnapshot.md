@@ -12,6 +12,8 @@ Name | Type | Description | Notes
 **Scheme** | Pointer to **NullableString** | An additional label used to differentiate different sub-types of a payment method. Most notably this can include the type of card used in a transaction. | [optional] 
 **ExpirationDate** | Pointer to **NullableString** | The expiration date for this payment method. This is mostly used by cards where the card might have an expiration date. | [optional] 
 **ApprovalUrl** | Pointer to **NullableString** | The optional URL that the buyer needs to be redirected to to further authorize their payment. | [optional] 
+**Currency** | Pointer to **NullableString** | The ISO-4217 currency code that this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used for multiple currencies. | [optional] 
+**Country** | Pointer to **NullableString** | The 2-letter ISO code of the country this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used in multiple countries. | [optional] 
 
 ## Methods
 
@@ -282,6 +284,76 @@ HasApprovalUrl returns a boolean if a field has been set.
 `func (o *PaymentMethodSnapshot) UnsetApprovalUrl()`
 
 UnsetApprovalUrl ensures that no value is present for ApprovalUrl, not even an explicit nil
+### GetCurrency
+
+`func (o *PaymentMethodSnapshot) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *PaymentMethodSnapshot) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *PaymentMethodSnapshot) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *PaymentMethodSnapshot) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
+
+### SetCurrencyNil
+
+`func (o *PaymentMethodSnapshot) SetCurrencyNil(b bool)`
+
+ SetCurrencyNil sets the value for Currency to be an explicit nil
+
+### UnsetCurrency
+`func (o *PaymentMethodSnapshot) UnsetCurrency()`
+
+UnsetCurrency ensures that no value is present for Currency, not even an explicit nil
+### GetCountry
+
+`func (o *PaymentMethodSnapshot) GetCountry() string`
+
+GetCountry returns the Country field if non-nil, zero value otherwise.
+
+### GetCountryOk
+
+`func (o *PaymentMethodSnapshot) GetCountryOk() (*string, bool)`
+
+GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountry
+
+`func (o *PaymentMethodSnapshot) SetCountry(v string)`
+
+SetCountry sets Country field to given value.
+
+### HasCountry
+
+`func (o *PaymentMethodSnapshot) HasCountry() bool`
+
+HasCountry returns a boolean if a field has been set.
+
+### SetCountryNil
+
+`func (o *PaymentMethodSnapshot) SetCountryNil(b bool)`
+
+ SetCountryNil sets the value for Country to be an explicit nil
+
+### UnsetCountry
+`func (o *PaymentMethodSnapshot) UnsetCountry()`
+
+UnsetCountry ensures that no value is present for Country, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

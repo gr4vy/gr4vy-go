@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **FirstName** | Pointer to **NullableString** | The first name(s) or given name of the buyer. | [optional] 
 **LastName** | Pointer to **NullableString** | The last name, or family name, of the buyer. | [optional] 
 **EmailAddress** | Pointer to **NullableString** | The email address of the buyer. | [optional] 
-**PhoneNumber** | Pointer to **NullableString** | The phone number of the buyer. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
+**PhoneNumber** | Pointer to **NullableString** | The phone number of the buyer. This number is formatted according to the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
 **Address** | Pointer to [**Address**](Address.md) |  | [optional] 
 **TaxId** | Pointer to [**TaxId**](TaxId.md) |  | [optional] 
 

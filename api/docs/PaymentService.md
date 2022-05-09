@@ -24,9 +24,11 @@ Name | Type | Description | Notes
 **MerchantUrl** | Pointer to **NullableString** | Fully qualified URL of 3-D Secure requestor website or customer care site. | [optional] 
 **Active** | Pointer to **bool** | Defines if this service is currently active or not. | [optional] [default to true]
 **Position** | Pointer to **float32** | The numeric rank of a payment service. Payment services with a lower position value are processed first. | [optional] 
+**PaymentMethodTokenizationEnabled** | Pointer to **bool** | Defines if tokenization is enabled for the service (can only be enabled if the payment service definition supports it). | [optional] [default to false]
 **CreatedAt** | Pointer to **time.Time** | The date and time when this service was created. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this service was last updated. | [optional] 
 **WebhookUrl** | Pointer to **NullableString** | The URL that needs to be configured with this payment service as the receiving endpoint for webhooks from the service to Gr4vy. Currently, Gr4vy does not yet automatically register webhooks on setup, and therefore webhooks need to be registered manually by the merchant. | [optional] 
+**Fields** | Pointer to [**[]PaymentServiceFields**](PaymentServiceFields.md) | A list of fields, each containing a key-value pair for each field configured for this payment service. Fields marked as &#x60;secret&#x60; (see Payment Service Definition) are not returned. | [optional] 
 
 ## Methods
 
@@ -637,6 +639,31 @@ SetPosition sets Position field to given value.
 
 HasPosition returns a boolean if a field has been set.
 
+### GetPaymentMethodTokenizationEnabled
+
+`func (o *PaymentService) GetPaymentMethodTokenizationEnabled() bool`
+
+GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field if non-nil, zero value otherwise.
+
+### GetPaymentMethodTokenizationEnabledOk
+
+`func (o *PaymentService) GetPaymentMethodTokenizationEnabledOk() (*bool, bool)`
+
+GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMethodTokenizationEnabled
+
+`func (o *PaymentService) SetPaymentMethodTokenizationEnabled(v bool)`
+
+SetPaymentMethodTokenizationEnabled sets PaymentMethodTokenizationEnabled field to given value.
+
+### HasPaymentMethodTokenizationEnabled
+
+`func (o *PaymentService) HasPaymentMethodTokenizationEnabled() bool`
+
+HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
+
 ### GetCreatedAt
 
 `func (o *PaymentService) GetCreatedAt() time.Time`
@@ -722,6 +749,31 @@ HasWebhookUrl returns a boolean if a field has been set.
 `func (o *PaymentService) UnsetWebhookUrl()`
 
 UnsetWebhookUrl ensures that no value is present for WebhookUrl, not even an explicit nil
+### GetFields
+
+`func (o *PaymentService) GetFields() []PaymentServiceFields`
+
+GetFields returns the Fields field if non-nil, zero value otherwise.
+
+### GetFieldsOk
+
+`func (o *PaymentService) GetFieldsOk() (*[]PaymentServiceFields, bool)`
+
+GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFields
+
+`func (o *PaymentService) SetFields(v []PaymentServiceFields)`
+
+SetFields sets Fields field to given value.
+
+### HasFields
+
+`func (o *PaymentService) HasFields() bool`
+
+HasFields returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

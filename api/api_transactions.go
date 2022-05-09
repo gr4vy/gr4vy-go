@@ -1060,6 +1060,8 @@ func (r ApiVoidTransactionRequest) Execute() (Transaction, *_nethttp.Response, e
 If the transaction was not yet successfully authorized, or was already
 captured, the void will not be processed. Captured transactions can be
 [refunded](#operation/refund-transaction) instead.
+
+Voiding zero-amount authorized transactions is not supported.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param transactionId The ID for the transaction to get the information for.
  * @return ApiVoidTransactionRequest

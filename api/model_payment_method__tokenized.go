@@ -30,6 +30,10 @@ type PaymentMethodTokenized struct {
 	ExpirationDate NullableString `json:"expiration_date,omitempty"`
 	// The optional URL that the buyer needs to be redirected to to further authorize their payment.
 	ApprovalUrl NullableString `json:"approval_url,omitempty"`
+	// The ISO-4217 currency code that this payment method can be used for. If this value is `null` the payment method may be used for multiple currencies.
+	Currency NullableString `json:"currency,omitempty"`
+	// The 2-letter ISO code of the country this payment method can be used for. If this value is `null` the payment method may be used in multiple countries.
+	Country NullableString `json:"country,omitempty"`
 }
 
 // NewPaymentMethodTokenized instantiates a new PaymentMethodTokenized object
@@ -303,6 +307,90 @@ func (o *PaymentMethodTokenized) UnsetApprovalUrl() {
 	o.ApprovalUrl.Unset()
 }
 
+// GetCurrency returns the Currency field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethodTokenized) GetCurrency() string {
+	if o == nil || o.Currency.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Currency.Get()
+}
+
+// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethodTokenized) GetCurrencyOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Currency.Get(), o.Currency.IsSet()
+}
+
+// HasCurrency returns a boolean if a field has been set.
+func (o *PaymentMethodTokenized) HasCurrency() bool {
+	if o != nil && o.Currency.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrency gets a reference to the given NullableString and assigns it to the Currency field.
+func (o *PaymentMethodTokenized) SetCurrency(v string) {
+	o.Currency.Set(&v)
+}
+// SetCurrencyNil sets the value for Currency to be an explicit nil
+func (o *PaymentMethodTokenized) SetCurrencyNil() {
+	o.Currency.Set(nil)
+}
+
+// UnsetCurrency ensures that no value is present for Currency, not even an explicit nil
+func (o *PaymentMethodTokenized) UnsetCurrency() {
+	o.Currency.Unset()
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethodTokenized) GetCountry() string {
+	if o == nil || o.Country.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Country.Get()
+}
+
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethodTokenized) GetCountryOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Country.Get(), o.Country.IsSet()
+}
+
+// HasCountry returns a boolean if a field has been set.
+func (o *PaymentMethodTokenized) HasCountry() bool {
+	if o != nil && o.Country.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given NullableString and assigns it to the Country field.
+func (o *PaymentMethodTokenized) SetCountry(v string) {
+	o.Country.Set(&v)
+}
+// SetCountryNil sets the value for Country to be an explicit nil
+func (o *PaymentMethodTokenized) SetCountryNil() {
+	o.Country.Set(nil)
+}
+
+// UnsetCountry ensures that no value is present for Country, not even an explicit nil
+func (o *PaymentMethodTokenized) UnsetCountry() {
+	o.Country.Unset()
+}
+
 func (o PaymentMethodTokenized) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -325,6 +413,12 @@ func (o PaymentMethodTokenized) MarshalJSON() ([]byte, error) {
 	}
 	if o.ApprovalUrl.IsSet() {
 		toSerialize["approval_url"] = o.ApprovalUrl.Get()
+	}
+	if o.Currency.IsSet() {
+		toSerialize["currency"] = o.Currency.Get()
+	}
+	if o.Country.IsSet() {
+		toSerialize["country"] = o.Country.Get()
 	}
 	return json.Marshal(toSerialize)
 }

@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **MerchantUrl** | Pointer to **NullableString** | Fully qualified URL of 3-D Secure requestor website or customer care site. | [optional] 
 **Active** | Pointer to **bool** | Defines if this service is currently active or not. | [optional] [default to true]
 **Position** | Pointer to **float32** | The numeric rank of a payment service. Payment services with a lower position value are processed first. When a payment services is inserted at a position, any payment services with the the same value or higher are shifted down a position accordingly. When left out, the payment service is inserted at the end of the list. | [optional] 
+**PaymentMethodTokenizationEnabled** | Pointer to **bool** | Defines if tokenization is enabled for the service (can only be enabled if the payment service definition supports it). | [optional] [default to false]
 
 ## Methods
 
@@ -529,6 +530,31 @@ SetPosition sets Position field to given value.
 `func (o *PaymentServiceUpdate) HasPosition() bool`
 
 HasPosition returns a boolean if a field has been set.
+
+### GetPaymentMethodTokenizationEnabled
+
+`func (o *PaymentServiceUpdate) GetPaymentMethodTokenizationEnabled() bool`
+
+GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field if non-nil, zero value otherwise.
+
+### GetPaymentMethodTokenizationEnabledOk
+
+`func (o *PaymentServiceUpdate) GetPaymentMethodTokenizationEnabledOk() (*bool, bool)`
+
+GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMethodTokenizationEnabled
+
+`func (o *PaymentServiceUpdate) SetPaymentMethodTokenizationEnabled(v bool)`
+
+SetPaymentMethodTokenizationEnabled sets PaymentMethodTokenizationEnabled field to given value.
+
+### HasPaymentMethodTokenizationEnabled
+
+`func (o *PaymentServiceUpdate) HasPaymentMethodTokenizationEnabled() bool`
+
+HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

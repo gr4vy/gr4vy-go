@@ -17,7 +17,7 @@ import (
 
 // TransactionRefundRequest A request to refund a transaction.
 type TransactionRefundRequest struct {
-	// The amount requested to refund.  If omitted, a full refund will be requested. Otherwise, the amount must be lower than or equal to the remaining balance in the associated transaction. Negative refunds are not supported.
+	// The amount requested to refund.  If omitted, a full refund will be requested.  Otherwise, the amount must be lower than or equal to the remaining balance in the associated transaction.  Negative and zero-amount refunds are not supported.
 	Amount *int32 `json:"amount,omitempty"`
 }
 

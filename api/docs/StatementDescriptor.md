@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Name** | Pointer to **NullableString** | Reflects your doing business as (DBA) name.  Other validations:  1. Contains only Latin characters. 2. Contain at least one letter 3. Does not contain any of the special characters &#x60;&lt; &gt; \\ &#39; \&quot; *&#x60; 4. Supports:   1. Lower case: &#x60;a-z&#x60;   2. Upper case: &#x60;A-Z&#x60;   3. Numbers: &#x60;0-9&#x60;   4. Spaces: &#x60; &#x60;   5. Special characters: &#x60;. , _ - ? + /&#x60;. | [optional] 
 **Description** | Pointer to **NullableString** | A short description about the purchase.  Other validations: 1. Contains only Latin characters. 2. Contain at least one letter 3. Does not contain any of the special characters &#x60;&lt; &gt; \\ &#39; \&quot; *&#x60; 4. Supports:   1. Lower case: &#x60;a-z&#x60;   2. Upper case: &#x60;A-Z&#x60;   3. Numbers: &#x60;0-9&#x60;   4. Spaces: &#x60; &#x60;   5. Special characters: &#x60;. , _ - ? + /&#x60;. | [optional] 
 **City** | Pointer to **NullableString** | City from which the charge originated. | [optional] 
-**PhoneNumber** | Pointer to **NullableString** | The value in the phone number field of a customer&#39;s statement. The phone number to use for this request. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
+**PhoneNumber** | Pointer to **NullableString** | The value in the phone number field of a customer&#39;s statement which should be formatted according to the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
 **Url** | Pointer to **NullableString** | The value in the URL/web address field of a customer&#39;s statement. | [optional] 
 
 ## Methods

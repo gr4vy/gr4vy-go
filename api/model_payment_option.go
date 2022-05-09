@@ -28,6 +28,8 @@ type PaymentOption struct {
 	// A flag to indicate if storing the payment method is supported.
 	CanStorePaymentMethod *bool `json:"can_store_payment_method,omitempty"`
 	Context *PaymentOptionContext `json:"context,omitempty"`
+	// A flag to indicate if storing the payment method is enabled.
+	PaymentMethodTokenizationEnabled *bool `json:"payment_method_tokenization_enabled,omitempty"`
 }
 
 // NewPaymentOption instantiates a new PaymentOption object
@@ -281,6 +283,38 @@ func (o *PaymentOption) SetContext(v PaymentOptionContext) {
 	o.Context = &v
 }
 
+// GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field value if set, zero value otherwise.
+func (o *PaymentOption) GetPaymentMethodTokenizationEnabled() bool {
+	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PaymentMethodTokenizationEnabled
+}
+
+// GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentOption) GetPaymentMethodTokenizationEnabledOk() (*bool, bool) {
+	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
+		return nil, false
+	}
+	return o.PaymentMethodTokenizationEnabled, true
+}
+
+// HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
+func (o *PaymentOption) HasPaymentMethodTokenizationEnabled() bool {
+	if o != nil && o.PaymentMethodTokenizationEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMethodTokenizationEnabled gets a reference to the given bool and assigns it to the PaymentMethodTokenizationEnabled field.
+func (o *PaymentOption) SetPaymentMethodTokenizationEnabled(v bool) {
+	o.PaymentMethodTokenizationEnabled = &v
+}
+
 func (o PaymentOption) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -303,6 +337,9 @@ func (o PaymentOption) MarshalJSON() ([]byte, error) {
 	}
 	if o.Context != nil {
 		toSerialize["context"] = o.Context
+	}
+	if o.PaymentMethodTokenizationEnabled != nil {
+		toSerialize["payment_method_tokenization_enabled"] = o.PaymentMethodTokenizationEnabled
 	}
 	return json.Marshal(toSerialize)
 }

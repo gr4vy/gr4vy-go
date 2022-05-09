@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **DisplayName** | Pointer to **string** | The name to display for a field in the dashboard. | [optional] 
 **Required** | Pointer to **bool** | Defines if this field is required when the service is created. | [optional] 
 **Format** | Pointer to **string** | Defines the type of input that needs to be rendered for this field. | [optional] 
+**Secret** | Pointer to **bool** | Defines if this field is secret. When &#x60;true&#x60; the field is not returned when querying the payment service. | [optional] 
 
 ## Methods
 
@@ -127,6 +128,31 @@ SetFormat sets Format field to given value.
 `func (o *PaymentServiceDefinitionFields) HasFormat() bool`
 
 HasFormat returns a boolean if a field has been set.
+
+### GetSecret
+
+`func (o *PaymentServiceDefinitionFields) GetSecret() bool`
+
+GetSecret returns the Secret field if non-nil, zero value otherwise.
+
+### GetSecretOk
+
+`func (o *PaymentServiceDefinitionFields) GetSecretOk() (*bool, bool)`
+
+GetSecretOk returns a tuple with the Secret field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecret
+
+`func (o *PaymentServiceDefinitionFields) SetSecret(v bool)`
+
+SetSecret sets Secret field to given value.
+
+### HasSecret
+
+`func (o *PaymentServiceDefinitionFields) HasSecret() bool`
+
+HasSecret returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -5,11 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;card-detail&#x60;. | [optional] 
-**Id** | Pointer to **string** | The 6-8 digit BIN of the card. | [optional] 
+**Id** | Pointer to **string** | The 8 digit BIN of the card. When looking up card details using a &#x60;payment_method_id&#x60; this value will be &#x60;null&#x60;. | [optional] 
 **CardType** | Pointer to **string** | The type of card. | [optional] 
 **Scheme** | Pointer to **string** | The scheme/brand of the card. | [optional] 
 **Country** | Pointer to **string** | The 2-letter ISO code of the issuing country of the card. | [optional] 
-**RequiredFields** | Pointer to **[]string** | A list of fields that are required to process a transaction for this card. | [optional] 
+**RequiredFields** | Pointer to [**CardRequiredFields**](CardRequiredFields.md) |  | [optional] 
 
 ## Methods
 
@@ -157,20 +157,20 @@ HasCountry returns a boolean if a field has been set.
 
 ### GetRequiredFields
 
-`func (o *CardDetails) GetRequiredFields() []string`
+`func (o *CardDetails) GetRequiredFields() CardRequiredFields`
 
 GetRequiredFields returns the RequiredFields field if non-nil, zero value otherwise.
 
 ### GetRequiredFieldsOk
 
-`func (o *CardDetails) GetRequiredFieldsOk() (*[]string, bool)`
+`func (o *CardDetails) GetRequiredFieldsOk() (*CardRequiredFields, bool)`
 
 GetRequiredFieldsOk returns a tuple with the RequiredFields field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetRequiredFields
 
-`func (o *CardDetails) SetRequiredFields(v []string)`
+`func (o *CardDetails) SetRequiredFields(v CardRequiredFields)`
 
 SetRequiredFields sets RequiredFields field to given value.
 

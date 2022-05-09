@@ -23,7 +23,7 @@ type StatementDescriptor struct {
 	Description NullableString `json:"description,omitempty"`
 	// City from which the charge originated.
 	City NullableString `json:"city,omitempty"`
-	// The value in the phone number field of a customer's statement. The phone number to use for this request. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
+	// The value in the phone number field of a customer's statement which should be formatted according to the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
 	PhoneNumber NullableString `json:"phone_number,omitempty"`
 	// The value in the URL/web address field of a customer's statement.
 	Url NullableString `json:"url,omitempty"`

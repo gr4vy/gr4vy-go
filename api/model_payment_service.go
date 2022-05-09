@@ -57,12 +57,16 @@ type PaymentService struct {
 	Active *bool `json:"active,omitempty"`
 	// The numeric rank of a payment service. Payment services with a lower position value are processed first.
 	Position *float32 `json:"position,omitempty"`
+	// Defines if tokenization is enabled for the service (can only be enabled if the payment service definition supports it).
+	PaymentMethodTokenizationEnabled *bool `json:"payment_method_tokenization_enabled,omitempty"`
 	// The date and time when this service was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this service was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// The URL that needs to be configured with this payment service as the receiving endpoint for webhooks from the service to Gr4vy. Currently, Gr4vy does not yet automatically register webhooks on setup, and therefore webhooks need to be registered manually by the merchant.
 	WebhookUrl NullableString `json:"webhook_url,omitempty"`
+	// A list of fields, each containing a key-value pair for each field configured for this payment service. Fields marked as `secret` (see Payment Service Definition) are not returned.
+	Fields *[]PaymentServiceFields `json:"fields,omitempty"`
 }
 
 // NewPaymentService instantiates a new PaymentService object
@@ -75,6 +79,8 @@ func NewPaymentService() *PaymentService {
 	this.ThreeDSecureEnabled = &threeDSecureEnabled
 	var active bool = true
 	this.Active = &active
+	var paymentMethodTokenizationEnabled bool = false
+	this.PaymentMethodTokenizationEnabled = &paymentMethodTokenizationEnabled
 	return &this
 }
 
@@ -87,6 +93,8 @@ func NewPaymentServiceWithDefaults() *PaymentService {
 	this.ThreeDSecureEnabled = &threeDSecureEnabled
 	var active bool = true
 	this.Active = &active
+	var paymentMethodTokenizationEnabled bool = false
+	this.PaymentMethodTokenizationEnabled = &paymentMethodTokenizationEnabled
 	return &this
 }
 
@@ -820,6 +828,38 @@ func (o *PaymentService) SetPosition(v float32) {
 	o.Position = &v
 }
 
+// GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field value if set, zero value otherwise.
+func (o *PaymentService) GetPaymentMethodTokenizationEnabled() bool {
+	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PaymentMethodTokenizationEnabled
+}
+
+// GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentService) GetPaymentMethodTokenizationEnabledOk() (*bool, bool) {
+	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
+		return nil, false
+	}
+	return o.PaymentMethodTokenizationEnabled, true
+}
+
+// HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
+func (o *PaymentService) HasPaymentMethodTokenizationEnabled() bool {
+	if o != nil && o.PaymentMethodTokenizationEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMethodTokenizationEnabled gets a reference to the given bool and assigns it to the PaymentMethodTokenizationEnabled field.
+func (o *PaymentService) SetPaymentMethodTokenizationEnabled(v bool) {
+	o.PaymentMethodTokenizationEnabled = &v
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *PaymentService) GetCreatedAt() time.Time {
 	if o == nil || o.CreatedAt == nil {
@@ -926,6 +966,38 @@ func (o *PaymentService) UnsetWebhookUrl() {
 	o.WebhookUrl.Unset()
 }
 
+// GetFields returns the Fields field value if set, zero value otherwise.
+func (o *PaymentService) GetFields() []PaymentServiceFields {
+	if o == nil || o.Fields == nil {
+		var ret []PaymentServiceFields
+		return ret
+	}
+	return *o.Fields
+}
+
+// GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentService) GetFieldsOk() (*[]PaymentServiceFields, bool) {
+	if o == nil || o.Fields == nil {
+		return nil, false
+	}
+	return o.Fields, true
+}
+
+// HasFields returns a boolean if a field has been set.
+func (o *PaymentService) HasFields() bool {
+	if o != nil && o.Fields != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetFields gets a reference to the given []PaymentServiceFields and assigns it to the Fields field.
+func (o *PaymentService) SetFields(v []PaymentServiceFields) {
+	o.Fields = &v
+}
+
 func (o PaymentService) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -988,6 +1060,9 @@ func (o PaymentService) MarshalJSON() ([]byte, error) {
 	if o.Position != nil {
 		toSerialize["position"] = o.Position
 	}
+	if o.PaymentMethodTokenizationEnabled != nil {
+		toSerialize["payment_method_tokenization_enabled"] = o.PaymentMethodTokenizationEnabled
+	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -996,6 +1071,9 @@ func (o PaymentService) MarshalJSON() ([]byte, error) {
 	}
 	if o.WebhookUrl.IsSet() {
 		toSerialize["webhook_url"] = o.WebhookUrl.Get()
+	}
+	if o.Fields != nil {
+		toSerialize["fields"] = o.Fields
 	}
 	return json.Marshal(toSerialize)
 }
