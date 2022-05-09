@@ -17,12 +17,14 @@ import (
 
 // TransactionRequest A request to create a transaction.
 type TransactionRequest struct {
-	// The monetary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.
+	// The monetary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.  If the `intent` is set to `capture`, an amount greater than zero must be supplied.
 	Amount int32 `json:"amount"`
 	// A supported ISO-4217 currency code.
 	Currency string `json:"currency"`
+	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction. 
+	Country NullableString `json:"country,omitempty"`
 	PaymentMethod TransactionPaymentMethodRequest `json:"payment_method"`
-	// Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature.
+	// Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. There are also a few restrictions on how the flag may be set:  * The flag has to be set to `true` when the `payment_source` is set to `recurring` or `installment`, and `merchant_initiated` is set to `false`.  * The flag has to be set to `false` (or not set) when using a previously tokenized payment method.
 	Store *bool `json:"store,omitempty"`
 	// Defines the intent of this API call. This determines the desired initial state of the transaction.  * `authorize` - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * `capture` - Optionally approves and then authorizes and captures the funds of the transaction.
 	Intent *string `json:"intent,omitempty"`
@@ -33,7 +35,7 @@ type TransactionRequest struct {
 	MerchantInitiated *bool `json:"merchant_initiated,omitempty"`
 	// The source of the transaction. Defaults to `ecommerce`.
 	PaymentSource *string `json:"payment_source,omitempty"`
-	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with `payment_source` set to `recurring`, `installment`, or `card_on_file` and will be ignored for other values or if `payment_source` is not present.
+	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.  The flag can only be `false` (or not set) when the transaction meets one of the following criteria:  * It is not `merchant_initiated`. * `payment_source` is set to `card_on_file`.  The flag can only be set to `true` when the transaction meets one of the following criteria:  * It is not `merchant_initiated`. * `payment_source` is set to `recurring` or `installment` and `merchant_initiated` is set to `true`. * `payment_source` is set to `card_on_file`.
 	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://gr4vy.com/docs/ under `Connections` for more information on how specific providers support metadata.
 	Metadata *map[string]string `json:"metadata,omitempty"`
@@ -42,6 +44,7 @@ type TransactionRequest struct {
 	CartItems *[]CartItem `json:"cart_items,omitempty"`
 	// A scheme's transaction identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction.  If not provided, and a qualifying customer initiated transaction has been previously made, then Gr4vy will populate this value with the identifier returned for that transaction.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID.
 	PreviousSchemeTransactionId NullableString `json:"previous_scheme_transaction_id,omitempty"`
+	BrowserInfo *BrowserInfo `json:"browser_info,omitempty"`
 }
 
 // NewTransactionRequest instantiates a new TransactionRequest object
@@ -130,6 +133,48 @@ func (o *TransactionRequest) GetCurrencyOk() (*string, bool) {
 // SetCurrency sets field value
 func (o *TransactionRequest) SetCurrency(v string) {
 	o.Currency = v
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRequest) GetCountry() string {
+	if o == nil || o.Country.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Country.Get()
+}
+
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRequest) GetCountryOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Country.Get(), o.Country.IsSet()
+}
+
+// HasCountry returns a boolean if a field has been set.
+func (o *TransactionRequest) HasCountry() bool {
+	if o != nil && o.Country.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given NullableString and assigns it to the Country field.
+func (o *TransactionRequest) SetCountry(v string) {
+	o.Country.Set(&v)
+}
+// SetCountryNil sets the value for Country to be an explicit nil
+func (o *TransactionRequest) SetCountryNil() {
+	o.Country.Set(nil)
+}
+
+// UnsetCountry ensures that no value is present for Country, not even an explicit nil
+func (o *TransactionRequest) UnsetCountry() {
+	o.Country.Unset()
 }
 
 // GetPaymentMethod returns the PaymentMethod field value
@@ -528,6 +573,38 @@ func (o *TransactionRequest) UnsetPreviousSchemeTransactionId() {
 	o.PreviousSchemeTransactionId.Unset()
 }
 
+// GetBrowserInfo returns the BrowserInfo field value if set, zero value otherwise.
+func (o *TransactionRequest) GetBrowserInfo() BrowserInfo {
+	if o == nil || o.BrowserInfo == nil {
+		var ret BrowserInfo
+		return ret
+	}
+	return *o.BrowserInfo
+}
+
+// GetBrowserInfoOk returns a tuple with the BrowserInfo field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRequest) GetBrowserInfoOk() (*BrowserInfo, bool) {
+	if o == nil || o.BrowserInfo == nil {
+		return nil, false
+	}
+	return o.BrowserInfo, true
+}
+
+// HasBrowserInfo returns a boolean if a field has been set.
+func (o *TransactionRequest) HasBrowserInfo() bool {
+	if o != nil && o.BrowserInfo != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBrowserInfo gets a reference to the given BrowserInfo and assigns it to the BrowserInfo field.
+func (o *TransactionRequest) SetBrowserInfo(v BrowserInfo) {
+	o.BrowserInfo = &v
+}
+
 func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -535,6 +612,9 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["currency"] = o.Currency
+	}
+	if o.Country.IsSet() {
+		toSerialize["country"] = o.Country.Get()
 	}
 	if true {
 		toSerialize["payment_method"] = o.PaymentMethod
@@ -571,6 +651,9 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.PreviousSchemeTransactionId.IsSet() {
 		toSerialize["previous_scheme_transaction_id"] = o.PreviousSchemeTransactionId.Get()
+	}
+	if o.BrowserInfo != nil {
+		toSerialize["browser_info"] = o.BrowserInfo
 	}
 	return json.Marshal(toSerialize)
 }

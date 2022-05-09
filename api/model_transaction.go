@@ -22,16 +22,20 @@ type Transaction struct {
 	Type *string `json:"type,omitempty"`
 	// The unique identifier for this transaction.
 	Id *string `json:"id,omitempty"`
-	// The status of the transaction. The status may change over time as asynchronous  processing events occur.
+	// The status of the transaction. The status may change over time as asynchronous processing events occur.
 	Status *string `json:"status,omitempty"`
-	// The authorized amount for this transaction. This can be different than the actual captured amount and part of this amount may be refunded.
+	// The original `intent` used when the transaction was [created](#operation/authorize-new-transaction).
+	Intent *string `json:"intent,omitempty"`
+	// The authorized amount for this transaction. This can be more than the actual captured amount and part of this amount may be refunded.
 	Amount *int32 `json:"amount,omitempty"`
-	// The captured amount for this transaction. This can be a part and in some cases even more than the authorized amount.
+	// The captured amount for this transaction. This can be the total or a portion of the authorized amount.
 	CapturedAmount *int32 `json:"captured_amount,omitempty"`
-	// The refunded amount for this transaction. This can be a part or all of the captured amount.
+	// The refunded amount for this transaction. This can be the total or a portion of the captured amount.
 	RefundedAmount *int32 `json:"refunded_amount,omitempty"`
 	// The currency code for this transaction.
 	Currency *string `json:"currency,omitempty"`
+	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction. 
+	Country NullableString `json:"country,omitempty"`
 	PaymentMethod *PaymentMethodSnapshot `json:"payment_method,omitempty"`
 	Buyer *BuyerSnapshot `json:"buyer,omitempty"`
 	// The date and time when this transaction was created in our system.
@@ -45,7 +49,7 @@ type Transaction struct {
 	MerchantInitiated *bool `json:"merchant_initiated,omitempty"`
 	// The source of the transaction. Defaults to `ecommerce`.
 	PaymentSource *string `json:"payment_source,omitempty"`
-	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with `payment_source` set to `recurring`, `installment`, or `card_on_file` and will be ignored for other values or if `payment_source` is not present.
+	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.  The flag can only be `false` (or not set) when the transaction meets one of the following criteria:  * It is not `merchant_initiated`. * `payment_source` is set to `card_on_file`.  The flag can only be set to `true` when the transaction meets one of the following criteria:  * It is not `merchant_initiated`. * `payment_source` is set to `recurring` or `installment` and `merchant_initiated` is set to `true`. * `payment_source` is set to `card_on_file`.
 	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
 	StatementDescriptor *StatementDescriptor `json:"statement_descriptor,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
@@ -60,6 +64,11 @@ type Transaction struct {
 	AvsResponseCode NullableString `json:"avs_response_code,omitempty"`
 	// The response code received from the payment service for the Card Verification Value (CVV). This code is mapped to a standardized Gr4vy CVV response code.  - `no_match` - the CVV does not match the expected value - `match` - the CVV matches the expected value - `unavailable ` - CVV check unavailable for card our country - `not_provided ` - CVV not provided  The value of this field can be `null` if the payment service did not provide a response.
 	CvvResponseCode NullableString `json:"cvv_response_code,omitempty"`
+	Method *string `json:"method,omitempty"`
+	// The payment service's unique ID for the transaction.
+	PaymentServiceTransactionId *string `json:"payment_service_transaction_id,omitempty"`
+	// Additional information about the transaction stored as key-value pairs.
+	Metadata *map[string]string `json:"metadata,omitempty"`
 }
 
 // NewTransaction instantiates a new Transaction object
@@ -185,6 +194,38 @@ func (o *Transaction) HasStatus() bool {
 // SetStatus gets a reference to the given string and assigns it to the Status field.
 func (o *Transaction) SetStatus(v string) {
 	o.Status = &v
+}
+
+// GetIntent returns the Intent field value if set, zero value otherwise.
+func (o *Transaction) GetIntent() string {
+	if o == nil || o.Intent == nil {
+		var ret string
+		return ret
+	}
+	return *o.Intent
+}
+
+// GetIntentOk returns a tuple with the Intent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetIntentOk() (*string, bool) {
+	if o == nil || o.Intent == nil {
+		return nil, false
+	}
+	return o.Intent, true
+}
+
+// HasIntent returns a boolean if a field has been set.
+func (o *Transaction) HasIntent() bool {
+	if o != nil && o.Intent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIntent gets a reference to the given string and assigns it to the Intent field.
+func (o *Transaction) SetIntent(v string) {
+	o.Intent = &v
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
@@ -313,6 +354,48 @@ func (o *Transaction) HasCurrency() bool {
 // SetCurrency gets a reference to the given string and assigns it to the Currency field.
 func (o *Transaction) SetCurrency(v string) {
 	o.Currency = &v
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetCountry() string {
+	if o == nil || o.Country.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Country.Get()
+}
+
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetCountryOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Country.Get(), o.Country.IsSet()
+}
+
+// HasCountry returns a boolean if a field has been set.
+func (o *Transaction) HasCountry() bool {
+	if o != nil && o.Country.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given NullableString and assigns it to the Country field.
+func (o *Transaction) SetCountry(v string) {
+	o.Country.Set(&v)
+}
+// SetCountryNil sets the value for Country to be an explicit nil
+func (o *Transaction) SetCountryNil() {
+	o.Country.Set(nil)
+}
+
+// UnsetCountry ensures that no value is present for Country, not even an explicit nil
+func (o *Transaction) UnsetCountry() {
+	o.Country.Unset()
 }
 
 // GetPaymentMethod returns the PaymentMethod field value if set, zero value otherwise.
@@ -887,6 +970,102 @@ func (o *Transaction) UnsetCvvResponseCode() {
 	o.CvvResponseCode.Unset()
 }
 
+// GetMethod returns the Method field value if set, zero value otherwise.
+func (o *Transaction) GetMethod() string {
+	if o == nil || o.Method == nil {
+		var ret string
+		return ret
+	}
+	return *o.Method
+}
+
+// GetMethodOk returns a tuple with the Method field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetMethodOk() (*string, bool) {
+	if o == nil || o.Method == nil {
+		return nil, false
+	}
+	return o.Method, true
+}
+
+// HasMethod returns a boolean if a field has been set.
+func (o *Transaction) HasMethod() bool {
+	if o != nil && o.Method != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMethod gets a reference to the given string and assigns it to the Method field.
+func (o *Transaction) SetMethod(v string) {
+	o.Method = &v
+}
+
+// GetPaymentServiceTransactionId returns the PaymentServiceTransactionId field value if set, zero value otherwise.
+func (o *Transaction) GetPaymentServiceTransactionId() string {
+	if o == nil || o.PaymentServiceTransactionId == nil {
+		var ret string
+		return ret
+	}
+	return *o.PaymentServiceTransactionId
+}
+
+// GetPaymentServiceTransactionIdOk returns a tuple with the PaymentServiceTransactionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetPaymentServiceTransactionIdOk() (*string, bool) {
+	if o == nil || o.PaymentServiceTransactionId == nil {
+		return nil, false
+	}
+	return o.PaymentServiceTransactionId, true
+}
+
+// HasPaymentServiceTransactionId returns a boolean if a field has been set.
+func (o *Transaction) HasPaymentServiceTransactionId() bool {
+	if o != nil && o.PaymentServiceTransactionId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentServiceTransactionId gets a reference to the given string and assigns it to the PaymentServiceTransactionId field.
+func (o *Transaction) SetPaymentServiceTransactionId(v string) {
+	o.PaymentServiceTransactionId = &v
+}
+
+// GetMetadata returns the Metadata field value if set, zero value otherwise.
+func (o *Transaction) GetMetadata() map[string]string {
+	if o == nil || o.Metadata == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetMetadataOk() (*map[string]string, bool) {
+	if o == nil || o.Metadata == nil {
+		return nil, false
+	}
+	return o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *Transaction) HasMetadata() bool {
+	if o != nil && o.Metadata != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
+func (o *Transaction) SetMetadata(v map[string]string) {
+	o.Metadata = &v
+}
+
 func (o Transaction) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -897,6 +1076,9 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
+	}
+	if o.Intent != nil {
+		toSerialize["intent"] = o.Intent
 	}
 	if o.Amount != nil {
 		toSerialize["amount"] = o.Amount
@@ -909,6 +1091,9 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.Currency != nil {
 		toSerialize["currency"] = o.Currency
+	}
+	if o.Country.IsSet() {
+		toSerialize["country"] = o.Country.Get()
 	}
 	if o.PaymentMethod != nil {
 		toSerialize["payment_method"] = o.PaymentMethod
@@ -957,6 +1142,15 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.CvvResponseCode.IsSet() {
 		toSerialize["cvv_response_code"] = o.CvvResponseCode.Get()
+	}
+	if o.Method != nil {
+		toSerialize["method"] = o.Method
+	}
+	if o.PaymentServiceTransactionId != nil {
+		toSerialize["payment_service_transaction_id"] = o.PaymentServiceTransactionId
+	}
+	if o.Metadata != nil {
+		toSerialize["metadata"] = o.Metadata
 	}
 	return json.Marshal(toSerialize)
 }

@@ -4,11 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Address** | Pointer to [**NullableAddressUpdate**](AddressUpdate.md) | Address associated with the billing details. | [optional] 
 **FirstName** | Pointer to **NullableString** | The first name(s) or given name for the buyer. | [optional] 
 **LastName** | Pointer to **NullableString** | The last name, or family name, of the buyer. | [optional] 
 **EmailAddress** | Pointer to **NullableString** | The email address for the buyer. | [optional] 
-**PhoneNumber** | Pointer to **NullableString** | The phone number to use for this request. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
+**PhoneNumber** | Pointer to **NullableString** | The phone number for the buyer which should be formatted according to the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
+**Address** | Pointer to [**NullableAddress**](Address.md) | The billing address for the buyer. | [optional] 
 **TaxId** | Pointer to [**TaxId**](TaxId.md) |  | [optional] 
 
 ## Methods
@@ -30,41 +30,6 @@ NewBillingDetailsUpdateRequestWithDefaults instantiates a new BillingDetailsUpda
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetAddress
-
-`func (o *BillingDetailsUpdateRequest) GetAddress() AddressUpdate`
-
-GetAddress returns the Address field if non-nil, zero value otherwise.
-
-### GetAddressOk
-
-`func (o *BillingDetailsUpdateRequest) GetAddressOk() (*AddressUpdate, bool)`
-
-GetAddressOk returns a tuple with the Address field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAddress
-
-`func (o *BillingDetailsUpdateRequest) SetAddress(v AddressUpdate)`
-
-SetAddress sets Address field to given value.
-
-### HasAddress
-
-`func (o *BillingDetailsUpdateRequest) HasAddress() bool`
-
-HasAddress returns a boolean if a field has been set.
-
-### SetAddressNil
-
-`func (o *BillingDetailsUpdateRequest) SetAddressNil(b bool)`
-
- SetAddressNil sets the value for Address to be an explicit nil
-
-### UnsetAddress
-`func (o *BillingDetailsUpdateRequest) UnsetAddress()`
-
-UnsetAddress ensures that no value is present for Address, not even an explicit nil
 ### GetFirstName
 
 `func (o *BillingDetailsUpdateRequest) GetFirstName() string`
@@ -205,6 +170,41 @@ HasPhoneNumber returns a boolean if a field has been set.
 `func (o *BillingDetailsUpdateRequest) UnsetPhoneNumber()`
 
 UnsetPhoneNumber ensures that no value is present for PhoneNumber, not even an explicit nil
+### GetAddress
+
+`func (o *BillingDetailsUpdateRequest) GetAddress() Address`
+
+GetAddress returns the Address field if non-nil, zero value otherwise.
+
+### GetAddressOk
+
+`func (o *BillingDetailsUpdateRequest) GetAddressOk() (*Address, bool)`
+
+GetAddressOk returns a tuple with the Address field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAddress
+
+`func (o *BillingDetailsUpdateRequest) SetAddress(v Address)`
+
+SetAddress sets Address field to given value.
+
+### HasAddress
+
+`func (o *BillingDetailsUpdateRequest) HasAddress() bool`
+
+HasAddress returns a boolean if a field has been set.
+
+### SetAddressNil
+
+`func (o *BillingDetailsUpdateRequest) SetAddressNil(b bool)`
+
+ SetAddressNil sets the value for Address to be an explicit nil
+
+### UnsetAddress
+`func (o *BillingDetailsUpdateRequest) UnsetAddress()`
+
+UnsetAddress ensures that no value is present for Address, not even an explicit nil
 ### GetTaxId
 
 `func (o *BillingDetailsUpdateRequest) GetTaxId() TaxId`

@@ -25,7 +25,7 @@ type BillingDetails struct {
 	LastName NullableString `json:"last_name,omitempty"`
 	// The email address of the buyer.
 	EmailAddress NullableString `json:"email_address,omitempty"`
-	// The phone number of the buyer. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
+	// The phone number of the buyer. This number is formatted according to the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
 	PhoneNumber NullableString `json:"phone_number,omitempty"`
 	Address *Address `json:"address,omitempty"`
 	TaxId *TaxId `json:"tax_id,omitempty"`

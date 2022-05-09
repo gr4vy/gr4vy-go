@@ -22,16 +22,20 @@ type TransactionSummary struct {
 	Type *string `json:"type,omitempty"`
 	// The unique identifier for this transaction.
 	Id *string `json:"id,omitempty"`
-	// The status of the transaction. The status may change over time as asynchronous  processing events occur.
+	// The status of the transaction. The status may change over time as asynchronous processing events occur.
 	Status *string `json:"status,omitempty"`
-	// The authorized amount for this transaction. This can be different than the actual captured amount and part of this amount may be refunded.
+	// The original `intent` used when the transaction was [created](#operation/authorize-new-transaction).
+	Intent *string `json:"intent,omitempty"`
+	// The authorized amount for this transaction. This can be more than the actual captured amount and part of this amount may be refunded.
 	Amount *int32 `json:"amount,omitempty"`
-	// The captured amount for this transaction. This can be a part and in some cases even more than the authorized amount.
+	// The captured amount for this transaction. This can be the total or a portion of the authorized amount.
 	CapturedAmount *int32 `json:"captured_amount,omitempty"`
-	// The refunded amount for this transaction. This can be a part or all of the captured amount.
+	// The refunded amount for this transaction. This can be the total or a portion of the captured amount.
 	RefundedAmount *int32 `json:"refunded_amount,omitempty"`
 	// The currency code for this transaction.
 	Currency *string `json:"currency,omitempty"`
+	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction. 
+	Country NullableString `json:"country,omitempty"`
 	PaymentMethod *PaymentMethodSnapshot `json:"payment_method,omitempty"`
 	Buyer *BuyerSnapshot `json:"buyer,omitempty"`
 	// The date and time when this transaction was created in our system.
@@ -41,6 +45,7 @@ type TransactionSummary struct {
 	// Defines when the transaction was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
+	Method *string `json:"method,omitempty"`
 }
 
 // NewTransactionSummary instantiates a new TransactionSummary object
@@ -154,6 +159,38 @@ func (o *TransactionSummary) HasStatus() bool {
 // SetStatus gets a reference to the given string and assigns it to the Status field.
 func (o *TransactionSummary) SetStatus(v string) {
 	o.Status = &v
+}
+
+// GetIntent returns the Intent field value if set, zero value otherwise.
+func (o *TransactionSummary) GetIntent() string {
+	if o == nil || o.Intent == nil {
+		var ret string
+		return ret
+	}
+	return *o.Intent
+}
+
+// GetIntentOk returns a tuple with the Intent field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionSummary) GetIntentOk() (*string, bool) {
+	if o == nil || o.Intent == nil {
+		return nil, false
+	}
+	return o.Intent, true
+}
+
+// HasIntent returns a boolean if a field has been set.
+func (o *TransactionSummary) HasIntent() bool {
+	if o != nil && o.Intent != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIntent gets a reference to the given string and assigns it to the Intent field.
+func (o *TransactionSummary) SetIntent(v string) {
+	o.Intent = &v
 }
 
 // GetAmount returns the Amount field value if set, zero value otherwise.
@@ -282,6 +319,48 @@ func (o *TransactionSummary) HasCurrency() bool {
 // SetCurrency gets a reference to the given string and assigns it to the Currency field.
 func (o *TransactionSummary) SetCurrency(v string) {
 	o.Currency = &v
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionSummary) GetCountry() string {
+	if o == nil || o.Country.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Country.Get()
+}
+
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionSummary) GetCountryOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Country.Get(), o.Country.IsSet()
+}
+
+// HasCountry returns a boolean if a field has been set.
+func (o *TransactionSummary) HasCountry() bool {
+	if o != nil && o.Country.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given NullableString and assigns it to the Country field.
+func (o *TransactionSummary) SetCountry(v string) {
+	o.Country.Set(&v)
+}
+// SetCountryNil sets the value for Country to be an explicit nil
+func (o *TransactionSummary) SetCountryNil() {
+	o.Country.Set(nil)
+}
+
+// UnsetCountry ensures that no value is present for Country, not even an explicit nil
+func (o *TransactionSummary) UnsetCountry() {
+	o.Country.Unset()
 }
 
 // GetPaymentMethod returns the PaymentMethod field value if set, zero value otherwise.
@@ -486,6 +565,38 @@ func (o *TransactionSummary) SetPaymentService(v PaymentServiceSnapshot) {
 	o.PaymentService = &v
 }
 
+// GetMethod returns the Method field value if set, zero value otherwise.
+func (o *TransactionSummary) GetMethod() string {
+	if o == nil || o.Method == nil {
+		var ret string
+		return ret
+	}
+	return *o.Method
+}
+
+// GetMethodOk returns a tuple with the Method field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionSummary) GetMethodOk() (*string, bool) {
+	if o == nil || o.Method == nil {
+		return nil, false
+	}
+	return o.Method, true
+}
+
+// HasMethod returns a boolean if a field has been set.
+func (o *TransactionSummary) HasMethod() bool {
+	if o != nil && o.Method != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMethod gets a reference to the given string and assigns it to the Method field.
+func (o *TransactionSummary) SetMethod(v string) {
+	o.Method = &v
+}
+
 func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -496,6 +607,9 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
+	}
+	if o.Intent != nil {
+		toSerialize["intent"] = o.Intent
 	}
 	if o.Amount != nil {
 		toSerialize["amount"] = o.Amount
@@ -508,6 +622,9 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	}
 	if o.Currency != nil {
 		toSerialize["currency"] = o.Currency
+	}
+	if o.Country.IsSet() {
+		toSerialize["country"] = o.Country.Get()
 	}
 	if o.PaymentMethod != nil {
 		toSerialize["payment_method"] = o.PaymentMethod
@@ -526,6 +643,9 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	}
 	if o.PaymentService != nil {
 		toSerialize["payment_service"] = o.PaymentService
+	}
+	if o.Method != nil {
+		toSerialize["method"] = o.Method
 	}
 	return json.Marshal(toSerialize)
 }

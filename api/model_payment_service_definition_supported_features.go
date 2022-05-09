@@ -19,6 +19,8 @@ import (
 type PaymentServiceDefinitionSupportedFeatures struct {
 	// Supports storing a payment method via tokenization.
 	PaymentMethodTokenization *bool `json:"payment_method_tokenization,omitempty"`
+	// Supports toggling tokenization for a payment method on or off from the dashboard.
+	PaymentMethodTokenizationToggle *bool `json:"payment_method_tokenization_toggle,omitempty"`
 	// Supports hosted 3-D Secure with a redirect.
 	ThreeDSecureHosted *bool `json:"three_d_secure_hosted,omitempty"`
 	// Supports passing 3-D Secure data to the underlying processor.
@@ -82,6 +84,38 @@ func (o *PaymentServiceDefinitionSupportedFeatures) HasPaymentMethodTokenization
 // SetPaymentMethodTokenization gets a reference to the given bool and assigns it to the PaymentMethodTokenization field.
 func (o *PaymentServiceDefinitionSupportedFeatures) SetPaymentMethodTokenization(v bool) {
 	o.PaymentMethodTokenization = &v
+}
+
+// GetPaymentMethodTokenizationToggle returns the PaymentMethodTokenizationToggle field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetPaymentMethodTokenizationToggle() bool {
+	if o == nil || o.PaymentMethodTokenizationToggle == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PaymentMethodTokenizationToggle
+}
+
+// GetPaymentMethodTokenizationToggleOk returns a tuple with the PaymentMethodTokenizationToggle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetPaymentMethodTokenizationToggleOk() (*bool, bool) {
+	if o == nil || o.PaymentMethodTokenizationToggle == nil {
+		return nil, false
+	}
+	return o.PaymentMethodTokenizationToggle, true
+}
+
+// HasPaymentMethodTokenizationToggle returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasPaymentMethodTokenizationToggle() bool {
+	if o != nil && o.PaymentMethodTokenizationToggle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMethodTokenizationToggle gets a reference to the given bool and assigns it to the PaymentMethodTokenizationToggle field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetPaymentMethodTokenizationToggle(v bool) {
+	o.PaymentMethodTokenizationToggle = &v
 }
 
 // GetThreeDSecureHosted returns the ThreeDSecureHosted field value if set, zero value otherwise.
@@ -312,6 +346,9 @@ func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error)
 	toSerialize := map[string]interface{}{}
 	if o.PaymentMethodTokenization != nil {
 		toSerialize["payment_method_tokenization"] = o.PaymentMethodTokenization
+	}
+	if o.PaymentMethodTokenizationToggle != nil {
+		toSerialize["payment_method_tokenization_toggle"] = o.PaymentMethodTokenizationToggle
 	}
 	if o.ThreeDSecureHosted != nil {
 		toSerialize["three_d_secure_hosted"] = o.ThreeDSecureHosted

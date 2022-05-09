@@ -14,12 +14,12 @@ api_transactions.go
 client.go
 configuration.go
 docs/Address.md
-docs/AddressUpdate.md
 docs/ApplePayRequest.md
 docs/ApplePaySessionRequest.md
 docs/BillingDetails.md
 docs/BillingDetailsRequest.md
 docs/BillingDetailsUpdateRequest.md
+docs/BrowserInfo.md
 docs/Buyer.md
 docs/BuyerRequest.md
 docs/BuyerSnapshot.md
@@ -28,6 +28,8 @@ docs/Buyers.md
 docs/BuyersApi.md
 docs/CardDetails.md
 docs/CardRequest.md
+docs/CardRequiredFields.md
+docs/CardRequiredFieldsAddress.md
 docs/CartItem.md
 docs/DigitalWallet.md
 docs/DigitalWalletRequest.md
@@ -66,6 +68,7 @@ docs/PaymentServiceDefinitionFields.md
 docs/PaymentServiceDefinitionSupportedFeatures.md
 docs/PaymentServiceDefinitions.md
 docs/PaymentServiceDefinitionsApi.md
+docs/PaymentServiceFields.md
 docs/PaymentServiceRequest.md
 docs/PaymentServiceRequestAllOf.md
 docs/PaymentServiceSnapshot.md
@@ -101,12 +104,12 @@ git_push.sh
 go.mod
 go.sum
 model_address.go
-model_address_update.go
 model_apple_pay_request.go
 model_apple_pay_session_request.go
 model_billing_details.go
 model_billing_details_request.go
 model_billing_details_update_request.go
+model_browser_info.go
 model_buyer.go
 model_buyer__snapshot.go
 model_buyer_request.go
@@ -114,6 +117,8 @@ model_buyer_update.go
 model_buyers.go
 model_card_details.go
 model_card_request.go
+model_card_required_fields.go
+model_card_required_fields_address.go
 model_cart_item.go
 model_digital_wallet.go
 model_digital_wallet_request.go
@@ -148,6 +153,7 @@ model_payment_service_definition.go
 model_payment_service_definition_fields.go
 model_payment_service_definition_supported_features.go
 model_payment_service_definitions.go
+model_payment_service_fields.go
 model_payment_service_request.go
 model_payment_service_request_all_of.go
 model_payment_service_update.go

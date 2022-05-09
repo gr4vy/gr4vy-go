@@ -17,16 +17,16 @@ import (
 
 // BillingDetailsUpdateRequest struct for BillingDetailsUpdateRequest
 type BillingDetailsUpdateRequest struct {
-	// Address associated with the billing details.
-	Address NullableAddressUpdate `json:"address,omitempty"`
 	// The first name(s) or given name for the buyer.
 	FirstName NullableString `json:"first_name,omitempty"`
 	// The last name, or family name, of the buyer.
 	LastName NullableString `json:"last_name,omitempty"`
 	// The email address for the buyer.
 	EmailAddress NullableString `json:"email_address,omitempty"`
-	// The phone number to use for this request. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
+	// The phone number for the buyer which should be formatted according to the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
 	PhoneNumber NullableString `json:"phone_number,omitempty"`
+	// The billing address for the buyer.
+	Address NullableAddress `json:"address,omitempty"`
 	TaxId *TaxId `json:"tax_id,omitempty"`
 }
 
@@ -45,48 +45,6 @@ func NewBillingDetailsUpdateRequest() *BillingDetailsUpdateRequest {
 func NewBillingDetailsUpdateRequestWithDefaults() *BillingDetailsUpdateRequest {
 	this := BillingDetailsUpdateRequest{}
 	return &this
-}
-
-// GetAddress returns the Address field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BillingDetailsUpdateRequest) GetAddress() AddressUpdate {
-	if o == nil || o.Address.Get() == nil {
-		var ret AddressUpdate
-		return ret
-	}
-	return *o.Address.Get()
-}
-
-// GetAddressOk returns a tuple with the Address field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BillingDetailsUpdateRequest) GetAddressOk() (*AddressUpdate, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.Address.Get(), o.Address.IsSet()
-}
-
-// HasAddress returns a boolean if a field has been set.
-func (o *BillingDetailsUpdateRequest) HasAddress() bool {
-	if o != nil && o.Address.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAddress gets a reference to the given NullableAddressUpdate and assigns it to the Address field.
-func (o *BillingDetailsUpdateRequest) SetAddress(v AddressUpdate) {
-	o.Address.Set(&v)
-}
-// SetAddressNil sets the value for Address to be an explicit nil
-func (o *BillingDetailsUpdateRequest) SetAddressNil() {
-	o.Address.Set(nil)
-}
-
-// UnsetAddress ensures that no value is present for Address, not even an explicit nil
-func (o *BillingDetailsUpdateRequest) UnsetAddress() {
-	o.Address.Unset()
 }
 
 // GetFirstName returns the FirstName field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -257,6 +215,48 @@ func (o *BillingDetailsUpdateRequest) UnsetPhoneNumber() {
 	o.PhoneNumber.Unset()
 }
 
+// GetAddress returns the Address field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BillingDetailsUpdateRequest) GetAddress() Address {
+	if o == nil || o.Address.Get() == nil {
+		var ret Address
+		return ret
+	}
+	return *o.Address.Get()
+}
+
+// GetAddressOk returns a tuple with the Address field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BillingDetailsUpdateRequest) GetAddressOk() (*Address, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Address.Get(), o.Address.IsSet()
+}
+
+// HasAddress returns a boolean if a field has been set.
+func (o *BillingDetailsUpdateRequest) HasAddress() bool {
+	if o != nil && o.Address.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAddress gets a reference to the given NullableAddress and assigns it to the Address field.
+func (o *BillingDetailsUpdateRequest) SetAddress(v Address) {
+	o.Address.Set(&v)
+}
+// SetAddressNil sets the value for Address to be an explicit nil
+func (o *BillingDetailsUpdateRequest) SetAddressNil() {
+	o.Address.Set(nil)
+}
+
+// UnsetAddress ensures that no value is present for Address, not even an explicit nil
+func (o *BillingDetailsUpdateRequest) UnsetAddress() {
+	o.Address.Unset()
+}
+
 // GetTaxId returns the TaxId field value if set, zero value otherwise.
 func (o *BillingDetailsUpdateRequest) GetTaxId() TaxId {
 	if o == nil || o.TaxId == nil {
@@ -291,9 +291,6 @@ func (o *BillingDetailsUpdateRequest) SetTaxId(v TaxId) {
 
 func (o BillingDetailsUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Address.IsSet() {
-		toSerialize["address"] = o.Address.Get()
-	}
 	if o.FirstName.IsSet() {
 		toSerialize["first_name"] = o.FirstName.Get()
 	}
@@ -305,6 +302,9 @@ func (o BillingDetailsUpdateRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.PhoneNumber.IsSet() {
 		toSerialize["phone_number"] = o.PhoneNumber.Get()
+	}
+	if o.Address.IsSet() {
+		toSerialize["address"] = o.Address.Get()
 	}
 	if o.TaxId != nil {
 		toSerialize["tax_id"] = o.TaxId

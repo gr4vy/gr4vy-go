@@ -6,11 +6,13 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;transaction&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this transaction. | [optional] 
-**Status** | Pointer to **string** | The status of the transaction. The status may change over time as asynchronous  processing events occur. | [optional] 
-**Amount** | Pointer to **int32** | The authorized amount for this transaction. This can be different than the actual captured amount and part of this amount may be refunded. | [optional] 
-**CapturedAmount** | Pointer to **int32** | The captured amount for this transaction. This can be a part and in some cases even more than the authorized amount. | [optional] 
-**RefundedAmount** | Pointer to **int32** | The refunded amount for this transaction. This can be a part or all of the captured amount. | [optional] 
+**Status** | Pointer to **string** | The status of the transaction. The status may change over time as asynchronous processing events occur. | [optional] 
+**Intent** | Pointer to **string** | The original &#x60;intent&#x60; used when the transaction was [created](#operation/authorize-new-transaction). | [optional] 
+**Amount** | Pointer to **int32** | The authorized amount for this transaction. This can be more than the actual captured amount and part of this amount may be refunded. | [optional] 
+**CapturedAmount** | Pointer to **int32** | The captured amount for this transaction. This can be the total or a portion of the authorized amount. | [optional] 
+**RefundedAmount** | Pointer to **int32** | The refunded amount for this transaction. This can be the total or a portion of the captured amount. | [optional] 
 **Currency** | Pointer to **string** | The currency code for this transaction. | [optional] 
+**Country** | Pointer to **NullableString** | The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.  | [optional] 
 **PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) |  | [optional] 
 **Buyer** | Pointer to [**BuyerSnapshot**](Buyer--Snapshot.md) |  | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this transaction was created in our system. | [optional] 
@@ -19,7 +21,7 @@ Name | Type | Description | Notes
 **PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) |  | [optional] 
 **MerchantInitiated** | Pointer to **bool** | Indicates whether the transaction was initiated by the merchant (true) or customer (false). | [optional] [default to false]
 **PaymentSource** | Pointer to **string** | The source of the transaction. Defaults to &#x60;ecommerce&#x60;. | [optional] 
-**IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note this flag is only compatible with &#x60;payment_source&#x60; set to &#x60;recurring&#x60;, &#x60;installment&#x60;, or &#x60;card_on_file&#x60; and will be ignored for other values or if &#x60;payment_source&#x60; is not present. | [optional] [default to false]
+**IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.  The flag can only be &#x60;false&#x60; (or not set) when the transaction meets one of the following criteria:  * It is not &#x60;merchant_initiated&#x60;. * &#x60;payment_source&#x60; is set to &#x60;card_on_file&#x60;.  The flag can only be set to &#x60;true&#x60; when the transaction meets one of the following criteria:  * It is not &#x60;merchant_initiated&#x60;. * &#x60;payment_source&#x60; is set to &#x60;recurring&#x60; or &#x60;installment&#x60; and &#x60;merchant_initiated&#x60; is set to &#x60;true&#x60;. * &#x60;payment_source&#x60; is set to &#x60;card_on_file&#x60;. | [optional] [default to false]
 **StatementDescriptor** | Pointer to [**StatementDescriptor**](StatementDescriptor.md) |  | [optional] 
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 **SchemeTransactionId** | Pointer to **NullableString** | An identifier for the transaction used by the scheme itself, when available.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID. | [optional] [default to "null"]
@@ -27,6 +29,9 @@ Name | Type | Description | Notes
 **RawResponseDescription** | Pointer to **NullableString** | This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
 **AvsResponseCode** | Pointer to **NullableString** | The response code received from the payment service for the Address Verification Check (AVS). This code is mapped to a standardized Gr4vy AVS response code.  - &#x60;no_match&#x60; - neither address or postal code match - &#x60;match&#x60; - both address and postal code match - &#x60;partial_match_address&#x60; - address matches but postal code does not - &#x60;partial_match_postcode&#x60; - postal code matches but address does not - &#x60;unavailable &#x60; - AVS is unavailable for card/country  The value of this field can be &#x60;null&#x60; if the payment service did not provide a response. | [optional] 
 **CvvResponseCode** | Pointer to **NullableString** | The response code received from the payment service for the Card Verification Value (CVV). This code is mapped to a standardized Gr4vy CVV response code.  - &#x60;no_match&#x60; - the CVV does not match the expected value - &#x60;match&#x60; - the CVV matches the expected value - &#x60;unavailable &#x60; - CVV check unavailable for card our country - &#x60;not_provided &#x60; - CVV not provided  The value of this field can be &#x60;null&#x60; if the payment service did not provide a response. | [optional] 
+**Method** | Pointer to **string** |  | [optional] 
+**PaymentServiceTransactionId** | Pointer to **string** | The payment service&#39;s unique ID for the transaction. | [optional] 
+**Metadata** | Pointer to **map[string]string** | Additional information about the transaction stored as key-value pairs. | [optional] 
 
 ## Methods
 
@@ -121,6 +126,31 @@ SetStatus sets Status field to given value.
 `func (o *Transaction) HasStatus() bool`
 
 HasStatus returns a boolean if a field has been set.
+
+### GetIntent
+
+`func (o *Transaction) GetIntent() string`
+
+GetIntent returns the Intent field if non-nil, zero value otherwise.
+
+### GetIntentOk
+
+`func (o *Transaction) GetIntentOk() (*string, bool)`
+
+GetIntentOk returns a tuple with the Intent field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIntent
+
+`func (o *Transaction) SetIntent(v string)`
+
+SetIntent sets Intent field to given value.
+
+### HasIntent
+
+`func (o *Transaction) HasIntent() bool`
+
+HasIntent returns a boolean if a field has been set.
 
 ### GetAmount
 
@@ -222,6 +252,41 @@ SetCurrency sets Currency field to given value.
 
 HasCurrency returns a boolean if a field has been set.
 
+### GetCountry
+
+`func (o *Transaction) GetCountry() string`
+
+GetCountry returns the Country field if non-nil, zero value otherwise.
+
+### GetCountryOk
+
+`func (o *Transaction) GetCountryOk() (*string, bool)`
+
+GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountry
+
+`func (o *Transaction) SetCountry(v string)`
+
+SetCountry sets Country field to given value.
+
+### HasCountry
+
+`func (o *Transaction) HasCountry() bool`
+
+HasCountry returns a boolean if a field has been set.
+
+### SetCountryNil
+
+`func (o *Transaction) SetCountryNil(b bool)`
+
+ SetCountryNil sets the value for Country to be an explicit nil
+
+### UnsetCountry
+`func (o *Transaction) UnsetCountry()`
+
+UnsetCountry ensures that no value is present for Country, not even an explicit nil
 ### GetPaymentMethod
 
 `func (o *Transaction) GetPaymentMethod() PaymentMethodSnapshot`
@@ -682,6 +747,81 @@ HasCvvResponseCode returns a boolean if a field has been set.
 `func (o *Transaction) UnsetCvvResponseCode()`
 
 UnsetCvvResponseCode ensures that no value is present for CvvResponseCode, not even an explicit nil
+### GetMethod
+
+`func (o *Transaction) GetMethod() string`
+
+GetMethod returns the Method field if non-nil, zero value otherwise.
+
+### GetMethodOk
+
+`func (o *Transaction) GetMethodOk() (*string, bool)`
+
+GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMethod
+
+`func (o *Transaction) SetMethod(v string)`
+
+SetMethod sets Method field to given value.
+
+### HasMethod
+
+`func (o *Transaction) HasMethod() bool`
+
+HasMethod returns a boolean if a field has been set.
+
+### GetPaymentServiceTransactionId
+
+`func (o *Transaction) GetPaymentServiceTransactionId() string`
+
+GetPaymentServiceTransactionId returns the PaymentServiceTransactionId field if non-nil, zero value otherwise.
+
+### GetPaymentServiceTransactionIdOk
+
+`func (o *Transaction) GetPaymentServiceTransactionIdOk() (*string, bool)`
+
+GetPaymentServiceTransactionIdOk returns a tuple with the PaymentServiceTransactionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentServiceTransactionId
+
+`func (o *Transaction) SetPaymentServiceTransactionId(v string)`
+
+SetPaymentServiceTransactionId sets PaymentServiceTransactionId field to given value.
+
+### HasPaymentServiceTransactionId
+
+`func (o *Transaction) HasPaymentServiceTransactionId() bool`
+
+HasPaymentServiceTransactionId returns a boolean if a field has been set.
+
+### GetMetadata
+
+`func (o *Transaction) GetMetadata() map[string]string`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *Transaction) GetMetadataOk() (*map[string]string, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *Transaction) SetMetadata(v map[string]string)`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *Transaction) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

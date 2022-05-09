@@ -49,6 +49,8 @@ type PaymentServiceRequest struct {
 	Active *bool `json:"active,omitempty"`
 	// The numeric rank of a payment service. Payment services with a lower position value are processed first. When a payment services is inserted at a position, any payment services with the the same value or higher are shifted down a position accordingly. When left out, the payment service is inserted at the end of the list.
 	Position *float32 `json:"position,omitempty"`
+	// Defines if tokenization is enabled for the service (can only be enabled if the payment service definition supports it).
+	PaymentMethodTokenizationEnabled *bool `json:"payment_method_tokenization_enabled,omitempty"`
 	// The ID of the payment service to use.
 	PaymentServiceDefinitionId string `json:"payment_service_definition_id"`
 }
@@ -67,6 +69,8 @@ func NewPaymentServiceRequest(displayName string, fields []PaymentServiceUpdateF
 	this.ThreeDSecureEnabled = &threeDSecureEnabled
 	var active bool = true
 	this.Active = &active
+	var paymentMethodTokenizationEnabled bool = false
+	this.PaymentMethodTokenizationEnabled = &paymentMethodTokenizationEnabled
 	this.PaymentServiceDefinitionId = paymentServiceDefinitionId
 	return &this
 }
@@ -80,6 +84,8 @@ func NewPaymentServiceRequestWithDefaults() *PaymentServiceRequest {
 	this.ThreeDSecureEnabled = &threeDSecureEnabled
 	var active bool = true
 	this.Active = &active
+	var paymentMethodTokenizationEnabled bool = false
+	this.PaymentMethodTokenizationEnabled = &paymentMethodTokenizationEnabled
 	return &this
 }
 
@@ -653,6 +659,38 @@ func (o *PaymentServiceRequest) SetPosition(v float32) {
 	o.Position = &v
 }
 
+// GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field value if set, zero value otherwise.
+func (o *PaymentServiceRequest) GetPaymentMethodTokenizationEnabled() bool {
+	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PaymentMethodTokenizationEnabled
+}
+
+// GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceRequest) GetPaymentMethodTokenizationEnabledOk() (*bool, bool) {
+	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
+		return nil, false
+	}
+	return o.PaymentMethodTokenizationEnabled, true
+}
+
+// HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
+func (o *PaymentServiceRequest) HasPaymentMethodTokenizationEnabled() bool {
+	if o != nil && o.PaymentMethodTokenizationEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMethodTokenizationEnabled gets a reference to the given bool and assigns it to the PaymentMethodTokenizationEnabled field.
+func (o *PaymentServiceRequest) SetPaymentMethodTokenizationEnabled(v bool) {
+	o.PaymentMethodTokenizationEnabled = &v
+}
+
 // GetPaymentServiceDefinitionId returns the PaymentServiceDefinitionId field value
 func (o *PaymentServiceRequest) GetPaymentServiceDefinitionId() string {
 	if o == nil {
@@ -726,6 +764,9 @@ func (o PaymentServiceRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Position != nil {
 		toSerialize["position"] = o.Position
+	}
+	if o.PaymentMethodTokenizationEnabled != nil {
+		toSerialize["payment_method_tokenization_enabled"] = o.PaymentMethodTokenizationEnabled
 	}
 	if true {
 		toSerialize["payment_service_definition_id"] = o.PaymentServiceDefinitionId

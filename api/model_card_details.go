@@ -19,7 +19,7 @@ import (
 type CardDetails struct {
 	// `card-detail`.
 	Type *string `json:"type,omitempty"`
-	// The 6-8 digit BIN of the card.
+	// The 8 digit BIN of the card. When looking up card details using a `payment_method_id` this value will be `null`.
 	Id *string `json:"id,omitempty"`
 	// The type of card.
 	CardType *string `json:"card_type,omitempty"`
@@ -27,8 +27,7 @@ type CardDetails struct {
 	Scheme *string `json:"scheme,omitempty"`
 	// The 2-letter ISO code of the issuing country of the card.
 	Country *string `json:"country,omitempty"`
-	// A list of fields that are required to process a transaction for this card.
-	RequiredFields *[]string `json:"required_fields,omitempty"`
+	RequiredFields *CardRequiredFields `json:"required_fields,omitempty"`
 }
 
 // NewCardDetails instantiates a new CardDetails object
@@ -209,9 +208,9 @@ func (o *CardDetails) SetCountry(v string) {
 }
 
 // GetRequiredFields returns the RequiredFields field value if set, zero value otherwise.
-func (o *CardDetails) GetRequiredFields() []string {
+func (o *CardDetails) GetRequiredFields() CardRequiredFields {
 	if o == nil || o.RequiredFields == nil {
-		var ret []string
+		var ret CardRequiredFields
 		return ret
 	}
 	return *o.RequiredFields
@@ -219,7 +218,7 @@ func (o *CardDetails) GetRequiredFields() []string {
 
 // GetRequiredFieldsOk returns a tuple with the RequiredFields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetRequiredFieldsOk() (*[]string, bool) {
+func (o *CardDetails) GetRequiredFieldsOk() (*CardRequiredFields, bool) {
 	if o == nil || o.RequiredFields == nil {
 		return nil, false
 	}
@@ -235,8 +234,8 @@ func (o *CardDetails) HasRequiredFields() bool {
 	return false
 }
 
-// SetRequiredFields gets a reference to the given []string and assigns it to the RequiredFields field.
-func (o *CardDetails) SetRequiredFields(v []string) {
+// SetRequiredFields gets a reference to the given CardRequiredFields and assigns it to the RequiredFields field.
+func (o *CardDetails) SetRequiredFields(v CardRequiredFields) {
 	o.RequiredFields = &v
 }
 

@@ -17,7 +17,7 @@ import (
 
 // TransactionCaptureRequest A request to capture a transaction.
 type TransactionCaptureRequest struct {
-	// The monetary amount to capture an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.  When omitted blank, this will capture the entire amount.
+	// The monetary amount to capture an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.  When omitted blank, this will capture the entire amount.  Capturing an amount that is greater than the authorized amount is not supported.
 	Amount *int32 `json:"amount,omitempty"`
 }
 

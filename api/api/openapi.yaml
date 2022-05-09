@@ -1257,10 +1257,6 @@ paths:
           - authorization_void_pending
           - authorization_void_declined
           - authorization_void_failed
-          - refund_succeeded
-          - refund_pending
-          - refund_declined
-          - refund_failed
           - buyer_approval_succeeded
           - buyer_approval_pending
           - buyer_approval_declined
@@ -1438,8 +1434,8 @@ paths:
                   payment_method:
                     method: gocardless
                     redirect_url: https://example.com/callback
-                    country: USD
-                    currency: US
+                    country: US
+                    currency: USD
               Authorize and capture using a previously tokenized card:
                 value:
                   amount: 1299
@@ -1531,7 +1527,6 @@ paths:
               Capture an authorization:
                 value:
                   amount: 1299
-                  currency: USD
             schema:
               $ref: '#/components/schemas/TransactionCaptureRequest'
       responses:
@@ -1741,6 +1736,8 @@ paths:
         If the transaction was not yet successfully authorized, or was already
         captured, the void will not be processed. Captured transactions can be
         [refunded](#operation/refund-transaction) instead.
+
+        Voiding zero-amount authorized transactions is not supported.
       operationId: void-transaction
       parameters:
       - description: The ID for the transaction to get the information for.
@@ -1785,7 +1782,7 @@ paths:
 components:
   schemas:
     Address:
-      description: Billing details associated to a buyer.
+      description: The billing address of the buyer.
       properties:
         city:
           description: The city for the billing address.
@@ -1856,88 +1853,7 @@ components:
           minLength: 1
           nullable: true
           type: string
-      required:
-      - city
-      - country
-      - line1
-      - postal_code
-      - state
       title: Address
-      type: object
-      x-tags:
-      - Buyers
-    AddressUpdate:
-      properties:
-        city:
-          description: The city for the billing address.
-          example: London
-          maxLength: 100
-          minLength: 1
-          nullable: false
-          type: string
-        country:
-          description: The country for the billing address.
-          example: GB
-          maxLength: 2
-          minLength: 1
-          nullable: false
-          type: string
-        postal_code:
-          description: The postal code or zip code for the billing address.
-          example: "789123"
-          maxLength: 50
-          minLength: 1
-          nullable: false
-          type: string
-        state:
-          description: The state, county, or province for the billing address.
-          example: Greater London
-          maxLength: 255
-          minLength: 1
-          nullable: false
-          type: string
-        state_code:
-          description: |-
-            The code of state, county, or province for the billing address in
-            ISO 3166-2 format.
-          example: GB-LND
-          maxLength: 6
-          minLength: 4
-          nullable: true
-          type: string
-        house_number_or_name:
-          description: |-
-            The house number or name for the billing address. Not all payment
-            services use this field but some do.
-          example: "10"
-          maxLength: 255
-          minLength: 1
-          nullable: true
-          type: string
-        line1:
-          description: The first line of the billing address.
-          example: 10 Oxford Street
-          maxLength: 255
-          minLength: 1
-          nullable: false
-          type: string
-        line2:
-          description: The second line of the billing address.
-          example: New Oxford Court
-          maxLength: 255
-          minLength: 1
-          nullable: true
-          type: string
-        organization:
-          description: |-
-            The optional name of the company or organisation to add
-            to the billing address.
-          example: Gr4vy
-          maxLength: 255
-          minLength: 1
-          nullable: true
-          type: string
-      title: Address (Update)
       type: object
       x-tags:
       - Buyers
@@ -2012,7 +1928,7 @@ components:
           type: string
         phone_number:
           description: |-
-            The phone number of the buyer. This expect the number in the
+            The phone number of the buyer. This number is formatted according to the
             [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
           example: +1234567890
           maxLength: 50
@@ -2060,7 +1976,7 @@ components:
           type: string
         phone_number:
           description: |-
-            The phone number to use for this request. This expect the number in the
+            The phone number for the buyer which should be formatted according to the
             [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
           example: +1234567890
           maxLength: 50
@@ -2071,8 +1987,14 @@ components:
         address:
           allOf:
           - $ref: '#/components/schemas/Address'
-          - description: The billing address for the buyer.
-            nullable: true
+          - required:
+            - city
+            - country
+            - line1
+            - postal_code
+            - state
+          description: The billing address for the buyer.
+          nullable: true
         tax_id:
           allOf:
           - $ref: '#/components/schemas/TaxId'
@@ -2083,18 +2005,113 @@ components:
       x-tags:
       - Buyers
     BillingDetailsUpdateRequest:
-      allOf:
-      - $ref: '#/components/schemas/BillingDetailsRequest'
       properties:
+        first_name:
+          description: The first name(s) or given name for the buyer.
+          example: John
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        last_name:
+          description: The last name, or family name, of the buyer.
+          example: Lunn
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        email_address:
+          description: The email address for the buyer.
+          example: john@example.com
+          maxLength: 320
+          minLength: 1
+          nullable: true
+          type: string
+        phone_number:
+          description: |-
+            The phone number for the buyer which should be formatted according to the
+            [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
+          example: +1234567890
+          maxLength: 50
+          minLength: 1
+          nullable: true
+          pattern: ^\+[1-9]\d{1,14}$
+          type: string
         address:
           allOf:
-          - $ref: '#/components/schemas/AddressUpdate'
-          description: Address associated with the billing details.
+          - $ref: '#/components/schemas/Address'
+          description: The billing address for the buyer.
           nullable: true
+        tax_id:
+          allOf:
+          - $ref: '#/components/schemas/TaxId'
+          - description: The tax information associated with the billing details.
+            nullable: true
       title: Billing Details (Update)
       type: object
       x-tags:
       - Buyers
+    BrowserInfo:
+      properties:
+        java_enabled:
+          description: Indicates whether the client browser supports Java.
+          example: true
+          type: boolean
+        javascript_enabled:
+          description: Indicates whether the client browser supports JavaScript.
+          example: true
+          type: boolean
+        language:
+          description: |-
+            The preferred language of the buyer,
+            usually the language of the browser UI.
+          example: en-GB
+          type: string
+        color_depth:
+          description: The color depth of the screen.
+          example: 32
+          type: number
+        screen_height:
+          description: The height of the screen in pixels.
+          example: 1080
+          type: number
+        screen_width:
+          description: The width of the screen in pixels.
+          example: 1920
+          type: number
+        time_zone_offset:
+          description: Time-zone offset in minutes between UTC and buyer location.
+          example: 60
+          type: number
+        user_device:
+          description: The platform that is being used to access the website.
+          enum:
+          - desktop
+          - mobile
+          example: desktop
+          type: string
+        user_agent:
+          description: The user agent string for the current browser.
+          example: |-
+            Mozilla/5.0 (darwin) AppleWebKit/537.36
+            (KHTML, like Gecko) jsdom/16.7.0
+          type: string
+        accept_header:
+          description: The `Accept` header of the request from the buyer's browser.
+          example: '*/*'
+          type: string
+      required:
+      - color_depth
+      - java_enabled
+      - javascript_enabled
+      - language
+      - screen_height
+      - screen_width
+      - time_zone_offset
+      - user_agent
+      - user_device
+      title: Browser info
+      type: object
     Buyer:
       example:
         external_identifier: user-789123
@@ -2288,17 +2305,33 @@ components:
       x-tags:
       - Buyers
     BuyerUpdate:
-      allOf:
-      - $ref: '#/components/schemas/BuyerRequest'
       description: A request to update a buyer.
       example:
+        external_identifier: user-789123
         billing_details: ""
+        display_name: John L.
       properties:
+        external_identifier:
+          description: An external identifier that can be used to match the buyer
+            against your own records. This value needs to be unique for all buyers.
+          example: user-789123
+          maxLength: 200
+          minLength: 1
+          nullable: true
+          type: string
+        display_name:
+          description: A unique name for this buyer which is used in the Gr4vy admin
+            panel to give a buyer a human readable name.
+          example: John L.
+          maxLength: 200
+          minLength: 1
+          nullable: true
+          type: string
         billing_details:
           allOf:
           - $ref: '#/components/schemas/BillingDetailsUpdateRequest'
-          description: The optional billing details to update a buyer.
-          nullable: true
+          - description: The billing details of the buyer.
+            nullable: true
       title: Buyer (Update)
       type: object
       x-tags:
@@ -2313,11 +2346,13 @@ components:
           example: card-detail
           type: string
         id:
-          description: The 6-8 digit BIN of the card.
-          example: "424242"
+          description: |-
+            The 8 digit BIN of the card. When looking up card details using a
+            `payment_method_id` this value will be `null`.
+          example: "42424242"
           format: bin
           maxLength: 8
-          minLength: 6
+          minLength: 8
           type: string
         card_type:
           description: The type of card.
@@ -2335,17 +2370,36 @@ components:
           example: US
           type: string
         required_fields:
-          description: A list of fields that are required to process a transaction
-            for this card.
-          example:
-          - name
-          - address
-          - tax_id
-          items:
-            type: string
-          minItems: 0
-          type: array
+          $ref: '#/components/schemas/CardRequiredFields'
       title: Card Details
+      type: object
+    CardRequiredFields:
+      description: The fields that are required to process a transaction for this
+        card.
+      properties:
+        first_name:
+          description: The first (given) name of the buyer.
+          readOnly: true
+          type: boolean
+        last_name:
+          description: The last (family) name of the buyer.
+          readOnly: true
+          type: boolean
+        email_address:
+          description: The email address of the buyer.
+          readOnly: true
+          type: boolean
+        phone_number:
+          description: The phone number of the buyer.
+          readOnly: true
+          type: boolean
+        address:
+          $ref: '#/components/schemas/CardRequiredFields_address'
+        tax_id:
+          description: The tax id code associated with the billing details.
+          readOnly: true
+          type: boolean
+      title: Card Required Fields
       type: object
     CardRequest:
       description: Card details to use in a transaction or to register a new payment
@@ -3166,6 +3220,7 @@ components:
     PaymentMethod:
       description: A generic payment method.
       example:
+        country: US
         external_identifier: user-789123
         method: ""
         scheme: scheme
@@ -3177,6 +3232,7 @@ components:
         buyer: ""
         mode: ""
         updated_at: 2013-07-16T19:23:00Z
+        currency: USD
         id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
         status: succeeded
       properties:
@@ -3285,6 +3341,22 @@ components:
           example: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           nullable: true
           type: string
+        currency:
+          description: |-
+            The ISO-4217 currency code that this payment method can be
+            used for. If this value is `null` the payment method may be
+            used for multiple currencies.
+          example: USD
+          nullable: true
+          type: string
+        country:
+          description: |-
+            The 2-letter ISO code of the country this payment method can
+            be used for. If this value is `null` the payment method may be
+            used in multiple countries.
+          example: US
+          nullable: true
+          type: string
       title: Payment method
       type: object
       x-tags:
@@ -3292,8 +3364,10 @@ components:
     PaymentMethod--Tokenized:
       description: A mini format version of a payment method.
       example:
+        country: US
         method: ""
         scheme: visa
+        currency: USD
         id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
         label: "1111"
         type: payment-method
@@ -3365,6 +3439,22 @@ components:
           example: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           nullable: true
           type: string
+        currency:
+          description: |-
+            The ISO-4217 currency code that this payment method can be
+            used for. If this value is `null` the payment method may be
+            used for multiple currencies.
+          example: USD
+          nullable: true
+          type: string
+        country:
+          description: |-
+            The 2-letter ISO code of the country this payment method can
+            be used for. If this value is `null` the payment method may be
+            used in multiple countries.
+          example: US
+          nullable: true
+          type: string
       title: Payment Method (Tokenized)
       type: object
       x-tags:
@@ -3376,7 +3466,8 @@ components:
         next_cursor: ZXhhbXBsZTE
         limit: 1
         items:
-        - external_identifier: user-789123
+        - country: US
+          external_identifier: user-789123
           method: ""
           scheme: scheme
           created_at: 2013-07-16T19:23:00Z
@@ -3387,9 +3478,11 @@ components:
           buyer: ""
           mode: ""
           updated_at: 2013-07-16T19:23:00Z
+          currency: USD
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           status: succeeded
-        - external_identifier: user-789123
+        - country: US
+          external_identifier: user-789123
           method: ""
           scheme: scheme
           created_at: 2013-07-16T19:23:00Z
@@ -3400,6 +3493,7 @@ components:
           buyer: ""
           mode: ""
           updated_at: 2013-07-16T19:23:00Z
+          currency: USD
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           status: succeeded
       properties:
@@ -3509,6 +3603,22 @@ components:
           example: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           nullable: true
           type: string
+        currency:
+          description: |-
+            The ISO-4217 currency code that this payment method can be
+            used for. If this value is `null` the payment method may be
+            used for multiple currencies.
+          example: USD
+          nullable: true
+          type: string
+        country:
+          description: |-
+            The 2-letter ISO code of the country this payment method can
+            be used for. If this value is `null` the payment method may be
+            used in multiple countries.
+          example: US
+          nullable: true
+          type: string
       title: Payment method (Snapshot)
       type: object
       x-tags:
@@ -3517,15 +3627,19 @@ components:
       description: A list of stored payment methods in token format.
       example:
         items:
-        - method: ""
+        - country: US
+          method: ""
           scheme: visa
+          currency: USD
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           label: "1111"
           type: payment-method
           expiration_date: 11/25
           approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
-        - method: ""
+        - country: US
+          method: ""
           scheme: visa
+          currency: USD
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           label: "1111"
           type: payment-method
@@ -3633,7 +3747,7 @@ components:
         a new payment method.
       example:
         number: "4111111111111111"
-        country: USD
+        country: US
         external_identifier: account-23423423
         buyer_external_identifier: user-789123
         security_code: "123"
@@ -3736,7 +3850,7 @@ components:
             This is used to select the payment service to use.
 
             This only applies to `redirect` mode payment methods like `gocardless`.
-          example: USD
+          example: US
           type: string
       required:
       - method
@@ -3747,27 +3861,33 @@ components:
     PaymentService:
       description: An active, configured payment service.
       example:
-        method: ""
-        webhook_url: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0cmlwZS1jYXJk/9fcuh3fzQHPRBUslDGLVqBzx3qda6RjoJuaxn3qlvQ0
-        merchant_category_code: "5045"
-        acquirer_bin_discover: acquirer_bin_discover
         acquirer_merchant_id: acquirer_merchant_id
-        merchant_name: gr4vy
-        active: true
         created_at: 2012-12-12T10:53:43Z
         type: payment-service
-        display_name: Stripe (Main)
         acquirer_bin_visa: acquirer_bin_visa
         payment_service_definition_id: stripe-card
         three_d_secure_enabled: true
+        updated_at: 2012-12-12T10:53:43Z
+        id: faaad066-30b4-4997-a438-242b0752d7e1
+        method: ""
+        webhook_url: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0...
+        merchant_category_code: "5045"
+        acquirer_bin_discover: acquirer_bin_discover
+        merchant_name: gr4vy
+        active: true
+        payment_method_tokenization_enabled: true
+        display_name: Stripe (Main)
         acquirer_bin_amex: acquirer_bin_amex
         merchant_country_code: "840"
-        updated_at: 2012-12-12T10:53:43Z
         accepted_countries:
         - DE
-        id: faaad066-30b4-4997-a438-242b0752d7e1
         position: 1
         merchant_url: http://example.com/aeiou
+        fields:
+        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+          key: secret_key
+        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+          key: secret_key
         acquirer_bin_mastercard: acquirer_bin_mastercard
         accepted_currencies:
         - EUR
@@ -3922,6 +4042,13 @@ components:
             position value are processed first.
           example: 1
           type: number
+        payment_method_tokenization_enabled:
+          default: false
+          description: |-
+            Defines if tokenization is enabled for the service (can only be
+            enabled if the payment service definition supports it).
+          example: true
+          type: boolean
         created_at:
           description: The date and time when this service was created.
           example: 2012-12-12T10:53:43Z
@@ -3938,10 +4065,18 @@ components:
             receiving endpoint for webhooks from the service to Gr4vy. Currently,
             Gr4vy does not yet automatically register webhooks on setup, and
             therefore webhooks need to be registered manually by the merchant.
-          example: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0cmlwZS1jYXJk/9fcuh3fzQHPRBUslDGLVqBzx3qda6RjoJuaxn3qlvQ0
+          example: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0...
           format: url
           nullable: true
           type: string
+        fields:
+          description: |-
+            A list of fields, each containing a key-value pair for each field
+            configured for this payment service. Fields marked as `secret`
+            (see Payment Service Definition) are not returned.
+          items:
+            $ref: '#/components/schemas/PaymentService_fields'
+          type: array
       title: A payment service
       type: object
       x-tags:
@@ -4001,52 +4136,64 @@ components:
         next_cursor: ZXhhbXBsZTE
         limit: 1
         items:
-        - method: ""
-          webhook_url: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0cmlwZS1jYXJk/9fcuh3fzQHPRBUslDGLVqBzx3qda6RjoJuaxn3qlvQ0
-          merchant_category_code: "5045"
-          acquirer_bin_discover: acquirer_bin_discover
-          acquirer_merchant_id: acquirer_merchant_id
-          merchant_name: gr4vy
-          active: true
+        - acquirer_merchant_id: acquirer_merchant_id
           created_at: 2012-12-12T10:53:43Z
           type: payment-service
-          display_name: Stripe (Main)
           acquirer_bin_visa: acquirer_bin_visa
           payment_service_definition_id: stripe-card
           three_d_secure_enabled: true
+          updated_at: 2012-12-12T10:53:43Z
+          id: faaad066-30b4-4997-a438-242b0752d7e1
+          method: ""
+          webhook_url: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0...
+          merchant_category_code: "5045"
+          acquirer_bin_discover: acquirer_bin_discover
+          merchant_name: gr4vy
+          active: true
+          payment_method_tokenization_enabled: true
+          display_name: Stripe (Main)
           acquirer_bin_amex: acquirer_bin_amex
           merchant_country_code: "840"
-          updated_at: 2012-12-12T10:53:43Z
           accepted_countries:
           - DE
-          id: faaad066-30b4-4997-a438-242b0752d7e1
           position: 1
           merchant_url: http://example.com/aeiou
+          fields:
+          - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+            key: secret_key
+          - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+            key: secret_key
           acquirer_bin_mastercard: acquirer_bin_mastercard
           accepted_currencies:
           - EUR
           status: pending
-        - method: ""
-          webhook_url: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0cmlwZS1jYXJk/9fcuh3fzQHPRBUslDGLVqBzx3qda6RjoJuaxn3qlvQ0
-          merchant_category_code: "5045"
-          acquirer_bin_discover: acquirer_bin_discover
-          acquirer_merchant_id: acquirer_merchant_id
-          merchant_name: gr4vy
-          active: true
+        - acquirer_merchant_id: acquirer_merchant_id
           created_at: 2012-12-12T10:53:43Z
           type: payment-service
-          display_name: Stripe (Main)
           acquirer_bin_visa: acquirer_bin_visa
           payment_service_definition_id: stripe-card
           three_d_secure_enabled: true
+          updated_at: 2012-12-12T10:53:43Z
+          id: faaad066-30b4-4997-a438-242b0752d7e1
+          method: ""
+          webhook_url: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0...
+          merchant_category_code: "5045"
+          acquirer_bin_discover: acquirer_bin_discover
+          merchant_name: gr4vy
+          active: true
+          payment_method_tokenization_enabled: true
+          display_name: Stripe (Main)
           acquirer_bin_amex: acquirer_bin_amex
           merchant_country_code: "840"
-          updated_at: 2012-12-12T10:53:43Z
           accepted_countries:
           - DE
-          id: faaad066-30b4-4997-a438-242b0752d7e1
           position: 1
           merchant_url: http://example.com/aeiou
+          fields:
+          - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+            key: secret_key
+          - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+            key: secret_key
           acquirer_bin_mastercard: acquirer_bin_mastercard
           accepted_currencies:
           - EUR
@@ -4110,6 +4257,7 @@ components:
         acquirer_merchant_id: acquirer_merchant_id
         merchant_name: gr4vy
         active: true
+        payment_method_tokenization_enabled: true
         display_name: Stripe (Main)
         acquirer_bin_visa: acquirer_bin_visa
         three_d_secure_enabled: true
@@ -4248,6 +4396,13 @@ components:
             inserted at the end of the list.
           example: 1
           type: number
+        payment_method_tokenization_enabled:
+          default: false
+          description: |-
+            Defines if tokenization is enabled for the service (can only be
+            enabled if the payment service definition supports it).
+          example: true
+          type: boolean
       title: Payment Service (Update)
       type: object
       x-tags:
@@ -4263,6 +4418,7 @@ components:
           network_tokens: false
           payment_method_tokenization: true
           void: true
+          payment_method_tokenization_toggle: false
           three_d_secure_pass_through: false
           verify_credentials: false
           partial_refunds: false
@@ -4276,10 +4432,12 @@ components:
         display_name: Stripe
         fields:
         - format: text
+          secret: true
           display_name: Private API key
           key: private_api_key
           required: true
         - format: text
+          secret: true
           display_name: Private API key
           key: private_api_key
           required: true
@@ -4384,6 +4542,7 @@ components:
             network_tokens: false
             payment_method_tokenization: true
             void: true
+            payment_method_tokenization_toggle: false
             three_d_secure_pass_through: false
             verify_credentials: false
             partial_refunds: false
@@ -4397,10 +4556,12 @@ components:
           display_name: Stripe
           fields:
           - format: text
+            secret: true
             display_name: Private API key
             key: private_api_key
             required: true
           - format: text
+            secret: true
             display_name: Private API key
             key: private_api_key
             required: true
@@ -4416,6 +4577,7 @@ components:
             network_tokens: false
             payment_method_tokenization: true
             void: true
+            payment_method_tokenization_toggle: false
             three_d_secure_pass_through: false
             verify_credentials: false
             partial_refunds: false
@@ -4429,10 +4591,12 @@ components:
           display_name: Stripe
           fields:
           - format: text
+            secret: true
             display_name: Private API key
             key: private_api_key
             required: true
           - format: text
+            secret: true
             display_name: Private API key
             key: private_api_key
             required: true
@@ -4487,6 +4651,7 @@ components:
           supported_schemes:
           - '{}'
           - '{}'
+        payment_method_tokenization_enabled: true
         label: Pay by Card
         type: payment-option
         can_store_payment_method: true
@@ -4540,6 +4705,9 @@ components:
           type: boolean
         context:
           $ref: '#/components/schemas/PaymentOption_context'
+        payment_method_tokenization_enabled:
+          description: A flag to indicate if storing the payment method is enabled.
+          type: boolean
       title: Payment option
       type: object
       x-tags:
@@ -4556,6 +4724,7 @@ components:
             supported_schemes:
             - '{}'
             - '{}'
+          payment_method_tokenization_enabled: true
           label: Pay by Card
           type: payment-option
           can_store_payment_method: true
@@ -4567,6 +4736,7 @@ components:
             supported_schemes:
             - '{}'
             - '{}'
+          payment_method_tokenization_enabled: true
           label: Pay by Card
           type: payment-option
           can_store_payment_method: true
@@ -4613,7 +4783,7 @@ components:
           description: |-
             The 2-letter ISO code of the country to use this payment method for.
             This is used to select the payment service to use.
-          example: USD
+          example: US
           type: string
         external_identifier:
           description: An external identifier that can be used to match the account
@@ -4838,8 +5008,8 @@ components:
           type: string
         phone_number:
           description: |-
-            The value in the phone number field of a customer's statement.
-            The phone number to use for this request. This expect the number in the
+            The value in the phone number field of a customer's statement which
+            should be formatted according to the
             [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
           example: +1234567890
           maxLength: 20
@@ -5001,9 +5171,26 @@ components:
     Transaction:
       description: A transaction record.
       example:
-        amount: 1299
+        country: US
+        payment_service_transaction_id: charge_xYqd43gySMtori
         external_identifier: user-789123
+        metadata:
+          key: value
         payment_service: ""
+        cvv_response_code: match
+        created_at: 2013-07-16T19:23:00Z
+        is_subsequent_payment: true
+        raw_response_code: incorrect-zip
+        type: transaction
+        statement_descriptor: ""
+        updated_at: 2000-01-23T04:56:07.000+00:00
+        captured_amount: 999
+        currency: USD
+        id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        payment_source: ecommerce
+        payment_method: ""
+        amount: 1299
+        method: card
         cart_items:
         - tax_amount: 0
           external_identifier: item-789123
@@ -5037,26 +5224,15 @@ components:
           - categories
           - categories
           sku: sku-789123
-        cvv_response_code: match
-        created_at: 2013-07-16T19:23:00Z
-        is_subsequent_payment: true
-        raw_response_code: incorrect-zip
         avs_response_code: partial_match_address
-        type: transaction
         scheme_transaction_id: "123456789012345"
+        intent: authorize
         refunded_amount: 100
         buyer: ""
-        statement_descriptor: ""
-        updated_at: 2000-01-23T04:56:07.000+00:00
-        captured_amount: 999
-        currency: USD
-        id: fe26475d-ec3e-4884-9553-f7356683f7f9
         merchant_initiated: true
-        payment_source: ecommerce
         raw_response_description: |-
           The card's postal code is incorrect. Check the card's postal code or use a
           different card.
-        payment_method: ""
         status: processing
       properties:
         type:
@@ -5073,7 +5249,7 @@ components:
         status:
           description: |-
             The status of the transaction. The status may change over time as
-            asynchronous  processing events occur.
+            asynchronous processing events occur.
           enum:
           - processing
           - processing_failed
@@ -5090,10 +5266,6 @@ components:
           - authorization_void_pending
           - authorization_void_declined
           - authorization_void_failed
-          - refund_succeeded
-          - refund_pending
-          - refund_declined
-          - refund_failed
           - buyer_approval_succeeded
           - buyer_approval_pending
           - buyer_approval_declined
@@ -5101,9 +5273,18 @@ components:
           - buyer_approval_timedout
           example: processing
           type: string
+        intent:
+          description: |-
+            The original `intent` used when the transaction was
+            [created](#operation/authorize-new-transaction).
+          enum:
+          - authorize
+          - capture
+          example: authorize
+          type: string
         amount:
           description: |-
-            The authorized amount for this transaction. This can be different than the
+            The authorized amount for this transaction. This can be more than the
             actual captured amount and part of this amount may be refunded.
           example: 1299
           maximum: 99999999
@@ -5111,16 +5292,16 @@ components:
           type: integer
         captured_amount:
           description: |-
-            The captured amount for this transaction. This can be a part and in some
-            cases even more than the authorized amount.
+            The captured amount for this transaction. This can be the total or a
+            portion of the authorized amount.
           example: 999
           maximum: 99999999
           minimum: 0
           type: integer
         refunded_amount:
           description: |-
-            The refunded amount for this transaction. This can be a part or all of the
-            captured amount.
+            The refunded amount for this transaction. This can be the total or a
+            portion of the captured amount.
           example: 100
           maximum: 99999999
           minimum: 0
@@ -5128,6 +5309,14 @@ components:
         currency:
           description: The currency code for this transaction.
           example: USD
+          type: string
+        country:
+          description: |
+            The 2-letter ISO code of the country of the transaction.
+            This is used to filter the payment services that is used to process the
+            transaction.
+          example: US
+          nullable: true
           type: string
         payment_method:
           allOf:
@@ -5180,9 +5369,22 @@ components:
           description: |-
             Indicates whether the transaction represents a subsequent payment
             coming from a setup recurring payment.
-            Please note this flag is only compatible with `payment_source` set to
-            `recurring`, `installment`, or `card_on_file` and will be ignored for
-            other values or if `payment_source` is not present.
+            Please note there are some restrictions on how this flag may be
+            used.
+
+            The flag can only be `false` (or not set) when the transaction meets
+            one of the following criteria:
+
+            * It is not `merchant_initiated`.
+            * `payment_source` is set to `card_on_file`.
+
+            The flag can only be set to `true` when the transaction meets one of the
+            following criteria:
+
+            * It is not `merchant_initiated`.
+            * `payment_source` is set to `recurring` or `installment` and
+            `merchant_initiated` is set to `true`.
+            * `payment_source` is set to `card_on_file`.
           example: true
           type: boolean
         statement_descriptor:
@@ -5268,6 +5470,32 @@ components:
           example: match
           nullable: true
           type: string
+        method:
+          enum:
+          - card
+          - paypal
+          - banked
+          - gocardless
+          - stripedd
+          - applepay
+          - googlepay
+          - afterpay
+          - clearpay
+          - zippay
+          example: card
+          type: string
+        payment_service_transaction_id:
+          description: The payment service's unique ID for the transaction.
+          example: charge_xYqd43gySMtori
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: Additional information about the transaction stored as key-value
+            pairs.
+          example:
+            key: value
+          type: object
       title: Transaction
       type: object
       x-tags:
@@ -5275,11 +5503,14 @@ components:
     TransactionSummary:
       description: A transaction record.
       example:
+        country: US
         amount: 1299
         external_identifier: user-789123
         payment_service: ""
+        method: card
         created_at: 2013-07-16T19:23:00Z
         type: transaction
+        intent: authorize
         refunded_amount: 100
         buyer: ""
         updated_at: 2000-01-23T04:56:07.000+00:00
@@ -5303,7 +5534,7 @@ components:
         status:
           description: |-
             The status of the transaction. The status may change over time as
-            asynchronous  processing events occur.
+            asynchronous processing events occur.
           enum:
           - processing
           - processing_failed
@@ -5320,10 +5551,6 @@ components:
           - authorization_void_pending
           - authorization_void_declined
           - authorization_void_failed
-          - refund_succeeded
-          - refund_pending
-          - refund_declined
-          - refund_failed
           - buyer_approval_succeeded
           - buyer_approval_pending
           - buyer_approval_declined
@@ -5331,9 +5558,18 @@ components:
           - buyer_approval_timedout
           example: processing
           type: string
+        intent:
+          description: |-
+            The original `intent` used when the transaction was
+            [created](#operation/authorize-new-transaction).
+          enum:
+          - authorize
+          - capture
+          example: authorize
+          type: string
         amount:
           description: |-
-            The authorized amount for this transaction. This can be different than the
+            The authorized amount for this transaction. This can be more than the
             actual captured amount and part of this amount may be refunded.
           example: 1299
           maximum: 99999999
@@ -5341,16 +5577,16 @@ components:
           type: integer
         captured_amount:
           description: |-
-            The captured amount for this transaction. This can be a part and in some
-            cases even more than the authorized amount.
+            The captured amount for this transaction. This can be the total or a
+            portion of the authorized amount.
           example: 999
           maximum: 99999999
           minimum: 0
           type: integer
         refunded_amount:
           description: |-
-            The refunded amount for this transaction. This can be a part or all of the
-            captured amount.
+            The refunded amount for this transaction. This can be the total or a
+            portion of the captured amount.
           example: 100
           maximum: 99999999
           minimum: 0
@@ -5358,6 +5594,14 @@ components:
         currency:
           description: The currency code for this transaction.
           example: USD
+          type: string
+        country:
+          description: |
+            The 2-letter ISO code of the country of the transaction.
+            This is used to filter the payment services that is used to process the
+            transaction.
+          example: US
+          nullable: true
           type: string
         payment_method:
           allOf:
@@ -5388,6 +5632,20 @@ components:
           allOf:
           - $ref: '#/components/schemas/PaymentService--Snapshot'
           - description: The payment service used for this transaction.
+        method:
+          enum:
+          - card
+          - paypal
+          - banked
+          - gocardless
+          - stripedd
+          - applepay
+          - googlepay
+          - afterpay
+          - clearpay
+          - zippay
+          example: card
+          type: string
       title: Transaction
       type: object
       x-tags:
@@ -5399,11 +5657,14 @@ components:
         next_cursor: ZXhhbXBsZTE
         limit: 1
         items:
-        - amount: 1299
+        - country: US
+          amount: 1299
           external_identifier: user-789123
           payment_service: ""
+          method: card
           created_at: 2013-07-16T19:23:00Z
           type: transaction
+          intent: authorize
           refunded_amount: 100
           buyer: ""
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -5412,11 +5673,14 @@ components:
           id: fe26475d-ec3e-4884-9553-f7356683f7f9
           payment_method: ""
           status: processing
-        - amount: 1299
+        - country: US
+          amount: 1299
           external_identifier: user-789123
           payment_service: ""
+          method: card
           created_at: 2013-07-16T19:23:00Z
           type: transaction
+          intent: authorize
           refunded_amount: 100
           buyer: ""
           updated_at: 2000-01-23T04:56:07.000+00:00
@@ -5498,6 +5762,7 @@ components:
     TransactionRequest:
       description: A request to create a transaction.
       example:
+        country: US
         amount: 1299
         external_identifier: user-789123
         metadata:
@@ -5588,6 +5853,7 @@ components:
         previous_scheme_transaction_id: "123456789012345"
         intent: capture
         statement_descriptor: ""
+        browser_info: ""
         currency: USD
         merchant_initiated: true
         payment_source: ecommerce
@@ -5607,6 +5873,9 @@ components:
             The monetary amount to create an authorization for, in the smallest
             currency unit for the given currency, for example `1299` cents to create
             an authorization for `$12.99`.
+
+            If the `intent` is set to `capture`, an amount greater than zero must
+            be supplied.
           example: 1299
           maximum: 99999999
           minimum: 0
@@ -5615,6 +5884,14 @@ components:
           description: A supported ISO-4217 currency code.
           example: USD
           type: string
+        country:
+          description: |
+            The 2-letter ISO code of the country of the transaction.
+            This is used to filter the payment services that is used to process the
+            transaction.
+          example: US
+          nullable: true
+          type: string
         payment_method:
           $ref: '#/components/schemas/TransactionPaymentMethodRequest'
         store:
@@ -5622,7 +5899,14 @@ components:
           description: |-
             Whether or not to also try and store the payment method with us so that
             it can be used again for future use. This is only supported for payment
-            methods that support this feature.
+            methods that support this feature. There are also a few restrictions on
+            how the flag may be set:
+
+            * The flag has to be set to `true` when the `payment_source` is set to
+            `recurring` or `installment`, and `merchant_initiated` is set to `false`.
+
+            * The flag has to be set to `false` (or not set) when using a previously
+            tokenized payment method.
           example: true
           type: boolean
         intent:
@@ -5670,9 +5954,22 @@ components:
           description: |-
             Indicates whether the transaction represents a subsequent payment
             coming from a setup recurring payment.
-            Please note this flag is only compatible with `payment_source` set to
-            `recurring`, `installment`, or `card_on_file` and will be ignored for
-            other values or if `payment_source` is not present.
+            Please note there are some restrictions on how this flag may be
+            used.
+
+            The flag can only be `false` (or not set) when the transaction meets
+            one of the following criteria:
+
+            * It is not `merchant_initiated`.
+            * `payment_source` is set to `card_on_file`.
+
+            The flag can only be set to `true` when the transaction meets one of the
+            following criteria:
+
+            * It is not `merchant_initiated`.
+            * `payment_source` is set to `recurring` or `installment` and
+            `merchant_initiated` is set to `true`.
+            * `payment_source` is set to `card_on_file`.
           example: true
           type: boolean
         metadata:
@@ -5713,6 +6010,11 @@ components:
           example: "123456789012345"
           nullable: true
           type: string
+        browser_info:
+          allOf:
+          - $ref: '#/components/schemas/BrowserInfo'
+          - description: Information about the browser used by the buyer.
+            nullable: true
       required:
       - amount
       - currency
@@ -5733,9 +6035,12 @@ components:
             an authorization for `$12.99`.
 
             When omitted blank, this will capture the entire amount.
+
+            Capturing an amount that is greater than the authorized amount is not
+            supported.
           example: 1299
           maximum: 99999999
-          minimum: 0
+          minimum: 1
           type: integer
       title: Capture a transaction
       type: object
@@ -5751,11 +6056,14 @@ components:
             The amount requested to refund.
 
             If omitted, a full refund will be requested.
+
             Otherwise, the amount must be lower than or equal to the remaining balance
-            in the associated transaction. Negative refunds are not supported.
+            in the associated transaction.
+
+            Negative and zero-amount refunds are not supported.
           example: 1299
           maximum: 99999999
-          minimum: 0
+          minimum: 1
           type: integer
       title: Transaction Refund Request
       type: object
@@ -5919,6 +6227,54 @@ components:
       type: object
       x-tags:
       - Users
+    CardRequiredFields_address:
+      description: The billing address of the buyer.
+      properties:
+        city:
+          description: The city for the billing address.
+          readOnly: true
+          type: boolean
+        country:
+          description: The country for the billing address.
+          readOnly: true
+          type: boolean
+        postal_code:
+          description: The postal code or zip code for the billing address.
+          readOnly: true
+          type: boolean
+        state:
+          description: The state, county, or province for the billing address.
+          readOnly: true
+          type: boolean
+        house_number_or_name:
+          description: |-
+            The house number or name for the billing address. Not all payment
+            services use this field but some do.
+          readOnly: true
+          type: boolean
+        line1:
+          description: The first line of the billing address.
+          readOnly: true
+          type: boolean
+      type: object
+    PaymentService_fields:
+      example:
+        value: sk_test_26PHem9AhJZvU623DfE1x4sd
+        key: secret_key
+      properties:
+        key:
+          description: The key of the field.
+          example: secret_key
+          maxLength: 50
+          minLength: 1
+          type: string
+        value:
+          description: The value of the field.
+          example: sk_test_26PHem9AhJZvU623DfE1x4sd
+          maxLength: 5000
+          minLength: 0
+          type: string
+      type: object
     PaymentServiceRequest_allOf:
       properties:
         payment_service_definition_id:
@@ -5957,6 +6313,7 @@ components:
         is created.
       example:
         format: text
+        secret: true
         display_name: Private API key
         key: private_api_key
         required: true
@@ -5982,6 +6339,12 @@ components:
           - number
           example: text
           type: string
+        secret:
+          description: |-
+            Defines if this field is secret. When `true` the field is not
+            returned when querying the payment service.
+          example: true
+          type: boolean
       type: object
     PaymentServiceDefinition_supported_features:
       description: Features supported by the payment definition.
@@ -5990,6 +6353,7 @@ components:
         network_tokens: false
         payment_method_tokenization: true
         void: true
+        payment_method_tokenization_toggle: false
         three_d_secure_pass_through: false
         verify_credentials: false
         partial_refunds: false
@@ -5998,6 +6362,12 @@ components:
         payment_method_tokenization:
           description: Supports storing a payment method via tokenization.
           example: true
+          type: boolean
+        payment_method_tokenization_toggle:
+          description: |-
+            Supports toggling tokenization for a payment method on or off
+            from the dashboard.
+          example: false
           type: boolean
         three_d_secure_hosted:
           description: Supports hosted 3-D Secure with a redirect.

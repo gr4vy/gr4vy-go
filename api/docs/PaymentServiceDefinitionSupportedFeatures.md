@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **PaymentMethodTokenization** | Pointer to **bool** | Supports storing a payment method via tokenization. | [optional] 
+**PaymentMethodTokenizationToggle** | Pointer to **bool** | Supports toggling tokenization for a payment method on or off from the dashboard. | [optional] 
 **ThreeDSecureHosted** | Pointer to **bool** | Supports hosted 3-D Secure with a redirect. | [optional] 
 **ThreeDSecurePassThrough** | Pointer to **bool** | Supports passing 3-D Secure data to the underlying processor. | [optional] 
 **NetworkTokens** | Pointer to **bool** | Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor. | [optional] 
@@ -56,6 +57,31 @@ SetPaymentMethodTokenization sets PaymentMethodTokenization field to given value
 `func (o *PaymentServiceDefinitionSupportedFeatures) HasPaymentMethodTokenization() bool`
 
 HasPaymentMethodTokenization returns a boolean if a field has been set.
+
+### GetPaymentMethodTokenizationToggle
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetPaymentMethodTokenizationToggle() bool`
+
+GetPaymentMethodTokenizationToggle returns the PaymentMethodTokenizationToggle field if non-nil, zero value otherwise.
+
+### GetPaymentMethodTokenizationToggleOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetPaymentMethodTokenizationToggleOk() (*bool, bool)`
+
+GetPaymentMethodTokenizationToggleOk returns a tuple with the PaymentMethodTokenizationToggle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMethodTokenizationToggle
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetPaymentMethodTokenizationToggle(v bool)`
+
+SetPaymentMethodTokenizationToggle sets PaymentMethodTokenizationToggle field to given value.
+
+### HasPaymentMethodTokenizationToggle
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasPaymentMethodTokenizationToggle() bool`
+
+HasPaymentMethodTokenizationToggle returns a boolean if a field has been set.
 
 ### GetThreeDSecureHosted
 

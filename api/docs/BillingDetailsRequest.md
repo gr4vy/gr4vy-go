@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **FirstName** | Pointer to **NullableString** | The first name(s) or given name for the buyer. | [optional] 
 **LastName** | Pointer to **NullableString** | The last name, or family name, of the buyer. | [optional] 
 **EmailAddress** | Pointer to **NullableString** | The email address for the buyer. | [optional] 
-**PhoneNumber** | Pointer to **NullableString** | The phone number to use for this request. This expect the number in the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
-**Address** | Pointer to [**Address**](Address.md) |  | [optional] 
+**PhoneNumber** | Pointer to **NullableString** | The phone number for the buyer which should be formatted according to the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
+**Address** | Pointer to [**NullableAddress**](Address.md) | The billing address for the buyer. | [optional] 
 **TaxId** | Pointer to [**TaxId**](TaxId.md) |  | [optional] 
 
 ## Methods
@@ -195,6 +195,16 @@ SetAddress sets Address field to given value.
 
 HasAddress returns a boolean if a field has been set.
 
+### SetAddressNil
+
+`func (o *BillingDetailsRequest) SetAddressNil(b bool)`
+
+ SetAddressNil sets the value for Address to be an explicit nil
+
+### UnsetAddress
+`func (o *BillingDetailsRequest) UnsetAddress()`
+
+UnsetAddress ensures that no value is present for Address, not even an explicit nil
 ### GetTaxId
 
 `func (o *BillingDetailsRequest) GetTaxId() TaxId`

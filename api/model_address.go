@@ -15,22 +15,22 @@ import (
 	"encoding/json"
 )
 
-// Address Billing details associated to a buyer.
+// Address The billing address of the buyer.
 type Address struct {
 	// The city for the billing address.
-	City string `json:"city"`
+	City *string `json:"city,omitempty"`
 	// The country for the billing address.
-	Country string `json:"country"`
+	Country *string `json:"country,omitempty"`
 	// The postal code or zip code for the billing address.
-	PostalCode string `json:"postal_code"`
+	PostalCode *string `json:"postal_code,omitempty"`
 	// The state, county, or province for the billing address.
-	State string `json:"state"`
+	State *string `json:"state,omitempty"`
 	// The code of state, county, or province for the billing address in ISO 3166-2 format.
 	StateCode NullableString `json:"state_code,omitempty"`
 	// The house number or name for the billing address. Not all payment services use this field but some do.
 	HouseNumberOrName NullableString `json:"house_number_or_name,omitempty"`
 	// The first line of the billing address.
-	Line1 string `json:"line1"`
+	Line1 *string `json:"line1,omitempty"`
 	// The second line of the billing address.
 	Line2 NullableString `json:"line2,omitempty"`
 	// The optional name of the company or organisation to add to the billing address.
@@ -41,13 +41,8 @@ type Address struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAddress(city string, country string, postalCode string, state string, line1 string) *Address {
+func NewAddress() *Address {
 	this := Address{}
-	this.City = city
-	this.Country = country
-	this.PostalCode = postalCode
-	this.State = state
-	this.Line1 = line1
 	return &this
 }
 
@@ -59,100 +54,132 @@ func NewAddressWithDefaults() *Address {
 	return &this
 }
 
-// GetCity returns the City field value
+// GetCity returns the City field value if set, zero value otherwise.
 func (o *Address) GetCity() string {
-	if o == nil {
+	if o == nil || o.City == nil {
 		var ret string
 		return ret
 	}
-
-	return o.City
+	return *o.City
 }
 
-// GetCityOk returns a tuple with the City field value
+// GetCityOk returns a tuple with the City field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Address) GetCityOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.City == nil {
 		return nil, false
 	}
-	return &o.City, true
+	return o.City, true
 }
 
-// SetCity sets field value
+// HasCity returns a boolean if a field has been set.
+func (o *Address) HasCity() bool {
+	if o != nil && o.City != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCity gets a reference to the given string and assigns it to the City field.
 func (o *Address) SetCity(v string) {
-	o.City = v
+	o.City = &v
 }
 
-// GetCountry returns the Country field value
+// GetCountry returns the Country field value if set, zero value otherwise.
 func (o *Address) GetCountry() string {
-	if o == nil {
+	if o == nil || o.Country == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Country
+	return *o.Country
 }
 
-// GetCountryOk returns a tuple with the Country field value
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Address) GetCountryOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Country == nil {
 		return nil, false
 	}
-	return &o.Country, true
+	return o.Country, true
 }
 
-// SetCountry sets field value
+// HasCountry returns a boolean if a field has been set.
+func (o *Address) HasCountry() bool {
+	if o != nil && o.Country != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given string and assigns it to the Country field.
 func (o *Address) SetCountry(v string) {
-	o.Country = v
+	o.Country = &v
 }
 
-// GetPostalCode returns the PostalCode field value
+// GetPostalCode returns the PostalCode field value if set, zero value otherwise.
 func (o *Address) GetPostalCode() string {
-	if o == nil {
+	if o == nil || o.PostalCode == nil {
 		var ret string
 		return ret
 	}
-
-	return o.PostalCode
+	return *o.PostalCode
 }
 
-// GetPostalCodeOk returns a tuple with the PostalCode field value
+// GetPostalCodeOk returns a tuple with the PostalCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Address) GetPostalCodeOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.PostalCode == nil {
 		return nil, false
 	}
-	return &o.PostalCode, true
+	return o.PostalCode, true
 }
 
-// SetPostalCode sets field value
+// HasPostalCode returns a boolean if a field has been set.
+func (o *Address) HasPostalCode() bool {
+	if o != nil && o.PostalCode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPostalCode gets a reference to the given string and assigns it to the PostalCode field.
 func (o *Address) SetPostalCode(v string) {
-	o.PostalCode = v
+	o.PostalCode = &v
 }
 
-// GetState returns the State field value
+// GetState returns the State field value if set, zero value otherwise.
 func (o *Address) GetState() string {
-	if o == nil {
+	if o == nil || o.State == nil {
 		var ret string
 		return ret
 	}
-
-	return o.State
+	return *o.State
 }
 
-// GetStateOk returns a tuple with the State field value
+// GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Address) GetStateOk() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.State == nil {
 		return nil, false
 	}
-	return &o.State, true
+	return o.State, true
 }
 
-// SetState sets field value
+// HasState returns a boolean if a field has been set.
+func (o *Address) HasState() bool {
+	if o != nil && o.State != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetState gets a reference to the given string and assigns it to the State field.
 func (o *Address) SetState(v string) {
-	o.State = v
+	o.State = &v
 }
 
 // GetStateCode returns the StateCode field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -239,28 +266,36 @@ func (o *Address) UnsetHouseNumberOrName() {
 	o.HouseNumberOrName.Unset()
 }
 
-// GetLine1 returns the Line1 field value
+// GetLine1 returns the Line1 field value if set, zero value otherwise.
 func (o *Address) GetLine1() string {
-	if o == nil {
+	if o == nil || o.Line1 == nil {
 		var ret string
 		return ret
 	}
-
-	return o.Line1
+	return *o.Line1
 }
 
-// GetLine1Ok returns a tuple with the Line1 field value
+// GetLine1Ok returns a tuple with the Line1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 func (o *Address) GetLine1Ok() (*string, bool) {
-	if o == nil  {
+	if o == nil || o.Line1 == nil {
 		return nil, false
 	}
-	return &o.Line1, true
+	return o.Line1, true
 }
 
-// SetLine1 sets field value
+// HasLine1 returns a boolean if a field has been set.
+func (o *Address) HasLine1() bool {
+	if o != nil && o.Line1 != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLine1 gets a reference to the given string and assigns it to the Line1 field.
 func (o *Address) SetLine1(v string) {
-	o.Line1 = v
+	o.Line1 = &v
 }
 
 // GetLine2 returns the Line2 field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -349,16 +384,16 @@ func (o *Address) UnsetOrganization() {
 
 func (o Address) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
+	if o.City != nil {
 		toSerialize["city"] = o.City
 	}
-	if true {
+	if o.Country != nil {
 		toSerialize["country"] = o.Country
 	}
-	if true {
+	if o.PostalCode != nil {
 		toSerialize["postal_code"] = o.PostalCode
 	}
-	if true {
+	if o.State != nil {
 		toSerialize["state"] = o.State
 	}
 	if o.StateCode.IsSet() {
@@ -367,7 +402,7 @@ func (o Address) MarshalJSON() ([]byte, error) {
 	if o.HouseNumberOrName.IsSet() {
 		toSerialize["house_number_or_name"] = o.HouseNumberOrName.Get()
 	}
-	if true {
+	if o.Line1 != nil {
 		toSerialize["line1"] = o.Line1
 	}
 	if o.Line2.IsSet() {

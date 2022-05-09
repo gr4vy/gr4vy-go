@@ -25,6 +25,8 @@ type PaymentServiceDefinitionFields struct {
 	Required *bool `json:"required,omitempty"`
 	// Defines the type of input that needs to be rendered for this field.
 	Format *string `json:"format,omitempty"`
+	// Defines if this field is secret. When `true` the field is not returned when querying the payment service.
+	Secret *bool `json:"secret,omitempty"`
 }
 
 // NewPaymentServiceDefinitionFields instantiates a new PaymentServiceDefinitionFields object
@@ -172,6 +174,38 @@ func (o *PaymentServiceDefinitionFields) SetFormat(v string) {
 	o.Format = &v
 }
 
+// GetSecret returns the Secret field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionFields) GetSecret() bool {
+	if o == nil || o.Secret == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Secret
+}
+
+// GetSecretOk returns a tuple with the Secret field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionFields) GetSecretOk() (*bool, bool) {
+	if o == nil || o.Secret == nil {
+		return nil, false
+	}
+	return o.Secret, true
+}
+
+// HasSecret returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionFields) HasSecret() bool {
+	if o != nil && o.Secret != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSecret gets a reference to the given bool and assigns it to the Secret field.
+func (o *PaymentServiceDefinitionFields) SetSecret(v bool) {
+	o.Secret = &v
+}
+
 func (o PaymentServiceDefinitionFields) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Key != nil {
@@ -185,6 +219,9 @@ func (o PaymentServiceDefinitionFields) MarshalJSON() ([]byte, error) {
 	}
 	if o.Format != nil {
 		toSerialize["format"] = o.Format
+	}
+	if o.Secret != nil {
+		toSerialize["secret"] = o.Secret
 	}
 	return json.Marshal(toSerialize)
 }

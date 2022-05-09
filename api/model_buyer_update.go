@@ -17,12 +17,11 @@ import (
 
 // BuyerUpdate A request to update a buyer.
 type BuyerUpdate struct {
-	// The optional billing details to update a buyer.
-	BillingDetails NullableBillingDetailsUpdateRequest `json:"billing_details,omitempty"`
 	// An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.
 	DisplayName NullableString `json:"display_name,omitempty"`
+	BillingDetails *BillingDetailsUpdateRequest `json:"billing_details,omitempty"`
 }
 
 // NewBuyerUpdate instantiates a new BuyerUpdate object
@@ -40,48 +39,6 @@ func NewBuyerUpdate() *BuyerUpdate {
 func NewBuyerUpdateWithDefaults() *BuyerUpdate {
 	this := BuyerUpdate{}
 	return &this
-}
-
-// GetBillingDetails returns the BillingDetails field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BuyerUpdate) GetBillingDetails() BillingDetailsUpdateRequest {
-	if o == nil || o.BillingDetails.Get() == nil {
-		var ret BillingDetailsUpdateRequest
-		return ret
-	}
-	return *o.BillingDetails.Get()
-}
-
-// GetBillingDetailsOk returns a tuple with the BillingDetails field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BuyerUpdate) GetBillingDetailsOk() (*BillingDetailsUpdateRequest, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.BillingDetails.Get(), o.BillingDetails.IsSet()
-}
-
-// HasBillingDetails returns a boolean if a field has been set.
-func (o *BuyerUpdate) HasBillingDetails() bool {
-	if o != nil && o.BillingDetails.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetBillingDetails gets a reference to the given NullableBillingDetailsUpdateRequest and assigns it to the BillingDetails field.
-func (o *BuyerUpdate) SetBillingDetails(v BillingDetailsUpdateRequest) {
-	o.BillingDetails.Set(&v)
-}
-// SetBillingDetailsNil sets the value for BillingDetails to be an explicit nil
-func (o *BuyerUpdate) SetBillingDetailsNil() {
-	o.BillingDetails.Set(nil)
-}
-
-// UnsetBillingDetails ensures that no value is present for BillingDetails, not even an explicit nil
-func (o *BuyerUpdate) UnsetBillingDetails() {
-	o.BillingDetails.Unset()
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -168,16 +125,48 @@ func (o *BuyerUpdate) UnsetDisplayName() {
 	o.DisplayName.Unset()
 }
 
+// GetBillingDetails returns the BillingDetails field value if set, zero value otherwise.
+func (o *BuyerUpdate) GetBillingDetails() BillingDetailsUpdateRequest {
+	if o == nil || o.BillingDetails == nil {
+		var ret BillingDetailsUpdateRequest
+		return ret
+	}
+	return *o.BillingDetails
+}
+
+// GetBillingDetailsOk returns a tuple with the BillingDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *BuyerUpdate) GetBillingDetailsOk() (*BillingDetailsUpdateRequest, bool) {
+	if o == nil || o.BillingDetails == nil {
+		return nil, false
+	}
+	return o.BillingDetails, true
+}
+
+// HasBillingDetails returns a boolean if a field has been set.
+func (o *BuyerUpdate) HasBillingDetails() bool {
+	if o != nil && o.BillingDetails != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBillingDetails gets a reference to the given BillingDetailsUpdateRequest and assigns it to the BillingDetails field.
+func (o *BuyerUpdate) SetBillingDetails(v BillingDetailsUpdateRequest) {
+	o.BillingDetails = &v
+}
+
 func (o BuyerUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.BillingDetails.IsSet() {
-		toSerialize["billing_details"] = o.BillingDetails.Get()
-	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
 	}
 	if o.DisplayName.IsSet() {
 		toSerialize["display_name"] = o.DisplayName.Get()
+	}
+	if o.BillingDetails != nil {
+		toSerialize["billing_details"] = o.BillingDetails
 	}
 	return json.Marshal(toSerialize)
 }
