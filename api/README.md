@@ -185,6 +185,7 @@ Class | Method | HTTP request | Description
  - [ThreeDSecureDataV1V2](docs/ThreeDSecureDataV1V2.md)
  - [ThreeDSecureDataV2](docs/ThreeDSecureDataV2.md)
  - [ThreeDSecureDataV2AllOf](docs/ThreeDSecureDataV2AllOf.md)
+ - [ThreeDSecureSummary](docs/ThreeDSecureSummary.md)
  - [TokenizedRequest](docs/TokenizedRequest.md)
  - [Transaction](docs/Transaction.md)
  - [TransactionCaptureRequest](docs/TransactionCaptureRequest.md)

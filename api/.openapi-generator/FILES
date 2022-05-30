@@ -89,6 +89,7 @@ docs/ThreeDSecureDataV1AllOf.md
 docs/ThreeDSecureDataV1V2.md
 docs/ThreeDSecureDataV2.md
 docs/ThreeDSecureDataV2AllOf.md
+docs/ThreeDSecureSummary.md
 docs/TokenizedRequest.md
 docs/Transaction.md
 docs/TransactionCaptureRequest.md
@@ -172,6 +173,7 @@ model_three_d_secure_data_v1_all_of.go
 model_three_d_secure_data_v1_v2.go
 model_three_d_secure_data_v2.go
 model_three_d_secure_data_v2_all_of.go
+model_three_d_secure_summary.go
 model_tokenized_request.go
 model_transaction.go
 model_transaction_capture_request.go
