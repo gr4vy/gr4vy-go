@@ -771,15 +771,29 @@ paths:
         required: false
         schema:
           enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          - stripedd
-          - applepay
-          - googlepay
           - afterpay
+          - applepay
+          - banked
+          - boleto
+          - card
           - clearpay
+          - dana
+          - fortumo
+          - gcash
+          - gocardless
+          - googlepay
+          - googlepay_pan_only
+          - grabpay
+          - klarna
+          - ovo
+          - paymaya
+          - paypal
+          - pix
+          - rabbitlinepay
+          - shopeepay
+          - stripedd
+          - truemoney
+          - trustly
           - zippay
           example: card
           type: string
@@ -1243,25 +1257,14 @@ paths:
         schema:
           enum:
           - processing
-          - processing_failed
-          - capture_succeeded
-          - capture_pending
-          - capture_declined
-          - capture_failed
-          - authorization_succeeded
-          - authorization_pending
-          - authorization_declined
-          - authorization_failed
-          - authorization_expired
-          - authorization_voided
-          - authorization_void_pending
-          - authorization_void_declined
-          - authorization_void_failed
-          - buyer_approval_succeeded
           - buyer_approval_pending
-          - buyer_approval_declined
-          - buyer_approval_failed
-          - buyer_approval_timedout
+          - authorization_succeeded
+          - authorization_failed
+          - authorization_declined
+          - capture_pending
+          - capture_succeeded
+          - authorization_void_pending
+          - authorization_voided
           example: capture_succeeded
           type: string
         style: form
@@ -3267,15 +3270,29 @@ components:
         method:
           allOf:
           - enum:
-            - card
-            - paypal
-            - banked
-            - gocardless
-            - stripedd
-            - applepay
-            - googlepay
             - afterpay
+            - applepay
+            - banked
+            - boleto
+            - card
             - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - googlepay_pan_only
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
             - zippay
             example: card
             type: string
@@ -3388,15 +3405,29 @@ components:
         method:
           allOf:
           - enum:
-            - card
-            - paypal
-            - banked
-            - gocardless
-            - stripedd
-            - applepay
-            - googlepay
             - afterpay
+            - applepay
+            - banked
+            - boleto
+            - card
             - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - googlepay_pan_only
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
             - zippay
             example: card
             type: string
@@ -3553,15 +3584,29 @@ components:
         method:
           allOf:
           - enum:
-            - card
-            - paypal
-            - banked
-            - gocardless
-            - stripedd
-            - applepay
-            - googlepay
             - afterpay
+            - applepay
+            - banked
+            - boleto
+            - card
             - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - googlepay_pan_only
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
             - zippay
             example: card
             type: string
@@ -3760,15 +3805,29 @@ components:
         method:
           allOf:
           - enum:
-            - card
-            - paypal
-            - banked
-            - gocardless
-            - stripedd
-            - applepay
-            - googlepay
             - afterpay
+            - applepay
+            - banked
+            - boleto
+            - card
             - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - googlepay_pan_only
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
             - zippay
             example: card
             type: string
@@ -3916,15 +3975,29 @@ components:
         method:
           allOf:
           - enum:
-            - card
-            - paypal
-            - banked
-            - gocardless
-            - stripedd
-            - applepay
-            - googlepay
             - afterpay
+            - applepay
+            - banked
+            - boleto
+            - card
             - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - googlepay_pan_only
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
             - zippay
             example: card
             type: string
@@ -3932,7 +4005,7 @@ components:
         display_name:
           description: The custom name set for this service.
           example: Stripe (Main)
-          maxLength: 50
+          maxLength: 200
           minLength: 1
           type: string
         status:
@@ -4106,15 +4179,29 @@ components:
         method:
           allOf:
           - enum:
-            - card
-            - paypal
-            - banked
-            - gocardless
-            - stripedd
-            - applepay
-            - googlepay
             - afterpay
+            - applepay
+            - banked
+            - boleto
+            - card
             - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - googlepay_pan_only
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
             - zippay
             example: card
             type: string
@@ -4463,15 +4550,29 @@ components:
         method:
           allOf:
           - enum:
-            - card
-            - paypal
-            - banked
-            - gocardless
-            - stripedd
-            - applepay
-            - googlepay
             - afterpay
+            - applepay
+            - banked
+            - boleto
+            - card
             - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - googlepay_pan_only
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
             - zippay
             example: card
             type: string
@@ -4665,15 +4766,29 @@ components:
         method:
           allOf:
           - enum:
-            - card
-            - paypal
-            - banked
-            - gocardless
-            - stripedd
-            - applepay
-            - googlepay
             - afterpay
+            - applepay
+            - banked
+            - boleto
+            - card
             - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - googlepay_pan_only
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
             - zippay
             example: card
             type: string
@@ -5136,6 +5251,39 @@ components:
       - $ref: '#/components/schemas/ThreeDSecureDataV2'
       title: 3-D Secure Data Version 1 & 2
       type: object
+    ThreeDSecureSummary:
+      description: |-
+        Details about the 3-D Secure challenge that was presented to
+        the buyer for this transaction, where applicable.
+      example:
+        method: challenge
+        version: 2.1.0
+        status: setup_error
+      properties:
+        version:
+          description: The version of 3DS used for this transaction.
+          example: 2.1.0
+          pattern: ^[1-2].?[\d+.?]{0,3}$
+          type: string
+        status:
+          description: The status of the 3DS challenge for this transaction.
+          enum:
+          - setup_error
+          - error
+          - declined
+          - cancelled
+          - complete
+          type: string
+        method:
+          description: The method used for 3DS authentication for this transaction.
+          enum:
+          - challenge
+          - frictionless
+          type: string
+        response_data:
+          $ref: '#/components/schemas/ThreeDSecureDataV1V2'
+      title: 3-D Secure Summary
+      type: object
     TokenizedRequest:
       description: Details for a previously tokenized payment method.
       properties:
@@ -5233,6 +5381,10 @@ components:
         raw_response_description: |-
           The card's postal code is incorrect. Check the card's postal code or use a
           different card.
+        three_d_secure:
+          method: challenge
+          version: 2.1.0
+          status: setup_error
         status: processing
       properties:
         type:
@@ -5252,25 +5404,14 @@ components:
             asynchronous processing events occur.
           enum:
           - processing
-          - processing_failed
-          - capture_succeeded
-          - capture_pending
-          - capture_declined
-          - capture_failed
-          - authorization_succeeded
-          - authorization_pending
-          - authorization_declined
-          - authorization_failed
-          - authorization_expired
-          - authorization_voided
-          - authorization_void_pending
-          - authorization_void_declined
-          - authorization_void_failed
-          - buyer_approval_succeeded
           - buyer_approval_pending
-          - buyer_approval_declined
-          - buyer_approval_failed
-          - buyer_approval_timedout
+          - authorization_succeeded
+          - authorization_failed
+          - authorization_declined
+          - capture_pending
+          - capture_succeeded
+          - authorization_void_pending
+          - authorization_voided
           example: processing
           type: string
         intent:
@@ -5472,15 +5613,29 @@ components:
           type: string
         method:
           enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          - stripedd
-          - applepay
-          - googlepay
           - afterpay
+          - applepay
+          - banked
+          - boleto
+          - card
           - clearpay
+          - dana
+          - fortumo
+          - gcash
+          - gocardless
+          - googlepay
+          - googlepay_pan_only
+          - grabpay
+          - klarna
+          - ovo
+          - paymaya
+          - paypal
+          - pix
+          - rabbitlinepay
+          - shopeepay
+          - stripedd
+          - truemoney
+          - trustly
           - zippay
           example: card
           type: string
@@ -5496,6 +5651,8 @@ components:
           example:
             key: value
           type: object
+        three_d_secure:
+          $ref: '#/components/schemas/ThreeDSecureSummary'
       title: Transaction
       type: object
       x-tags:
@@ -5537,25 +5694,14 @@ components:
             asynchronous processing events occur.
           enum:
           - processing
-          - processing_failed
-          - capture_succeeded
-          - capture_pending
-          - capture_declined
-          - capture_failed
-          - authorization_succeeded
-          - authorization_pending
-          - authorization_declined
-          - authorization_failed
-          - authorization_expired
-          - authorization_voided
-          - authorization_void_pending
-          - authorization_void_declined
-          - authorization_void_failed
-          - buyer_approval_succeeded
           - buyer_approval_pending
-          - buyer_approval_declined
-          - buyer_approval_failed
-          - buyer_approval_timedout
+          - authorization_succeeded
+          - authorization_failed
+          - authorization_declined
+          - capture_pending
+          - capture_succeeded
+          - authorization_void_pending
+          - authorization_voided
           example: processing
           type: string
         intent:
@@ -5634,15 +5780,29 @@ components:
           - description: The payment service used for this transaction.
         method:
           enum:
-          - card
-          - paypal
-          - banked
-          - gocardless
-          - stripedd
-          - applepay
-          - googlepay
           - afterpay
+          - applepay
+          - banked
+          - boleto
+          - card
           - clearpay
+          - dana
+          - fortumo
+          - gcash
+          - gocardless
+          - googlepay
+          - googlepay_pan_only
+          - grabpay
+          - klarna
+          - ovo
+          - paymaya
+          - paypal
+          - pix
+          - rabbitlinepay
+          - shopeepay
+          - stripedd
+          - truemoney
+          - trustly
           - zippay
           example: card
           type: string
@@ -6087,15 +6247,29 @@ components:
         method:
           allOf:
           - enum:
-            - card
-            - paypal
-            - banked
-            - gocardless
-            - stripedd
-            - applepay
-            - googlepay
             - afterpay
+            - applepay
+            - banked
+            - boleto
+            - card
             - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - googlepay_pan_only
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
             - zippay
             example: card
             type: string

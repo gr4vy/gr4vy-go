@@ -69,6 +69,7 @@ type Transaction struct {
 	PaymentServiceTransactionId *string `json:"payment_service_transaction_id,omitempty"`
 	// Additional information about the transaction stored as key-value pairs.
 	Metadata *map[string]string `json:"metadata,omitempty"`
+	ThreeDSecure *ThreeDSecureSummary `json:"three_d_secure,omitempty"`
 }
 
 // NewTransaction instantiates a new Transaction object
@@ -1066,6 +1067,38 @@ func (o *Transaction) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
+// GetThreeDSecure returns the ThreeDSecure field value if set, zero value otherwise.
+func (o *Transaction) GetThreeDSecure() ThreeDSecureSummary {
+	if o == nil || o.ThreeDSecure == nil {
+		var ret ThreeDSecureSummary
+		return ret
+	}
+	return *o.ThreeDSecure
+}
+
+// GetThreeDSecureOk returns a tuple with the ThreeDSecure field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetThreeDSecureOk() (*ThreeDSecureSummary, bool) {
+	if o == nil || o.ThreeDSecure == nil {
+		return nil, false
+	}
+	return o.ThreeDSecure, true
+}
+
+// HasThreeDSecure returns a boolean if a field has been set.
+func (o *Transaction) HasThreeDSecure() bool {
+	if o != nil && o.ThreeDSecure != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetThreeDSecure gets a reference to the given ThreeDSecureSummary and assigns it to the ThreeDSecure field.
+func (o *Transaction) SetThreeDSecure(v ThreeDSecureSummary) {
+	o.ThreeDSecure = &v
+}
+
 func (o Transaction) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -1151,6 +1184,9 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.ThreeDSecure != nil {
+		toSerialize["three_d_secure"] = o.ThreeDSecure
 	}
 	return json.Marshal(toSerialize)
 }
