@@ -4,15 +4,16 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**DelayedCapture** | Pointer to **bool** | Supports [capturing](#operation/capture-transaction) authorized transactions. | [optional] 
+**NetworkTokens** | Pointer to **bool** | Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor. | [optional] 
+**PartialRefunds** | Pointer to **bool** | Supports [partially refunding](#operation/refund-transaction) captured transactions. | [optional] 
 **PaymentMethodTokenization** | Pointer to **bool** | Supports storing a payment method via tokenization. | [optional] 
 **PaymentMethodTokenizationToggle** | Pointer to **bool** | Supports toggling tokenization for a payment method on or off from the dashboard. | [optional] 
+**Refunds** | Pointer to **bool** | Supports [refunding](#operation/refund-transaction) captured transactions. | [optional] 
 **ThreeDSecureHosted** | Pointer to **bool** | Supports hosted 3-D Secure with a redirect. | [optional] 
 **ThreeDSecurePassThrough** | Pointer to **bool** | Supports passing 3-D Secure data to the underlying processor. | [optional] 
-**NetworkTokens** | Pointer to **bool** | Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor. | [optional] 
 **VerifyCredentials** | Pointer to **bool** | Supports verifying the credentials entered while setting up the underlying processor. This is for internal use only. | [optional] 
 **Void** | Pointer to **bool** | Supports [voiding](#operation/void-transaction) authorized transactions. | [optional] 
-**Refunds** | Pointer to **bool** | Supports [refunding](#operation/refund-transaction) captured transactions. | [optional] 
-**PartialRefunds** | Pointer to **bool** | Supports [partially refunding](#operation/refund-transaction) captured transactions. | [optional] 
 
 ## Methods
 
@@ -32,6 +33,81 @@ will change when the set of required properties is changed
 NewPaymentServiceDefinitionSupportedFeaturesWithDefaults instantiates a new PaymentServiceDefinitionSupportedFeatures object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetDelayedCapture
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetDelayedCapture() bool`
+
+GetDelayedCapture returns the DelayedCapture field if non-nil, zero value otherwise.
+
+### GetDelayedCaptureOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetDelayedCaptureOk() (*bool, bool)`
+
+GetDelayedCaptureOk returns a tuple with the DelayedCapture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDelayedCapture
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetDelayedCapture(v bool)`
+
+SetDelayedCapture sets DelayedCapture field to given value.
+
+### HasDelayedCapture
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasDelayedCapture() bool`
+
+HasDelayedCapture returns a boolean if a field has been set.
+
+### GetNetworkTokens
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokens() bool`
+
+GetNetworkTokens returns the NetworkTokens field if non-nil, zero value otherwise.
+
+### GetNetworkTokensOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensOk() (*bool, bool)`
+
+GetNetworkTokensOk returns a tuple with the NetworkTokens field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkTokens
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokens(v bool)`
+
+SetNetworkTokens sets NetworkTokens field to given value.
+
+### HasNetworkTokens
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokens() bool`
+
+HasNetworkTokens returns a boolean if a field has been set.
+
+### GetPartialRefunds
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetPartialRefunds() bool`
+
+GetPartialRefunds returns the PartialRefunds field if non-nil, zero value otherwise.
+
+### GetPartialRefundsOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetPartialRefundsOk() (*bool, bool)`
+
+GetPartialRefundsOk returns a tuple with the PartialRefunds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPartialRefunds
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetPartialRefunds(v bool)`
+
+SetPartialRefunds sets PartialRefunds field to given value.
+
+### HasPartialRefunds
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasPartialRefunds() bool`
+
+HasPartialRefunds returns a boolean if a field has been set.
 
 ### GetPaymentMethodTokenization
 
@@ -83,6 +159,31 @@ SetPaymentMethodTokenizationToggle sets PaymentMethodTokenizationToggle field to
 
 HasPaymentMethodTokenizationToggle returns a boolean if a field has been set.
 
+### GetRefunds
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetRefunds() bool`
+
+GetRefunds returns the Refunds field if non-nil, zero value otherwise.
+
+### GetRefundsOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetRefundsOk() (*bool, bool)`
+
+GetRefundsOk returns a tuple with the Refunds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRefunds
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetRefunds(v bool)`
+
+SetRefunds sets Refunds field to given value.
+
+### HasRefunds
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasRefunds() bool`
+
+HasRefunds returns a boolean if a field has been set.
+
 ### GetThreeDSecureHosted
 
 `func (o *PaymentServiceDefinitionSupportedFeatures) GetThreeDSecureHosted() bool`
@@ -133,31 +234,6 @@ SetThreeDSecurePassThrough sets ThreeDSecurePassThrough field to given value.
 
 HasThreeDSecurePassThrough returns a boolean if a field has been set.
 
-### GetNetworkTokens
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokens() bool`
-
-GetNetworkTokens returns the NetworkTokens field if non-nil, zero value otherwise.
-
-### GetNetworkTokensOk
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensOk() (*bool, bool)`
-
-GetNetworkTokensOk returns a tuple with the NetworkTokens field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetNetworkTokens
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokens(v bool)`
-
-SetNetworkTokens sets NetworkTokens field to given value.
-
-### HasNetworkTokens
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokens() bool`
-
-HasNetworkTokens returns a boolean if a field has been set.
-
 ### GetVerifyCredentials
 
 `func (o *PaymentServiceDefinitionSupportedFeatures) GetVerifyCredentials() bool`
@@ -207,56 +283,6 @@ SetVoid sets Void field to given value.
 `func (o *PaymentServiceDefinitionSupportedFeatures) HasVoid() bool`
 
 HasVoid returns a boolean if a field has been set.
-
-### GetRefunds
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) GetRefunds() bool`
-
-GetRefunds returns the Refunds field if non-nil, zero value otherwise.
-
-### GetRefundsOk
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) GetRefundsOk() (*bool, bool)`
-
-GetRefundsOk returns a tuple with the Refunds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRefunds
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) SetRefunds(v bool)`
-
-SetRefunds sets Refunds field to given value.
-
-### HasRefunds
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) HasRefunds() bool`
-
-HasRefunds returns a boolean if a field has been set.
-
-### GetPartialRefunds
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) GetPartialRefunds() bool`
-
-GetPartialRefunds returns the PartialRefunds field if non-nil, zero value otherwise.
-
-### GetPartialRefundsOk
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) GetPartialRefundsOk() (*bool, bool)`
-
-GetPartialRefundsOk returns a tuple with the PartialRefunds field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPartialRefunds
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) SetPartialRefunds(v bool)`
-
-SetPartialRefunds sets PartialRefunds field to given value.
-
-### HasPartialRefunds
-
-`func (o *PaymentServiceDefinitionSupportedFeatures) HasPartialRefunds() bool`
-
-HasPartialRefunds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

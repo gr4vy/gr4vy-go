@@ -46,6 +46,10 @@ type TransactionSummary struct {
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
 	Method *string `json:"method,omitempty"`
+	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
+	RawResponseCode NullableString `json:"raw_response_code,omitempty"`
+	// This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
+	RawResponseDescription NullableString `json:"raw_response_description,omitempty"`
 }
 
 // NewTransactionSummary instantiates a new TransactionSummary object
@@ -597,6 +601,90 @@ func (o *TransactionSummary) SetMethod(v string) {
 	o.Method = &v
 }
 
+// GetRawResponseCode returns the RawResponseCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionSummary) GetRawResponseCode() string {
+	if o == nil || o.RawResponseCode.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RawResponseCode.Get()
+}
+
+// GetRawResponseCodeOk returns a tuple with the RawResponseCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionSummary) GetRawResponseCodeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.RawResponseCode.Get(), o.RawResponseCode.IsSet()
+}
+
+// HasRawResponseCode returns a boolean if a field has been set.
+func (o *TransactionSummary) HasRawResponseCode() bool {
+	if o != nil && o.RawResponseCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRawResponseCode gets a reference to the given NullableString and assigns it to the RawResponseCode field.
+func (o *TransactionSummary) SetRawResponseCode(v string) {
+	o.RawResponseCode.Set(&v)
+}
+// SetRawResponseCodeNil sets the value for RawResponseCode to be an explicit nil
+func (o *TransactionSummary) SetRawResponseCodeNil() {
+	o.RawResponseCode.Set(nil)
+}
+
+// UnsetRawResponseCode ensures that no value is present for RawResponseCode, not even an explicit nil
+func (o *TransactionSummary) UnsetRawResponseCode() {
+	o.RawResponseCode.Unset()
+}
+
+// GetRawResponseDescription returns the RawResponseDescription field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionSummary) GetRawResponseDescription() string {
+	if o == nil || o.RawResponseDescription.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RawResponseDescription.Get()
+}
+
+// GetRawResponseDescriptionOk returns a tuple with the RawResponseDescription field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionSummary) GetRawResponseDescriptionOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.RawResponseDescription.Get(), o.RawResponseDescription.IsSet()
+}
+
+// HasRawResponseDescription returns a boolean if a field has been set.
+func (o *TransactionSummary) HasRawResponseDescription() bool {
+	if o != nil && o.RawResponseDescription.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRawResponseDescription gets a reference to the given NullableString and assigns it to the RawResponseDescription field.
+func (o *TransactionSummary) SetRawResponseDescription(v string) {
+	o.RawResponseDescription.Set(&v)
+}
+// SetRawResponseDescriptionNil sets the value for RawResponseDescription to be an explicit nil
+func (o *TransactionSummary) SetRawResponseDescriptionNil() {
+	o.RawResponseDescription.Set(nil)
+}
+
+// UnsetRawResponseDescription ensures that no value is present for RawResponseDescription, not even an explicit nil
+func (o *TransactionSummary) UnsetRawResponseDescription() {
+	o.RawResponseDescription.Unset()
+}
+
 func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -646,6 +734,12 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	}
 	if o.Method != nil {
 		toSerialize["method"] = o.Method
+	}
+	if o.RawResponseCode.IsSet() {
+		toSerialize["raw_response_code"] = o.RawResponseCode.Get()
+	}
+	if o.RawResponseDescription.IsSet() {
+		toSerialize["raw_response_description"] = o.RawResponseDescription.Get()
 	}
 	return json.Marshal(toSerialize)
 }

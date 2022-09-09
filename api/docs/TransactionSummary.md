@@ -20,6 +20,8 @@ Name | Type | Description | Notes
 **UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
 **PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) |  | [optional] 
 **Method** | Pointer to **string** |  | [optional] 
+**RawResponseCode** | Pointer to **NullableString** | This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
+**RawResponseDescription** | Pointer to **NullableString** | This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
 
 ## Methods
 
@@ -460,6 +462,76 @@ SetMethod sets Method field to given value.
 
 HasMethod returns a boolean if a field has been set.
 
+### GetRawResponseCode
+
+`func (o *TransactionSummary) GetRawResponseCode() string`
+
+GetRawResponseCode returns the RawResponseCode field if non-nil, zero value otherwise.
+
+### GetRawResponseCodeOk
+
+`func (o *TransactionSummary) GetRawResponseCodeOk() (*string, bool)`
+
+GetRawResponseCodeOk returns a tuple with the RawResponseCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawResponseCode
+
+`func (o *TransactionSummary) SetRawResponseCode(v string)`
+
+SetRawResponseCode sets RawResponseCode field to given value.
+
+### HasRawResponseCode
+
+`func (o *TransactionSummary) HasRawResponseCode() bool`
+
+HasRawResponseCode returns a boolean if a field has been set.
+
+### SetRawResponseCodeNil
+
+`func (o *TransactionSummary) SetRawResponseCodeNil(b bool)`
+
+ SetRawResponseCodeNil sets the value for RawResponseCode to be an explicit nil
+
+### UnsetRawResponseCode
+`func (o *TransactionSummary) UnsetRawResponseCode()`
+
+UnsetRawResponseCode ensures that no value is present for RawResponseCode, not even an explicit nil
+### GetRawResponseDescription
+
+`func (o *TransactionSummary) GetRawResponseDescription() string`
+
+GetRawResponseDescription returns the RawResponseDescription field if non-nil, zero value otherwise.
+
+### GetRawResponseDescriptionOk
+
+`func (o *TransactionSummary) GetRawResponseDescriptionOk() (*string, bool)`
+
+GetRawResponseDescriptionOk returns a tuple with the RawResponseDescription field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRawResponseDescription
+
+`func (o *TransactionSummary) SetRawResponseDescription(v string)`
+
+SetRawResponseDescription sets RawResponseDescription field to given value.
+
+### HasRawResponseDescription
+
+`func (o *TransactionSummary) HasRawResponseDescription() bool`
+
+HasRawResponseDescription returns a boolean if a field has been set.
+
+### SetRawResponseDescriptionNil
+
+`func (o *TransactionSummary) SetRawResponseDescriptionNil(b bool)`
+
+ SetRawResponseDescriptionNil sets the value for RawResponseDescription to be an explicit nil
+
+### UnsetRawResponseDescription
+`func (o *TransactionSummary) UnsetRawResponseDescription()`
+
+UnsetRawResponseDescription ensures that no value is present for RawResponseDescription, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

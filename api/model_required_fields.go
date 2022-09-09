@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// CardRequiredFields The fields that are required to process a transaction for this card.
-type CardRequiredFields struct {
+// RequiredFields The fields that are required to process a transaction for this payment option.
+type RequiredFields struct {
 	// The first (given) name of the buyer.
 	FirstName *bool `json:"first_name,omitempty"`
 	// The last (family) name of the buyer.
@@ -25,30 +25,30 @@ type CardRequiredFields struct {
 	EmailAddress *bool `json:"email_address,omitempty"`
 	// The phone number of the buyer.
 	PhoneNumber *bool `json:"phone_number,omitempty"`
-	Address *CardRequiredFieldsAddress `json:"address,omitempty"`
+	Address *RequiredFieldsAddress `json:"address,omitempty"`
 	// The tax id code associated with the billing details.
 	TaxId *bool `json:"tax_id,omitempty"`
 }
 
-// NewCardRequiredFields instantiates a new CardRequiredFields object
+// NewRequiredFields instantiates a new RequiredFields object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCardRequiredFields() *CardRequiredFields {
-	this := CardRequiredFields{}
+func NewRequiredFields() *RequiredFields {
+	this := RequiredFields{}
 	return &this
 }
 
-// NewCardRequiredFieldsWithDefaults instantiates a new CardRequiredFields object
+// NewRequiredFieldsWithDefaults instantiates a new RequiredFields object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCardRequiredFieldsWithDefaults() *CardRequiredFields {
-	this := CardRequiredFields{}
+func NewRequiredFieldsWithDefaults() *RequiredFields {
+	this := RequiredFields{}
 	return &this
 }
 
 // GetFirstName returns the FirstName field value if set, zero value otherwise.
-func (o *CardRequiredFields) GetFirstName() bool {
+func (o *RequiredFields) GetFirstName() bool {
 	if o == nil || o.FirstName == nil {
 		var ret bool
 		return ret
@@ -58,7 +58,7 @@ func (o *CardRequiredFields) GetFirstName() bool {
 
 // GetFirstNameOk returns a tuple with the FirstName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardRequiredFields) GetFirstNameOk() (*bool, bool) {
+func (o *RequiredFields) GetFirstNameOk() (*bool, bool) {
 	if o == nil || o.FirstName == nil {
 		return nil, false
 	}
@@ -66,7 +66,7 @@ func (o *CardRequiredFields) GetFirstNameOk() (*bool, bool) {
 }
 
 // HasFirstName returns a boolean if a field has been set.
-func (o *CardRequiredFields) HasFirstName() bool {
+func (o *RequiredFields) HasFirstName() bool {
 	if o != nil && o.FirstName != nil {
 		return true
 	}
@@ -75,12 +75,12 @@ func (o *CardRequiredFields) HasFirstName() bool {
 }
 
 // SetFirstName gets a reference to the given bool and assigns it to the FirstName field.
-func (o *CardRequiredFields) SetFirstName(v bool) {
+func (o *RequiredFields) SetFirstName(v bool) {
 	o.FirstName = &v
 }
 
 // GetLastName returns the LastName field value if set, zero value otherwise.
-func (o *CardRequiredFields) GetLastName() bool {
+func (o *RequiredFields) GetLastName() bool {
 	if o == nil || o.LastName == nil {
 		var ret bool
 		return ret
@@ -90,7 +90,7 @@ func (o *CardRequiredFields) GetLastName() bool {
 
 // GetLastNameOk returns a tuple with the LastName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardRequiredFields) GetLastNameOk() (*bool, bool) {
+func (o *RequiredFields) GetLastNameOk() (*bool, bool) {
 	if o == nil || o.LastName == nil {
 		return nil, false
 	}
@@ -98,7 +98,7 @@ func (o *CardRequiredFields) GetLastNameOk() (*bool, bool) {
 }
 
 // HasLastName returns a boolean if a field has been set.
-func (o *CardRequiredFields) HasLastName() bool {
+func (o *RequiredFields) HasLastName() bool {
 	if o != nil && o.LastName != nil {
 		return true
 	}
@@ -107,12 +107,12 @@ func (o *CardRequiredFields) HasLastName() bool {
 }
 
 // SetLastName gets a reference to the given bool and assigns it to the LastName field.
-func (o *CardRequiredFields) SetLastName(v bool) {
+func (o *RequiredFields) SetLastName(v bool) {
 	o.LastName = &v
 }
 
 // GetEmailAddress returns the EmailAddress field value if set, zero value otherwise.
-func (o *CardRequiredFields) GetEmailAddress() bool {
+func (o *RequiredFields) GetEmailAddress() bool {
 	if o == nil || o.EmailAddress == nil {
 		var ret bool
 		return ret
@@ -122,7 +122,7 @@ func (o *CardRequiredFields) GetEmailAddress() bool {
 
 // GetEmailAddressOk returns a tuple with the EmailAddress field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardRequiredFields) GetEmailAddressOk() (*bool, bool) {
+func (o *RequiredFields) GetEmailAddressOk() (*bool, bool) {
 	if o == nil || o.EmailAddress == nil {
 		return nil, false
 	}
@@ -130,7 +130,7 @@ func (o *CardRequiredFields) GetEmailAddressOk() (*bool, bool) {
 }
 
 // HasEmailAddress returns a boolean if a field has been set.
-func (o *CardRequiredFields) HasEmailAddress() bool {
+func (o *RequiredFields) HasEmailAddress() bool {
 	if o != nil && o.EmailAddress != nil {
 		return true
 	}
@@ -139,12 +139,12 @@ func (o *CardRequiredFields) HasEmailAddress() bool {
 }
 
 // SetEmailAddress gets a reference to the given bool and assigns it to the EmailAddress field.
-func (o *CardRequiredFields) SetEmailAddress(v bool) {
+func (o *RequiredFields) SetEmailAddress(v bool) {
 	o.EmailAddress = &v
 }
 
 // GetPhoneNumber returns the PhoneNumber field value if set, zero value otherwise.
-func (o *CardRequiredFields) GetPhoneNumber() bool {
+func (o *RequiredFields) GetPhoneNumber() bool {
 	if o == nil || o.PhoneNumber == nil {
 		var ret bool
 		return ret
@@ -154,7 +154,7 @@ func (o *CardRequiredFields) GetPhoneNumber() bool {
 
 // GetPhoneNumberOk returns a tuple with the PhoneNumber field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardRequiredFields) GetPhoneNumberOk() (*bool, bool) {
+func (o *RequiredFields) GetPhoneNumberOk() (*bool, bool) {
 	if o == nil || o.PhoneNumber == nil {
 		return nil, false
 	}
@@ -162,7 +162,7 @@ func (o *CardRequiredFields) GetPhoneNumberOk() (*bool, bool) {
 }
 
 // HasPhoneNumber returns a boolean if a field has been set.
-func (o *CardRequiredFields) HasPhoneNumber() bool {
+func (o *RequiredFields) HasPhoneNumber() bool {
 	if o != nil && o.PhoneNumber != nil {
 		return true
 	}
@@ -171,14 +171,14 @@ func (o *CardRequiredFields) HasPhoneNumber() bool {
 }
 
 // SetPhoneNumber gets a reference to the given bool and assigns it to the PhoneNumber field.
-func (o *CardRequiredFields) SetPhoneNumber(v bool) {
+func (o *RequiredFields) SetPhoneNumber(v bool) {
 	o.PhoneNumber = &v
 }
 
 // GetAddress returns the Address field value if set, zero value otherwise.
-func (o *CardRequiredFields) GetAddress() CardRequiredFieldsAddress {
+func (o *RequiredFields) GetAddress() RequiredFieldsAddress {
 	if o == nil || o.Address == nil {
-		var ret CardRequiredFieldsAddress
+		var ret RequiredFieldsAddress
 		return ret
 	}
 	return *o.Address
@@ -186,7 +186,7 @@ func (o *CardRequiredFields) GetAddress() CardRequiredFieldsAddress {
 
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardRequiredFields) GetAddressOk() (*CardRequiredFieldsAddress, bool) {
+func (o *RequiredFields) GetAddressOk() (*RequiredFieldsAddress, bool) {
 	if o == nil || o.Address == nil {
 		return nil, false
 	}
@@ -194,7 +194,7 @@ func (o *CardRequiredFields) GetAddressOk() (*CardRequiredFieldsAddress, bool) {
 }
 
 // HasAddress returns a boolean if a field has been set.
-func (o *CardRequiredFields) HasAddress() bool {
+func (o *RequiredFields) HasAddress() bool {
 	if o != nil && o.Address != nil {
 		return true
 	}
@@ -202,13 +202,13 @@ func (o *CardRequiredFields) HasAddress() bool {
 	return false
 }
 
-// SetAddress gets a reference to the given CardRequiredFieldsAddress and assigns it to the Address field.
-func (o *CardRequiredFields) SetAddress(v CardRequiredFieldsAddress) {
+// SetAddress gets a reference to the given RequiredFieldsAddress and assigns it to the Address field.
+func (o *RequiredFields) SetAddress(v RequiredFieldsAddress) {
 	o.Address = &v
 }
 
 // GetTaxId returns the TaxId field value if set, zero value otherwise.
-func (o *CardRequiredFields) GetTaxId() bool {
+func (o *RequiredFields) GetTaxId() bool {
 	if o == nil || o.TaxId == nil {
 		var ret bool
 		return ret
@@ -218,7 +218,7 @@ func (o *CardRequiredFields) GetTaxId() bool {
 
 // GetTaxIdOk returns a tuple with the TaxId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardRequiredFields) GetTaxIdOk() (*bool, bool) {
+func (o *RequiredFields) GetTaxIdOk() (*bool, bool) {
 	if o == nil || o.TaxId == nil {
 		return nil, false
 	}
@@ -226,7 +226,7 @@ func (o *CardRequiredFields) GetTaxIdOk() (*bool, bool) {
 }
 
 // HasTaxId returns a boolean if a field has been set.
-func (o *CardRequiredFields) HasTaxId() bool {
+func (o *RequiredFields) HasTaxId() bool {
 	if o != nil && o.TaxId != nil {
 		return true
 	}
@@ -235,11 +235,11 @@ func (o *CardRequiredFields) HasTaxId() bool {
 }
 
 // SetTaxId gets a reference to the given bool and assigns it to the TaxId field.
-func (o *CardRequiredFields) SetTaxId(v bool) {
+func (o *RequiredFields) SetTaxId(v bool) {
 	o.TaxId = &v
 }
 
-func (o CardRequiredFields) MarshalJSON() ([]byte, error) {
+func (o RequiredFields) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.FirstName != nil {
 		toSerialize["first_name"] = o.FirstName
@@ -262,38 +262,38 @@ func (o CardRequiredFields) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableCardRequiredFields struct {
-	value *CardRequiredFields
+type NullableRequiredFields struct {
+	value *RequiredFields
 	isSet bool
 }
 
-func (v NullableCardRequiredFields) Get() *CardRequiredFields {
+func (v NullableRequiredFields) Get() *RequiredFields {
 	return v.value
 }
 
-func (v *NullableCardRequiredFields) Set(val *CardRequiredFields) {
+func (v *NullableRequiredFields) Set(val *RequiredFields) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCardRequiredFields) IsSet() bool {
+func (v NullableRequiredFields) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCardRequiredFields) Unset() {
+func (v *NullableRequiredFields) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCardRequiredFields(val *CardRequiredFields) *NullableCardRequiredFields {
-	return &NullableCardRequiredFields{value: val, isSet: true}
+func NewNullableRequiredFields(val *RequiredFields) *NullableRequiredFields {
+	return &NullableRequiredFields{value: val, isSet: true}
 }
 
-func (v NullableCardRequiredFields) MarshalJSON() ([]byte, error) {
+func (v NullableRequiredFields) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCardRequiredFields) UnmarshalJSON(src []byte) error {
+func (v *NullableRequiredFields) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

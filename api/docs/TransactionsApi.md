@@ -372,7 +372,7 @@ Name | Type | Description  | Notes
 
 ## ListTransactions
 
-> Transactions ListTransactions(ctx).Search(search).TransactionStatus(transactionStatus).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).Limit(limit).Cursor(cursor).Execute()
+> Transactions ListTransactions(ctx).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).TransactionStatus(transactionStatus).Execute()
 
 List transactions
 
@@ -387,24 +387,41 @@ import (
     "context"
     "fmt"
     "os"
+    "time"
     openapiclient "./openapi"
 )
 
 func main() {
-    search := "be828248-56de-481e-a580-44b6e1d4df81" // string | Filters the transactions to only the items for which the `id` or `external_identifier` matches this value. This field allows for a partial match, matching any transaction for which either of the fields partially or completely matches. (optional)
-    transactionStatus := "capture_succeeded" // string | Filters the results to only the transactions for which the `status` matches this value. (optional)
-    buyerId := "8724fd24-5489-4a5d-90fd-0604df7d3b83" // string | Filters the results to only the items for which the `buyer` has an `id` that matches this value. (optional)
     buyerExternalIdentifier := "user-12345" // string | Filters the results to only the items for which the `buyer` has an `external_identifier` that matches this value. (optional)
-    beforeCreatedAt := "2012-12-12T10:53:43+00:00" // string | Filters the results to only transactions created before this ISO date-time string. (optional)
-    afterCreatedAt := "2012-12-12T10:53:43+00:00" // string | Filters the results to only transactions created after this ISO date-time string. (optional)
-    beforeUpdatedAt := "2012-12-12T10:53:43+00:00" // string | Filters the results to only transactions last updated before this ISO date-time string. (optional)
-    afterUpdatedAt := "2012-12-12T10:53:43+00:00" // string | Filters the results to only transactions last updated after this ISO date-time string. (optional)
-    limit := int32(1) // int32 | Defines the maximum number of items to return for this request. (optional) (default to 20)
+    buyerId := "8724fd24-5489-4a5d-90fd-0604df7d3b83" // string | Filters the results to only the items for which the `buyer` has an `id` that matches this value. (optional)
     cursor := "ZXhhbXBsZTE" // string | A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the `next_cursor` field. Similarly the `previous_cursor` can be used to reverse backwards in the list. (optional)
+    limit := int32(1) // int32 | Defines the maximum number of items to return for this request. (optional) (default to 20)
+    amountEq := int32(500) // int32 | Filters for transactions that have an `amount` that is equal to the provided `amount_eq` value. (optional)
+    amountGte := int32(500) // int32 | Filters for transactions that have an `amount` that is greater than or equal to the `amount_gte` value. (optional)
+    amountLte := int32(500) // int32 | Filters for transactions that have an `amount` that is less than or equal to the `amount_lte` value. (optional)
+    createdAtGte := time.Now() // time.Time | Filters the results to only transactions created after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`. (optional)
+    createdAtLte := time.Now() // time.Time | Filters the results to only transactions created before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`. (optional)
+    currency := []string{"Inner_example"} // []string | Filters for transactions that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency code. (optional)
+    externalIdentifier := "user-12345" // string | Filters the results to only the items for which the `external_identifier` matches this value. (optional)
+    hasRefunds := true // bool | When set to `true`, filter for transactions that have at least one refund in any state associated with it. When set to `false`, filter for transactions that have no refunds. (optional)
+    id := TODO // string | Filters for the transaction that has a matching `id` value. (optional)
+    metadata := []string{"Inner_example"} // []string | Filters for transactions where their `metadata` values contain all of the provided `metadata` keys. The value sent for `metadata` must be formatted as a JSON string, and all keys and values must be strings. This value should also be URL encoded.  Duplicate keys are not supported. If a key is duplicated, only the last appearing value will be used. (optional)
+    method := []string{"card"} // []string | Filters the results to only the items for which the `method` has been set to this value. (optional)
+    paymentServiceId := []string{"Inner_example"} // []string | Filters for transactions that were processed by the provided `payment_service_id` values. (optional)
+    paymentServiceTransactionId := "transaction_123" // string | Filters for transactions that have a matching `payment_service_transaction_id` value. The `payment_service_transaction_id` is the identifier of the transaction given by the payment service. (optional)
+    search := "be828248-56de-481e-a580-44b6e1d4df81" // string | Filters for transactions that have one of the following fields match exactly with the provided `search` value: * `buyer_external_identifier` * `buyer_id` * `external_identifier` * `id` * `payment_service_transaction_id` (optional)
+    status := []string{"Status_example"} // []string | Filters the results to only the transactions that have a `status` that matches with any of the provided status values. (optional)
+    updatedAtGte := time.Now() // time.Time | Filters the results to only transactions last updated after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`. (optional)
+    updatedAtLte := time.Now() // time.Time | Filters the results to only transactions last updated before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`. (optional)
+    beforeCreatedAt := time.Now() // time.Time | Filters the results to only transactions created before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.  **WARNING** This filter is deprecated and may be removed eventually, use `created_at_lte` instead. (optional)
+    afterCreatedAt := time.Now() // time.Time | Filters the results to only transactions created after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.  **WARNING** This filter is deprecated and may be removed eventually, use `created_at_gte` instead. (optional)
+    beforeUpdatedAt := time.Now() // time.Time | Filters the results to only transactions last updated before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.  **WARNING** This filter is deprecated and may be removed eventually, use `updated_at_lte` instead. (optional)
+    afterUpdatedAt := time.Now() // time.Time | Filters the results to only transactions last updated after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.  **WARNING** This filter is deprecated and may be removed eventually, use `updated_at_gte` instead. (optional)
+    transactionStatus := "capture_succeeded" // string | Filters the results to only the transactions for which the `status` matches this value.  **WARNING** This filter is deprecated and may be removed eventually, use `status` instead. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).Search(search).TransactionStatus(transactionStatus).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).Limit(limit).Cursor(cursor).Execute()
+    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).TransactionStatus(transactionStatus).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.ListTransactions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -425,16 +442,32 @@ Other parameters are passed through a pointer to a apiListTransactionsRequest st
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
- **search** | **string** | Filters the transactions to only the items for which the &#x60;id&#x60; or &#x60;external_identifier&#x60; matches this value. This field allows for a partial match, matching any transaction for which either of the fields partially or completely matches. | 
- **transactionStatus** | **string** | Filters the results to only the transactions for which the &#x60;status&#x60; matches this value. | 
- **buyerId** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;id&#x60; that matches this value. | 
  **buyerExternalIdentifier** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;external_identifier&#x60; that matches this value. | 
- **beforeCreatedAt** | **string** | Filters the results to only transactions created before this ISO date-time string. | 
- **afterCreatedAt** | **string** | Filters the results to only transactions created after this ISO date-time string. | 
- **beforeUpdatedAt** | **string** | Filters the results to only transactions last updated before this ISO date-time string. | 
- **afterUpdatedAt** | **string** | Filters the results to only transactions last updated after this ISO date-time string. | 
- **limit** | **int32** | Defines the maximum number of items to return for this request. | [default to 20]
+ **buyerId** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;id&#x60; that matches this value. | 
  **cursor** | **string** | A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the &#x60;next_cursor&#x60; field. Similarly the &#x60;previous_cursor&#x60; can be used to reverse backwards in the list. | 
+ **limit** | **int32** | Defines the maximum number of items to return for this request. | [default to 20]
+ **amountEq** | **int32** | Filters for transactions that have an &#x60;amount&#x60; that is equal to the provided &#x60;amount_eq&#x60; value. | 
+ **amountGte** | **int32** | Filters for transactions that have an &#x60;amount&#x60; that is greater than or equal to the &#x60;amount_gte&#x60; value. | 
+ **amountLte** | **int32** | Filters for transactions that have an &#x60;amount&#x60; that is less than or equal to the &#x60;amount_lte&#x60; value. | 
+ **createdAtGte** | **time.Time** | Filters the results to only transactions created after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;. | 
+ **createdAtLte** | **time.Time** | Filters the results to only transactions created before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;. | 
+ **currency** | **[]string** | Filters for transactions that have matching &#x60;currency&#x60; values. The &#x60;currency&#x60; values provided must be formatted as 3-letter ISO currency code. | 
+ **externalIdentifier** | **string** | Filters the results to only the items for which the &#x60;external_identifier&#x60; matches this value. | 
+ **hasRefunds** | **bool** | When set to &#x60;true&#x60;, filter for transactions that have at least one refund in any state associated with it. When set to &#x60;false&#x60;, filter for transactions that have no refunds. | 
+ **id** | [**string**](string.md) | Filters for the transaction that has a matching &#x60;id&#x60; value. | 
+ **metadata** | **[]string** | Filters for transactions where their &#x60;metadata&#x60; values contain all of the provided &#x60;metadata&#x60; keys. The value sent for &#x60;metadata&#x60; must be formatted as a JSON string, and all keys and values must be strings. This value should also be URL encoded.  Duplicate keys are not supported. If a key is duplicated, only the last appearing value will be used. | 
+ **method** | **[]string** | Filters the results to only the items for which the &#x60;method&#x60; has been set to this value. | 
+ **paymentServiceId** | **[]string** | Filters for transactions that were processed by the provided &#x60;payment_service_id&#x60; values. | 
+ **paymentServiceTransactionId** | **string** | Filters for transactions that have a matching &#x60;payment_service_transaction_id&#x60; value. The &#x60;payment_service_transaction_id&#x60; is the identifier of the transaction given by the payment service. | 
+ **search** | **string** | Filters for transactions that have one of the following fields match exactly with the provided &#x60;search&#x60; value: * &#x60;buyer_external_identifier&#x60; * &#x60;buyer_id&#x60; * &#x60;external_identifier&#x60; * &#x60;id&#x60; * &#x60;payment_service_transaction_id&#x60; | 
+ **status** | **[]string** | Filters the results to only the transactions that have a &#x60;status&#x60; that matches with any of the provided status values. | 
+ **updatedAtGte** | **time.Time** | Filters the results to only transactions last updated after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;. | 
+ **updatedAtLte** | **time.Time** | Filters the results to only transactions last updated before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;. | 
+ **beforeCreatedAt** | **time.Time** | Filters the results to only transactions created before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;.  **WARNING** This filter is deprecated and may be removed eventually, use &#x60;created_at_lte&#x60; instead. | 
+ **afterCreatedAt** | **time.Time** | Filters the results to only transactions created after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;.  **WARNING** This filter is deprecated and may be removed eventually, use &#x60;created_at_gte&#x60; instead. | 
+ **beforeUpdatedAt** | **time.Time** | Filters the results to only transactions last updated before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;.  **WARNING** This filter is deprecated and may be removed eventually, use &#x60;updated_at_lte&#x60; instead. | 
+ **afterUpdatedAt** | **time.Time** | Filters the results to only transactions last updated after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;.  **WARNING** This filter is deprecated and may be removed eventually, use &#x60;updated_at_gte&#x60; instead. | 
+ **transactionStatus** | **string** | Filters the results to only the transactions for which the &#x60;status&#x60; matches this value.  **WARNING** This filter is deprecated and may be removed eventually, use &#x60;status&#x60; instead. | 
 
 ### Return type
 
