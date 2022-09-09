@@ -22,6 +22,9 @@ servers:
 security:
 - BearerAuth: []
 tags:
+- description: Audit Logs provide an historic record of changes made to your Gr4vy
+    instance.
+  name: Audit Logs
 - description: |-
     In Gr4vy, a buyer represents your customer, the shopper who's performing
     a checkout and making a purchase.
@@ -34,6 +37,12 @@ tags:
     * Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the
       buyer's previously stored payment methods, allowing for faster checkout.
   name: Buyers
+- description: Card Scheme definitions provide display information to a card scheme.
+  name: Card Scheme Definitions
+- description: |-
+    A Checkout Session represents the session of a user as they progress
+    through an online checkout.
+  name: Checkout Sessions
 - description: |-
     In Gr4vy, a digital wallet represents a way for a buyer to pay using
     card details already stored on their device via a digital wallet service
@@ -67,6 +76,9 @@ tags:
     * Store (also known as tokenize) a payment method for a buyer.
     * Fetch all previously tokenized payment methods for a buyer.
   name: Payment Methods
+- description: Payment Method definitions provide display information to a payment
+    method.
+  name: Payment Method Definitions
 - description: |-
     In Gr4vy, a payment option represents a list of methods (card, PayPal,
     etc) that are available for a given locale.
@@ -101,6 +113,56 @@ tags:
     - Refund, void, and otherwise cancel existing transactions.
   name: Transactions
 paths:
+  /audit-logs:
+    get:
+      description: Returns a list of audit logs.
+      operationId: list-audit-logs
+      parameters:
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AuditLogs'
+          description: Returns a list of audit logs.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List Audit Logs
+      tags:
+      - Audit Logs
   /buyers:
     get:
       description: Returns a list of buyers.
@@ -415,6 +477,183 @@ paths:
       summary: List stored payment methods for a buyer
       tags:
       - Payment Methods
+  /card-scheme-definitions:
+    get:
+      description: Returns a list of all available card scheme definitions.
+      operationId: list-card-scheme-definitions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CardSchemeDefinitions'
+          description: Returns a list of card scheme definitions.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List card scheme definitions
+      tags:
+      - Card Scheme Definitions
+  /checkout/sessions:
+    post:
+      description: Creates a new Checkout Session.
+      operationId: add-checkout-session
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutSession'
+          description: Returns the new Checkout Session.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns a generic error.
+      summary: Create a new Checkout Session
+      tags:
+      - Checkout Sessions
+  /checkout/sessions/{checkout_session_id}:
+    delete:
+      description: Deletes a Checkout Session.
+      operationId: delete-checkout-session
+      parameters:
+      - description: The unique ID for a Checkout Session.
+        explode: false
+        in: path
+        name: checkout_session_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Returns an empty response.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the Checkout Session can not be found or
+            has expired.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns a generic error.
+      summary: Delete a Checkout Session
+      tags:
+      - Checkout Sessions
+    get:
+      description: Gets details about a current Checkout Session.
+      operationId: get-checkout-session
+      parameters:
+      - description: The unique ID for a Checkout Session.
+        explode: false
+        in: path
+        name: checkout_session_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutSession'
+          description: Returns details about a current Checkout Session.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the Checkout Session can not be found or
+            has expired.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns a generic error.
+      summary: Get a Checkout Session
+      tags:
+      - Checkout Sessions
+  /checkout/sessions/{checkout_session_id}/fields:
+    put:
+      description: |-
+        Updates the Secure Fields of the Checkout Session. Once the fields have
+        been received the `expires_at` will be updated to 5 minutes from the time
+        of receipt.
+      operationId: update-checkout-session-fields
+      parameters:
+      - description: The unique ID for a Checkout Session.
+        explode: false
+        in: path
+        name: checkout_session_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutSessionSecureFieldsUpdate'
+      responses:
+        "204":
+          description: Returns when the Checkout Session was updated.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the Checkout Session can not be found or
+            has expired.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns a generic error.
+      summary: Update a Checkout Session's Secure Fields
+      tags:
+      - Checkout Sessions
   /payment-methods:
     get:
       description: Returns a list of stored (tokenized) payment methods.
@@ -640,6 +879,26 @@ paths:
       summary: List payment method tokens
       tags:
       - Payment Method Tokens
+  /payment-method-definitions:
+    get:
+      description: Returns a list of all available payment method definitions.
+      operationId: list-payment-method-definitions
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentMethodDefinitions'
+          description: Returns a list of payment method definitions.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List payment method definitions
+      tags:
+      - Payment Method Definitions
   /payment-options:
     get:
       description: |-
@@ -774,6 +1033,7 @@ paths:
           - afterpay
           - applepay
           - banked
+          - bitpay
           - boleto
           - card
           - clearpay
@@ -782,7 +1042,6 @@ paths:
           - gcash
           - gocardless
           - googlepay
-          - googlepay_pan_only
           - grabpay
           - klarna
           - ovo
@@ -790,6 +1049,7 @@ paths:
           - paypal
           - pix
           - rabbitlinepay
+          - scalapay
           - shopeepay
           - stripedd
           - truemoney
@@ -797,6 +1057,18 @@ paths:
           - zippay
           example: card
           type: string
+        style: form
+      - description: |-
+          Filters the results to only show items which have been deleted.
+          By default, deleted items will not be returned.
+        explode: true
+        in: query
+        name: deleted
+        required: false
+        schema:
+          default: false
+          example: true
+          type: boolean
         style: form
       responses:
         "200":
@@ -1235,37 +1507,14 @@ paths:
       operationId: list-transactions
       parameters:
       - description: |-
-          Filters the transactions to only the items for which the `id` or
-          `external_identifier` matches this value. This field allows for a partial
-          match, matching any transaction for which either of the fields partially or
-          completely matches.
+          Filters the results to only the items for which the `buyer` has an
+          `external_identifier` that matches this value.
         explode: true
         in: query
-        name: search
+        name: buyer_external_identifier
         required: false
         schema:
-          example: be828248-56de-481e-a580-44b6e1d4df81
-          type: string
-        style: form
-      - description: |-
-          Filters the results to only the transactions for which the `status`
-          matches this value.
-        explode: true
-        in: query
-        name: transaction_status
-        required: false
-        schema:
-          enum:
-          - processing
-          - buyer_approval_pending
-          - authorization_succeeded
-          - authorization_failed
-          - authorization_declined
-          - capture_pending
-          - capture_succeeded
-          - authorization_void_pending
-          - authorization_voided
-          example: capture_succeeded
+          example: user-12345
           type: string
         style: form
       - description: |-
@@ -1280,56 +1529,19 @@ paths:
           type: string
         style: form
       - description: |-
-          Filters the results to only the items for which the `buyer` has an
-          `external_identifier` that matches this value.
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
         explode: true
         in: query
-        name: buyer_external_identifier
+        name: cursor
         required: false
         schema:
-          example: user-12345
-          type: string
-        style: form
-      - description: Filters the results to only transactions created before this
-          ISO date-time string.
-        explode: true
-        in: query
-        name: before_created_at
-        required: false
-        schema:
-          example: 2012-12-12T10:53:43+00:00
-          type: string
-        style: form
-      - description: Filters the results to only transactions created after this ISO
-          date-time string.
-        explode: true
-        in: query
-        name: after_created_at
-        required: false
-        schema:
-          example: 2012-12-12T10:53:43+00:00
-          type: string
-        style: form
-      - description: |-
-          Filters the results to only transactions last updated before this ISO
-          date-time string.
-        explode: true
-        in: query
-        name: before_updated_at
-        required: false
-        schema:
-          example: 2012-12-12T10:53:43+00:00
-          type: string
-        style: form
-      - description: |-
-          Filters the results to only transactions last updated after this ISO
-          date-time string.
-        explode: true
-        in: query
-        name: after_updated_at
-        required: false
-        schema:
-          example: 2012-12-12T10:53:43+00:00
+          example: ZXhhbXBsZTE
           type: string
         style: form
       - description: Defines the maximum number of items to return for this request.
@@ -1346,19 +1558,374 @@ paths:
           type: integer
         style: form
       - description: |-
-          A cursor that identifies the page of results to return. This is used to
-          paginate the results of this API.
-
-          For the first page of results, this parameter can be left out.
-          For additional pages, use the value returned by the API in
-          the `next_cursor` field. Similarly the `previous_cursor` can be used to
-          reverse backwards in the list.
+          Filters for transactions that have an `amount` that is
+          equal to the provided `amount_eq` value.
         explode: true
         in: query
-        name: cursor
+        name: amount_eq
         required: false
         schema:
-          example: ZXhhbXBsZTE
+          example: 500
+          type: integer
+        style: form
+      - description: |-
+          Filters for transactions that have an `amount` that is
+          greater than or equal to the `amount_gte` value.
+        explode: true
+        in: query
+        name: amount_gte
+        required: false
+        schema:
+          example: 500
+          type: integer
+        style: form
+      - description: |-
+          Filters for transactions that have an `amount` that is
+          less than or equal to the `amount_lte` value.
+        explode: true
+        in: query
+        name: amount_lte
+        required: false
+        schema:
+          example: 500
+          type: integer
+        style: form
+      - description: |-
+          Filters the results to only transactions created after this ISO
+          date-time string. The time zone must be included.
+
+          Ensure that the date-time string is URL encoded, e.g.
+          `2022-01-01T12:00:00+08:00` must be encoded as
+          `2022-01-01T12%3A00%3A00%2B08%3A00`.
+        explode: true
+        in: query
+        name: created_at_gte
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only transactions created before this ISO
+          date-time string. The time zone must be included.
+
+          Ensure that the date-time string is URL encoded, e.g.
+          `2022-01-01T12:00:00+08:00` must be encoded as
+          `2022-01-01T12%3A00%3A00%2B08%3A00`.
+        explode: true
+        in: query
+        name: created_at_lte
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: |-
+          Filters for transactions that have matching `currency` values.
+          The `currency` values provided must be formatted as 3-letter ISO
+          currency code.
+        explode: true
+        in: query
+        name: currency
+        required: false
+        schema:
+          example:
+          - USD
+          - GBP
+          items:
+            type: string
+          type: array
+        style: form
+      - description: |-
+          Filters the results to only the items for which the `external_identifier`
+          matches this value.
+        explode: true
+        in: query
+        name: external_identifier
+        required: false
+        schema:
+          example: user-12345
+          type: string
+        style: form
+      - description: |-
+          When set to `true`, filter for transactions that have at least one refund
+          in any state associated with it. When set to `false`, filter for transactions
+          that have no refunds.
+        explode: true
+        in: query
+        name: has_refunds
+        required: false
+        schema:
+          example: true
+          type: boolean
+        style: form
+      - description: Filters for the transaction that has a matching `id` value.
+        explode: true
+        in: query
+        name: id
+        required: false
+        schema:
+          example: be828248-56de-481e-a580-44b6e1d4df81
+          format: uuid
+          type: string
+        style: form
+      - description: |-
+          Filters for transactions where their `metadata` values
+          contain all of the provided `metadata` keys. The value sent
+          for `metadata` must be formatted as a JSON string, and all
+          keys and values must be strings. This value should also be URL
+          encoded.
+
+          Duplicate keys are not supported. If a key is duplicated, only the
+          last appearing value will be used.
+        explode: true
+        in: query
+        name: metadata
+        required: false
+        schema:
+          example:
+          - '{"key": "value"}'
+          - '{"key_one": "value", "key_two": "value"}'
+          items:
+            type: string
+          type: array
+        style: form
+      - description: |-
+          Filters the results to only the items for which the `method` has been set to
+          this value.
+        explode: true
+        in: query
+        name: method
+        required: false
+        schema:
+          items:
+            enum:
+            - afterpay
+            - applepay
+            - banked
+            - bitpay
+            - boleto
+            - card
+            - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - scalapay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
+            - zippay
+            example: card
+            type: string
+          type: array
+        style: form
+      - description: |-
+          Filters for transactions that were processed by the provided
+          `payment_service_id` values.
+        explode: true
+        in: query
+        name: payment_service_id
+        required: false
+        schema:
+          example:
+          - 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          items:
+            format: uuid
+            type: string
+          type: array
+        style: form
+      - description: |-
+          Filters for transactions that have a matching
+          `payment_service_transaction_id` value. The `payment_service_transaction_id`
+          is the identifier of the transaction given by the payment service.
+        explode: true
+        in: query
+        name: payment_service_transaction_id
+        required: false
+        schema:
+          example: transaction_123
+          type: string
+        style: form
+      - description: |-
+          Filters for transactions that have one of the following fields
+          match exactly with the provided `search` value:
+          * `buyer_external_identifier`
+          * `buyer_id`
+          * `external_identifier`
+          * `id`
+          * `payment_service_transaction_id`
+        explode: true
+        in: query
+        name: search
+        required: false
+        schema:
+          example: be828248-56de-481e-a580-44b6e1d4df81
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the transactions that have a `status`
+          that matches with any of the provided status values.
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          example:
+          - capture_succeeded
+          - processing
+          items:
+            enum:
+            - processing
+            - buyer_approval_pending
+            - authorization_succeeded
+            - authorization_failed
+            - authorization_declined
+            - capture_pending
+            - capture_succeeded
+            - authorization_void_pending
+            - authorization_voided
+            type: string
+          type: array
+        style: form
+      - description: |-
+          Filters the results to only transactions last updated after this ISO
+          date-time string. The time zone must be included.
+
+          Ensure that the date-time string is URL encoded, e.g.
+          `2022-01-01T12:00:00+08:00` must be encoded as
+          `2022-01-01T12%3A00%3A00%2B08%3A00`.
+        explode: true
+        in: query
+        name: updated_at_gte
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only transactions last updated before this ISO
+          date-time string. The time zone must be included.
+
+          Ensure that the date-time string is URL encoded, e.g.
+          `2022-01-01T12:00:00+08:00` must be encoded as
+          `2022-01-01T12%3A00%3A00%2B08%3A00`.
+        explode: true
+        in: query
+        name: updated_at_lte
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - deprecated: true
+        description: |-
+          Filters the results to only transactions created before this ISO date-time
+          string. The time zone must be included.
+
+          Ensure that the date-time string is URL encoded, e.g.
+          `2022-01-01T12:00:00+08:00` must be encoded as
+          `2022-01-01T12%3A00%3A00%2B08%3A00`.
+
+          **WARNING** This filter is deprecated and may be removed eventually, use
+          `created_at_lte` instead.
+        explode: true
+        in: query
+        name: before_created_at
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - deprecated: true
+        description: |-
+          Filters the results to only transactions created after this ISO date-time
+          string. The time zone must be included.
+
+          Ensure that the date-time string is URL encoded, e.g.
+          `2022-01-01T12:00:00+08:00` must be encoded as
+          `2022-01-01T12%3A00%3A00%2B08%3A00`.
+
+          **WARNING** This filter is deprecated and may be removed eventually, use
+          `created_at_gte` instead.
+        explode: true
+        in: query
+        name: after_created_at
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - deprecated: true
+        description: |-
+          Filters the results to only transactions last updated before this ISO
+          date-time string. The time zone must be included.
+
+          Ensure that the date-time string is URL encoded, e.g.
+          `2022-01-01T12:00:00+08:00` must be encoded as
+          `2022-01-01T12%3A00%3A00%2B08%3A00`.
+
+          **WARNING** This filter is deprecated and may be removed eventually, use
+          `updated_at_lte` instead.
+        explode: true
+        in: query
+        name: before_updated_at
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - deprecated: true
+        description: |-
+          Filters the results to only transactions last updated after this ISO
+          date-time string. The time zone must be included.
+
+          Ensure that the date-time string is URL encoded, e.g.
+          `2022-01-01T12:00:00+08:00` must be encoded as
+          `2022-01-01T12%3A00%3A00%2B08%3A00`.
+
+          **WARNING** This filter is deprecated and may be removed eventually, use
+          `updated_at_gte` instead.
+        explode: true
+        in: query
+        name: after_updated_at
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - deprecated: true
+        description: |-
+          Filters the results to only the transactions for which the `status`
+          matches this value.
+
+          **WARNING** This filter is deprecated and may be removed eventually, use
+          `status` instead.
+        explode: true
+        in: query
+        name: transaction_status
+        required: false
+        schema:
+          enum:
+          - processing
+          - buyer_approval_pending
+          - authorization_succeeded
+          - authorization_failed
+          - authorization_declined
+          - capture_pending
+          - capture_succeeded
+          - authorization_void_pending
+          - authorization_voided
+          example: capture_succeeded
           type: string
         style: form
       responses:
@@ -1782,6 +2349,189 @@ paths:
       summary: Void transaction
       tags:
       - Transactions
+  /anti-fraud-services:
+    post:
+      description: |
+        Adds an anti-fraud service, enabling merchants to determine risky transactions
+        and prevent chargebacks.
+      operationId: add-anti-fraud-service
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Create an anti-fraud service:
+                value:
+                  anti_fraud_service_definition_id: sift
+                  display_name: Sift Anti-Fraud Service.
+                  active: true
+                  fields:
+                  - key: api_key
+                    value: sk_test_26PHem9AhJZvU623DfE1x4sd
+                  - key: account_id
+                    value: 26PHem9AhJZvU623DfE1x4sd
+            schema:
+              $ref: '#/components/schemas/AntiFraudServiceCreate'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AntiFraudService'
+          description: Returns the anti-fraud service that was added.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409DuplicateRecord'
+          description: Returns an error if duplicate resource has been found.
+      summary: New anti-fraud service
+      tags:
+      - Anti-Fraud Services
+  /anti-fraud-services/{anti_fraud_service_id}:
+    delete:
+      description: |-
+        Deletes an anti-fraud service record. Any associated credentials
+        will also be deleted.
+      operationId: delete-anti-fraud-service
+      parameters:
+      - description: The unique ID for an anti-fraud service.
+        explode: false
+        in: path
+        name: anti_fraud_service_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Returns an empty response.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Delete anti-fraud service
+      tags:
+      - Anti-Fraud Services
+    get:
+      description: Gets the information about an anti-fraud service.
+      operationId: get-anti-fraud-service
+      parameters:
+      - description: The unique ID for an anti-fraud service.
+        explode: false
+        in: path
+        name: anti_fraud_service_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AntiFraudService'
+          description: Returns the information about a anti-fraud service.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns a generic error.
+      summary: Get anti-fraud service
+      tags:
+      - Anti-Fraud Services
+    put:
+      description: |
+        Update an anti-fraud service, enabling merchants to determine
+        risky transactions and prevent chargebacks.
+      operationId: update-anti-fraud-service
+      parameters:
+      - description: The unique ID for an anti-fraud service.
+        explode: false
+        in: path
+        name: anti_fraud_service_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Update an anti-fraud service:
+                value:
+                  anti_fraud_service_definition_id: sift
+                  display_name: Sift Anti-Fraud Service.
+                  active: true
+                  fields:
+                  - key: api_key
+                    value: sk_test_26PHem9AhJZvU623DfE1x4sd
+                  - key: account_id
+                    value: 26PHem9AhJZvU623DfE1x4sd
+            schema:
+              $ref: '#/components/schemas/AntiFraudServiceUpdate'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AntiFraudService'
+          description: Returns the anti-fraud service that was added.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: Update anti-fraud service
+      tags:
+      - Anti-Fraud Services
 components:
   schemas:
     Address:
@@ -1860,6 +2610,143 @@ components:
       type: object
       x-tags:
       - Buyers
+    AntiFraudService:
+      example:
+        updated_at: 2013-07-16T19:23:00Z
+        anti_fraud_service_definition_id: sift
+        active: true
+        created_at: 2013-07-16T19:23:00Z
+        id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        type: anti-fraud-service
+        display_name: Sift Anti-Fraud Service.
+        fields:
+        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+          key: approve_decision
+        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+          key: approve_decision
+      properties:
+        type:
+          description: The type of this resource. Is always `anti-fraud-service`.
+          enum:
+          - anti-fraud-service
+          example: anti-fraud-service
+          type: string
+        id:
+          description: The unique Gr4vy ID for this anti-fraud service.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        anti_fraud_service_definition_id:
+          description: |-
+            The name of the Anti-Fraud service provider.
+            During update request, this value is used for validation only but
+            the underlying service can not be changed for an existing service.
+          enum:
+          - sift
+          - cybersource
+          example: sift
+          type: string
+        display_name:
+          description: A unique name for this anti-fraud service which is used in
+            the Gr4vy admin panel to give a anti-fraud service a human readable name.
+          example: Sift Anti-Fraud Service.
+          maxLength: 200
+          minLength: 1
+          nullable: true
+          type: string
+        active:
+          default: true
+          description: Defines if this service is currently active or not.
+          example: true
+          type: boolean
+        fields:
+          description: A list of fields, each containing a key-value pair for anti-fraud
+            service decision mapping e.g. for sift `approve_decision` will be in the
+            response.
+          items:
+            $ref: '#/components/schemas/AntiFraudService_fields'
+          type: array
+        created_at:
+          description: |-
+            The date and time
+            when this anti-fraud service was created in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: |-
+            The date and time
+            when this anti-fraud service was last updated in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+      title: Anti-Fraud Service
+      type: object
+      x-tags:
+      - Anti-Fraud Services
+    AntiFraudServiceCreate:
+      allOf:
+      - $ref: '#/components/schemas/AntiFraudServiceUpdate'
+      description: A request to create an anti-fraud service.
+      required:
+      - anti_fraud_service_definition_id
+      - display_name
+      - fields
+      title: Anti-Fraud Service (Create)
+      type: object
+      x-tags:
+      - Anti-Fraud Services
+    AntiFraudServiceUpdate:
+      description: A request to update an anti-fraud service.
+      example:
+        anti_fraud_service_definition_id: sift
+        active: true
+        display_name: Sift Anti-Fraud Service.
+        fields:
+        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+          key: api_key
+        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+          key: api_key
+      properties:
+        anti_fraud_service_definition_id:
+          description: |-
+            The name of the Anti-Fraud service provider.
+            During update request, this value is used for validation only but
+            the underlying service can not be changed for an existing service.
+          enum:
+          - sift
+          - cybersource
+          example: sift
+          type: string
+        display_name:
+          description: A unique name for this anti-fraud service which is used in
+            the Gr4vy admin panel to give a anti-fraud Service a human readable name.
+          example: Sift Anti-Fraud Service.
+          maxLength: 200
+          minLength: 1
+          type: string
+        active:
+          default: true
+          description: Defines if this service is currently active or not.
+          example: true
+          type: boolean
+        fields:
+          description: |-
+            A list of fields, each containing a key-value pair for each field defined
+            by the definition for this anti-fraud service e.g. for sift
+            `api_key` must be sent within this field when creating the service.
+
+            For updates, only the fields sent here will be updated,
+            existing ones will not be affected if not present.
+          items:
+            $ref: '#/components/schemas/AntiFraudServiceUpdate_fields'
+          type: array
+      required:
+      - anti_fraud_service_definition_id
+      title: Anti-Fraud Service (Update)
+      type: object
+      x-tags:
+      - Anti-Fraud Services
     ApplePayRequest:
       description: Details for a Apple Pay payment method.
       properties:
@@ -1899,6 +2786,122 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    AuditLog:
+      description: A log of a change that occurred in the Gr4vy instance.
+      example:
+        resource:
+          name: Samuel J
+          id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          type: buyer
+        action: created
+        id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+        type: audit-log
+        user:
+          name: John L
+          staff: false
+          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+        timestamp: 2022-05-20T10:46:02.000Z
+      properties:
+        type:
+          description: '`audit-log`.'
+          enum:
+          - audit-log
+          example: audit-log
+          type: string
+        id:
+          description: The ID of the audit log entry.
+          example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          format: uuid
+          type: string
+        timestamp:
+          description: The date and time that the action was performed.
+          example: 2022-05-20T10:46:02.000Z
+          format: datetime
+          type: string
+        action:
+          description: The action that was performed.
+          enum:
+          - created
+          - updated
+          - deleted
+          example: created
+          type: string
+        user:
+          $ref: '#/components/schemas/AuditLog_user'
+        resource:
+          $ref: '#/components/schemas/AuditLog_resource'
+      title: Audit Log
+      type: object
+      x-tags:
+      - Audit Logs
+    AuditLogs:
+      description: A list of audit log entries.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - resource:
+            name: Samuel J
+            id: fe26475d-ec3e-4884-9553-f7356683f7f9
+            type: buyer
+          action: created
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          type: audit-log
+          user:
+            name: John L
+            staff: false
+            id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          timestamp: 2022-05-20T10:46:02.000Z
+        - resource:
+            name: Samuel J
+            id: fe26475d-ec3e-4884-9553-f7356683f7f9
+            type: buyer
+          action: created
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          type: audit-log
+          user:
+            name: John L
+            staff: false
+            id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          timestamp: 2022-05-20T10:46:02.000Z
+      properties:
+        items:
+          description: A list of audit log entries.
+          items:
+            $ref: '#/components/schemas/AuditLog'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Audit Logs
+      type: object
+      x-tags:
+      - Audit Logs
     BillingDetails:
       description: Billing details associated to a buyer.
       properties:
@@ -2373,12 +3376,28 @@ components:
           example: US
           type: string
         required_fields:
-          $ref: '#/components/schemas/CardRequiredFields'
+          $ref: '#/components/schemas/RequiredFields'
       title: Card Details
       type: object
-    CardRequiredFields:
+    PaymentOptionCardScheme:
+      title: The scheme of the transaction
+      type: string
+    RequiredFields:
       description: The fields that are required to process a transaction for this
-        card.
+        payment option.
+      example:
+        email_address: true
+        address:
+          country: true
+          city: true
+          state: true
+          postal_code: true
+          line1: true
+          house_number_or_name: true
+        last_name: true
+        phone_number: true
+        first_name: true
+        tax_id: true
       properties:
         first_name:
           description: The first (given) name of the buyer.
@@ -2397,16 +3416,24 @@ components:
           readOnly: true
           type: boolean
         address:
-          $ref: '#/components/schemas/CardRequiredFields_address'
+          $ref: '#/components/schemas/RequiredFields_address'
         tax_id:
           description: The tax id code associated with the billing details.
           readOnly: true
           type: boolean
-      title: Card Required Fields
+      title: Required Fields
       type: object
     CardRequest:
       description: Card details to use in a transaction or to register a new payment
         method.
+      example:
+        number: "4111111111111111"
+        external_identifier: card-323444
+        buyer_external_identifier: user-789123
+        security_code: "123"
+        method: card
+        expiration_date: 11/25
+        buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
       properties:
         method:
           description: '`card`.'
@@ -2416,12 +3443,12 @@ components:
           type: string
         number:
           description: |-
-            The 15-16 digit number for this card as it can be found on the
+            The 13-19 digit number for this card as it can be found on the
             front of the card.
           example: "4111111111111111"
-          maxLength: 16
-          minLength: 14
-          pattern: ^[0-9]{14,16}$
+          maxLength: 19
+          minLength: 13
+          pattern: ^[0-9]{13,19}$
           type: string
         expiration_date:
           description: The expiration date of the card, formatted `MM/YY`.
@@ -2468,6 +3495,108 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    Connection:
+      description: A configured connection.
+      properties:
+        id:
+          description: The ID of the connection.
+          example: 7b5e02bd-fa53-4ef0-b11e-1609d0f48cc5
+          type: string
+        type:
+          default: connection
+          description: '`connection`.'
+          example: connection
+          type: string
+        name:
+          description: The name of this connection.
+          example: My Connection
+          type: string
+        active:
+          description: |-
+            Whether this connection is currently in use. Connections can
+            be deactivated to allow for them to be kept around and
+            re-activated at a later date.
+          example: true
+          type: boolean
+        definition:
+          $ref: '#/components/schemas/ConnectionDefinition'
+      title: Connection
+      type: object
+      x-tags:
+      - Discovery
+    Connections:
+      description: A list of configured connections.
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/Connection'
+          type: array
+      title: Connections
+      type: object
+      x-tags:
+      - Discovery
+    ConnectionDefinition:
+      description: A connection that can be configured.
+      properties:
+        id:
+          description: The ID of the connection.
+          example: stripe-card
+          type: string
+        type:
+          default: connection-definition
+          description: '`connection-definition`.'
+          example: connection-definition
+          type: string
+        name:
+          description: The name of this connection.
+          example: Stripe
+          type: string
+        count:
+          description: The number of configured connections.
+          example: 1
+          type: number
+        group:
+          enum:
+          - anti-fraud-service
+          - payment-service
+          - digital-wallet
+          example: payment-service
+          type: string
+        category:
+          enum:
+          - anti-fraud
+          - bank
+          - bnpl
+          - card
+          - cash
+          - wallet
+          example: card
+          type: string
+        icon_url:
+          description: An icon to display for the connection.
+          example: https://cdn.gr4vy.app/stripe.svg
+          nullable: true
+          type: string
+        provider:
+          description: The provider for this connection.
+          example: Stripe
+          nullable: true
+          type: string
+      title: Connection Definition
+      type: object
+      x-tags:
+      - Discovery
+    ConnectionDefinitions:
+      description: A list of available connection definitions.
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/ConnectionDefinition'
+          type: array
+      title: Connection definitions
+      type: object
+      x-tags:
+      - Discovery
     CartItem:
       description: |-
         A cart item that represents a single cart line item for a transaction.
@@ -2628,6 +3757,125 @@ components:
       - unit_amount
       title: Cart Item
       type: object
+    CardSchemeDefinition:
+      description: Definitions of a card scheme including icon, label, etc.
+      example:
+        icon_url: https://api.sandbox.example.gr4vy.app/assets/card-scheme-definitions/visa.svg
+        id: visa
+        type: card-scheme-definition
+        display_name: Visa
+      properties:
+        type:
+          description: '`card-scheme-definition`.'
+          enum:
+          - card-scheme-definition
+          example: card-scheme-definition
+          type: string
+        id:
+          description: The name of this card scheme.
+          example: visa
+          type: string
+        icon_url:
+          description: The icon for this card scheme.
+          example: https://api.sandbox.example.gr4vy.app/assets/card-scheme-definitions/visa.svg
+          type: string
+        display_name:
+          description: The display name of this card scheme.
+          example: Visa
+          type: string
+      title: Card Scheme Definition
+      type: object
+      x-tags:
+      - Card Sheme Definitions
+    CardSchemeDefinitions:
+      description: A list of available card scheme definitions.
+      example:
+        items:
+        - icon_url: https://api.sandbox.example.gr4vy.app/assets/card-scheme-definitions/visa.svg
+          id: visa
+          type: card-scheme-definition
+          display_name: Visa
+        - icon_url: https://api.sandbox.example.gr4vy.app/assets/card-scheme-definitions/visa.svg
+          id: visa
+          type: card-scheme-definition
+          display_name: Visa
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/CardSchemeDefinition'
+          type: array
+      title: Card Scheme Definitions
+      type: object
+      x-tags:
+      - Card Scheme Definitions
+    CheckoutSession:
+      description: A short-lived checkout session.
+      example:
+        expires_at: 2022-07-27T16:13:02.000Z
+        id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+        type: checkout-session
+      properties:
+        type:
+          description: '`checkout-session`.'
+          enum:
+          - checkout-session
+          example: checkout-session
+          type: string
+        id:
+          description: The ID of the Checkout Session.
+          example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          format: uuid
+          type: string
+        expires_at:
+          description: |-
+            The date and time when the Checkout Session will expire.
+            By default this will be set to 1 hour from the date of creation.
+          example: 2022-07-27T16:13:02.000Z
+          format: datetime
+          type: string
+      title: Checkout Session
+      type: object
+      x-tags:
+      - Checkout
+    CheckoutSessionSecureFieldsUpdate:
+      description: A request to update the secure fields of a checkout session.
+      example:
+        payment_method:
+          number: "4111111111111111"
+          external_identifier: card-323444
+          buyer_external_identifier: user-789123
+          security_code: "123"
+          method: card
+          expiration_date: 11/25
+          buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
+      properties:
+        payment_method:
+          $ref: '#/components/schemas/CardRequest'
+      title: Checkout Session Secure Fields (Update)
+      type: object
+      x-tags:
+      - Checkout Sessions
+    CheckoutSessionRequest:
+      description: Details for a Checkout Session payment method.
+      properties:
+        method:
+          description: '`checkout-session`.'
+          enum:
+          - checkout-session
+          example: checkout-session
+          type: string
+        id:
+          description: The ID of the Checkout Session.
+          example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          format: uuid
+          type: string
+      required:
+      - id
+      - method
+      title: Checkout Session payment method request
+      type: object
+      x-tags:
+      - Request Bodies
     DigitalWallet:
       description: A digital wallet (e.g. Apple Pay) that has been registered.
       example:
@@ -3226,16 +4474,20 @@ components:
         country: US
         external_identifier: user-789123
         method: ""
-        scheme: scheme
+        scheme: visa
         created_at: 2013-07-16T19:23:00Z
         label: john@example.com
         type: payment-method
-        expiration_date: expiration_date
+        expiration_date: 07/24
         approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
         buyer: ""
         mode: ""
         updated_at: 2013-07-16T19:23:00Z
+        approval_target: any
         currency: USD
+        details:
+          bin: "412345"
+          card_type: credit
         id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
         status: succeeded
       properties:
@@ -3273,6 +4525,7 @@ components:
             - afterpay
             - applepay
             - banked
+            - bitpay
             - boleto
             - card
             - clearpay
@@ -3281,7 +4534,6 @@ components:
             - gcash
             - gocardless
             - googlepay
-            - googlepay_pan_only
             - grabpay
             - klarna
             - ovo
@@ -3289,6 +4541,7 @@ components:
             - paypal
             - pix
             - rabbitlinepay
+            - scalapay
             - shopeepay
             - stripedd
             - truemoney
@@ -3343,14 +4596,25 @@ components:
           type: string
         scheme:
           description: The scheme of the card. Only applies to card payments.
+          example: visa
           nullable: true
           type: string
         expiration_date:
           description: The expiration date for the payment method.
+          example: 07/24
           maxLength: 5
           minLength: 5
           nullable: true
           pattern: ^\d{2}/\d{2}$
+          type: string
+        approval_target:
+          description: The browser target that an approval URL must be opened in.
+            If `any` or `null`, then there is no specific requirement.
+          enum:
+          - any
+          - new_window
+          example: any
+          nullable: true
           type: string
         approval_url:
           description: The optional URL that the buyer needs to be redirected to to
@@ -3374,6 +4638,8 @@ components:
           example: US
           nullable: true
           type: string
+        details:
+          $ref: '#/components/schemas/PaymentMethodDetailsCard'
       title: Payment method
       type: object
       x-tags:
@@ -3384,6 +4650,7 @@ components:
         country: US
         method: ""
         scheme: visa
+        approval_target: any
         currency: USD
         id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
         label: "1111"
@@ -3408,6 +4675,7 @@ components:
             - afterpay
             - applepay
             - banked
+            - bitpay
             - boleto
             - card
             - clearpay
@@ -3416,7 +4684,6 @@ components:
             - gcash
             - gocardless
             - googlepay
-            - googlepay_pan_only
             - grabpay
             - klarna
             - ovo
@@ -3424,6 +4691,7 @@ components:
             - paypal
             - pix
             - rabbitlinepay
+            - scalapay
             - shopeepay
             - stripedd
             - truemoney
@@ -3441,18 +4709,19 @@ components:
         scheme:
           description: The type of the card, if the payment method is a card.
           enum:
-          - visa
-          - mastercard
-          - american-express
+          - amex
+          - dankort
           - diners-club
           - discover
-          - jcb
-          - unionpay
-          - maestro
+          - eftpos-australia
           - elo
-          - mir
-          - hiper
-          - hipercard
+          - jcb
+          - maestro
+          - mastercard
+          - other
+          - rupay
+          - unionpay
+          - visa
           example: visa
           nullable: true
           type: string
@@ -3463,6 +4732,15 @@ components:
           minLength: 5
           nullable: true
           pattern: ^\d{2}/\d{2}$
+          type: string
+        approval_target:
+          description: The browser target that an approval URL must be opened in.
+            If `any` or `null`, then there is no specific requirement.
+          enum:
+          - any
+          - new_window
+          example: any
+          nullable: true
           type: string
         approval_url:
           description: The optional URL that the buyer needs to be redirected to to
@@ -3500,31 +4778,39 @@ components:
         - country: US
           external_identifier: user-789123
           method: ""
-          scheme: scheme
+          scheme: visa
           created_at: 2013-07-16T19:23:00Z
           label: john@example.com
           type: payment-method
-          expiration_date: expiration_date
+          expiration_date: 07/24
           approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           buyer: ""
           mode: ""
           updated_at: 2013-07-16T19:23:00Z
+          approval_target: any
           currency: USD
+          details:
+            bin: "412345"
+            card_type: credit
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           status: succeeded
         - country: US
           external_identifier: user-789123
           method: ""
-          scheme: scheme
+          scheme: visa
           created_at: 2013-07-16T19:23:00Z
           label: john@example.com
           type: payment-method
-          expiration_date: expiration_date
+          expiration_date: 07/24
           approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
           buyer: ""
           mode: ""
           updated_at: 2013-07-16T19:23:00Z
+          approval_target: any
           currency: USD
+          details:
+            bin: "412345"
+            card_type: credit
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           status: succeeded
       properties:
@@ -3587,6 +4873,7 @@ components:
             - afterpay
             - applepay
             - banked
+            - bitpay
             - boleto
             - card
             - clearpay
@@ -3595,7 +4882,6 @@ components:
             - gcash
             - gocardless
             - googlepay
-            - googlepay_pan_only
             - grabpay
             - klarna
             - ovo
@@ -3603,6 +4889,7 @@ components:
             - paypal
             - pix
             - rabbitlinepay
+            - scalapay
             - shopeepay
             - stripedd
             - truemoney
@@ -3642,6 +4929,15 @@ components:
           nullable: true
           pattern: ^\d{2}/\d{2}$
           type: string
+        approval_target:
+          description: The browser target that an approval URL must be opened in.
+            If `any` or `null`, then there is no specific requirement.
+          enum:
+          - any
+          - new_window
+          example: any
+          nullable: true
+          type: string
         approval_url:
           description: The optional URL that the buyer needs to be redirected to to
             further authorize their payment.
@@ -3664,6 +4960,8 @@ components:
           example: US
           nullable: true
           type: string
+        details:
+          $ref: '#/components/schemas/PaymentMethodDetailsCard'
       title: Payment method (Snapshot)
       type: object
       x-tags:
@@ -3675,6 +4973,7 @@ components:
         - country: US
           method: ""
           scheme: visa
+          approval_target: any
           currency: USD
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           label: "1111"
@@ -3684,6 +4983,7 @@ components:
         - country: US
           method: ""
           scheme: visa
+          approval_target: any
           currency: USD
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           label: "1111"
@@ -3697,6 +4997,28 @@ components:
             $ref: '#/components/schemas/PaymentMethod--Tokenized'
           type: array
       title: Payment Methods (Token only)
+      type: object
+      x-tags:
+      - Payment Methods
+    PaymentMethodDetailsCard:
+      description: A credit or debit card payment method.
+      example:
+        bin: "412345"
+        card_type: credit
+      properties:
+        card_type:
+          description: The type of card, one of `credit`, `debit` or `prepaid`.
+          enum:
+          - credit
+          - debit
+          - prepaid
+          example: credit
+          type: string
+        bin:
+          description: The first 6 digits of the full card number (the BIN).
+          example: "412345"
+          type: string
+      title: Card
       type: object
       x-tags:
       - Payment Methods
@@ -3808,6 +5130,7 @@ components:
             - afterpay
             - applepay
             - banked
+            - bitpay
             - boleto
             - card
             - clearpay
@@ -3816,7 +5139,6 @@ components:
             - gcash
             - gocardless
             - googlepay
-            - googlepay_pan_only
             - grabpay
             - klarna
             - ovo
@@ -3824,6 +5146,7 @@ components:
             - paypal
             - pix
             - rabbitlinepay
+            - scalapay
             - shopeepay
             - stripedd
             - truemoney
@@ -3834,15 +5157,15 @@ components:
           - description: The method to use for this request.
         number:
           description: |-
-            The 15-16 digit number for this credit card as it can be found on the
+            The 13-19 digit number for this credit card as it can be found on the
             front of the card.
 
             If a card has been stored with us previously, this number will represent
             the unique tokenized card ID provided via our API.
           example: "4111111111111111"
-          maxLength: 16
-          minLength: 14
-          pattern: ^[0-9]{14,16}$
+          maxLength: 19
+          minLength: 13
+          pattern: ^[0-9]{13,19}$
           type: string
         expiration_date:
           description: |-
@@ -3917,6 +5240,62 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    PaymentMethodDefinition:
+      description: Definitions of a payment method including icon, label, etc.
+      example:
+        icon_url: https://api.sandbox.example.gr4vy.app/assets/payment-method-definitions/bank.svg
+        method: BACS
+        id: bank
+        long_display_name: Bank (BACS)
+        display_name: Bank
+      properties:
+        id:
+          description: The mode of this payment method.
+          example: bank
+          type: string
+        icon_url:
+          description: The icon for this payment method.
+          example: https://api.sandbox.example.gr4vy.app/assets/payment-method-definitions/bank.svg
+          type: string
+        display_name:
+          description: The display name of this payment method.
+          example: Bank
+          type: string
+        long_display_name:
+          description: The long display name of this payment method.
+          example: Bank (BACS)
+          type: string
+        method:
+          description: The method, or type, for this payment method.
+          example: BACS
+          type: string
+      title: Payment Method Definition
+      type: object
+      x-tags:
+      - Payment Method Definitions
+    PaymentMethodDefinitions:
+      description: A list of available payment method definitions.
+      example:
+        items:
+        - icon_url: https://api.sandbox.example.gr4vy.app/assets/payment-method-definitions/bank.svg
+          method: BACS
+          id: bank
+          long_display_name: Bank (BACS)
+          display_name: Bank
+        - icon_url: https://api.sandbox.example.gr4vy.app/assets/payment-method-definitions/bank.svg
+          method: BACS
+          id: bank
+          long_display_name: Bank (BACS)
+          display_name: Bank
+      properties:
+        items:
+          items:
+            $ref: '#/components/schemas/PaymentMethodDefinition'
+          type: array
+      title: Payment Method Definitions
+      type: object
+      x-tags:
+      - Payment Method Definitions
     PaymentService:
       description: An active, configured payment service.
       example:
@@ -3978,6 +5357,7 @@ components:
             - afterpay
             - applepay
             - banked
+            - bitpay
             - boleto
             - card
             - clearpay
@@ -3986,7 +5366,6 @@ components:
             - gcash
             - gocardless
             - googlepay
-            - googlepay_pan_only
             - grabpay
             - klarna
             - ovo
@@ -3994,6 +5373,7 @@ components:
             - paypal
             - pix
             - rabbitlinepay
+            - scalapay
             - shopeepay
             - stripedd
             - truemoney
@@ -4182,6 +5562,7 @@ components:
             - afterpay
             - applepay
             - banked
+            - bitpay
             - boleto
             - card
             - clearpay
@@ -4190,7 +5571,6 @@ components:
             - gcash
             - gocardless
             - googlepay
-            - googlepay_pan_only
             - grabpay
             - klarna
             - ovo
@@ -4198,6 +5578,7 @@ components:
             - paypal
             - pix
             - rabbitlinepay
+            - scalapay
             - shopeepay
             - stripedd
             - truemoney
@@ -4494,21 +5875,54 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    PaymentServiceDefinitionConfiguration:
+      description: Configuration items for the payment service.
+      example:
+        approval_ui_height: 300px
+        approval_ui_width: 300px
+        approval_ui_target: any
+      properties:
+        approval_ui_height:
+          description: Height of the approval interface in either pixels or view height
+            (vh).
+          example: 300px
+          type: string
+        approval_ui_width:
+          description: Width of the approval interface in either pixels or view width
+            (vw).
+          example: 300px
+          type: string
+        approval_ui_target:
+          description: The browser target that an approval URL must be opened in.
+            If `any` or `null`, then there is no specific requirement.
+          enum:
+          - any
+          - new_window
+          example: any
+          nullable: true
+          type: string
+      title: Payment Service Definition Context
+      type: object
     PaymentServiceDefinition:
       description: An available payment service that can be configured.
       example:
         mode: ""
         icon_url: https://cdn.gr4vy.app/stripe.svg
         method: ""
+        configuration:
+          approval_ui_height: 300px
+          approval_ui_width: 300px
+          approval_ui_target: any
         supported_features:
-          three_d_secure_hosted: true
+          delayed_capture: false
           network_tokens: false
+          three_d_secure_hosted: true
           payment_method_tokenization: true
           void: true
           payment_method_tokenization_toggle: false
           three_d_secure_pass_through: false
-          verify_credentials: false
           partial_refunds: false
+          verify_credentials: false
           refunds: true
         supported_countries:
         - US
@@ -4553,6 +5967,7 @@ components:
             - afterpay
             - applepay
             - banked
+            - bitpay
             - boleto
             - card
             - clearpay
@@ -4561,7 +5976,6 @@ components:
             - gcash
             - gocardless
             - googlepay
-            - googlepay_pan_only
             - grabpay
             - klarna
             - ovo
@@ -4569,6 +5983,7 @@ components:
             - paypal
             - pix
             - rabbitlinepay
+            - scalapay
             - shopeepay
             - stripedd
             - truemoney
@@ -4624,6 +6039,8 @@ components:
           example: https://cdn.gr4vy.app/stripe.svg
           nullable: true
           type: string
+        configuration:
+          $ref: '#/components/schemas/PaymentServiceDefinitionConfiguration'
       title: Payment Service Definition
       type: object
       x-tags:
@@ -4638,15 +6055,20 @@ components:
         - mode: ""
           icon_url: https://cdn.gr4vy.app/stripe.svg
           method: ""
+          configuration:
+            approval_ui_height: 300px
+            approval_ui_width: 300px
+            approval_ui_target: any
           supported_features:
-            three_d_secure_hosted: true
+            delayed_capture: false
             network_tokens: false
+            three_d_secure_hosted: true
             payment_method_tokenization: true
             void: true
             payment_method_tokenization_toggle: false
             three_d_secure_pass_through: false
-            verify_credentials: false
             partial_refunds: false
+            verify_credentials: false
             refunds: true
           supported_countries:
           - US
@@ -4673,15 +6095,20 @@ components:
         - mode: ""
           icon_url: https://cdn.gr4vy.app/stripe.svg
           method: ""
+          configuration:
+            approval_ui_height: 300px
+            approval_ui_width: 300px
+            approval_ui_target: any
           supported_features:
-            three_d_secure_hosted: true
+            delayed_capture: false
             network_tokens: false
+            three_d_secure_hosted: true
             payment_method_tokenization: true
             void: true
             payment_method_tokenization_toggle: false
             three_d_secure_pass_through: false
-            verify_credentials: false
             partial_refunds: false
+            verify_credentials: false
             refunds: true
           supported_countries:
           - US
@@ -4741,6 +6168,25 @@ components:
       type: object
       x-tags:
       - Discovery
+    PaymentOptionApprovalUI:
+      description: Configuration for the approval interface that should be shown to
+        the buyer.
+      example:
+        width: 300px
+        height: 300px
+      properties:
+        height:
+          description: Height of the approval interface in either pixels or view height
+            (vh).
+          example: 300px
+          type: string
+        width:
+          description: Width of the approval interface in either pixels or view width
+            (vw).
+          example: 300px
+          type: string
+      title: Payment Option Approval UI
+      type: object
     PaymentOption:
       description: An available payment option for a locale.
       example:
@@ -4748,11 +6194,26 @@ components:
         mode: ""
         method: ""
         context:
+          required_fields:
+            email_address: true
+            address:
+              country: true
+              city: true
+              state: true
+              postal_code: true
+              line1: true
+              house_number_or_name: true
+            last_name: true
+            phone_number: true
+            first_name: true
+            tax_id: true
+          approval_ui:
+            width: 300px
+            height: 300px
           merchant_name: merchant_name
           supported_schemes:
-          - '{}'
-          - '{}'
-        payment_method_tokenization_enabled: true
+          - null
+          - null
         label: Pay by Card
         type: payment-option
         can_store_payment_method: true
@@ -4769,6 +6230,7 @@ components:
             - afterpay
             - applepay
             - banked
+            - bitpay
             - boleto
             - card
             - clearpay
@@ -4777,7 +6239,6 @@ components:
             - gcash
             - gocardless
             - googlepay
-            - googlepay_pan_only
             - grabpay
             - klarna
             - ovo
@@ -4785,6 +6246,7 @@ components:
             - paypal
             - pix
             - rabbitlinepay
+            - scalapay
             - shopeepay
             - stripedd
             - truemoney
@@ -4820,9 +6282,6 @@ components:
           type: boolean
         context:
           $ref: '#/components/schemas/PaymentOption_context'
-        payment_method_tokenization_enabled:
-          description: A flag to indicate if storing the payment method is enabled.
-          type: boolean
       title: Payment option
       type: object
       x-tags:
@@ -4835,11 +6294,26 @@ components:
           mode: ""
           method: ""
           context:
+            required_fields:
+              email_address: true
+              address:
+                country: true
+                city: true
+                state: true
+                postal_code: true
+                line1: true
+                house_number_or_name: true
+              last_name: true
+              phone_number: true
+              first_name: true
+              tax_id: true
+            approval_ui:
+              width: 300px
+              height: 300px
             merchant_name: merchant_name
             supported_schemes:
-            - '{}'
-            - '{}'
-          payment_method_tokenization_enabled: true
+            - null
+            - null
           label: Pay by Card
           type: payment-option
           can_store_payment_method: true
@@ -4847,11 +6321,26 @@ components:
           mode: ""
           method: ""
           context:
+            required_fields:
+              email_address: true
+              address:
+                country: true
+                city: true
+                state: true
+                postal_code: true
+                line1: true
+                house_number_or_name: true
+              last_name: true
+              phone_number: true
+              first_name: true
+              tax_id: true
+            approval_ui:
+              width: 300px
+              height: 300px
             merchant_name: merchant_name
             supported_schemes:
-            - '{}'
-            - '{}'
-          payment_method_tokenization_enabled: true
+            - null
+            - null
           label: Pay by Card
           type: payment-option
           can_store_payment_method: true
@@ -4872,6 +6361,7 @@ components:
           - enum:
             - paypal
             - banked
+            - bitpay
             - gocardless
             - stripedd
             example: paypal
@@ -5184,6 +6674,7 @@ components:
           - my.sst
           - no.vat
           - nz.gst
+          - ph.tin
           - ru.inn
           - ru.kpp
           - sa.vat
@@ -5309,6 +6800,18 @@ components:
             after 3-D Secure has completed.
           example: https://example.com/callback
           type: string
+        security_code:
+          description: |-
+            The 3 or 4 digit security code often found on the card. This often
+            referred to as the CVV or CVD.
+
+            The security code can only be set if the stored payment method
+            represents a card.
+          example: "123"
+          maxLength: 4
+          minLength: 3
+          pattern: ^\d{3,4}$
+          type: string
       required:
       - id
       - method
@@ -5321,15 +6824,18 @@ components:
       example:
         country: US
         payment_service_transaction_id: charge_xYqd43gySMtori
+        voided_at: 2013-07-16T19:23:00Z
         external_identifier: user-789123
         metadata:
           key: value
         payment_service: ""
         cvv_response_code: match
         created_at: 2013-07-16T19:23:00Z
+        captured_at: 2013-07-16T19:23:00Z
         is_subsequent_payment: true
         raw_response_code: incorrect-zip
         type: transaction
+        authorized_at: 2013-07-16T19:23:00Z
         statement_descriptor: ""
         updated_at: 2000-01-23T04:56:07.000+00:00
         captured_amount: 999
@@ -5616,6 +7122,7 @@ components:
           - afterpay
           - applepay
           - banked
+          - bitpay
           - boleto
           - card
           - clearpay
@@ -5624,7 +7131,6 @@ components:
           - gcash
           - gocardless
           - googlepay
-          - googlepay_pan_only
           - grabpay
           - klarna
           - ovo
@@ -5632,6 +7138,7 @@ components:
           - paypal
           - pix
           - rabbitlinepay
+          - scalapay
           - shopeepay
           - stripedd
           - truemoney
@@ -5653,6 +7160,48 @@ components:
           type: object
         three_d_secure:
           $ref: '#/components/schemas/ThreeDSecureSummary'
+        authorized_at:
+          description: |-
+            The date and time when this transaction was authorized in the payment
+            service.
+
+            Don't use this field to determine whether the transaction was authorized.
+            A `null` value doesn't necessarily imply that the transaction wasn't
+            authorized, it can mean that the payment service doesn't provide this
+            value, that it didn't provide it at the time the transaction was
+            authorized or that the transaction was authorized before the introduction
+            of this field.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          nullable: true
+          type: string
+        captured_at:
+          description: |-
+            The date and time when this transaction was captured in the payment
+            service.
+
+            Don't use this field to determine whether the transaction was captured.
+            A `null` value doesn't necessarily imply that the transaction wasn't
+            captured, it can mean that the payment service doesn't provide this value,
+            that it didn't provide it at the time the transaction was captured or that
+            the transaction was captured before the introduction of this field.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          nullable: true
+          type: string
+        voided_at:
+          description: |-
+            The date and time when this transaction was voided in the payment service.
+
+            Don't use this field to determine whether the transaction was voided.
+            A `null` value doesn't necessarily imply that the transaction wasn't
+            voided, it can mean that the payment service doesn't provide this value,
+            that it didn't provide it at the time the transaction was voided or that
+            the transaction was voided before the introduction of this field.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          nullable: true
+          type: string
       title: Transaction
       type: object
       x-tags:
@@ -5666,6 +7215,7 @@ components:
         payment_service: ""
         method: card
         created_at: 2013-07-16T19:23:00Z
+        raw_response_code: incorrect-zip
         type: transaction
         intent: authorize
         refunded_amount: 100
@@ -5674,6 +7224,9 @@ components:
         captured_amount: 999
         currency: USD
         id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        raw_response_description: |-
+          The card's postal code is incorrect. Check the card's postal code or use a
+          different card.
         payment_method: ""
         status: processing
       properties:
@@ -5783,6 +7336,7 @@ components:
           - afterpay
           - applepay
           - banked
+          - bitpay
           - boleto
           - card
           - clearpay
@@ -5791,7 +7345,6 @@ components:
           - gcash
           - gocardless
           - googlepay
-          - googlepay_pan_only
           - grabpay
           - klarna
           - ovo
@@ -5799,12 +7352,31 @@ components:
           - paypal
           - pix
           - rabbitlinepay
+          - scalapay
           - shopeepay
           - stripedd
           - truemoney
           - trustly
           - zippay
           example: card
+          type: string
+        raw_response_code:
+          description: |-
+            This is the response code received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: incorrect-zip
+          nullable: true
+          type: string
+        raw_response_description:
+          description: |-
+            This is the response description received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: |-
+            The card's postal code is incorrect. Check the card's postal code or use a
+            different card.
+          nullable: true
           type: string
       title: Transaction
       type: object
@@ -5823,6 +7395,7 @@ components:
           payment_service: ""
           method: card
           created_at: 2013-07-16T19:23:00Z
+          raw_response_code: incorrect-zip
           type: transaction
           intent: authorize
           refunded_amount: 100
@@ -5831,6 +7404,9 @@ components:
           captured_amount: 999
           currency: USD
           id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          raw_response_description: |-
+            The card's postal code is incorrect. Check the card's postal code or use a
+            different card.
           payment_method: ""
           status: processing
         - country: US
@@ -5839,6 +7415,7 @@ components:
           payment_service: ""
           method: card
           created_at: 2013-07-16T19:23:00Z
+          raw_response_code: incorrect-zip
           type: transaction
           intent: authorize
           refunded_amount: 100
@@ -5847,6 +7424,9 @@ components:
           captured_amount: 999
           currency: USD
           id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          raw_response_description: |-
+            The card's postal code is incorrect. Check the card's postal code or use a
+            different card.
           payment_method: ""
           status: processing
       properties:
@@ -6041,7 +7621,11 @@ components:
           minimum: 0
           type: integer
         currency:
-          description: A supported ISO-4217 currency code.
+          description: |
+            A supported ISO-4217 currency code.
+
+            For redirect requests, this value must match the one specified for
+            `currency` in `payment_method`.
           example: USD
           type: string
         country:
@@ -6049,6 +7633,11 @@ components:
             The 2-letter ISO code of the country of the transaction.
             This is used to filter the payment services that is used to process the
             transaction.
+
+            If this value is provided for redirect requests and it's not `null`, it
+            must match the one specified for `country` in `payment_method`. Otherwise,
+            the value specified for `country` in `payment_method` will be assumed
+            implicitly.
           example: US
           nullable: true
           type: string
@@ -6250,6 +7839,7 @@ components:
             - afterpay
             - applepay
             - banked
+            - bitpay
             - boleto
             - card
             - clearpay
@@ -6258,7 +7848,6 @@ components:
             - gcash
             - gocardless
             - googlepay
-            - googlepay_pan_only
             - grabpay
             - klarna
             - ovo
@@ -6266,6 +7855,7 @@ components:
             - paypal
             - pix
             - rabbitlinepay
+            - scalapay
             - shopeepay
             - stripedd
             - truemoney
@@ -6276,15 +7866,15 @@ components:
           - description: The method to use for this request.
         number:
           description: |-
-            The 15-16 digit number for this credit card as it can be found on the
+            The 13-19 digit number for this credit card as it can be found on the
             front of the card.
 
             If a card has been stored with us previously, this number will represent
             the unique tokenized card ID provided via our API.
           example: "4111111111111111"
-          maxLength: 16
-          minLength: 14
-          pattern: ^[0-9]{14,16}$
+          maxLength: 19
+          minLength: 13
+          pattern: ^[0-9]{13,19}$
           type: string
         expiration_date:
           description: |-
@@ -6401,8 +7991,244 @@ components:
       type: object
       x-tags:
       - Users
-    CardRequiredFields_address:
+    FlowRuleBooleanOutcome:
+      description: |-
+        Defines the outcome of a rule in a flow where the result
+        is a boolean.
+      properties:
+        type:
+          description: The type of action outcome for the given rule.
+          enum:
+          - boolean
+          example: boolean
+          type: string
+        result:
+          description: Results for a given flow action.
+          enum:
+          - true
+          type: boolean
+      required:
+      - result
+      - type
+      title: Boolean outcome
+      type: object
+      x-tags:
+      - Flow
+    FlowRuleMethodOutcome:
+      description: |-
+        Defines the outcome of a rule in a flow where the result
+        is a list of payment types.
+      properties:
+        type:
+          description: The type of action outcome for the given rule.
+          enum:
+          - list
+          example: list
+          type: string
+        result:
+          description: Results for a given flow action.
+          example:
+          - card
+          - paypal
+          items:
+            enum:
+            - afterpay
+            - applepay
+            - banked
+            - bitpay
+            - boleto
+            - card
+            - clearpay
+            - dana
+            - fortumo
+            - gcash
+            - gocardless
+            - googlepay
+            - grabpay
+            - klarna
+            - ovo
+            - paymaya
+            - paypal
+            - pix
+            - rabbitlinepay
+            - scalapay
+            - shopeepay
+            - stripedd
+            - truemoney
+            - trustly
+            - zippay
+            example: card
+            type: string
+          type: array
+      required:
+      - result
+      - type
+      title: Payment method outcome
+      type: object
+      x-tags:
+      - Flow
+    FlowRuleServiceOutcome:
+      description: |-
+        Defines the outcome of a rule in a flow where the result
+        is a list of UUIDs for a service.
+      properties:
+        type:
+          description: The type of action outcome for the given rule.
+          enum:
+          - list
+          example: list
+          type: string
+        result:
+          description: Results for a given flow action.
+          example:
+          - fe26475d-ec3e-4884-9553-f7356683f7f9
+          - d88aca32-07fb-46cd-a43f-86da02b73c21
+          items:
+            example: fe26475d-ec3e-4884-9553-f7356683f7f9
+            format: uuid
+            type: string
+          type: array
+      required:
+      - result
+      - type
+      title: Payment service outcome
+      type: object
+      x-tags:
+      - Flow
+    FlowPaymentOptionOutcome:
+      description: |-
+        Outcome for checkout flow/select payment options action.
+        Each option is a Gr4vy payment option object.
+      properties:
+        type:
+          description: The type of this resource. Is always `action`.
+          enum:
+          - action
+          example: action
+          type: string
+        id:
+          description: Payment option identifier.
+          example: card
+          type: string
+        label:
+          description: Verbose payment option name.
+          example: Card
+          type: string
+        active:
+          description: |-
+            The status of the payment option, true if at least one underlying
+            connection is active, otherwise false.
+          type: boolean
+        group:
+          description: Optional group label for a given payment option, e.g. `Bank`.
+          example: Bank
+          nullable: true
+          type: string
+        icon_url:
+          description: Payment option icon URL.
+          nullable: false
+          type: string
+      title: Checkout/Payment Option Outcome
+      type: object
+      x-tags:
+      - Flow
+    AntiFraudService_fields:
+      description: A key-value pair that represents a field defined in the definition
+        for this anti-fraud service.
+      example:
+        value: sk_test_26PHem9AhJZvU623DfE1x4sd
+        key: approve_decision
+      properties:
+        key:
+          description: The key of the field to set a value for.
+          example: approve_decision
+          maxLength: 50
+          minLength: 1
+          type: string
+        value:
+          description: The value of a field to set.
+          example: sk_test_26PHem9AhJZvU623DfE1x4sd
+          maxLength: 5000
+          minLength: 1
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    AntiFraudServiceUpdate_fields:
+      description: A key-value pair that represents a field defined in the definition
+        for this anti-fraud service.
+      example:
+        value: sk_test_26PHem9AhJZvU623DfE1x4sd
+        key: api_key
+      properties:
+        key:
+          description: The key of the field to set a value for.
+          example: api_key
+          maxLength: 50
+          minLength: 1
+          type: string
+        value:
+          description: The value of a field to set.
+          example: sk_test_26PHem9AhJZvU623DfE1x4sd
+          maxLength: 5000
+          minLength: 1
+          type: string
+      required:
+      - key
+      - value
+      type: object
+    AuditLog_user:
+      description: The user who performed the action.
+      example:
+        name: John L
+        staff: false
+        id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+      properties:
+        id:
+          description: The ID of the user.
+          example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          format: uuid
+          type: string
+        name:
+          description: The name of the user.
+          example: John L
+          type: string
+        staff:
+          description: Whether the user is Gr4vy staff.
+          example: false
+          type: boolean
+      type: object
+    AuditLog_resource:
+      description: The resource that was changed.
+      example:
+        name: Samuel J
+        id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        type: buyer
+      properties:
+        type:
+          description: The type of the resource.
+          example: buyer
+          type: string
+        id:
+          description: The ID of the resource.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The descriptive name of the resource.
+          example: Samuel J
+          type: string
+      type: object
+    RequiredFields_address:
       description: The billing address of the buyer.
+      example:
+        country: true
+        city: true
+        state: true
+        postal_code: true
+        line1: true
+        house_number_or_name: true
       properties:
         city:
           description: The city for the billing address.
@@ -6523,16 +8349,35 @@ components:
     PaymentServiceDefinition_supported_features:
       description: Features supported by the payment definition.
       example:
-        three_d_secure_hosted: true
+        delayed_capture: false
         network_tokens: false
+        three_d_secure_hosted: true
         payment_method_tokenization: true
         void: true
         payment_method_tokenization_toggle: false
         three_d_secure_pass_through: false
-        verify_credentials: false
         partial_refunds: false
+        verify_credentials: false
         refunds: true
       properties:
+        delayed_capture:
+          description: |-
+            Supports [capturing](#operation/capture-transaction) authorized
+            transactions.
+          example: false
+          type: boolean
+        network_tokens:
+          description: |-
+            Supports passing decrypted digital wallet (e.g. Apple Pay)
+            tokens to the underlying processor.
+          example: false
+          type: boolean
+        partial_refunds:
+          description: |-
+            Supports [partially refunding](#operation/refund-transaction) captured
+            transactions.
+          example: false
+          type: boolean
         payment_method_tokenization:
           description: Supports storing a payment method via tokenization.
           example: true
@@ -6543,18 +8388,18 @@ components:
             from the dashboard.
           example: false
           type: boolean
+        refunds:
+          description: |-
+            Supports [refunding](#operation/refund-transaction) captured
+            transactions.
+          example: true
+          type: boolean
         three_d_secure_hosted:
           description: Supports hosted 3-D Secure with a redirect.
           example: true
           type: boolean
         three_d_secure_pass_through:
           description: Supports passing 3-D Secure data to the underlying processor.
-          example: false
-          type: boolean
-        network_tokens:
-          description: |-
-            Supports passing decrypted digital wallet (e.g. Apple Pay)
-            tokens to the underlying processor.
           example: false
           type: boolean
         verify_credentials:
@@ -6569,28 +8414,32 @@ components:
             transactions.
           example: true
           type: boolean
-        refunds:
-          description: |-
-            Supports [refunding](#operation/refund-transaction) captured
-            transactions.
-          example: true
-          type: boolean
-        partial_refunds:
-          description: |-
-            Supports [partially refunding](#operation/refund-transaction) captured
-            transactions.
-          example: false
-          type: boolean
       type: object
     PaymentOption_context:
       description: |-
         Additional context specific to the payment option.
         This is currently only returned for Apple Pay and Google Pay.
       example:
+        required_fields:
+          email_address: true
+          address:
+            country: true
+            city: true
+            state: true
+            postal_code: true
+            line1: true
+            house_number_or_name: true
+          last_name: true
+          phone_number: true
+          first_name: true
+          tax_id: true
+        approval_ui:
+          width: 300px
+          height: 300px
         merchant_name: merchant_name
         supported_schemes:
-        - '{}'
-        - '{}'
+        - null
+        - null
       properties:
         merchant_name:
           description: |-
@@ -6600,8 +8449,12 @@ components:
         supported_schemes:
           description: Card schemes supported by the digital wallet provider.
           items:
-            $ref: '#/components/schemas/undefined'
+            $ref: '#/components/schemas/PaymentOptionCardScheme'
           type: array
+        approval_ui:
+          $ref: '#/components/schemas/PaymentOptionApprovalUI'
+        required_fields:
+          $ref: '#/components/schemas/RequiredFields'
       type: object
     ThreeDSecureDataV1_allOf:
       properties:

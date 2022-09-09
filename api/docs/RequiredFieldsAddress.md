@@ -1,4 +1,4 @@
-# CardRequiredFieldsAddress
+# RequiredFieldsAddress
 
 ## Properties
 
@@ -13,170 +13,170 @@ Name | Type | Description | Notes
 
 ## Methods
 
-### NewCardRequiredFieldsAddress
+### NewRequiredFieldsAddress
 
-`func NewCardRequiredFieldsAddress() *CardRequiredFieldsAddress`
+`func NewRequiredFieldsAddress() *RequiredFieldsAddress`
 
-NewCardRequiredFieldsAddress instantiates a new CardRequiredFieldsAddress object
+NewRequiredFieldsAddress instantiates a new RequiredFieldsAddress object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewCardRequiredFieldsAddressWithDefaults
+### NewRequiredFieldsAddressWithDefaults
 
-`func NewCardRequiredFieldsAddressWithDefaults() *CardRequiredFieldsAddress`
+`func NewRequiredFieldsAddressWithDefaults() *RequiredFieldsAddress`
 
-NewCardRequiredFieldsAddressWithDefaults instantiates a new CardRequiredFieldsAddress object
+NewRequiredFieldsAddressWithDefaults instantiates a new RequiredFieldsAddress object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetCity
 
-`func (o *CardRequiredFieldsAddress) GetCity() bool`
+`func (o *RequiredFieldsAddress) GetCity() bool`
 
 GetCity returns the City field if non-nil, zero value otherwise.
 
 ### GetCityOk
 
-`func (o *CardRequiredFieldsAddress) GetCityOk() (*bool, bool)`
+`func (o *RequiredFieldsAddress) GetCityOk() (*bool, bool)`
 
 GetCityOk returns a tuple with the City field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCity
 
-`func (o *CardRequiredFieldsAddress) SetCity(v bool)`
+`func (o *RequiredFieldsAddress) SetCity(v bool)`
 
 SetCity sets City field to given value.
 
 ### HasCity
 
-`func (o *CardRequiredFieldsAddress) HasCity() bool`
+`func (o *RequiredFieldsAddress) HasCity() bool`
 
 HasCity returns a boolean if a field has been set.
 
 ### GetCountry
 
-`func (o *CardRequiredFieldsAddress) GetCountry() bool`
+`func (o *RequiredFieldsAddress) GetCountry() bool`
 
 GetCountry returns the Country field if non-nil, zero value otherwise.
 
 ### GetCountryOk
 
-`func (o *CardRequiredFieldsAddress) GetCountryOk() (*bool, bool)`
+`func (o *RequiredFieldsAddress) GetCountryOk() (*bool, bool)`
 
 GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCountry
 
-`func (o *CardRequiredFieldsAddress) SetCountry(v bool)`
+`func (o *RequiredFieldsAddress) SetCountry(v bool)`
 
 SetCountry sets Country field to given value.
 
 ### HasCountry
 
-`func (o *CardRequiredFieldsAddress) HasCountry() bool`
+`func (o *RequiredFieldsAddress) HasCountry() bool`
 
 HasCountry returns a boolean if a field has been set.
 
 ### GetPostalCode
 
-`func (o *CardRequiredFieldsAddress) GetPostalCode() bool`
+`func (o *RequiredFieldsAddress) GetPostalCode() bool`
 
 GetPostalCode returns the PostalCode field if non-nil, zero value otherwise.
 
 ### GetPostalCodeOk
 
-`func (o *CardRequiredFieldsAddress) GetPostalCodeOk() (*bool, bool)`
+`func (o *RequiredFieldsAddress) GetPostalCodeOk() (*bool, bool)`
 
 GetPostalCodeOk returns a tuple with the PostalCode field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPostalCode
 
-`func (o *CardRequiredFieldsAddress) SetPostalCode(v bool)`
+`func (o *RequiredFieldsAddress) SetPostalCode(v bool)`
 
 SetPostalCode sets PostalCode field to given value.
 
 ### HasPostalCode
 
-`func (o *CardRequiredFieldsAddress) HasPostalCode() bool`
+`func (o *RequiredFieldsAddress) HasPostalCode() bool`
 
 HasPostalCode returns a boolean if a field has been set.
 
 ### GetState
 
-`func (o *CardRequiredFieldsAddress) GetState() bool`
+`func (o *RequiredFieldsAddress) GetState() bool`
 
 GetState returns the State field if non-nil, zero value otherwise.
 
 ### GetStateOk
 
-`func (o *CardRequiredFieldsAddress) GetStateOk() (*bool, bool)`
+`func (o *RequiredFieldsAddress) GetStateOk() (*bool, bool)`
 
 GetStateOk returns a tuple with the State field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetState
 
-`func (o *CardRequiredFieldsAddress) SetState(v bool)`
+`func (o *RequiredFieldsAddress) SetState(v bool)`
 
 SetState sets State field to given value.
 
 ### HasState
 
-`func (o *CardRequiredFieldsAddress) HasState() bool`
+`func (o *RequiredFieldsAddress) HasState() bool`
 
 HasState returns a boolean if a field has been set.
 
 ### GetHouseNumberOrName
 
-`func (o *CardRequiredFieldsAddress) GetHouseNumberOrName() bool`
+`func (o *RequiredFieldsAddress) GetHouseNumberOrName() bool`
 
 GetHouseNumberOrName returns the HouseNumberOrName field if non-nil, zero value otherwise.
 
 ### GetHouseNumberOrNameOk
 
-`func (o *CardRequiredFieldsAddress) GetHouseNumberOrNameOk() (*bool, bool)`
+`func (o *RequiredFieldsAddress) GetHouseNumberOrNameOk() (*bool, bool)`
 
 GetHouseNumberOrNameOk returns a tuple with the HouseNumberOrName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetHouseNumberOrName
 
-`func (o *CardRequiredFieldsAddress) SetHouseNumberOrName(v bool)`
+`func (o *RequiredFieldsAddress) SetHouseNumberOrName(v bool)`
 
 SetHouseNumberOrName sets HouseNumberOrName field to given value.
 
 ### HasHouseNumberOrName
 
-`func (o *CardRequiredFieldsAddress) HasHouseNumberOrName() bool`
+`func (o *RequiredFieldsAddress) HasHouseNumberOrName() bool`
 
 HasHouseNumberOrName returns a boolean if a field has been set.
 
 ### GetLine1
 
-`func (o *CardRequiredFieldsAddress) GetLine1() bool`
+`func (o *RequiredFieldsAddress) GetLine1() bool`
 
 GetLine1 returns the Line1 field if non-nil, zero value otherwise.
 
 ### GetLine1Ok
 
-`func (o *CardRequiredFieldsAddress) GetLine1Ok() (*bool, bool)`
+`func (o *RequiredFieldsAddress) GetLine1Ok() (*bool, bool)`
 
 GetLine1Ok returns a tuple with the Line1 field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetLine1
 
-`func (o *CardRequiredFieldsAddress) SetLine1(v bool)`
+`func (o *RequiredFieldsAddress) SetLine1(v bool)`
 
 SetLine1 sets Line1 field to given value.
 
 ### HasLine1
 
-`func (o *CardRequiredFieldsAddress) HasLine1() bool`
+`func (o *RequiredFieldsAddress) HasLine1() bool`
 
 HasLine1 returns a boolean if a field has been set.
 

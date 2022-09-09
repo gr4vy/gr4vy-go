@@ -17,24 +17,26 @@ import (
 
 // PaymentServiceDefinitionSupportedFeatures Features supported by the payment definition.
 type PaymentServiceDefinitionSupportedFeatures struct {
+	// Supports [capturing](#operation/capture-transaction) authorized transactions.
+	DelayedCapture *bool `json:"delayed_capture,omitempty"`
+	// Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor.
+	NetworkTokens *bool `json:"network_tokens,omitempty"`
+	// Supports [partially refunding](#operation/refund-transaction) captured transactions.
+	PartialRefunds *bool `json:"partial_refunds,omitempty"`
 	// Supports storing a payment method via tokenization.
 	PaymentMethodTokenization *bool `json:"payment_method_tokenization,omitempty"`
 	// Supports toggling tokenization for a payment method on or off from the dashboard.
 	PaymentMethodTokenizationToggle *bool `json:"payment_method_tokenization_toggle,omitempty"`
+	// Supports [refunding](#operation/refund-transaction) captured transactions.
+	Refunds *bool `json:"refunds,omitempty"`
 	// Supports hosted 3-D Secure with a redirect.
 	ThreeDSecureHosted *bool `json:"three_d_secure_hosted,omitempty"`
 	// Supports passing 3-D Secure data to the underlying processor.
 	ThreeDSecurePassThrough *bool `json:"three_d_secure_pass_through,omitempty"`
-	// Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor.
-	NetworkTokens *bool `json:"network_tokens,omitempty"`
 	// Supports verifying the credentials entered while setting up the underlying processor. This is for internal use only.
 	VerifyCredentials *bool `json:"verify_credentials,omitempty"`
 	// Supports [voiding](#operation/void-transaction) authorized transactions.
 	Void *bool `json:"void,omitempty"`
-	// Supports [refunding](#operation/refund-transaction) captured transactions.
-	Refunds *bool `json:"refunds,omitempty"`
-	// Supports [partially refunding](#operation/refund-transaction) captured transactions.
-	PartialRefunds *bool `json:"partial_refunds,omitempty"`
 }
 
 // NewPaymentServiceDefinitionSupportedFeatures instantiates a new PaymentServiceDefinitionSupportedFeatures object
@@ -52,6 +54,102 @@ func NewPaymentServiceDefinitionSupportedFeatures() *PaymentServiceDefinitionSup
 func NewPaymentServiceDefinitionSupportedFeaturesWithDefaults() *PaymentServiceDefinitionSupportedFeatures {
 	this := PaymentServiceDefinitionSupportedFeatures{}
 	return &this
+}
+
+// GetDelayedCapture returns the DelayedCapture field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetDelayedCapture() bool {
+	if o == nil || o.DelayedCapture == nil {
+		var ret bool
+		return ret
+	}
+	return *o.DelayedCapture
+}
+
+// GetDelayedCaptureOk returns a tuple with the DelayedCapture field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetDelayedCaptureOk() (*bool, bool) {
+	if o == nil || o.DelayedCapture == nil {
+		return nil, false
+	}
+	return o.DelayedCapture, true
+}
+
+// HasDelayedCapture returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasDelayedCapture() bool {
+	if o != nil && o.DelayedCapture != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDelayedCapture gets a reference to the given bool and assigns it to the DelayedCapture field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetDelayedCapture(v bool) {
+	o.DelayedCapture = &v
+}
+
+// GetNetworkTokens returns the NetworkTokens field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokens() bool {
+	if o == nil || o.NetworkTokens == nil {
+		var ret bool
+		return ret
+	}
+	return *o.NetworkTokens
+}
+
+// GetNetworkTokensOk returns a tuple with the NetworkTokens field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensOk() (*bool, bool) {
+	if o == nil || o.NetworkTokens == nil {
+		return nil, false
+	}
+	return o.NetworkTokens, true
+}
+
+// HasNetworkTokens returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokens() bool {
+	if o != nil && o.NetworkTokens != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkTokens gets a reference to the given bool and assigns it to the NetworkTokens field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokens(v bool) {
+	o.NetworkTokens = &v
+}
+
+// GetPartialRefunds returns the PartialRefunds field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetPartialRefunds() bool {
+	if o == nil || o.PartialRefunds == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PartialRefunds
+}
+
+// GetPartialRefundsOk returns a tuple with the PartialRefunds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetPartialRefundsOk() (*bool, bool) {
+	if o == nil || o.PartialRefunds == nil {
+		return nil, false
+	}
+	return o.PartialRefunds, true
+}
+
+// HasPartialRefunds returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasPartialRefunds() bool {
+	if o != nil && o.PartialRefunds != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPartialRefunds gets a reference to the given bool and assigns it to the PartialRefunds field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetPartialRefunds(v bool) {
+	o.PartialRefunds = &v
 }
 
 // GetPaymentMethodTokenization returns the PaymentMethodTokenization field value if set, zero value otherwise.
@@ -118,6 +216,38 @@ func (o *PaymentServiceDefinitionSupportedFeatures) SetPaymentMethodTokenization
 	o.PaymentMethodTokenizationToggle = &v
 }
 
+// GetRefunds returns the Refunds field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetRefunds() bool {
+	if o == nil || o.Refunds == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Refunds
+}
+
+// GetRefundsOk returns a tuple with the Refunds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetRefundsOk() (*bool, bool) {
+	if o == nil || o.Refunds == nil {
+		return nil, false
+	}
+	return o.Refunds, true
+}
+
+// HasRefunds returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasRefunds() bool {
+	if o != nil && o.Refunds != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRefunds gets a reference to the given bool and assigns it to the Refunds field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetRefunds(v bool) {
+	o.Refunds = &v
+}
+
 // GetThreeDSecureHosted returns the ThreeDSecureHosted field value if set, zero value otherwise.
 func (o *PaymentServiceDefinitionSupportedFeatures) GetThreeDSecureHosted() bool {
 	if o == nil || o.ThreeDSecureHosted == nil {
@@ -180,38 +310,6 @@ func (o *PaymentServiceDefinitionSupportedFeatures) HasThreeDSecurePassThrough()
 // SetThreeDSecurePassThrough gets a reference to the given bool and assigns it to the ThreeDSecurePassThrough field.
 func (o *PaymentServiceDefinitionSupportedFeatures) SetThreeDSecurePassThrough(v bool) {
 	o.ThreeDSecurePassThrough = &v
-}
-
-// GetNetworkTokens returns the NetworkTokens field value if set, zero value otherwise.
-func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokens() bool {
-	if o == nil || o.NetworkTokens == nil {
-		var ret bool
-		return ret
-	}
-	return *o.NetworkTokens
-}
-
-// GetNetworkTokensOk returns a tuple with the NetworkTokens field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensOk() (*bool, bool) {
-	if o == nil || o.NetworkTokens == nil {
-		return nil, false
-	}
-	return o.NetworkTokens, true
-}
-
-// HasNetworkTokens returns a boolean if a field has been set.
-func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokens() bool {
-	if o != nil && o.NetworkTokens != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetNetworkTokens gets a reference to the given bool and assigns it to the NetworkTokens field.
-func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokens(v bool) {
-	o.NetworkTokens = &v
 }
 
 // GetVerifyCredentials returns the VerifyCredentials field value if set, zero value otherwise.
@@ -278,77 +376,25 @@ func (o *PaymentServiceDefinitionSupportedFeatures) SetVoid(v bool) {
 	o.Void = &v
 }
 
-// GetRefunds returns the Refunds field value if set, zero value otherwise.
-func (o *PaymentServiceDefinitionSupportedFeatures) GetRefunds() bool {
-	if o == nil || o.Refunds == nil {
-		var ret bool
-		return ret
-	}
-	return *o.Refunds
-}
-
-// GetRefundsOk returns a tuple with the Refunds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentServiceDefinitionSupportedFeatures) GetRefundsOk() (*bool, bool) {
-	if o == nil || o.Refunds == nil {
-		return nil, false
-	}
-	return o.Refunds, true
-}
-
-// HasRefunds returns a boolean if a field has been set.
-func (o *PaymentServiceDefinitionSupportedFeatures) HasRefunds() bool {
-	if o != nil && o.Refunds != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetRefunds gets a reference to the given bool and assigns it to the Refunds field.
-func (o *PaymentServiceDefinitionSupportedFeatures) SetRefunds(v bool) {
-	o.Refunds = &v
-}
-
-// GetPartialRefunds returns the PartialRefunds field value if set, zero value otherwise.
-func (o *PaymentServiceDefinitionSupportedFeatures) GetPartialRefunds() bool {
-	if o == nil || o.PartialRefunds == nil {
-		var ret bool
-		return ret
-	}
-	return *o.PartialRefunds
-}
-
-// GetPartialRefundsOk returns a tuple with the PartialRefunds field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentServiceDefinitionSupportedFeatures) GetPartialRefundsOk() (*bool, bool) {
-	if o == nil || o.PartialRefunds == nil {
-		return nil, false
-	}
-	return o.PartialRefunds, true
-}
-
-// HasPartialRefunds returns a boolean if a field has been set.
-func (o *PaymentServiceDefinitionSupportedFeatures) HasPartialRefunds() bool {
-	if o != nil && o.PartialRefunds != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPartialRefunds gets a reference to the given bool and assigns it to the PartialRefunds field.
-func (o *PaymentServiceDefinitionSupportedFeatures) SetPartialRefunds(v bool) {
-	o.PartialRefunds = &v
-}
-
 func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.DelayedCapture != nil {
+		toSerialize["delayed_capture"] = o.DelayedCapture
+	}
+	if o.NetworkTokens != nil {
+		toSerialize["network_tokens"] = o.NetworkTokens
+	}
+	if o.PartialRefunds != nil {
+		toSerialize["partial_refunds"] = o.PartialRefunds
+	}
 	if o.PaymentMethodTokenization != nil {
 		toSerialize["payment_method_tokenization"] = o.PaymentMethodTokenization
 	}
 	if o.PaymentMethodTokenizationToggle != nil {
 		toSerialize["payment_method_tokenization_toggle"] = o.PaymentMethodTokenizationToggle
+	}
+	if o.Refunds != nil {
+		toSerialize["refunds"] = o.Refunds
 	}
 	if o.ThreeDSecureHosted != nil {
 		toSerialize["three_d_secure_hosted"] = o.ThreeDSecureHosted
@@ -356,20 +402,11 @@ func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error)
 	if o.ThreeDSecurePassThrough != nil {
 		toSerialize["three_d_secure_pass_through"] = o.ThreeDSecurePassThrough
 	}
-	if o.NetworkTokens != nil {
-		toSerialize["network_tokens"] = o.NetworkTokens
-	}
 	if o.VerifyCredentials != nil {
 		toSerialize["verify_credentials"] = o.VerifyCredentials
 	}
 	if o.Void != nil {
 		toSerialize["void"] = o.Void
-	}
-	if o.Refunds != nil {
-		toSerialize["refunds"] = o.Refunds
-	}
-	if o.PartialRefunds != nil {
-		toSerialize["partial_refunds"] = o.PartialRefunds
 	}
 	return json.Marshal(toSerialize)
 }

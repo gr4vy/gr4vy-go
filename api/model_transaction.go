@@ -70,6 +70,12 @@ type Transaction struct {
 	// Additional information about the transaction stored as key-value pairs.
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	ThreeDSecure *ThreeDSecureSummary `json:"three_d_secure,omitempty"`
+	// The date and time when this transaction was authorized in the payment service.  Don't use this field to determine whether the transaction was authorized. A `null` value doesn't necessarily imply that the transaction wasn't authorized, it can mean that the payment service doesn't provide this value, that it didn't provide it at the time the transaction was authorized or that the transaction was authorized before the introduction of this field.
+	AuthorizedAt NullableTime `json:"authorized_at,omitempty"`
+	// The date and time when this transaction was captured in the payment service.  Don't use this field to determine whether the transaction was captured. A `null` value doesn't necessarily imply that the transaction wasn't captured, it can mean that the payment service doesn't provide this value, that it didn't provide it at the time the transaction was captured or that the transaction was captured before the introduction of this field.
+	CapturedAt NullableTime `json:"captured_at,omitempty"`
+	// The date and time when this transaction was voided in the payment service.  Don't use this field to determine whether the transaction was voided. A `null` value doesn't necessarily imply that the transaction wasn't voided, it can mean that the payment service doesn't provide this value, that it didn't provide it at the time the transaction was voided or that the transaction was voided before the introduction of this field.
+	VoidedAt NullableTime `json:"voided_at,omitempty"`
 }
 
 // NewTransaction instantiates a new Transaction object
@@ -1099,6 +1105,132 @@ func (o *Transaction) SetThreeDSecure(v ThreeDSecureSummary) {
 	o.ThreeDSecure = &v
 }
 
+// GetAuthorizedAt returns the AuthorizedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetAuthorizedAt() time.Time {
+	if o == nil || o.AuthorizedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.AuthorizedAt.Get()
+}
+
+// GetAuthorizedAtOk returns a tuple with the AuthorizedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetAuthorizedAtOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AuthorizedAt.Get(), o.AuthorizedAt.IsSet()
+}
+
+// HasAuthorizedAt returns a boolean if a field has been set.
+func (o *Transaction) HasAuthorizedAt() bool {
+	if o != nil && o.AuthorizedAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthorizedAt gets a reference to the given NullableTime and assigns it to the AuthorizedAt field.
+func (o *Transaction) SetAuthorizedAt(v time.Time) {
+	o.AuthorizedAt.Set(&v)
+}
+// SetAuthorizedAtNil sets the value for AuthorizedAt to be an explicit nil
+func (o *Transaction) SetAuthorizedAtNil() {
+	o.AuthorizedAt.Set(nil)
+}
+
+// UnsetAuthorizedAt ensures that no value is present for AuthorizedAt, not even an explicit nil
+func (o *Transaction) UnsetAuthorizedAt() {
+	o.AuthorizedAt.Unset()
+}
+
+// GetCapturedAt returns the CapturedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetCapturedAt() time.Time {
+	if o == nil || o.CapturedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.CapturedAt.Get()
+}
+
+// GetCapturedAtOk returns a tuple with the CapturedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetCapturedAtOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CapturedAt.Get(), o.CapturedAt.IsSet()
+}
+
+// HasCapturedAt returns a boolean if a field has been set.
+func (o *Transaction) HasCapturedAt() bool {
+	if o != nil && o.CapturedAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCapturedAt gets a reference to the given NullableTime and assigns it to the CapturedAt field.
+func (o *Transaction) SetCapturedAt(v time.Time) {
+	o.CapturedAt.Set(&v)
+}
+// SetCapturedAtNil sets the value for CapturedAt to be an explicit nil
+func (o *Transaction) SetCapturedAtNil() {
+	o.CapturedAt.Set(nil)
+}
+
+// UnsetCapturedAt ensures that no value is present for CapturedAt, not even an explicit nil
+func (o *Transaction) UnsetCapturedAt() {
+	o.CapturedAt.Unset()
+}
+
+// GetVoidedAt returns the VoidedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetVoidedAt() time.Time {
+	if o == nil || o.VoidedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.VoidedAt.Get()
+}
+
+// GetVoidedAtOk returns a tuple with the VoidedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetVoidedAtOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.VoidedAt.Get(), o.VoidedAt.IsSet()
+}
+
+// HasVoidedAt returns a boolean if a field has been set.
+func (o *Transaction) HasVoidedAt() bool {
+	if o != nil && o.VoidedAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVoidedAt gets a reference to the given NullableTime and assigns it to the VoidedAt field.
+func (o *Transaction) SetVoidedAt(v time.Time) {
+	o.VoidedAt.Set(&v)
+}
+// SetVoidedAtNil sets the value for VoidedAt to be an explicit nil
+func (o *Transaction) SetVoidedAtNil() {
+	o.VoidedAt.Set(nil)
+}
+
+// UnsetVoidedAt ensures that no value is present for VoidedAt, not even an explicit nil
+func (o *Transaction) UnsetVoidedAt() {
+	o.VoidedAt.Unset()
+}
+
 func (o Transaction) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -1187,6 +1319,15 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.ThreeDSecure != nil {
 		toSerialize["three_d_secure"] = o.ThreeDSecure
+	}
+	if o.AuthorizedAt.IsSet() {
+		toSerialize["authorized_at"] = o.AuthorizedAt.Get()
+	}
+	if o.CapturedAt.IsSet() {
+		toSerialize["captured_at"] = o.CapturedAt.Get()
+	}
+	if o.VoidedAt.IsSet() {
+		toSerialize["voided_at"] = o.VoidedAt.Get()
 	}
 	return json.Marshal(toSerialize)
 }

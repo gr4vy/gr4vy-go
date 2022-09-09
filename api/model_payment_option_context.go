@@ -21,6 +21,8 @@ type PaymentOptionContext struct {
 	MerchantName *string `json:"merchant_name,omitempty"`
 	// Card schemes supported by the digital wallet provider.
 	SupportedSchemes *[]string `json:"supported_schemes,omitempty"`
+	ApprovalUi *PaymentOptionApprovalUI `json:"approval_ui,omitempty"`
+	RequiredFields *RequiredFields `json:"required_fields,omitempty"`
 }
 
 // NewPaymentOptionContext instantiates a new PaymentOptionContext object
@@ -104,6 +106,70 @@ func (o *PaymentOptionContext) SetSupportedSchemes(v []string) {
 	o.SupportedSchemes = &v
 }
 
+// GetApprovalUi returns the ApprovalUi field value if set, zero value otherwise.
+func (o *PaymentOptionContext) GetApprovalUi() PaymentOptionApprovalUI {
+	if o == nil || o.ApprovalUi == nil {
+		var ret PaymentOptionApprovalUI
+		return ret
+	}
+	return *o.ApprovalUi
+}
+
+// GetApprovalUiOk returns a tuple with the ApprovalUi field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentOptionContext) GetApprovalUiOk() (*PaymentOptionApprovalUI, bool) {
+	if o == nil || o.ApprovalUi == nil {
+		return nil, false
+	}
+	return o.ApprovalUi, true
+}
+
+// HasApprovalUi returns a boolean if a field has been set.
+func (o *PaymentOptionContext) HasApprovalUi() bool {
+	if o != nil && o.ApprovalUi != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetApprovalUi gets a reference to the given PaymentOptionApprovalUI and assigns it to the ApprovalUi field.
+func (o *PaymentOptionContext) SetApprovalUi(v PaymentOptionApprovalUI) {
+	o.ApprovalUi = &v
+}
+
+// GetRequiredFields returns the RequiredFields field value if set, zero value otherwise.
+func (o *PaymentOptionContext) GetRequiredFields() RequiredFields {
+	if o == nil || o.RequiredFields == nil {
+		var ret RequiredFields
+		return ret
+	}
+	return *o.RequiredFields
+}
+
+// GetRequiredFieldsOk returns a tuple with the RequiredFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentOptionContext) GetRequiredFieldsOk() (*RequiredFields, bool) {
+	if o == nil || o.RequiredFields == nil {
+		return nil, false
+	}
+	return o.RequiredFields, true
+}
+
+// HasRequiredFields returns a boolean if a field has been set.
+func (o *PaymentOptionContext) HasRequiredFields() bool {
+	if o != nil && o.RequiredFields != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequiredFields gets a reference to the given RequiredFields and assigns it to the RequiredFields field.
+func (o *PaymentOptionContext) SetRequiredFields(v RequiredFields) {
+	o.RequiredFields = &v
+}
+
 func (o PaymentOptionContext) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.MerchantName != nil {
@@ -111,6 +177,12 @@ func (o PaymentOptionContext) MarshalJSON() ([]byte, error) {
 	}
 	if o.SupportedSchemes != nil {
 		toSerialize["supported_schemes"] = o.SupportedSchemes
+	}
+	if o.ApprovalUi != nil {
+		toSerialize["approval_ui"] = o.ApprovalUi
+	}
+	if o.RequiredFields != nil {
+		toSerialize["required_fields"] = o.RequiredFields
 	}
 	return json.Marshal(toSerialize)
 }

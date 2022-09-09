@@ -33,6 +33,9 @@ Name | Type | Description | Notes
 **PaymentServiceTransactionId** | Pointer to **string** | The payment service&#39;s unique ID for the transaction. | [optional] 
 **Metadata** | Pointer to **map[string]string** | Additional information about the transaction stored as key-value pairs. | [optional] 
 **ThreeDSecure** | Pointer to [**ThreeDSecureSummary**](ThreeDSecureSummary.md) |  | [optional] 
+**AuthorizedAt** | Pointer to **NullableTime** | The date and time when this transaction was authorized in the payment service.  Don&#39;t use this field to determine whether the transaction was authorized. A &#x60;null&#x60; value doesn&#39;t necessarily imply that the transaction wasn&#39;t authorized, it can mean that the payment service doesn&#39;t provide this value, that it didn&#39;t provide it at the time the transaction was authorized or that the transaction was authorized before the introduction of this field. | [optional] 
+**CapturedAt** | Pointer to **NullableTime** | The date and time when this transaction was captured in the payment service.  Don&#39;t use this field to determine whether the transaction was captured. A &#x60;null&#x60; value doesn&#39;t necessarily imply that the transaction wasn&#39;t captured, it can mean that the payment service doesn&#39;t provide this value, that it didn&#39;t provide it at the time the transaction was captured or that the transaction was captured before the introduction of this field. | [optional] 
+**VoidedAt** | Pointer to **NullableTime** | The date and time when this transaction was voided in the payment service.  Don&#39;t use this field to determine whether the transaction was voided. A &#x60;null&#x60; value doesn&#39;t necessarily imply that the transaction wasn&#39;t voided, it can mean that the payment service doesn&#39;t provide this value, that it didn&#39;t provide it at the time the transaction was voided or that the transaction was voided before the introduction of this field. | [optional] 
 
 ## Methods
 
@@ -848,6 +851,111 @@ SetThreeDSecure sets ThreeDSecure field to given value.
 
 HasThreeDSecure returns a boolean if a field has been set.
 
+### GetAuthorizedAt
+
+`func (o *Transaction) GetAuthorizedAt() time.Time`
+
+GetAuthorizedAt returns the AuthorizedAt field if non-nil, zero value otherwise.
+
+### GetAuthorizedAtOk
+
+`func (o *Transaction) GetAuthorizedAtOk() (*time.Time, bool)`
+
+GetAuthorizedAtOk returns a tuple with the AuthorizedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthorizedAt
+
+`func (o *Transaction) SetAuthorizedAt(v time.Time)`
+
+SetAuthorizedAt sets AuthorizedAt field to given value.
+
+### HasAuthorizedAt
+
+`func (o *Transaction) HasAuthorizedAt() bool`
+
+HasAuthorizedAt returns a boolean if a field has been set.
+
+### SetAuthorizedAtNil
+
+`func (o *Transaction) SetAuthorizedAtNil(b bool)`
+
+ SetAuthorizedAtNil sets the value for AuthorizedAt to be an explicit nil
+
+### UnsetAuthorizedAt
+`func (o *Transaction) UnsetAuthorizedAt()`
+
+UnsetAuthorizedAt ensures that no value is present for AuthorizedAt, not even an explicit nil
+### GetCapturedAt
+
+`func (o *Transaction) GetCapturedAt() time.Time`
+
+GetCapturedAt returns the CapturedAt field if non-nil, zero value otherwise.
+
+### GetCapturedAtOk
+
+`func (o *Transaction) GetCapturedAtOk() (*time.Time, bool)`
+
+GetCapturedAtOk returns a tuple with the CapturedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapturedAt
+
+`func (o *Transaction) SetCapturedAt(v time.Time)`
+
+SetCapturedAt sets CapturedAt field to given value.
+
+### HasCapturedAt
+
+`func (o *Transaction) HasCapturedAt() bool`
+
+HasCapturedAt returns a boolean if a field has been set.
+
+### SetCapturedAtNil
+
+`func (o *Transaction) SetCapturedAtNil(b bool)`
+
+ SetCapturedAtNil sets the value for CapturedAt to be an explicit nil
+
+### UnsetCapturedAt
+`func (o *Transaction) UnsetCapturedAt()`
+
+UnsetCapturedAt ensures that no value is present for CapturedAt, not even an explicit nil
+### GetVoidedAt
+
+`func (o *Transaction) GetVoidedAt() time.Time`
+
+GetVoidedAt returns the VoidedAt field if non-nil, zero value otherwise.
+
+### GetVoidedAtOk
+
+`func (o *Transaction) GetVoidedAtOk() (*time.Time, bool)`
+
+GetVoidedAtOk returns a tuple with the VoidedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetVoidedAt
+
+`func (o *Transaction) SetVoidedAt(v time.Time)`
+
+SetVoidedAt sets VoidedAt field to given value.
+
+### HasVoidedAt
+
+`func (o *Transaction) HasVoidedAt() bool`
+
+HasVoidedAt returns a boolean if a field has been set.
+
+### SetVoidedAtNil
+
+`func (o *Transaction) SetVoidedAtNil(b bool)`
+
+ SetVoidedAtNil sets the value for VoidedAt to be an explicit nil
+
+### UnsetVoidedAt
+`func (o *Transaction) UnsetVoidedAt()`
+
+UnsetVoidedAt ensures that no value is present for VoidedAt, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

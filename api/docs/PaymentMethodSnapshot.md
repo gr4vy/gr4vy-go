@@ -11,9 +11,11 @@ Name | Type | Description | Notes
 **Label** | Pointer to **string** | A label for the payment method. This can be the last 4 digits for a card, or the email address for an alternative payment method. | [optional] 
 **Scheme** | Pointer to **NullableString** | An additional label used to differentiate different sub-types of a payment method. Most notably this can include the type of card used in a transaction. | [optional] 
 **ExpirationDate** | Pointer to **NullableString** | The expiration date for this payment method. This is mostly used by cards where the card might have an expiration date. | [optional] 
+**ApprovalTarget** | Pointer to **NullableString** | The browser target that an approval URL must be opened in. If &#x60;any&#x60; or &#x60;null&#x60;, then there is no specific requirement. | [optional] 
 **ApprovalUrl** | Pointer to **NullableString** | The optional URL that the buyer needs to be redirected to to further authorize their payment. | [optional] 
 **Currency** | Pointer to **NullableString** | The ISO-4217 currency code that this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used for multiple currencies. | [optional] 
 **Country** | Pointer to **NullableString** | The 2-letter ISO code of the country this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used in multiple countries. | [optional] 
+**Details** | Pointer to [**PaymentMethodDetailsCard**](PaymentMethodDetailsCard.md) |  | [optional] 
 
 ## Methods
 
@@ -249,6 +251,41 @@ HasExpirationDate returns a boolean if a field has been set.
 `func (o *PaymentMethodSnapshot) UnsetExpirationDate()`
 
 UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
+### GetApprovalTarget
+
+`func (o *PaymentMethodSnapshot) GetApprovalTarget() string`
+
+GetApprovalTarget returns the ApprovalTarget field if non-nil, zero value otherwise.
+
+### GetApprovalTargetOk
+
+`func (o *PaymentMethodSnapshot) GetApprovalTargetOk() (*string, bool)`
+
+GetApprovalTargetOk returns a tuple with the ApprovalTarget field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetApprovalTarget
+
+`func (o *PaymentMethodSnapshot) SetApprovalTarget(v string)`
+
+SetApprovalTarget sets ApprovalTarget field to given value.
+
+### HasApprovalTarget
+
+`func (o *PaymentMethodSnapshot) HasApprovalTarget() bool`
+
+HasApprovalTarget returns a boolean if a field has been set.
+
+### SetApprovalTargetNil
+
+`func (o *PaymentMethodSnapshot) SetApprovalTargetNil(b bool)`
+
+ SetApprovalTargetNil sets the value for ApprovalTarget to be an explicit nil
+
+### UnsetApprovalTarget
+`func (o *PaymentMethodSnapshot) UnsetApprovalTarget()`
+
+UnsetApprovalTarget ensures that no value is present for ApprovalTarget, not even an explicit nil
 ### GetApprovalUrl
 
 `func (o *PaymentMethodSnapshot) GetApprovalUrl() string`
@@ -354,6 +391,31 @@ HasCountry returns a boolean if a field has been set.
 `func (o *PaymentMethodSnapshot) UnsetCountry()`
 
 UnsetCountry ensures that no value is present for Country, not even an explicit nil
+### GetDetails
+
+`func (o *PaymentMethodSnapshot) GetDetails() PaymentMethodDetailsCard`
+
+GetDetails returns the Details field if non-nil, zero value otherwise.
+
+### GetDetailsOk
+
+`func (o *PaymentMethodSnapshot) GetDetailsOk() (*PaymentMethodDetailsCard, bool)`
+
+GetDetailsOk returns a tuple with the Details field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDetails
+
+`func (o *PaymentMethodSnapshot) SetDetails(v PaymentMethodDetailsCard)`
+
+SetDetails sets Details field to given value.
+
+### HasDetails
+
+`func (o *PaymentMethodSnapshot) HasDetails() bool`
+
+HasDetails returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -28,6 +28,8 @@ type PaymentMethodTokenized struct {
 	Scheme NullableString `json:"scheme,omitempty"`
 	// The expiration date for the payment method.
 	ExpirationDate NullableString `json:"expiration_date,omitempty"`
+	// The browser target that an approval URL must be opened in. If `any` or `null`, then there is no specific requirement.
+	ApprovalTarget NullableString `json:"approval_target,omitempty"`
 	// The optional URL that the buyer needs to be redirected to to further authorize their payment.
 	ApprovalUrl NullableString `json:"approval_url,omitempty"`
 	// The ISO-4217 currency code that this payment method can be used for. If this value is `null` the payment method may be used for multiple currencies.
@@ -265,6 +267,48 @@ func (o *PaymentMethodTokenized) UnsetExpirationDate() {
 	o.ExpirationDate.Unset()
 }
 
+// GetApprovalTarget returns the ApprovalTarget field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethodTokenized) GetApprovalTarget() string {
+	if o == nil || o.ApprovalTarget.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ApprovalTarget.Get()
+}
+
+// GetApprovalTargetOk returns a tuple with the ApprovalTarget field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethodTokenized) GetApprovalTargetOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ApprovalTarget.Get(), o.ApprovalTarget.IsSet()
+}
+
+// HasApprovalTarget returns a boolean if a field has been set.
+func (o *PaymentMethodTokenized) HasApprovalTarget() bool {
+	if o != nil && o.ApprovalTarget.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetApprovalTarget gets a reference to the given NullableString and assigns it to the ApprovalTarget field.
+func (o *PaymentMethodTokenized) SetApprovalTarget(v string) {
+	o.ApprovalTarget.Set(&v)
+}
+// SetApprovalTargetNil sets the value for ApprovalTarget to be an explicit nil
+func (o *PaymentMethodTokenized) SetApprovalTargetNil() {
+	o.ApprovalTarget.Set(nil)
+}
+
+// UnsetApprovalTarget ensures that no value is present for ApprovalTarget, not even an explicit nil
+func (o *PaymentMethodTokenized) UnsetApprovalTarget() {
+	o.ApprovalTarget.Unset()
+}
+
 // GetApprovalUrl returns the ApprovalUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentMethodTokenized) GetApprovalUrl() string {
 	if o == nil || o.ApprovalUrl.Get() == nil {
@@ -410,6 +454,9 @@ func (o PaymentMethodTokenized) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExpirationDate.IsSet() {
 		toSerialize["expiration_date"] = o.ExpirationDate.Get()
+	}
+	if o.ApprovalTarget.IsSet() {
+		toSerialize["approval_target"] = o.ApprovalTarget.Get()
 	}
 	if o.ApprovalUrl.IsSet() {
 		toSerialize["approval_url"] = o.ApprovalUrl.Get()
