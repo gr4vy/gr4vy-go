@@ -18,6 +18,8 @@ import (
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
+	"time"
+	"reflect"
 )
 
 // Linger please
@@ -708,56 +710,136 @@ func (a *TransactionsApiService) ListTransactionRefundsExecute(r ApiListTransact
 type ApiListTransactionsRequest struct {
 	ctx _context.Context
 	ApiService *TransactionsApiService
-	search *string
-	transactionStatus *string
-	buyerId *string
 	buyerExternalIdentifier *string
-	beforeCreatedAt *string
-	afterCreatedAt *string
-	beforeUpdatedAt *string
-	afterUpdatedAt *string
-	limit *int32
+	buyerId *string
 	cursor *string
+	limit *int32
+	amountEq *int32
+	amountGte *int32
+	amountLte *int32
+	createdAtGte *time.Time
+	createdAtLte *time.Time
+	currency *[]string
+	externalIdentifier *string
+	hasRefunds *bool
+	id *string
+	metadata *[]string
+	method *[]string
+	paymentServiceId *[]string
+	paymentServiceTransactionId *string
+	search *string
+	status *[]string
+	updatedAtGte *time.Time
+	updatedAtLte *time.Time
+	beforeCreatedAt *time.Time
+	afterCreatedAt *time.Time
+	beforeUpdatedAt *time.Time
+	afterUpdatedAt *time.Time
+	transactionStatus *string
 }
 
-func (r ApiListTransactionsRequest) Search(search string) ApiListTransactionsRequest {
-	r.search = &search
-	return r
-}
-func (r ApiListTransactionsRequest) TransactionStatus(transactionStatus string) ApiListTransactionsRequest {
-	r.transactionStatus = &transactionStatus
+func (r ApiListTransactionsRequest) BuyerExternalIdentifier(buyerExternalIdentifier string) ApiListTransactionsRequest {
+	r.buyerExternalIdentifier = &buyerExternalIdentifier
 	return r
 }
 func (r ApiListTransactionsRequest) BuyerId(buyerId string) ApiListTransactionsRequest {
 	r.buyerId = &buyerId
 	return r
 }
-func (r ApiListTransactionsRequest) BuyerExternalIdentifier(buyerExternalIdentifier string) ApiListTransactionsRequest {
-	r.buyerExternalIdentifier = &buyerExternalIdentifier
-	return r
-}
-func (r ApiListTransactionsRequest) BeforeCreatedAt(beforeCreatedAt string) ApiListTransactionsRequest {
-	r.beforeCreatedAt = &beforeCreatedAt
-	return r
-}
-func (r ApiListTransactionsRequest) AfterCreatedAt(afterCreatedAt string) ApiListTransactionsRequest {
-	r.afterCreatedAt = &afterCreatedAt
-	return r
-}
-func (r ApiListTransactionsRequest) BeforeUpdatedAt(beforeUpdatedAt string) ApiListTransactionsRequest {
-	r.beforeUpdatedAt = &beforeUpdatedAt
-	return r
-}
-func (r ApiListTransactionsRequest) AfterUpdatedAt(afterUpdatedAt string) ApiListTransactionsRequest {
-	r.afterUpdatedAt = &afterUpdatedAt
+func (r ApiListTransactionsRequest) Cursor(cursor string) ApiListTransactionsRequest {
+	r.cursor = &cursor
 	return r
 }
 func (r ApiListTransactionsRequest) Limit(limit int32) ApiListTransactionsRequest {
 	r.limit = &limit
 	return r
 }
-func (r ApiListTransactionsRequest) Cursor(cursor string) ApiListTransactionsRequest {
-	r.cursor = &cursor
+func (r ApiListTransactionsRequest) AmountEq(amountEq int32) ApiListTransactionsRequest {
+	r.amountEq = &amountEq
+	return r
+}
+func (r ApiListTransactionsRequest) AmountGte(amountGte int32) ApiListTransactionsRequest {
+	r.amountGte = &amountGte
+	return r
+}
+func (r ApiListTransactionsRequest) AmountLte(amountLte int32) ApiListTransactionsRequest {
+	r.amountLte = &amountLte
+	return r
+}
+func (r ApiListTransactionsRequest) CreatedAtGte(createdAtGte time.Time) ApiListTransactionsRequest {
+	r.createdAtGte = &createdAtGte
+	return r
+}
+func (r ApiListTransactionsRequest) CreatedAtLte(createdAtLte time.Time) ApiListTransactionsRequest {
+	r.createdAtLte = &createdAtLte
+	return r
+}
+func (r ApiListTransactionsRequest) Currency(currency []string) ApiListTransactionsRequest {
+	r.currency = &currency
+	return r
+}
+func (r ApiListTransactionsRequest) ExternalIdentifier(externalIdentifier string) ApiListTransactionsRequest {
+	r.externalIdentifier = &externalIdentifier
+	return r
+}
+func (r ApiListTransactionsRequest) HasRefunds(hasRefunds bool) ApiListTransactionsRequest {
+	r.hasRefunds = &hasRefunds
+	return r
+}
+func (r ApiListTransactionsRequest) Id(id string) ApiListTransactionsRequest {
+	r.id = &id
+	return r
+}
+func (r ApiListTransactionsRequest) Metadata(metadata []string) ApiListTransactionsRequest {
+	r.metadata = &metadata
+	return r
+}
+func (r ApiListTransactionsRequest) Method(method []string) ApiListTransactionsRequest {
+	r.method = &method
+	return r
+}
+func (r ApiListTransactionsRequest) PaymentServiceId(paymentServiceId []string) ApiListTransactionsRequest {
+	r.paymentServiceId = &paymentServiceId
+	return r
+}
+func (r ApiListTransactionsRequest) PaymentServiceTransactionId(paymentServiceTransactionId string) ApiListTransactionsRequest {
+	r.paymentServiceTransactionId = &paymentServiceTransactionId
+	return r
+}
+func (r ApiListTransactionsRequest) Search(search string) ApiListTransactionsRequest {
+	r.search = &search
+	return r
+}
+func (r ApiListTransactionsRequest) Status(status []string) ApiListTransactionsRequest {
+	r.status = &status
+	return r
+}
+func (r ApiListTransactionsRequest) UpdatedAtGte(updatedAtGte time.Time) ApiListTransactionsRequest {
+	r.updatedAtGte = &updatedAtGte
+	return r
+}
+func (r ApiListTransactionsRequest) UpdatedAtLte(updatedAtLte time.Time) ApiListTransactionsRequest {
+	r.updatedAtLte = &updatedAtLte
+	return r
+}
+func (r ApiListTransactionsRequest) BeforeCreatedAt(beforeCreatedAt time.Time) ApiListTransactionsRequest {
+	r.beforeCreatedAt = &beforeCreatedAt
+	return r
+}
+func (r ApiListTransactionsRequest) AfterCreatedAt(afterCreatedAt time.Time) ApiListTransactionsRequest {
+	r.afterCreatedAt = &afterCreatedAt
+	return r
+}
+func (r ApiListTransactionsRequest) BeforeUpdatedAt(beforeUpdatedAt time.Time) ApiListTransactionsRequest {
+	r.beforeUpdatedAt = &beforeUpdatedAt
+	return r
+}
+func (r ApiListTransactionsRequest) AfterUpdatedAt(afterUpdatedAt time.Time) ApiListTransactionsRequest {
+	r.afterUpdatedAt = &afterUpdatedAt
+	return r
+}
+func (r ApiListTransactionsRequest) TransactionStatus(transactionStatus string) ApiListTransactionsRequest {
+	r.transactionStatus = &transactionStatus
 	return r
 }
 
@@ -803,17 +885,108 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.search != nil {
-		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
-	}
-	if r.transactionStatus != nil {
-		localVarQueryParams.Add("transaction_status", parameterToString(*r.transactionStatus, ""))
+	if r.buyerExternalIdentifier != nil {
+		localVarQueryParams.Add("buyer_external_identifier", parameterToString(*r.buyerExternalIdentifier, ""))
 	}
 	if r.buyerId != nil {
 		localVarQueryParams.Add("buyer_id", parameterToString(*r.buyerId, ""))
 	}
-	if r.buyerExternalIdentifier != nil {
-		localVarQueryParams.Add("buyer_external_identifier", parameterToString(*r.buyerExternalIdentifier, ""))
+	if r.cursor != nil {
+		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
+	}
+	if r.limit != nil {
+		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
+	}
+	if r.amountEq != nil {
+		localVarQueryParams.Add("amount_eq", parameterToString(*r.amountEq, ""))
+	}
+	if r.amountGte != nil {
+		localVarQueryParams.Add("amount_gte", parameterToString(*r.amountGte, ""))
+	}
+	if r.amountLte != nil {
+		localVarQueryParams.Add("amount_lte", parameterToString(*r.amountLte, ""))
+	}
+	if r.createdAtGte != nil {
+		localVarQueryParams.Add("created_at_gte", parameterToString(*r.createdAtGte, ""))
+	}
+	if r.createdAtLte != nil {
+		localVarQueryParams.Add("created_at_lte", parameterToString(*r.createdAtLte, ""))
+	}
+	if r.currency != nil {
+		t := *r.currency
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("currency", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("currency", parameterToString(t, "multi"))
+		}
+	}
+	if r.externalIdentifier != nil {
+		localVarQueryParams.Add("external_identifier", parameterToString(*r.externalIdentifier, ""))
+	}
+	if r.hasRefunds != nil {
+		localVarQueryParams.Add("has_refunds", parameterToString(*r.hasRefunds, ""))
+	}
+	if r.id != nil {
+		localVarQueryParams.Add("id", parameterToString(*r.id, ""))
+	}
+	if r.metadata != nil {
+		t := *r.metadata
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("metadata", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("metadata", parameterToString(t, "multi"))
+		}
+	}
+	if r.method != nil {
+		t := *r.method
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("method", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("method", parameterToString(t, "multi"))
+		}
+	}
+	if r.paymentServiceId != nil {
+		t := *r.paymentServiceId
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("payment_service_id", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("payment_service_id", parameterToString(t, "multi"))
+		}
+	}
+	if r.paymentServiceTransactionId != nil {
+		localVarQueryParams.Add("payment_service_transaction_id", parameterToString(*r.paymentServiceTransactionId, ""))
+	}
+	if r.search != nil {
+		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
+	}
+	if r.status != nil {
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status", parameterToString(t, "multi"))
+		}
+	}
+	if r.updatedAtGte != nil {
+		localVarQueryParams.Add("updated_at_gte", parameterToString(*r.updatedAtGte, ""))
+	}
+	if r.updatedAtLte != nil {
+		localVarQueryParams.Add("updated_at_lte", parameterToString(*r.updatedAtLte, ""))
 	}
 	if r.beforeCreatedAt != nil {
 		localVarQueryParams.Add("before_created_at", parameterToString(*r.beforeCreatedAt, ""))
@@ -827,11 +1000,8 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	if r.afterUpdatedAt != nil {
 		localVarQueryParams.Add("after_updated_at", parameterToString(*r.afterUpdatedAt, ""))
 	}
-	if r.limit != nil {
-		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
-	}
-	if r.cursor != nil {
-		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
+	if r.transactionStatus != nil {
+		localVarQueryParams.Add("transaction_status", parameterToString(*r.transactionStatus, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -19,9 +19,9 @@ import (
 type TransactionRequest struct {
 	// The monetary amount to create an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.  If the `intent` is set to `capture`, an amount greater than zero must be supplied.
 	Amount int32 `json:"amount"`
-	// A supported ISO-4217 currency code.
+	// A supported ISO-4217 currency code.  For redirect requests, this value must match the one specified for `currency` in `payment_method`. 
 	Currency string `json:"currency"`
-	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction. 
+	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.  If this value is provided for redirect requests and it's not `null`, it must match the one specified for `country` in `payment_method`. Otherwise, the value specified for `country` in `payment_method` will be assumed implicitly. 
 	Country NullableString `json:"country,omitempty"`
 	PaymentMethod TransactionPaymentMethodRequest `json:"payment_method"`
 	// Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. There are also a few restrictions on how the flag may be set:  * The flag has to be set to `true` when the `payment_source` is set to `recurring` or `installment`, and `merchant_initiated` is set to `false`.  * The flag has to be set to `false` (or not set) when using a previously tokenized payment method.

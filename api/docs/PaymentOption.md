@@ -11,7 +11,6 @@ Name | Type | Description | Notes
 **Label** | Pointer to **string** | A label that describes this payment option. This label is returned in the language defined by the &#x60;locale&#x60; query parameter. The label can be used to display a list of payment options to the buyer in their language. | [optional] 
 **CanStorePaymentMethod** | Pointer to **bool** | A flag to indicate if storing the payment method is supported. | [optional] 
 **Context** | Pointer to [**PaymentOptionContext**](PaymentOptionContext.md) |  | [optional] 
-**PaymentMethodTokenizationEnabled** | Pointer to **bool** | A flag to indicate if storing the payment method is enabled. | [optional] 
 
 ## Methods
 
@@ -216,31 +215,6 @@ SetContext sets Context field to given value.
 `func (o *PaymentOption) HasContext() bool`
 
 HasContext returns a boolean if a field has been set.
-
-### GetPaymentMethodTokenizationEnabled
-
-`func (o *PaymentOption) GetPaymentMethodTokenizationEnabled() bool`
-
-GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field if non-nil, zero value otherwise.
-
-### GetPaymentMethodTokenizationEnabledOk
-
-`func (o *PaymentOption) GetPaymentMethodTokenizationEnabledOk() (*bool, bool)`
-
-GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPaymentMethodTokenizationEnabled
-
-`func (o *PaymentOption) SetPaymentMethodTokenizationEnabled(v bool)`
-
-SetPaymentMethodTokenizationEnabled sets PaymentMethodTokenizationEnabled field to given value.
-
-### HasPaymentMethodTokenizationEnabled
-
-`func (o *PaymentOption) HasPaymentMethodTokenizationEnabled() bool`
-
-HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

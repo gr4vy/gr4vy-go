@@ -27,7 +27,7 @@ type CardDetails struct {
 	Scheme *string `json:"scheme,omitempty"`
 	// The 2-letter ISO code of the issuing country of the card.
 	Country *string `json:"country,omitempty"`
-	RequiredFields *CardRequiredFields `json:"required_fields,omitempty"`
+	RequiredFields *RequiredFields `json:"required_fields,omitempty"`
 }
 
 // NewCardDetails instantiates a new CardDetails object
@@ -208,9 +208,9 @@ func (o *CardDetails) SetCountry(v string) {
 }
 
 // GetRequiredFields returns the RequiredFields field value if set, zero value otherwise.
-func (o *CardDetails) GetRequiredFields() CardRequiredFields {
+func (o *CardDetails) GetRequiredFields() RequiredFields {
 	if o == nil || o.RequiredFields == nil {
-		var ret CardRequiredFields
+		var ret RequiredFields
 		return ret
 	}
 	return *o.RequiredFields
@@ -218,7 +218,7 @@ func (o *CardDetails) GetRequiredFields() CardRequiredFields {
 
 // GetRequiredFieldsOk returns a tuple with the RequiredFields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CardDetails) GetRequiredFieldsOk() (*CardRequiredFields, bool) {
+func (o *CardDetails) GetRequiredFieldsOk() (*RequiredFields, bool) {
 	if o == nil || o.RequiredFields == nil {
 		return nil, false
 	}
@@ -234,8 +234,8 @@ func (o *CardDetails) HasRequiredFields() bool {
 	return false
 }
 
-// SetRequiredFields gets a reference to the given CardRequiredFields and assigns it to the RequiredFields field.
-func (o *CardDetails) SetRequiredFields(v CardRequiredFields) {
+// SetRequiredFields gets a reference to the given RequiredFields and assigns it to the RequiredFields field.
+func (o *CardDetails) SetRequiredFields(v RequiredFields) {
 	o.RequiredFields = &v
 }
 

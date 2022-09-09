@@ -34,6 +34,7 @@ type PaymentServiceDefinition struct {
 	SupportedFeatures *PaymentServiceDefinitionSupportedFeatures `json:"supported_features,omitempty"`
 	// An icon to display for the payment service.
 	IconUrl NullableString `json:"icon_url,omitempty"`
+	Configuration *PaymentServiceDefinitionConfiguration `json:"configuration,omitempty"`
 }
 
 // NewPaymentServiceDefinition instantiates a new PaymentServiceDefinition object
@@ -387,6 +388,38 @@ func (o *PaymentServiceDefinition) UnsetIconUrl() {
 	o.IconUrl.Unset()
 }
 
+// GetConfiguration returns the Configuration field value if set, zero value otherwise.
+func (o *PaymentServiceDefinition) GetConfiguration() PaymentServiceDefinitionConfiguration {
+	if o == nil || o.Configuration == nil {
+		var ret PaymentServiceDefinitionConfiguration
+		return ret
+	}
+	return *o.Configuration
+}
+
+// GetConfigurationOk returns a tuple with the Configuration field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinition) GetConfigurationOk() (*PaymentServiceDefinitionConfiguration, bool) {
+	if o == nil || o.Configuration == nil {
+		return nil, false
+	}
+	return o.Configuration, true
+}
+
+// HasConfiguration returns a boolean if a field has been set.
+func (o *PaymentServiceDefinition) HasConfiguration() bool {
+	if o != nil && o.Configuration != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetConfiguration gets a reference to the given PaymentServiceDefinitionConfiguration and assigns it to the Configuration field.
+func (o *PaymentServiceDefinition) SetConfiguration(v PaymentServiceDefinitionConfiguration) {
+	o.Configuration = &v
+}
+
 func (o PaymentServiceDefinition) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -418,6 +451,9 @@ func (o PaymentServiceDefinition) MarshalJSON() ([]byte, error) {
 	}
 	if o.IconUrl.IsSet() {
 		toSerialize["icon_url"] = o.IconUrl.Get()
+	}
+	if o.Configuration != nil {
+		toSerialize["configuration"] = o.Configuration
 	}
 	return json.Marshal(toSerialize)
 }

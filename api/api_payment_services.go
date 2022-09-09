@@ -401,6 +401,7 @@ type ApiListPaymentServicesRequest struct {
 	limit *int32
 	cursor *string
 	method *string
+	deleted *bool
 }
 
 func (r ApiListPaymentServicesRequest) Limit(limit int32) ApiListPaymentServicesRequest {
@@ -413,6 +414,10 @@ func (r ApiListPaymentServicesRequest) Cursor(cursor string) ApiListPaymentServi
 }
 func (r ApiListPaymentServicesRequest) Method(method string) ApiListPaymentServicesRequest {
 	r.method = &method
+	return r
+}
+func (r ApiListPaymentServicesRequest) Deleted(deleted bool) ApiListPaymentServicesRequest {
+	r.deleted = &deleted
 	return r
 }
 
@@ -466,6 +471,9 @@ func (a *PaymentServicesApiService) ListPaymentServicesExecute(r ApiListPaymentS
 	}
 	if r.method != nil {
 		localVarQueryParams.Add("method", parameterToString(*r.method, ""))
+	}
+	if r.deleted != nil {
+		localVarQueryParams.Add("deleted", parameterToString(*r.deleted, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

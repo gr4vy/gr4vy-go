@@ -19,7 +19,7 @@ import (
 type CardRequest struct {
 	// `card`.
 	Method string `json:"method"`
-	// The 15-16 digit number for this card as it can be found on the front of the card.
+	// The 13-19 digit number for this card as it can be found on the front of the card.
 	Number string `json:"number"`
 	// The expiration date of the card, formatted `MM/YY`.
 	ExpirationDate string `json:"expiration_date"`

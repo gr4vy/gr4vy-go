@@ -80,16 +80,27 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*AntiFraudServicesApi* | [**AddAntiFraudService**](docs/AntiFraudServicesApi.md#addantifraudservice) | **Post** /anti-fraud-services | New anti-fraud service
+*AntiFraudServicesApi* | [**DeleteAntiFraudService**](docs/AntiFraudServicesApi.md#deleteantifraudservice) | **Delete** /anti-fraud-services/{anti_fraud_service_id} | Delete anti-fraud service
+*AntiFraudServicesApi* | [**GetAntiFraudService**](docs/AntiFraudServicesApi.md#getantifraudservice) | **Get** /anti-fraud-services/{anti_fraud_service_id} | Get anti-fraud service
+*AntiFraudServicesApi* | [**UpdateAntiFraudService**](docs/AntiFraudServicesApi.md#updateantifraudservice) | **Put** /anti-fraud-services/{anti_fraud_service_id} | Update anti-fraud service
+*AuditLogsApi* | [**ListAuditLogs**](docs/AuditLogsApi.md#listauditlogs) | **Get** /audit-logs | List Audit Logs
 *BuyersApi* | [**AddBuyer**](docs/BuyersApi.md#addbuyer) | **Post** /buyers | New buyer
 *BuyersApi* | [**DeleteBuyer**](docs/BuyersApi.md#deletebuyer) | **Delete** /buyers/{buyer_id} | Delete buyer
 *BuyersApi* | [**GetBuyer**](docs/BuyersApi.md#getbuyer) | **Get** /buyers/{buyer_id} | Get buyer
 *BuyersApi* | [**ListBuyers**](docs/BuyersApi.md#listbuyers) | **Get** /buyers | List buyers
 *BuyersApi* | [**UpdateBuyer**](docs/BuyersApi.md#updatebuyer) | **Put** /buyers/{buyer_id} | Update buyer
+*CardSchemeDefinitionsApi* | [**ListCardSchemeDefinitions**](docs/CardSchemeDefinitionsApi.md#listcardschemedefinitions) | **Get** /card-scheme-definitions | List card scheme definitions
+*CheckoutSessionsApi* | [**AddCheckoutSession**](docs/CheckoutSessionsApi.md#addcheckoutsession) | **Post** /checkout/sessions | Create a new Checkout Session
+*CheckoutSessionsApi* | [**DeleteCheckoutSession**](docs/CheckoutSessionsApi.md#deletecheckoutsession) | **Delete** /checkout/sessions/{checkout_session_id} | Delete a Checkout Session
+*CheckoutSessionsApi* | [**GetCheckoutSession**](docs/CheckoutSessionsApi.md#getcheckoutsession) | **Get** /checkout/sessions/{checkout_session_id} | Get a Checkout Session
+*CheckoutSessionsApi* | [**UpdateCheckoutSessionFields**](docs/CheckoutSessionsApi.md#updatecheckoutsessionfields) | **Put** /checkout/sessions/{checkout_session_id}/fields | Update a Checkout Session&#39;s Secure Fields
 *DigitalWalletsApi* | [**DeregisterDigitalWallet**](docs/DigitalWalletsApi.md#deregisterdigitalwallet) | **Delete** /digital-wallets/{digital_wallet_id} | De-register digital wallet
 *DigitalWalletsApi* | [**GetDigitalWallet**](docs/DigitalWalletsApi.md#getdigitalwallet) | **Get** /digital-wallets/{digital_wallet_id} | Get digital wallet
 *DigitalWalletsApi* | [**ListDigitalWallets**](docs/DigitalWalletsApi.md#listdigitalwallets) | **Get** /digital-wallets | List digital wallets
 *DigitalWalletsApi* | [**RegisterDigitalWallet**](docs/DigitalWalletsApi.md#registerdigitalwallet) | **Post** /digital-wallets | Register digital wallet
 *DigitalWalletsApi* | [**UpdateDigitalWallet**](docs/DigitalWalletsApi.md#updatedigitalwallet) | **Put** /digital-wallets/{digital_wallet_id} | Update digital wallet
+*PaymentMethodDefinitionsApi* | [**ListPaymentMethodDefinitions**](docs/PaymentMethodDefinitionsApi.md#listpaymentmethoddefinitions) | **Get** /payment-method-definitions | List payment method definitions
 *PaymentMethodTokensApi* | [**ListPaymentMethodTokens**](docs/PaymentMethodTokensApi.md#listpaymentmethodtokens) | **Get** /payment-methods/{payment_method_id}/tokens | List payment method tokens
 *PaymentMethodsApi* | [**DeletePaymentMethod**](docs/PaymentMethodsApi.md#deletepaymentmethod) | **Delete** /payment-methods/{payment_method_id} | Delete payment method
 *PaymentMethodsApi* | [**GetPaymentMethod**](docs/PaymentMethodsApi.md#getpaymentmethod) | **Get** /payment-methods/{payment_method_id} | Get stored payment method
@@ -117,8 +128,17 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Address](docs/Address.md)
+ - [AntiFraudService](docs/AntiFraudService.md)
+ - [AntiFraudServiceCreate](docs/AntiFraudServiceCreate.md)
+ - [AntiFraudServiceFields](docs/AntiFraudServiceFields.md)
+ - [AntiFraudServiceUpdate](docs/AntiFraudServiceUpdate.md)
+ - [AntiFraudServiceUpdateFields](docs/AntiFraudServiceUpdateFields.md)
  - [ApplePayRequest](docs/ApplePayRequest.md)
  - [ApplePaySessionRequest](docs/ApplePaySessionRequest.md)
+ - [AuditLog](docs/AuditLog.md)
+ - [AuditLogResource](docs/AuditLogResource.md)
+ - [AuditLogUser](docs/AuditLogUser.md)
+ - [AuditLogs](docs/AuditLogs.md)
  - [BillingDetails](docs/BillingDetails.md)
  - [BillingDetailsRequest](docs/BillingDetailsRequest.md)
  - [BillingDetailsUpdateRequest](docs/BillingDetailsUpdateRequest.md)
@@ -130,9 +150,16 @@ Class | Method | HTTP request | Description
  - [Buyers](docs/Buyers.md)
  - [CardDetails](docs/CardDetails.md)
  - [CardRequest](docs/CardRequest.md)
- - [CardRequiredFields](docs/CardRequiredFields.md)
- - [CardRequiredFieldsAddress](docs/CardRequiredFieldsAddress.md)
+ - [CardSchemeDefinition](docs/CardSchemeDefinition.md)
+ - [CardSchemeDefinitions](docs/CardSchemeDefinitions.md)
  - [CartItem](docs/CartItem.md)
+ - [CheckoutSession](docs/CheckoutSession.md)
+ - [CheckoutSessionRequest](docs/CheckoutSessionRequest.md)
+ - [CheckoutSessionSecureFieldsUpdate](docs/CheckoutSessionSecureFieldsUpdate.md)
+ - [Connection](docs/Connection.md)
+ - [ConnectionDefinition](docs/ConnectionDefinition.md)
+ - [ConnectionDefinitions](docs/ConnectionDefinitions.md)
+ - [Connections](docs/Connections.md)
  - [DigitalWallet](docs/DigitalWallet.md)
  - [DigitalWalletRequest](docs/DigitalWalletRequest.md)
  - [DigitalWalletUpdate](docs/DigitalWalletUpdate.md)
@@ -147,9 +174,16 @@ Class | Method | HTTP request | Description
  - [Error409DuplicateRecord](docs/Error409DuplicateRecord.md)
  - [ErrorDetail](docs/ErrorDetail.md)
  - [ErrorGeneric](docs/ErrorGeneric.md)
+ - [FlowPaymentOptionOutcome](docs/FlowPaymentOptionOutcome.md)
+ - [FlowRuleBooleanOutcome](docs/FlowRuleBooleanOutcome.md)
+ - [FlowRuleMethodOutcome](docs/FlowRuleMethodOutcome.md)
+ - [FlowRuleServiceOutcome](docs/FlowRuleServiceOutcome.md)
  - [GooglePayRequest](docs/GooglePayRequest.md)
  - [GooglePaySessionRequest](docs/GooglePaySessionRequest.md)
  - [PaymentMethod](docs/PaymentMethod.md)
+ - [PaymentMethodDefinition](docs/PaymentMethodDefinition.md)
+ - [PaymentMethodDefinitions](docs/PaymentMethodDefinitions.md)
+ - [PaymentMethodDetailsCard](docs/PaymentMethodDetailsCard.md)
  - [PaymentMethodRequest](docs/PaymentMethodRequest.md)
  - [PaymentMethodSnapshot](docs/PaymentMethodSnapshot.md)
  - [PaymentMethodToken](docs/PaymentMethodToken.md)
@@ -158,10 +192,12 @@ Class | Method | HTTP request | Description
  - [PaymentMethods](docs/PaymentMethods.md)
  - [PaymentMethodsTokenized](docs/PaymentMethodsTokenized.md)
  - [PaymentOption](docs/PaymentOption.md)
+ - [PaymentOptionApprovalUI](docs/PaymentOptionApprovalUI.md)
  - [PaymentOptionContext](docs/PaymentOptionContext.md)
  - [PaymentOptions](docs/PaymentOptions.md)
  - [PaymentService](docs/PaymentService.md)
  - [PaymentServiceDefinition](docs/PaymentServiceDefinition.md)
+ - [PaymentServiceDefinitionConfiguration](docs/PaymentServiceDefinitionConfiguration.md)
  - [PaymentServiceDefinitionFields](docs/PaymentServiceDefinitionFields.md)
  - [PaymentServiceDefinitionSupportedFeatures](docs/PaymentServiceDefinitionSupportedFeatures.md)
  - [PaymentServiceDefinitions](docs/PaymentServiceDefinitions.md)
@@ -175,6 +211,8 @@ Class | Method | HTTP request | Description
  - [RedirectRequest](docs/RedirectRequest.md)
  - [Refund](docs/Refund.md)
  - [Refunds](docs/Refunds.md)
+ - [RequiredFields](docs/RequiredFields.md)
+ - [RequiredFieldsAddress](docs/RequiredFieldsAddress.md)
  - [ResetPasswordRequest](docs/ResetPasswordRequest.md)
  - [SetPasswordRequest](docs/SetPasswordRequest.md)
  - [StatementDescriptor](docs/StatementDescriptor.md)

@@ -39,12 +39,15 @@ type PaymentMethod struct {
 	Scheme NullableString `json:"scheme,omitempty"`
 	// The expiration date for the payment method.
 	ExpirationDate NullableString `json:"expiration_date,omitempty"`
+	// The browser target that an approval URL must be opened in. If `any` or `null`, then there is no specific requirement.
+	ApprovalTarget NullableString `json:"approval_target,omitempty"`
 	// The optional URL that the buyer needs to be redirected to to further authorize their payment.
 	ApprovalUrl NullableString `json:"approval_url,omitempty"`
 	// The ISO-4217 currency code that this payment method can be used for. If this value is `null` the payment method may be used for multiple currencies.
 	Currency NullableString `json:"currency,omitempty"`
 	// The 2-letter ISO code of the country this payment method can be used for. If this value is `null` the payment method may be used in multiple countries.
 	Country NullableString `json:"country,omitempty"`
+	Details *PaymentMethodDetailsCard `json:"details,omitempty"`
 }
 
 // NewPaymentMethod instantiates a new PaymentMethod object
@@ -488,6 +491,48 @@ func (o *PaymentMethod) UnsetExpirationDate() {
 	o.ExpirationDate.Unset()
 }
 
+// GetApprovalTarget returns the ApprovalTarget field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethod) GetApprovalTarget() string {
+	if o == nil || o.ApprovalTarget.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ApprovalTarget.Get()
+}
+
+// GetApprovalTargetOk returns a tuple with the ApprovalTarget field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethod) GetApprovalTargetOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ApprovalTarget.Get(), o.ApprovalTarget.IsSet()
+}
+
+// HasApprovalTarget returns a boolean if a field has been set.
+func (o *PaymentMethod) HasApprovalTarget() bool {
+	if o != nil && o.ApprovalTarget.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetApprovalTarget gets a reference to the given NullableString and assigns it to the ApprovalTarget field.
+func (o *PaymentMethod) SetApprovalTarget(v string) {
+	o.ApprovalTarget.Set(&v)
+}
+// SetApprovalTargetNil sets the value for ApprovalTarget to be an explicit nil
+func (o *PaymentMethod) SetApprovalTargetNil() {
+	o.ApprovalTarget.Set(nil)
+}
+
+// UnsetApprovalTarget ensures that no value is present for ApprovalTarget, not even an explicit nil
+func (o *PaymentMethod) UnsetApprovalTarget() {
+	o.ApprovalTarget.Unset()
+}
+
 // GetApprovalUrl returns the ApprovalUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentMethod) GetApprovalUrl() string {
 	if o == nil || o.ApprovalUrl.Get() == nil {
@@ -614,6 +659,38 @@ func (o *PaymentMethod) UnsetCountry() {
 	o.Country.Unset()
 }
 
+// GetDetails returns the Details field value if set, zero value otherwise.
+func (o *PaymentMethod) GetDetails() PaymentMethodDetailsCard {
+	if o == nil || o.Details == nil {
+		var ret PaymentMethodDetailsCard
+		return ret
+	}
+	return *o.Details
+}
+
+// GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetDetailsOk() (*PaymentMethodDetailsCard, bool) {
+	if o == nil || o.Details == nil {
+		return nil, false
+	}
+	return o.Details, true
+}
+
+// HasDetails returns a boolean if a field has been set.
+func (o *PaymentMethod) HasDetails() bool {
+	if o != nil && o.Details != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDetails gets a reference to the given PaymentMethodDetailsCard and assigns it to the Details field.
+func (o *PaymentMethod) SetDetails(v PaymentMethodDetailsCard) {
+	o.Details = &v
+}
+
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -652,6 +729,9 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	if o.ExpirationDate.IsSet() {
 		toSerialize["expiration_date"] = o.ExpirationDate.Get()
 	}
+	if o.ApprovalTarget.IsSet() {
+		toSerialize["approval_target"] = o.ApprovalTarget.Get()
+	}
 	if o.ApprovalUrl.IsSet() {
 		toSerialize["approval_url"] = o.ApprovalUrl.Get()
 	}
@@ -660,6 +740,9 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	}
 	if o.Country.IsSet() {
 		toSerialize["country"] = o.Country.Get()
+	}
+	if o.Details != nil {
+		toSerialize["details"] = o.Details
 	}
 	return json.Marshal(toSerialize)
 }

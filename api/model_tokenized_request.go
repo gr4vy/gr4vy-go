@@ -23,6 +23,8 @@ type TokenizedRequest struct {
 	Id string `json:"id"`
 	// We strongly recommended providing a `redirect_url` for stored cards when 3-D Secure is enabled and `three_d_secure_data` is not provided. This will be appended with both a transaction ID and status (e.g. `https://example.com/callback? gr4vy_transaction_id=123&gr4vy_transaction_status=capture_succeeded`) after 3-D Secure has completed.
 	RedirectUrl *string `json:"redirect_url,omitempty"`
+	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card.
+	SecurityCode *string `json:"security_code,omitempty"`
 }
 
 // NewTokenizedRequest instantiates a new TokenizedRequest object
@@ -124,6 +126,38 @@ func (o *TokenizedRequest) SetRedirectUrl(v string) {
 	o.RedirectUrl = &v
 }
 
+// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise.
+func (o *TokenizedRequest) GetSecurityCode() string {
+	if o == nil || o.SecurityCode == nil {
+		var ret string
+		return ret
+	}
+	return *o.SecurityCode
+}
+
+// GetSecurityCodeOk returns a tuple with the SecurityCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TokenizedRequest) GetSecurityCodeOk() (*string, bool) {
+	if o == nil || o.SecurityCode == nil {
+		return nil, false
+	}
+	return o.SecurityCode, true
+}
+
+// HasSecurityCode returns a boolean if a field has been set.
+func (o *TokenizedRequest) HasSecurityCode() bool {
+	if o != nil && o.SecurityCode != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurityCode gets a reference to the given string and assigns it to the SecurityCode field.
+func (o *TokenizedRequest) SetSecurityCode(v string) {
+	o.SecurityCode = &v
+}
+
 func (o TokenizedRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -134,6 +168,9 @@ func (o TokenizedRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.RedirectUrl != nil {
 		toSerialize["redirect_url"] = o.RedirectUrl
+	}
+	if o.SecurityCode != nil {
+		toSerialize["security_code"] = o.SecurityCode
 	}
 	return json.Marshal(toSerialize)
 }
