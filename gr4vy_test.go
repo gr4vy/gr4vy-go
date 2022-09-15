@@ -2,6 +2,8 @@ package gr4vy
 
 import (
 	"context"
+	"fmt"
+	"strconv"
 	"testing"
 )
 
@@ -581,20 +583,25 @@ func TestAuthorizeTransaction(t *testing.T) {
 	// }
 }
 func TestRefundTransaction(t *testing.T) {
-	t.Skip("skipping test for now")
-	// key, err := GetKeyFromFile(keyPath)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return
-	// }
-	// client := NewGr4vyClient(gr4vyId, key, environment)
+	// t.Skip("skipping test for now")
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key, environment)
 
-	// response, err := client.RefundTransaction(transactionId)
-	// if err != nil {
-	// 	t.Errorf(err.Error())
-	// 	return;
-	// }
-	// if (response.StatusCode != 200) {
-	// 	t.Errorf("expected StatusCode 200: received: " + strconv.Itoa(response.StatusCode))
-	// }
+	req := Gr4vyTransactionRefundRequest{}
+
+	body, response, err := client.RefundTransaction(transactionId, req)
+	if err != nil {
+		t.Errorf(err.Error())
+		fmt.Println("got here")
+		fmt.Printf("%+v\n", response)
+		fmt.Printf("%+v\n", body)
+		return
+	}
+	if response.StatusCode != 201 {
+		t.Errorf("expected StatusCode 201: received: " + strconv.Itoa(response.StatusCode))
+	}
 }

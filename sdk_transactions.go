@@ -9,6 +9,7 @@ import (
 type Gr4vyTransactionPaymentMethodRequest TransactionPaymentMethodRequest
 type Gr4vyTransactionRequest TransactionRequest
 type Gr4vyTransactionCaptureRequest TransactionCaptureRequest
+type Gr4vyTransactionRefundRequest TransactionRefundRequest
 type Gr4vyTransactions Transactions
 type Gr4vyTransaction Transaction
 type Gr4vyRefund Refund
@@ -162,7 +163,7 @@ func (c *Gr4vyClient) CaptureTransactionContext(ctx context.Context, transaction
     return &r, http, err
 }
 
-func (c *Gr4vyClient) RefundTransaction(transaction_id string) (*Gr4vyRefund, *http.Response, error) {
+func (c *Gr4vyClient) RefundTransaction(transaction_id string, body Gr4vyTransactionRefundRequest) (*Gr4vyRefund, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -170,7 +171,8 @@ func (c *Gr4vyClient) RefundTransaction(transaction_id string) (*Gr4vyRefund, *h
     auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
     p := client.TransactionsApi.RefundTransaction(auth, transaction_id)
 
-    response, http, err := p.Execute()
+    var b TransactionRefundRequest = TransactionRefundRequest(body)
+    response, http, err := p.TransactionRefundRequest(b).Execute()
     c.HandleResponse(http, err)
     if (err != nil) {
         return nil, http, err
@@ -178,7 +180,7 @@ func (c *Gr4vyClient) RefundTransaction(transaction_id string) (*Gr4vyRefund, *h
     var r Gr4vyRefund = Gr4vyRefund(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) RefundTransactionContext(ctx context.Context, transaction_id string) (*Gr4vyRefund, *http.Response, error) {
+func (c *Gr4vyClient) RefundTransactionContext(ctx context.Context, transaction_id string, body Gr4vyTransactionRefundRequest) (*Gr4vyRefund, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -186,7 +188,8 @@ func (c *Gr4vyClient) RefundTransactionContext(ctx context.Context, transaction_
     auth := context.WithValue(ctx, ContextAccessToken, c.accessToken)
     p := client.TransactionsApi.RefundTransaction(auth, transaction_id)
 
-    response, http, err := p.Execute()
+    var b TransactionRefundRequest = TransactionRefundRequest(body)
+    response, http, err := p.TransactionRefundRequest(b).Execute()
     c.HandleResponse(http, err)
     if (err != nil) {
         return nil, http, err
