@@ -589,12 +589,14 @@ func TestRefundTransaction(t *testing.T) {
 	// }
 	// client := NewGr4vyClient(gr4vyId, key, environment)
 
-	// response, err := client.RefundTransaction(transactionId)
+	// req := Gr4vyTransactionRefundRequest{}
+
+	// body, response, err := client.RefundTransaction(transactionId, req)
 	// if err != nil {
 	// 	t.Errorf(err.Error())
-	// 	return;
+	// 	return
 	// }
-	// if (response.StatusCode != 200) {
-	// 	t.Errorf("expected StatusCode 200: received: " + strconv.Itoa(response.StatusCode))
+	// if response.StatusCode != 201 {
+	// 	t.Errorf("expected StatusCode 201: received: " + strconv.Itoa(response.StatusCode))
 	// }
 }
