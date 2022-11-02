@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Mode** | Pointer to **string** |  | [optional] 
 **Label** | Pointer to **string** | A label that describes this payment option. This label is returned in the language defined by the &#x60;locale&#x60; query parameter. The label can be used to display a list of payment options to the buyer in their language. | [optional] 
 **CanStorePaymentMethod** | Pointer to **bool** | A flag to indicate if storing the payment method is supported. | [optional] 
+**CanDelayCapture** | Pointer to **bool** | A flag to indicate if delayed capture is supported. | [optional] 
 **Context** | Pointer to [**PaymentOptionContext**](PaymentOptionContext.md) |  | [optional] 
 
 ## Methods
@@ -190,6 +191,31 @@ SetCanStorePaymentMethod sets CanStorePaymentMethod field to given value.
 `func (o *PaymentOption) HasCanStorePaymentMethod() bool`
 
 HasCanStorePaymentMethod returns a boolean if a field has been set.
+
+### GetCanDelayCapture
+
+`func (o *PaymentOption) GetCanDelayCapture() bool`
+
+GetCanDelayCapture returns the CanDelayCapture field if non-nil, zero value otherwise.
+
+### GetCanDelayCaptureOk
+
+`func (o *PaymentOption) GetCanDelayCaptureOk() (*bool, bool)`
+
+GetCanDelayCaptureOk returns a tuple with the CanDelayCapture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCanDelayCapture
+
+`func (o *PaymentOption) SetCanDelayCapture(v bool)`
+
+SetCanDelayCapture sets CanDelayCapture field to given value.
+
+### HasCanDelayCapture
+
+`func (o *PaymentOption) HasCanDelayCapture() bool`
+
+HasCanDelayCapture returns a boolean if a field has been set.
 
 ### GetContext
 

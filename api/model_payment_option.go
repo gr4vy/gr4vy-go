@@ -27,6 +27,8 @@ type PaymentOption struct {
 	Label *string `json:"label,omitempty"`
 	// A flag to indicate if storing the payment method is supported.
 	CanStorePaymentMethod *bool `json:"can_store_payment_method,omitempty"`
+	// A flag to indicate if delayed capture is supported.
+	CanDelayCapture *bool `json:"can_delay_capture,omitempty"`
 	Context *PaymentOptionContext `json:"context,omitempty"`
 }
 
@@ -249,6 +251,38 @@ func (o *PaymentOption) SetCanStorePaymentMethod(v bool) {
 	o.CanStorePaymentMethod = &v
 }
 
+// GetCanDelayCapture returns the CanDelayCapture field value if set, zero value otherwise.
+func (o *PaymentOption) GetCanDelayCapture() bool {
+	if o == nil || o.CanDelayCapture == nil {
+		var ret bool
+		return ret
+	}
+	return *o.CanDelayCapture
+}
+
+// GetCanDelayCaptureOk returns a tuple with the CanDelayCapture field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentOption) GetCanDelayCaptureOk() (*bool, bool) {
+	if o == nil || o.CanDelayCapture == nil {
+		return nil, false
+	}
+	return o.CanDelayCapture, true
+}
+
+// HasCanDelayCapture returns a boolean if a field has been set.
+func (o *PaymentOption) HasCanDelayCapture() bool {
+	if o != nil && o.CanDelayCapture != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCanDelayCapture gets a reference to the given bool and assigns it to the CanDelayCapture field.
+func (o *PaymentOption) SetCanDelayCapture(v bool) {
+	o.CanDelayCapture = &v
+}
+
 // GetContext returns the Context field value if set, zero value otherwise.
 func (o *PaymentOption) GetContext() PaymentOptionContext {
 	if o == nil || o.Context == nil {
@@ -300,6 +334,9 @@ func (o PaymentOption) MarshalJSON() ([]byte, error) {
 	}
 	if o.CanStorePaymentMethod != nil {
 		toSerialize["can_store_payment_method"] = o.CanStorePaymentMethod
+	}
+	if o.CanDelayCapture != nil {
+		toSerialize["can_delay_capture"] = o.CanDelayCapture
 	}
 	if o.Context != nil {
 		toSerialize["context"] = o.Context

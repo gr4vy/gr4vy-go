@@ -80,16 +80,16 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*AntiFraudServicesApi* | [**AddAntiFraudService**](docs/AntiFraudServicesApi.md#addantifraudservice) | **Post** /anti-fraud-services | New anti-fraud service
-*AntiFraudServicesApi* | [**DeleteAntiFraudService**](docs/AntiFraudServicesApi.md#deleteantifraudservice) | **Delete** /anti-fraud-services/{anti_fraud_service_id} | Delete anti-fraud service
-*AntiFraudServicesApi* | [**GetAntiFraudService**](docs/AntiFraudServicesApi.md#getantifraudservice) | **Get** /anti-fraud-services/{anti_fraud_service_id} | Get anti-fraud service
-*AntiFraudServicesApi* | [**UpdateAntiFraudService**](docs/AntiFraudServicesApi.md#updateantifraudservice) | **Put** /anti-fraud-services/{anti_fraud_service_id} | Update anti-fraud service
 *AuditLogsApi* | [**ListAuditLogs**](docs/AuditLogsApi.md#listauditlogs) | **Get** /audit-logs | List Audit Logs
 *BuyersApi* | [**AddBuyer**](docs/BuyersApi.md#addbuyer) | **Post** /buyers | New buyer
+*BuyersApi* | [**AddBuyerShippingAddress**](docs/BuyersApi.md#addbuyershippingaddress) | **Post** /buyers/{buyer_id}/shipping-details | New buyer shipping address
 *BuyersApi* | [**DeleteBuyer**](docs/BuyersApi.md#deletebuyer) | **Delete** /buyers/{buyer_id} | Delete buyer
+*BuyersApi* | [**DeleteBuyerShippingAddress**](docs/BuyersApi.md#deletebuyershippingaddress) | **Delete** /buyers/{buyer_id}/shipping-details/{shipping_address_id} | Delete buyer shipping address
 *BuyersApi* | [**GetBuyer**](docs/BuyersApi.md#getbuyer) | **Get** /buyers/{buyer_id} | Get buyer
+*BuyersApi* | [**GetBuyerShippingAddresses**](docs/BuyersApi.md#getbuyershippingaddresses) | **Get** /buyers/{buyer_id}/shipping-details | Get buyer shipping addresses
 *BuyersApi* | [**ListBuyers**](docs/BuyersApi.md#listbuyers) | **Get** /buyers | List buyers
 *BuyersApi* | [**UpdateBuyer**](docs/BuyersApi.md#updatebuyer) | **Put** /buyers/{buyer_id} | Update buyer
+*BuyersApi* | [**UpdateBuyerShippingAddress**](docs/BuyersApi.md#updatebuyershippingaddress) | **Put** /buyers/{buyer_id}/shipping-details/{shipping_address_id} | Update buyer shipping address
 *CardSchemeDefinitionsApi* | [**ListCardSchemeDefinitions**](docs/CardSchemeDefinitionsApi.md#listcardschemedefinitions) | **Get** /card-scheme-definitions | List card scheme definitions
 *CheckoutSessionsApi* | [**AddCheckoutSession**](docs/CheckoutSessionsApi.md#addcheckoutsession) | **Post** /checkout/sessions | Create a new Checkout Session
 *CheckoutSessionsApi* | [**DeleteCheckoutSession**](docs/CheckoutSessionsApi.md#deletecheckoutsession) | **Delete** /checkout/sessions/{checkout_session_id} | Delete a Checkout Session
@@ -115,6 +115,14 @@ Class | Method | HTTP request | Description
 *PaymentServicesApi* | [**GetPaymentService**](docs/PaymentServicesApi.md#getpaymentservice) | **Get** /payment-services/{payment_service_id} | Get payment service
 *PaymentServicesApi* | [**ListPaymentServices**](docs/PaymentServicesApi.md#listpaymentservices) | **Get** /payment-services | List payment services
 *PaymentServicesApi* | [**UpdatePaymentService**](docs/PaymentServicesApi.md#updatepaymentservice) | **Put** /payment-services/{payment_service_id} | Update payment service
+*ReportsApi* | [**AddReport**](docs/ReportsApi.md#addreport) | **Post** /reports | New report
+*ReportsApi* | [**GenerateDownloadUrl**](docs/ReportsApi.md#generatedownloadurl) | **Post** /reports/{report_id}/executions/{report_execution_id}/url | Generate the download URL of a report execution result
+*ReportsApi* | [**GetReport**](docs/ReportsApi.md#getreport) | **Get** /reports/{report_id} | Get report
+*ReportsApi* | [**GetReportExecution**](docs/ReportsApi.md#getreportexecution) | **Get** /report-executions/{report_execution_id} | Get report execution
+*ReportsApi* | [**ListAllReportExecutions**](docs/ReportsApi.md#listallreportexecutions) | **Get** /report-executions | List all report executions
+*ReportsApi* | [**ListReportExecutions**](docs/ReportsApi.md#listreportexecutions) | **Get** /reports/{report_id}/executions | List executions for a report
+*ReportsApi* | [**ListReports**](docs/ReportsApi.md#listreports) | **Get** /reports | List reports
+*ReportsApi* | [**UpdateReport**](docs/ReportsApi.md#updatereport) | **Put** /reports/{report_id} | Update report
 *TransactionsApi* | [**AuthorizeNewTransaction**](docs/TransactionsApi.md#authorizenewtransaction) | **Post** /transactions | New transaction
 *TransactionsApi* | [**CaptureTransaction**](docs/TransactionsApi.md#capturetransaction) | **Post** /transactions/{transaction_id}/capture | Capture transaction
 *TransactionsApi* | [**GetTransaction**](docs/TransactionsApi.md#gettransaction) | **Get** /transactions/{transaction_id} | Get transaction
@@ -128,9 +136,7 @@ Class | Method | HTTP request | Description
 ## Documentation For Models
 
  - [Address](docs/Address.md)
- - [AntiFraudService](docs/AntiFraudService.md)
  - [AntiFraudServiceCreate](docs/AntiFraudServiceCreate.md)
- - [AntiFraudServiceFields](docs/AntiFraudServiceFields.md)
  - [AntiFraudServiceUpdate](docs/AntiFraudServiceUpdate.md)
  - [AntiFraudServiceUpdateFields](docs/AntiFraudServiceUpdateFields.md)
  - [ApplePayRequest](docs/ApplePayRequest.md)
@@ -174,10 +180,6 @@ Class | Method | HTTP request | Description
  - [Error409DuplicateRecord](docs/Error409DuplicateRecord.md)
  - [ErrorDetail](docs/ErrorDetail.md)
  - [ErrorGeneric](docs/ErrorGeneric.md)
- - [FlowPaymentOptionOutcome](docs/FlowPaymentOptionOutcome.md)
- - [FlowRuleBooleanOutcome](docs/FlowRuleBooleanOutcome.md)
- - [FlowRuleMethodOutcome](docs/FlowRuleMethodOutcome.md)
- - [FlowRuleServiceOutcome](docs/FlowRuleServiceOutcome.md)
  - [GooglePayRequest](docs/GooglePayRequest.md)
  - [GooglePaySessionRequest](docs/GooglePaySessionRequest.md)
  - [PaymentMethod](docs/PaymentMethod.md)
@@ -211,10 +213,25 @@ Class | Method | HTTP request | Description
  - [RedirectRequest](docs/RedirectRequest.md)
  - [Refund](docs/Refund.md)
  - [Refunds](docs/Refunds.md)
+ - [Report](docs/Report.md)
+ - [ReportCreate](docs/ReportCreate.md)
+ - [ReportExecution](docs/ReportExecution.md)
+ - [ReportExecutionSummary](docs/ReportExecutionSummary.md)
+ - [ReportExecutionSummaryContext](docs/ReportExecutionSummaryContext.md)
+ - [ReportExecutionUrl](docs/ReportExecutionUrl.md)
+ - [ReportExecutions](docs/ReportExecutions.md)
+ - [ReportSpec](docs/ReportSpec.md)
+ - [ReportSummary](docs/ReportSummary.md)
+ - [ReportUpdate](docs/ReportUpdate.md)
+ - [Reports](docs/Reports.md)
  - [RequiredFields](docs/RequiredFields.md)
  - [RequiredFieldsAddress](docs/RequiredFieldsAddress.md)
  - [ResetPasswordRequest](docs/ResetPasswordRequest.md)
  - [SetPasswordRequest](docs/SetPasswordRequest.md)
+ - [ShippingAddress](docs/ShippingAddress.md)
+ - [ShippingAddressRequest](docs/ShippingAddressRequest.md)
+ - [ShippingAddressUpdateRequest](docs/ShippingAddressUpdateRequest.md)
+ - [ShippingAddresses](docs/ShippingAddresses.md)
  - [StatementDescriptor](docs/StatementDescriptor.md)
  - [TaxId](docs/TaxId.md)
  - [ThreeDSecureData](docs/ThreeDSecureData.md)

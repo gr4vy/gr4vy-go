@@ -31,6 +31,8 @@ type CardRequest struct {
 	BuyerId *string `json:"buyer_id,omitempty"`
 	// The `external_identifier` of the buyer to associate this payment method to. If this field is provided then the `buyer_id` field needs to be unset.
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
+	// The redirect URL to redirect a buyer to after they have authorized their transaction or payment method. This only applies to payment methods that require buyer approval.
+	RedirectUrl NullableString `json:"redirect_url,omitempty"`
 }
 
 // NewCardRequest instantiates a new CardRequest object
@@ -256,6 +258,48 @@ func (o *CardRequest) SetBuyerExternalIdentifier(v string) {
 	o.BuyerExternalIdentifier = &v
 }
 
+// GetRedirectUrl returns the RedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CardRequest) GetRedirectUrl() string {
+	if o == nil || o.RedirectUrl.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RedirectUrl.Get()
+}
+
+// GetRedirectUrlOk returns a tuple with the RedirectUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CardRequest) GetRedirectUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.RedirectUrl.Get(), o.RedirectUrl.IsSet()
+}
+
+// HasRedirectUrl returns a boolean if a field has been set.
+func (o *CardRequest) HasRedirectUrl() bool {
+	if o != nil && o.RedirectUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRedirectUrl gets a reference to the given NullableString and assigns it to the RedirectUrl field.
+func (o *CardRequest) SetRedirectUrl(v string) {
+	o.RedirectUrl.Set(&v)
+}
+// SetRedirectUrlNil sets the value for RedirectUrl to be an explicit nil
+func (o *CardRequest) SetRedirectUrlNil() {
+	o.RedirectUrl.Set(nil)
+}
+
+// UnsetRedirectUrl ensures that no value is present for RedirectUrl, not even an explicit nil
+func (o *CardRequest) UnsetRedirectUrl() {
+	o.RedirectUrl.Unset()
+}
+
 func (o CardRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -278,6 +322,9 @@ func (o CardRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.BuyerExternalIdentifier != nil {
 		toSerialize["buyer_external_identifier"] = o.BuyerExternalIdentifier
+	}
+	if o.RedirectUrl.IsSet() {
+		toSerialize["redirect_url"] = o.RedirectUrl.Get()
 	}
 	return json.Marshal(toSerialize)
 }

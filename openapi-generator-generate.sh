@@ -24,3 +24,5 @@ sed -i '' "s/$var1/$rep1/g" ./api/model_transaction_request.go
 var1='Undefined'
 rep1='string'
 sed -i '' "s/$var1/$rep1/g" ./api//model_payment_option_context.go
+
+sh replace.sh

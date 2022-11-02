@@ -15,25 +15,25 @@ import (
 	"encoding/json"
 )
 
-// Address The billing address of the buyer.
+// Address An address for the buyer.
 type Address struct {
-	// The city for the billing address.
-	City *string `json:"city,omitempty"`
-	// The country for the billing address.
-	Country *string `json:"country,omitempty"`
-	// The postal code or zip code for the billing address.
-	PostalCode *string `json:"postal_code,omitempty"`
-	// The state, county, or province for the billing address.
-	State *string `json:"state,omitempty"`
-	// The code of state, county, or province for the billing address in ISO 3166-2 format.
+	// The city for the address.
+	City NullableString `json:"city,omitempty"`
+	// The country for the address in ISO 3166 format.
+	Country NullableString `json:"country,omitempty"`
+	// The postal code or zip code for the address.
+	PostalCode NullableString `json:"postal_code,omitempty"`
+	// The state, county, or province for the address.
+	State NullableString `json:"state,omitempty"`
+	// The code of state, county, or province for the address in ISO 3166-2 format.
 	StateCode NullableString `json:"state_code,omitempty"`
-	// The house number or name for the billing address. Not all payment services use this field but some do.
+	// The house number or name for the address. Not all payment services use this field but some do.
 	HouseNumberOrName NullableString `json:"house_number_or_name,omitempty"`
-	// The first line of the billing address.
-	Line1 *string `json:"line1,omitempty"`
-	// The second line of the billing address.
+	// The first line of the address.
+	Line1 NullableString `json:"line1,omitempty"`
+	// The second line of the address.
 	Line2 NullableString `json:"line2,omitempty"`
-	// The optional name of the company or organisation to add to the billing address.
+	// The optional name of the company or organisation to add to the address.
 	Organization NullableString `json:"organization,omitempty"`
 }
 
@@ -54,132 +54,172 @@ func NewAddressWithDefaults() *Address {
 	return &this
 }
 
-// GetCity returns the City field value if set, zero value otherwise.
+// GetCity returns the City field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Address) GetCity() string {
-	if o == nil || o.City == nil {
+	if o == nil || o.City.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.City
+	return *o.City.Get()
 }
 
 // GetCityOk returns a tuple with the City field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Address) GetCityOk() (*string, bool) {
-	if o == nil || o.City == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.City, true
+	return o.City.Get(), o.City.IsSet()
 }
 
 // HasCity returns a boolean if a field has been set.
 func (o *Address) HasCity() bool {
-	if o != nil && o.City != nil {
+	if o != nil && o.City.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCity gets a reference to the given string and assigns it to the City field.
+// SetCity gets a reference to the given NullableString and assigns it to the City field.
 func (o *Address) SetCity(v string) {
-	o.City = &v
+	o.City.Set(&v)
+}
+// SetCityNil sets the value for City to be an explicit nil
+func (o *Address) SetCityNil() {
+	o.City.Set(nil)
 }
 
-// GetCountry returns the Country field value if set, zero value otherwise.
+// UnsetCity ensures that no value is present for City, not even an explicit nil
+func (o *Address) UnsetCity() {
+	o.City.Unset()
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Address) GetCountry() string {
-	if o == nil || o.Country == nil {
+	if o == nil || o.Country.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Country
+	return *o.Country.Get()
 }
 
 // GetCountryOk returns a tuple with the Country field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Address) GetCountryOk() (*string, bool) {
-	if o == nil || o.Country == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Country, true
+	return o.Country.Get(), o.Country.IsSet()
 }
 
 // HasCountry returns a boolean if a field has been set.
 func (o *Address) HasCountry() bool {
-	if o != nil && o.Country != nil {
+	if o != nil && o.Country.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCountry gets a reference to the given string and assigns it to the Country field.
+// SetCountry gets a reference to the given NullableString and assigns it to the Country field.
 func (o *Address) SetCountry(v string) {
-	o.Country = &v
+	o.Country.Set(&v)
+}
+// SetCountryNil sets the value for Country to be an explicit nil
+func (o *Address) SetCountryNil() {
+	o.Country.Set(nil)
 }
 
-// GetPostalCode returns the PostalCode field value if set, zero value otherwise.
+// UnsetCountry ensures that no value is present for Country, not even an explicit nil
+func (o *Address) UnsetCountry() {
+	o.Country.Unset()
+}
+
+// GetPostalCode returns the PostalCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Address) GetPostalCode() string {
-	if o == nil || o.PostalCode == nil {
+	if o == nil || o.PostalCode.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.PostalCode
+	return *o.PostalCode.Get()
 }
 
 // GetPostalCodeOk returns a tuple with the PostalCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Address) GetPostalCodeOk() (*string, bool) {
-	if o == nil || o.PostalCode == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.PostalCode, true
+	return o.PostalCode.Get(), o.PostalCode.IsSet()
 }
 
 // HasPostalCode returns a boolean if a field has been set.
 func (o *Address) HasPostalCode() bool {
-	if o != nil && o.PostalCode != nil {
+	if o != nil && o.PostalCode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPostalCode gets a reference to the given string and assigns it to the PostalCode field.
+// SetPostalCode gets a reference to the given NullableString and assigns it to the PostalCode field.
 func (o *Address) SetPostalCode(v string) {
-	o.PostalCode = &v
+	o.PostalCode.Set(&v)
+}
+// SetPostalCodeNil sets the value for PostalCode to be an explicit nil
+func (o *Address) SetPostalCodeNil() {
+	o.PostalCode.Set(nil)
 }
 
-// GetState returns the State field value if set, zero value otherwise.
+// UnsetPostalCode ensures that no value is present for PostalCode, not even an explicit nil
+func (o *Address) UnsetPostalCode() {
+	o.PostalCode.Unset()
+}
+
+// GetState returns the State field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Address) GetState() string {
-	if o == nil || o.State == nil {
+	if o == nil || o.State.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.State
+	return *o.State.Get()
 }
 
 // GetStateOk returns a tuple with the State field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Address) GetStateOk() (*string, bool) {
-	if o == nil || o.State == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.State, true
+	return o.State.Get(), o.State.IsSet()
 }
 
 // HasState returns a boolean if a field has been set.
 func (o *Address) HasState() bool {
-	if o != nil && o.State != nil {
+	if o != nil && o.State.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetState gets a reference to the given string and assigns it to the State field.
+// SetState gets a reference to the given NullableString and assigns it to the State field.
 func (o *Address) SetState(v string) {
-	o.State = &v
+	o.State.Set(&v)
+}
+// SetStateNil sets the value for State to be an explicit nil
+func (o *Address) SetStateNil() {
+	o.State.Set(nil)
+}
+
+// UnsetState ensures that no value is present for State, not even an explicit nil
+func (o *Address) UnsetState() {
+	o.State.Unset()
 }
 
 // GetStateCode returns the StateCode field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -266,36 +306,46 @@ func (o *Address) UnsetHouseNumberOrName() {
 	o.HouseNumberOrName.Unset()
 }
 
-// GetLine1 returns the Line1 field value if set, zero value otherwise.
+// GetLine1 returns the Line1 field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Address) GetLine1() string {
-	if o == nil || o.Line1 == nil {
+	if o == nil || o.Line1.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Line1
+	return *o.Line1.Get()
 }
 
 // GetLine1Ok returns a tuple with the Line1 field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Address) GetLine1Ok() (*string, bool) {
-	if o == nil || o.Line1 == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Line1, true
+	return o.Line1.Get(), o.Line1.IsSet()
 }
 
 // HasLine1 returns a boolean if a field has been set.
 func (o *Address) HasLine1() bool {
-	if o != nil && o.Line1 != nil {
+	if o != nil && o.Line1.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLine1 gets a reference to the given string and assigns it to the Line1 field.
+// SetLine1 gets a reference to the given NullableString and assigns it to the Line1 field.
 func (o *Address) SetLine1(v string) {
-	o.Line1 = &v
+	o.Line1.Set(&v)
+}
+// SetLine1Nil sets the value for Line1 to be an explicit nil
+func (o *Address) SetLine1Nil() {
+	o.Line1.Set(nil)
+}
+
+// UnsetLine1 ensures that no value is present for Line1, not even an explicit nil
+func (o *Address) UnsetLine1() {
+	o.Line1.Unset()
 }
 
 // GetLine2 returns the Line2 field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -384,17 +434,17 @@ func (o *Address) UnsetOrganization() {
 
 func (o Address) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.City != nil {
-		toSerialize["city"] = o.City
+	if o.City.IsSet() {
+		toSerialize["city"] = o.City.Get()
 	}
-	if o.Country != nil {
-		toSerialize["country"] = o.Country
+	if o.Country.IsSet() {
+		toSerialize["country"] = o.Country.Get()
 	}
-	if o.PostalCode != nil {
-		toSerialize["postal_code"] = o.PostalCode
+	if o.PostalCode.IsSet() {
+		toSerialize["postal_code"] = o.PostalCode.Get()
 	}
-	if o.State != nil {
-		toSerialize["state"] = o.State
+	if o.State.IsSet() {
+		toSerialize["state"] = o.State.Get()
 	}
 	if o.StateCode.IsSet() {
 		toSerialize["state_code"] = o.StateCode.Get()
@@ -402,8 +452,8 @@ func (o Address) MarshalJSON() ([]byte, error) {
 	if o.HouseNumberOrName.IsSet() {
 		toSerialize["house_number_or_name"] = o.HouseNumberOrName.Get()
 	}
-	if o.Line1 != nil {
-		toSerialize["line1"] = o.Line1
+	if o.Line1.IsSet() {
+		toSerialize["line1"] = o.Line1.Get()
 	}
 	if o.Line2.IsSet() {
 		toSerialize["line2"] = o.Line2.Get()

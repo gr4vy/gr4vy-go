@@ -103,6 +103,34 @@ tags:
     * Set a display name for a payment provider.
   name: Payment Services
 - description: |-
+    In Gr4vy, a report represents the configuration details to extract or
+    dump a set of data into a downloadable CSV file. The data extracted
+    by a report is configured via the reports API where you can specify:
+
+    * Which fields should be in the dataset.
+    * How the dataset should be sorted.
+    * How the dataset should be filtered.
+
+    Once a report is created, it may be executed on a one-off or recurring
+    basis. One-off reports are executed only once shortly after the report
+    is created, while recurring reports are executed periodically based on
+    its configured frequency, e.g. weekly or monthly.
+
+    During a report execution, the data is extracted and loaded into
+    a CSV file according to the report's configuration. The resulting file
+    may then be downloaded.
+
+    The reports API can be used to:
+
+    * Create and configure new reports.
+    * List all reports.
+    * View the configuration details of a report.
+    * List a report's executions.
+    * Reconfigure an existing report.
+    * Generate a temporary URL to download the result of a report execution
+    in CSV format.
+  name: Reports
+- description: |-
     In Gr4vy, a transaction represents a payment in any state, either before it
     is authorized, once it is captured, or after it has been refunded.
 
@@ -399,6 +427,186 @@ paths:
                 $ref: '#/components/schemas/Error404NotFound'
           description: Returns an error if the resource can not be found.
       summary: Update buyer
+      tags:
+      - Buyers
+  /buyers/{buyer_id}/shipping-details:
+    get:
+      description: Retrieve all shipping addresses for a buyer.
+      operationId: get-buyer-shipping-addresses
+      parameters:
+      - description: The unique ID for a buyer.
+        explode: false
+        in: path
+        name: buyer_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShippingAddresses'
+          description: Returns all associated shipping addresses.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns a generic error.
+      summary: Get buyer shipping addresses
+      tags:
+      - Buyers
+    post:
+      description: Adds a buyer shipping address.
+      operationId: add-buyer-shipping-address
+      parameters:
+      - description: The unique ID for a buyer.
+        explode: false
+        in: path
+        name: buyer_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShippingAddressRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShippingAddress'
+          description: Returns the shipping address that was added.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: New buyer shipping address
+      tags:
+      - Buyers
+  /buyers/{buyer_id}/shipping-details/{shipping_address_id}:
+    delete:
+      description: Deletes a buyer shipping address.
+      operationId: delete-buyer-shipping-address
+      parameters:
+      - description: The unique ID for a buyer.
+        explode: false
+        in: path
+        name: buyer_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique ID for a shipping address.
+        explode: false
+        in: path
+        name: shipping_address_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Returns an empty response.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Delete buyer shipping address
+      tags:
+      - Buyers
+    put:
+      description: Updates a shipping address for a buyer.
+      operationId: update-buyer-shipping-address
+      parameters:
+      - description: The unique ID for a buyer.
+        explode: false
+        in: path
+        name: buyer_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique ID for a shipping address.
+        explode: false
+        in: path
+        name: shipping_address_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ShippingAddressUpdateRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ShippingAddress'
+          description: Returns the updated shipping address.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Update buyer shipping address
       tags:
       - Buyers
   /buyers/payment-methods:
@@ -1648,9 +1856,9 @@ paths:
           type: string
         style: form
       - description: |-
-          When set to `true`, filter for transactions that have at least one refund
-          in any state associated with it. When set to `false`, filter for transactions
-          that have no refunds.
+          When set to `true`, filter for transactions that have at least one completed
+          refund associated with it. When set to `false`, filter for transactions
+          that have no completed refunds.
         explode: true
         in: query
         name: has_refunds
@@ -1728,6 +1936,16 @@ paths:
             example: card
             type: string
           type: array
+        style: form
+      - description: The ID of the payment method.
+        explode: true
+        in: query
+        name: payment_method_id
+        required: false
+        schema:
+          example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          format: uuid
+          type: string
         style: form
       - description: |-
           Filters for transactions that were processed by the provided
@@ -2349,100 +2567,109 @@ paths:
       summary: Void transaction
       tags:
       - Transactions
-  /anti-fraud-services:
-    post:
-      description: |
-        Adds an anti-fraud service, enabling merchants to determine risky transactions
-        and prevent chargebacks.
-      operationId: add-anti-fraud-service
-      requestBody:
-        content:
-          application/json:
-            examples:
-              Create an anti-fraud service:
-                value:
-                  anti_fraud_service_definition_id: sift
-                  display_name: Sift Anti-Fraud Service.
-                  active: true
-                  fields:
-                  - key: api_key
-                    value: sk_test_26PHem9AhJZvU623DfE1x4sd
-                  - key: account_id
-                    value: 26PHem9AhJZvU623DfE1x4sd
-            schema:
-              $ref: '#/components/schemas/AntiFraudServiceCreate'
-      responses:
-        "201":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/AntiFraudService'
-          description: Returns the anti-fraud service that was added.
-        "400":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/ErrorGeneric'
-          description: Returns an error if the request was badly formatted or missing
-            required fields.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error401Unauthorized'
-          description: Returns an error if no valid authentication was provided.
-        "409":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error409DuplicateRecord'
-          description: Returns an error if duplicate resource has been found.
-      summary: New anti-fraud service
-      tags:
-      - Anti-Fraud Services
-  /anti-fraud-services/{anti_fraud_service_id}:
-    delete:
-      description: |-
-        Deletes an anti-fraud service record. Any associated credentials
-        will also be deleted.
-      operationId: delete-anti-fraud-service
-      parameters:
-      - description: The unique ID for an anti-fraud service.
-        explode: false
-        in: path
-        name: anti_fraud_service_id
-        required: true
-        schema:
-          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "204":
-          description: Returns an empty response.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error401Unauthorized'
-          description: Returns an error if no valid authentication was provided.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error404NotFound'
-          description: Returns an error if the resource can not be found.
-      summary: Delete anti-fraud service
-      tags:
-      - Anti-Fraud Services
+  /report-executions:
     get:
-      description: Gets the information about an anti-fraud service.
-      operationId: get-anti-fraud-service
+      description: Returns a list of executions belonging to any report.
+      operationId: list-all-report-executions
       parameters:
-      - description: The unique ID for an anti-fraud service.
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          Filters the results to report executions created after this ISO
+          date-time string. The time zone must be included.
+
+          Ensure that the date-time string is URL encoded, e.g.
+          `2022-01-01T12:00:00+08:00` must be encoded as
+          `2022-01-01T12%3A00%3A00%2B08%3A00`.
+        explode: true
+        in: query
+        name: created_at_gte
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: |-
+          Filters the results to report executions created before this ISO
+          date-time string. The time zone must be included.
+
+          Ensure that the date-time string is URL encoded, e.g.
+          `2022-01-01T12:00:00+08:00` must be encoded as
+          `2022-01-01T12%3A00%3A00%2B08%3A00`.
+        explode: true
+        in: query
+        name: created_at_lte
+        required: false
+        schema:
+          format: date-time
+          type: string
+        style: form
+      - description: |-
+          Filters for executions of reports that have a matching
+          `name` value. This filter is case-insensitive.
+
+          Ensure that when necessary, the value you pass for this
+          filter is URL encoded.
+        explode: true
+        in: query
+        name: report_name
+        required: false
+        schema:
+          example: Failed+Authorizations+042022
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportExecutions'
+          description: Returns a list of report executions.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List all report executions
+      tags:
+      - Reports
+  /report-executions/{report_execution_id}:
+    get:
+      description: Retrieves the details of a single report execution.
+      operationId: get-report-execution
+      parameters:
+      - description: The unique ID for a report execution.
         explode: false
         in: path
-        name: anti_fraud_service_id
+        name: report_execution_id
         required: true
         schema:
           example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
@@ -2454,8 +2681,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AntiFraudService'
-          description: Returns the information about a anti-fraud service.
+                $ref: '#/components/schemas/ReportExecution'
+          description: Returns a report execution.
         "401":
           content:
             application/json:
@@ -2468,54 +2695,114 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error404NotFound'
           description: Returns an error if the resource can not be found.
-        default:
+      summary: Get report execution
+      tags:
+      - Reports
+  /reports:
+    get:
+      description: Returns a list of reports.
+      operationId: list-reports
+      parameters:
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          Filters for reports that have a matching `name` value.
+          This filter is case-insensitive.
+
+          Ensure that when necessary, the value you pass for this
+          filter is URL encoded.
+        explode: true
+        in: query
+        name: name
+        required: false
+        schema:
+          example: Failed+Authorizations+042022
+          type: string
+        style: form
+      - description: Filters for reports that have matching `schedule` values.
+        explode: true
+        in: query
+        name: schedule
+        required: false
+        schema:
+          example:
+          - once
+          - monthly
+          items:
+            enum:
+            - monthly
+            - once
+            type: string
+          type: array
+        style: form
+      - description: Filters for reports that have a matching `schedule_enabled` value.
+        explode: true
+        in: query
+        name: schedule_enabled
+        required: false
+        schema:
+          example: true
+          type: boolean
+        style: form
+      responses:
+        "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ErrorGeneric'
-          description: Returns a generic error.
-      summary: Get anti-fraud service
+                $ref: '#/components/schemas/Reports'
+          description: Returns a list of reports.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List reports
       tags:
-      - Anti-Fraud Services
-    put:
+      - Reports
+    post:
       description: |
-        Update an anti-fraud service, enabling merchants to determine
-        risky transactions and prevent chargebacks.
-      operationId: update-anti-fraud-service
-      parameters:
-      - description: The unique ID for an anti-fraud service.
-        explode: false
-        in: path
-        name: anti_fraud_service_id
-        required: true
-        schema:
-          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
-          format: uuid
-          type: string
-        style: simple
+        Adds a report.
+      operationId: add-report
       requestBody:
         content:
           application/json:
-            examples:
-              Update an anti-fraud service:
-                value:
-                  anti_fraud_service_definition_id: sift
-                  display_name: Sift Anti-Fraud Service.
-                  active: true
-                  fields:
-                  - key: api_key
-                    value: sk_test_26PHem9AhJZvU623DfE1x4sd
-                  - key: account_id
-                    value: 26PHem9AhJZvU623DfE1x4sd
             schema:
-              $ref: '#/components/schemas/AntiFraudServiceUpdate'
+              $ref: '#/components/schemas/ReportCreate'
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AntiFraudService'
-          description: Returns the anti-fraud service that was added.
+                $ref: '#/components/schemas/Report'
+          description: Returns the report that was added.
         "400":
           content:
             application/json:
@@ -2529,45 +2816,241 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error401Unauthorized'
           description: Returns an error if no valid authentication was provided.
-      summary: Update anti-fraud service
+      summary: New report
       tags:
-      - Anti-Fraud Services
+      - Reports
+  /reports/{report_id}:
+    get:
+      description: Retrieves the details of a single report.
+      operationId: get-report
+      parameters:
+      - description: The unique ID for a report.
+        explode: false
+        in: path
+        name: report_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+          description: Returns a report.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Get report
+      tags:
+      - Reports
+    put:
+      description: Updates a report.
+      operationId: update-report
+      parameters:
+      - description: The unique ID for a report.
+        explode: false
+        in: path
+        name: report_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ReportUpdate'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Report'
+          description: Returns the updated report.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Update report
+      tags:
+      - Reports
+  /reports/{report_id}/executions:
+    get:
+      description: Returns a list of executions for a report.
+      operationId: list-report-executions
+      parameters:
+      - description: The unique ID for a report.
+        explode: false
+        in: path
+        name: report_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportExecutions'
+          description: Returns a list of executions for a report.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List executions for a report
+      tags:
+      - Reports
+  /reports/{report_id}/executions/{report_execution_id}/url:
+    post:
+      description: |-
+        Generates a temporary signed URL to download the result of a report
+        execution.
+      operationId: generate-download-url
+      parameters:
+      - description: The unique ID for a report.
+        explode: false
+        in: path
+        name: report_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      - description: The unique ID for a report execution.
+        explode: false
+        in: path
+        name: report_execution_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ReportExecutionUrl'
+          description: |-
+            Returns the signed download URL of a report execution result and its
+            expiration date and time.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Generate the download URL of a report execution result
+      tags:
+      - Reports
 components:
   schemas:
     Address:
-      description: The billing address of the buyer.
+      description: An address for the buyer.
       properties:
         city:
-          description: The city for the billing address.
+          description: The city for the address.
           example: London
           maxLength: 100
           minLength: 1
-          nullable: false
+          nullable: true
           type: string
         country:
-          description: The country for the billing address.
+          description: The country for the address in ISO 3166 format.
           example: GB
           maxLength: 2
-          minLength: 1
-          nullable: false
+          minLength: 2
+          nullable: true
           type: string
         postal_code:
-          description: The postal code or zip code for the billing address.
+          description: The postal code or zip code for the address.
           example: "789123"
           maxLength: 50
           minLength: 1
-          nullable: false
+          nullable: true
           type: string
         state:
-          description: The state, county, or province for the billing address.
+          description: The state, county, or province for the address.
           example: Greater London
           maxLength: 255
           minLength: 1
-          nullable: false
+          nullable: true
           type: string
         state_code:
           description: |-
-            The code of state, county, or province for the billing address in
+            The code of state, county, or province for the address in
             ISO 3166-2 format.
           example: GB-LND
           maxLength: 6
@@ -2576,7 +3059,7 @@ components:
           type: string
         house_number_or_name:
           description: |-
-            The house number or name for the billing address. Not all payment
+            The house number or name for the address. Not all payment
             services use this field but some do.
           example: "10"
           maxLength: 255
@@ -2584,14 +3067,14 @@ components:
           nullable: true
           type: string
         line1:
-          description: The first line of the billing address.
+          description: The first line of the address.
           example: 10 Oxford Street
           maxLength: 255
           minLength: 1
-          nullable: false
+          nullable: true
           type: string
         line2:
-          description: The second line of the billing address.
+          description: The second line of the address.
           example: New Oxford Court
           maxLength: 255
           minLength: 1
@@ -2600,7 +3083,7 @@ components:
         organization:
           description: |-
             The optional name of the company or organisation to add
-            to the billing address.
+            to the address.
           example: Gr4vy
           maxLength: 255
           minLength: 1
@@ -2610,80 +3093,6 @@ components:
       type: object
       x-tags:
       - Buyers
-    AntiFraudService:
-      example:
-        updated_at: 2013-07-16T19:23:00Z
-        anti_fraud_service_definition_id: sift
-        active: true
-        created_at: 2013-07-16T19:23:00Z
-        id: fe26475d-ec3e-4884-9553-f7356683f7f9
-        type: anti-fraud-service
-        display_name: Sift Anti-Fraud Service.
-        fields:
-        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
-          key: approve_decision
-        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
-          key: approve_decision
-      properties:
-        type:
-          description: The type of this resource. Is always `anti-fraud-service`.
-          enum:
-          - anti-fraud-service
-          example: anti-fraud-service
-          type: string
-        id:
-          description: The unique Gr4vy ID for this anti-fraud service.
-          example: fe26475d-ec3e-4884-9553-f7356683f7f9
-          format: uuid
-          type: string
-        anti_fraud_service_definition_id:
-          description: |-
-            The name of the Anti-Fraud service provider.
-            During update request, this value is used for validation only but
-            the underlying service can not be changed for an existing service.
-          enum:
-          - sift
-          - cybersource
-          example: sift
-          type: string
-        display_name:
-          description: A unique name for this anti-fraud service which is used in
-            the Gr4vy admin panel to give a anti-fraud service a human readable name.
-          example: Sift Anti-Fraud Service.
-          maxLength: 200
-          minLength: 1
-          nullable: true
-          type: string
-        active:
-          default: true
-          description: Defines if this service is currently active or not.
-          example: true
-          type: boolean
-        fields:
-          description: A list of fields, each containing a key-value pair for anti-fraud
-            service decision mapping e.g. for sift `approve_decision` will be in the
-            response.
-          items:
-            $ref: '#/components/schemas/AntiFraudService_fields'
-          type: array
-        created_at:
-          description: |-
-            The date and time
-            when this anti-fraud service was created in our system.
-          example: 2013-07-16T19:23:00Z
-          format: date-time
-          type: string
-        updated_at:
-          description: |-
-            The date and time
-            when this anti-fraud service was last updated in our system.
-          example: 2013-07-16T19:23:00Z
-          format: date-time
-          type: string
-      title: Anti-Fraud Service
-      type: object
-      x-tags:
-      - Anti-Fraud Services
     AntiFraudServiceCreate:
       allOf:
       - $ref: '#/components/schemas/AntiFraudServiceUpdate'
@@ -2698,15 +3107,6 @@ components:
       - Anti-Fraud Services
     AntiFraudServiceUpdate:
       description: A request to update an anti-fraud service.
-      example:
-        anti_fraud_service_definition_id: sift
-        active: true
-        display_name: Sift Anti-Fraud Service.
-        fields:
-        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
-          key: api_key
-        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
-          key: api_key
       properties:
         anti_fraud_service_definition_id:
           description: |-
@@ -2800,7 +3200,7 @@ components:
           name: John L
           staff: false
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
-        timestamp: 2022-05-20T10:46:02.000Z
+        timestamp: 2022-01-01T00:00:00Z
       properties:
         type:
           description: '`audit-log`.'
@@ -2815,8 +3215,8 @@ components:
           type: string
         timestamp:
           description: The date and time that the action was performed.
-          example: 2022-05-20T10:46:02.000Z
-          format: datetime
+          example: 2022-01-01T00:00:00Z
+          format: date-time
           type: string
         action:
           description: The action that was performed.
@@ -2852,7 +3252,7 @@ components:
             name: John L
             staff: false
             id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
-          timestamp: 2022-05-20T10:46:02.000Z
+          timestamp: 2022-01-01T00:00:00Z
         - resource:
             name: Samuel J
             id: fe26475d-ec3e-4884-9553-f7356683f7f9
@@ -2864,7 +3264,7 @@ components:
             name: John L
             staff: false
             id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
-          timestamp: 2022-05-20T10:46:02.000Z
+          timestamp: 2022-01-01T00:00:00Z
       properties:
         items:
           description: A list of audit log entries.
@@ -3371,6 +3771,10 @@ components:
           description: The scheme/brand of the card.
           example: visa
           type: string
+        scheme_icon_url:
+          description: An icon to display for the card scheme.
+          example: https://api.sandbox.example.gr4vy.app/assets/card-scheme-definitions/visa.svg
+          type: string
         country:
           description: The 2-letter ISO code of the issuing country of the card.
           example: US
@@ -3434,6 +3838,7 @@ components:
         method: card
         expiration_date: 11/25
         buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
+        redirect_url: https://example.com/callback
       properties:
         method:
           description: '`card`.'
@@ -3485,6 +3890,14 @@ components:
             to. If this field is provided then the `buyer_id` field
             needs to be unset.
           example: user-789123
+          type: string
+        redirect_url:
+          description: |-
+            The redirect URL to redirect a buyer to after they have authorized their
+            transaction or payment method. This only applies to payment methods that
+            require buyer approval.
+          example: https://example.com/callback
+          nullable: true
           type: string
       required:
       - expiration_date
@@ -3811,7 +4224,7 @@ components:
     CheckoutSession:
       description: A short-lived checkout session.
       example:
-        expires_at: 2022-07-27T16:13:02.000Z
+        expires_at: 2022-01-01T00:00:00Z
         id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
         type: checkout-session
       properties:
@@ -3830,8 +4243,8 @@ components:
           description: |-
             The date and time when the Checkout Session will expire.
             By default this will be set to 1 hour from the date of creation.
-          example: 2022-07-27T16:13:02.000Z
-          format: datetime
+          example: 2022-01-01T00:00:00Z
+          format: date-time
           type: string
       title: Checkout Session
       type: object
@@ -3848,6 +4261,7 @@ components:
           method: card
           expiration_date: 11/25
           buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
+          redirect_url: https://example.com/callback
       properties:
         payment_method:
           $ref: '#/components/schemas/CardRequest'
@@ -3868,6 +4282,26 @@ components:
           description: The ID of the Checkout Session.
           example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
           format: uuid
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the card against
+            your own records.
+          example: card-323444
+          nullable: true
+          type: string
+        buyer_id:
+          description: |-
+            The ID of the buyer to associate this payment method to. If this field is
+            provided then the `buyer_external_identifier` field needs to be unset.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        buyer_external_identifier:
+          description: |-
+            The `external_identifier` of the buyer to associate this payment method
+            to. If this field is provided then the `buyer_id` field
+            needs to be unset.
+          example: user-789123
           type: string
       required:
       - id
@@ -5118,43 +5552,24 @@ components:
         external_identifier: account-23423423
         buyer_external_identifier: user-789123
         security_code: "123"
-        method: ""
+        method: card
         currency: USD
+        id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
         expiration_date: 11/15
         buyer_id: fe26475d-ec3e-4884-9553-f7356683f7f9
         redirect_url: https://example.com/callback
       properties:
         method:
-          allOf:
-          - enum:
-            - afterpay
-            - applepay
-            - banked
-            - bitpay
-            - boleto
-            - card
-            - clearpay
-            - dana
-            - fortumo
-            - gcash
-            - gocardless
-            - googlepay
-            - grabpay
-            - klarna
-            - ovo
-            - paymaya
-            - paypal
-            - pix
-            - rabbitlinepay
-            - scalapay
-            - shopeepay
-            - stripedd
-            - truemoney
-            - trustly
-            - zippay
-            example: card
-            type: string
-          - description: The method to use for this request.
+          description: |-
+            The type of the funding source, e.g. `card`, `paypal`,
+            or `checkout-session`.
+          example: card
+          type: string
+        id:
+          description: The ID of a Checkout Session.
+          example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          format: uuid
+          type: string
         number:
           description: |-
             The 13-19 digit number for this credit card as it can be found on the
@@ -6216,6 +6631,7 @@ components:
           - null
         label: Pay by Card
         type: payment-option
+        can_delay_capture: true
         can_store_payment_method: true
       properties:
         type:
@@ -6280,6 +6696,9 @@ components:
         can_store_payment_method:
           description: A flag to indicate if storing the payment method is supported.
           type: boolean
+        can_delay_capture:
+          description: A flag to indicate if delayed capture is supported.
+          type: boolean
         context:
           $ref: '#/components/schemas/PaymentOption_context'
       title: Payment option
@@ -6316,6 +6735,7 @@ components:
             - null
           label: Pay by Card
           type: payment-option
+          can_delay_capture: true
           can_store_payment_method: true
         - icon_url: https://cdn.gr4vy.app/card.svg
           mode: ""
@@ -6343,6 +6763,7 @@ components:
             - null
           label: Pay by Card
           type: payment-option
+          can_delay_capture: true
           can_store_payment_method: true
       properties:
         items:
@@ -6555,6 +6976,644 @@ components:
       type: object
       x-tags:
       - Transactions
+    Report:
+      allOf:
+      - $ref: '#/components/schemas/ReportSummary'
+      description: A report record.
+      example:
+        schedule: monthly
+        schedule_timezone: schedule_timezone
+        next_execution_at: 2023-01-01T00:00:00Z
+        updated_at: 2013-07-16T19:23:00Z
+        latest_execution: ""
+        schedule_enabled: true
+        created_at: 2013-07-16T19:23:00Z
+        description: Transactions that failed to authorize in April 2022
+        spec: ""
+      properties:
+        created_at:
+          description: The date and time this report was created in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time this report was last updated.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        next_execution_at:
+          description: |-
+            The date and time this report will next be executed, provided
+            that `schedule_enabled` is `true`. This value is null if this
+            is a one-off report.
+          example: 2023-01-01T00:00:00Z
+          format: date-time
+          nullable: true
+          type: string
+        description:
+          description: The description of this report.
+          example: Transactions that failed to authorize in April 2022
+          maxLength: 1000
+          nullable: true
+          type: string
+        schedule:
+          description: |-
+            Specifies the schedule of this report.
+
+            If this is a one-off report, this value is `once`.
+
+            If this is a recurring report, this value is set to the
+            frequency by which the report will be executed. For example, a
+            `monthly` schedule means that this report will be periodically
+            executed at the start of each month.
+          enum:
+          - monthly
+          - once
+          example: monthly
+          type: string
+        schedule_enabled:
+          description: |-
+            Indicates whether this report's scheduling is enabled. This value
+            can only be set to `true` if this is a recurring report.
+
+            When this value is set to `true`, this report will be executed at
+            the `next_execution_at` date and time.
+
+            When this value is set to `false`, future executions of this
+            report are paused until this value is set to `true` again.
+          example: true
+          type: boolean
+        schedule_timezone:
+          description: |-
+            The time zone in which the next execution will be scheduled. This
+            value is used to calculate this report's `next_execution_at` value
+            and is only relevant if this is a recurring report. This time zone
+            is also used to calculate the timestamp range for reports that use
+            date-time placeholders. Date-time placeholders are dynamic
+            timestamps that change with every report execution.
+          type: string
+        spec:
+          allOf:
+          - $ref: '#/components/schemas/ReportSpec'
+          description: The specifications of this report.
+        latest_execution:
+          allOf:
+          - $ref: '#/components/schemas/ReportExecutionSummary'
+          description: Details of the latest execution of this report.
+          nullable: true
+      title: Report
+      type: object
+      x-tags:
+      - Reports
+    ReportCreate:
+      description: A request to create a report.
+      example:
+        schedule: monthly
+        schedule_timezone: Europe/London
+        name: Failed Authorizations 042022
+        schedule_enabled: true
+        description: Transactions that failed to authorize in April 2022
+        spec: ""
+      properties:
+        name:
+          description: The name of the report.
+          example: Failed Authorizations 042022
+          maxLength: 100
+          nullable: false
+          type: string
+        description:
+          description: The description of the report.
+          example: Transactions that failed to authorize in April 2022
+          maxLength: 1000
+          nullable: true
+          type: string
+        schedule:
+          default: once
+          description: |-
+            Specifies the schedule of the report.
+
+            If this is a one-off report, set this value to `once`.
+
+            If this is a recurring report, this value should be set to the
+            frequency by which the report will be executed. For example, a
+            `monthly` schedule means that the report will be periodically
+            executed at the start of each month.
+          enum:
+          - monthly
+          - once
+          example: monthly
+          nullable: false
+          type: string
+        schedule_enabled:
+          description: |-
+            Indicates whether the report's scheduling is enabled. This value
+            can only be set to `true` if this is a recurring report.
+
+            If this value is set to `true`, the report will be executed at
+            the `next_execution_at` date and time.
+
+            If this is a recurring report and this value is set to `false`,
+            executions of the report will not occur until this value is set
+            to `true`.
+
+            If this value is not provided, `schedule_enabled` will
+            automatically be set to `false` if `schedule` is `once` and set to
+            `true` otherwise.
+          example: true
+          nullable: true
+          type: boolean
+        schedule_timezone:
+          default: Etc/UTC
+          description: |-
+            The time zone in which the report's executions will be scheduled.
+            This value is used to compute the report's `next_execution_at`
+            value and is only relevant when this is a recurring report. This
+            time zone is also used to calculate the timestamp range for reports
+            that use date-time placeholders. Date-time placeholders are dynamic
+            timestamps that change with every report execution.
+
+            This value must be set to the time zone's name as presented in
+            the IANA time zone database. For example, to schedule reports in
+            the time zone of New York, set this value to `America/New_York`.
+          example: Europe/London
+          nullable: false
+          type: string
+        spec:
+          allOf:
+          - $ref: '#/components/schemas/ReportSpec'
+          - description: The specifications of the report.
+          nullable: false
+      required:
+      - name
+      - spec
+      title: Report (Create)
+      type: object
+      x-tags:
+      - Reports
+    ReportExecution:
+      allOf:
+      - $ref: '#/components/schemas/ReportExecutionSummary'
+      description: A report execution.
+      example:
+        report: '{}'
+      properties:
+        report:
+          allOf:
+          - $ref: '#/components/schemas/ReportSummary'
+          description: The report associated with this report execution.
+          type: object
+      title: Report Execution
+      type: object
+      x-tags:
+      - Reports
+    ReportExecutionSummary:
+      description: A report execution summary.
+      properties:
+        type:
+          description: The type of this resource. Is always `report-execution`.
+          enum:
+          - report-execution
+          example: report-execution
+          type: string
+        id:
+          description: The unique identifier for this report execution.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        created_at:
+          description: The date and time this report execution was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time this report execution was last updated.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        status:
+          description: The status of this report execution.
+          enum:
+          - dispatched
+          - failed
+          - pending
+          - processing
+          - succeeded
+          example: succeeded
+          type: string
+        context:
+          $ref: '#/components/schemas/ReportExecutionSummary_context'
+      title: Report Execution Summary
+      type: object
+      x-tags:
+      - Reports
+    ReportExecutionUrl:
+      description: |-
+        The temporary signed URL to download the result of a report execution
+        and its expiration date and time.
+      example:
+        expires_at: 2013-07-16T19:23:00Z
+        url: https://example.com/download
+      properties:
+        url:
+          description: The URL to download the report execution.
+          example: https://example.com/download
+          type: string
+        expires_at:
+          description: The date and time when the download URL expires.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+      title: Report Execution URL
+      type: object
+      x-tags:
+      - Reports
+    ReportExecutions:
+      description: A list of report executions.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - report: '{}'
+        - report: '{}'
+      properties:
+        items:
+          description: A list of report executions.
+          items:
+            $ref: '#/components/schemas/ReportExecution'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Report Executions
+      type: object
+      x-tags:
+      - Reports
+    ReportSpec:
+      description: The specification of a report.
+      properties:
+        model:
+          description: |-
+            The model (dataset) that the data used for the report is retrieved
+            from.
+          enum:
+          - transactions
+          example: transactions
+          type: string
+        params:
+          additionalProperties: true
+          description: |-
+            Parameters used to configure the report. Acceptable values for
+            this property depend on the value specified for `model`.
+          example:
+            fields:
+            - id
+            - status
+            filters:
+              status:
+              - authorization_failed
+            sort:
+            - field: captured_at
+              order: desc
+          type: object
+      required:
+      - model
+      - params
+      title: Report Specification
+      type: object
+      x-tags:
+      - Reports
+    ReportSummary:
+      description: A report record summary.
+      properties:
+        type:
+          description: The type of this resource. Is always `report`.
+          enum:
+          - report
+          example: report
+          type: string
+        id:
+          description: The unique identifier for this report.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this report.
+          example: Failed Authorizations 042022
+          maxLength: 100
+          type: string
+      title: Report Summary
+      type: object
+      x-tags:
+      - Reports
+    ReportUpdate:
+      description: Request body to update a report.
+      example:
+        name: Failed Authorizations 042022
+        schedule_enabled: true
+        description: Transactions that failed to authorize in April 2022
+      properties:
+        name:
+          description: The name of the report.
+          example: Failed Authorizations 042022
+          maxLength: 100
+          nullable: false
+          type: string
+        description:
+          description: The description of the report.
+          example: Transactions that failed to authorize in April 2022
+          maxLength: 1000
+          nullable: true
+          type: string
+        schedule_enabled:
+          description: |-
+            Indicates whether the report's scheduling is enabled. This value
+            can only be set to `true` if this is a recurring report.
+
+            When this value is set to `true`, the report will be executed at
+            the `next_execution_at` date and time.
+
+            When this value is set to `false`, future executions of the
+            report are paused until this value is set to `true` again.
+
+            If scheduling is enabled after being disabled, then the
+            `next_execution_at` value is updated if and only if its current
+            value is a past date-time. The `next_execution_at` value is then
+            set to the next closest date-time in the future depending on the
+            values of `schedule` and `schedule_timezone`.
+          example: true
+          nullable: false
+          type: boolean
+      title: Report (Update)
+      type: object
+      x-tags:
+      - Request Bodies
+    Reports:
+      description: A list of reports.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - schedule: monthly
+          schedule_timezone: schedule_timezone
+          next_execution_at: 2023-01-01T00:00:00Z
+          updated_at: 2013-07-16T19:23:00Z
+          latest_execution: ""
+          schedule_enabled: true
+          created_at: 2013-07-16T19:23:00Z
+          description: Transactions that failed to authorize in April 2022
+          spec: ""
+        - schedule: monthly
+          schedule_timezone: schedule_timezone
+          next_execution_at: 2023-01-01T00:00:00Z
+          updated_at: 2013-07-16T19:23:00Z
+          latest_execution: ""
+          schedule_enabled: true
+          created_at: 2013-07-16T19:23:00Z
+          description: Transactions that failed to authorize in April 2022
+          spec: ""
+      properties:
+        items:
+          description: A list of reports.
+          items:
+            $ref: '#/components/schemas/Report'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Reports
+      type: object
+      x-tags:
+      - Reports
+    ShippingAddress:
+      description: Shipping address for a buyer.
+      example:
+        email_address: john@example.com
+        address: ""
+        last_name: Lunn
+        phone_number: +1234567890
+        type: shipping-details
+        first_name: John
+      properties:
+        type:
+          description: The type of this resource. Is always `shipping-details`.
+          enum:
+          - shipping-details
+          example: shipping-details
+          type: string
+        first_name:
+          description: The first name(s) or given name of the buyer.
+          example: John
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        last_name:
+          description: The last name, or family name, of the buyer.
+          example: Lunn
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        email_address:
+          description: The email address of the buyer.
+          example: john@example.com
+          maxLength: 320
+          minLength: 1
+          nullable: true
+          type: string
+        phone_number:
+          description: |-
+            The phone number of the buyer. This number is formatted according to the
+            [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
+          example: +1234567890
+          maxLength: 50
+          minLength: 1
+          nullable: true
+          pattern: ^\+[1-9]\d{1,14}$
+          type: string
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The physical shipping address associated to this buyer.
+          nullable: true
+      title: Shipping address
+      type: object
+      x-tags:
+      - Buyers
+    ShippingAddresses:
+      description: A list of shipping addresses.
+      example:
+        items:
+        - email_address: john@example.com
+          address: ""
+          last_name: Lunn
+          phone_number: +1234567890
+          type: shipping-details
+          first_name: John
+        - email_address: john@example.com
+          address: ""
+          last_name: Lunn
+          phone_number: +1234567890
+          type: shipping-details
+          first_name: John
+      properties:
+        items:
+          description: A list of shipping addresses.
+          items:
+            $ref: '#/components/schemas/ShippingAddress'
+          type: array
+      title: Shipping addresses
+      type: object
+      x-tags:
+      - Transactions
+    ShippingAddressRequest:
+      description: Shipping address associated to a buyer.
+      example:
+        email_address: john@example.com
+        address: ""
+        last_name: Lunn
+        phone_number: +1234567890
+        first_name: John
+      properties:
+        first_name:
+          description: The first name(s) or given name for the buyer.
+          example: John
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        last_name:
+          description: The last name, or family name, of the buyer.
+          example: Lunn
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        email_address:
+          description: The email address for the buyer.
+          example: john@example.com
+          maxLength: 320
+          minLength: 1
+          nullable: true
+          type: string
+        phone_number:
+          description: |-
+            The phone number for the buyer which should be formatted according to the
+            [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
+          example: +1234567890
+          maxLength: 50
+          minLength: 1
+          nullable: true
+          pattern: ^\+[1-9]\d{1,14}$
+          type: string
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The physical shipping address associated to this buyer.
+          nullable: true
+      title: Shipping address (Create)
+      type: object
+      x-tags:
+      - Buyers
+    ShippingAddressUpdateRequest:
+      example:
+        email_address: john@example.com
+        address: ""
+        last_name: Lunn
+        phone_number: +1234567890
+        first_name: John
+      properties:
+        first_name:
+          description: The first name(s) or given name for the buyer.
+          example: John
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        last_name:
+          description: The last name, or family name, of the buyer.
+          example: Lunn
+          maxLength: 255
+          minLength: 1
+          nullable: true
+          type: string
+        email_address:
+          description: The email address for the buyer.
+          example: john@example.com
+          maxLength: 320
+          minLength: 1
+          nullable: true
+          type: string
+        phone_number:
+          description: |-
+            The phone number for the buyer which should be formatted according to the
+            [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
+          example: +1234567890
+          maxLength: 50
+          minLength: 1
+          nullable: true
+          pattern: ^\+[1-9]\d{1,14}$
+          type: string
+        address:
+          allOf:
+          - $ref: '#/components/schemas/Address'
+          description: The physical shipping address associated to this buyer.
+          nullable: true
+      title: Shipping address (Update)
+      type: object
+      x-tags:
+      - Buyers
     StatementDescriptor:
       description: |-
         The statement descriptor is the text to be shown on the buyer's statements.
@@ -6830,6 +7889,7 @@ components:
           key: value
         payment_service: ""
         cvv_response_code: match
+        shipping_details: ""
         created_at: 2013-07-16T19:23:00Z
         captured_at: 2013-07-16T19:23:00Z
         is_subsequent_payment: true
@@ -7158,6 +8218,11 @@ components:
           example:
             key: value
           type: object
+        shipping_details:
+          allOf:
+          - $ref: '#/components/schemas/ShippingAddress'
+          - description: The shipping details associated with the transaction.
+            nullable: true
         three_d_secure:
           $ref: '#/components/schemas/ThreeDSecureSummary'
         authorized_at:
@@ -7588,6 +8653,7 @@ components:
           - categories
           - categories
           sku: sku-789123
+        shipping_details_id: 47da6902-5eae-4b4b-88fd-856802d627d6
         is_subsequent_payment: true
         store: true
         previous_scheme_transaction_id: "123456789012345"
@@ -7764,6 +8830,17 @@ components:
           - $ref: '#/components/schemas/BrowserInfo'
           - description: Information about the browser used by the buyer.
             nullable: true
+        shipping_details_id:
+          description: |-
+            The unique identifier of a set of shipping details stored for the buyer.
+
+            If provided, the created transaction will include a copy of the details
+            at the point of transaction creation; i.e. it will not be affected by
+            later changes to the address in the database.
+          example: 47da6902-5eae-4b4b-88fd-856802d627d6
+          format: uuid
+          nullable: true
+          type: string
       required:
       - amount
       - currency
@@ -7991,176 +9068,9 @@ components:
       type: object
       x-tags:
       - Users
-    FlowRuleBooleanOutcome:
-      description: |-
-        Defines the outcome of a rule in a flow where the result
-        is a boolean.
-      properties:
-        type:
-          description: The type of action outcome for the given rule.
-          enum:
-          - boolean
-          example: boolean
-          type: string
-        result:
-          description: Results for a given flow action.
-          enum:
-          - true
-          type: boolean
-      required:
-      - result
-      - type
-      title: Boolean outcome
-      type: object
-      x-tags:
-      - Flow
-    FlowRuleMethodOutcome:
-      description: |-
-        Defines the outcome of a rule in a flow where the result
-        is a list of payment types.
-      properties:
-        type:
-          description: The type of action outcome for the given rule.
-          enum:
-          - list
-          example: list
-          type: string
-        result:
-          description: Results for a given flow action.
-          example:
-          - card
-          - paypal
-          items:
-            enum:
-            - afterpay
-            - applepay
-            - banked
-            - bitpay
-            - boleto
-            - card
-            - clearpay
-            - dana
-            - fortumo
-            - gcash
-            - gocardless
-            - googlepay
-            - grabpay
-            - klarna
-            - ovo
-            - paymaya
-            - paypal
-            - pix
-            - rabbitlinepay
-            - scalapay
-            - shopeepay
-            - stripedd
-            - truemoney
-            - trustly
-            - zippay
-            example: card
-            type: string
-          type: array
-      required:
-      - result
-      - type
-      title: Payment method outcome
-      type: object
-      x-tags:
-      - Flow
-    FlowRuleServiceOutcome:
-      description: |-
-        Defines the outcome of a rule in a flow where the result
-        is a list of UUIDs for a service.
-      properties:
-        type:
-          description: The type of action outcome for the given rule.
-          enum:
-          - list
-          example: list
-          type: string
-        result:
-          description: Results for a given flow action.
-          example:
-          - fe26475d-ec3e-4884-9553-f7356683f7f9
-          - d88aca32-07fb-46cd-a43f-86da02b73c21
-          items:
-            example: fe26475d-ec3e-4884-9553-f7356683f7f9
-            format: uuid
-            type: string
-          type: array
-      required:
-      - result
-      - type
-      title: Payment service outcome
-      type: object
-      x-tags:
-      - Flow
-    FlowPaymentOptionOutcome:
-      description: |-
-        Outcome for checkout flow/select payment options action.
-        Each option is a Gr4vy payment option object.
-      properties:
-        type:
-          description: The type of this resource. Is always `action`.
-          enum:
-          - action
-          example: action
-          type: string
-        id:
-          description: Payment option identifier.
-          example: card
-          type: string
-        label:
-          description: Verbose payment option name.
-          example: Card
-          type: string
-        active:
-          description: |-
-            The status of the payment option, true if at least one underlying
-            connection is active, otherwise false.
-          type: boolean
-        group:
-          description: Optional group label for a given payment option, e.g. `Bank`.
-          example: Bank
-          nullable: true
-          type: string
-        icon_url:
-          description: Payment option icon URL.
-          nullable: false
-          type: string
-      title: Checkout/Payment Option Outcome
-      type: object
-      x-tags:
-      - Flow
-    AntiFraudService_fields:
-      description: A key-value pair that represents a field defined in the definition
-        for this anti-fraud service.
-      example:
-        value: sk_test_26PHem9AhJZvU623DfE1x4sd
-        key: approve_decision
-      properties:
-        key:
-          description: The key of the field to set a value for.
-          example: approve_decision
-          maxLength: 50
-          minLength: 1
-          type: string
-        value:
-          description: The value of a field to set.
-          example: sk_test_26PHem9AhJZvU623DfE1x4sd
-          maxLength: 5000
-          minLength: 1
-          type: string
-      required:
-      - key
-      - value
-      type: object
     AntiFraudServiceUpdate_fields:
       description: A key-value pair that represents a field defined in the definition
         for this anti-fraud service.
-      example:
-        value: sk_test_26PHem9AhJZvU623DfE1x4sd
-        key: api_key
       properties:
         key:
           description: The key of the field to set a value for.
@@ -8455,6 +9365,25 @@ components:
           $ref: '#/components/schemas/PaymentOptionApprovalUI'
         required_fields:
           $ref: '#/components/schemas/RequiredFields'
+      type: object
+    ReportExecutionSummary_context:
+      description: |-
+        Contains the context values used to compute the value of date-time
+        placeholders such as `month_start` and `month_end` if present in
+        the report's specification. Date-time placeholders are dynamic
+        timestamps that change with every report execution.
+      properties:
+        reference_timestamp:
+          description: |-
+            The date and time used by the system as a reference point to
+            compute date-time placeholders.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        reference_timezone:
+          description: The time zone used to compute date-time placeholders.
+          example: Europe/London
+          type: string
       type: object
     ThreeDSecureDataV1_allOf:
       properties:

@@ -32,6 +32,7 @@ Name | Type | Description | Notes
 **Method** | Pointer to **string** |  | [optional] 
 **PaymentServiceTransactionId** | Pointer to **string** | The payment service&#39;s unique ID for the transaction. | [optional] 
 **Metadata** | Pointer to **map[string]string** | Additional information about the transaction stored as key-value pairs. | [optional] 
+**ShippingDetails** | Pointer to [**ShippingAddress**](ShippingAddress.md) |  | [optional] 
 **ThreeDSecure** | Pointer to [**ThreeDSecureSummary**](ThreeDSecureSummary.md) |  | [optional] 
 **AuthorizedAt** | Pointer to **NullableTime** | The date and time when this transaction was authorized in the payment service.  Don&#39;t use this field to determine whether the transaction was authorized. A &#x60;null&#x60; value doesn&#39;t necessarily imply that the transaction wasn&#39;t authorized, it can mean that the payment service doesn&#39;t provide this value, that it didn&#39;t provide it at the time the transaction was authorized or that the transaction was authorized before the introduction of this field. | [optional] 
 **CapturedAt** | Pointer to **NullableTime** | The date and time when this transaction was captured in the payment service.  Don&#39;t use this field to determine whether the transaction was captured. A &#x60;null&#x60; value doesn&#39;t necessarily imply that the transaction wasn&#39;t captured, it can mean that the payment service doesn&#39;t provide this value, that it didn&#39;t provide it at the time the transaction was captured or that the transaction was captured before the introduction of this field. | [optional] 
@@ -825,6 +826,31 @@ SetMetadata sets Metadata field to given value.
 `func (o *Transaction) HasMetadata() bool`
 
 HasMetadata returns a boolean if a field has been set.
+
+### GetShippingDetails
+
+`func (o *Transaction) GetShippingDetails() ShippingAddress`
+
+GetShippingDetails returns the ShippingDetails field if non-nil, zero value otherwise.
+
+### GetShippingDetailsOk
+
+`func (o *Transaction) GetShippingDetailsOk() (*ShippingAddress, bool)`
+
+GetShippingDetailsOk returns a tuple with the ShippingDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShippingDetails
+
+`func (o *Transaction) SetShippingDetails(v ShippingAddress)`
+
+SetShippingDetails sets ShippingDetails field to given value.
+
+### HasShippingDetails
+
+`func (o *Transaction) HasShippingDetails() bool`
+
+HasShippingDetails returns a boolean if a field has been set.
 
 ### GetThreeDSecure
 

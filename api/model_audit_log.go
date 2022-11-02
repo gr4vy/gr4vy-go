@@ -13,6 +13,7 @@ package Openapi
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // AuditLog A log of a change that occurred in the Gr4vy instance.
@@ -22,7 +23,7 @@ type AuditLog struct {
 	// The ID of the audit log entry.
 	Id *string `json:"id,omitempty"`
 	// The date and time that the action was performed.
-	Timestamp *string `json:"timestamp,omitempty"`
+	Timestamp *time.Time `json:"timestamp,omitempty"`
 	// The action that was performed.
 	Action *string `json:"action,omitempty"`
 	User *AuditLogUser `json:"user,omitempty"`
@@ -111,9 +112,9 @@ func (o *AuditLog) SetId(v string) {
 }
 
 // GetTimestamp returns the Timestamp field value if set, zero value otherwise.
-func (o *AuditLog) GetTimestamp() string {
+func (o *AuditLog) GetTimestamp() time.Time {
 	if o == nil || o.Timestamp == nil {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.Timestamp
@@ -121,7 +122,7 @@ func (o *AuditLog) GetTimestamp() string {
 
 // GetTimestampOk returns a tuple with the Timestamp field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AuditLog) GetTimestampOk() (*string, bool) {
+func (o *AuditLog) GetTimestampOk() (*time.Time, bool) {
 	if o == nil || o.Timestamp == nil {
 		return nil, false
 	}
@@ -137,8 +138,8 @@ func (o *AuditLog) HasTimestamp() bool {
 	return false
 }
 
-// SetTimestamp gets a reference to the given string and assigns it to the Timestamp field.
-func (o *AuditLog) SetTimestamp(v string) {
+// SetTimestamp gets a reference to the given time.Time and assigns it to the Timestamp field.
+func (o *AuditLog) SetTimestamp(v time.Time) {
 	o.Timestamp = &v
 }
 

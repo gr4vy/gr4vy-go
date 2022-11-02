@@ -6,6 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Method** | **string** | &#x60;checkout-session&#x60;. | 
 **Id** | **string** | The ID of the Checkout Session. | 
+**ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the card against your own records. | [optional] 
+**BuyerId** | Pointer to **string** | The ID of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_external_identifier&#x60; field needs to be unset. | [optional] 
+**BuyerExternalIdentifier** | Pointer to **string** | The &#x60;external_identifier&#x60; of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_id&#x60; field needs to be unset. | [optional] 
 
 ## Methods
 
@@ -65,6 +68,91 @@ and a boolean to check if the value has been set.
 
 SetId sets Id field to given value.
 
+
+### GetExternalIdentifier
+
+`func (o *CheckoutSessionRequest) GetExternalIdentifier() string`
+
+GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetExternalIdentifierOk
+
+`func (o *CheckoutSessionRequest) GetExternalIdentifierOk() (*string, bool)`
+
+GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalIdentifier
+
+`func (o *CheckoutSessionRequest) SetExternalIdentifier(v string)`
+
+SetExternalIdentifier sets ExternalIdentifier field to given value.
+
+### HasExternalIdentifier
+
+`func (o *CheckoutSessionRequest) HasExternalIdentifier() bool`
+
+HasExternalIdentifier returns a boolean if a field has been set.
+
+### SetExternalIdentifierNil
+
+`func (o *CheckoutSessionRequest) SetExternalIdentifierNil(b bool)`
+
+ SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
+
+### UnsetExternalIdentifier
+`func (o *CheckoutSessionRequest) UnsetExternalIdentifier()`
+
+UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
+### GetBuyerId
+
+`func (o *CheckoutSessionRequest) GetBuyerId() string`
+
+GetBuyerId returns the BuyerId field if non-nil, zero value otherwise.
+
+### GetBuyerIdOk
+
+`func (o *CheckoutSessionRequest) GetBuyerIdOk() (*string, bool)`
+
+GetBuyerIdOk returns a tuple with the BuyerId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuyerId
+
+`func (o *CheckoutSessionRequest) SetBuyerId(v string)`
+
+SetBuyerId sets BuyerId field to given value.
+
+### HasBuyerId
+
+`func (o *CheckoutSessionRequest) HasBuyerId() bool`
+
+HasBuyerId returns a boolean if a field has been set.
+
+### GetBuyerExternalIdentifier
+
+`func (o *CheckoutSessionRequest) GetBuyerExternalIdentifier() string`
+
+GetBuyerExternalIdentifier returns the BuyerExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetBuyerExternalIdentifierOk
+
+`func (o *CheckoutSessionRequest) GetBuyerExternalIdentifierOk() (*string, bool)`
+
+GetBuyerExternalIdentifierOk returns a tuple with the BuyerExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuyerExternalIdentifier
+
+`func (o *CheckoutSessionRequest) SetBuyerExternalIdentifier(v string)`
+
+SetBuyerExternalIdentifier sets BuyerExternalIdentifier field to given value.
+
+### HasBuyerExternalIdentifier
+
+`func (o *CheckoutSessionRequest) HasBuyerExternalIdentifier() bool`
+
+HasBuyerExternalIdentifier returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

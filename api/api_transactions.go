@@ -725,6 +725,7 @@ type ApiListTransactionsRequest struct {
 	id *string
 	metadata *[]string
 	method *[]string
+	paymentMethodId *string
 	paymentServiceId *[]string
 	paymentServiceTransactionId *string
 	search *string
@@ -796,6 +797,10 @@ func (r ApiListTransactionsRequest) Metadata(metadata []string) ApiListTransacti
 }
 func (r ApiListTransactionsRequest) Method(method []string) ApiListTransactionsRequest {
 	r.method = &method
+	return r
+}
+func (r ApiListTransactionsRequest) PaymentMethodId(paymentMethodId string) ApiListTransactionsRequest {
+	r.paymentMethodId = &paymentMethodId
 	return r
 }
 func (r ApiListTransactionsRequest) PaymentServiceId(paymentServiceId []string) ApiListTransactionsRequest {
@@ -953,6 +958,9 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 		} else {
 			localVarQueryParams.Add("method", parameterToString(t, "multi"))
 		}
+	}
+	if r.paymentMethodId != nil {
+		localVarQueryParams.Add("payment_method_id", parameterToString(*r.paymentMethodId, ""))
 	}
 	if r.paymentServiceId != nil {
 		t := *r.paymentServiceId

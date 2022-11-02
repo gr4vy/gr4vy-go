@@ -20,6 +20,7 @@ Name | Type | Description | Notes
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 **PreviousSchemeTransactionId** | Pointer to **NullableString** | A scheme&#39;s transaction identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction.  If not provided, and a qualifying customer initiated transaction has been previously made, then Gr4vy will populate this value with the identifier returned for that transaction.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID. | [optional] [default to "null"]
 **BrowserInfo** | Pointer to [**BrowserInfo**](BrowserInfo.md) |  | [optional] 
+**ShippingDetailsId** | Pointer to **NullableString** | The unique identifier of a set of shipping details stored for the buyer.  If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the address in the database. | [optional] 
 
 ## Methods
 
@@ -455,6 +456,41 @@ SetBrowserInfo sets BrowserInfo field to given value.
 
 HasBrowserInfo returns a boolean if a field has been set.
 
+### GetShippingDetailsId
+
+`func (o *TransactionRequest) GetShippingDetailsId() string`
+
+GetShippingDetailsId returns the ShippingDetailsId field if non-nil, zero value otherwise.
+
+### GetShippingDetailsIdOk
+
+`func (o *TransactionRequest) GetShippingDetailsIdOk() (*string, bool)`
+
+GetShippingDetailsIdOk returns a tuple with the ShippingDetailsId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShippingDetailsId
+
+`func (o *TransactionRequest) SetShippingDetailsId(v string)`
+
+SetShippingDetailsId sets ShippingDetailsId field to given value.
+
+### HasShippingDetailsId
+
+`func (o *TransactionRequest) HasShippingDetailsId() bool`
+
+HasShippingDetailsId returns a boolean if a field has been set.
+
+### SetShippingDetailsIdNil
+
+`func (o *TransactionRequest) SetShippingDetailsIdNil(b bool)`
+
+ SetShippingDetailsIdNil sets the value for ShippingDetailsId to be an explicit nil
+
+### UnsetShippingDetailsId
+`func (o *TransactionRequest) UnsetShippingDetailsId()`
+
+UnsetShippingDetailsId ensures that no value is present for ShippingDetailsId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

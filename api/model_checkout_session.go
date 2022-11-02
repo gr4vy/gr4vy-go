@@ -13,6 +13,7 @@ package Openapi
 
 import (
 	"encoding/json"
+	"time"
 )
 
 // CheckoutSession A short-lived checkout session.
@@ -22,7 +23,7 @@ type CheckoutSession struct {
 	// The ID of the Checkout Session.
 	Id *string `json:"id,omitempty"`
 	// The date and time when the Checkout Session will expire. By default this will be set to 1 hour from the date of creation.
-	ExpiresAt *string `json:"expires_at,omitempty"`
+	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 }
 
 // NewCheckoutSession instantiates a new CheckoutSession object
@@ -107,9 +108,9 @@ func (o *CheckoutSession) SetId(v string) {
 }
 
 // GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
-func (o *CheckoutSession) GetExpiresAt() string {
+func (o *CheckoutSession) GetExpiresAt() time.Time {
 	if o == nil || o.ExpiresAt == nil {
-		var ret string
+		var ret time.Time
 		return ret
 	}
 	return *o.ExpiresAt
@@ -117,7 +118,7 @@ func (o *CheckoutSession) GetExpiresAt() string {
 
 // GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutSession) GetExpiresAtOk() (*string, bool) {
+func (o *CheckoutSession) GetExpiresAtOk() (*time.Time, bool) {
 	if o == nil || o.ExpiresAt == nil {
 		return nil, false
 	}
@@ -133,8 +134,8 @@ func (o *CheckoutSession) HasExpiresAt() bool {
 	return false
 }
 
-// SetExpiresAt gets a reference to the given string and assigns it to the ExpiresAt field.
-func (o *CheckoutSession) SetExpiresAt(v string) {
+// SetExpiresAt gets a reference to the given time.Time and assigns it to the ExpiresAt field.
+func (o *CheckoutSession) SetExpiresAt(v time.Time) {
 	o.ExpiresAt = &v
 }
 

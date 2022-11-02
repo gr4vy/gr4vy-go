@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The 8 digit BIN of the card. When looking up card details using a &#x60;payment_method_id&#x60; this value will be &#x60;null&#x60;. | [optional] 
 **CardType** | Pointer to **string** | The type of card. | [optional] 
 **Scheme** | Pointer to **string** | The scheme/brand of the card. | [optional] 
+**SchemeIconUrl** | Pointer to **string** | An icon to display for the card scheme. | [optional] 
 **Country** | Pointer to **string** | The 2-letter ISO code of the issuing country of the card. | [optional] 
 **RequiredFields** | Pointer to [**RequiredFields**](RequiredFields.md) |  | [optional] 
 
@@ -129,6 +130,31 @@ SetScheme sets Scheme field to given value.
 `func (o *CardDetails) HasScheme() bool`
 
 HasScheme returns a boolean if a field has been set.
+
+### GetSchemeIconUrl
+
+`func (o *CardDetails) GetSchemeIconUrl() string`
+
+GetSchemeIconUrl returns the SchemeIconUrl field if non-nil, zero value otherwise.
+
+### GetSchemeIconUrlOk
+
+`func (o *CardDetails) GetSchemeIconUrlOk() (*string, bool)`
+
+GetSchemeIconUrlOk returns a tuple with the SchemeIconUrl field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSchemeIconUrl
+
+`func (o *CardDetails) SetSchemeIconUrl(v string)`
+
+SetSchemeIconUrl sets SchemeIconUrl field to given value.
+
+### HasSchemeIconUrl
+
+`func (o *CardDetails) HasSchemeIconUrl() bool`
+
+HasSchemeIconUrl returns a boolean if a field has been set.
 
 ### GetCountry
 

@@ -317,7 +317,7 @@ import (
 )
 
 func main() {
-    paymentMethodRequest := *openapiclient.NewPaymentMethodRequest(string(123)) // PaymentMethodRequest |  (optional)
+    paymentMethodRequest := *openapiclient.NewPaymentMethodRequest("card") // PaymentMethodRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
