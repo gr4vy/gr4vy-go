@@ -320,9 +320,6 @@ func NewNullableTime(val *time.Time) *NullableTime {
 }
 
 func (v NullableTime) MarshalJSON() ([]byte, error) {
-	if v.value == nil {
-		return []byte("null"), nil
-	}
 	return v.value.MarshalJSON()
 }
 
