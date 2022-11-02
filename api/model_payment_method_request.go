@@ -17,7 +17,10 @@ import (
 
 // PaymentMethodRequest Payment method details used to register a new payment method.
 type PaymentMethodRequest struct {
+	// The type of the funding source, e.g. `card`, `paypal`, or `checkout-session`.
 	Method string `json:"method"`
+	// The ID of a Checkout Session.
+	Id *string `json:"id,omitempty"`
 	// The 13-19 digit number for this credit card as it can be found on the front of the card.  If a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.
 	Number *string `json:"number,omitempty"`
 	// The expiration date of the card, formatted `MM/YY`. If a card has been previously stored with us this value is optional.  If the `number` of this card represents a tokenized card, then this value is ignored.
@@ -78,6 +81,38 @@ func (o *PaymentMethodRequest) GetMethodOk() (*string, bool) {
 // SetMethod sets field value
 func (o *PaymentMethodRequest) SetMethod(v string) {
 	o.Method = v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *PaymentMethodRequest) GetId() string {
+	if o == nil || o.Id == nil {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodRequest) GetIdOk() (*string, bool) {
+	if o == nil || o.Id == nil {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *PaymentMethodRequest) HasId() bool {
+	if o != nil && o.Id != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *PaymentMethodRequest) SetId(v string) {
+	o.Id = &v
 }
 
 // GetNumber returns the Number field value if set, zero value otherwise.
@@ -382,6 +417,9 @@ func (o PaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
 		toSerialize["method"] = o.Method
+	}
+	if o.Id != nil {
+		toSerialize["id"] = o.Id
 	}
 	if o.Number != nil {
 		toSerialize["number"] = o.Number

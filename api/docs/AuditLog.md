@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;audit-log&#x60;. | [optional] 
 **Id** | Pointer to **string** | The ID of the audit log entry. | [optional] 
-**Timestamp** | Pointer to **string** | The date and time that the action was performed. | [optional] 
+**Timestamp** | Pointer to **time.Time** | The date and time that the action was performed. | [optional] 
 **Action** | Pointer to **string** | The action that was performed. | [optional] 
 **User** | Pointer to [**AuditLogUser**](AuditLogUser.md) |  | [optional] 
 **Resource** | Pointer to [**AuditLogResource**](AuditLogResource.md) |  | [optional] 
@@ -82,20 +82,20 @@ HasId returns a boolean if a field has been set.
 
 ### GetTimestamp
 
-`func (o *AuditLog) GetTimestamp() string`
+`func (o *AuditLog) GetTimestamp() time.Time`
 
 GetTimestamp returns the Timestamp field if non-nil, zero value otherwise.
 
 ### GetTimestampOk
 
-`func (o *AuditLog) GetTimestampOk() (*string, bool)`
+`func (o *AuditLog) GetTimestampOk() (*time.Time, bool)`
 
 GetTimestampOk returns a tuple with the Timestamp field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetTimestamp
 
-`func (o *AuditLog) SetTimestamp(v string)`
+`func (o *AuditLog) SetTimestamp(v time.Time)`
 
 SetTimestamp sets Timestamp field to given value.
 

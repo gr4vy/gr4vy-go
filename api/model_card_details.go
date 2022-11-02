@@ -25,6 +25,8 @@ type CardDetails struct {
 	CardType *string `json:"card_type,omitempty"`
 	// The scheme/brand of the card.
 	Scheme *string `json:"scheme,omitempty"`
+	// An icon to display for the card scheme.
+	SchemeIconUrl *string `json:"scheme_icon_url,omitempty"`
 	// The 2-letter ISO code of the issuing country of the card.
 	Country *string `json:"country,omitempty"`
 	RequiredFields *RequiredFields `json:"required_fields,omitempty"`
@@ -175,6 +177,38 @@ func (o *CardDetails) SetScheme(v string) {
 	o.Scheme = &v
 }
 
+// GetSchemeIconUrl returns the SchemeIconUrl field value if set, zero value otherwise.
+func (o *CardDetails) GetSchemeIconUrl() string {
+	if o == nil || o.SchemeIconUrl == nil {
+		var ret string
+		return ret
+	}
+	return *o.SchemeIconUrl
+}
+
+// GetSchemeIconUrlOk returns a tuple with the SchemeIconUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CardDetails) GetSchemeIconUrlOk() (*string, bool) {
+	if o == nil || o.SchemeIconUrl == nil {
+		return nil, false
+	}
+	return o.SchemeIconUrl, true
+}
+
+// HasSchemeIconUrl returns a boolean if a field has been set.
+func (o *CardDetails) HasSchemeIconUrl() bool {
+	if o != nil && o.SchemeIconUrl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSchemeIconUrl gets a reference to the given string and assigns it to the SchemeIconUrl field.
+func (o *CardDetails) SetSchemeIconUrl(v string) {
+	o.SchemeIconUrl = &v
+}
+
 // GetCountry returns the Country field value if set, zero value otherwise.
 func (o *CardDetails) GetCountry() string {
 	if o == nil || o.Country == nil {
@@ -252,6 +286,9 @@ func (o CardDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.Scheme != nil {
 		toSerialize["scheme"] = o.Scheme
+	}
+	if o.SchemeIconUrl != nil {
+		toSerialize["scheme_icon_url"] = o.SchemeIconUrl
 	}
 	if o.Country != nil {
 		toSerialize["country"] = o.Country

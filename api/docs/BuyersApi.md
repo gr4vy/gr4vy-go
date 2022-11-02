@@ -5,10 +5,14 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddBuyer**](BuyersApi.md#AddBuyer) | **Post** /buyers | New buyer
+[**AddBuyerShippingAddress**](BuyersApi.md#AddBuyerShippingAddress) | **Post** /buyers/{buyer_id}/shipping-details | New buyer shipping address
 [**DeleteBuyer**](BuyersApi.md#DeleteBuyer) | **Delete** /buyers/{buyer_id} | Delete buyer
+[**DeleteBuyerShippingAddress**](BuyersApi.md#DeleteBuyerShippingAddress) | **Delete** /buyers/{buyer_id}/shipping-details/{shipping_address_id} | Delete buyer shipping address
 [**GetBuyer**](BuyersApi.md#GetBuyer) | **Get** /buyers/{buyer_id} | Get buyer
+[**GetBuyerShippingAddresses**](BuyersApi.md#GetBuyerShippingAddresses) | **Get** /buyers/{buyer_id}/shipping-details | Get buyer shipping addresses
 [**ListBuyers**](BuyersApi.md#ListBuyers) | **Get** /buyers | List buyers
 [**UpdateBuyer**](BuyersApi.md#UpdateBuyer) | **Put** /buyers/{buyer_id} | Update buyer
+[**UpdateBuyerShippingAddress**](BuyersApi.md#UpdateBuyerShippingAddress) | **Put** /buyers/{buyer_id}/shipping-details/{shipping_address_id} | Update buyer shipping address
 
 
 
@@ -63,6 +67,78 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Buyer**](Buyer.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## AddBuyerShippingAddress
+
+> ShippingAddress AddBuyerShippingAddress(ctx, buyerId).ShippingAddressRequest(shippingAddressRequest).Execute()
+
+New buyer shipping address
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    buyerId := TODO // string | The unique ID for a buyer.
+    shippingAddressRequest := *openapiclient.NewShippingAddressRequest() // ShippingAddressRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BuyersApi.AddBuyerShippingAddress(context.Background(), buyerId).ShippingAddressRequest(shippingAddressRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.AddBuyerShippingAddress``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `AddBuyerShippingAddress`: ShippingAddress
+    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.AddBuyerShippingAddress`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**buyerId** | [**string**](.md) | The unique ID for a buyer. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddBuyerShippingAddressRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **shippingAddressRequest** | [**ShippingAddressRequest**](ShippingAddressRequest.md) |  | 
+
+### Return type
+
+[**ShippingAddress**](ShippingAddress.md)
 
 ### Authorization
 
@@ -146,6 +222,77 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## DeleteBuyerShippingAddress
+
+> DeleteBuyerShippingAddress(ctx, buyerId, shippingAddressId).Execute()
+
+Delete buyer shipping address
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    buyerId := TODO // string | The unique ID for a buyer.
+    shippingAddressId := TODO // string | The unique ID for a shipping address.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BuyersApi.DeleteBuyerShippingAddress(context.Background(), buyerId, shippingAddressId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.DeleteBuyerShippingAddress``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**buyerId** | [**string**](.md) | The unique ID for a buyer. | 
+**shippingAddressId** | [**string**](.md) | The unique ID for a shipping address. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteBuyerShippingAddressRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## GetBuyer
 
 > Buyer GetBuyer(ctx, buyerId).Execute()
@@ -201,6 +348,76 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Buyer**](Buyer.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetBuyerShippingAddresses
+
+> ShippingAddresses GetBuyerShippingAddresses(ctx, buyerId).Execute()
+
+Get buyer shipping addresses
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    buyerId := TODO // string | The unique ID for a buyer.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BuyersApi.GetBuyerShippingAddresses(context.Background(), buyerId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.GetBuyerShippingAddresses``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetBuyerShippingAddresses`: ShippingAddresses
+    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.GetBuyerShippingAddresses`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**buyerId** | [**string**](.md) | The unique ID for a buyer. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetBuyerShippingAddressesRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**ShippingAddresses**](ShippingAddresses.md)
 
 ### Authorization
 
@@ -343,6 +560,81 @@ Name | Type | Description  | Notes
 ### Return type
 
 [**Buyer**](Buyer.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## UpdateBuyerShippingAddress
+
+> ShippingAddress UpdateBuyerShippingAddress(ctx, buyerId, shippingAddressId).ShippingAddressUpdateRequest(shippingAddressUpdateRequest).Execute()
+
+Update buyer shipping address
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    buyerId := TODO // string | The unique ID for a buyer.
+    shippingAddressId := TODO // string | The unique ID for a shipping address.
+    shippingAddressUpdateRequest := *openapiclient.NewShippingAddressUpdateRequest() // ShippingAddressUpdateRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BuyersApi.UpdateBuyerShippingAddress(context.Background(), buyerId, shippingAddressId).ShippingAddressUpdateRequest(shippingAddressUpdateRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.UpdateBuyerShippingAddress``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `UpdateBuyerShippingAddress`: ShippingAddress
+    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.UpdateBuyerShippingAddress`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**buyerId** | [**string**](.md) | The unique ID for a buyer. | 
+**shippingAddressId** | [**string**](.md) | The unique ID for a shipping address. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiUpdateBuyerShippingAddressRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+ **shippingAddressUpdateRequest** | [**ShippingAddressUpdateRequest**](ShippingAddressUpdateRequest.md) |  | 
+
+### Return type
+
+[**ShippingAddress**](ShippingAddress.md)
 
 ### Authorization
 

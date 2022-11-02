@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;checkout-session&#x60;. | [optional] 
 **Id** | Pointer to **string** | The ID of the Checkout Session. | [optional] 
-**ExpiresAt** | Pointer to **string** | The date and time when the Checkout Session will expire. By default this will be set to 1 hour from the date of creation. | [optional] 
+**ExpiresAt** | Pointer to **time.Time** | The date and time when the Checkout Session will expire. By default this will be set to 1 hour from the date of creation. | [optional] 
 
 ## Methods
 
@@ -79,20 +79,20 @@ HasId returns a boolean if a field has been set.
 
 ### GetExpiresAt
 
-`func (o *CheckoutSession) GetExpiresAt() string`
+`func (o *CheckoutSession) GetExpiresAt() time.Time`
 
 GetExpiresAt returns the ExpiresAt field if non-nil, zero value otherwise.
 
 ### GetExpiresAtOk
 
-`func (o *CheckoutSession) GetExpiresAtOk() (*string, bool)`
+`func (o *CheckoutSession) GetExpiresAtOk() (*time.Time, bool)`
 
 GetExpiresAtOk returns a tuple with the ExpiresAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetExpiresAt
 
-`func (o *CheckoutSession) SetExpiresAt(v string)`
+`func (o *CheckoutSession) SetExpiresAt(v time.Time)`
 
 SetExpiresAt sets ExpiresAt field to given value.
 

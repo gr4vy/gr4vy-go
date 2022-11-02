@@ -45,6 +45,8 @@ type TransactionRequest struct {
 	// A scheme's transaction identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction.  If not provided, and a qualifying customer initiated transaction has been previously made, then Gr4vy will populate this value with the identifier returned for that transaction.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID.
 	PreviousSchemeTransactionId NullableString `json:"previous_scheme_transaction_id,omitempty"`
 	BrowserInfo *BrowserInfo `json:"browser_info,omitempty"`
+	// The unique identifier of a set of shipping details stored for the buyer.  If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the address in the database.
+	ShippingDetailsId NullableString `json:"shipping_details_id,omitempty"`
 }
 
 // NewTransactionRequest instantiates a new TransactionRequest object
@@ -605,6 +607,48 @@ func (o *TransactionRequest) SetBrowserInfo(v BrowserInfo) {
 	o.BrowserInfo = &v
 }
 
+// GetShippingDetailsId returns the ShippingDetailsId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRequest) GetShippingDetailsId() string {
+	if o == nil || o.ShippingDetailsId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ShippingDetailsId.Get()
+}
+
+// GetShippingDetailsIdOk returns a tuple with the ShippingDetailsId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRequest) GetShippingDetailsIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ShippingDetailsId.Get(), o.ShippingDetailsId.IsSet()
+}
+
+// HasShippingDetailsId returns a boolean if a field has been set.
+func (o *TransactionRequest) HasShippingDetailsId() bool {
+	if o != nil && o.ShippingDetailsId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetShippingDetailsId gets a reference to the given NullableString and assigns it to the ShippingDetailsId field.
+func (o *TransactionRequest) SetShippingDetailsId(v string) {
+	o.ShippingDetailsId.Set(&v)
+}
+// SetShippingDetailsIdNil sets the value for ShippingDetailsId to be an explicit nil
+func (o *TransactionRequest) SetShippingDetailsIdNil() {
+	o.ShippingDetailsId.Set(nil)
+}
+
+// UnsetShippingDetailsId ensures that no value is present for ShippingDetailsId, not even an explicit nil
+func (o *TransactionRequest) UnsetShippingDetailsId() {
+	o.ShippingDetailsId.Unset()
+}
+
 func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -654,6 +698,9 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.BrowserInfo != nil {
 		toSerialize["browser_info"] = o.BrowserInfo
+	}
+	if o.ShippingDetailsId.IsSet() {
+		toSerialize["shipping_details_id"] = o.ShippingDetailsId.Get()
 	}
 	return json.Marshal(toSerialize)
 }

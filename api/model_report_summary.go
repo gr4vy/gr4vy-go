@@ -13,38 +13,37 @@ package Openapi
 
 import (
 	"encoding/json"
-	"time"
 )
 
-// CheckoutSession A short-lived checkout session.
-type CheckoutSession struct {
-	// `checkout-session`.
+// ReportSummary A report record summary.
+type ReportSummary struct {
+	// The type of this resource. Is always `report`.
 	Type *string `json:"type,omitempty"`
-	// The ID of the Checkout Session.
+	// The unique identifier for this report.
 	Id *string `json:"id,omitempty"`
-	// The date and time when the Checkout Session will expire. By default this will be set to 1 hour from the date of creation.
-	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+	// The name of this report.
+	Name *string `json:"name,omitempty"`
 }
 
-// NewCheckoutSession instantiates a new CheckoutSession object
+// NewReportSummary instantiates a new ReportSummary object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCheckoutSession() *CheckoutSession {
-	this := CheckoutSession{}
+func NewReportSummary() *ReportSummary {
+	this := ReportSummary{}
 	return &this
 }
 
-// NewCheckoutSessionWithDefaults instantiates a new CheckoutSession object
+// NewReportSummaryWithDefaults instantiates a new ReportSummary object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewCheckoutSessionWithDefaults() *CheckoutSession {
-	this := CheckoutSession{}
+func NewReportSummaryWithDefaults() *ReportSummary {
+	this := ReportSummary{}
 	return &this
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *CheckoutSession) GetType() string {
+func (o *ReportSummary) GetType() string {
 	if o == nil || o.Type == nil {
 		var ret string
 		return ret
@@ -54,7 +53,7 @@ func (o *CheckoutSession) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutSession) GetTypeOk() (*string, bool) {
+func (o *ReportSummary) GetTypeOk() (*string, bool) {
 	if o == nil || o.Type == nil {
 		return nil, false
 	}
@@ -62,7 +61,7 @@ func (o *CheckoutSession) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *CheckoutSession) HasType() bool {
+func (o *ReportSummary) HasType() bool {
 	if o != nil && o.Type != nil {
 		return true
 	}
@@ -71,12 +70,12 @@ func (o *CheckoutSession) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *CheckoutSession) SetType(v string) {
+func (o *ReportSummary) SetType(v string) {
 	o.Type = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *CheckoutSession) GetId() string {
+func (o *ReportSummary) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -86,7 +85,7 @@ func (o *CheckoutSession) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutSession) GetIdOk() (*string, bool) {
+func (o *ReportSummary) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -94,7 +93,7 @@ func (o *CheckoutSession) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *CheckoutSession) HasId() bool {
+func (o *ReportSummary) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -103,43 +102,43 @@ func (o *CheckoutSession) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *CheckoutSession) SetId(v string) {
+func (o *ReportSummary) SetId(v string) {
 	o.Id = &v
 }
 
-// GetExpiresAt returns the ExpiresAt field value if set, zero value otherwise.
-func (o *CheckoutSession) GetExpiresAt() time.Time {
-	if o == nil || o.ExpiresAt == nil {
-		var ret time.Time
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *ReportSummary) GetName() string {
+	if o == nil || o.Name == nil {
+		var ret string
 		return ret
 	}
-	return *o.ExpiresAt
+	return *o.Name
 }
 
-// GetExpiresAtOk returns a tuple with the ExpiresAt field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutSession) GetExpiresAtOk() (*time.Time, bool) {
-	if o == nil || o.ExpiresAt == nil {
+func (o *ReportSummary) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
-	return o.ExpiresAt, true
+	return o.Name, true
 }
 
-// HasExpiresAt returns a boolean if a field has been set.
-func (o *CheckoutSession) HasExpiresAt() bool {
-	if o != nil && o.ExpiresAt != nil {
+// HasName returns a boolean if a field has been set.
+func (o *ReportSummary) HasName() bool {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetExpiresAt gets a reference to the given time.Time and assigns it to the ExpiresAt field.
-func (o *CheckoutSession) SetExpiresAt(v time.Time) {
-	o.ExpiresAt = &v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *ReportSummary) SetName(v string) {
+	o.Name = &v
 }
 
-func (o CheckoutSession) MarshalJSON() ([]byte, error) {
+func (o ReportSummary) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
@@ -147,44 +146,44 @@ func (o CheckoutSession) MarshalJSON() ([]byte, error) {
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
-	if o.ExpiresAt != nil {
-		toSerialize["expires_at"] = o.ExpiresAt
+	if o.Name != nil {
+		toSerialize["name"] = o.Name
 	}
 	return json.Marshal(toSerialize)
 }
 
-type NullableCheckoutSession struct {
-	value *CheckoutSession
+type NullableReportSummary struct {
+	value *ReportSummary
 	isSet bool
 }
 
-func (v NullableCheckoutSession) Get() *CheckoutSession {
+func (v NullableReportSummary) Get() *ReportSummary {
 	return v.value
 }
 
-func (v *NullableCheckoutSession) Set(val *CheckoutSession) {
+func (v *NullableReportSummary) Set(val *ReportSummary) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableCheckoutSession) IsSet() bool {
+func (v NullableReportSummary) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableCheckoutSession) Unset() {
+func (v *NullableReportSummary) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableCheckoutSession(val *CheckoutSession) *NullableCheckoutSession {
-	return &NullableCheckoutSession{value: val, isSet: true}
+func NewNullableReportSummary(val *ReportSummary) *NullableReportSummary {
+	return &NullableReportSummary{value: val, isSet: true}
 }
 
-func (v NullableCheckoutSession) MarshalJSON() ([]byte, error) {
+func (v NullableReportSummary) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableCheckoutSession) UnmarshalJSON(src []byte) error {
+func (v *NullableReportSummary) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

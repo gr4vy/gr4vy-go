@@ -4,7 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Method** | **string** |  | 
+**Method** | **string** | The type of the funding source, e.g. &#x60;card&#x60;, &#x60;paypal&#x60;, or &#x60;checkout-session&#x60;. | 
+**Id** | Pointer to **string** | The ID of a Checkout Session. | [optional] 
 **Number** | Pointer to **string** | The 13-19 digit number for this credit card as it can be found on the front of the card.  If a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API. | [optional] 
 **ExpirationDate** | Pointer to **string** | The expiration date of the card, formatted &#x60;MM/YY&#x60;. If a card has been previously stored with us this value is optional.  If the &#x60;number&#x60; of this card represents a tokenized card, then this value is ignored. | [optional] 
 **SecurityCode** | Pointer to **string** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  If the &#x60;number&#x60; of this card represents a tokenized card, then this value is ignored. | [optional] 
@@ -53,6 +54,31 @@ and a boolean to check if the value has been set.
 
 SetMethod sets Method field to given value.
 
+
+### GetId
+
+`func (o *PaymentMethodRequest) GetId() string`
+
+GetId returns the Id field if non-nil, zero value otherwise.
+
+### GetIdOk
+
+`func (o *PaymentMethodRequest) GetIdOk() (*string, bool)`
+
+GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetId
+
+`func (o *PaymentMethodRequest) SetId(v string)`
+
+SetId sets Id field to given value.
+
+### HasId
+
+`func (o *PaymentMethodRequest) HasId() bool`
+
+HasId returns a boolean if a field has been set.
 
 ### GetNumber
 

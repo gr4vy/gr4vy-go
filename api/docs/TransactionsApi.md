@@ -372,7 +372,7 @@ Name | Type | Description  | Notes
 
 ## ListTransactions
 
-> Transactions ListTransactions(ctx).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).TransactionStatus(transactionStatus).Execute()
+> Transactions ListTransactions(ctx).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentMethodId(paymentMethodId).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).TransactionStatus(transactionStatus).Execute()
 
 List transactions
 
@@ -403,10 +403,11 @@ func main() {
     createdAtLte := time.Now() // time.Time | Filters the results to only transactions created before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`. (optional)
     currency := []string{"Inner_example"} // []string | Filters for transactions that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency code. (optional)
     externalIdentifier := "user-12345" // string | Filters the results to only the items for which the `external_identifier` matches this value. (optional)
-    hasRefunds := true // bool | When set to `true`, filter for transactions that have at least one refund in any state associated with it. When set to `false`, filter for transactions that have no refunds. (optional)
+    hasRefunds := true // bool | When set to `true`, filter for transactions that have at least one completed refund associated with it. When set to `false`, filter for transactions that have no completed refunds. (optional)
     id := TODO // string | Filters for the transaction that has a matching `id` value. (optional)
     metadata := []string{"Inner_example"} // []string | Filters for transactions where their `metadata` values contain all of the provided `metadata` keys. The value sent for `metadata` must be formatted as a JSON string, and all keys and values must be strings. This value should also be URL encoded.  Duplicate keys are not supported. If a key is duplicated, only the last appearing value will be used. (optional)
     method := []string{"card"} // []string | Filters the results to only the items for which the `method` has been set to this value. (optional)
+    paymentMethodId := TODO // string | The ID of the payment method. (optional)
     paymentServiceId := []string{"Inner_example"} // []string | Filters for transactions that were processed by the provided `payment_service_id` values. (optional)
     paymentServiceTransactionId := "transaction_123" // string | Filters for transactions that have a matching `payment_service_transaction_id` value. The `payment_service_transaction_id` is the identifier of the transaction given by the payment service. (optional)
     search := "be828248-56de-481e-a580-44b6e1d4df81" // string | Filters for transactions that have one of the following fields match exactly with the provided `search` value: * `buyer_external_identifier` * `buyer_id` * `external_identifier` * `id` * `payment_service_transaction_id` (optional)
@@ -421,7 +422,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).TransactionStatus(transactionStatus).Execute()
+    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentMethodId(paymentMethodId).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).BeforeCreatedAt(beforeCreatedAt).AfterCreatedAt(afterCreatedAt).BeforeUpdatedAt(beforeUpdatedAt).AfterUpdatedAt(afterUpdatedAt).TransactionStatus(transactionStatus).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.ListTransactions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -453,10 +454,11 @@ Name | Type | Description  | Notes
  **createdAtLte** | **time.Time** | Filters the results to only transactions created before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;. | 
  **currency** | **[]string** | Filters for transactions that have matching &#x60;currency&#x60; values. The &#x60;currency&#x60; values provided must be formatted as 3-letter ISO currency code. | 
  **externalIdentifier** | **string** | Filters the results to only the items for which the &#x60;external_identifier&#x60; matches this value. | 
- **hasRefunds** | **bool** | When set to &#x60;true&#x60;, filter for transactions that have at least one refund in any state associated with it. When set to &#x60;false&#x60;, filter for transactions that have no refunds. | 
+ **hasRefunds** | **bool** | When set to &#x60;true&#x60;, filter for transactions that have at least one completed refund associated with it. When set to &#x60;false&#x60;, filter for transactions that have no completed refunds. | 
  **id** | [**string**](string.md) | Filters for the transaction that has a matching &#x60;id&#x60; value. | 
  **metadata** | **[]string** | Filters for transactions where their &#x60;metadata&#x60; values contain all of the provided &#x60;metadata&#x60; keys. The value sent for &#x60;metadata&#x60; must be formatted as a JSON string, and all keys and values must be strings. This value should also be URL encoded.  Duplicate keys are not supported. If a key is duplicated, only the last appearing value will be used. | 
  **method** | **[]string** | Filters the results to only the items for which the &#x60;method&#x60; has been set to this value. | 
+ **paymentMethodId** | [**string**](string.md) | The ID of the payment method. | 
  **paymentServiceId** | **[]string** | Filters for transactions that were processed by the provided &#x60;payment_service_id&#x60; values. | 
  **paymentServiceTransactionId** | **string** | Filters for transactions that have a matching &#x60;payment_service_transaction_id&#x60; value. The &#x60;payment_service_transaction_id&#x60; is the identifier of the transaction given by the payment service. | 
  **search** | **string** | Filters for transactions that have one of the following fields match exactly with the provided &#x60;search&#x60; value: * &#x60;buyer_external_identifier&#x60; * &#x60;buyer_id&#x60; * &#x60;external_identifier&#x60; * &#x60;id&#x60; * &#x60;payment_service_transaction_id&#x60; | 

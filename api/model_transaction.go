@@ -69,6 +69,7 @@ type Transaction struct {
 	PaymentServiceTransactionId *string `json:"payment_service_transaction_id,omitempty"`
 	// Additional information about the transaction stored as key-value pairs.
 	Metadata *map[string]string `json:"metadata,omitempty"`
+	ShippingDetails *ShippingAddress `json:"shipping_details,omitempty"`
 	ThreeDSecure *ThreeDSecureSummary `json:"three_d_secure,omitempty"`
 	// The date and time when this transaction was authorized in the payment service.  Don't use this field to determine whether the transaction was authorized. A `null` value doesn't necessarily imply that the transaction wasn't authorized, it can mean that the payment service doesn't provide this value, that it didn't provide it at the time the transaction was authorized or that the transaction was authorized before the introduction of this field.
 	AuthorizedAt NullableTime `json:"authorized_at,omitempty"`
@@ -1073,6 +1074,38 @@ func (o *Transaction) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
+// GetShippingDetails returns the ShippingDetails field value if set, zero value otherwise.
+func (o *Transaction) GetShippingDetails() ShippingAddress {
+	if o == nil || o.ShippingDetails == nil {
+		var ret ShippingAddress
+		return ret
+	}
+	return *o.ShippingDetails
+}
+
+// GetShippingDetailsOk returns a tuple with the ShippingDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetShippingDetailsOk() (*ShippingAddress, bool) {
+	if o == nil || o.ShippingDetails == nil {
+		return nil, false
+	}
+	return o.ShippingDetails, true
+}
+
+// HasShippingDetails returns a boolean if a field has been set.
+func (o *Transaction) HasShippingDetails() bool {
+	if o != nil && o.ShippingDetails != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetShippingDetails gets a reference to the given ShippingAddress and assigns it to the ShippingDetails field.
+func (o *Transaction) SetShippingDetails(v ShippingAddress) {
+	o.ShippingDetails = &v
+}
+
 // GetThreeDSecure returns the ThreeDSecure field value if set, zero value otherwise.
 func (o *Transaction) GetThreeDSecure() ThreeDSecureSummary {
 	if o == nil || o.ThreeDSecure == nil {
@@ -1316,6 +1349,9 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.ShippingDetails != nil {
+		toSerialize["shipping_details"] = o.ShippingDetails
 	}
 	if o.ThreeDSecure != nil {
 		toSerialize["three_d_secure"] = o.ThreeDSecure

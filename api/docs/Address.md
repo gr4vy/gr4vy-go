@@ -4,15 +4,15 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**City** | Pointer to **string** | The city for the billing address. | [optional] 
-**Country** | Pointer to **string** | The country for the billing address. | [optional] 
-**PostalCode** | Pointer to **string** | The postal code or zip code for the billing address. | [optional] 
-**State** | Pointer to **string** | The state, county, or province for the billing address. | [optional] 
-**StateCode** | Pointer to **NullableString** | The code of state, county, or province for the billing address in ISO 3166-2 format. | [optional] 
-**HouseNumberOrName** | Pointer to **NullableString** | The house number or name for the billing address. Not all payment services use this field but some do. | [optional] 
-**Line1** | Pointer to **string** | The first line of the billing address. | [optional] 
-**Line2** | Pointer to **NullableString** | The second line of the billing address. | [optional] 
-**Organization** | Pointer to **NullableString** | The optional name of the company or organisation to add to the billing address. | [optional] 
+**City** | Pointer to **NullableString** | The city for the address. | [optional] 
+**Country** | Pointer to **NullableString** | The country for the address in ISO 3166 format. | [optional] 
+**PostalCode** | Pointer to **NullableString** | The postal code or zip code for the address. | [optional] 
+**State** | Pointer to **NullableString** | The state, county, or province for the address. | [optional] 
+**StateCode** | Pointer to **NullableString** | The code of state, county, or province for the address in ISO 3166-2 format. | [optional] 
+**HouseNumberOrName** | Pointer to **NullableString** | The house number or name for the address. Not all payment services use this field but some do. | [optional] 
+**Line1** | Pointer to **NullableString** | The first line of the address. | [optional] 
+**Line2** | Pointer to **NullableString** | The second line of the address. | [optional] 
+**Organization** | Pointer to **NullableString** | The optional name of the company or organisation to add to the address. | [optional] 
 
 ## Methods
 
@@ -58,6 +58,16 @@ SetCity sets City field to given value.
 
 HasCity returns a boolean if a field has been set.
 
+### SetCityNil
+
+`func (o *Address) SetCityNil(b bool)`
+
+ SetCityNil sets the value for City to be an explicit nil
+
+### UnsetCity
+`func (o *Address) UnsetCity()`
+
+UnsetCity ensures that no value is present for City, not even an explicit nil
 ### GetCountry
 
 `func (o *Address) GetCountry() string`
@@ -83,6 +93,16 @@ SetCountry sets Country field to given value.
 
 HasCountry returns a boolean if a field has been set.
 
+### SetCountryNil
+
+`func (o *Address) SetCountryNil(b bool)`
+
+ SetCountryNil sets the value for Country to be an explicit nil
+
+### UnsetCountry
+`func (o *Address) UnsetCountry()`
+
+UnsetCountry ensures that no value is present for Country, not even an explicit nil
 ### GetPostalCode
 
 `func (o *Address) GetPostalCode() string`
@@ -108,6 +128,16 @@ SetPostalCode sets PostalCode field to given value.
 
 HasPostalCode returns a boolean if a field has been set.
 
+### SetPostalCodeNil
+
+`func (o *Address) SetPostalCodeNil(b bool)`
+
+ SetPostalCodeNil sets the value for PostalCode to be an explicit nil
+
+### UnsetPostalCode
+`func (o *Address) UnsetPostalCode()`
+
+UnsetPostalCode ensures that no value is present for PostalCode, not even an explicit nil
 ### GetState
 
 `func (o *Address) GetState() string`
@@ -133,6 +163,16 @@ SetState sets State field to given value.
 
 HasState returns a boolean if a field has been set.
 
+### SetStateNil
+
+`func (o *Address) SetStateNil(b bool)`
+
+ SetStateNil sets the value for State to be an explicit nil
+
+### UnsetState
+`func (o *Address) UnsetState()`
+
+UnsetState ensures that no value is present for State, not even an explicit nil
 ### GetStateCode
 
 `func (o *Address) GetStateCode() string`
@@ -228,6 +268,16 @@ SetLine1 sets Line1 field to given value.
 
 HasLine1 returns a boolean if a field has been set.
 
+### SetLine1Nil
+
+`func (o *Address) SetLine1Nil(b bool)`
+
+ SetLine1Nil sets the value for Line1 to be an explicit nil
+
+### UnsetLine1
+`func (o *Address) UnsetLine1()`
+
+UnsetLine1 ensures that no value is present for Line1, not even an explicit nil
 ### GetLine2
 
 `func (o *Address) GetLine2() string`
