@@ -97,8 +97,6 @@ func (c *Gr4vyClient) AuthorizeNewTransaction(body Gr4vyTransactionRequest, pm G
     auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
     p := client.TransactionsApi.AuthorizeNewTransaction(auth)
 
-    p = p.IdempotencyKey("my_test_key")
-
     var b TransactionRequest = TransactionRequest(body)
     var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
     b.PaymentMethod = tpm
@@ -117,8 +115,6 @@ func (c *Gr4vyClient) AuthorizeNewTransactionContext(ctx context.Context, body G
     }
     auth := context.WithValue(ctx, ContextAccessToken, c.accessToken)
     p := client.TransactionsApi.AuthorizeNewTransaction(auth)
-    
-    p = p.IdempotencyKey("my_test_key")
 
     var b TransactionRequest = TransactionRequest(body)
     var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
