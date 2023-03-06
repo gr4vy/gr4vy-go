@@ -17,10 +17,12 @@ import (
 
 // UserRequest A request to create a user.
 type UserRequest struct {
-	// An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers.
-	DisplayName *string `json:"display_name,omitempty"`
-	// A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.
+	// The full name of the user which is used in the Gr4vy admin panel to give an user a human readable name.
+	Name *string `json:"name,omitempty"`
+	// The email address for this user.
 	EmailAddress *string `json:"email_address,omitempty"`
+	// A list of role ids that will be assigned to the user being created. The creator must have `roles.write` or the role that is being assigned.
+	RoleIds *[]string `json:"role_ids,omitempty"`
 }
 
 // NewUserRequest instantiates a new UserRequest object
@@ -40,36 +42,36 @@ func NewUserRequestWithDefaults() *UserRequest {
 	return &this
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *UserRequest) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+// GetName returns the Name field value if set, zero value otherwise.
+func (o *UserRequest) GetName() string {
+	if o == nil || o.Name == nil {
 		var ret string
 		return ret
 	}
-	return *o.DisplayName
+	return *o.Name
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *UserRequest) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
+func (o *UserRequest) GetNameOk() (*string, bool) {
+	if o == nil || o.Name == nil {
 		return nil, false
 	}
-	return o.DisplayName, true
+	return o.Name, true
 }
 
-// HasDisplayName returns a boolean if a field has been set.
-func (o *UserRequest) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+// HasName returns a boolean if a field has been set.
+func (o *UserRequest) HasName() bool {
+	if o != nil && o.Name != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *UserRequest) SetDisplayName(v string) {
-	o.DisplayName = &v
+// SetName gets a reference to the given string and assigns it to the Name field.
+func (o *UserRequest) SetName(v string) {
+	o.Name = &v
 }
 
 // GetEmailAddress returns the EmailAddress field value if set, zero value otherwise.
@@ -104,13 +106,48 @@ func (o *UserRequest) SetEmailAddress(v string) {
 	o.EmailAddress = &v
 }
 
+// GetRoleIds returns the RoleIds field value if set, zero value otherwise.
+func (o *UserRequest) GetRoleIds() []string {
+	if o == nil || o.RoleIds == nil {
+		var ret []string
+		return ret
+	}
+	return *o.RoleIds
+}
+
+// GetRoleIdsOk returns a tuple with the RoleIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *UserRequest) GetRoleIdsOk() (*[]string, bool) {
+	if o == nil || o.RoleIds == nil {
+		return nil, false
+	}
+	return o.RoleIds, true
+}
+
+// HasRoleIds returns a boolean if a field has been set.
+func (o *UserRequest) HasRoleIds() bool {
+	if o != nil && o.RoleIds != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRoleIds gets a reference to the given []string and assigns it to the RoleIds field.
+func (o *UserRequest) SetRoleIds(v []string) {
+	o.RoleIds = &v
+}
+
 func (o UserRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.DisplayName != nil {
-		toSerialize["display_name"] = o.DisplayName
+	if o.Name != nil {
+		toSerialize["name"] = o.Name
 	}
 	if o.EmailAddress != nil {
 		toSerialize["email_address"] = o.EmailAddress
+	}
+	if o.RoleIds != nil {
+		toSerialize["role_ids"] = o.RoleIds
 	}
 	return json.Marshal(toSerialize)
 }

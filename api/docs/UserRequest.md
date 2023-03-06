@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DisplayName** | Pointer to **string** | An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers. | [optional] 
-**EmailAddress** | Pointer to **string** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
+**Name** | Pointer to **string** | The full name of the user which is used in the Gr4vy admin panel to give an user a human readable name. | [optional] 
+**EmailAddress** | Pointer to **string** | The email address for this user. | [optional] 
+**RoleIds** | Pointer to **[]string** | A list of role ids that will be assigned to the user being created. The creator must have &#x60;roles.write&#x60; or the role that is being assigned. | [optional] 
 
 ## Methods
 
@@ -26,30 +27,30 @@ NewUserRequestWithDefaults instantiates a new UserRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
-### GetDisplayName
+### GetName
 
-`func (o *UserRequest) GetDisplayName() string`
+`func (o *UserRequest) GetName() string`
 
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+GetName returns the Name field if non-nil, zero value otherwise.
 
-### GetDisplayNameOk
+### GetNameOk
 
-`func (o *UserRequest) GetDisplayNameOk() (*string, bool)`
+`func (o *UserRequest) GetNameOk() (*string, bool)`
 
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDisplayName
+### SetName
 
-`func (o *UserRequest) SetDisplayName(v string)`
+`func (o *UserRequest) SetName(v string)`
 
-SetDisplayName sets DisplayName field to given value.
+SetName sets Name field to given value.
 
-### HasDisplayName
+### HasName
 
-`func (o *UserRequest) HasDisplayName() bool`
+`func (o *UserRequest) HasName() bool`
 
-HasDisplayName returns a boolean if a field has been set.
+HasName returns a boolean if a field has been set.
 
 ### GetEmailAddress
 
@@ -75,6 +76,31 @@ SetEmailAddress sets EmailAddress field to given value.
 `func (o *UserRequest) HasEmailAddress() bool`
 
 HasEmailAddress returns a boolean if a field has been set.
+
+### GetRoleIds
+
+`func (o *UserRequest) GetRoleIds() []string`
+
+GetRoleIds returns the RoleIds field if non-nil, zero value otherwise.
+
+### GetRoleIdsOk
+
+`func (o *UserRequest) GetRoleIdsOk() (*[]string, bool)`
+
+GetRoleIdsOk returns a tuple with the RoleIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRoleIds
+
+`func (o *UserRequest) SetRoleIds(v []string)`
+
+SetRoleIds sets RoleIds field to given value.
+
+### HasRoleIds
+
+`func (o *UserRequest) HasRoleIds() bool`
+
+HasRoleIds returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

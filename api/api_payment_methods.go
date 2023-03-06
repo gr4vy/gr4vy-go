@@ -299,9 +299,9 @@ func (r ApiListBuyerPaymentMethodsRequest) Execute() (PaymentMethodsTokenized, *
 
 /*
  * ListBuyerPaymentMethods List stored payment methods for a buyer
- * Returns a list of stored (tokenized) payment methods for a buyer in a short
-tokenized format. Only payment methods that are compatible with at least one
-active payment service in that region are shown.
+ * Returns a list of stored payment methods for a buyer in a summarized format.
+Only payment methods that are compatible with at least one active payment
+service in that region are shown.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListBuyerPaymentMethodsRequest
  */
@@ -459,7 +459,7 @@ func (r ApiListPaymentMethodsRequest) Execute() (PaymentMethods, *_nethttp.Respo
 
 /*
  * ListPaymentMethods List payment methods
- * Returns a list of stored (tokenized) payment methods.
+ * Returns a list of stored payment methods.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListPaymentMethodsRequest
  */
@@ -590,7 +590,12 @@ func (r ApiStorePaymentMethodRequest) Execute() (PaymentMethod, *_nethttp.Respon
 
 /*
  * StorePaymentMethod New payment method
- * Stores and tokenizes a new payment method.
+ * Stores and vaults a new payment method.
+
+Vaulting a card only stores its information but doesn't validate it against any
+PSP. In order to do so, a CIT (Customer Initiated Transaction) must be done,
+even if it's a zero-value one.
+
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiStorePaymentMethodRequest
  */
@@ -679,6 +684,16 @@ func (a *PaymentMethodsApiService) StorePaymentMethodExecute(r ApiStorePaymentMe
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Error409DuplicateRecord
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

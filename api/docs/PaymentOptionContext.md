@@ -4,6 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Gateway** | Pointer to **string** | Gateway used for Google Pay payments. | [optional] 
+**GatewayMerchantId** | Pointer to **string** | Gateway merchant identifier used for Google Pay payments. | [optional] 
 **MerchantName** | Pointer to **string** | Display name of the merchant as registered with the digital wallet provider. | [optional] 
 **SupportedSchemes** | Pointer to **[]string** | Card schemes supported by the digital wallet provider. | [optional] 
 **ApprovalUi** | Pointer to [**PaymentOptionApprovalUI**](PaymentOptionApprovalUI.md) |  | [optional] 
@@ -27,6 +29,56 @@ will change when the set of required properties is changed
 NewPaymentOptionContextWithDefaults instantiates a new PaymentOptionContext object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetGateway
+
+`func (o *PaymentOptionContext) GetGateway() string`
+
+GetGateway returns the Gateway field if non-nil, zero value otherwise.
+
+### GetGatewayOk
+
+`func (o *PaymentOptionContext) GetGatewayOk() (*string, bool)`
+
+GetGatewayOk returns a tuple with the Gateway field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGateway
+
+`func (o *PaymentOptionContext) SetGateway(v string)`
+
+SetGateway sets Gateway field to given value.
+
+### HasGateway
+
+`func (o *PaymentOptionContext) HasGateway() bool`
+
+HasGateway returns a boolean if a field has been set.
+
+### GetGatewayMerchantId
+
+`func (o *PaymentOptionContext) GetGatewayMerchantId() string`
+
+GetGatewayMerchantId returns the GatewayMerchantId field if non-nil, zero value otherwise.
+
+### GetGatewayMerchantIdOk
+
+`func (o *PaymentOptionContext) GetGatewayMerchantIdOk() (*string, bool)`
+
+GetGatewayMerchantIdOk returns a tuple with the GatewayMerchantId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGatewayMerchantId
+
+`func (o *PaymentOptionContext) SetGatewayMerchantId(v string)`
+
+SetGatewayMerchantId sets GatewayMerchantId field to given value.
+
+### HasGatewayMerchantId
+
+`func (o *PaymentOptionContext) HasGatewayMerchantId() bool`
+
+HasGatewayMerchantId returns a boolean if a field has been set.
 
 ### GetMerchantName
 

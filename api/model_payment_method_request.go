@@ -21,11 +21,11 @@ type PaymentMethodRequest struct {
 	Method string `json:"method"`
 	// The ID of a Checkout Session.
 	Id *string `json:"id,omitempty"`
-	// The 13-19 digit number for this credit card as it can be found on the front of the card.  If a card has been stored with us previously, this number will represent the unique tokenized card ID provided via our API.
+	// The 13-19 digit number for this credit card as it can be found on the front of the card.
 	Number *string `json:"number,omitempty"`
-	// The expiration date of the card, formatted `MM/YY`. If a card has been previously stored with us this value is optional.  If the `number` of this card represents a tokenized card, then this value is ignored.
+	// The expiration date of the card, formatted `MM/YY`. If a card has been previously stored with us this value is optional.
 	ExpirationDate *string `json:"expiration_date,omitempty"`
-	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  If the `number` of this card represents a tokenized card, then this value is ignored.
+	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
 	SecurityCode *string `json:"security_code,omitempty"`
 	// An external identifier that can be used to match the card against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`

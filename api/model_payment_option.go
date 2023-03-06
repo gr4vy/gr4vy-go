@@ -19,9 +19,11 @@ import (
 type PaymentOption struct {
 	// `payment-option`.
 	Type *string `json:"type,omitempty"`
+	// The type of payment method that is available.
 	Method *string `json:"method,omitempty"`
 	// An icon to display for the payment option.
 	IconUrl NullableString `json:"icon_url,omitempty"`
+	// The mode to use with this payment option.
 	Mode *string `json:"mode,omitempty"`
 	// A label that describes this payment option. This label is returned in the language defined by the `locale` query parameter. The label can be used to display a list of payment options to the buyer in their language.
 	Label *string `json:"label,omitempty"`

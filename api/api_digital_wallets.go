@@ -44,6 +44,11 @@ func (r ApiDeregisterDigitalWalletRequest) Execute() (*_nethttp.Response, error)
  * De-registers a digital wallet with a provider. Upon successful
 de-registration, the digital wallet's record is deleted and will no
 longer be available.
+
+A digital wallet of the `apple` provider may only be de-registered if
+there are no `active` Apple Pay certificates. When there are only
+`incomplete` or `expired` Apple Pay certificates, these certificates
+are deleted alongside the `apple` digital wallet's record.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param digitalWalletId The ID of the registered digital wallet.
  * @return ApiDeregisterDigitalWalletRequest
@@ -486,6 +491,16 @@ func (a *DigitalWalletsApiService) RegisterDigitalWalletExecute(r ApiRegisterDig
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Error409DuplicateRecord
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

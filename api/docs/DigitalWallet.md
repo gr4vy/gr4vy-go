@@ -12,6 +12,9 @@ Name | Type | Description | Notes
 **DomainNames** | Pointer to **[]string** | The list of domain names that a digital wallet can be used on. To use a digital wallet on a website, the domain of the site is required to be in this list. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this digital wallet was registered. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this digital wallet was last updated. | [optional] 
+**ActiveCertificateCount** | Pointer to **int32** | The number of active custom certificates registered for this digital wallet (Apple Pay only). | [optional] 
+**PendingCertificateCount** | Pointer to **int32** | The number of pending custom certificates registered for this digital wallet (Apple Pay only). | [optional] 
+**ExpiredCertificateCount** | Pointer to **int32** | The number of expired custom certificates registered for this digital wallet (Apple Pay only). | [optional] 
 
 ## Methods
 
@@ -241,6 +244,81 @@ SetUpdatedAt sets UpdatedAt field to given value.
 `func (o *DigitalWallet) HasUpdatedAt() bool`
 
 HasUpdatedAt returns a boolean if a field has been set.
+
+### GetActiveCertificateCount
+
+`func (o *DigitalWallet) GetActiveCertificateCount() int32`
+
+GetActiveCertificateCount returns the ActiveCertificateCount field if non-nil, zero value otherwise.
+
+### GetActiveCertificateCountOk
+
+`func (o *DigitalWallet) GetActiveCertificateCountOk() (*int32, bool)`
+
+GetActiveCertificateCountOk returns a tuple with the ActiveCertificateCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetActiveCertificateCount
+
+`func (o *DigitalWallet) SetActiveCertificateCount(v int32)`
+
+SetActiveCertificateCount sets ActiveCertificateCount field to given value.
+
+### HasActiveCertificateCount
+
+`func (o *DigitalWallet) HasActiveCertificateCount() bool`
+
+HasActiveCertificateCount returns a boolean if a field has been set.
+
+### GetPendingCertificateCount
+
+`func (o *DigitalWallet) GetPendingCertificateCount() int32`
+
+GetPendingCertificateCount returns the PendingCertificateCount field if non-nil, zero value otherwise.
+
+### GetPendingCertificateCountOk
+
+`func (o *DigitalWallet) GetPendingCertificateCountOk() (*int32, bool)`
+
+GetPendingCertificateCountOk returns a tuple with the PendingCertificateCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPendingCertificateCount
+
+`func (o *DigitalWallet) SetPendingCertificateCount(v int32)`
+
+SetPendingCertificateCount sets PendingCertificateCount field to given value.
+
+### HasPendingCertificateCount
+
+`func (o *DigitalWallet) HasPendingCertificateCount() bool`
+
+HasPendingCertificateCount returns a boolean if a field has been set.
+
+### GetExpiredCertificateCount
+
+`func (o *DigitalWallet) GetExpiredCertificateCount() int32`
+
+GetExpiredCertificateCount returns the ExpiredCertificateCount field if non-nil, zero value otherwise.
+
+### GetExpiredCertificateCountOk
+
+`func (o *DigitalWallet) GetExpiredCertificateCountOk() (*int32, bool)`
+
+GetExpiredCertificateCountOk returns a tuple with the ExpiredCertificateCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiredCertificateCount
+
+`func (o *DigitalWallet) SetExpiredCertificateCount(v int32)`
+
+SetExpiredCertificateCount sets ExpiredCertificateCount field to given value.
+
+### HasExpiredCertificateCount
+
+`func (o *DigitalWallet) HasExpiredCertificateCount() bool`
+
+HasExpiredCertificateCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

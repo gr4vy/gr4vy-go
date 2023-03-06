@@ -21,6 +21,7 @@ type PaymentMethodSnapshot struct {
 	Type *string `json:"type,omitempty"`
 	// The unique ID of the payment method.
 	Id NullableString `json:"id,omitempty"`
+	// The type of this payment method.
 	Method *string `json:"method,omitempty"`
 	// An external identifier that can be used to match the payment method against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`

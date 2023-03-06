@@ -7,24 +7,27 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The ID of this payment service. | [optional] 
 **Type** | Pointer to **string** | The type of this resource. | [optional] 
 **PaymentServiceDefinitionId** | Pointer to **string** | The ID of the payment service definition used to create this service.  | [optional] 
-**Method** | Pointer to **string** |  | [optional] 
+**Method** | Pointer to **string** | The payment method that this service handles. | [optional] 
 **DisplayName** | Pointer to **string** | The custom name set for this service. | [optional] 
 **Status** | Pointer to **string** | The current status of this service. This will start off as pending, move to created, and might eventually move to an error status if and when the credentials are no longer valid.  | [optional] 
 **AcceptedCurrencies** | Pointer to **[]string** | A list of currencies for which this service is enabled, in ISO 4217 three-letter code format. | [optional] 
 **AcceptedCountries** | Pointer to **[]string** | A list of countries for which this service is enabled, in ISO two-letter code format. | [optional] 
+**OpenLoop** | Pointer to **bool** | Defines if the service works as an open-loop service. This feature can only be enabled if the PSP is set up to accept previous scheme transaction IDs. | [optional] 
+**PaymentMethodTokenizationEnabled** | Pointer to **bool** | Defines if tokenization is enabled for the service. This feature can only be enabled if the payment service is NOT set as &#x60;open_loop&#x60; and the PSP is set up to tokenize. | [optional] [default to false]
+**NetworkTokensEnabled** | Pointer to **bool** | Defines if network tokens are enabled for the service. This feature can only be enabled if the payment service is set as &#x60;open_loop&#x60; and the PSP is set up to accept network tokens. | [optional] 
 **ThreeDSecureEnabled** | Pointer to **bool** | Defines if 3-D Secure is enabled for the service (can only be enabled if the payment service definition supports the &#x60;three_d_secure_hosted&#x60; feature). This does not affect pass through 3-D Secure data. | [optional] [default to false]
-**AcquirerBinVisa** | Pointer to **NullableString** | Acquiring institution identification code for VISA. | [optional] 
-**AcquirerBinMastercard** | Pointer to **NullableString** | Acquiring institution identification code for Mastercard. | [optional] 
-**AcquirerBinAmex** | Pointer to **NullableString** | Acquiring institution identification code for Amex. | [optional] 
-**AcquirerBinDiscover** | Pointer to **NullableString** | Acquiring institution identification code for Discover. | [optional] 
-**AcquirerMerchantId** | Pointer to **NullableString** | Merchant identifier used in authorisation requests (assigned by the acquirer). | [optional] 
-**MerchantName** | Pointer to **NullableString** | Merchant name (assigned by the acquirer). | [optional] 
-**MerchantCountryCode** | Pointer to **NullableString** | ISO 3166-1 numeric three-digit country code. | [optional] 
-**MerchantCategoryCode** | Pointer to **NullableString** | Merchant category code that describes the business. | [optional] 
-**MerchantUrl** | Pointer to **NullableString** | Fully qualified URL of 3-D Secure requestor website or customer care site. | [optional] 
+**AcquirerBinVisa** | Pointer to **NullableString** |  | [optional] 
+**AcquirerBinMastercard** | Pointer to **NullableString** |  | [optional] 
+**AcquirerBinAmex** | Pointer to **NullableString** |  | [optional] 
+**AcquirerBinDiscover** | Pointer to **NullableString** |  | [optional] 
+**AcquirerMerchantId** | Pointer to **NullableString** |  | [optional] 
+**MerchantName** | Pointer to **NullableString** |  | [optional] 
+**MerchantCountryCode** | Pointer to **NullableString** |  | [optional] 
+**MerchantCategoryCode** | Pointer to **NullableString** |  | [optional] 
+**MerchantProfile** | Pointer to [**NullableMerchantProfile**](MerchantProfile.md) | An object containing a key for each supported card scheme (Amex, Discover, Mastercard and Visa), and for each key an object with the merchant profile for this service and the corresponding scheme. | [optional] 
+**MerchantUrl** | Pointer to **NullableString** |  | [optional] 
 **Active** | Pointer to **bool** | Defines if this service is currently active or not. | [optional] [default to true]
 **Position** | Pointer to **float32** | The numeric rank of a payment service. Payment services with a lower position value are processed first. | [optional] 
-**PaymentMethodTokenizationEnabled** | Pointer to **bool** | Defines if tokenization is enabled for the service (can only be enabled if the payment service definition supports it). | [optional] [default to false]
 **CreatedAt** | Pointer to **time.Time** | The date and time when this service was created. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this service was last updated. | [optional] 
 **WebhookUrl** | Pointer to **NullableString** | The URL that needs to be configured with this payment service as the receiving endpoint for webhooks from the service to Gr4vy. Currently, Gr4vy does not yet automatically register webhooks on setup, and therefore webhooks need to be registered manually by the merchant. | [optional] 
@@ -248,6 +251,81 @@ SetAcceptedCountries sets AcceptedCountries field to given value.
 `func (o *PaymentService) HasAcceptedCountries() bool`
 
 HasAcceptedCountries returns a boolean if a field has been set.
+
+### GetOpenLoop
+
+`func (o *PaymentService) GetOpenLoop() bool`
+
+GetOpenLoop returns the OpenLoop field if non-nil, zero value otherwise.
+
+### GetOpenLoopOk
+
+`func (o *PaymentService) GetOpenLoopOk() (*bool, bool)`
+
+GetOpenLoopOk returns a tuple with the OpenLoop field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenLoop
+
+`func (o *PaymentService) SetOpenLoop(v bool)`
+
+SetOpenLoop sets OpenLoop field to given value.
+
+### HasOpenLoop
+
+`func (o *PaymentService) HasOpenLoop() bool`
+
+HasOpenLoop returns a boolean if a field has been set.
+
+### GetPaymentMethodTokenizationEnabled
+
+`func (o *PaymentService) GetPaymentMethodTokenizationEnabled() bool`
+
+GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field if non-nil, zero value otherwise.
+
+### GetPaymentMethodTokenizationEnabledOk
+
+`func (o *PaymentService) GetPaymentMethodTokenizationEnabledOk() (*bool, bool)`
+
+GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMethodTokenizationEnabled
+
+`func (o *PaymentService) SetPaymentMethodTokenizationEnabled(v bool)`
+
+SetPaymentMethodTokenizationEnabled sets PaymentMethodTokenizationEnabled field to given value.
+
+### HasPaymentMethodTokenizationEnabled
+
+`func (o *PaymentService) HasPaymentMethodTokenizationEnabled() bool`
+
+HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
+
+### GetNetworkTokensEnabled
+
+`func (o *PaymentService) GetNetworkTokensEnabled() bool`
+
+GetNetworkTokensEnabled returns the NetworkTokensEnabled field if non-nil, zero value otherwise.
+
+### GetNetworkTokensEnabledOk
+
+`func (o *PaymentService) GetNetworkTokensEnabledOk() (*bool, bool)`
+
+GetNetworkTokensEnabledOk returns a tuple with the NetworkTokensEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkTokensEnabled
+
+`func (o *PaymentService) SetNetworkTokensEnabled(v bool)`
+
+SetNetworkTokensEnabled sets NetworkTokensEnabled field to given value.
+
+### HasNetworkTokensEnabled
+
+`func (o *PaymentService) HasNetworkTokensEnabled() bool`
+
+HasNetworkTokensEnabled returns a boolean if a field has been set.
 
 ### GetThreeDSecureEnabled
 
@@ -554,6 +632,41 @@ HasMerchantCategoryCode returns a boolean if a field has been set.
 `func (o *PaymentService) UnsetMerchantCategoryCode()`
 
 UnsetMerchantCategoryCode ensures that no value is present for MerchantCategoryCode, not even an explicit nil
+### GetMerchantProfile
+
+`func (o *PaymentService) GetMerchantProfile() MerchantProfile`
+
+GetMerchantProfile returns the MerchantProfile field if non-nil, zero value otherwise.
+
+### GetMerchantProfileOk
+
+`func (o *PaymentService) GetMerchantProfileOk() (*MerchantProfile, bool)`
+
+GetMerchantProfileOk returns a tuple with the MerchantProfile field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantProfile
+
+`func (o *PaymentService) SetMerchantProfile(v MerchantProfile)`
+
+SetMerchantProfile sets MerchantProfile field to given value.
+
+### HasMerchantProfile
+
+`func (o *PaymentService) HasMerchantProfile() bool`
+
+HasMerchantProfile returns a boolean if a field has been set.
+
+### SetMerchantProfileNil
+
+`func (o *PaymentService) SetMerchantProfileNil(b bool)`
+
+ SetMerchantProfileNil sets the value for MerchantProfile to be an explicit nil
+
+### UnsetMerchantProfile
+`func (o *PaymentService) UnsetMerchantProfile()`
+
+UnsetMerchantProfile ensures that no value is present for MerchantProfile, not even an explicit nil
 ### GetMerchantUrl
 
 `func (o *PaymentService) GetMerchantUrl() string`
@@ -638,31 +751,6 @@ SetPosition sets Position field to given value.
 `func (o *PaymentService) HasPosition() bool`
 
 HasPosition returns a boolean if a field has been set.
-
-### GetPaymentMethodTokenizationEnabled
-
-`func (o *PaymentService) GetPaymentMethodTokenizationEnabled() bool`
-
-GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field if non-nil, zero value otherwise.
-
-### GetPaymentMethodTokenizationEnabledOk
-
-`func (o *PaymentService) GetPaymentMethodTokenizationEnabledOk() (*bool, bool)`
-
-GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPaymentMethodTokenizationEnabled
-
-`func (o *PaymentService) SetPaymentMethodTokenizationEnabled(v bool)`
-
-SetPaymentMethodTokenizationEnabled sets PaymentMethodTokenizationEnabled field to given value.
-
-### HasPaymentMethodTokenizationEnabled
-
-`func (o *PaymentService) HasPaymentMethodTokenizationEnabled() bool`
-
-HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

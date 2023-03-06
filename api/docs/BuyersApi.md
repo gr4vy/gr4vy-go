@@ -5,14 +5,14 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**AddBuyer**](BuyersApi.md#AddBuyer) | **Post** /buyers | New buyer
-[**AddBuyerShippingAddress**](BuyersApi.md#AddBuyerShippingAddress) | **Post** /buyers/{buyer_id}/shipping-details | New buyer shipping address
+[**AddBuyerShippingDetail**](BuyersApi.md#AddBuyerShippingDetail) | **Post** /buyers/{buyer_id}/shipping-details | New buyer shipping detail
 [**DeleteBuyer**](BuyersApi.md#DeleteBuyer) | **Delete** /buyers/{buyer_id} | Delete buyer
-[**DeleteBuyerShippingAddress**](BuyersApi.md#DeleteBuyerShippingAddress) | **Delete** /buyers/{buyer_id}/shipping-details/{shipping_address_id} | Delete buyer shipping address
+[**DeleteBuyerShippingDetail**](BuyersApi.md#DeleteBuyerShippingDetail) | **Delete** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Delete buyer shipping detail
 [**GetBuyer**](BuyersApi.md#GetBuyer) | **Get** /buyers/{buyer_id} | Get buyer
-[**GetBuyerShippingAddresses**](BuyersApi.md#GetBuyerShippingAddresses) | **Get** /buyers/{buyer_id}/shipping-details | Get buyer shipping addresses
+[**GetBuyerShippingDetails**](BuyersApi.md#GetBuyerShippingDetails) | **Get** /buyers/{buyer_id}/shipping-details | Get buyer shipping details
 [**ListBuyers**](BuyersApi.md#ListBuyers) | **Get** /buyers | List buyers
 [**UpdateBuyer**](BuyersApi.md#UpdateBuyer) | **Put** /buyers/{buyer_id} | Update buyer
-[**UpdateBuyerShippingAddress**](BuyersApi.md#UpdateBuyerShippingAddress) | **Put** /buyers/{buyer_id}/shipping-details/{shipping_address_id} | Update buyer shipping address
+[**UpdateBuyerShippingDetail**](BuyersApi.md#UpdateBuyerShippingDetail) | **Put** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Update buyer shipping detail
 
 
 
@@ -82,11 +82,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## AddBuyerShippingAddress
+## AddBuyerShippingDetail
 
-> ShippingAddress AddBuyerShippingAddress(ctx, buyerId).ShippingAddressRequest(shippingAddressRequest).Execute()
+> ShippingDetail AddBuyerShippingDetail(ctx, buyerId).ShippingDetailRequest(shippingDetailRequest).Execute()
 
-New buyer shipping address
+New buyer shipping detail
 
 
 
@@ -104,17 +104,17 @@ import (
 
 func main() {
     buyerId := TODO // string | The unique ID for a buyer.
-    shippingAddressRequest := *openapiclient.NewShippingAddressRequest() // ShippingAddressRequest |  (optional)
+    shippingDetailRequest := *openapiclient.NewShippingDetailRequest() // ShippingDetailRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BuyersApi.AddBuyerShippingAddress(context.Background(), buyerId).ShippingAddressRequest(shippingAddressRequest).Execute()
+    resp, r, err := api_client.BuyersApi.AddBuyerShippingDetail(context.Background(), buyerId).ShippingDetailRequest(shippingDetailRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.AddBuyerShippingAddress``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.AddBuyerShippingDetail``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `AddBuyerShippingAddress`: ShippingAddress
-    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.AddBuyerShippingAddress`: %v\n", resp)
+    // response from `AddBuyerShippingDetail`: ShippingDetail
+    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.AddBuyerShippingDetail`: %v\n", resp)
 }
 ```
 
@@ -128,17 +128,17 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiAddBuyerShippingAddressRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiAddBuyerShippingDetailRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
- **shippingAddressRequest** | [**ShippingAddressRequest**](ShippingAddressRequest.md) |  | 
+ **shippingDetailRequest** | [**ShippingDetailRequest**](ShippingDetailRequest.md) |  | 
 
 ### Return type
 
-[**ShippingAddress**](ShippingAddress.md)
+[**ShippingDetail**](ShippingDetail.md)
 
 ### Authorization
 
@@ -222,11 +222,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## DeleteBuyerShippingAddress
+## DeleteBuyerShippingDetail
 
-> DeleteBuyerShippingAddress(ctx, buyerId, shippingAddressId).Execute()
+> DeleteBuyerShippingDetail(ctx, buyerId, shippingDetailId).Execute()
 
-Delete buyer shipping address
+Delete buyer shipping detail
 
 
 
@@ -244,13 +244,13 @@ import (
 
 func main() {
     buyerId := TODO // string | The unique ID for a buyer.
-    shippingAddressId := TODO // string | The unique ID for a shipping address.
+    shippingDetailId := TODO // string | The unique ID for a buyer's shipping detail.
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BuyersApi.DeleteBuyerShippingAddress(context.Background(), buyerId, shippingAddressId).Execute()
+    resp, r, err := api_client.BuyersApi.DeleteBuyerShippingDetail(context.Background(), buyerId, shippingDetailId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.DeleteBuyerShippingAddress``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.DeleteBuyerShippingDetail``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -263,11 +263,11 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **buyerId** | [**string**](.md) | The unique ID for a buyer. | 
-**shippingAddressId** | [**string**](.md) | The unique ID for a shipping address. | 
+**shippingDetailId** | [**string**](.md) | The unique ID for a buyer&#39;s shipping detail. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeleteBuyerShippingAddressRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteBuyerShippingDetailRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -363,11 +363,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetBuyerShippingAddresses
+## GetBuyerShippingDetails
 
-> ShippingAddresses GetBuyerShippingAddresses(ctx, buyerId).Execute()
+> ShippingDetails GetBuyerShippingDetails(ctx, buyerId).Execute()
 
-Get buyer shipping addresses
+Get buyer shipping details
 
 
 
@@ -388,13 +388,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BuyersApi.GetBuyerShippingAddresses(context.Background(), buyerId).Execute()
+    resp, r, err := api_client.BuyersApi.GetBuyerShippingDetails(context.Background(), buyerId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.GetBuyerShippingAddresses``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.GetBuyerShippingDetails``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetBuyerShippingAddresses`: ShippingAddresses
-    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.GetBuyerShippingAddresses`: %v\n", resp)
+    // response from `GetBuyerShippingDetails`: ShippingDetails
+    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.GetBuyerShippingDetails`: %v\n", resp)
 }
 ```
 
@@ -408,7 +408,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetBuyerShippingAddressesRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiGetBuyerShippingDetailsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -417,7 +417,7 @@ Name | Type | Description  | Notes
 
 ### Return type
 
-[**ShippingAddresses**](ShippingAddresses.md)
+[**ShippingDetails**](ShippingDetails.md)
 
 ### Authorization
 
@@ -575,11 +575,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## UpdateBuyerShippingAddress
+## UpdateBuyerShippingDetail
 
-> ShippingAddress UpdateBuyerShippingAddress(ctx, buyerId, shippingAddressId).ShippingAddressUpdateRequest(shippingAddressUpdateRequest).Execute()
+> ShippingDetail UpdateBuyerShippingDetail(ctx, buyerId, shippingDetailId).ShippingDetailUpdateRequest(shippingDetailUpdateRequest).Execute()
 
-Update buyer shipping address
+Update buyer shipping detail
 
 
 
@@ -597,18 +597,18 @@ import (
 
 func main() {
     buyerId := TODO // string | The unique ID for a buyer.
-    shippingAddressId := TODO // string | The unique ID for a shipping address.
-    shippingAddressUpdateRequest := *openapiclient.NewShippingAddressUpdateRequest() // ShippingAddressUpdateRequest |  (optional)
+    shippingDetailId := TODO // string | The unique ID for a buyer's shipping detail.
+    shippingDetailUpdateRequest := *openapiclient.NewShippingDetailUpdateRequest() // ShippingDetailUpdateRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BuyersApi.UpdateBuyerShippingAddress(context.Background(), buyerId, shippingAddressId).ShippingAddressUpdateRequest(shippingAddressUpdateRequest).Execute()
+    resp, r, err := api_client.BuyersApi.UpdateBuyerShippingDetail(context.Background(), buyerId, shippingDetailId).ShippingDetailUpdateRequest(shippingDetailUpdateRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.UpdateBuyerShippingAddress``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.UpdateBuyerShippingDetail``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `UpdateBuyerShippingAddress`: ShippingAddress
-    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.UpdateBuyerShippingAddress`: %v\n", resp)
+    // response from `UpdateBuyerShippingDetail`: ShippingDetail
+    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.UpdateBuyerShippingDetail`: %v\n", resp)
 }
 ```
 
@@ -619,22 +619,22 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 **ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
 **buyerId** | [**string**](.md) | The unique ID for a buyer. | 
-**shippingAddressId** | [**string**](.md) | The unique ID for a shipping address. | 
+**shippingDetailId** | [**string**](.md) | The unique ID for a buyer&#39;s shipping detail. | 
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiUpdateBuyerShippingAddressRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiUpdateBuyerShippingDetailRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
 
- **shippingAddressUpdateRequest** | [**ShippingAddressUpdateRequest**](ShippingAddressUpdateRequest.md) |  | 
+ **shippingDetailUpdateRequest** | [**ShippingDetailUpdateRequest**](ShippingDetailUpdateRequest.md) |  | 
 
 ### Return type
 
-[**ShippingAddress**](ShippingAddress.md)
+[**ShippingDetail**](ShippingDetail.md)
 
 ### Authorization
 

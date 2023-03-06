@@ -15,9 +15,9 @@ import (
 	"encoding/json"
 )
 
-// PaymentMethodsTokenized A list of stored payment methods in token format.
+// PaymentMethodsTokenized A list of stored payment methods in summarized format.
 type PaymentMethodsTokenized struct {
-	// A list of stored payment methods in token format.
+	// A list of stored payment methods in summarized format.
 	Items *[]PaymentMethodTokenized `json:"items,omitempty"`
 }
 

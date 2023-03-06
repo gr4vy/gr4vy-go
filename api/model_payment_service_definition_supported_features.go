@@ -21,6 +21,14 @@ type PaymentServiceDefinitionSupportedFeatures struct {
 	DelayedCapture *bool `json:"delayed_capture,omitempty"`
 	// Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor.
 	NetworkTokens *bool `json:"network_tokens,omitempty"`
+	// Supports processing network tokens by default.
+	NetworkTokensDefault *bool `json:"network_tokens_default,omitempty"`
+	// Supports toggling processing of network tokens on or off.
+	NetworkTokensToggle *bool `json:"network_tokens_toggle,omitempty"`
+	// Supports processing transactions with either raw PAN details or network tokens.
+	OpenLoop *bool `json:"open_loop,omitempty"`
+	// Supports toggling processing as open-loop on or off.
+	OpenLoopToggle *bool `json:"open_loop_toggle,omitempty"`
 	// Supports [partially refunding](#operation/refund-transaction) captured transactions.
 	PartialRefunds *bool `json:"partial_refunds,omitempty"`
 	// Supports storing a payment method via tokenization.
@@ -29,6 +37,8 @@ type PaymentServiceDefinitionSupportedFeatures struct {
 	PaymentMethodTokenizationToggle *bool `json:"payment_method_tokenization_toggle,omitempty"`
 	// Supports [refunding](#operation/refund-transaction) captured transactions.
 	Refunds *bool `json:"refunds,omitempty"`
+	// Requires merchant to set up `webhook_url` manually with provider.
+	RequiresWebhookSetup *bool `json:"requires_webhook_setup,omitempty"`
 	// Supports hosted 3-D Secure with a redirect.
 	ThreeDSecureHosted *bool `json:"three_d_secure_hosted,omitempty"`
 	// Supports passing 3-D Secure data to the underlying processor.
@@ -118,6 +128,134 @@ func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokens() bool {
 // SetNetworkTokens gets a reference to the given bool and assigns it to the NetworkTokens field.
 func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokens(v bool) {
 	o.NetworkTokens = &v
+}
+
+// GetNetworkTokensDefault returns the NetworkTokensDefault field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensDefault() bool {
+	if o == nil || o.NetworkTokensDefault == nil {
+		var ret bool
+		return ret
+	}
+	return *o.NetworkTokensDefault
+}
+
+// GetNetworkTokensDefaultOk returns a tuple with the NetworkTokensDefault field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensDefaultOk() (*bool, bool) {
+	if o == nil || o.NetworkTokensDefault == nil {
+		return nil, false
+	}
+	return o.NetworkTokensDefault, true
+}
+
+// HasNetworkTokensDefault returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokensDefault() bool {
+	if o != nil && o.NetworkTokensDefault != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkTokensDefault gets a reference to the given bool and assigns it to the NetworkTokensDefault field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokensDefault(v bool) {
+	o.NetworkTokensDefault = &v
+}
+
+// GetNetworkTokensToggle returns the NetworkTokensToggle field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensToggle() bool {
+	if o == nil || o.NetworkTokensToggle == nil {
+		var ret bool
+		return ret
+	}
+	return *o.NetworkTokensToggle
+}
+
+// GetNetworkTokensToggleOk returns a tuple with the NetworkTokensToggle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensToggleOk() (*bool, bool) {
+	if o == nil || o.NetworkTokensToggle == nil {
+		return nil, false
+	}
+	return o.NetworkTokensToggle, true
+}
+
+// HasNetworkTokensToggle returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokensToggle() bool {
+	if o != nil && o.NetworkTokensToggle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkTokensToggle gets a reference to the given bool and assigns it to the NetworkTokensToggle field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokensToggle(v bool) {
+	o.NetworkTokensToggle = &v
+}
+
+// GetOpenLoop returns the OpenLoop field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetOpenLoop() bool {
+	if o == nil || o.OpenLoop == nil {
+		var ret bool
+		return ret
+	}
+	return *o.OpenLoop
+}
+
+// GetOpenLoopOk returns a tuple with the OpenLoop field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetOpenLoopOk() (*bool, bool) {
+	if o == nil || o.OpenLoop == nil {
+		return nil, false
+	}
+	return o.OpenLoop, true
+}
+
+// HasOpenLoop returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasOpenLoop() bool {
+	if o != nil && o.OpenLoop != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenLoop gets a reference to the given bool and assigns it to the OpenLoop field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetOpenLoop(v bool) {
+	o.OpenLoop = &v
+}
+
+// GetOpenLoopToggle returns the OpenLoopToggle field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetOpenLoopToggle() bool {
+	if o == nil || o.OpenLoopToggle == nil {
+		var ret bool
+		return ret
+	}
+	return *o.OpenLoopToggle
+}
+
+// GetOpenLoopToggleOk returns a tuple with the OpenLoopToggle field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetOpenLoopToggleOk() (*bool, bool) {
+	if o == nil || o.OpenLoopToggle == nil {
+		return nil, false
+	}
+	return o.OpenLoopToggle, true
+}
+
+// HasOpenLoopToggle returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasOpenLoopToggle() bool {
+	if o != nil && o.OpenLoopToggle != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenLoopToggle gets a reference to the given bool and assigns it to the OpenLoopToggle field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetOpenLoopToggle(v bool) {
+	o.OpenLoopToggle = &v
 }
 
 // GetPartialRefunds returns the PartialRefunds field value if set, zero value otherwise.
@@ -246,6 +384,38 @@ func (o *PaymentServiceDefinitionSupportedFeatures) HasRefunds() bool {
 // SetRefunds gets a reference to the given bool and assigns it to the Refunds field.
 func (o *PaymentServiceDefinitionSupportedFeatures) SetRefunds(v bool) {
 	o.Refunds = &v
+}
+
+// GetRequiresWebhookSetup returns the RequiresWebhookSetup field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetRequiresWebhookSetup() bool {
+	if o == nil || o.RequiresWebhookSetup == nil {
+		var ret bool
+		return ret
+	}
+	return *o.RequiresWebhookSetup
+}
+
+// GetRequiresWebhookSetupOk returns a tuple with the RequiresWebhookSetup field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetRequiresWebhookSetupOk() (*bool, bool) {
+	if o == nil || o.RequiresWebhookSetup == nil {
+		return nil, false
+	}
+	return o.RequiresWebhookSetup, true
+}
+
+// HasRequiresWebhookSetup returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasRequiresWebhookSetup() bool {
+	if o != nil && o.RequiresWebhookSetup != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetRequiresWebhookSetup gets a reference to the given bool and assigns it to the RequiresWebhookSetup field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetRequiresWebhookSetup(v bool) {
+	o.RequiresWebhookSetup = &v
 }
 
 // GetThreeDSecureHosted returns the ThreeDSecureHosted field value if set, zero value otherwise.
@@ -384,6 +554,18 @@ func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error)
 	if o.NetworkTokens != nil {
 		toSerialize["network_tokens"] = o.NetworkTokens
 	}
+	if o.NetworkTokensDefault != nil {
+		toSerialize["network_tokens_default"] = o.NetworkTokensDefault
+	}
+	if o.NetworkTokensToggle != nil {
+		toSerialize["network_tokens_toggle"] = o.NetworkTokensToggle
+	}
+	if o.OpenLoop != nil {
+		toSerialize["open_loop"] = o.OpenLoop
+	}
+	if o.OpenLoopToggle != nil {
+		toSerialize["open_loop_toggle"] = o.OpenLoopToggle
+	}
 	if o.PartialRefunds != nil {
 		toSerialize["partial_refunds"] = o.PartialRefunds
 	}
@@ -395,6 +577,9 @@ func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error)
 	}
 	if o.Refunds != nil {
 		toSerialize["refunds"] = o.Refunds
+	}
+	if o.RequiresWebhookSetup != nil {
+		toSerialize["requires_webhook_setup"] = o.RequiresWebhookSetup
 	}
 	if o.ThreeDSecureHosted != nil {
 		toSerialize["three_d_secure_hosted"] = o.ThreeDSecureHosted

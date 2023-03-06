@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Version** | Pointer to **string** | The version of 3DS used for this transaction. | [optional] 
 **Status** | Pointer to **string** | The status of the 3DS challenge for this transaction. | [optional] 
 **Method** | Pointer to **string** | The method used for 3DS authentication for this transaction. | [optional] 
+**ErrorData** | Pointer to [**NullableThreeDSecureError**](ThreeDSecureError.md) | If the transaction had a 3DS error, information about it. | [optional] 
 **ResponseData** | Pointer to [**ThreeDSecureDataV1V2**](ThreeDSecureDataV1V2.md) |  | [optional] 
 
 ## Methods
@@ -103,6 +104,41 @@ SetMethod sets Method field to given value.
 
 HasMethod returns a boolean if a field has been set.
 
+### GetErrorData
+
+`func (o *ThreeDSecureSummary) GetErrorData() ThreeDSecureError`
+
+GetErrorData returns the ErrorData field if non-nil, zero value otherwise.
+
+### GetErrorDataOk
+
+`func (o *ThreeDSecureSummary) GetErrorDataOk() (*ThreeDSecureError, bool)`
+
+GetErrorDataOk returns a tuple with the ErrorData field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetErrorData
+
+`func (o *ThreeDSecureSummary) SetErrorData(v ThreeDSecureError)`
+
+SetErrorData sets ErrorData field to given value.
+
+### HasErrorData
+
+`func (o *ThreeDSecureSummary) HasErrorData() bool`
+
+HasErrorData returns a boolean if a field has been set.
+
+### SetErrorDataNil
+
+`func (o *ThreeDSecureSummary) SetErrorDataNil(b bool)`
+
+ SetErrorDataNil sets the value for ErrorData to be an explicit nil
+
+### UnsetErrorData
+`func (o *ThreeDSecureSummary) UnsetErrorData()`
+
+UnsetErrorData ensures that no value is present for ErrorData, not even an explicit nil
 ### GetResponseData
 
 `func (o *ThreeDSecureSummary) GetResponseData() ThreeDSecureDataV1V2`

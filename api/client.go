@@ -49,6 +49,8 @@ type APIClient struct {
 
 	// API Services
 
+	APILogsApi *APILogsApiService
+
 	AuditLogsApi *AuditLogsApiService
 
 	BuyersApi *BuyersApiService
@@ -59,9 +61,9 @@ type APIClient struct {
 
 	DigitalWalletsApi *DigitalWalletsApiService
 
-	PaymentMethodDefinitionsApi *PaymentMethodDefinitionsApiService
+	MerchantAccountsApi *MerchantAccountsApiService
 
-	PaymentMethodTokensApi *PaymentMethodTokensApiService
+	PaymentMethodDefinitionsApi *PaymentMethodDefinitionsApiService
 
 	PaymentMethodsApi *PaymentMethodsApiService
 
@@ -72,6 +74,8 @@ type APIClient struct {
 	PaymentServicesApi *PaymentServicesApiService
 
 	ReportsApi *ReportsApiService
+
+	RolesApi *RolesApiService
 
 	TransactionsApi *TransactionsApiService
 }
@@ -92,18 +96,20 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.common.client = c
 
 	// API Services
+	c.APILogsApi = (*APILogsApiService)(&c.common)
 	c.AuditLogsApi = (*AuditLogsApiService)(&c.common)
 	c.BuyersApi = (*BuyersApiService)(&c.common)
 	c.CardSchemeDefinitionsApi = (*CardSchemeDefinitionsApiService)(&c.common)
 	c.CheckoutSessionsApi = (*CheckoutSessionsApiService)(&c.common)
 	c.DigitalWalletsApi = (*DigitalWalletsApiService)(&c.common)
+	c.MerchantAccountsApi = (*MerchantAccountsApiService)(&c.common)
 	c.PaymentMethodDefinitionsApi = (*PaymentMethodDefinitionsApiService)(&c.common)
-	c.PaymentMethodTokensApi = (*PaymentMethodTokensApiService)(&c.common)
 	c.PaymentMethodsApi = (*PaymentMethodsApiService)(&c.common)
 	c.PaymentOptionsApi = (*PaymentOptionsApiService)(&c.common)
 	c.PaymentServiceDefinitionsApi = (*PaymentServiceDefinitionsApiService)(&c.common)
 	c.PaymentServicesApi = (*PaymentServicesApiService)(&c.common)
 	c.ReportsApi = (*ReportsApiService)(&c.common)
+	c.RolesApi = (*RolesApiService)(&c.common)
 	c.TransactionsApi = (*TransactionsApiService)(&c.common)
 
 	return c

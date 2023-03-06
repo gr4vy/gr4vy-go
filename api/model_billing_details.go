@@ -27,8 +27,10 @@ type BillingDetails struct {
 	EmailAddress NullableString `json:"email_address,omitempty"`
 	// The phone number of the buyer. This number is formatted according to the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
 	PhoneNumber NullableString `json:"phone_number,omitempty"`
-	Address *Address `json:"address,omitempty"`
-	TaxId *TaxId `json:"tax_id,omitempty"`
+	// The billing address of the buyer.
+	Address NullableAddress `json:"address,omitempty"`
+	// The tax information associated with the billing details.
+	TaxId NullableTaxId `json:"tax_id,omitempty"`
 }
 
 // NewBillingDetails instantiates a new BillingDetails object
@@ -248,68 +250,88 @@ func (o *BillingDetails) UnsetPhoneNumber() {
 	o.PhoneNumber.Unset()
 }
 
-// GetAddress returns the Address field value if set, zero value otherwise.
+// GetAddress returns the Address field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BillingDetails) GetAddress() Address {
-	if o == nil || o.Address == nil {
+	if o == nil || o.Address.Get() == nil {
 		var ret Address
 		return ret
 	}
-	return *o.Address
+	return *o.Address.Get()
 }
 
 // GetAddressOk returns a tuple with the Address field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BillingDetails) GetAddressOk() (*Address, bool) {
-	if o == nil || o.Address == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Address, true
+	return o.Address.Get(), o.Address.IsSet()
 }
 
 // HasAddress returns a boolean if a field has been set.
 func (o *BillingDetails) HasAddress() bool {
-	if o != nil && o.Address != nil {
+	if o != nil && o.Address.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAddress gets a reference to the given Address and assigns it to the Address field.
+// SetAddress gets a reference to the given NullableAddress and assigns it to the Address field.
 func (o *BillingDetails) SetAddress(v Address) {
-	o.Address = &v
+	o.Address.Set(&v)
+}
+// SetAddressNil sets the value for Address to be an explicit nil
+func (o *BillingDetails) SetAddressNil() {
+	o.Address.Set(nil)
 }
 
-// GetTaxId returns the TaxId field value if set, zero value otherwise.
+// UnsetAddress ensures that no value is present for Address, not even an explicit nil
+func (o *BillingDetails) UnsetAddress() {
+	o.Address.Unset()
+}
+
+// GetTaxId returns the TaxId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BillingDetails) GetTaxId() TaxId {
-	if o == nil || o.TaxId == nil {
+	if o == nil || o.TaxId.Get() == nil {
 		var ret TaxId
 		return ret
 	}
-	return *o.TaxId
+	return *o.TaxId.Get()
 }
 
 // GetTaxIdOk returns a tuple with the TaxId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BillingDetails) GetTaxIdOk() (*TaxId, bool) {
-	if o == nil || o.TaxId == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.TaxId, true
+	return o.TaxId.Get(), o.TaxId.IsSet()
 }
 
 // HasTaxId returns a boolean if a field has been set.
 func (o *BillingDetails) HasTaxId() bool {
-	if o != nil && o.TaxId != nil {
+	if o != nil && o.TaxId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTaxId gets a reference to the given TaxId and assigns it to the TaxId field.
+// SetTaxId gets a reference to the given NullableTaxId and assigns it to the TaxId field.
 func (o *BillingDetails) SetTaxId(v TaxId) {
-	o.TaxId = &v
+	o.TaxId.Set(&v)
+}
+// SetTaxIdNil sets the value for TaxId to be an explicit nil
+func (o *BillingDetails) SetTaxIdNil() {
+	o.TaxId.Set(nil)
+}
+
+// UnsetTaxId ensures that no value is present for TaxId, not even an explicit nil
+func (o *BillingDetails) UnsetTaxId() {
+	o.TaxId.Unset()
 }
 
 func (o BillingDetails) MarshalJSON() ([]byte, error) {
@@ -329,11 +351,11 @@ func (o BillingDetails) MarshalJSON() ([]byte, error) {
 	if o.PhoneNumber.IsSet() {
 		toSerialize["phone_number"] = o.PhoneNumber.Get()
 	}
-	if o.Address != nil {
-		toSerialize["address"] = o.Address
+	if o.Address.IsSet() {
+		toSerialize["address"] = o.Address.Get()
 	}
-	if o.TaxId != nil {
-		toSerialize["tax_id"] = o.TaxId
+	if o.TaxId.IsSet() {
+		toSerialize["tax_id"] = o.TaxId.Get()
 	}
 	return json.Marshal(toSerialize)
 }

@@ -13,12 +13,12 @@ Name | Type | Description | Notes
 **RefundedAmount** | Pointer to **int32** | The refunded amount for this transaction. This can be the total or a portion of the captured amount. | [optional] 
 **Currency** | Pointer to **string** | The currency code for this transaction. | [optional] 
 **Country** | Pointer to **NullableString** | The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.  | [optional] 
-**PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) |  | [optional] 
-**Buyer** | Pointer to [**BuyerSnapshot**](Buyer--Snapshot.md) |  | [optional] 
+**PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) | The payment method used for this transaction. | [optional] 
+**Buyer** | Pointer to [**NullableBuyerSnapshot**](Buyer--Snapshot.md) | The buyer used for this transaction. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this transaction was created in our system. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
-**PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) |  | [optional] 
+**PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) | The payment service used for this transaction. | [optional] 
 **Method** | Pointer to **string** |  | [optional] 
 **RawResponseCode** | Pointer to **NullableString** | This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
 **RawResponseDescription** | Pointer to **NullableString** | This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
@@ -327,6 +327,16 @@ SetBuyer sets Buyer field to given value.
 
 HasBuyer returns a boolean if a field has been set.
 
+### SetBuyerNil
+
+`func (o *TransactionSummary) SetBuyerNil(b bool)`
+
+ SetBuyerNil sets the value for Buyer to be an explicit nil
+
+### UnsetBuyer
+`func (o *TransactionSummary) UnsetBuyer()`
+
+UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *TransactionSummary) GetCreatedAt() time.Time`

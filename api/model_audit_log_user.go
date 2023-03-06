@@ -21,8 +21,12 @@ type AuditLogUser struct {
 	Id *string `json:"id,omitempty"`
 	// The name of the user.
 	Name *string `json:"name,omitempty"`
+	// The email address for this user.
+	EmailAddress NullableString `json:"email_address,omitempty"`
 	// Whether the user is Gr4vy staff.
 	Staff *bool `json:"staff,omitempty"`
+	// The status of the user.
+	Status *string `json:"status,omitempty"`
 }
 
 // NewAuditLogUser instantiates a new AuditLogUser object
@@ -106,6 +110,48 @@ func (o *AuditLogUser) SetName(v string) {
 	o.Name = &v
 }
 
+// GetEmailAddress returns the EmailAddress field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AuditLogUser) GetEmailAddress() string {
+	if o == nil || o.EmailAddress.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.EmailAddress.Get()
+}
+
+// GetEmailAddressOk returns a tuple with the EmailAddress field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AuditLogUser) GetEmailAddressOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.EmailAddress.Get(), o.EmailAddress.IsSet()
+}
+
+// HasEmailAddress returns a boolean if a field has been set.
+func (o *AuditLogUser) HasEmailAddress() bool {
+	if o != nil && o.EmailAddress.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetEmailAddress gets a reference to the given NullableString and assigns it to the EmailAddress field.
+func (o *AuditLogUser) SetEmailAddress(v string) {
+	o.EmailAddress.Set(&v)
+}
+// SetEmailAddressNil sets the value for EmailAddress to be an explicit nil
+func (o *AuditLogUser) SetEmailAddressNil() {
+	o.EmailAddress.Set(nil)
+}
+
+// UnsetEmailAddress ensures that no value is present for EmailAddress, not even an explicit nil
+func (o *AuditLogUser) UnsetEmailAddress() {
+	o.EmailAddress.Unset()
+}
+
 // GetStaff returns the Staff field value if set, zero value otherwise.
 func (o *AuditLogUser) GetStaff() bool {
 	if o == nil || o.Staff == nil {
@@ -138,6 +184,38 @@ func (o *AuditLogUser) SetStaff(v bool) {
 	o.Staff = &v
 }
 
+// GetStatus returns the Status field value if set, zero value otherwise.
+func (o *AuditLogUser) GetStatus() string {
+	if o == nil || o.Status == nil {
+		var ret string
+		return ret
+	}
+	return *o.Status
+}
+
+// GetStatusOk returns a tuple with the Status field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AuditLogUser) GetStatusOk() (*string, bool) {
+	if o == nil || o.Status == nil {
+		return nil, false
+	}
+	return o.Status, true
+}
+
+// HasStatus returns a boolean if a field has been set.
+func (o *AuditLogUser) HasStatus() bool {
+	if o != nil && o.Status != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetStatus gets a reference to the given string and assigns it to the Status field.
+func (o *AuditLogUser) SetStatus(v string) {
+	o.Status = &v
+}
+
 func (o AuditLogUser) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -146,8 +224,14 @@ func (o AuditLogUser) MarshalJSON() ([]byte, error) {
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
 	}
+	if o.EmailAddress.IsSet() {
+		toSerialize["email_address"] = o.EmailAddress.Get()
+	}
 	if o.Staff != nil {
 		toSerialize["staff"] = o.Staff
+	}
+	if o.Status != nil {
+		toSerialize["status"] = o.Status
 	}
 	return json.Marshal(toSerialize)
 }

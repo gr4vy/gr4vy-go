@@ -296,7 +296,7 @@ Name | Type | Description  | Notes
 
 ## ListAllReportExecutions
 
-> ReportExecutions ListAllReportExecutions(ctx).Cursor(cursor).Limit(limit).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).ReportName(reportName).Execute()
+> ReportExecutions ListAllReportExecutions(ctx).Cursor(cursor).Limit(limit).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).ReportName(reportName).Status(status).Execute()
 
 List all report executions
 
@@ -321,10 +321,11 @@ func main() {
     createdAtGte := time.Now() // time.Time | Filters the results to report executions created after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`. (optional)
     createdAtLte := time.Now() // time.Time | Filters the results to report executions created before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`. (optional)
     reportName := "Failed+Authorizations+042022" // string | Filters for executions of reports that have a matching `name` value. This filter is case-insensitive.  Ensure that when necessary, the value you pass for this filter is URL encoded. (optional)
+    status := []string{"succeeded"} // []string | Filters for report executions that have a matching `status` value.  This filter accepts multiple values. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReportsApi.ListAllReportExecutions(context.Background()).Cursor(cursor).Limit(limit).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).ReportName(reportName).Execute()
+    resp, r, err := api_client.ReportsApi.ListAllReportExecutions(context.Background()).Cursor(cursor).Limit(limit).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).ReportName(reportName).Status(status).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReportsApi.ListAllReportExecutions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -350,6 +351,7 @@ Name | Type | Description  | Notes
  **createdAtGte** | **time.Time** | Filters the results to report executions created after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;. | 
  **createdAtLte** | **time.Time** | Filters the results to report executions created before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;. | 
  **reportName** | **string** | Filters for executions of reports that have a matching &#x60;name&#x60; value. This filter is case-insensitive.  Ensure that when necessary, the value you pass for this filter is URL encoded. | 
+ **status** | **[]string** | Filters for report executions that have a matching &#x60;status&#x60; value.  This filter accepts multiple values. | 
 
 ### Return type
 

@@ -21,9 +21,9 @@ type AntiFraudServiceCreate struct {
 	AntiFraudServiceDefinitionId string `json:"anti_fraud_service_definition_id"`
 	// A unique name for this anti-fraud service which is used in the Gr4vy admin panel to give a anti-fraud Service a human readable name.
 	DisplayName string `json:"display_name"`
-	// Defines if this service is currently active or not.
+	// Defines if this service is currently active or not. There can only be one active service at any time. When updating a service to active, the current active service will be deactivated.
 	Active *bool `json:"active,omitempty"`
-	// A list of fields, each containing a key-value pair for each field defined by the definition for this anti-fraud service e.g. for sift `api_key` must be sent within this field when creating the service.  For updates, only the fields sent here will be updated, existing ones will not be affected if not present.
+	// A list of fields, each containing a key-value pair for each field defined by the definition for this anti-fraud service e.g. for Sift `api_key` must be sent within this field when creating the service.  For updates, only the fields sent here will be updated, existing ones will not be affected if not present.
 	Fields []AntiFraudServiceUpdateFields `json:"fields"`
 }
 

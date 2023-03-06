@@ -23,6 +23,7 @@ type PaymentServiceDefinition struct {
 	Type *string `json:"type,omitempty"`
 	// The display name of this service.
 	DisplayName *string `json:"display_name,omitempty"`
+	// The ID of the payment method that this services handles.
 	Method *string `json:"method,omitempty"`
 	// A list of fields that need to be submitted when activating the payment. service.
 	Fields *[]PaymentServiceDefinitionFields `json:"fields,omitempty"`
@@ -30,6 +31,7 @@ type PaymentServiceDefinition struct {
 	SupportedCurrencies *[]string `json:"supported_currencies,omitempty"`
 	// A list of two-letter ISO country codes that this service supports.
 	SupportedCountries *[]string `json:"supported_countries,omitempty"`
+	// The mode of this payment service.
 	Mode *string `json:"mode,omitempty"`
 	SupportedFeatures *PaymentServiceDefinitionSupportedFeatures `json:"supported_features,omitempty"`
 	// An icon to display for the payment service.

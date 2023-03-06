@@ -127,6 +127,48 @@ func (c *Gr4vyClient) AuthorizeNewTransactionContext(ctx context.Context, body G
     var r Gr4vyTransaction = Gr4vyTransaction(response)
     return &r, http, err
 }
+func (c *Gr4vyClient) AuthorizeNewTransactionWithIdempotencyKey(body Gr4vyTransactionRequest, pm Gr4vyTransactionPaymentMethodRequest, ik string) (*Gr4vyTransaction, *http.Response, error) {
+    client, err := GetClient(c)
+    if err != nil {
+        return nil, nil, err
+    }
+    auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+    p := client.TransactionsApi.AuthorizeNewTransaction(auth)
+
+    p = p.IdempotencyKey(ik)
+    
+    var b TransactionRequest = TransactionRequest(body)
+    var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
+    b.PaymentMethod = tpm
+    response, http, err := p.TransactionRequest(b).Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyTransaction = Gr4vyTransaction(response)
+    return &r, http, err
+}
+func (c *Gr4vyClient) AuthorizeNewTransactionContextWithIdempotencyKey(ctx context.Context, body Gr4vyTransactionRequest, pm Gr4vyTransactionPaymentMethodRequest, ik string) (*Gr4vyTransaction, *http.Response, error) {
+    client, err := GetClient(c)
+    if err != nil {
+        return nil, nil, err
+    }
+    auth := context.WithValue(ctx, ContextAccessToken, c.accessToken)
+    p := client.TransactionsApi.AuthorizeNewTransaction(auth)
+    
+    p = p.IdempotencyKey(ik)
+
+    var b TransactionRequest = TransactionRequest(body)
+    var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
+    b.PaymentMethod = tpm
+    response, http, err := p.TransactionRequest(b).Execute()
+    c.HandleResponse(http, err)
+    if (err != nil) {
+        return nil, http, err
+    }
+    var r Gr4vyTransaction = Gr4vyTransaction(response)
+    return &r, http, err
+}
 
 func (c *Gr4vyClient) CaptureTransaction(transaction_id string, body Gr4vyTransactionCaptureRequest) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)

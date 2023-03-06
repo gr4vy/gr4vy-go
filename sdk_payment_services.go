@@ -6,7 +6,7 @@ import (
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
-type Gr4vyPaymentServiceUpdateFields PaymentServiceUpdateFields
+type Gr4vyPaymentServiceRequestFields PaymentServiceRequestFields
 type Gr4vyPaymentServiceRequest PaymentServiceRequest
 type Gr4vyPaymentServiceUpdate PaymentServiceUpdate
 type Gr4vyPaymentService PaymentService
@@ -86,7 +86,7 @@ func (c *Gr4vyClient) GetPaymentServiceContext(ctx context.Context, payment_serv
     return &r, http, err
 }
 
-func (c *Gr4vyClient) AddPaymentService(body Gr4vyPaymentServiceRequest, fields []Gr4vyPaymentServiceUpdateFields) (*Gr4vyPaymentService, *http.Response, error) {
+func (c *Gr4vyClient) AddPaymentService(body Gr4vyPaymentServiceRequest, fields []Gr4vyPaymentServiceRequestFields) (*Gr4vyPaymentService, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -95,9 +95,9 @@ func (c *Gr4vyClient) AddPaymentService(body Gr4vyPaymentServiceRequest, fields 
     p := client.PaymentServicesApi.AddPaymentService(auth)
 
     var b PaymentServiceRequest = PaymentServiceRequest(body)
-	var f []PaymentServiceUpdateFields
+	var f []PaymentServiceRequestFields
     for _, element := range fields {
-        var c PaymentServiceUpdateFields = PaymentServiceUpdateFields(element)
+        var c PaymentServiceRequestFields = PaymentServiceRequestFields(element)
         f = append(f, c)
     }
     b.Fields = f
@@ -109,7 +109,7 @@ func (c *Gr4vyClient) AddPaymentService(body Gr4vyPaymentServiceRequest, fields 
     var r Gr4vyPaymentService = Gr4vyPaymentService(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) AddPaymentServiceContext(ctx context.Context, body Gr4vyPaymentServiceRequest, fields []Gr4vyPaymentServiceUpdateFields) (*Gr4vyPaymentService, *http.Response, error) {
+func (c *Gr4vyClient) AddPaymentServiceContext(ctx context.Context, body Gr4vyPaymentServiceRequest, fields []Gr4vyPaymentServiceRequestFields) (*Gr4vyPaymentService, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
         return nil, nil, err
@@ -118,9 +118,9 @@ func (c *Gr4vyClient) AddPaymentServiceContext(ctx context.Context, body Gr4vyPa
     p := client.PaymentServicesApi.AddPaymentService(auth)
 
     var b PaymentServiceRequest = PaymentServiceRequest(body)
-    var f []PaymentServiceUpdateFields
+    var f []PaymentServiceRequestFields
     for _, element := range fields {
-        var c PaymentServiceUpdateFields = PaymentServiceUpdateFields(element)
+        var c PaymentServiceRequestFields = PaymentServiceRequestFields(element)
         f = append(f, c)
     }
     b.Fields = f

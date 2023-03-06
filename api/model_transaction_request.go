@@ -24,7 +24,7 @@ type TransactionRequest struct {
 	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.  If this value is provided for redirect requests and it's not `null`, it must match the one specified for `country` in `payment_method`. Otherwise, the value specified for `country` in `payment_method` will be assumed implicitly. 
 	Country NullableString `json:"country,omitempty"`
 	PaymentMethod TransactionPaymentMethodRequest `json:"payment_method"`
-	// Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. There are also a few restrictions on how the flag may be set:  * The flag has to be set to `true` when the `payment_source` is set to `recurring` or `installment`, and `merchant_initiated` is set to `false`.  * The flag has to be set to `false` (or not set) when using a previously tokenized payment method.
+	// Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. There are also a few restrictions on how the flag may be set:  * The flag has to be set to `true` when the `payment_source` is set to `recurring` or `installment`, and `merchant_initiated` is set to `false`.  * The flag has to be set to `false` (or not set) when using a previously vaulted payment method.
 	Store *bool `json:"store,omitempty"`
 	// Defines the intent of this API call. This determines the desired initial state of the transaction.  * `authorize` - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * `capture` - Optionally approves and then authorizes and captures the funds of the transaction.
 	Intent *string `json:"intent,omitempty"`
@@ -37,16 +37,21 @@ type TransactionRequest struct {
 	PaymentSource *string `json:"payment_source,omitempty"`
 	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.  The flag can only be `false` (or not set) when the transaction meets one of the following criteria:  * It is not `merchant_initiated`. * `payment_source` is set to `card_on_file`.  The flag can only be set to `true` when the transaction meets one of the following criteria:  * It is not `merchant_initiated`. * `payment_source` is set to `recurring` or `installment` and `merchant_initiated` is set to `true`. * `payment_source` is set to `card_on_file`.
 	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
-	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://gr4vy.com/docs/ under `Connections` for more information on how specific providers support metadata.
+	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://docs.gr4vy.com/ under `Connections` for more information on how specific providers support metadata. Please note the metadata key is case sensitive when used in Flow.
 	Metadata *map[string]string `json:"metadata,omitempty"`
-	StatementDescriptor *StatementDescriptor `json:"statement_descriptor,omitempty"`
+	StatementDescriptor NullableStatementDescriptor `json:"statement_descriptor,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
 	CartItems *[]CartItem `json:"cart_items,omitempty"`
 	// A scheme's transaction identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction.  If not provided, and a qualifying customer initiated transaction has been previously made, then Gr4vy will populate this value with the identifier returned for that transaction.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID.
 	PreviousSchemeTransactionId NullableString `json:"previous_scheme_transaction_id,omitempty"`
-	BrowserInfo *BrowserInfo `json:"browser_info,omitempty"`
-	// The unique identifier of a set of shipping details stored for the buyer.  If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the address in the database.
+	// Information about the browser used by the buyer.
+	BrowserInfo NullableBrowserInfo `json:"browser_info,omitempty"`
+	// The unique identifier of a set of shipping details stored for the buyer.  If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the detail in the database.
 	ShippingDetailsId NullableString `json:"shipping_details_id,omitempty"`
+	// Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.
+	ConnectionOptions NullableConnectionOptions `json:"connection_options,omitempty"`
+	// Whether to capture the transaction asynchronously.  - When `async_capture` is `false` (default), the transaction is captured   in the same request. - When `async_capture` is `true`, the transaction is automatically   captured at a later time.  Redirect transactions are not affected by this flag.  This flag can only be set to `true` when `intent` is set to `capture`.
+	AsyncCapture *bool `json:"async_capture,omitempty"`
 }
 
 // NewTransactionRequest instantiates a new TransactionRequest object
@@ -68,6 +73,8 @@ func NewTransactionRequest(amount int32, currency string, paymentMethod Transact
 	this.IsSubsequentPayment = &isSubsequentPayment
 	var previousSchemeTransactionId string = "null"
 	this.PreviousSchemeTransactionId = *NewNullableString(&previousSchemeTransactionId)
+	var asyncCapture bool = false
+	this.AsyncCapture = &asyncCapture
 	return &this
 }
 
@@ -86,6 +93,8 @@ func NewTransactionRequestWithDefaults() *TransactionRequest {
 	this.IsSubsequentPayment = &isSubsequentPayment
 	var previousSchemeTransactionId string = "null"
 	this.PreviousSchemeTransactionId = *NewNullableString(&previousSchemeTransactionId)
+	var asyncCapture bool = false
+	this.AsyncCapture = &asyncCapture
 	return &this
 }
 
@@ -469,36 +478,46 @@ func (o *TransactionRequest) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
-// GetStatementDescriptor returns the StatementDescriptor field value if set, zero value otherwise.
+// GetStatementDescriptor returns the StatementDescriptor field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionRequest) GetStatementDescriptor() StatementDescriptor {
-	if o == nil || o.StatementDescriptor == nil {
+	if o == nil || o.StatementDescriptor.Get() == nil {
 		var ret StatementDescriptor
 		return ret
 	}
-	return *o.StatementDescriptor
+	return *o.StatementDescriptor.Get()
 }
 
 // GetStatementDescriptorOk returns a tuple with the StatementDescriptor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionRequest) GetStatementDescriptorOk() (*StatementDescriptor, bool) {
-	if o == nil || o.StatementDescriptor == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.StatementDescriptor, true
+	return o.StatementDescriptor.Get(), o.StatementDescriptor.IsSet()
 }
 
 // HasStatementDescriptor returns a boolean if a field has been set.
 func (o *TransactionRequest) HasStatementDescriptor() bool {
-	if o != nil && o.StatementDescriptor != nil {
+	if o != nil && o.StatementDescriptor.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStatementDescriptor gets a reference to the given StatementDescriptor and assigns it to the StatementDescriptor field.
+// SetStatementDescriptor gets a reference to the given NullableStatementDescriptor and assigns it to the StatementDescriptor field.
 func (o *TransactionRequest) SetStatementDescriptor(v StatementDescriptor) {
-	o.StatementDescriptor = &v
+	o.StatementDescriptor.Set(&v)
+}
+// SetStatementDescriptorNil sets the value for StatementDescriptor to be an explicit nil
+func (o *TransactionRequest) SetStatementDescriptorNil() {
+	o.StatementDescriptor.Set(nil)
+}
+
+// UnsetStatementDescriptor ensures that no value is present for StatementDescriptor, not even an explicit nil
+func (o *TransactionRequest) UnsetStatementDescriptor() {
+	o.StatementDescriptor.Unset()
 }
 
 // GetCartItems returns the CartItems field value if set, zero value otherwise.
@@ -575,36 +594,46 @@ func (o *TransactionRequest) UnsetPreviousSchemeTransactionId() {
 	o.PreviousSchemeTransactionId.Unset()
 }
 
-// GetBrowserInfo returns the BrowserInfo field value if set, zero value otherwise.
+// GetBrowserInfo returns the BrowserInfo field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionRequest) GetBrowserInfo() BrowserInfo {
-	if o == nil || o.BrowserInfo == nil {
+	if o == nil || o.BrowserInfo.Get() == nil {
 		var ret BrowserInfo
 		return ret
 	}
-	return *o.BrowserInfo
+	return *o.BrowserInfo.Get()
 }
 
 // GetBrowserInfoOk returns a tuple with the BrowserInfo field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionRequest) GetBrowserInfoOk() (*BrowserInfo, bool) {
-	if o == nil || o.BrowserInfo == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.BrowserInfo, true
+	return o.BrowserInfo.Get(), o.BrowserInfo.IsSet()
 }
 
 // HasBrowserInfo returns a boolean if a field has been set.
 func (o *TransactionRequest) HasBrowserInfo() bool {
-	if o != nil && o.BrowserInfo != nil {
+	if o != nil && o.BrowserInfo.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBrowserInfo gets a reference to the given BrowserInfo and assigns it to the BrowserInfo field.
+// SetBrowserInfo gets a reference to the given NullableBrowserInfo and assigns it to the BrowserInfo field.
 func (o *TransactionRequest) SetBrowserInfo(v BrowserInfo) {
-	o.BrowserInfo = &v
+	o.BrowserInfo.Set(&v)
+}
+// SetBrowserInfoNil sets the value for BrowserInfo to be an explicit nil
+func (o *TransactionRequest) SetBrowserInfoNil() {
+	o.BrowserInfo.Set(nil)
+}
+
+// UnsetBrowserInfo ensures that no value is present for BrowserInfo, not even an explicit nil
+func (o *TransactionRequest) UnsetBrowserInfo() {
+	o.BrowserInfo.Unset()
 }
 
 // GetShippingDetailsId returns the ShippingDetailsId field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -649,6 +678,80 @@ func (o *TransactionRequest) UnsetShippingDetailsId() {
 	o.ShippingDetailsId.Unset()
 }
 
+// GetConnectionOptions returns the ConnectionOptions field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRequest) GetConnectionOptions() ConnectionOptions {
+	if o == nil || o.ConnectionOptions.Get() == nil {
+		var ret ConnectionOptions
+		return ret
+	}
+	return *o.ConnectionOptions.Get()
+}
+
+// GetConnectionOptionsOk returns a tuple with the ConnectionOptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRequest) GetConnectionOptionsOk() (*ConnectionOptions, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ConnectionOptions.Get(), o.ConnectionOptions.IsSet()
+}
+
+// HasConnectionOptions returns a boolean if a field has been set.
+func (o *TransactionRequest) HasConnectionOptions() bool {
+	if o != nil && o.ConnectionOptions.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetConnectionOptions gets a reference to the given NullableConnectionOptions and assigns it to the ConnectionOptions field.
+func (o *TransactionRequest) SetConnectionOptions(v ConnectionOptions) {
+	o.ConnectionOptions.Set(&v)
+}
+// SetConnectionOptionsNil sets the value for ConnectionOptions to be an explicit nil
+func (o *TransactionRequest) SetConnectionOptionsNil() {
+	o.ConnectionOptions.Set(nil)
+}
+
+// UnsetConnectionOptions ensures that no value is present for ConnectionOptions, not even an explicit nil
+func (o *TransactionRequest) UnsetConnectionOptions() {
+	o.ConnectionOptions.Unset()
+}
+
+// GetAsyncCapture returns the AsyncCapture field value if set, zero value otherwise.
+func (o *TransactionRequest) GetAsyncCapture() bool {
+	if o == nil || o.AsyncCapture == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AsyncCapture
+}
+
+// GetAsyncCaptureOk returns a tuple with the AsyncCapture field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRequest) GetAsyncCaptureOk() (*bool, bool) {
+	if o == nil || o.AsyncCapture == nil {
+		return nil, false
+	}
+	return o.AsyncCapture, true
+}
+
+// HasAsyncCapture returns a boolean if a field has been set.
+func (o *TransactionRequest) HasAsyncCapture() bool {
+	if o != nil && o.AsyncCapture != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAsyncCapture gets a reference to the given bool and assigns it to the AsyncCapture field.
+func (o *TransactionRequest) SetAsyncCapture(v bool) {
+	o.AsyncCapture = &v
+}
+
 func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -687,8 +790,8 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.StatementDescriptor != nil {
-		toSerialize["statement_descriptor"] = o.StatementDescriptor
+	if o.StatementDescriptor.IsSet() {
+		toSerialize["statement_descriptor"] = o.StatementDescriptor.Get()
 	}
 	if o.CartItems != nil {
 		toSerialize["cart_items"] = o.CartItems
@@ -696,11 +799,17 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	if o.PreviousSchemeTransactionId.IsSet() {
 		toSerialize["previous_scheme_transaction_id"] = o.PreviousSchemeTransactionId.Get()
 	}
-	if o.BrowserInfo != nil {
-		toSerialize["browser_info"] = o.BrowserInfo
+	if o.BrowserInfo.IsSet() {
+		toSerialize["browser_info"] = o.BrowserInfo.Get()
 	}
 	if o.ShippingDetailsId.IsSet() {
 		toSerialize["shipping_details_id"] = o.ShippingDetailsId.Get()
+	}
+	if o.ConnectionOptions.IsSet() {
+		toSerialize["connection_options"] = o.ConnectionOptions.Get()
+	}
+	if o.AsyncCapture != nil {
+		toSerialize["async_capture"] = o.AsyncCapture
 	}
 	return json.Marshal(toSerialize)
 }

@@ -36,14 +36,17 @@ type Transaction struct {
 	Currency *string `json:"currency,omitempty"`
 	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction. 
 	Country NullableString `json:"country,omitempty"`
+	// The payment method used for this transaction.
 	PaymentMethod *PaymentMethodSnapshot `json:"payment_method,omitempty"`
-	Buyer *BuyerSnapshot `json:"buyer,omitempty"`
+	// The buyer used for this transaction.
+	Buyer NullableBuyerSnapshot `json:"buyer,omitempty"`
 	// The date and time when this transaction was created in our system.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// An external identifier that can be used to match the transaction against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// Defines when the transaction was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// The payment service used for this transaction.
 	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
 	// Indicates whether the transaction was initiated by the merchant (true) or customer (false).
 	MerchantInitiated *bool `json:"merchant_initiated,omitempty"`
@@ -51,7 +54,7 @@ type Transaction struct {
 	PaymentSource *string `json:"payment_source,omitempty"`
 	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.  The flag can only be `false` (or not set) when the transaction meets one of the following criteria:  * It is not `merchant_initiated`. * `payment_source` is set to `card_on_file`.  The flag can only be set to `true` when the transaction meets one of the following criteria:  * It is not `merchant_initiated`. * `payment_source` is set to `recurring` or `installment` and `merchant_initiated` is set to `true`. * `payment_source` is set to `card_on_file`.
 	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
-	StatementDescriptor *StatementDescriptor `json:"statement_descriptor,omitempty"`
+	StatementDescriptor NullableStatementDescriptor `json:"statement_descriptor,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
 	CartItems *[]CartItem `json:"cart_items,omitempty"`
 	// An identifier for the transaction used by the scheme itself, when available.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID.
@@ -69,7 +72,8 @@ type Transaction struct {
 	PaymentServiceTransactionId *string `json:"payment_service_transaction_id,omitempty"`
 	// Additional information about the transaction stored as key-value pairs.
 	Metadata *map[string]string `json:"metadata,omitempty"`
-	ShippingDetails *ShippingAddress `json:"shipping_details,omitempty"`
+	// The shipping details associated with the transaction.
+	ShippingDetails NullableShippingDetail `json:"shipping_details,omitempty"`
 	ThreeDSecure *ThreeDSecureSummary `json:"three_d_secure,omitempty"`
 	// The date and time when this transaction was authorized in the payment service.  Don't use this field to determine whether the transaction was authorized. A `null` value doesn't necessarily imply that the transaction wasn't authorized, it can mean that the payment service doesn't provide this value, that it didn't provide it at the time the transaction was authorized or that the transaction was authorized before the introduction of this field.
 	AuthorizedAt NullableTime `json:"authorized_at,omitempty"`
@@ -438,36 +442,46 @@ func (o *Transaction) SetPaymentMethod(v PaymentMethodSnapshot) {
 	o.PaymentMethod = &v
 }
 
-// GetBuyer returns the Buyer field value if set, zero value otherwise.
+// GetBuyer returns the Buyer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetBuyer() BuyerSnapshot {
-	if o == nil || o.Buyer == nil {
+	if o == nil || o.Buyer.Get() == nil {
 		var ret BuyerSnapshot
 		return ret
 	}
-	return *o.Buyer
+	return *o.Buyer.Get()
 }
 
 // GetBuyerOk returns a tuple with the Buyer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetBuyerOk() (*BuyerSnapshot, bool) {
-	if o == nil || o.Buyer == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Buyer, true
+	return o.Buyer.Get(), o.Buyer.IsSet()
 }
 
 // HasBuyer returns a boolean if a field has been set.
 func (o *Transaction) HasBuyer() bool {
-	if o != nil && o.Buyer != nil {
+	if o != nil && o.Buyer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBuyer gets a reference to the given BuyerSnapshot and assigns it to the Buyer field.
+// SetBuyer gets a reference to the given NullableBuyerSnapshot and assigns it to the Buyer field.
 func (o *Transaction) SetBuyer(v BuyerSnapshot) {
-	o.Buyer = &v
+	o.Buyer.Set(&v)
+}
+// SetBuyerNil sets the value for Buyer to be an explicit nil
+func (o *Transaction) SetBuyerNil() {
+	o.Buyer.Set(nil)
+}
+
+// UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
+func (o *Transaction) UnsetBuyer() {
+	o.Buyer.Unset()
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -704,36 +718,46 @@ func (o *Transaction) SetIsSubsequentPayment(v bool) {
 	o.IsSubsequentPayment = &v
 }
 
-// GetStatementDescriptor returns the StatementDescriptor field value if set, zero value otherwise.
+// GetStatementDescriptor returns the StatementDescriptor field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetStatementDescriptor() StatementDescriptor {
-	if o == nil || o.StatementDescriptor == nil {
+	if o == nil || o.StatementDescriptor.Get() == nil {
 		var ret StatementDescriptor
 		return ret
 	}
-	return *o.StatementDescriptor
+	return *o.StatementDescriptor.Get()
 }
 
 // GetStatementDescriptorOk returns a tuple with the StatementDescriptor field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *Transaction) GetStatementDescriptorOk() (*StatementDescriptor, bool) {
-	if o == nil || o.StatementDescriptor == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.StatementDescriptor, true
+	return o.StatementDescriptor.Get(), o.StatementDescriptor.IsSet()
 }
 
 // HasStatementDescriptor returns a boolean if a field has been set.
 func (o *Transaction) HasStatementDescriptor() bool {
-	if o != nil && o.StatementDescriptor != nil {
+	if o != nil && o.StatementDescriptor.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetStatementDescriptor gets a reference to the given StatementDescriptor and assigns it to the StatementDescriptor field.
+// SetStatementDescriptor gets a reference to the given NullableStatementDescriptor and assigns it to the StatementDescriptor field.
 func (o *Transaction) SetStatementDescriptor(v StatementDescriptor) {
-	o.StatementDescriptor = &v
+	o.StatementDescriptor.Set(&v)
+}
+// SetStatementDescriptorNil sets the value for StatementDescriptor to be an explicit nil
+func (o *Transaction) SetStatementDescriptorNil() {
+	o.StatementDescriptor.Set(nil)
+}
+
+// UnsetStatementDescriptor ensures that no value is present for StatementDescriptor, not even an explicit nil
+func (o *Transaction) UnsetStatementDescriptor() {
+	o.StatementDescriptor.Unset()
 }
 
 // GetCartItems returns the CartItems field value if set, zero value otherwise.
@@ -1074,36 +1098,46 @@ func (o *Transaction) SetMetadata(v map[string]string) {
 	o.Metadata = &v
 }
 
-// GetShippingDetails returns the ShippingDetails field value if set, zero value otherwise.
-func (o *Transaction) GetShippingDetails() ShippingAddress {
-	if o == nil || o.ShippingDetails == nil {
-		var ret ShippingAddress
+// GetShippingDetails returns the ShippingDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetShippingDetails() ShippingDetail {
+	if o == nil || o.ShippingDetails.Get() == nil {
+		var ret ShippingDetail
 		return ret
 	}
-	return *o.ShippingDetails
+	return *o.ShippingDetails.Get()
 }
 
 // GetShippingDetailsOk returns a tuple with the ShippingDetails field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetShippingDetailsOk() (*ShippingAddress, bool) {
-	if o == nil || o.ShippingDetails == nil {
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetShippingDetailsOk() (*ShippingDetail, bool) {
+	if o == nil  {
 		return nil, false
 	}
-	return o.ShippingDetails, true
+	return o.ShippingDetails.Get(), o.ShippingDetails.IsSet()
 }
 
 // HasShippingDetails returns a boolean if a field has been set.
 func (o *Transaction) HasShippingDetails() bool {
-	if o != nil && o.ShippingDetails != nil {
+	if o != nil && o.ShippingDetails.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetShippingDetails gets a reference to the given ShippingAddress and assigns it to the ShippingDetails field.
-func (o *Transaction) SetShippingDetails(v ShippingAddress) {
-	o.ShippingDetails = &v
+// SetShippingDetails gets a reference to the given NullableShippingDetail and assigns it to the ShippingDetails field.
+func (o *Transaction) SetShippingDetails(v ShippingDetail) {
+	o.ShippingDetails.Set(&v)
+}
+// SetShippingDetailsNil sets the value for ShippingDetails to be an explicit nil
+func (o *Transaction) SetShippingDetailsNil() {
+	o.ShippingDetails.Set(nil)
+}
+
+// UnsetShippingDetails ensures that no value is present for ShippingDetails, not even an explicit nil
+func (o *Transaction) UnsetShippingDetails() {
+	o.ShippingDetails.Unset()
 }
 
 // GetThreeDSecure returns the ThreeDSecure field value if set, zero value otherwise.
@@ -1296,8 +1330,8 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	if o.PaymentMethod != nil {
 		toSerialize["payment_method"] = o.PaymentMethod
 	}
-	if o.Buyer != nil {
-		toSerialize["buyer"] = o.Buyer
+	if o.Buyer.IsSet() {
+		toSerialize["buyer"] = o.Buyer.Get()
 	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt
@@ -1320,8 +1354,8 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	if o.IsSubsequentPayment != nil {
 		toSerialize["is_subsequent_payment"] = o.IsSubsequentPayment
 	}
-	if o.StatementDescriptor != nil {
-		toSerialize["statement_descriptor"] = o.StatementDescriptor
+	if o.StatementDescriptor.IsSet() {
+		toSerialize["statement_descriptor"] = o.StatementDescriptor.Get()
 	}
 	if o.CartItems != nil {
 		toSerialize["cart_items"] = o.CartItems
@@ -1350,8 +1384,8 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
 	}
-	if o.ShippingDetails != nil {
-		toSerialize["shipping_details"] = o.ShippingDetails
+	if o.ShippingDetails.IsSet() {
+		toSerialize["shipping_details"] = o.ShippingDetails.Get()
 	}
 	if o.ThreeDSecure != nil {
 		toSerialize["three_d_secure"] = o.ThreeDSecure

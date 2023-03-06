@@ -34,6 +34,12 @@ type DigitalWallet struct {
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this digital wallet was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// The number of active custom certificates registered for this digital wallet (Apple Pay only).
+	ActiveCertificateCount *int32 `json:"active_certificate_count,omitempty"`
+	// The number of pending custom certificates registered for this digital wallet (Apple Pay only).
+	PendingCertificateCount *int32 `json:"pending_certificate_count,omitempty"`
+	// The number of expired custom certificates registered for this digital wallet (Apple Pay only).
+	ExpiredCertificateCount *int32 `json:"expired_certificate_count,omitempty"`
 }
 
 // NewDigitalWallet instantiates a new DigitalWallet object
@@ -323,6 +329,102 @@ func (o *DigitalWallet) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetActiveCertificateCount returns the ActiveCertificateCount field value if set, zero value otherwise.
+func (o *DigitalWallet) GetActiveCertificateCount() int32 {
+	if o == nil || o.ActiveCertificateCount == nil {
+		var ret int32
+		return ret
+	}
+	return *o.ActiveCertificateCount
+}
+
+// GetActiveCertificateCountOk returns a tuple with the ActiveCertificateCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DigitalWallet) GetActiveCertificateCountOk() (*int32, bool) {
+	if o == nil || o.ActiveCertificateCount == nil {
+		return nil, false
+	}
+	return o.ActiveCertificateCount, true
+}
+
+// HasActiveCertificateCount returns a boolean if a field has been set.
+func (o *DigitalWallet) HasActiveCertificateCount() bool {
+	if o != nil && o.ActiveCertificateCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetActiveCertificateCount gets a reference to the given int32 and assigns it to the ActiveCertificateCount field.
+func (o *DigitalWallet) SetActiveCertificateCount(v int32) {
+	o.ActiveCertificateCount = &v
+}
+
+// GetPendingCertificateCount returns the PendingCertificateCount field value if set, zero value otherwise.
+func (o *DigitalWallet) GetPendingCertificateCount() int32 {
+	if o == nil || o.PendingCertificateCount == nil {
+		var ret int32
+		return ret
+	}
+	return *o.PendingCertificateCount
+}
+
+// GetPendingCertificateCountOk returns a tuple with the PendingCertificateCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DigitalWallet) GetPendingCertificateCountOk() (*int32, bool) {
+	if o == nil || o.PendingCertificateCount == nil {
+		return nil, false
+	}
+	return o.PendingCertificateCount, true
+}
+
+// HasPendingCertificateCount returns a boolean if a field has been set.
+func (o *DigitalWallet) HasPendingCertificateCount() bool {
+	if o != nil && o.PendingCertificateCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPendingCertificateCount gets a reference to the given int32 and assigns it to the PendingCertificateCount field.
+func (o *DigitalWallet) SetPendingCertificateCount(v int32) {
+	o.PendingCertificateCount = &v
+}
+
+// GetExpiredCertificateCount returns the ExpiredCertificateCount field value if set, zero value otherwise.
+func (o *DigitalWallet) GetExpiredCertificateCount() int32 {
+	if o == nil || o.ExpiredCertificateCount == nil {
+		var ret int32
+		return ret
+	}
+	return *o.ExpiredCertificateCount
+}
+
+// GetExpiredCertificateCountOk returns a tuple with the ExpiredCertificateCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DigitalWallet) GetExpiredCertificateCountOk() (*int32, bool) {
+	if o == nil || o.ExpiredCertificateCount == nil {
+		return nil, false
+	}
+	return o.ExpiredCertificateCount, true
+}
+
+// HasExpiredCertificateCount returns a boolean if a field has been set.
+func (o *DigitalWallet) HasExpiredCertificateCount() bool {
+	if o != nil && o.ExpiredCertificateCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiredCertificateCount gets a reference to the given int32 and assigns it to the ExpiredCertificateCount field.
+func (o *DigitalWallet) SetExpiredCertificateCount(v int32) {
+	o.ExpiredCertificateCount = &v
+}
+
 func (o DigitalWallet) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -348,6 +450,15 @@ func (o DigitalWallet) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if o.ActiveCertificateCount != nil {
+		toSerialize["active_certificate_count"] = o.ActiveCertificateCount
+	}
+	if o.PendingCertificateCount != nil {
+		toSerialize["pending_certificate_count"] = o.PendingCertificateCount
+	}
+	if o.ExpiredCertificateCount != nil {
+		toSerialize["expired_certificate_count"] = o.ExpiredCertificateCount
 	}
 	return json.Marshal(toSerialize)
 }

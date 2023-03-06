@@ -32,6 +32,9 @@ type ApiListAuditLogsRequest struct {
 	ApiService *AuditLogsApiService
 	limit *int32
 	cursor *string
+	userId *string
+	action *string
+	resourceType *string
 }
 
 func (r ApiListAuditLogsRequest) Limit(limit int32) ApiListAuditLogsRequest {
@@ -40,6 +43,18 @@ func (r ApiListAuditLogsRequest) Limit(limit int32) ApiListAuditLogsRequest {
 }
 func (r ApiListAuditLogsRequest) Cursor(cursor string) ApiListAuditLogsRequest {
 	r.cursor = &cursor
+	return r
+}
+func (r ApiListAuditLogsRequest) UserId(userId string) ApiListAuditLogsRequest {
+	r.userId = &userId
+	return r
+}
+func (r ApiListAuditLogsRequest) Action(action string) ApiListAuditLogsRequest {
+	r.action = &action
+	return r
+}
+func (r ApiListAuditLogsRequest) ResourceType(resourceType string) ApiListAuditLogsRequest {
+	r.resourceType = &resourceType
 	return r
 }
 
@@ -90,6 +105,15 @@ func (a *AuditLogsApiService) ListAuditLogsExecute(r ApiListAuditLogsRequest) (A
 	}
 	if r.cursor != nil {
 		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
+	}
+	if r.userId != nil {
+		localVarQueryParams.Add("user_id", parameterToString(*r.userId, ""))
+	}
+	if r.action != nil {
+		localVarQueryParams.Add("action", parameterToString(*r.action, ""))
+	}
+	if r.resourceType != nil {
+		localVarQueryParams.Add("resource_type", parameterToString(*r.resourceType, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

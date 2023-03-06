@@ -13,16 +13,16 @@ Name | Type | Description | Notes
 **RefundedAmount** | Pointer to **int32** | The refunded amount for this transaction. This can be the total or a portion of the captured amount. | [optional] 
 **Currency** | Pointer to **string** | The currency code for this transaction. | [optional] 
 **Country** | Pointer to **NullableString** | The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.  | [optional] 
-**PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) |  | [optional] 
-**Buyer** | Pointer to [**BuyerSnapshot**](Buyer--Snapshot.md) |  | [optional] 
+**PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) | The payment method used for this transaction. | [optional] 
+**Buyer** | Pointer to [**NullableBuyerSnapshot**](Buyer--Snapshot.md) | The buyer used for this transaction. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this transaction was created in our system. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
-**PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) |  | [optional] 
+**PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) | The payment service used for this transaction. | [optional] 
 **MerchantInitiated** | Pointer to **bool** | Indicates whether the transaction was initiated by the merchant (true) or customer (false). | [optional] [default to false]
 **PaymentSource** | Pointer to **string** | The source of the transaction. Defaults to &#x60;ecommerce&#x60;. | [optional] 
 **IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.  The flag can only be &#x60;false&#x60; (or not set) when the transaction meets one of the following criteria:  * It is not &#x60;merchant_initiated&#x60;. * &#x60;payment_source&#x60; is set to &#x60;card_on_file&#x60;.  The flag can only be set to &#x60;true&#x60; when the transaction meets one of the following criteria:  * It is not &#x60;merchant_initiated&#x60;. * &#x60;payment_source&#x60; is set to &#x60;recurring&#x60; or &#x60;installment&#x60; and &#x60;merchant_initiated&#x60; is set to &#x60;true&#x60;. * &#x60;payment_source&#x60; is set to &#x60;card_on_file&#x60;. | [optional] [default to false]
-**StatementDescriptor** | Pointer to [**StatementDescriptor**](StatementDescriptor.md) |  | [optional] 
+**StatementDescriptor** | Pointer to [**NullableStatementDescriptor**](StatementDescriptor.md) |  | [optional] 
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 **SchemeTransactionId** | Pointer to **NullableString** | An identifier for the transaction used by the scheme itself, when available.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID. | [optional] [default to "null"]
 **RawResponseCode** | Pointer to **NullableString** | This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
@@ -32,7 +32,7 @@ Name | Type | Description | Notes
 **Method** | Pointer to **string** |  | [optional] 
 **PaymentServiceTransactionId** | Pointer to **string** | The payment service&#39;s unique ID for the transaction. | [optional] 
 **Metadata** | Pointer to **map[string]string** | Additional information about the transaction stored as key-value pairs. | [optional] 
-**ShippingDetails** | Pointer to [**ShippingAddress**](ShippingAddress.md) |  | [optional] 
+**ShippingDetails** | Pointer to [**NullableShippingDetail**](ShippingDetail.md) | The shipping details associated with the transaction. | [optional] 
 **ThreeDSecure** | Pointer to [**ThreeDSecureSummary**](ThreeDSecureSummary.md) |  | [optional] 
 **AuthorizedAt** | Pointer to **NullableTime** | The date and time when this transaction was authorized in the payment service.  Don&#39;t use this field to determine whether the transaction was authorized. A &#x60;null&#x60; value doesn&#39;t necessarily imply that the transaction wasn&#39;t authorized, it can mean that the payment service doesn&#39;t provide this value, that it didn&#39;t provide it at the time the transaction was authorized or that the transaction was authorized before the introduction of this field. | [optional] 
 **CapturedAt** | Pointer to **NullableTime** | The date and time when this transaction was captured in the payment service.  Don&#39;t use this field to determine whether the transaction was captured. A &#x60;null&#x60; value doesn&#39;t necessarily imply that the transaction wasn&#39;t captured, it can mean that the payment service doesn&#39;t provide this value, that it didn&#39;t provide it at the time the transaction was captured or that the transaction was captured before the introduction of this field. | [optional] 
@@ -342,6 +342,16 @@ SetBuyer sets Buyer field to given value.
 
 HasBuyer returns a boolean if a field has been set.
 
+### SetBuyerNil
+
+`func (o *Transaction) SetBuyerNil(b bool)`
+
+ SetBuyerNil sets the value for Buyer to be an explicit nil
+
+### UnsetBuyer
+`func (o *Transaction) UnsetBuyer()`
+
+UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *Transaction) GetCreatedAt() time.Time`
@@ -552,6 +562,16 @@ SetStatementDescriptor sets StatementDescriptor field to given value.
 
 HasStatementDescriptor returns a boolean if a field has been set.
 
+### SetStatementDescriptorNil
+
+`func (o *Transaction) SetStatementDescriptorNil(b bool)`
+
+ SetStatementDescriptorNil sets the value for StatementDescriptor to be an explicit nil
+
+### UnsetStatementDescriptor
+`func (o *Transaction) UnsetStatementDescriptor()`
+
+UnsetStatementDescriptor ensures that no value is present for StatementDescriptor, not even an explicit nil
 ### GetCartItems
 
 `func (o *Transaction) GetCartItems() []CartItem`
@@ -829,20 +849,20 @@ HasMetadata returns a boolean if a field has been set.
 
 ### GetShippingDetails
 
-`func (o *Transaction) GetShippingDetails() ShippingAddress`
+`func (o *Transaction) GetShippingDetails() ShippingDetail`
 
 GetShippingDetails returns the ShippingDetails field if non-nil, zero value otherwise.
 
 ### GetShippingDetailsOk
 
-`func (o *Transaction) GetShippingDetailsOk() (*ShippingAddress, bool)`
+`func (o *Transaction) GetShippingDetailsOk() (*ShippingDetail, bool)`
 
 GetShippingDetailsOk returns a tuple with the ShippingDetails field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetShippingDetails
 
-`func (o *Transaction) SetShippingDetails(v ShippingAddress)`
+`func (o *Transaction) SetShippingDetails(v ShippingDetail)`
 
 SetShippingDetails sets ShippingDetails field to given value.
 
@@ -852,6 +872,16 @@ SetShippingDetails sets ShippingDetails field to given value.
 
 HasShippingDetails returns a boolean if a field has been set.
 
+### SetShippingDetailsNil
+
+`func (o *Transaction) SetShippingDetailsNil(b bool)`
+
+ SetShippingDetailsNil sets the value for ShippingDetails to be an explicit nil
+
+### UnsetShippingDetails
+`func (o *Transaction) UnsetShippingDetails()`
+
+UnsetShippingDetails ensures that no value is present for ShippingDetails, not even an explicit nil
 ### GetThreeDSecure
 
 `func (o *Transaction) GetThreeDSecure() ThreeDSecureSummary`
