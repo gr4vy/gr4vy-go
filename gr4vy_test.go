@@ -6,6 +6,7 @@ import (
 	"strconv"
 	"testing"
 	"net/http"
+	"github.com/google/uuid"
 )
 
 const keyPath = "./private_key.pem"
@@ -519,9 +520,11 @@ func TestAuthorizeNewTransaction(t *testing.T) {
 		SecurityCode:   StringPtr("123"),
 	}
 
+	id := uuid.New()
+
 	var response *Gr4vyTransaction
 	var body *http.Response
-	response, body, err = client.AuthorizeNewTransactionWithIdempotencyKey(req, paymentMethod, "myspecialkey124")
+	response, body, err = client.AuthorizeNewTransactionWithIdempotencyKey(req, paymentMethod, id.String())
 	if err != nil {
 		t.Errorf(err.Error())
 		fmt.Printf("%+v\n", response)

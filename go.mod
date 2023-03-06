@@ -4,8 +4,9 @@ go 1.16
 
 require (
 	github.com/deepmap/oapi-codegen v1.6.1
-	github.com/golang-jwt/jwt v3.2.1+incompatible
 	github.com/getkin/kin-openapi v0.55.0
+	github.com/golang-jwt/jwt v3.2.1+incompatible
+	github.com/google/uuid v1.3.0 // indirect
 	github.com/labstack/echo/v4 v4.2.2
 	github.com/myesui/uuid v1.0.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
