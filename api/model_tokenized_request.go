@@ -15,13 +15,13 @@ import (
 	"encoding/json"
 )
 
-// TokenizedRequest Details for a previously tokenized payment method.
+// TokenizedRequest Details for a previously stored payment method.
 type TokenizedRequest struct {
 	// `id`.
 	Method string `json:"method"`
-	// A ID that represents a previously tokenized payment method. This token can represent any type of payment method.
+	// A ID that represents a previously stored payment method. This ID can represent any type of payment method.
 	Id string `json:"id"`
-	// We strongly recommended providing a `redirect_url` for stored cards when 3-D Secure is enabled and `three_d_secure_data` is not provided. This will be appended with both a transaction ID and status (e.g. `https://example.com/callback? gr4vy_transaction_id=123&gr4vy_transaction_status=capture_succeeded`) after 3-D Secure has completed.
+	// This value is mandatory for stored redirect payment methods. For stored cards, we strongly recommend providing a `redirect_url` either when 3-D Secure is enabled and `three_d_secure_data` is not provided, or when using connections where 3DS is enabled. This value will be appended with both a transaction ID and status (e.g. `https://example.com/callback?gr4vy_transaction_id=123 &gr4vy_transaction_status=capture_succeeded`) after 3-D Secure has completed. For those cases, if the value is not present, the transaction will be marked as failed.
 	RedirectUrl *string `json:"redirect_url,omitempty"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card.
 	SecurityCode *string `json:"security_code,omitempty"`

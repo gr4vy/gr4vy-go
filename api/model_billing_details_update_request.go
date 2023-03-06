@@ -27,7 +27,8 @@ type BillingDetailsUpdateRequest struct {
 	PhoneNumber NullableString `json:"phone_number,omitempty"`
 	// The billing address for the buyer.
 	Address NullableAddress `json:"address,omitempty"`
-	TaxId *TaxId `json:"tax_id,omitempty"`
+	// The tax ID information associated with the billing details.
+	TaxId NullableTaxId `json:"tax_id,omitempty"`
 }
 
 // NewBillingDetailsUpdateRequest instantiates a new BillingDetailsUpdateRequest object
@@ -257,36 +258,46 @@ func (o *BillingDetailsUpdateRequest) UnsetAddress() {
 	o.Address.Unset()
 }
 
-// GetTaxId returns the TaxId field value if set, zero value otherwise.
+// GetTaxId returns the TaxId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BillingDetailsUpdateRequest) GetTaxId() TaxId {
-	if o == nil || o.TaxId == nil {
+	if o == nil || o.TaxId.Get() == nil {
 		var ret TaxId
 		return ret
 	}
-	return *o.TaxId
+	return *o.TaxId.Get()
 }
 
 // GetTaxIdOk returns a tuple with the TaxId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BillingDetailsUpdateRequest) GetTaxIdOk() (*TaxId, bool) {
-	if o == nil || o.TaxId == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.TaxId, true
+	return o.TaxId.Get(), o.TaxId.IsSet()
 }
 
 // HasTaxId returns a boolean if a field has been set.
 func (o *BillingDetailsUpdateRequest) HasTaxId() bool {
-	if o != nil && o.TaxId != nil {
+	if o != nil && o.TaxId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetTaxId gets a reference to the given TaxId and assigns it to the TaxId field.
+// SetTaxId gets a reference to the given NullableTaxId and assigns it to the TaxId field.
 func (o *BillingDetailsUpdateRequest) SetTaxId(v TaxId) {
-	o.TaxId = &v
+	o.TaxId.Set(&v)
+}
+// SetTaxIdNil sets the value for TaxId to be an explicit nil
+func (o *BillingDetailsUpdateRequest) SetTaxIdNil() {
+	o.TaxId.Set(nil)
+}
+
+// UnsetTaxId ensures that no value is present for TaxId, not even an explicit nil
+func (o *BillingDetailsUpdateRequest) UnsetTaxId() {
+	o.TaxId.Unset()
 }
 
 func (o BillingDetailsUpdateRequest) MarshalJSON() ([]byte, error) {
@@ -306,8 +317,8 @@ func (o BillingDetailsUpdateRequest) MarshalJSON() ([]byte, error) {
 	if o.Address.IsSet() {
 		toSerialize["address"] = o.Address.Get()
 	}
-	if o.TaxId != nil {
-		toSerialize["tax_id"] = o.TaxId
+	if o.TaxId.IsSet() {
+		toSerialize["tax_id"] = o.TaxId.Get()
 	}
 	return json.Marshal(toSerialize)
 }

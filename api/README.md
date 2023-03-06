@@ -80,16 +80,17 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
+*APILogsApi* | [**ListApiLogs**](docs/APILogsApi.md#listapilogs) | **Get** /api-logs | List API error Logs
 *AuditLogsApi* | [**ListAuditLogs**](docs/AuditLogsApi.md#listauditlogs) | **Get** /audit-logs | List Audit Logs
 *BuyersApi* | [**AddBuyer**](docs/BuyersApi.md#addbuyer) | **Post** /buyers | New buyer
-*BuyersApi* | [**AddBuyerShippingAddress**](docs/BuyersApi.md#addbuyershippingaddress) | **Post** /buyers/{buyer_id}/shipping-details | New buyer shipping address
+*BuyersApi* | [**AddBuyerShippingDetail**](docs/BuyersApi.md#addbuyershippingdetail) | **Post** /buyers/{buyer_id}/shipping-details | New buyer shipping detail
 *BuyersApi* | [**DeleteBuyer**](docs/BuyersApi.md#deletebuyer) | **Delete** /buyers/{buyer_id} | Delete buyer
-*BuyersApi* | [**DeleteBuyerShippingAddress**](docs/BuyersApi.md#deletebuyershippingaddress) | **Delete** /buyers/{buyer_id}/shipping-details/{shipping_address_id} | Delete buyer shipping address
+*BuyersApi* | [**DeleteBuyerShippingDetail**](docs/BuyersApi.md#deletebuyershippingdetail) | **Delete** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Delete buyer shipping detail
 *BuyersApi* | [**GetBuyer**](docs/BuyersApi.md#getbuyer) | **Get** /buyers/{buyer_id} | Get buyer
-*BuyersApi* | [**GetBuyerShippingAddresses**](docs/BuyersApi.md#getbuyershippingaddresses) | **Get** /buyers/{buyer_id}/shipping-details | Get buyer shipping addresses
+*BuyersApi* | [**GetBuyerShippingDetails**](docs/BuyersApi.md#getbuyershippingdetails) | **Get** /buyers/{buyer_id}/shipping-details | Get buyer shipping details
 *BuyersApi* | [**ListBuyers**](docs/BuyersApi.md#listbuyers) | **Get** /buyers | List buyers
 *BuyersApi* | [**UpdateBuyer**](docs/BuyersApi.md#updatebuyer) | **Put** /buyers/{buyer_id} | Update buyer
-*BuyersApi* | [**UpdateBuyerShippingAddress**](docs/BuyersApi.md#updatebuyershippingaddress) | **Put** /buyers/{buyer_id}/shipping-details/{shipping_address_id} | Update buyer shipping address
+*BuyersApi* | [**UpdateBuyerShippingDetail**](docs/BuyersApi.md#updatebuyershippingdetail) | **Put** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Update buyer shipping detail
 *CardSchemeDefinitionsApi* | [**ListCardSchemeDefinitions**](docs/CardSchemeDefinitionsApi.md#listcardschemedefinitions) | **Get** /card-scheme-definitions | List card scheme definitions
 *CheckoutSessionsApi* | [**AddCheckoutSession**](docs/CheckoutSessionsApi.md#addcheckoutsession) | **Post** /checkout/sessions | Create a new Checkout Session
 *CheckoutSessionsApi* | [**DeleteCheckoutSession**](docs/CheckoutSessionsApi.md#deletecheckoutsession) | **Delete** /checkout/sessions/{checkout_session_id} | Delete a Checkout Session
@@ -100,14 +101,17 @@ Class | Method | HTTP request | Description
 *DigitalWalletsApi* | [**ListDigitalWallets**](docs/DigitalWalletsApi.md#listdigitalwallets) | **Get** /digital-wallets | List digital wallets
 *DigitalWalletsApi* | [**RegisterDigitalWallet**](docs/DigitalWalletsApi.md#registerdigitalwallet) | **Post** /digital-wallets | Register digital wallet
 *DigitalWalletsApi* | [**UpdateDigitalWallet**](docs/DigitalWalletsApi.md#updatedigitalwallet) | **Put** /digital-wallets/{digital_wallet_id} | Update digital wallet
+*MerchantAccountsApi* | [**CreateMerchantAccount**](docs/MerchantAccountsApi.md#createmerchantaccount) | **Post** /merchant-accounts | Create merchant account
+*MerchantAccountsApi* | [**DeleteMerchantAccuont**](docs/MerchantAccountsApi.md#deletemerchantaccuont) | **Delete** /merchant-accounts/{merchant_account_id} | Delete merchant account
+*MerchantAccountsApi* | [**ListMerchantAccounts**](docs/MerchantAccountsApi.md#listmerchantaccounts) | **Get** /merchant-accounts | List merchant accounts
 *PaymentMethodDefinitionsApi* | [**ListPaymentMethodDefinitions**](docs/PaymentMethodDefinitionsApi.md#listpaymentmethoddefinitions) | **Get** /payment-method-definitions | List payment method definitions
-*PaymentMethodTokensApi* | [**ListPaymentMethodTokens**](docs/PaymentMethodTokensApi.md#listpaymentmethodtokens) | **Get** /payment-methods/{payment_method_id}/tokens | List payment method tokens
 *PaymentMethodsApi* | [**DeletePaymentMethod**](docs/PaymentMethodsApi.md#deletepaymentmethod) | **Delete** /payment-methods/{payment_method_id} | Delete payment method
 *PaymentMethodsApi* | [**GetPaymentMethod**](docs/PaymentMethodsApi.md#getpaymentmethod) | **Get** /payment-methods/{payment_method_id} | Get stored payment method
 *PaymentMethodsApi* | [**ListBuyerPaymentMethods**](docs/PaymentMethodsApi.md#listbuyerpaymentmethods) | **Get** /buyers/payment-methods | List stored payment methods for a buyer
 *PaymentMethodsApi* | [**ListPaymentMethods**](docs/PaymentMethodsApi.md#listpaymentmethods) | **Get** /payment-methods | List payment methods
 *PaymentMethodsApi* | [**StorePaymentMethod**](docs/PaymentMethodsApi.md#storepaymentmethod) | **Post** /payment-methods | New payment method
 *PaymentOptionsApi* | [**ListPaymentOptions**](docs/PaymentOptionsApi.md#listpaymentoptions) | **Get** /payment-options | List payment options
+*PaymentOptionsApi* | [**PostListPaymentOptions**](docs/PaymentOptionsApi.md#postlistpaymentoptions) | **Post** /payment-options | List payment options
 *PaymentServiceDefinitionsApi* | [**GetPaymentServiceDefinition**](docs/PaymentServiceDefinitionsApi.md#getpaymentservicedefinition) | **Get** /payment-service-definitions/{payment_service_definition_id} | Get payment service definition
 *PaymentServiceDefinitionsApi* | [**ListPaymentServiceDefinitions**](docs/PaymentServiceDefinitionsApi.md#listpaymentservicedefinitions) | **Get** /payment-service-definitions | List payment service definitions
 *PaymentServicesApi* | [**AddPaymentService**](docs/PaymentServicesApi.md#addpaymentservice) | **Post** /payment-services | New payment service
@@ -123,6 +127,10 @@ Class | Method | HTTP request | Description
 *ReportsApi* | [**ListReportExecutions**](docs/ReportsApi.md#listreportexecutions) | **Get** /reports/{report_id}/executions | List executions for a report
 *ReportsApi* | [**ListReports**](docs/ReportsApi.md#listreports) | **Get** /reports | List reports
 *ReportsApi* | [**UpdateReport**](docs/ReportsApi.md#updatereport) | **Put** /reports/{report_id} | Update report
+*RolesApi* | [**AddRoleAssignment**](docs/RolesApi.md#addroleassignment) | **Post** /roles/assignments | New role assignment
+*RolesApi* | [**DeleteRoleAssignment**](docs/RolesApi.md#deleteroleassignment) | **Delete** /roles/assignments/{role_assignment_id} | Delete role assignment
+*RolesApi* | [**ListRoleAssignments**](docs/RolesApi.md#listroleassignments) | **Get** /roles/assignments | List role assignments
+*RolesApi* | [**ListRoles**](docs/RolesApi.md#listroles) | **Get** /roles | List roles
 *TransactionsApi* | [**AuthorizeNewTransaction**](docs/TransactionsApi.md#authorizenewtransaction) | **Post** /transactions | New transaction
 *TransactionsApi* | [**CaptureTransaction**](docs/TransactionsApi.md#capturetransaction) | **Post** /transactions/{transaction_id}/capture | Capture transaction
 *TransactionsApi* | [**GetTransaction**](docs/TransactionsApi.md#gettransaction) | **Get** /transactions/{transaction_id} | Get transaction
@@ -135,10 +143,16 @@ Class | Method | HTTP request | Description
 
 ## Documentation For Models
 
+ - [APIKeyPairCreate](docs/APIKeyPairCreate.md)
+ - [APIKeyPairUpdate](docs/APIKeyPairUpdate.md)
  - [Address](docs/Address.md)
  - [AntiFraudServiceCreate](docs/AntiFraudServiceCreate.md)
  - [AntiFraudServiceUpdate](docs/AntiFraudServiceUpdate.md)
  - [AntiFraudServiceUpdateFields](docs/AntiFraudServiceUpdateFields.md)
+ - [ApiLog](docs/ApiLog.md)
+ - [ApiLogResponseBody](docs/ApiLogResponseBody.md)
+ - [ApiLogResponseBodyDetails](docs/ApiLogResponseBodyDetails.md)
+ - [ApiLogs](docs/ApiLogs.md)
  - [ApplePayRequest](docs/ApplePayRequest.md)
  - [ApplePaySessionRequest](docs/ApplePaySessionRequest.md)
  - [AuditLog](docs/AuditLog.md)
@@ -165,6 +179,9 @@ Class | Method | HTTP request | Description
  - [Connection](docs/Connection.md)
  - [ConnectionDefinition](docs/ConnectionDefinition.md)
  - [ConnectionDefinitions](docs/ConnectionDefinitions.md)
+ - [ConnectionOptions](docs/ConnectionOptions.md)
+ - [ConnectionOptionsAdyenCard](docs/ConnectionOptionsAdyenCard.md)
+ - [ConnectionOptionsCybersourceAntiFraud](docs/ConnectionOptionsCybersourceAntiFraud.md)
  - [Connections](docs/Connections.md)
  - [DigitalWallet](docs/DigitalWallet.md)
  - [DigitalWalletRequest](docs/DigitalWalletRequest.md)
@@ -181,22 +198,28 @@ Class | Method | HTTP request | Description
  - [ErrorDetail](docs/ErrorDetail.md)
  - [ErrorGeneric](docs/ErrorGeneric.md)
  - [GooglePayRequest](docs/GooglePayRequest.md)
+ - [GooglePayRequestAssuranceDetails](docs/GooglePayRequestAssuranceDetails.md)
  - [GooglePaySessionRequest](docs/GooglePaySessionRequest.md)
+ - [MerchantAccount](docs/MerchantAccount.md)
+ - [MerchantAccountCreate](docs/MerchantAccountCreate.md)
+ - [MerchantAccountUpdate](docs/MerchantAccountUpdate.md)
+ - [MerchantAccounts](docs/MerchantAccounts.md)
+ - [MerchantProfile](docs/MerchantProfile.md)
+ - [MerchantProfileScheme](docs/MerchantProfileScheme.md)
  - [PaymentMethod](docs/PaymentMethod.md)
  - [PaymentMethodDefinition](docs/PaymentMethodDefinition.md)
  - [PaymentMethodDefinitions](docs/PaymentMethodDefinitions.md)
  - [PaymentMethodDetailsCard](docs/PaymentMethodDetailsCard.md)
  - [PaymentMethodRequest](docs/PaymentMethodRequest.md)
  - [PaymentMethodSnapshot](docs/PaymentMethodSnapshot.md)
- - [PaymentMethodToken](docs/PaymentMethodToken.md)
  - [PaymentMethodTokenized](docs/PaymentMethodTokenized.md)
- - [PaymentMethodTokens](docs/PaymentMethodTokens.md)
  - [PaymentMethods](docs/PaymentMethods.md)
  - [PaymentMethodsTokenized](docs/PaymentMethodsTokenized.md)
  - [PaymentOption](docs/PaymentOption.md)
  - [PaymentOptionApprovalUI](docs/PaymentOptionApprovalUI.md)
  - [PaymentOptionContext](docs/PaymentOptionContext.md)
  - [PaymentOptions](docs/PaymentOptions.md)
+ - [PaymentOptionsRequest](docs/PaymentOptionsRequest.md)
  - [PaymentService](docs/PaymentService.md)
  - [PaymentServiceDefinition](docs/PaymentServiceDefinition.md)
  - [PaymentServiceDefinitionConfiguration](docs/PaymentServiceDefinitionConfiguration.md)
@@ -205,10 +228,9 @@ Class | Method | HTTP request | Description
  - [PaymentServiceDefinitions](docs/PaymentServiceDefinitions.md)
  - [PaymentServiceFields](docs/PaymentServiceFields.md)
  - [PaymentServiceRequest](docs/PaymentServiceRequest.md)
- - [PaymentServiceRequestAllOf](docs/PaymentServiceRequestAllOf.md)
+ - [PaymentServiceRequestFields](docs/PaymentServiceRequestFields.md)
  - [PaymentServiceSnapshot](docs/PaymentServiceSnapshot.md)
  - [PaymentServiceUpdate](docs/PaymentServiceUpdate.md)
- - [PaymentServiceUpdateFields](docs/PaymentServiceUpdateFields.md)
  - [PaymentServices](docs/PaymentServices.md)
  - [RedirectRequest](docs/RedirectRequest.md)
  - [Refund](docs/Refund.md)
@@ -227,11 +249,20 @@ Class | Method | HTTP request | Description
  - [RequiredFields](docs/RequiredFields.md)
  - [RequiredFieldsAddress](docs/RequiredFieldsAddress.md)
  - [ResetPasswordRequest](docs/ResetPasswordRequest.md)
+ - [Role](docs/Role.md)
+ - [RoleAssignment](docs/RoleAssignment.md)
+ - [RoleAssignmentAssignee](docs/RoleAssignmentAssignee.md)
+ - [RoleAssignmentRequest](docs/RoleAssignmentRequest.md)
+ - [RoleAssignmentRequestAssignee](docs/RoleAssignmentRequestAssignee.md)
+ - [RoleAssignmentRequestRole](docs/RoleAssignmentRequestRole.md)
+ - [RoleAssignments](docs/RoleAssignments.md)
+ - [RolePermissions](docs/RolePermissions.md)
+ - [Roles](docs/Roles.md)
  - [SetPasswordRequest](docs/SetPasswordRequest.md)
- - [ShippingAddress](docs/ShippingAddress.md)
- - [ShippingAddressRequest](docs/ShippingAddressRequest.md)
- - [ShippingAddressUpdateRequest](docs/ShippingAddressUpdateRequest.md)
- - [ShippingAddresses](docs/ShippingAddresses.md)
+ - [ShippingDetail](docs/ShippingDetail.md)
+ - [ShippingDetailRequest](docs/ShippingDetailRequest.md)
+ - [ShippingDetailUpdateRequest](docs/ShippingDetailUpdateRequest.md)
+ - [ShippingDetails](docs/ShippingDetails.md)
  - [StatementDescriptor](docs/StatementDescriptor.md)
  - [TaxId](docs/TaxId.md)
  - [ThreeDSecureData](docs/ThreeDSecureData.md)
@@ -240,17 +271,25 @@ Class | Method | HTTP request | Description
  - [ThreeDSecureDataV1V2](docs/ThreeDSecureDataV1V2.md)
  - [ThreeDSecureDataV2](docs/ThreeDSecureDataV2.md)
  - [ThreeDSecureDataV2AllOf](docs/ThreeDSecureDataV2AllOf.md)
+ - [ThreeDSecureError](docs/ThreeDSecureError.md)
  - [ThreeDSecureSummary](docs/ThreeDSecureSummary.md)
  - [TokenizedRequest](docs/TokenizedRequest.md)
  - [Transaction](docs/Transaction.md)
  - [TransactionCaptureRequest](docs/TransactionCaptureRequest.md)
+ - [TransactionCardRequest](docs/TransactionCardRequest.md)
+ - [TransactionCheckoutSessionRequest](docs/TransactionCheckoutSessionRequest.md)
  - [TransactionPaymentMethodRequest](docs/TransactionPaymentMethodRequest.md)
+ - [TransactionRedirectRequest](docs/TransactionRedirectRequest.md)
  - [TransactionRefundRequest](docs/TransactionRefundRequest.md)
  - [TransactionRequest](docs/TransactionRequest.md)
+ - [TransactionStatusSummary](docs/TransactionStatusSummary.md)
  - [TransactionSummary](docs/TransactionSummary.md)
  - [Transactions](docs/Transactions.md)
  - [TransactionsBatchCaptureRequest](docs/TransactionsBatchCaptureRequest.md)
+ - [UserCurrentUpdate](docs/UserCurrentUpdate.md)
  - [UserRequest](docs/UserRequest.md)
+ - [UserRole](docs/UserRole.md)
+ - [UserUpdate](docs/UserUpdate.md)
 
 
 ## Documentation For Authorization

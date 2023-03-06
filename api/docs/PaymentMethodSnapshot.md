@@ -6,7 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;payment-method&#x60;. | [optional] 
 **Id** | Pointer to **NullableString** | The unique ID of the payment method. | [optional] 
-**Method** | Pointer to **string** |  | [optional] 
+**Method** | Pointer to **string** | The type of this payment method. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the payment method against your own records. | [optional] 
 **Label** | Pointer to **string** | A label for the payment method. This can be the last 4 digits for a card, or the email address for an alternative payment method. | [optional] 
 **Scheme** | Pointer to **NullableString** | An additional label used to differentiate different sub-types of a payment method. Most notably this can include the type of card used in a transaction. | [optional] 

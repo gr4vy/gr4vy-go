@@ -1,0 +1,206 @@
+# \MerchantAccountsApi
+
+All URIs are relative to *https://api.plantly.gr4vy.app*
+
+Method | HTTP request | Description
+------------- | ------------- | -------------
+[**CreateMerchantAccount**](MerchantAccountsApi.md#CreateMerchantAccount) | **Post** /merchant-accounts | Create merchant account
+[**DeleteMerchantAccuont**](MerchantAccountsApi.md#DeleteMerchantAccuont) | **Delete** /merchant-accounts/{merchant_account_id} | Delete merchant account
+[**ListMerchantAccounts**](MerchantAccountsApi.md#ListMerchantAccounts) | **Get** /merchant-accounts | List merchant accounts
+
+
+
+## CreateMerchantAccount
+
+> MerchantAccount CreateMerchantAccount(ctx).MerchantAccountCreate(merchantAccountCreate).Execute()
+
+Create merchant account
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    merchantAccountCreate := *openapiclient.NewMerchantAccountCreate() // MerchantAccountCreate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.MerchantAccountsApi.CreateMerchantAccount(context.Background()).MerchantAccountCreate(merchantAccountCreate).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MerchantAccountsApi.CreateMerchantAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreateMerchantAccount`: MerchantAccount
+    fmt.Fprintf(os.Stdout, "Response from `MerchantAccountsApi.CreateMerchantAccount`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreateMerchantAccountRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **merchantAccountCreate** | [**MerchantAccountCreate**](MerchantAccountCreate.md) |  | 
+
+### Return type
+
+[**MerchantAccount**](MerchantAccount.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteMerchantAccuont
+
+> DeleteMerchantAccuont(ctx, merchantAccountId).Execute()
+
+Delete merchant account
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    merchantAccountId := "plantly_uk" // string | The unique ID for a merchant account.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.MerchantAccountsApi.DeleteMerchantAccuont(context.Background(), merchantAccountId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MerchantAccountsApi.DeleteMerchantAccuont``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**merchantAccountId** | **string** | The unique ID for a merchant account. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteMerchantAccuontRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## ListMerchantAccounts
+
+> MerchantAccounts ListMerchantAccounts(ctx).Execute()
+
+List merchant accounts
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.MerchantAccountsApi.ListMerchantAccounts(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MerchantAccountsApi.ListMerchantAccounts``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `ListMerchantAccounts`: MerchantAccounts
+    fmt.Fprintf(os.Stdout, "Response from `MerchantAccountsApi.ListMerchantAccounts`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiListMerchantAccountsRequest struct via the builder pattern
+
+
+### Return type
+
+[**MerchantAccounts**](MerchantAccounts.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+

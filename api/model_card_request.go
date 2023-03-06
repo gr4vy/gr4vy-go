@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// CardRequest Card details to use in a transaction or to register a new payment method.
+// CardRequest Details to register a new card payment method.
 type CardRequest struct {
 	// `card`.
 	Method string `json:"method"`

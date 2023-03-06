@@ -23,6 +23,8 @@ type ThreeDSecureSummary struct {
 	Status *string `json:"status,omitempty"`
 	// The method used for 3DS authentication for this transaction.
 	Method *string `json:"method,omitempty"`
+	// If the transaction had a 3DS error, information about it.
+	ErrorData NullableThreeDSecureError `json:"error_data,omitempty"`
 	ResponseData *ThreeDSecureDataV1V2 `json:"response_data,omitempty"`
 }
 
@@ -139,6 +141,48 @@ func (o *ThreeDSecureSummary) SetMethod(v string) {
 	o.Method = &v
 }
 
+// GetErrorData returns the ErrorData field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ThreeDSecureSummary) GetErrorData() ThreeDSecureError {
+	if o == nil || o.ErrorData.Get() == nil {
+		var ret ThreeDSecureError
+		return ret
+	}
+	return *o.ErrorData.Get()
+}
+
+// GetErrorDataOk returns a tuple with the ErrorData field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ThreeDSecureSummary) GetErrorDataOk() (*ThreeDSecureError, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ErrorData.Get(), o.ErrorData.IsSet()
+}
+
+// HasErrorData returns a boolean if a field has been set.
+func (o *ThreeDSecureSummary) HasErrorData() bool {
+	if o != nil && o.ErrorData.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetErrorData gets a reference to the given NullableThreeDSecureError and assigns it to the ErrorData field.
+func (o *ThreeDSecureSummary) SetErrorData(v ThreeDSecureError) {
+	o.ErrorData.Set(&v)
+}
+// SetErrorDataNil sets the value for ErrorData to be an explicit nil
+func (o *ThreeDSecureSummary) SetErrorDataNil() {
+	o.ErrorData.Set(nil)
+}
+
+// UnsetErrorData ensures that no value is present for ErrorData, not even an explicit nil
+func (o *ThreeDSecureSummary) UnsetErrorData() {
+	o.ErrorData.Unset()
+}
+
 // GetResponseData returns the ResponseData field value if set, zero value otherwise.
 func (o *ThreeDSecureSummary) GetResponseData() ThreeDSecureDataV1V2 {
 	if o == nil || o.ResponseData == nil {
@@ -181,6 +225,9 @@ func (o ThreeDSecureSummary) MarshalJSON() ([]byte, error) {
 	}
 	if o.Method != nil {
 		toSerialize["method"] = o.Method
+	}
+	if o.ErrorData.IsSet() {
+		toSerialize["error_data"] = o.ErrorData.Get()
 	}
 	if o.ResponseData != nil {
 		toSerialize["response_data"] = o.ResponseData

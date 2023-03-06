@@ -36,14 +36,17 @@ type TransactionSummary struct {
 	Currency *string `json:"currency,omitempty"`
 	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction. 
 	Country NullableString `json:"country,omitempty"`
+	// The payment method used for this transaction.
 	PaymentMethod *PaymentMethodSnapshot `json:"payment_method,omitempty"`
-	Buyer *BuyerSnapshot `json:"buyer,omitempty"`
+	// The buyer used for this transaction.
+	Buyer NullableBuyerSnapshot `json:"buyer,omitempty"`
 	// The date and time when this transaction was created in our system.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// An external identifier that can be used to match the transaction against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// Defines when the transaction was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// The payment service used for this transaction.
 	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
 	Method *string `json:"method,omitempty"`
 	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
@@ -399,36 +402,46 @@ func (o *TransactionSummary) SetPaymentMethod(v PaymentMethodSnapshot) {
 	o.PaymentMethod = &v
 }
 
-// GetBuyer returns the Buyer field value if set, zero value otherwise.
+// GetBuyer returns the Buyer field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionSummary) GetBuyer() BuyerSnapshot {
-	if o == nil || o.Buyer == nil {
+	if o == nil || o.Buyer.Get() == nil {
 		var ret BuyerSnapshot
 		return ret
 	}
-	return *o.Buyer
+	return *o.Buyer.Get()
 }
 
 // GetBuyerOk returns a tuple with the Buyer field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionSummary) GetBuyerOk() (*BuyerSnapshot, bool) {
-	if o == nil || o.Buyer == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Buyer, true
+	return o.Buyer.Get(), o.Buyer.IsSet()
 }
 
 // HasBuyer returns a boolean if a field has been set.
 func (o *TransactionSummary) HasBuyer() bool {
-	if o != nil && o.Buyer != nil {
+	if o != nil && o.Buyer.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetBuyer gets a reference to the given BuyerSnapshot and assigns it to the Buyer field.
+// SetBuyer gets a reference to the given NullableBuyerSnapshot and assigns it to the Buyer field.
 func (o *TransactionSummary) SetBuyer(v BuyerSnapshot) {
-	o.Buyer = &v
+	o.Buyer.Set(&v)
+}
+// SetBuyerNil sets the value for Buyer to be an explicit nil
+func (o *TransactionSummary) SetBuyerNil() {
+	o.Buyer.Set(nil)
+}
+
+// UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
+func (o *TransactionSummary) UnsetBuyer() {
+	o.Buyer.Unset()
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -717,8 +730,8 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	if o.PaymentMethod != nil {
 		toSerialize["payment_method"] = o.PaymentMethod
 	}
-	if o.Buyer != nil {
-		toSerialize["buyer"] = o.Buyer
+	if o.Buyer.IsSet() {
+		toSerialize["buyer"] = o.Buyer.Get()
 	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt

@@ -168,31 +168,31 @@ func (a *BuyersApiService) AddBuyerExecute(r ApiAddBuyerRequest) (Buyer, *_netht
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiAddBuyerShippingAddressRequest struct {
+type ApiAddBuyerShippingDetailRequest struct {
 	ctx _context.Context
 	ApiService *BuyersApiService
 	buyerId string
-	shippingAddressRequest *ShippingAddressRequest
+	shippingDetailRequest *ShippingDetailRequest
 }
 
-func (r ApiAddBuyerShippingAddressRequest) ShippingAddressRequest(shippingAddressRequest ShippingAddressRequest) ApiAddBuyerShippingAddressRequest {
-	r.shippingAddressRequest = &shippingAddressRequest
+func (r ApiAddBuyerShippingDetailRequest) ShippingDetailRequest(shippingDetailRequest ShippingDetailRequest) ApiAddBuyerShippingDetailRequest {
+	r.shippingDetailRequest = &shippingDetailRequest
 	return r
 }
 
-func (r ApiAddBuyerShippingAddressRequest) Execute() (ShippingAddress, *_nethttp.Response, error) {
-	return r.ApiService.AddBuyerShippingAddressExecute(r)
+func (r ApiAddBuyerShippingDetailRequest) Execute() (ShippingDetail, *_nethttp.Response, error) {
+	return r.ApiService.AddBuyerShippingDetailExecute(r)
 }
 
 /*
- * AddBuyerShippingAddress New buyer shipping address
- * Adds a buyer shipping address.
+ * AddBuyerShippingDetail New buyer shipping detail
+ * Adds a buyer shipping detail.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param buyerId The unique ID for a buyer.
- * @return ApiAddBuyerShippingAddressRequest
+ * @return ApiAddBuyerShippingDetailRequest
  */
-func (a *BuyersApiService) AddBuyerShippingAddress(ctx _context.Context, buyerId string) ApiAddBuyerShippingAddressRequest {
-	return ApiAddBuyerShippingAddressRequest{
+func (a *BuyersApiService) AddBuyerShippingDetail(ctx _context.Context, buyerId string) ApiAddBuyerShippingDetailRequest {
+	return ApiAddBuyerShippingDetailRequest{
 		ApiService: a,
 		ctx: ctx,
 		buyerId: buyerId,
@@ -201,19 +201,19 @@ func (a *BuyersApiService) AddBuyerShippingAddress(ctx _context.Context, buyerId
 
 /*
  * Execute executes the request
- * @return ShippingAddress
+ * @return ShippingDetail
  */
-func (a *BuyersApiService) AddBuyerShippingAddressExecute(r ApiAddBuyerShippingAddressRequest) (ShippingAddress, *_nethttp.Response, error) {
+func (a *BuyersApiService) AddBuyerShippingDetailExecute(r ApiAddBuyerShippingDetailRequest) (ShippingDetail, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShippingAddress
+		localVarReturnValue  ShippingDetail
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.AddBuyerShippingAddress")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.AddBuyerShippingDetail")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -243,7 +243,7 @@ func (a *BuyersApiService) AddBuyerShippingAddressExecute(r ApiAddBuyerShippingA
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.shippingAddressRequest
+	localVarPostBody = r.shippingDetailRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err
@@ -313,7 +313,7 @@ func (r ApiDeleteBuyerRequest) Execute() (*_nethttp.Response, error) {
 
 /*
  * DeleteBuyer Delete buyer
- * Deletes a buyer record. Any associated tokenized payment methods will remain
+ * Deletes a buyer record. Any associated stored payment methods will remain
 in the system but no longer associated to the buyer.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param buyerId The unique ID for a buyer.
@@ -415,39 +415,39 @@ func (a *BuyersApiService) DeleteBuyerExecute(r ApiDeleteBuyerRequest) (*_nethtt
 	return localVarHTTPResponse, nil
 }
 
-type ApiDeleteBuyerShippingAddressRequest struct {
+type ApiDeleteBuyerShippingDetailRequest struct {
 	ctx _context.Context
 	ApiService *BuyersApiService
 	buyerId string
-	shippingAddressId string
+	shippingDetailId string
 }
 
 
-func (r ApiDeleteBuyerShippingAddressRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeleteBuyerShippingAddressExecute(r)
+func (r ApiDeleteBuyerShippingDetailRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteBuyerShippingDetailExecute(r)
 }
 
 /*
- * DeleteBuyerShippingAddress Delete buyer shipping address
- * Deletes a buyer shipping address.
+ * DeleteBuyerShippingDetail Delete buyer shipping detail
+ * Deletes a buyer shipping detail.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param buyerId The unique ID for a buyer.
- * @param shippingAddressId The unique ID for a shipping address.
- * @return ApiDeleteBuyerShippingAddressRequest
+ * @param shippingDetailId The unique ID for a buyer's shipping detail.
+ * @return ApiDeleteBuyerShippingDetailRequest
  */
-func (a *BuyersApiService) DeleteBuyerShippingAddress(ctx _context.Context, buyerId string, shippingAddressId string) ApiDeleteBuyerShippingAddressRequest {
-	return ApiDeleteBuyerShippingAddressRequest{
+func (a *BuyersApiService) DeleteBuyerShippingDetail(ctx _context.Context, buyerId string, shippingDetailId string) ApiDeleteBuyerShippingDetailRequest {
+	return ApiDeleteBuyerShippingDetailRequest{
 		ApiService: a,
 		ctx: ctx,
 		buyerId: buyerId,
-		shippingAddressId: shippingAddressId,
+		shippingDetailId: shippingDetailId,
 	}
 }
 
 /*
  * Execute executes the request
  */
-func (a *BuyersApiService) DeleteBuyerShippingAddressExecute(r ApiDeleteBuyerShippingAddressRequest) (*_nethttp.Response, error) {
+func (a *BuyersApiService) DeleteBuyerShippingDetailExecute(r ApiDeleteBuyerShippingDetailRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -456,14 +456,14 @@ func (a *BuyersApiService) DeleteBuyerShippingAddressExecute(r ApiDeleteBuyerShi
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.DeleteBuyerShippingAddress")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.DeleteBuyerShippingDetail")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/buyers/{buyer_id}/shipping-details/{shipping_address_id}"
+	localVarPath := localBasePath + "/buyers/{buyer_id}/shipping-details/{shipping_detail_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"buyer_id"+"}", _neturl.PathEscape(parameterToString(r.buyerId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"shipping_address_id"+"}", _neturl.PathEscape(parameterToString(r.shippingAddressId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"shipping_detail_id"+"}", _neturl.PathEscape(parameterToString(r.shippingDetailId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -666,26 +666,26 @@ func (a *BuyersApiService) GetBuyerExecute(r ApiGetBuyerRequest) (Buyer, *_netht
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBuyerShippingAddressesRequest struct {
+type ApiGetBuyerShippingDetailsRequest struct {
 	ctx _context.Context
 	ApiService *BuyersApiService
 	buyerId string
 }
 
 
-func (r ApiGetBuyerShippingAddressesRequest) Execute() (ShippingAddresses, *_nethttp.Response, error) {
-	return r.ApiService.GetBuyerShippingAddressesExecute(r)
+func (r ApiGetBuyerShippingDetailsRequest) Execute() (ShippingDetails, *_nethttp.Response, error) {
+	return r.ApiService.GetBuyerShippingDetailsExecute(r)
 }
 
 /*
- * GetBuyerShippingAddresses Get buyer shipping addresses
- * Retrieve all shipping addresses for a buyer.
+ * GetBuyerShippingDetails Get buyer shipping details
+ * Retrieve all shipping details for a buyer.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param buyerId The unique ID for a buyer.
- * @return ApiGetBuyerShippingAddressesRequest
+ * @return ApiGetBuyerShippingDetailsRequest
  */
-func (a *BuyersApiService) GetBuyerShippingAddresses(ctx _context.Context, buyerId string) ApiGetBuyerShippingAddressesRequest {
-	return ApiGetBuyerShippingAddressesRequest{
+func (a *BuyersApiService) GetBuyerShippingDetails(ctx _context.Context, buyerId string) ApiGetBuyerShippingDetailsRequest {
+	return ApiGetBuyerShippingDetailsRequest{
 		ApiService: a,
 		ctx: ctx,
 		buyerId: buyerId,
@@ -694,19 +694,19 @@ func (a *BuyersApiService) GetBuyerShippingAddresses(ctx _context.Context, buyer
 
 /*
  * Execute executes the request
- * @return ShippingAddresses
+ * @return ShippingDetails
  */
-func (a *BuyersApiService) GetBuyerShippingAddressesExecute(r ApiGetBuyerShippingAddressesRequest) (ShippingAddresses, *_nethttp.Response, error) {
+func (a *BuyersApiService) GetBuyerShippingDetailsExecute(r ApiGetBuyerShippingDetailsRequest) (ShippingDetails, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShippingAddresses
+		localVarReturnValue  ShippingDetails
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.GetBuyerShippingAddresses")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.GetBuyerShippingDetails")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -1051,6 +1051,16 @@ func (a *BuyersApiService) UpdateBuyerExecute(r ApiUpdateBuyerRequest) (Buyer, *
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Error409DuplicateRecord
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -1067,62 +1077,62 @@ func (a *BuyersApiService) UpdateBuyerExecute(r ApiUpdateBuyerRequest) (Buyer, *
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiUpdateBuyerShippingAddressRequest struct {
+type ApiUpdateBuyerShippingDetailRequest struct {
 	ctx _context.Context
 	ApiService *BuyersApiService
 	buyerId string
-	shippingAddressId string
-	shippingAddressUpdateRequest *ShippingAddressUpdateRequest
+	shippingDetailId string
+	shippingDetailUpdateRequest *ShippingDetailUpdateRequest
 }
 
-func (r ApiUpdateBuyerShippingAddressRequest) ShippingAddressUpdateRequest(shippingAddressUpdateRequest ShippingAddressUpdateRequest) ApiUpdateBuyerShippingAddressRequest {
-	r.shippingAddressUpdateRequest = &shippingAddressUpdateRequest
+func (r ApiUpdateBuyerShippingDetailRequest) ShippingDetailUpdateRequest(shippingDetailUpdateRequest ShippingDetailUpdateRequest) ApiUpdateBuyerShippingDetailRequest {
+	r.shippingDetailUpdateRequest = &shippingDetailUpdateRequest
 	return r
 }
 
-func (r ApiUpdateBuyerShippingAddressRequest) Execute() (ShippingAddress, *_nethttp.Response, error) {
-	return r.ApiService.UpdateBuyerShippingAddressExecute(r)
+func (r ApiUpdateBuyerShippingDetailRequest) Execute() (ShippingDetail, *_nethttp.Response, error) {
+	return r.ApiService.UpdateBuyerShippingDetailExecute(r)
 }
 
 /*
- * UpdateBuyerShippingAddress Update buyer shipping address
- * Updates a shipping address for a buyer.
+ * UpdateBuyerShippingDetail Update buyer shipping detail
+ * Updates a shipping detail for a buyer.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param buyerId The unique ID for a buyer.
- * @param shippingAddressId The unique ID for a shipping address.
- * @return ApiUpdateBuyerShippingAddressRequest
+ * @param shippingDetailId The unique ID for a buyer's shipping detail.
+ * @return ApiUpdateBuyerShippingDetailRequest
  */
-func (a *BuyersApiService) UpdateBuyerShippingAddress(ctx _context.Context, buyerId string, shippingAddressId string) ApiUpdateBuyerShippingAddressRequest {
-	return ApiUpdateBuyerShippingAddressRequest{
+func (a *BuyersApiService) UpdateBuyerShippingDetail(ctx _context.Context, buyerId string, shippingDetailId string) ApiUpdateBuyerShippingDetailRequest {
+	return ApiUpdateBuyerShippingDetailRequest{
 		ApiService: a,
 		ctx: ctx,
 		buyerId: buyerId,
-		shippingAddressId: shippingAddressId,
+		shippingDetailId: shippingDetailId,
 	}
 }
 
 /*
  * Execute executes the request
- * @return ShippingAddress
+ * @return ShippingDetail
  */
-func (a *BuyersApiService) UpdateBuyerShippingAddressExecute(r ApiUpdateBuyerShippingAddressRequest) (ShippingAddress, *_nethttp.Response, error) {
+func (a *BuyersApiService) UpdateBuyerShippingDetailExecute(r ApiUpdateBuyerShippingDetailRequest) (ShippingDetail, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPut
 		localVarPostBody     interface{}
 		localVarFormFileName string
 		localVarFileName     string
 		localVarFileBytes    []byte
-		localVarReturnValue  ShippingAddress
+		localVarReturnValue  ShippingDetail
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.UpdateBuyerShippingAddress")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.UpdateBuyerShippingDetail")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
 
-	localVarPath := localBasePath + "/buyers/{buyer_id}/shipping-details/{shipping_address_id}"
+	localVarPath := localBasePath + "/buyers/{buyer_id}/shipping-details/{shipping_detail_id}"
 	localVarPath = strings.Replace(localVarPath, "{"+"buyer_id"+"}", _neturl.PathEscape(parameterToString(r.buyerId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"shipping_address_id"+"}", _neturl.PathEscape(parameterToString(r.shippingAddressId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"shipping_detail_id"+"}", _neturl.PathEscape(parameterToString(r.shippingDetailId, "")), -1)
 
 	localVarHeaderParams := make(map[string]string)
 	localVarQueryParams := _neturl.Values{}
@@ -1146,7 +1156,7 @@ func (a *BuyersApiService) UpdateBuyerShippingAddressExecute(r ApiUpdateBuyerShi
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	// body params
-	localVarPostBody = r.shippingAddressUpdateRequest
+	localVarPostBody = r.shippingDetailUpdateRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
 	if err != nil {
 		return localVarReturnValue, nil, err

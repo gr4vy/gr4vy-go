@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;payment-option&#x60;. | [optional] 
-**Method** | Pointer to **string** |  | [optional] 
+**Method** | Pointer to **string** | The type of payment method that is available. | [optional] 
 **IconUrl** | Pointer to **NullableString** | An icon to display for the payment option. | [optional] 
-**Mode** | Pointer to **string** |  | [optional] 
+**Mode** | Pointer to **string** | The mode to use with this payment option. | [optional] 
 **Label** | Pointer to **string** | A label that describes this payment option. This label is returned in the language defined by the &#x60;locale&#x60; query parameter. The label can be used to display a list of payment options to the buyer in their language. | [optional] 
 **CanStorePaymentMethod** | Pointer to **bool** | A flag to indicate if storing the payment method is supported. | [optional] 
 **CanDelayCapture** | Pointer to **bool** | A flag to indicate if delayed capture is supported. | [optional] 

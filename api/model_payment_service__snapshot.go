@@ -23,6 +23,7 @@ type PaymentServiceSnapshot struct {
 	Type *string `json:"type,omitempty"`
 	// The ID of the payment service definition used to create this service. 
 	PaymentServiceDefinitionId *string `json:"payment_service_definition_id,omitempty"`
+	// The payment method that this services handles.
 	Method *string `json:"method,omitempty"`
 	// The custom name set for this service.
 	DisplayName *string `json:"display_name,omitempty"`

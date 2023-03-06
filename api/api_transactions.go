@@ -33,9 +33,14 @@ type TransactionsApiService service
 type ApiAuthorizeNewTransactionRequest struct {
 	ctx _context.Context
 	ApiService *TransactionsApiService
+	idempotencyKey *string
 	transactionRequest *TransactionRequest
 }
 
+func (r ApiAuthorizeNewTransactionRequest) IdempotencyKey(idempotencyKey string) ApiAuthorizeNewTransactionRequest {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
 func (r ApiAuthorizeNewTransactionRequest) TransactionRequest(transactionRequest TransactionRequest) ApiAuthorizeNewTransactionRequest {
 	r.transactionRequest = &transactionRequest
 	return r
@@ -112,6 +117,11 @@ func (a *TransactionsApiService) AuthorizeNewTransactionExecute(r ApiAuthorizeNe
 	if localVarHTTPHeaderAccept != "" {
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
+	if r.idempotencyKey != nil {
+		localVarHeaderParams["Idempotency-Key"] = parameterToString(*r.idempotencyKey, "")
+	} else {
+		localVarHeaderParams["Idempotency-Key"] = "my-test2"
+	}
 	// body params
 	localVarPostBody = r.transactionRequest
 	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
@@ -148,6 +158,16 @@ func (a *TransactionsApiService) AuthorizeNewTransactionExecute(r ApiAuthorizeNe
 		}
 		if localVarHTTPResponse.StatusCode == 401 {
 			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Error409DuplicateRecord
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -726,6 +746,7 @@ type ApiListTransactionsRequest struct {
 	metadata *[]string
 	method *[]string
 	paymentMethodId *string
+	paymentMethodLabel *string
 	paymentServiceId *[]string
 	paymentServiceTransactionId *string
 	search *string
@@ -801,6 +822,10 @@ func (r ApiListTransactionsRequest) Method(method []string) ApiListTransactionsR
 }
 func (r ApiListTransactionsRequest) PaymentMethodId(paymentMethodId string) ApiListTransactionsRequest {
 	r.paymentMethodId = &paymentMethodId
+	return r
+}
+func (r ApiListTransactionsRequest) PaymentMethodLabel(paymentMethodLabel string) ApiListTransactionsRequest {
+	r.paymentMethodLabel = &paymentMethodLabel
 	return r
 }
 func (r ApiListTransactionsRequest) PaymentServiceId(paymentServiceId []string) ApiListTransactionsRequest {
@@ -961,6 +986,9 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	}
 	if r.paymentMethodId != nil {
 		localVarQueryParams.Add("payment_method_id", parameterToString(*r.paymentMethodId, ""))
+	}
+	if r.paymentMethodLabel != nil {
+		localVarQueryParams.Add("payment_method_label", parameterToString(*r.paymentMethodLabel, ""))
 	}
 	if r.paymentServiceId != nil {
 		t := *r.paymentServiceId

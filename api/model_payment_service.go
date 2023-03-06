@@ -24,6 +24,7 @@ type PaymentService struct {
 	Type *string `json:"type,omitempty"`
 	// The ID of the payment service definition used to create this service. 
 	PaymentServiceDefinitionId *string `json:"payment_service_definition_id,omitempty"`
+	// The payment method that this service handles.
 	Method *string `json:"method,omitempty"`
 	// The custom name set for this service.
 	DisplayName *string `json:"display_name,omitempty"`
@@ -33,32 +34,29 @@ type PaymentService struct {
 	AcceptedCurrencies *[]string `json:"accepted_currencies,omitempty"`
 	// A list of countries for which this service is enabled, in ISO two-letter code format.
 	AcceptedCountries *[]string `json:"accepted_countries,omitempty"`
+	// Defines if the service works as an open-loop service. This feature can only be enabled if the PSP is set up to accept previous scheme transaction IDs.
+	OpenLoop *bool `json:"open_loop,omitempty"`
+	// Defines if tokenization is enabled for the service. This feature can only be enabled if the payment service is NOT set as `open_loop` and the PSP is set up to tokenize.
+	PaymentMethodTokenizationEnabled *bool `json:"payment_method_tokenization_enabled,omitempty"`
+	// Defines if network tokens are enabled for the service. This feature can only be enabled if the payment service is set as `open_loop` and the PSP is set up to accept network tokens.
+	NetworkTokensEnabled *bool `json:"network_tokens_enabled,omitempty"`
 	// Defines if 3-D Secure is enabled for the service (can only be enabled if the payment service definition supports the `three_d_secure_hosted` feature). This does not affect pass through 3-D Secure data.
 	ThreeDSecureEnabled *bool `json:"three_d_secure_enabled,omitempty"`
-	// Acquiring institution identification code for VISA.
 	AcquirerBinVisa NullableString `json:"acquirer_bin_visa,omitempty"`
-	// Acquiring institution identification code for Mastercard.
 	AcquirerBinMastercard NullableString `json:"acquirer_bin_mastercard,omitempty"`
-	// Acquiring institution identification code for Amex.
 	AcquirerBinAmex NullableString `json:"acquirer_bin_amex,omitempty"`
-	// Acquiring institution identification code for Discover.
 	AcquirerBinDiscover NullableString `json:"acquirer_bin_discover,omitempty"`
-	// Merchant identifier used in authorisation requests (assigned by the acquirer).
 	AcquirerMerchantId NullableString `json:"acquirer_merchant_id,omitempty"`
-	// Merchant name (assigned by the acquirer).
 	MerchantName NullableString `json:"merchant_name,omitempty"`
-	// ISO 3166-1 numeric three-digit country code.
 	MerchantCountryCode NullableString `json:"merchant_country_code,omitempty"`
-	// Merchant category code that describes the business.
 	MerchantCategoryCode NullableString `json:"merchant_category_code,omitempty"`
-	// Fully qualified URL of 3-D Secure requestor website or customer care site.
+	// An object containing a key for each supported card scheme (Amex, Discover, Mastercard and Visa), and for each key an object with the merchant profile for this service and the corresponding scheme.
+	MerchantProfile NullableMerchantProfile `json:"merchant_profile,omitempty"`
 	MerchantUrl NullableString `json:"merchant_url,omitempty"`
 	// Defines if this service is currently active or not.
 	Active *bool `json:"active,omitempty"`
 	// The numeric rank of a payment service. Payment services with a lower position value are processed first.
 	Position *float32 `json:"position,omitempty"`
-	// Defines if tokenization is enabled for the service (can only be enabled if the payment service definition supports it).
-	PaymentMethodTokenizationEnabled *bool `json:"payment_method_tokenization_enabled,omitempty"`
 	// The date and time when this service was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this service was last updated.
@@ -75,12 +73,12 @@ type PaymentService struct {
 // will change when the set of required properties is changed
 func NewPaymentService() *PaymentService {
 	this := PaymentService{}
+	var paymentMethodTokenizationEnabled bool = false
+	this.PaymentMethodTokenizationEnabled = &paymentMethodTokenizationEnabled
 	var threeDSecureEnabled bool = false
 	this.ThreeDSecureEnabled = &threeDSecureEnabled
 	var active bool = true
 	this.Active = &active
-	var paymentMethodTokenizationEnabled bool = false
-	this.PaymentMethodTokenizationEnabled = &paymentMethodTokenizationEnabled
 	return &this
 }
 
@@ -89,12 +87,12 @@ func NewPaymentService() *PaymentService {
 // but it doesn't guarantee that properties required by API are set
 func NewPaymentServiceWithDefaults() *PaymentService {
 	this := PaymentService{}
+	var paymentMethodTokenizationEnabled bool = false
+	this.PaymentMethodTokenizationEnabled = &paymentMethodTokenizationEnabled
 	var threeDSecureEnabled bool = false
 	this.ThreeDSecureEnabled = &threeDSecureEnabled
 	var active bool = true
 	this.Active = &active
-	var paymentMethodTokenizationEnabled bool = false
-	this.PaymentMethodTokenizationEnabled = &paymentMethodTokenizationEnabled
 	return &this
 }
 
@@ -352,6 +350,102 @@ func (o *PaymentService) HasAcceptedCountries() bool {
 // SetAcceptedCountries gets a reference to the given []string and assigns it to the AcceptedCountries field.
 func (o *PaymentService) SetAcceptedCountries(v []string) {
 	o.AcceptedCountries = &v
+}
+
+// GetOpenLoop returns the OpenLoop field value if set, zero value otherwise.
+func (o *PaymentService) GetOpenLoop() bool {
+	if o == nil || o.OpenLoop == nil {
+		var ret bool
+		return ret
+	}
+	return *o.OpenLoop
+}
+
+// GetOpenLoopOk returns a tuple with the OpenLoop field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentService) GetOpenLoopOk() (*bool, bool) {
+	if o == nil || o.OpenLoop == nil {
+		return nil, false
+	}
+	return o.OpenLoop, true
+}
+
+// HasOpenLoop returns a boolean if a field has been set.
+func (o *PaymentService) HasOpenLoop() bool {
+	if o != nil && o.OpenLoop != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetOpenLoop gets a reference to the given bool and assigns it to the OpenLoop field.
+func (o *PaymentService) SetOpenLoop(v bool) {
+	o.OpenLoop = &v
+}
+
+// GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field value if set, zero value otherwise.
+func (o *PaymentService) GetPaymentMethodTokenizationEnabled() bool {
+	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PaymentMethodTokenizationEnabled
+}
+
+// GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentService) GetPaymentMethodTokenizationEnabledOk() (*bool, bool) {
+	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
+		return nil, false
+	}
+	return o.PaymentMethodTokenizationEnabled, true
+}
+
+// HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
+func (o *PaymentService) HasPaymentMethodTokenizationEnabled() bool {
+	if o != nil && o.PaymentMethodTokenizationEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMethodTokenizationEnabled gets a reference to the given bool and assigns it to the PaymentMethodTokenizationEnabled field.
+func (o *PaymentService) SetPaymentMethodTokenizationEnabled(v bool) {
+	o.PaymentMethodTokenizationEnabled = &v
+}
+
+// GetNetworkTokensEnabled returns the NetworkTokensEnabled field value if set, zero value otherwise.
+func (o *PaymentService) GetNetworkTokensEnabled() bool {
+	if o == nil || o.NetworkTokensEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.NetworkTokensEnabled
+}
+
+// GetNetworkTokensEnabledOk returns a tuple with the NetworkTokensEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentService) GetNetworkTokensEnabledOk() (*bool, bool) {
+	if o == nil || o.NetworkTokensEnabled == nil {
+		return nil, false
+	}
+	return o.NetworkTokensEnabled, true
+}
+
+// HasNetworkTokensEnabled returns a boolean if a field has been set.
+func (o *PaymentService) HasNetworkTokensEnabled() bool {
+	if o != nil && o.NetworkTokensEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetNetworkTokensEnabled gets a reference to the given bool and assigns it to the NetworkTokensEnabled field.
+func (o *PaymentService) SetNetworkTokensEnabled(v bool) {
+	o.NetworkTokensEnabled = &v
 }
 
 // GetThreeDSecureEnabled returns the ThreeDSecureEnabled field value if set, zero value otherwise.
@@ -722,6 +816,48 @@ func (o *PaymentService) UnsetMerchantCategoryCode() {
 	o.MerchantCategoryCode.Unset()
 }
 
+// GetMerchantProfile returns the MerchantProfile field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentService) GetMerchantProfile() MerchantProfile {
+	if o == nil || o.MerchantProfile.Get() == nil {
+		var ret MerchantProfile
+		return ret
+	}
+	return *o.MerchantProfile.Get()
+}
+
+// GetMerchantProfileOk returns a tuple with the MerchantProfile field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentService) GetMerchantProfileOk() (*MerchantProfile, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.MerchantProfile.Get(), o.MerchantProfile.IsSet()
+}
+
+// HasMerchantProfile returns a boolean if a field has been set.
+func (o *PaymentService) HasMerchantProfile() bool {
+	if o != nil && o.MerchantProfile.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantProfile gets a reference to the given NullableMerchantProfile and assigns it to the MerchantProfile field.
+func (o *PaymentService) SetMerchantProfile(v MerchantProfile) {
+	o.MerchantProfile.Set(&v)
+}
+// SetMerchantProfileNil sets the value for MerchantProfile to be an explicit nil
+func (o *PaymentService) SetMerchantProfileNil() {
+	o.MerchantProfile.Set(nil)
+}
+
+// UnsetMerchantProfile ensures that no value is present for MerchantProfile, not even an explicit nil
+func (o *PaymentService) UnsetMerchantProfile() {
+	o.MerchantProfile.Unset()
+}
+
 // GetMerchantUrl returns the MerchantUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentService) GetMerchantUrl() string {
 	if o == nil || o.MerchantUrl.Get() == nil {
@@ -826,38 +962,6 @@ func (o *PaymentService) HasPosition() bool {
 // SetPosition gets a reference to the given float32 and assigns it to the Position field.
 func (o *PaymentService) SetPosition(v float32) {
 	o.Position = &v
-}
-
-// GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field value if set, zero value otherwise.
-func (o *PaymentService) GetPaymentMethodTokenizationEnabled() bool {
-	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
-		var ret bool
-		return ret
-	}
-	return *o.PaymentMethodTokenizationEnabled
-}
-
-// GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentService) GetPaymentMethodTokenizationEnabledOk() (*bool, bool) {
-	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
-		return nil, false
-	}
-	return o.PaymentMethodTokenizationEnabled, true
-}
-
-// HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
-func (o *PaymentService) HasPaymentMethodTokenizationEnabled() bool {
-	if o != nil && o.PaymentMethodTokenizationEnabled != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPaymentMethodTokenizationEnabled gets a reference to the given bool and assigns it to the PaymentMethodTokenizationEnabled field.
-func (o *PaymentService) SetPaymentMethodTokenizationEnabled(v bool) {
-	o.PaymentMethodTokenizationEnabled = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -1024,6 +1128,15 @@ func (o PaymentService) MarshalJSON() ([]byte, error) {
 	if o.AcceptedCountries != nil {
 		toSerialize["accepted_countries"] = o.AcceptedCountries
 	}
+	if o.OpenLoop != nil {
+		toSerialize["open_loop"] = o.OpenLoop
+	}
+	if o.PaymentMethodTokenizationEnabled != nil {
+		toSerialize["payment_method_tokenization_enabled"] = o.PaymentMethodTokenizationEnabled
+	}
+	if o.NetworkTokensEnabled != nil {
+		toSerialize["network_tokens_enabled"] = o.NetworkTokensEnabled
+	}
 	if o.ThreeDSecureEnabled != nil {
 		toSerialize["three_d_secure_enabled"] = o.ThreeDSecureEnabled
 	}
@@ -1051,6 +1164,9 @@ func (o PaymentService) MarshalJSON() ([]byte, error) {
 	if o.MerchantCategoryCode.IsSet() {
 		toSerialize["merchant_category_code"] = o.MerchantCategoryCode.Get()
 	}
+	if o.MerchantProfile.IsSet() {
+		toSerialize["merchant_profile"] = o.MerchantProfile.Get()
+	}
 	if o.MerchantUrl.IsSet() {
 		toSerialize["merchant_url"] = o.MerchantUrl.Get()
 	}
@@ -1059,9 +1175,6 @@ func (o PaymentService) MarshalJSON() ([]byte, error) {
 	}
 	if o.Position != nil {
 		toSerialize["position"] = o.Position
-	}
-	if o.PaymentMethodTokenizationEnabled != nil {
-		toSerialize["payment_method_tokenization_enabled"] = o.PaymentMethodTokenizationEnabled
 	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt

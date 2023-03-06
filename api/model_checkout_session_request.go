@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// CheckoutSessionRequest Details for a Checkout Session payment method.
+// CheckoutSessionRequest Details to register a new Checkout Session payment method.
 type CheckoutSessionRequest struct {
 	// `checkout-session`.
 	Method string `json:"method"`

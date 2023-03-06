@@ -21,12 +21,13 @@ type ReportCreate struct {
 	Name string `json:"name"`
 	// The description of the report.
 	Description NullableString `json:"description,omitempty"`
-	// Specifies the schedule of the report.  If this is a one-off report, set this value to `once`.  If this is a recurring report, this value should be set to the frequency by which the report will be executed. For example, a `monthly` schedule means that the report will be periodically executed at the start of each month.
+	// Specifies the schedule of the report.  If this is a one-off report, set this value to `once`.  If this is a recurring report, this value should be set to the frequency by which the report will be executed. For example, a `monthly` schedule means that the report will be periodically executed at the start of each month.  Note that a `weekly` schedule means that the report will be executed at the start of every Monday.
 	Schedule *string `json:"schedule,omitempty"`
 	// Indicates whether the report's scheduling is enabled. This value can only be set to `true` if this is a recurring report.  If this value is set to `true`, the report will be executed at the `next_execution_at` date and time.  If this is a recurring report and this value is set to `false`, executions of the report will not occur until this value is set to `true`.  If this value is not provided, `schedule_enabled` will automatically be set to `false` if `schedule` is `once` and set to `true` otherwise.
 	ScheduleEnabled NullableBool `json:"schedule_enabled,omitempty"`
 	// The time zone in which the report's executions will be scheduled. This value is used to compute the report's `next_execution_at` value and is only relevant when this is a recurring report. This time zone is also used to calculate the timestamp range for reports that use date-time placeholders. Date-time placeholders are dynamic timestamps that change with every report execution.  This value must be set to the time zone's name as presented in the IANA time zone database. For example, to schedule reports in the time zone of New York, set this value to `America/New_York`.
 	ScheduleTimezone *string `json:"schedule_timezone,omitempty"`
+	// The specifications of the report.
 	Spec ReportSpec `json:"spec"`
 }
 

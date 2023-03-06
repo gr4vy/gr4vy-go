@@ -21,6 +21,11 @@ type GooglePayRequest struct {
 	Method string `json:"method"`
 	// The encrypted (opaque) token returned by the Google Pay API that represents a payment method.
 	Token map[string]interface{} `json:"token"`
+	AssuranceDetails NullableGooglePayRequestAssuranceDetails `json:"assurance_details,omitempty"`
+	// Name of the card holder.
+	CardHolderName NullableString `json:"card_holder_name,omitempty"`
+	// The redirect URL to redirect a buyer to after they have authorized their transaction or payment method. This only applies to payment methods that require buyer approval.
+	RedirectUrl NullableString `json:"redirect_url,omitempty"`
 }
 
 // NewGooglePayRequest instantiates a new GooglePayRequest object
@@ -90,6 +95,132 @@ func (o *GooglePayRequest) SetToken(v map[string]interface{}) {
 	o.Token = v
 }
 
+// GetAssuranceDetails returns the AssuranceDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GooglePayRequest) GetAssuranceDetails() GooglePayRequestAssuranceDetails {
+	if o == nil || o.AssuranceDetails.Get() == nil {
+		var ret GooglePayRequestAssuranceDetails
+		return ret
+	}
+	return *o.AssuranceDetails.Get()
+}
+
+// GetAssuranceDetailsOk returns a tuple with the AssuranceDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GooglePayRequest) GetAssuranceDetailsOk() (*GooglePayRequestAssuranceDetails, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AssuranceDetails.Get(), o.AssuranceDetails.IsSet()
+}
+
+// HasAssuranceDetails returns a boolean if a field has been set.
+func (o *GooglePayRequest) HasAssuranceDetails() bool {
+	if o != nil && o.AssuranceDetails.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAssuranceDetails gets a reference to the given NullableGooglePayRequestAssuranceDetails and assigns it to the AssuranceDetails field.
+func (o *GooglePayRequest) SetAssuranceDetails(v GooglePayRequestAssuranceDetails) {
+	o.AssuranceDetails.Set(&v)
+}
+// SetAssuranceDetailsNil sets the value for AssuranceDetails to be an explicit nil
+func (o *GooglePayRequest) SetAssuranceDetailsNil() {
+	o.AssuranceDetails.Set(nil)
+}
+
+// UnsetAssuranceDetails ensures that no value is present for AssuranceDetails, not even an explicit nil
+func (o *GooglePayRequest) UnsetAssuranceDetails() {
+	o.AssuranceDetails.Unset()
+}
+
+// GetCardHolderName returns the CardHolderName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GooglePayRequest) GetCardHolderName() string {
+	if o == nil || o.CardHolderName.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardHolderName.Get()
+}
+
+// GetCardHolderNameOk returns a tuple with the CardHolderName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GooglePayRequest) GetCardHolderNameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CardHolderName.Get(), o.CardHolderName.IsSet()
+}
+
+// HasCardHolderName returns a boolean if a field has been set.
+func (o *GooglePayRequest) HasCardHolderName() bool {
+	if o != nil && o.CardHolderName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCardHolderName gets a reference to the given NullableString and assigns it to the CardHolderName field.
+func (o *GooglePayRequest) SetCardHolderName(v string) {
+	o.CardHolderName.Set(&v)
+}
+// SetCardHolderNameNil sets the value for CardHolderName to be an explicit nil
+func (o *GooglePayRequest) SetCardHolderNameNil() {
+	o.CardHolderName.Set(nil)
+}
+
+// UnsetCardHolderName ensures that no value is present for CardHolderName, not even an explicit nil
+func (o *GooglePayRequest) UnsetCardHolderName() {
+	o.CardHolderName.Unset()
+}
+
+// GetRedirectUrl returns the RedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GooglePayRequest) GetRedirectUrl() string {
+	if o == nil || o.RedirectUrl.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RedirectUrl.Get()
+}
+
+// GetRedirectUrlOk returns a tuple with the RedirectUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GooglePayRequest) GetRedirectUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.RedirectUrl.Get(), o.RedirectUrl.IsSet()
+}
+
+// HasRedirectUrl returns a boolean if a field has been set.
+func (o *GooglePayRequest) HasRedirectUrl() bool {
+	if o != nil && o.RedirectUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRedirectUrl gets a reference to the given NullableString and assigns it to the RedirectUrl field.
+func (o *GooglePayRequest) SetRedirectUrl(v string) {
+	o.RedirectUrl.Set(&v)
+}
+// SetRedirectUrlNil sets the value for RedirectUrl to be an explicit nil
+func (o *GooglePayRequest) SetRedirectUrlNil() {
+	o.RedirectUrl.Set(nil)
+}
+
+// UnsetRedirectUrl ensures that no value is present for RedirectUrl, not even an explicit nil
+func (o *GooglePayRequest) UnsetRedirectUrl() {
+	o.RedirectUrl.Unset()
+}
+
 func (o GooglePayRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -97,6 +228,15 @@ func (o GooglePayRequest) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["token"] = o.Token
+	}
+	if o.AssuranceDetails.IsSet() {
+		toSerialize["assurance_details"] = o.AssuranceDetails.Get()
+	}
+	if o.CardHolderName.IsSet() {
+		toSerialize["card_holder_name"] = o.CardHolderName.Get()
+	}
+	if o.RedirectUrl.IsSet() {
+		toSerialize["redirect_url"] = o.RedirectUrl.Get()
 	}
 	return json.Marshal(toSerialize)
 }

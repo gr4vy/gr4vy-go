@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Items** | Pointer to [**[]PaymentMethodTokenized**](PaymentMethodTokenized.md) | A list of stored payment methods in token format. | [optional] 
+**Items** | Pointer to [**[]PaymentMethodTokenized**](PaymentMethodTokenized.md) | A list of stored payment methods in summarized format. | [optional] 
 
 ## Methods
 

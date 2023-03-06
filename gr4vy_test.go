@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strconv"
 	"testing"
+	"net/http"
 )
 
 const keyPath = "./private_key.pem"
@@ -421,7 +422,7 @@ func TestAddPaymentService(t *testing.T) {
 		AcceptedCurrencies:         []string{"GBP"},
 		AcceptedCountries:          []string{"GB"},
 	}
-	fields := []Gr4vyPaymentServiceUpdateFields{
+	fields := []Gr4vyPaymentServiceRequestFields{
 		{Key: "secret_key", Value: "abc"},
 	}
 	var response *Gr4vyPaymentService
@@ -519,9 +520,12 @@ func TestAuthorizeNewTransaction(t *testing.T) {
 	}
 
 	var response *Gr4vyTransaction
-	response, _, err = client.AuthorizeNewTransaction(req, paymentMethod)
+	var body *http.Response
+	response, body, err = client.AuthorizeNewTransactionWithIdempotencyKey(req, paymentMethod, "myspecialkey124")
 	if err != nil {
 		t.Errorf(err.Error())
+		fmt.Printf("%+v\n", response)
+		fmt.Printf("%+v\n", body)
 		return
 	}
 
@@ -596,7 +600,6 @@ func TestRefundTransaction(t *testing.T) {
 	body, response, err := client.RefundTransaction(transactionId, req)
 	if err != nil {
 		t.Errorf(err.Error())
-		fmt.Println("got here")
 		fmt.Printf("%+v\n", response)
 		fmt.Printf("%+v\n", body)
 		return

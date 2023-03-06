@@ -33,7 +33,7 @@ tags:
 
     * Display a human readable name (`display_name`) for a buyer in the Gr4vy
     admin panel
-    * Associate multiple tokenized payment methods with a single user
+    * Associate multiple stored payment methods with a single user
     * Initialize **Gr4vy Embed** with the buyer ID, automatically displaying the
       buyer's previously stored payment methods, allowing for faster checkout.
   name: Buyers
@@ -55,6 +55,12 @@ tags:
     * List digital wallets currently registered.
   name: Digital Wallets
 - description: |-
+    In Gr4vy, a merchant account represents an individual merchant in an
+    instance. Each instance has one or more merchant accounts, and each
+    merchant account has its own connections, Flow rules, transactions, and
+    more.
+  name: Merchant Accounts
+- description: |-
     In Gr4vy, a payment method token represents the token created by a payment
     service for a payment method.
 
@@ -73,8 +79,8 @@ tags:
     * List all the available payment methods
     * Filter the available payment method for a buyer in a specific currency
     and country.
-    * Store (also known as tokenize) a payment method for a buyer.
-    * Fetch all previously tokenized payment methods for a buyer.
+    * Store (also known as vault) a payment method for a buyer.
+    * Fetch all previously stored payment methods for a buyer.
   name: Payment Methods
 - description: Payment Method definitions provide display information to a payment
     method.
@@ -140,7 +146,31 @@ tags:
     - Authorize, capture, and store alternative payment methods like PayPal.
     - Refund, void, and otherwise cancel existing transactions.
   name: Transactions
+- description: |-
+    In Gr4vy, users can be granted access to specific types of resources and permissions
+    to perform certain actions by being assigned one or more roles.
+  name: Roles
 paths:
+  /api-logs:
+    get:
+      description: Returns a list of API 4XX and 5XX logs.
+      operationId: list-api-logs
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ApiLogs'
+          description: Returns a list of API logs.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List API error Logs
+      tags:
+      - API Logs
   /audit-logs:
     get:
       description: Returns a list of audit logs.
@@ -173,6 +203,43 @@ paths:
         required: false
         schema:
           example: ZXhhbXBsZTE
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the items for which the `user` has an
+          `id` that matches this value.
+        explode: true
+        in: query
+        name: user_id
+        required: false
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the items for which the `audit-log` has an
+          `action` that matches this value.
+        explode: true
+        in: query
+        name: action
+        required: false
+        schema:
+          enum:
+          - created
+          - updated
+          - deleted
+          example: created
+          type: string
+        style: form
+      - description: |-
+          Filters the results to only the items for which the `audit-log` has a
+          `resource` that matches this type value.
+        explode: true
+        in: query
+        name: resource_type
+        required: false
+        schema:
+          example: buyer
           type: string
         style: form
       responses:
@@ -301,7 +368,7 @@ paths:
   /buyers/{buyer_id}:
     delete:
       description: |-
-        Deletes a buyer record. Any associated tokenized payment methods will remain
+        Deletes a buyer record. Any associated stored payment methods will remain
         in the system but no longer associated to the buyer.
       operationId: delete-buyer
       parameters:
@@ -426,13 +493,19 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error404NotFound'
           description: Returns an error if the resource can not be found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409DuplicateRecord'
+          description: Returns an error if duplicate resource has been found.
       summary: Update buyer
       tags:
       - Buyers
   /buyers/{buyer_id}/shipping-details:
     get:
-      description: Retrieve all shipping addresses for a buyer.
-      operationId: get-buyer-shipping-addresses
+      description: Retrieve all shipping details for a buyer.
+      operationId: get-buyer-shipping-details
       parameters:
       - description: The unique ID for a buyer.
         explode: false
@@ -449,8 +522,8 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShippingAddresses'
-          description: Returns all associated shipping addresses.
+                $ref: '#/components/schemas/ShippingDetails'
+          description: Returns all associated shipping details.
         "401":
           content:
             application/json:
@@ -463,12 +536,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/ErrorGeneric'
           description: Returns a generic error.
-      summary: Get buyer shipping addresses
+      summary: Get buyer shipping details
       tags:
       - Buyers
     post:
-      description: Adds a buyer shipping address.
-      operationId: add-buyer-shipping-address
+      description: Adds a buyer shipping detail.
+      operationId: add-buyer-shipping-detail
       parameters:
       - description: The unique ID for a buyer.
         explode: false
@@ -484,14 +557,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ShippingAddressRequest'
+              $ref: '#/components/schemas/ShippingDetailRequest'
       responses:
         "201":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShippingAddress'
-          description: Returns the shipping address that was added.
+                $ref: '#/components/schemas/ShippingDetail'
+          description: Returns the shipping detail that was added.
         "400":
           content:
             application/json:
@@ -505,13 +578,13 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error401Unauthorized'
           description: Returns an error if no valid authentication was provided.
-      summary: New buyer shipping address
+      summary: New buyer shipping detail
       tags:
       - Buyers
-  /buyers/{buyer_id}/shipping-details/{shipping_address_id}:
+  /buyers/{buyer_id}/shipping-details/{shipping_detail_id}:
     delete:
-      description: Deletes a buyer shipping address.
-      operationId: delete-buyer-shipping-address
+      description: Deletes a buyer shipping detail.
+      operationId: delete-buyer-shipping-detail
       parameters:
       - description: The unique ID for a buyer.
         explode: false
@@ -523,10 +596,10 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: The unique ID for a shipping address.
+      - description: The unique ID for a buyer's shipping detail.
         explode: false
         in: path
-        name: shipping_address_id
+        name: shipping_detail_id
         required: true
         schema:
           example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
@@ -548,12 +621,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error404NotFound'
           description: Returns an error if the resource can not be found.
-      summary: Delete buyer shipping address
+      summary: Delete buyer shipping detail
       tags:
       - Buyers
     put:
-      description: Updates a shipping address for a buyer.
-      operationId: update-buyer-shipping-address
+      description: Updates a shipping detail for a buyer.
+      operationId: update-buyer-shipping-detail
       parameters:
       - description: The unique ID for a buyer.
         explode: false
@@ -565,10 +638,10 @@ paths:
           format: uuid
           type: string
         style: simple
-      - description: The unique ID for a shipping address.
+      - description: The unique ID for a buyer's shipping detail.
         explode: false
         in: path
-        name: shipping_address_id
+        name: shipping_detail_id
         required: true
         schema:
           example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
@@ -579,14 +652,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/ShippingAddressUpdateRequest'
+              $ref: '#/components/schemas/ShippingDetailUpdateRequest'
       responses:
         "200":
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/ShippingAddress'
-          description: Returns the updated shipping address.
+                $ref: '#/components/schemas/ShippingDetail'
+          description: Returns the updated shipping detail.
         "400":
           content:
             application/json:
@@ -606,15 +679,15 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error404NotFound'
           description: Returns an error if the resource can not be found.
-      summary: Update buyer shipping address
+      summary: Update buyer shipping detail
       tags:
       - Buyers
   /buyers/payment-methods:
     get:
       description: |-
-        Returns a list of stored (tokenized) payment methods for a buyer in a short
-        tokenized format. Only payment methods that are compatible with at least one
-        active payment service in that region are shown.
+        Returns a list of stored payment methods for a buyer in a summarized format.
+        Only payment methods that are compatible with at least one active payment
+        service in that region are shown.
       operationId: list-buyer-payment-methods
       parameters:
       - description: |-
@@ -722,6 +795,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error401Unauthorized'
           description: Returns an error if no valid authentication was provided.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409DuplicateRecord'
+          description: Returns an error if duplicate resource has been found.
         default:
           content:
             application/json:
@@ -864,7 +943,7 @@ paths:
       - Checkout Sessions
   /payment-methods:
     get:
-      description: Returns a list of stored (tokenized) payment methods.
+      description: Returns a list of stored payment methods.
       operationId: list-payment-methods
       parameters:
       - description: |-
@@ -951,7 +1030,12 @@ paths:
       tags:
       - Payment Methods
     post:
-      description: Stores and tokenizes a new payment method.
+      description: |
+        Stores and vaults a new payment method.
+
+        Vaulting a card only stores its information but doesn't validate it against any
+        PSP. In order to do so, a CIT (Customer Initiated Transaction) must be done,
+        even if it's a zero-value one.
       operationId: store-payment-method
       requestBody:
         content:
@@ -978,6 +1062,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error401Unauthorized'
           description: Returns an error if no valid authentication was provided.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409DuplicateRecord'
+          description: Returns an error if duplicate resource has been found.
       summary: New payment method
       tags:
       - Payment Methods
@@ -1050,43 +1140,6 @@ paths:
       summary: Get stored payment method
       tags:
       - Payment Methods
-  /payment-methods/{payment_method_id}/tokens:
-    get:
-      description: Returns a list of PSP tokens for a given payment method.
-      operationId: list-payment-method-tokens
-      parameters:
-      - description: The ID of the payment method.
-        explode: false
-        in: path
-        name: payment_method_id
-        required: true
-        schema:
-          example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
-          format: uuid
-          type: string
-        style: simple
-      responses:
-        "200":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/PaymentMethodTokens'
-          description: Returns a list of payment method tokens.
-        "401":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error401Unauthorized'
-          description: Returns an error if no valid authentication was provided.
-        "404":
-          content:
-            application/json:
-              schema:
-                $ref: '#/components/schemas/Error404NotFound'
-          description: Returns an error if the resource can not be found.
-      summary: List payment method tokens
-      tags:
-      - Payment Method Tokens
   /payment-method-definitions:
     get:
       description: Returns a list of all available payment method definitions.
@@ -1110,8 +1163,14 @@ paths:
   /payment-options:
     get:
       description: |-
-        Returns a list of available payment method options for a currency
-        and country.
+        Returns a list of available payment method options for the combination of
+        amount, currency, country and metadata.
+
+        If the amount is zero, payment options which do not support zero amounts,
+        will be omitted in the response.
+
+        If you want to use Flow rules,
+        please use the [post endpoint](#operation/post-list-payment-options).
       operationId: list-payment-options
       parameters:
       - description: |-
@@ -1166,7 +1225,7 @@ paths:
         name: locale
         required: false
         schema:
-          default: en-US
+          default: en
           example: en-US
           pattern: ^[a-z]{2}(?:-[A-Z]{2})?$
           type: string
@@ -1186,6 +1245,45 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error400BadRequest'
           description: Returns an error if  any of the query parameters are not recognised.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List payment options
+      tags:
+      - Payment Options
+    post:
+      description: |-
+        Returns a list of available payment method options for the combination of
+        amount, currency, country, metadata and list of cart items.
+
+        If the amount is zero, payment options which do not support zero amounts,
+        will be omitted in the response.
+      operationId: post-list-payment-options
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/PaymentOptionsRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PaymentOptions'
+          description: |-
+            Returns a list of available payment options for the given query
+            parameters.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error400BadRequest'
+          description: |-
+            Returns an error if the request was badly formatted or missing required
+            fields.
         "401":
           content:
             application/json:
@@ -1588,6 +1686,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error401Unauthorized'
           description: Returns an error if no valid authentication was provided.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409DuplicateRecord'
+          description: Returns an error if duplicate resource has been found.
       summary: Register digital wallet
       tags:
       - Digital Wallets
@@ -1597,6 +1701,11 @@ paths:
         De-registers a digital wallet with a provider. Upon successful
         de-registration, the digital wallet's record is deleted and will no
         longer be available.
+
+        A digital wallet of the `apple` provider may only be de-registered if
+        there are no `active` Apple Pay certificates. When there are only
+        `incomplete` or `expired` Apple Pay certificates, these certificates
+        are deleted alongside the `apple` digital wallet's record.
       operationId: deregister-digital-wallet
       parameters:
       - description: The ID of the registered digital wallet.
@@ -1948,6 +2057,17 @@ paths:
           type: string
         style: form
       - description: |-
+          Filters for transactions that have a payment method with a label
+          that matches exactly with the provided value.
+        explode: true
+        in: query
+        name: payment_method_label
+        required: false
+        schema:
+          example: "1234"
+          type: string
+        style: form
+      - description: |-
           Filters for transactions that were processed by the provided
           `payment_service_id` values.
         explode: true
@@ -2177,6 +2297,22 @@ paths:
         * `capture` - Use this method to also perform a capture of the transaction
         after it has been authorized.
       operationId: authorize-new-transaction
+      parameters:
+      - description: |-
+          A unique key that identifies this request. Providing this header will make
+          this an idempotent request. We recommend using V4 UUIDs, or another random
+          string with enough entropy to avoid collisions. See the
+          [documentation](https://docs.gr4vy.com/idempotent-requests) for more
+          information.
+        explode: false
+        in: header
+        name: Idempotency-Key
+        required: false
+        schema:
+          example: bffa9ce6-7a8a-449c-889a-65bd2ee86903
+          maxLength: 255
+          type: string
+        style: simple
       requestBody:
         content:
           application/json:
@@ -2191,7 +2327,7 @@ paths:
                     expiration_date: 11/25
                     security_code: "123"
                     redirect_url: https://example.com/callback
-              Authorized and tokenize a card:
+              Authorize and store a card:
                 value:
                   amount: 1299
                   currency: USD
@@ -2202,7 +2338,7 @@ paths:
                     expiration_date: 11/25
                     security_code: "123"
                     redirect_url: https://example.com/callback
-              Authorize, capture, and tokenize a card:
+              Authorize, capture, and store a card:
                 value:
                   amount: 1299
                   currency: USD
@@ -2224,7 +2360,7 @@ paths:
                     redirect_url: https://example.com/callback
                     country: US
                     currency: USD
-              Authorize and capture using a previously tokenized card:
+              Authorize and capture using a previously stored card:
                 value:
                   amount: 1299
                   currency: USD
@@ -2232,6 +2368,34 @@ paths:
                   payment_method:
                     method: id
                     id: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+              Authorize a new card with connection options:
+                value:
+                  amount: 1299
+                  currency: USD
+                  payment_method:
+                    method: card
+                    number: "4111111111111111"
+                    expiration_date: 11/25
+                    security_code: "123"
+                    redirect_url: https://example.com/callback
+                  connection_options:
+                    cybersource-anti-fraud:
+                      device_fingerprint_id: yGeBAFYgFmM=
+                      merchant_defined_data:
+                        field1: value1
+                        field2: value2
+              Authorize and asynchronously capture a card transaction:
+                value:
+                  amount: 1299
+                  currency: USD
+                  intent: capture
+                  async_capture: true
+                  payment_method:
+                    method: card
+                    number: "4111111111111111"
+                    expiration_date: 11/25
+                    security_code: "123"
+                    redirect_url: https://example.com/callback
             schema:
               $ref: '#/components/schemas/TransactionRequest'
       responses:
@@ -2254,6 +2418,12 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error401Unauthorized'
           description: Returns an error if no valid authentication was provided.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409DuplicateRecord'
+          description: Returns an error if duplicate resource has been found.
       summary: New transaction
       tags:
       - Transactions
@@ -2645,6 +2815,29 @@ paths:
           example: Failed+Authorizations+042022
           type: string
         style: form
+      - description: |-
+          Filters for report executions that have a matching `status` value.
+
+          This filter accepts multiple values.
+        explode: true
+        in: query
+        name: status
+        required: false
+        schema:
+          example:
+          - succeeded
+          - failed
+          items:
+            enum:
+            - dispatched
+            - failed
+            - pending
+            - processing
+            - succeeded
+            example: succeeded
+            type: string
+          type: array
+        style: form
       responses:
         "200":
           content:
@@ -2757,8 +2950,10 @@ paths:
           - monthly
           items:
             enum:
+            - daily
             - monthly
             - once
+            - weekly
             type: string
           type: array
         style: form
@@ -2790,6 +2985,9 @@ paths:
     post:
       description: |
         Adds a report.
+
+        Documentation about reports models and how to write a valid specification
+        can be found in [Reporting docs](/reporting/introduction).
       operationId: add-report
       requestBody:
         content:
@@ -3015,6 +3213,306 @@ paths:
       summary: Generate the download URL of a report execution result
       tags:
       - Reports
+  /roles:
+    get:
+      description: Returns a list of roles.
+      operationId: list-roles
+      parameters:
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Roles'
+          description: Returns a list of roles.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List roles
+      tags:
+      - Roles
+  /roles/assignments:
+    get:
+      description: |-
+        Returns a list of role assignments.
+
+        Role assignments can be filtered for a given role by providing
+        the `role_id` search parameter, or for a given assignee by providing
+        both the `assignee_type` and `assignee_id` parameters.
+      operationId: list-role-assignments
+      parameters:
+      - description: Filters for role assignments for the role that has a matching
+          `id` value.
+        explode: true
+        in: query
+        name: role_id
+        required: false
+        schema:
+          example: be828248-56de-481e-a580-44b6e1d4df81
+          format: uuid
+          type: string
+        style: form
+      - description: Filters for role assignments for the assignee of the given type.
+        explode: true
+        in: query
+        name: assignee_type
+        required: false
+        schema:
+          enum:
+          - user
+          example: user
+          type: string
+        style: form
+      - description: |-
+          Filters for role assignments for the assignee that has a matching `id` value.
+          The `assignee_type` must also be specified.
+        explode: true
+        in: query
+        name: assignee_id
+        required: false
+        schema:
+          example: be828248-56de-481e-a580-44b6e1d4df81
+          format: uuid
+          type: string
+        style: form
+      - description: Defines the maximum number of items to return for this request.
+        explode: true
+        in: query
+        name: limit
+        required: false
+        schema:
+          default: 20
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        style: form
+      - description: |-
+          A cursor that identifies the page of results to return. This is used to
+          paginate the results of this API.
+
+          For the first page of results, this parameter can be left out.
+          For additional pages, use the value returned by the API in
+          the `next_cursor` field. Similarly the `previous_cursor` can be used to
+          reverse backwards in the list.
+        explode: true
+        in: query
+        name: cursor
+        required: false
+        schema:
+          example: ZXhhbXBsZTE
+          type: string
+        style: form
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAssignments'
+          description: Returns a list of role assignments.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List role assignments
+      tags:
+      - Roles
+    post:
+      description: |
+        Adds a role assignment, in effect applying a role to the given assignee.
+      operationId: add-role-assignment
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RoleAssignmentRequest'
+      responses:
+        "201":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RoleAssignment'
+          description: Returns the role assignment that was added.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409DuplicateRecord'
+          description: Returns an error if duplicate resource has been found.
+      summary: New role assignment
+      tags:
+      - Roles
+  /roles/assignments/{role_assignment_id}:
+    delete:
+      description: |-
+        Deletes a role assignment. The associated assignee will no longer be
+        assigned the role.
+      operationId: delete-role-assignment
+      parameters:
+      - description: The unique ID for the role assignment.
+        explode: false
+        in: path
+        name: role_assignment_id
+        required: true
+        schema:
+          example: 1cdac457-400f-4866-8da6-5c193a8db158
+          format: uuid
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Returns an empty response.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Delete role assignment
+      tags:
+      - Roles
+  /merchant-accounts:
+    get:
+      description: Lists all merchant accounts in an instance.
+      operationId: list-merchant-accounts
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/MerchantAccounts'
+          description: Returns a paginated list of merchant accounts.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: List merchant accounts
+      tags:
+      - Merchant Accounts
+    post:
+      description: Create a merchant account.
+      operationId: create-merchant-account
+      requestBody:
+        content:
+          application/json:
+            examples:
+              Create a merchant account:
+                value:
+                  display_name: Plantly UK
+            schema:
+              $ref: '#/components/schemas/MerchantAccountCreate'
+      responses:
+        "201":
+          content:
+            application/json:
+              examples:
+                Merchant Account:
+                  value:
+                    type: merchant-account
+                    id: plantly_uk
+                    display_name: Plantly UK
+                    created_at: 2022-02-01T14:20:00.000+00:00
+                    updated_at: 2022-02-01T14:20:00.000+00:00
+              schema:
+                $ref: '#/components/schemas/MerchantAccount'
+          description: Returns the created merchant account.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: Create merchant account
+      tags:
+      - Merchant Accounts
+  /merchant-accounts/{merchant_account_id}:
+    delete:
+      description: Deletes a specific merchant account.
+      operationId: delete-merchant-accuont
+      parameters:
+      - description: The unique ID for a merchant account.
+        explode: false
+        in: path
+        name: merchant_account_id
+        required: true
+        schema:
+          example: plantly_uk
+          type: string
+        style: simple
+      responses:
+        "204":
+          description: Returns an empty response.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+      summary: Delete merchant account
+      tags:
+      - Merchant Accounts
 components:
   schemas:
     Address:
@@ -3114,9 +3612,9 @@ components:
             During update request, this value is used for validation only but
             the underlying service can not be changed for an existing service.
           enum:
-          - sift
-          - cybersource
-          example: sift
+          - sift-anti-fraud
+          - cybersource-anti-fraud
+          example: sift-anti-fraud
           type: string
         display_name:
           description: A unique name for this anti-fraud service which is used in
@@ -3127,13 +3625,16 @@ components:
           type: string
         active:
           default: true
-          description: Defines if this service is currently active or not.
+          description: |-
+            Defines if this service is currently active or not. There can only
+            be one active service at any time. When updating a service
+            to active, the current active service will be deactivated.
           example: true
           type: boolean
         fields:
           description: |-
             A list of fields, each containing a key-value pair for each field defined
-            by the definition for this anti-fraud service e.g. for sift
+            by the definition for this anti-fraud service e.g. for Sift
             `api_key` must be sent within this field when creating the service.
 
             For updates, only the fields sent here will be updated,
@@ -3186,6 +3687,144 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    APIKeyPairCreate:
+      description: A request to create an API key-pair.
+      properties:
+        display_name:
+          description: A name for this key-pair which is used in the Gr4vy admin panel
+            to give the key-pair a human readable name.
+          example: Sandbox
+          maxLength: 200
+          minLength: 1
+          type: string
+      title: API key-pair (Create)
+      type: object
+      x-tags:
+      - API Key Pairs
+    APIKeyPairUpdate:
+      description: A request to update an API key-pair.
+      properties:
+        display_name:
+          description: A name for this key-pair which is used in the Gr4vy admin panel
+            to give the key-pair a human readable name.
+          example: Sandbox
+          maxLength: 200
+          minLength: 1
+          type: string
+      required:
+      - display_name
+      title: API key-pair (Update)
+      type: object
+      x-tags:
+      - API Key Pairs
+    ApiLog:
+      description: A log of an error that happened in the API call.
+      example:
+        response_sent_at: 2022-01-01T00:00:10Z
+        request_received_at: 2022-01-01T00:00:00Z
+        response_body:
+          code: bad_request
+          details:
+            pointer: /payment_method/number
+            location: body
+            message: ensure this value has at least 13 characters
+            type: value_error.any_str.min_length
+          message: Request failed validation
+          type: error
+          status: 400
+        id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+        request_method: POST
+        type: api-log
+        request_url: http://api.wpay.gr4vy.app/transactions
+        response_status_code: 400
+      properties:
+        type:
+          description: '`api-log`.'
+          enum:
+          - api-log
+          example: api-log
+          type: string
+        id:
+          description: The ID of the API log entry.
+          example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          format: uuid
+          type: string
+        request_method:
+          description: The http request method that generated the log entry.
+          example: POST
+          type: string
+        request_url:
+          description: The http request URL which trigged the error log.
+          example: http://api.wpay.gr4vy.app/transactions
+          type: string
+        request_received_at:
+          description: The date and time that the request was received.
+          example: 2022-01-01T00:00:00Z
+          format: date-time
+          type: string
+        response_status_code:
+          description: The http request status code.
+          example: 400
+          type: number
+        response_body:
+          $ref: '#/components/schemas/ApiLog_response_body'
+        response_sent_at:
+          description: date-time of when the response was sent.
+          example: 2022-01-01T00:00:10Z
+          format: date-time
+          type: string
+      title: API Log
+      type: object
+      x-tags:
+      - API Log
+    ApiLogs:
+      description: A list of API log entries.
+      example:
+        items:
+        - response_sent_at: 2022-01-01T00:00:10Z
+          request_received_at: 2022-01-01T00:00:00Z
+          response_body:
+            code: bad_request
+            details:
+              pointer: /payment_method/number
+              location: body
+              message: ensure this value has at least 13 characters
+              type: value_error.any_str.min_length
+            message: Request failed validation
+            type: error
+            status: 400
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          request_method: POST
+          type: api-log
+          request_url: http://api.wpay.gr4vy.app/transactions
+          response_status_code: 400
+        - response_sent_at: 2022-01-01T00:00:10Z
+          request_received_at: 2022-01-01T00:00:00Z
+          response_body:
+            code: bad_request
+            details:
+              pointer: /payment_method/number
+              location: body
+              message: ensure this value has at least 13 characters
+              type: value_error.any_str.min_length
+            message: Request failed validation
+            type: error
+            status: 400
+          id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          request_method: POST
+          type: api-log
+          request_url: http://api.wpay.gr4vy.app/transactions
+          response_status_code: 400
+      properties:
+        items:
+          description: A list of API log entries.
+          items:
+            $ref: '#/components/schemas/ApiLog'
+          type: array
+      title: API Logs
+      type: object
+      x-tags:
+      - API Logs
     AuditLog:
       description: A log of a change that occurred in the Gr4vy instance.
       example:
@@ -3197,9 +3836,11 @@ components:
         id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
         type: audit-log
         user:
+          email_address: john@example.com
           name: John L
           staff: false
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          status: active
         timestamp: 2022-01-01T00:00:00Z
       properties:
         type:
@@ -3249,9 +3890,11 @@ components:
           id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
           type: audit-log
           user:
+            email_address: john@example.com
             name: John L
             staff: false
             id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+            status: active
           timestamp: 2022-01-01T00:00:00Z
         - resource:
             name: Samuel J
@@ -3261,9 +3904,11 @@ components:
           id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
           type: audit-log
           user:
+            email_address: john@example.com
             name: John L
             staff: false
             id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+            status: active
           timestamp: 2022-01-01T00:00:00Z
       properties:
         items:
@@ -3345,13 +3990,13 @@ components:
         address:
           allOf:
           - $ref: '#/components/schemas/Address'
-          - description: The billing address of the buyer.
-            nullable: true
+          description: The billing address of the buyer.
+          nullable: true
         tax_id:
           allOf:
           - $ref: '#/components/schemas/TaxId'
-          - description: The tax information associated with the billing details.
-            nullable: true
+          description: The tax information associated with the billing details.
+          nullable: true
       title: Billing details
       type: object
       x-tags:
@@ -3404,8 +4049,8 @@ components:
         tax_id:
           allOf:
           - $ref: '#/components/schemas/TaxId'
-          - description: The tax information associated with the billing details.
-            nullable: true
+          description: The tax ID information associated with the billing details.
+          nullable: true
       title: Billing details (Create)
       type: object
       x-tags:
@@ -3451,8 +4096,8 @@ components:
         tax_id:
           allOf:
           - $ref: '#/components/schemas/TaxId'
-          - description: The tax information associated with the billing details.
-            nullable: true
+          description: The tax ID information associated with the billing details.
+          nullable: true
       title: Billing Details (Update)
       type: object
       x-tags:
@@ -3558,8 +4203,8 @@ components:
         billing_details:
           allOf:
           - $ref: '#/components/schemas/BillingDetails'
-          - description: The billing details associated with a buyer.
-            nullable: true
+          description: The billing details associated with a buyer.
+          nullable: true
         created_at:
           description: |-
             The date and time
@@ -3671,9 +4316,10 @@ components:
         billing_details:
           allOf:
           - $ref: '#/components/schemas/BillingDetails'
-          - description: The billing details associated with the buyer, which include
-              the address and tax ID.
-            nullable: true
+          description: |-
+            The billing details associated with the buyer, which include the
+            address and tax ID.
+          nullable: true
       title: Buyer (Snapshot)
       type: object
       x-tags:
@@ -3682,7 +4328,7 @@ components:
       description: A request to create a buyer.
       example:
         external_identifier: user-789123
-        billing_details: ""
+        billing_details: '{}'
         display_name: John L.
       properties:
         external_identifier:
@@ -3704,8 +4350,9 @@ components:
         billing_details:
           allOf:
           - $ref: '#/components/schemas/BillingDetailsRequest'
-          - description: The optional billing details to create a buyer.
-            nullable: true
+          description: The optional billing details to associate with a buyer.
+          nullable: true
+          type: object
       title: Buyer (Create)
       type: object
       x-tags:
@@ -3714,7 +4361,7 @@ components:
       description: A request to update a buyer.
       example:
         external_identifier: user-789123
-        billing_details: ""
+        billing_details: '{}'
         display_name: John L.
       properties:
         external_identifier:
@@ -3736,8 +4383,9 @@ components:
         billing_details:
           allOf:
           - $ref: '#/components/schemas/BillingDetailsUpdateRequest'
-          - description: The billing details of the buyer.
-            nullable: true
+          description: The billing details of the buyer.
+          nullable: true
+          type: object
       title: Buyer (Update)
       type: object
       x-tags:
@@ -3828,8 +4476,7 @@ components:
       title: Required Fields
       type: object
     CardRequest:
-      description: Card details to use in a transaction or to register a new payment
-        method.
+      description: Details to register a new card payment method.
       example:
         number: "4111111111111111"
         external_identifier: card-323444
@@ -4010,6 +4657,14 @@ components:
       type: object
       x-tags:
       - Discovery
+    ConnectionOptions:
+      properties:
+        cybersource-anti-fraud:
+          $ref: '#/components/schemas/ConnectionOptions_cybersource_anti_fraud'
+        adyen-card:
+          $ref: '#/components/schemas/ConnectionOptions_adyen_card'
+      title: Connection Options
+      type: object
     CartItem:
       description: |-
         A cart item that represents a single cart line item for a transaction.
@@ -4270,7 +4925,7 @@ components:
       x-tags:
       - Checkout Sessions
     CheckoutSessionRequest:
-      description: Details for a Checkout Session payment method.
+      description: Details to register a new Checkout Session payment method.
       properties:
         method:
           description: '`checkout-session`.'
@@ -4306,14 +4961,17 @@ components:
       required:
       - id
       - method
-      title: Checkout Session payment method request
+      title: Checkout Session
       type: object
       x-tags:
       - Request Bodies
     DigitalWallet:
       description: A digital wallet (e.g. Apple Pay) that has been registered.
       example:
+        pending_certificate_count: 1
         updated_at: 2012-12-12T10:53:43Z
+        active_certificate_count: 1
+        expired_certificate_count: 1
         provider: apple
         merchant_name: Gr4vy
         created_at: 2012-12-12T10:53:43Z
@@ -4374,6 +5032,21 @@ components:
           example: 2012-12-12T10:53:43Z
           format: date-time
           type: string
+        active_certificate_count:
+          description: The number of active custom certificates registered for this
+            digital wallet (Apple Pay only).
+          example: 1
+          type: integer
+        pending_certificate_count:
+          description: The number of pending custom certificates registered for this
+            digital wallet (Apple Pay only).
+          example: 1
+          type: integer
+        expired_certificate_count:
+          description: The number of expired custom certificates registered for this
+            digital wallet (Apple Pay only).
+          example: 1
+          type: integer
       title: Digital Wallet
       type: object
       x-tags:
@@ -4382,7 +5055,10 @@ components:
       description: A list of registered digital wallets.
       example:
         items:
-        - updated_at: 2012-12-12T10:53:43Z
+        - pending_certificate_count: 1
+          updated_at: 2012-12-12T10:53:43Z
+          active_certificate_count: 1
+          expired_certificate_count: 1
           provider: apple
           merchant_name: Gr4vy
           created_at: 2012-12-12T10:53:43Z
@@ -4391,7 +5067,10 @@ components:
           merchant_url: https://example.com
           domain_names:
           - example.com
-        - updated_at: 2012-12-12T10:53:43Z
+        - pending_certificate_count: 1
+          updated_at: 2012-12-12T10:53:43Z
+          active_certificate_count: 1
+          expired_certificate_count: 1
           provider: apple
           merchant_name: Gr4vy
           created_at: 2012-12-12T10:53:43Z
@@ -4883,6 +5562,20 @@ components:
             The encrypted (opaque) token returned by the Google Pay API that
             represents a payment method.
           type: object
+        assurance_details:
+          $ref: '#/components/schemas/GooglePayRequest_assurance_details'
+        card_holder_name:
+          description: Name of the card holder.
+          nullable: true
+          type: string
+        redirect_url:
+          description: |-
+            The redirect URL to redirect a buyer to after they have authorized their
+            transaction or payment method. This only applies to payment methods that
+            require buyer approval.
+          example: https://example.com/callback
+          nullable: true
+          type: string
       required:
       - method
       - token
@@ -4902,6 +5595,193 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    MerchantAccount:
+      example:
+        updated_at: 2022-02-01T14:20:00Z
+        created_at: 2022-02-01T14:20:00Z
+        id: plantly_uk
+        type: merchant-account
+        display_name: Plantly UK
+      properties:
+        type:
+          description: '`merchant-account`.'
+          enum:
+          - merchant-account
+          example: merchant-account
+          type: string
+        id:
+          description: The ID for this merchant account.
+          example: plantly_uk
+          type: string
+        display_name:
+          description: The display name of this merchant account.
+          example: Plantly UK
+          type: string
+        created_at:
+          description: The date and time when this merchant account was created in
+            our system.
+          example: 2022-02-01T14:20:00Z
+          format: date-time
+          type: string
+        updated_at:
+          description: The date and time when this merchant account was updated in
+            our system.
+          example: 2022-02-01T14:20:00Z
+          format: date-time
+          type: string
+      title: Merchant Account
+      type: object
+      x-tags:
+      - Merchant Account
+    MerchantAccounts:
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - updated_at: 2022-02-01T14:20:00Z
+          created_at: 2022-02-01T14:20:00Z
+          id: plantly_uk
+          type: merchant-account
+          display_name: Plantly UK
+        - updated_at: 2022-02-01T14:20:00Z
+          created_at: 2022-02-01T14:20:00Z
+          id: plantly_uk
+          type: merchant-account
+          display_name: Plantly UK
+      properties:
+        items:
+          description: A list of merchant accounts.
+          items:
+            $ref: '#/components/schemas/MerchantAccount'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Merchant Accounts
+      type: object
+      x-tags:
+      - Merchant Accounts
+    MerchantAccountCreate:
+      description: A request to create a merchant account.
+      example:
+        id: plantly_uk
+        display_name: Plantly UK
+      properties:
+        id:
+          description: The unique ID for the merchant account.
+          example: plantly_uk
+          maxLength: 255
+          minLength: 1
+          nullable: false
+          type: string
+        display_name:
+          description: The human-readable name of the merchant account.
+          example: Plantly UK
+          maxLength: 255
+          minLength: 1
+          nullable: false
+          type: string
+      title: Merchant Account (Create)
+      type: object
+      x-tags:
+      - Merchant Accounts
+    MerchantAccountUpdate:
+      description: A request to update a merchant account.
+      properties:
+        display_name:
+          description: The human-readable name of the merchant account.
+          example: Plantly UK
+          maxLength: 255
+          minLength: 1
+          nullable: false
+          type: string
+      title: Merchant Account (Update)
+      type: object
+      x-tags:
+      - Merchant Accounts
+    MerchantProfileScheme:
+      description: Merchant profile for a specific scheme.
+      properties:
+        merchant_acquirer_bin:
+          description: Acquirer bin to use when calling 3DS through this scheme.
+          maxLength: 11
+          type: string
+        merchant_url:
+          description: URL to send when calling 3DS through this scheme.
+          type: string
+        merchant_acquirer_id:
+          description: Merchant ID to use when calling 3DS through this scheme.
+          maxLength: 35
+          type: string
+        merchant_name:
+          description: Merchant name to use when calling 3DS through this scheme.
+          maxLength: 40
+          type: string
+        merchant_country_code:
+          description: Acquirer bin to use when calling 3DS through this scheme.
+          maxLength: 3
+          minLength: 3
+          type: string
+        merchant_category_code:
+          description: Acquirer bin to use when calling 3DS through this scheme.
+          maxLength: 4
+          type: string
+      title: Merchant Profile (single scheme)
+      type: object
+    MerchantProfile:
+      description: Merchant profile for the different card schemes.
+      properties:
+        amex:
+          allOf:
+          - $ref: '#/components/schemas/MerchantProfileScheme'
+          description: Merchant profile for Amex.
+          nullable: true
+          type: object
+        discover:
+          allOf:
+          - $ref: '#/components/schemas/MerchantProfileScheme'
+          description: Merchant profile for Discover.
+          nullable: true
+          type: object
+        mastercard:
+          allOf:
+          - $ref: '#/components/schemas/MerchantProfileScheme'
+          description: Merchant profile for Mastercard.
+          nullable: true
+          type: object
+        visa:
+          allOf:
+          - $ref: '#/components/schemas/MerchantProfileScheme'
+          description: Merchant profile for Visa.
+          nullable: true
+          type: object
+      title: Merchant Profile
+      type: object
     PaymentMethod:
       description: A generic payment method.
       example:
@@ -4983,7 +5863,7 @@ components:
             - zippay
             example: card
             type: string
-          - description: The type of this payment method.
+          description: The type of this payment method.
         mode:
           allOf:
           - enum:
@@ -4993,7 +5873,7 @@ components:
             - googlepay
             example: card
             type: string
-          - description: The mode to use with this payment method.
+          description: The mode to use with this payment method.
         created_at:
           description: |-
             The date and time when this payment method was first created in our
@@ -5017,9 +5897,8 @@ components:
         buyer:
           allOf:
           - $ref: '#/components/schemas/Buyer'
-          - description: The optional buyer for which this payment method has been
-              stored.
-            nullable: true
+          description: The optional buyer for which this payment method has been stored.
+          nullable: true
         label:
           description: |-
             A label for the card or the account. For a `paypal` payment method this
@@ -5133,7 +6012,7 @@ components:
             - zippay
             example: card
             type: string
-          - description: The type of this payment method.
+          description: The type of this payment method.
         label:
           description: |-
             A label for the payment method. For a `card` payment method this is the
@@ -5198,7 +6077,7 @@ components:
           example: US
           nullable: true
           type: string
-      title: Payment Method (Tokenized)
+      title: Payment Method (Summary)
       type: object
       x-tags:
       - Payment Methods
@@ -5331,7 +6210,7 @@ components:
             - zippay
             example: card
             type: string
-          - description: The type of this payment method.
+          description: The type of this payment method.
         external_identifier:
           description: |-
             An external identifier that can be used to match the payment method
@@ -5401,7 +6280,7 @@ components:
       x-tags:
       - Payment Methods
     PaymentMethods--Tokenized:
-      description: A list of stored payment methods in token format.
+      description: A list of stored payment methods in summarized format.
       example:
         items:
         - country: US
@@ -5426,11 +6305,11 @@ components:
           approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
       properties:
         items:
-          description: A list of stored payment methods in token format.
+          description: A list of stored payment methods in summarized format.
           items:
             $ref: '#/components/schemas/PaymentMethod--Tokenized'
           type: array
-      title: Payment Methods (Token only)
+      title: Payment Methods (Summary)
       type: object
       x-tags:
       - Payment Methods
@@ -5456,92 +6335,6 @@ components:
       type: object
       x-tags:
       - Payment Methods
-    PaymentMethodToken:
-      description: A token for a payment method.
-      example:
-        payment_service: ""
-        id: cus_4QEiU0VT5E3Whi
-        type: payment-method-token
-        token: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
-        status: succeeded
-      properties:
-        type:
-          description: '`payment-method-token`.'
-          enum:
-          - payment-method-token
-          example: payment-method-token
-          type: string
-        id:
-          description: |-
-            The external ID of this payment method as it has been registered with the
-            payment service, which can be used directly in combination with the
-            `token` without the need to go through Gr4vy for a transaction.
-
-            In some cases this is a different value to the `token` while in others
-            this value is identical. Please see the documentation for the payment
-            service for more details.
-          example: cus_4QEiU0VT5E3Whi
-          type: string
-        token:
-          description: |-
-            The token of this payment method as it has been registered with the
-            payment service, which can be used directly in combination with the
-            `id` without the need to go through Gr4vy for a transaction.
-
-            In some cases this is a different value to the `id` while in others
-            this value is identical. Please see the documentation for the payment
-            service for more details.
-          example: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
-          type: string
-        status:
-          description: |-
-            The state of the payment method.
-
-            - `processing` - The payment method is still being stored.
-            - `buyer_approval_required` - The buyer still needs to provide
-              approval before the payment method can be stored.
-            - `succeeded` - The payment method is approved and stored with all
-              relevant payment services.
-            - `failed` - Storing the payment method did not succeed.
-          enum:
-          - processing
-          - buyer_approval_required
-          - succeeded
-          - failed
-          example: succeeded
-          type: string
-        payment_service:
-          allOf:
-          - $ref: '#/components/schemas/PaymentService--Snapshot'
-          - description: The payment service used for this transaction.
-      title: Payment method token
-      type: object
-      x-tags:
-      - Payment Method Tokens
-    PaymentMethodTokens:
-      description: A list of tokens for a payment method.
-      example:
-        items:
-        - payment_service: ""
-          id: cus_4QEiU0VT5E3Whi
-          type: payment-method-token
-          token: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
-          status: succeeded
-        - payment_service: ""
-          id: cus_4QEiU0VT5E3Whi
-          type: payment-method-token
-          token: tok_1JCNiQ2eZvKYlo2CpvA4ODiD
-          status: succeeded
-      properties:
-        items:
-          description: A list of stored tokens for payment methods.
-          items:
-            $ref: '#/components/schemas/PaymentMethodToken'
-          type: array
-      title: Payment Method Tokens
-      type: object
-      x-tags:
-      - Payment Method Tokens
     PaymentMethodRequest:
       description: |-
         Payment method details used to register
@@ -5574,9 +6367,6 @@ components:
           description: |-
             The 13-19 digit number for this credit card as it can be found on the
             front of the card.
-
-            If a card has been stored with us previously, this number will represent
-            the unique tokenized card ID provided via our API.
           example: "4111111111111111"
           maxLength: 19
           minLength: 13
@@ -5586,9 +6376,6 @@ components:
           description: |-
             The expiration date of the card, formatted `MM/YY`. If a card has been
             previously stored with us this value is optional.
-
-            If the `number` of this card represents a tokenized card, then this value
-            is ignored.
           example: 11/15
           maxLength: 5
           minLength: 5
@@ -5598,9 +6385,6 @@ components:
           description: |-
             The 3 or 4 digit security code often found on the card. This often
             referred to as the CVV or CVD.
-
-            If the `number` of this card represents a tokenized card, then this value
-            is ignored.
           example: "123"
           maxLength: 4
           minLength: 3
@@ -5711,6 +6495,157 @@ components:
       type: object
       x-tags:
       - Payment Method Definitions
+    PaymentOptionsRequest:
+      description: A request to get list of payment options.
+      example:
+        country: US
+        amount: 1299
+        metadata:
+          key: value
+        cart_items:
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        currency: USD
+        locale: en-US
+      properties:
+        amount:
+          description: |-
+            The monetary amount to create an authorization for, in the smallest
+            currency unit for the given currency, for example `1299` cents to create
+            an authorization for `$12.99`.
+
+            If the `intent` is set to `capture`, an amount greater than zero must
+            be supplied.
+          example: 1299
+          nullable: true
+          type: integer
+        locale:
+          default: en
+          description: |-
+            An ISO 639-1 Language Code and optional ISO 3166 Country Code. This locale
+            determines the language for the labels returned for every payment option.
+          example: en-US
+          nullable: true
+          pattern: ^[a-z]{2}(?:-[A-Z]{2})?$
+          type: string
+        currency:
+          description: |
+            A supported ISO-4217 currency code.
+
+            For redirect requests, this value must match the one specified for
+            `currency` in `payment_method`.
+          example: USD
+          nullable: true
+          type: string
+        country:
+          description: |
+            Filters the results to only the items which support this country code. A
+            country is formatted as 2-letter ISO country code.
+          example: US
+          nullable: true
+          type: string
+        metadata:
+          additionalProperties:
+            type: string
+          description: |-
+            Used by the Flow engine to filter available options based on various
+            client-defined parameters. If present, this must be a string representing
+            a valid JSON dictionary.
+          example:
+            key: value
+          maxProperties: 20
+          nullable: true
+          type: object
+        cart_items:
+          description: An array of cart items that represents the line items of a
+            transaction.
+          items:
+            $ref: '#/components/schemas/CartItem'
+          maxItems: 249
+          nullable: true
+          type: array
+      title: Payment Options (List)
+      type: object
+      x-tags:
+      - Request Bodies
     PaymentService:
       description: An active, configured payment service.
       example:
@@ -5721,7 +6656,9 @@ components:
         payment_service_definition_id: stripe-card
         three_d_secure_enabled: true
         updated_at: 2012-12-12T10:53:43Z
+        network_tokens_enabled: true
         id: faaad066-30b4-4997-a438-242b0752d7e1
+        open_loop: true
         method: ""
         webhook_url: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0...
         merchant_category_code: "5045"
@@ -5730,6 +6667,7 @@ components:
         active: true
         payment_method_tokenization_enabled: true
         display_name: Stripe (Main)
+        merchant_profile: '{}'
         acquirer_bin_amex: acquirer_bin_amex
         merchant_country_code: "840"
         accepted_countries:
@@ -5796,7 +6734,7 @@ components:
             - zippay
             example: card
             type: string
-          - description: The payment method that this service handles.
+          description: The payment method that this service handles.
         display_name:
           description: The custom name set for this service.
           example: Stripe (Main)
@@ -5837,6 +6775,28 @@ components:
             type: string
           minItems: 1
           type: array
+        open_loop:
+          description: |-
+            Defines if the service works as an open-loop service. This feature
+            can only be enabled if the PSP is set up to accept previous scheme
+            transaction IDs.
+          example: true
+          type: boolean
+        payment_method_tokenization_enabled:
+          default: false
+          description: |-
+            Defines if tokenization is enabled for the service. This feature
+            can only be enabled if the payment service is NOT set as `open_loop`
+            and the PSP is set up to tokenize.
+          example: true
+          type: boolean
+        network_tokens_enabled:
+          description: |-
+            Defines if network tokens are enabled for the service. This feature
+            can only be enabled if the payment service is set as `open_loop` and
+            the PSP is set up to accept network tokens.
+          example: true
+          type: boolean
         three_d_secure_enabled:
           default: false
           description: |-
@@ -5847,54 +6807,60 @@ components:
           example: true
           type: boolean
         acquirer_bin_visa:
-          description: Acquiring institution identification code for VISA.
+          deprecated: true
           maxLength: 11
           nullable: true
           type: string
         acquirer_bin_mastercard:
-          description: Acquiring institution identification code for Mastercard.
+          deprecated: true
           maxLength: 11
           nullable: true
           type: string
         acquirer_bin_amex:
-          description: Acquiring institution identification code for Amex.
+          deprecated: true
           maxLength: 11
           nullable: true
           type: string
         acquirer_bin_discover:
-          description: Acquiring institution identification code for Discover.
+          deprecated: true
           maxLength: 11
           nullable: true
           type: string
         acquirer_merchant_id:
-          description: |-
-            Merchant identifier used in authorisation
-            requests (assigned by the acquirer).
+          deprecated: true
           maxLength: 35
           nullable: true
           type: string
         merchant_name:
-          description: Merchant name (assigned by the acquirer).
+          deprecated: true
           example: gr4vy
           maxLength: 40
           nullable: true
           type: string
         merchant_country_code:
-          description: ISO 3166-1 numeric three-digit country code.
+          deprecated: true
           example: "840"
           nullable: true
           pattern: ^\d{3}$
           type: string
         merchant_category_code:
-          description: Merchant category code that describes the business.
+          deprecated: true
           example: "5045"
           maxLength: 4
           minLength: 4
           nullable: true
           type: string
+        merchant_profile:
+          allOf:
+          - $ref: '#/components/schemas/MerchantProfile'
+          description: |-
+            An object containing a key for each supported card scheme (Amex,
+            Discover, Mastercard and Visa), and for each key an object with
+            the merchant profile for this service and the corresponding scheme.
+          nullable: true
+          type: object
         merchant_url:
-          description: Fully qualified URL of 3-D Secure requestor website or customer
-            care site.
+          deprecated: true
           format: url
           maxLength: 2048
           nullable: true
@@ -5910,13 +6876,6 @@ components:
             position value are processed first.
           example: 1
           type: number
-        payment_method_tokenization_enabled:
-          default: false
-          description: |-
-            Defines if tokenization is enabled for the service (can only be
-            enabled if the payment service definition supports it).
-          example: true
-          type: boolean
         created_at:
           description: The date and time when this service was created.
           example: 2012-12-12T10:53:43Z
@@ -6001,7 +6960,7 @@ components:
             - zippay
             example: card
             type: string
-          - description: The payment method that this services handles.
+          description: The payment method that this services handles.
         display_name:
           description: The custom name set for this service.
           example: Stripe (Main)
@@ -6026,7 +6985,9 @@ components:
           payment_service_definition_id: stripe-card
           three_d_secure_enabled: true
           updated_at: 2012-12-12T10:53:43Z
+          network_tokens_enabled: true
           id: faaad066-30b4-4997-a438-242b0752d7e1
+          open_loop: true
           method: ""
           webhook_url: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0...
           merchant_category_code: "5045"
@@ -6035,6 +6996,7 @@ components:
           active: true
           payment_method_tokenization_enabled: true
           display_name: Stripe (Main)
+          merchant_profile: '{}'
           acquirer_bin_amex: acquirer_bin_amex
           merchant_country_code: "840"
           accepted_countries:
@@ -6057,7 +7019,9 @@ components:
           payment_service_definition_id: stripe-card
           three_d_secure_enabled: true
           updated_at: 2012-12-12T10:53:43Z
+          network_tokens_enabled: true
           id: faaad066-30b4-4997-a438-242b0752d7e1
+          open_loop: true
           method: ""
           webhook_url: https://api.example.app.gr4vy.com/i/ViYUjDkUSoiQ0ColeigGwnN0...
           merchant_category_code: "5045"
@@ -6066,6 +7030,7 @@ components:
           active: true
           payment_method_tokenization_enabled: true
           display_name: Stripe (Main)
+          merchant_profile: '{}'
           acquirer_bin_amex: acquirer_bin_amex
           merchant_country_code: "840"
           accepted_countries:
@@ -6118,22 +7083,7 @@ components:
       x-tags:
       - Payment Services
     PaymentServiceRequest:
-      allOf:
-      - $ref: '#/components/schemas/PaymentServiceUpdate'
-      - $ref: '#/components/schemas/PaymentServiceRequest_allOf'
       description: Request body for activating a payment service.
-      required:
-      - accepted_countries
-      - accepted_currencies
-      - display_name
-      - fields
-      - payment_service_definition_id
-      title: Payment Service (Create)
-      type: object
-      x-tags:
-      - Request Bodies
-    PaymentServiceUpdate:
-      description: Request body for updating an active payment service.
       example:
         merchant_category_code: "5045"
         acquirer_bin_discover: acquirer_bin_discover
@@ -6143,6 +7093,8 @@ components:
         payment_method_tokenization_enabled: true
         display_name: Stripe (Main)
         acquirer_bin_visa: acquirer_bin_visa
+        payment_service_definition_id: stripe-card
+        merchant_profile: '{}'
         three_d_secure_enabled: true
         acquirer_bin_amex: acquirer_bin_amex
         merchant_country_code: "840"
@@ -6150,6 +7102,7 @@ components:
         - US
         - GB
         - DE
+        network_tokens_enabled: true
         position: 1
         fields:
         - value: sk_test_26PHem9AhJZvU623DfE1x4sd
@@ -6162,7 +7115,14 @@ components:
         - EUR
         - USD
         - GBP
+        open_loop: true
       properties:
+        payment_service_definition_id:
+          description: The ID of the payment service to use.
+          example: stripe-card
+          maxLength: 50
+          minLength: 1
+          type: string
         display_name:
           description: A custom name for the payment service. This will be shown in
             the Admin UI.
@@ -6175,7 +7135,7 @@ components:
             field defined by the definition for this payment service e.g. for stripe-card
             `secret_key` is required and so must be sent within this field.
           items:
-            $ref: '#/components/schemas/PaymentServiceUpdate_fields'
+            $ref: '#/components/schemas/PaymentServiceRequest_fields'
           type: array
         accepted_countries:
           description: A list of countries that this payment service needs to support
@@ -6213,54 +7173,57 @@ components:
           example: true
           type: boolean
         acquirer_bin_visa:
-          description: Acquiring institution identification code for VISA.
+          deprecated: true
           maxLength: 11
           nullable: true
           type: string
         acquirer_bin_mastercard:
-          description: Acquiring institution identification code for Mastercard.
+          deprecated: true
           maxLength: 11
           nullable: true
           type: string
         acquirer_bin_amex:
-          description: Acquiring institution identification code for Amex.
+          deprecated: true
           maxLength: 11
           nullable: true
           type: string
         acquirer_bin_discover:
-          description: Acquiring institution identification code for Discover.
+          deprecated: true
           maxLength: 11
           nullable: true
           type: string
         acquirer_merchant_id:
-          description: |-
-            Merchant identifier used in authorisation
-            requests (assigned by the acquirer).
+          deprecated: true
           maxLength: 35
           nullable: true
           type: string
         merchant_name:
-          description: Merchant name (assigned by the acquirer).
+          deprecated: true
           example: gr4vy
           maxLength: 40
           nullable: true
           type: string
         merchant_country_code:
-          description: ISO 3166-1 numeric three-digit country code.
+          deprecated: true
           example: "840"
           nullable: true
           pattern: ^\d{3}$
           type: string
         merchant_category_code:
-          description: Merchant category code that describes the business.
+          deprecated: true
           example: "5045"
           maxLength: 4
           minLength: 4
           nullable: true
           type: string
+        merchant_profile:
+          allOf:
+          - $ref: '#/components/schemas/MerchantProfile'
+          description: Configuration for each supported card scheme.
+          nullable: true
+          type: object
         merchant_url:
-          description: Fully qualified URL of 3-D Secure requestor website or customer
-            care site.
+          deprecated: true
           format: url
           maxLength: 2048
           nullable: true
@@ -6279,12 +7242,249 @@ components:
             inserted at the end of the list.
           example: 1
           type: number
+        open_loop:
+          description: |-
+            Defines if the service works as an open-loop service. This feature
+            can only be enabled if the PSP is set up to accept previous scheme
+            transaction IDs.
+
+            If this value is not provided or is set to `null`, it will be set
+            to the value of `open_loop` in the payment service definition.
+
+            If `open_loop_toggle` is `false` in the payment service definition,
+            `open_loop` should either not be provided or set to `null`, or it
+            will fail with a validation error.
+          example: true
+          nullable: true
+          type: boolean
         payment_method_tokenization_enabled:
           default: false
           description: |-
-            Defines if tokenization is enabled for the service (can only be
-            enabled if the payment service definition supports it).
+            Defines if tokenization is enabled for the service. This feature
+            can only be enabled if the payment service is NOT set as `open_loop`
+            and the PSP is set up to tokenize.
           example: true
+          type: boolean
+        network_tokens_enabled:
+          description: |-
+            Defines if network tokens are enabled for the service. This feature
+            can only be enabled if the payment service is set as `open_loop` and
+            the PSP is set up to accept network tokens.
+
+            If this value is not provided or is set to `null`, it will be set
+            to the value of `network_tokens_default` in the payment service
+            definition.
+
+            If `network_tokens_toggle` is `false` in the payment service definition,
+            `network_tokens_enabled` should either not be provided or set to `null`,
+            or it will fail with a validation error.
+          example: true
+          nullable: true
+          type: boolean
+      required:
+      - accepted_countries
+      - accepted_currencies
+      - display_name
+      - fields
+      - payment_service_definition_id
+      title: Payment Service (Create)
+      type: object
+      x-tags:
+      - Request Bodies
+    PaymentServiceUpdate:
+      description: Request body for updating an active payment service.
+      example:
+        merchant_category_code: "5045"
+        acquirer_bin_discover: acquirer_bin_discover
+        acquirer_merchant_id: acquirer_merchant_id
+        merchant_name: gr4vy
+        active: true
+        payment_method_tokenization_enabled: true
+        display_name: Stripe (Main)
+        acquirer_bin_visa: acquirer_bin_visa
+        merchant_profile: '{}'
+        three_d_secure_enabled: true
+        acquirer_bin_amex: acquirer_bin_amex
+        merchant_country_code: "840"
+        accepted_countries:
+        - US
+        - GB
+        - DE
+        network_tokens_enabled: true
+        position: 1
+        fields:
+        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+          key: private_key
+        - value: sk_test_26PHem9AhJZvU623DfE1x4sd
+          key: private_key
+        merchant_url: http://example.com/aeiou
+        acquirer_bin_mastercard: acquirer_bin_mastercard
+        accepted_currencies:
+        - EUR
+        - USD
+        - GBP
+        open_loop: true
+      properties:
+        display_name:
+          description: A custom name for the payment service. This will be shown in
+            the Admin UI.
+          example: Stripe (Main)
+          maxLength: 50
+          minLength: 1
+          type: string
+        fields:
+          description: A list of fields, each containing a key-value pair for each
+            field defined by the definition for this payment service e.g. for stripe-card
+            `secret_key` is required and so must be sent within this field.
+          items:
+            $ref: '#/components/schemas/PaymentServiceRequest_fields'
+          type: array
+        accepted_countries:
+          description: A list of countries that this payment service needs to support
+            in ISO two-letter code format.
+          example:
+          - US
+          - GB
+          - DE
+          items:
+            maxLength: 2
+            minLength: 2
+            type: string
+          minItems: 1
+          type: array
+        accepted_currencies:
+          description: A list of currencies that this payment service needs to support
+            in ISO 4217 three-letter code format.
+          example:
+          - EUR
+          - USD
+          - GBP
+          items:
+            maxLength: 3
+            minLength: 3
+            type: string
+          minItems: 1
+          type: array
+        three_d_secure_enabled:
+          default: false
+          description: |-
+            Defines if 3-D Secure is enabled for the service (can only be
+            enabled if the payment service definition supports
+            the `three_d_secure_hosted` feature).
+            This does not affect pass through 3-D Secure data.
+          example: true
+          type: boolean
+        acquirer_bin_visa:
+          deprecated: true
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_bin_mastercard:
+          deprecated: true
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_bin_amex:
+          deprecated: true
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_bin_discover:
+          deprecated: true
+          maxLength: 11
+          nullable: true
+          type: string
+        acquirer_merchant_id:
+          deprecated: true
+          maxLength: 35
+          nullable: true
+          type: string
+        merchant_name:
+          deprecated: true
+          example: gr4vy
+          maxLength: 40
+          nullable: true
+          type: string
+        merchant_country_code:
+          deprecated: true
+          example: "840"
+          nullable: true
+          pattern: ^\d{3}$
+          type: string
+        merchant_category_code:
+          deprecated: true
+          example: "5045"
+          maxLength: 4
+          minLength: 4
+          nullable: true
+          type: string
+        merchant_profile:
+          allOf:
+          - $ref: '#/components/schemas/MerchantProfile'
+          description: |-
+            Configuration for each supported card scheme.
+            When updating a Payment Service, a key not being present will
+            indicate no updates to be done on that scheme, whereas an object being
+            sent as Null for a key will empty the configuration for that scheme.
+          nullable: true
+          type: object
+        merchant_url:
+          deprecated: true
+          format: url
+          maxLength: 2048
+          nullable: true
+          type: string
+        active:
+          default: true
+          description: Defines if this service is currently active or not.
+          example: true
+          type: boolean
+        position:
+          description: |-
+            The numeric rank of a payment service. Payment services with a lower
+            position value are processed first. When a payment services is inserted at
+            a position, any payment services with the the same value or higher are
+            shifted down a position accordingly. When left out, the payment service is
+            inserted at the end of the list.
+          example: 1
+          type: number
+        open_loop:
+          description: |-
+            Defines if the service works as an open-loop service. This feature
+            can only be enabled if the PSP is set up to accept previous scheme
+            transaction IDs.
+
+            If this value is set to `null`, it will be set to the value of
+            `open_loop` in the payment service definition.
+
+            If `open_loop_toggle` is `false` in the payment service definition,
+            `open_loop` should either not be provided or set to `null`, or it
+            will fail with a validation error.
+          example: true
+          nullable: true
+          type: boolean
+        payment_method_tokenization_enabled:
+          default: false
+          description: |-
+            Defines if tokenization is enabled for the service. This feature
+            can only be enabled if the payment service is NOT set as `open_loop`
+            and the PSP is set up to tokenize.
+          example: true
+          type: boolean
+        network_tokens_enabled:
+          description: |-
+            Defines if network tokens are enabled for the service. This feature
+            can only be enabled if the payment service is set as `open_loop` and
+            the PSP is set up to accept network tokens.
+
+            If this value is set to `null`, it will be set to the value of
+            `network_tokens_default` in the payment service definition.
+
+            If `network_tokens_toggle` is `false` in the payment service definition,
+            `network_tokens_enabled` should either not be provided or set to `null`,
+            or it will fail with a validation error.
+          example: true
+          nullable: true
           type: boolean
       title: Payment Service (Update)
       type: object
@@ -6329,16 +7529,21 @@ components:
           approval_ui_width: 300px
           approval_ui_target: any
         supported_features:
-          delayed_capture: false
           network_tokens: false
-          three_d_secure_hosted: true
+          requires_webhook_setup: true
+          network_tokens_toggle: false
           payment_method_tokenization: true
           void: true
           payment_method_tokenization_toggle: false
+          refunds: true
+          delayed_capture: false
+          three_d_secure_hosted: true
+          open_loop_toggle: false
+          network_tokens_default: true
           three_d_secure_pass_through: false
+          open_loop: true
           partial_refunds: false
           verify_credentials: false
-          refunds: true
         supported_countries:
         - US
         - GB
@@ -6406,7 +7611,7 @@ components:
             - zippay
             example: card
             type: string
-          - description: The ID of the payment method that this services handles.
+          description: The ID of the payment method that this services handles.
         fields:
           description: A list of fields that need to be submitted when activating
             the payment. service.
@@ -6446,7 +7651,7 @@ components:
             - googlepay
             example: card
             type: string
-          - description: The mode of this payment service.
+          description: The mode of this payment service.
         supported_features:
           $ref: '#/components/schemas/PaymentServiceDefinition_supported_features'
         icon_url:
@@ -6475,16 +7680,21 @@ components:
             approval_ui_width: 300px
             approval_ui_target: any
           supported_features:
-            delayed_capture: false
             network_tokens: false
-            three_d_secure_hosted: true
+            requires_webhook_setup: true
+            network_tokens_toggle: false
             payment_method_tokenization: true
             void: true
             payment_method_tokenization_toggle: false
+            refunds: true
+            delayed_capture: false
+            three_d_secure_hosted: true
+            open_loop_toggle: false
+            network_tokens_default: true
             three_d_secure_pass_through: false
+            open_loop: true
             partial_refunds: false
             verify_credentials: false
-            refunds: true
           supported_countries:
           - US
           - GB
@@ -6515,16 +7725,21 @@ components:
             approval_ui_width: 300px
             approval_ui_target: any
           supported_features:
-            delayed_capture: false
             network_tokens: false
-            three_d_secure_hosted: true
+            requires_webhook_setup: true
+            network_tokens_toggle: false
             payment_method_tokenization: true
             void: true
             payment_method_tokenization_toggle: false
+            refunds: true
+            delayed_capture: false
+            three_d_secure_hosted: true
+            open_loop_toggle: false
+            network_tokens_default: true
             three_d_secure_pass_through: false
+            open_loop: true
             partial_refunds: false
             verify_credentials: false
-            refunds: true
           supported_countries:
           - US
           - GB
@@ -6622,6 +7837,7 @@ components:
             phone_number: true
             first_name: true
             tax_id: true
+          gateway_merchant_id: gateway_merchant_id
           approval_ui:
             width: 300px
             height: 300px
@@ -6629,6 +7845,7 @@ components:
           supported_schemes:
           - null
           - null
+          gateway: gateway
         label: Pay by Card
         type: payment-option
         can_delay_capture: true
@@ -6670,7 +7887,7 @@ components:
             - zippay
             example: card
             type: string
-          - description: The type of payment method that is available.
+          description: The type of payment method that is available.
         icon_url:
           description: An icon to display for the payment option.
           example: https://cdn.gr4vy.app/card.svg
@@ -6685,7 +7902,7 @@ components:
             - googlepay
             example: card
             type: string
-          - description: The mode to use with this payment option.
+          description: The mode to use with this payment option.
         label:
           description: |-
             A label that describes this payment option. This label is returned in the
@@ -6726,6 +7943,7 @@ components:
               phone_number: true
               first_name: true
               tax_id: true
+            gateway_merchant_id: gateway_merchant_id
             approval_ui:
               width: 300px
               height: 300px
@@ -6733,6 +7951,7 @@ components:
             supported_schemes:
             - null
             - null
+            gateway: gateway
           label: Pay by Card
           type: payment-option
           can_delay_capture: true
@@ -6754,6 +7973,7 @@ components:
               phone_number: true
               first_name: true
               tax_id: true
+            gateway_merchant_id: gateway_merchant_id
             approval_ui:
               width: 300px
               height: 300px
@@ -6761,6 +7981,7 @@ components:
             supported_schemes:
             - null
             - null
+            gateway: gateway
           label: Pay by Card
           type: payment-option
           can_delay_capture: true
@@ -6775,7 +7996,7 @@ components:
       x-tags:
       - Payment Options
     RedirectRequest:
-      description: Request to use a redirect payment method in a transaction.
+      description: Details to register a new redirect payment method.
       properties:
         method:
           allOf:
@@ -6787,12 +8008,12 @@ components:
             - stripedd
             example: paypal
             type: string
-          - description: |-
-              The method to use, this can be any of the methods that
-              support redirect requests.
+          description: |-
+            The method to use, this can be any of the methods that
+            support redirect requests.
 
-              When storing a new payment method, only `gocardless` and `stripedd`
-              are currently supported.
+            When storing a new payment method, only `gocardless` and `stripedd`
+            are currently supported.
         redirect_url:
           description: |-
             The redirect URL to redirect a buyer to after they have authorized their
@@ -6836,7 +8057,7 @@ components:
       - currency
       - method
       - redirect_url
-      title: Redirect Request
+      title: Redirect
       type: object
       x-tags:
       - Request Bodies
@@ -7026,9 +8247,14 @@ components:
             frequency by which the report will be executed. For example, a
             `monthly` schedule means that this report will be periodically
             executed at the start of each month.
+
+            Note that a `weekly` schedule means that the report is executed
+            at the start of every Monday.
           enum:
+          - daily
           - monthly
           - once
+          - weekly
           example: monthly
           type: string
         schedule_enabled:
@@ -7098,9 +8324,14 @@ components:
             frequency by which the report will be executed. For example, a
             `monthly` schedule means that the report will be periodically
             executed at the start of each month.
+
+            Note that a `weekly` schedule means that the report will be
+            executed at the start of every Monday.
           enum:
+          - daily
           - monthly
           - once
+          - weekly
           example: monthly
           nullable: false
           type: string
@@ -7141,7 +8372,7 @@ components:
         spec:
           allOf:
           - $ref: '#/components/schemas/ReportSpec'
-          - description: The specifications of the report.
+          description: The specifications of the report.
           nullable: false
       required:
       - name
@@ -7435,14 +8666,267 @@ components:
       type: object
       x-tags:
       - Reports
-    ShippingAddress:
-      description: Shipping address for a buyer.
+    Role:
+      example:
+        permissions:
+          allow:
+          - buyers.read
+          - payment-methods.read
+          - transactions.read
+        name: Support
+        description: Customer support agents
+        id: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+        type: role
+      properties:
+        type:
+          description: The type of this resource. Always `role`.
+          enum:
+          - role
+          example: role
+          type: string
+        id:
+          description: The unique ID for this role.
+          example: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+          format: uuid
+          type: string
+        name:
+          description: The unique name for this role.
+          example: Support
+          type: string
+        description:
+          description: The description for this role.
+          example: Customer support agents
+          type: string
+        permissions:
+          $ref: '#/components/schemas/RolePermissions'
+      title: Role
+      type: object
+      x-tags:
+      - Roles
+    Roles:
+      description: A list of roles.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - permissions:
+            allow:
+            - buyers.read
+            - payment-methods.read
+            - transactions.read
+          name: Support
+          description: Customer support agents
+          id: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+          type: role
+        - permissions:
+            allow:
+            - buyers.read
+            - payment-methods.read
+            - transactions.read
+          name: Support
+          description: Customer support agents
+          id: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+          type: role
+      properties:
+        items:
+          description: A list of roles.
+          items:
+            $ref: '#/components/schemas/Role'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Roles
+      type: object
+      x-tags:
+      - Roles
+    RoleAssignment:
+      example:
+        role:
+          permissions:
+            allow:
+            - buyers.read
+            - payment-methods.read
+            - transactions.read
+          name: Support
+          description: Customer support agents
+          id: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+          type: role
+        id: 1cdac457-400f-4866-8da6-5c193a8db158
+        assignee:
+          id: 42aae896-8ce2-4a60-b80a-5f6ae1dfbbd4
+          type: user
+        type: role-assignment
+      properties:
+        type:
+          description: The type of this resource. Always `role-assignment`.
+          enum:
+          - role-assignment
+          example: role-assignment
+          type: string
+        id:
+          description: The unique ID for this role assignment.
+          example: 1cdac457-400f-4866-8da6-5c193a8db158
+          format: uuid
+          type: string
+        role:
+          $ref: '#/components/schemas/Role'
+        assignee:
+          $ref: '#/components/schemas/RoleAssignment_assignee'
+      title: Role Assignment
+      type: object
+      x-tags:
+      - Roles
+    RoleAssignments:
+      description: A list of role assignments.
+      example:
+        previous_cursor: previous_cursor
+        next_cursor: ZXhhbXBsZTE
+        limit: 1
+        items:
+        - role:
+            permissions:
+              allow:
+              - buyers.read
+              - payment-methods.read
+              - transactions.read
+            name: Support
+            description: Customer support agents
+            id: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+            type: role
+          id: 1cdac457-400f-4866-8da6-5c193a8db158
+          assignee:
+            id: 42aae896-8ce2-4a60-b80a-5f6ae1dfbbd4
+            type: user
+          type: role-assignment
+        - role:
+            permissions:
+              allow:
+              - buyers.read
+              - payment-methods.read
+              - transactions.read
+            name: Support
+            description: Customer support agents
+            id: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+            type: role
+          id: 1cdac457-400f-4866-8da6-5c193a8db158
+          assignee:
+            id: 42aae896-8ce2-4a60-b80a-5f6ae1dfbbd4
+            type: user
+          type: role-assignment
+      properties:
+        items:
+          description: A list of role assignments.
+          items:
+            $ref: '#/components/schemas/RoleAssignment'
+          type: array
+        limit:
+          default: 20
+          description: |-
+            The limit applied to request. This represents the number of items that are at
+            maximum returned by this request.
+          example: 1
+          format: int32
+          maximum: 100
+          minimum: 1
+          type: integer
+        next_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          example: ZXhhbXBsZTE
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+        previous_cursor:
+          description: |-
+            The cursor that represents the next page of results. Use the `cursor` query
+            parameter to fetch this page of items.
+          maxLength: 1000
+          minLength: 1
+          nullable: true
+          type: string
+      title: Role Assignments
+      type: object
+      x-tags:
+      - Roles
+    RoleAssignmentRequest:
+      description: A request to create a role assignment.
+      example:
+        role:
+          id: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+        assignee:
+          id: 42aae896-8ce2-4a60-b80a-5f6ae1dfbbd4
+          type: user
+      properties:
+        role:
+          $ref: '#/components/schemas/RoleAssignmentRequest_role'
+        assignee:
+          $ref: '#/components/schemas/RoleAssignmentRequest_assignee'
+      required:
+      - assignee
+      - role
+      title: Role Assignment (Create)
+      type: object
+      x-tags:
+      - Roles
+    RolePermissions:
+      description: The permissions associated with a role.
+      example:
+        allow:
+        - buyers.read
+        - payment-methods.read
+        - transactions.read
+      properties:
+        allow:
+          description: The list of permissions to allow for a role.
+          example:
+          - buyers.read
+          - payment-methods.read
+          - transactions.read
+          items:
+            type: string
+          type: array
+      title: Role permissions
+      type: object
+      x-tags:
+      - Roles
+    ShippingDetail:
+      description: Shipping detail for a buyer.
       example:
         email_address: john@example.com
         address: ""
         last_name: Lunn
         phone_number: +1234567890
+        id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
         type: shipping-details
+        buyer_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
         first_name: John
       properties:
         type:
@@ -7450,6 +8934,16 @@ components:
           enum:
           - shipping-details
           example: shipping-details
+          type: string
+        id:
+          description: The unique ID for a buyer's shipping detail.
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        buyer_id:
+          description: The unique ID for a buyer.
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
           type: string
         first_name:
           description: The first name(s) or given name of the buyer.
@@ -7487,38 +8981,42 @@ components:
           - $ref: '#/components/schemas/Address'
           description: The physical shipping address associated to this buyer.
           nullable: true
-      title: Shipping address
+      title: Shipping detail
       type: object
       x-tags:
       - Buyers
-    ShippingAddresses:
-      description: A list of shipping addresses.
+    ShippingDetails:
+      description: A list of shipping details.
       example:
         items:
         - email_address: john@example.com
           address: ""
           last_name: Lunn
           phone_number: +1234567890
+          id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
           type: shipping-details
+          buyer_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
           first_name: John
         - email_address: john@example.com
           address: ""
           last_name: Lunn
           phone_number: +1234567890
+          id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
           type: shipping-details
+          buyer_id: 8724fd24-5489-4a5d-90fd-0604df7d3b83
           first_name: John
       properties:
         items:
-          description: A list of shipping addresses.
+          description: A list of shipping details.
           items:
-            $ref: '#/components/schemas/ShippingAddress'
+            $ref: '#/components/schemas/ShippingDetail'
           type: array
-      title: Shipping addresses
+      title: Shipping details
       type: object
       x-tags:
       - Transactions
-    ShippingAddressRequest:
-      description: Shipping address associated to a buyer.
+    ShippingDetailRequest:
+      description: Shipping detail associated to a buyer.
       example:
         email_address: john@example.com
         address: ""
@@ -7562,11 +9060,11 @@ components:
           - $ref: '#/components/schemas/Address'
           description: The physical shipping address associated to this buyer.
           nullable: true
-      title: Shipping address (Create)
+      title: Shipping detail (Create)
       type: object
       x-tags:
       - Buyers
-    ShippingAddressUpdateRequest:
+    ShippingDetailUpdateRequest:
       example:
         email_address: john@example.com
         address: ""
@@ -7610,7 +9108,7 @@ components:
           - $ref: '#/components/schemas/Address'
           description: The physical shipping address associated to this buyer.
           nullable: true
-      title: Shipping address (Update)
+      title: Shipping detail (Update)
       type: object
       x-tags:
       - Buyers
@@ -7704,6 +9202,8 @@ components:
           enum:
           - ae.trn
           - au.abn
+          - ar.dni
+          - ar.cuil
           - ar.cuit
           - br.cnpj
           - br.cpf
@@ -7726,7 +9226,7 @@ components:
           - jp.rn
           - kr.brn
           - li.uid
-          - mx.rfc
+          - mx.curp
           - my.frp
           - my.itn
           - my.nric
@@ -7801,6 +9301,45 @@ components:
       - $ref: '#/components/schemas/ThreeDSecureDataV2'
       title: 3-D Secure Data Version 1 & 2
       type: object
+    ThreeDSecureError:
+      description: Details about the error resulting from 3DS processing a Transaction.
+      properties:
+        description:
+          description: The error description.
+          example: Invalid ThreeDSCompInd
+          maxLength: 2048
+          nullable: true
+          type: string
+        detail:
+          description: Detail for the error.
+          example: The threeDSCompInd must be 'Y' when successful
+          maxLength: 2048
+          nullable: true
+          type: string
+        code:
+          description: The error code.
+          example: "305"
+          maxLength: 3
+          minLength: 3
+          nullable: true
+          type: string
+        component:
+          description: Code indicating the 3-D Secure component that identified the
+            error..
+          example: C
+          maxLength: 1
+          minLength: 1
+          nullable: true
+          type: string
+      required:
+      - code
+      - component
+      - description
+      - detail
+      title: 3-D Secure Error Data
+      type: object
+      x-tags:
+      - Transactions
     ThreeDSecureSummary:
       description: |-
         Details about the 3-D Secure challenge that was presented to
@@ -7809,6 +9348,7 @@ components:
         method: challenge
         version: 2.1.0
         status: setup_error
+        error_data: '{}'
       properties:
         version:
           description: The version of 3DS used for this transaction.
@@ -7830,12 +9370,18 @@ components:
           - challenge
           - frictionless
           type: string
+        error_data:
+          allOf:
+          - $ref: '#/components/schemas/ThreeDSecureError'
+          description: If the transaction had a 3DS error, information about it.
+          nullable: true
+          type: object
         response_data:
           $ref: '#/components/schemas/ThreeDSecureDataV1V2'
       title: 3-D Secure Summary
       type: object
     TokenizedRequest:
-      description: Details for a previously tokenized payment method.
+      description: Details for a previously stored payment method.
       properties:
         method:
           description: '`id`.'
@@ -7845,18 +9391,21 @@ components:
           type: string
         id:
           description: |-
-            A ID that represents a previously tokenized payment method.
-            This token can represent any type of payment method.
+            A ID that represents a previously stored payment method.
+            This ID can represent any type of payment method.
           example: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
           type: string
         redirect_url:
           description: |-
-            We strongly recommended providing a `redirect_url` for
-            stored cards when 3-D Secure is enabled and `three_d_secure_data`
-            is not provided. This will be appended with both a
-            transaction ID and status (e.g. `https://example.com/callback?
-            gr4vy_transaction_id=123&gr4vy_transaction_status=capture_succeeded`)
-            after 3-D Secure has completed.
+            This value is mandatory for stored redirect payment methods.
+            For stored cards, we strongly recommend providing a `redirect_url`
+            either when 3-D Secure is enabled and `three_d_secure_data`
+            is not provided, or when using connections where 3DS is enabled.
+            This value will be appended with both a transaction ID and status
+            (e.g. `https://example.com/callback?gr4vy_transaction_id=123
+            &gr4vy_transaction_status=capture_succeeded`) after 3-D Secure
+            has completed. For those cases, if the value is not present, the
+            transaction will be marked as failed.
           example: https://example.com/callback
           type: string
         security_code:
@@ -7874,7 +9423,7 @@ components:
       required:
       - id
       - method
-      title: Tokenized payment method request
+      title: Stored payment method request
       type: object
       x-tags:
       - Request Bodies
@@ -7951,6 +9500,7 @@ components:
           method: challenge
           version: 2.1.0
           status: setup_error
+          error_data: '{}'
         status: processing
       properties:
         type:
@@ -8028,12 +9578,12 @@ components:
         payment_method:
           allOf:
           - $ref: '#/components/schemas/PaymentMethod--Snapshot'
-          - description: The payment method used for this transaction.
+          description: The payment method used for this transaction.
         buyer:
           allOf:
           - $ref: '#/components/schemas/Buyer--Snapshot'
-          - description: The buyer used for this transaction.
-            nullable: true
+          description: The buyer used for this transaction.
+          nullable: true
         created_at:
           description: The date and time when this transaction was created in our
             system.
@@ -8053,7 +9603,7 @@ components:
         payment_service:
           allOf:
           - $ref: '#/components/schemas/PaymentService--Snapshot'
-          - description: The payment service used for this transaction.
+          description: The payment service used for this transaction.
         merchant_initiated:
           default: false
           description: |-
@@ -8097,7 +9647,7 @@ components:
         statement_descriptor:
           allOf:
           - $ref: '#/components/schemas/StatementDescriptor'
-          - nullable: true
+          nullable: true
         cart_items:
           description: An array of cart items that represents the line items of a
             transaction.
@@ -8220,9 +9770,9 @@ components:
           type: object
         shipping_details:
           allOf:
-          - $ref: '#/components/schemas/ShippingAddress'
-          - description: The shipping details associated with the transaction.
-            nullable: true
+          - $ref: '#/components/schemas/ShippingDetail'
+          description: The shipping details associated with the transaction.
+          nullable: true
         three_d_secure:
           $ref: '#/components/schemas/ThreeDSecureSummary'
         authorized_at:
@@ -8266,6 +9816,40 @@ components:
           example: 2013-07-16T19:23:00Z
           format: date-time
           nullable: true
+          type: string
+      title: Transaction
+      type: object
+      x-tags:
+      - Transactions
+    TransactionStatusSummary:
+      description: A transaction record.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction`.
+          enum:
+          - transaction
+          example: transaction
+          type: string
+        id:
+          description: The unique identifier for this transaction.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        status:
+          description: |-
+            The status of the transaction. The status may change over time as
+            asynchronous processing events occur.
+          enum:
+          - processing
+          - buyer_approval_pending
+          - authorization_succeeded
+          - authorization_failed
+          - authorization_declined
+          - capture_pending
+          - capture_succeeded
+          - authorization_void_pending
+          - authorization_voided
+          example: processing
           type: string
       title: Transaction
       type: object
@@ -8370,12 +9954,12 @@ components:
         payment_method:
           allOf:
           - $ref: '#/components/schemas/PaymentMethod--Snapshot'
-          - description: The payment method used for this transaction.
+          description: The payment method used for this transaction.
         buyer:
           allOf:
           - $ref: '#/components/schemas/Buyer--Snapshot'
-          - description: The buyer used for this transaction.
-            nullable: true
+          description: The buyer used for this transaction.
+          nullable: true
         created_at:
           description: The date and time when this transaction was created in our
             system.
@@ -8395,7 +9979,7 @@ components:
         payment_service:
           allOf:
           - $ref: '#/components/schemas/PaymentService--Snapshot'
-          - description: The payment service used for this transaction.
+          description: The payment service used for this transaction.
         method:
           enum:
           - afterpay
@@ -8654,11 +10238,13 @@ components:
           - categories
           sku: sku-789123
         shipping_details_id: 47da6902-5eae-4b4b-88fd-856802d627d6
+        connection_options: ""
         is_subsequent_payment: true
         store: true
         previous_scheme_transaction_id: "123456789012345"
         intent: capture
         statement_descriptor: ""
+        async_capture: true
         browser_info: ""
         currency: USD
         merchant_initiated: true
@@ -8721,7 +10307,7 @@ components:
             `recurring` or `installment`, and `merchant_initiated` is set to `false`.
 
             * The flag has to be set to `false` (or not set) when using a previously
-            tokenized payment method.
+            vaulted payment method.
           example: true
           type: boolean
         intent:
@@ -8793,9 +10379,10 @@ components:
           description: |-
             Any additional information about the transaction that you would like to
             store as key-value pairs. This data is passed to payment service
-            providers that support it. Please visit https://gr4vy.com/docs/ under
+            providers that support it. Please visit https://docs.gr4vy.com/ under
             `Connections` for more information on how specific providers support
-            metadata.
+            metadata. Please note the metadata key is case sensitive when used in
+            Flow.
           example:
             key: value
           maxProperties: 20
@@ -8803,7 +10390,7 @@ components:
         statement_descriptor:
           allOf:
           - $ref: '#/components/schemas/StatementDescriptor'
-          - nullable: true
+          nullable: true
         cart_items:
           description: An array of cart items that represents the line items of a
             transaction.
@@ -8828,19 +10415,43 @@ components:
         browser_info:
           allOf:
           - $ref: '#/components/schemas/BrowserInfo'
-          - description: Information about the browser used by the buyer.
-            nullable: true
+          description: Information about the browser used by the buyer.
+          nullable: true
         shipping_details_id:
           description: |-
             The unique identifier of a set of shipping details stored for the buyer.
 
             If provided, the created transaction will include a copy of the details
             at the point of transaction creation; i.e. it will not be affected by
-            later changes to the address in the database.
+            later changes to the detail in the database.
           example: 47da6902-5eae-4b4b-88fd-856802d627d6
           format: uuid
           nullable: true
           type: string
+        connection_options:
+          allOf:
+          - $ref: '#/components/schemas/ConnectionOptions'
+          description: |-
+            Allows for passing optional configuration per connection to take
+            advantage of connection specific features. When provided, the data
+            is only passed to the target connection type to prevent sharing
+            configuration across connections.
+          nullable: true
+        async_capture:
+          default: false
+          description: |-
+            Whether to capture the transaction asynchronously.
+
+            - When `async_capture` is `false` (default), the transaction is captured
+              in the same request.
+            - When `async_capture` is `true`, the transaction is automatically
+              captured at a later time.
+
+            Redirect transactions are not affected by this flag.
+
+            This flag can only be set to `true` when `intent` is set to `capture`.
+          example: true
+          type: boolean
       required:
       - amount
       - currency
@@ -8940,14 +10551,11 @@ components:
             - zippay
             example: card
             type: string
-          - description: The method to use for this request.
+          description: The method to use for this request.
         number:
           description: |-
             The 13-19 digit number for this credit card as it can be found on the
             front of the card.
-
-            If a card has been stored with us previously, this number will represent
-            the unique tokenized card ID provided via our API.
           example: "4111111111111111"
           maxLength: 19
           minLength: 13
@@ -8957,9 +10565,6 @@ components:
           description: |-
             The expiration date of the card, formatted `MM/YY`. If a card has been
             previously stored with us this value is optional.
-
-            If the `number` of this card represents a tokenized card, then this value
-            is ignored.
           example: 11/15
           maxLength: 5
           minLength: 5
@@ -8969,9 +10574,6 @@ components:
           description: |-
             The 3 or 4 digit security code often found on the card. This often
             referred to as the CVV or CVD.
-
-            If the `number` of this card represents a tokenized card, then this value
-            is ignored.
           example: "123"
           maxLength: 4
           minLength: 3
@@ -9006,7 +10608,7 @@ components:
           type: string
         id:
           description: |-
-            An identifier for a previously tokenized payment method.
+            An identifier for a previously vaulted payment method.
             This id can represent any type of payment method.
           example: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
           type: string
@@ -9016,26 +10618,284 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    TransactionCardRequest:
+      description: Card payment method details to use in a transaction.
+      properties:
+        method:
+          description: '`card`.'
+          enum:
+          - card
+          example: card
+          type: string
+        number:
+          description: |-
+            The 13-19 digit number for this card as it can be found on the
+            front of the card.
+          example: "4111111111111111"
+          maxLength: 19
+          minLength: 13
+          pattern: ^[0-9]{13,19}$
+          type: string
+        expiration_date:
+          description: The expiration date of the card, formatted `MM/YY`.
+          example: 11/25
+          maxLength: 5
+          minLength: 5
+          pattern: ^\d{2}/\d{2}$
+          type: string
+        security_code:
+          description: |-
+            The 3 or 4 digit security code often found on the card. This often
+            referred to as the CVV or CVD.
+          example: "123"
+          maxLength: 4
+          minLength: 3
+          pattern: ^\d{3,4}$
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the card against
+            your own records. This can only be set if the `store` flag is set to `true`.
+          example: card-323444
+          nullable: true
+          type: string
+        buyer_id:
+          description: |-
+            The ID of the buyer to associate this payment method to. If this field is
+            provided then the `buyer_external_identifier` field needs to be unset.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        buyer_external_identifier:
+          description: |-
+            The `external_identifier` of the buyer to associate this payment method
+            to. If this field is provided then the `buyer_id` field
+            needs to be unset.
+          example: user-789123
+          type: string
+        redirect_url:
+          description: |-
+            We strongly recommend providing a `redirect_url` either when 3-D
+            Secure is enabled and `three_d_secure_data` is not provided, or when
+            using connections where 3DS is enabled. This value will be appended
+            with both a transaction ID and status
+            (e.g. `https://example.com/callback?gr4vy_transaction_id=123
+            &gr4vy_transaction_status=capture_succeeded`) after 3-D Secure has
+            completed. For those cases, if the value is not present, the
+            transaction will be marked as failed.
+          example: https://example.com/callback
+          nullable: true
+          type: string
+      required:
+      - expiration_date
+      - method
+      - number
+      - security_code
+      title: Card
+      type: object
+      x-tags:
+      - Request Bodies
+    TransactionRedirectRequest:
+      description: Redirect payment method details to use in a transaction.
+      properties:
+        method:
+          allOf:
+          - enum:
+            - paypal
+            - banked
+            - bitpay
+            - gocardless
+            - stripedd
+            example: paypal
+            type: string
+          description: |-
+            The method to use, this can be any of the methods that
+            support redirect requests.
+
+            When storing a new payment method, only `gocardless` and `stripedd`
+            are currently supported.
+        redirect_url:
+          description: |-
+            The redirect URL to redirect a buyer to after they have authorized their
+            transaction.
+          example: https://example.com/callback
+          type: string
+        currency:
+          description: |-
+            The ISO-4217 currency code to use this payment method for. This is
+            used to select the payment service to use.
+          example: USD
+          type: string
+        country:
+          description: |-
+            The 2-letter ISO code of the country to use this payment method for.
+            This is used to select the payment service to use.
+          example: US
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the account
+            against your own records. This can only be set if the `store` flag is
+            set to `true`.
+          example: account-23423423
+          nullable: true
+          type: string
+        buyer_id:
+          description: |-
+            The ID of the buyer to associate this payment method to. If this field is
+            provided then the `buyer_external_identifier` field needs to be unset.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        buyer_external_identifier:
+          description: |-
+            The `external_identifier` of the buyer to associate this payment method
+            to. If this field is provided then the `buyer_id` field
+            needs to be unset.
+          example: user-789123
+          type: string
+      required:
+      - country
+      - currency
+      - method
+      - redirect_url
+      title: Redirect
+      type: object
+      x-tags:
+      - Request Bodies
+    TransactionCheckoutSessionRequest:
+      description: Checkout Session payment method details to use in a transaction.
+      properties:
+        method:
+          description: '`checkout-session`.'
+          enum:
+          - checkout-session
+          example: checkout-session
+          type: string
+        id:
+          description: The ID of the Checkout Session.
+          example: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          format: uuid
+          type: string
+        external_identifier:
+          description: An external identifier that can be used to match the card against
+            your own records. This can only be set if the `store` flag is set to `true`.
+          example: card-323444
+          nullable: true
+          type: string
+        buyer_id:
+          description: |-
+            The ID of the buyer to associate this payment method to. If this field is
+            provided then the `buyer_external_identifier` field needs to be unset.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        buyer_external_identifier:
+          description: |-
+            The `external_identifier` of the buyer to associate this payment method
+            to. If this field is provided then the `buyer_id` field
+            needs to be unset.
+          example: user-789123
+          type: string
+        redirect_url:
+          description: |-
+            We strongly recommend providing a `redirect_url` either when 3-D
+            Secure is enabled and `three_d_secure_data` is not provided, or when
+            using connections where 3DS is enabled. This value will be appended
+            with both a transaction ID and status
+            (e.g. `https://example.com/callback?gr4vy_transaction_id=123
+            &gr4vy_transaction_status=capture_succeeded`) after 3-D Secure has
+            completed. For those cases, if the value is not present, the
+            transaction will be marked as failed.
+          example: https://example.com/callback
+          nullable: true
+          type: string
+      required:
+      - id
+      - method
+      title: Checkout Session
+      type: object
+      x-tags:
+      - Request Bodies
+    UserCurrentUpdate:
+      description: A request to update the current user.
+      properties:
+        name:
+          description: The full name of the user which is used in the Gr4vy admin
+            panel to give a user a human readable name.
+          example: John L.
+          maxLength: 1000
+          minLength: 1
+          type: string
+      title: User (Update Current)
+      type: object
+      x-tags:
+      - Users
     UserRequest:
       description: A request to create a user.
       properties:
-        display_name:
-          description: An external identifier that can be used to match the buyer
-            against your own records. This value needs to be unique for all buyers.
+        name:
+          description: The full name of the user which is used in the Gr4vy admin
+            panel to give an user a human readable name.
           example: John L.
           maxLength: 1000
           minLength: 1
           nullable: false
           type: string
         email_address:
-          description: A unique name for this buyer which is used in the Gr4vy admin
-            panel to give a buyer a human readable name.
+          description: The email address for this user.
           example: john@example.com
           maxLength: 200
           minLength: 1
           nullable: false
           type: string
+        role_ids:
+          description: A list of role ids that will be assigned to the user being
+            created. The creator must have `roles.write` or the role that is being
+            assigned.
+          example:
+          - 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
+          items:
+            format: uuid
+            type: string
+          minItems: 1
+          nullable: false
+          type: array
       title: User (Create)
+      type: object
+      x-tags:
+      - Users
+    UserUpdate:
+      description: A request to update a user.
+      properties:
+        name:
+          description: The full name of the user which is used in the Gr4vy admin
+            panel to give a user a human readable name.
+          example: John L.
+          maxLength: 1000
+          minLength: 1
+          type: string
+        role_ids:
+          description: The IDs of the roles to assign to the user. Sending an empty
+            list will remove all roles assigned to the user.
+          example:
+          - 46973e9d-88a7-44a6-abfe-be4ff0134ff4
+          items:
+            format: uuid
+            type: string
+          type: array
+      title: User (Update)
+      type: object
+      x-tags:
+      - Users
+    UserRole:
+      allOf:
+      - $ref: '#/components/schemas/Role'
+      properties:
+        assignment_id:
+          description: The unique ID for this role assignment to the user.
+          example: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+          format: uuid
+          type: string
+      title: User Role
       type: object
       x-tags:
       - Users
@@ -9088,12 +10948,71 @@ components:
       - key
       - value
       type: object
+    ApiLog_response_body_details:
+      description: Details of the log entry, stack trace and endpoint.
+      example:
+        pointer: /payment_method/number
+        location: body
+        message: ensure this value has at least 13 characters
+        type: value_error.any_str.min_length
+      properties:
+        pointer:
+          description: Log's pointer.
+          example: /payment_method/number
+          type: string
+        message:
+          description: Detailed message on the log entry.
+          example: ensure this value has at least 13 characters
+          type: string
+        location:
+          description: Location on where the error happened.
+          example: body
+          type: string
+        type:
+          description: Detailed error type that is specified in the log entry.
+          example: value_error.any_str.min_length
+          type: string
+      type: object
+    ApiLog_response_body:
+      description: The JSON response body for the log entry.
+      example:
+        code: bad_request
+        details:
+          pointer: /payment_method/number
+          location: body
+          message: ensure this value has at least 13 characters
+          type: value_error.any_str.min_length
+        message: Request failed validation
+        type: error
+        status: 400
+      properties:
+        code:
+          description: The error code.
+          example: bad_request
+          type: string
+        message:
+          description: The error message.
+          example: Request failed validation
+          type: string
+        status:
+          description: The HTTP error code.
+          example: 400
+          type: number
+        type:
+          description: Type of the log entry.
+          example: error
+          type: string
+        details:
+          $ref: '#/components/schemas/ApiLog_response_body_details'
+      type: object
     AuditLog_user:
       description: The user who performed the action.
       example:
+        email_address: john@example.com
         name: John L
         staff: false
         id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+        status: active
       properties:
         id:
           description: The ID of the user.
@@ -9104,10 +11023,23 @@ components:
           description: The name of the user.
           example: John L
           type: string
+        email_address:
+          description: The email address for this user.
+          example: john@example.com
+          nullable: true
+          type: string
         staff:
           description: Whether the user is Gr4vy staff.
           example: false
           type: boolean
+        status:
+          description: The status of the user.
+          enum:
+          - active
+          - pending
+          - deleted
+          example: active
+          type: string
       type: object
     AuditLog_resource:
       description: The resource that was changed.
@@ -9167,6 +11099,57 @@ components:
           readOnly: true
           type: boolean
       type: object
+    ConnectionOptions_cybersource_anti_fraud:
+      description: Additional options for Cybersource Decision Manager (anti-fraud).
+      nullable: true
+      properties:
+        device_fingerprint_id:
+          description: This field represents device fingerprint ID.
+          example: yGeBAFYgFmM=
+          type: string
+        merchant_defined_data:
+          additionalProperties:
+            type: string
+          description: This is a key-value object for merchant defined data.
+          example:
+            field1: value1
+            field2: value2
+          maxProperties: 100
+          type: object
+      type: object
+    ConnectionOptions_adyen_card:
+      description: |-
+        Additional options to be passed through to Adyen when processing
+        card transactions.
+      nullable: true
+      properties:
+        additionalData:
+          additionalProperties:
+            type: string
+          description: |-
+            A key-value object representing additional data to be passed
+            to Adyen.
+          example:
+            riskdata.operatorCode: operatorCode,
+            riskdata.operatorCountry: operatorCountry
+          type: object
+      type: object
+    GooglePayRequest_assurance_details:
+      description: Information about the validation performed on the payment data.
+        (See https://developers.google.com/pay/api/web/reference/response-objects#assurance-details-specifications).
+      nullable: true
+      properties:
+        account_verified:
+          description: Indicates that card holder possession validation has been performed.
+          example: false
+          nullable: true
+          type: boolean
+        card_holder_authenticated:
+          description: Indicates that identification and verifications was performed.
+          example: false
+          nullable: true
+          type: boolean
+      type: object
     PaymentService_fields:
       example:
         value: sk_test_26PHem9AhJZvU623DfE1x4sd
@@ -9185,16 +11168,7 @@ components:
           minLength: 0
           type: string
       type: object
-    PaymentServiceRequest_allOf:
-      properties:
-        payment_service_definition_id:
-          description: The ID of the payment service to use.
-          example: stripe-card
-          maxLength: 50
-          minLength: 1
-          type: string
-      type: object
-    PaymentServiceUpdate_fields:
+    PaymentServiceRequest_fields:
       description: A key-value pair that represents a field defined in the definition
         for this payment service.
       example:
@@ -9208,10 +11182,11 @@ components:
           minLength: 1
           type: string
         value:
-          description: The value of a field to set.
+          description: The value of a field to set; you can unset optional fields
+            by setting this to an empty string `""`.
           example: sk_test_26PHem9AhJZvU623DfE1x4sd
           maxLength: 5000
-          minLength: 1
+          minLength: 0
           type: string
       required:
       - key
@@ -9259,16 +11234,21 @@ components:
     PaymentServiceDefinition_supported_features:
       description: Features supported by the payment definition.
       example:
-        delayed_capture: false
         network_tokens: false
-        three_d_secure_hosted: true
+        requires_webhook_setup: true
+        network_tokens_toggle: false
         payment_method_tokenization: true
         void: true
         payment_method_tokenization_toggle: false
+        refunds: true
+        delayed_capture: false
+        three_d_secure_hosted: true
+        open_loop_toggle: false
+        network_tokens_default: true
         three_d_secure_pass_through: false
+        open_loop: true
         partial_refunds: false
         verify_credentials: false
-        refunds: true
       properties:
         delayed_capture:
           description: |-
@@ -9280,6 +11260,24 @@ components:
           description: |-
             Supports passing decrypted digital wallet (e.g. Apple Pay)
             tokens to the underlying processor.
+          example: false
+          type: boolean
+        network_tokens_default:
+          description: Supports processing network tokens by default.
+          example: true
+          type: boolean
+        network_tokens_toggle:
+          description: Supports toggling processing of network tokens on or off.
+          example: false
+          type: boolean
+        open_loop:
+          description: |-
+            Supports processing transactions with either raw PAN details or
+            network tokens.
+          example: true
+          type: boolean
+        open_loop_toggle:
+          description: Supports toggling processing as open-loop on or off.
           example: false
           type: boolean
         partial_refunds:
@@ -9302,6 +11300,10 @@ components:
           description: |-
             Supports [refunding](#operation/refund-transaction) captured
             transactions.
+          example: true
+          type: boolean
+        requires_webhook_setup:
+          description: Requires merchant to set up `webhook_url` manually with provider.
           example: true
           type: boolean
         three_d_secure_hosted:
@@ -9343,6 +11345,7 @@ components:
           phone_number: true
           first_name: true
           tax_id: true
+        gateway_merchant_id: gateway_merchant_id
         approval_ui:
           width: 300px
           height: 300px
@@ -9350,7 +11353,14 @@ components:
         supported_schemes:
         - null
         - null
+        gateway: gateway
       properties:
+        gateway:
+          description: Gateway used for Google Pay payments.
+          type: string
+        gateway_merchant_id:
+          description: Gateway merchant identifier used for Google Pay payments.
+          type: string
         merchant_name:
           description: |-
             Display name of the merchant as registered with the digital wallet
@@ -9384,6 +11394,58 @@ components:
           description: The time zone used to compute date-time placeholders.
           example: Europe/London
           type: string
+      type: object
+    RoleAssignment_assignee:
+      description: The assignee for this role assignment.
+      example:
+        id: 42aae896-8ce2-4a60-b80a-5f6ae1dfbbd4
+        type: user
+      properties:
+        type:
+          description: The type of the assignee.
+          enum:
+          - user
+          example: user
+          type: string
+        id:
+          description: The unique ID of the assignee.
+          example: 42aae896-8ce2-4a60-b80a-5f6ae1dfbbd4
+          format: uuid
+          type: string
+      type: object
+    RoleAssignmentRequest_role:
+      description: The role to associate with the role assignment.
+      example:
+        id: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+      properties:
+        id:
+          description: The ID of the role to associate with the role assignment.
+          example: 462ab2e2-3e29-44bd-b39f-e4d1293affbb
+          format: uuid
+          type: string
+      required:
+      - id
+      type: object
+    RoleAssignmentRequest_assignee:
+      description: The assignee to associate with the role assignment.
+      example:
+        id: 42aae896-8ce2-4a60-b80a-5f6ae1dfbbd4
+        type: user
+      properties:
+        type:
+          description: The type of the assignee to associate with the role assignment.
+          enum:
+          - user
+          example: user
+          type: string
+        id:
+          description: The ID of the assignee to associate with the role assignment.
+          example: 42aae896-8ce2-4a60-b80a-5f6ae1dfbbd4
+          format: uuid
+          type: string
+      required:
+      - id
+      - type
       type: object
     ThreeDSecureDataV1_allOf:
       properties:

@@ -8,19 +8,21 @@ Name | Type | Description | Notes
 **Currency** | **string** | A supported ISO-4217 currency code.  For redirect requests, this value must match the one specified for &#x60;currency&#x60; in &#x60;payment_method&#x60;.  | 
 **Country** | Pointer to **NullableString** | The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.  If this value is provided for redirect requests and it&#39;s not &#x60;null&#x60;, it must match the one specified for &#x60;country&#x60; in &#x60;payment_method&#x60;. Otherwise, the value specified for &#x60;country&#x60; in &#x60;payment_method&#x60; will be assumed implicitly.  | [optional] 
 **PaymentMethod** | [**TransactionPaymentMethodRequest**](TransactionPaymentMethodRequest.md) |  | 
-**Store** | Pointer to **bool** | Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. There are also a few restrictions on how the flag may be set:  * The flag has to be set to &#x60;true&#x60; when the &#x60;payment_source&#x60; is set to &#x60;recurring&#x60; or &#x60;installment&#x60;, and &#x60;merchant_initiated&#x60; is set to &#x60;false&#x60;.  * The flag has to be set to &#x60;false&#x60; (or not set) when using a previously tokenized payment method. | [optional] [default to false]
+**Store** | Pointer to **bool** | Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. There are also a few restrictions on how the flag may be set:  * The flag has to be set to &#x60;true&#x60; when the &#x60;payment_source&#x60; is set to &#x60;recurring&#x60; or &#x60;installment&#x60;, and &#x60;merchant_initiated&#x60; is set to &#x60;false&#x60;.  * The flag has to be set to &#x60;false&#x60; (or not set) when using a previously vaulted payment method. | [optional] [default to false]
 **Intent** | Pointer to **string** | Defines the intent of this API call. This determines the desired initial state of the transaction.  * &#x60;authorize&#x60; - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * &#x60;capture&#x60; - Optionally approves and then authorizes and captures the funds of the transaction. | [optional] [default to "authorize"]
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **ThreeDSecureData** | Pointer to [**ThreeDSecureDataV1V2**](ThreeDSecureDataV1V2.md) |  | [optional] 
 **MerchantInitiated** | Pointer to **bool** | Indicates whether the transaction was initiated by the merchant (true) or customer (false). | [optional] [default to false]
 **PaymentSource** | Pointer to **string** | The source of the transaction. Defaults to &#x60;ecommerce&#x60;. | [optional] 
 **IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.  The flag can only be &#x60;false&#x60; (or not set) when the transaction meets one of the following criteria:  * It is not &#x60;merchant_initiated&#x60;. * &#x60;payment_source&#x60; is set to &#x60;card_on_file&#x60;.  The flag can only be set to &#x60;true&#x60; when the transaction meets one of the following criteria:  * It is not &#x60;merchant_initiated&#x60;. * &#x60;payment_source&#x60; is set to &#x60;recurring&#x60; or &#x60;installment&#x60; and &#x60;merchant_initiated&#x60; is set to &#x60;true&#x60;. * &#x60;payment_source&#x60; is set to &#x60;card_on_file&#x60;. | [optional] [default to false]
-**Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://gr4vy.com/docs/ under &#x60;Connections&#x60; for more information on how specific providers support metadata. | [optional] 
-**StatementDescriptor** | Pointer to [**StatementDescriptor**](StatementDescriptor.md) |  | [optional] 
+**Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://docs.gr4vy.com/ under &#x60;Connections&#x60; for more information on how specific providers support metadata. Please note the metadata key is case sensitive when used in Flow. | [optional] 
+**StatementDescriptor** | Pointer to [**NullableStatementDescriptor**](StatementDescriptor.md) |  | [optional] 
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 **PreviousSchemeTransactionId** | Pointer to **NullableString** | A scheme&#39;s transaction identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction.  If not provided, and a qualifying customer initiated transaction has been previously made, then Gr4vy will populate this value with the identifier returned for that transaction.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID. | [optional] [default to "null"]
-**BrowserInfo** | Pointer to [**BrowserInfo**](BrowserInfo.md) |  | [optional] 
-**ShippingDetailsId** | Pointer to **NullableString** | The unique identifier of a set of shipping details stored for the buyer.  If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the address in the database. | [optional] 
+**BrowserInfo** | Pointer to [**NullableBrowserInfo**](BrowserInfo.md) | Information about the browser used by the buyer. | [optional] 
+**ShippingDetailsId** | Pointer to **NullableString** | The unique identifier of a set of shipping details stored for the buyer.  If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the detail in the database. | [optional] 
+**ConnectionOptions** | Pointer to [**NullableConnectionOptions**](ConnectionOptions.md) | Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections. | [optional] 
+**AsyncCapture** | Pointer to **bool** | Whether to capture the transaction asynchronously.  - When &#x60;async_capture&#x60; is &#x60;false&#x60; (default), the transaction is captured   in the same request. - When &#x60;async_capture&#x60; is &#x60;true&#x60;, the transaction is automatically   captured at a later time.  Redirect transactions are not affected by this flag.  This flag can only be set to &#x60;true&#x60; when &#x60;intent&#x60; is set to &#x60;capture&#x60;. | [optional] [default to false]
 
 ## Methods
 
@@ -371,6 +373,16 @@ SetStatementDescriptor sets StatementDescriptor field to given value.
 
 HasStatementDescriptor returns a boolean if a field has been set.
 
+### SetStatementDescriptorNil
+
+`func (o *TransactionRequest) SetStatementDescriptorNil(b bool)`
+
+ SetStatementDescriptorNil sets the value for StatementDescriptor to be an explicit nil
+
+### UnsetStatementDescriptor
+`func (o *TransactionRequest) UnsetStatementDescriptor()`
+
+UnsetStatementDescriptor ensures that no value is present for StatementDescriptor, not even an explicit nil
 ### GetCartItems
 
 `func (o *TransactionRequest) GetCartItems() []CartItem`
@@ -456,6 +468,16 @@ SetBrowserInfo sets BrowserInfo field to given value.
 
 HasBrowserInfo returns a boolean if a field has been set.
 
+### SetBrowserInfoNil
+
+`func (o *TransactionRequest) SetBrowserInfoNil(b bool)`
+
+ SetBrowserInfoNil sets the value for BrowserInfo to be an explicit nil
+
+### UnsetBrowserInfo
+`func (o *TransactionRequest) UnsetBrowserInfo()`
+
+UnsetBrowserInfo ensures that no value is present for BrowserInfo, not even an explicit nil
 ### GetShippingDetailsId
 
 `func (o *TransactionRequest) GetShippingDetailsId() string`
@@ -491,6 +513,66 @@ HasShippingDetailsId returns a boolean if a field has been set.
 `func (o *TransactionRequest) UnsetShippingDetailsId()`
 
 UnsetShippingDetailsId ensures that no value is present for ShippingDetailsId, not even an explicit nil
+### GetConnectionOptions
+
+`func (o *TransactionRequest) GetConnectionOptions() ConnectionOptions`
+
+GetConnectionOptions returns the ConnectionOptions field if non-nil, zero value otherwise.
+
+### GetConnectionOptionsOk
+
+`func (o *TransactionRequest) GetConnectionOptionsOk() (*ConnectionOptions, bool)`
+
+GetConnectionOptionsOk returns a tuple with the ConnectionOptions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetConnectionOptions
+
+`func (o *TransactionRequest) SetConnectionOptions(v ConnectionOptions)`
+
+SetConnectionOptions sets ConnectionOptions field to given value.
+
+### HasConnectionOptions
+
+`func (o *TransactionRequest) HasConnectionOptions() bool`
+
+HasConnectionOptions returns a boolean if a field has been set.
+
+### SetConnectionOptionsNil
+
+`func (o *TransactionRequest) SetConnectionOptionsNil(b bool)`
+
+ SetConnectionOptionsNil sets the value for ConnectionOptions to be an explicit nil
+
+### UnsetConnectionOptions
+`func (o *TransactionRequest) UnsetConnectionOptions()`
+
+UnsetConnectionOptions ensures that no value is present for ConnectionOptions, not even an explicit nil
+### GetAsyncCapture
+
+`func (o *TransactionRequest) GetAsyncCapture() bool`
+
+GetAsyncCapture returns the AsyncCapture field if non-nil, zero value otherwise.
+
+### GetAsyncCaptureOk
+
+`func (o *TransactionRequest) GetAsyncCaptureOk() (*bool, bool)`
+
+GetAsyncCaptureOk returns a tuple with the AsyncCapture field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAsyncCapture
+
+`func (o *TransactionRequest) SetAsyncCapture(v bool)`
+
+SetAsyncCapture sets AsyncCapture field to given value.
+
+### HasAsyncCapture
+
+`func (o *TransactionRequest) HasAsyncCapture() bool`
+
+HasAsyncCapture returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

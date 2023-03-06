@@ -17,6 +17,10 @@ import (
 
 // PaymentOptionContext Additional context specific to the payment option. This is currently only returned for Apple Pay and Google Pay.
 type PaymentOptionContext struct {
+	// Gateway used for Google Pay payments.
+	Gateway *string `json:"gateway,omitempty"`
+	// Gateway merchant identifier used for Google Pay payments.
+	GatewayMerchantId *string `json:"gateway_merchant_id,omitempty"`
 	// Display name of the merchant as registered with the digital wallet provider.
 	MerchantName *string `json:"merchant_name,omitempty"`
 	// Card schemes supported by the digital wallet provider.
@@ -40,6 +44,70 @@ func NewPaymentOptionContext() *PaymentOptionContext {
 func NewPaymentOptionContextWithDefaults() *PaymentOptionContext {
 	this := PaymentOptionContext{}
 	return &this
+}
+
+// GetGateway returns the Gateway field value if set, zero value otherwise.
+func (o *PaymentOptionContext) GetGateway() string {
+	if o == nil || o.Gateway == nil {
+		var ret string
+		return ret
+	}
+	return *o.Gateway
+}
+
+// GetGatewayOk returns a tuple with the Gateway field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentOptionContext) GetGatewayOk() (*string, bool) {
+	if o == nil || o.Gateway == nil {
+		return nil, false
+	}
+	return o.Gateway, true
+}
+
+// HasGateway returns a boolean if a field has been set.
+func (o *PaymentOptionContext) HasGateway() bool {
+	if o != nil && o.Gateway != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGateway gets a reference to the given string and assigns it to the Gateway field.
+func (o *PaymentOptionContext) SetGateway(v string) {
+	o.Gateway = &v
+}
+
+// GetGatewayMerchantId returns the GatewayMerchantId field value if set, zero value otherwise.
+func (o *PaymentOptionContext) GetGatewayMerchantId() string {
+	if o == nil || o.GatewayMerchantId == nil {
+		var ret string
+		return ret
+	}
+	return *o.GatewayMerchantId
+}
+
+// GetGatewayMerchantIdOk returns a tuple with the GatewayMerchantId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentOptionContext) GetGatewayMerchantIdOk() (*string, bool) {
+	if o == nil || o.GatewayMerchantId == nil {
+		return nil, false
+	}
+	return o.GatewayMerchantId, true
+}
+
+// HasGatewayMerchantId returns a boolean if a field has been set.
+func (o *PaymentOptionContext) HasGatewayMerchantId() bool {
+	if o != nil && o.GatewayMerchantId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGatewayMerchantId gets a reference to the given string and assigns it to the GatewayMerchantId field.
+func (o *PaymentOptionContext) SetGatewayMerchantId(v string) {
+	o.GatewayMerchantId = &v
 }
 
 // GetMerchantName returns the MerchantName field value if set, zero value otherwise.
@@ -172,6 +240,12 @@ func (o *PaymentOptionContext) SetRequiredFields(v RequiredFields) {
 
 func (o PaymentOptionContext) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Gateway != nil {
+		toSerialize["gateway"] = o.Gateway
+	}
+	if o.GatewayMerchantId != nil {
+		toSerialize["gateway_merchant_id"] = o.GatewayMerchantId
+	}
 	if o.MerchantName != nil {
 		toSerialize["merchant_name"] = o.MerchantName
 	}

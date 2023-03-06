@@ -49,6 +49,9 @@ func (r ApiAddReportRequest) Execute() (Report, *_nethttp.Response, error) {
  * AddReport New report
  * Adds a report.
 
+Documentation about reports models and how to write a valid specification
+can be found in [Reporting docs](/reporting/introduction).
+
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiAddReportRequest
  */
@@ -547,6 +550,7 @@ type ApiListAllReportExecutionsRequest struct {
 	createdAtGte *time.Time
 	createdAtLte *time.Time
 	reportName *string
+	status *[]string
 }
 
 func (r ApiListAllReportExecutionsRequest) Cursor(cursor string) ApiListAllReportExecutionsRequest {
@@ -567,6 +571,10 @@ func (r ApiListAllReportExecutionsRequest) CreatedAtLte(createdAtLte time.Time) 
 }
 func (r ApiListAllReportExecutionsRequest) ReportName(reportName string) ApiListAllReportExecutionsRequest {
 	r.reportName = &reportName
+	return r
+}
+func (r ApiListAllReportExecutionsRequest) Status(status []string) ApiListAllReportExecutionsRequest {
+	r.status = &status
 	return r
 }
 
@@ -626,6 +634,17 @@ func (a *ReportsApiService) ListAllReportExecutionsExecute(r ApiListAllReportExe
 	}
 	if r.reportName != nil {
 		localVarQueryParams.Add("report_name", parameterToString(*r.reportName, ""))
+	}
+	if r.status != nil {
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status", parameterToString(t, "multi"))
+		}
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}

@@ -6,10 +6,15 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DelayedCapture** | Pointer to **bool** | Supports [capturing](#operation/capture-transaction) authorized transactions. | [optional] 
 **NetworkTokens** | Pointer to **bool** | Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor. | [optional] 
+**NetworkTokensDefault** | Pointer to **bool** | Supports processing network tokens by default. | [optional] 
+**NetworkTokensToggle** | Pointer to **bool** | Supports toggling processing of network tokens on or off. | [optional] 
+**OpenLoop** | Pointer to **bool** | Supports processing transactions with either raw PAN details or network tokens. | [optional] 
+**OpenLoopToggle** | Pointer to **bool** | Supports toggling processing as open-loop on or off. | [optional] 
 **PartialRefunds** | Pointer to **bool** | Supports [partially refunding](#operation/refund-transaction) captured transactions. | [optional] 
 **PaymentMethodTokenization** | Pointer to **bool** | Supports storing a payment method via tokenization. | [optional] 
 **PaymentMethodTokenizationToggle** | Pointer to **bool** | Supports toggling tokenization for a payment method on or off from the dashboard. | [optional] 
 **Refunds** | Pointer to **bool** | Supports [refunding](#operation/refund-transaction) captured transactions. | [optional] 
+**RequiresWebhookSetup** | Pointer to **bool** | Requires merchant to set up &#x60;webhook_url&#x60; manually with provider. | [optional] 
 **ThreeDSecureHosted** | Pointer to **bool** | Supports hosted 3-D Secure with a redirect. | [optional] 
 **ThreeDSecurePassThrough** | Pointer to **bool** | Supports passing 3-D Secure data to the underlying processor. | [optional] 
 **VerifyCredentials** | Pointer to **bool** | Supports verifying the credentials entered while setting up the underlying processor. This is for internal use only. | [optional] 
@@ -83,6 +88,106 @@ SetNetworkTokens sets NetworkTokens field to given value.
 `func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokens() bool`
 
 HasNetworkTokens returns a boolean if a field has been set.
+
+### GetNetworkTokensDefault
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensDefault() bool`
+
+GetNetworkTokensDefault returns the NetworkTokensDefault field if non-nil, zero value otherwise.
+
+### GetNetworkTokensDefaultOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensDefaultOk() (*bool, bool)`
+
+GetNetworkTokensDefaultOk returns a tuple with the NetworkTokensDefault field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkTokensDefault
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokensDefault(v bool)`
+
+SetNetworkTokensDefault sets NetworkTokensDefault field to given value.
+
+### HasNetworkTokensDefault
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokensDefault() bool`
+
+HasNetworkTokensDefault returns a boolean if a field has been set.
+
+### GetNetworkTokensToggle
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensToggle() bool`
+
+GetNetworkTokensToggle returns the NetworkTokensToggle field if non-nil, zero value otherwise.
+
+### GetNetworkTokensToggleOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensToggleOk() (*bool, bool)`
+
+GetNetworkTokensToggleOk returns a tuple with the NetworkTokensToggle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetNetworkTokensToggle
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokensToggle(v bool)`
+
+SetNetworkTokensToggle sets NetworkTokensToggle field to given value.
+
+### HasNetworkTokensToggle
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokensToggle() bool`
+
+HasNetworkTokensToggle returns a boolean if a field has been set.
+
+### GetOpenLoop
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetOpenLoop() bool`
+
+GetOpenLoop returns the OpenLoop field if non-nil, zero value otherwise.
+
+### GetOpenLoopOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetOpenLoopOk() (*bool, bool)`
+
+GetOpenLoopOk returns a tuple with the OpenLoop field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenLoop
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetOpenLoop(v bool)`
+
+SetOpenLoop sets OpenLoop field to given value.
+
+### HasOpenLoop
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasOpenLoop() bool`
+
+HasOpenLoop returns a boolean if a field has been set.
+
+### GetOpenLoopToggle
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetOpenLoopToggle() bool`
+
+GetOpenLoopToggle returns the OpenLoopToggle field if non-nil, zero value otherwise.
+
+### GetOpenLoopToggleOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetOpenLoopToggleOk() (*bool, bool)`
+
+GetOpenLoopToggleOk returns a tuple with the OpenLoopToggle field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOpenLoopToggle
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetOpenLoopToggle(v bool)`
+
+SetOpenLoopToggle sets OpenLoopToggle field to given value.
+
+### HasOpenLoopToggle
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasOpenLoopToggle() bool`
+
+HasOpenLoopToggle returns a boolean if a field has been set.
 
 ### GetPartialRefunds
 
@@ -183,6 +288,31 @@ SetRefunds sets Refunds field to given value.
 `func (o *PaymentServiceDefinitionSupportedFeatures) HasRefunds() bool`
 
 HasRefunds returns a boolean if a field has been set.
+
+### GetRequiresWebhookSetup
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetRequiresWebhookSetup() bool`
+
+GetRequiresWebhookSetup returns the RequiresWebhookSetup field if non-nil, zero value otherwise.
+
+### GetRequiresWebhookSetupOk
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetRequiresWebhookSetupOk() (*bool, bool)`
+
+GetRequiresWebhookSetupOk returns a tuple with the RequiresWebhookSetup field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRequiresWebhookSetup
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetRequiresWebhookSetup(v bool)`
+
+SetRequiresWebhookSetup sets RequiresWebhookSetup field to given value.
+
+### HasRequiresWebhookSetup
+
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasRequiresWebhookSetup() bool`
+
+HasRequiresWebhookSetup returns a boolean if a field has been set.
 
 ### GetThreeDSecureHosted
 
