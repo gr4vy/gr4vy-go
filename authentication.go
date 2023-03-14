@@ -24,7 +24,7 @@ func getEmbedClaims(embed EmbedParams) map[string]interface{} {
 
 func getEmbedToken(private_key string, embed EmbedParams) (string, error) {
 	claims := jwt.MapClaims{
-		"iss":    fmt.Sprintf("Gr4vy SDK %v - %v", VERSION, runtime.Version()),
+		"iss":    fmt.Sprintf("Gr4vy Go SDK %v - Go %v", VERSION, runtime.Version()),
 		"nbf":    float64(time.Now().Unix()),
 		"exp":    float64(time.Now().Unix() + 3000),
 		"scopes": []string{"embed"},

@@ -13,7 +13,7 @@ import (
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
-const VERSION = "0.22.0"
+const VERSION = "0.23.0"
 
 type Gr4vyClient struct {
 	gr4vyId     string
