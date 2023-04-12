@@ -117,6 +117,23 @@ func TestListBuyers(t *testing.T) {
 	}
 	t.Logf("%+v\n", *response)
 }
+
+func TestListBuyersForMid(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClientWithMid(gr4vyId, key, environment, "default")
+
+	var response *Gr4vyBuyers
+	response, _, err = client.ListBuyers(Int32(5))
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	t.Logf("%+v\n", *response)
+}
 func TestListBuyersContext(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {

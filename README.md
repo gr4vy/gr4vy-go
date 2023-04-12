@@ -56,6 +56,15 @@ func main() {
 }
 ```
 
+## Multi merchant
+
+In a multi-merchant environment, the merchant account ID can be set by using `NewGr4vyClientWithMid`:
+
+```go
+  client := gr4vy.NewGr4vyClientWithMid("demo", key, "sandbox", "my_merchant_account_id")
+```
+
+
 ## Gr4vy Embed
 
 To create a token for Gr4vy Embed, call the `client.GetEmbedToken(embed)`
