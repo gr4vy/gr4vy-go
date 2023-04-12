@@ -22,6 +22,7 @@ type Gr4vyClient struct {
 	Debug       bool
 	accessToken string
 	environment string
+	merchantId string
 }
 
 type EmbedParams struct {
@@ -37,6 +38,18 @@ func NewGr4vyClient(gr4vy_id string, private_key string, environment string) *Gr
 		privateKey:  private_key,
 		Debug:       false,
 		environment: environment,
+		merchantId: "default",
+	}
+	return &client
+}
+
+func NewGr4vyClientWithMid(gr4vy_id string, private_key string, environment string, merchant_id string) *Gr4vyClient {
+	client := Gr4vyClient{
+		gr4vyId:     gr4vy_id,
+		privateKey:  private_key,
+		Debug:       false,
+		environment: environment,
+		merchantId: merchant_id,
 	}
 	return &client
 }
@@ -47,6 +60,7 @@ func NewGr4vyClientWithBaseUrl(base_url string, private_key string) *Gr4vyClient
 		baseUrl:     base_url,
 		Debug:       false,
 		environment: "sandbox",
+		merchantId: "default",
 	}
 	return &client
 }
@@ -67,6 +81,7 @@ func GetClient(c *Gr4vyClient) (*APIClient, error) {
 
 	config := NewConfiguration()
 	config.Servers[0].URL = c.BaseUrl()
+	config.AddDefaultHeader("X-GR4VY-MERCHANT-ACCOUNT-ID", c.merchantId)
 
 	client := NewAPIClient(config)
 
