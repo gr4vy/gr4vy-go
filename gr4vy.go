@@ -22,7 +22,7 @@ type Gr4vyClient struct {
 	Debug       bool
 	accessToken string
 	environment string
-	merchantId string
+	merchantAccountId string
 }
 
 type EmbedParams struct {
