@@ -33,6 +33,21 @@ func TestEmbedClaimsSerialization(t *testing.T) {
 		t.Error("EmbedParams serialization is not snake_casing keys")
 	}
 }
+
+func TestEmbedClaimsWithMerchantAccountId(t *testing.T) {
+	embed := EmbedParams{
+		Amount:   200,
+		Currency: "USD",
+		BuyerID:  "d757c76a-cbd7-4b56-95a3-40125b51b29c",
+		MerchantAccountId: "plantly-uk",
+	}
+
+	serialized := getEmbedClaims(embed)
+
+	if _, present := serialized["buyer_id"]; !present {
+		t.Error("EmbedParams serialization is not snake_casing keys")
+	}
+}
 func TestEmbedToken(t *testing.T) {
 
 	key, err := GetKeyFromFile(keyPath)
