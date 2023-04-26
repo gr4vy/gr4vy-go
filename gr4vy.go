@@ -159,6 +159,11 @@ func String(v string) NullableString {
 	return *NewNullableString(&v)
 }
 
+
+func Gr4vyNullableInt32(v int32) NullableInt32 {
+	return *NewNullableInt32(&v)
+}
+
 func StringPtr(v string) *string {
 	return &v
 }

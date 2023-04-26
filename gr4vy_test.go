@@ -358,9 +358,17 @@ func TestPostListPaymentOptions(t *testing.T) {
 	}
 	client := NewGr4vyClient(gr4vyId, key, environment)
 
+	// cartItems := []CartItem{
+	// 	{Name: "Aloe", UnitAmount: 1000, Quantity: 1, Sku: String("aloe")},
+	// }
+
 	req := Gr4vyPaymentOptionsRequest{
-		Country:         String("GB"),
-		Currency:        String("GBP"),
+		Country:    String("US"),
+		Currency:   String("USD"),
+		Amount: 	Gr4vyNullableInt32(1000),
+		Metadata: 	map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
+		// CartItems:	cartItems,
+		Locale:		String("en"),
 	}
 
 	var response *Gr4vyPaymentOptions
@@ -380,9 +388,17 @@ func TestPostListPaymentOptionsContext(t *testing.T) {
 	}
 	client := NewGr4vyClient(gr4vyId, key, environment)
 
+	// cartItems := []CartItem{
+	// 	{Name: "Aloe", UnitAmount: 1000, Quantity: 1, Sku: String("aloe")},
+	// }
+
 	req := Gr4vyPaymentOptionsRequest{
-		Country:         String("GB"),
-		Currency:        String("GBP"),
+		Country:    String("US"),
+		Currency:   String("USD"),
+		Amount: 	Gr4vyNullableInt32(1000),
+		Metadata: 	map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
+		// CartItems:	cartItems,
+		Locale:		String("en"),
 	}
 
 	var response *Gr4vyPaymentOptions
