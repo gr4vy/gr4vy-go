@@ -350,6 +350,50 @@ func TestListPaymentOptionsContext(t *testing.T) {
 		return
 	}
 }
+func TestPostListPaymentOptions(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key, environment)
+
+	req := Gr4vyPaymentOptionsRequest{
+		Country:         String("GB"),
+		Currency:        String("GBP"),
+	}
+
+	var response *Gr4vyPaymentOptions
+	response, _, err = client.PostListPaymentOptions(req)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	var paymentOptionMethod = (*response.Items)[0].GetMethod()
+	t.Log("Retrieved payment options: " + paymentOptionMethod)
+}
+func TestPostListPaymentOptionsContext(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key, environment)
+
+	req := Gr4vyPaymentOptionsRequest{
+		Country:         String("GB"),
+		Currency:        String("GBP"),
+	}
+
+	var response *Gr4vyPaymentOptions
+	response, _, err = client.PostListPaymentOptionsContext(context.Background(), req)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	var paymentOptionMethod = (*response.Items)[1].GetMethod()
+	t.Log("Retrieved payment options: " + paymentOptionMethod)
+}
 
 func TestListPaymentServiceDefinitions(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
