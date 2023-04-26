@@ -30,6 +30,7 @@ type EmbedParams struct {
 	Currency string            `json:"currency"`
 	BuyerID  string            `json:"buyer_id"`
 	Metadata map[string]string `json:"metadata"`
+	MerchantAccountId string   `json:"merchant_account_id"`
 }
 
 func NewGr4vyClient(gr4vy_id string, private_key string, environment string) *Gr4vyClient {
