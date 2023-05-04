@@ -350,6 +350,66 @@ func TestListPaymentOptionsContext(t *testing.T) {
 		return
 	}
 }
+func TestPostListPaymentOptions(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key, environment)
+
+	// cartItems := []CartItem{
+	// 	{Name: "Aloe", UnitAmount: 1000, Quantity: 1, Sku: String("aloe")},
+	// }
+
+	req := Gr4vyPaymentOptionsRequest{
+		Country:    String("US"),
+		Currency:   String("USD"),
+		Amount: 	Gr4vyNullableInt32(1000),
+		Metadata: 	map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
+		// CartItems:	cartItems,
+		Locale:		String("en"),
+	}
+
+	var response *Gr4vyPaymentOptions
+	response, _, err = client.PostListPaymentOptions(req)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	var paymentOptionMethod = (*response.Items)[0].GetMethod()
+	t.Log("Retrieved payment options: " + paymentOptionMethod)
+}
+func TestPostListPaymentOptionsContext(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key, environment)
+
+	// cartItems := []CartItem{
+	// 	{Name: "Aloe", UnitAmount: 1000, Quantity: 1, Sku: String("aloe")},
+	// }
+
+	req := Gr4vyPaymentOptionsRequest{
+		Country:    String("US"),
+		Currency:   String("USD"),
+		Amount: 	Gr4vyNullableInt32(1000),
+		Metadata: 	map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
+		// CartItems:	cartItems,
+		Locale:		String("en"),
+	}
+
+	var response *Gr4vyPaymentOptions
+	response, _, err = client.PostListPaymentOptionsContext(context.Background(), req)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	var paymentOptionMethod = (*response.Items)[1].GetMethod()
+	t.Log("Retrieved payment options: " + paymentOptionMethod)
+}
 
 func TestListPaymentServiceDefinitions(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
