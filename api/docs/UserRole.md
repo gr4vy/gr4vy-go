@@ -4,7 +4,6 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AssignmentId** | Pointer to **string** | The unique ID for this role assignment to the user. | [optional] 
 **Type** | Pointer to **string** | The type of this resource. Always &#x60;role&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique ID for this role. | [optional] 
 **Name** | Pointer to **string** | The unique name for this role. | [optional] 
@@ -29,31 +28,6 @@ will change when the set of required properties is changed
 NewUserRoleWithDefaults instantiates a new UserRole object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetAssignmentId
-
-`func (o *UserRole) GetAssignmentId() string`
-
-GetAssignmentId returns the AssignmentId field if non-nil, zero value otherwise.
-
-### GetAssignmentIdOk
-
-`func (o *UserRole) GetAssignmentIdOk() (*string, bool)`
-
-GetAssignmentIdOk returns a tuple with the AssignmentId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAssignmentId
-
-`func (o *UserRole) SetAssignmentId(v string)`
-
-SetAssignmentId sets AssignmentId field to given value.
-
-### HasAssignmentId
-
-`func (o *UserRole) HasAssignmentId() bool`
-
-HasAssignmentId returns a boolean if a field has been set.
 
 ### GetType
 

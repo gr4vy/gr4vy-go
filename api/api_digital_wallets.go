@@ -28,33 +28,33 @@ var (
 // DigitalWalletsApiService DigitalWalletsApi service
 type DigitalWalletsApiService service
 
-type ApiDeregisterDigitalWalletRequest struct {
+type ApiDeleteDigitalWalletRequest struct {
 	ctx _context.Context
 	ApiService *DigitalWalletsApiService
 	digitalWalletId string
 }
 
 
-func (r ApiDeregisterDigitalWalletRequest) Execute() (*_nethttp.Response, error) {
-	return r.ApiService.DeregisterDigitalWalletExecute(r)
+func (r ApiDeleteDigitalWalletRequest) Execute() (*_nethttp.Response, error) {
+	return r.ApiService.DeleteDigitalWalletExecute(r)
 }
 
 /*
- * DeregisterDigitalWallet De-register digital wallet
+ * DeleteDigitalWallet De-register digital wallet
  * De-registers a digital wallet with a provider. Upon successful
 de-registration, the digital wallet's record is deleted and will no
 longer be available.
 
-A digital wallet of the `apple` provider may only be de-registered if
-there are no `active` Apple Pay certificates. When there are only
-`incomplete` or `expired` Apple Pay certificates, these certificates
-are deleted alongside the `apple` digital wallet's record.
+A digital wallet of the Apple provider may only be de-registered if
+there are no active Apple Pay certificates. When there are only
+incomplete or expired Apple Pay certificates, these certificates
+are deleted alongside the Apple digital wallet's record.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param digitalWalletId The ID of the registered digital wallet.
- * @return ApiDeregisterDigitalWalletRequest
+ * @return ApiDeleteDigitalWalletRequest
  */
-func (a *DigitalWalletsApiService) DeregisterDigitalWallet(ctx _context.Context, digitalWalletId string) ApiDeregisterDigitalWalletRequest {
-	return ApiDeregisterDigitalWalletRequest{
+func (a *DigitalWalletsApiService) DeleteDigitalWallet(ctx _context.Context, digitalWalletId string) ApiDeleteDigitalWalletRequest {
+	return ApiDeleteDigitalWalletRequest{
 		ApiService: a,
 		ctx: ctx,
 		digitalWalletId: digitalWalletId,
@@ -64,7 +64,7 @@ func (a *DigitalWalletsApiService) DeregisterDigitalWallet(ctx _context.Context,
 /*
  * Execute executes the request
  */
-func (a *DigitalWalletsApiService) DeregisterDigitalWalletExecute(r ApiDeregisterDigitalWalletRequest) (*_nethttp.Response, error) {
+func (a *DigitalWalletsApiService) DeleteDigitalWalletExecute(r ApiDeleteDigitalWalletRequest) (*_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodDelete
 		localVarPostBody     interface{}
@@ -73,7 +73,7 @@ func (a *DigitalWalletsApiService) DeregisterDigitalWalletExecute(r ApiDeregiste
 		localVarFileBytes    []byte
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DigitalWalletsApiService.DeregisterDigitalWallet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DigitalWalletsApiService.DeleteDigitalWallet")
 	if err != nil {
 		return nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -385,29 +385,29 @@ func (a *DigitalWalletsApiService) ListDigitalWalletsExecute(r ApiListDigitalWal
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRegisterDigitalWalletRequest struct {
+type ApiNewDigitalWalletRequest struct {
 	ctx _context.Context
 	ApiService *DigitalWalletsApiService
 	digitalWalletRequest *DigitalWalletRequest
 }
 
-func (r ApiRegisterDigitalWalletRequest) DigitalWalletRequest(digitalWalletRequest DigitalWalletRequest) ApiRegisterDigitalWalletRequest {
+func (r ApiNewDigitalWalletRequest) DigitalWalletRequest(digitalWalletRequest DigitalWalletRequest) ApiNewDigitalWalletRequest {
 	r.digitalWalletRequest = &digitalWalletRequest
 	return r
 }
 
-func (r ApiRegisterDigitalWalletRequest) Execute() (DigitalWallet, *_nethttp.Response, error) {
-	return r.ApiService.RegisterDigitalWalletExecute(r)
+func (r ApiNewDigitalWalletRequest) Execute() (DigitalWallet, *_nethttp.Response, error) {
+	return r.ApiService.NewDigitalWalletExecute(r)
 }
 
 /*
- * RegisterDigitalWallet Register digital wallet
+ * NewDigitalWallet Register digital wallet
  * Register with a digital wallet provider.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiRegisterDigitalWalletRequest
+ * @return ApiNewDigitalWalletRequest
  */
-func (a *DigitalWalletsApiService) RegisterDigitalWallet(ctx _context.Context) ApiRegisterDigitalWalletRequest {
-	return ApiRegisterDigitalWalletRequest{
+func (a *DigitalWalletsApiService) NewDigitalWallet(ctx _context.Context) ApiNewDigitalWalletRequest {
+	return ApiNewDigitalWalletRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -417,7 +417,7 @@ func (a *DigitalWalletsApiService) RegisterDigitalWallet(ctx _context.Context) A
  * Execute executes the request
  * @return DigitalWallet
  */
-func (a *DigitalWalletsApiService) RegisterDigitalWalletExecute(r ApiRegisterDigitalWalletRequest) (DigitalWallet, *_nethttp.Response, error) {
+func (a *DigitalWalletsApiService) NewDigitalWalletExecute(r ApiNewDigitalWalletRequest) (DigitalWallet, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -427,7 +427,7 @@ func (a *DigitalWalletsApiService) RegisterDigitalWalletExecute(r ApiRegisterDig
 		localVarReturnValue  DigitalWallet
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DigitalWalletsApiService.RegisterDigitalWallet")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "DigitalWalletsApiService.NewDigitalWallet")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}

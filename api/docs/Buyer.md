@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;buyer&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique Gr4vy ID for this buyer. | [optional] 
+**MerchantAccountId** | Pointer to **string** | The unique ID for a merchant account. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. | [optional] 
 **DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
 **BillingDetails** | Pointer to [**NullableBillingDetails**](BillingDetails.md) | The billing details associated with a buyer. | [optional] 
@@ -80,6 +81,31 @@ SetId sets Id field to given value.
 `func (o *Buyer) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetMerchantAccountId
+
+`func (o *Buyer) GetMerchantAccountId() string`
+
+GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
+
+### GetMerchantAccountIdOk
+
+`func (o *Buyer) GetMerchantAccountIdOk() (*string, bool)`
+
+GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantAccountId
+
+`func (o *Buyer) SetMerchantAccountId(v string)`
+
+SetMerchantAccountId sets MerchantAccountId field to given value.
+
+### HasMerchantAccountId
+
+`func (o *Buyer) HasMerchantAccountId() bool`
+
+HasMerchantAccountId returns a boolean if a field has been set.
 
 ### GetExternalIdentifier
 

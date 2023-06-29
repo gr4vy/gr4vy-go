@@ -70,8 +70,7 @@ amount, currency, country and metadata.
 If the amount is zero, payment options which do not support zero amounts,
 will be omitted in the response.
 
-If you want to use Flow rules,
-please use the [post endpoint](#operation/post-list-payment-options).
+Checkout flow rules are used to limit these result.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListPaymentOptionsRequest
  */
@@ -211,12 +210,14 @@ func (r ApiPostListPaymentOptionsRequest) Execute() (PaymentOptions, *_nethttp.R
 }
 
 /*
- * PostListPaymentOptions List payment options
+ * PostListPaymentOptions List payment options with POST
  * Returns a list of available payment method options for the combination of
 amount, currency, country, metadata and list of cart items.
 
 If the amount is zero, payment options which do not support zero amounts,
 will be omitted in the response.
+
+Checkout flow rules are used to limit these result.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiPostListPaymentOptionsRequest
  */

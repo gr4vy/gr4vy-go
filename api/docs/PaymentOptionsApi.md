@@ -5,7 +5,7 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**ListPaymentOptions**](PaymentOptionsApi.md#ListPaymentOptions) | **Get** /payment-options | List payment options
-[**PostListPaymentOptions**](PaymentOptionsApi.md#PostListPaymentOptions) | **Post** /payment-options | List payment options
+[**PostListPaymentOptions**](PaymentOptionsApi.md#PostListPaymentOptions) | **Post** /payment-options | List payment options with POST
 
 
 
@@ -87,7 +87,7 @@ Name | Type | Description  | Notes
 
 > PaymentOptions PostListPaymentOptions(ctx).PaymentOptionsRequest(paymentOptionsRequest).Execute()
 
-List payment options
+List payment options with POST
 
 
 

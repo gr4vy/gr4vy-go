@@ -154,7 +154,7 @@ func (r ApiGetPaymentMethodRequest) Execute() (PaymentMethod, *_nethttp.Response
 }
 
 /*
- * GetPaymentMethod Get stored payment method
+ * GetPaymentMethod Get payment method
  * Gets the details for a stored payment method.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param paymentMethodId The ID of the payment method.
@@ -298,7 +298,7 @@ func (r ApiListBuyerPaymentMethodsRequest) Execute() (PaymentMethodsTokenized, *
 }
 
 /*
- * ListBuyerPaymentMethods List stored payment methods for a buyer
+ * ListBuyerPaymentMethods List payment methods for buyer
  * Returns a list of stored payment methods for a buyer in a summarized format.
 Only payment methods that are compatible with at least one active payment
 service in that region are shown.
@@ -573,34 +573,35 @@ func (a *PaymentMethodsApiService) ListPaymentMethodsExecute(r ApiListPaymentMet
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiStorePaymentMethodRequest struct {
+type ApiNewPaymentMethodRequest struct {
 	ctx _context.Context
 	ApiService *PaymentMethodsApiService
 	paymentMethodRequest *PaymentMethodRequest
 }
 
-func (r ApiStorePaymentMethodRequest) PaymentMethodRequest(paymentMethodRequest PaymentMethodRequest) ApiStorePaymentMethodRequest {
+func (r ApiNewPaymentMethodRequest) PaymentMethodRequest(paymentMethodRequest PaymentMethodRequest) ApiNewPaymentMethodRequest {
 	r.paymentMethodRequest = &paymentMethodRequest
 	return r
 }
 
-func (r ApiStorePaymentMethodRequest) Execute() (PaymentMethod, *_nethttp.Response, error) {
-	return r.ApiService.StorePaymentMethodExecute(r)
+func (r ApiNewPaymentMethodRequest) Execute() (PaymentMethod, *_nethttp.Response, error) {
+	return r.ApiService.NewPaymentMethodExecute(r)
 }
 
 /*
- * StorePaymentMethod New payment method
+ * NewPaymentMethod New payment method
  * Stores and vaults a new payment method.
 
 Vaulting a card only stores its information but doesn't validate it against any
-PSP. In order to do so, a CIT (Customer Initiated Transaction) must be done,
-even if it's a zero-value one.
+PSP, so ephemeral data like the security code, often referred to as the CVV or
+CVD, won't be used. In order to validate the card data, a CIT (Customer Initiated
+Transaction) must be done, even if it's a zero-value one.
 
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiStorePaymentMethodRequest
+ * @return ApiNewPaymentMethodRequest
  */
-func (a *PaymentMethodsApiService) StorePaymentMethod(ctx _context.Context) ApiStorePaymentMethodRequest {
-	return ApiStorePaymentMethodRequest{
+func (a *PaymentMethodsApiService) NewPaymentMethod(ctx _context.Context) ApiNewPaymentMethodRequest {
+	return ApiNewPaymentMethodRequest{
 		ApiService: a,
 		ctx: ctx,
 	}
@@ -610,7 +611,7 @@ func (a *PaymentMethodsApiService) StorePaymentMethod(ctx _context.Context) ApiS
  * Execute executes the request
  * @return PaymentMethod
  */
-func (a *PaymentMethodsApiService) StorePaymentMethodExecute(r ApiStorePaymentMethodRequest) (PaymentMethod, *_nethttp.Response, error) {
+func (a *PaymentMethodsApiService) NewPaymentMethodExecute(r ApiNewPaymentMethodRequest) (PaymentMethod, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -620,7 +621,7 @@ func (a *PaymentMethodsApiService) StorePaymentMethodExecute(r ApiStorePaymentMe
 		localVarReturnValue  PaymentMethod
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentMethodsApiService.StorePaymentMethod")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentMethodsApiService.NewPaymentMethod")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}

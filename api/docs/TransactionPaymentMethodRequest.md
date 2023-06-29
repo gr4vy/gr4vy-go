@@ -13,6 +13,8 @@ Name | Type | Description | Notes
 **BuyerExternalIdentifier** | Pointer to **string** | The &#x60;external_identifier&#x60; of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_id&#x60; field needs to be unset. | [optional] 
 **RedirectUrl** | Pointer to **string** | The redirect URL to redirect a buyer to after they have authorized their transaction or payment method. This only applies to payment methods that require buyer approval. | [optional] 
 **Id** | Pointer to **string** | An identifier for a previously vaulted payment method. This id can represent any type of payment method. | [optional] 
+**Currency** | Pointer to **string** | The ISO-4217 currency code to store this payment method for. This is used to select the payment service to use.  This only applies to &#x60;redirect&#x60; mode payment methods like &#x60;gocardless&#x60;. | [optional] 
+**Country** | Pointer to **string** | The 2-letter ISO code of the country to store this payment method for. This is used to select the payment service to use.  This only applies to &#x60;redirect&#x60; mode payment methods like &#x60;gocardless&#x60;. | [optional] 
 
 ## Methods
 
@@ -262,6 +264,56 @@ SetId sets Id field to given value.
 `func (o *TransactionPaymentMethodRequest) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetCurrency
+
+`func (o *TransactionPaymentMethodRequest) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *TransactionPaymentMethodRequest) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *TransactionPaymentMethodRequest) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *TransactionPaymentMethodRequest) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
+
+### GetCountry
+
+`func (o *TransactionPaymentMethodRequest) GetCountry() string`
+
+GetCountry returns the Country field if non-nil, zero value otherwise.
+
+### GetCountryOk
+
+`func (o *TransactionPaymentMethodRequest) GetCountryOk() (*string, bool)`
+
+GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountry
+
+`func (o *TransactionPaymentMethodRequest) SetCountry(v string)`
+
+SetCountry sets Country field to given value.
+
+### HasCountry
+
+`func (o *TransactionPaymentMethodRequest) HasCountry() bool`
+
+HasCountry returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

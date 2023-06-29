@@ -24,9 +24,25 @@ type MerchantAccount struct {
 	Id *string `json:"id,omitempty"`
 	// The display name of this merchant account.
 	DisplayName *string `json:"display_name,omitempty"`
-	// The date and time when this merchant account was created in our system.
+	// The optional URL where webhooks will be received.
+	OutboundWebhookUrl NullableString `json:"outbound_webhook_url,omitempty"`
+	// The optional username to use when `outbound_webhook_url` is configured and requires basic authentication.
+	OutboundWebhookUsername NullableString `json:"outbound_webhook_username,omitempty"`
+	// Requestor ID provided for Visa after onboarding to use Network Tokens.
+	VisaNetworkTokensRequestorId NullableString `json:"visa_network_tokens_requestor_id,omitempty"`
+	// Application ID provided for Visa after onboarding to use Network Tokens.
+	VisaNetworkTokensAppId NullableString `json:"visa_network_tokens_app_id,omitempty"`
+	// Requestor ID provided for Amex after onboarding to use Network Tokens.
+	AmexNetworkTokensRequestorId NullableString `json:"amex_network_tokens_requestor_id,omitempty"`
+	// Application ID provided for Amex after onboarding to use Network Tokens.
+	AmexNetworkTokensAppId NullableString `json:"amex_network_tokens_app_id,omitempty"`
+	// Requestor ID provided for Mastercard after onboarding to use Network Tokens.
+	MastercardNetworkTokensRequestorId NullableString `json:"mastercard_network_tokens_requestor_id,omitempty"`
+	// Application ID provided for Mastercard after onboarding to use Network Tokens.
+	MastercardNetworkTokensAppId NullableString `json:"mastercard_network_tokens_app_id,omitempty"`
+	// The date and time when this merchant account was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
-	// The date and time when this merchant account was updated in our system.
+	// The date and time when this merchant account was updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
 
@@ -143,6 +159,342 @@ func (o *MerchantAccount) SetDisplayName(v string) {
 	o.DisplayName = &v
 }
 
+// GetOutboundWebhookUrl returns the OutboundWebhookUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccount) GetOutboundWebhookUrl() string {
+	if o == nil || o.OutboundWebhookUrl.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.OutboundWebhookUrl.Get()
+}
+
+// GetOutboundWebhookUrlOk returns a tuple with the OutboundWebhookUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccount) GetOutboundWebhookUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.OutboundWebhookUrl.Get(), o.OutboundWebhookUrl.IsSet()
+}
+
+// HasOutboundWebhookUrl returns a boolean if a field has been set.
+func (o *MerchantAccount) HasOutboundWebhookUrl() bool {
+	if o != nil && o.OutboundWebhookUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOutboundWebhookUrl gets a reference to the given NullableString and assigns it to the OutboundWebhookUrl field.
+func (o *MerchantAccount) SetOutboundWebhookUrl(v string) {
+	o.OutboundWebhookUrl.Set(&v)
+}
+// SetOutboundWebhookUrlNil sets the value for OutboundWebhookUrl to be an explicit nil
+func (o *MerchantAccount) SetOutboundWebhookUrlNil() {
+	o.OutboundWebhookUrl.Set(nil)
+}
+
+// UnsetOutboundWebhookUrl ensures that no value is present for OutboundWebhookUrl, not even an explicit nil
+func (o *MerchantAccount) UnsetOutboundWebhookUrl() {
+	o.OutboundWebhookUrl.Unset()
+}
+
+// GetOutboundWebhookUsername returns the OutboundWebhookUsername field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccount) GetOutboundWebhookUsername() string {
+	if o == nil || o.OutboundWebhookUsername.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.OutboundWebhookUsername.Get()
+}
+
+// GetOutboundWebhookUsernameOk returns a tuple with the OutboundWebhookUsername field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccount) GetOutboundWebhookUsernameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.OutboundWebhookUsername.Get(), o.OutboundWebhookUsername.IsSet()
+}
+
+// HasOutboundWebhookUsername returns a boolean if a field has been set.
+func (o *MerchantAccount) HasOutboundWebhookUsername() bool {
+	if o != nil && o.OutboundWebhookUsername.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOutboundWebhookUsername gets a reference to the given NullableString and assigns it to the OutboundWebhookUsername field.
+func (o *MerchantAccount) SetOutboundWebhookUsername(v string) {
+	o.OutboundWebhookUsername.Set(&v)
+}
+// SetOutboundWebhookUsernameNil sets the value for OutboundWebhookUsername to be an explicit nil
+func (o *MerchantAccount) SetOutboundWebhookUsernameNil() {
+	o.OutboundWebhookUsername.Set(nil)
+}
+
+// UnsetOutboundWebhookUsername ensures that no value is present for OutboundWebhookUsername, not even an explicit nil
+func (o *MerchantAccount) UnsetOutboundWebhookUsername() {
+	o.OutboundWebhookUsername.Unset()
+}
+
+// GetVisaNetworkTokensRequestorId returns the VisaNetworkTokensRequestorId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccount) GetVisaNetworkTokensRequestorId() string {
+	if o == nil || o.VisaNetworkTokensRequestorId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.VisaNetworkTokensRequestorId.Get()
+}
+
+// GetVisaNetworkTokensRequestorIdOk returns a tuple with the VisaNetworkTokensRequestorId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccount) GetVisaNetworkTokensRequestorIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.VisaNetworkTokensRequestorId.Get(), o.VisaNetworkTokensRequestorId.IsSet()
+}
+
+// HasVisaNetworkTokensRequestorId returns a boolean if a field has been set.
+func (o *MerchantAccount) HasVisaNetworkTokensRequestorId() bool {
+	if o != nil && o.VisaNetworkTokensRequestorId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVisaNetworkTokensRequestorId gets a reference to the given NullableString and assigns it to the VisaNetworkTokensRequestorId field.
+func (o *MerchantAccount) SetVisaNetworkTokensRequestorId(v string) {
+	o.VisaNetworkTokensRequestorId.Set(&v)
+}
+// SetVisaNetworkTokensRequestorIdNil sets the value for VisaNetworkTokensRequestorId to be an explicit nil
+func (o *MerchantAccount) SetVisaNetworkTokensRequestorIdNil() {
+	o.VisaNetworkTokensRequestorId.Set(nil)
+}
+
+// UnsetVisaNetworkTokensRequestorId ensures that no value is present for VisaNetworkTokensRequestorId, not even an explicit nil
+func (o *MerchantAccount) UnsetVisaNetworkTokensRequestorId() {
+	o.VisaNetworkTokensRequestorId.Unset()
+}
+
+// GetVisaNetworkTokensAppId returns the VisaNetworkTokensAppId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccount) GetVisaNetworkTokensAppId() string {
+	if o == nil || o.VisaNetworkTokensAppId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.VisaNetworkTokensAppId.Get()
+}
+
+// GetVisaNetworkTokensAppIdOk returns a tuple with the VisaNetworkTokensAppId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccount) GetVisaNetworkTokensAppIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.VisaNetworkTokensAppId.Get(), o.VisaNetworkTokensAppId.IsSet()
+}
+
+// HasVisaNetworkTokensAppId returns a boolean if a field has been set.
+func (o *MerchantAccount) HasVisaNetworkTokensAppId() bool {
+	if o != nil && o.VisaNetworkTokensAppId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetVisaNetworkTokensAppId gets a reference to the given NullableString and assigns it to the VisaNetworkTokensAppId field.
+func (o *MerchantAccount) SetVisaNetworkTokensAppId(v string) {
+	o.VisaNetworkTokensAppId.Set(&v)
+}
+// SetVisaNetworkTokensAppIdNil sets the value for VisaNetworkTokensAppId to be an explicit nil
+func (o *MerchantAccount) SetVisaNetworkTokensAppIdNil() {
+	o.VisaNetworkTokensAppId.Set(nil)
+}
+
+// UnsetVisaNetworkTokensAppId ensures that no value is present for VisaNetworkTokensAppId, not even an explicit nil
+func (o *MerchantAccount) UnsetVisaNetworkTokensAppId() {
+	o.VisaNetworkTokensAppId.Unset()
+}
+
+// GetAmexNetworkTokensRequestorId returns the AmexNetworkTokensRequestorId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccount) GetAmexNetworkTokensRequestorId() string {
+	if o == nil || o.AmexNetworkTokensRequestorId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.AmexNetworkTokensRequestorId.Get()
+}
+
+// GetAmexNetworkTokensRequestorIdOk returns a tuple with the AmexNetworkTokensRequestorId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccount) GetAmexNetworkTokensRequestorIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AmexNetworkTokensRequestorId.Get(), o.AmexNetworkTokensRequestorId.IsSet()
+}
+
+// HasAmexNetworkTokensRequestorId returns a boolean if a field has been set.
+func (o *MerchantAccount) HasAmexNetworkTokensRequestorId() bool {
+	if o != nil && o.AmexNetworkTokensRequestorId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAmexNetworkTokensRequestorId gets a reference to the given NullableString and assigns it to the AmexNetworkTokensRequestorId field.
+func (o *MerchantAccount) SetAmexNetworkTokensRequestorId(v string) {
+	o.AmexNetworkTokensRequestorId.Set(&v)
+}
+// SetAmexNetworkTokensRequestorIdNil sets the value for AmexNetworkTokensRequestorId to be an explicit nil
+func (o *MerchantAccount) SetAmexNetworkTokensRequestorIdNil() {
+	o.AmexNetworkTokensRequestorId.Set(nil)
+}
+
+// UnsetAmexNetworkTokensRequestorId ensures that no value is present for AmexNetworkTokensRequestorId, not even an explicit nil
+func (o *MerchantAccount) UnsetAmexNetworkTokensRequestorId() {
+	o.AmexNetworkTokensRequestorId.Unset()
+}
+
+// GetAmexNetworkTokensAppId returns the AmexNetworkTokensAppId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccount) GetAmexNetworkTokensAppId() string {
+	if o == nil || o.AmexNetworkTokensAppId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.AmexNetworkTokensAppId.Get()
+}
+
+// GetAmexNetworkTokensAppIdOk returns a tuple with the AmexNetworkTokensAppId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccount) GetAmexNetworkTokensAppIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AmexNetworkTokensAppId.Get(), o.AmexNetworkTokensAppId.IsSet()
+}
+
+// HasAmexNetworkTokensAppId returns a boolean if a field has been set.
+func (o *MerchantAccount) HasAmexNetworkTokensAppId() bool {
+	if o != nil && o.AmexNetworkTokensAppId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAmexNetworkTokensAppId gets a reference to the given NullableString and assigns it to the AmexNetworkTokensAppId field.
+func (o *MerchantAccount) SetAmexNetworkTokensAppId(v string) {
+	o.AmexNetworkTokensAppId.Set(&v)
+}
+// SetAmexNetworkTokensAppIdNil sets the value for AmexNetworkTokensAppId to be an explicit nil
+func (o *MerchantAccount) SetAmexNetworkTokensAppIdNil() {
+	o.AmexNetworkTokensAppId.Set(nil)
+}
+
+// UnsetAmexNetworkTokensAppId ensures that no value is present for AmexNetworkTokensAppId, not even an explicit nil
+func (o *MerchantAccount) UnsetAmexNetworkTokensAppId() {
+	o.AmexNetworkTokensAppId.Unset()
+}
+
+// GetMastercardNetworkTokensRequestorId returns the MastercardNetworkTokensRequestorId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccount) GetMastercardNetworkTokensRequestorId() string {
+	if o == nil || o.MastercardNetworkTokensRequestorId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.MastercardNetworkTokensRequestorId.Get()
+}
+
+// GetMastercardNetworkTokensRequestorIdOk returns a tuple with the MastercardNetworkTokensRequestorId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccount) GetMastercardNetworkTokensRequestorIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.MastercardNetworkTokensRequestorId.Get(), o.MastercardNetworkTokensRequestorId.IsSet()
+}
+
+// HasMastercardNetworkTokensRequestorId returns a boolean if a field has been set.
+func (o *MerchantAccount) HasMastercardNetworkTokensRequestorId() bool {
+	if o != nil && o.MastercardNetworkTokensRequestorId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMastercardNetworkTokensRequestorId gets a reference to the given NullableString and assigns it to the MastercardNetworkTokensRequestorId field.
+func (o *MerchantAccount) SetMastercardNetworkTokensRequestorId(v string) {
+	o.MastercardNetworkTokensRequestorId.Set(&v)
+}
+// SetMastercardNetworkTokensRequestorIdNil sets the value for MastercardNetworkTokensRequestorId to be an explicit nil
+func (o *MerchantAccount) SetMastercardNetworkTokensRequestorIdNil() {
+	o.MastercardNetworkTokensRequestorId.Set(nil)
+}
+
+// UnsetMastercardNetworkTokensRequestorId ensures that no value is present for MastercardNetworkTokensRequestorId, not even an explicit nil
+func (o *MerchantAccount) UnsetMastercardNetworkTokensRequestorId() {
+	o.MastercardNetworkTokensRequestorId.Unset()
+}
+
+// GetMastercardNetworkTokensAppId returns the MastercardNetworkTokensAppId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccount) GetMastercardNetworkTokensAppId() string {
+	if o == nil || o.MastercardNetworkTokensAppId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.MastercardNetworkTokensAppId.Get()
+}
+
+// GetMastercardNetworkTokensAppIdOk returns a tuple with the MastercardNetworkTokensAppId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccount) GetMastercardNetworkTokensAppIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.MastercardNetworkTokensAppId.Get(), o.MastercardNetworkTokensAppId.IsSet()
+}
+
+// HasMastercardNetworkTokensAppId returns a boolean if a field has been set.
+func (o *MerchantAccount) HasMastercardNetworkTokensAppId() bool {
+	if o != nil && o.MastercardNetworkTokensAppId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMastercardNetworkTokensAppId gets a reference to the given NullableString and assigns it to the MastercardNetworkTokensAppId field.
+func (o *MerchantAccount) SetMastercardNetworkTokensAppId(v string) {
+	o.MastercardNetworkTokensAppId.Set(&v)
+}
+// SetMastercardNetworkTokensAppIdNil sets the value for MastercardNetworkTokensAppId to be an explicit nil
+func (o *MerchantAccount) SetMastercardNetworkTokensAppIdNil() {
+	o.MastercardNetworkTokensAppId.Set(nil)
+}
+
+// UnsetMastercardNetworkTokensAppId ensures that no value is present for MastercardNetworkTokensAppId, not even an explicit nil
+func (o *MerchantAccount) UnsetMastercardNetworkTokensAppId() {
+	o.MastercardNetworkTokensAppId.Unset()
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *MerchantAccount) GetCreatedAt() time.Time {
 	if o == nil || o.CreatedAt == nil {
@@ -217,6 +569,30 @@ func (o MerchantAccount) MarshalJSON() ([]byte, error) {
 	}
 	if o.DisplayName != nil {
 		toSerialize["display_name"] = o.DisplayName
+	}
+	if o.OutboundWebhookUrl.IsSet() {
+		toSerialize["outbound_webhook_url"] = o.OutboundWebhookUrl.Get()
+	}
+	if o.OutboundWebhookUsername.IsSet() {
+		toSerialize["outbound_webhook_username"] = o.OutboundWebhookUsername.Get()
+	}
+	if o.VisaNetworkTokensRequestorId.IsSet() {
+		toSerialize["visa_network_tokens_requestor_id"] = o.VisaNetworkTokensRequestorId.Get()
+	}
+	if o.VisaNetworkTokensAppId.IsSet() {
+		toSerialize["visa_network_tokens_app_id"] = o.VisaNetworkTokensAppId.Get()
+	}
+	if o.AmexNetworkTokensRequestorId.IsSet() {
+		toSerialize["amex_network_tokens_requestor_id"] = o.AmexNetworkTokensRequestorId.Get()
+	}
+	if o.AmexNetworkTokensAppId.IsSet() {
+		toSerialize["amex_network_tokens_app_id"] = o.AmexNetworkTokensAppId.Get()
+	}
+	if o.MastercardNetworkTokensRequestorId.IsSet() {
+		toSerialize["mastercard_network_tokens_requestor_id"] = o.MastercardNetworkTokensRequestorId.Get()
+	}
+	if o.MastercardNetworkTokensAppId.IsSet() {
+		toSerialize["mastercard_network_tokens_app_id"] = o.MastercardNetworkTokensAppId.Get()
 	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt

@@ -22,6 +22,8 @@ type PaymentMethod struct {
 	Type *string `json:"type,omitempty"`
 	// The unique ID of the payment method.
 	Id *string `json:"id,omitempty"`
+	// The unique ID for a merchant account.
+	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
 	// The state of the payment method.  - `processing` - The payment method is still being stored. - `buyer_approval_required` - Storing the payment method requires   the buyer to provide approval. Follow the `approval_url` for next steps. - `succeeded` - The payment method is approved and stored with all   relevant payment services. - `failed` - Storing the payment method did not succeed.
 	Status *string `json:"status,omitempty"`
 	// The type of this payment method.
@@ -132,6 +134,38 @@ func (o *PaymentMethod) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *PaymentMethod) SetId(v string) {
 	o.Id = &v
+}
+
+// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
+func (o *PaymentMethod) GetMerchantAccountId() string {
+	if o == nil || o.MerchantAccountId == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantAccountId
+}
+
+// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetMerchantAccountIdOk() (*string, bool) {
+	if o == nil || o.MerchantAccountId == nil {
+		return nil, false
+	}
+	return o.MerchantAccountId, true
+}
+
+// HasMerchantAccountId returns a boolean if a field has been set.
+func (o *PaymentMethod) HasMerchantAccountId() bool {
+	if o != nil && o.MerchantAccountId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountId gets a reference to the given string and assigns it to the MerchantAccountId field.
+func (o *PaymentMethod) SetMerchantAccountId(v string) {
+	o.MerchantAccountId = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -711,6 +745,9 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
+	}
+	if o.MerchantAccountId != nil {
+		toSerialize["merchant_account_id"] = o.MerchantAccountId
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status

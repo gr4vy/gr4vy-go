@@ -37,7 +37,7 @@ type TransactionRequest struct {
 	PaymentSource *string `json:"payment_source,omitempty"`
 	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.  The flag can only be `false` (or not set) when the transaction meets one of the following criteria:  * It is not `merchant_initiated`. * `payment_source` is set to `card_on_file`.  The flag can only be set to `true` when the transaction meets one of the following criteria:  * It is not `merchant_initiated`. * `payment_source` is set to `recurring` or `installment` and `merchant_initiated` is set to `true`. * `payment_source` is set to `card_on_file`.
 	IsSubsequentPayment *bool `json:"is_subsequent_payment,omitempty"`
-	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. Please visit https://docs.gr4vy.com/ under `Connections` for more information on how specific providers support metadata. Please note the metadata key is case sensitive when used in Flow.
+	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it.
 	Metadata *map[string]string `json:"metadata,omitempty"`
 	StatementDescriptor NullableStatementDescriptor `json:"statement_descriptor,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
@@ -48,7 +48,7 @@ type TransactionRequest struct {
 	BrowserInfo NullableBrowserInfo `json:"browser_info,omitempty"`
 	// The unique identifier of a set of shipping details stored for the buyer.  If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the detail in the database.
 	ShippingDetailsId NullableString `json:"shipping_details_id,omitempty"`
-	// Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.
+	// Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.  Please note that each of the keys this object are in kebab-case, for example `cybersource-anti-fraud` as they represent the ID of the connector. All the other keys will be snake-case, for example `device_fingerprint_id`.
 	ConnectionOptions NullableConnectionOptions `json:"connection_options,omitempty"`
 	// Whether to capture the transaction asynchronously.  - When `async_capture` is `false` (default), the transaction is captured   in the same request. - When `async_capture` is `true`, the transaction is automatically   captured at a later time.  Redirect transactions are not affected by this flag.  This flag can only be set to `true` when `intent` is set to `capture`.
 	AsyncCapture *bool `json:"async_capture,omitempty"`

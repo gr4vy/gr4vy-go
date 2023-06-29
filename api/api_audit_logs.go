@@ -63,7 +63,7 @@ func (r ApiListAuditLogsRequest) Execute() (AuditLogs, *_nethttp.Response, error
 }
 
 /*
- * ListAuditLogs List Audit Logs
+ * ListAuditLogs List audit logs
  * Returns a list of audit logs.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListAuditLogsRequest

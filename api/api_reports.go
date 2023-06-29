@@ -30,138 +30,6 @@ var (
 // ReportsApiService ReportsApi service
 type ReportsApiService service
 
-type ApiAddReportRequest struct {
-	ctx _context.Context
-	ApiService *ReportsApiService
-	reportCreate *ReportCreate
-}
-
-func (r ApiAddReportRequest) ReportCreate(reportCreate ReportCreate) ApiAddReportRequest {
-	r.reportCreate = &reportCreate
-	return r
-}
-
-func (r ApiAddReportRequest) Execute() (Report, *_nethttp.Response, error) {
-	return r.ApiService.AddReportExecute(r)
-}
-
-/*
- * AddReport New report
- * Adds a report.
-
-Documentation about reports models and how to write a valid specification
-can be found in [Reporting docs](/reporting/introduction).
-
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiAddReportRequest
- */
-func (a *ReportsApiService) AddReport(ctx _context.Context) ApiAddReportRequest {
-	return ApiAddReportRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-/*
- * Execute executes the request
- * @return Report
- */
-func (a *ReportsApiService) AddReportExecute(r ApiAddReportRequest) (Report, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Report
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsApiService.AddReport")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/reports"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.reportCreate
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error401Unauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiGenerateDownloadUrlRequest struct {
 	ctx _context.Context
 	ApiService *ReportsApiService
@@ -175,7 +43,7 @@ func (r ApiGenerateDownloadUrlRequest) Execute() (ReportExecutionUrl, *_nethttp.
 }
 
 /*
- * GenerateDownloadUrl Generate the download URL of a report execution result
+ * GenerateDownloadUrl Generate report download URL
  * Generates a temporary signed URL to download the result of a report
 execution.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
@@ -551,6 +419,7 @@ type ApiListAllReportExecutionsRequest struct {
 	createdAtLte *time.Time
 	reportName *string
 	status *[]string
+	creatorId *[]string
 }
 
 func (r ApiListAllReportExecutionsRequest) Cursor(cursor string) ApiListAllReportExecutionsRequest {
@@ -575,6 +444,10 @@ func (r ApiListAllReportExecutionsRequest) ReportName(reportName string) ApiList
 }
 func (r ApiListAllReportExecutionsRequest) Status(status []string) ApiListAllReportExecutionsRequest {
 	r.status = &status
+	return r
+}
+func (r ApiListAllReportExecutionsRequest) CreatorId(creatorId []string) ApiListAllReportExecutionsRequest {
+	r.creatorId = &creatorId
 	return r
 }
 
@@ -644,6 +517,17 @@ func (a *ReportsApiService) ListAllReportExecutionsExecute(r ApiListAllReportExe
 			}
 		} else {
 			localVarQueryParams.Add("status", parameterToString(t, "multi"))
+		}
+	}
+	if r.creatorId != nil {
+		t := *r.creatorId
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("creator_id", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("creator_id", parameterToString(t, "multi"))
 		}
 	}
 	// to determine the Content-Type header
@@ -731,8 +615,10 @@ func (r ApiListReportExecutionsRequest) Execute() (ReportExecutions, *_nethttp.R
 }
 
 /*
- * ListReportExecutions List executions for a report
- * Returns a list of executions for a report.
+ * ListReportExecutions List executions for report
+ * Returns a list of executions for a report. For a
+one-off report there will only be one, where for scheduled ones
+there may be more.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param reportId The unique ID for a report.
  * @return ApiListReportExecutionsRequest
@@ -999,6 +885,135 @@ func (a *ReportsApiService) ListReportsExecute(r ApiListReportsRequest) (Reports
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiNewReportRequest struct {
+	ctx _context.Context
+	ApiService *ReportsApiService
+	reportCreate *ReportCreate
+}
+
+func (r ApiNewReportRequest) ReportCreate(reportCreate ReportCreate) ApiNewReportRequest {
+	r.reportCreate = &reportCreate
+	return r
+}
+
+func (r ApiNewReportRequest) Execute() (Report, *_nethttp.Response, error) {
+	return r.ApiService.NewReportExecute(r)
+}
+
+/*
+ * NewReport New report
+ * Creates a new report.
+
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiNewReportRequest
+ */
+func (a *ReportsApiService) NewReport(ctx _context.Context) ApiNewReportRequest {
+	return ApiNewReportRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Report
+ */
+func (a *ReportsApiService) NewReportExecute(r ApiNewReportRequest) (Report, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Report
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "ReportsApiService.NewReport")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/reports"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.reportCreate
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorGeneric
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateReportRequest struct {
 	ctx _context.Context
 	ApiService *ReportsApiService
@@ -1017,7 +1032,7 @@ func (r ApiUpdateReportRequest) Execute() (Report, *_nethttp.Response, error) {
 
 /*
  * UpdateReport Update report
- * Updates a report.
+ * Updates a report. This is mostly used with scheduled reports.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param reportId The unique ID for a report.
  * @return ApiUpdateReportRequest

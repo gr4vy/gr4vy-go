@@ -20,10 +20,12 @@ import (
 type DigitalWallet struct {
 	// `digital-wallet`.
 	Type *string `json:"type,omitempty"`
-	// The name of the digital wallet provider.
-	Provider *string `json:"provider,omitempty"`
 	// The ID of the registered digital wallet.
 	Id *string `json:"id,omitempty"`
+	// The unique ID for a merchant account.
+	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
+	// The name of the digital wallet provider.
+	Provider *string `json:"provider,omitempty"`
 	// The name of the merchant the digital wallet is registered to.
 	MerchantName *string `json:"merchant_name,omitempty"`
 	// The main URL of the merchant.
@@ -95,38 +97,6 @@ func (o *DigitalWallet) SetType(v string) {
 	o.Type = &v
 }
 
-// GetProvider returns the Provider field value if set, zero value otherwise.
-func (o *DigitalWallet) GetProvider() string {
-	if o == nil || o.Provider == nil {
-		var ret string
-		return ret
-	}
-	return *o.Provider
-}
-
-// GetProviderOk returns a tuple with the Provider field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *DigitalWallet) GetProviderOk() (*string, bool) {
-	if o == nil || o.Provider == nil {
-		return nil, false
-	}
-	return o.Provider, true
-}
-
-// HasProvider returns a boolean if a field has been set.
-func (o *DigitalWallet) HasProvider() bool {
-	if o != nil && o.Provider != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetProvider gets a reference to the given string and assigns it to the Provider field.
-func (o *DigitalWallet) SetProvider(v string) {
-	o.Provider = &v
-}
-
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *DigitalWallet) GetId() string {
 	if o == nil || o.Id == nil {
@@ -157,6 +127,70 @@ func (o *DigitalWallet) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *DigitalWallet) SetId(v string) {
 	o.Id = &v
+}
+
+// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
+func (o *DigitalWallet) GetMerchantAccountId() string {
+	if o == nil || o.MerchantAccountId == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantAccountId
+}
+
+// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DigitalWallet) GetMerchantAccountIdOk() (*string, bool) {
+	if o == nil || o.MerchantAccountId == nil {
+		return nil, false
+	}
+	return o.MerchantAccountId, true
+}
+
+// HasMerchantAccountId returns a boolean if a field has been set.
+func (o *DigitalWallet) HasMerchantAccountId() bool {
+	if o != nil && o.MerchantAccountId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountId gets a reference to the given string and assigns it to the MerchantAccountId field.
+func (o *DigitalWallet) SetMerchantAccountId(v string) {
+	o.MerchantAccountId = &v
+}
+
+// GetProvider returns the Provider field value if set, zero value otherwise.
+func (o *DigitalWallet) GetProvider() string {
+	if o == nil || o.Provider == nil {
+		var ret string
+		return ret
+	}
+	return *o.Provider
+}
+
+// GetProviderOk returns a tuple with the Provider field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DigitalWallet) GetProviderOk() (*string, bool) {
+	if o == nil || o.Provider == nil {
+		return nil, false
+	}
+	return o.Provider, true
+}
+
+// HasProvider returns a boolean if a field has been set.
+func (o *DigitalWallet) HasProvider() bool {
+	if o != nil && o.Provider != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetProvider gets a reference to the given string and assigns it to the Provider field.
+func (o *DigitalWallet) SetProvider(v string) {
+	o.Provider = &v
 }
 
 // GetMerchantName returns the MerchantName field value if set, zero value otherwise.
@@ -430,11 +464,14 @@ func (o DigitalWallet) MarshalJSON() ([]byte, error) {
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
 	}
-	if o.Provider != nil {
-		toSerialize["provider"] = o.Provider
-	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
+	}
+	if o.MerchantAccountId != nil {
+		toSerialize["merchant_account_id"] = o.MerchantAccountId
+	}
+	if o.Provider != nil {
+		toSerialize["provider"] = o.Provider
 	}
 	if o.MerchantName != nil {
 		toSerialize["merchant_name"] = o.MerchantName

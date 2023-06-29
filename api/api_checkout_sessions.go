@@ -28,135 +28,6 @@ var (
 // CheckoutSessionsApiService CheckoutSessionsApi service
 type CheckoutSessionsApiService service
 
-type ApiAddCheckoutSessionRequest struct {
-	ctx _context.Context
-	ApiService *CheckoutSessionsApiService
-}
-
-
-func (r ApiAddCheckoutSessionRequest) Execute() (CheckoutSession, *_nethttp.Response, error) {
-	return r.ApiService.AddCheckoutSessionExecute(r)
-}
-
-/*
- * AddCheckoutSession Create a new Checkout Session
- * Creates a new Checkout Session.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiAddCheckoutSessionRequest
- */
-func (a *CheckoutSessionsApiService) AddCheckoutSession(ctx _context.Context) ApiAddCheckoutSessionRequest {
-	return ApiAddCheckoutSessionRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-/*
- * Execute executes the request
- * @return CheckoutSession
- */
-func (a *CheckoutSessionsApiService) AddCheckoutSessionExecute(r ApiAddCheckoutSessionRequest) (CheckoutSession, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  CheckoutSession
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CheckoutSessionsApiService.AddCheckoutSession")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/checkout/sessions"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error401Unauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v Error409DuplicateRecord
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-			var v ErrorGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiDeleteCheckoutSessionRequest struct {
 	ctx _context.Context
 	ApiService *CheckoutSessionsApiService
@@ -169,7 +40,7 @@ func (r ApiDeleteCheckoutSessionRequest) Execute() (*_nethttp.Response, error) {
 }
 
 /*
- * DeleteCheckoutSession Delete a Checkout Session
+ * DeleteCheckoutSession Delete checkout session
  * Deletes a Checkout Session.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param checkoutSessionId The unique ID for a Checkout Session.
@@ -291,7 +162,7 @@ func (r ApiGetCheckoutSessionRequest) Execute() (CheckoutSession, *_nethttp.Resp
 }
 
 /*
- * GetCheckoutSession Get a Checkout Session
+ * GetCheckoutSession Get checkout session
  * Gets details about a current Checkout Session.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param checkoutSessionId The unique ID for a Checkout Session.
@@ -412,6 +283,135 @@ func (a *CheckoutSessionsApiService) GetCheckoutSessionExecute(r ApiGetCheckoutS
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiNewCheckoutSessionRequest struct {
+	ctx _context.Context
+	ApiService *CheckoutSessionsApiService
+}
+
+
+func (r ApiNewCheckoutSessionRequest) Execute() (CheckoutSession, *_nethttp.Response, error) {
+	return r.ApiService.NewCheckoutSessionExecute(r)
+}
+
+/*
+ * NewCheckoutSession New checkout session
+ * Creates a new Checkout Session.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiNewCheckoutSessionRequest
+ */
+func (a *CheckoutSessionsApiService) NewCheckoutSession(ctx _context.Context) ApiNewCheckoutSessionRequest {
+	return ApiNewCheckoutSessionRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return CheckoutSession
+ */
+func (a *CheckoutSessionsApiService) NewCheckoutSessionExecute(r ApiNewCheckoutSessionRequest) (CheckoutSession, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  CheckoutSession
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "CheckoutSessionsApiService.NewCheckoutSession")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/checkout/sessions"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Error409DuplicateRecord
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+			var v ErrorGeneric
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateCheckoutSessionFieldsRequest struct {
 	ctx _context.Context
 	ApiService *CheckoutSessionsApiService
@@ -429,9 +429,9 @@ func (r ApiUpdateCheckoutSessionFieldsRequest) Execute() (*_nethttp.Response, er
 }
 
 /*
- * UpdateCheckoutSessionFields Update a Checkout Session's Secure Fields
+ * UpdateCheckoutSessionFields Update fields for checkout session
  * Updates the Secure Fields of the Checkout Session. Once the fields have
-been received the `expires_at` will be updated to 5 minutes from the time
+been received the expiration will be updated to 5 minutes from the time
 of receipt.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param checkoutSessionId The unique ID for a Checkout Session.

@@ -23,8 +23,6 @@ type CardRequest struct {
 	Number string `json:"number"`
 	// The expiration date of the card, formatted `MM/YY`.
 	ExpirationDate string `json:"expiration_date"`
-	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
-	SecurityCode string `json:"security_code"`
 	// An external identifier that can be used to match the card against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// The ID of the buyer to associate this payment method to. If this field is provided then the `buyer_external_identifier` field needs to be unset.
@@ -39,12 +37,11 @@ type CardRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewCardRequest(method string, number string, expirationDate string, securityCode string) *CardRequest {
+func NewCardRequest(method string, number string, expirationDate string) *CardRequest {
 	this := CardRequest{}
 	this.Method = method
 	this.Number = number
 	this.ExpirationDate = expirationDate
-	this.SecurityCode = securityCode
 	return &this
 }
 
@@ -126,30 +123,6 @@ func (o *CardRequest) GetExpirationDateOk() (*string, bool) {
 // SetExpirationDate sets field value
 func (o *CardRequest) SetExpirationDate(v string) {
 	o.ExpirationDate = v
-}
-
-// GetSecurityCode returns the SecurityCode field value
-func (o *CardRequest) GetSecurityCode() string {
-	if o == nil {
-		var ret string
-		return ret
-	}
-
-	return o.SecurityCode
-}
-
-// GetSecurityCodeOk returns a tuple with the SecurityCode field value
-// and a boolean to check if the value has been set.
-func (o *CardRequest) GetSecurityCodeOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return &o.SecurityCode, true
-}
-
-// SetSecurityCode sets field value
-func (o *CardRequest) SetSecurityCode(v string) {
-	o.SecurityCode = v
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -310,9 +283,6 @@ func (o CardRequest) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["expiration_date"] = o.ExpirationDate
-	}
-	if true {
-		toSerialize["security_code"] = o.SecurityCode
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()

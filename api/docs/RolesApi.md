@@ -4,77 +4,11 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddRoleAssignment**](RolesApi.md#AddRoleAssignment) | **Post** /roles/assignments | New role assignment
 [**DeleteRoleAssignment**](RolesApi.md#DeleteRoleAssignment) | **Delete** /roles/assignments/{role_assignment_id} | Delete role assignment
 [**ListRoleAssignments**](RolesApi.md#ListRoleAssignments) | **Get** /roles/assignments | List role assignments
 [**ListRoles**](RolesApi.md#ListRoles) | **Get** /roles | List roles
+[**NewRoleAssignment**](RolesApi.md#NewRoleAssignment) | **Post** /roles/assignments | New role assignment
 
-
-
-## AddRoleAssignment
-
-> RoleAssignment AddRoleAssignment(ctx).RoleAssignmentRequest(roleAssignmentRequest).Execute()
-
-New role assignment
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    roleAssignmentRequest := *openapiclient.NewRoleAssignmentRequest(*openapiclient.NewRoleAssignmentRequestRole("462ab2e2-3e29-44bd-b39f-e4d1293affbb"), *openapiclient.NewRoleAssignmentRequestAssignee("user", "42aae896-8ce2-4a60-b80a-5f6ae1dfbbd4")) // RoleAssignmentRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.RolesApi.AddRoleAssignment(context.Background()).RoleAssignmentRequest(roleAssignmentRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `RolesApi.AddRoleAssignment``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddRoleAssignment`: RoleAssignment
-    fmt.Fprintf(os.Stdout, "Response from `RolesApi.AddRoleAssignment`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddRoleAssignmentRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **roleAssignmentRequest** | [**RoleAssignmentRequest**](RoleAssignmentRequest.md) |  | 
-
-### Return type
-
-[**RoleAssignment**](RoleAssignment.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## DeleteRoleAssignment
@@ -280,6 +214,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## NewRoleAssignment
+
+> RoleAssignment NewRoleAssignment(ctx).RoleAssignmentRequest(roleAssignmentRequest).Execute()
+
+New role assignment
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    roleAssignmentRequest := *openapiclient.NewRoleAssignmentRequest(*openapiclient.NewRoleAssignmentRequestRole("462ab2e2-3e29-44bd-b39f-e4d1293affbb"), *openapiclient.NewRoleAssignmentRequestAssignee("user", "42aae896-8ce2-4a60-b80a-5f6ae1dfbbd4")) // RoleAssignmentRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.RolesApi.NewRoleAssignment(context.Background()).RoleAssignmentRequest(roleAssignmentRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `RolesApi.NewRoleAssignment``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `NewRoleAssignment`: RoleAssignment
+    fmt.Fprintf(os.Stdout, "Response from `RolesApi.NewRoleAssignment`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNewRoleAssignmentRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **roleAssignmentRequest** | [**RoleAssignmentRequest**](RoleAssignmentRequest.md) |  | 
+
+### Return type
+
+[**RoleAssignment**](RoleAssignment.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

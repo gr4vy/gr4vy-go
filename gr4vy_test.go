@@ -3,9 +3,10 @@ package gr4vy
 import (
 	"context"
 	"fmt"
+	"net/http"
 	"strconv"
 	"testing"
-	"net/http"
+
 	"github.com/google/uuid"
 )
 
@@ -276,7 +277,6 @@ func TestStorePaymentMethod(t *testing.T) {
 		Method:         "card",
 		Number:         StringPtr("4111111111111111"),
 		ExpirationDate: StringPtr("12/24"),
-		SecurityCode:   StringPtr("123"),
 	}
 
 	var response *Gr4vyPaymentMethod

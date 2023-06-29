@@ -22,7 +22,9 @@ type Transaction struct {
 	Type *string `json:"type,omitempty"`
 	// The unique identifier for this transaction.
 	Id *string `json:"id,omitempty"`
-	// The status of the transaction. The status may change over time as asynchronous processing events occur.
+	// The ID of the merchant account to which this transaction belongs to.
+	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
+	// The status of the transaction. The status may change over time as asynchronous processing events occur.  Please note that the possible statuses returned will depend on the operation performed. For example, a captured transaction will never move to a `authorization_voided` status.
 	Status *string `json:"status,omitempty"`
 	// The original `intent` used when the transaction was [created](#operation/authorize-new-transaction).
 	Intent *string `json:"intent,omitempty"`
@@ -48,6 +50,8 @@ type Transaction struct {
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// The payment service used for this transaction.
 	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
+	// Whether a manual review is pending.
+	PendingReview *bool `json:"pending_review,omitempty"`
 	// Indicates whether the transaction was initiated by the merchant (true) or customer (false).
 	MerchantInitiated *bool `json:"merchant_initiated,omitempty"`
 	// The source of the transaction. Defaults to `ecommerce`.
@@ -81,6 +85,8 @@ type Transaction struct {
 	CapturedAt NullableTime `json:"captured_at,omitempty"`
 	// The date and time when this transaction was voided in the payment service.  Don't use this field to determine whether the transaction was voided. A `null` value doesn't necessarily imply that the transaction wasn't voided, it can mean that the payment service doesn't provide this value, that it didn't provide it at the time the transaction was voided or that the transaction was voided before the introduction of this field.
 	VoidedAt NullableTime `json:"voided_at,omitempty"`
+	// The identifier for the checkout session this transaction is associated with.
+	CheckoutSessionId *string `json:"checkout_session_id,omitempty"`
 }
 
 // NewTransaction instantiates a new Transaction object
@@ -174,6 +180,38 @@ func (o *Transaction) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *Transaction) SetId(v string) {
 	o.Id = &v
+}
+
+// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
+func (o *Transaction) GetMerchantAccountId() string {
+	if o == nil || o.MerchantAccountId == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantAccountId
+}
+
+// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetMerchantAccountIdOk() (*string, bool) {
+	if o == nil || o.MerchantAccountId == nil {
+		return nil, false
+	}
+	return o.MerchantAccountId, true
+}
+
+// HasMerchantAccountId returns a boolean if a field has been set.
+func (o *Transaction) HasMerchantAccountId() bool {
+	if o != nil && o.MerchantAccountId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountId gets a reference to the given string and assigns it to the MerchantAccountId field.
+func (o *Transaction) SetMerchantAccountId(v string) {
+	o.MerchantAccountId = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -620,6 +658,38 @@ func (o *Transaction) HasPaymentService() bool {
 // SetPaymentService gets a reference to the given PaymentServiceSnapshot and assigns it to the PaymentService field.
 func (o *Transaction) SetPaymentService(v PaymentServiceSnapshot) {
 	o.PaymentService = &v
+}
+
+// GetPendingReview returns the PendingReview field value if set, zero value otherwise.
+func (o *Transaction) GetPendingReview() bool {
+	if o == nil || o.PendingReview == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PendingReview
+}
+
+// GetPendingReviewOk returns a tuple with the PendingReview field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetPendingReviewOk() (*bool, bool) {
+	if o == nil || o.PendingReview == nil {
+		return nil, false
+	}
+	return o.PendingReview, true
+}
+
+// HasPendingReview returns a boolean if a field has been set.
+func (o *Transaction) HasPendingReview() bool {
+	if o != nil && o.PendingReview != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPendingReview gets a reference to the given bool and assigns it to the PendingReview field.
+func (o *Transaction) SetPendingReview(v bool) {
+	o.PendingReview = &v
 }
 
 // GetMerchantInitiated returns the MerchantInitiated field value if set, zero value otherwise.
@@ -1298,6 +1368,38 @@ func (o *Transaction) UnsetVoidedAt() {
 	o.VoidedAt.Unset()
 }
 
+// GetCheckoutSessionId returns the CheckoutSessionId field value if set, zero value otherwise.
+func (o *Transaction) GetCheckoutSessionId() string {
+	if o == nil || o.CheckoutSessionId == nil {
+		var ret string
+		return ret
+	}
+	return *o.CheckoutSessionId
+}
+
+// GetCheckoutSessionIdOk returns a tuple with the CheckoutSessionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Transaction) GetCheckoutSessionIdOk() (*string, bool) {
+	if o == nil || o.CheckoutSessionId == nil {
+		return nil, false
+	}
+	return o.CheckoutSessionId, true
+}
+
+// HasCheckoutSessionId returns a boolean if a field has been set.
+func (o *Transaction) HasCheckoutSessionId() bool {
+	if o != nil && o.CheckoutSessionId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCheckoutSessionId gets a reference to the given string and assigns it to the CheckoutSessionId field.
+func (o *Transaction) SetCheckoutSessionId(v string) {
+	o.CheckoutSessionId = &v
+}
+
 func (o Transaction) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -1305,6 +1407,9 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
+	}
+	if o.MerchantAccountId != nil {
+		toSerialize["merchant_account_id"] = o.MerchantAccountId
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
@@ -1344,6 +1449,9 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.PaymentService != nil {
 		toSerialize["payment_service"] = o.PaymentService
+	}
+	if o.PendingReview != nil {
+		toSerialize["pending_review"] = o.PendingReview
 	}
 	if o.MerchantInitiated != nil {
 		toSerialize["merchant_initiated"] = o.MerchantInitiated
@@ -1398,6 +1506,9 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.VoidedAt.IsSet() {
 		toSerialize["voided_at"] = o.VoidedAt.Get()
+	}
+	if o.CheckoutSessionId != nil {
+		toSerialize["checkout_session_id"] = o.CheckoutSessionId
 	}
 	return json.Marshal(toSerialize)
 }

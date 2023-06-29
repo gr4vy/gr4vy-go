@@ -17,8 +17,6 @@ import (
 
 // UserRole struct for UserRole
 type UserRole struct {
-	// The unique ID for this role assignment to the user.
-	AssignmentId *string `json:"assignment_id,omitempty"`
 	// The type of this resource. Always `role`.
 	Type *string `json:"type,omitempty"`
 	// The unique ID for this role.
@@ -45,38 +43,6 @@ func NewUserRole() *UserRole {
 func NewUserRoleWithDefaults() *UserRole {
 	this := UserRole{}
 	return &this
-}
-
-// GetAssignmentId returns the AssignmentId field value if set, zero value otherwise.
-func (o *UserRole) GetAssignmentId() string {
-	if o == nil || o.AssignmentId == nil {
-		var ret string
-		return ret
-	}
-	return *o.AssignmentId
-}
-
-// GetAssignmentIdOk returns a tuple with the AssignmentId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *UserRole) GetAssignmentIdOk() (*string, bool) {
-	if o == nil || o.AssignmentId == nil {
-		return nil, false
-	}
-	return o.AssignmentId, true
-}
-
-// HasAssignmentId returns a boolean if a field has been set.
-func (o *UserRole) HasAssignmentId() bool {
-	if o != nil && o.AssignmentId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetAssignmentId gets a reference to the given string and assigns it to the AssignmentId field.
-func (o *UserRole) SetAssignmentId(v string) {
-	o.AssignmentId = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -241,9 +207,6 @@ func (o *UserRole) SetPermissions(v RolePermissions) {
 
 func (o UserRole) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AssignmentId != nil {
-		toSerialize["assignment_id"] = o.AssignmentId
-	}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
 	}

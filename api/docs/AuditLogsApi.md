@@ -4,7 +4,7 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListAuditLogs**](AuditLogsApi.md#ListAuditLogs) | **Get** /audit-logs | List Audit Logs
+[**ListAuditLogs**](AuditLogsApi.md#ListAuditLogs) | **Get** /audit-logs | List audit logs
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > AuditLogs ListAuditLogs(ctx).Limit(limit).Cursor(cursor).UserId(userId).Action(action).ResourceType(resourceType).Execute()
 
-List Audit Logs
+List audit logs
 
 
 

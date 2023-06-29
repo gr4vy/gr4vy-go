@@ -4,154 +4,16 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddBuyer**](BuyersApi.md#AddBuyer) | **Post** /buyers | New buyer
-[**AddBuyerShippingDetail**](BuyersApi.md#AddBuyerShippingDetail) | **Post** /buyers/{buyer_id}/shipping-details | New buyer shipping detail
 [**DeleteBuyer**](BuyersApi.md#DeleteBuyer) | **Delete** /buyers/{buyer_id} | Delete buyer
 [**DeleteBuyerShippingDetail**](BuyersApi.md#DeleteBuyerShippingDetail) | **Delete** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Delete buyer shipping detail
 [**GetBuyer**](BuyersApi.md#GetBuyer) | **Get** /buyers/{buyer_id} | Get buyer
-[**GetBuyerShippingDetails**](BuyersApi.md#GetBuyerShippingDetails) | **Get** /buyers/{buyer_id}/shipping-details | Get buyer shipping details
+[**ListBuyerShippingDetails**](BuyersApi.md#ListBuyerShippingDetails) | **Get** /buyers/{buyer_id}/shipping-details | List buyer shipping details
 [**ListBuyers**](BuyersApi.md#ListBuyers) | **Get** /buyers | List buyers
+[**NewBuyer**](BuyersApi.md#NewBuyer) | **Post** /buyers | New buyer
+[**NewBuyerShippingDetail**](BuyersApi.md#NewBuyerShippingDetail) | **Post** /buyers/{buyer_id}/shipping-details | New buyer shipping detail
 [**UpdateBuyer**](BuyersApi.md#UpdateBuyer) | **Put** /buyers/{buyer_id} | Update buyer
-[**UpdateBuyerShippingDetail**](BuyersApi.md#UpdateBuyerShippingDetail) | **Put** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Update buyer shipping detail
+[**UpdateBuyerShippingDetail**](BuyersApi.md#UpdateBuyerShippingDetail) | **Put** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Update buyer shipping details
 
-
-
-## AddBuyer
-
-> Buyer AddBuyer(ctx).BuyerRequest(buyerRequest).Execute()
-
-New buyer
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    buyerRequest := *openapiclient.NewBuyerRequest() // BuyerRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BuyersApi.AddBuyer(context.Background()).BuyerRequest(buyerRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.AddBuyer``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddBuyer`: Buyer
-    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.AddBuyer`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddBuyerRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **buyerRequest** | [**BuyerRequest**](BuyerRequest.md) |  | 
-
-### Return type
-
-[**Buyer**](Buyer.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
-
-
-## AddBuyerShippingDetail
-
-> ShippingDetail AddBuyerShippingDetail(ctx, buyerId).ShippingDetailRequest(shippingDetailRequest).Execute()
-
-New buyer shipping detail
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    buyerId := TODO // string | The unique ID for a buyer.
-    shippingDetailRequest := *openapiclient.NewShippingDetailRequest() // ShippingDetailRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BuyersApi.AddBuyerShippingDetail(context.Background(), buyerId).ShippingDetailRequest(shippingDetailRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.AddBuyerShippingDetail``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddBuyerShippingDetail`: ShippingDetail
-    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.AddBuyerShippingDetail`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
-**buyerId** | [**string**](.md) | The unique ID for a buyer. | 
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddBuyerShippingDetailRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
-
- **shippingDetailRequest** | [**ShippingDetailRequest**](ShippingDetailRequest.md) |  | 
-
-### Return type
-
-[**ShippingDetail**](ShippingDetail.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## DeleteBuyer
@@ -363,11 +225,11 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## GetBuyerShippingDetails
+## ListBuyerShippingDetails
 
-> ShippingDetails GetBuyerShippingDetails(ctx, buyerId).Execute()
+> ShippingDetails ListBuyerShippingDetails(ctx, buyerId).Execute()
 
-Get buyer shipping details
+List buyer shipping details
 
 
 
@@ -388,13 +250,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BuyersApi.GetBuyerShippingDetails(context.Background(), buyerId).Execute()
+    resp, r, err := api_client.BuyersApi.ListBuyerShippingDetails(context.Background(), buyerId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.GetBuyerShippingDetails``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.ListBuyerShippingDetails``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `GetBuyerShippingDetails`: ShippingDetails
-    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.GetBuyerShippingDetails`: %v\n", resp)
+    // response from `ListBuyerShippingDetails`: ShippingDetails
+    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.ListBuyerShippingDetails`: %v\n", resp)
 }
 ```
 
@@ -408,7 +270,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiGetBuyerShippingDetailsRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiListBuyerShippingDetailsRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -503,6 +365,144 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## NewBuyer
+
+> Buyer NewBuyer(ctx).BuyerRequest(buyerRequest).Execute()
+
+New buyer
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    buyerRequest := *openapiclient.NewBuyerRequest() // BuyerRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BuyersApi.NewBuyer(context.Background()).BuyerRequest(buyerRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.NewBuyer``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `NewBuyer`: Buyer
+    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.NewBuyer`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNewBuyerRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **buyerRequest** | [**BuyerRequest**](BuyerRequest.md) |  | 
+
+### Return type
+
+[**Buyer**](Buyer.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## NewBuyerShippingDetail
+
+> ShippingDetail NewBuyerShippingDetail(ctx, buyerId).ShippingDetailRequest(shippingDetailRequest).Execute()
+
+New buyer shipping detail
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    buyerId := TODO // string | The unique ID for a buyer.
+    shippingDetailRequest := *openapiclient.NewShippingDetailRequest() // ShippingDetailRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.BuyersApi.NewBuyerShippingDetail(context.Background(), buyerId).ShippingDetailRequest(shippingDetailRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.NewBuyerShippingDetail``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `NewBuyerShippingDetail`: ShippingDetail
+    fmt.Fprintf(os.Stdout, "Response from `BuyersApi.NewBuyerShippingDetail`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**buyerId** | [**string**](.md) | The unique ID for a buyer. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNewBuyerShippingDetailRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **shippingDetailRequest** | [**ShippingDetailRequest**](ShippingDetailRequest.md) |  | 
+
+### Return type
+
+[**ShippingDetail**](ShippingDetail.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateBuyer
 
 > Buyer UpdateBuyer(ctx, buyerId).BuyerUpdate(buyerUpdate).Execute()
@@ -579,7 +579,7 @@ Name | Type | Description  | Notes
 
 > ShippingDetail UpdateBuyerShippingDetail(ctx, buyerId, shippingDetailId).ShippingDetailUpdateRequest(shippingDetailUpdateRequest).Execute()
 
-Update buyer shipping detail
+Update buyer shipping details
 
 
 

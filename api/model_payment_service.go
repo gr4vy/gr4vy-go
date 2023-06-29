@@ -18,10 +18,12 @@ import (
 
 // PaymentService An active, configured payment service.
 type PaymentService struct {
-	// The ID of this payment service.
-	Id *string `json:"id,omitempty"`
 	// The type of this resource.
 	Type *string `json:"type,omitempty"`
+	// The ID of this payment service.
+	Id *string `json:"id,omitempty"`
+	// The unique ID for a merchant account.
+	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
 	// The ID of the payment service definition used to create this service. 
 	PaymentServiceDefinitionId *string `json:"payment_service_definition_id,omitempty"`
 	// The payment method that this service handles.
@@ -42,21 +44,10 @@ type PaymentService struct {
 	NetworkTokensEnabled *bool `json:"network_tokens_enabled,omitempty"`
 	// Defines if 3-D Secure is enabled for the service (can only be enabled if the payment service definition supports the `three_d_secure_hosted` feature). This does not affect pass through 3-D Secure data.
 	ThreeDSecureEnabled *bool `json:"three_d_secure_enabled,omitempty"`
-	AcquirerBinVisa NullableString `json:"acquirer_bin_visa,omitempty"`
-	AcquirerBinMastercard NullableString `json:"acquirer_bin_mastercard,omitempty"`
-	AcquirerBinAmex NullableString `json:"acquirer_bin_amex,omitempty"`
-	AcquirerBinDiscover NullableString `json:"acquirer_bin_discover,omitempty"`
-	AcquirerMerchantId NullableString `json:"acquirer_merchant_id,omitempty"`
-	MerchantName NullableString `json:"merchant_name,omitempty"`
-	MerchantCountryCode NullableString `json:"merchant_country_code,omitempty"`
-	MerchantCategoryCode NullableString `json:"merchant_category_code,omitempty"`
 	// An object containing a key for each supported card scheme (Amex, Discover, Mastercard and Visa), and for each key an object with the merchant profile for this service and the corresponding scheme.
 	MerchantProfile NullableMerchantProfile `json:"merchant_profile,omitempty"`
-	MerchantUrl NullableString `json:"merchant_url,omitempty"`
 	// Defines if this service is currently active or not.
 	Active *bool `json:"active,omitempty"`
-	// The numeric rank of a payment service. Payment services with a lower position value are processed first.
-	Position *float32 `json:"position,omitempty"`
 	// The date and time when this service was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this service was last updated.
@@ -96,6 +87,38 @@ func NewPaymentServiceWithDefaults() *PaymentService {
 	return &this
 }
 
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *PaymentService) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentService) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *PaymentService) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *PaymentService) SetType(v string) {
+	o.Type = &v
+}
+
 // GetId returns the Id field value if set, zero value otherwise.
 func (o *PaymentService) GetId() string {
 	if o == nil || o.Id == nil {
@@ -128,36 +151,36 @@ func (o *PaymentService) SetId(v string) {
 	o.Id = &v
 }
 
-// GetType returns the Type field value if set, zero value otherwise.
-func (o *PaymentService) GetType() string {
-	if o == nil || o.Type == nil {
+// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
+func (o *PaymentService) GetMerchantAccountId() string {
+	if o == nil || o.MerchantAccountId == nil {
 		var ret string
 		return ret
 	}
-	return *o.Type
+	return *o.MerchantAccountId
 }
 
-// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentService) GetTypeOk() (*string, bool) {
-	if o == nil || o.Type == nil {
+func (o *PaymentService) GetMerchantAccountIdOk() (*string, bool) {
+	if o == nil || o.MerchantAccountId == nil {
 		return nil, false
 	}
-	return o.Type, true
+	return o.MerchantAccountId, true
 }
 
-// HasType returns a boolean if a field has been set.
-func (o *PaymentService) HasType() bool {
-	if o != nil && o.Type != nil {
+// HasMerchantAccountId returns a boolean if a field has been set.
+func (o *PaymentService) HasMerchantAccountId() bool {
+	if o != nil && o.MerchantAccountId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetType gets a reference to the given string and assigns it to the Type field.
-func (o *PaymentService) SetType(v string) {
-	o.Type = &v
+// SetMerchantAccountId gets a reference to the given string and assigns it to the MerchantAccountId field.
+func (o *PaymentService) SetMerchantAccountId(v string) {
+	o.MerchantAccountId = &v
 }
 
 // GetPaymentServiceDefinitionId returns the PaymentServiceDefinitionId field value if set, zero value otherwise.
@@ -480,342 +503,6 @@ func (o *PaymentService) SetThreeDSecureEnabled(v bool) {
 	o.ThreeDSecureEnabled = &v
 }
 
-// GetAcquirerBinVisa returns the AcquirerBinVisa field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentService) GetAcquirerBinVisa() string {
-	if o == nil || o.AcquirerBinVisa.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.AcquirerBinVisa.Get()
-}
-
-// GetAcquirerBinVisaOk returns a tuple with the AcquirerBinVisa field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentService) GetAcquirerBinVisaOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.AcquirerBinVisa.Get(), o.AcquirerBinVisa.IsSet()
-}
-
-// HasAcquirerBinVisa returns a boolean if a field has been set.
-func (o *PaymentService) HasAcquirerBinVisa() bool {
-	if o != nil && o.AcquirerBinVisa.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAcquirerBinVisa gets a reference to the given NullableString and assigns it to the AcquirerBinVisa field.
-func (o *PaymentService) SetAcquirerBinVisa(v string) {
-	o.AcquirerBinVisa.Set(&v)
-}
-// SetAcquirerBinVisaNil sets the value for AcquirerBinVisa to be an explicit nil
-func (o *PaymentService) SetAcquirerBinVisaNil() {
-	o.AcquirerBinVisa.Set(nil)
-}
-
-// UnsetAcquirerBinVisa ensures that no value is present for AcquirerBinVisa, not even an explicit nil
-func (o *PaymentService) UnsetAcquirerBinVisa() {
-	o.AcquirerBinVisa.Unset()
-}
-
-// GetAcquirerBinMastercard returns the AcquirerBinMastercard field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentService) GetAcquirerBinMastercard() string {
-	if o == nil || o.AcquirerBinMastercard.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.AcquirerBinMastercard.Get()
-}
-
-// GetAcquirerBinMastercardOk returns a tuple with the AcquirerBinMastercard field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentService) GetAcquirerBinMastercardOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.AcquirerBinMastercard.Get(), o.AcquirerBinMastercard.IsSet()
-}
-
-// HasAcquirerBinMastercard returns a boolean if a field has been set.
-func (o *PaymentService) HasAcquirerBinMastercard() bool {
-	if o != nil && o.AcquirerBinMastercard.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAcquirerBinMastercard gets a reference to the given NullableString and assigns it to the AcquirerBinMastercard field.
-func (o *PaymentService) SetAcquirerBinMastercard(v string) {
-	o.AcquirerBinMastercard.Set(&v)
-}
-// SetAcquirerBinMastercardNil sets the value for AcquirerBinMastercard to be an explicit nil
-func (o *PaymentService) SetAcquirerBinMastercardNil() {
-	o.AcquirerBinMastercard.Set(nil)
-}
-
-// UnsetAcquirerBinMastercard ensures that no value is present for AcquirerBinMastercard, not even an explicit nil
-func (o *PaymentService) UnsetAcquirerBinMastercard() {
-	o.AcquirerBinMastercard.Unset()
-}
-
-// GetAcquirerBinAmex returns the AcquirerBinAmex field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentService) GetAcquirerBinAmex() string {
-	if o == nil || o.AcquirerBinAmex.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.AcquirerBinAmex.Get()
-}
-
-// GetAcquirerBinAmexOk returns a tuple with the AcquirerBinAmex field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentService) GetAcquirerBinAmexOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.AcquirerBinAmex.Get(), o.AcquirerBinAmex.IsSet()
-}
-
-// HasAcquirerBinAmex returns a boolean if a field has been set.
-func (o *PaymentService) HasAcquirerBinAmex() bool {
-	if o != nil && o.AcquirerBinAmex.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAcquirerBinAmex gets a reference to the given NullableString and assigns it to the AcquirerBinAmex field.
-func (o *PaymentService) SetAcquirerBinAmex(v string) {
-	o.AcquirerBinAmex.Set(&v)
-}
-// SetAcquirerBinAmexNil sets the value for AcquirerBinAmex to be an explicit nil
-func (o *PaymentService) SetAcquirerBinAmexNil() {
-	o.AcquirerBinAmex.Set(nil)
-}
-
-// UnsetAcquirerBinAmex ensures that no value is present for AcquirerBinAmex, not even an explicit nil
-func (o *PaymentService) UnsetAcquirerBinAmex() {
-	o.AcquirerBinAmex.Unset()
-}
-
-// GetAcquirerBinDiscover returns the AcquirerBinDiscover field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentService) GetAcquirerBinDiscover() string {
-	if o == nil || o.AcquirerBinDiscover.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.AcquirerBinDiscover.Get()
-}
-
-// GetAcquirerBinDiscoverOk returns a tuple with the AcquirerBinDiscover field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentService) GetAcquirerBinDiscoverOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.AcquirerBinDiscover.Get(), o.AcquirerBinDiscover.IsSet()
-}
-
-// HasAcquirerBinDiscover returns a boolean if a field has been set.
-func (o *PaymentService) HasAcquirerBinDiscover() bool {
-	if o != nil && o.AcquirerBinDiscover.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAcquirerBinDiscover gets a reference to the given NullableString and assigns it to the AcquirerBinDiscover field.
-func (o *PaymentService) SetAcquirerBinDiscover(v string) {
-	o.AcquirerBinDiscover.Set(&v)
-}
-// SetAcquirerBinDiscoverNil sets the value for AcquirerBinDiscover to be an explicit nil
-func (o *PaymentService) SetAcquirerBinDiscoverNil() {
-	o.AcquirerBinDiscover.Set(nil)
-}
-
-// UnsetAcquirerBinDiscover ensures that no value is present for AcquirerBinDiscover, not even an explicit nil
-func (o *PaymentService) UnsetAcquirerBinDiscover() {
-	o.AcquirerBinDiscover.Unset()
-}
-
-// GetAcquirerMerchantId returns the AcquirerMerchantId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentService) GetAcquirerMerchantId() string {
-	if o == nil || o.AcquirerMerchantId.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.AcquirerMerchantId.Get()
-}
-
-// GetAcquirerMerchantIdOk returns a tuple with the AcquirerMerchantId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentService) GetAcquirerMerchantIdOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.AcquirerMerchantId.Get(), o.AcquirerMerchantId.IsSet()
-}
-
-// HasAcquirerMerchantId returns a boolean if a field has been set.
-func (o *PaymentService) HasAcquirerMerchantId() bool {
-	if o != nil && o.AcquirerMerchantId.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetAcquirerMerchantId gets a reference to the given NullableString and assigns it to the AcquirerMerchantId field.
-func (o *PaymentService) SetAcquirerMerchantId(v string) {
-	o.AcquirerMerchantId.Set(&v)
-}
-// SetAcquirerMerchantIdNil sets the value for AcquirerMerchantId to be an explicit nil
-func (o *PaymentService) SetAcquirerMerchantIdNil() {
-	o.AcquirerMerchantId.Set(nil)
-}
-
-// UnsetAcquirerMerchantId ensures that no value is present for AcquirerMerchantId, not even an explicit nil
-func (o *PaymentService) UnsetAcquirerMerchantId() {
-	o.AcquirerMerchantId.Unset()
-}
-
-// GetMerchantName returns the MerchantName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentService) GetMerchantName() string {
-	if o == nil || o.MerchantName.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.MerchantName.Get()
-}
-
-// GetMerchantNameOk returns a tuple with the MerchantName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentService) GetMerchantNameOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.MerchantName.Get(), o.MerchantName.IsSet()
-}
-
-// HasMerchantName returns a boolean if a field has been set.
-func (o *PaymentService) HasMerchantName() bool {
-	if o != nil && o.MerchantName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantName gets a reference to the given NullableString and assigns it to the MerchantName field.
-func (o *PaymentService) SetMerchantName(v string) {
-	o.MerchantName.Set(&v)
-}
-// SetMerchantNameNil sets the value for MerchantName to be an explicit nil
-func (o *PaymentService) SetMerchantNameNil() {
-	o.MerchantName.Set(nil)
-}
-
-// UnsetMerchantName ensures that no value is present for MerchantName, not even an explicit nil
-func (o *PaymentService) UnsetMerchantName() {
-	o.MerchantName.Unset()
-}
-
-// GetMerchantCountryCode returns the MerchantCountryCode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentService) GetMerchantCountryCode() string {
-	if o == nil || o.MerchantCountryCode.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.MerchantCountryCode.Get()
-}
-
-// GetMerchantCountryCodeOk returns a tuple with the MerchantCountryCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentService) GetMerchantCountryCodeOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.MerchantCountryCode.Get(), o.MerchantCountryCode.IsSet()
-}
-
-// HasMerchantCountryCode returns a boolean if a field has been set.
-func (o *PaymentService) HasMerchantCountryCode() bool {
-	if o != nil && o.MerchantCountryCode.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantCountryCode gets a reference to the given NullableString and assigns it to the MerchantCountryCode field.
-func (o *PaymentService) SetMerchantCountryCode(v string) {
-	o.MerchantCountryCode.Set(&v)
-}
-// SetMerchantCountryCodeNil sets the value for MerchantCountryCode to be an explicit nil
-func (o *PaymentService) SetMerchantCountryCodeNil() {
-	o.MerchantCountryCode.Set(nil)
-}
-
-// UnsetMerchantCountryCode ensures that no value is present for MerchantCountryCode, not even an explicit nil
-func (o *PaymentService) UnsetMerchantCountryCode() {
-	o.MerchantCountryCode.Unset()
-}
-
-// GetMerchantCategoryCode returns the MerchantCategoryCode field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentService) GetMerchantCategoryCode() string {
-	if o == nil || o.MerchantCategoryCode.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.MerchantCategoryCode.Get()
-}
-
-// GetMerchantCategoryCodeOk returns a tuple with the MerchantCategoryCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentService) GetMerchantCategoryCodeOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.MerchantCategoryCode.Get(), o.MerchantCategoryCode.IsSet()
-}
-
-// HasMerchantCategoryCode returns a boolean if a field has been set.
-func (o *PaymentService) HasMerchantCategoryCode() bool {
-	if o != nil && o.MerchantCategoryCode.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantCategoryCode gets a reference to the given NullableString and assigns it to the MerchantCategoryCode field.
-func (o *PaymentService) SetMerchantCategoryCode(v string) {
-	o.MerchantCategoryCode.Set(&v)
-}
-// SetMerchantCategoryCodeNil sets the value for MerchantCategoryCode to be an explicit nil
-func (o *PaymentService) SetMerchantCategoryCodeNil() {
-	o.MerchantCategoryCode.Set(nil)
-}
-
-// UnsetMerchantCategoryCode ensures that no value is present for MerchantCategoryCode, not even an explicit nil
-func (o *PaymentService) UnsetMerchantCategoryCode() {
-	o.MerchantCategoryCode.Unset()
-}
-
 // GetMerchantProfile returns the MerchantProfile field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentService) GetMerchantProfile() MerchantProfile {
 	if o == nil || o.MerchantProfile.Get() == nil {
@@ -858,48 +545,6 @@ func (o *PaymentService) UnsetMerchantProfile() {
 	o.MerchantProfile.Unset()
 }
 
-// GetMerchantUrl returns the MerchantUrl field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentService) GetMerchantUrl() string {
-	if o == nil || o.MerchantUrl.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.MerchantUrl.Get()
-}
-
-// GetMerchantUrlOk returns a tuple with the MerchantUrl field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentService) GetMerchantUrlOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.MerchantUrl.Get(), o.MerchantUrl.IsSet()
-}
-
-// HasMerchantUrl returns a boolean if a field has been set.
-func (o *PaymentService) HasMerchantUrl() bool {
-	if o != nil && o.MerchantUrl.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantUrl gets a reference to the given NullableString and assigns it to the MerchantUrl field.
-func (o *PaymentService) SetMerchantUrl(v string) {
-	o.MerchantUrl.Set(&v)
-}
-// SetMerchantUrlNil sets the value for MerchantUrl to be an explicit nil
-func (o *PaymentService) SetMerchantUrlNil() {
-	o.MerchantUrl.Set(nil)
-}
-
-// UnsetMerchantUrl ensures that no value is present for MerchantUrl, not even an explicit nil
-func (o *PaymentService) UnsetMerchantUrl() {
-	o.MerchantUrl.Unset()
-}
-
 // GetActive returns the Active field value if set, zero value otherwise.
 func (o *PaymentService) GetActive() bool {
 	if o == nil || o.Active == nil {
@@ -930,38 +575,6 @@ func (o *PaymentService) HasActive() bool {
 // SetActive gets a reference to the given bool and assigns it to the Active field.
 func (o *PaymentService) SetActive(v bool) {
 	o.Active = &v
-}
-
-// GetPosition returns the Position field value if set, zero value otherwise.
-func (o *PaymentService) GetPosition() float32 {
-	if o == nil || o.Position == nil {
-		var ret float32
-		return ret
-	}
-	return *o.Position
-}
-
-// GetPositionOk returns a tuple with the Position field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentService) GetPositionOk() (*float32, bool) {
-	if o == nil || o.Position == nil {
-		return nil, false
-	}
-	return o.Position, true
-}
-
-// HasPosition returns a boolean if a field has been set.
-func (o *PaymentService) HasPosition() bool {
-	if o != nil && o.Position != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetPosition gets a reference to the given float32 and assigns it to the Position field.
-func (o *PaymentService) SetPosition(v float32) {
-	o.Position = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -1104,11 +717,14 @@ func (o *PaymentService) SetFields(v []PaymentServiceFields) {
 
 func (o PaymentService) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Type != nil {
+		toSerialize["type"] = o.Type
+	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
-	if o.Type != nil {
-		toSerialize["type"] = o.Type
+	if o.MerchantAccountId != nil {
+		toSerialize["merchant_account_id"] = o.MerchantAccountId
 	}
 	if o.PaymentServiceDefinitionId != nil {
 		toSerialize["payment_service_definition_id"] = o.PaymentServiceDefinitionId
@@ -1140,41 +756,11 @@ func (o PaymentService) MarshalJSON() ([]byte, error) {
 	if o.ThreeDSecureEnabled != nil {
 		toSerialize["three_d_secure_enabled"] = o.ThreeDSecureEnabled
 	}
-	if o.AcquirerBinVisa.IsSet() {
-		toSerialize["acquirer_bin_visa"] = o.AcquirerBinVisa.Get()
-	}
-	if o.AcquirerBinMastercard.IsSet() {
-		toSerialize["acquirer_bin_mastercard"] = o.AcquirerBinMastercard.Get()
-	}
-	if o.AcquirerBinAmex.IsSet() {
-		toSerialize["acquirer_bin_amex"] = o.AcquirerBinAmex.Get()
-	}
-	if o.AcquirerBinDiscover.IsSet() {
-		toSerialize["acquirer_bin_discover"] = o.AcquirerBinDiscover.Get()
-	}
-	if o.AcquirerMerchantId.IsSet() {
-		toSerialize["acquirer_merchant_id"] = o.AcquirerMerchantId.Get()
-	}
-	if o.MerchantName.IsSet() {
-		toSerialize["merchant_name"] = o.MerchantName.Get()
-	}
-	if o.MerchantCountryCode.IsSet() {
-		toSerialize["merchant_country_code"] = o.MerchantCountryCode.Get()
-	}
-	if o.MerchantCategoryCode.IsSet() {
-		toSerialize["merchant_category_code"] = o.MerchantCategoryCode.Get()
-	}
 	if o.MerchantProfile.IsSet() {
 		toSerialize["merchant_profile"] = o.MerchantProfile.Get()
 	}
-	if o.MerchantUrl.IsSet() {
-		toSerialize["merchant_url"] = o.MerchantUrl.Get()
-	}
 	if o.Active != nil {
 		toSerialize["active"] = o.Active
-	}
-	if o.Position != nil {
-		toSerialize["position"] = o.Position
 	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt

@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;transaction&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this transaction. | [optional] 
+**MerchantAccountId** | Pointer to **string** | The ID of the merchant account to which this transaction belongs to. | [optional] 
 **Status** | Pointer to **string** | The status of the transaction. The status may change over time as asynchronous processing events occur. | [optional] 
 **Intent** | Pointer to **string** | The original &#x60;intent&#x60; used when the transaction was [created](#operation/authorize-new-transaction). | [optional] 
 **Amount** | Pointer to **int32** | The authorized amount for this transaction. This can be more than the actual captured amount and part of this amount may be refunded. | [optional] 
@@ -19,9 +20,11 @@ Name | Type | Description | Notes
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
 **PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) | The payment service used for this transaction. | [optional] 
+**PendingReview** | Pointer to **bool** | Whether a manual review is pending. | [optional] 
 **Method** | Pointer to **string** |  | [optional] 
 **RawResponseCode** | Pointer to **NullableString** | This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
 **RawResponseDescription** | Pointer to **NullableString** | This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
+**CheckoutSessionId** | Pointer to **string** | The identifier for the checkout session this transaction is associated with. | [optional] 
 
 ## Methods
 
@@ -91,6 +94,31 @@ SetId sets Id field to given value.
 `func (o *TransactionSummary) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetMerchantAccountId
+
+`func (o *TransactionSummary) GetMerchantAccountId() string`
+
+GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
+
+### GetMerchantAccountIdOk
+
+`func (o *TransactionSummary) GetMerchantAccountIdOk() (*string, bool)`
+
+GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantAccountId
+
+`func (o *TransactionSummary) SetMerchantAccountId(v string)`
+
+SetMerchantAccountId sets MerchantAccountId field to given value.
+
+### HasMerchantAccountId
+
+`func (o *TransactionSummary) HasMerchantAccountId() bool`
+
+HasMerchantAccountId returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -447,6 +475,31 @@ SetPaymentService sets PaymentService field to given value.
 
 HasPaymentService returns a boolean if a field has been set.
 
+### GetPendingReview
+
+`func (o *TransactionSummary) GetPendingReview() bool`
+
+GetPendingReview returns the PendingReview field if non-nil, zero value otherwise.
+
+### GetPendingReviewOk
+
+`func (o *TransactionSummary) GetPendingReviewOk() (*bool, bool)`
+
+GetPendingReviewOk returns a tuple with the PendingReview field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPendingReview
+
+`func (o *TransactionSummary) SetPendingReview(v bool)`
+
+SetPendingReview sets PendingReview field to given value.
+
+### HasPendingReview
+
+`func (o *TransactionSummary) HasPendingReview() bool`
+
+HasPendingReview returns a boolean if a field has been set.
+
 ### GetMethod
 
 `func (o *TransactionSummary) GetMethod() string`
@@ -542,6 +595,31 @@ HasRawResponseDescription returns a boolean if a field has been set.
 `func (o *TransactionSummary) UnsetRawResponseDescription()`
 
 UnsetRawResponseDescription ensures that no value is present for RawResponseDescription, not even an explicit nil
+### GetCheckoutSessionId
+
+`func (o *TransactionSummary) GetCheckoutSessionId() string`
+
+GetCheckoutSessionId returns the CheckoutSessionId field if non-nil, zero value otherwise.
+
+### GetCheckoutSessionIdOk
+
+`func (o *TransactionSummary) GetCheckoutSessionIdOk() (*string, bool)`
+
+GetCheckoutSessionIdOk returns a tuple with the CheckoutSessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCheckoutSessionId
+
+`func (o *TransactionSummary) SetCheckoutSessionId(v string)`
+
+SetCheckoutSessionId sets CheckoutSessionId field to given value.
+
+### HasCheckoutSessionId
+
+`func (o *TransactionSummary) HasCheckoutSessionId() bool`
+
+HasCheckoutSessionId returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -40,8 +40,16 @@ type Report struct {
 	Type *string `json:"type,omitempty"`
 	// The unique identifier for this report.
 	Id *string `json:"id,omitempty"`
+	// The unique ID for a merchant account.
+	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
 	// The name of this report.
 	Name *string `json:"name,omitempty"`
+	// The unique identifier for the creator of this report.
+	CreatorId NullableString `json:"creator_id,omitempty"`
+	// The name of the creator of this report.
+	CreatorDisplayName NullableString `json:"creator_display_name,omitempty"`
+	// The type of the creator of this report.
+	CreatorType NullableString `json:"creator_type,omitempty"`
 }
 
 // NewReport instantiates a new Report object
@@ -443,6 +451,38 @@ func (o *Report) SetId(v string) {
 	o.Id = &v
 }
 
+// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
+func (o *Report) GetMerchantAccountId() string {
+	if o == nil || o.MerchantAccountId == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantAccountId
+}
+
+// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Report) GetMerchantAccountIdOk() (*string, bool) {
+	if o == nil || o.MerchantAccountId == nil {
+		return nil, false
+	}
+	return o.MerchantAccountId, true
+}
+
+// HasMerchantAccountId returns a boolean if a field has been set.
+func (o *Report) HasMerchantAccountId() bool {
+	if o != nil && o.MerchantAccountId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountId gets a reference to the given string and assigns it to the MerchantAccountId field.
+func (o *Report) SetMerchantAccountId(v string) {
+	o.MerchantAccountId = &v
+}
+
 // GetName returns the Name field value if set, zero value otherwise.
 func (o *Report) GetName() string {
 	if o == nil || o.Name == nil {
@@ -473,6 +513,132 @@ func (o *Report) HasName() bool {
 // SetName gets a reference to the given string and assigns it to the Name field.
 func (o *Report) SetName(v string) {
 	o.Name = &v
+}
+
+// GetCreatorId returns the CreatorId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Report) GetCreatorId() string {
+	if o == nil || o.CreatorId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CreatorId.Get()
+}
+
+// GetCreatorIdOk returns a tuple with the CreatorId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Report) GetCreatorIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CreatorId.Get(), o.CreatorId.IsSet()
+}
+
+// HasCreatorId returns a boolean if a field has been set.
+func (o *Report) HasCreatorId() bool {
+	if o != nil && o.CreatorId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatorId gets a reference to the given NullableString and assigns it to the CreatorId field.
+func (o *Report) SetCreatorId(v string) {
+	o.CreatorId.Set(&v)
+}
+// SetCreatorIdNil sets the value for CreatorId to be an explicit nil
+func (o *Report) SetCreatorIdNil() {
+	o.CreatorId.Set(nil)
+}
+
+// UnsetCreatorId ensures that no value is present for CreatorId, not even an explicit nil
+func (o *Report) UnsetCreatorId() {
+	o.CreatorId.Unset()
+}
+
+// GetCreatorDisplayName returns the CreatorDisplayName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Report) GetCreatorDisplayName() string {
+	if o == nil || o.CreatorDisplayName.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CreatorDisplayName.Get()
+}
+
+// GetCreatorDisplayNameOk returns a tuple with the CreatorDisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Report) GetCreatorDisplayNameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CreatorDisplayName.Get(), o.CreatorDisplayName.IsSet()
+}
+
+// HasCreatorDisplayName returns a boolean if a field has been set.
+func (o *Report) HasCreatorDisplayName() bool {
+	if o != nil && o.CreatorDisplayName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatorDisplayName gets a reference to the given NullableString and assigns it to the CreatorDisplayName field.
+func (o *Report) SetCreatorDisplayName(v string) {
+	o.CreatorDisplayName.Set(&v)
+}
+// SetCreatorDisplayNameNil sets the value for CreatorDisplayName to be an explicit nil
+func (o *Report) SetCreatorDisplayNameNil() {
+	o.CreatorDisplayName.Set(nil)
+}
+
+// UnsetCreatorDisplayName ensures that no value is present for CreatorDisplayName, not even an explicit nil
+func (o *Report) UnsetCreatorDisplayName() {
+	o.CreatorDisplayName.Unset()
+}
+
+// GetCreatorType returns the CreatorType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Report) GetCreatorType() string {
+	if o == nil || o.CreatorType.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CreatorType.Get()
+}
+
+// GetCreatorTypeOk returns a tuple with the CreatorType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Report) GetCreatorTypeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CreatorType.Get(), o.CreatorType.IsSet()
+}
+
+// HasCreatorType returns a boolean if a field has been set.
+func (o *Report) HasCreatorType() bool {
+	if o != nil && o.CreatorType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCreatorType gets a reference to the given NullableString and assigns it to the CreatorType field.
+func (o *Report) SetCreatorType(v string) {
+	o.CreatorType.Set(&v)
+}
+// SetCreatorTypeNil sets the value for CreatorType to be an explicit nil
+func (o *Report) SetCreatorTypeNil() {
+	o.CreatorType.Set(nil)
+}
+
+// UnsetCreatorType ensures that no value is present for CreatorType, not even an explicit nil
+func (o *Report) UnsetCreatorType() {
+	o.CreatorType.Unset()
 }
 
 func (o Report) MarshalJSON() ([]byte, error) {
@@ -510,8 +676,20 @@ func (o Report) MarshalJSON() ([]byte, error) {
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
+	if o.MerchantAccountId != nil {
+		toSerialize["merchant_account_id"] = o.MerchantAccountId
+	}
 	if o.Name != nil {
 		toSerialize["name"] = o.Name
+	}
+	if o.CreatorId.IsSet() {
+		toSerialize["creator_id"] = o.CreatorId.Get()
+	}
+	if o.CreatorDisplayName.IsSet() {
+		toSerialize["creator_display_name"] = o.CreatorDisplayName.Get()
+	}
+	if o.CreatorType.IsSet() {
+		toSerialize["creator_type"] = o.CreatorType.Get()
 	}
 	return json.Marshal(toSerialize)
 }

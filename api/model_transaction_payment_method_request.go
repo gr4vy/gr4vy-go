@@ -35,6 +35,10 @@ type TransactionPaymentMethodRequest struct {
 	RedirectUrl *string `json:"redirect_url,omitempty"`
 	// An identifier for a previously vaulted payment method. This id can represent any type of payment method.
 	Id *string `json:"id,omitempty"`
+	// The ISO-4217 currency code to store this payment method for. This is used to select the payment service to use.  This only applies to `redirect` mode payment methods like `gocardless`.
+	Currency *string `json:"currency,omitempty"`
+	// The 2-letter ISO code of the country to store this payment method for. This is used to select the payment service to use.  This only applies to `redirect` mode payment methods like `gocardless`.
+	Country *string `json:"country,omitempty"`
 }
 
 // NewTransactionPaymentMethodRequest instantiates a new TransactionPaymentMethodRequest object
@@ -345,6 +349,70 @@ func (o *TransactionPaymentMethodRequest) SetId(v string) {
 	o.Id = &v
 }
 
+// GetCurrency returns the Currency field value if set, zero value otherwise.
+func (o *TransactionPaymentMethodRequest) GetCurrency() string {
+	if o == nil || o.Currency == nil {
+		var ret string
+		return ret
+	}
+	return *o.Currency
+}
+
+// GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionPaymentMethodRequest) GetCurrencyOk() (*string, bool) {
+	if o == nil || o.Currency == nil {
+		return nil, false
+	}
+	return o.Currency, true
+}
+
+// HasCurrency returns a boolean if a field has been set.
+func (o *TransactionPaymentMethodRequest) HasCurrency() bool {
+	if o != nil && o.Currency != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCurrency gets a reference to the given string and assigns it to the Currency field.
+func (o *TransactionPaymentMethodRequest) SetCurrency(v string) {
+	o.Currency = &v
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise.
+func (o *TransactionPaymentMethodRequest) GetCountry() string {
+	if o == nil || o.Country == nil {
+		var ret string
+		return ret
+	}
+	return *o.Country
+}
+
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionPaymentMethodRequest) GetCountryOk() (*string, bool) {
+	if o == nil || o.Country == nil {
+		return nil, false
+	}
+	return o.Country, true
+}
+
+// HasCountry returns a boolean if a field has been set.
+func (o *TransactionPaymentMethodRequest) HasCountry() bool {
+	if o != nil && o.Country != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given string and assigns it to the Country field.
+func (o *TransactionPaymentMethodRequest) SetCountry(v string) {
+	o.Country = &v
+}
+
 func (o TransactionPaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -373,6 +441,12 @@ func (o TransactionPaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
+	}
+	if o.Currency != nil {
+		toSerialize["currency"] = o.Currency
+	}
+	if o.Country != nil {
+		toSerialize["country"] = o.Country
 	}
 	return json.Marshal(toSerialize)
 }

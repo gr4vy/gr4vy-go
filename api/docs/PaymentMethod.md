@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;payment-method&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique ID of the payment method. | [optional] 
+**MerchantAccountId** | Pointer to **string** | The unique ID for a merchant account. | [optional] 
 **Status** | Pointer to **string** | The state of the payment method.  - &#x60;processing&#x60; - The payment method is still being stored. - &#x60;buyer_approval_required&#x60; - Storing the payment method requires   the buyer to provide approval. Follow the &#x60;approval_url&#x60; for next steps. - &#x60;succeeded&#x60; - The payment method is approved and stored with all   relevant payment services. - &#x60;failed&#x60; - Storing the payment method did not succeed. | [optional] 
 **Method** | Pointer to **string** | The type of this payment method. | [optional] 
 **Mode** | Pointer to **string** | The mode to use with this payment method. | [optional] 
@@ -90,6 +91,31 @@ SetId sets Id field to given value.
 `func (o *PaymentMethod) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetMerchantAccountId
+
+`func (o *PaymentMethod) GetMerchantAccountId() string`
+
+GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
+
+### GetMerchantAccountIdOk
+
+`func (o *PaymentMethod) GetMerchantAccountIdOk() (*string, bool)`
+
+GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantAccountId
+
+`func (o *PaymentMethod) SetMerchantAccountId(v string)`
+
+SetMerchantAccountId sets MerchantAccountId field to given value.
+
+### HasMerchantAccountId
+
+`func (o *PaymentMethod) HasMerchantAccountId() bool`
+
+HasMerchantAccountId returns a boolean if a field has been set.
 
 ### GetStatus
 

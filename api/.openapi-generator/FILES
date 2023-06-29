@@ -17,6 +17,7 @@ api_payment_service_definitions.go
 api_payment_services.go
 api_reports.go
 api_roles.go
+api_tokens.go
 api_transactions.go
 client.go
 configuration.go
@@ -24,6 +25,8 @@ docs/APIKeyPairCreate.md
 docs/APIKeyPairUpdate.md
 docs/APILogsApi.md
 docs/Address.md
+docs/AntiFraudDecisionTransactionEvent.md
+docs/AntiFraudDecisionTransactionEventContext.md
 docs/AntiFraudServiceCreate.md
 docs/AntiFraudServiceUpdate.md
 docs/AntiFraudServiceUpdateFields.md
@@ -55,6 +58,7 @@ docs/CardSchemeDefinitions.md
 docs/CardSchemeDefinitionsApi.md
 docs/CartItem.md
 docs/CheckoutSession.md
+docs/CheckoutSessionFieldsPaymentMethod.md
 docs/CheckoutSessionRequest.md
 docs/CheckoutSessionSecureFieldsUpdate.md
 docs/CheckoutSessionsApi.md
@@ -65,6 +69,7 @@ docs/ConnectionOptions.md
 docs/ConnectionOptionsAdyenCard.md
 docs/ConnectionOptionsCybersourceAntiFraud.md
 docs/Connections.md
+docs/Cryptogram.md
 docs/DigitalWallet.md
 docs/DigitalWalletRequest.md
 docs/DigitalWalletUpdate.md
@@ -83,6 +88,7 @@ docs/ErrorGeneric.md
 docs/GooglePayRequest.md
 docs/GooglePayRequestAssuranceDetails.md
 docs/GooglePaySessionRequest.md
+docs/IssueCryptogramRequest.md
 docs/MerchantAccount.md
 docs/MerchantAccountCreate.md
 docs/MerchantAccountUpdate.md
@@ -90,6 +96,9 @@ docs/MerchantAccounts.md
 docs/MerchantAccountsApi.md
 docs/MerchantProfile.md
 docs/MerchantProfileScheme.md
+docs/NetworkToken.md
+docs/NetworkTokenRequest.md
+docs/NetworkTokens.md
 docs/PaymentMethod.md
 docs/PaymentMethodDefinition.md
 docs/PaymentMethodDefinitions.md
@@ -118,6 +127,9 @@ docs/PaymentServiceFields.md
 docs/PaymentServiceRequest.md
 docs/PaymentServiceRequestFields.md
 docs/PaymentServiceSnapshot.md
+docs/PaymentServiceToken.md
+docs/PaymentServiceTokenRequest.md
+docs/PaymentServiceTokens.md
 docs/PaymentServiceUpdate.md
 docs/PaymentServices.md
 docs/PaymentServicesApi.md
@@ -163,8 +175,11 @@ docs/ThreeDSecureDataV1V2.md
 docs/ThreeDSecureDataV2.md
 docs/ThreeDSecureDataV2AllOf.md
 docs/ThreeDSecureError.md
+docs/ThreeDSecureSuccessTransactionEvent.md
+docs/ThreeDSecureSuccessTransactionEventContext.md
 docs/ThreeDSecureSummary.md
 docs/TokenizedRequest.md
+docs/TokensApi.md
 docs/Transaction.md
 docs/TransactionCaptureRequest.md
 docs/TransactionCardRequest.md
@@ -186,6 +201,8 @@ git_push.sh
 go.mod
 go.sum
 model_address.go
+model_anti_fraud_decision_transaction_event.go
+model_anti_fraud_decision_transaction_event_context.go
 model_anti_fraud_service_create.go
 model_anti_fraud_service_update.go
 model_anti_fraud_service_update_fields.go
@@ -216,6 +233,7 @@ model_card_scheme_definition.go
 model_card_scheme_definitions.go
 model_cart_item.go
 model_checkout_session.go
+model_checkout_session_fields_payment_method.go
 model_checkout_session_request.go
 model_checkout_session_secure_fields_update.go
 model_connection.go
@@ -225,6 +243,7 @@ model_connection_options.go
 model_connection_options_adyen_card.go
 model_connection_options_cybersource_anti_fraud.go
 model_connections.go
+model_cryptogram.go
 model_digital_wallet.go
 model_digital_wallet_request.go
 model_digital_wallet_update.go
@@ -242,12 +261,16 @@ model_error_generic.go
 model_google_pay_request.go
 model_google_pay_request_assurance_details.go
 model_google_pay_session_request.go
+model_issue_cryptogram_request.go
 model_merchant_account.go
 model_merchant_account_create.go
 model_merchant_account_update.go
 model_merchant_accounts.go
 model_merchant_profile.go
 model_merchant_profile_scheme.go
+model_network_token.go
+model_network_token_request.go
+model_network_tokens.go
 model_payment_method.go
 model_payment_method__snapshot.go
 model_payment_method__tokenized.go
@@ -272,6 +295,9 @@ model_payment_service_definitions.go
 model_payment_service_fields.go
 model_payment_service_request.go
 model_payment_service_request_fields.go
+model_payment_service_token.go
+model_payment_service_token_request.go
+model_payment_service_tokens.go
 model_payment_service_update.go
 model_payment_services.go
 model_redirect_request.go
@@ -314,6 +340,8 @@ model_three_d_secure_data_v1_v2.go
 model_three_d_secure_data_v2.go
 model_three_d_secure_data_v2_all_of.go
 model_three_d_secure_error.go
+model_three_d_secure_success_transaction_event.go
+model_three_d_secure_success_transaction_event_context.go
 model_three_d_secure_summary.go
 model_tokenized_request.go
 model_transaction.go

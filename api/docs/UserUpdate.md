@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **string** | The full name of the user which is used in the Gr4vy admin panel to give a user a human readable name. | [optional] 
 **RoleIds** | Pointer to **[]string** | The IDs of the roles to assign to the user. Sending an empty list will remove all roles assigned to the user. | [optional] 
+**MerchantAccountIds** | Pointer to **[]string** | A list of merchant account IDs that the user is assigned to. | [optional] 
 
 ## Methods
 
@@ -76,6 +77,41 @@ SetRoleIds sets RoleIds field to given value.
 
 HasRoleIds returns a boolean if a field has been set.
 
+### GetMerchantAccountIds
+
+`func (o *UserUpdate) GetMerchantAccountIds() []string`
+
+GetMerchantAccountIds returns the MerchantAccountIds field if non-nil, zero value otherwise.
+
+### GetMerchantAccountIdsOk
+
+`func (o *UserUpdate) GetMerchantAccountIdsOk() (*[]string, bool)`
+
+GetMerchantAccountIdsOk returns a tuple with the MerchantAccountIds field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantAccountIds
+
+`func (o *UserUpdate) SetMerchantAccountIds(v []string)`
+
+SetMerchantAccountIds sets MerchantAccountIds field to given value.
+
+### HasMerchantAccountIds
+
+`func (o *UserUpdate) HasMerchantAccountIds() bool`
+
+HasMerchantAccountIds returns a boolean if a field has been set.
+
+### SetMerchantAccountIdsNil
+
+`func (o *UserUpdate) SetMerchantAccountIdsNil(b bool)`
+
+ SetMerchantAccountIdsNil sets the value for MerchantAccountIds to be an explicit nil
+
+### UnsetMerchantAccountIds
+`func (o *UserUpdate) UnsetMerchantAccountIds()`
+
+UnsetMerchantAccountIds ensures that no value is present for MerchantAccountIds, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

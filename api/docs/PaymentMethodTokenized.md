@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;payment-method&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique ID of the payment method. | [optional] 
+**MerchantAccountId** | Pointer to **string** | The unique ID for a merchant account. | [optional] 
 **Method** | Pointer to **string** | The type of this payment method. | [optional] 
 **Label** | Pointer to **string** | A label for the payment method. For a &#x60;card&#x60; payment method this is the last 4 digits on the card. For others it would be the email address. | [optional] 
 **Scheme** | Pointer to **NullableString** | The type of the card, if the payment method is a card. | [optional] 
@@ -83,6 +84,31 @@ SetId sets Id field to given value.
 `func (o *PaymentMethodTokenized) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetMerchantAccountId
+
+`func (o *PaymentMethodTokenized) GetMerchantAccountId() string`
+
+GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
+
+### GetMerchantAccountIdOk
+
+`func (o *PaymentMethodTokenized) GetMerchantAccountIdOk() (*string, bool)`
+
+GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantAccountId
+
+`func (o *PaymentMethodTokenized) SetMerchantAccountId(v string)`
+
+SetMerchantAccountId sets MerchantAccountId field to given value.
+
+### HasMerchantAccountId
+
+`func (o *PaymentMethodTokenized) HasMerchantAccountId() bool`
+
+HasMerchantAccountId returns a boolean if a field has been set.
 
 ### GetMethod
 

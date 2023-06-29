@@ -23,6 +23,8 @@ type UserRequest struct {
 	EmailAddress *string `json:"email_address,omitempty"`
 	// A list of role ids that will be assigned to the user being created. The creator must have `roles.write` or the role that is being assigned.
 	RoleIds *[]string `json:"role_ids,omitempty"`
+	// A list of merchant account IDs that the user being created will be assigned to.
+	MerchantAccountIds []string `json:"merchant_account_ids,omitempty"`
 }
 
 // NewUserRequest instantiates a new UserRequest object
@@ -138,6 +140,39 @@ func (o *UserRequest) SetRoleIds(v []string) {
 	o.RoleIds = &v
 }
 
+// GetMerchantAccountIds returns the MerchantAccountIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UserRequest) GetMerchantAccountIds() []string {
+	if o == nil  {
+		var ret []string
+		return ret
+	}
+	return o.MerchantAccountIds
+}
+
+// GetMerchantAccountIdsOk returns a tuple with the MerchantAccountIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UserRequest) GetMerchantAccountIdsOk() (*[]string, bool) {
+	if o == nil || o.MerchantAccountIds == nil {
+		return nil, false
+	}
+	return &o.MerchantAccountIds, true
+}
+
+// HasMerchantAccountIds returns a boolean if a field has been set.
+func (o *UserRequest) HasMerchantAccountIds() bool {
+	if o != nil && o.MerchantAccountIds != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountIds gets a reference to the given []string and assigns it to the MerchantAccountIds field.
+func (o *UserRequest) SetMerchantAccountIds(v []string) {
+	o.MerchantAccountIds = v
+}
+
 func (o UserRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Name != nil {
@@ -148,6 +183,9 @@ func (o UserRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.RoleIds != nil {
 		toSerialize["role_ids"] = o.RoleIds
+	}
+	if o.MerchantAccountIds != nil {
+		toSerialize["merchant_account_ids"] = o.MerchantAccountIds
 	}
 	return json.Marshal(toSerialize)
 }
