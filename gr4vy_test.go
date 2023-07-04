@@ -37,9 +37,9 @@ func TestEmbedClaimsSerialization(t *testing.T) {
 
 func TestEmbedClaimsWithMerchantAccountId(t *testing.T) {
 	embed := EmbedParams{
-		Amount:   200,
-		Currency: "USD",
-		BuyerID:  "d757c76a-cbd7-4b56-95a3-40125b51b29c",
+		Amount:            200,
+		Currency:          "USD",
+		BuyerID:           "d757c76a-cbd7-4b56-95a3-40125b51b29c",
 		MerchantAccountId: "plantly-uk",
 	}
 
@@ -65,7 +65,7 @@ func TestEmbedToken(t *testing.T) {
 		Metadata: map[string]string{"key": "value"},
 	}
 
-	_, err = client.GetEmbedToken(embed)
+	_, err = client.GetEmbedToken(embed, "")
 
 	if err != nil {
 		t.Errorf(err.Error())
@@ -101,7 +101,7 @@ func TestAddBuyerAndEmbed(t *testing.T) {
 
 	client = NewGr4vyClient(gr4vyId, key, environment)
 
-	_, err = client.GetEmbedToken(embed)
+	_, err = client.GetEmbedToken(embed, "")
 
 	if err != nil {
 		t.Errorf(err.Error())
@@ -363,12 +363,12 @@ func TestPostListPaymentOptions(t *testing.T) {
 	// }
 
 	req := Gr4vyPaymentOptionsRequest{
-		Country:    String("US"),
-		Currency:   String("USD"),
-		Amount: 	Gr4vyNullableInt32(1000),
-		Metadata: 	map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
+		Country:  String("US"),
+		Currency: String("USD"),
+		Amount:   Gr4vyNullableInt32(1000),
+		Metadata: map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
 		// CartItems:	cartItems,
-		Locale:		String("en"),
+		Locale: String("en"),
 	}
 
 	var response *Gr4vyPaymentOptions
@@ -393,12 +393,12 @@ func TestPostListPaymentOptionsContext(t *testing.T) {
 	// }
 
 	req := Gr4vyPaymentOptionsRequest{
-		Country:    String("US"),
-		Currency:   String("USD"),
-		Amount: 	Gr4vyNullableInt32(1000),
-		Metadata: 	map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
+		Country:  String("US"),
+		Currency: String("USD"),
+		Amount:   Gr4vyNullableInt32(1000),
+		Metadata: map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
 		// CartItems:	cartItems,
-		Locale:		String("en"),
+		Locale: String("en"),
 	}
 
 	var response *Gr4vyPaymentOptions

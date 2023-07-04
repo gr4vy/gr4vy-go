@@ -16,29 +16,29 @@ import (
 const VERSION = "0.24.0"
 
 type Gr4vyClient struct {
-	gr4vyId     string
-	privateKey  string
-	baseUrl     string
-	Debug       bool
-	accessToken string
-	environment string
+	gr4vyId           string
+	privateKey        string
+	baseUrl           string
+	Debug             bool
+	accessToken       string
+	environment       string
 	merchantAccountId string
 }
 
 type EmbedParams struct {
-	Amount   int32             `json:"amount"`
-	Currency string            `json:"currency"`
-	BuyerID  string            `json:"buyer_id"`
-	Metadata map[string]string `json:"metadata"`
-	MerchantAccountId string   `json:"merchant_account_id"`
+	Amount            int32             `json:"amount"`
+	Currency          string            `json:"currency"`
+	BuyerID           string            `json:"buyer_id"`
+	Metadata          map[string]string `json:"metadata"`
+	MerchantAccountId string            `json:"merchant_account_id"`
 }
 
 func NewGr4vyClient(gr4vy_id string, private_key string, environment string) *Gr4vyClient {
 	client := Gr4vyClient{
-		gr4vyId:     gr4vy_id,
-		privateKey:  private_key,
-		Debug:       false,
-		environment: environment,
+		gr4vyId:           gr4vy_id,
+		privateKey:        private_key,
+		Debug:             false,
+		environment:       environment,
 		merchantAccountId: "default",
 	}
 	return &client
@@ -46,10 +46,10 @@ func NewGr4vyClient(gr4vy_id string, private_key string, environment string) *Gr
 
 func NewGr4vyClientWithMid(gr4vy_id string, private_key string, environment string, merchant_account_id string) *Gr4vyClient {
 	client := Gr4vyClient{
-		gr4vyId:     gr4vy_id,
-		privateKey:  private_key,
-		Debug:       false,
-		environment: environment,
+		gr4vyId:           gr4vy_id,
+		privateKey:        private_key,
+		Debug:             false,
+		environment:       environment,
 		merchantAccountId: merchant_account_id,
 	}
 	return &client
@@ -57,10 +57,10 @@ func NewGr4vyClientWithMid(gr4vy_id string, private_key string, environment stri
 
 func NewGr4vyClientWithBaseUrl(base_url string, private_key string) *Gr4vyClient {
 	client := Gr4vyClient{
-		privateKey:  private_key,
-		baseUrl:     base_url,
-		Debug:       false,
-		environment: "sandbox",
+		privateKey:        private_key,
+		baseUrl:           base_url,
+		Debug:             false,
+		environment:       "sandbox",
 		merchantAccountId: "default",
 	}
 	return &client
@@ -89,8 +89,14 @@ func GetClient(c *Gr4vyClient) (*APIClient, error) {
 	return client, nil
 }
 
-func (c *Gr4vyClient) GetEmbedToken(params EmbedParams) (string, error) {
-	return getEmbedToken(c.privateKey, params)
+func (c *Gr4vyClient) GetEmbedToken(params EmbedParams, checkout_session_id string) (string, error) {
+	return getEmbedToken(c.privateKey, params, checkout_session_id)
+}
+
+func (c *Gr4vyClient) GetEmbedTokenWithCheckoutSession(params EmbedParams) (string, CheckoutSession, error) {
+	checkoutSession, _, _ := c.AddCheckoutSession()
+	token, err := getEmbedToken(c.privateKey, params, *checkoutSession.Id)
+	return token, CheckoutSession(*checkoutSession), err
 }
 
 func (c *Gr4vyClient) GetToken() (string, error) {
@@ -158,7 +164,6 @@ func GetKeyFromFile(fileName string) (string, error) {
 func String(v string) NullableString {
 	return *NewNullableString(&v)
 }
-
 
 func Gr4vyNullableInt32(v int32) NullableInt32 {
 	return *NewNullableInt32(&v)
