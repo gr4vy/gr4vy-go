@@ -22,13 +22,17 @@ func getEmbedClaims(embed EmbedParams) map[string]interface{} {
 	return inInterface
 }
 
-func getEmbedToken(private_key string, embed EmbedParams) (string, error) {
+func getEmbedToken(private_key string, embed EmbedParams, checkout_session_id string) (string, error) {
 	claims := jwt.MapClaims{
 		"iss":    fmt.Sprintf("Gr4vy Go SDK %v - Go %v", VERSION, runtime.Version()),
 		"nbf":    float64(time.Now().Unix()),
 		"exp":    float64(time.Now().Unix() + 3000),
 		"scopes": []string{"embed"},
 		"jti":    uuid.NewV4(),
+	}
+
+	if len(checkout_session_id) != 0 {
+		claims["checkout_session_id"] = checkout_session_id
 	}
 
 	claims["embed"] = getEmbedClaims(embed)

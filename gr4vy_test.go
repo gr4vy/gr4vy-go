@@ -2,11 +2,15 @@ package gr4vy
 
 import (
 	"context"
+	"crypto/ecdsa"
+	"crypto/x509"
+	"encoding/pem"
 	"fmt"
 	"net/http"
 	"strconv"
 	"testing"
 
+	"github.com/golang-jwt/jwt"
 	"github.com/google/uuid"
 )
 
@@ -37,9 +41,9 @@ func TestEmbedClaimsSerialization(t *testing.T) {
 
 func TestEmbedClaimsWithMerchantAccountId(t *testing.T) {
 	embed := EmbedParams{
-		Amount:   200,
-		Currency: "USD",
-		BuyerID:  "d757c76a-cbd7-4b56-95a3-40125b51b29c",
+		Amount:            200,
+		Currency:          "USD",
+		BuyerID:           "d757c76a-cbd7-4b56-95a3-40125b51b29c",
 		MerchantAccountId: "plantly-uk",
 	}
 
@@ -65,7 +69,7 @@ func TestEmbedToken(t *testing.T) {
 		Metadata: map[string]string{"key": "value"},
 	}
 
-	_, err = client.GetEmbedToken(embed)
+	_, err = client.GetEmbedToken(embed, "")
 
 	if err != nil {
 		t.Errorf(err.Error())
@@ -101,7 +105,7 @@ func TestAddBuyerAndEmbed(t *testing.T) {
 
 	client = NewGr4vyClient(gr4vyId, key, environment)
 
-	_, err = client.GetEmbedToken(embed)
+	_, err = client.GetEmbedToken(embed, "")
 
 	if err != nil {
 		t.Errorf(err.Error())
@@ -363,12 +367,12 @@ func TestPostListPaymentOptions(t *testing.T) {
 	// }
 
 	req := Gr4vyPaymentOptionsRequest{
-		Country:    String("US"),
-		Currency:   String("USD"),
-		Amount: 	Gr4vyNullableInt32(1000),
-		Metadata: 	map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
+		Country:  String("US"),
+		Currency: String("USD"),
+		Amount:   Gr4vyNullableInt32(1000),
+		Metadata: map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
 		// CartItems:	cartItems,
-		Locale:		String("en"),
+		Locale: String("en"),
 	}
 
 	var response *Gr4vyPaymentOptions
@@ -393,12 +397,12 @@ func TestPostListPaymentOptionsContext(t *testing.T) {
 	// }
 
 	req := Gr4vyPaymentOptionsRequest{
-		Country:    String("US"),
-		Currency:   String("USD"),
-		Amount: 	Gr4vyNullableInt32(1000),
-		Metadata: 	map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
+		Country:  String("US"),
+		Currency: String("USD"),
+		Amount:   Gr4vyNullableInt32(1000),
+		Metadata: map[string]string{"TypeOfPayment": "purchase", "Carbon_FootPrint": "10"},
 		// CartItems:	cartItems,
-		Locale:		String("en"),
+		Locale: String("en"),
 	}
 
 	var response *Gr4vyPaymentOptions
@@ -701,5 +705,84 @@ func TestRefundTransaction(t *testing.T) {
 	}
 	if response.StatusCode != 201 {
 		t.Errorf("expected StatusCode 201: received: " + strconv.Itoa(response.StatusCode))
+	}
+}
+
+func TestEmbedTokenWithCheckoutSession(t *testing.T) {
+	// fetch/decode the private key
+	key, err := GetKeyFromFile(keyPath)
+	block, _ := pem.Decode([]byte(key))
+
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+
+	privateKey, err := x509.ParsePKCS8PrivateKey(block.Bytes)
+	ecPrivateKey, _ := privateKey.(*ecdsa.PrivateKey)
+
+	if err != nil {
+		t.Errorf(err.Error())
+		fmt.Println("Failed to parse private key:", err)
+		return
+	}
+
+	// create a client
+	client := NewGr4vyClient(gr4vyId, key, environment)
+
+	// create a checkout session
+	checkoutSession, _, err := client.AddCheckoutSession()
+
+	if err != nil {
+		t.Errorf(err.Error())
+	}
+
+	// create an embed token
+	embed := EmbedParams{
+		Amount:            200,
+		Currency:          "USD",
+		BuyerID:           "d757c76a-cbd7-4b56-95a3-40125b51b29c",
+		MerchantAccountId: "plantly-uk",
+	}
+	token, err := client.GetEmbedToken(embed, *checkoutSession.Id)
+
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+
+	// verify/parse the token
+	result, err := jwt.Parse(token, func(token *jwt.Token) (interface{}, error) {
+		// Make sure the signing method is ES256
+		if _, ok := token.Method.(*jwt.SigningMethodECDSA); !ok {
+			return nil, fmt.Errorf("unexpected signing method: %v", token.Header["alg"])
+		}
+
+		// Return the ECDSA private key for verification
+		return ecPrivateKey.Public(), nil
+	})
+
+	if err != nil {
+		fmt.Println("Failed to parse token:", err)
+		t.Errorf(err.Error())
+		return
+	}
+
+	// check the token is valid
+	if !result.Valid {
+		t.Errorf("token is not valid")
+		return
+	}
+
+	claims, ok := result.Claims.(jwt.MapClaims)
+
+	if !ok {
+		t.Errorf("invalid token claims")
+		return
+	}
+
+	if claims["checkout_session_id"] != *checkoutSession.Id {
+		t.Errorf("checkout session id does not match %v %v", claims["checkout_session_id"], *checkoutSession.Id)
+		return
 	}
 }
