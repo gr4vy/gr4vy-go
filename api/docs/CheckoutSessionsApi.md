@@ -4,79 +4,18 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddCheckoutSession**](CheckoutSessionsApi.md#AddCheckoutSession) | **Post** /checkout/sessions | Create a new Checkout Session
-[**DeleteCheckoutSession**](CheckoutSessionsApi.md#DeleteCheckoutSession) | **Delete** /checkout/sessions/{checkout_session_id} | Delete a Checkout Session
-[**GetCheckoutSession**](CheckoutSessionsApi.md#GetCheckoutSession) | **Get** /checkout/sessions/{checkout_session_id} | Get a Checkout Session
-[**UpdateCheckoutSessionFields**](CheckoutSessionsApi.md#UpdateCheckoutSessionFields) | **Put** /checkout/sessions/{checkout_session_id}/fields | Update a Checkout Session&#39;s Secure Fields
+[**DeleteCheckoutSession**](CheckoutSessionsApi.md#DeleteCheckoutSession) | **Delete** /checkout/sessions/{checkout_session_id} | Delete checkout session
+[**GetCheckoutSession**](CheckoutSessionsApi.md#GetCheckoutSession) | **Get** /checkout/sessions/{checkout_session_id} | Get checkout session
+[**NewCheckoutSession**](CheckoutSessionsApi.md#NewCheckoutSession) | **Post** /checkout/sessions | New checkout session
+[**UpdateCheckoutSessionFields**](CheckoutSessionsApi.md#UpdateCheckoutSessionFields) | **Put** /checkout/sessions/{checkout_session_id}/fields | Update fields for checkout session
 
-
-
-## AddCheckoutSession
-
-> CheckoutSession AddCheckoutSession(ctx).Execute()
-
-Create a new Checkout Session
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.CheckoutSessionsApi.AddCheckoutSession(context.Background()).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `CheckoutSessionsApi.AddCheckoutSession``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddCheckoutSession`: CheckoutSession
-    fmt.Fprintf(os.Stdout, "Response from `CheckoutSessionsApi.AddCheckoutSession`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-This endpoint does not need any parameter.
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddCheckoutSessionRequest struct via the builder pattern
-
-
-### Return type
-
-[**CheckoutSession**](CheckoutSession.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: Not defined
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## DeleteCheckoutSession
 
 > DeleteCheckoutSession(ctx, checkoutSessionId).Execute()
 
-Delete a Checkout Session
+Delete checkout session
 
 
 
@@ -144,7 +83,7 @@ Name | Type | Description  | Notes
 
 > CheckoutSession GetCheckoutSession(ctx, checkoutSessionId).Execute()
 
-Get a Checkout Session
+Get checkout session
 
 
 
@@ -210,11 +149,72 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
+## NewCheckoutSession
+
+> CheckoutSession NewCheckoutSession(ctx).Execute()
+
+New checkout session
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.CheckoutSessionsApi.NewCheckoutSession(context.Background()).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `CheckoutSessionsApi.NewCheckoutSession``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `NewCheckoutSession`: CheckoutSession
+    fmt.Fprintf(os.Stdout, "Response from `CheckoutSessionsApi.NewCheckoutSession`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+This endpoint does not need any parameter.
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNewCheckoutSessionRequest struct via the builder pattern
+
+
+### Return type
+
+[**CheckoutSession**](CheckoutSession.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
 ## UpdateCheckoutSessionFields
 
 > UpdateCheckoutSessionFields(ctx, checkoutSessionId).CheckoutSessionSecureFieldsUpdate(checkoutSessionSecureFieldsUpdate).Execute()
 
-Update a Checkout Session's Secure Fields
+Update fields for checkout session
 
 
 

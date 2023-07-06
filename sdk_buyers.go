@@ -1,8 +1,9 @@
 package gr4vy
 
 import (
-	"net/http"
 	"context"
+	"net/http"
+
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
@@ -91,7 +92,7 @@ func (c *Gr4vyClient) AddBuyer(body Gr4vyBuyerRequest) (*Gr4vyBuyer, *http.Respo
         return nil, nil, err
     }
     auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
-    p := client.BuyersApi.AddBuyer(auth)
+    p := client.BuyersApi.NewBuyer(auth)
 
     var b BuyerRequest = BuyerRequest(body)
     response, http, err := p.BuyerRequest(b).Execute()
@@ -108,7 +109,7 @@ func (c *Gr4vyClient) AddBuyerContext(ctx context.Context, body Gr4vyBuyerReques
         return nil, nil, err
     }
     auth := context.WithValue(ctx, ContextAccessToken, c.accessToken)
-    p := client.BuyersApi.AddBuyer(auth)
+    p := client.BuyersApi.NewBuyer(auth)
 
     var b BuyerRequest = BuyerRequest(body)
     response, http, err := p.BuyerRequest(b).Execute()

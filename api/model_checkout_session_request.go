@@ -21,6 +21,8 @@ type CheckoutSessionRequest struct {
 	Method string `json:"method"`
 	// The ID of the Checkout Session.
 	Id string `json:"id"`
+	// The redirect URL to redirect a buyer to after they have authorized their transaction or payment method. This only applies to payment methods that require buyer approval.
+	RedirectUrl NullableString `json:"redirect_url,omitempty"`
 	// An external identifier that can be used to match the card against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// The ID of the buyer to associate this payment method to. If this field is provided then the `buyer_external_identifier` field needs to be unset.
@@ -94,6 +96,48 @@ func (o *CheckoutSessionRequest) GetIdOk() (*string, bool) {
 // SetId sets field value
 func (o *CheckoutSessionRequest) SetId(v string) {
 	o.Id = v
+}
+
+// GetRedirectUrl returns the RedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CheckoutSessionRequest) GetRedirectUrl() string {
+	if o == nil || o.RedirectUrl.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RedirectUrl.Get()
+}
+
+// GetRedirectUrlOk returns a tuple with the RedirectUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CheckoutSessionRequest) GetRedirectUrlOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.RedirectUrl.Get(), o.RedirectUrl.IsSet()
+}
+
+// HasRedirectUrl returns a boolean if a field has been set.
+func (o *CheckoutSessionRequest) HasRedirectUrl() bool {
+	if o != nil && o.RedirectUrl.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRedirectUrl gets a reference to the given NullableString and assigns it to the RedirectUrl field.
+func (o *CheckoutSessionRequest) SetRedirectUrl(v string) {
+	o.RedirectUrl.Set(&v)
+}
+// SetRedirectUrlNil sets the value for RedirectUrl to be an explicit nil
+func (o *CheckoutSessionRequest) SetRedirectUrlNil() {
+	o.RedirectUrl.Set(nil)
+}
+
+// UnsetRedirectUrl ensures that no value is present for RedirectUrl, not even an explicit nil
+func (o *CheckoutSessionRequest) UnsetRedirectUrl() {
+	o.RedirectUrl.Unset()
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -209,6 +253,9 @@ func (o CheckoutSessionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["id"] = o.Id
+	}
+	if o.RedirectUrl.IsSet() {
+		toSerialize["redirect_url"] = o.RedirectUrl.Get()
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()

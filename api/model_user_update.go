@@ -21,6 +21,8 @@ type UserUpdate struct {
 	Name *string `json:"name,omitempty"`
 	// The IDs of the roles to assign to the user. Sending an empty list will remove all roles assigned to the user.
 	RoleIds *[]string `json:"role_ids,omitempty"`
+	// A list of merchant account IDs that the user is assigned to.
+	MerchantAccountIds []string `json:"merchant_account_ids,omitempty"`
 }
 
 // NewUserUpdate instantiates a new UserUpdate object
@@ -104,6 +106,39 @@ func (o *UserUpdate) SetRoleIds(v []string) {
 	o.RoleIds = &v
 }
 
+// GetMerchantAccountIds returns the MerchantAccountIds field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *UserUpdate) GetMerchantAccountIds() []string {
+	if o == nil  {
+		var ret []string
+		return ret
+	}
+	return o.MerchantAccountIds
+}
+
+// GetMerchantAccountIdsOk returns a tuple with the MerchantAccountIds field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *UserUpdate) GetMerchantAccountIdsOk() (*[]string, bool) {
+	if o == nil || o.MerchantAccountIds == nil {
+		return nil, false
+	}
+	return &o.MerchantAccountIds, true
+}
+
+// HasMerchantAccountIds returns a boolean if a field has been set.
+func (o *UserUpdate) HasMerchantAccountIds() bool {
+	if o != nil && o.MerchantAccountIds != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountIds gets a reference to the given []string and assigns it to the MerchantAccountIds field.
+func (o *UserUpdate) SetMerchantAccountIds(v []string) {
+	o.MerchantAccountIds = v
+}
+
 func (o UserUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Name != nil {
@@ -111,6 +146,9 @@ func (o UserUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.RoleIds != nil {
 		toSerialize["role_ids"] = o.RoleIds
+	}
+	if o.MerchantAccountIds != nil {
+		toSerialize["merchant_account_ids"] = o.MerchantAccountIds
 	}
 	return json.Marshal(toSerialize)
 }

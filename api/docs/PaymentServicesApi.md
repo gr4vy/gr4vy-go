@@ -4,78 +4,12 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddPaymentService**](PaymentServicesApi.md#AddPaymentService) | **Post** /payment-services | New payment service
 [**DeletePaymentService**](PaymentServicesApi.md#DeletePaymentService) | **Delete** /payment-services/{payment_service_id} | Delete payment service
 [**GetPaymentService**](PaymentServicesApi.md#GetPaymentService) | **Get** /payment-services/{payment_service_id} | Get payment service
 [**ListPaymentServices**](PaymentServicesApi.md#ListPaymentServices) | **Get** /payment-services | List payment services
+[**NewPaymentService**](PaymentServicesApi.md#NewPaymentService) | **Post** /payment-services | New payment service
 [**UpdatePaymentService**](PaymentServicesApi.md#UpdatePaymentService) | **Put** /payment-services/{payment_service_id} | Update payment service
 
-
-
-## AddPaymentService
-
-> PaymentService AddPaymentService(ctx).PaymentServiceRequest(paymentServiceRequest).Execute()
-
-New payment service
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    paymentServiceRequest := *openapiclient.NewPaymentServiceRequest("stripe-card", "Stripe (Main)", []openapiclient.PaymentServiceRequestFields{*openapiclient.NewPaymentServiceRequestFields("private_key", "sk_test_26PHem9AhJZvU623DfE1x4sd")}, []string{"AcceptedCountries_example"}, []string{"AcceptedCurrencies_example"}) // PaymentServiceRequest |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentServicesApi.AddPaymentService(context.Background()).PaymentServiceRequest(paymentServiceRequest).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PaymentServicesApi.AddPaymentService``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddPaymentService`: PaymentService
-    fmt.Fprintf(os.Stdout, "Response from `PaymentServicesApi.AddPaymentService`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddPaymentServiceRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **paymentServiceRequest** | [**PaymentServiceRequest**](PaymentServiceRequest.md) |  | 
-
-### Return type
-
-[**PaymentService**](PaymentService.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## DeletePaymentService
@@ -239,7 +173,7 @@ import (
 func main() {
     limit := int32(1) // int32 | Defines the maximum number of items to return for this request. (optional) (default to 20)
     cursor := "ZXhhbXBsZTE" // string | A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the `next_cursor` field. Similarly the `previous_cursor` can be used to reverse backwards in the list. (optional)
-    method := "card" // string | Filters the results to only the items for which the `method` has been set to this value. (optional)
+    method := "card" // string | Filters the results to only the items for which the `method` has been set to this value. For example `card`. (optional)
     deleted := true // bool | Filters the results to only show items which have been deleted. By default, deleted items will not be returned. (optional) (default to false)
 
     configuration := openapiclient.NewConfiguration()
@@ -267,7 +201,7 @@ Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **limit** | **int32** | Defines the maximum number of items to return for this request. | [default to 20]
  **cursor** | **string** | A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the &#x60;next_cursor&#x60; field. Similarly the &#x60;previous_cursor&#x60; can be used to reverse backwards in the list. | 
- **method** | **string** | Filters the results to only the items for which the &#x60;method&#x60; has been set to this value. | 
+ **method** | **string** | Filters the results to only the items for which the &#x60;method&#x60; has been set to this value. For example &#x60;card&#x60;. | 
  **deleted** | **bool** | Filters the results to only show items which have been deleted. By default, deleted items will not be returned. | [default to false]
 
 ### Return type
@@ -281,6 +215,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## NewPaymentService
+
+> PaymentService NewPaymentService(ctx).PaymentServiceRequest(paymentServiceRequest).Execute()
+
+New payment service
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    paymentServiceRequest := *openapiclient.NewPaymentServiceRequest("stripe-card", "Stripe (Main)", []openapiclient.PaymentServiceRequestFields{*openapiclient.NewPaymentServiceRequestFields("private_key", "sk_test_26PHem9AhJZvU623DfE1x4sd")}, []string{"AcceptedCountries_example"}, []string{"AcceptedCurrencies_example"}) // PaymentServiceRequest |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PaymentServicesApi.NewPaymentService(context.Background()).PaymentServiceRequest(paymentServiceRequest).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PaymentServicesApi.NewPaymentService``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `NewPaymentService`: PaymentService
+    fmt.Fprintf(os.Stdout, "Response from `PaymentServicesApi.NewPaymentService`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNewPaymentServiceRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **paymentServiceRequest** | [**PaymentServiceRequest**](PaymentServiceRequest.md) |  | 
+
+### Return type
+
+[**PaymentService**](PaymentService.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

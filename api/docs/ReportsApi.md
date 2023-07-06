@@ -4,88 +4,22 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**AddReport**](ReportsApi.md#AddReport) | **Post** /reports | New report
-[**GenerateDownloadUrl**](ReportsApi.md#GenerateDownloadUrl) | **Post** /reports/{report_id}/executions/{report_execution_id}/url | Generate the download URL of a report execution result
+[**GenerateDownloadUrl**](ReportsApi.md#GenerateDownloadUrl) | **Post** /reports/{report_id}/executions/{report_execution_id}/url | Generate report download URL
 [**GetReport**](ReportsApi.md#GetReport) | **Get** /reports/{report_id} | Get report
 [**GetReportExecution**](ReportsApi.md#GetReportExecution) | **Get** /report-executions/{report_execution_id} | Get report execution
 [**ListAllReportExecutions**](ReportsApi.md#ListAllReportExecutions) | **Get** /report-executions | List all report executions
-[**ListReportExecutions**](ReportsApi.md#ListReportExecutions) | **Get** /reports/{report_id}/executions | List executions for a report
+[**ListReportExecutions**](ReportsApi.md#ListReportExecutions) | **Get** /reports/{report_id}/executions | List executions for report
 [**ListReports**](ReportsApi.md#ListReports) | **Get** /reports | List reports
+[**NewReport**](ReportsApi.md#NewReport) | **Post** /reports | New report
 [**UpdateReport**](ReportsApi.md#UpdateReport) | **Put** /reports/{report_id} | Update report
 
-
-
-## AddReport
-
-> Report AddReport(ctx).ReportCreate(reportCreate).Execute()
-
-New report
-
-
-
-### Example
-
-```go
-package main
-
-import (
-    "context"
-    "fmt"
-    "os"
-    openapiclient "./openapi"
-)
-
-func main() {
-    reportCreate := *openapiclient.NewReportCreate("Failed Authorizations 042022", *openapiclient.NewReportSpec("transactions", map[string]map[string]interface{}{"key": map[string]interface{}(123)})) // ReportCreate |  (optional)
-
-    configuration := openapiclient.NewConfiguration()
-    api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReportsApi.AddReport(context.Background()).ReportCreate(reportCreate).Execute()
-    if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `ReportsApi.AddReport``: %v\n", err)
-        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
-    }
-    // response from `AddReport`: Report
-    fmt.Fprintf(os.Stdout, "Response from `ReportsApi.AddReport`: %v\n", resp)
-}
-```
-
-### Path Parameters
-
-
-
-### Other Parameters
-
-Other parameters are passed through a pointer to a apiAddReportRequest struct via the builder pattern
-
-
-Name | Type | Description  | Notes
-------------- | ------------- | ------------- | -------------
- **reportCreate** | [**ReportCreate**](ReportCreate.md) |  | 
-
-### Return type
-
-[**Report**](Report.md)
-
-### Authorization
-
-[BearerAuth](../README.md#BearerAuth)
-
-### HTTP request headers
-
-- **Content-Type**: application/json
-- **Accept**: application/json
-
-[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
-[[Back to Model list]](../README.md#documentation-for-models)
-[[Back to README]](../README.md)
 
 
 ## GenerateDownloadUrl
 
 > ReportExecutionUrl GenerateDownloadUrl(ctx, reportId, reportExecutionId).Execute()
 
-Generate the download URL of a report execution result
+Generate report download URL
 
 
 
@@ -296,7 +230,7 @@ Name | Type | Description  | Notes
 
 ## ListAllReportExecutions
 
-> ReportExecutions ListAllReportExecutions(ctx).Cursor(cursor).Limit(limit).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).ReportName(reportName).Status(status).Execute()
+> ReportExecutions ListAllReportExecutions(ctx).Cursor(cursor).Limit(limit).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).ReportName(reportName).Status(status).CreatorId(creatorId).Execute()
 
 List all report executions
 
@@ -322,10 +256,11 @@ func main() {
     createdAtLte := time.Now() // time.Time | Filters the results to report executions created before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`. (optional)
     reportName := "Failed+Authorizations+042022" // string | Filters for executions of reports that have a matching `name` value. This filter is case-insensitive.  Ensure that when necessary, the value you pass for this filter is URL encoded. (optional)
     status := []string{"succeeded"} // []string | Filters for report executions that have a matching `status` value.  This filter accepts multiple values. (optional)
+    creatorId := []string{"Inner_example"} // []string | Filters the results to only match the reports that their `creator_id` matches with any of the provided creator IDs. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.ReportsApi.ListAllReportExecutions(context.Background()).Cursor(cursor).Limit(limit).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).ReportName(reportName).Status(status).Execute()
+    resp, r, err := api_client.ReportsApi.ListAllReportExecutions(context.Background()).Cursor(cursor).Limit(limit).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).ReportName(reportName).Status(status).CreatorId(creatorId).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `ReportsApi.ListAllReportExecutions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -352,6 +287,7 @@ Name | Type | Description  | Notes
  **createdAtLte** | **time.Time** | Filters the results to report executions created before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;. | 
  **reportName** | **string** | Filters for executions of reports that have a matching &#x60;name&#x60; value. This filter is case-insensitive.  Ensure that when necessary, the value you pass for this filter is URL encoded. | 
  **status** | **[]string** | Filters for report executions that have a matching &#x60;status&#x60; value.  This filter accepts multiple values. | 
+ **creatorId** | **[]string** | Filters the results to only match the reports that their &#x60;creator_id&#x60; matches with any of the provided creator IDs. | 
 
 ### Return type
 
@@ -375,7 +311,7 @@ Name | Type | Description  | Notes
 
 > ReportExecutions ListReportExecutions(ctx, reportId).Cursor(cursor).Limit(limit).Execute()
 
-List executions for a report
+List executions for report
 
 
 
@@ -512,6 +448,72 @@ Name | Type | Description  | Notes
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## NewReport
+
+> Report NewReport(ctx).ReportCreate(reportCreate).Execute()
+
+New report
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    reportCreate := *openapiclient.NewReportCreate("Failed Authorizations 042022", *openapiclient.NewReportSpec("transactions", map[string]map[string]interface{}{"key": map[string]interface{}(123)})) // ReportCreate |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.ReportsApi.NewReport(context.Background()).ReportCreate(reportCreate).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `ReportsApi.NewReport``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `NewReport`: Report
+    fmt.Fprintf(os.Stdout, "Response from `ReportsApi.NewReport`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiNewReportRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+ **reportCreate** | [**ReportCreate**](ReportCreate.md) |  | 
+
+### Return type
+
+[**Report**](Report.md)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)

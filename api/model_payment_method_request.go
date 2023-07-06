@@ -25,8 +25,6 @@ type PaymentMethodRequest struct {
 	Number *string `json:"number,omitempty"`
 	// The expiration date of the card, formatted `MM/YY`. If a card has been previously stored with us this value is optional.
 	ExpirationDate *string `json:"expiration_date,omitempty"`
-	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
-	SecurityCode *string `json:"security_code,omitempty"`
 	// An external identifier that can be used to match the card against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// The ID of the buyer to associate this payment method to. If this field is provided then the `buyer_external_identifier` field needs to be unset.
@@ -177,38 +175,6 @@ func (o *PaymentMethodRequest) HasExpirationDate() bool {
 // SetExpirationDate gets a reference to the given string and assigns it to the ExpirationDate field.
 func (o *PaymentMethodRequest) SetExpirationDate(v string) {
 	o.ExpirationDate = &v
-}
-
-// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise.
-func (o *PaymentMethodRequest) GetSecurityCode() string {
-	if o == nil || o.SecurityCode == nil {
-		var ret string
-		return ret
-	}
-	return *o.SecurityCode
-}
-
-// GetSecurityCodeOk returns a tuple with the SecurityCode field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentMethodRequest) GetSecurityCodeOk() (*string, bool) {
-	if o == nil || o.SecurityCode == nil {
-		return nil, false
-	}
-	return o.SecurityCode, true
-}
-
-// HasSecurityCode returns a boolean if a field has been set.
-func (o *PaymentMethodRequest) HasSecurityCode() bool {
-	if o != nil && o.SecurityCode != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetSecurityCode gets a reference to the given string and assigns it to the SecurityCode field.
-func (o *PaymentMethodRequest) SetSecurityCode(v string) {
-	o.SecurityCode = &v
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -426,9 +392,6 @@ func (o PaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExpirationDate != nil {
 		toSerialize["expiration_date"] = o.ExpirationDate
-	}
-	if o.SecurityCode != nil {
-		toSerialize["security_code"] = o.SecurityCode
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()

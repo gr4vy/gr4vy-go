@@ -22,6 +22,8 @@ type Buyer struct {
 	Type *string `json:"type,omitempty"`
 	// The unique Gr4vy ID for this buyer.
 	Id *string `json:"id,omitempty"`
+	// The unique ID for a merchant account.
+	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
 	// An external identifier that can be used to match the buyer against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.
@@ -113,6 +115,38 @@ func (o *Buyer) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *Buyer) SetId(v string) {
 	o.Id = &v
+}
+
+// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
+func (o *Buyer) GetMerchantAccountId() string {
+	if o == nil || o.MerchantAccountId == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantAccountId
+}
+
+// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Buyer) GetMerchantAccountIdOk() (*string, bool) {
+	if o == nil || o.MerchantAccountId == nil {
+		return nil, false
+	}
+	return o.MerchantAccountId, true
+}
+
+// HasMerchantAccountId returns a boolean if a field has been set.
+func (o *Buyer) HasMerchantAccountId() bool {
+	if o != nil && o.MerchantAccountId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountId gets a reference to the given string and assigns it to the MerchantAccountId field.
+func (o *Buyer) SetMerchantAccountId(v string) {
+	o.MerchantAccountId = &v
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -312,6 +346,9 @@ func (o Buyer) MarshalJSON() ([]byte, error) {
 	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
+	}
+	if o.MerchantAccountId != nil {
+		toSerialize["merchant_account_id"] = o.MerchantAccountId
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()

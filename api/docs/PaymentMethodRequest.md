@@ -8,7 +8,6 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The ID of a Checkout Session. | [optional] 
 **Number** | Pointer to **string** | The 13-19 digit number for this credit card as it can be found on the front of the card. | [optional] 
 **ExpirationDate** | Pointer to **string** | The expiration date of the card, formatted &#x60;MM/YY&#x60;. If a card has been previously stored with us this value is optional. | [optional] 
-**SecurityCode** | Pointer to **string** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the card against your own records. | [optional] 
 **BuyerId** | Pointer to **string** | The ID of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_external_identifier&#x60; field needs to be unset. | [optional] 
 **BuyerExternalIdentifier** | Pointer to **string** | The &#x60;external_identifier&#x60; of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_id&#x60; field needs to be unset. | [optional] 
@@ -129,31 +128,6 @@ SetExpirationDate sets ExpirationDate field to given value.
 `func (o *PaymentMethodRequest) HasExpirationDate() bool`
 
 HasExpirationDate returns a boolean if a field has been set.
-
-### GetSecurityCode
-
-`func (o *PaymentMethodRequest) GetSecurityCode() string`
-
-GetSecurityCode returns the SecurityCode field if non-nil, zero value otherwise.
-
-### GetSecurityCodeOk
-
-`func (o *PaymentMethodRequest) GetSecurityCodeOk() (*string, bool)`
-
-GetSecurityCodeOk returns a tuple with the SecurityCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetSecurityCode
-
-`func (o *PaymentMethodRequest) SetSecurityCode(v string)`
-
-SetSecurityCode sets SecurityCode field to given value.
-
-### HasSecurityCode
-
-`func (o *PaymentMethodRequest) HasSecurityCode() bool`
-
-HasSecurityCode returns a boolean if a field has been set.
 
 ### GetExternalIdentifier
 

@@ -6,7 +6,8 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;transaction&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this transaction. | [optional] 
-**Status** | Pointer to **string** | The status of the transaction. The status may change over time as asynchronous processing events occur. | [optional] 
+**MerchantAccountId** | Pointer to **string** | The ID of the merchant account to which this transaction belongs to. | [optional] 
+**Status** | Pointer to **string** | The status of the transaction. The status may change over time as asynchronous processing events occur.  Please note that the possible statuses returned will depend on the operation performed. For example, a captured transaction will never move to a &#x60;authorization_voided&#x60; status. | [optional] 
 **Intent** | Pointer to **string** | The original &#x60;intent&#x60; used when the transaction was [created](#operation/authorize-new-transaction). | [optional] 
 **Amount** | Pointer to **int32** | The authorized amount for this transaction. This can be more than the actual captured amount and part of this amount may be refunded. | [optional] 
 **CapturedAmount** | Pointer to **int32** | The captured amount for this transaction. This can be the total or a portion of the authorized amount. | [optional] 
@@ -19,6 +20,7 @@ Name | Type | Description | Notes
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
 **PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) | The payment service used for this transaction. | [optional] 
+**PendingReview** | Pointer to **bool** | Whether a manual review is pending. | [optional] 
 **MerchantInitiated** | Pointer to **bool** | Indicates whether the transaction was initiated by the merchant (true) or customer (false). | [optional] [default to false]
 **PaymentSource** | Pointer to **string** | The source of the transaction. Defaults to &#x60;ecommerce&#x60;. | [optional] 
 **IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.  The flag can only be &#x60;false&#x60; (or not set) when the transaction meets one of the following criteria:  * It is not &#x60;merchant_initiated&#x60;. * &#x60;payment_source&#x60; is set to &#x60;card_on_file&#x60;.  The flag can only be set to &#x60;true&#x60; when the transaction meets one of the following criteria:  * It is not &#x60;merchant_initiated&#x60;. * &#x60;payment_source&#x60; is set to &#x60;recurring&#x60; or &#x60;installment&#x60; and &#x60;merchant_initiated&#x60; is set to &#x60;true&#x60;. * &#x60;payment_source&#x60; is set to &#x60;card_on_file&#x60;. | [optional] [default to false]
@@ -37,6 +39,7 @@ Name | Type | Description | Notes
 **AuthorizedAt** | Pointer to **NullableTime** | The date and time when this transaction was authorized in the payment service.  Don&#39;t use this field to determine whether the transaction was authorized. A &#x60;null&#x60; value doesn&#39;t necessarily imply that the transaction wasn&#39;t authorized, it can mean that the payment service doesn&#39;t provide this value, that it didn&#39;t provide it at the time the transaction was authorized or that the transaction was authorized before the introduction of this field. | [optional] 
 **CapturedAt** | Pointer to **NullableTime** | The date and time when this transaction was captured in the payment service.  Don&#39;t use this field to determine whether the transaction was captured. A &#x60;null&#x60; value doesn&#39;t necessarily imply that the transaction wasn&#39;t captured, it can mean that the payment service doesn&#39;t provide this value, that it didn&#39;t provide it at the time the transaction was captured or that the transaction was captured before the introduction of this field. | [optional] 
 **VoidedAt** | Pointer to **NullableTime** | The date and time when this transaction was voided in the payment service.  Don&#39;t use this field to determine whether the transaction was voided. A &#x60;null&#x60; value doesn&#39;t necessarily imply that the transaction wasn&#39;t voided, it can mean that the payment service doesn&#39;t provide this value, that it didn&#39;t provide it at the time the transaction was voided or that the transaction was voided before the introduction of this field. | [optional] 
+**CheckoutSessionId** | Pointer to **string** | The identifier for the checkout session this transaction is associated with. | [optional] 
 
 ## Methods
 
@@ -106,6 +109,31 @@ SetId sets Id field to given value.
 `func (o *Transaction) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetMerchantAccountId
+
+`func (o *Transaction) GetMerchantAccountId() string`
+
+GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
+
+### GetMerchantAccountIdOk
+
+`func (o *Transaction) GetMerchantAccountIdOk() (*string, bool)`
+
+GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantAccountId
+
+`func (o *Transaction) SetMerchantAccountId(v string)`
+
+SetMerchantAccountId sets MerchantAccountId field to given value.
+
+### HasMerchantAccountId
+
+`func (o *Transaction) HasMerchantAccountId() bool`
+
+HasMerchantAccountId returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -461,6 +489,31 @@ SetPaymentService sets PaymentService field to given value.
 `func (o *Transaction) HasPaymentService() bool`
 
 HasPaymentService returns a boolean if a field has been set.
+
+### GetPendingReview
+
+`func (o *Transaction) GetPendingReview() bool`
+
+GetPendingReview returns the PendingReview field if non-nil, zero value otherwise.
+
+### GetPendingReviewOk
+
+`func (o *Transaction) GetPendingReviewOk() (*bool, bool)`
+
+GetPendingReviewOk returns a tuple with the PendingReview field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPendingReview
+
+`func (o *Transaction) SetPendingReview(v bool)`
+
+SetPendingReview sets PendingReview field to given value.
+
+### HasPendingReview
+
+`func (o *Transaction) HasPendingReview() bool`
+
+HasPendingReview returns a boolean if a field has been set.
 
 ### GetMerchantInitiated
 
@@ -1012,6 +1065,31 @@ HasVoidedAt returns a boolean if a field has been set.
 `func (o *Transaction) UnsetVoidedAt()`
 
 UnsetVoidedAt ensures that no value is present for VoidedAt, not even an explicit nil
+### GetCheckoutSessionId
+
+`func (o *Transaction) GetCheckoutSessionId() string`
+
+GetCheckoutSessionId returns the CheckoutSessionId field if non-nil, zero value otherwise.
+
+### GetCheckoutSessionIdOk
+
+`func (o *Transaction) GetCheckoutSessionIdOk() (*string, bool)`
+
+GetCheckoutSessionIdOk returns a tuple with the CheckoutSessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCheckoutSessionId
+
+`func (o *Transaction) SetCheckoutSessionId(v string)`
+
+SetCheckoutSessionId sets CheckoutSessionId field to given value.
+
+### HasCheckoutSessionId
+
+`func (o *Transaction) HasCheckoutSessionId() bool`
+
+HasCheckoutSessionId returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

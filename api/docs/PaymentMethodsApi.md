@@ -5,10 +5,10 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeletePaymentMethod**](PaymentMethodsApi.md#DeletePaymentMethod) | **Delete** /payment-methods/{payment_method_id} | Delete payment method
-[**GetPaymentMethod**](PaymentMethodsApi.md#GetPaymentMethod) | **Get** /payment-methods/{payment_method_id} | Get stored payment method
-[**ListBuyerPaymentMethods**](PaymentMethodsApi.md#ListBuyerPaymentMethods) | **Get** /buyers/payment-methods | List stored payment methods for a buyer
+[**GetPaymentMethod**](PaymentMethodsApi.md#GetPaymentMethod) | **Get** /payment-methods/{payment_method_id} | Get payment method
+[**ListBuyerPaymentMethods**](PaymentMethodsApi.md#ListBuyerPaymentMethods) | **Get** /buyers/payment-methods | List payment methods for buyer
 [**ListPaymentMethods**](PaymentMethodsApi.md#ListPaymentMethods) | **Get** /payment-methods | List payment methods
-[**StorePaymentMethod**](PaymentMethodsApi.md#StorePaymentMethod) | **Post** /payment-methods | New payment method
+[**NewPaymentMethod**](PaymentMethodsApi.md#NewPaymentMethod) | **Post** /payment-methods | New payment method
 
 
 
@@ -84,7 +84,7 @@ Name | Type | Description  | Notes
 
 > PaymentMethod GetPaymentMethod(ctx, paymentMethodId).Execute()
 
-Get stored payment method
+Get payment method
 
 
 
@@ -154,7 +154,7 @@ Name | Type | Description  | Notes
 
 > PaymentMethodsTokenized ListBuyerPaymentMethods(ctx).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Country(country).Currency(currency).Execute()
 
-List stored payment methods for a buyer
+List payment methods for buyer
 
 
 
@@ -296,9 +296,9 @@ Name | Type | Description  | Notes
 [[Back to README]](../README.md)
 
 
-## StorePaymentMethod
+## NewPaymentMethod
 
-> PaymentMethod StorePaymentMethod(ctx).PaymentMethodRequest(paymentMethodRequest).Execute()
+> PaymentMethod NewPaymentMethod(ctx).PaymentMethodRequest(paymentMethodRequest).Execute()
 
 New payment method
 
@@ -321,13 +321,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.PaymentMethodsApi.StorePaymentMethod(context.Background()).PaymentMethodRequest(paymentMethodRequest).Execute()
+    resp, r, err := api_client.PaymentMethodsApi.NewPaymentMethod(context.Background()).PaymentMethodRequest(paymentMethodRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `PaymentMethodsApi.StorePaymentMethod``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `PaymentMethodsApi.NewPaymentMethod``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `StorePaymentMethod`: PaymentMethod
-    fmt.Fprintf(os.Stdout, "Response from `PaymentMethodsApi.StorePaymentMethod`: %v\n", resp)
+    // response from `NewPaymentMethod`: PaymentMethod
+    fmt.Fprintf(os.Stdout, "Response from `PaymentMethodsApi.NewPaymentMethod`: %v\n", resp)
 }
 ```
 
@@ -337,7 +337,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiStorePaymentMethodRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiNewPaymentMethodRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes

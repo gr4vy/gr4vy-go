@@ -28,278 +28,6 @@ var (
 // BuyersApiService BuyersApi service
 type BuyersApiService service
 
-type ApiAddBuyerRequest struct {
-	ctx _context.Context
-	ApiService *BuyersApiService
-	buyerRequest *BuyerRequest
-}
-
-func (r ApiAddBuyerRequest) BuyerRequest(buyerRequest BuyerRequest) ApiAddBuyerRequest {
-	r.buyerRequest = &buyerRequest
-	return r
-}
-
-func (r ApiAddBuyerRequest) Execute() (Buyer, *_nethttp.Response, error) {
-	return r.ApiService.AddBuyerExecute(r)
-}
-
-/*
- * AddBuyer New buyer
- * Adds a buyer, allowing for payment methods and transactions to be associated
-to this buyer.
-
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiAddBuyerRequest
- */
-func (a *BuyersApiService) AddBuyer(ctx _context.Context) ApiAddBuyerRequest {
-	return ApiAddBuyerRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-/*
- * Execute executes the request
- * @return Buyer
- */
-func (a *BuyersApiService) AddBuyerExecute(r ApiAddBuyerRequest) (Buyer, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Buyer
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.AddBuyer")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/buyers"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.buyerRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error401Unauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v Error409DuplicateRecord
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
-type ApiAddBuyerShippingDetailRequest struct {
-	ctx _context.Context
-	ApiService *BuyersApiService
-	buyerId string
-	shippingDetailRequest *ShippingDetailRequest
-}
-
-func (r ApiAddBuyerShippingDetailRequest) ShippingDetailRequest(shippingDetailRequest ShippingDetailRequest) ApiAddBuyerShippingDetailRequest {
-	r.shippingDetailRequest = &shippingDetailRequest
-	return r
-}
-
-func (r ApiAddBuyerShippingDetailRequest) Execute() (ShippingDetail, *_nethttp.Response, error) {
-	return r.ApiService.AddBuyerShippingDetailExecute(r)
-}
-
-/*
- * AddBuyerShippingDetail New buyer shipping detail
- * Adds a buyer shipping detail.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param buyerId The unique ID for a buyer.
- * @return ApiAddBuyerShippingDetailRequest
- */
-func (a *BuyersApiService) AddBuyerShippingDetail(ctx _context.Context, buyerId string) ApiAddBuyerShippingDetailRequest {
-	return ApiAddBuyerShippingDetailRequest{
-		ApiService: a,
-		ctx: ctx,
-		buyerId: buyerId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return ShippingDetail
- */
-func (a *BuyersApiService) AddBuyerShippingDetailExecute(r ApiAddBuyerShippingDetailRequest) (ShippingDetail, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  ShippingDetail
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.AddBuyerShippingDetail")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/buyers/{buyer_id}/shipping-details"
-	localVarPath = strings.Replace(localVarPath, "{"+"buyer_id"+"}", _neturl.PathEscape(parameterToString(r.buyerId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	// body params
-	localVarPostBody = r.shippingDetailRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error401Unauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiDeleteBuyerRequest struct {
 	ctx _context.Context
 	ApiService *BuyersApiService
@@ -666,26 +394,26 @@ func (a *BuyersApiService) GetBuyerExecute(r ApiGetBuyerRequest) (Buyer, *_netht
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetBuyerShippingDetailsRequest struct {
+type ApiListBuyerShippingDetailsRequest struct {
 	ctx _context.Context
 	ApiService *BuyersApiService
 	buyerId string
 }
 
 
-func (r ApiGetBuyerShippingDetailsRequest) Execute() (ShippingDetails, *_nethttp.Response, error) {
-	return r.ApiService.GetBuyerShippingDetailsExecute(r)
+func (r ApiListBuyerShippingDetailsRequest) Execute() (ShippingDetails, *_nethttp.Response, error) {
+	return r.ApiService.ListBuyerShippingDetailsExecute(r)
 }
 
 /*
- * GetBuyerShippingDetails Get buyer shipping details
+ * ListBuyerShippingDetails List buyer shipping details
  * Retrieve all shipping details for a buyer.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param buyerId The unique ID for a buyer.
- * @return ApiGetBuyerShippingDetailsRequest
+ * @return ApiListBuyerShippingDetailsRequest
  */
-func (a *BuyersApiService) GetBuyerShippingDetails(ctx _context.Context, buyerId string) ApiGetBuyerShippingDetailsRequest {
-	return ApiGetBuyerShippingDetailsRequest{
+func (a *BuyersApiService) ListBuyerShippingDetails(ctx _context.Context, buyerId string) ApiListBuyerShippingDetailsRequest {
+	return ApiListBuyerShippingDetailsRequest{
 		ApiService: a,
 		ctx: ctx,
 		buyerId: buyerId,
@@ -696,7 +424,7 @@ func (a *BuyersApiService) GetBuyerShippingDetails(ctx _context.Context, buyerId
  * Execute executes the request
  * @return ShippingDetails
  */
-func (a *BuyersApiService) GetBuyerShippingDetailsExecute(r ApiGetBuyerShippingDetailsRequest) (ShippingDetails, *_nethttp.Response, error) {
+func (a *BuyersApiService) ListBuyerShippingDetailsExecute(r ApiListBuyerShippingDetailsRequest) (ShippingDetails, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodGet
 		localVarPostBody     interface{}
@@ -706,7 +434,7 @@ func (a *BuyersApiService) GetBuyerShippingDetailsExecute(r ApiGetBuyerShippingD
 		localVarReturnValue  ShippingDetails
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.GetBuyerShippingDetails")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.ListBuyerShippingDetails")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -924,6 +652,278 @@ func (a *BuyersApiService) ListBuyersExecute(r ApiListBuyersRequest) (Buyers, *_
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiNewBuyerRequest struct {
+	ctx _context.Context
+	ApiService *BuyersApiService
+	buyerRequest *BuyerRequest
+}
+
+func (r ApiNewBuyerRequest) BuyerRequest(buyerRequest BuyerRequest) ApiNewBuyerRequest {
+	r.buyerRequest = &buyerRequest
+	return r
+}
+
+func (r ApiNewBuyerRequest) Execute() (Buyer, *_nethttp.Response, error) {
+	return r.ApiService.NewBuyerExecute(r)
+}
+
+/*
+ * NewBuyer New buyer
+ * Adds a buyer, allowing for payment methods and transactions to be associated
+to this buyer.
+
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiNewBuyerRequest
+ */
+func (a *BuyersApiService) NewBuyer(ctx _context.Context) ApiNewBuyerRequest {
+	return ApiNewBuyerRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Buyer
+ */
+func (a *BuyersApiService) NewBuyerExecute(r ApiNewBuyerRequest) (Buyer, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Buyer
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.NewBuyer")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/buyers"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.buyerRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorGeneric
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Error409DuplicateRecord
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiNewBuyerShippingDetailRequest struct {
+	ctx _context.Context
+	ApiService *BuyersApiService
+	buyerId string
+	shippingDetailRequest *ShippingDetailRequest
+}
+
+func (r ApiNewBuyerShippingDetailRequest) ShippingDetailRequest(shippingDetailRequest ShippingDetailRequest) ApiNewBuyerShippingDetailRequest {
+	r.shippingDetailRequest = &shippingDetailRequest
+	return r
+}
+
+func (r ApiNewBuyerShippingDetailRequest) Execute() (ShippingDetail, *_nethttp.Response, error) {
+	return r.ApiService.NewBuyerShippingDetailExecute(r)
+}
+
+/*
+ * NewBuyerShippingDetail New buyer shipping detail
+ * Adds a buyer shipping detail.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param buyerId The unique ID for a buyer.
+ * @return ApiNewBuyerShippingDetailRequest
+ */
+func (a *BuyersApiService) NewBuyerShippingDetail(ctx _context.Context, buyerId string) ApiNewBuyerShippingDetailRequest {
+	return ApiNewBuyerShippingDetailRequest{
+		ApiService: a,
+		ctx: ctx,
+		buyerId: buyerId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return ShippingDetail
+ */
+func (a *BuyersApiService) NewBuyerShippingDetailExecute(r ApiNewBuyerShippingDetailRequest) (ShippingDetail, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  ShippingDetail
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "BuyersApiService.NewBuyerShippingDetail")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/buyers/{buyer_id}/shipping-details"
+	localVarPath = strings.Replace(localVarPath, "{"+"buyer_id"+"}", _neturl.PathEscape(parameterToString(r.buyerId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.shippingDetailRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorGeneric
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiUpdateBuyerRequest struct {
 	ctx _context.Context
 	ApiService *BuyersApiService
@@ -1095,8 +1095,8 @@ func (r ApiUpdateBuyerShippingDetailRequest) Execute() (ShippingDetail, *_nethtt
 }
 
 /*
- * UpdateBuyerShippingDetail Update buyer shipping detail
- * Updates a shipping detail for a buyer.
+ * UpdateBuyerShippingDetail Update buyer shipping details
+ * Updates shipping detail for a buyer.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param buyerId The unique ID for a buyer.
  * @param shippingDetailId The unique ID for a buyer's shipping detail.

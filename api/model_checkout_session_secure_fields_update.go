@@ -17,7 +17,7 @@ import (
 
 // CheckoutSessionSecureFieldsUpdate A request to update the secure fields of a checkout session.
 type CheckoutSessionSecureFieldsUpdate struct {
-	PaymentMethod *CardRequest `json:"payment_method,omitempty"`
+	PaymentMethod *CheckoutSessionFieldsPaymentMethod `json:"payment_method,omitempty"`
 }
 
 // NewCheckoutSessionSecureFieldsUpdate instantiates a new CheckoutSessionSecureFieldsUpdate object
@@ -38,9 +38,9 @@ func NewCheckoutSessionSecureFieldsUpdateWithDefaults() *CheckoutSessionSecureFi
 }
 
 // GetPaymentMethod returns the PaymentMethod field value if set, zero value otherwise.
-func (o *CheckoutSessionSecureFieldsUpdate) GetPaymentMethod() CardRequest {
+func (o *CheckoutSessionSecureFieldsUpdate) GetPaymentMethod() CheckoutSessionFieldsPaymentMethod {
 	if o == nil || o.PaymentMethod == nil {
-		var ret CardRequest
+		var ret CheckoutSessionFieldsPaymentMethod
 		return ret
 	}
 	return *o.PaymentMethod
@@ -48,7 +48,7 @@ func (o *CheckoutSessionSecureFieldsUpdate) GetPaymentMethod() CardRequest {
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *CheckoutSessionSecureFieldsUpdate) GetPaymentMethodOk() (*CardRequest, bool) {
+func (o *CheckoutSessionSecureFieldsUpdate) GetPaymentMethodOk() (*CheckoutSessionFieldsPaymentMethod, bool) {
 	if o == nil || o.PaymentMethod == nil {
 		return nil, false
 	}
@@ -64,8 +64,8 @@ func (o *CheckoutSessionSecureFieldsUpdate) HasPaymentMethod() bool {
 	return false
 }
 
-// SetPaymentMethod gets a reference to the given CardRequest and assigns it to the PaymentMethod field.
-func (o *CheckoutSessionSecureFieldsUpdate) SetPaymentMethod(v CardRequest) {
+// SetPaymentMethod gets a reference to the given CheckoutSessionFieldsPaymentMethod and assigns it to the PaymentMethod field.
+func (o *CheckoutSessionSecureFieldsUpdate) SetPaymentMethod(v CheckoutSessionFieldsPaymentMethod) {
 	o.PaymentMethod = &v
 }
 

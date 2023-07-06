@@ -1,8 +1,9 @@
 package gr4vy
 
 import (
-	"net/http"
 	"context"
+	"net/http"
+
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
@@ -90,7 +91,7 @@ func (c *Gr4vyClient) StorePaymentMethod(body Gr4vyPaymentMethodRequest) (*Gr4vy
         return nil, nil, err
     }
     auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
-    p := client.PaymentMethodsApi.StorePaymentMethod(auth)
+    p := client.PaymentMethodsApi.NewPaymentMethod(auth)
 
     var b PaymentMethodRequest = PaymentMethodRequest(body)
     response, http, err := p.PaymentMethodRequest(b).Execute()
@@ -107,7 +108,7 @@ func (c *Gr4vyClient) StorePaymentMethodContext(ctx context.Context, body Gr4vyP
         return nil, nil, err
     }
     auth := context.WithValue(ctx, ContextAccessToken, c.accessToken)
-    p := client.PaymentMethodsApi.StorePaymentMethod(auth)
+    p := client.PaymentMethodsApi.NewPaymentMethod(auth)
 
     var b PaymentMethodRequest = PaymentMethodRequest(body)
     response, http, err := p.PaymentMethodRequest(b).Execute()

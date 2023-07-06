@@ -4,7 +4,7 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**ListApiLogs**](APILogsApi.md#ListApiLogs) | **Get** /api-logs | List API error Logs
+[**ListApiLogs**](APILogsApi.md#ListApiLogs) | **Get** /api-logs | List API error logs
 
 
 
@@ -12,7 +12,7 @@ Method | HTTP request | Description
 
 > ApiLogs ListApiLogs(ctx).Execute()
 
-List API error Logs
+List API error logs
 
 
 

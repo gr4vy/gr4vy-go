@@ -38,7 +38,7 @@ func (r ApiListApiLogsRequest) Execute() (ApiLogs, *_nethttp.Response, error) {
 }
 
 /*
- * ListApiLogs List API error Logs
+ * ListApiLogs List API error logs
  * Returns a list of API 4XX and 5XX logs.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListApiLogsRequest

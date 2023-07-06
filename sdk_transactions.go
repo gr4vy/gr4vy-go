@@ -1,8 +1,9 @@
 package gr4vy
 
 import (
-	"net/http"
 	"context"
+	"net/http"
+
 	. "github.com/gr4vy/gr4vy-go/api"
 )
 
@@ -95,7 +96,7 @@ func (c *Gr4vyClient) AuthorizeNewTransaction(body Gr4vyTransactionRequest, pm G
         return nil, nil, err
     }
     auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
-    p := client.TransactionsApi.AuthorizeNewTransaction(auth)
+    p := client.TransactionsApi.NewTransaction(auth)
 
     var b TransactionRequest = TransactionRequest(body)
     var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
@@ -114,7 +115,7 @@ func (c *Gr4vyClient) AuthorizeNewTransactionContext(ctx context.Context, body G
         return nil, nil, err
     }
     auth := context.WithValue(ctx, ContextAccessToken, c.accessToken)
-    p := client.TransactionsApi.AuthorizeNewTransaction(auth)
+    p := client.TransactionsApi.NewTransaction(auth)
 
     var b TransactionRequest = TransactionRequest(body)
     var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
@@ -133,7 +134,7 @@ func (c *Gr4vyClient) AuthorizeNewTransactionWithIdempotencyKey(body Gr4vyTransa
         return nil, nil, err
     }
     auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
-    p := client.TransactionsApi.AuthorizeNewTransaction(auth)
+    p := client.TransactionsApi.NewTransaction(auth)
 
     p = p.IdempotencyKey(ik)
     
@@ -154,7 +155,7 @@ func (c *Gr4vyClient) AuthorizeNewTransactionContextWithIdempotencyKey(ctx conte
         return nil, nil, err
     }
     auth := context.WithValue(ctx, ContextAccessToken, c.accessToken)
-    p := client.TransactionsApi.AuthorizeNewTransaction(auth)
+    p := client.TransactionsApi.NewTransaction(auth)
     
     p = p.IdempotencyKey(ik)
 
@@ -211,7 +212,7 @@ func (c *Gr4vyClient) RefundTransaction(transaction_id string, body Gr4vyTransac
         return nil, nil, err
     }
     auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
-    p := client.TransactionsApi.RefundTransaction(auth, transaction_id)
+    p := client.TransactionsApi.NewRefund(auth, transaction_id)
 
     var b TransactionRefundRequest = TransactionRefundRequest(body)
     response, http, err := p.TransactionRefundRequest(b).Execute()
@@ -228,7 +229,7 @@ func (c *Gr4vyClient) RefundTransactionContext(ctx context.Context, transaction_
         return nil, nil, err
     }
     auth := context.WithValue(ctx, ContextAccessToken, c.accessToken)
-    p := client.TransactionsApi.RefundTransaction(auth, transaction_id)
+    p := client.TransactionsApi.NewRefund(auth, transaction_id)
 
     var b TransactionRefundRequest = TransactionRefundRequest(body)
     response, http, err := p.TransactionRefundRequest(b).Execute()

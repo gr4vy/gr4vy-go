@@ -15,7 +15,11 @@ Name | Type | Description | Notes
 **LatestExecution** | Pointer to [**NullableReportExecutionSummary**](ReportExecutionSummary.md) | Details of the latest execution of this report. | [optional] 
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;report&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this report. | [optional] 
+**MerchantAccountId** | Pointer to **string** | The unique ID for a merchant account. | [optional] 
 **Name** | Pointer to **string** | The name of this report. | [optional] 
+**CreatorId** | Pointer to **NullableString** | The unique identifier for the creator of this report. | [optional] 
+**CreatorDisplayName** | Pointer to **NullableString** | The name of the creator of this report. | [optional] 
+**CreatorType** | Pointer to **NullableString** | The type of the creator of this report. | [optional] 
 
 ## Methods
 
@@ -341,6 +345,31 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
+### GetMerchantAccountId
+
+`func (o *Report) GetMerchantAccountId() string`
+
+GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
+
+### GetMerchantAccountIdOk
+
+`func (o *Report) GetMerchantAccountIdOk() (*string, bool)`
+
+GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantAccountId
+
+`func (o *Report) SetMerchantAccountId(v string)`
+
+SetMerchantAccountId sets MerchantAccountId field to given value.
+
+### HasMerchantAccountId
+
+`func (o *Report) HasMerchantAccountId() bool`
+
+HasMerchantAccountId returns a boolean if a field has been set.
+
 ### GetName
 
 `func (o *Report) GetName() string`
@@ -366,6 +395,111 @@ SetName sets Name field to given value.
 
 HasName returns a boolean if a field has been set.
 
+### GetCreatorId
+
+`func (o *Report) GetCreatorId() string`
+
+GetCreatorId returns the CreatorId field if non-nil, zero value otherwise.
+
+### GetCreatorIdOk
+
+`func (o *Report) GetCreatorIdOk() (*string, bool)`
+
+GetCreatorIdOk returns a tuple with the CreatorId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatorId
+
+`func (o *Report) SetCreatorId(v string)`
+
+SetCreatorId sets CreatorId field to given value.
+
+### HasCreatorId
+
+`func (o *Report) HasCreatorId() bool`
+
+HasCreatorId returns a boolean if a field has been set.
+
+### SetCreatorIdNil
+
+`func (o *Report) SetCreatorIdNil(b bool)`
+
+ SetCreatorIdNil sets the value for CreatorId to be an explicit nil
+
+### UnsetCreatorId
+`func (o *Report) UnsetCreatorId()`
+
+UnsetCreatorId ensures that no value is present for CreatorId, not even an explicit nil
+### GetCreatorDisplayName
+
+`func (o *Report) GetCreatorDisplayName() string`
+
+GetCreatorDisplayName returns the CreatorDisplayName field if non-nil, zero value otherwise.
+
+### GetCreatorDisplayNameOk
+
+`func (o *Report) GetCreatorDisplayNameOk() (*string, bool)`
+
+GetCreatorDisplayNameOk returns a tuple with the CreatorDisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatorDisplayName
+
+`func (o *Report) SetCreatorDisplayName(v string)`
+
+SetCreatorDisplayName sets CreatorDisplayName field to given value.
+
+### HasCreatorDisplayName
+
+`func (o *Report) HasCreatorDisplayName() bool`
+
+HasCreatorDisplayName returns a boolean if a field has been set.
+
+### SetCreatorDisplayNameNil
+
+`func (o *Report) SetCreatorDisplayNameNil(b bool)`
+
+ SetCreatorDisplayNameNil sets the value for CreatorDisplayName to be an explicit nil
+
+### UnsetCreatorDisplayName
+`func (o *Report) UnsetCreatorDisplayName()`
+
+UnsetCreatorDisplayName ensures that no value is present for CreatorDisplayName, not even an explicit nil
+### GetCreatorType
+
+`func (o *Report) GetCreatorType() string`
+
+GetCreatorType returns the CreatorType field if non-nil, zero value otherwise.
+
+### GetCreatorTypeOk
+
+`func (o *Report) GetCreatorTypeOk() (*string, bool)`
+
+GetCreatorTypeOk returns a tuple with the CreatorType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCreatorType
+
+`func (o *Report) SetCreatorType(v string)`
+
+SetCreatorType sets CreatorType field to given value.
+
+### HasCreatorType
+
+`func (o *Report) HasCreatorType() bool`
+
+HasCreatorType returns a boolean if a field has been set.
+
+### SetCreatorTypeNil
+
+`func (o *Report) SetCreatorTypeNil(b bool)`
+
+ SetCreatorTypeNil sets the value for CreatorType to be an explicit nil
+
+### UnsetCreatorType
+`func (o *Report) UnsetCreatorType()`
+
+UnsetCreatorType ensures that no value is present for CreatorType, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

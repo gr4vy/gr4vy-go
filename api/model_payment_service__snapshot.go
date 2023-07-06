@@ -17,10 +17,10 @@ import (
 
 // PaymentServiceSnapshot An active, configured payment service.
 type PaymentServiceSnapshot struct {
-	// The ID of this payment service.
-	Id *string `json:"id,omitempty"`
 	// The type of this resource.
 	Type *string `json:"type,omitempty"`
+	// The ID of this payment service.
+	Id *string `json:"id,omitempty"`
 	// The ID of the payment service definition used to create this service. 
 	PaymentServiceDefinitionId *string `json:"payment_service_definition_id,omitempty"`
 	// The payment method that this services handles.
@@ -44,38 +44,6 @@ func NewPaymentServiceSnapshot() *PaymentServiceSnapshot {
 func NewPaymentServiceSnapshotWithDefaults() *PaymentServiceSnapshot {
 	this := PaymentServiceSnapshot{}
 	return &this
-}
-
-// GetId returns the Id field value if set, zero value otherwise.
-func (o *PaymentServiceSnapshot) GetId() string {
-	if o == nil || o.Id == nil {
-		var ret string
-		return ret
-	}
-	return *o.Id
-}
-
-// GetIdOk returns a tuple with the Id field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentServiceSnapshot) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
-		return nil, false
-	}
-	return o.Id, true
-}
-
-// HasId returns a boolean if a field has been set.
-func (o *PaymentServiceSnapshot) HasId() bool {
-	if o != nil && o.Id != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetId gets a reference to the given string and assigns it to the Id field.
-func (o *PaymentServiceSnapshot) SetId(v string) {
-	o.Id = &v
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
@@ -108,6 +76,38 @@ func (o *PaymentServiceSnapshot) HasType() bool {
 // SetType gets a reference to the given string and assigns it to the Type field.
 func (o *PaymentServiceSnapshot) SetType(v string) {
 	o.Type = &v
+}
+
+// GetId returns the Id field value if set, zero value otherwise.
+func (o *PaymentServiceSnapshot) GetId() string {
+	if o == nil || o.Id == nil {
+		var ret string
+		return ret
+	}
+	return *o.Id
+}
+
+// GetIdOk returns a tuple with the Id field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceSnapshot) GetIdOk() (*string, bool) {
+	if o == nil || o.Id == nil {
+		return nil, false
+	}
+	return o.Id, true
+}
+
+// HasId returns a boolean if a field has been set.
+func (o *PaymentServiceSnapshot) HasId() bool {
+	if o != nil && o.Id != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetId gets a reference to the given string and assigns it to the Id field.
+func (o *PaymentServiceSnapshot) SetId(v string) {
+	o.Id = &v
 }
 
 // GetPaymentServiceDefinitionId returns the PaymentServiceDefinitionId field value if set, zero value otherwise.
@@ -208,11 +208,11 @@ func (o *PaymentServiceSnapshot) SetDisplayName(v string) {
 
 func (o PaymentServiceSnapshot) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
-	}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
+	}
+	if o.Id != nil {
+		toSerialize["id"] = o.Id
 	}
 	if o.PaymentServiceDefinitionId != nil {
 		toSerialize["payment_service_definition_id"] = o.PaymentServiceDefinitionId

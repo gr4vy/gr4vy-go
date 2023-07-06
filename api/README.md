@@ -80,64 +80,74 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
-*APILogsApi* | [**ListApiLogs**](docs/APILogsApi.md#listapilogs) | **Get** /api-logs | List API error Logs
-*AuditLogsApi* | [**ListAuditLogs**](docs/AuditLogsApi.md#listauditlogs) | **Get** /audit-logs | List Audit Logs
-*BuyersApi* | [**AddBuyer**](docs/BuyersApi.md#addbuyer) | **Post** /buyers | New buyer
-*BuyersApi* | [**AddBuyerShippingDetail**](docs/BuyersApi.md#addbuyershippingdetail) | **Post** /buyers/{buyer_id}/shipping-details | New buyer shipping detail
+*APILogsApi* | [**ListApiLogs**](docs/APILogsApi.md#listapilogs) | **Get** /api-logs | List API error logs
+*AuditLogsApi* | [**ListAuditLogs**](docs/AuditLogsApi.md#listauditlogs) | **Get** /audit-logs | List audit logs
 *BuyersApi* | [**DeleteBuyer**](docs/BuyersApi.md#deletebuyer) | **Delete** /buyers/{buyer_id} | Delete buyer
 *BuyersApi* | [**DeleteBuyerShippingDetail**](docs/BuyersApi.md#deletebuyershippingdetail) | **Delete** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Delete buyer shipping detail
 *BuyersApi* | [**GetBuyer**](docs/BuyersApi.md#getbuyer) | **Get** /buyers/{buyer_id} | Get buyer
-*BuyersApi* | [**GetBuyerShippingDetails**](docs/BuyersApi.md#getbuyershippingdetails) | **Get** /buyers/{buyer_id}/shipping-details | Get buyer shipping details
+*BuyersApi* | [**ListBuyerShippingDetails**](docs/BuyersApi.md#listbuyershippingdetails) | **Get** /buyers/{buyer_id}/shipping-details | List buyer shipping details
 *BuyersApi* | [**ListBuyers**](docs/BuyersApi.md#listbuyers) | **Get** /buyers | List buyers
+*BuyersApi* | [**NewBuyer**](docs/BuyersApi.md#newbuyer) | **Post** /buyers | New buyer
+*BuyersApi* | [**NewBuyerShippingDetail**](docs/BuyersApi.md#newbuyershippingdetail) | **Post** /buyers/{buyer_id}/shipping-details | New buyer shipping detail
 *BuyersApi* | [**UpdateBuyer**](docs/BuyersApi.md#updatebuyer) | **Put** /buyers/{buyer_id} | Update buyer
-*BuyersApi* | [**UpdateBuyerShippingDetail**](docs/BuyersApi.md#updatebuyershippingdetail) | **Put** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Update buyer shipping detail
+*BuyersApi* | [**UpdateBuyerShippingDetail**](docs/BuyersApi.md#updatebuyershippingdetail) | **Put** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Update buyer shipping details
 *CardSchemeDefinitionsApi* | [**ListCardSchemeDefinitions**](docs/CardSchemeDefinitionsApi.md#listcardschemedefinitions) | **Get** /card-scheme-definitions | List card scheme definitions
-*CheckoutSessionsApi* | [**AddCheckoutSession**](docs/CheckoutSessionsApi.md#addcheckoutsession) | **Post** /checkout/sessions | Create a new Checkout Session
-*CheckoutSessionsApi* | [**DeleteCheckoutSession**](docs/CheckoutSessionsApi.md#deletecheckoutsession) | **Delete** /checkout/sessions/{checkout_session_id} | Delete a Checkout Session
-*CheckoutSessionsApi* | [**GetCheckoutSession**](docs/CheckoutSessionsApi.md#getcheckoutsession) | **Get** /checkout/sessions/{checkout_session_id} | Get a Checkout Session
-*CheckoutSessionsApi* | [**UpdateCheckoutSessionFields**](docs/CheckoutSessionsApi.md#updatecheckoutsessionfields) | **Put** /checkout/sessions/{checkout_session_id}/fields | Update a Checkout Session&#39;s Secure Fields
-*DigitalWalletsApi* | [**DeregisterDigitalWallet**](docs/DigitalWalletsApi.md#deregisterdigitalwallet) | **Delete** /digital-wallets/{digital_wallet_id} | De-register digital wallet
+*CheckoutSessionsApi* | [**DeleteCheckoutSession**](docs/CheckoutSessionsApi.md#deletecheckoutsession) | **Delete** /checkout/sessions/{checkout_session_id} | Delete checkout session
+*CheckoutSessionsApi* | [**GetCheckoutSession**](docs/CheckoutSessionsApi.md#getcheckoutsession) | **Get** /checkout/sessions/{checkout_session_id} | Get checkout session
+*CheckoutSessionsApi* | [**NewCheckoutSession**](docs/CheckoutSessionsApi.md#newcheckoutsession) | **Post** /checkout/sessions | New checkout session
+*CheckoutSessionsApi* | [**UpdateCheckoutSessionFields**](docs/CheckoutSessionsApi.md#updatecheckoutsessionfields) | **Put** /checkout/sessions/{checkout_session_id}/fields | Update fields for checkout session
+*DigitalWalletsApi* | [**DeleteDigitalWallet**](docs/DigitalWalletsApi.md#deletedigitalwallet) | **Delete** /digital-wallets/{digital_wallet_id} | De-register digital wallet
 *DigitalWalletsApi* | [**GetDigitalWallet**](docs/DigitalWalletsApi.md#getdigitalwallet) | **Get** /digital-wallets/{digital_wallet_id} | Get digital wallet
 *DigitalWalletsApi* | [**ListDigitalWallets**](docs/DigitalWalletsApi.md#listdigitalwallets) | **Get** /digital-wallets | List digital wallets
-*DigitalWalletsApi* | [**RegisterDigitalWallet**](docs/DigitalWalletsApi.md#registerdigitalwallet) | **Post** /digital-wallets | Register digital wallet
+*DigitalWalletsApi* | [**NewDigitalWallet**](docs/DigitalWalletsApi.md#newdigitalwallet) | **Post** /digital-wallets | Register digital wallet
 *DigitalWalletsApi* | [**UpdateDigitalWallet**](docs/DigitalWalletsApi.md#updatedigitalwallet) | **Put** /digital-wallets/{digital_wallet_id} | Update digital wallet
-*MerchantAccountsApi* | [**CreateMerchantAccount**](docs/MerchantAccountsApi.md#createmerchantaccount) | **Post** /merchant-accounts | Create merchant account
 *MerchantAccountsApi* | [**DeleteMerchantAccuont**](docs/MerchantAccountsApi.md#deletemerchantaccuont) | **Delete** /merchant-accounts/{merchant_account_id} | Delete merchant account
 *MerchantAccountsApi* | [**ListMerchantAccounts**](docs/MerchantAccountsApi.md#listmerchantaccounts) | **Get** /merchant-accounts | List merchant accounts
+*MerchantAccountsApi* | [**NewMerchantAccount**](docs/MerchantAccountsApi.md#newmerchantaccount) | **Post** /merchant-accounts | New merchant account
+*MerchantAccountsApi* | [**UpdateMerchantAccount**](docs/MerchantAccountsApi.md#updatemerchantaccount) | **Put** /merchant-accounts/{merchant_account_id} | Update merchant account
 *PaymentMethodDefinitionsApi* | [**ListPaymentMethodDefinitions**](docs/PaymentMethodDefinitionsApi.md#listpaymentmethoddefinitions) | **Get** /payment-method-definitions | List payment method definitions
 *PaymentMethodsApi* | [**DeletePaymentMethod**](docs/PaymentMethodsApi.md#deletepaymentmethod) | **Delete** /payment-methods/{payment_method_id} | Delete payment method
-*PaymentMethodsApi* | [**GetPaymentMethod**](docs/PaymentMethodsApi.md#getpaymentmethod) | **Get** /payment-methods/{payment_method_id} | Get stored payment method
-*PaymentMethodsApi* | [**ListBuyerPaymentMethods**](docs/PaymentMethodsApi.md#listbuyerpaymentmethods) | **Get** /buyers/payment-methods | List stored payment methods for a buyer
+*PaymentMethodsApi* | [**GetPaymentMethod**](docs/PaymentMethodsApi.md#getpaymentmethod) | **Get** /payment-methods/{payment_method_id} | Get payment method
+*PaymentMethodsApi* | [**ListBuyerPaymentMethods**](docs/PaymentMethodsApi.md#listbuyerpaymentmethods) | **Get** /buyers/payment-methods | List payment methods for buyer
 *PaymentMethodsApi* | [**ListPaymentMethods**](docs/PaymentMethodsApi.md#listpaymentmethods) | **Get** /payment-methods | List payment methods
-*PaymentMethodsApi* | [**StorePaymentMethod**](docs/PaymentMethodsApi.md#storepaymentmethod) | **Post** /payment-methods | New payment method
+*PaymentMethodsApi* | [**NewPaymentMethod**](docs/PaymentMethodsApi.md#newpaymentmethod) | **Post** /payment-methods | New payment method
 *PaymentOptionsApi* | [**ListPaymentOptions**](docs/PaymentOptionsApi.md#listpaymentoptions) | **Get** /payment-options | List payment options
-*PaymentOptionsApi* | [**PostListPaymentOptions**](docs/PaymentOptionsApi.md#postlistpaymentoptions) | **Post** /payment-options | List payment options
+*PaymentOptionsApi* | [**PostListPaymentOptions**](docs/PaymentOptionsApi.md#postlistpaymentoptions) | **Post** /payment-options | List payment options with POST
 *PaymentServiceDefinitionsApi* | [**GetPaymentServiceDefinition**](docs/PaymentServiceDefinitionsApi.md#getpaymentservicedefinition) | **Get** /payment-service-definitions/{payment_service_definition_id} | Get payment service definition
 *PaymentServiceDefinitionsApi* | [**ListPaymentServiceDefinitions**](docs/PaymentServiceDefinitionsApi.md#listpaymentservicedefinitions) | **Get** /payment-service-definitions | List payment service definitions
-*PaymentServicesApi* | [**AddPaymentService**](docs/PaymentServicesApi.md#addpaymentservice) | **Post** /payment-services | New payment service
 *PaymentServicesApi* | [**DeletePaymentService**](docs/PaymentServicesApi.md#deletepaymentservice) | **Delete** /payment-services/{payment_service_id} | Delete payment service
 *PaymentServicesApi* | [**GetPaymentService**](docs/PaymentServicesApi.md#getpaymentservice) | **Get** /payment-services/{payment_service_id} | Get payment service
 *PaymentServicesApi* | [**ListPaymentServices**](docs/PaymentServicesApi.md#listpaymentservices) | **Get** /payment-services | List payment services
+*PaymentServicesApi* | [**NewPaymentService**](docs/PaymentServicesApi.md#newpaymentservice) | **Post** /payment-services | New payment service
 *PaymentServicesApi* | [**UpdatePaymentService**](docs/PaymentServicesApi.md#updatepaymentservice) | **Put** /payment-services/{payment_service_id} | Update payment service
-*ReportsApi* | [**AddReport**](docs/ReportsApi.md#addreport) | **Post** /reports | New report
-*ReportsApi* | [**GenerateDownloadUrl**](docs/ReportsApi.md#generatedownloadurl) | **Post** /reports/{report_id}/executions/{report_execution_id}/url | Generate the download URL of a report execution result
+*ReportsApi* | [**GenerateDownloadUrl**](docs/ReportsApi.md#generatedownloadurl) | **Post** /reports/{report_id}/executions/{report_execution_id}/url | Generate report download URL
 *ReportsApi* | [**GetReport**](docs/ReportsApi.md#getreport) | **Get** /reports/{report_id} | Get report
 *ReportsApi* | [**GetReportExecution**](docs/ReportsApi.md#getreportexecution) | **Get** /report-executions/{report_execution_id} | Get report execution
 *ReportsApi* | [**ListAllReportExecutions**](docs/ReportsApi.md#listallreportexecutions) | **Get** /report-executions | List all report executions
-*ReportsApi* | [**ListReportExecutions**](docs/ReportsApi.md#listreportexecutions) | **Get** /reports/{report_id}/executions | List executions for a report
+*ReportsApi* | [**ListReportExecutions**](docs/ReportsApi.md#listreportexecutions) | **Get** /reports/{report_id}/executions | List executions for report
 *ReportsApi* | [**ListReports**](docs/ReportsApi.md#listreports) | **Get** /reports | List reports
+*ReportsApi* | [**NewReport**](docs/ReportsApi.md#newreport) | **Post** /reports | New report
 *ReportsApi* | [**UpdateReport**](docs/ReportsApi.md#updatereport) | **Put** /reports/{report_id} | Update report
-*RolesApi* | [**AddRoleAssignment**](docs/RolesApi.md#addroleassignment) | **Post** /roles/assignments | New role assignment
 *RolesApi* | [**DeleteRoleAssignment**](docs/RolesApi.md#deleteroleassignment) | **Delete** /roles/assignments/{role_assignment_id} | Delete role assignment
 *RolesApi* | [**ListRoleAssignments**](docs/RolesApi.md#listroleassignments) | **Get** /roles/assignments | List role assignments
 *RolesApi* | [**ListRoles**](docs/RolesApi.md#listroles) | **Get** /roles | List roles
-*TransactionsApi* | [**AuthorizeNewTransaction**](docs/TransactionsApi.md#authorizenewtransaction) | **Post** /transactions | New transaction
+*RolesApi* | [**NewRoleAssignment**](docs/RolesApi.md#newroleassignment) | **Post** /roles/assignments | New role assignment
+*TokensApi* | [**DeleteNetworkToken**](docs/TokensApi.md#deletenetworktoken) | **Delete** /payment-methods/{payment_method_id}/network-tokens/{network_token_id} | Delete network token
+*TokensApi* | [**DeletePaymentServiceToken**](docs/TokensApi.md#deletepaymentservicetoken) | **Delete** /payment-methods/{payment_method_id}/payment-service-tokens/{payment_service_token_id} | Delete payment service token
+*TokensApi* | [**GetNetworkTokens**](docs/TokensApi.md#getnetworktokens) | **Get** /payment-methods/{payment_method_id}/network-tokens | Get network tokens
+*TokensApi* | [**GetPaymentServiceTokens**](docs/TokensApi.md#getpaymentservicetokens) | **Get** /payment-methods/{payment_method_id}/payment-service-tokens | Get payment service tokens
+*TokensApi* | [**IssueCryptogram**](docs/TokensApi.md#issuecryptogram) | **Post** /payment-methods/{payment_method_id}/network-tokens/{network_token_id}/cryptogram | Issue cryptogram
+*TokensApi* | [**ProvisionNetworkToken**](docs/TokensApi.md#provisionnetworktoken) | **Post** /payment-methods/{payment_method_id}/network-tokens | Provision network token
+*TokensApi* | [**ProvisionPaymentServiceToken**](docs/TokensApi.md#provisionpaymentservicetoken) | **Post** /payment-methods/{payment_method_id}/payment-service-tokens | Provision payment service token
+*TokensApi* | [**ResumeNetworkToken**](docs/TokensApi.md#resumenetworktoken) | **Post** /payment-methods/{payment_method_id}/network-tokens/{network_token_id}/resume | Resume network token
+*TokensApi* | [**SuspendNetworkToken**](docs/TokensApi.md#suspendnetworktoken) | **Post** /payment-methods/{payment_method_id}/network-tokens/{network_token_id}/suspend | Suspend network token
 *TransactionsApi* | [**CaptureTransaction**](docs/TransactionsApi.md#capturetransaction) | **Post** /transactions/{transaction_id}/capture | Capture transaction
+*TransactionsApi* | [**GetRefund**](docs/TransactionsApi.md#getrefund) | **Get** /transactions/{transaction_id}/refunds/{refund_id} | Get refund
 *TransactionsApi* | [**GetTransaction**](docs/TransactionsApi.md#gettransaction) | **Get** /transactions/{transaction_id} | Get transaction
-*TransactionsApi* | [**GetTransactionRefund**](docs/TransactionsApi.md#gettransactionrefund) | **Get** /transactions/{transaction_id}/refunds/{refund_id} | Get transaction refund
-*TransactionsApi* | [**ListTransactionRefunds**](docs/TransactionsApi.md#listtransactionrefunds) | **Get** /transactions/{transaction_id}/refunds | List transaction refunds
+*TransactionsApi* | [**ListTransactionRefunds**](docs/TransactionsApi.md#listtransactionrefunds) | **Get** /transactions/{transaction_id}/refunds | List refunds
 *TransactionsApi* | [**ListTransactions**](docs/TransactionsApi.md#listtransactions) | **Get** /transactions | List transactions
-*TransactionsApi* | [**RefundTransaction**](docs/TransactionsApi.md#refundtransaction) | **Post** /transactions/{transaction_id}/refunds | Refund transaction
+*TransactionsApi* | [**NewRefund**](docs/TransactionsApi.md#newrefund) | **Post** /transactions/{transaction_id}/refunds | Refund transaction
+*TransactionsApi* | [**NewTransaction**](docs/TransactionsApi.md#newtransaction) | **Post** /transactions | New transaction
 *TransactionsApi* | [**VoidTransaction**](docs/TransactionsApi.md#voidtransaction) | **Post** /transactions/{transaction_id}/void | Void transaction
 
 
@@ -146,6 +156,8 @@ Class | Method | HTTP request | Description
  - [APIKeyPairCreate](docs/APIKeyPairCreate.md)
  - [APIKeyPairUpdate](docs/APIKeyPairUpdate.md)
  - [Address](docs/Address.md)
+ - [AntiFraudDecisionTransactionEvent](docs/AntiFraudDecisionTransactionEvent.md)
+ - [AntiFraudDecisionTransactionEventContext](docs/AntiFraudDecisionTransactionEventContext.md)
  - [AntiFraudServiceCreate](docs/AntiFraudServiceCreate.md)
  - [AntiFraudServiceUpdate](docs/AntiFraudServiceUpdate.md)
  - [AntiFraudServiceUpdateFields](docs/AntiFraudServiceUpdateFields.md)
@@ -174,6 +186,7 @@ Class | Method | HTTP request | Description
  - [CardSchemeDefinitions](docs/CardSchemeDefinitions.md)
  - [CartItem](docs/CartItem.md)
  - [CheckoutSession](docs/CheckoutSession.md)
+ - [CheckoutSessionFieldsPaymentMethod](docs/CheckoutSessionFieldsPaymentMethod.md)
  - [CheckoutSessionRequest](docs/CheckoutSessionRequest.md)
  - [CheckoutSessionSecureFieldsUpdate](docs/CheckoutSessionSecureFieldsUpdate.md)
  - [Connection](docs/Connection.md)
@@ -183,6 +196,7 @@ Class | Method | HTTP request | Description
  - [ConnectionOptionsAdyenCard](docs/ConnectionOptionsAdyenCard.md)
  - [ConnectionOptionsCybersourceAntiFraud](docs/ConnectionOptionsCybersourceAntiFraud.md)
  - [Connections](docs/Connections.md)
+ - [Cryptogram](docs/Cryptogram.md)
  - [DigitalWallet](docs/DigitalWallet.md)
  - [DigitalWalletRequest](docs/DigitalWalletRequest.md)
  - [DigitalWalletUpdate](docs/DigitalWalletUpdate.md)
@@ -200,12 +214,16 @@ Class | Method | HTTP request | Description
  - [GooglePayRequest](docs/GooglePayRequest.md)
  - [GooglePayRequestAssuranceDetails](docs/GooglePayRequestAssuranceDetails.md)
  - [GooglePaySessionRequest](docs/GooglePaySessionRequest.md)
+ - [IssueCryptogramRequest](docs/IssueCryptogramRequest.md)
  - [MerchantAccount](docs/MerchantAccount.md)
  - [MerchantAccountCreate](docs/MerchantAccountCreate.md)
  - [MerchantAccountUpdate](docs/MerchantAccountUpdate.md)
  - [MerchantAccounts](docs/MerchantAccounts.md)
  - [MerchantProfile](docs/MerchantProfile.md)
  - [MerchantProfileScheme](docs/MerchantProfileScheme.md)
+ - [NetworkToken](docs/NetworkToken.md)
+ - [NetworkTokenRequest](docs/NetworkTokenRequest.md)
+ - [NetworkTokens](docs/NetworkTokens.md)
  - [PaymentMethod](docs/PaymentMethod.md)
  - [PaymentMethodDefinition](docs/PaymentMethodDefinition.md)
  - [PaymentMethodDefinitions](docs/PaymentMethodDefinitions.md)
@@ -230,6 +248,9 @@ Class | Method | HTTP request | Description
  - [PaymentServiceRequest](docs/PaymentServiceRequest.md)
  - [PaymentServiceRequestFields](docs/PaymentServiceRequestFields.md)
  - [PaymentServiceSnapshot](docs/PaymentServiceSnapshot.md)
+ - [PaymentServiceToken](docs/PaymentServiceToken.md)
+ - [PaymentServiceTokenRequest](docs/PaymentServiceTokenRequest.md)
+ - [PaymentServiceTokens](docs/PaymentServiceTokens.md)
  - [PaymentServiceUpdate](docs/PaymentServiceUpdate.md)
  - [PaymentServices](docs/PaymentServices.md)
  - [RedirectRequest](docs/RedirectRequest.md)
@@ -272,6 +293,8 @@ Class | Method | HTTP request | Description
  - [ThreeDSecureDataV2](docs/ThreeDSecureDataV2.md)
  - [ThreeDSecureDataV2AllOf](docs/ThreeDSecureDataV2AllOf.md)
  - [ThreeDSecureError](docs/ThreeDSecureError.md)
+ - [ThreeDSecureSuccessTransactionEvent](docs/ThreeDSecureSuccessTransactionEvent.md)
+ - [ThreeDSecureSuccessTransactionEventContext](docs/ThreeDSecureSuccessTransactionEventContext.md)
  - [ThreeDSecureSummary](docs/ThreeDSecureSummary.md)
  - [TokenizedRequest](docs/TokenizedRequest.md)
  - [Transaction](docs/Transaction.md)

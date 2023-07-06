@@ -30,166 +30,6 @@ var (
 // TransactionsApiService TransactionsApi service
 type TransactionsApiService service
 
-type ApiAuthorizeNewTransactionRequest struct {
-	ctx _context.Context
-	ApiService *TransactionsApiService
-	idempotencyKey *string
-	transactionRequest *TransactionRequest
-}
-
-func (r ApiAuthorizeNewTransactionRequest) IdempotencyKey(idempotencyKey string) ApiAuthorizeNewTransactionRequest {
-	r.idempotencyKey = &idempotencyKey
-	return r
-}
-func (r ApiAuthorizeNewTransactionRequest) TransactionRequest(transactionRequest TransactionRequest) ApiAuthorizeNewTransactionRequest {
-	r.transactionRequest = &transactionRequest
-	return r
-}
-
-func (r ApiAuthorizeNewTransactionRequest) Execute() (Transaction, *_nethttp.Response, error) {
-	return r.ApiService.AuthorizeNewTransactionExecute(r)
-}
-
-/*
- * AuthorizeNewTransaction New transaction
- * Attempts to create an authorization for a payment method. In some cases it is
-not possible to create the authorization without redirecting the user for
-their authorization. In these cases the status is set to
-`buyer_approval_pending` and an `approval_url` is returned.
-
-Additionally, this endpoint accepts a few additional fields that allow for
-simultaneous capturing and storage of the payment method.
-
-* `store` - Use this field to store the payment method for
-future use. Not all payment methods support this feature.
-* `capture` - Use this method to also perform a capture of the transaction
-after it has been authorized.
-
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @return ApiAuthorizeNewTransactionRequest
- */
-func (a *TransactionsApiService) AuthorizeNewTransaction(ctx _context.Context) ApiAuthorizeNewTransactionRequest {
-	return ApiAuthorizeNewTransactionRequest{
-		ApiService: a,
-		ctx: ctx,
-	}
-}
-
-/*
- * Execute executes the request
- * @return Transaction
- */
-func (a *TransactionsApiService) AuthorizeNewTransactionExecute(r ApiAuthorizeNewTransactionRequest) (Transaction, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodPost
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Transaction
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionsApiService.AuthorizeNewTransaction")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/transactions"
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{"application/json"}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	if r.idempotencyKey != nil {
-		localVarHeaderParams["Idempotency-Key"] = parameterToString(*r.idempotencyKey, "")
-	} else {
-		localVarHeaderParams["Idempotency-Key"] = "my-test2"
-	}
-	// body params
-	localVarPostBody = r.transactionRequest
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error401Unauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 409 {
-			var v Error409DuplicateRecord
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiCaptureTransactionRequest struct {
 	ctx _context.Context
 	ApiService *TransactionsApiService
@@ -310,6 +150,135 @@ func (a *TransactionsApiService) CaptureTransactionExecute(r ApiCaptureTransacti
 		}
 		if localVarHTTPResponse.StatusCode == 404 {
 			var v ErrorGeneric
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiGetRefundRequest struct {
+	ctx _context.Context
+	ApiService *TransactionsApiService
+	transactionId string
+	refundId string
+}
+
+
+func (r ApiGetRefundRequest) Execute() (Refund, *_nethttp.Response, error) {
+	return r.ApiService.GetRefundExecute(r)
+}
+
+/*
+ * GetRefund Get refund
+ * Gets information about a refund associated with a certain transaction.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param transactionId The ID for the transaction to get the information for.
+ * @param refundId The unique ID of the refund.
+ * @return ApiGetRefundRequest
+ */
+func (a *TransactionsApiService) GetRefund(ctx _context.Context, transactionId string, refundId string) ApiGetRefundRequest {
+	return ApiGetRefundRequest{
+		ApiService: a,
+		ctx: ctx,
+		transactionId: transactionId,
+		refundId: refundId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Refund
+ */
+func (a *TransactionsApiService) GetRefundExecute(r ApiGetRefundRequest) (Refund, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodGet
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Refund
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionsApiService.GetRefund")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/transactions/{transaction_id}/refunds/{refund_id}"
+	localVarPath = strings.Replace(localVarPath, "{"+"transaction_id"+"}", _neturl.PathEscape(parameterToString(r.transactionId, "")), -1)
+	localVarPath = strings.Replace(localVarPath, "{"+"refund_id"+"}", _neturl.PathEscape(parameterToString(r.refundId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error404NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -457,135 +426,6 @@ func (a *TransactionsApiService) GetTransactionExecute(r ApiGetTransactionReques
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiGetTransactionRefundRequest struct {
-	ctx _context.Context
-	ApiService *TransactionsApiService
-	transactionId string
-	refundId string
-}
-
-
-func (r ApiGetTransactionRefundRequest) Execute() (Refund, *_nethttp.Response, error) {
-	return r.ApiService.GetTransactionRefundExecute(r)
-}
-
-/*
- * GetTransactionRefund Get transaction refund
- * Gets information about a refund associated with a certain transaction.
- * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
- * @param transactionId The ID for the transaction to get the information for.
- * @param refundId The unique ID of the refund.
- * @return ApiGetTransactionRefundRequest
- */
-func (a *TransactionsApiService) GetTransactionRefund(ctx _context.Context, transactionId string, refundId string) ApiGetTransactionRefundRequest {
-	return ApiGetTransactionRefundRequest{
-		ApiService: a,
-		ctx: ctx,
-		transactionId: transactionId,
-		refundId: refundId,
-	}
-}
-
-/*
- * Execute executes the request
- * @return Refund
- */
-func (a *TransactionsApiService) GetTransactionRefundExecute(r ApiGetTransactionRefundRequest) (Refund, *_nethttp.Response, error) {
-	var (
-		localVarHTTPMethod   = _nethttp.MethodGet
-		localVarPostBody     interface{}
-		localVarFormFileName string
-		localVarFileName     string
-		localVarFileBytes    []byte
-		localVarReturnValue  Refund
-	)
-
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionsApiService.GetTransactionRefund")
-	if err != nil {
-		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
-	}
-
-	localVarPath := localBasePath + "/transactions/{transaction_id}/refunds/{refund_id}"
-	localVarPath = strings.Replace(localVarPath, "{"+"transaction_id"+"}", _neturl.PathEscape(parameterToString(r.transactionId, "")), -1)
-	localVarPath = strings.Replace(localVarPath, "{"+"refund_id"+"}", _neturl.PathEscape(parameterToString(r.refundId, "")), -1)
-
-	localVarHeaderParams := make(map[string]string)
-	localVarQueryParams := _neturl.Values{}
-	localVarFormParams := _neturl.Values{}
-
-	// to determine the Content-Type header
-	localVarHTTPContentTypes := []string{}
-
-	// set Content-Type header
-	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
-	if localVarHTTPContentType != "" {
-		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
-	}
-
-	// to determine the Accept header
-	localVarHTTPHeaderAccepts := []string{"application/json"}
-
-	// set Accept header
-	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
-	if localVarHTTPHeaderAccept != "" {
-		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
-	}
-	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
-	if err != nil {
-		return localVarReturnValue, nil, err
-	}
-
-	localVarHTTPResponse, err := a.client.callAPI(req)
-	if err != nil || localVarHTTPResponse == nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
-	localVarHTTPResponse.Body.Close()
-	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
-	if err != nil {
-		return localVarReturnValue, localVarHTTPResponse, err
-	}
-
-	if localVarHTTPResponse.StatusCode >= 300 {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: localVarHTTPResponse.Status,
-		}
-		if localVarHTTPResponse.StatusCode == 401 {
-			var v Error401Unauthorized
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
-		}
-		if localVarHTTPResponse.StatusCode == 404 {
-			var v Error404NotFound
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-	if err != nil {
-		newErr := GenericOpenAPIError{
-			body:  localVarBody,
-			error: err.Error(),
-		}
-		return localVarReturnValue, localVarHTTPResponse, newErr
-	}
-
-	return localVarReturnValue, localVarHTTPResponse, nil
-}
-
 type ApiListTransactionRefundsRequest struct {
 	ctx _context.Context
 	ApiService *TransactionsApiService
@@ -608,7 +448,7 @@ func (r ApiListTransactionRefundsRequest) Execute() (Refunds, *_nethttp.Response
 }
 
 /*
- * ListTransactionRefunds List transaction refunds
+ * ListTransactionRefunds List refunds
  * Lists all refunds associated with a certain transaction.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param transactionId The ID for the transaction to get the information for.
@@ -737,11 +577,13 @@ type ApiListTransactionsRequest struct {
 	amountEq *int32
 	amountGte *int32
 	amountLte *int32
+	checkoutSessionId *string
 	createdAtGte *time.Time
 	createdAtLte *time.Time
 	currency *[]string
 	externalIdentifier *string
 	hasRefunds *bool
+	pendingReview *bool
 	id *string
 	metadata *[]string
 	method *[]string
@@ -753,11 +595,6 @@ type ApiListTransactionsRequest struct {
 	status *[]string
 	updatedAtGte *time.Time
 	updatedAtLte *time.Time
-	beforeCreatedAt *time.Time
-	afterCreatedAt *time.Time
-	beforeUpdatedAt *time.Time
-	afterUpdatedAt *time.Time
-	transactionStatus *string
 }
 
 func (r ApiListTransactionsRequest) BuyerExternalIdentifier(buyerExternalIdentifier string) ApiListTransactionsRequest {
@@ -788,6 +625,10 @@ func (r ApiListTransactionsRequest) AmountLte(amountLte int32) ApiListTransactio
 	r.amountLte = &amountLte
 	return r
 }
+func (r ApiListTransactionsRequest) CheckoutSessionId(checkoutSessionId string) ApiListTransactionsRequest {
+	r.checkoutSessionId = &checkoutSessionId
+	return r
+}
 func (r ApiListTransactionsRequest) CreatedAtGte(createdAtGte time.Time) ApiListTransactionsRequest {
 	r.createdAtGte = &createdAtGte
 	return r
@@ -806,6 +647,10 @@ func (r ApiListTransactionsRequest) ExternalIdentifier(externalIdentifier string
 }
 func (r ApiListTransactionsRequest) HasRefunds(hasRefunds bool) ApiListTransactionsRequest {
 	r.hasRefunds = &hasRefunds
+	return r
+}
+func (r ApiListTransactionsRequest) PendingReview(pendingReview bool) ApiListTransactionsRequest {
+	r.pendingReview = &pendingReview
 	return r
 }
 func (r ApiListTransactionsRequest) Id(id string) ApiListTransactionsRequest {
@@ -852,26 +697,6 @@ func (r ApiListTransactionsRequest) UpdatedAtLte(updatedAtLte time.Time) ApiList
 	r.updatedAtLte = &updatedAtLte
 	return r
 }
-func (r ApiListTransactionsRequest) BeforeCreatedAt(beforeCreatedAt time.Time) ApiListTransactionsRequest {
-	r.beforeCreatedAt = &beforeCreatedAt
-	return r
-}
-func (r ApiListTransactionsRequest) AfterCreatedAt(afterCreatedAt time.Time) ApiListTransactionsRequest {
-	r.afterCreatedAt = &afterCreatedAt
-	return r
-}
-func (r ApiListTransactionsRequest) BeforeUpdatedAt(beforeUpdatedAt time.Time) ApiListTransactionsRequest {
-	r.beforeUpdatedAt = &beforeUpdatedAt
-	return r
-}
-func (r ApiListTransactionsRequest) AfterUpdatedAt(afterUpdatedAt time.Time) ApiListTransactionsRequest {
-	r.afterUpdatedAt = &afterUpdatedAt
-	return r
-}
-func (r ApiListTransactionsRequest) TransactionStatus(transactionStatus string) ApiListTransactionsRequest {
-	r.transactionStatus = &transactionStatus
-	return r
-}
 
 func (r ApiListTransactionsRequest) Execute() (Transactions, *_nethttp.Response, error) {
 	return r.ApiService.ListTransactionsExecute(r)
@@ -879,7 +704,7 @@ func (r ApiListTransactionsRequest) Execute() (Transactions, *_nethttp.Response,
 
 /*
  * ListTransactions List transactions
- * Lists all transactions for an account. Sorted by last `updated_at` status.
+ * Lists all transactions for an account. Sorted by last updated at.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListTransactionsRequest
  */
@@ -936,6 +761,9 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	if r.amountLte != nil {
 		localVarQueryParams.Add("amount_lte", parameterToString(*r.amountLte, ""))
 	}
+	if r.checkoutSessionId != nil {
+		localVarQueryParams.Add("checkout_session_id", parameterToString(*r.checkoutSessionId, ""))
+	}
 	if r.createdAtGte != nil {
 		localVarQueryParams.Add("created_at_gte", parameterToString(*r.createdAtGte, ""))
 	}
@@ -958,6 +786,9 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	}
 	if r.hasRefunds != nil {
 		localVarQueryParams.Add("has_refunds", parameterToString(*r.hasRefunds, ""))
+	}
+	if r.pendingReview != nil {
+		localVarQueryParams.Add("pending_review", parameterToString(*r.pendingReview, ""))
 	}
 	if r.id != nil {
 		localVarQueryParams.Add("id", parameterToString(*r.id, ""))
@@ -1024,21 +855,6 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	if r.updatedAtLte != nil {
 		localVarQueryParams.Add("updated_at_lte", parameterToString(*r.updatedAtLte, ""))
 	}
-	if r.beforeCreatedAt != nil {
-		localVarQueryParams.Add("before_created_at", parameterToString(*r.beforeCreatedAt, ""))
-	}
-	if r.afterCreatedAt != nil {
-		localVarQueryParams.Add("after_created_at", parameterToString(*r.afterCreatedAt, ""))
-	}
-	if r.beforeUpdatedAt != nil {
-		localVarQueryParams.Add("before_updated_at", parameterToString(*r.beforeUpdatedAt, ""))
-	}
-	if r.afterUpdatedAt != nil {
-		localVarQueryParams.Add("after_updated_at", parameterToString(*r.afterUpdatedAt, ""))
-	}
-	if r.transactionStatus != nil {
-		localVarQueryParams.Add("transaction_status", parameterToString(*r.transactionStatus, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -1102,35 +918,35 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
-type ApiRefundTransactionRequest struct {
+type ApiNewRefundRequest struct {
 	ctx _context.Context
 	ApiService *TransactionsApiService
 	transactionId string
 	transactionRefundRequest *TransactionRefundRequest
 }
 
-func (r ApiRefundTransactionRequest) TransactionRefundRequest(transactionRefundRequest TransactionRefundRequest) ApiRefundTransactionRequest {
+func (r ApiNewRefundRequest) TransactionRefundRequest(transactionRefundRequest TransactionRefundRequest) ApiNewRefundRequest {
 	r.transactionRefundRequest = &transactionRefundRequest
 	return r
 }
 
-func (r ApiRefundTransactionRequest) Execute() (Refund, *_nethttp.Response, error) {
-	return r.ApiService.RefundTransactionExecute(r)
+func (r ApiNewRefundRequest) Execute() (Refund, *_nethttp.Response, error) {
+	return r.ApiService.NewRefundExecute(r)
 }
 
 /*
- * RefundTransaction Refund transaction
+ * NewRefund Refund transaction
  * Refunds a transaction, fully or partially.
 
 If the transaction was not yet successfully captured, the
 refund will not be processed. Authorized transactions can be
-[voided](#operation/void-transaction) instead.
+voided instead.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param transactionId The ID for the transaction to get the information for.
- * @return ApiRefundTransactionRequest
+ * @return ApiNewRefundRequest
  */
-func (a *TransactionsApiService) RefundTransaction(ctx _context.Context, transactionId string) ApiRefundTransactionRequest {
-	return ApiRefundTransactionRequest{
+func (a *TransactionsApiService) NewRefund(ctx _context.Context, transactionId string) ApiNewRefundRequest {
+	return ApiNewRefundRequest{
 		ApiService: a,
 		ctx: ctx,
 		transactionId: transactionId,
@@ -1141,7 +957,7 @@ func (a *TransactionsApiService) RefundTransaction(ctx _context.Context, transac
  * Execute executes the request
  * @return Refund
  */
-func (a *TransactionsApiService) RefundTransactionExecute(r ApiRefundTransactionRequest) (Refund, *_nethttp.Response, error) {
+func (a *TransactionsApiService) NewRefundExecute(r ApiNewRefundRequest) (Refund, *_nethttp.Response, error) {
 	var (
 		localVarHTTPMethod   = _nethttp.MethodPost
 		localVarPostBody     interface{}
@@ -1151,7 +967,7 @@ func (a *TransactionsApiService) RefundTransactionExecute(r ApiRefundTransaction
 		localVarReturnValue  Refund
 	)
 
-	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionsApiService.RefundTransaction")
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionsApiService.NewRefund")
 	if err != nil {
 		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
 	}
@@ -1248,6 +1064,156 @@ func (a *TransactionsApiService) RefundTransactionExecute(r ApiRefundTransaction
 	return localVarReturnValue, localVarHTTPResponse, nil
 }
 
+type ApiNewTransactionRequest struct {
+	ctx _context.Context
+	ApiService *TransactionsApiService
+	idempotencyKey *string
+	transactionRequest *TransactionRequest
+}
+
+func (r ApiNewTransactionRequest) IdempotencyKey(idempotencyKey string) ApiNewTransactionRequest {
+	r.idempotencyKey = &idempotencyKey
+	return r
+}
+func (r ApiNewTransactionRequest) TransactionRequest(transactionRequest TransactionRequest) ApiNewTransactionRequest {
+	r.transactionRequest = &transactionRequest
+	return r
+}
+
+func (r ApiNewTransactionRequest) Execute() (Transaction, *_nethttp.Response, error) {
+	return r.ApiService.NewTransactionExecute(r)
+}
+
+/*
+ * NewTransaction New transaction
+ * Attempts to create an authorization for a payment method. In some cases it is
+not possible to create the authorization without redirecting the user for
+their authorization. In these cases the status is set to
+indicate buyer approval is pending and an approval URL is returned.
+
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @return ApiNewTransactionRequest
+ */
+func (a *TransactionsApiService) NewTransaction(ctx _context.Context) ApiNewTransactionRequest {
+	return ApiNewTransactionRequest{
+		ApiService: a,
+		ctx: ctx,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Transaction
+ */
+func (a *TransactionsApiService) NewTransactionExecute(r ApiNewTransactionRequest) (Transaction, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Transaction
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionsApiService.NewTransaction")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/transactions"
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	if r.idempotencyKey != nil {
+		localVarHeaderParams["Idempotency-Key"] = parameterToString(*r.idempotencyKey, "")
+	}
+	// body params
+	localVarPostBody = r.transactionRequest
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorGeneric
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 409 {
+			var v Error409DuplicateRecord
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiVoidTransactionRequest struct {
 	ctx _context.Context
 	ApiService *TransactionsApiService
@@ -1265,9 +1231,12 @@ func (r ApiVoidTransactionRequest) Execute() (Transaction, *_nethttp.Response, e
 
 If the transaction was not yet successfully authorized, or was already
 captured, the void will not be processed. Captured transactions can be
-[refunded](#operation/refund-transaction) instead.
+refunded instead.
 
 Voiding zero-amount authorized transactions is not supported.
+
+Once voided, the status of the transaction will be either `authorization_voided`,
+`authorization_void_pending`, or if the void fails the original status will remain.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param transactionId The ID for the transaction to get the information for.
  * @return ApiVoidTransactionRequest

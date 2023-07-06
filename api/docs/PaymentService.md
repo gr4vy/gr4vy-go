@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Id** | Pointer to **string** | The ID of this payment service. | [optional] 
 **Type** | Pointer to **string** | The type of this resource. | [optional] 
+**Id** | Pointer to **string** | The ID of this payment service. | [optional] 
+**MerchantAccountId** | Pointer to **string** | The unique ID for a merchant account. | [optional] 
 **PaymentServiceDefinitionId** | Pointer to **string** | The ID of the payment service definition used to create this service.  | [optional] 
 **Method** | Pointer to **string** | The payment method that this service handles. | [optional] 
 **DisplayName** | Pointer to **string** | The custom name set for this service. | [optional] 
@@ -16,18 +17,8 @@ Name | Type | Description | Notes
 **PaymentMethodTokenizationEnabled** | Pointer to **bool** | Defines if tokenization is enabled for the service. This feature can only be enabled if the payment service is NOT set as &#x60;open_loop&#x60; and the PSP is set up to tokenize. | [optional] [default to false]
 **NetworkTokensEnabled** | Pointer to **bool** | Defines if network tokens are enabled for the service. This feature can only be enabled if the payment service is set as &#x60;open_loop&#x60; and the PSP is set up to accept network tokens. | [optional] 
 **ThreeDSecureEnabled** | Pointer to **bool** | Defines if 3-D Secure is enabled for the service (can only be enabled if the payment service definition supports the &#x60;three_d_secure_hosted&#x60; feature). This does not affect pass through 3-D Secure data. | [optional] [default to false]
-**AcquirerBinVisa** | Pointer to **NullableString** |  | [optional] 
-**AcquirerBinMastercard** | Pointer to **NullableString** |  | [optional] 
-**AcquirerBinAmex** | Pointer to **NullableString** |  | [optional] 
-**AcquirerBinDiscover** | Pointer to **NullableString** |  | [optional] 
-**AcquirerMerchantId** | Pointer to **NullableString** |  | [optional] 
-**MerchantName** | Pointer to **NullableString** |  | [optional] 
-**MerchantCountryCode** | Pointer to **NullableString** |  | [optional] 
-**MerchantCategoryCode** | Pointer to **NullableString** |  | [optional] 
 **MerchantProfile** | Pointer to [**NullableMerchantProfile**](MerchantProfile.md) | An object containing a key for each supported card scheme (Amex, Discover, Mastercard and Visa), and for each key an object with the merchant profile for this service and the corresponding scheme. | [optional] 
-**MerchantUrl** | Pointer to **NullableString** |  | [optional] 
 **Active** | Pointer to **bool** | Defines if this service is currently active or not. | [optional] [default to true]
-**Position** | Pointer to **float32** | The numeric rank of a payment service. Payment services with a lower position value are processed first. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this service was created. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this service was last updated. | [optional] 
 **WebhookUrl** | Pointer to **NullableString** | The URL that needs to be configured with this payment service as the receiving endpoint for webhooks from the service to Gr4vy. Currently, Gr4vy does not yet automatically register webhooks on setup, and therefore webhooks need to be registered manually by the merchant. | [optional] 
@@ -51,6 +42,31 @@ will change when the set of required properties is changed
 NewPaymentServiceWithDefaults instantiates a new PaymentService object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetType
+
+`func (o *PaymentService) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *PaymentService) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *PaymentService) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *PaymentService) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetId
 
@@ -77,30 +93,30 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
-### GetType
+### GetMerchantAccountId
 
-`func (o *PaymentService) GetType() string`
+`func (o *PaymentService) GetMerchantAccountId() string`
 
-GetType returns the Type field if non-nil, zero value otherwise.
+GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
 
-### GetTypeOk
+### GetMerchantAccountIdOk
 
-`func (o *PaymentService) GetTypeOk() (*string, bool)`
+`func (o *PaymentService) GetMerchantAccountIdOk() (*string, bool)`
 
-GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetType
+### SetMerchantAccountId
 
-`func (o *PaymentService) SetType(v string)`
+`func (o *PaymentService) SetMerchantAccountId(v string)`
 
-SetType sets Type field to given value.
+SetMerchantAccountId sets MerchantAccountId field to given value.
 
-### HasType
+### HasMerchantAccountId
 
-`func (o *PaymentService) HasType() bool`
+`func (o *PaymentService) HasMerchantAccountId() bool`
 
-HasType returns a boolean if a field has been set.
+HasMerchantAccountId returns a boolean if a field has been set.
 
 ### GetPaymentServiceDefinitionId
 
@@ -352,286 +368,6 @@ SetThreeDSecureEnabled sets ThreeDSecureEnabled field to given value.
 
 HasThreeDSecureEnabled returns a boolean if a field has been set.
 
-### GetAcquirerBinVisa
-
-`func (o *PaymentService) GetAcquirerBinVisa() string`
-
-GetAcquirerBinVisa returns the AcquirerBinVisa field if non-nil, zero value otherwise.
-
-### GetAcquirerBinVisaOk
-
-`func (o *PaymentService) GetAcquirerBinVisaOk() (*string, bool)`
-
-GetAcquirerBinVisaOk returns a tuple with the AcquirerBinVisa field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAcquirerBinVisa
-
-`func (o *PaymentService) SetAcquirerBinVisa(v string)`
-
-SetAcquirerBinVisa sets AcquirerBinVisa field to given value.
-
-### HasAcquirerBinVisa
-
-`func (o *PaymentService) HasAcquirerBinVisa() bool`
-
-HasAcquirerBinVisa returns a boolean if a field has been set.
-
-### SetAcquirerBinVisaNil
-
-`func (o *PaymentService) SetAcquirerBinVisaNil(b bool)`
-
- SetAcquirerBinVisaNil sets the value for AcquirerBinVisa to be an explicit nil
-
-### UnsetAcquirerBinVisa
-`func (o *PaymentService) UnsetAcquirerBinVisa()`
-
-UnsetAcquirerBinVisa ensures that no value is present for AcquirerBinVisa, not even an explicit nil
-### GetAcquirerBinMastercard
-
-`func (o *PaymentService) GetAcquirerBinMastercard() string`
-
-GetAcquirerBinMastercard returns the AcquirerBinMastercard field if non-nil, zero value otherwise.
-
-### GetAcquirerBinMastercardOk
-
-`func (o *PaymentService) GetAcquirerBinMastercardOk() (*string, bool)`
-
-GetAcquirerBinMastercardOk returns a tuple with the AcquirerBinMastercard field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAcquirerBinMastercard
-
-`func (o *PaymentService) SetAcquirerBinMastercard(v string)`
-
-SetAcquirerBinMastercard sets AcquirerBinMastercard field to given value.
-
-### HasAcquirerBinMastercard
-
-`func (o *PaymentService) HasAcquirerBinMastercard() bool`
-
-HasAcquirerBinMastercard returns a boolean if a field has been set.
-
-### SetAcquirerBinMastercardNil
-
-`func (o *PaymentService) SetAcquirerBinMastercardNil(b bool)`
-
- SetAcquirerBinMastercardNil sets the value for AcquirerBinMastercard to be an explicit nil
-
-### UnsetAcquirerBinMastercard
-`func (o *PaymentService) UnsetAcquirerBinMastercard()`
-
-UnsetAcquirerBinMastercard ensures that no value is present for AcquirerBinMastercard, not even an explicit nil
-### GetAcquirerBinAmex
-
-`func (o *PaymentService) GetAcquirerBinAmex() string`
-
-GetAcquirerBinAmex returns the AcquirerBinAmex field if non-nil, zero value otherwise.
-
-### GetAcquirerBinAmexOk
-
-`func (o *PaymentService) GetAcquirerBinAmexOk() (*string, bool)`
-
-GetAcquirerBinAmexOk returns a tuple with the AcquirerBinAmex field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAcquirerBinAmex
-
-`func (o *PaymentService) SetAcquirerBinAmex(v string)`
-
-SetAcquirerBinAmex sets AcquirerBinAmex field to given value.
-
-### HasAcquirerBinAmex
-
-`func (o *PaymentService) HasAcquirerBinAmex() bool`
-
-HasAcquirerBinAmex returns a boolean if a field has been set.
-
-### SetAcquirerBinAmexNil
-
-`func (o *PaymentService) SetAcquirerBinAmexNil(b bool)`
-
- SetAcquirerBinAmexNil sets the value for AcquirerBinAmex to be an explicit nil
-
-### UnsetAcquirerBinAmex
-`func (o *PaymentService) UnsetAcquirerBinAmex()`
-
-UnsetAcquirerBinAmex ensures that no value is present for AcquirerBinAmex, not even an explicit nil
-### GetAcquirerBinDiscover
-
-`func (o *PaymentService) GetAcquirerBinDiscover() string`
-
-GetAcquirerBinDiscover returns the AcquirerBinDiscover field if non-nil, zero value otherwise.
-
-### GetAcquirerBinDiscoverOk
-
-`func (o *PaymentService) GetAcquirerBinDiscoverOk() (*string, bool)`
-
-GetAcquirerBinDiscoverOk returns a tuple with the AcquirerBinDiscover field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAcquirerBinDiscover
-
-`func (o *PaymentService) SetAcquirerBinDiscover(v string)`
-
-SetAcquirerBinDiscover sets AcquirerBinDiscover field to given value.
-
-### HasAcquirerBinDiscover
-
-`func (o *PaymentService) HasAcquirerBinDiscover() bool`
-
-HasAcquirerBinDiscover returns a boolean if a field has been set.
-
-### SetAcquirerBinDiscoverNil
-
-`func (o *PaymentService) SetAcquirerBinDiscoverNil(b bool)`
-
- SetAcquirerBinDiscoverNil sets the value for AcquirerBinDiscover to be an explicit nil
-
-### UnsetAcquirerBinDiscover
-`func (o *PaymentService) UnsetAcquirerBinDiscover()`
-
-UnsetAcquirerBinDiscover ensures that no value is present for AcquirerBinDiscover, not even an explicit nil
-### GetAcquirerMerchantId
-
-`func (o *PaymentService) GetAcquirerMerchantId() string`
-
-GetAcquirerMerchantId returns the AcquirerMerchantId field if non-nil, zero value otherwise.
-
-### GetAcquirerMerchantIdOk
-
-`func (o *PaymentService) GetAcquirerMerchantIdOk() (*string, bool)`
-
-GetAcquirerMerchantIdOk returns a tuple with the AcquirerMerchantId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetAcquirerMerchantId
-
-`func (o *PaymentService) SetAcquirerMerchantId(v string)`
-
-SetAcquirerMerchantId sets AcquirerMerchantId field to given value.
-
-### HasAcquirerMerchantId
-
-`func (o *PaymentService) HasAcquirerMerchantId() bool`
-
-HasAcquirerMerchantId returns a boolean if a field has been set.
-
-### SetAcquirerMerchantIdNil
-
-`func (o *PaymentService) SetAcquirerMerchantIdNil(b bool)`
-
- SetAcquirerMerchantIdNil sets the value for AcquirerMerchantId to be an explicit nil
-
-### UnsetAcquirerMerchantId
-`func (o *PaymentService) UnsetAcquirerMerchantId()`
-
-UnsetAcquirerMerchantId ensures that no value is present for AcquirerMerchantId, not even an explicit nil
-### GetMerchantName
-
-`func (o *PaymentService) GetMerchantName() string`
-
-GetMerchantName returns the MerchantName field if non-nil, zero value otherwise.
-
-### GetMerchantNameOk
-
-`func (o *PaymentService) GetMerchantNameOk() (*string, bool)`
-
-GetMerchantNameOk returns a tuple with the MerchantName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMerchantName
-
-`func (o *PaymentService) SetMerchantName(v string)`
-
-SetMerchantName sets MerchantName field to given value.
-
-### HasMerchantName
-
-`func (o *PaymentService) HasMerchantName() bool`
-
-HasMerchantName returns a boolean if a field has been set.
-
-### SetMerchantNameNil
-
-`func (o *PaymentService) SetMerchantNameNil(b bool)`
-
- SetMerchantNameNil sets the value for MerchantName to be an explicit nil
-
-### UnsetMerchantName
-`func (o *PaymentService) UnsetMerchantName()`
-
-UnsetMerchantName ensures that no value is present for MerchantName, not even an explicit nil
-### GetMerchantCountryCode
-
-`func (o *PaymentService) GetMerchantCountryCode() string`
-
-GetMerchantCountryCode returns the MerchantCountryCode field if non-nil, zero value otherwise.
-
-### GetMerchantCountryCodeOk
-
-`func (o *PaymentService) GetMerchantCountryCodeOk() (*string, bool)`
-
-GetMerchantCountryCodeOk returns a tuple with the MerchantCountryCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMerchantCountryCode
-
-`func (o *PaymentService) SetMerchantCountryCode(v string)`
-
-SetMerchantCountryCode sets MerchantCountryCode field to given value.
-
-### HasMerchantCountryCode
-
-`func (o *PaymentService) HasMerchantCountryCode() bool`
-
-HasMerchantCountryCode returns a boolean if a field has been set.
-
-### SetMerchantCountryCodeNil
-
-`func (o *PaymentService) SetMerchantCountryCodeNil(b bool)`
-
- SetMerchantCountryCodeNil sets the value for MerchantCountryCode to be an explicit nil
-
-### UnsetMerchantCountryCode
-`func (o *PaymentService) UnsetMerchantCountryCode()`
-
-UnsetMerchantCountryCode ensures that no value is present for MerchantCountryCode, not even an explicit nil
-### GetMerchantCategoryCode
-
-`func (o *PaymentService) GetMerchantCategoryCode() string`
-
-GetMerchantCategoryCode returns the MerchantCategoryCode field if non-nil, zero value otherwise.
-
-### GetMerchantCategoryCodeOk
-
-`func (o *PaymentService) GetMerchantCategoryCodeOk() (*string, bool)`
-
-GetMerchantCategoryCodeOk returns a tuple with the MerchantCategoryCode field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMerchantCategoryCode
-
-`func (o *PaymentService) SetMerchantCategoryCode(v string)`
-
-SetMerchantCategoryCode sets MerchantCategoryCode field to given value.
-
-### HasMerchantCategoryCode
-
-`func (o *PaymentService) HasMerchantCategoryCode() bool`
-
-HasMerchantCategoryCode returns a boolean if a field has been set.
-
-### SetMerchantCategoryCodeNil
-
-`func (o *PaymentService) SetMerchantCategoryCodeNil(b bool)`
-
- SetMerchantCategoryCodeNil sets the value for MerchantCategoryCode to be an explicit nil
-
-### UnsetMerchantCategoryCode
-`func (o *PaymentService) UnsetMerchantCategoryCode()`
-
-UnsetMerchantCategoryCode ensures that no value is present for MerchantCategoryCode, not even an explicit nil
 ### GetMerchantProfile
 
 `func (o *PaymentService) GetMerchantProfile() MerchantProfile`
@@ -667,41 +403,6 @@ HasMerchantProfile returns a boolean if a field has been set.
 `func (o *PaymentService) UnsetMerchantProfile()`
 
 UnsetMerchantProfile ensures that no value is present for MerchantProfile, not even an explicit nil
-### GetMerchantUrl
-
-`func (o *PaymentService) GetMerchantUrl() string`
-
-GetMerchantUrl returns the MerchantUrl field if non-nil, zero value otherwise.
-
-### GetMerchantUrlOk
-
-`func (o *PaymentService) GetMerchantUrlOk() (*string, bool)`
-
-GetMerchantUrlOk returns a tuple with the MerchantUrl field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMerchantUrl
-
-`func (o *PaymentService) SetMerchantUrl(v string)`
-
-SetMerchantUrl sets MerchantUrl field to given value.
-
-### HasMerchantUrl
-
-`func (o *PaymentService) HasMerchantUrl() bool`
-
-HasMerchantUrl returns a boolean if a field has been set.
-
-### SetMerchantUrlNil
-
-`func (o *PaymentService) SetMerchantUrlNil(b bool)`
-
- SetMerchantUrlNil sets the value for MerchantUrl to be an explicit nil
-
-### UnsetMerchantUrl
-`func (o *PaymentService) UnsetMerchantUrl()`
-
-UnsetMerchantUrl ensures that no value is present for MerchantUrl, not even an explicit nil
 ### GetActive
 
 `func (o *PaymentService) GetActive() bool`
@@ -726,31 +427,6 @@ SetActive sets Active field to given value.
 `func (o *PaymentService) HasActive() bool`
 
 HasActive returns a boolean if a field has been set.
-
-### GetPosition
-
-`func (o *PaymentService) GetPosition() float32`
-
-GetPosition returns the Position field if non-nil, zero value otherwise.
-
-### GetPositionOk
-
-`func (o *PaymentService) GetPositionOk() (*float32, bool)`
-
-GetPositionOk returns a tuple with the Position field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPosition
-
-`func (o *PaymentService) SetPosition(v float32)`
-
-SetPosition sets Position field to given value.
-
-### HasPosition
-
-`func (o *PaymentService) HasPosition() bool`
-
-HasPosition returns a boolean if a field has been set.
 
 ### GetCreatedAt
 

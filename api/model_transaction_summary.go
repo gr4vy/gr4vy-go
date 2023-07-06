@@ -22,6 +22,8 @@ type TransactionSummary struct {
 	Type *string `json:"type,omitempty"`
 	// The unique identifier for this transaction.
 	Id *string `json:"id,omitempty"`
+	// The ID of the merchant account to which this transaction belongs to.
+	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
 	// The status of the transaction. The status may change over time as asynchronous processing events occur.
 	Status *string `json:"status,omitempty"`
 	// The original `intent` used when the transaction was [created](#operation/authorize-new-transaction).
@@ -48,11 +50,15 @@ type TransactionSummary struct {
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// The payment service used for this transaction.
 	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
+	// Whether a manual review is pending.
+	PendingReview *bool `json:"pending_review,omitempty"`
 	Method *string `json:"method,omitempty"`
 	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
 	RawResponseCode NullableString `json:"raw_response_code,omitempty"`
 	// This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
 	RawResponseDescription NullableString `json:"raw_response_description,omitempty"`
+	// The identifier for the checkout session this transaction is associated with.
+	CheckoutSessionId *string `json:"checkout_session_id,omitempty"`
 }
 
 // NewTransactionSummary instantiates a new TransactionSummary object
@@ -134,6 +140,38 @@ func (o *TransactionSummary) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *TransactionSummary) SetId(v string) {
 	o.Id = &v
+}
+
+// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
+func (o *TransactionSummary) GetMerchantAccountId() string {
+	if o == nil || o.MerchantAccountId == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantAccountId
+}
+
+// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionSummary) GetMerchantAccountIdOk() (*string, bool) {
+	if o == nil || o.MerchantAccountId == nil {
+		return nil, false
+	}
+	return o.MerchantAccountId, true
+}
+
+// HasMerchantAccountId returns a boolean if a field has been set.
+func (o *TransactionSummary) HasMerchantAccountId() bool {
+	if o != nil && o.MerchantAccountId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountId gets a reference to the given string and assigns it to the MerchantAccountId field.
+func (o *TransactionSummary) SetMerchantAccountId(v string) {
+	o.MerchantAccountId = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -582,6 +620,38 @@ func (o *TransactionSummary) SetPaymentService(v PaymentServiceSnapshot) {
 	o.PaymentService = &v
 }
 
+// GetPendingReview returns the PendingReview field value if set, zero value otherwise.
+func (o *TransactionSummary) GetPendingReview() bool {
+	if o == nil || o.PendingReview == nil {
+		var ret bool
+		return ret
+	}
+	return *o.PendingReview
+}
+
+// GetPendingReviewOk returns a tuple with the PendingReview field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionSummary) GetPendingReviewOk() (*bool, bool) {
+	if o == nil || o.PendingReview == nil {
+		return nil, false
+	}
+	return o.PendingReview, true
+}
+
+// HasPendingReview returns a boolean if a field has been set.
+func (o *TransactionSummary) HasPendingReview() bool {
+	if o != nil && o.PendingReview != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPendingReview gets a reference to the given bool and assigns it to the PendingReview field.
+func (o *TransactionSummary) SetPendingReview(v bool) {
+	o.PendingReview = &v
+}
+
 // GetMethod returns the Method field value if set, zero value otherwise.
 func (o *TransactionSummary) GetMethod() string {
 	if o == nil || o.Method == nil {
@@ -698,6 +768,38 @@ func (o *TransactionSummary) UnsetRawResponseDescription() {
 	o.RawResponseDescription.Unset()
 }
 
+// GetCheckoutSessionId returns the CheckoutSessionId field value if set, zero value otherwise.
+func (o *TransactionSummary) GetCheckoutSessionId() string {
+	if o == nil || o.CheckoutSessionId == nil {
+		var ret string
+		return ret
+	}
+	return *o.CheckoutSessionId
+}
+
+// GetCheckoutSessionIdOk returns a tuple with the CheckoutSessionId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionSummary) GetCheckoutSessionIdOk() (*string, bool) {
+	if o == nil || o.CheckoutSessionId == nil {
+		return nil, false
+	}
+	return o.CheckoutSessionId, true
+}
+
+// HasCheckoutSessionId returns a boolean if a field has been set.
+func (o *TransactionSummary) HasCheckoutSessionId() bool {
+	if o != nil && o.CheckoutSessionId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCheckoutSessionId gets a reference to the given string and assigns it to the CheckoutSessionId field.
+func (o *TransactionSummary) SetCheckoutSessionId(v string) {
+	o.CheckoutSessionId = &v
+}
+
 func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -705,6 +807,9 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
+	}
+	if o.MerchantAccountId != nil {
+		toSerialize["merchant_account_id"] = o.MerchantAccountId
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
@@ -745,6 +850,9 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	if o.PaymentService != nil {
 		toSerialize["payment_service"] = o.PaymentService
 	}
+	if o.PendingReview != nil {
+		toSerialize["pending_review"] = o.PendingReview
+	}
 	if o.Method != nil {
 		toSerialize["method"] = o.Method
 	}
@@ -753,6 +861,9 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	}
 	if o.RawResponseDescription.IsSet() {
 		toSerialize["raw_response_description"] = o.RawResponseDescription.Get()
+	}
+	if o.CheckoutSessionId != nil {
+		toSerialize["checkout_session_id"] = o.CheckoutSessionId
 	}
 	return json.Marshal(toSerialize)
 }

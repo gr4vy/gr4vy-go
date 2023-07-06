@@ -23,6 +23,8 @@ type AntiFraudServiceUpdate struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// Defines if this service is currently active or not. There can only be one active service at any time. When updating a service to active, the current active service will be deactivated.
 	Active *bool `json:"active,omitempty"`
+	// Defines if this service needs to handle the review status from anti-fraud responses with a proper review workflow. If not, the review status will be treated as any other one.
+	ReviewsEnabled *bool `json:"reviews_enabled,omitempty"`
 	// A list of fields, each containing a key-value pair for each field defined by the definition for this anti-fraud service e.g. for Sift `api_key` must be sent within this field when creating the service.  For updates, only the fields sent here will be updated, existing ones will not be affected if not present.
 	Fields *[]AntiFraudServiceUpdateFields `json:"fields,omitempty"`
 }
@@ -36,6 +38,8 @@ func NewAntiFraudServiceUpdate(antiFraudServiceDefinitionId string) *AntiFraudSe
 	this.AntiFraudServiceDefinitionId = antiFraudServiceDefinitionId
 	var active bool = true
 	this.Active = &active
+	var reviewsEnabled bool = false
+	this.ReviewsEnabled = &reviewsEnabled
 	return &this
 }
 
@@ -46,6 +50,8 @@ func NewAntiFraudServiceUpdateWithDefaults() *AntiFraudServiceUpdate {
 	this := AntiFraudServiceUpdate{}
 	var active bool = true
 	this.Active = &active
+	var reviewsEnabled bool = false
+	this.ReviewsEnabled = &reviewsEnabled
 	return &this
 }
 
@@ -137,6 +143,38 @@ func (o *AntiFraudServiceUpdate) SetActive(v bool) {
 	o.Active = &v
 }
 
+// GetReviewsEnabled returns the ReviewsEnabled field value if set, zero value otherwise.
+func (o *AntiFraudServiceUpdate) GetReviewsEnabled() bool {
+	if o == nil || o.ReviewsEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.ReviewsEnabled
+}
+
+// GetReviewsEnabledOk returns a tuple with the ReviewsEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *AntiFraudServiceUpdate) GetReviewsEnabledOk() (*bool, bool) {
+	if o == nil || o.ReviewsEnabled == nil {
+		return nil, false
+	}
+	return o.ReviewsEnabled, true
+}
+
+// HasReviewsEnabled returns a boolean if a field has been set.
+func (o *AntiFraudServiceUpdate) HasReviewsEnabled() bool {
+	if o != nil && o.ReviewsEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReviewsEnabled gets a reference to the given bool and assigns it to the ReviewsEnabled field.
+func (o *AntiFraudServiceUpdate) SetReviewsEnabled(v bool) {
+	o.ReviewsEnabled = &v
+}
+
 // GetFields returns the Fields field value if set, zero value otherwise.
 func (o *AntiFraudServiceUpdate) GetFields() []AntiFraudServiceUpdateFields {
 	if o == nil || o.Fields == nil {
@@ -179,6 +217,9 @@ func (o AntiFraudServiceUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.Active != nil {
 		toSerialize["active"] = o.Active
+	}
+	if o.ReviewsEnabled != nil {
+		toSerialize["reviews_enabled"] = o.ReviewsEnabled
 	}
 	if o.Fields != nil {
 		toSerialize["fields"] = o.Fields

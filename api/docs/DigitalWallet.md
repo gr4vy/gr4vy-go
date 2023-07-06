@@ -5,8 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;digital-wallet&#x60;. | [optional] 
-**Provider** | Pointer to **string** | The name of the digital wallet provider. | [optional] 
 **Id** | Pointer to **string** | The ID of the registered digital wallet. | [optional] 
+**MerchantAccountId** | Pointer to **string** | The unique ID for a merchant account. | [optional] 
+**Provider** | Pointer to **string** | The name of the digital wallet provider. | [optional] 
 **MerchantName** | Pointer to **string** | The name of the merchant the digital wallet is registered to. | [optional] 
 **MerchantUrl** | Pointer to **NullableString** | The main URL of the merchant. | [optional] [default to "null"]
 **DomainNames** | Pointer to **[]string** | The list of domain names that a digital wallet can be used on. To use a digital wallet on a website, the domain of the site is required to be in this list. | [optional] 
@@ -60,31 +61,6 @@ SetType sets Type field to given value.
 
 HasType returns a boolean if a field has been set.
 
-### GetProvider
-
-`func (o *DigitalWallet) GetProvider() string`
-
-GetProvider returns the Provider field if non-nil, zero value otherwise.
-
-### GetProviderOk
-
-`func (o *DigitalWallet) GetProviderOk() (*string, bool)`
-
-GetProviderOk returns a tuple with the Provider field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetProvider
-
-`func (o *DigitalWallet) SetProvider(v string)`
-
-SetProvider sets Provider field to given value.
-
-### HasProvider
-
-`func (o *DigitalWallet) HasProvider() bool`
-
-HasProvider returns a boolean if a field has been set.
-
 ### GetId
 
 `func (o *DigitalWallet) GetId() string`
@@ -109,6 +85,56 @@ SetId sets Id field to given value.
 `func (o *DigitalWallet) HasId() bool`
 
 HasId returns a boolean if a field has been set.
+
+### GetMerchantAccountId
+
+`func (o *DigitalWallet) GetMerchantAccountId() string`
+
+GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
+
+### GetMerchantAccountIdOk
+
+`func (o *DigitalWallet) GetMerchantAccountIdOk() (*string, bool)`
+
+GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantAccountId
+
+`func (o *DigitalWallet) SetMerchantAccountId(v string)`
+
+SetMerchantAccountId sets MerchantAccountId field to given value.
+
+### HasMerchantAccountId
+
+`func (o *DigitalWallet) HasMerchantAccountId() bool`
+
+HasMerchantAccountId returns a boolean if a field has been set.
+
+### GetProvider
+
+`func (o *DigitalWallet) GetProvider() string`
+
+GetProvider returns the Provider field if non-nil, zero value otherwise.
+
+### GetProviderOk
+
+`func (o *DigitalWallet) GetProviderOk() (*string, bool)`
+
+GetProviderOk returns a tuple with the Provider field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetProvider
+
+`func (o *DigitalWallet) SetProvider(v string)`
+
+SetProvider sets Provider field to given value.
+
+### HasProvider
+
+`func (o *DigitalWallet) HasProvider() bool`
+
+HasProvider returns a boolean if a field has been set.
 
 ### GetMerchantName
 

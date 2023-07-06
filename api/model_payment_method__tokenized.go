@@ -21,6 +21,8 @@ type PaymentMethodTokenized struct {
 	Type *string `json:"type,omitempty"`
 	// The unique ID of the payment method.
 	Id *string `json:"id,omitempty"`
+	// The unique ID for a merchant account.
+	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
 	// The type of this payment method.
 	Method *string `json:"method,omitempty"`
 	// A label for the payment method. For a `card` payment method this is the last 4 digits on the card. For others it would be the email address.
@@ -118,6 +120,38 @@ func (o *PaymentMethodTokenized) HasId() bool {
 // SetId gets a reference to the given string and assigns it to the Id field.
 func (o *PaymentMethodTokenized) SetId(v string) {
 	o.Id = &v
+}
+
+// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
+func (o *PaymentMethodTokenized) GetMerchantAccountId() string {
+	if o == nil || o.MerchantAccountId == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantAccountId
+}
+
+// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodTokenized) GetMerchantAccountIdOk() (*string, bool) {
+	if o == nil || o.MerchantAccountId == nil {
+		return nil, false
+	}
+	return o.MerchantAccountId, true
+}
+
+// HasMerchantAccountId returns a boolean if a field has been set.
+func (o *PaymentMethodTokenized) HasMerchantAccountId() bool {
+	if o != nil && o.MerchantAccountId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountId gets a reference to the given string and assigns it to the MerchantAccountId field.
+func (o *PaymentMethodTokenized) SetMerchantAccountId(v string) {
+	o.MerchantAccountId = &v
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
@@ -443,6 +477,9 @@ func (o PaymentMethodTokenized) MarshalJSON() ([]byte, error) {
 	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
+	}
+	if o.MerchantAccountId != nil {
+		toSerialize["merchant_account_id"] = o.MerchantAccountId
 	}
 	if o.Method != nil {
 		toSerialize["method"] = o.Method

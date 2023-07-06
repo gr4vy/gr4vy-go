@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**PaymentMethod** | Pointer to [**CardRequest**](CardRequest.md) |  | [optional] 
+**PaymentMethod** | Pointer to [**CheckoutSessionFieldsPaymentMethod**](CheckoutSessionFieldsPaymentMethod.md) |  | [optional] 
 
 ## Methods
 
@@ -27,20 +27,20 @@ but it doesn't guarantee that properties required by API are set
 
 ### GetPaymentMethod
 
-`func (o *CheckoutSessionSecureFieldsUpdate) GetPaymentMethod() CardRequest`
+`func (o *CheckoutSessionSecureFieldsUpdate) GetPaymentMethod() CheckoutSessionFieldsPaymentMethod`
 
 GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
 
 ### GetPaymentMethodOk
 
-`func (o *CheckoutSessionSecureFieldsUpdate) GetPaymentMethodOk() (*CardRequest, bool)`
+`func (o *CheckoutSessionSecureFieldsUpdate) GetPaymentMethodOk() (*CheckoutSessionFieldsPaymentMethod, bool)`
 
 GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetPaymentMethod
 
-`func (o *CheckoutSessionSecureFieldsUpdate) SetPaymentMethod(v CardRequest)`
+`func (o *CheckoutSessionSecureFieldsUpdate) SetPaymentMethod(v CheckoutSessionFieldsPaymentMethod)`
 
 SetPaymentMethod sets PaymentMethod field to given value.
 

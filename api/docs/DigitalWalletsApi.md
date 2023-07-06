@@ -4,17 +4,17 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**DeregisterDigitalWallet**](DigitalWalletsApi.md#DeregisterDigitalWallet) | **Delete** /digital-wallets/{digital_wallet_id} | De-register digital wallet
+[**DeleteDigitalWallet**](DigitalWalletsApi.md#DeleteDigitalWallet) | **Delete** /digital-wallets/{digital_wallet_id} | De-register digital wallet
 [**GetDigitalWallet**](DigitalWalletsApi.md#GetDigitalWallet) | **Get** /digital-wallets/{digital_wallet_id} | Get digital wallet
 [**ListDigitalWallets**](DigitalWalletsApi.md#ListDigitalWallets) | **Get** /digital-wallets | List digital wallets
-[**RegisterDigitalWallet**](DigitalWalletsApi.md#RegisterDigitalWallet) | **Post** /digital-wallets | Register digital wallet
+[**NewDigitalWallet**](DigitalWalletsApi.md#NewDigitalWallet) | **Post** /digital-wallets | Register digital wallet
 [**UpdateDigitalWallet**](DigitalWalletsApi.md#UpdateDigitalWallet) | **Put** /digital-wallets/{digital_wallet_id} | Update digital wallet
 
 
 
-## DeregisterDigitalWallet
+## DeleteDigitalWallet
 
-> DeregisterDigitalWallet(ctx, digitalWalletId).Execute()
+> DeleteDigitalWallet(ctx, digitalWalletId).Execute()
 
 De-register digital wallet
 
@@ -37,9 +37,9 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DigitalWalletsApi.DeregisterDigitalWallet(context.Background(), digitalWalletId).Execute()
+    resp, r, err := api_client.DigitalWalletsApi.DeleteDigitalWallet(context.Background(), digitalWalletId).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletsApi.DeregisterDigitalWallet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletsApi.DeleteDigitalWallet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
 }
@@ -55,7 +55,7 @@ Name | Type | Description  | Notes
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiDeregisterDigitalWalletRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiDeleteDigitalWalletRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
@@ -211,9 +211,9 @@ Other parameters are passed through a pointer to a apiListDigitalWalletsRequest 
 [[Back to README]](../README.md)
 
 
-## RegisterDigitalWallet
+## NewDigitalWallet
 
-> DigitalWallet RegisterDigitalWallet(ctx).DigitalWalletRequest(digitalWalletRequest).Execute()
+> DigitalWallet NewDigitalWallet(ctx).DigitalWalletRequest(digitalWalletRequest).Execute()
 
 Register digital wallet
 
@@ -236,13 +236,13 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.DigitalWalletsApi.RegisterDigitalWallet(context.Background()).DigitalWalletRequest(digitalWalletRequest).Execute()
+    resp, r, err := api_client.DigitalWalletsApi.NewDigitalWallet(context.Background()).DigitalWalletRequest(digitalWalletRequest).Execute()
     if err != nil {
-        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletsApi.RegisterDigitalWallet``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletsApi.NewDigitalWallet``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
     }
-    // response from `RegisterDigitalWallet`: DigitalWallet
-    fmt.Fprintf(os.Stdout, "Response from `DigitalWalletsApi.RegisterDigitalWallet`: %v\n", resp)
+    // response from `NewDigitalWallet`: DigitalWallet
+    fmt.Fprintf(os.Stdout, "Response from `DigitalWalletsApi.NewDigitalWallet`: %v\n", resp)
 }
 ```
 
@@ -252,7 +252,7 @@ func main() {
 
 ### Other Parameters
 
-Other parameters are passed through a pointer to a apiRegisterDigitalWalletRequest struct via the builder pattern
+Other parameters are passed through a pointer to a apiNewDigitalWalletRequest struct via the builder pattern
 
 
 Name | Type | Description  | Notes
