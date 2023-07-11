@@ -76,6 +76,34 @@ func TestEmbedToken(t *testing.T) {
 		return
 	}
 }
+func TestEmbedTokenWithConnectionOptions(t *testing.T) {
+
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key, environment)
+
+	embed := EmbedParams{
+		Amount:   200,
+		Currency: "USD",
+		BuyerID:  "d757c76a-cbd7-4b56-95a3-40125b51b29c",
+		Metadata: map[string]string{"key": "value"},
+		ConnectionOptions: map[string]interface{}{
+			"stripe-card": map[string]interface{}{
+				"stripe_connect": map[string]string{"key": "value"},
+			},
+		},
+	}
+
+	_, err = client.GetEmbedToken(embed, "")
+
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+}
 func TestAddBuyerAndEmbed(t *testing.T) {
 	key, err := GetKeyFromFile(keyPath)
 	if err != nil {
