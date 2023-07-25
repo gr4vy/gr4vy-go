@@ -30,6 +30,7 @@ type EmbedParams struct {
 	Currency          string            `json:"currency"`
 	BuyerID           string            `json:"buyer_id"`
 	Metadata          map[string]string `json:"metadata"`
+	ConnectionOptions	map[string]interface{} `json:"connection_options"`
 	MerchantAccountId string            `json:"merchant_account_id"`
 }
 
