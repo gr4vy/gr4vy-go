@@ -64,3 +64,19 @@ func (c *Gr4vyClient) UpdateCheckoutSession(checkoutSessionId string, body Gr4vy
 	var r Gr4vyCheckoutSession = Gr4vyCheckoutSession(response)
 	return &r, http, err
 }
+
+func (c *Gr4vyClient) DeleteCheckoutSession(checkoutSessionId string) (*http.Response, error) {
+	client, err := GetClient(c)
+	if err != nil {
+		return nil, err
+	}
+	auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
+	p := client.CheckoutSessionsApi.DeleteCheckoutSession(auth, checkoutSessionId)
+
+	http, err := p.Execute()
+	c.HandleResponse(http, err)
+	if err != nil {
+		return http, err
+	}
+	return http, err
+}
