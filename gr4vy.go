@@ -26,12 +26,12 @@ type Gr4vyClient struct {
 }
 
 type EmbedParams struct {
-	Amount            int32             `json:"amount"`
-	Currency          string            `json:"currency"`
-	BuyerID           string            `json:"buyer_id"`
-	Metadata          map[string]string `json:"metadata"`
-	ConnectionOptions	map[string]interface{} `json:"connection_options"`
-	MerchantAccountId string            `json:"merchant_account_id"`
+	Amount            int32                  `json:"amount"`
+	Currency          string                 `json:"currency"`
+	BuyerID           string                 `json:"buyer_id"`
+	Metadata          map[string]string      `json:"metadata"`
+	ConnectionOptions map[string]interface{} `json:"connection_options"`
+	MerchantAccountId string                 `json:"merchant_account_id"`
 }
 
 func NewGr4vyClient(gr4vy_id string, private_key string, environment string) *Gr4vyClient {
@@ -95,7 +95,8 @@ func (c *Gr4vyClient) GetEmbedToken(params EmbedParams, checkout_session_id stri
 }
 
 func (c *Gr4vyClient) GetEmbedTokenWithCheckoutSession(params EmbedParams) (string, CheckoutSession, error) {
-	checkoutSession, _, _ := c.AddCheckoutSession()
+	req := Gr4vyCheckoutSessionCreateRequest{}
+	checkoutSession, _, _ := c.AddCheckoutSession(req)
 	token, err := getEmbedToken(c.privateKey, params, *checkoutSession.Id)
 	return token, CheckoutSession(*checkoutSession), err
 }

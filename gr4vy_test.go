@@ -759,7 +759,10 @@ func TestEmbedTokenWithCheckoutSession(t *testing.T) {
 	client := NewGr4vyClient(gr4vyId, key, environment)
 
 	// create a checkout session
-	checkoutSession, _, err := client.AddCheckoutSession()
+	req := Gr4vyCheckoutSessionCreateRequest{
+		Metadata: map[string]string{"foo": "bar"},
+	}
+	checkoutSession, _, err := client.AddCheckoutSession(req)
 
 	if err != nil {
 		t.Errorf(err.Error())
