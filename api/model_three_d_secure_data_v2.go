@@ -23,10 +23,10 @@ type ThreeDSecureDataV2 struct {
 	Eci string `json:"eci"`
 	// The version of 3-D Secure that was used.
 	Version string `json:"version"`
-	// For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the `ARes`.
+	// The transaction status received as part of the authentication request.
 	DirectoryResponse string `json:"directory_response"`
-	// The transaction status from the challenge result (not required for frictionless).
-	AuthenticationResponse *string `json:"authentication_response,omitempty"`
+	// The transaction status after a the 3DS challenge. This will be null in case of a frictionless 3DS flow.
+	AuthenticationResponse NullableString `json:"authentication_response,omitempty"`
 	// The transaction identifier.
 	DirectoryTransactionId string `json:"directory_transaction_id"`
 }
@@ -149,36 +149,46 @@ func (o *ThreeDSecureDataV2) SetDirectoryResponse(v string) {
 	o.DirectoryResponse = v
 }
 
-// GetAuthenticationResponse returns the AuthenticationResponse field value if set, zero value otherwise.
+// GetAuthenticationResponse returns the AuthenticationResponse field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ThreeDSecureDataV2) GetAuthenticationResponse() string {
-	if o == nil || o.AuthenticationResponse == nil {
+	if o == nil || o.AuthenticationResponse.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.AuthenticationResponse
+	return *o.AuthenticationResponse.Get()
 }
 
 // GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ThreeDSecureDataV2) GetAuthenticationResponseOk() (*string, bool) {
-	if o == nil || o.AuthenticationResponse == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.AuthenticationResponse, true
+	return o.AuthenticationResponse.Get(), o.AuthenticationResponse.IsSet()
 }
 
 // HasAuthenticationResponse returns a boolean if a field has been set.
 func (o *ThreeDSecureDataV2) HasAuthenticationResponse() bool {
-	if o != nil && o.AuthenticationResponse != nil {
+	if o != nil && o.AuthenticationResponse.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAuthenticationResponse gets a reference to the given string and assigns it to the AuthenticationResponse field.
+// SetAuthenticationResponse gets a reference to the given NullableString and assigns it to the AuthenticationResponse field.
 func (o *ThreeDSecureDataV2) SetAuthenticationResponse(v string) {
-	o.AuthenticationResponse = &v
+	o.AuthenticationResponse.Set(&v)
+}
+// SetAuthenticationResponseNil sets the value for AuthenticationResponse to be an explicit nil
+func (o *ThreeDSecureDataV2) SetAuthenticationResponseNil() {
+	o.AuthenticationResponse.Set(nil)
+}
+
+// UnsetAuthenticationResponse ensures that no value is present for AuthenticationResponse, not even an explicit nil
+func (o *ThreeDSecureDataV2) UnsetAuthenticationResponse() {
+	o.AuthenticationResponse.Unset()
 }
 
 // GetDirectoryTransactionId returns the DirectoryTransactionId field value
@@ -219,8 +229,8 @@ func (o ThreeDSecureDataV2) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["directory_response"] = o.DirectoryResponse
 	}
-	if o.AuthenticationResponse != nil {
-		toSerialize["authentication_response"] = o.AuthenticationResponse
+	if o.AuthenticationResponse.IsSet() {
+		toSerialize["authentication_response"] = o.AuthenticationResponse.Get()
 	}
 	if true {
 		toSerialize["directory_transaction_id"] = o.DirectoryTransactionId

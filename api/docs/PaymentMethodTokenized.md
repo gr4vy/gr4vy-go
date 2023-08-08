@@ -15,6 +15,8 @@ Name | Type | Description | Notes
 **ApprovalUrl** | Pointer to **NullableString** | The optional URL that the buyer needs to be redirected to to further authorize their payment. | [optional] 
 **Currency** | Pointer to **NullableString** | The ISO-4217 currency code that this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used for multiple currencies. | [optional] 
 **Country** | Pointer to **NullableString** | The 2-letter ISO code of the country this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used in multiple countries. | [optional] 
+**LastReplacedAt** | Pointer to **NullableTime** | The date and time when this card was last replaced.  When the Account Updater determines that new card details are available (e.g. when it&#39;s about to expire), existing details are not changed immediately. The actual replacement occurs when a transaction using this payment method is declined with any of the following codes:  * &#x60;canceled_payment_method&#x60; * &#x60;expired_payment_method&#x60; * &#x60;unavailable_payment_method&#x60; * &#x60;unknown_payment_method&#x60;  When the replacement is applied, this field is updated. For non-card payment methods, the value of this field is always set to &#x60;null&#x60;. | [optional] 
+**HasReplacement** | Pointer to **bool** | Whether this card has a pending replacement that hasn&#39;t been applied yet.  When the Account Updater determines that new card details are available (e.g. when it&#39;s about to expire), existing details are not changed immediately, but this field is set to &#x60;true&#x60;. The actual replacement occurs when a transaction using this payment method is declined with any of the following codes:  * &#x60;canceled_payment_method&#x60; * &#x60;expired_payment_method&#x60; * &#x60;unavailable_payment_method&#x60; * &#x60;unknown_payment_method&#x60;  When the replacement is applied, this field is set to &#x60;false&#x60;. For non-card payment methods, the value of this field is always set to &#x60;false&#x60;. | [optional] 
 
 ## Methods
 
@@ -370,6 +372,66 @@ HasCountry returns a boolean if a field has been set.
 `func (o *PaymentMethodTokenized) UnsetCountry()`
 
 UnsetCountry ensures that no value is present for Country, not even an explicit nil
+### GetLastReplacedAt
+
+`func (o *PaymentMethodTokenized) GetLastReplacedAt() time.Time`
+
+GetLastReplacedAt returns the LastReplacedAt field if non-nil, zero value otherwise.
+
+### GetLastReplacedAtOk
+
+`func (o *PaymentMethodTokenized) GetLastReplacedAtOk() (*time.Time, bool)`
+
+GetLastReplacedAtOk returns a tuple with the LastReplacedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastReplacedAt
+
+`func (o *PaymentMethodTokenized) SetLastReplacedAt(v time.Time)`
+
+SetLastReplacedAt sets LastReplacedAt field to given value.
+
+### HasLastReplacedAt
+
+`func (o *PaymentMethodTokenized) HasLastReplacedAt() bool`
+
+HasLastReplacedAt returns a boolean if a field has been set.
+
+### SetLastReplacedAtNil
+
+`func (o *PaymentMethodTokenized) SetLastReplacedAtNil(b bool)`
+
+ SetLastReplacedAtNil sets the value for LastReplacedAt to be an explicit nil
+
+### UnsetLastReplacedAt
+`func (o *PaymentMethodTokenized) UnsetLastReplacedAt()`
+
+UnsetLastReplacedAt ensures that no value is present for LastReplacedAt, not even an explicit nil
+### GetHasReplacement
+
+`func (o *PaymentMethodTokenized) GetHasReplacement() bool`
+
+GetHasReplacement returns the HasReplacement field if non-nil, zero value otherwise.
+
+### GetHasReplacementOk
+
+`func (o *PaymentMethodTokenized) GetHasReplacementOk() (*bool, bool)`
+
+GetHasReplacementOk returns a tuple with the HasReplacement field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetHasReplacement
+
+`func (o *PaymentMethodTokenized) SetHasReplacement(v bool)`
+
+SetHasReplacement sets HasReplacement field to given value.
+
+### HasHasReplacement
+
+`func (o *PaymentMethodTokenized) HasHasReplacement() bool`
+
+HasHasReplacement returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -15,8 +15,8 @@ import (
 	"encoding/json"
 )
 
-// ThreeDSecureSuccessTransactionEventContext 3DS context.
-type ThreeDSecureSuccessTransactionEventContext struct {
+// ThreeDSecureSuccessEventContext 3DS context.
+type ThreeDSecureSuccessEventContext struct {
 	// The electronic commerce indicator for the 3DS transaction.
 	Eci *string `json:"eci,omitempty"`
 	// The cardholder authentication value or AAV.
@@ -35,25 +35,25 @@ type ThreeDSecureSuccessTransactionEventContext struct {
 	Method NullableString `json:"method,omitempty"`
 }
 
-// NewThreeDSecureSuccessTransactionEventContext instantiates a new ThreeDSecureSuccessTransactionEventContext object
+// NewThreeDSecureSuccessEventContext instantiates a new ThreeDSecureSuccessEventContext object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewThreeDSecureSuccessTransactionEventContext() *ThreeDSecureSuccessTransactionEventContext {
-	this := ThreeDSecureSuccessTransactionEventContext{}
+func NewThreeDSecureSuccessEventContext() *ThreeDSecureSuccessEventContext {
+	this := ThreeDSecureSuccessEventContext{}
 	return &this
 }
 
-// NewThreeDSecureSuccessTransactionEventContextWithDefaults instantiates a new ThreeDSecureSuccessTransactionEventContext object
+// NewThreeDSecureSuccessEventContextWithDefaults instantiates a new ThreeDSecureSuccessEventContext object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewThreeDSecureSuccessTransactionEventContextWithDefaults() *ThreeDSecureSuccessTransactionEventContext {
-	this := ThreeDSecureSuccessTransactionEventContext{}
+func NewThreeDSecureSuccessEventContextWithDefaults() *ThreeDSecureSuccessEventContext {
+	this := ThreeDSecureSuccessEventContext{}
 	return &this
 }
 
 // GetEci returns the Eci field value if set, zero value otherwise.
-func (o *ThreeDSecureSuccessTransactionEventContext) GetEci() string {
+func (o *ThreeDSecureSuccessEventContext) GetEci() string {
 	if o == nil || o.Eci == nil {
 		var ret string
 		return ret
@@ -63,7 +63,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetEci() string {
 
 // GetEciOk returns a tuple with the Eci field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) GetEciOk() (*string, bool) {
+func (o *ThreeDSecureSuccessEventContext) GetEciOk() (*string, bool) {
 	if o == nil || o.Eci == nil {
 		return nil, false
 	}
@@ -71,7 +71,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetEciOk() (*string, bool) 
 }
 
 // HasEci returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) HasEci() bool {
+func (o *ThreeDSecureSuccessEventContext) HasEci() bool {
 	if o != nil && o.Eci != nil {
 		return true
 	}
@@ -80,12 +80,12 @@ func (o *ThreeDSecureSuccessTransactionEventContext) HasEci() bool {
 }
 
 // SetEci gets a reference to the given string and assigns it to the Eci field.
-func (o *ThreeDSecureSuccessTransactionEventContext) SetEci(v string) {
+func (o *ThreeDSecureSuccessEventContext) SetEci(v string) {
 	o.Eci = &v
 }
 
 // GetCavv returns the Cavv field value if set, zero value otherwise.
-func (o *ThreeDSecureSuccessTransactionEventContext) GetCavv() string {
+func (o *ThreeDSecureSuccessEventContext) GetCavv() string {
 	if o == nil || o.Cavv == nil {
 		var ret string
 		return ret
@@ -95,7 +95,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetCavv() string {
 
 // GetCavvOk returns a tuple with the Cavv field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) GetCavvOk() (*string, bool) {
+func (o *ThreeDSecureSuccessEventContext) GetCavvOk() (*string, bool) {
 	if o == nil || o.Cavv == nil {
 		return nil, false
 	}
@@ -103,7 +103,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetCavvOk() (*string, bool)
 }
 
 // HasCavv returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) HasCavv() bool {
+func (o *ThreeDSecureSuccessEventContext) HasCavv() bool {
 	if o != nil && o.Cavv != nil {
 		return true
 	}
@@ -112,12 +112,12 @@ func (o *ThreeDSecureSuccessTransactionEventContext) HasCavv() bool {
 }
 
 // SetCavv gets a reference to the given string and assigns it to the Cavv field.
-func (o *ThreeDSecureSuccessTransactionEventContext) SetCavv(v string) {
+func (o *ThreeDSecureSuccessEventContext) SetCavv(v string) {
 	o.Cavv = &v
 }
 
 // GetVersion returns the Version field value if set, zero value otherwise.
-func (o *ThreeDSecureSuccessTransactionEventContext) GetVersion() string {
+func (o *ThreeDSecureSuccessEventContext) GetVersion() string {
 	if o == nil || o.Version == nil {
 		var ret string
 		return ret
@@ -127,7 +127,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetVersion() string {
 
 // GetVersionOk returns a tuple with the Version field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) GetVersionOk() (*string, bool) {
+func (o *ThreeDSecureSuccessEventContext) GetVersionOk() (*string, bool) {
 	if o == nil || o.Version == nil {
 		return nil, false
 	}
@@ -135,7 +135,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetVersionOk() (*string, bo
 }
 
 // HasVersion returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) HasVersion() bool {
+func (o *ThreeDSecureSuccessEventContext) HasVersion() bool {
 	if o != nil && o.Version != nil {
 		return true
 	}
@@ -144,12 +144,12 @@ func (o *ThreeDSecureSuccessTransactionEventContext) HasVersion() bool {
 }
 
 // SetVersion gets a reference to the given string and assigns it to the Version field.
-func (o *ThreeDSecureSuccessTransactionEventContext) SetVersion(v string) {
+func (o *ThreeDSecureSuccessEventContext) SetVersion(v string) {
 	o.Version = &v
 }
 
 // GetDirectoryResponse returns the DirectoryResponse field value if set, zero value otherwise.
-func (o *ThreeDSecureSuccessTransactionEventContext) GetDirectoryResponse() string {
+func (o *ThreeDSecureSuccessEventContext) GetDirectoryResponse() string {
 	if o == nil || o.DirectoryResponse == nil {
 		var ret string
 		return ret
@@ -159,7 +159,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetDirectoryResponse() stri
 
 // GetDirectoryResponseOk returns a tuple with the DirectoryResponse field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) GetDirectoryResponseOk() (*string, bool) {
+func (o *ThreeDSecureSuccessEventContext) GetDirectoryResponseOk() (*string, bool) {
 	if o == nil || o.DirectoryResponse == nil {
 		return nil, false
 	}
@@ -167,7 +167,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetDirectoryResponseOk() (*
 }
 
 // HasDirectoryResponse returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) HasDirectoryResponse() bool {
+func (o *ThreeDSecureSuccessEventContext) HasDirectoryResponse() bool {
 	if o != nil && o.DirectoryResponse != nil {
 		return true
 	}
@@ -176,12 +176,12 @@ func (o *ThreeDSecureSuccessTransactionEventContext) HasDirectoryResponse() bool
 }
 
 // SetDirectoryResponse gets a reference to the given string and assigns it to the DirectoryResponse field.
-func (o *ThreeDSecureSuccessTransactionEventContext) SetDirectoryResponse(v string) {
+func (o *ThreeDSecureSuccessEventContext) SetDirectoryResponse(v string) {
 	o.DirectoryResponse = &v
 }
 
 // GetAuthenticationResponse returns the AuthenticationResponse field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ThreeDSecureSuccessTransactionEventContext) GetAuthenticationResponse() string {
+func (o *ThreeDSecureSuccessEventContext) GetAuthenticationResponse() string {
 	if o == nil || o.AuthenticationResponse.Get() == nil {
 		var ret string
 		return ret
@@ -192,7 +192,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetAuthenticationResponse()
 // GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ThreeDSecureSuccessTransactionEventContext) GetAuthenticationResponseOk() (*string, bool) {
+func (o *ThreeDSecureSuccessEventContext) GetAuthenticationResponseOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -200,7 +200,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetAuthenticationResponseOk
 }
 
 // HasAuthenticationResponse returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) HasAuthenticationResponse() bool {
+func (o *ThreeDSecureSuccessEventContext) HasAuthenticationResponse() bool {
 	if o != nil && o.AuthenticationResponse.IsSet() {
 		return true
 	}
@@ -209,21 +209,21 @@ func (o *ThreeDSecureSuccessTransactionEventContext) HasAuthenticationResponse()
 }
 
 // SetAuthenticationResponse gets a reference to the given NullableString and assigns it to the AuthenticationResponse field.
-func (o *ThreeDSecureSuccessTransactionEventContext) SetAuthenticationResponse(v string) {
+func (o *ThreeDSecureSuccessEventContext) SetAuthenticationResponse(v string) {
 	o.AuthenticationResponse.Set(&v)
 }
 // SetAuthenticationResponseNil sets the value for AuthenticationResponse to be an explicit nil
-func (o *ThreeDSecureSuccessTransactionEventContext) SetAuthenticationResponseNil() {
+func (o *ThreeDSecureSuccessEventContext) SetAuthenticationResponseNil() {
 	o.AuthenticationResponse.Set(nil)
 }
 
 // UnsetAuthenticationResponse ensures that no value is present for AuthenticationResponse, not even an explicit nil
-func (o *ThreeDSecureSuccessTransactionEventContext) UnsetAuthenticationResponse() {
+func (o *ThreeDSecureSuccessEventContext) UnsetAuthenticationResponse() {
 	o.AuthenticationResponse.Unset()
 }
 
 // GetDirectoryTransactionId returns the DirectoryTransactionId field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ThreeDSecureSuccessTransactionEventContext) GetDirectoryTransactionId() string {
+func (o *ThreeDSecureSuccessEventContext) GetDirectoryTransactionId() string {
 	if o == nil || o.DirectoryTransactionId.Get() == nil {
 		var ret string
 		return ret
@@ -234,7 +234,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetDirectoryTransactionId()
 // GetDirectoryTransactionIdOk returns a tuple with the DirectoryTransactionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ThreeDSecureSuccessTransactionEventContext) GetDirectoryTransactionIdOk() (*string, bool) {
+func (o *ThreeDSecureSuccessEventContext) GetDirectoryTransactionIdOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -242,7 +242,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetDirectoryTransactionIdOk
 }
 
 // HasDirectoryTransactionId returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) HasDirectoryTransactionId() bool {
+func (o *ThreeDSecureSuccessEventContext) HasDirectoryTransactionId() bool {
 	if o != nil && o.DirectoryTransactionId.IsSet() {
 		return true
 	}
@@ -251,21 +251,21 @@ func (o *ThreeDSecureSuccessTransactionEventContext) HasDirectoryTransactionId()
 }
 
 // SetDirectoryTransactionId gets a reference to the given NullableString and assigns it to the DirectoryTransactionId field.
-func (o *ThreeDSecureSuccessTransactionEventContext) SetDirectoryTransactionId(v string) {
+func (o *ThreeDSecureSuccessEventContext) SetDirectoryTransactionId(v string) {
 	o.DirectoryTransactionId.Set(&v)
 }
 // SetDirectoryTransactionIdNil sets the value for DirectoryTransactionId to be an explicit nil
-func (o *ThreeDSecureSuccessTransactionEventContext) SetDirectoryTransactionIdNil() {
+func (o *ThreeDSecureSuccessEventContext) SetDirectoryTransactionIdNil() {
 	o.DirectoryTransactionId.Set(nil)
 }
 
 // UnsetDirectoryTransactionId ensures that no value is present for DirectoryTransactionId, not even an explicit nil
-func (o *ThreeDSecureSuccessTransactionEventContext) UnsetDirectoryTransactionId() {
+func (o *ThreeDSecureSuccessEventContext) UnsetDirectoryTransactionId() {
 	o.DirectoryTransactionId.Unset()
 }
 
 // GetCavvAlgorithm returns the CavvAlgorithm field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ThreeDSecureSuccessTransactionEventContext) GetCavvAlgorithm() string {
+func (o *ThreeDSecureSuccessEventContext) GetCavvAlgorithm() string {
 	if o == nil || o.CavvAlgorithm.Get() == nil {
 		var ret string
 		return ret
@@ -276,7 +276,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetCavvAlgorithm() string {
 // GetCavvAlgorithmOk returns a tuple with the CavvAlgorithm field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ThreeDSecureSuccessTransactionEventContext) GetCavvAlgorithmOk() (*string, bool) {
+func (o *ThreeDSecureSuccessEventContext) GetCavvAlgorithmOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -284,7 +284,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetCavvAlgorithmOk() (*stri
 }
 
 // HasCavvAlgorithm returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) HasCavvAlgorithm() bool {
+func (o *ThreeDSecureSuccessEventContext) HasCavvAlgorithm() bool {
 	if o != nil && o.CavvAlgorithm.IsSet() {
 		return true
 	}
@@ -293,21 +293,21 @@ func (o *ThreeDSecureSuccessTransactionEventContext) HasCavvAlgorithm() bool {
 }
 
 // SetCavvAlgorithm gets a reference to the given NullableString and assigns it to the CavvAlgorithm field.
-func (o *ThreeDSecureSuccessTransactionEventContext) SetCavvAlgorithm(v string) {
+func (o *ThreeDSecureSuccessEventContext) SetCavvAlgorithm(v string) {
 	o.CavvAlgorithm.Set(&v)
 }
 // SetCavvAlgorithmNil sets the value for CavvAlgorithm to be an explicit nil
-func (o *ThreeDSecureSuccessTransactionEventContext) SetCavvAlgorithmNil() {
+func (o *ThreeDSecureSuccessEventContext) SetCavvAlgorithmNil() {
 	o.CavvAlgorithm.Set(nil)
 }
 
 // UnsetCavvAlgorithm ensures that no value is present for CavvAlgorithm, not even an explicit nil
-func (o *ThreeDSecureSuccessTransactionEventContext) UnsetCavvAlgorithm() {
+func (o *ThreeDSecureSuccessEventContext) UnsetCavvAlgorithm() {
 	o.CavvAlgorithm.Unset()
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *ThreeDSecureSuccessTransactionEventContext) GetMethod() string {
+func (o *ThreeDSecureSuccessEventContext) GetMethod() string {
 	if o == nil || o.Method.Get() == nil {
 		var ret string
 		return ret
@@ -318,7 +318,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetMethod() string {
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *ThreeDSecureSuccessTransactionEventContext) GetMethodOk() (*string, bool) {
+func (o *ThreeDSecureSuccessEventContext) GetMethodOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -326,7 +326,7 @@ func (o *ThreeDSecureSuccessTransactionEventContext) GetMethodOk() (*string, boo
 }
 
 // HasMethod returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEventContext) HasMethod() bool {
+func (o *ThreeDSecureSuccessEventContext) HasMethod() bool {
 	if o != nil && o.Method.IsSet() {
 		return true
 	}
@@ -335,20 +335,20 @@ func (o *ThreeDSecureSuccessTransactionEventContext) HasMethod() bool {
 }
 
 // SetMethod gets a reference to the given NullableString and assigns it to the Method field.
-func (o *ThreeDSecureSuccessTransactionEventContext) SetMethod(v string) {
+func (o *ThreeDSecureSuccessEventContext) SetMethod(v string) {
 	o.Method.Set(&v)
 }
 // SetMethodNil sets the value for Method to be an explicit nil
-func (o *ThreeDSecureSuccessTransactionEventContext) SetMethodNil() {
+func (o *ThreeDSecureSuccessEventContext) SetMethodNil() {
 	o.Method.Set(nil)
 }
 
 // UnsetMethod ensures that no value is present for Method, not even an explicit nil
-func (o *ThreeDSecureSuccessTransactionEventContext) UnsetMethod() {
+func (o *ThreeDSecureSuccessEventContext) UnsetMethod() {
 	o.Method.Unset()
 }
 
-func (o ThreeDSecureSuccessTransactionEventContext) MarshalJSON() ([]byte, error) {
+func (o ThreeDSecureSuccessEventContext) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Eci != nil {
 		toSerialize["eci"] = o.Eci
@@ -377,38 +377,38 @@ func (o ThreeDSecureSuccessTransactionEventContext) MarshalJSON() ([]byte, error
 	return json.Marshal(toSerialize)
 }
 
-type NullableThreeDSecureSuccessTransactionEventContext struct {
-	value *ThreeDSecureSuccessTransactionEventContext
+type NullableThreeDSecureSuccessEventContext struct {
+	value *ThreeDSecureSuccessEventContext
 	isSet bool
 }
 
-func (v NullableThreeDSecureSuccessTransactionEventContext) Get() *ThreeDSecureSuccessTransactionEventContext {
+func (v NullableThreeDSecureSuccessEventContext) Get() *ThreeDSecureSuccessEventContext {
 	return v.value
 }
 
-func (v *NullableThreeDSecureSuccessTransactionEventContext) Set(val *ThreeDSecureSuccessTransactionEventContext) {
+func (v *NullableThreeDSecureSuccessEventContext) Set(val *ThreeDSecureSuccessEventContext) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableThreeDSecureSuccessTransactionEventContext) IsSet() bool {
+func (v NullableThreeDSecureSuccessEventContext) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableThreeDSecureSuccessTransactionEventContext) Unset() {
+func (v *NullableThreeDSecureSuccessEventContext) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableThreeDSecureSuccessTransactionEventContext(val *ThreeDSecureSuccessTransactionEventContext) *NullableThreeDSecureSuccessTransactionEventContext {
-	return &NullableThreeDSecureSuccessTransactionEventContext{value: val, isSet: true}
+func NewNullableThreeDSecureSuccessEventContext(val *ThreeDSecureSuccessEventContext) *NullableThreeDSecureSuccessEventContext {
+	return &NullableThreeDSecureSuccessEventContext{value: val, isSet: true}
 }
 
-func (v NullableThreeDSecureSuccessTransactionEventContext) MarshalJSON() ([]byte, error) {
+func (v NullableThreeDSecureSuccessEventContext) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableThreeDSecureSuccessTransactionEventContext) UnmarshalJSON(src []byte) error {
+func (v *NullableThreeDSecureSuccessEventContext) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

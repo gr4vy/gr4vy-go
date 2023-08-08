@@ -23,11 +23,11 @@ type ThreeDSecureDataV1V2 struct {
 	Eci string `json:"eci"`
 	// The version of 3-D Secure that was used.
 	Version string `json:"version"`
-	// For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the `ARes`.
+	// The transaction status received as part of the authentication request.
 	DirectoryResponse string `json:"directory_response"`
-	// The transaction status from the challenge result (not required for frictionless).
-	AuthenticationResponse string `json:"authentication_response"`
-	// The CAVV Algorithm used.
+	// The transaction status after a the 3DS challenge. This will be null in case of a frictionless 3DS flow.
+	AuthenticationResponse NullableString `json:"authentication_response"`
+	// The CAVV algorithm used.
 	CavvAlgorithm string `json:"cavv_algorithm"`
 	// The transaction identifier.
 	Xid string `json:"xid"`
@@ -39,7 +39,7 @@ type ThreeDSecureDataV1V2 struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewThreeDSecureDataV1V2(cavv string, eci string, version string, directoryResponse string, authenticationResponse string, cavvAlgorithm string, xid string, directoryTransactionId string) *ThreeDSecureDataV1V2 {
+func NewThreeDSecureDataV1V2(cavv string, eci string, version string, directoryResponse string, authenticationResponse NullableString, cavvAlgorithm string, xid string, directoryTransactionId string) *ThreeDSecureDataV1V2 {
 	this := ThreeDSecureDataV1V2{}
 	this.Cavv = cavv
 	this.Eci = eci
@@ -157,27 +157,29 @@ func (o *ThreeDSecureDataV1V2) SetDirectoryResponse(v string) {
 }
 
 // GetAuthenticationResponse returns the AuthenticationResponse field value
+// If the value is explicit nil, the zero value for string will be returned
 func (o *ThreeDSecureDataV1V2) GetAuthenticationResponse() string {
-	if o == nil {
+	if o == nil || o.AuthenticationResponse.Get() == nil {
 		var ret string
 		return ret
 	}
 
-	return o.AuthenticationResponse
+	return *o.AuthenticationResponse.Get()
 }
 
 // GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field value
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ThreeDSecureDataV1V2) GetAuthenticationResponseOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.AuthenticationResponse, true
+	return o.AuthenticationResponse.Get(), o.AuthenticationResponse.IsSet()
 }
 
 // SetAuthenticationResponse sets field value
 func (o *ThreeDSecureDataV1V2) SetAuthenticationResponse(v string) {
-	o.AuthenticationResponse = v
+	o.AuthenticationResponse.Set(&v)
 }
 
 // GetCavvAlgorithm returns the CavvAlgorithm field value
@@ -267,7 +269,7 @@ func (o ThreeDSecureDataV1V2) MarshalJSON() ([]byte, error) {
 		toSerialize["directory_response"] = o.DirectoryResponse
 	}
 	if true {
-		toSerialize["authentication_response"] = o.AuthenticationResponse
+		toSerialize["authentication_response"] = o.AuthenticationResponse.Get()
 	}
 	if true {
 		toSerialize["cavv_algorithm"] = o.CavvAlgorithm

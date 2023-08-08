@@ -17,9 +17,7 @@ import (
 
 // ConnectionOptionsCybersourceAntiFraud Additional options for Cybersource Decision Manager (anti-fraud).
 type ConnectionOptionsCybersourceAntiFraud struct {
-	// This field represents device fingerprint ID.
-	DeviceFingerprintId *string `json:"device_fingerprint_id,omitempty"`
-	// This is a key-value object for merchant defined data.
+	// This is a key-value object for merchant defined data. Each key needs to be a numeric string identifying the MDD field to set. For example, for field 1 set the key to \"1\".
 	MerchantDefinedData *map[string]string `json:"merchant_defined_data,omitempty"`
 }
 
@@ -38,38 +36,6 @@ func NewConnectionOptionsCybersourceAntiFraud() *ConnectionOptionsCybersourceAnt
 func NewConnectionOptionsCybersourceAntiFraudWithDefaults() *ConnectionOptionsCybersourceAntiFraud {
 	this := ConnectionOptionsCybersourceAntiFraud{}
 	return &this
-}
-
-// GetDeviceFingerprintId returns the DeviceFingerprintId field value if set, zero value otherwise.
-func (o *ConnectionOptionsCybersourceAntiFraud) GetDeviceFingerprintId() string {
-	if o == nil || o.DeviceFingerprintId == nil {
-		var ret string
-		return ret
-	}
-	return *o.DeviceFingerprintId
-}
-
-// GetDeviceFingerprintIdOk returns a tuple with the DeviceFingerprintId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *ConnectionOptionsCybersourceAntiFraud) GetDeviceFingerprintIdOk() (*string, bool) {
-	if o == nil || o.DeviceFingerprintId == nil {
-		return nil, false
-	}
-	return o.DeviceFingerprintId, true
-}
-
-// HasDeviceFingerprintId returns a boolean if a field has been set.
-func (o *ConnectionOptionsCybersourceAntiFraud) HasDeviceFingerprintId() bool {
-	if o != nil && o.DeviceFingerprintId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetDeviceFingerprintId gets a reference to the given string and assigns it to the DeviceFingerprintId field.
-func (o *ConnectionOptionsCybersourceAntiFraud) SetDeviceFingerprintId(v string) {
-	o.DeviceFingerprintId = &v
 }
 
 // GetMerchantDefinedData returns the MerchantDefinedData field value if set, zero value otherwise.
@@ -106,9 +72,6 @@ func (o *ConnectionOptionsCybersourceAntiFraud) SetMerchantDefinedData(v map[str
 
 func (o ConnectionOptionsCybersourceAntiFraud) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.DeviceFingerprintId != nil {
-		toSerialize["device_fingerprint_id"] = o.DeviceFingerprintId
-	}
 	if o.MerchantDefinedData != nil {
 		toSerialize["merchant_defined_data"] = o.MerchantDefinedData
 	}

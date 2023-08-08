@@ -7,9 +7,9 @@ Name | Type | Description | Notes
 **Cavv** | **string** | The cardholder authentication value or AAV. | 
 **Eci** | **string** | The electronic commerce indicator for the 3DS transaction. | 
 **Version** | **string** | The version of 3-D Secure that was used. | 
-**DirectoryResponse** | **string** | For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the &#x60;ARes&#x60;. | 
-**AuthenticationResponse** | **string** | The transaction status from the challenge result (not required for frictionless). | 
-**CavvAlgorithm** | **string** | The CAVV Algorithm used. | 
+**DirectoryResponse** | **string** | The transaction status received as part of the authentication request. | 
+**AuthenticationResponse** | **NullableString** | The transaction status after a the 3DS challenge. This will be null in case of a frictionless 3DS flow. | 
+**CavvAlgorithm** | **string** | The CAVV algorithm used. | 
 **Xid** | **string** | The transaction identifier. | 
 **DirectoryTransactionId** | **string** | The transaction identifier. | 
 
@@ -17,7 +17,7 @@ Name | Type | Description | Notes
 
 ### NewThreeDSecureDataV1V2
 
-`func NewThreeDSecureDataV1V2(cavv string, eci string, version string, directoryResponse string, authenticationResponse string, cavvAlgorithm string, xid string, directoryTransactionId string, ) *ThreeDSecureDataV1V2`
+`func NewThreeDSecureDataV1V2(cavv string, eci string, version string, directoryResponse string, authenticationResponse NullableString, cavvAlgorithm string, xid string, directoryTransactionId string, ) *ThreeDSecureDataV1V2`
 
 NewThreeDSecureDataV1V2 instantiates a new ThreeDSecureDataV1V2 object
 This constructor will assign default values to properties that have it defined,
@@ -132,6 +132,16 @@ and a boolean to check if the value has been set.
 SetAuthenticationResponse sets AuthenticationResponse field to given value.
 
 
+### SetAuthenticationResponseNil
+
+`func (o *ThreeDSecureDataV1V2) SetAuthenticationResponseNil(b bool)`
+
+ SetAuthenticationResponseNil sets the value for AuthenticationResponse to be an explicit nil
+
+### UnsetAuthenticationResponse
+`func (o *ThreeDSecureDataV1V2) UnsetAuthenticationResponse()`
+
+UnsetAuthenticationResponse ensures that no value is present for AuthenticationResponse, not even an explicit nil
 ### GetCavvAlgorithm
 
 `func (o *ThreeDSecureDataV1V2) GetCavvAlgorithm() string`

@@ -4,8 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**DeviceFingerprintId** | Pointer to **string** | This field represents device fingerprint ID. | [optional] 
-**MerchantDefinedData** | Pointer to **map[string]string** | This is a key-value object for merchant defined data. | [optional] 
+**MerchantDefinedData** | Pointer to **map[string]string** | This is a key-value object for merchant defined data. Each key needs to be a numeric string identifying the MDD field to set. For example, for field 1 set the key to \&quot;1\&quot;. | [optional] 
 
 ## Methods
 
@@ -25,31 +24,6 @@ will change when the set of required properties is changed
 NewConnectionOptionsCybersourceAntiFraudWithDefaults instantiates a new ConnectionOptionsCybersourceAntiFraud object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
-
-### GetDeviceFingerprintId
-
-`func (o *ConnectionOptionsCybersourceAntiFraud) GetDeviceFingerprintId() string`
-
-GetDeviceFingerprintId returns the DeviceFingerprintId field if non-nil, zero value otherwise.
-
-### GetDeviceFingerprintIdOk
-
-`func (o *ConnectionOptionsCybersourceAntiFraud) GetDeviceFingerprintIdOk() (*string, bool)`
-
-GetDeviceFingerprintIdOk returns a tuple with the DeviceFingerprintId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDeviceFingerprintId
-
-`func (o *ConnectionOptionsCybersourceAntiFraud) SetDeviceFingerprintId(v string)`
-
-SetDeviceFingerprintId sets DeviceFingerprintId field to given value.
-
-### HasDeviceFingerprintId
-
-`func (o *ConnectionOptionsCybersourceAntiFraud) HasDeviceFingerprintId() bool`
-
-HasDeviceFingerprintId returns a boolean if a field has been set.
 
 ### GetMerchantDefinedData
 

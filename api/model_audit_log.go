@@ -26,6 +26,8 @@ type AuditLog struct {
 	Timestamp *time.Time `json:"timestamp,omitempty"`
 	// The action that was performed.
 	Action *string `json:"action,omitempty"`
+	// The ID of the merchant account this entry was created for.
+	MerchantAccountId NullableString `json:"merchant_account_id,omitempty"`
 	User *AuditLogUser `json:"user,omitempty"`
 	Resource *AuditLogResource `json:"resource,omitempty"`
 }
@@ -175,6 +177,48 @@ func (o *AuditLog) SetAction(v string) {
 	o.Action = &v
 }
 
+// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AuditLog) GetMerchantAccountId() string {
+	if o == nil || o.MerchantAccountId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantAccountId.Get()
+}
+
+// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *AuditLog) GetMerchantAccountIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.MerchantAccountId.Get(), o.MerchantAccountId.IsSet()
+}
+
+// HasMerchantAccountId returns a boolean if a field has been set.
+func (o *AuditLog) HasMerchantAccountId() bool {
+	if o != nil && o.MerchantAccountId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountId gets a reference to the given NullableString and assigns it to the MerchantAccountId field.
+func (o *AuditLog) SetMerchantAccountId(v string) {
+	o.MerchantAccountId.Set(&v)
+}
+// SetMerchantAccountIdNil sets the value for MerchantAccountId to be an explicit nil
+func (o *AuditLog) SetMerchantAccountIdNil() {
+	o.MerchantAccountId.Set(nil)
+}
+
+// UnsetMerchantAccountId ensures that no value is present for MerchantAccountId, not even an explicit nil
+func (o *AuditLog) UnsetMerchantAccountId() {
+	o.MerchantAccountId.Unset()
+}
+
 // GetUser returns the User field value if set, zero value otherwise.
 func (o *AuditLog) GetUser() AuditLogUser {
 	if o == nil || o.User == nil {
@@ -252,6 +296,9 @@ func (o AuditLog) MarshalJSON() ([]byte, error) {
 	}
 	if o.Action != nil {
 		toSerialize["action"] = o.Action
+	}
+	if o.MerchantAccountId.IsSet() {
+		toSerialize["merchant_account_id"] = o.MerchantAccountId.Get()
 	}
 	if o.User != nil {
 		toSerialize["user"] = o.User

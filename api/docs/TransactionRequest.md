@@ -21,8 +21,9 @@ Name | Type | Description | Notes
 **PreviousSchemeTransactionId** | Pointer to **NullableString** | A scheme&#39;s transaction identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction.  If not provided, and a qualifying customer initiated transaction has been previously made, then Gr4vy will populate this value with the identifier returned for that transaction.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID. | [optional] [default to "null"]
 **BrowserInfo** | Pointer to [**NullableBrowserInfo**](BrowserInfo.md) | Information about the browser used by the buyer. | [optional] 
 **ShippingDetailsId** | Pointer to **NullableString** | The unique identifier of a set of shipping details stored for the buyer.  If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the detail in the database. | [optional] 
-**ConnectionOptions** | Pointer to [**NullableConnectionOptions**](ConnectionOptions.md) | Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.  Please note that each of the keys this object are in kebab-case, for example &#x60;cybersource-anti-fraud&#x60; as they represent the ID of the connector. All the other keys will be snake-case, for example &#x60;device_fingerprint_id&#x60;. | [optional] 
+**ConnectionOptions** | Pointer to [**NullableConnectionOptions**](ConnectionOptions.md) | Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.  Please note that each of the keys this object are in kebab-case, for example &#x60;cybersource-anti-fraud&#x60; as they represent the ID of the connector. All the other keys will be snake-case, for example &#x60;merchant_defined_data&#x60;. | [optional] 
 **AsyncCapture** | Pointer to **bool** | Whether to capture the transaction asynchronously.  - When &#x60;async_capture&#x60; is &#x60;false&#x60; (default), the transaction is captured   in the same request. - When &#x60;async_capture&#x60; is &#x60;true&#x60;, the transaction is automatically   captured at a later time.  Redirect transactions are not affected by this flag.  This flag can only be set to &#x60;true&#x60; when &#x60;intent&#x60; is set to &#x60;capture&#x60;. | [optional] [default to false]
+**AntiFraudFingerprint** | Pointer to **NullableString** | This field represents the fingerprint data to be passed to the active anti-fraud service. | [optional] [default to "null"]
 
 ## Methods
 
@@ -573,6 +574,41 @@ SetAsyncCapture sets AsyncCapture field to given value.
 
 HasAsyncCapture returns a boolean if a field has been set.
 
+### GetAntiFraudFingerprint
+
+`func (o *TransactionRequest) GetAntiFraudFingerprint() string`
+
+GetAntiFraudFingerprint returns the AntiFraudFingerprint field if non-nil, zero value otherwise.
+
+### GetAntiFraudFingerprintOk
+
+`func (o *TransactionRequest) GetAntiFraudFingerprintOk() (*string, bool)`
+
+GetAntiFraudFingerprintOk returns a tuple with the AntiFraudFingerprint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAntiFraudFingerprint
+
+`func (o *TransactionRequest) SetAntiFraudFingerprint(v string)`
+
+SetAntiFraudFingerprint sets AntiFraudFingerprint field to given value.
+
+### HasAntiFraudFingerprint
+
+`func (o *TransactionRequest) HasAntiFraudFingerprint() bool`
+
+HasAntiFraudFingerprint returns a boolean if a field has been set.
+
+### SetAntiFraudFingerprintNil
+
+`func (o *TransactionRequest) SetAntiFraudFingerprintNil(b bool)`
+
+ SetAntiFraudFingerprintNil sets the value for AntiFraudFingerprint to be an explicit nil
+
+### UnsetAntiFraudFingerprint
+`func (o *TransactionRequest) UnsetAntiFraudFingerprint()`
+
+UnsetAntiFraudFingerprint ensures that no value is present for AntiFraudFingerprint, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

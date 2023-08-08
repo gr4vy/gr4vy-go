@@ -67,6 +67,8 @@ type Transaction struct {
 	RawResponseCode NullableString `json:"raw_response_code,omitempty"`
 	// This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
 	RawResponseDescription NullableString `json:"raw_response_description,omitempty"`
+	// This is the response description received from the processor.
+	AuthResponseCode NullableString `json:"auth_response_code,omitempty"`
 	// The response code received from the payment service for the Address Verification Check (AVS). This code is mapped to a standardized Gr4vy AVS response code.  - `no_match` - neither address or postal code match - `match` - both address and postal code match - `partial_match_address` - address matches but postal code does not - `partial_match_postcode` - postal code matches but address does not - `unavailable ` - AVS is unavailable for card/country  The value of this field can be `null` if the payment service did not provide a response.
 	AvsResponseCode NullableString `json:"avs_response_code,omitempty"`
 	// The response code received from the payment service for the Card Verification Value (CVV). This code is mapped to a standardized Gr4vy CVV response code.  - `no_match` - the CVV does not match the expected value - `match` - the CVV matches the expected value - `unavailable ` - CVV check unavailable for card our country - `not_provided ` - CVV not provided  The value of this field can be `null` if the payment service did not provide a response.
@@ -988,6 +990,48 @@ func (o *Transaction) UnsetRawResponseDescription() {
 	o.RawResponseDescription.Unset()
 }
 
+// GetAuthResponseCode returns the AuthResponseCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Transaction) GetAuthResponseCode() string {
+	if o == nil || o.AuthResponseCode.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.AuthResponseCode.Get()
+}
+
+// GetAuthResponseCodeOk returns a tuple with the AuthResponseCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Transaction) GetAuthResponseCodeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AuthResponseCode.Get(), o.AuthResponseCode.IsSet()
+}
+
+// HasAuthResponseCode returns a boolean if a field has been set.
+func (o *Transaction) HasAuthResponseCode() bool {
+	if o != nil && o.AuthResponseCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAuthResponseCode gets a reference to the given NullableString and assigns it to the AuthResponseCode field.
+func (o *Transaction) SetAuthResponseCode(v string) {
+	o.AuthResponseCode.Set(&v)
+}
+// SetAuthResponseCodeNil sets the value for AuthResponseCode to be an explicit nil
+func (o *Transaction) SetAuthResponseCodeNil() {
+	o.AuthResponseCode.Set(nil)
+}
+
+// UnsetAuthResponseCode ensures that no value is present for AuthResponseCode, not even an explicit nil
+func (o *Transaction) UnsetAuthResponseCode() {
+	o.AuthResponseCode.Unset()
+}
+
 // GetAvsResponseCode returns the AvsResponseCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Transaction) GetAvsResponseCode() string {
 	if o == nil || o.AvsResponseCode.Get() == nil {
@@ -1476,6 +1520,9 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	}
 	if o.RawResponseDescription.IsSet() {
 		toSerialize["raw_response_description"] = o.RawResponseDescription.Get()
+	}
+	if o.AuthResponseCode.IsSet() {
+		toSerialize["auth_response_code"] = o.AuthResponseCode.Get()
 	}
 	if o.AvsResponseCode.IsSet() {
 		toSerialize["avs_response_code"] = o.AvsResponseCode.Get()

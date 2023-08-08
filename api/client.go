@@ -80,6 +80,8 @@ type APIClient struct {
 	TokensApi *TokensApiService
 
 	TransactionsApi *TransactionsApiService
+
+	VaultForwardApi *VaultForwardApiService
 }
 
 type service struct {
@@ -114,6 +116,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.RolesApi = (*RolesApiService)(&c.common)
 	c.TokensApi = (*TokensApiService)(&c.common)
 	c.TransactionsApi = (*TransactionsApiService)(&c.common)
+	c.VaultForwardApi = (*VaultForwardApiService)(&c.common)
 
 	return c
 }

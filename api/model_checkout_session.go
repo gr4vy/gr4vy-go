@@ -24,6 +24,10 @@ type CheckoutSession struct {
 	Id *string `json:"id,omitempty"`
 	// The date and time when the Checkout Session will expire. By default this will be set to 1 hour from the date of creation.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
+	// An array of cart items that represents the line items of a transaction.
+	CartItems []CartItem `json:"cart_items,omitempty"`
+	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it.
+	Metadata map[string]string `json:"metadata,omitempty"`
 }
 
 // NewCheckoutSession instantiates a new CheckoutSession object
@@ -139,6 +143,72 @@ func (o *CheckoutSession) SetExpiresAt(v time.Time) {
 	o.ExpiresAt = &v
 }
 
+// GetCartItems returns the CartItems field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CheckoutSession) GetCartItems() []CartItem {
+	if o == nil  {
+		var ret []CartItem
+		return ret
+	}
+	return o.CartItems
+}
+
+// GetCartItemsOk returns a tuple with the CartItems field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CheckoutSession) GetCartItemsOk() (*[]CartItem, bool) {
+	if o == nil || o.CartItems == nil {
+		return nil, false
+	}
+	return &o.CartItems, true
+}
+
+// HasCartItems returns a boolean if a field has been set.
+func (o *CheckoutSession) HasCartItems() bool {
+	if o != nil && o.CartItems != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCartItems gets a reference to the given []CartItem and assigns it to the CartItems field.
+func (o *CheckoutSession) SetCartItems(v []CartItem) {
+	o.CartItems = v
+}
+
+// GetMetadata returns the Metadata field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CheckoutSession) GetMetadata() map[string]string {
+	if o == nil  {
+		var ret map[string]string
+		return ret
+	}
+	return o.Metadata
+}
+
+// GetMetadataOk returns a tuple with the Metadata field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CheckoutSession) GetMetadataOk() (*map[string]string, bool) {
+	if o == nil || o.Metadata == nil {
+		return nil, false
+	}
+	return &o.Metadata, true
+}
+
+// HasMetadata returns a boolean if a field has been set.
+func (o *CheckoutSession) HasMetadata() bool {
+	if o != nil && o.Metadata != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMetadata gets a reference to the given map[string]string and assigns it to the Metadata field.
+func (o *CheckoutSession) SetMetadata(v map[string]string) {
+	o.Metadata = v
+}
+
 func (o CheckoutSession) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -149,6 +219,12 @@ func (o CheckoutSession) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExpiresAt != nil {
 		toSerialize["expires_at"] = o.ExpiresAt
+	}
+	if o.CartItems != nil {
+		toSerialize["cart_items"] = o.CartItems
+	}
+	if o.Metadata != nil {
+		toSerialize["metadata"] = o.Metadata
 	}
 	return json.Marshal(toSerialize)
 }

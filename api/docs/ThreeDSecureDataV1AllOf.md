@@ -4,8 +4,8 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**AuthenticationResponse** | **string** | The authentication response. | 
-**CavvAlgorithm** | **string** | The CAVV Algorithm used. | 
+**AuthenticationResponse** | **string** | The response for the 3DS authentication call. | 
+**CavvAlgorithm** | **string** | The CAVV algorithm used. | 
 **Xid** | **string** | The transaction identifier. | 
 
 ## Methods

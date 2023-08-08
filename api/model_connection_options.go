@@ -18,6 +18,7 @@ import (
 // ConnectionOptions struct for ConnectionOptions
 type ConnectionOptions struct {
 	CybersourceAntiFraud NullableConnectionOptionsCybersourceAntiFraud `json:"cybersource-anti-fraud,omitempty"`
+	ForterAntiFraud NullableConnectionOptionsForterAntiFraud `json:"forter-anti-fraud,omitempty"`
 	AdyenCard NullableConnectionOptionsAdyenCard `json:"adyen-card,omitempty"`
 }
 
@@ -80,6 +81,48 @@ func (o *ConnectionOptions) UnsetCybersourceAntiFraud() {
 	o.CybersourceAntiFraud.Unset()
 }
 
+// GetForterAntiFraud returns the ForterAntiFraud field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetForterAntiFraud() ConnectionOptionsForterAntiFraud {
+	if o == nil || o.ForterAntiFraud.Get() == nil {
+		var ret ConnectionOptionsForterAntiFraud
+		return ret
+	}
+	return *o.ForterAntiFraud.Get()
+}
+
+// GetForterAntiFraudOk returns a tuple with the ForterAntiFraud field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetForterAntiFraudOk() (*ConnectionOptionsForterAntiFraud, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ForterAntiFraud.Get(), o.ForterAntiFraud.IsSet()
+}
+
+// HasForterAntiFraud returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasForterAntiFraud() bool {
+	if o != nil && o.ForterAntiFraud.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetForterAntiFraud gets a reference to the given NullableConnectionOptionsForterAntiFraud and assigns it to the ForterAntiFraud field.
+func (o *ConnectionOptions) SetForterAntiFraud(v ConnectionOptionsForterAntiFraud) {
+	o.ForterAntiFraud.Set(&v)
+}
+// SetForterAntiFraudNil sets the value for ForterAntiFraud to be an explicit nil
+func (o *ConnectionOptions) SetForterAntiFraudNil() {
+	o.ForterAntiFraud.Set(nil)
+}
+
+// UnsetForterAntiFraud ensures that no value is present for ForterAntiFraud, not even an explicit nil
+func (o *ConnectionOptions) UnsetForterAntiFraud() {
+	o.ForterAntiFraud.Unset()
+}
+
 // GetAdyenCard returns the AdyenCard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConnectionOptions) GetAdyenCard() ConnectionOptionsAdyenCard {
 	if o == nil || o.AdyenCard.Get() == nil {
@@ -126,6 +169,9 @@ func (o ConnectionOptions) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CybersourceAntiFraud.IsSet() {
 		toSerialize["cybersource-anti-fraud"] = o.CybersourceAntiFraud.Get()
+	}
+	if o.ForterAntiFraud.IsSet() {
+		toSerialize["forter-anti-fraud"] = o.ForterAntiFraud.Get()
 	}
 	if o.AdyenCard.IsSet() {
 		toSerialize["adyen-card"] = o.AdyenCard.Get()
