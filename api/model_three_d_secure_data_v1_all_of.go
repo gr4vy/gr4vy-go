@@ -17,9 +17,9 @@ import (
 
 // ThreeDSecureDataV1AllOf struct for ThreeDSecureDataV1AllOf
 type ThreeDSecureDataV1AllOf struct {
-	// The authentication response.
+	// The response for the 3DS authentication call.
 	AuthenticationResponse string `json:"authentication_response"`
-	// The CAVV Algorithm used.
+	// The CAVV algorithm used.
 	CavvAlgorithm string `json:"cavv_algorithm"`
 	// The transaction identifier.
 	Xid string `json:"xid"`

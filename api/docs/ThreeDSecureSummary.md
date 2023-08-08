@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Version** | Pointer to **string** | The version of 3DS used for this transaction. | [optional] 
 **Status** | Pointer to **string** | The status of the 3DS challenge for this transaction. | [optional] 
 **Method** | Pointer to **string** | The method used for 3DS authentication for this transaction. | [optional] 
-**ErrorData** | Pointer to [**NullableThreeDSecureError**](ThreeDSecureError.md) | If the transaction had a 3DS error, information about it. | [optional] 
+**ErrorData** | Pointer to [**NullableThreeDSecureError**](ThreeDSecureError.md) | The error data received from our 3DS server. This will not be populated if the customer failed the authentication with a status code of &#x60;N&#x60;, &#x60;R&#x60;, or &#x60;U&#x60;.  To see full details about the 3DS calls in those situations please use our transaction events API. | [optional] 
 **ResponseData** | Pointer to [**ThreeDSecureDataV1V2**](ThreeDSecureDataV1V2.md) |  | [optional] 
 
 ## Methods

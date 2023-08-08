@@ -48,10 +48,12 @@ type TransactionRequest struct {
 	BrowserInfo NullableBrowserInfo `json:"browser_info,omitempty"`
 	// The unique identifier of a set of shipping details stored for the buyer.  If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the detail in the database.
 	ShippingDetailsId NullableString `json:"shipping_details_id,omitempty"`
-	// Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.  Please note that each of the keys this object are in kebab-case, for example `cybersource-anti-fraud` as they represent the ID of the connector. All the other keys will be snake-case, for example `device_fingerprint_id`.
+	// Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.  Please note that each of the keys this object are in kebab-case, for example `cybersource-anti-fraud` as they represent the ID of the connector. All the other keys will be snake-case, for example `merchant_defined_data`.
 	ConnectionOptions NullableConnectionOptions `json:"connection_options,omitempty"`
 	// Whether to capture the transaction asynchronously.  - When `async_capture` is `false` (default), the transaction is captured   in the same request. - When `async_capture` is `true`, the transaction is automatically   captured at a later time.  Redirect transactions are not affected by this flag.  This flag can only be set to `true` when `intent` is set to `capture`.
 	AsyncCapture *bool `json:"async_capture,omitempty"`
+	// This field represents the fingerprint data to be passed to the active anti-fraud service.
+	AntiFraudFingerprint NullableString `json:"anti_fraud_fingerprint,omitempty"`
 }
 
 // NewTransactionRequest instantiates a new TransactionRequest object
@@ -75,6 +77,8 @@ func NewTransactionRequest(amount int32, currency string, paymentMethod Transact
 	this.PreviousSchemeTransactionId = *NewNullableString(&previousSchemeTransactionId)
 	var asyncCapture bool = false
 	this.AsyncCapture = &asyncCapture
+	var antiFraudFingerprint string = "null"
+	this.AntiFraudFingerprint = *NewNullableString(&antiFraudFingerprint)
 	return &this
 }
 
@@ -95,6 +99,8 @@ func NewTransactionRequestWithDefaults() *TransactionRequest {
 	this.PreviousSchemeTransactionId = *NewNullableString(&previousSchemeTransactionId)
 	var asyncCapture bool = false
 	this.AsyncCapture = &asyncCapture
+	var antiFraudFingerprint string = "null"
+	this.AntiFraudFingerprint = *NewNullableString(&antiFraudFingerprint)
 	return &this
 }
 
@@ -752,6 +758,48 @@ func (o *TransactionRequest) SetAsyncCapture(v bool) {
 	o.AsyncCapture = &v
 }
 
+// GetAntiFraudFingerprint returns the AntiFraudFingerprint field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRequest) GetAntiFraudFingerprint() string {
+	if o == nil || o.AntiFraudFingerprint.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.AntiFraudFingerprint.Get()
+}
+
+// GetAntiFraudFingerprintOk returns a tuple with the AntiFraudFingerprint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRequest) GetAntiFraudFingerprintOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AntiFraudFingerprint.Get(), o.AntiFraudFingerprint.IsSet()
+}
+
+// HasAntiFraudFingerprint returns a boolean if a field has been set.
+func (o *TransactionRequest) HasAntiFraudFingerprint() bool {
+	if o != nil && o.AntiFraudFingerprint.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAntiFraudFingerprint gets a reference to the given NullableString and assigns it to the AntiFraudFingerprint field.
+func (o *TransactionRequest) SetAntiFraudFingerprint(v string) {
+	o.AntiFraudFingerprint.Set(&v)
+}
+// SetAntiFraudFingerprintNil sets the value for AntiFraudFingerprint to be an explicit nil
+func (o *TransactionRequest) SetAntiFraudFingerprintNil() {
+	o.AntiFraudFingerprint.Set(nil)
+}
+
+// UnsetAntiFraudFingerprint ensures that no value is present for AntiFraudFingerprint, not even an explicit nil
+func (o *TransactionRequest) UnsetAntiFraudFingerprint() {
+	o.AntiFraudFingerprint.Unset()
+}
+
 func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -810,6 +858,9 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.AsyncCapture != nil {
 		toSerialize["async_capture"] = o.AsyncCapture
+	}
+	if o.AntiFraudFingerprint.IsSet() {
+		toSerialize["anti_fraud_fingerprint"] = o.AntiFraudFingerprint.Get()
 	}
 	return json.Marshal(toSerialize)
 }

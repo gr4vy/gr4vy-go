@@ -1,4 +1,4 @@
-# AntiFraudDecisionTransactionEvent
+# TransactionHistoryEvent
 
 ## Properties
 
@@ -6,151 +6,151 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;transaction-event&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this event. | [optional] 
-**Name** | Pointer to **string** | The name of this resource. Is always &#x60;anti-fraud-decision &#x60;. | [optional] 
+**Name** | Pointer to **string** | The name of this resource. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this transaction was created in our system. | [optional] 
-**Context** | Pointer to [**AntiFraudDecisionTransactionEventContext**](AntiFraudDecisionTransactionEventContext.md) |  | [optional] 
+**Context** | Pointer to **map[string]map[string]interface{}** | A list of key/values with additional data. | [optional] 
 
 ## Methods
 
-### NewAntiFraudDecisionTransactionEvent
+### NewTransactionHistoryEvent
 
-`func NewAntiFraudDecisionTransactionEvent() *AntiFraudDecisionTransactionEvent`
+`func NewTransactionHistoryEvent() *TransactionHistoryEvent`
 
-NewAntiFraudDecisionTransactionEvent instantiates a new AntiFraudDecisionTransactionEvent object
+NewTransactionHistoryEvent instantiates a new TransactionHistoryEvent object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewAntiFraudDecisionTransactionEventWithDefaults
+### NewTransactionHistoryEventWithDefaults
 
-`func NewAntiFraudDecisionTransactionEventWithDefaults() *AntiFraudDecisionTransactionEvent`
+`func NewTransactionHistoryEventWithDefaults() *TransactionHistoryEvent`
 
-NewAntiFraudDecisionTransactionEventWithDefaults instantiates a new AntiFraudDecisionTransactionEvent object
+NewTransactionHistoryEventWithDefaults instantiates a new TransactionHistoryEvent object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetType
 
-`func (o *AntiFraudDecisionTransactionEvent) GetType() string`
+`func (o *TransactionHistoryEvent) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *AntiFraudDecisionTransactionEvent) GetTypeOk() (*string, bool)`
+`func (o *TransactionHistoryEvent) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *AntiFraudDecisionTransactionEvent) SetType(v string)`
+`func (o *TransactionHistoryEvent) SetType(v string)`
 
 SetType sets Type field to given value.
 
 ### HasType
 
-`func (o *AntiFraudDecisionTransactionEvent) HasType() bool`
+`func (o *TransactionHistoryEvent) HasType() bool`
 
 HasType returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *AntiFraudDecisionTransactionEvent) GetId() string`
+`func (o *TransactionHistoryEvent) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *AntiFraudDecisionTransactionEvent) GetIdOk() (*string, bool)`
+`func (o *TransactionHistoryEvent) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *AntiFraudDecisionTransactionEvent) SetId(v string)`
+`func (o *TransactionHistoryEvent) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *AntiFraudDecisionTransactionEvent) HasId() bool`
+`func (o *TransactionHistoryEvent) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetName
 
-`func (o *AntiFraudDecisionTransactionEvent) GetName() string`
+`func (o *TransactionHistoryEvent) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *AntiFraudDecisionTransactionEvent) GetNameOk() (*string, bool)`
+`func (o *TransactionHistoryEvent) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *AntiFraudDecisionTransactionEvent) SetName(v string)`
+`func (o *TransactionHistoryEvent) SetName(v string)`
 
 SetName sets Name field to given value.
 
 ### HasName
 
-`func (o *AntiFraudDecisionTransactionEvent) HasName() bool`
+`func (o *TransactionHistoryEvent) HasName() bool`
 
 HasName returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
-`func (o *AntiFraudDecisionTransactionEvent) GetCreatedAt() time.Time`
+`func (o *TransactionHistoryEvent) GetCreatedAt() time.Time`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *AntiFraudDecisionTransactionEvent) GetCreatedAtOk() (*time.Time, bool)`
+`func (o *TransactionHistoryEvent) GetCreatedAtOk() (*time.Time, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *AntiFraudDecisionTransactionEvent) SetCreatedAt(v time.Time)`
+`func (o *TransactionHistoryEvent) SetCreatedAt(v time.Time)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
 ### HasCreatedAt
 
-`func (o *AntiFraudDecisionTransactionEvent) HasCreatedAt() bool`
+`func (o *TransactionHistoryEvent) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
 
 ### GetContext
 
-`func (o *AntiFraudDecisionTransactionEvent) GetContext() AntiFraudDecisionTransactionEventContext`
+`func (o *TransactionHistoryEvent) GetContext() map[string]map[string]interface{}`
 
 GetContext returns the Context field if non-nil, zero value otherwise.
 
 ### GetContextOk
 
-`func (o *AntiFraudDecisionTransactionEvent) GetContextOk() (*AntiFraudDecisionTransactionEventContext, bool)`
+`func (o *TransactionHistoryEvent) GetContextOk() (*map[string]map[string]interface{}, bool)`
 
 GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContext
 
-`func (o *AntiFraudDecisionTransactionEvent) SetContext(v AntiFraudDecisionTransactionEventContext)`
+`func (o *TransactionHistoryEvent) SetContext(v map[string]map[string]interface{})`
 
 SetContext sets Context field to given value.
 
 ### HasContext
 
-`func (o *AntiFraudDecisionTransactionEvent) HasContext() bool`
+`func (o *TransactionHistoryEvent) HasContext() bool`
 
 HasContext returns a boolean if a field has been set.
 

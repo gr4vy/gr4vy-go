@@ -17,8 +17,10 @@ import (
 
 // ThreeDSecureDataV2AllOf struct for ThreeDSecureDataV2AllOf
 type ThreeDSecureDataV2AllOf struct {
-	// The transaction status from the challenge result (not required for frictionless).
-	AuthenticationResponse *string `json:"authentication_response,omitempty"`
+	// The transaction status after a the 3DS challenge. This will be null in case of a frictionless 3DS flow.
+	AuthenticationResponse NullableString `json:"authentication_response,omitempty"`
+	// The transaction status received as part of the authentication request.
+	DirectoryResponse *string `json:"directory_response,omitempty"`
 	// The transaction identifier.
 	DirectoryTransactionId string `json:"directory_transaction_id"`
 }
@@ -41,36 +43,78 @@ func NewThreeDSecureDataV2AllOfWithDefaults() *ThreeDSecureDataV2AllOf {
 	return &this
 }
 
-// GetAuthenticationResponse returns the AuthenticationResponse field value if set, zero value otherwise.
+// GetAuthenticationResponse returns the AuthenticationResponse field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ThreeDSecureDataV2AllOf) GetAuthenticationResponse() string {
-	if o == nil || o.AuthenticationResponse == nil {
+	if o == nil || o.AuthenticationResponse.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.AuthenticationResponse
+	return *o.AuthenticationResponse.Get()
 }
 
 // GetAuthenticationResponseOk returns a tuple with the AuthenticationResponse field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *ThreeDSecureDataV2AllOf) GetAuthenticationResponseOk() (*string, bool) {
-	if o == nil || o.AuthenticationResponse == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.AuthenticationResponse, true
+	return o.AuthenticationResponse.Get(), o.AuthenticationResponse.IsSet()
 }
 
 // HasAuthenticationResponse returns a boolean if a field has been set.
 func (o *ThreeDSecureDataV2AllOf) HasAuthenticationResponse() bool {
-	if o != nil && o.AuthenticationResponse != nil {
+	if o != nil && o.AuthenticationResponse.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAuthenticationResponse gets a reference to the given string and assigns it to the AuthenticationResponse field.
+// SetAuthenticationResponse gets a reference to the given NullableString and assigns it to the AuthenticationResponse field.
 func (o *ThreeDSecureDataV2AllOf) SetAuthenticationResponse(v string) {
-	o.AuthenticationResponse = &v
+	o.AuthenticationResponse.Set(&v)
+}
+// SetAuthenticationResponseNil sets the value for AuthenticationResponse to be an explicit nil
+func (o *ThreeDSecureDataV2AllOf) SetAuthenticationResponseNil() {
+	o.AuthenticationResponse.Set(nil)
+}
+
+// UnsetAuthenticationResponse ensures that no value is present for AuthenticationResponse, not even an explicit nil
+func (o *ThreeDSecureDataV2AllOf) UnsetAuthenticationResponse() {
+	o.AuthenticationResponse.Unset()
+}
+
+// GetDirectoryResponse returns the DirectoryResponse field value if set, zero value otherwise.
+func (o *ThreeDSecureDataV2AllOf) GetDirectoryResponse() string {
+	if o == nil || o.DirectoryResponse == nil {
+		var ret string
+		return ret
+	}
+	return *o.DirectoryResponse
+}
+
+// GetDirectoryResponseOk returns a tuple with the DirectoryResponse field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ThreeDSecureDataV2AllOf) GetDirectoryResponseOk() (*string, bool) {
+	if o == nil || o.DirectoryResponse == nil {
+		return nil, false
+	}
+	return o.DirectoryResponse, true
+}
+
+// HasDirectoryResponse returns a boolean if a field has been set.
+func (o *ThreeDSecureDataV2AllOf) HasDirectoryResponse() bool {
+	if o != nil && o.DirectoryResponse != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetDirectoryResponse gets a reference to the given string and assigns it to the DirectoryResponse field.
+func (o *ThreeDSecureDataV2AllOf) SetDirectoryResponse(v string) {
+	o.DirectoryResponse = &v
 }
 
 // GetDirectoryTransactionId returns the DirectoryTransactionId field value
@@ -99,8 +143,11 @@ func (o *ThreeDSecureDataV2AllOf) SetDirectoryTransactionId(v string) {
 
 func (o ThreeDSecureDataV2AllOf) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.AuthenticationResponse != nil {
-		toSerialize["authentication_response"] = o.AuthenticationResponse
+	if o.AuthenticationResponse.IsSet() {
+		toSerialize["authentication_response"] = o.AuthenticationResponse.Get()
+	}
+	if o.DirectoryResponse != nil {
+		toSerialize["directory_response"] = o.DirectoryResponse
 	}
 	if true {
 		toSerialize["directory_transaction_id"] = o.DirectoryTransactionId

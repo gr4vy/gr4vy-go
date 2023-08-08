@@ -99,6 +99,19 @@ tags:
     * Set a display name for a payment provider.
   name: Payment Services
 - description: |-
+    Vault Forward definitions describe a third party service that has been vetted
+    to receive requests containing PCI data.
+  name: Vault Forward Definitions
+- description: |-
+    A Vault Forward Configuration represents a third party service that is
+    currently enabled to send requests containing PCI data.
+  name: Vault Forward Configurations
+- description: |-
+    Vault Forwarding is a way to perform requests where, provided a template,
+    Gr4vy will evaluate it to inject PCI data and forward it to third party
+    services that have been vetted to receive such data.
+  name: Vault Forward
+- description: |-
     In Gr4vy, a report represents the configuration details to extract or
     dump a set of data into a downloadable CSV file. The data extracted
     by a report is configured via the reports API where you can specify:
@@ -774,6 +787,11 @@ paths:
     post:
       description: Creates a new Checkout Session.
       operationId: new-checkout-session
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutSessionCreateRequest'
       responses:
         "201":
           content:
@@ -883,6 +901,66 @@ paths:
                 $ref: '#/components/schemas/ErrorGeneric'
           description: Returns a generic error.
       summary: Get checkout session
+      tags:
+      - Checkout Sessions
+    put:
+      description: Updates a Checkout Session.
+      operationId: update-checkout-session
+      parameters:
+      - description: The unique ID for a Checkout Session.
+        explode: false
+        in: path
+        name: checkout_session_id
+        required: true
+        schema:
+          example: 8724fd24-5489-4a5d-90fd-0604df7d3b83
+          format: uuid
+          type: string
+        style: simple
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CheckoutSessionUpdateRequest'
+      responses:
+        "200":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CheckoutSession'
+          description: Returns the updated Checkout Session.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+        "404":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error404NotFound'
+          description: Returns an error if the resource can not be found.
+        "409":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error409DuplicateRecord'
+          description: Returns an error if duplicate resource has been found.
+        default:
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns a generic error.
+      summary: Update checkout session
       tags:
       - Checkout Sessions
   /checkout/sessions/{checkout_session_id}/fields:
@@ -2274,7 +2352,7 @@ paths:
                   payment_method:
                     method: id
                     id: 46973e9d-88a7-44a6-abfe-be4ff0134ff4
-              Authorize a new card with connection options:
+              Authorize a new card with connection options and anti-fraud fingerprint:
                 value:
                   amount: 1299
                   currency: USD
@@ -2286,10 +2364,11 @@ paths:
                     redirect_url: https://example.com/callback
                   connection_options:
                     cybersource-anti-fraud:
-                      device_fingerprint_id: yGeBAFYgFmM=
                       merchant_defined_data:
-                        field1: value1
-                        field2: value2
+                        "1": John Doe
+                        "2": trusted
+                        "99": recurring
+                  anti_fraud_fingerprint: yGeBAFYgFmM=
               Authorize and asynchronously capture a card transaction:
                 value:
                   amount: 1299
@@ -4002,6 +4081,117 @@ paths:
       summary: Resume network token
       tags:
       - Tokens
+  /vault-forward:
+    post:
+      description: Forward an API call to a PCI endpoint. The request body is evaluated
+        and any template fields are replaced by the card data before the request is
+        sent to the given destination.
+      operationId: make-vault-forward
+      parameters:
+      - description: A comma-separated list of Payment Method IDs that can be used
+          to fill in the request template. At least 1 must be given, and a maximum
+          of 100 are accepted.
+        explode: false
+        in: header
+        name: x-vault-forward-payment-methods
+        required: true
+        schema:
+          example: faaad066-30b4-4997-a438-242b0752d7e1,faaad066-30b4-4997-a438-242b0752d7e2
+          type: string
+        style: simple
+      - description: The URL to forward card data to.
+        explode: false
+        in: header
+        name: x-vault-forward-url
+        required: true
+        schema:
+          example: https://api.amadeus.com/booking
+          type: string
+        style: simple
+      - description: The HTTP method that is used when forwarding the request to the
+          `x-vault-forward-url`.
+        explode: false
+        in: header
+        name: x-vault-forward-http-method
+        required: true
+        schema:
+          enum:
+          - POST
+          - PUT
+          - PATCH
+          example: POST
+          type: string
+        style: simple
+      - description: |-
+          A header that is forwarded to the `x-vault-forward-url`. The header will be
+          forwarded without the `x-vault-forward-header` part. For example,
+          `x-vault-forward-header-x-frame-options: SAMEORIGIN` is forwarded as
+          `x-frame-options: SAMEORIGIN`.
+        explode: false
+        in: header
+        name: x-vault-forward-header-{HEADER_NAME}
+        required: false
+        schema:
+          example: x-vault-forward-header-x-frame-options
+          type: string
+        style: simple
+      - description: |-
+          The number of seconds to wait before timing out when forwarding the
+          request.
+        explode: false
+        in: header
+        name: x-vault-forward-timeout
+        required: false
+        schema:
+          default: 30
+          example: 10
+          minimum: 1
+          type: integer
+        style: simple
+      requestBody:
+        content:
+          '*/*':
+            examples:
+              Make a JSON request:
+                value: |
+                  {
+                    "number":"{{CARD_NUMBER_1}}",
+                    "expiry":"{{CARD_EXPIRATION_DATE_1}}"
+                  }
+              Make an XML request:
+                value: |
+                  <card>
+                    <number>{{CARD_NUMBER_1}}</number>
+                    <expiry>{{CARD_EXPIRATION_DATE_1}}</expiry>
+                  </card>
+            schema:
+              type: string
+        description: Payload to forward in the request.
+      responses:
+        "200":
+          content:
+            '*/*':
+              schema:
+                type: string
+          description: |-
+            Returns the payload received from the forwarded request. If the request timed
+            out or there was a network error, the payload will be empty instead.
+        "400":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ErrorGeneric'
+          description: Returns an error if the request was badly formatted or missing
+            required fields.
+        "401":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error401Unauthorized'
+          description: Returns an error if no valid authentication was provided.
+      summary: Forward PCI data
+      tags:
+      - Vault Forward
 components:
   schemas:
     Address:
@@ -4080,9 +4270,9 @@ components:
       type: object
       x-tags:
       - Buyers
-    AntiFraudDecisionTransactionEvent:
-      description: The request/response details of HTTP calls made to an anti-fraud
-        provider.
+    AntiFraudDecisionEvent:
+      description: This event logs the request and response details of HTTP calls
+        made to an anti-fraud provider.
       properties:
         type:
           description: The type of this resource. Is always `transaction-event`.
@@ -4096,7 +4286,7 @@ components:
           format: uuid
           type: string
         name:
-          description: The name of this resource. Is always `anti-fraud-decision `.
+          description: The name of this resource. Is always `anti-fraud-decision`.
           enum:
           - anti-fraud-decision
           example: anti-fraud-decision
@@ -4108,8 +4298,107 @@ components:
           format: date-time
           type: string
         context:
-          $ref: '#/components/schemas/AntiFraudDecisionTransactionEvent_context'
-      title: Anti-fraud Decision
+          $ref: '#/components/schemas/AntiFraudDecisionEvent_context'
+      title: Anti-fraud - Decision
+      type: object
+      x-tags:
+      - Transactions
+    AntiFraudDecisionErrorEvent:
+      description: This event logs the reason why we were unable to get an anti-fraud
+        decision.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `anti-fraud-decision-error`.
+          enum:
+          - anti-fraud-decision-error
+          example: anti-fraud-decision-error
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/AntiFraudDecisionErrorEvent_context'
+      title: Anti-fraud - Error
+      type: object
+      x-tags:
+      - Transactions
+    AntiFraudDecisionSkippedEvent:
+      description: This event logs the reason why we skipped getting an anti-fraud
+        decision.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `anti-fraud-decision-skipped`.
+          enum:
+          - anti-fraud-decision-skipped
+          example: anti-fraud-decision-skipped
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/AntiFraudDecisionSkippedEvent_context'
+      title: Anti-fraud - Skipped
+      type: object
+      x-tags:
+      - Transactions
+    AntiFraudWebhookEvent:
+      description: This event logs the webhook received when an anti-fraud decision
+        is updated.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `anti-fraud-webhook`.
+          enum:
+          - anti-fraud-webhook
+          example: anti-fraud-webhook
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/AntiFraudWebhookEvent_context'
+      title: Anti-fraud - Webhook
       type: object
       x-tags:
       - Transactions
@@ -4134,8 +4423,9 @@ components:
             During update request, this value is used for validation only but
             the underlying service can not be changed for an existing service.
           enum:
-          - sift-anti-fraud
           - cybersource-anti-fraud
+          - forter-anti-fraud
+          - sift-anti-fraud
           example: sift-anti-fraud
           type: string
         display_name:
@@ -4393,6 +4683,7 @@ components:
           name: Samuel J
           id: fe26475d-ec3e-4884-9553-f7356683f7f9
           type: buyer
+        merchant_account_id: default
         action: created
         id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
         type: audit-log
@@ -4428,6 +4719,11 @@ components:
           - deleted
           example: created
           type: string
+        merchant_account_id:
+          description: The ID of the merchant account this entry was created for.
+          example: default
+          nullable: true
+          type: string
         user:
           $ref: '#/components/schemas/AuditLog_user'
         resource:
@@ -4447,6 +4743,7 @@ components:
             name: Samuel J
             id: fe26475d-ec3e-4884-9553-f7356683f7f9
             type: buyer
+          merchant_account_id: default
           action: created
           id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
           type: audit-log
@@ -4461,6 +4758,7 @@ components:
             name: Samuel J
             id: fe26475d-ec3e-4884-9553-f7356683f7f9
             type: buyer
+          merchant_account_id: default
           action: created
           id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
           type: audit-log
@@ -5211,6 +5509,8 @@ components:
       properties:
         cybersource-anti-fraud:
           $ref: '#/components/schemas/ConnectionOptions_cybersource_anti_fraud'
+        forter-anti-fraud:
+          $ref: '#/components/schemas/ConnectionOptions_forter_anti_fraud'
         adyen-card:
           $ref: '#/components/schemas/ConnectionOptions_adyen_card'
       title: Connection Options
@@ -5429,7 +5729,42 @@ components:
     CheckoutSession:
       description: A short-lived checkout session.
       example:
+        metadata:
+          key: value
         expires_at: 2022-01-01T00:00:00Z
+        cart_items:
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
         id: 8d3fe99b-1422-42e6-bbb3-932d95ae5f79
         type: checkout-session
       properties:
@@ -5451,6 +5786,25 @@ components:
           example: 2022-01-01T00:00:00Z
           format: date-time
           type: string
+        cart_items:
+          description: An array of cart items that represents the line items of a
+            transaction.
+          items:
+            $ref: '#/components/schemas/CartItem'
+          nullable: true
+          type: array
+        metadata:
+          additionalProperties:
+            type: string
+          description: |-
+            Any additional information about the transaction that you would like to
+            store as key-value pairs. This data is passed to payment service
+            providers that support it.
+          example:
+            key: value
+          maxProperties: 20
+          nullable: true
+          type: object
       title: Checkout Session
       type: object
       x-tags:
@@ -5567,6 +5921,130 @@ components:
       type: object
       x-tags:
       - Request Bodies
+    CheckoutSessionCreateRequest:
+      description: A request to create a checkout session.
+      example:
+        metadata:
+          key: value
+        cart_items:
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+      properties:
+        cart_items:
+          description: An array of cart items that represents the line items of a
+            transaction.
+          items:
+            $ref: '#/components/schemas/CartItem'
+          nullable: true
+          type: array
+        metadata:
+          additionalProperties:
+            type: string
+          description: |-
+            Any additional information about the transaction that you would like to
+            store as key-value pairs. This data is passed to payment service
+            providers that support it.
+          example:
+            key: value
+          maxProperties: 20
+          nullable: true
+          type: object
+      title: Checkout Session (Create)
+      type: object
+      x-tags:
+      - Checkout
+    CheckoutSessionUpdateRequest:
+      description: A request to update a checkout session.
+      example:
+        metadata:
+          key: value
+        cart_items:
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+        - tax_amount: 0
+          external_identifier: item-789123
+          quantity: 1
+          product_url: https://example.com/items/gopro
+          product_type: physical
+          discount_amount: 0
+          image_url: https://example.com/images/items/gopro.png
+          name: GoPro HERO9 Camcorder
+          unit_amount: 37999
+          categories:
+          - categories
+          - categories
+          - categories
+          - categories
+          - categories
+          sku: sku-789123
+      properties:
+        cart_items:
+          description: An array of cart items that represents the line items of a
+            transaction.
+          items:
+            $ref: '#/components/schemas/CartItem'
+          nullable: true
+          type: array
+        metadata:
+          additionalProperties:
+            type: string
+          description: |-
+            Any additional information about the transaction that you would like to
+            store as key-value pairs. This data is passed to payment service
+            providers that support it.
+          example:
+            key: value
+          maxProperties: 20
+          nullable: true
+          type: object
+      title: Checkout Session (Update)
+      type: object
+      x-tags:
+      - Checkout
     Cryptogram:
       description: A network token cryptogram.
       example:
@@ -6814,6 +7292,310 @@ components:
       type: object
       x-tags:
       - Tokens
+    PaymentConnectorResponseTransactionAuthorizationSucceededEvent:
+      description: |-
+        This event logs the exact details parsed details for a succeeded authorization
+        as reported by our connector.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `payment-connector-response-transaction-authorization-succeeded`.
+          enum:
+          - payment-connector-response-transaction-authorization-succeeded
+          example: payment-connector-response-transaction-authorization-succeeded
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/PaymentConnectorResponseTransactionAuthorizationSucceededEvent_context'
+      title: Authorization
+      type: object
+      x-tags:
+      - Transactions
+    PaymentConnectorResponseTransactionAuthorizationFailedEvent:
+      description: |-
+        This event logs the exact details parsed details for a failed authorization
+        as reported by our connector.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `payment-connector-response-transaction-authorization-failed`.
+          enum:
+          - payment-connector-response-transaction-authorization-failed
+          example: payment-connector-response-transaction-authorization-failed
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/PaymentConnectorResponseTransactionAuthorizationFailedEvent_context'
+      title: Authorization - Failed
+      type: object
+      x-tags:
+      - Transactions
+    PaymentConnectorResponseTransactionDeclinedEvent:
+      description: |-
+        This event logs the exact details parsed details for a transaction as reported
+        by our connector when the capture is declined.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `payment-connector-response-transaction-declined`.
+          enum:
+          - payment-connector-response-transaction-declined
+          example: payment-connector-response-transaction-declined
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/PaymentConnectorResponseTransactionDeclinedEvent_context'
+      title: Authorization - Declined
+      type: object
+      x-tags:
+      - Transactions
+    PaymentConnectorResponseTransactionCaptureSucceededEvent:
+      description: |-
+        This event logs the exact details parsed details for a succeeded capture
+        as reported by our connector.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `payment-connector-response-transaction-capture-succeeded`.
+          enum:
+          - payment-connector-response-transaction-capture-succeeded
+          example: payment-connector-response-transaction-capture-succeeded
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/PaymentConnectorResponseTransactionCaptureSucceededEvent_context'
+      title: Capture - Succeeded
+      type: object
+      x-tags:
+      - Transactions
+    PaymentConnectorResponseTransactionCaptureDeclinedEvent:
+      description: |-
+        This event logs the exact details parsed details for a declined capture
+        as reported by our connector.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `payment-connector-response-transaction-capture-declined`.
+          enum:
+          - payment-connector-response-transaction-capture-declined
+          example: payment-connector-response-transaction-capture-declined
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/PaymentConnectorResponseTransactionCaptureDeclinedEvent_context'
+      title: Capture - Declined
+      type: object
+      x-tags:
+      - Transactions
+    PaymentConnectorResponseTransactionCaptureFailedEvent:
+      description: |-
+        This event logs the exact details parsed details for a failed capture
+        as reported by our connector.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `payment-connector-response-transaction-capture-failed`.
+          enum:
+          - payment-connector-response-transaction-capture-failed
+          example: payment-connector-response-transaction-capture-failed
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/PaymentConnectorResponseTransactionCaptureDeclinedEvent_context'
+      title: Capture - Failed
+      type: object
+      x-tags:
+      - Transactions
+    PaymentConnectorResponseTransactionVoidSucceededEvent:
+      description: |-
+        This event logs the exact details parsed details for a succeeded void
+        as reported by our connector.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `payment-connector-response-transaction-void-succeeded`.
+          enum:
+          - payment-connector-response-transaction-void-succeeded
+          example: payment-connector-response-transaction-void-succeeded
+          type: string
+        created_at:
+          description: The date and time when this event was created in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/PaymentConnectorResponseTransactionVoidSucceededEvent_context'
+      title: Void - Succeeded
+      type: object
+      x-tags:
+      - Transactions
+    PaymentConnectorResponseTransactionVoidDeclinedEvent:
+      description: |-
+        This event logs the exact details parsed details for a declined void
+        as reported by our connector.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `payment-connector-response-transaction-void-declined`.
+          enum:
+          - payment-connector-response-transaction-void-declined
+          example: payment-connector-response-transaction-void-declined
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/PaymentConnectorResponseTransactionVoidDeclinedEvent_context'
+      title: Void - Declined
+      type: object
+      x-tags:
+      - Transactions
+    PaymentConnectorResponseTransactionVoidFailedEvent:
+      description: |-
+        This event logs the exact details parsed details for a failed void
+        as reported by our connector.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `payment-connector-response-transaction-void-failed`.
+          enum:
+          - payment-connector-response-transaction-void-failed
+          example: payment-connector-response-transaction-void-failed
+          type: string
+        created_at:
+          description: The date and time when this event was created in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/PaymentConnectorResponseTransactionVoidFailedEvent_context'
+      title: Void - Failed
+      type: object
+      x-tags:
+      - Transactions
     PaymentMethod:
       description: A generic payment method.
       example:
@@ -6822,6 +7604,7 @@ components:
         method: card
         scheme: visa
         created_at: 2013-07-16T19:23:00Z
+        has_replacement: false
         label: john@example.com
         type: payment-method
         expiration_date: 07/24
@@ -6836,6 +7619,7 @@ components:
           bin: "412345"
           card_type: credit
         id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+        last_replaced_at: 2023-07-26T19:23:00Z
         status: succeeded
       properties:
         type:
@@ -6988,6 +7772,43 @@ components:
           type: string
         details:
           $ref: '#/components/schemas/PaymentMethodDetailsCard'
+        last_replaced_at:
+          description: |-
+            The date and time when this card was last replaced.
+
+            When the Account Updater determines that new card details are available (e.g. when it's about to expire),
+            existing details are not changed immediately. The actual replacement occurs when a transaction using this
+            payment method is declined with any of the following codes:
+
+            * `canceled_payment_method`
+            * `expired_payment_method`
+            * `unavailable_payment_method`
+            * `unknown_payment_method`
+
+            When the replacement is applied, this field is updated.
+            For non-card payment methods, the value of this field is always set to `null`.
+          example: 2023-07-26T19:23:00Z
+          format: date-time
+          nullable: true
+          type: string
+        has_replacement:
+          description: |-
+            Whether this card has a pending replacement that hasn't been applied yet.
+
+            When the Account Updater determines that new card details are available (e.g. when it's about to expire),
+            existing details are not changed immediately, but this field is set to `true`. The actual replacement
+            occurs when a transaction using this payment method is declined with any of the following codes:
+
+            * `canceled_payment_method`
+            * `expired_payment_method`
+            * `unavailable_payment_method`
+            * `unknown_payment_method`
+
+            When the replacement is applied, this field is set to `false`.
+            For non-card payment methods, the value of this field is always set to `false`.
+          example: false
+          nullable: false
+          type: boolean
       title: Payment method
       type: object
       x-tags:
@@ -6998,14 +7819,16 @@ components:
         country: US
         method: card
         scheme: visa
-        approval_target: any
-        merchant_account_id: default
-        currency: USD
-        id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+        has_replacement: false
         label: "1111"
         type: payment-method
         expiration_date: 11/25
         approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+        approval_target: any
+        merchant_account_id: default
+        currency: USD
+        id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+        last_replaced_at: 2023-07-26T19:23:00Z
       properties:
         type:
           description: '`payment-method`.'
@@ -7116,6 +7939,43 @@ components:
           example: US
           nullable: true
           type: string
+        last_replaced_at:
+          description: |-
+            The date and time when this card was last replaced.
+
+            When the Account Updater determines that new card details are available (e.g. when it's about to expire),
+            existing details are not changed immediately. The actual replacement occurs when a transaction using this
+            payment method is declined with any of the following codes:
+
+            * `canceled_payment_method`
+            * `expired_payment_method`
+            * `unavailable_payment_method`
+            * `unknown_payment_method`
+
+            When the replacement is applied, this field is updated.
+            For non-card payment methods, the value of this field is always set to `null`.
+          example: 2023-07-26T19:23:00Z
+          format: date-time
+          nullable: true
+          type: string
+        has_replacement:
+          description: |-
+            Whether this card has a pending replacement that hasn't been applied yet.
+
+            When the Account Updater determines that new card details are available (e.g. when it's about to expire),
+            existing details are not changed immediately, but this field is set to `true`. The actual replacement
+            occurs when a transaction using this payment method is declined with any of the following codes:
+
+            * `canceled_payment_method`
+            * `expired_payment_method`
+            * `unavailable_payment_method`
+            * `unknown_payment_method`
+
+            When the replacement is applied, this field is set to `false`.
+            For non-card payment methods, the value of this field is always set to `false`.
+          example: false
+          nullable: false
+          type: boolean
       title: Payment Method (Summary)
       type: object
       x-tags:
@@ -7132,6 +7992,7 @@ components:
           method: card
           scheme: visa
           created_at: 2013-07-16T19:23:00Z
+          has_replacement: false
           label: john@example.com
           type: payment-method
           expiration_date: 07/24
@@ -7146,12 +8007,14 @@ components:
             bin: "412345"
             card_type: credit
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          last_replaced_at: 2023-07-26T19:23:00Z
           status: succeeded
         - country: US
           external_identifier: user-789123
           method: card
           scheme: visa
           created_at: 2013-07-16T19:23:00Z
+          has_replacement: false
           label: john@example.com
           type: payment-method
           expiration_date: 07/24
@@ -7166,6 +8029,7 @@ components:
             bin: "412345"
             card_type: credit
           id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          last_replaced_at: 2023-07-26T19:23:00Z
           status: succeeded
       properties:
         items:
@@ -7326,25 +8190,29 @@ components:
         - country: US
           method: card
           scheme: visa
-          approval_target: any
-          merchant_account_id: default
-          currency: USD
-          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          has_replacement: false
           label: "1111"
           type: payment-method
           expiration_date: 11/25
           approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          approval_target: any
+          merchant_account_id: default
+          currency: USD
+          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          last_replaced_at: 2023-07-26T19:23:00Z
         - country: US
           method: card
           scheme: visa
-          approval_target: any
-          merchant_account_id: default
-          currency: USD
-          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          has_replacement: false
           label: "1111"
           type: payment-method
           expiration_date: 11/25
           approval_url: https://api.example.app.gr4vy.com/payment-methods/ffc88ec9-e1ee-45ba-993d-b5902c3b2a8c/approve
+          approval_target: any
+          merchant_account_id: default
+          currency: USD
+          id: 77a76f7e-d2de-4bbc-ada9-d6a0015e6bd5
+          last_replaced_at: 2023-07-26T19:23:00Z
       properties:
         items:
           description: A list of stored payment methods in summarized format.
@@ -10338,7 +11206,135 @@ components:
       type: object
       x-tags:
       - Transactions
-    ThreeDSecureSuccessTransactionEvent:
+    ThreeDSecureAuthenticationRequestEvent:
+      description: The result and raw data for a 3DS authorization call.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `three-d-secure-authentication-request`.
+          enum:
+          - three-d-secure-authentication-request
+          example: three-d-secure-authentication-request
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/ThreeDSecureAuthenticationRequestEvent_context'
+      title: 3DS - Authentication
+      type: object
+      x-tags:
+      - Transactions
+    ThreeDSecurePreparationRequestEvent:
+      description: The result and raw data for a 3DS pre-authorization call.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `three-d-secure-preparation-request`.
+          enum:
+          - three-d-secure-preparation-request
+          example: three-d-secure-preparation-request
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/ThreeDSecurePreparationRequestEvent_context'
+      title: 3DS - Pre-authentication
+      type: object
+      x-tags:
+      - Transactions
+    ThreeDSecureResultRequestEvent:
+      description: The result and raw data for a 3DS post-authorization call.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `three-d-secure-result-request`.
+          enum:
+          - three-d-secure-result-request
+          example: three-d-secure-result-request
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/ThreeDSecureResultRequestEvent_context'
+      title: 3DS - Post-authentication
+      type: object
+      x-tags:
+      - Transactions
+    ThreeDSecureRequestErrorEvent:
+      description: Error details for a failed 3DS call.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `three-d-secure-request-error`.
+          enum:
+          - three-d-secure-request-error
+          example: three-d-secure-request-error
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/ThreeDSecureRequestErrorEvent_context'
+      title: 3DS - Error
+      type: object
+      x-tags:
+      - Transactions
+    ThreeDSecureSuccessEvent:
       description: Details related to 3DS processing.
       properties:
         type:
@@ -10365,15 +11361,15 @@ components:
           format: date-time
           type: string
         context:
-          $ref: '#/components/schemas/ThreeDSecureSuccessTransactionEvent_context'
-      title: 3DS Success
+          $ref: '#/components/schemas/ThreeDSecureSuccessEvent_context'
+      title: 3DS - Authentication (Deprecated)
       type: object
       x-tags:
       - Transactions
     ThreeDSecureSummary:
       description: |-
-        Details about the 3-D Secure challenge that was presented to
-        the buyer for this transaction, where applicable.
+        The 3-D Secure data that was sent to the payment
+        service for the transaction.
       example:
         method: challenge
         version: 2.1.0
@@ -10403,12 +11399,17 @@ components:
         error_data:
           allOf:
           - $ref: '#/components/schemas/ThreeDSecureError'
-          description: If the transaction had a 3DS error, information about it.
+          description: |-
+            The error data received from our 3DS server. This will not be
+            populated if the customer failed the authentication with a
+            status code of `N`, `R`, or `U`.  To see full details about
+            the 3DS calls in those situations please use our transaction
+            events API.
           nullable: true
           type: object
         response_data:
           $ref: '#/components/schemas/ThreeDSecureDataV1V2'
-      title: 3-D Secure Summary
+      title: 3-D Secure data
       type: object
     TokenizedRequest:
       description: Details for a previously stored payment method.
@@ -10468,6 +11469,7 @@ components:
           key: value
         pending_review: true
         payment_service: ""
+        auth_response_code: "00"
         cvv_response_code: match
         shipping_details: ""
         created_at: 2013-07-16T19:23:00Z
@@ -10732,6 +11734,11 @@ components:
             different card.
           nullable: true
           type: string
+        auth_response_code:
+          description: This is the response description received from the processor.
+          example: "00"
+          nullable: true
+          type: string
         avs_response_code:
           description: |-
             The response code received from the payment service for the Address
@@ -10873,6 +11880,43 @@ components:
           format: uuid
           type: string
       title: Transaction
+      type: object
+      x-tags:
+      - Transactions
+    TransactionHistoryEvent:
+      description: A generic transaction history event.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource.
+          enum:
+          - anti-fraud-decision-error
+          - anti-fraud-decision-skipped
+          - anti-fraud-decision
+          - anti-fraud-webhook
+          example: anti-fraud-decision
+          type: string
+        created_at:
+          description: The date and time when this transaction was created in our
+            system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          additionalProperties: true
+          description: A list of key/values with additional data.
+          type: object
+      title: Transaction history event
       type: object
       x-tags:
       - Transactions
@@ -11328,6 +12372,7 @@ components:
         statement_descriptor: ""
         async_capture: true
         browser_info: ""
+        anti_fraud_fingerprint: yGeBAFYgFmM=
         currency: USD
         merchant_initiated: true
         payment_source: ecommerce
@@ -11521,7 +12566,7 @@ components:
             Please note that each of the keys this object are in kebab-case, for
             example `cybersource-anti-fraud` as they represent the ID of the
             connector. All the other keys will be snake-case, for example
-            `device_fingerprint_id`.
+            `merchant_defined_data`.
           nullable: true
         async_capture:
           default: false
@@ -11538,6 +12583,14 @@ components:
             This flag can only be set to `true` when `intent` is set to `capture`.
           example: true
           type: boolean
+        anti_fraud_fingerprint:
+          default: "null"
+          description: |-
+            This field represents the fingerprint data to be passed to the active
+            anti-fraud service.
+          example: yGeBAFYgFmM=
+          nullable: true
+          type: string
       required:
       - amount
       - currency
@@ -12043,9 +13096,23 @@ components:
       type: object
       x-tags:
       - Users
-    AntiFraudDecisionTransactionEvent_context:
-      description: Anti-fraud decision context.
+    AntiFraudDecisionEvent_context:
+      description: Additional context for this event.
       properties:
+        anti_fraud_service_id:
+          description: The unique ID of the anti-fraud service used.
+          format: uuid
+          type: string
+        anti_fraud_service_name:
+          description: The name of the anti-fraud service used.
+          type: string
+        anti_fraud_service_definition_id:
+          description: The anti-fraud service definition used.
+          type: string
+        anti_fraud_service_check_id:
+          description: The external ID of the decision.
+          example: decision-1234
+          type: string
         request:
           description: The HTTP body sent to fetch a decision.
           type: string
@@ -12059,6 +13126,10 @@ components:
           description: The parsed decision response from the anti-fraud provider response.
           example: ACCEPT
           type: string
+      type: object
+    AntiFraudDecisionErrorEvent_context:
+      description: Additional context for this event.
+      properties:
         anti_fraud_service_id:
           description: The unique ID of the anti-fraud service used.
           format: uuid
@@ -12068,6 +13139,67 @@ components:
           type: string
         anti_fraud_service_definition_id:
           description: The anti-fraud service definition used.
+          type: string
+        status_code:
+          description: The HTTP response status code from the anti-fraud provider,
+            if we received any.
+          type: number
+        reason:
+          description: The reason we could not get the anti-fraud decision.
+          example: Network Error
+          type: string
+      type: object
+    AntiFraudDecisionSkippedEvent_context:
+      description: Additional context for this event.
+      properties:
+        anti_fraud_service_id:
+          description: The unique ID of the anti-fraud service used.
+          format: uuid
+          type: string
+        anti_fraud_service_name:
+          description: The name of the anti-fraud service used.
+          type: string
+        anti_fraud_service_definition_id:
+          description: The anti-fraud service definition used.
+          type: string
+        reason:
+          description: The reason we could not get the anti-fraud decision.
+          example: Missing billing address
+          type: string
+      type: object
+    AntiFraudWebhookEvent_context:
+      description: Additional context for this event.
+      properties:
+        anti_fraud_service_id:
+          description: The unique ID of the anti-fraud service used.
+          format: uuid
+          type: string
+        anti_fraud_service_name:
+          description: The name of the anti-fraud service used.
+          type: string
+        anti_fraud_service_definition_id:
+          description: The anti-fraud service definition used.
+          type: string
+        anti_fraud_service_check_id:
+          description: The external ID of the decision that's being updated.
+          example: decision-1234
+          type: string
+        content:
+          description: The raw payload sent as a webhook.
+          example: '{ "decision": "ACCEPT", "id": "decision-1234", "reason": "Manually
+            verified" }'
+          type: string
+        content_type:
+          description: The content type of the payload sent as a webhook.
+          example: application/json
+          type: string
+        decision:
+          description: The parsed decision response from the anti-fraud provider webhook.
+          example: ACCEPT
+          type: string
+        comment:
+          description: Any comment that may have come with the webhook event.
+          example: Manually verified
           type: string
       type: object
     AntiFraudServiceUpdate_fields:
@@ -12245,19 +13377,41 @@ components:
       description: Additional options for Cybersource Decision Manager (anti-fraud).
       nullable: true
       properties:
-        device_fingerprint_id:
-          description: This field represents device fingerprint ID.
-          example: yGeBAFYgFmM=
-          type: string
         merchant_defined_data:
           additionalProperties:
             type: string
-          description: This is a key-value object for merchant defined data.
+          description: |-
+            This is a key-value object for merchant defined data. Each key needs to be a
+            numeric string identifying the MDD field to set. For example, for field 1 set
+            the key to "1".
           example:
-            field1: value1
-            field2: value2
+            "1": John Doe
+            "2": trusted
+            "99": recurring
           maxProperties: 100
           type: object
+      type: object
+    ConnectionOptions_forter_anti_fraud:
+      description: Additional options for Forter (anti-fraud).
+      nullable: true
+      properties:
+        delivery_type:
+          description: |-
+            Value to populate the `deliveryType` field in `primaryDeliveryDetails`.
+
+            Represents the type of delivery. This can be set to `PHYSICAL` for any
+            type of shipped goods, `DIGITAL` for non-shipped goods (services,
+            gift cards etc.), or `HYBRID` for others.
+          nullable: true
+          type: string
+        delivery_method:
+          description: |-
+            Value to populate the `deliveryMethod` field in `primaryDeliveryDetails`.
+
+            Represents the delivery method chosen by customer such as postal service,
+            email, in game transfer, etc.
+          nullable: true
+          type: string
       type: object
     ConnectionOptions_adyen_card:
       description: |-
@@ -12291,6 +13445,577 @@ components:
           example: false
           nullable: true
           type: boolean
+      type: object
+    PaymentConnectorResponseTransactionAuthorizationSucceededEvent_context:
+      description: Additional context for this event.
+      properties:
+        payment_service_id:
+          description: The unique ID of the payment service used.
+          format: uuid
+          type: string
+        payment_service_display_name:
+          description: The display name of the payment service used.
+          type: string
+        payment_service_definition_id:
+          description: The payment service definition used.
+          type: string
+        payment_service_transaction_id:
+          description: The external ID of the transaction as set by the payment service.
+          example: transaction-1234
+          nullable: true
+          type: string
+        status:
+          description: |-
+            The new status code for the transaction. This is always
+            set to `authorization_succeeded`.
+          enum:
+          - authorization_succeeded
+          example: authorization_succeeded
+          type: string
+        instrument_type:
+          description: The type of instrument used for this transaction.
+          enum:
+          - pan
+          - card_token
+          - redirect
+          - redirect_token
+          - googlepay
+          - applepay
+          - network_token
+          example: pan
+          type: string
+        retry_rule:
+          deprecated: true
+          description: This will always be `null` because the transaction succeeded.
+          nullable: true
+          type: string
+        raw_response_code:
+          description: |-
+            This is the response code received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: incorrect-zip
+          nullable: true
+          type: string
+        raw_response_description:
+          description: |-
+            This is the response description received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: |-
+            The card's postal code is incorrect. Check the card's postal code or use a
+            different card.
+          nullable: true
+          type: string
+        avs_response_code:
+          description: |-
+            The response code received from the payment service for the Address
+            Verification Check (AVS). This code is mapped to a standardized Gr4vy
+            AVS response code.
+
+            - `no_match` - neither address or postal code match
+            - `match` - both address and postal code match
+            - `partial_match_address` - address matches but postal code does not
+            - `partial_match_postcode` - postal code matches but address does not
+            - `unavailable ` - AVS is unavailable for card/country
+
+            The value of this field can be `null` if the payment service did not
+            provide a response.
+          enum:
+          - no_match
+          - match
+          - partial_match_address
+          - partial_match_postcode
+          - unavailable
+          example: partial_match_address
+          nullable: true
+          type: string
+        cvv_response_code:
+          description: |-
+            The response code received from the payment service for the Card
+            Verification Value (CVV). This code is mapped to a standardized Gr4vy
+            CVV response code.
+
+            - `no_match` - the CVV does not match the expected value
+            - `match` - the CVV matches the expected value
+            - `unavailable ` - CVV check unavailable for card our country
+            - `not_provided ` - CVV not provided
+
+            The value of this field can be `null` if the payment service did not
+            provide a response.
+          enum:
+          - no_match
+          - match
+          - unavailable
+          example: match
+          nullable: true
+          type: string
+      type: object
+    PaymentConnectorResponseTransactionAuthorizationFailedEvent_context:
+      description: Additional context for this event.
+      properties:
+        payment_service_id:
+          description: The unique ID of the payment service used.
+          format: uuid
+          type: string
+        payment_service_display_name:
+          description: The display name of the payment service used.
+          type: string
+        payment_service_definition_id:
+          description: The payment service definition used.
+          type: string
+        payment_service_transaction_id:
+          description: The external ID of the transaction as set by the payment service.
+          example: transaction-1234
+          nullable: true
+          type: string
+        status:
+          description: |-
+            The new status code for the transaction. This is always
+            set to `authorization_failed`.
+          enum:
+          - authorization_failed
+          example: authorization_failed
+          type: string
+        code:
+          description: A raw response code returned for the failure.
+          example: INVALID DATA
+          nullable: true
+          type: string
+        instrument_type:
+          description: The type of instrument used for this transaction.
+          enum:
+          - pan
+          - card_token
+          - redirect
+          - redirect_token
+          - googlepay
+          - applepay
+          - network_token
+          example: pan
+          type: string
+        retry_rule:
+          description: |-
+            Defines why the transaction might be retried. A retry is not guaranteed because
+            the maximum number of retries might already have been attempted.
+
+            * `failure` - the transaction will be retried because of a failure calling
+              the payment service.
+            * `retriable_decline` - the transaction will be retried because a decline code
+              was received that can be retried.
+          enum:
+          - failure
+          - retriable_decline
+          example: failure
+          nullable: true
+          type: string
+        raw_response_code:
+          description: |-
+            This is the response code received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: incorrect-zip
+          nullable: true
+          type: string
+        raw_response_description:
+          description: |-
+            This is the response description received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: |-
+            The card's postal code is incorrect. Check the card's postal code or use a
+            different card.
+          nullable: true
+          type: string
+        avs_response_code:
+          description: |-
+            The response code received from the payment service for the Address
+            Verification Check (AVS). This code is mapped to a standardized Gr4vy
+            AVS response code.
+
+            - `no_match` - neither address or postal code match
+            - `match` - both address and postal code match
+            - `partial_match_address` - address matches but postal code does not
+            - `partial_match_postcode` - postal code matches but address does not
+            - `unavailable ` - AVS is unavailable for card/country
+
+            The value of this field can be `null` if the payment service did not
+            provide a response.
+          enum:
+          - no_match
+          - match
+          - partial_match_address
+          - partial_match_postcode
+          - unavailable
+          example: partial_match_address
+          nullable: true
+          type: string
+        cvv_response_code:
+          description: |-
+            The response code received from the payment service for the Card
+            Verification Value (CVV). This code is mapped to a standardized Gr4vy
+            CVV response code.
+
+            - `no_match` - the CVV does not match the expected value
+            - `match` - the CVV matches the expected value
+            - `unavailable ` - CVV check unavailable for card our country
+            - `not_provided ` - CVV not provided
+
+            The value of this field can be `null` if the payment service did not
+            provide a response.
+          enum:
+          - no_match
+          - match
+          - unavailable
+          example: match
+          nullable: true
+          type: string
+      type: object
+    PaymentConnectorResponseTransactionDeclinedEvent_context:
+      description: Additional context for this event.
+      properties:
+        payment_service_id:
+          description: The unique ID of the payment service used.
+          format: uuid
+          type: string
+        payment_service_display_name:
+          description: The display name of the payment service used.
+          type: string
+        payment_service_definition_id:
+          description: The payment service definition used.
+          type: string
+        payment_service_transaction_id:
+          description: The external ID of the transaction as set by the payment service.
+          example: transaction-1234
+          nullable: true
+          type: string
+        status:
+          description: |-
+            The new status code for the transaction. This is always
+            set to `authorization_declined`.
+          enum:
+          - authorization_declined
+          example: authorization_declined
+          type: string
+        code:
+          description: A raw response code returned for the decline.
+          example: INVALID DATA
+          nullable: true
+          type: string
+        raw_response_code:
+          description: |-
+            This is the response code received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: incorrect-zip
+          nullable: true
+          type: string
+        raw_response_description:
+          description: |-
+            This is the response description received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: |-
+            The card's postal code is incorrect. Check the card's postal code or use a
+            different card.
+          nullable: true
+          type: string
+        avs_response_code:
+          description: |-
+            The response code received from the payment service for the Address
+            Verification Check (AVS). This code is mapped to a standardized Gr4vy
+            AVS response code.
+
+            - `no_match` - neither address or postal code match
+            - `match` - both address and postal code match
+            - `partial_match_address` - address matches but postal code does not
+            - `partial_match_postcode` - postal code matches but address does not
+            - `unavailable ` - AVS is unavailable for card/country
+
+            The value of this field can be `null` if the payment service did not
+            provide a response.
+          enum:
+          - no_match
+          - match
+          - partial_match_address
+          - partial_match_postcode
+          - unavailable
+          example: partial_match_address
+          nullable: true
+          type: string
+        cvv_response_code:
+          description: |-
+            The response code received from the payment service for the Card
+            Verification Value (CVV). This code is mapped to a standardized Gr4vy
+            CVV response code.
+
+            - `no_match` - the CVV does not match the expected value
+            - `match` - the CVV matches the expected value
+            - `unavailable ` - CVV check unavailable for card our country
+            - `not_provided ` - CVV not provided
+
+            The value of this field can be `null` if the payment service did not
+            provide a response.
+          enum:
+          - no_match
+          - match
+          - unavailable
+          example: match
+          nullable: true
+          type: string
+      type: object
+    PaymentConnectorResponseTransactionCaptureSucceededEvent_context:
+      description: Additional context for this event.
+      properties:
+        payment_service_id:
+          description: The unique ID of the payment service used.
+          format: uuid
+          type: string
+        payment_service_display_name:
+          description: The display name of the payment service used.
+          type: string
+        payment_service_definition_id:
+          description: The payment service definition used.
+          type: string
+        payment_service_transaction_id:
+          description: The external ID of the transaction as set by the payment service.
+          example: transaction-1234
+          nullable: true
+          type: string
+        status:
+          description: |-
+            The new status code for the transaction. This is always
+            set to `capture_succeeded`.
+          enum:
+          - capture_succeeded
+          example: capture_succeeded
+          type: string
+        instrument_type:
+          description: The type of instrument used for this transaction.
+          enum:
+          - pan
+          - card_token
+          - redirect
+          - redirect_token
+          - googlepay
+          - applepay
+          - network_token
+          example: pan
+          nullable: true
+          type: string
+        retry_rule:
+          deprecated: true
+          description: This will always be `null` because the transaction succeeded.
+          nullable: true
+          type: string
+        raw_response_code:
+          description: |-
+            This is the response code received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: incorrect-zip
+          nullable: true
+          type: string
+        raw_response_description:
+          description: |-
+            This is the response description received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: |-
+            The card's postal code is incorrect. Check the card's postal code or use a
+            different card.
+          nullable: true
+          type: string
+        avs_response_code:
+          description: |-
+            The response code received from the payment service for the Address
+            Verification Check (AVS). This code is mapped to a standardized Gr4vy
+            AVS response code.
+
+            - `no_match` - neither address or postal code match
+            - `match` - both address and postal code match
+            - `partial_match_address` - address matches but postal code does not
+            - `partial_match_postcode` - postal code matches but address does not
+            - `unavailable ` - AVS is unavailable for card/country
+
+            The value of this field can be `null` if the payment service did not
+            provide a response.
+          enum:
+          - no_match
+          - match
+          - partial_match_address
+          - partial_match_postcode
+          - unavailable
+          example: partial_match_address
+          nullable: true
+          type: string
+        cvv_response_code:
+          description: |-
+            The response code received from the payment service for the Card
+            Verification Value (CVV). This code is mapped to a standardized Gr4vy
+            CVV response code.
+
+            - `no_match` - the CVV does not match the expected value
+            - `match` - the CVV matches the expected value
+            - `unavailable ` - CVV check unavailable for card our country
+            - `not_provided ` - CVV not provided
+
+            The value of this field can be `null` if the payment service did not
+            provide a response.
+          enum:
+          - no_match
+          - match
+          - unavailable
+          example: match
+          nullable: true
+          type: string
+      type: object
+    PaymentConnectorResponseTransactionCaptureDeclinedEvent_context:
+      description: Additional context for this event.
+      properties:
+        payment_service_id:
+          description: The unique ID of the payment service used.
+          format: uuid
+          type: string
+        payment_service_display_name:
+          description: The display name of the payment service used.
+          type: string
+        payment_service_definition_id:
+          description: The payment service definition used.
+          type: string
+        payment_service_transaction_id:
+          description: The external ID of the transaction as set by the payment service.
+          example: transaction-1234
+          nullable: true
+          type: string
+        code:
+          description: A raw response code returned for the failure.
+          example: INVALID DATA
+          nullable: true
+          type: string
+        raw_response_code:
+          description: |-
+            This is the response code received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: incorrect-zip
+          nullable: true
+          type: string
+        raw_response_description:
+          description: |-
+            This is the response description received from the payment service. This
+            can be set to any value and is not standardized across different
+            payment services.
+          example: |-
+            The card's postal code is incorrect. Check the card's postal code or use a
+            different card.
+          nullable: true
+          type: string
+        avs_response_code:
+          description: |-
+            The response code received from the payment service for the Address
+            Verification Check (AVS). This code is mapped to a standardized Gr4vy
+            AVS response code.
+
+            - `no_match` - neither address or postal code match
+            - `match` - both address and postal code match
+            - `partial_match_address` - address matches but postal code does not
+            - `partial_match_postcode` - postal code matches but address does not
+            - `unavailable ` - AVS is unavailable for card/country
+
+            The value of this field can be `null` if the payment service did not
+            provide a response.
+          enum:
+          - no_match
+          - match
+          - partial_match_address
+          - partial_match_postcode
+          - unavailable
+          example: partial_match_address
+          nullable: true
+          type: string
+        cvv_response_code:
+          description: |-
+            The response code received from the payment service for the Card
+            Verification Value (CVV). This code is mapped to a standardized Gr4vy
+            CVV response code.
+
+            - `no_match` - the CVV does not match the expected value
+            - `match` - the CVV matches the expected value
+            - `unavailable ` - CVV check unavailable for card our country
+            - `not_provided ` - CVV not provided
+
+            The value of this field can be `null` if the payment service did not
+            provide a response.
+          enum:
+          - no_match
+          - match
+          - unavailable
+          example: match
+          nullable: true
+          type: string
+      type: object
+    PaymentConnectorResponseTransactionVoidSucceededEvent_context:
+      description: Additional context for this event.
+      properties:
+        payment_service_id:
+          description: The unique ID of the payment service used.
+          format: uuid
+          type: string
+        payment_service_display_name:
+          description: The display name of the payment service used.
+          type: string
+        payment_service_definition_id:
+          description: The payment service definition used.
+          type: string
+        payment_service_transaction_id:
+          description: The external ID of the transaction as set by the payment service.
+          example: transaction-1234
+          nullable: true
+          type: string
+        voided_at:
+          description: The date and time when this transaction was voided.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+      type: object
+    PaymentConnectorResponseTransactionVoidDeclinedEvent_context:
+      description: Additional context for this event.
+      properties:
+        payment_service_id:
+          description: The unique ID of the payment service used.
+          format: uuid
+          type: string
+        payment_service_display_name:
+          description: The display name of the payment service used.
+          type: string
+        payment_service_definition_id:
+          description: The payment service definition used.
+          type: string
+        payment_service_transaction_id:
+          description: The external ID of the transaction as set by the payment service.
+          example: transaction-1234
+          nullable: true
+          type: string
+        code:
+          description: A raw response code returned for the failure.
+          example: INVALID DATA
+          nullable: true
+          type: string
+      type: object
+    PaymentConnectorResponseTransactionVoidFailedEvent_context:
+      description: Additional context for this event.
+      properties:
+        payment_service_id:
+          description: The unique ID of the payment service used.
+          format: uuid
+          type: string
+        payment_service_display_name:
+          description: The display name of the payment service used.
+          type: string
+        payment_service_definition_id:
+          description: The payment service definition used.
+          type: string
       type: object
     PaymentService_fields:
       example:
@@ -12592,12 +14317,12 @@ components:
     ThreeDSecureDataV1_allOf:
       properties:
         authentication_response:
-          description: The authentication response.
+          description: The response for the 3DS authentication call.
           example: "Y"
           maxLength: 1
           type: string
         cavv_algorithm:
-          description: The CAVV Algorithm used.
+          description: The CAVV algorithm used.
           maxLength: 1
           type: string
         xid:
@@ -12611,9 +14336,29 @@ components:
       properties:
         authentication_response:
           description: |-
-            The transaction status from the challenge result
-            (not required for frictionless).
+            The transaction status after a the 3DS challenge. This will
+            be null in case of a frictionless 3DS flow.
+          enum:
+          - "Y"
+          - A
+          - "N"
+          - R
+          - U
           example: "Y"
+          maxLength: 1
+          nullable: true
+          type: string
+        directory_response:
+          description: The transaction status received as part of the authentication
+            request.
+          enum:
+          - C
+          - "Y"
+          - A
+          - "N"
+          - R
+          - U
+          example: C
           maxLength: 1
           type: string
         directory_transaction_id:
@@ -12622,7 +14367,131 @@ components:
           type: string
       required:
       - directory_transaction_id
-    ThreeDSecureSuccessTransactionEvent_context:
+    ThreeDSecureAuthenticationRequestEvent_context:
+      description: 3DS authentication context.
+      properties:
+        url:
+          description: The URL that was called for this request.
+          example: https://3dserver.example/auth
+          type: string
+        request:
+          description: The request body sent to the `url`.
+          example: '{}'
+          type: string
+        response:
+          description: The response body received from the `url`.
+          example: '{}'
+          type: string
+        response_status_code:
+          description: The response status code received from the `url`.
+          example: 200
+          type: integer
+        cavv:
+          description: The 3DS CAVV value parsed from the `response`.
+          example: +9YDsoSIbiEgO+PFMdgGSF17Uqk=
+          type: string
+        eci:
+          description: The 3DS ECI value parsed from the `response`.
+          example: "05"
+          type: string
+        directory_response:
+          description: The `transStatus` parsed from the `response`.
+          example: C
+          type: string
+        directory_transaction_id:
+          description: The `dsTransID` parsed from the `response`.
+          example: 8875884a-ac2f-42cb-b3f0-09b3ea3c0042
+          type: string
+        version:
+          description: The version of 3DS used.
+          example: 2.2.0
+          type: string
+      type: object
+    ThreeDSecurePreparationRequestEvent_context:
+      description: 3DS pre-authentication context.
+      properties:
+        url:
+          description: The URL that was called for this request.
+          example: https://3dserver.example/auth
+          type: string
+        request:
+          description: The request body sent to the `url`.
+          example: '{}'
+          type: string
+        response:
+          description: The response body received from the `url`.
+          example: '{}'
+          type: string
+        response_status_code:
+          description: The response status code received from the `url`.
+          example: 200
+          type: integer
+        is_enrolled:
+          description: If the card is enrolled for 3DS.
+          example: true
+          type: boolean
+        version:
+          description: The version of 3DS extracted from the `response.
+          example: 2.2.0
+          type: string
+      type: object
+    ThreeDSecureResultRequestEvent_context:
+      description: 3DS post-authentication context.
+      properties:
+        url:
+          description: The URL that was called for this request.
+          example: https://3dserver.example/auth
+          type: string
+        request:
+          description: The request body sent to the `url`.
+          example: '{}'
+          type: string
+        response:
+          description: The response body received from the `url`.
+          example: '{}'
+          type: string
+        response_status_code:
+          description: The response status code received from the `url`.
+          example: 200
+          type: integer
+        cavv:
+          description: The 3DS CAVV value parsed from the `response`.
+          example: +9YDsoSIbiEgO+PFMdgGSF17Uqk=
+          type: string
+        eci:
+          description: The 3DS ECI value parsed from the `response`.
+          example: "05"
+          type: string
+        authentication_response:
+          description: The `transStatus` parsed from the post-authorization `response`.
+          example: C
+          type: string
+        directory_response:
+          description: The `transStatus` parsed from the authorization `response`.
+          example: C
+          type: string
+        directory_transaction_id:
+          description: The `dsTransID` parsed from the `response`.
+          example: 8875884a-ac2f-42cb-b3f0-09b3ea3c0042
+          type: string
+        version:
+          description: The version of 3DS used.
+          example: 2.2.0
+          type: string
+      type: object
+    ThreeDSecureRequestErrorEvent_context:
+      description: 3DS post-authentication context.
+      properties:
+        url:
+          description: The URL that was called for this request.
+          example: https://3dserver.example/auth
+          type: string
+        reason:
+          description: The reason for the error.
+          example: TIMEOUT
+          type: string
+      type: object
+    ThreeDSecureSuccessEvent_context:
       description: 3DS context.
       properties:
         eci:

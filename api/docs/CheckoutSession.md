@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | &#x60;checkout-session&#x60;. | [optional] 
 **Id** | Pointer to **string** | The ID of the Checkout Session. | [optional] 
 **ExpiresAt** | Pointer to **time.Time** | The date and time when the Checkout Session will expire. By default this will be set to 1 hour from the date of creation. | [optional] 
+**CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
+**Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. | [optional] 
 
 ## Methods
 
@@ -102,6 +104,76 @@ SetExpiresAt sets ExpiresAt field to given value.
 
 HasExpiresAt returns a boolean if a field has been set.
 
+### GetCartItems
+
+`func (o *CheckoutSession) GetCartItems() []CartItem`
+
+GetCartItems returns the CartItems field if non-nil, zero value otherwise.
+
+### GetCartItemsOk
+
+`func (o *CheckoutSession) GetCartItemsOk() (*[]CartItem, bool)`
+
+GetCartItemsOk returns a tuple with the CartItems field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCartItems
+
+`func (o *CheckoutSession) SetCartItems(v []CartItem)`
+
+SetCartItems sets CartItems field to given value.
+
+### HasCartItems
+
+`func (o *CheckoutSession) HasCartItems() bool`
+
+HasCartItems returns a boolean if a field has been set.
+
+### SetCartItemsNil
+
+`func (o *CheckoutSession) SetCartItemsNil(b bool)`
+
+ SetCartItemsNil sets the value for CartItems to be an explicit nil
+
+### UnsetCartItems
+`func (o *CheckoutSession) UnsetCartItems()`
+
+UnsetCartItems ensures that no value is present for CartItems, not even an explicit nil
+### GetMetadata
+
+`func (o *CheckoutSession) GetMetadata() map[string]string`
+
+GetMetadata returns the Metadata field if non-nil, zero value otherwise.
+
+### GetMetadataOk
+
+`func (o *CheckoutSession) GetMetadataOk() (*map[string]string, bool)`
+
+GetMetadataOk returns a tuple with the Metadata field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMetadata
+
+`func (o *CheckoutSession) SetMetadata(v map[string]string)`
+
+SetMetadata sets Metadata field to given value.
+
+### HasMetadata
+
+`func (o *CheckoutSession) HasMetadata() bool`
+
+HasMetadata returns a boolean if a field has been set.
+
+### SetMetadataNil
+
+`func (o *CheckoutSession) SetMetadataNil(b bool)`
+
+ SetMetadataNil sets the value for Metadata to be an explicit nil
+
+### UnsetMetadata
+`func (o *CheckoutSession) UnsetMetadata()`
+
+UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -25,9 +25,9 @@ type ThreeDSecureDataV1 struct {
 	Version string `json:"version"`
 	// For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the `ARes`.
 	DirectoryResponse string `json:"directory_response"`
-	// The authentication response.
+	// The response for the 3DS authentication call.
 	AuthenticationResponse string `json:"authentication_response"`
-	// The CAVV Algorithm used.
+	// The CAVV algorithm used.
 	CavvAlgorithm string `json:"cavv_algorithm"`
 	// The transaction identifier.
 	Xid string `json:"xid"`

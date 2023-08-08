@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **Eci** | **string** | The electronic commerce indicator for the 3DS transaction. | 
 **Version** | **string** | The version of 3-D Secure that was used. | 
 **DirectoryResponse** | **string** | For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the &#x60;ARes&#x60;. | 
-**AuthenticationResponse** | **string** | The authentication response. | 
-**CavvAlgorithm** | **string** | The CAVV Algorithm used. | 
+**AuthenticationResponse** | **string** | The response for the 3DS authentication call. | 
+**CavvAlgorithm** | **string** | The CAVV algorithm used. | 
 **Xid** | **string** | The transaction identifier. | 
 
 ## Methods

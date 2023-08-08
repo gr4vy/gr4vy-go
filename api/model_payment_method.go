@@ -53,6 +53,10 @@ type PaymentMethod struct {
 	// The 2-letter ISO code of the country this payment method can be used for. If this value is `null` the payment method may be used in multiple countries.
 	Country NullableString `json:"country,omitempty"`
 	Details *PaymentMethodDetailsCard `json:"details,omitempty"`
+	// The date and time when this card was last replaced.  When the Account Updater determines that new card details are available (e.g. when it's about to expire), existing details are not changed immediately. The actual replacement occurs when a transaction using this payment method is declined with any of the following codes:  * `canceled_payment_method` * `expired_payment_method` * `unavailable_payment_method` * `unknown_payment_method`  When the replacement is applied, this field is updated. For non-card payment methods, the value of this field is always set to `null`.
+	LastReplacedAt NullableTime `json:"last_replaced_at,omitempty"`
+	// Whether this card has a pending replacement that hasn't been applied yet.  When the Account Updater determines that new card details are available (e.g. when it's about to expire), existing details are not changed immediately, but this field is set to `true`. The actual replacement occurs when a transaction using this payment method is declined with any of the following codes:  * `canceled_payment_method` * `expired_payment_method` * `unavailable_payment_method` * `unknown_payment_method`  When the replacement is applied, this field is set to `false`. For non-card payment methods, the value of this field is always set to `false`.
+	HasReplacement *bool `json:"has_replacement,omitempty"`
 }
 
 // NewPaymentMethod instantiates a new PaymentMethod object
@@ -738,6 +742,80 @@ func (o *PaymentMethod) SetDetails(v PaymentMethodDetailsCard) {
 	o.Details = &v
 }
 
+// GetLastReplacedAt returns the LastReplacedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethod) GetLastReplacedAt() time.Time {
+	if o == nil || o.LastReplacedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastReplacedAt.Get()
+}
+
+// GetLastReplacedAtOk returns a tuple with the LastReplacedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethod) GetLastReplacedAtOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.LastReplacedAt.Get(), o.LastReplacedAt.IsSet()
+}
+
+// HasLastReplacedAt returns a boolean if a field has been set.
+func (o *PaymentMethod) HasLastReplacedAt() bool {
+	if o != nil && o.LastReplacedAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLastReplacedAt gets a reference to the given NullableTime and assigns it to the LastReplacedAt field.
+func (o *PaymentMethod) SetLastReplacedAt(v time.Time) {
+	o.LastReplacedAt.Set(&v)
+}
+// SetLastReplacedAtNil sets the value for LastReplacedAt to be an explicit nil
+func (o *PaymentMethod) SetLastReplacedAtNil() {
+	o.LastReplacedAt.Set(nil)
+}
+
+// UnsetLastReplacedAt ensures that no value is present for LastReplacedAt, not even an explicit nil
+func (o *PaymentMethod) UnsetLastReplacedAt() {
+	o.LastReplacedAt.Unset()
+}
+
+// GetHasReplacement returns the HasReplacement field value if set, zero value otherwise.
+func (o *PaymentMethod) GetHasReplacement() bool {
+	if o == nil || o.HasReplacement == nil {
+		var ret bool
+		return ret
+	}
+	return *o.HasReplacement
+}
+
+// GetHasReplacementOk returns a tuple with the HasReplacement field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetHasReplacementOk() (*bool, bool) {
+	if o == nil || o.HasReplacement == nil {
+		return nil, false
+	}
+	return o.HasReplacement, true
+}
+
+// HasHasReplacement returns a boolean if a field has been set.
+func (o *PaymentMethod) HasHasReplacement() bool {
+	if o != nil && o.HasReplacement != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetHasReplacement gets a reference to the given bool and assigns it to the HasReplacement field.
+func (o *PaymentMethod) SetHasReplacement(v bool) {
+	o.HasReplacement = &v
+}
+
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -793,6 +871,12 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	}
 	if o.Details != nil {
 		toSerialize["details"] = o.Details
+	}
+	if o.LastReplacedAt.IsSet() {
+		toSerialize["last_replaced_at"] = o.LastReplacedAt.Get()
+	}
+	if o.HasReplacement != nil {
+		toSerialize["has_replacement"] = o.HasReplacement
 	}
 	return json.Marshal(toSerialize)
 }

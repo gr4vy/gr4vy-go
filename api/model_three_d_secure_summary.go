@@ -15,7 +15,7 @@ import (
 	"encoding/json"
 )
 
-// ThreeDSecureSummary Details about the 3-D Secure challenge that was presented to the buyer for this transaction, where applicable.
+// ThreeDSecureSummary The 3-D Secure data that was sent to the payment service for the transaction.
 type ThreeDSecureSummary struct {
 	// The version of 3DS used for this transaction.
 	Version *string `json:"version,omitempty"`
@@ -23,7 +23,7 @@ type ThreeDSecureSummary struct {
 	Status *string `json:"status,omitempty"`
 	// The method used for 3DS authentication for this transaction.
 	Method *string `json:"method,omitempty"`
-	// If the transaction had a 3DS error, information about it.
+	// The error data received from our 3DS server. This will not be populated if the customer failed the authentication with a status code of `N`, `R`, or `U`.  To see full details about the 3DS calls in those situations please use our transaction events API.
 	ErrorData NullableThreeDSecureError `json:"error_data,omitempty"`
 	ResponseData *ThreeDSecureDataV1V2 `json:"response_data,omitempty"`
 }

@@ -7,8 +7,8 @@ Name | Type | Description | Notes
 **Cavv** | **string** | The cardholder authentication value or AAV. | 
 **Eci** | **string** | The electronic commerce indicator for the 3DS transaction. | 
 **Version** | **string** | The version of 3-D Secure that was used. | 
-**DirectoryResponse** | **string** | For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the &#x60;ARes&#x60;. | 
-**AuthenticationResponse** | Pointer to **string** | The transaction status from the challenge result (not required for frictionless). | [optional] 
+**DirectoryResponse** | **string** | The transaction status received as part of the authentication request. | 
+**AuthenticationResponse** | Pointer to **NullableString** | The transaction status after a the 3DS challenge. This will be null in case of a frictionless 3DS flow. | [optional] 
 **DirectoryTransactionId** | **string** | The transaction identifier. | 
 
 ## Methods
@@ -135,6 +135,16 @@ SetAuthenticationResponse sets AuthenticationResponse field to given value.
 
 HasAuthenticationResponse returns a boolean if a field has been set.
 
+### SetAuthenticationResponseNil
+
+`func (o *ThreeDSecureDataV2) SetAuthenticationResponseNil(b bool)`
+
+ SetAuthenticationResponseNil sets the value for AuthenticationResponse to be an explicit nil
+
+### UnsetAuthenticationResponse
+`func (o *ThreeDSecureDataV2) UnsetAuthenticationResponse()`
+
+UnsetAuthenticationResponse ensures that no value is present for AuthenticationResponse, not even an explicit nil
 ### GetDirectoryTransactionId
 
 `func (o *ThreeDSecureDataV2) GetDirectoryTransactionId() string`

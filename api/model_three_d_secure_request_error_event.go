@@ -16,38 +16,38 @@ import (
 	"time"
 )
 
-// ThreeDSecureSuccessTransactionEvent Details related to 3DS processing.
-type ThreeDSecureSuccessTransactionEvent struct {
+// ThreeDSecureRequestErrorEvent Error details for a failed 3DS call.
+type ThreeDSecureRequestErrorEvent struct {
 	// The type of this resource. Is always `transaction-event`.
 	Type *string `json:"type,omitempty"`
 	// The unique identifier for this event.
 	Id *string `json:"id,omitempty"`
-	// The name of this resource. Is always `three-d-secure-success`.
+	// The name of this resource. Is always `three-d-secure-request-error`.
 	Name *string `json:"name,omitempty"`
 	// The date and time when this transaction was created in our system.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
-	Context *ThreeDSecureSuccessTransactionEventContext `json:"context,omitempty"`
+	Context *ThreeDSecureRequestErrorEventContext `json:"context,omitempty"`
 }
 
-// NewThreeDSecureSuccessTransactionEvent instantiates a new ThreeDSecureSuccessTransactionEvent object
+// NewThreeDSecureRequestErrorEvent instantiates a new ThreeDSecureRequestErrorEvent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewThreeDSecureSuccessTransactionEvent() *ThreeDSecureSuccessTransactionEvent {
-	this := ThreeDSecureSuccessTransactionEvent{}
+func NewThreeDSecureRequestErrorEvent() *ThreeDSecureRequestErrorEvent {
+	this := ThreeDSecureRequestErrorEvent{}
 	return &this
 }
 
-// NewThreeDSecureSuccessTransactionEventWithDefaults instantiates a new ThreeDSecureSuccessTransactionEvent object
+// NewThreeDSecureRequestErrorEventWithDefaults instantiates a new ThreeDSecureRequestErrorEvent object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewThreeDSecureSuccessTransactionEventWithDefaults() *ThreeDSecureSuccessTransactionEvent {
-	this := ThreeDSecureSuccessTransactionEvent{}
+func NewThreeDSecureRequestErrorEventWithDefaults() *ThreeDSecureRequestErrorEvent {
+	this := ThreeDSecureRequestErrorEvent{}
 	return &this
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *ThreeDSecureSuccessTransactionEvent) GetType() string {
+func (o *ThreeDSecureRequestErrorEvent) GetType() string {
 	if o == nil || o.Type == nil {
 		var ret string
 		return ret
@@ -57,7 +57,7 @@ func (o *ThreeDSecureSuccessTransactionEvent) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDSecureSuccessTransactionEvent) GetTypeOk() (*string, bool) {
+func (o *ThreeDSecureRequestErrorEvent) GetTypeOk() (*string, bool) {
 	if o == nil || o.Type == nil {
 		return nil, false
 	}
@@ -65,7 +65,7 @@ func (o *ThreeDSecureSuccessTransactionEvent) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEvent) HasType() bool {
+func (o *ThreeDSecureRequestErrorEvent) HasType() bool {
 	if o != nil && o.Type != nil {
 		return true
 	}
@@ -74,12 +74,12 @@ func (o *ThreeDSecureSuccessTransactionEvent) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *ThreeDSecureSuccessTransactionEvent) SetType(v string) {
+func (o *ThreeDSecureRequestErrorEvent) SetType(v string) {
 	o.Type = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *ThreeDSecureSuccessTransactionEvent) GetId() string {
+func (o *ThreeDSecureRequestErrorEvent) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -89,7 +89,7 @@ func (o *ThreeDSecureSuccessTransactionEvent) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDSecureSuccessTransactionEvent) GetIdOk() (*string, bool) {
+func (o *ThreeDSecureRequestErrorEvent) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *ThreeDSecureSuccessTransactionEvent) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEvent) HasId() bool {
+func (o *ThreeDSecureRequestErrorEvent) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -106,12 +106,12 @@ func (o *ThreeDSecureSuccessTransactionEvent) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *ThreeDSecureSuccessTransactionEvent) SetId(v string) {
+func (o *ThreeDSecureRequestErrorEvent) SetId(v string) {
 	o.Id = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *ThreeDSecureSuccessTransactionEvent) GetName() string {
+func (o *ThreeDSecureRequestErrorEvent) GetName() string {
 	if o == nil || o.Name == nil {
 		var ret string
 		return ret
@@ -121,7 +121,7 @@ func (o *ThreeDSecureSuccessTransactionEvent) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDSecureSuccessTransactionEvent) GetNameOk() (*string, bool) {
+func (o *ThreeDSecureRequestErrorEvent) GetNameOk() (*string, bool) {
 	if o == nil || o.Name == nil {
 		return nil, false
 	}
@@ -129,7 +129,7 @@ func (o *ThreeDSecureSuccessTransactionEvent) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEvent) HasName() bool {
+func (o *ThreeDSecureRequestErrorEvent) HasName() bool {
 	if o != nil && o.Name != nil {
 		return true
 	}
@@ -138,12 +138,12 @@ func (o *ThreeDSecureSuccessTransactionEvent) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *ThreeDSecureSuccessTransactionEvent) SetName(v string) {
+func (o *ThreeDSecureRequestErrorEvent) SetName(v string) {
 	o.Name = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *ThreeDSecureSuccessTransactionEvent) GetCreatedAt() time.Time {
+func (o *ThreeDSecureRequestErrorEvent) GetCreatedAt() time.Time {
 	if o == nil || o.CreatedAt == nil {
 		var ret time.Time
 		return ret
@@ -153,7 +153,7 @@ func (o *ThreeDSecureSuccessTransactionEvent) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDSecureSuccessTransactionEvent) GetCreatedAtOk() (*time.Time, bool) {
+func (o *ThreeDSecureRequestErrorEvent) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil || o.CreatedAt == nil {
 		return nil, false
 	}
@@ -161,7 +161,7 @@ func (o *ThreeDSecureSuccessTransactionEvent) GetCreatedAtOk() (*time.Time, bool
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEvent) HasCreatedAt() bool {
+func (o *ThreeDSecureRequestErrorEvent) HasCreatedAt() bool {
 	if o != nil && o.CreatedAt != nil {
 		return true
 	}
@@ -170,14 +170,14 @@ func (o *ThreeDSecureSuccessTransactionEvent) HasCreatedAt() bool {
 }
 
 // SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *ThreeDSecureSuccessTransactionEvent) SetCreatedAt(v time.Time) {
+func (o *ThreeDSecureRequestErrorEvent) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
 // GetContext returns the Context field value if set, zero value otherwise.
-func (o *ThreeDSecureSuccessTransactionEvent) GetContext() ThreeDSecureSuccessTransactionEventContext {
+func (o *ThreeDSecureRequestErrorEvent) GetContext() ThreeDSecureRequestErrorEventContext {
 	if o == nil || o.Context == nil {
-		var ret ThreeDSecureSuccessTransactionEventContext
+		var ret ThreeDSecureRequestErrorEventContext
 		return ret
 	}
 	return *o.Context
@@ -185,7 +185,7 @@ func (o *ThreeDSecureSuccessTransactionEvent) GetContext() ThreeDSecureSuccessTr
 
 // GetContextOk returns a tuple with the Context field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *ThreeDSecureSuccessTransactionEvent) GetContextOk() (*ThreeDSecureSuccessTransactionEventContext, bool) {
+func (o *ThreeDSecureRequestErrorEvent) GetContextOk() (*ThreeDSecureRequestErrorEventContext, bool) {
 	if o == nil || o.Context == nil {
 		return nil, false
 	}
@@ -193,7 +193,7 @@ func (o *ThreeDSecureSuccessTransactionEvent) GetContextOk() (*ThreeDSecureSucce
 }
 
 // HasContext returns a boolean if a field has been set.
-func (o *ThreeDSecureSuccessTransactionEvent) HasContext() bool {
+func (o *ThreeDSecureRequestErrorEvent) HasContext() bool {
 	if o != nil && o.Context != nil {
 		return true
 	}
@@ -201,12 +201,12 @@ func (o *ThreeDSecureSuccessTransactionEvent) HasContext() bool {
 	return false
 }
 
-// SetContext gets a reference to the given ThreeDSecureSuccessTransactionEventContext and assigns it to the Context field.
-func (o *ThreeDSecureSuccessTransactionEvent) SetContext(v ThreeDSecureSuccessTransactionEventContext) {
+// SetContext gets a reference to the given ThreeDSecureRequestErrorEventContext and assigns it to the Context field.
+func (o *ThreeDSecureRequestErrorEvent) SetContext(v ThreeDSecureRequestErrorEventContext) {
 	o.Context = &v
 }
 
-func (o ThreeDSecureSuccessTransactionEvent) MarshalJSON() ([]byte, error) {
+func (o ThreeDSecureRequestErrorEvent) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
@@ -226,38 +226,38 @@ func (o ThreeDSecureSuccessTransactionEvent) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableThreeDSecureSuccessTransactionEvent struct {
-	value *ThreeDSecureSuccessTransactionEvent
+type NullableThreeDSecureRequestErrorEvent struct {
+	value *ThreeDSecureRequestErrorEvent
 	isSet bool
 }
 
-func (v NullableThreeDSecureSuccessTransactionEvent) Get() *ThreeDSecureSuccessTransactionEvent {
+func (v NullableThreeDSecureRequestErrorEvent) Get() *ThreeDSecureRequestErrorEvent {
 	return v.value
 }
 
-func (v *NullableThreeDSecureSuccessTransactionEvent) Set(val *ThreeDSecureSuccessTransactionEvent) {
+func (v *NullableThreeDSecureRequestErrorEvent) Set(val *ThreeDSecureRequestErrorEvent) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableThreeDSecureSuccessTransactionEvent) IsSet() bool {
+func (v NullableThreeDSecureRequestErrorEvent) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableThreeDSecureSuccessTransactionEvent) Unset() {
+func (v *NullableThreeDSecureRequestErrorEvent) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableThreeDSecureSuccessTransactionEvent(val *ThreeDSecureSuccessTransactionEvent) *NullableThreeDSecureSuccessTransactionEvent {
-	return &NullableThreeDSecureSuccessTransactionEvent{value: val, isSet: true}
+func NewNullableThreeDSecureRequestErrorEvent(val *ThreeDSecureRequestErrorEvent) *NullableThreeDSecureRequestErrorEvent {
+	return &NullableThreeDSecureRequestErrorEvent{value: val, isSet: true}
 }
 
-func (v NullableThreeDSecureSuccessTransactionEvent) MarshalJSON() ([]byte, error) {
+func (v NullableThreeDSecureRequestErrorEvent) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableThreeDSecureSuccessTransactionEvent) UnmarshalJSON(src []byte) error {
+func (v *NullableThreeDSecureRequestErrorEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }

@@ -5,6 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CybersourceAntiFraud** | Pointer to [**NullableConnectionOptionsCybersourceAntiFraud**](ConnectionOptionsCybersourceAntiFraud.md) |  | [optional] 
+**ForterAntiFraud** | Pointer to [**NullableConnectionOptionsForterAntiFraud**](ConnectionOptionsForterAntiFraud.md) |  | [optional] 
 **AdyenCard** | Pointer to [**NullableConnectionOptionsAdyenCard**](ConnectionOptionsAdyenCard.md) |  | [optional] 
 
 ## Methods
@@ -61,6 +62,41 @@ HasCybersourceAntiFraud returns a boolean if a field has been set.
 `func (o *ConnectionOptions) UnsetCybersourceAntiFraud()`
 
 UnsetCybersourceAntiFraud ensures that no value is present for CybersourceAntiFraud, not even an explicit nil
+### GetForterAntiFraud
+
+`func (o *ConnectionOptions) GetForterAntiFraud() ConnectionOptionsForterAntiFraud`
+
+GetForterAntiFraud returns the ForterAntiFraud field if non-nil, zero value otherwise.
+
+### GetForterAntiFraudOk
+
+`func (o *ConnectionOptions) GetForterAntiFraudOk() (*ConnectionOptionsForterAntiFraud, bool)`
+
+GetForterAntiFraudOk returns a tuple with the ForterAntiFraud field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetForterAntiFraud
+
+`func (o *ConnectionOptions) SetForterAntiFraud(v ConnectionOptionsForterAntiFraud)`
+
+SetForterAntiFraud sets ForterAntiFraud field to given value.
+
+### HasForterAntiFraud
+
+`func (o *ConnectionOptions) HasForterAntiFraud() bool`
+
+HasForterAntiFraud returns a boolean if a field has been set.
+
+### SetForterAntiFraudNil
+
+`func (o *ConnectionOptions) SetForterAntiFraudNil(b bool)`
+
+ SetForterAntiFraudNil sets the value for ForterAntiFraud to be an explicit nil
+
+### UnsetForterAntiFraud
+`func (o *ConnectionOptions) UnsetForterAntiFraud()`
+
+UnsetForterAntiFraud ensures that no value is present for ForterAntiFraud, not even an explicit nil
 ### GetAdyenCard
 
 `func (o *ConnectionOptions) GetAdyenCard() ConnectionOptionsAdyenCard`

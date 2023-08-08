@@ -29,6 +29,7 @@ Name | Type | Description | Notes
 **SchemeTransactionId** | Pointer to **NullableString** | An identifier for the transaction used by the scheme itself, when available.  e.g. the Visa Transaction Identifier, or Mastercard Trace ID. | [optional] [default to "null"]
 **RawResponseCode** | Pointer to **NullableString** | This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
 **RawResponseDescription** | Pointer to **NullableString** | This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
+**AuthResponseCode** | Pointer to **NullableString** | This is the response description received from the processor. | [optional] 
 **AvsResponseCode** | Pointer to **NullableString** | The response code received from the payment service for the Address Verification Check (AVS). This code is mapped to a standardized Gr4vy AVS response code.  - &#x60;no_match&#x60; - neither address or postal code match - &#x60;match&#x60; - both address and postal code match - &#x60;partial_match_address&#x60; - address matches but postal code does not - &#x60;partial_match_postcode&#x60; - postal code matches but address does not - &#x60;unavailable &#x60; - AVS is unavailable for card/country  The value of this field can be &#x60;null&#x60; if the payment service did not provide a response. | [optional] 
 **CvvResponseCode** | Pointer to **NullableString** | The response code received from the payment service for the Card Verification Value (CVV). This code is mapped to a standardized Gr4vy CVV response code.  - &#x60;no_match&#x60; - the CVV does not match the expected value - &#x60;match&#x60; - the CVV matches the expected value - &#x60;unavailable &#x60; - CVV check unavailable for card our country - &#x60;not_provided &#x60; - CVV not provided  The value of this field can be &#x60;null&#x60; if the payment service did not provide a response. | [optional] 
 **Method** | Pointer to **string** |  | [optional] 
@@ -755,6 +756,41 @@ HasRawResponseDescription returns a boolean if a field has been set.
 `func (o *Transaction) UnsetRawResponseDescription()`
 
 UnsetRawResponseDescription ensures that no value is present for RawResponseDescription, not even an explicit nil
+### GetAuthResponseCode
+
+`func (o *Transaction) GetAuthResponseCode() string`
+
+GetAuthResponseCode returns the AuthResponseCode field if non-nil, zero value otherwise.
+
+### GetAuthResponseCodeOk
+
+`func (o *Transaction) GetAuthResponseCodeOk() (*string, bool)`
+
+GetAuthResponseCodeOk returns a tuple with the AuthResponseCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAuthResponseCode
+
+`func (o *Transaction) SetAuthResponseCode(v string)`
+
+SetAuthResponseCode sets AuthResponseCode field to given value.
+
+### HasAuthResponseCode
+
+`func (o *Transaction) HasAuthResponseCode() bool`
+
+HasAuthResponseCode returns a boolean if a field has been set.
+
+### SetAuthResponseCodeNil
+
+`func (o *Transaction) SetAuthResponseCodeNil(b bool)`
+
+ SetAuthResponseCodeNil sets the value for AuthResponseCode to be an explicit nil
+
+### UnsetAuthResponseCode
+`func (o *Transaction) UnsetAuthResponseCode()`
+
+UnsetAuthResponseCode ensures that no value is present for AuthResponseCode, not even an explicit nil
 ### GetAvsResponseCode
 
 `func (o *Transaction) GetAvsResponseCode() string`

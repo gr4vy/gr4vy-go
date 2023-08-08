@@ -8,6 +8,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The ID of the audit log entry. | [optional] 
 **Timestamp** | Pointer to **time.Time** | The date and time that the action was performed. | [optional] 
 **Action** | Pointer to **string** | The action that was performed. | [optional] 
+**MerchantAccountId** | Pointer to **NullableString** | The ID of the merchant account this entry was created for. | [optional] 
 **User** | Pointer to [**AuditLogUser**](AuditLogUser.md) |  | [optional] 
 **Resource** | Pointer to [**AuditLogResource**](AuditLogResource.md) |  | [optional] 
 
@@ -130,6 +131,41 @@ SetAction sets Action field to given value.
 
 HasAction returns a boolean if a field has been set.
 
+### GetMerchantAccountId
+
+`func (o *AuditLog) GetMerchantAccountId() string`
+
+GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
+
+### GetMerchantAccountIdOk
+
+`func (o *AuditLog) GetMerchantAccountIdOk() (*string, bool)`
+
+GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantAccountId
+
+`func (o *AuditLog) SetMerchantAccountId(v string)`
+
+SetMerchantAccountId sets MerchantAccountId field to given value.
+
+### HasMerchantAccountId
+
+`func (o *AuditLog) HasMerchantAccountId() bool`
+
+HasMerchantAccountId returns a boolean if a field has been set.
+
+### SetMerchantAccountIdNil
+
+`func (o *AuditLog) SetMerchantAccountIdNil(b bool)`
+
+ SetMerchantAccountIdNil sets the value for MerchantAccountId to be an explicit nil
+
+### UnsetMerchantAccountId
+`func (o *AuditLog) UnsetMerchantAccountId()`
+
+UnsetMerchantAccountId ensures that no value is present for MerchantAccountId, not even an explicit nil
 ### GetUser
 
 `func (o *AuditLog) GetUser() AuditLogUser`

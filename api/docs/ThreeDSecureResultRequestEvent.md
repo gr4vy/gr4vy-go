@@ -1,4 +1,4 @@
-# ThreeDSecureSuccessTransactionEvent
+# ThreeDSecureResultRequestEvent
 
 ## Properties
 
@@ -6,151 +6,151 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;transaction-event&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this event. | [optional] 
-**Name** | Pointer to **string** | The name of this resource. Is always &#x60;three-d-secure-success&#x60;. | [optional] 
+**Name** | Pointer to **string** | The name of this resource. Is always &#x60;three-d-secure-result-request&#x60;. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this transaction was created in our system. | [optional] 
-**Context** | Pointer to [**ThreeDSecureSuccessTransactionEventContext**](ThreeDSecureSuccessTransactionEventContext.md) |  | [optional] 
+**Context** | Pointer to [**ThreeDSecureResultRequestEventContext**](ThreeDSecureResultRequestEventContext.md) |  | [optional] 
 
 ## Methods
 
-### NewThreeDSecureSuccessTransactionEvent
+### NewThreeDSecureResultRequestEvent
 
-`func NewThreeDSecureSuccessTransactionEvent() *ThreeDSecureSuccessTransactionEvent`
+`func NewThreeDSecureResultRequestEvent() *ThreeDSecureResultRequestEvent`
 
-NewThreeDSecureSuccessTransactionEvent instantiates a new ThreeDSecureSuccessTransactionEvent object
+NewThreeDSecureResultRequestEvent instantiates a new ThreeDSecureResultRequestEvent object
 This constructor will assign default values to properties that have it defined,
 and makes sure properties required by API are set, but the set of arguments
 will change when the set of required properties is changed
 
-### NewThreeDSecureSuccessTransactionEventWithDefaults
+### NewThreeDSecureResultRequestEventWithDefaults
 
-`func NewThreeDSecureSuccessTransactionEventWithDefaults() *ThreeDSecureSuccessTransactionEvent`
+`func NewThreeDSecureResultRequestEventWithDefaults() *ThreeDSecureResultRequestEvent`
 
-NewThreeDSecureSuccessTransactionEventWithDefaults instantiates a new ThreeDSecureSuccessTransactionEvent object
+NewThreeDSecureResultRequestEventWithDefaults instantiates a new ThreeDSecureResultRequestEvent object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
 ### GetType
 
-`func (o *ThreeDSecureSuccessTransactionEvent) GetType() string`
+`func (o *ThreeDSecureResultRequestEvent) GetType() string`
 
 GetType returns the Type field if non-nil, zero value otherwise.
 
 ### GetTypeOk
 
-`func (o *ThreeDSecureSuccessTransactionEvent) GetTypeOk() (*string, bool)`
+`func (o *ThreeDSecureResultRequestEvent) GetTypeOk() (*string, bool)`
 
 GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetType
 
-`func (o *ThreeDSecureSuccessTransactionEvent) SetType(v string)`
+`func (o *ThreeDSecureResultRequestEvent) SetType(v string)`
 
 SetType sets Type field to given value.
 
 ### HasType
 
-`func (o *ThreeDSecureSuccessTransactionEvent) HasType() bool`
+`func (o *ThreeDSecureResultRequestEvent) HasType() bool`
 
 HasType returns a boolean if a field has been set.
 
 ### GetId
 
-`func (o *ThreeDSecureSuccessTransactionEvent) GetId() string`
+`func (o *ThreeDSecureResultRequestEvent) GetId() string`
 
 GetId returns the Id field if non-nil, zero value otherwise.
 
 ### GetIdOk
 
-`func (o *ThreeDSecureSuccessTransactionEvent) GetIdOk() (*string, bool)`
+`func (o *ThreeDSecureResultRequestEvent) GetIdOk() (*string, bool)`
 
 GetIdOk returns a tuple with the Id field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetId
 
-`func (o *ThreeDSecureSuccessTransactionEvent) SetId(v string)`
+`func (o *ThreeDSecureResultRequestEvent) SetId(v string)`
 
 SetId sets Id field to given value.
 
 ### HasId
 
-`func (o *ThreeDSecureSuccessTransactionEvent) HasId() bool`
+`func (o *ThreeDSecureResultRequestEvent) HasId() bool`
 
 HasId returns a boolean if a field has been set.
 
 ### GetName
 
-`func (o *ThreeDSecureSuccessTransactionEvent) GetName() string`
+`func (o *ThreeDSecureResultRequestEvent) GetName() string`
 
 GetName returns the Name field if non-nil, zero value otherwise.
 
 ### GetNameOk
 
-`func (o *ThreeDSecureSuccessTransactionEvent) GetNameOk() (*string, bool)`
+`func (o *ThreeDSecureResultRequestEvent) GetNameOk() (*string, bool)`
 
 GetNameOk returns a tuple with the Name field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetName
 
-`func (o *ThreeDSecureSuccessTransactionEvent) SetName(v string)`
+`func (o *ThreeDSecureResultRequestEvent) SetName(v string)`
 
 SetName sets Name field to given value.
 
 ### HasName
 
-`func (o *ThreeDSecureSuccessTransactionEvent) HasName() bool`
+`func (o *ThreeDSecureResultRequestEvent) HasName() bool`
 
 HasName returns a boolean if a field has been set.
 
 ### GetCreatedAt
 
-`func (o *ThreeDSecureSuccessTransactionEvent) GetCreatedAt() time.Time`
+`func (o *ThreeDSecureResultRequestEvent) GetCreatedAt() time.Time`
 
 GetCreatedAt returns the CreatedAt field if non-nil, zero value otherwise.
 
 ### GetCreatedAtOk
 
-`func (o *ThreeDSecureSuccessTransactionEvent) GetCreatedAtOk() (*time.Time, bool)`
+`func (o *ThreeDSecureResultRequestEvent) GetCreatedAtOk() (*time.Time, bool)`
 
 GetCreatedAtOk returns a tuple with the CreatedAt field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetCreatedAt
 
-`func (o *ThreeDSecureSuccessTransactionEvent) SetCreatedAt(v time.Time)`
+`func (o *ThreeDSecureResultRequestEvent) SetCreatedAt(v time.Time)`
 
 SetCreatedAt sets CreatedAt field to given value.
 
 ### HasCreatedAt
 
-`func (o *ThreeDSecureSuccessTransactionEvent) HasCreatedAt() bool`
+`func (o *ThreeDSecureResultRequestEvent) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
 
 ### GetContext
 
-`func (o *ThreeDSecureSuccessTransactionEvent) GetContext() ThreeDSecureSuccessTransactionEventContext`
+`func (o *ThreeDSecureResultRequestEvent) GetContext() ThreeDSecureResultRequestEventContext`
 
 GetContext returns the Context field if non-nil, zero value otherwise.
 
 ### GetContextOk
 
-`func (o *ThreeDSecureSuccessTransactionEvent) GetContextOk() (*ThreeDSecureSuccessTransactionEventContext, bool)`
+`func (o *ThreeDSecureResultRequestEvent) GetContextOk() (*ThreeDSecureResultRequestEventContext, bool)`
 
 GetContextOk returns a tuple with the Context field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetContext
 
-`func (o *ThreeDSecureSuccessTransactionEvent) SetContext(v ThreeDSecureSuccessTransactionEventContext)`
+`func (o *ThreeDSecureResultRequestEvent) SetContext(v ThreeDSecureResultRequestEventContext)`
 
 SetContext sets Context field to given value.
 
 ### HasContext
 
-`func (o *ThreeDSecureSuccessTransactionEvent) HasContext() bool`
+`func (o *ThreeDSecureResultRequestEvent) HasContext() bool`
 
 HasContext returns a boolean if a field has been set.
 

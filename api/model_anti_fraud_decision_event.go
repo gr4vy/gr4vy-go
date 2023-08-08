@@ -16,38 +16,38 @@ import (
 	"time"
 )
 
-// AntiFraudDecisionTransactionEvent The request/response details of HTTP calls made to an anti-fraud provider.
-type AntiFraudDecisionTransactionEvent struct {
+// AntiFraudDecisionEvent This event logs the request and response details of HTTP calls made to an anti-fraud provider.
+type AntiFraudDecisionEvent struct {
 	// The type of this resource. Is always `transaction-event`.
 	Type *string `json:"type,omitempty"`
 	// The unique identifier for this event.
 	Id *string `json:"id,omitempty"`
-	// The name of this resource. Is always `anti-fraud-decision `.
+	// The name of this resource. Is always `anti-fraud-decision`.
 	Name *string `json:"name,omitempty"`
 	// The date and time when this transaction was created in our system.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
-	Context *AntiFraudDecisionTransactionEventContext `json:"context,omitempty"`
+	Context *AntiFraudDecisionEventContext `json:"context,omitempty"`
 }
 
-// NewAntiFraudDecisionTransactionEvent instantiates a new AntiFraudDecisionTransactionEvent object
+// NewAntiFraudDecisionEvent instantiates a new AntiFraudDecisionEvent object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewAntiFraudDecisionTransactionEvent() *AntiFraudDecisionTransactionEvent {
-	this := AntiFraudDecisionTransactionEvent{}
+func NewAntiFraudDecisionEvent() *AntiFraudDecisionEvent {
+	this := AntiFraudDecisionEvent{}
 	return &this
 }
 
-// NewAntiFraudDecisionTransactionEventWithDefaults instantiates a new AntiFraudDecisionTransactionEvent object
+// NewAntiFraudDecisionEventWithDefaults instantiates a new AntiFraudDecisionEvent object
 // This constructor will only assign default values to properties that have it defined,
 // but it doesn't guarantee that properties required by API are set
-func NewAntiFraudDecisionTransactionEventWithDefaults() *AntiFraudDecisionTransactionEvent {
-	this := AntiFraudDecisionTransactionEvent{}
+func NewAntiFraudDecisionEventWithDefaults() *AntiFraudDecisionEvent {
+	this := AntiFraudDecisionEvent{}
 	return &this
 }
 
 // GetType returns the Type field value if set, zero value otherwise.
-func (o *AntiFraudDecisionTransactionEvent) GetType() string {
+func (o *AntiFraudDecisionEvent) GetType() string {
 	if o == nil || o.Type == nil {
 		var ret string
 		return ret
@@ -57,7 +57,7 @@ func (o *AntiFraudDecisionTransactionEvent) GetType() string {
 
 // GetTypeOk returns a tuple with the Type field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AntiFraudDecisionTransactionEvent) GetTypeOk() (*string, bool) {
+func (o *AntiFraudDecisionEvent) GetTypeOk() (*string, bool) {
 	if o == nil || o.Type == nil {
 		return nil, false
 	}
@@ -65,7 +65,7 @@ func (o *AntiFraudDecisionTransactionEvent) GetTypeOk() (*string, bool) {
 }
 
 // HasType returns a boolean if a field has been set.
-func (o *AntiFraudDecisionTransactionEvent) HasType() bool {
+func (o *AntiFraudDecisionEvent) HasType() bool {
 	if o != nil && o.Type != nil {
 		return true
 	}
@@ -74,12 +74,12 @@ func (o *AntiFraudDecisionTransactionEvent) HasType() bool {
 }
 
 // SetType gets a reference to the given string and assigns it to the Type field.
-func (o *AntiFraudDecisionTransactionEvent) SetType(v string) {
+func (o *AntiFraudDecisionEvent) SetType(v string) {
 	o.Type = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
-func (o *AntiFraudDecisionTransactionEvent) GetId() string {
+func (o *AntiFraudDecisionEvent) GetId() string {
 	if o == nil || o.Id == nil {
 		var ret string
 		return ret
@@ -89,7 +89,7 @@ func (o *AntiFraudDecisionTransactionEvent) GetId() string {
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AntiFraudDecisionTransactionEvent) GetIdOk() (*string, bool) {
+func (o *AntiFraudDecisionEvent) GetIdOk() (*string, bool) {
 	if o == nil || o.Id == nil {
 		return nil, false
 	}
@@ -97,7 +97,7 @@ func (o *AntiFraudDecisionTransactionEvent) GetIdOk() (*string, bool) {
 }
 
 // HasId returns a boolean if a field has been set.
-func (o *AntiFraudDecisionTransactionEvent) HasId() bool {
+func (o *AntiFraudDecisionEvent) HasId() bool {
 	if o != nil && o.Id != nil {
 		return true
 	}
@@ -106,12 +106,12 @@ func (o *AntiFraudDecisionTransactionEvent) HasId() bool {
 }
 
 // SetId gets a reference to the given string and assigns it to the Id field.
-func (o *AntiFraudDecisionTransactionEvent) SetId(v string) {
+func (o *AntiFraudDecisionEvent) SetId(v string) {
 	o.Id = &v
 }
 
 // GetName returns the Name field value if set, zero value otherwise.
-func (o *AntiFraudDecisionTransactionEvent) GetName() string {
+func (o *AntiFraudDecisionEvent) GetName() string {
 	if o == nil || o.Name == nil {
 		var ret string
 		return ret
@@ -121,7 +121,7 @@ func (o *AntiFraudDecisionTransactionEvent) GetName() string {
 
 // GetNameOk returns a tuple with the Name field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AntiFraudDecisionTransactionEvent) GetNameOk() (*string, bool) {
+func (o *AntiFraudDecisionEvent) GetNameOk() (*string, bool) {
 	if o == nil || o.Name == nil {
 		return nil, false
 	}
@@ -129,7 +129,7 @@ func (o *AntiFraudDecisionTransactionEvent) GetNameOk() (*string, bool) {
 }
 
 // HasName returns a boolean if a field has been set.
-func (o *AntiFraudDecisionTransactionEvent) HasName() bool {
+func (o *AntiFraudDecisionEvent) HasName() bool {
 	if o != nil && o.Name != nil {
 		return true
 	}
@@ -138,12 +138,12 @@ func (o *AntiFraudDecisionTransactionEvent) HasName() bool {
 }
 
 // SetName gets a reference to the given string and assigns it to the Name field.
-func (o *AntiFraudDecisionTransactionEvent) SetName(v string) {
+func (o *AntiFraudDecisionEvent) SetName(v string) {
 	o.Name = &v
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
-func (o *AntiFraudDecisionTransactionEvent) GetCreatedAt() time.Time {
+func (o *AntiFraudDecisionEvent) GetCreatedAt() time.Time {
 	if o == nil || o.CreatedAt == nil {
 		var ret time.Time
 		return ret
@@ -153,7 +153,7 @@ func (o *AntiFraudDecisionTransactionEvent) GetCreatedAt() time.Time {
 
 // GetCreatedAtOk returns a tuple with the CreatedAt field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AntiFraudDecisionTransactionEvent) GetCreatedAtOk() (*time.Time, bool) {
+func (o *AntiFraudDecisionEvent) GetCreatedAtOk() (*time.Time, bool) {
 	if o == nil || o.CreatedAt == nil {
 		return nil, false
 	}
@@ -161,7 +161,7 @@ func (o *AntiFraudDecisionTransactionEvent) GetCreatedAtOk() (*time.Time, bool) 
 }
 
 // HasCreatedAt returns a boolean if a field has been set.
-func (o *AntiFraudDecisionTransactionEvent) HasCreatedAt() bool {
+func (o *AntiFraudDecisionEvent) HasCreatedAt() bool {
 	if o != nil && o.CreatedAt != nil {
 		return true
 	}
@@ -170,14 +170,14 @@ func (o *AntiFraudDecisionTransactionEvent) HasCreatedAt() bool {
 }
 
 // SetCreatedAt gets a reference to the given time.Time and assigns it to the CreatedAt field.
-func (o *AntiFraudDecisionTransactionEvent) SetCreatedAt(v time.Time) {
+func (o *AntiFraudDecisionEvent) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
 // GetContext returns the Context field value if set, zero value otherwise.
-func (o *AntiFraudDecisionTransactionEvent) GetContext() AntiFraudDecisionTransactionEventContext {
+func (o *AntiFraudDecisionEvent) GetContext() AntiFraudDecisionEventContext {
 	if o == nil || o.Context == nil {
-		var ret AntiFraudDecisionTransactionEventContext
+		var ret AntiFraudDecisionEventContext
 		return ret
 	}
 	return *o.Context
@@ -185,7 +185,7 @@ func (o *AntiFraudDecisionTransactionEvent) GetContext() AntiFraudDecisionTransa
 
 // GetContextOk returns a tuple with the Context field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *AntiFraudDecisionTransactionEvent) GetContextOk() (*AntiFraudDecisionTransactionEventContext, bool) {
+func (o *AntiFraudDecisionEvent) GetContextOk() (*AntiFraudDecisionEventContext, bool) {
 	if o == nil || o.Context == nil {
 		return nil, false
 	}
@@ -193,7 +193,7 @@ func (o *AntiFraudDecisionTransactionEvent) GetContextOk() (*AntiFraudDecisionTr
 }
 
 // HasContext returns a boolean if a field has been set.
-func (o *AntiFraudDecisionTransactionEvent) HasContext() bool {
+func (o *AntiFraudDecisionEvent) HasContext() bool {
 	if o != nil && o.Context != nil {
 		return true
 	}
@@ -201,12 +201,12 @@ func (o *AntiFraudDecisionTransactionEvent) HasContext() bool {
 	return false
 }
 
-// SetContext gets a reference to the given AntiFraudDecisionTransactionEventContext and assigns it to the Context field.
-func (o *AntiFraudDecisionTransactionEvent) SetContext(v AntiFraudDecisionTransactionEventContext) {
+// SetContext gets a reference to the given AntiFraudDecisionEventContext and assigns it to the Context field.
+func (o *AntiFraudDecisionEvent) SetContext(v AntiFraudDecisionEventContext) {
 	o.Context = &v
 }
 
-func (o AntiFraudDecisionTransactionEvent) MarshalJSON() ([]byte, error) {
+func (o AntiFraudDecisionEvent) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
@@ -226,38 +226,38 @@ func (o AntiFraudDecisionTransactionEvent) MarshalJSON() ([]byte, error) {
 	return json.Marshal(toSerialize)
 }
 
-type NullableAntiFraudDecisionTransactionEvent struct {
-	value *AntiFraudDecisionTransactionEvent
+type NullableAntiFraudDecisionEvent struct {
+	value *AntiFraudDecisionEvent
 	isSet bool
 }
 
-func (v NullableAntiFraudDecisionTransactionEvent) Get() *AntiFraudDecisionTransactionEvent {
+func (v NullableAntiFraudDecisionEvent) Get() *AntiFraudDecisionEvent {
 	return v.value
 }
 
-func (v *NullableAntiFraudDecisionTransactionEvent) Set(val *AntiFraudDecisionTransactionEvent) {
+func (v *NullableAntiFraudDecisionEvent) Set(val *AntiFraudDecisionEvent) {
 	v.value = val
 	v.isSet = true
 }
 
-func (v NullableAntiFraudDecisionTransactionEvent) IsSet() bool {
+func (v NullableAntiFraudDecisionEvent) IsSet() bool {
 	return v.isSet
 }
 
-func (v *NullableAntiFraudDecisionTransactionEvent) Unset() {
+func (v *NullableAntiFraudDecisionEvent) Unset() {
 	v.value = nil
 	v.isSet = false
 }
 
-func NewNullableAntiFraudDecisionTransactionEvent(val *AntiFraudDecisionTransactionEvent) *NullableAntiFraudDecisionTransactionEvent {
-	return &NullableAntiFraudDecisionTransactionEvent{value: val, isSet: true}
+func NewNullableAntiFraudDecisionEvent(val *AntiFraudDecisionEvent) *NullableAntiFraudDecisionEvent {
+	return &NullableAntiFraudDecisionEvent{value: val, isSet: true}
 }
 
-func (v NullableAntiFraudDecisionTransactionEvent) MarshalJSON() ([]byte, error) {
+func (v NullableAntiFraudDecisionEvent) MarshalJSON() ([]byte, error) {
 	return json.Marshal(v.value)
 }
 
-func (v *NullableAntiFraudDecisionTransactionEvent) UnmarshalJSON(src []byte) error {
+func (v *NullableAntiFraudDecisionEvent) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
