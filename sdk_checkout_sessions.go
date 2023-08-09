@@ -11,6 +11,7 @@ type Gr4vyCheckoutSessionRequest CheckoutSessionRequest
 type Gr4vyCheckoutSession CheckoutSession
 type Gr4vyCheckoutSessionCreateRequest CheckoutSessionCreateRequest
 type Gr4vyCheckoutSessionUpdateRequest CheckoutSessionUpdateRequest
+type Gr4vyCartItem = CartItem
 
 func (c *Gr4vyClient) GetCheckoutSession(checkout_session_id string) (*Gr4vyCheckoutSession, *http.Response, error) {
 	client, err := GetClient(c)
