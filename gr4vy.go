@@ -91,6 +91,9 @@ func GetClient(c *Gr4vyClient) (*APIClient, error) {
 }
 
 func (c *Gr4vyClient) GetEmbedToken(params EmbedParams, checkout_session_id string) (string, error) {
+	if params.MerchantAccountId == "" {
+		params.MerchantAccountId = c.merchantAccountId
+	}
 	return getEmbedToken(c.privateKey, params, checkout_session_id)
 }
 
