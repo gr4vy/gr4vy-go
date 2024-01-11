@@ -18,6 +18,8 @@ import (
 
 // PaymentServiceToken A payment service token.
 type PaymentServiceToken struct {
+	// The type of this resource.
+	Type *string `json:"type,omitempty"`
 	// The unique ID of the token.
 	Id *string `json:"id,omitempty"`
 	// The unique ID of the payment method.
@@ -51,6 +53,38 @@ func NewPaymentServiceToken() *PaymentServiceToken {
 func NewPaymentServiceTokenWithDefaults() *PaymentServiceToken {
 	this := PaymentServiceToken{}
 	return &this
+}
+
+// GetType returns the Type field value if set, zero value otherwise.
+func (o *PaymentServiceToken) GetType() string {
+	if o == nil || o.Type == nil {
+		var ret string
+		return ret
+	}
+	return *o.Type
+}
+
+// GetTypeOk returns a tuple with the Type field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceToken) GetTypeOk() (*string, bool) {
+	if o == nil || o.Type == nil {
+		return nil, false
+	}
+	return o.Type, true
+}
+
+// HasType returns a boolean if a field has been set.
+func (o *PaymentServiceToken) HasType() bool {
+	if o != nil && o.Type != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetType gets a reference to the given string and assigns it to the Type field.
+func (o *PaymentServiceToken) SetType(v string) {
+	o.Type = &v
 }
 
 // GetId returns the Id field value if set, zero value otherwise.
@@ -321,6 +355,9 @@ func (o *PaymentServiceToken) SetUpdatedAt(v time.Time) {
 
 func (o PaymentServiceToken) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Type != nil {
+		toSerialize["type"] = o.Type
+	}
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}

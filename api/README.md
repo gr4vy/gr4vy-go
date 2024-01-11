@@ -81,6 +81,7 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *APILogsApi* | [**ListApiLogs**](docs/APILogsApi.md#listapilogs) | **Get** /api-logs | List API error logs
+*AccountUpdaterApi* | [**NewAccountUpdaterJob**](docs/AccountUpdaterApi.md#newaccountupdaterjob) | **Post** /account-updater/jobs | Create Account Updater job
 *AuditLogsApi* | [**ListAuditLogs**](docs/AuditLogsApi.md#listauditlogs) | **Get** /audit-logs | List audit logs
 *BuyersApi* | [**DeleteBuyer**](docs/BuyersApi.md#deletebuyer) | **Delete** /buyers/{buyer_id} | Delete buyer
 *BuyersApi* | [**DeleteBuyerShippingDetail**](docs/BuyersApi.md#deletebuyershippingdetail) | **Delete** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Delete buyer shipping detail
@@ -96,13 +97,25 @@ Class | Method | HTTP request | Description
 *CheckoutSessionsApi* | [**GetCheckoutSession**](docs/CheckoutSessionsApi.md#getcheckoutsession) | **Get** /checkout/sessions/{checkout_session_id} | Get checkout session
 *CheckoutSessionsApi* | [**NewCheckoutSession**](docs/CheckoutSessionsApi.md#newcheckoutsession) | **Post** /checkout/sessions | New checkout session
 *CheckoutSessionsApi* | [**UpdateCheckoutSession**](docs/CheckoutSessionsApi.md#updatecheckoutsession) | **Put** /checkout/sessions/{checkout_session_id} | Update checkout session
-*CheckoutSessionsApi* | [**UpdateCheckoutSessionFields**](docs/CheckoutSessionsApi.md#updatecheckoutsessionfields) | **Put** /checkout/sessions/{checkout_session_id}/fields | Update fields for checkout session
 *DigitalWalletsApi* | [**DeleteDigitalWallet**](docs/DigitalWalletsApi.md#deletedigitalwallet) | **Delete** /digital-wallets/{digital_wallet_id} | De-register digital wallet
 *DigitalWalletsApi* | [**GetDigitalWallet**](docs/DigitalWalletsApi.md#getdigitalwallet) | **Get** /digital-wallets/{digital_wallet_id} | Get digital wallet
 *DigitalWalletsApi* | [**ListDigitalWallets**](docs/DigitalWalletsApi.md#listdigitalwallets) | **Get** /digital-wallets | List digital wallets
 *DigitalWalletsApi* | [**NewDigitalWallet**](docs/DigitalWalletsApi.md#newdigitalwallet) | **Post** /digital-wallets | Register digital wallet
 *DigitalWalletsApi* | [**UpdateDigitalWallet**](docs/DigitalWalletsApi.md#updatedigitalwallet) | **Put** /digital-wallets/{digital_wallet_id} | Update digital wallet
+*GiftCardServiceDefinitionsApi* | [**GetGiftCardServiceDefinition**](docs/GiftCardServiceDefinitionsApi.md#getgiftcardservicedefinition) | **Get** /gift-card-service-definitions/{gift_card_service_definition_id} | Get gift card service definition
+*GiftCardServicesApi* | [**DeleteGiftCardService**](docs/GiftCardServicesApi.md#deletegiftcardservice) | **Delete** /gift-card-services/{gift_card_service_id} | Delete gift card service
+*GiftCardServicesApi* | [**GetGiftCardService**](docs/GiftCardServicesApi.md#getgiftcardservice) | **Get** /gift-card-services/{gift_card_service_id} | Get gift card service
+*GiftCardServicesApi* | [**NewGiftCardService**](docs/GiftCardServicesApi.md#newgiftcardservice) | **Post** /gift-card-services | New gift card service
+*GiftCardServicesApi* | [**UpdateGiftCardService**](docs/GiftCardServicesApi.md#updategiftcardservice) | **Put** /gift-card-services/{gift_card_service_id} | Update gift card service
+*GiftCardServicesApi* | [**VerifyGiftCardService**](docs/GiftCardServicesApi.md#verifygiftcardservice) | **Post** /gift-card-services/verify | Verify gift card service credentials
+*GiftCardsApi* | [**CheckGiftCardBalances**](docs/GiftCardsApi.md#checkgiftcardbalances) | **Post** /gift-cards/balances | Check gift card balances
+*GiftCardsApi* | [**DeleteGiftCard**](docs/GiftCardsApi.md#deletegiftcard) | **Delete** /gift-cards/{gift_card_id} | Delete gift card
+*GiftCardsApi* | [**GetGiftCard**](docs/GiftCardsApi.md#getgiftcard) | **Get** /gift-cards/{gift_card_id} | Get gift card
+*GiftCardsApi* | [**ListBuyerGiftCards**](docs/GiftCardsApi.md#listbuyergiftcards) | **Get** /buyers/gift-cards | List gift cards buyer
+*GiftCardsApi* | [**ListGiftCards**](docs/GiftCardsApi.md#listgiftcards) | **Get** /gift-cards | List gift cards
+*GiftCardsApi* | [**StoreGiftCard**](docs/GiftCardsApi.md#storegiftcard) | **Post** /gift-cards | Store gift card
 *MerchantAccountsApi* | [**DeleteMerchantAccuont**](docs/MerchantAccountsApi.md#deletemerchantaccuont) | **Delete** /merchant-accounts/{merchant_account_id} | Delete merchant account
+*MerchantAccountsApi* | [**GetMerchantAccount**](docs/MerchantAccountsApi.md#getmerchantaccount) | **Get** /merchant-accounts/{merchant_account_id} | Get merchant account
 *MerchantAccountsApi* | [**ListMerchantAccounts**](docs/MerchantAccountsApi.md#listmerchantaccounts) | **Get** /merchant-accounts | List merchant accounts
 *MerchantAccountsApi* | [**NewMerchantAccount**](docs/MerchantAccountsApi.md#newmerchantaccount) | **Post** /merchant-accounts | New merchant account
 *MerchantAccountsApi* | [**UpdateMerchantAccount**](docs/MerchantAccountsApi.md#updatemerchantaccount) | **Put** /merchant-accounts/{merchant_account_id} | Update merchant account
@@ -149,6 +162,7 @@ Class | Method | HTTP request | Description
 *TransactionsApi* | [**ListTransactions**](docs/TransactionsApi.md#listtransactions) | **Get** /transactions | List transactions
 *TransactionsApi* | [**NewRefund**](docs/TransactionsApi.md#newrefund) | **Post** /transactions/{transaction_id}/refunds | Refund transaction
 *TransactionsApi* | [**NewTransaction**](docs/TransactionsApi.md#newtransaction) | **Post** /transactions | New transaction
+*TransactionsApi* | [**RefundAll**](docs/TransactionsApi.md#refundall) | **Post** /transactions/{transaction_id}/refunds/all | Refund all instruments in a transaction
 *TransactionsApi* | [**VoidTransaction**](docs/TransactionsApi.md#voidtransaction) | **Post** /transactions/{transaction_id}/void | Void transaction
 *VaultForwardApi* | [**MakeVaultForward**](docs/VaultForwardApi.md#makevaultforward) | **Post** /vault-forward | Forward PCI data
 
@@ -157,6 +171,9 @@ Class | Method | HTTP request | Description
 
  - [APIKeyPairCreate](docs/APIKeyPairCreate.md)
  - [APIKeyPairUpdate](docs/APIKeyPairUpdate.md)
+ - [AccountUpdaterInquirySummary](docs/AccountUpdaterInquirySummary.md)
+ - [AccountUpdaterJob](docs/AccountUpdaterJob.md)
+ - [AccountUpdaterJobCreate](docs/AccountUpdaterJobCreate.md)
  - [Address](docs/Address.md)
  - [AntiFraudDecisionErrorEvent](docs/AntiFraudDecisionErrorEvent.md)
  - [AntiFraudDecisionErrorEventContext](docs/AntiFraudDecisionErrorEventContext.md)
@@ -167,6 +184,10 @@ Class | Method | HTTP request | Description
  - [AntiFraudServiceCreate](docs/AntiFraudServiceCreate.md)
  - [AntiFraudServiceUpdate](docs/AntiFraudServiceUpdate.md)
  - [AntiFraudServiceUpdateFields](docs/AntiFraudServiceUpdateFields.md)
+ - [AntiFraudTransactionStatusUpdateErrorEvent](docs/AntiFraudTransactionStatusUpdateErrorEvent.md)
+ - [AntiFraudTransactionStatusUpdateErrorEventContext](docs/AntiFraudTransactionStatusUpdateErrorEventContext.md)
+ - [AntiFraudTransactionStatusUpdateEvent](docs/AntiFraudTransactionStatusUpdateEvent.md)
+ - [AntiFraudTransactionStatusUpdateEventContext](docs/AntiFraudTransactionStatusUpdateEventContext.md)
  - [AntiFraudWebhookEvent](docs/AntiFraudWebhookEvent.md)
  - [AntiFraudWebhookEventContext](docs/AntiFraudWebhookEventContext.md)
  - [ApiLog](docs/ApiLog.md)
@@ -179,6 +200,8 @@ Class | Method | HTTP request | Description
  - [AuditLogResource](docs/AuditLogResource.md)
  - [AuditLogUser](docs/AuditLogUser.md)
  - [AuditLogs](docs/AuditLogs.md)
+ - [BINLookupRequest](docs/BINLookupRequest.md)
+ - [BINLookupRequestContext](docs/BINLookupRequestContext.md)
  - [BillingDetails](docs/BillingDetails.md)
  - [BillingDetailsRequest](docs/BillingDetailsRequest.md)
  - [BillingDetailsUpdateRequest](docs/BillingDetailsUpdateRequest.md)
@@ -195,10 +218,11 @@ Class | Method | HTTP request | Description
  - [CartItem](docs/CartItem.md)
  - [CheckoutSession](docs/CheckoutSession.md)
  - [CheckoutSessionCreateRequest](docs/CheckoutSessionCreateRequest.md)
- - [CheckoutSessionFieldsPaymentMethod](docs/CheckoutSessionFieldsPaymentMethod.md)
+ - [CheckoutSessionPaymentMethod](docs/CheckoutSessionPaymentMethod.md)
+ - [CheckoutSessionPaymentMethodDetails](docs/CheckoutSessionPaymentMethodDetails.md)
  - [CheckoutSessionRequest](docs/CheckoutSessionRequest.md)
- - [CheckoutSessionSecureFieldsUpdate](docs/CheckoutSessionSecureFieldsUpdate.md)
  - [CheckoutSessionUpdateRequest](docs/CheckoutSessionUpdateRequest.md)
+ - [ClickToPaySessionRequest](docs/ClickToPaySessionRequest.md)
  - [Connection](docs/Connection.md)
  - [ConnectionDefinition](docs/ConnectionDefinition.md)
  - [ConnectionDefinitions](docs/ConnectionDefinitions.md)
@@ -206,9 +230,28 @@ Class | Method | HTTP request | Description
  - [ConnectionOptionsAdyenCard](docs/ConnectionOptionsAdyenCard.md)
  - [ConnectionOptionsCybersourceAntiFraud](docs/ConnectionOptionsCybersourceAntiFraud.md)
  - [ConnectionOptionsForterAntiFraud](docs/ConnectionOptionsForterAntiFraud.md)
+ - [ConnectionOptionsForterAntiFraudAddress](docs/ConnectionOptionsForterAntiFraudAddress.md)
+ - [ConnectionOptionsForterAntiFraudBasicItemData](docs/ConnectionOptionsForterAntiFraudBasicItemData.md)
+ - [ConnectionOptionsForterAntiFraudBeneficiaries](docs/ConnectionOptionsForterAntiFraudBeneficiaries.md)
+ - [ConnectionOptionsForterAntiFraudCartItems](docs/ConnectionOptionsForterAntiFraudCartItems.md)
+ - [ConnectionOptionsForterAntiFraudComments](docs/ConnectionOptionsForterAntiFraudComments.md)
+ - [ConnectionOptionsForterAntiFraudDeliveryDetails](docs/ConnectionOptionsForterAntiFraudDeliveryDetails.md)
+ - [ConnectionOptionsForterAntiFraudPersonalDetails](docs/ConnectionOptionsForterAntiFraudPersonalDetails.md)
+ - [ConnectionOptionsForterAntiFraudPhone](docs/ConnectionOptionsForterAntiFraudPhone.md)
+ - [ConnectionOptionsForterAntiFraudTotalDiscount](docs/ConnectionOptionsForterAntiFraudTotalDiscount.md)
+ - [ConnectionOptionsForterAntiFraudTotalDiscountCouponDiscountAmount](docs/ConnectionOptionsForterAntiFraudTotalDiscountCouponDiscountAmount.md)
+ - [ConnectionOptionsPaypalPaypal](docs/ConnectionOptionsPaypalPaypal.md)
+ - [ConnectionOptionsPaypalPaypalAdditionalData](docs/ConnectionOptionsPaypalPaypalAdditionalData.md)
  - [Connections](docs/Connections.md)
  - [Cryptogram](docs/Cryptogram.md)
  - [DigitalWallet](docs/DigitalWallet.md)
+ - [DigitalWalletApplePayTokenDecrypted](docs/DigitalWalletApplePayTokenDecrypted.md)
+ - [DigitalWalletApplePayTokenDecryptedContext](docs/DigitalWalletApplePayTokenDecryptedContext.md)
+ - [DigitalWalletClickToPayFields](docs/DigitalWalletClickToPayFields.md)
+ - [DigitalWalletClickToPayTokenDecrypted](docs/DigitalWalletClickToPayTokenDecrypted.md)
+ - [DigitalWalletClickToPayTokenDecryptedContext](docs/DigitalWalletClickToPayTokenDecryptedContext.md)
+ - [DigitalWalletGooglePayTokenDecrypted](docs/DigitalWalletGooglePayTokenDecrypted.md)
+ - [DigitalWalletGooglePayTokenDecryptedContext](docs/DigitalWalletGooglePayTokenDecryptedContext.md)
  - [DigitalWalletRequest](docs/DigitalWalletRequest.md)
  - [DigitalWalletUpdate](docs/DigitalWalletUpdate.md)
  - [DigitalWallets](docs/DigitalWallets.md)
@@ -222,6 +265,35 @@ Class | Method | HTTP request | Description
  - [Error409DuplicateRecord](docs/Error409DuplicateRecord.md)
  - [ErrorDetail](docs/ErrorDetail.md)
  - [ErrorGeneric](docs/ErrorGeneric.md)
+ - [GiftCard](docs/GiftCard.md)
+ - [GiftCardBalanceNewRequest](docs/GiftCardBalanceNewRequest.md)
+ - [GiftCardBalanceRequest](docs/GiftCardBalanceRequest.md)
+ - [GiftCardBalanceStoredRequest](docs/GiftCardBalanceStoredRequest.md)
+ - [GiftCardBalancesRequest](docs/GiftCardBalancesRequest.md)
+ - [GiftCardRedemption](docs/GiftCardRedemption.md)
+ - [GiftCardRedemptionFailed](docs/GiftCardRedemptionFailed.md)
+ - [GiftCardRedemptionFailedContext](docs/GiftCardRedemptionFailedContext.md)
+ - [GiftCardRedemptionSucceeded](docs/GiftCardRedemptionSucceeded.md)
+ - [GiftCardRedemptionSucceededContext](docs/GiftCardRedemptionSucceededContext.md)
+ - [GiftCardRefundFailed](docs/GiftCardRefundFailed.md)
+ - [GiftCardRefundFailedContext](docs/GiftCardRefundFailedContext.md)
+ - [GiftCardRefundSucceeded](docs/GiftCardRefundSucceeded.md)
+ - [GiftCardService](docs/GiftCardService.md)
+ - [GiftCardServiceCreateRequest](docs/GiftCardServiceCreateRequest.md)
+ - [GiftCardServiceCreateRequestFields](docs/GiftCardServiceCreateRequestFields.md)
+ - [GiftCardServiceDefinition](docs/GiftCardServiceDefinition.md)
+ - [GiftCardServiceDefinitionFields](docs/GiftCardServiceDefinitionFields.md)
+ - [GiftCardServiceFields](docs/GiftCardServiceFields.md)
+ - [GiftCardServiceSnapshot](docs/GiftCardServiceSnapshot.md)
+ - [GiftCardServiceUpdateRequest](docs/GiftCardServiceUpdateRequest.md)
+ - [GiftCardServiceUpdateRequestFields](docs/GiftCardServiceUpdateRequestFields.md)
+ - [GiftCardServiceVerifyRequest](docs/GiftCardServiceVerifyRequest.md)
+ - [GiftCardServiceVerifyRequestFields](docs/GiftCardServiceVerifyRequestFields.md)
+ - [GiftCardSnapshot](docs/GiftCardSnapshot.md)
+ - [GiftCardStoreRequest](docs/GiftCardStoreRequest.md)
+ - [GiftCardSummary](docs/GiftCardSummary.md)
+ - [GiftCards](docs/GiftCards.md)
+ - [GiftCardsSummary](docs/GiftCardsSummary.md)
  - [GooglePayRequest](docs/GooglePayRequest.md)
  - [GooglePayRequestAssuranceDetails](docs/GooglePayRequestAssuranceDetails.md)
  - [GooglePaySessionRequest](docs/GooglePaySessionRequest.md)
@@ -235,6 +307,8 @@ Class | Method | HTTP request | Description
  - [NetworkToken](docs/NetworkToken.md)
  - [NetworkTokenRequest](docs/NetworkTokenRequest.md)
  - [NetworkTokens](docs/NetworkTokens.md)
+ - [PaymentConnectorExternalTransactionRequest](docs/PaymentConnectorExternalTransactionRequest.md)
+ - [PaymentConnectorExternalTransactionRequestContext](docs/PaymentConnectorExternalTransactionRequestContext.md)
  - [PaymentConnectorResponseTransactionAuthorizationFailedEvent](docs/PaymentConnectorResponseTransactionAuthorizationFailedEvent.md)
  - [PaymentConnectorResponseTransactionAuthorizationFailedEventContext](docs/PaymentConnectorResponseTransactionAuthorizationFailedEventContext.md)
  - [PaymentConnectorResponseTransactionAuthorizationSucceededEvent](docs/PaymentConnectorResponseTransactionAuthorizationSucceededEvent.md)
@@ -269,10 +343,8 @@ Class | Method | HTTP request | Description
  - [PaymentService](docs/PaymentService.md)
  - [PaymentServiceDefinition](docs/PaymentServiceDefinition.md)
  - [PaymentServiceDefinitionConfiguration](docs/PaymentServiceDefinitionConfiguration.md)
- - [PaymentServiceDefinitionFields](docs/PaymentServiceDefinitionFields.md)
  - [PaymentServiceDefinitionSupportedFeatures](docs/PaymentServiceDefinitionSupportedFeatures.md)
  - [PaymentServiceDefinitions](docs/PaymentServiceDefinitions.md)
- - [PaymentServiceFields](docs/PaymentServiceFields.md)
  - [PaymentServiceRequest](docs/PaymentServiceRequest.md)
  - [PaymentServiceRequestFields](docs/PaymentServiceRequestFields.md)
  - [PaymentServiceSnapshot](docs/PaymentServiceSnapshot.md)
@@ -332,12 +404,17 @@ Class | Method | HTTP request | Description
  - [ThreeDSecureSuccessEvent](docs/ThreeDSecureSuccessEvent.md)
  - [ThreeDSecureSuccessEventContext](docs/ThreeDSecureSuccessEventContext.md)
  - [ThreeDSecureSummary](docs/ThreeDSecureSummary.md)
+ - [ThreeDSecureV2](docs/ThreeDSecureV2.md)
  - [TokenizedRequest](docs/TokenizedRequest.md)
  - [Transaction](docs/Transaction.md)
  - [TransactionCaptureRequest](docs/TransactionCaptureRequest.md)
  - [TransactionCardRequest](docs/TransactionCardRequest.md)
  - [TransactionCheckoutSessionRequest](docs/TransactionCheckoutSessionRequest.md)
+ - [TransactionGiftCardNewRequest](docs/TransactionGiftCardNewRequest.md)
+ - [TransactionGiftCardRequest](docs/TransactionGiftCardRequest.md)
+ - [TransactionGiftCardStoredRequest](docs/TransactionGiftCardStoredRequest.md)
  - [TransactionHistoryEvent](docs/TransactionHistoryEvent.md)
+ - [TransactionHistoryEvents](docs/TransactionHistoryEvents.md)
  - [TransactionPaymentMethodRequest](docs/TransactionPaymentMethodRequest.md)
  - [TransactionRedirectRequest](docs/TransactionRedirectRequest.md)
  - [TransactionRefundRequest](docs/TransactionRefundRequest.md)

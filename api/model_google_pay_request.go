@@ -20,7 +20,7 @@ type GooglePayRequest struct {
 	// `googlepay`.
 	Method string `json:"method"`
 	// The encrypted (opaque) token returned by the Google Pay API that represents a payment method.
-	Token map[string]interface{} `json:"token"`
+	Token string `json:"token"`
 	AssuranceDetails NullableGooglePayRequestAssuranceDetails `json:"assurance_details,omitempty"`
 	// Name of the card holder.
 	CardHolderName NullableString `json:"card_holder_name,omitempty"`
@@ -32,7 +32,7 @@ type GooglePayRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewGooglePayRequest(method string, token map[string]interface{}) *GooglePayRequest {
+func NewGooglePayRequest(method string, token string) *GooglePayRequest {
 	this := GooglePayRequest{}
 	this.Method = method
 	this.Token = token
@@ -72,9 +72,9 @@ func (o *GooglePayRequest) SetMethod(v string) {
 }
 
 // GetToken returns the Token field value
-func (o *GooglePayRequest) GetToken() map[string]interface{} {
+func (o *GooglePayRequest) GetToken() string {
 	if o == nil {
-		var ret map[string]interface{}
+		var ret string
 		return ret
 	}
 
@@ -83,7 +83,7 @@ func (o *GooglePayRequest) GetToken() map[string]interface{} {
 
 // GetTokenOk returns a tuple with the Token field value
 // and a boolean to check if the value has been set.
-func (o *GooglePayRequest) GetTokenOk() (*map[string]interface{}, bool) {
+func (o *GooglePayRequest) GetTokenOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -91,7 +91,7 @@ func (o *GooglePayRequest) GetTokenOk() (*map[string]interface{}, bool) {
 }
 
 // SetToken sets field value
-func (o *GooglePayRequest) SetToken(v map[string]interface{}) {
+func (o *GooglePayRequest) SetToken(v string) {
 	o.Token = v
 }
 

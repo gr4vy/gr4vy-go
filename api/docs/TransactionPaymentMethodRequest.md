@@ -5,16 +5,17 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Method** | **string** | The method to use for this request. | 
-**Number** | Pointer to **string** | The 13-19 digit number for this credit card as it can be found on the front of the card. | [optional] 
-**ExpirationDate** | Pointer to **string** | The expiration date of the card, formatted &#x60;MM/YY&#x60;. If a card has been previously stored with us this value is optional. | [optional] 
-**SecurityCode** | Pointer to **string** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD. | [optional] 
+**Number** | Pointer to **NullableString** | The 13-19 digit number for this credit card as it can be found on the front of the card. | [optional] 
+**ExpirationDate** | Pointer to **NullableString** | The expiration date of the card, formatted &#x60;MM/YY&#x60;. If a card has been previously stored with us this value is optional. | [optional] 
+**SecurityCode** | Pointer to **NullableString** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the card against your own records. | [optional] 
-**BuyerId** | Pointer to **string** | The ID of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_external_identifier&#x60; field needs to be unset. | [optional] 
-**BuyerExternalIdentifier** | Pointer to **string** | The &#x60;external_identifier&#x60; of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_id&#x60; field needs to be unset. | [optional] 
-**RedirectUrl** | Pointer to **string** | The redirect URL to redirect a buyer to after they have authorized their transaction or payment method. This only applies to payment methods that require buyer approval. | [optional] 
-**Id** | Pointer to **string** | An identifier for a previously vaulted payment method. This id can represent any type of payment method. | [optional] 
-**Currency** | Pointer to **string** | The ISO-4217 currency code to store this payment method for. This is used to select the payment service to use.  This only applies to &#x60;redirect&#x60; mode payment methods like &#x60;gocardless&#x60;. | [optional] 
-**Country** | Pointer to **string** | The 2-letter ISO code of the country to store this payment method for. This is used to select the payment service to use.  This only applies to &#x60;redirect&#x60; mode payment methods like &#x60;gocardless&#x60;. | [optional] 
+**RedirectUrl** | Pointer to **NullableString** | The redirect URL to redirect a buyer to after they have authorized their transaction or payment method. This only applies to payment methods that require buyer approval. | [optional] 
+**Id** | Pointer to **NullableString** | An identifier for a previously tokenized payment method or checkout-session. This id can represent any type of payment method or checkout-session. | [optional] 
+**Currency** | Pointer to **NullableString** | The ISO-4217 currency code to use this payment method for. This is used to select the payment service to use. | [optional] 
+**Country** | Pointer to **NullableString** | The 2-letter ISO code of the country to use this payment method for. This is used to select the payment service to use. | [optional] 
+**Token** | Pointer to **map[string]interface{}** | The encrypted (opaque) token that was passed to the &#x60;onpaymentauthorized&#x60; callback by the Apple Pay integration. | [optional] 
+**AssuranceDetails** | Pointer to [**NullableGooglePayRequestAssuranceDetails**](GooglePayRequestAssuranceDetails.md) |  | [optional] 
+**CardHolderName** | Pointer to **NullableString** | Name of the card holder. | [optional] 
 
 ## Methods
 
@@ -80,6 +81,16 @@ SetNumber sets Number field to given value.
 
 HasNumber returns a boolean if a field has been set.
 
+### SetNumberNil
+
+`func (o *TransactionPaymentMethodRequest) SetNumberNil(b bool)`
+
+ SetNumberNil sets the value for Number to be an explicit nil
+
+### UnsetNumber
+`func (o *TransactionPaymentMethodRequest) UnsetNumber()`
+
+UnsetNumber ensures that no value is present for Number, not even an explicit nil
 ### GetExpirationDate
 
 `func (o *TransactionPaymentMethodRequest) GetExpirationDate() string`
@@ -105,6 +116,16 @@ SetExpirationDate sets ExpirationDate field to given value.
 
 HasExpirationDate returns a boolean if a field has been set.
 
+### SetExpirationDateNil
+
+`func (o *TransactionPaymentMethodRequest) SetExpirationDateNil(b bool)`
+
+ SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
+
+### UnsetExpirationDate
+`func (o *TransactionPaymentMethodRequest) UnsetExpirationDate()`
+
+UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
 ### GetSecurityCode
 
 `func (o *TransactionPaymentMethodRequest) GetSecurityCode() string`
@@ -130,6 +151,16 @@ SetSecurityCode sets SecurityCode field to given value.
 
 HasSecurityCode returns a boolean if a field has been set.
 
+### SetSecurityCodeNil
+
+`func (o *TransactionPaymentMethodRequest) SetSecurityCodeNil(b bool)`
+
+ SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+
+### UnsetSecurityCode
+`func (o *TransactionPaymentMethodRequest) UnsetSecurityCode()`
+
+UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
 ### GetExternalIdentifier
 
 `func (o *TransactionPaymentMethodRequest) GetExternalIdentifier() string`
@@ -165,56 +196,6 @@ HasExternalIdentifier returns a boolean if a field has been set.
 `func (o *TransactionPaymentMethodRequest) UnsetExternalIdentifier()`
 
 UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
-### GetBuyerId
-
-`func (o *TransactionPaymentMethodRequest) GetBuyerId() string`
-
-GetBuyerId returns the BuyerId field if non-nil, zero value otherwise.
-
-### GetBuyerIdOk
-
-`func (o *TransactionPaymentMethodRequest) GetBuyerIdOk() (*string, bool)`
-
-GetBuyerIdOk returns a tuple with the BuyerId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBuyerId
-
-`func (o *TransactionPaymentMethodRequest) SetBuyerId(v string)`
-
-SetBuyerId sets BuyerId field to given value.
-
-### HasBuyerId
-
-`func (o *TransactionPaymentMethodRequest) HasBuyerId() bool`
-
-HasBuyerId returns a boolean if a field has been set.
-
-### GetBuyerExternalIdentifier
-
-`func (o *TransactionPaymentMethodRequest) GetBuyerExternalIdentifier() string`
-
-GetBuyerExternalIdentifier returns the BuyerExternalIdentifier field if non-nil, zero value otherwise.
-
-### GetBuyerExternalIdentifierOk
-
-`func (o *TransactionPaymentMethodRequest) GetBuyerExternalIdentifierOk() (*string, bool)`
-
-GetBuyerExternalIdentifierOk returns a tuple with the BuyerExternalIdentifier field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBuyerExternalIdentifier
-
-`func (o *TransactionPaymentMethodRequest) SetBuyerExternalIdentifier(v string)`
-
-SetBuyerExternalIdentifier sets BuyerExternalIdentifier field to given value.
-
-### HasBuyerExternalIdentifier
-
-`func (o *TransactionPaymentMethodRequest) HasBuyerExternalIdentifier() bool`
-
-HasBuyerExternalIdentifier returns a boolean if a field has been set.
-
 ### GetRedirectUrl
 
 `func (o *TransactionPaymentMethodRequest) GetRedirectUrl() string`
@@ -240,6 +221,16 @@ SetRedirectUrl sets RedirectUrl field to given value.
 
 HasRedirectUrl returns a boolean if a field has been set.
 
+### SetRedirectUrlNil
+
+`func (o *TransactionPaymentMethodRequest) SetRedirectUrlNil(b bool)`
+
+ SetRedirectUrlNil sets the value for RedirectUrl to be an explicit nil
+
+### UnsetRedirectUrl
+`func (o *TransactionPaymentMethodRequest) UnsetRedirectUrl()`
+
+UnsetRedirectUrl ensures that no value is present for RedirectUrl, not even an explicit nil
 ### GetId
 
 `func (o *TransactionPaymentMethodRequest) GetId() string`
@@ -265,6 +256,16 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
+### SetIdNil
+
+`func (o *TransactionPaymentMethodRequest) SetIdNil(b bool)`
+
+ SetIdNil sets the value for Id to be an explicit nil
+
+### UnsetId
+`func (o *TransactionPaymentMethodRequest) UnsetId()`
+
+UnsetId ensures that no value is present for Id, not even an explicit nil
 ### GetCurrency
 
 `func (o *TransactionPaymentMethodRequest) GetCurrency() string`
@@ -290,6 +291,16 @@ SetCurrency sets Currency field to given value.
 
 HasCurrency returns a boolean if a field has been set.
 
+### SetCurrencyNil
+
+`func (o *TransactionPaymentMethodRequest) SetCurrencyNil(b bool)`
+
+ SetCurrencyNil sets the value for Currency to be an explicit nil
+
+### UnsetCurrency
+`func (o *TransactionPaymentMethodRequest) UnsetCurrency()`
+
+UnsetCurrency ensures that no value is present for Currency, not even an explicit nil
 ### GetCountry
 
 `func (o *TransactionPaymentMethodRequest) GetCountry() string`
@@ -315,6 +326,121 @@ SetCountry sets Country field to given value.
 
 HasCountry returns a boolean if a field has been set.
 
+### SetCountryNil
+
+`func (o *TransactionPaymentMethodRequest) SetCountryNil(b bool)`
+
+ SetCountryNil sets the value for Country to be an explicit nil
+
+### UnsetCountry
+`func (o *TransactionPaymentMethodRequest) UnsetCountry()`
+
+UnsetCountry ensures that no value is present for Country, not even an explicit nil
+### GetToken
+
+`func (o *TransactionPaymentMethodRequest) GetToken() map[string]interface{}`
+
+GetToken returns the Token field if non-nil, zero value otherwise.
+
+### GetTokenOk
+
+`func (o *TransactionPaymentMethodRequest) GetTokenOk() (*map[string]interface{}, bool)`
+
+GetTokenOk returns a tuple with the Token field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetToken
+
+`func (o *TransactionPaymentMethodRequest) SetToken(v map[string]interface{})`
+
+SetToken sets Token field to given value.
+
+### HasToken
+
+`func (o *TransactionPaymentMethodRequest) HasToken() bool`
+
+HasToken returns a boolean if a field has been set.
+
+### SetTokenNil
+
+`func (o *TransactionPaymentMethodRequest) SetTokenNil(b bool)`
+
+ SetTokenNil sets the value for Token to be an explicit nil
+
+### UnsetToken
+`func (o *TransactionPaymentMethodRequest) UnsetToken()`
+
+UnsetToken ensures that no value is present for Token, not even an explicit nil
+### GetAssuranceDetails
+
+`func (o *TransactionPaymentMethodRequest) GetAssuranceDetails() GooglePayRequestAssuranceDetails`
+
+GetAssuranceDetails returns the AssuranceDetails field if non-nil, zero value otherwise.
+
+### GetAssuranceDetailsOk
+
+`func (o *TransactionPaymentMethodRequest) GetAssuranceDetailsOk() (*GooglePayRequestAssuranceDetails, bool)`
+
+GetAssuranceDetailsOk returns a tuple with the AssuranceDetails field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAssuranceDetails
+
+`func (o *TransactionPaymentMethodRequest) SetAssuranceDetails(v GooglePayRequestAssuranceDetails)`
+
+SetAssuranceDetails sets AssuranceDetails field to given value.
+
+### HasAssuranceDetails
+
+`func (o *TransactionPaymentMethodRequest) HasAssuranceDetails() bool`
+
+HasAssuranceDetails returns a boolean if a field has been set.
+
+### SetAssuranceDetailsNil
+
+`func (o *TransactionPaymentMethodRequest) SetAssuranceDetailsNil(b bool)`
+
+ SetAssuranceDetailsNil sets the value for AssuranceDetails to be an explicit nil
+
+### UnsetAssuranceDetails
+`func (o *TransactionPaymentMethodRequest) UnsetAssuranceDetails()`
+
+UnsetAssuranceDetails ensures that no value is present for AssuranceDetails, not even an explicit nil
+### GetCardHolderName
+
+`func (o *TransactionPaymentMethodRequest) GetCardHolderName() string`
+
+GetCardHolderName returns the CardHolderName field if non-nil, zero value otherwise.
+
+### GetCardHolderNameOk
+
+`func (o *TransactionPaymentMethodRequest) GetCardHolderNameOk() (*string, bool)`
+
+GetCardHolderNameOk returns a tuple with the CardHolderName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardHolderName
+
+`func (o *TransactionPaymentMethodRequest) SetCardHolderName(v string)`
+
+SetCardHolderName sets CardHolderName field to given value.
+
+### HasCardHolderName
+
+`func (o *TransactionPaymentMethodRequest) HasCardHolderName() bool`
+
+HasCardHolderName returns a boolean if a field has been set.
+
+### SetCardHolderNameNil
+
+`func (o *TransactionPaymentMethodRequest) SetCardHolderNameNil(b bool)`
+
+ SetCardHolderNameNil sets the value for CardHolderName to be an explicit nil
+
+### UnsetCardHolderName
+`func (o *TransactionPaymentMethodRequest) UnsetCardHolderName()`
+
+UnsetCardHolderName ensures that no value is present for CardHolderName, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

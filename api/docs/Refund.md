@@ -7,11 +7,14 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;refund&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique ID of the refund. | [optional] 
 **TransactionId** | Pointer to **string** | The ID of the transaction associated with this refund. | [optional] 
+**PaymentServiceRefundId** | Pointer to **string** | The payment service&#39;s unique ID for the refund. | [optional] 
 **Status** | Pointer to **string** | The status of the refund. It may change over time as asynchronous processing events occur.  - &#x60;processing&#x60; - The refund is being processed. - &#x60;succeeded&#x60; - The refund was successful. - &#x60;declined&#x60; - The refund was declined by the underlying PSP. - &#x60;failed&#x60; - The refund could not proceed due to a technical issue. - &#x60;voided&#x60; - The refund was voided and will not proceed. | [optional] 
 **Currency** | Pointer to **string** | The currency code for this refund. Will always match that of the associated transaction. | [optional] 
 **Amount** | Pointer to **int32** | The amount requested for this refund. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this refund was created. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this refund was last updated. | [optional] 
+**TargetType** | Pointer to **string** | The type of the instrument that was refunded. | [optional] 
+**TargetId** | Pointer to **NullableString** | The optional ID of the instrument that was refunded. This may be &#x60;null&#x60; if the instrument was not stored. | [optional] 
 
 ## Methods
 
@@ -106,6 +109,31 @@ SetTransactionId sets TransactionId field to given value.
 `func (o *Refund) HasTransactionId() bool`
 
 HasTransactionId returns a boolean if a field has been set.
+
+### GetPaymentServiceRefundId
+
+`func (o *Refund) GetPaymentServiceRefundId() string`
+
+GetPaymentServiceRefundId returns the PaymentServiceRefundId field if non-nil, zero value otherwise.
+
+### GetPaymentServiceRefundIdOk
+
+`func (o *Refund) GetPaymentServiceRefundIdOk() (*string, bool)`
+
+GetPaymentServiceRefundIdOk returns a tuple with the PaymentServiceRefundId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentServiceRefundId
+
+`func (o *Refund) SetPaymentServiceRefundId(v string)`
+
+SetPaymentServiceRefundId sets PaymentServiceRefundId field to given value.
+
+### HasPaymentServiceRefundId
+
+`func (o *Refund) HasPaymentServiceRefundId() bool`
+
+HasPaymentServiceRefundId returns a boolean if a field has been set.
 
 ### GetStatus
 
@@ -232,6 +260,66 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 HasUpdatedAt returns a boolean if a field has been set.
 
+### GetTargetType
+
+`func (o *Refund) GetTargetType() string`
+
+GetTargetType returns the TargetType field if non-nil, zero value otherwise.
+
+### GetTargetTypeOk
+
+`func (o *Refund) GetTargetTypeOk() (*string, bool)`
+
+GetTargetTypeOk returns a tuple with the TargetType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetType
+
+`func (o *Refund) SetTargetType(v string)`
+
+SetTargetType sets TargetType field to given value.
+
+### HasTargetType
+
+`func (o *Refund) HasTargetType() bool`
+
+HasTargetType returns a boolean if a field has been set.
+
+### GetTargetId
+
+`func (o *Refund) GetTargetId() string`
+
+GetTargetId returns the TargetId field if non-nil, zero value otherwise.
+
+### GetTargetIdOk
+
+`func (o *Refund) GetTargetIdOk() (*string, bool)`
+
+GetTargetIdOk returns a tuple with the TargetId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTargetId
+
+`func (o *Refund) SetTargetId(v string)`
+
+SetTargetId sets TargetId field to given value.
+
+### HasTargetId
+
+`func (o *Refund) HasTargetId() bool`
+
+HasTargetId returns a boolean if a field has been set.
+
+### SetTargetIdNil
+
+`func (o *Refund) SetTargetIdNil(b bool)`
+
+ SetTargetIdNil sets the value for TargetId to be an explicit nil
+
+### UnsetTargetId
+`func (o *Refund) UnsetTargetId()`
+
+UnsetTargetId ensures that no value is present for TargetId, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

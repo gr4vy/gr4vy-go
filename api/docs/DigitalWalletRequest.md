@@ -6,7 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Provider** | **string** | The name of the digital wallet provider. | 
 **MerchantName** | **string** | The name of the merchant. This is used to register the merchant with a digital wallet provider and this name is not displayed to the buyer. | 
-**MerchantUrl** | Pointer to **NullableString** | The main URL of the merchant. This is used to register the merchant with a digital wallet provider and this URL is not displayed to the buyer. | [optional] [default to "null"]
+**MerchantUrl** | Pointer to **NullableString** | The main URL of the merchant. | [optional] [default to "null"]
+**MerchantDisplayName** | Pointer to **NullableString** | The consumer facing name of the merchant. | [optional] 
+**MerchantCountryCode** | Pointer to **NullableString** | The country code where the merchant is registered. | [optional] 
 **DomainNames** | **[]string** | The list of domain names that a digital wallet can be used on. To use a digital wallet on a website, the domain of the site is required to be in this list. | 
 **AcceptTermsAndConditions** | **bool** | The explicit acceptance of the digital wallet provider&#39;s terms and conditions by the merchant. Needs to be &#x60;true&#x60; to register a new digital wallet. | 
 
@@ -104,6 +106,76 @@ HasMerchantUrl returns a boolean if a field has been set.
 `func (o *DigitalWalletRequest) UnsetMerchantUrl()`
 
 UnsetMerchantUrl ensures that no value is present for MerchantUrl, not even an explicit nil
+### GetMerchantDisplayName
+
+`func (o *DigitalWalletRequest) GetMerchantDisplayName() string`
+
+GetMerchantDisplayName returns the MerchantDisplayName field if non-nil, zero value otherwise.
+
+### GetMerchantDisplayNameOk
+
+`func (o *DigitalWalletRequest) GetMerchantDisplayNameOk() (*string, bool)`
+
+GetMerchantDisplayNameOk returns a tuple with the MerchantDisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantDisplayName
+
+`func (o *DigitalWalletRequest) SetMerchantDisplayName(v string)`
+
+SetMerchantDisplayName sets MerchantDisplayName field to given value.
+
+### HasMerchantDisplayName
+
+`func (o *DigitalWalletRequest) HasMerchantDisplayName() bool`
+
+HasMerchantDisplayName returns a boolean if a field has been set.
+
+### SetMerchantDisplayNameNil
+
+`func (o *DigitalWalletRequest) SetMerchantDisplayNameNil(b bool)`
+
+ SetMerchantDisplayNameNil sets the value for MerchantDisplayName to be an explicit nil
+
+### UnsetMerchantDisplayName
+`func (o *DigitalWalletRequest) UnsetMerchantDisplayName()`
+
+UnsetMerchantDisplayName ensures that no value is present for MerchantDisplayName, not even an explicit nil
+### GetMerchantCountryCode
+
+`func (o *DigitalWalletRequest) GetMerchantCountryCode() string`
+
+GetMerchantCountryCode returns the MerchantCountryCode field if non-nil, zero value otherwise.
+
+### GetMerchantCountryCodeOk
+
+`func (o *DigitalWalletRequest) GetMerchantCountryCodeOk() (*string, bool)`
+
+GetMerchantCountryCodeOk returns a tuple with the MerchantCountryCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantCountryCode
+
+`func (o *DigitalWalletRequest) SetMerchantCountryCode(v string)`
+
+SetMerchantCountryCode sets MerchantCountryCode field to given value.
+
+### HasMerchantCountryCode
+
+`func (o *DigitalWalletRequest) HasMerchantCountryCode() bool`
+
+HasMerchantCountryCode returns a boolean if a field has been set.
+
+### SetMerchantCountryCodeNil
+
+`func (o *DigitalWalletRequest) SetMerchantCountryCodeNil(b bool)`
+
+ SetMerchantCountryCodeNil sets the value for MerchantCountryCode to be an explicit nil
+
+### UnsetMerchantCountryCode
+`func (o *DigitalWalletRequest) UnsetMerchantCountryCode()`
+
+UnsetMerchantCountryCode ensures that no value is present for MerchantCountryCode, not even an explicit nil
 ### GetDomainNames
 
 `func (o *DigitalWalletRequest) GetDomainNames() []string`

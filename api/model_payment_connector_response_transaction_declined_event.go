@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// PaymentConnectorResponseTransactionDeclinedEvent This event logs the exact details parsed details for a transaction as reported by our connector when the capture is declined.
+// PaymentConnectorResponseTransactionDeclinedEvent This event logs the exact details parsed details for a declined transaction as reported by our connector.
 type PaymentConnectorResponseTransactionDeclinedEvent struct {
 	// The type of this resource. Is always `transaction-event`.
 	Type *string `json:"type,omitempty"`

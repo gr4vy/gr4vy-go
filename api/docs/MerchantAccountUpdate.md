@@ -14,6 +14,9 @@ Name | Type | Description | Notes
 **AmexNetworkTokensAppId** | Pointer to **NullableString** | Application ID provided for Amex after onboarding to use Network Tokens. The application ID must be unique across all schemes and merchant accounts. | [optional] 
 **MastercardNetworkTokensRequestorId** | Pointer to **NullableString** | Requestor ID provided for Mastercard after onboarding to use Network Tokens. The requestor ID must be unique across all schemes and merchant accounts. | [optional] 
 **MastercardNetworkTokensAppId** | Pointer to **NullableString** | Application ID provided for Mastercard after onboarding to use Network Tokens. The application ID must be unique across all schemes and merchant accounts. | [optional] 
+**LoonClientKey** | Pointer to **NullableString** | Client key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service used by Gr4vy.  * If the field is not set, the Account Updater service configuration is not updated. * If the field is set to &#x60;null&#x60;, the Account Updater service is disabled. * If the field is set to &#x60;null&#x60;, the other &#x60;loon_*&#x60; fields must be set to &#x60;null&#x60; as well. | [optional] 
+**LoonSecretKey** | Pointer to **NullableString** | Secret key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service used by Gr4vy.  * If the field is not set, the Account Updater service configuration is not updated. * If the field is set to &#x60;null&#x60;, the Account Updater service is disabled. * If the field is set to &#x60;null&#x60;, the other &#x60;loon_*&#x60; fields must be set to &#x60;null&#x60; as well. | [optional] 
+**LoonAcceptedSchemes** | Pointer to **[]string** | Card schemes accepted when creating jobs using this set of Loon API keys. Loon is the Account Updater service used by Gr4vy.  * If the field is not set, the Account Updater service configuration is not updated. * If the field is set to &#x60;null&#x60;, the Account Updater service is disabled. * If the field is set to &#x60;null&#x60;, the other &#x60;loon_*&#x60; fields must be set to &#x60;null&#x60; as well. | [optional] 
 
 ## Methods
 
@@ -374,6 +377,111 @@ HasMastercardNetworkTokensAppId returns a boolean if a field has been set.
 `func (o *MerchantAccountUpdate) UnsetMastercardNetworkTokensAppId()`
 
 UnsetMastercardNetworkTokensAppId ensures that no value is present for MastercardNetworkTokensAppId, not even an explicit nil
+### GetLoonClientKey
+
+`func (o *MerchantAccountUpdate) GetLoonClientKey() string`
+
+GetLoonClientKey returns the LoonClientKey field if non-nil, zero value otherwise.
+
+### GetLoonClientKeyOk
+
+`func (o *MerchantAccountUpdate) GetLoonClientKeyOk() (*string, bool)`
+
+GetLoonClientKeyOk returns a tuple with the LoonClientKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoonClientKey
+
+`func (o *MerchantAccountUpdate) SetLoonClientKey(v string)`
+
+SetLoonClientKey sets LoonClientKey field to given value.
+
+### HasLoonClientKey
+
+`func (o *MerchantAccountUpdate) HasLoonClientKey() bool`
+
+HasLoonClientKey returns a boolean if a field has been set.
+
+### SetLoonClientKeyNil
+
+`func (o *MerchantAccountUpdate) SetLoonClientKeyNil(b bool)`
+
+ SetLoonClientKeyNil sets the value for LoonClientKey to be an explicit nil
+
+### UnsetLoonClientKey
+`func (o *MerchantAccountUpdate) UnsetLoonClientKey()`
+
+UnsetLoonClientKey ensures that no value is present for LoonClientKey, not even an explicit nil
+### GetLoonSecretKey
+
+`func (o *MerchantAccountUpdate) GetLoonSecretKey() string`
+
+GetLoonSecretKey returns the LoonSecretKey field if non-nil, zero value otherwise.
+
+### GetLoonSecretKeyOk
+
+`func (o *MerchantAccountUpdate) GetLoonSecretKeyOk() (*string, bool)`
+
+GetLoonSecretKeyOk returns a tuple with the LoonSecretKey field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoonSecretKey
+
+`func (o *MerchantAccountUpdate) SetLoonSecretKey(v string)`
+
+SetLoonSecretKey sets LoonSecretKey field to given value.
+
+### HasLoonSecretKey
+
+`func (o *MerchantAccountUpdate) HasLoonSecretKey() bool`
+
+HasLoonSecretKey returns a boolean if a field has been set.
+
+### SetLoonSecretKeyNil
+
+`func (o *MerchantAccountUpdate) SetLoonSecretKeyNil(b bool)`
+
+ SetLoonSecretKeyNil sets the value for LoonSecretKey to be an explicit nil
+
+### UnsetLoonSecretKey
+`func (o *MerchantAccountUpdate) UnsetLoonSecretKey()`
+
+UnsetLoonSecretKey ensures that no value is present for LoonSecretKey, not even an explicit nil
+### GetLoonAcceptedSchemes
+
+`func (o *MerchantAccountUpdate) GetLoonAcceptedSchemes() []string`
+
+GetLoonAcceptedSchemes returns the LoonAcceptedSchemes field if non-nil, zero value otherwise.
+
+### GetLoonAcceptedSchemesOk
+
+`func (o *MerchantAccountUpdate) GetLoonAcceptedSchemesOk() (*[]string, bool)`
+
+GetLoonAcceptedSchemesOk returns a tuple with the LoonAcceptedSchemes field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLoonAcceptedSchemes
+
+`func (o *MerchantAccountUpdate) SetLoonAcceptedSchemes(v []string)`
+
+SetLoonAcceptedSchemes sets LoonAcceptedSchemes field to given value.
+
+### HasLoonAcceptedSchemes
+
+`func (o *MerchantAccountUpdate) HasLoonAcceptedSchemes() bool`
+
+HasLoonAcceptedSchemes returns a boolean if a field has been set.
+
+### SetLoonAcceptedSchemesNil
+
+`func (o *MerchantAccountUpdate) SetLoonAcceptedSchemesNil(b bool)`
+
+ SetLoonAcceptedSchemesNil sets the value for LoonAcceptedSchemes to be an explicit nil
+
+### UnsetLoonAcceptedSchemes
+`func (o *MerchantAccountUpdate) UnsetLoonAcceptedSchemes()`
+
+UnsetLoonAcceptedSchemes ensures that no value is present for LoonAcceptedSchemes, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -20,25 +20,26 @@ type TransactionPaymentMethodRequest struct {
 	// The method to use for this request.
 	Method string `json:"method"`
 	// The 13-19 digit number for this credit card as it can be found on the front of the card.
-	Number *string `json:"number,omitempty"`
+	Number NullableString `json:"number,omitempty"`
 	// The expiration date of the card, formatted `MM/YY`. If a card has been previously stored with us this value is optional.
-	ExpirationDate *string `json:"expiration_date,omitempty"`
+	ExpirationDate NullableString `json:"expiration_date,omitempty"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
-	SecurityCode *string `json:"security_code,omitempty"`
+	SecurityCode NullableString `json:"security_code,omitempty"`
 	// An external identifier that can be used to match the card against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
-	// The ID of the buyer to associate this payment method to. If this field is provided then the `buyer_external_identifier` field needs to be unset.
-	BuyerId *string `json:"buyer_id,omitempty"`
-	// The `external_identifier` of the buyer to associate this payment method to. If this field is provided then the `buyer_id` field needs to be unset.
-	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 	// The redirect URL to redirect a buyer to after they have authorized their transaction or payment method. This only applies to payment methods that require buyer approval.
-	RedirectUrl *string `json:"redirect_url,omitempty"`
-	// An identifier for a previously vaulted payment method. This id can represent any type of payment method.
-	Id *string `json:"id,omitempty"`
-	// The ISO-4217 currency code to store this payment method for. This is used to select the payment service to use.  This only applies to `redirect` mode payment methods like `gocardless`.
-	Currency *string `json:"currency,omitempty"`
-	// The 2-letter ISO code of the country to store this payment method for. This is used to select the payment service to use.  This only applies to `redirect` mode payment methods like `gocardless`.
-	Country *string `json:"country,omitempty"`
+	RedirectUrl NullableString `json:"redirect_url,omitempty"`
+	// An identifier for a previously tokenized payment method or checkout-session. This id can represent any type of payment method or checkout-session.
+	Id NullableString `json:"id,omitempty"`
+	// The ISO-4217 currency code to use this payment method for. This is used to select the payment service to use.
+	Currency NullableString `json:"currency,omitempty"`
+	// The 2-letter ISO code of the country to use this payment method for. This is used to select the payment service to use.
+	Country NullableString `json:"country,omitempty"`
+	// The encrypted (opaque) token that was passed to the `onpaymentauthorized` callback by the Apple Pay integration.
+	Token map[string]interface{} `json:"token,omitempty"`
+	AssuranceDetails NullableGooglePayRequestAssuranceDetails `json:"assurance_details,omitempty"`
+	// Name of the card holder.
+	CardHolderName NullableString `json:"card_holder_name,omitempty"`
 }
 
 // NewTransactionPaymentMethodRequest instantiates a new TransactionPaymentMethodRequest object
@@ -83,100 +84,130 @@ func (o *TransactionPaymentMethodRequest) SetMethod(v string) {
 	o.Method = v
 }
 
-// GetNumber returns the Number field value if set, zero value otherwise.
+// GetNumber returns the Number field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionPaymentMethodRequest) GetNumber() string {
-	if o == nil || o.Number == nil {
+	if o == nil || o.Number.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Number
+	return *o.Number.Get()
 }
 
 // GetNumberOk returns a tuple with the Number field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionPaymentMethodRequest) GetNumberOk() (*string, bool) {
-	if o == nil || o.Number == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Number, true
+	return o.Number.Get(), o.Number.IsSet()
 }
 
 // HasNumber returns a boolean if a field has been set.
 func (o *TransactionPaymentMethodRequest) HasNumber() bool {
-	if o != nil && o.Number != nil {
+	if o != nil && o.Number.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetNumber gets a reference to the given string and assigns it to the Number field.
+// SetNumber gets a reference to the given NullableString and assigns it to the Number field.
 func (o *TransactionPaymentMethodRequest) SetNumber(v string) {
-	o.Number = &v
+	o.Number.Set(&v)
+}
+// SetNumberNil sets the value for Number to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetNumberNil() {
+	o.Number.Set(nil)
 }
 
-// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise.
+// UnsetNumber ensures that no value is present for Number, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetNumber() {
+	o.Number.Unset()
+}
+
+// GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionPaymentMethodRequest) GetExpirationDate() string {
-	if o == nil || o.ExpirationDate == nil {
+	if o == nil || o.ExpirationDate.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.ExpirationDate
+	return *o.ExpirationDate.Get()
 }
 
 // GetExpirationDateOk returns a tuple with the ExpirationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionPaymentMethodRequest) GetExpirationDateOk() (*string, bool) {
-	if o == nil || o.ExpirationDate == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.ExpirationDate, true
+	return o.ExpirationDate.Get(), o.ExpirationDate.IsSet()
 }
 
 // HasExpirationDate returns a boolean if a field has been set.
 func (o *TransactionPaymentMethodRequest) HasExpirationDate() bool {
-	if o != nil && o.ExpirationDate != nil {
+	if o != nil && o.ExpirationDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetExpirationDate gets a reference to the given string and assigns it to the ExpirationDate field.
+// SetExpirationDate gets a reference to the given NullableString and assigns it to the ExpirationDate field.
 func (o *TransactionPaymentMethodRequest) SetExpirationDate(v string) {
-	o.ExpirationDate = &v
+	o.ExpirationDate.Set(&v)
+}
+// SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetExpirationDateNil() {
+	o.ExpirationDate.Set(nil)
 }
 
-// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise.
+// UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetExpirationDate() {
+	o.ExpirationDate.Unset()
+}
+
+// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionPaymentMethodRequest) GetSecurityCode() string {
-	if o == nil || o.SecurityCode == nil {
+	if o == nil || o.SecurityCode.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.SecurityCode
+	return *o.SecurityCode.Get()
 }
 
 // GetSecurityCodeOk returns a tuple with the SecurityCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionPaymentMethodRequest) GetSecurityCodeOk() (*string, bool) {
-	if o == nil || o.SecurityCode == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.SecurityCode, true
+	return o.SecurityCode.Get(), o.SecurityCode.IsSet()
 }
 
 // HasSecurityCode returns a boolean if a field has been set.
 func (o *TransactionPaymentMethodRequest) HasSecurityCode() bool {
-	if o != nil && o.SecurityCode != nil {
+	if o != nil && o.SecurityCode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecurityCode gets a reference to the given string and assigns it to the SecurityCode field.
+// SetSecurityCode gets a reference to the given NullableString and assigns it to the SecurityCode field.
 func (o *TransactionPaymentMethodRequest) SetSecurityCode(v string) {
-	o.SecurityCode = &v
+	o.SecurityCode.Set(&v)
+}
+// SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetSecurityCodeNil() {
+	o.SecurityCode.Set(nil)
+}
+
+// UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetSecurityCode() {
+	o.SecurityCode.Unset()
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -221,196 +252,289 @@ func (o *TransactionPaymentMethodRequest) UnsetExternalIdentifier() {
 	o.ExternalIdentifier.Unset()
 }
 
-// GetBuyerId returns the BuyerId field value if set, zero value otherwise.
-func (o *TransactionPaymentMethodRequest) GetBuyerId() string {
-	if o == nil || o.BuyerId == nil {
-		var ret string
-		return ret
-	}
-	return *o.BuyerId
-}
-
-// GetBuyerIdOk returns a tuple with the BuyerId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionPaymentMethodRequest) GetBuyerIdOk() (*string, bool) {
-	if o == nil || o.BuyerId == nil {
-		return nil, false
-	}
-	return o.BuyerId, true
-}
-
-// HasBuyerId returns a boolean if a field has been set.
-func (o *TransactionPaymentMethodRequest) HasBuyerId() bool {
-	if o != nil && o.BuyerId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBuyerId gets a reference to the given string and assigns it to the BuyerId field.
-func (o *TransactionPaymentMethodRequest) SetBuyerId(v string) {
-	o.BuyerId = &v
-}
-
-// GetBuyerExternalIdentifier returns the BuyerExternalIdentifier field value if set, zero value otherwise.
-func (o *TransactionPaymentMethodRequest) GetBuyerExternalIdentifier() string {
-	if o == nil || o.BuyerExternalIdentifier == nil {
-		var ret string
-		return ret
-	}
-	return *o.BuyerExternalIdentifier
-}
-
-// GetBuyerExternalIdentifierOk returns a tuple with the BuyerExternalIdentifier field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionPaymentMethodRequest) GetBuyerExternalIdentifierOk() (*string, bool) {
-	if o == nil || o.BuyerExternalIdentifier == nil {
-		return nil, false
-	}
-	return o.BuyerExternalIdentifier, true
-}
-
-// HasBuyerExternalIdentifier returns a boolean if a field has been set.
-func (o *TransactionPaymentMethodRequest) HasBuyerExternalIdentifier() bool {
-	if o != nil && o.BuyerExternalIdentifier != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBuyerExternalIdentifier gets a reference to the given string and assigns it to the BuyerExternalIdentifier field.
-func (o *TransactionPaymentMethodRequest) SetBuyerExternalIdentifier(v string) {
-	o.BuyerExternalIdentifier = &v
-}
-
-// GetRedirectUrl returns the RedirectUrl field value if set, zero value otherwise.
+// GetRedirectUrl returns the RedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionPaymentMethodRequest) GetRedirectUrl() string {
-	if o == nil || o.RedirectUrl == nil {
+	if o == nil || o.RedirectUrl.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.RedirectUrl
+	return *o.RedirectUrl.Get()
 }
 
 // GetRedirectUrlOk returns a tuple with the RedirectUrl field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionPaymentMethodRequest) GetRedirectUrlOk() (*string, bool) {
-	if o == nil || o.RedirectUrl == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.RedirectUrl, true
+	return o.RedirectUrl.Get(), o.RedirectUrl.IsSet()
 }
 
 // HasRedirectUrl returns a boolean if a field has been set.
 func (o *TransactionPaymentMethodRequest) HasRedirectUrl() bool {
-	if o != nil && o.RedirectUrl != nil {
+	if o != nil && o.RedirectUrl.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetRedirectUrl gets a reference to the given string and assigns it to the RedirectUrl field.
+// SetRedirectUrl gets a reference to the given NullableString and assigns it to the RedirectUrl field.
 func (o *TransactionPaymentMethodRequest) SetRedirectUrl(v string) {
-	o.RedirectUrl = &v
+	o.RedirectUrl.Set(&v)
+}
+// SetRedirectUrlNil sets the value for RedirectUrl to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetRedirectUrlNil() {
+	o.RedirectUrl.Set(nil)
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// UnsetRedirectUrl ensures that no value is present for RedirectUrl, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetRedirectUrl() {
+	o.RedirectUrl.Unset()
+}
+
+// GetId returns the Id field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionPaymentMethodRequest) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || o.Id.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+	return *o.Id.Get()
 }
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionPaymentMethodRequest) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Id, true
+	return o.Id.Get(), o.Id.IsSet()
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *TransactionPaymentMethodRequest) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && o.Id.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId gets a reference to the given NullableString and assigns it to the Id field.
 func (o *TransactionPaymentMethodRequest) SetId(v string) {
-	o.Id = &v
+	o.Id.Set(&v)
+}
+// SetIdNil sets the value for Id to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetIdNil() {
+	o.Id.Set(nil)
 }
 
-// GetCurrency returns the Currency field value if set, zero value otherwise.
+// UnsetId ensures that no value is present for Id, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetId() {
+	o.Id.Unset()
+}
+
+// GetCurrency returns the Currency field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionPaymentMethodRequest) GetCurrency() string {
-	if o == nil || o.Currency == nil {
+	if o == nil || o.Currency.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Currency
+	return *o.Currency.Get()
 }
 
 // GetCurrencyOk returns a tuple with the Currency field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionPaymentMethodRequest) GetCurrencyOk() (*string, bool) {
-	if o == nil || o.Currency == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Currency, true
+	return o.Currency.Get(), o.Currency.IsSet()
 }
 
 // HasCurrency returns a boolean if a field has been set.
 func (o *TransactionPaymentMethodRequest) HasCurrency() bool {
-	if o != nil && o.Currency != nil {
+	if o != nil && o.Currency.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCurrency gets a reference to the given string and assigns it to the Currency field.
+// SetCurrency gets a reference to the given NullableString and assigns it to the Currency field.
 func (o *TransactionPaymentMethodRequest) SetCurrency(v string) {
-	o.Currency = &v
+	o.Currency.Set(&v)
+}
+// SetCurrencyNil sets the value for Currency to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetCurrencyNil() {
+	o.Currency.Set(nil)
 }
 
-// GetCountry returns the Country field value if set, zero value otherwise.
+// UnsetCurrency ensures that no value is present for Currency, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetCurrency() {
+	o.Currency.Unset()
+}
+
+// GetCountry returns the Country field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionPaymentMethodRequest) GetCountry() string {
-	if o == nil || o.Country == nil {
+	if o == nil || o.Country.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Country
+	return *o.Country.Get()
 }
 
 // GetCountryOk returns a tuple with the Country field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionPaymentMethodRequest) GetCountryOk() (*string, bool) {
-	if o == nil || o.Country == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Country, true
+	return o.Country.Get(), o.Country.IsSet()
 }
 
 // HasCountry returns a boolean if a field has been set.
 func (o *TransactionPaymentMethodRequest) HasCountry() bool {
-	if o != nil && o.Country != nil {
+	if o != nil && o.Country.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCountry gets a reference to the given string and assigns it to the Country field.
+// SetCountry gets a reference to the given NullableString and assigns it to the Country field.
 func (o *TransactionPaymentMethodRequest) SetCountry(v string) {
-	o.Country = &v
+	o.Country.Set(&v)
+}
+// SetCountryNil sets the value for Country to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetCountryNil() {
+	o.Country.Set(nil)
+}
+
+// UnsetCountry ensures that no value is present for Country, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetCountry() {
+	o.Country.Unset()
+}
+
+// GetToken returns the Token field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionPaymentMethodRequest) GetToken() map[string]interface{} {
+	if o == nil  {
+		var ret map[string]interface{}
+		return ret
+	}
+	return o.Token
+}
+
+// GetTokenOk returns a tuple with the Token field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionPaymentMethodRequest) GetTokenOk() (*map[string]interface{}, bool) {
+	if o == nil || o.Token == nil {
+		return nil, false
+	}
+	return &o.Token, true
+}
+
+// HasToken returns a boolean if a field has been set.
+func (o *TransactionPaymentMethodRequest) HasToken() bool {
+	if o != nil && o.Token != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetToken gets a reference to the given map[string]interface{} and assigns it to the Token field.
+func (o *TransactionPaymentMethodRequest) SetToken(v map[string]interface{}) {
+	o.Token = v
+}
+
+// GetAssuranceDetails returns the AssuranceDetails field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionPaymentMethodRequest) GetAssuranceDetails() GooglePayRequestAssuranceDetails {
+	if o == nil || o.AssuranceDetails.Get() == nil {
+		var ret GooglePayRequestAssuranceDetails
+		return ret
+	}
+	return *o.AssuranceDetails.Get()
+}
+
+// GetAssuranceDetailsOk returns a tuple with the AssuranceDetails field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionPaymentMethodRequest) GetAssuranceDetailsOk() (*GooglePayRequestAssuranceDetails, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AssuranceDetails.Get(), o.AssuranceDetails.IsSet()
+}
+
+// HasAssuranceDetails returns a boolean if a field has been set.
+func (o *TransactionPaymentMethodRequest) HasAssuranceDetails() bool {
+	if o != nil && o.AssuranceDetails.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAssuranceDetails gets a reference to the given NullableGooglePayRequestAssuranceDetails and assigns it to the AssuranceDetails field.
+func (o *TransactionPaymentMethodRequest) SetAssuranceDetails(v GooglePayRequestAssuranceDetails) {
+	o.AssuranceDetails.Set(&v)
+}
+// SetAssuranceDetailsNil sets the value for AssuranceDetails to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetAssuranceDetailsNil() {
+	o.AssuranceDetails.Set(nil)
+}
+
+// UnsetAssuranceDetails ensures that no value is present for AssuranceDetails, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetAssuranceDetails() {
+	o.AssuranceDetails.Unset()
+}
+
+// GetCardHolderName returns the CardHolderName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionPaymentMethodRequest) GetCardHolderName() string {
+	if o == nil || o.CardHolderName.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardHolderName.Get()
+}
+
+// GetCardHolderNameOk returns a tuple with the CardHolderName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionPaymentMethodRequest) GetCardHolderNameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CardHolderName.Get(), o.CardHolderName.IsSet()
+}
+
+// HasCardHolderName returns a boolean if a field has been set.
+func (o *TransactionPaymentMethodRequest) HasCardHolderName() bool {
+	if o != nil && o.CardHolderName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCardHolderName gets a reference to the given NullableString and assigns it to the CardHolderName field.
+func (o *TransactionPaymentMethodRequest) SetCardHolderName(v string) {
+	o.CardHolderName.Set(&v)
+}
+// SetCardHolderNameNil sets the value for CardHolderName to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetCardHolderNameNil() {
+	o.CardHolderName.Set(nil)
+}
+
+// UnsetCardHolderName ensures that no value is present for CardHolderName, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetCardHolderName() {
+	o.CardHolderName.Unset()
 }
 
 func (o TransactionPaymentMethodRequest) MarshalJSON() ([]byte, error) {
@@ -418,35 +542,38 @@ func (o TransactionPaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["method"] = o.Method
 	}
-	if o.Number != nil {
-		toSerialize["number"] = o.Number
+	if o.Number.IsSet() {
+		toSerialize["number"] = o.Number.Get()
 	}
-	if o.ExpirationDate != nil {
-		toSerialize["expiration_date"] = o.ExpirationDate
+	if o.ExpirationDate.IsSet() {
+		toSerialize["expiration_date"] = o.ExpirationDate.Get()
 	}
-	if o.SecurityCode != nil {
-		toSerialize["security_code"] = o.SecurityCode
+	if o.SecurityCode.IsSet() {
+		toSerialize["security_code"] = o.SecurityCode.Get()
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
 	}
-	if o.BuyerId != nil {
-		toSerialize["buyer_id"] = o.BuyerId
+	if o.RedirectUrl.IsSet() {
+		toSerialize["redirect_url"] = o.RedirectUrl.Get()
 	}
-	if o.BuyerExternalIdentifier != nil {
-		toSerialize["buyer_external_identifier"] = o.BuyerExternalIdentifier
+	if o.Id.IsSet() {
+		toSerialize["id"] = o.Id.Get()
 	}
-	if o.RedirectUrl != nil {
-		toSerialize["redirect_url"] = o.RedirectUrl
+	if o.Currency.IsSet() {
+		toSerialize["currency"] = o.Currency.Get()
 	}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
+	if o.Country.IsSet() {
+		toSerialize["country"] = o.Country.Get()
 	}
-	if o.Currency != nil {
-		toSerialize["currency"] = o.Currency
+	if o.Token != nil {
+		toSerialize["token"] = o.Token
 	}
-	if o.Country != nil {
-		toSerialize["country"] = o.Country
+	if o.AssuranceDetails.IsSet() {
+		toSerialize["assurance_details"] = o.AssuranceDetails.Get()
+	}
+	if o.CardHolderName.IsSet() {
+		toSerialize["card_holder_name"] = o.CardHolderName.Get()
 	}
 	return json.Marshal(toSerialize)
 }

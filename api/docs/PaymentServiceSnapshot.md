@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. | [optional] 
 **Id** | Pointer to **string** | The ID of this payment service. | [optional] 
-**PaymentServiceDefinitionId** | Pointer to **string** | The ID of the payment service definition used to create this service.  | [optional] 
-**Method** | Pointer to **string** | The payment method that this services handles. | [optional] 
 **DisplayName** | Pointer to **string** | The custom name set for this service. | [optional] 
+**Method** | Pointer to **string** | The payment method that this services handles. | [optional] 
+**PaymentServiceDefinitionId** | Pointer to **string** | The ID of the payment service definition used to create this service.  | [optional] 
 
 ## Methods
 
@@ -79,30 +79,30 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
-### GetPaymentServiceDefinitionId
+### GetDisplayName
 
-`func (o *PaymentServiceSnapshot) GetPaymentServiceDefinitionId() string`
+`func (o *PaymentServiceSnapshot) GetDisplayName() string`
 
-GetPaymentServiceDefinitionId returns the PaymentServiceDefinitionId field if non-nil, zero value otherwise.
+GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
 
-### GetPaymentServiceDefinitionIdOk
+### GetDisplayNameOk
 
-`func (o *PaymentServiceSnapshot) GetPaymentServiceDefinitionIdOk() (*string, bool)`
+`func (o *PaymentServiceSnapshot) GetDisplayNameOk() (*string, bool)`
 
-GetPaymentServiceDefinitionIdOk returns a tuple with the PaymentServiceDefinitionId field if it's non-nil, zero value otherwise
+GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetPaymentServiceDefinitionId
+### SetDisplayName
 
-`func (o *PaymentServiceSnapshot) SetPaymentServiceDefinitionId(v string)`
+`func (o *PaymentServiceSnapshot) SetDisplayName(v string)`
 
-SetPaymentServiceDefinitionId sets PaymentServiceDefinitionId field to given value.
+SetDisplayName sets DisplayName field to given value.
 
-### HasPaymentServiceDefinitionId
+### HasDisplayName
 
-`func (o *PaymentServiceSnapshot) HasPaymentServiceDefinitionId() bool`
+`func (o *PaymentServiceSnapshot) HasDisplayName() bool`
 
-HasPaymentServiceDefinitionId returns a boolean if a field has been set.
+HasDisplayName returns a boolean if a field has been set.
 
 ### GetMethod
 
@@ -129,30 +129,30 @@ SetMethod sets Method field to given value.
 
 HasMethod returns a boolean if a field has been set.
 
-### GetDisplayName
+### GetPaymentServiceDefinitionId
 
-`func (o *PaymentServiceSnapshot) GetDisplayName() string`
+`func (o *PaymentServiceSnapshot) GetPaymentServiceDefinitionId() string`
 
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+GetPaymentServiceDefinitionId returns the PaymentServiceDefinitionId field if non-nil, zero value otherwise.
 
-### GetDisplayNameOk
+### GetPaymentServiceDefinitionIdOk
 
-`func (o *PaymentServiceSnapshot) GetDisplayNameOk() (*string, bool)`
+`func (o *PaymentServiceSnapshot) GetPaymentServiceDefinitionIdOk() (*string, bool)`
 
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+GetPaymentServiceDefinitionIdOk returns a tuple with the PaymentServiceDefinitionId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetDisplayName
+### SetPaymentServiceDefinitionId
 
-`func (o *PaymentServiceSnapshot) SetDisplayName(v string)`
+`func (o *PaymentServiceSnapshot) SetPaymentServiceDefinitionId(v string)`
 
-SetDisplayName sets DisplayName field to given value.
+SetPaymentServiceDefinitionId sets PaymentServiceDefinitionId field to given value.
 
-### HasDisplayName
+### HasPaymentServiceDefinitionId
 
-`func (o *PaymentServiceSnapshot) HasDisplayName() bool`
+`func (o *PaymentServiceSnapshot) HasPaymentServiceDefinitionId() bool`
 
-HasDisplayName returns a boolean if a field has been set.
+HasPaymentServiceDefinitionId returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

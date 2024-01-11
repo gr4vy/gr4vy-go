@@ -5,6 +5,7 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**DeleteMerchantAccuont**](MerchantAccountsApi.md#DeleteMerchantAccuont) | **Delete** /merchant-accounts/{merchant_account_id} | Delete merchant account
+[**GetMerchantAccount**](MerchantAccountsApi.md#GetMerchantAccount) | **Get** /merchant-accounts/{merchant_account_id} | Get merchant account
 [**ListMerchantAccounts**](MerchantAccountsApi.md#ListMerchantAccounts) | **Get** /merchant-accounts | List merchant accounts
 [**NewMerchantAccount**](MerchantAccountsApi.md#NewMerchantAccount) | **Post** /merchant-accounts | New merchant account
 [**UpdateMerchantAccount**](MerchantAccountsApi.md#UpdateMerchantAccount) | **Put** /merchant-accounts/{merchant_account_id} | Update merchant account
@@ -64,6 +65,76 @@ Name | Type | Description  | Notes
 ### Return type
 
  (empty response body)
+
+### Authorization
+
+[BearerAuth](../README.md#BearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetMerchantAccount
+
+> MerchantAccount GetMerchantAccount(ctx, merchantAccountId).Execute()
+
+Get merchant account
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    merchantAccountId := "plantly-uk" // string | The unique ID for a merchant account.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.MerchantAccountsApi.GetMerchantAccount(context.Background(), merchantAccountId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `MerchantAccountsApi.GetMerchantAccount``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetMerchantAccount`: MerchantAccount
+    fmt.Fprintf(os.Stdout, "Response from `MerchantAccountsApi.GetMerchantAccount`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**merchantAccountId** | **string** | The unique ID for a merchant account. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetMerchantAccountRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**MerchantAccount**](MerchantAccount.md)
 
 ### Authorization
 

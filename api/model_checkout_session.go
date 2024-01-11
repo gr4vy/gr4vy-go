@@ -28,6 +28,7 @@ type CheckoutSession struct {
 	CartItems []CartItem `json:"cart_items,omitempty"`
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it.
 	Metadata map[string]string `json:"metadata,omitempty"`
+	PaymentMethod NullableCheckoutSessionPaymentMethod `json:"payment_method,omitempty"`
 }
 
 // NewCheckoutSession instantiates a new CheckoutSession object
@@ -209,6 +210,48 @@ func (o *CheckoutSession) SetMetadata(v map[string]string) {
 	o.Metadata = v
 }
 
+// GetPaymentMethod returns the PaymentMethod field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CheckoutSession) GetPaymentMethod() CheckoutSessionPaymentMethod {
+	if o == nil || o.PaymentMethod.Get() == nil {
+		var ret CheckoutSessionPaymentMethod
+		return ret
+	}
+	return *o.PaymentMethod.Get()
+}
+
+// GetPaymentMethodOk returns a tuple with the PaymentMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CheckoutSession) GetPaymentMethodOk() (*CheckoutSessionPaymentMethod, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.PaymentMethod.Get(), o.PaymentMethod.IsSet()
+}
+
+// HasPaymentMethod returns a boolean if a field has been set.
+func (o *CheckoutSession) HasPaymentMethod() bool {
+	if o != nil && o.PaymentMethod.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMethod gets a reference to the given NullableCheckoutSessionPaymentMethod and assigns it to the PaymentMethod field.
+func (o *CheckoutSession) SetPaymentMethod(v CheckoutSessionPaymentMethod) {
+	o.PaymentMethod.Set(&v)
+}
+// SetPaymentMethodNil sets the value for PaymentMethod to be an explicit nil
+func (o *CheckoutSession) SetPaymentMethodNil() {
+	o.PaymentMethod.Set(nil)
+}
+
+// UnsetPaymentMethod ensures that no value is present for PaymentMethod, not even an explicit nil
+func (o *CheckoutSession) UnsetPaymentMethod() {
+	o.PaymentMethod.Unset()
+}
+
 func (o CheckoutSession) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -225,6 +268,9 @@ func (o CheckoutSession) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.PaymentMethod.IsSet() {
+		toSerialize["payment_method"] = o.PaymentMethod.Get()
 	}
 	return json.Marshal(toSerialize)
 }

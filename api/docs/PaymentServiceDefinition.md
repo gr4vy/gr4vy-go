@@ -8,7 +8,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | &#x60;payment-service-definition&#x60;. | [optional] [default to "payment-service-definition"]
 **DisplayName** | Pointer to **string** | The display name of this service. | [optional] 
 **Method** | Pointer to **string** | The ID of the payment method that this services handles. | [optional] 
-**Fields** | Pointer to [**[]PaymentServiceDefinitionFields**](PaymentServiceDefinitionFields.md) | A list of fields that need to be submitted when activating the payment. service. | [optional] 
+**Fields** | Pointer to [**[]GiftCardServiceDefinitionFields**](GiftCardServiceDefinitionFields.md) | A list of fields that need to be submitted when activating the payment. service. | [optional] 
 **SupportedCurrencies** | Pointer to **[]string** | A list of three-letter ISO currency codes that this service supports. | [optional] 
 **SupportedCountries** | Pointer to **[]string** | A list of two-letter ISO country codes that this service supports. | [optional] 
 **Mode** | Pointer to **string** | The mode of this payment service. | [optional] 
@@ -137,20 +137,20 @@ HasMethod returns a boolean if a field has been set.
 
 ### GetFields
 
-`func (o *PaymentServiceDefinition) GetFields() []PaymentServiceDefinitionFields`
+`func (o *PaymentServiceDefinition) GetFields() []GiftCardServiceDefinitionFields`
 
 GetFields returns the Fields field if non-nil, zero value otherwise.
 
 ### GetFieldsOk
 
-`func (o *PaymentServiceDefinition) GetFieldsOk() (*[]PaymentServiceDefinitionFields, bool)`
+`func (o *PaymentServiceDefinition) GetFieldsOk() (*[]GiftCardServiceDefinitionFields, bool)`
 
 GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFields
 
-`func (o *PaymentServiceDefinition) SetFields(v []PaymentServiceDefinitionFields)`
+`func (o *PaymentServiceDefinition) SetFields(v []GiftCardServiceDefinitionFields)`
 
 SetFields sets Fields field to given value.
 

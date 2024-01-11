@@ -17,6 +17,8 @@ import (
 
 // ConnectionOptionsCybersourceAntiFraud Additional options for Cybersource Decision Manager (anti-fraud).
 type ConnectionOptionsCybersourceAntiFraud struct {
+	// An override for the merchant ID configured for the connector, used in combination with meta keys.
+	MetaKeyMerchantId NullableString `json:"meta_key_merchant_id,omitempty"`
 	// This is a key-value object for merchant defined data. Each key needs to be a numeric string identifying the MDD field to set. For example, for field 1 set the key to \"1\".
 	MerchantDefinedData *map[string]string `json:"merchant_defined_data,omitempty"`
 }
@@ -36,6 +38,48 @@ func NewConnectionOptionsCybersourceAntiFraud() *ConnectionOptionsCybersourceAnt
 func NewConnectionOptionsCybersourceAntiFraudWithDefaults() *ConnectionOptionsCybersourceAntiFraud {
 	this := ConnectionOptionsCybersourceAntiFraud{}
 	return &this
+}
+
+// GetMetaKeyMerchantId returns the MetaKeyMerchantId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptionsCybersourceAntiFraud) GetMetaKeyMerchantId() string {
+	if o == nil || o.MetaKeyMerchantId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.MetaKeyMerchantId.Get()
+}
+
+// GetMetaKeyMerchantIdOk returns a tuple with the MetaKeyMerchantId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptionsCybersourceAntiFraud) GetMetaKeyMerchantIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.MetaKeyMerchantId.Get(), o.MetaKeyMerchantId.IsSet()
+}
+
+// HasMetaKeyMerchantId returns a boolean if a field has been set.
+func (o *ConnectionOptionsCybersourceAntiFraud) HasMetaKeyMerchantId() bool {
+	if o != nil && o.MetaKeyMerchantId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMetaKeyMerchantId gets a reference to the given NullableString and assigns it to the MetaKeyMerchantId field.
+func (o *ConnectionOptionsCybersourceAntiFraud) SetMetaKeyMerchantId(v string) {
+	o.MetaKeyMerchantId.Set(&v)
+}
+// SetMetaKeyMerchantIdNil sets the value for MetaKeyMerchantId to be an explicit nil
+func (o *ConnectionOptionsCybersourceAntiFraud) SetMetaKeyMerchantIdNil() {
+	o.MetaKeyMerchantId.Set(nil)
+}
+
+// UnsetMetaKeyMerchantId ensures that no value is present for MetaKeyMerchantId, not even an explicit nil
+func (o *ConnectionOptionsCybersourceAntiFraud) UnsetMetaKeyMerchantId() {
+	o.MetaKeyMerchantId.Unset()
 }
 
 // GetMerchantDefinedData returns the MerchantDefinedData field value if set, zero value otherwise.
@@ -72,6 +116,9 @@ func (o *ConnectionOptionsCybersourceAntiFraud) SetMerchantDefinedData(v map[str
 
 func (o ConnectionOptionsCybersourceAntiFraud) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.MetaKeyMerchantId.IsSet() {
+		toSerialize["meta_key_merchant_id"] = o.MetaKeyMerchantId.Get()
+	}
 	if o.MerchantDefinedData != nil {
 		toSerialize["merchant_defined_data"] = o.MerchantDefinedData
 	}

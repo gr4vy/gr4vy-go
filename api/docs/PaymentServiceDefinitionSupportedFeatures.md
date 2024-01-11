@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DelayedCapture** | Pointer to **bool** | Supports [capturing](#operation/capture-transaction) authorized transactions. | [optional] 
-**NetworkTokens** | Pointer to **bool** | Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor. | [optional] 
+**DigitalWallets** | Pointer to **bool** | Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor. | [optional] 
 **NetworkTokensDefault** | Pointer to **bool** | Supports processing network tokens by default. | [optional] 
 **NetworkTokensToggle** | Pointer to **bool** | Supports toggling processing of network tokens on or off. | [optional] 
 **OpenLoop** | Pointer to **bool** | Supports processing transactions with either raw PAN details or network tokens. | [optional] 
@@ -64,30 +64,30 @@ SetDelayedCapture sets DelayedCapture field to given value.
 
 HasDelayedCapture returns a boolean if a field has been set.
 
-### GetNetworkTokens
+### GetDigitalWallets
 
-`func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokens() bool`
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetDigitalWallets() bool`
 
-GetNetworkTokens returns the NetworkTokens field if non-nil, zero value otherwise.
+GetDigitalWallets returns the DigitalWallets field if non-nil, zero value otherwise.
 
-### GetNetworkTokensOk
+### GetDigitalWalletsOk
 
-`func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensOk() (*bool, bool)`
+`func (o *PaymentServiceDefinitionSupportedFeatures) GetDigitalWalletsOk() (*bool, bool)`
 
-GetNetworkTokensOk returns a tuple with the NetworkTokens field if it's non-nil, zero value otherwise
+GetDigitalWalletsOk returns a tuple with the DigitalWallets field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetNetworkTokens
+### SetDigitalWallets
 
-`func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokens(v bool)`
+`func (o *PaymentServiceDefinitionSupportedFeatures) SetDigitalWallets(v bool)`
 
-SetNetworkTokens sets NetworkTokens field to given value.
+SetDigitalWallets sets DigitalWallets field to given value.
 
-### HasNetworkTokens
+### HasDigitalWallets
 
-`func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokens() bool`
+`func (o *PaymentServiceDefinitionSupportedFeatures) HasDigitalWallets() bool`
 
-HasNetworkTokens returns a boolean if a field has been set.
+HasDigitalWallets returns a boolean if a field has been set.
 
 ### GetNetworkTokensDefault
 

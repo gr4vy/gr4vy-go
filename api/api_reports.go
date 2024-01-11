@@ -18,7 +18,6 @@ import (
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
-	"time"
 	"reflect"
 )
 
@@ -415,8 +414,8 @@ type ApiListAllReportExecutionsRequest struct {
 	ApiService *ReportsApiService
 	cursor *string
 	limit *int32
-	createdAtGte *time.Time
-	createdAtLte *time.Time
+	createdAtGte *string
+	createdAtLte *string
 	reportName *string
 	status *[]string
 	creatorId *[]string
@@ -430,11 +429,11 @@ func (r ApiListAllReportExecutionsRequest) Limit(limit int32) ApiListAllReportEx
 	r.limit = &limit
 	return r
 }
-func (r ApiListAllReportExecutionsRequest) CreatedAtGte(createdAtGte time.Time) ApiListAllReportExecutionsRequest {
+func (r ApiListAllReportExecutionsRequest) CreatedAtGte(createdAtGte string) ApiListAllReportExecutionsRequest {
 	r.createdAtGte = &createdAtGte
 	return r
 }
-func (r ApiListAllReportExecutionsRequest) CreatedAtLte(createdAtLte time.Time) ApiListAllReportExecutionsRequest {
+func (r ApiListAllReportExecutionsRequest) CreatedAtLte(createdAtLte string) ApiListAllReportExecutionsRequest {
 	r.createdAtLte = &createdAtLte
 	return r
 }

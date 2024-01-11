@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **CybersourceAntiFraud** | Pointer to [**NullableConnectionOptionsCybersourceAntiFraud**](ConnectionOptionsCybersourceAntiFraud.md) |  | [optional] 
 **ForterAntiFraud** | Pointer to [**NullableConnectionOptionsForterAntiFraud**](ConnectionOptionsForterAntiFraud.md) |  | [optional] 
 **AdyenCard** | Pointer to [**NullableConnectionOptionsAdyenCard**](ConnectionOptionsAdyenCard.md) |  | [optional] 
+**PaypalPaypal** | Pointer to [**NullableConnectionOptionsPaypalPaypal**](ConnectionOptionsPaypalPaypal.md) |  | [optional] 
+**PaypalPaypalpaylater** | Pointer to [**NullableConnectionOptionsPaypalPaypal**](ConnectionOptionsPaypalPaypal.md) |  | [optional] 
 
 ## Methods
 
@@ -132,6 +134,76 @@ HasAdyenCard returns a boolean if a field has been set.
 `func (o *ConnectionOptions) UnsetAdyenCard()`
 
 UnsetAdyenCard ensures that no value is present for AdyenCard, not even an explicit nil
+### GetPaypalPaypal
+
+`func (o *ConnectionOptions) GetPaypalPaypal() ConnectionOptionsPaypalPaypal`
+
+GetPaypalPaypal returns the PaypalPaypal field if non-nil, zero value otherwise.
+
+### GetPaypalPaypalOk
+
+`func (o *ConnectionOptions) GetPaypalPaypalOk() (*ConnectionOptionsPaypalPaypal, bool)`
+
+GetPaypalPaypalOk returns a tuple with the PaypalPaypal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaypalPaypal
+
+`func (o *ConnectionOptions) SetPaypalPaypal(v ConnectionOptionsPaypalPaypal)`
+
+SetPaypalPaypal sets PaypalPaypal field to given value.
+
+### HasPaypalPaypal
+
+`func (o *ConnectionOptions) HasPaypalPaypal() bool`
+
+HasPaypalPaypal returns a boolean if a field has been set.
+
+### SetPaypalPaypalNil
+
+`func (o *ConnectionOptions) SetPaypalPaypalNil(b bool)`
+
+ SetPaypalPaypalNil sets the value for PaypalPaypal to be an explicit nil
+
+### UnsetPaypalPaypal
+`func (o *ConnectionOptions) UnsetPaypalPaypal()`
+
+UnsetPaypalPaypal ensures that no value is present for PaypalPaypal, not even an explicit nil
+### GetPaypalPaypalpaylater
+
+`func (o *ConnectionOptions) GetPaypalPaypalpaylater() ConnectionOptionsPaypalPaypal`
+
+GetPaypalPaypalpaylater returns the PaypalPaypalpaylater field if non-nil, zero value otherwise.
+
+### GetPaypalPaypalpaylaterOk
+
+`func (o *ConnectionOptions) GetPaypalPaypalpaylaterOk() (*ConnectionOptionsPaypalPaypal, bool)`
+
+GetPaypalPaypalpaylaterOk returns a tuple with the PaypalPaypalpaylater field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaypalPaypalpaylater
+
+`func (o *ConnectionOptions) SetPaypalPaypalpaylater(v ConnectionOptionsPaypalPaypal)`
+
+SetPaypalPaypalpaylater sets PaypalPaypalpaylater field to given value.
+
+### HasPaypalPaypalpaylater
+
+`func (o *ConnectionOptions) HasPaypalPaypalpaylater() bool`
+
+HasPaypalPaypalpaylater returns a boolean if a field has been set.
+
+### SetPaypalPaypalpaylaterNil
+
+`func (o *ConnectionOptions) SetPaypalPaypalpaylaterNil(b bool)`
+
+ SetPaypalPaypalpaylaterNil sets the value for PaypalPaypalpaylater to be an explicit nil
+
+### UnsetPaypalPaypalpaylater
+`func (o *ConnectionOptions) UnsetPaypalPaypalpaylater()`
+
+UnsetPaypalPaypalpaylater ensures that no value is present for PaypalPaypalpaylater, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

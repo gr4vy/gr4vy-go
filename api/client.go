@@ -51,6 +51,8 @@ type APIClient struct {
 
 	APILogsApi *APILogsApiService
 
+	AccountUpdaterApi *AccountUpdaterApiService
+
 	AuditLogsApi *AuditLogsApiService
 
 	BuyersApi *BuyersApiService
@@ -60,6 +62,12 @@ type APIClient struct {
 	CheckoutSessionsApi *CheckoutSessionsApiService
 
 	DigitalWalletsApi *DigitalWalletsApiService
+
+	GiftCardServiceDefinitionsApi *GiftCardServiceDefinitionsApiService
+
+	GiftCardServicesApi *GiftCardServicesApiService
+
+	GiftCardsApi *GiftCardsApiService
 
 	MerchantAccountsApi *MerchantAccountsApiService
 
@@ -101,11 +109,15 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 
 	// API Services
 	c.APILogsApi = (*APILogsApiService)(&c.common)
+	c.AccountUpdaterApi = (*AccountUpdaterApiService)(&c.common)
 	c.AuditLogsApi = (*AuditLogsApiService)(&c.common)
 	c.BuyersApi = (*BuyersApiService)(&c.common)
 	c.CardSchemeDefinitionsApi = (*CardSchemeDefinitionsApiService)(&c.common)
 	c.CheckoutSessionsApi = (*CheckoutSessionsApiService)(&c.common)
 	c.DigitalWalletsApi = (*DigitalWalletsApiService)(&c.common)
+	c.GiftCardServiceDefinitionsApi = (*GiftCardServiceDefinitionsApiService)(&c.common)
+	c.GiftCardServicesApi = (*GiftCardServicesApiService)(&c.common)
+	c.GiftCardsApi = (*GiftCardsApiService)(&c.common)
 	c.MerchantAccountsApi = (*MerchantAccountsApiService)(&c.common)
 	c.PaymentMethodDefinitionsApi = (*PaymentMethodDefinitionsApiService)(&c.common)
 	c.PaymentMethodsApi = (*PaymentMethodsApiService)(&c.common)

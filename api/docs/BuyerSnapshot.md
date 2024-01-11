@@ -6,9 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;buyer&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique Gr4vy ID for this buyer. | [optional] 
-**ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. | [optional] 
-**DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
 **BillingDetails** | Pointer to [**NullableBillingDetails**](BillingDetails.md) | The billing details associated with the buyer, which include the address and tax ID. | [optional] 
+**DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
+**ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. | [optional] 
 
 ## Methods
 
@@ -79,76 +79,6 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
-### GetExternalIdentifier
-
-`func (o *BuyerSnapshot) GetExternalIdentifier() string`
-
-GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
-
-### GetExternalIdentifierOk
-
-`func (o *BuyerSnapshot) GetExternalIdentifierOk() (*string, bool)`
-
-GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExternalIdentifier
-
-`func (o *BuyerSnapshot) SetExternalIdentifier(v string)`
-
-SetExternalIdentifier sets ExternalIdentifier field to given value.
-
-### HasExternalIdentifier
-
-`func (o *BuyerSnapshot) HasExternalIdentifier() bool`
-
-HasExternalIdentifier returns a boolean if a field has been set.
-
-### SetExternalIdentifierNil
-
-`func (o *BuyerSnapshot) SetExternalIdentifierNil(b bool)`
-
- SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
-
-### UnsetExternalIdentifier
-`func (o *BuyerSnapshot) UnsetExternalIdentifier()`
-
-UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
-### GetDisplayName
-
-`func (o *BuyerSnapshot) GetDisplayName() string`
-
-GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
-
-### GetDisplayNameOk
-
-`func (o *BuyerSnapshot) GetDisplayNameOk() (*string, bool)`
-
-GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetDisplayName
-
-`func (o *BuyerSnapshot) SetDisplayName(v string)`
-
-SetDisplayName sets DisplayName field to given value.
-
-### HasDisplayName
-
-`func (o *BuyerSnapshot) HasDisplayName() bool`
-
-HasDisplayName returns a boolean if a field has been set.
-
-### SetDisplayNameNil
-
-`func (o *BuyerSnapshot) SetDisplayNameNil(b bool)`
-
- SetDisplayNameNil sets the value for DisplayName to be an explicit nil
-
-### UnsetDisplayName
-`func (o *BuyerSnapshot) UnsetDisplayName()`
-
-UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
 ### GetBillingDetails
 
 `func (o *BuyerSnapshot) GetBillingDetails() BillingDetails`
@@ -184,6 +114,76 @@ HasBillingDetails returns a boolean if a field has been set.
 `func (o *BuyerSnapshot) UnsetBillingDetails()`
 
 UnsetBillingDetails ensures that no value is present for BillingDetails, not even an explicit nil
+### GetDisplayName
+
+`func (o *BuyerSnapshot) GetDisplayName() string`
+
+GetDisplayName returns the DisplayName field if non-nil, zero value otherwise.
+
+### GetDisplayNameOk
+
+`func (o *BuyerSnapshot) GetDisplayNameOk() (*string, bool)`
+
+GetDisplayNameOk returns a tuple with the DisplayName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDisplayName
+
+`func (o *BuyerSnapshot) SetDisplayName(v string)`
+
+SetDisplayName sets DisplayName field to given value.
+
+### HasDisplayName
+
+`func (o *BuyerSnapshot) HasDisplayName() bool`
+
+HasDisplayName returns a boolean if a field has been set.
+
+### SetDisplayNameNil
+
+`func (o *BuyerSnapshot) SetDisplayNameNil(b bool)`
+
+ SetDisplayNameNil sets the value for DisplayName to be an explicit nil
+
+### UnsetDisplayName
+`func (o *BuyerSnapshot) UnsetDisplayName()`
+
+UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
+### GetExternalIdentifier
+
+`func (o *BuyerSnapshot) GetExternalIdentifier() string`
+
+GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetExternalIdentifierOk
+
+`func (o *BuyerSnapshot) GetExternalIdentifierOk() (*string, bool)`
+
+GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalIdentifier
+
+`func (o *BuyerSnapshot) SetExternalIdentifier(v string)`
+
+SetExternalIdentifier sets ExternalIdentifier field to given value.
+
+### HasExternalIdentifier
+
+`func (o *BuyerSnapshot) HasExternalIdentifier() bool`
+
+HasExternalIdentifier returns a boolean if a field has been set.
+
+### SetExternalIdentifierNil
+
+`func (o *BuyerSnapshot) SetExternalIdentifierNil(b bool)`
+
+ SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
+
+### UnsetExternalIdentifier
+`func (o *BuyerSnapshot) UnsetExternalIdentifier()`
+
+UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

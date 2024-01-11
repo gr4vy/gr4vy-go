@@ -39,6 +39,12 @@ type MerchantAccountCreate struct {
 	MastercardNetworkTokensRequestorId NullableString `json:"mastercard_network_tokens_requestor_id,omitempty"`
 	// Application ID provided for Mastercard after onboarding to use Network Tokens. The application ID must be unique across all schemes and merchant accounts.
 	MastercardNetworkTokensAppId NullableString `json:"mastercard_network_tokens_app_id,omitempty"`
+	// Client key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service used by Gr4vy.  * If the field is not set or if it's set to `null`, the Account Updater service doesn't get configured. * If the field is set to `null`, the other `loon_*` fields must be set to `null` as well.
+	LoonClientKey NullableString `json:"loon_client_key,omitempty"`
+	// Secret key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service used by Gr4vy.  * If the field is not set or if it's set to `null`, the Account Updater service doesn't get configured. * If the field is set to `null`, the other `loon_*` fields must be set to `null` as well.
+	LoonSecretKey NullableString `json:"loon_secret_key,omitempty"`
+	// Card schemes accepted when creating jobs using this set of Loon API keys. Loon is the Account Updater service used by Gr4vy.  * If the field is not set or if it's set to `null`, the Account Updater service doesn't get configured. * If the field is set to `null`, the other `loon_*` fields must be set to `null` as well.
+	LoonAcceptedSchemes []string `json:"loon_accepted_schemes,omitempty"`
 }
 
 // NewMerchantAccountCreate instantiates a new MerchantAccountCreate object
@@ -500,6 +506,123 @@ func (o *MerchantAccountCreate) UnsetMastercardNetworkTokensAppId() {
 	o.MastercardNetworkTokensAppId.Unset()
 }
 
+// GetLoonClientKey returns the LoonClientKey field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccountCreate) GetLoonClientKey() string {
+	if o == nil || o.LoonClientKey.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.LoonClientKey.Get()
+}
+
+// GetLoonClientKeyOk returns a tuple with the LoonClientKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccountCreate) GetLoonClientKeyOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.LoonClientKey.Get(), o.LoonClientKey.IsSet()
+}
+
+// HasLoonClientKey returns a boolean if a field has been set.
+func (o *MerchantAccountCreate) HasLoonClientKey() bool {
+	if o != nil && o.LoonClientKey.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLoonClientKey gets a reference to the given NullableString and assigns it to the LoonClientKey field.
+func (o *MerchantAccountCreate) SetLoonClientKey(v string) {
+	o.LoonClientKey.Set(&v)
+}
+// SetLoonClientKeyNil sets the value for LoonClientKey to be an explicit nil
+func (o *MerchantAccountCreate) SetLoonClientKeyNil() {
+	o.LoonClientKey.Set(nil)
+}
+
+// UnsetLoonClientKey ensures that no value is present for LoonClientKey, not even an explicit nil
+func (o *MerchantAccountCreate) UnsetLoonClientKey() {
+	o.LoonClientKey.Unset()
+}
+
+// GetLoonSecretKey returns the LoonSecretKey field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccountCreate) GetLoonSecretKey() string {
+	if o == nil || o.LoonSecretKey.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.LoonSecretKey.Get()
+}
+
+// GetLoonSecretKeyOk returns a tuple with the LoonSecretKey field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccountCreate) GetLoonSecretKeyOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.LoonSecretKey.Get(), o.LoonSecretKey.IsSet()
+}
+
+// HasLoonSecretKey returns a boolean if a field has been set.
+func (o *MerchantAccountCreate) HasLoonSecretKey() bool {
+	if o != nil && o.LoonSecretKey.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLoonSecretKey gets a reference to the given NullableString and assigns it to the LoonSecretKey field.
+func (o *MerchantAccountCreate) SetLoonSecretKey(v string) {
+	o.LoonSecretKey.Set(&v)
+}
+// SetLoonSecretKeyNil sets the value for LoonSecretKey to be an explicit nil
+func (o *MerchantAccountCreate) SetLoonSecretKeyNil() {
+	o.LoonSecretKey.Set(nil)
+}
+
+// UnsetLoonSecretKey ensures that no value is present for LoonSecretKey, not even an explicit nil
+func (o *MerchantAccountCreate) UnsetLoonSecretKey() {
+	o.LoonSecretKey.Unset()
+}
+
+// GetLoonAcceptedSchemes returns the LoonAcceptedSchemes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccountCreate) GetLoonAcceptedSchemes() []string {
+	if o == nil  {
+		var ret []string
+		return ret
+	}
+	return o.LoonAcceptedSchemes
+}
+
+// GetLoonAcceptedSchemesOk returns a tuple with the LoonAcceptedSchemes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccountCreate) GetLoonAcceptedSchemesOk() (*[]string, bool) {
+	if o == nil || o.LoonAcceptedSchemes == nil {
+		return nil, false
+	}
+	return &o.LoonAcceptedSchemes, true
+}
+
+// HasLoonAcceptedSchemes returns a boolean if a field has been set.
+func (o *MerchantAccountCreate) HasLoonAcceptedSchemes() bool {
+	if o != nil && o.LoonAcceptedSchemes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetLoonAcceptedSchemes gets a reference to the given []string and assigns it to the LoonAcceptedSchemes field.
+func (o *MerchantAccountCreate) SetLoonAcceptedSchemes(v []string) {
+	o.LoonAcceptedSchemes = v
+}
+
 func (o MerchantAccountCreate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -534,6 +657,15 @@ func (o MerchantAccountCreate) MarshalJSON() ([]byte, error) {
 	}
 	if o.MastercardNetworkTokensAppId.IsSet() {
 		toSerialize["mastercard_network_tokens_app_id"] = o.MastercardNetworkTokensAppId.Get()
+	}
+	if o.LoonClientKey.IsSet() {
+		toSerialize["loon_client_key"] = o.LoonClientKey.Get()
+	}
+	if o.LoonSecretKey.IsSet() {
+		toSerialize["loon_secret_key"] = o.LoonSecretKey.Get()
+	}
+	if o.LoonAcceptedSchemes != nil {
+		toSerialize["loon_accepted_schemes"] = o.LoonAcceptedSchemes
 	}
 	return json.Marshal(toSerialize)
 }

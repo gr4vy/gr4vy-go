@@ -20,7 +20,7 @@ type PaymentServiceDefinitionSupportedFeatures struct {
 	// Supports [capturing](#operation/capture-transaction) authorized transactions.
 	DelayedCapture *bool `json:"delayed_capture,omitempty"`
 	// Supports passing decrypted digital wallet (e.g. Apple Pay) tokens to the underlying processor.
-	NetworkTokens *bool `json:"network_tokens,omitempty"`
+	DigitalWallets *bool `json:"digital_wallets,omitempty"`
 	// Supports processing network tokens by default.
 	NetworkTokensDefault *bool `json:"network_tokens_default,omitempty"`
 	// Supports toggling processing of network tokens on or off.
@@ -98,36 +98,36 @@ func (o *PaymentServiceDefinitionSupportedFeatures) SetDelayedCapture(v bool) {
 	o.DelayedCapture = &v
 }
 
-// GetNetworkTokens returns the NetworkTokens field value if set, zero value otherwise.
-func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokens() bool {
-	if o == nil || o.NetworkTokens == nil {
+// GetDigitalWallets returns the DigitalWallets field value if set, zero value otherwise.
+func (o *PaymentServiceDefinitionSupportedFeatures) GetDigitalWallets() bool {
+	if o == nil || o.DigitalWallets == nil {
 		var ret bool
 		return ret
 	}
-	return *o.NetworkTokens
+	return *o.DigitalWallets
 }
 
-// GetNetworkTokensOk returns a tuple with the NetworkTokens field value if set, nil otherwise
+// GetDigitalWalletsOk returns a tuple with the DigitalWallets field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentServiceDefinitionSupportedFeatures) GetNetworkTokensOk() (*bool, bool) {
-	if o == nil || o.NetworkTokens == nil {
+func (o *PaymentServiceDefinitionSupportedFeatures) GetDigitalWalletsOk() (*bool, bool) {
+	if o == nil || o.DigitalWallets == nil {
 		return nil, false
 	}
-	return o.NetworkTokens, true
+	return o.DigitalWallets, true
 }
 
-// HasNetworkTokens returns a boolean if a field has been set.
-func (o *PaymentServiceDefinitionSupportedFeatures) HasNetworkTokens() bool {
-	if o != nil && o.NetworkTokens != nil {
+// HasDigitalWallets returns a boolean if a field has been set.
+func (o *PaymentServiceDefinitionSupportedFeatures) HasDigitalWallets() bool {
+	if o != nil && o.DigitalWallets != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetNetworkTokens gets a reference to the given bool and assigns it to the NetworkTokens field.
-func (o *PaymentServiceDefinitionSupportedFeatures) SetNetworkTokens(v bool) {
-	o.NetworkTokens = &v
+// SetDigitalWallets gets a reference to the given bool and assigns it to the DigitalWallets field.
+func (o *PaymentServiceDefinitionSupportedFeatures) SetDigitalWallets(v bool) {
+	o.DigitalWallets = &v
 }
 
 // GetNetworkTokensDefault returns the NetworkTokensDefault field value if set, zero value otherwise.
@@ -551,8 +551,8 @@ func (o PaymentServiceDefinitionSupportedFeatures) MarshalJSON() ([]byte, error)
 	if o.DelayedCapture != nil {
 		toSerialize["delayed_capture"] = o.DelayedCapture
 	}
-	if o.NetworkTokens != nil {
-		toSerialize["network_tokens"] = o.NetworkTokens
+	if o.DigitalWallets != nil {
+		toSerialize["digital_wallets"] = o.DigitalWallets
 	}
 	if o.NetworkTokensDefault != nil {
 		toSerialize["network_tokens_default"] = o.NetworkTokensDefault

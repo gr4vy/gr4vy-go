@@ -17,8 +17,12 @@ import (
 
 // TransactionRefundRequest A request to refund a transaction.
 type TransactionRefundRequest struct {
-	// The amount requested to refund.  If omitted, a full refund will be requested.  Otherwise, the amount must be lower than or equal to the remaining balance in the associated transaction.  Negative and zero-amount refunds are not supported.
+	// The amount requested to refund.  If omitted, a full refund will be requested for the main payment method.  When set, the amount must be lower than or equal to the remaining balance in the associated transaction. Negative and zero-amount refunds are not supported.
 	Amount *int32 `json:"amount,omitempty"`
+	// The target type to refund for. This can be used to target a gift card to refund to instead of the main payment method.
+	TargetType NullableString `json:"target_type,omitempty"`
+	// The optional ID of the instrument to refund for. This is only required when the `target_type` is set to `gift-card-redemption`.
+	TargetId NullableString `json:"target_id,omitempty"`
 }
 
 // NewTransactionRefundRequest instantiates a new TransactionRefundRequest object
@@ -27,6 +31,8 @@ type TransactionRefundRequest struct {
 // will change when the set of required properties is changed
 func NewTransactionRefundRequest() *TransactionRefundRequest {
 	this := TransactionRefundRequest{}
+	var targetType TARGET_TYPE = "payment-method"
+	this.TargetType = *NewNullableString(&targetType)
 	return &this
 }
 
@@ -35,6 +41,8 @@ func NewTransactionRefundRequest() *TransactionRefundRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewTransactionRefundRequestWithDefaults() *TransactionRefundRequest {
 	this := TransactionRefundRequest{}
+	var targetType TARGET_TYPE = "payment-method"
+	this.TargetType = *NewNullableString(&targetType)
 	return &this
 }
 
@@ -70,10 +78,100 @@ func (o *TransactionRefundRequest) SetAmount(v int32) {
 	o.Amount = &v
 }
 
+// GetTargetType returns the TargetType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRefundRequest) GetTargetType() string {
+	if o == nil || o.TargetType.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.TargetType.Get()
+}
+
+// GetTargetTypeOk returns a tuple with the TargetType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRefundRequest) GetTargetTypeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.TargetType.Get(), o.TargetType.IsSet()
+}
+
+// HasTargetType returns a boolean if a field has been set.
+func (o *TransactionRefundRequest) HasTargetType() bool {
+	if o != nil && o.TargetType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetType gets a reference to the given NullableString and assigns it to the TargetType field.
+func (o *TransactionRefundRequest) SetTargetType(v string) {
+	o.TargetType.Set(&v)
+}
+// SetTargetTypeNil sets the value for TargetType to be an explicit nil
+func (o *TransactionRefundRequest) SetTargetTypeNil() {
+	o.TargetType.Set(nil)
+}
+
+// UnsetTargetType ensures that no value is present for TargetType, not even an explicit nil
+func (o *TransactionRefundRequest) UnsetTargetType() {
+	o.TargetType.Unset()
+}
+
+// GetTargetId returns the TargetId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRefundRequest) GetTargetId() string {
+	if o == nil || o.TargetId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.TargetId.Get()
+}
+
+// GetTargetIdOk returns a tuple with the TargetId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRefundRequest) GetTargetIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.TargetId.Get(), o.TargetId.IsSet()
+}
+
+// HasTargetId returns a boolean if a field has been set.
+func (o *TransactionRefundRequest) HasTargetId() bool {
+	if o != nil && o.TargetId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetId gets a reference to the given NullableString and assigns it to the TargetId field.
+func (o *TransactionRefundRequest) SetTargetId(v string) {
+	o.TargetId.Set(&v)
+}
+// SetTargetIdNil sets the value for TargetId to be an explicit nil
+func (o *TransactionRefundRequest) SetTargetIdNil() {
+	o.TargetId.Set(nil)
+}
+
+// UnsetTargetId ensures that no value is present for TargetId, not even an explicit nil
+func (o *TransactionRefundRequest) UnsetTargetId() {
+	o.TargetId.Unset()
+}
+
 func (o TransactionRefundRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Amount != nil {
 		toSerialize["amount"] = o.Amount
+	}
+	if o.TargetType.IsSet() {
+		toSerialize["target_type"] = o.TargetType.Get()
+	}
+	if o.TargetId.IsSet() {
+		toSerialize["target_id"] = o.TargetId.Get()
 	}
 	return json.Marshal(toSerialize)
 }

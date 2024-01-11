@@ -21,12 +21,12 @@ type PaymentServiceSnapshot struct {
 	Type *string `json:"type,omitempty"`
 	// The ID of this payment service.
 	Id *string `json:"id,omitempty"`
-	// The ID of the payment service definition used to create this service. 
-	PaymentServiceDefinitionId *string `json:"payment_service_definition_id,omitempty"`
-	// The payment method that this services handles.
-	Method *string `json:"method,omitempty"`
 	// The custom name set for this service.
 	DisplayName *string `json:"display_name,omitempty"`
+	// The payment method that this services handles.
+	Method *string `json:"method,omitempty"`
+	// The ID of the payment service definition used to create this service. 
+	PaymentServiceDefinitionId *string `json:"payment_service_definition_id,omitempty"`
 }
 
 // NewPaymentServiceSnapshot instantiates a new PaymentServiceSnapshot object
@@ -110,36 +110,36 @@ func (o *PaymentServiceSnapshot) SetId(v string) {
 	o.Id = &v
 }
 
-// GetPaymentServiceDefinitionId returns the PaymentServiceDefinitionId field value if set, zero value otherwise.
-func (o *PaymentServiceSnapshot) GetPaymentServiceDefinitionId() string {
-	if o == nil || o.PaymentServiceDefinitionId == nil {
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
+func (o *PaymentServiceSnapshot) GetDisplayName() string {
+	if o == nil || o.DisplayName == nil {
 		var ret string
 		return ret
 	}
-	return *o.PaymentServiceDefinitionId
+	return *o.DisplayName
 }
 
-// GetPaymentServiceDefinitionIdOk returns a tuple with the PaymentServiceDefinitionId field value if set, nil otherwise
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentServiceSnapshot) GetPaymentServiceDefinitionIdOk() (*string, bool) {
-	if o == nil || o.PaymentServiceDefinitionId == nil {
+func (o *PaymentServiceSnapshot) GetDisplayNameOk() (*string, bool) {
+	if o == nil || o.DisplayName == nil {
 		return nil, false
 	}
-	return o.PaymentServiceDefinitionId, true
+	return o.DisplayName, true
 }
 
-// HasPaymentServiceDefinitionId returns a boolean if a field has been set.
-func (o *PaymentServiceSnapshot) HasPaymentServiceDefinitionId() bool {
-	if o != nil && o.PaymentServiceDefinitionId != nil {
+// HasDisplayName returns a boolean if a field has been set.
+func (o *PaymentServiceSnapshot) HasDisplayName() bool {
+	if o != nil && o.DisplayName != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetPaymentServiceDefinitionId gets a reference to the given string and assigns it to the PaymentServiceDefinitionId field.
-func (o *PaymentServiceSnapshot) SetPaymentServiceDefinitionId(v string) {
-	o.PaymentServiceDefinitionId = &v
+// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
+func (o *PaymentServiceSnapshot) SetDisplayName(v string) {
+	o.DisplayName = &v
 }
 
 // GetMethod returns the Method field value if set, zero value otherwise.
@@ -174,36 +174,36 @@ func (o *PaymentServiceSnapshot) SetMethod(v string) {
 	o.Method = &v
 }
 
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise.
-func (o *PaymentServiceSnapshot) GetDisplayName() string {
-	if o == nil || o.DisplayName == nil {
+// GetPaymentServiceDefinitionId returns the PaymentServiceDefinitionId field value if set, zero value otherwise.
+func (o *PaymentServiceSnapshot) GetPaymentServiceDefinitionId() string {
+	if o == nil || o.PaymentServiceDefinitionId == nil {
 		var ret string
 		return ret
 	}
-	return *o.DisplayName
+	return *o.PaymentServiceDefinitionId
 }
 
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// GetPaymentServiceDefinitionIdOk returns a tuple with the PaymentServiceDefinitionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentServiceSnapshot) GetDisplayNameOk() (*string, bool) {
-	if o == nil || o.DisplayName == nil {
+func (o *PaymentServiceSnapshot) GetPaymentServiceDefinitionIdOk() (*string, bool) {
+	if o == nil || o.PaymentServiceDefinitionId == nil {
 		return nil, false
 	}
-	return o.DisplayName, true
+	return o.PaymentServiceDefinitionId, true
 }
 
-// HasDisplayName returns a boolean if a field has been set.
-func (o *PaymentServiceSnapshot) HasDisplayName() bool {
-	if o != nil && o.DisplayName != nil {
+// HasPaymentServiceDefinitionId returns a boolean if a field has been set.
+func (o *PaymentServiceSnapshot) HasPaymentServiceDefinitionId() bool {
+	if o != nil && o.PaymentServiceDefinitionId != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetDisplayName gets a reference to the given string and assigns it to the DisplayName field.
-func (o *PaymentServiceSnapshot) SetDisplayName(v string) {
-	o.DisplayName = &v
+// SetPaymentServiceDefinitionId gets a reference to the given string and assigns it to the PaymentServiceDefinitionId field.
+func (o *PaymentServiceSnapshot) SetPaymentServiceDefinitionId(v string) {
+	o.PaymentServiceDefinitionId = &v
 }
 
 func (o PaymentServiceSnapshot) MarshalJSON() ([]byte, error) {
@@ -214,14 +214,14 @@ func (o PaymentServiceSnapshot) MarshalJSON() ([]byte, error) {
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
-	if o.PaymentServiceDefinitionId != nil {
-		toSerialize["payment_service_definition_id"] = o.PaymentServiceDefinitionId
+	if o.DisplayName != nil {
+		toSerialize["display_name"] = o.DisplayName
 	}
 	if o.Method != nil {
 		toSerialize["method"] = o.Method
 	}
-	if o.DisplayName != nil {
-		toSerialize["display_name"] = o.DisplayName
+	if o.PaymentServiceDefinitionId != nil {
+		toSerialize["payment_service_definition_id"] = o.PaymentServiceDefinitionId
 	}
 	return json.Marshal(toSerialize)
 }

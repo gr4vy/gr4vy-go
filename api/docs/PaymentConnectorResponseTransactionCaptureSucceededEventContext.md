@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **RawResponseDescription** | Pointer to **NullableString** | This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
 **AvsResponseCode** | Pointer to **NullableString** | The response code received from the payment service for the Address Verification Check (AVS). This code is mapped to a standardized Gr4vy AVS response code.  - &#x60;no_match&#x60; - neither address or postal code match - &#x60;match&#x60; - both address and postal code match - &#x60;partial_match_address&#x60; - address matches but postal code does not - &#x60;partial_match_postcode&#x60; - postal code matches but address does not - &#x60;unavailable &#x60; - AVS is unavailable for card/country  The value of this field can be &#x60;null&#x60; if the payment service did not provide a response. | [optional] 
 **CvvResponseCode** | Pointer to **NullableString** | The response code received from the payment service for the Card Verification Value (CVV). This code is mapped to a standardized Gr4vy CVV response code.  - &#x60;no_match&#x60; - the CVV does not match the expected value - &#x60;match&#x60; - the CVV matches the expected value - &#x60;unavailable &#x60; - CVV check unavailable for card our country - &#x60;not_provided &#x60; - CVV not provided  The value of this field can be &#x60;null&#x60; if the payment service did not provide a response. | [optional] 
+**PaymentMethodScheme** | Pointer to **NullableString** | The card scheme sent to the connector. | [optional] 
 
 ## Methods
 
@@ -380,6 +381,41 @@ HasCvvResponseCode returns a boolean if a field has been set.
 `func (o *PaymentConnectorResponseTransactionCaptureSucceededEventContext) UnsetCvvResponseCode()`
 
 UnsetCvvResponseCode ensures that no value is present for CvvResponseCode, not even an explicit nil
+### GetPaymentMethodScheme
+
+`func (o *PaymentConnectorResponseTransactionCaptureSucceededEventContext) GetPaymentMethodScheme() string`
+
+GetPaymentMethodScheme returns the PaymentMethodScheme field if non-nil, zero value otherwise.
+
+### GetPaymentMethodSchemeOk
+
+`func (o *PaymentConnectorResponseTransactionCaptureSucceededEventContext) GetPaymentMethodSchemeOk() (*string, bool)`
+
+GetPaymentMethodSchemeOk returns a tuple with the PaymentMethodScheme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMethodScheme
+
+`func (o *PaymentConnectorResponseTransactionCaptureSucceededEventContext) SetPaymentMethodScheme(v string)`
+
+SetPaymentMethodScheme sets PaymentMethodScheme field to given value.
+
+### HasPaymentMethodScheme
+
+`func (o *PaymentConnectorResponseTransactionCaptureSucceededEventContext) HasPaymentMethodScheme() bool`
+
+HasPaymentMethodScheme returns a boolean if a field has been set.
+
+### SetPaymentMethodSchemeNil
+
+`func (o *PaymentConnectorResponseTransactionCaptureSucceededEventContext) SetPaymentMethodSchemeNil(b bool)`
+
+ SetPaymentMethodSchemeNil sets the value for PaymentMethodScheme to be an explicit nil
+
+### UnsetPaymentMethodScheme
+`func (o *PaymentConnectorResponseTransactionCaptureSucceededEventContext) UnsetPaymentMethodScheme()`
+
+UnsetPaymentMethodScheme ensures that no value is present for PaymentMethodScheme, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

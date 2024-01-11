@@ -22,16 +22,16 @@ type Buyer struct {
 	Type *string `json:"type,omitempty"`
 	// The unique Gr4vy ID for this buyer.
 	Id *string `json:"id,omitempty"`
-	// The unique ID for a merchant account.
-	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
-	// An external identifier that can be used to match the buyer against your own records.
-	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
-	// A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.
-	DisplayName NullableString `json:"display_name,omitempty"`
 	// The billing details associated with a buyer.
 	BillingDetails NullableBillingDetails `json:"billing_details,omitempty"`
 	// The date and time when this buyer was created in our system.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
+	// A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.
+	DisplayName NullableString `json:"display_name,omitempty"`
+	// An external identifier that can be used to match the buyer against your own records.
+	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
+	// The unique ID for a merchant account.
+	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
 	// The date and time when this buyer was last updated in our system.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 }
@@ -117,122 +117,6 @@ func (o *Buyer) SetId(v string) {
 	o.Id = &v
 }
 
-// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
-func (o *Buyer) GetMerchantAccountId() string {
-	if o == nil || o.MerchantAccountId == nil {
-		var ret string
-		return ret
-	}
-	return *o.MerchantAccountId
-}
-
-// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *Buyer) GetMerchantAccountIdOk() (*string, bool) {
-	if o == nil || o.MerchantAccountId == nil {
-		return nil, false
-	}
-	return o.MerchantAccountId, true
-}
-
-// HasMerchantAccountId returns a boolean if a field has been set.
-func (o *Buyer) HasMerchantAccountId() bool {
-	if o != nil && o.MerchantAccountId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetMerchantAccountId gets a reference to the given string and assigns it to the MerchantAccountId field.
-func (o *Buyer) SetMerchantAccountId(v string) {
-	o.MerchantAccountId = &v
-}
-
-// GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Buyer) GetExternalIdentifier() string {
-	if o == nil || o.ExternalIdentifier.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.ExternalIdentifier.Get()
-}
-
-// GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Buyer) GetExternalIdentifierOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.ExternalIdentifier.Get(), o.ExternalIdentifier.IsSet()
-}
-
-// HasExternalIdentifier returns a boolean if a field has been set.
-func (o *Buyer) HasExternalIdentifier() bool {
-	if o != nil && o.ExternalIdentifier.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetExternalIdentifier gets a reference to the given NullableString and assigns it to the ExternalIdentifier field.
-func (o *Buyer) SetExternalIdentifier(v string) {
-	o.ExternalIdentifier.Set(&v)
-}
-// SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
-func (o *Buyer) SetExternalIdentifierNil() {
-	o.ExternalIdentifier.Set(nil)
-}
-
-// UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
-func (o *Buyer) UnsetExternalIdentifier() {
-	o.ExternalIdentifier.Unset()
-}
-
-// GetDisplayName returns the DisplayName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *Buyer) GetDisplayName() string {
-	if o == nil || o.DisplayName.Get() == nil {
-		var ret string
-		return ret
-	}
-	return *o.DisplayName.Get()
-}
-
-// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *Buyer) GetDisplayNameOk() (*string, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.DisplayName.Get(), o.DisplayName.IsSet()
-}
-
-// HasDisplayName returns a boolean if a field has been set.
-func (o *Buyer) HasDisplayName() bool {
-	if o != nil && o.DisplayName.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetDisplayName gets a reference to the given NullableString and assigns it to the DisplayName field.
-func (o *Buyer) SetDisplayName(v string) {
-	o.DisplayName.Set(&v)
-}
-// SetDisplayNameNil sets the value for DisplayName to be an explicit nil
-func (o *Buyer) SetDisplayNameNil() {
-	o.DisplayName.Set(nil)
-}
-
-// UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
-func (o *Buyer) UnsetDisplayName() {
-	o.DisplayName.Unset()
-}
-
 // GetBillingDetails returns the BillingDetails field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *Buyer) GetBillingDetails() BillingDetails {
 	if o == nil || o.BillingDetails.Get() == nil {
@@ -307,6 +191,122 @@ func (o *Buyer) SetCreatedAt(v time.Time) {
 	o.CreatedAt = &v
 }
 
+// GetDisplayName returns the DisplayName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Buyer) GetDisplayName() string {
+	if o == nil || o.DisplayName.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.DisplayName.Get()
+}
+
+// GetDisplayNameOk returns a tuple with the DisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Buyer) GetDisplayNameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.DisplayName.Get(), o.DisplayName.IsSet()
+}
+
+// HasDisplayName returns a boolean if a field has been set.
+func (o *Buyer) HasDisplayName() bool {
+	if o != nil && o.DisplayName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDisplayName gets a reference to the given NullableString and assigns it to the DisplayName field.
+func (o *Buyer) SetDisplayName(v string) {
+	o.DisplayName.Set(&v)
+}
+// SetDisplayNameNil sets the value for DisplayName to be an explicit nil
+func (o *Buyer) SetDisplayNameNil() {
+	o.DisplayName.Set(nil)
+}
+
+// UnsetDisplayName ensures that no value is present for DisplayName, not even an explicit nil
+func (o *Buyer) UnsetDisplayName() {
+	o.DisplayName.Unset()
+}
+
+// GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Buyer) GetExternalIdentifier() string {
+	if o == nil || o.ExternalIdentifier.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ExternalIdentifier.Get()
+}
+
+// GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Buyer) GetExternalIdentifierOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ExternalIdentifier.Get(), o.ExternalIdentifier.IsSet()
+}
+
+// HasExternalIdentifier returns a boolean if a field has been set.
+func (o *Buyer) HasExternalIdentifier() bool {
+	if o != nil && o.ExternalIdentifier.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalIdentifier gets a reference to the given NullableString and assigns it to the ExternalIdentifier field.
+func (o *Buyer) SetExternalIdentifier(v string) {
+	o.ExternalIdentifier.Set(&v)
+}
+// SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
+func (o *Buyer) SetExternalIdentifierNil() {
+	o.ExternalIdentifier.Set(nil)
+}
+
+// UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
+func (o *Buyer) UnsetExternalIdentifier() {
+	o.ExternalIdentifier.Unset()
+}
+
+// GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
+func (o *Buyer) GetMerchantAccountId() string {
+	if o == nil || o.MerchantAccountId == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantAccountId
+}
+
+// GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Buyer) GetMerchantAccountIdOk() (*string, bool) {
+	if o == nil || o.MerchantAccountId == nil {
+		return nil, false
+	}
+	return o.MerchantAccountId, true
+}
+
+// HasMerchantAccountId returns a boolean if a field has been set.
+func (o *Buyer) HasMerchantAccountId() bool {
+	if o != nil && o.MerchantAccountId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantAccountId gets a reference to the given string and assigns it to the MerchantAccountId field.
+func (o *Buyer) SetMerchantAccountId(v string) {
+	o.MerchantAccountId = &v
+}
+
 // GetUpdatedAt returns the UpdatedAt field value if set, zero value otherwise.
 func (o *Buyer) GetUpdatedAt() time.Time {
 	if o == nil || o.UpdatedAt == nil {
@@ -347,20 +347,20 @@ func (o Buyer) MarshalJSON() ([]byte, error) {
 	if o.Id != nil {
 		toSerialize["id"] = o.Id
 	}
-	if o.MerchantAccountId != nil {
-		toSerialize["merchant_account_id"] = o.MerchantAccountId
-	}
-	if o.ExternalIdentifier.IsSet() {
-		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
-	}
-	if o.DisplayName.IsSet() {
-		toSerialize["display_name"] = o.DisplayName.Get()
-	}
 	if o.BillingDetails.IsSet() {
 		toSerialize["billing_details"] = o.BillingDetails.Get()
 	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt
+	}
+	if o.DisplayName.IsSet() {
+		toSerialize["display_name"] = o.DisplayName.Get()
+	}
+	if o.ExternalIdentifier.IsSet() {
+		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
+	}
+	if o.MerchantAccountId != nil {
+		toSerialize["merchant_account_id"] = o.MerchantAccountId
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updated_at"] = o.UpdatedAt

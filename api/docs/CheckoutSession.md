@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ExpiresAt** | Pointer to **time.Time** | The date and time when the Checkout Session will expire. By default this will be set to 1 hour from the date of creation. | [optional] 
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 **Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. | [optional] 
+**PaymentMethod** | Pointer to [**NullableCheckoutSessionPaymentMethod**](CheckoutSessionPaymentMethod.md) |  | [optional] 
 
 ## Methods
 
@@ -174,6 +175,41 @@ HasMetadata returns a boolean if a field has been set.
 `func (o *CheckoutSession) UnsetMetadata()`
 
 UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
+### GetPaymentMethod
+
+`func (o *CheckoutSession) GetPaymentMethod() CheckoutSessionPaymentMethod`
+
+GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
+
+### GetPaymentMethodOk
+
+`func (o *CheckoutSession) GetPaymentMethodOk() (*CheckoutSessionPaymentMethod, bool)`
+
+GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMethod
+
+`func (o *CheckoutSession) SetPaymentMethod(v CheckoutSessionPaymentMethod)`
+
+SetPaymentMethod sets PaymentMethod field to given value.
+
+### HasPaymentMethod
+
+`func (o *CheckoutSession) HasPaymentMethod() bool`
+
+HasPaymentMethod returns a boolean if a field has been set.
+
+### SetPaymentMethodNil
+
+`func (o *CheckoutSession) SetPaymentMethodNil(b bool)`
+
+ SetPaymentMethodNil sets the value for PaymentMethod to be an explicit nil
+
+### UnsetPaymentMethod
+`func (o *CheckoutSession) UnsetPaymentMethod()`
+
+UnsetPaymentMethod ensures that no value is present for PaymentMethod, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
