@@ -174,6 +174,10 @@ func Gr4vyNullableInt32(v int32) NullableInt32 {
 	return *NewNullableInt32(&v)
 }
 
+func Gr4vyNullableString(v string) NullableString {
+	return *NewNullableString(&v)
+}
+
 func StringPtr(v string) *string {
 	return &v
 }

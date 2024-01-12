@@ -639,9 +639,9 @@ func TestAuthorizeNewTransaction(t *testing.T) {
 
 	paymentMethod := Gr4vyTransactionPaymentMethodRequest{
 		Method:         "card",
-		Number:         StringPtr("4111111111111111"),
-		ExpirationDate: StringPtr("12/24"),
-		SecurityCode:   StringPtr("123"),
+		Number:         Gr4vyNullableString("4111111111111111"),
+		ExpirationDate: Gr4vyNullableString("12/24"),
+		SecurityCode:   Gr4vyNullableString("123"),
 	}
 
 	id := uuid.New()
