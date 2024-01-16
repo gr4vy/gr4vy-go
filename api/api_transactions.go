@@ -430,18 +430,8 @@ type ApiListTransactionRefundsRequest struct {
 	ctx _context.Context
 	ApiService *TransactionsApiService
 	transactionId string
-	limit *int32
-	cursor *string
 }
 
-func (r ApiListTransactionRefundsRequest) Limit(limit int32) ApiListTransactionRefundsRequest {
-	r.limit = &limit
-	return r
-}
-func (r ApiListTransactionRefundsRequest) Cursor(cursor string) ApiListTransactionRefundsRequest {
-	r.cursor = &cursor
-	return r
-}
 
 func (r ApiListTransactionRefundsRequest) Execute() (Refunds, *_nethttp.Response, error) {
 	return r.ApiService.ListTransactionRefundsExecute(r)
@@ -488,12 +478,6 @@ func (a *TransactionsApiService) ListTransactionRefundsExecute(r ApiListTransact
 	localVarQueryParams := _neturl.Values{}
 	localVarFormParams := _neturl.Values{}
 
-	if r.limit != nil {
-		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
-	}
-	if r.cursor != nil {
-		localVarQueryParams.Add("cursor", parameterToString(*r.cursor, ""))
-	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
 
@@ -582,8 +566,9 @@ type ApiListTransactionsRequest struct {
 	createdAtLte *time.Time
 	currency *[]string
 	externalIdentifier *string
+	giftCardId *string
+	hasGiftCardRedemptions *bool
 	hasRefunds *bool
-	pendingReview *bool
 	id *string
 	metadata *[]string
 	method *[]string
@@ -591,6 +576,8 @@ type ApiListTransactionsRequest struct {
 	paymentMethodLabel *string
 	paymentServiceId *[]string
 	paymentServiceTransactionId *string
+	pendingReview *bool
+	reconciliationId *string
 	search *string
 	status *[]string
 	updatedAtGte *time.Time
@@ -645,12 +632,16 @@ func (r ApiListTransactionsRequest) ExternalIdentifier(externalIdentifier string
 	r.externalIdentifier = &externalIdentifier
 	return r
 }
-func (r ApiListTransactionsRequest) HasRefunds(hasRefunds bool) ApiListTransactionsRequest {
-	r.hasRefunds = &hasRefunds
+func (r ApiListTransactionsRequest) GiftCardId(giftCardId string) ApiListTransactionsRequest {
+	r.giftCardId = &giftCardId
 	return r
 }
-func (r ApiListTransactionsRequest) PendingReview(pendingReview bool) ApiListTransactionsRequest {
-	r.pendingReview = &pendingReview
+func (r ApiListTransactionsRequest) HasGiftCardRedemptions(hasGiftCardRedemptions bool) ApiListTransactionsRequest {
+	r.hasGiftCardRedemptions = &hasGiftCardRedemptions
+	return r
+}
+func (r ApiListTransactionsRequest) HasRefunds(hasRefunds bool) ApiListTransactionsRequest {
+	r.hasRefunds = &hasRefunds
 	return r
 }
 func (r ApiListTransactionsRequest) Id(id string) ApiListTransactionsRequest {
@@ -679,6 +670,14 @@ func (r ApiListTransactionsRequest) PaymentServiceId(paymentServiceId []string) 
 }
 func (r ApiListTransactionsRequest) PaymentServiceTransactionId(paymentServiceTransactionId string) ApiListTransactionsRequest {
 	r.paymentServiceTransactionId = &paymentServiceTransactionId
+	return r
+}
+func (r ApiListTransactionsRequest) PendingReview(pendingReview bool) ApiListTransactionsRequest {
+	r.pendingReview = &pendingReview
+	return r
+}
+func (r ApiListTransactionsRequest) ReconciliationId(reconciliationId string) ApiListTransactionsRequest {
+	r.reconciliationId = &reconciliationId
 	return r
 }
 func (r ApiListTransactionsRequest) Search(search string) ApiListTransactionsRequest {
@@ -784,11 +783,14 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	if r.externalIdentifier != nil {
 		localVarQueryParams.Add("external_identifier", parameterToString(*r.externalIdentifier, ""))
 	}
+	if r.giftCardId != nil {
+		localVarQueryParams.Add("gift_card_id", parameterToString(*r.giftCardId, ""))
+	}
+	if r.hasGiftCardRedemptions != nil {
+		localVarQueryParams.Add("has_gift_card_redemptions", parameterToString(*r.hasGiftCardRedemptions, ""))
+	}
 	if r.hasRefunds != nil {
 		localVarQueryParams.Add("has_refunds", parameterToString(*r.hasRefunds, ""))
-	}
-	if r.pendingReview != nil {
-		localVarQueryParams.Add("pending_review", parameterToString(*r.pendingReview, ""))
 	}
 	if r.id != nil {
 		localVarQueryParams.Add("id", parameterToString(*r.id, ""))
@@ -834,6 +836,12 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	}
 	if r.paymentServiceTransactionId != nil {
 		localVarQueryParams.Add("payment_service_transaction_id", parameterToString(*r.paymentServiceTransactionId, ""))
+	}
+	if r.pendingReview != nil {
+		localVarQueryParams.Add("pending_review", parameterToString(*r.pendingReview, ""))
+	}
+	if r.reconciliationId != nil {
+		localVarQueryParams.Add("reconciliation_id", parameterToString(*r.reconciliationId, ""))
 	}
 	if r.search != nil {
 		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
@@ -1091,6 +1099,9 @@ not possible to create the authorization without redirecting the user for
 their authorization. In these cases the status is set to
 indicate buyer approval is pending and an approval URL is returned.
 
+Duplicated gift card numbers are not supported. This includes both stored gift
+cards, as well as those directly provided via the request.
+
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiNewTransactionRequest
  */
@@ -1192,6 +1203,141 @@ func (a *TransactionsApiService) NewTransactionExecute(r ApiNewTransactionReques
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
 			var v Error409DuplicateRecord
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
+type ApiRefundAllRequest struct {
+	ctx _context.Context
+	ApiService *TransactionsApiService
+	transactionId string
+}
+
+
+func (r ApiRefundAllRequest) Execute() (Refunds, *_nethttp.Response, error) {
+	return r.ApiService.RefundAllExecute(r)
+}
+
+/*
+ * RefundAll Refund all instruments in a transaction
+ * Refunds a transaction fully across all instruments.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param transactionId The ID for the transaction to get the information for.
+ * @return ApiRefundAllRequest
+ */
+func (a *TransactionsApiService) RefundAll(ctx _context.Context, transactionId string) ApiRefundAllRequest {
+	return ApiRefundAllRequest{
+		ApiService: a,
+		ctx: ctx,
+		transactionId: transactionId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return Refunds
+ */
+func (a *TransactionsApiService) RefundAllExecute(r ApiRefundAllRequest) (Refunds, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  Refunds
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "TransactionsApiService.RefundAll")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/transactions/{transaction_id}/refunds/all"
+	localVarPath = strings.Replace(localVarPath, "{"+"transaction_id"+"}", _neturl.PathEscape(parameterToString(r.transactionId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v ErrorGeneric
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error404NotFound
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

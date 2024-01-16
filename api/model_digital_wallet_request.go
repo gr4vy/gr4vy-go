@@ -21,8 +21,12 @@ type DigitalWalletRequest struct {
 	Provider string `json:"provider"`
 	// The name of the merchant. This is used to register the merchant with a digital wallet provider and this name is not displayed to the buyer.
 	MerchantName string `json:"merchant_name"`
-	// The main URL of the merchant. This is used to register the merchant with a digital wallet provider and this URL is not displayed to the buyer.
+	// The main URL of the merchant.
 	MerchantUrl NullableString `json:"merchant_url,omitempty"`
+	// The consumer facing name of the merchant.
+	MerchantDisplayName NullableString `json:"merchant_display_name,omitempty"`
+	// The country code where the merchant is registered.
+	MerchantCountryCode NullableString `json:"merchant_country_code,omitempty"`
 	// The list of domain names that a digital wallet can be used on. To use a digital wallet on a website, the domain of the site is required to be in this list.
 	DomainNames []string `json:"domain_names"`
 	// The explicit acceptance of the digital wallet provider's terms and conditions by the merchant. Needs to be `true` to register a new digital wallet.
@@ -144,6 +148,90 @@ func (o *DigitalWalletRequest) UnsetMerchantUrl() {
 	o.MerchantUrl.Unset()
 }
 
+// GetMerchantDisplayName returns the MerchantDisplayName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DigitalWalletRequest) GetMerchantDisplayName() string {
+	if o == nil || o.MerchantDisplayName.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantDisplayName.Get()
+}
+
+// GetMerchantDisplayNameOk returns a tuple with the MerchantDisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DigitalWalletRequest) GetMerchantDisplayNameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.MerchantDisplayName.Get(), o.MerchantDisplayName.IsSet()
+}
+
+// HasMerchantDisplayName returns a boolean if a field has been set.
+func (o *DigitalWalletRequest) HasMerchantDisplayName() bool {
+	if o != nil && o.MerchantDisplayName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantDisplayName gets a reference to the given NullableString and assigns it to the MerchantDisplayName field.
+func (o *DigitalWalletRequest) SetMerchantDisplayName(v string) {
+	o.MerchantDisplayName.Set(&v)
+}
+// SetMerchantDisplayNameNil sets the value for MerchantDisplayName to be an explicit nil
+func (o *DigitalWalletRequest) SetMerchantDisplayNameNil() {
+	o.MerchantDisplayName.Set(nil)
+}
+
+// UnsetMerchantDisplayName ensures that no value is present for MerchantDisplayName, not even an explicit nil
+func (o *DigitalWalletRequest) UnsetMerchantDisplayName() {
+	o.MerchantDisplayName.Unset()
+}
+
+// GetMerchantCountryCode returns the MerchantCountryCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DigitalWalletRequest) GetMerchantCountryCode() string {
+	if o == nil || o.MerchantCountryCode.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantCountryCode.Get()
+}
+
+// GetMerchantCountryCodeOk returns a tuple with the MerchantCountryCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DigitalWalletRequest) GetMerchantCountryCodeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.MerchantCountryCode.Get(), o.MerchantCountryCode.IsSet()
+}
+
+// HasMerchantCountryCode returns a boolean if a field has been set.
+func (o *DigitalWalletRequest) HasMerchantCountryCode() bool {
+	if o != nil && o.MerchantCountryCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantCountryCode gets a reference to the given NullableString and assigns it to the MerchantCountryCode field.
+func (o *DigitalWalletRequest) SetMerchantCountryCode(v string) {
+	o.MerchantCountryCode.Set(&v)
+}
+// SetMerchantCountryCodeNil sets the value for MerchantCountryCode to be an explicit nil
+func (o *DigitalWalletRequest) SetMerchantCountryCodeNil() {
+	o.MerchantCountryCode.Set(nil)
+}
+
+// UnsetMerchantCountryCode ensures that no value is present for MerchantCountryCode, not even an explicit nil
+func (o *DigitalWalletRequest) UnsetMerchantCountryCode() {
+	o.MerchantCountryCode.Unset()
+}
+
 // GetDomainNames returns the DomainNames field value
 func (o *DigitalWalletRequest) GetDomainNames() []string {
 	if o == nil {
@@ -202,6 +290,12 @@ func (o DigitalWalletRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.MerchantUrl.IsSet() {
 		toSerialize["merchant_url"] = o.MerchantUrl.Get()
+	}
+	if o.MerchantDisplayName.IsSet() {
+		toSerialize["merchant_display_name"] = o.MerchantDisplayName.Get()
+	}
+	if o.MerchantCountryCode.IsSet() {
+		toSerialize["merchant_country_code"] = o.MerchantCountryCode.Get()
 	}
 	if true {
 		toSerialize["domain_names"] = o.DomainNames

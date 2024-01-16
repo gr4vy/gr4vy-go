@@ -6,6 +6,9 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **DeliveryType** | Pointer to **NullableString** | Value to populate the &#x60;deliveryType&#x60; field in &#x60;primaryDeliveryDetails&#x60;.  Represents the type of delivery. This can be set to &#x60;PHYSICAL&#x60; for any type of shipped goods, &#x60;DIGITAL&#x60; for non-shipped goods (services, gift cards etc.), or &#x60;HYBRID&#x60; for others. | [optional] 
 **DeliveryMethod** | Pointer to **NullableString** | Value to populate the &#x60;deliveryMethod&#x60; field in &#x60;primaryDeliveryDetails&#x60;.  Represents the delivery method chosen by customer such as postal service, email, in game transfer, etc. | [optional] 
+**IsGuestBuyer** | Pointer to **bool** | Defines if this is a guest check-out. This will redact the &#x60;accountId&#x60; and &#x60;created&#x60; fields from the &#x60;accountOwner&#x60; details sent to Forter. | [optional] [default to false]
+**CartItems** | Pointer to [**[]ConnectionOptionsForterAntiFraudCartItems**](ConnectionOptionsForterAntiFraudCartItems.md) | A list of Forter cart item objects. These will be merged into the &#x60;cart_items&#x60; passed to the transaction. Every cart item here will be merged with a cart item on the transaction with the same index.  Together, these will augment the &#x60;cartItems&#x60; values sent to the Forter validation API. | [optional] 
+**TotalDiscount** | Pointer to [**NullableConnectionOptionsForterAntiFraudTotalDiscount**](ConnectionOptionsForterAntiFraudTotalDiscount.md) |  | [optional] 
 
 ## Methods
 
@@ -96,6 +99,91 @@ HasDeliveryMethod returns a boolean if a field has been set.
 `func (o *ConnectionOptionsForterAntiFraud) UnsetDeliveryMethod()`
 
 UnsetDeliveryMethod ensures that no value is present for DeliveryMethod, not even an explicit nil
+### GetIsGuestBuyer
+
+`func (o *ConnectionOptionsForterAntiFraud) GetIsGuestBuyer() bool`
+
+GetIsGuestBuyer returns the IsGuestBuyer field if non-nil, zero value otherwise.
+
+### GetIsGuestBuyerOk
+
+`func (o *ConnectionOptionsForterAntiFraud) GetIsGuestBuyerOk() (*bool, bool)`
+
+GetIsGuestBuyerOk returns a tuple with the IsGuestBuyer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetIsGuestBuyer
+
+`func (o *ConnectionOptionsForterAntiFraud) SetIsGuestBuyer(v bool)`
+
+SetIsGuestBuyer sets IsGuestBuyer field to given value.
+
+### HasIsGuestBuyer
+
+`func (o *ConnectionOptionsForterAntiFraud) HasIsGuestBuyer() bool`
+
+HasIsGuestBuyer returns a boolean if a field has been set.
+
+### GetCartItems
+
+`func (o *ConnectionOptionsForterAntiFraud) GetCartItems() []ConnectionOptionsForterAntiFraudCartItems`
+
+GetCartItems returns the CartItems field if non-nil, zero value otherwise.
+
+### GetCartItemsOk
+
+`func (o *ConnectionOptionsForterAntiFraud) GetCartItemsOk() (*[]ConnectionOptionsForterAntiFraudCartItems, bool)`
+
+GetCartItemsOk returns a tuple with the CartItems field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCartItems
+
+`func (o *ConnectionOptionsForterAntiFraud) SetCartItems(v []ConnectionOptionsForterAntiFraudCartItems)`
+
+SetCartItems sets CartItems field to given value.
+
+### HasCartItems
+
+`func (o *ConnectionOptionsForterAntiFraud) HasCartItems() bool`
+
+HasCartItems returns a boolean if a field has been set.
+
+### GetTotalDiscount
+
+`func (o *ConnectionOptionsForterAntiFraud) GetTotalDiscount() ConnectionOptionsForterAntiFraudTotalDiscount`
+
+GetTotalDiscount returns the TotalDiscount field if non-nil, zero value otherwise.
+
+### GetTotalDiscountOk
+
+`func (o *ConnectionOptionsForterAntiFraud) GetTotalDiscountOk() (*ConnectionOptionsForterAntiFraudTotalDiscount, bool)`
+
+GetTotalDiscountOk returns a tuple with the TotalDiscount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTotalDiscount
+
+`func (o *ConnectionOptionsForterAntiFraud) SetTotalDiscount(v ConnectionOptionsForterAntiFraudTotalDiscount)`
+
+SetTotalDiscount sets TotalDiscount field to given value.
+
+### HasTotalDiscount
+
+`func (o *ConnectionOptionsForterAntiFraud) HasTotalDiscount() bool`
+
+HasTotalDiscount returns a boolean if a field has been set.
+
+### SetTotalDiscountNil
+
+`func (o *ConnectionOptionsForterAntiFraud) SetTotalDiscountNil(b bool)`
+
+ SetTotalDiscountNil sets the value for TotalDiscount to be an explicit nil
+
+### UnsetTotalDiscount
+`func (o *ConnectionOptionsForterAntiFraud) UnsetTotalDiscount()`
+
+UnsetTotalDiscount ensures that no value is present for TotalDiscount, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

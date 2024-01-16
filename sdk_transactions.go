@@ -100,7 +100,7 @@ func (c *Gr4vyClient) AuthorizeNewTransaction(body Gr4vyTransactionRequest, pm G
 
     var b TransactionRequest = TransactionRequest(body)
     var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
-    b.PaymentMethod = tpm
+    b.PaymentMethod = &tpm
     response, http, err := p.TransactionRequest(b).Execute()
     c.HandleResponse(http, err)
     if (err != nil) {
@@ -119,7 +119,7 @@ func (c *Gr4vyClient) AuthorizeNewTransactionContext(ctx context.Context, body G
 
     var b TransactionRequest = TransactionRequest(body)
     var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
-    b.PaymentMethod = tpm
+    b.PaymentMethod = &tpm
     response, http, err := p.TransactionRequest(b).Execute()
     c.HandleResponse(http, err)
     if (err != nil) {
@@ -140,7 +140,7 @@ func (c *Gr4vyClient) AuthorizeNewTransactionWithIdempotencyKey(body Gr4vyTransa
     
     var b TransactionRequest = TransactionRequest(body)
     var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
-    b.PaymentMethod = tpm
+    b.PaymentMethod = &tpm
     response, http, err := p.TransactionRequest(b).Execute()
     c.HandleResponse(http, err)
     if (err != nil) {
@@ -161,7 +161,7 @@ func (c *Gr4vyClient) AuthorizeNewTransactionContextWithIdempotencyKey(ctx conte
 
     var b TransactionRequest = TransactionRequest(body)
     var tpm TransactionPaymentMethodRequest = TransactionPaymentMethodRequest(pm)
-    b.PaymentMethod = tpm
+    b.PaymentMethod = &tpm
     response, http, err := p.TransactionRequest(b).Execute()
     c.HandleResponse(http, err)
     if (err != nil) {

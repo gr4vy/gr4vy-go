@@ -29,6 +29,10 @@ type PaymentConnectorResponseTransactionDeclinedEventContext struct {
 	Status *string `json:"status,omitempty"`
 	// A raw response code returned for the decline.
 	Code NullableString `json:"code,omitempty"`
+	// The type of instrument used for this transaction.
+	InstrumentType *string `json:"instrument_type,omitempty"`
+	// Defines why the transaction might be retried. A retry is not guaranteed because the maximum number of retries might already have been attempted.  * `failure` - the transaction will be retried because of a failure calling   the payment service. * `retriable_decline` - the transaction will be retried because a decline code   was received that can be retried. * `payment_method_replacement` - the transaction will be retried because a   decline code was received that triggered a payment method replacement.
+	RetryRule NullableString `json:"retry_rule,omitempty"`
 	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
 	RawResponseCode NullableString `json:"raw_response_code,omitempty"`
 	// This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
@@ -37,6 +41,8 @@ type PaymentConnectorResponseTransactionDeclinedEventContext struct {
 	AvsResponseCode NullableString `json:"avs_response_code,omitempty"`
 	// The response code received from the payment service for the Card Verification Value (CVV). This code is mapped to a standardized Gr4vy CVV response code.  - `no_match` - the CVV does not match the expected value - `match` - the CVV matches the expected value - `unavailable ` - CVV check unavailable for card our country - `not_provided ` - CVV not provided  The value of this field can be `null` if the payment service did not provide a response.
 	CvvResponseCode NullableString `json:"cvv_response_code,omitempty"`
+	// The card scheme sent to the connector.
+	PaymentMethodScheme NullableString `json:"payment_method_scheme,omitempty"`
 }
 
 // NewPaymentConnectorResponseTransactionDeclinedEventContext instantiates a new PaymentConnectorResponseTransactionDeclinedEventContext object
@@ -268,6 +274,80 @@ func (o *PaymentConnectorResponseTransactionDeclinedEventContext) UnsetCode() {
 	o.Code.Unset()
 }
 
+// GetInstrumentType returns the InstrumentType field value if set, zero value otherwise.
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) GetInstrumentType() string {
+	if o == nil || o.InstrumentType == nil {
+		var ret string
+		return ret
+	}
+	return *o.InstrumentType
+}
+
+// GetInstrumentTypeOk returns a tuple with the InstrumentType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) GetInstrumentTypeOk() (*string, bool) {
+	if o == nil || o.InstrumentType == nil {
+		return nil, false
+	}
+	return o.InstrumentType, true
+}
+
+// HasInstrumentType returns a boolean if a field has been set.
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) HasInstrumentType() bool {
+	if o != nil && o.InstrumentType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetInstrumentType gets a reference to the given string and assigns it to the InstrumentType field.
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) SetInstrumentType(v string) {
+	o.InstrumentType = &v
+}
+
+// GetRetryRule returns the RetryRule field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) GetRetryRule() string {
+	if o == nil || o.RetryRule.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RetryRule.Get()
+}
+
+// GetRetryRuleOk returns a tuple with the RetryRule field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) GetRetryRuleOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.RetryRule.Get(), o.RetryRule.IsSet()
+}
+
+// HasRetryRule returns a boolean if a field has been set.
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) HasRetryRule() bool {
+	if o != nil && o.RetryRule.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRetryRule gets a reference to the given NullableString and assigns it to the RetryRule field.
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) SetRetryRule(v string) {
+	o.RetryRule.Set(&v)
+}
+// SetRetryRuleNil sets the value for RetryRule to be an explicit nil
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) SetRetryRuleNil() {
+	o.RetryRule.Set(nil)
+}
+
+// UnsetRetryRule ensures that no value is present for RetryRule, not even an explicit nil
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) UnsetRetryRule() {
+	o.RetryRule.Unset()
+}
+
 // GetRawResponseCode returns the RawResponseCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentConnectorResponseTransactionDeclinedEventContext) GetRawResponseCode() string {
 	if o == nil || o.RawResponseCode.Get() == nil {
@@ -436,6 +516,48 @@ func (o *PaymentConnectorResponseTransactionDeclinedEventContext) UnsetCvvRespon
 	o.CvvResponseCode.Unset()
 }
 
+// GetPaymentMethodScheme returns the PaymentMethodScheme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) GetPaymentMethodScheme() string {
+	if o == nil || o.PaymentMethodScheme.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.PaymentMethodScheme.Get()
+}
+
+// GetPaymentMethodSchemeOk returns a tuple with the PaymentMethodScheme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) GetPaymentMethodSchemeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.PaymentMethodScheme.Get(), o.PaymentMethodScheme.IsSet()
+}
+
+// HasPaymentMethodScheme returns a boolean if a field has been set.
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) HasPaymentMethodScheme() bool {
+	if o != nil && o.PaymentMethodScheme.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMethodScheme gets a reference to the given NullableString and assigns it to the PaymentMethodScheme field.
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) SetPaymentMethodScheme(v string) {
+	o.PaymentMethodScheme.Set(&v)
+}
+// SetPaymentMethodSchemeNil sets the value for PaymentMethodScheme to be an explicit nil
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) SetPaymentMethodSchemeNil() {
+	o.PaymentMethodScheme.Set(nil)
+}
+
+// UnsetPaymentMethodScheme ensures that no value is present for PaymentMethodScheme, not even an explicit nil
+func (o *PaymentConnectorResponseTransactionDeclinedEventContext) UnsetPaymentMethodScheme() {
+	o.PaymentMethodScheme.Unset()
+}
+
 func (o PaymentConnectorResponseTransactionDeclinedEventContext) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.PaymentServiceId != nil {
@@ -456,6 +578,12 @@ func (o PaymentConnectorResponseTransactionDeclinedEventContext) MarshalJSON() (
 	if o.Code.IsSet() {
 		toSerialize["code"] = o.Code.Get()
 	}
+	if o.InstrumentType != nil {
+		toSerialize["instrument_type"] = o.InstrumentType
+	}
+	if o.RetryRule.IsSet() {
+		toSerialize["retry_rule"] = o.RetryRule.Get()
+	}
 	if o.RawResponseCode.IsSet() {
 		toSerialize["raw_response_code"] = o.RawResponseCode.Get()
 	}
@@ -467,6 +595,9 @@ func (o PaymentConnectorResponseTransactionDeclinedEventContext) MarshalJSON() (
 	}
 	if o.CvvResponseCode.IsSet() {
 		toSerialize["cvv_response_code"] = o.CvvResponseCode.Get()
+	}
+	if o.PaymentMethodScheme.IsSet() {
+		toSerialize["payment_method_scheme"] = o.PaymentMethodScheme.Get()
 	}
 	return json.Marshal(toSerialize)
 }

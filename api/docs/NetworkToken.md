@@ -4,6 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**Type** | Pointer to **string** | The type of this resource. | [optional] 
 **Id** | Pointer to **string** | The unique ID of the token. | [optional] 
 **PaymentMethodId** | Pointer to **string** | The unique ID of the payment method. | [optional] 
 **Status** | Pointer to **string** | The state of the network token.  - &#x60;active&#x60; - The network token is active and ready to be used. - &#x60;inactive&#x60; - The network token is being deactivated. - &#x60;suspended&#x60; - The network token is suspended. - &#x60;deleted&#x60; - The network token is deleted. | [optional] 
@@ -30,6 +31,31 @@ will change when the set of required properties is changed
 NewNetworkTokenWithDefaults instantiates a new NetworkToken object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetType
+
+`func (o *NetworkToken) GetType() string`
+
+GetType returns the Type field if non-nil, zero value otherwise.
+
+### GetTypeOk
+
+`func (o *NetworkToken) GetTypeOk() (*string, bool)`
+
+GetTypeOk returns a tuple with the Type field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetType
+
+`func (o *NetworkToken) SetType(v string)`
+
+SetType sets Type field to given value.
+
+### HasType
+
+`func (o *NetworkToken) HasType() bool`
+
+HasType returns a boolean if a field has been set.
 
 ### GetId
 

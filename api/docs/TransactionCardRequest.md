@@ -9,8 +9,6 @@ Name | Type | Description | Notes
 **ExpirationDate** | **string** | The expiration date of the card, formatted &#x60;MM/YY&#x60;. | 
 **SecurityCode** | **string** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD. | 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the card against your own records. This can only be set if the &#x60;store&#x60; flag is set to &#x60;true&#x60;. | [optional] 
-**BuyerId** | Pointer to **string** | The ID of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_external_identifier&#x60; field needs to be unset. | [optional] 
-**BuyerExternalIdentifier** | Pointer to **string** | The &#x60;external_identifier&#x60; of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_id&#x60; field needs to be unset. | [optional] 
 **RedirectUrl** | Pointer to **NullableString** | We strongly recommend providing a &#x60;redirect_url&#x60; either when 3-D Secure is enabled and &#x60;three_d_secure_data&#x60; is not provided, or when using connections where 3DS is enabled. This value will be appended with both a transaction ID and status (e.g. &#x60;https://example.com/callback?gr4vy_transaction_id&#x3D;123 &amp;gr4vy_transaction_status&#x3D;capture_succeeded&#x60;) after 3-D Secure has completed. For those cases, if the value is not present, the transaction will be marked as failed. | [optional] 
 
 ## Methods
@@ -147,56 +145,6 @@ HasExternalIdentifier returns a boolean if a field has been set.
 `func (o *TransactionCardRequest) UnsetExternalIdentifier()`
 
 UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
-### GetBuyerId
-
-`func (o *TransactionCardRequest) GetBuyerId() string`
-
-GetBuyerId returns the BuyerId field if non-nil, zero value otherwise.
-
-### GetBuyerIdOk
-
-`func (o *TransactionCardRequest) GetBuyerIdOk() (*string, bool)`
-
-GetBuyerIdOk returns a tuple with the BuyerId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBuyerId
-
-`func (o *TransactionCardRequest) SetBuyerId(v string)`
-
-SetBuyerId sets BuyerId field to given value.
-
-### HasBuyerId
-
-`func (o *TransactionCardRequest) HasBuyerId() bool`
-
-HasBuyerId returns a boolean if a field has been set.
-
-### GetBuyerExternalIdentifier
-
-`func (o *TransactionCardRequest) GetBuyerExternalIdentifier() string`
-
-GetBuyerExternalIdentifier returns the BuyerExternalIdentifier field if non-nil, zero value otherwise.
-
-### GetBuyerExternalIdentifierOk
-
-`func (o *TransactionCardRequest) GetBuyerExternalIdentifierOk() (*string, bool)`
-
-GetBuyerExternalIdentifierOk returns a tuple with the BuyerExternalIdentifier field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetBuyerExternalIdentifier
-
-`func (o *TransactionCardRequest) SetBuyerExternalIdentifier(v string)`
-
-SetBuyerExternalIdentifier sets BuyerExternalIdentifier field to given value.
-
-### HasBuyerExternalIdentifier
-
-`func (o *TransactionCardRequest) HasBuyerExternalIdentifier() bool`
-
-HasBuyerExternalIdentifier returns a boolean if a field has been set.
-
 ### GetRedirectUrl
 
 `func (o *TransactionCardRequest) GetRedirectUrl() string`

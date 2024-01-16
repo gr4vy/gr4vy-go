@@ -21,6 +21,11 @@ type ConnectionOptionsForterAntiFraud struct {
 	DeliveryType NullableString `json:"delivery_type,omitempty"`
 	// Value to populate the `deliveryMethod` field in `primaryDeliveryDetails`.  Represents the delivery method chosen by customer such as postal service, email, in game transfer, etc.
 	DeliveryMethod NullableString `json:"delivery_method,omitempty"`
+	// Defines if this is a guest check-out. This will redact the `accountId` and `created` fields from the `accountOwner` details sent to Forter.
+	IsGuestBuyer *bool `json:"is_guest_buyer,omitempty"`
+	// A list of Forter cart item objects. These will be merged into the `cart_items` passed to the transaction. Every cart item here will be merged with a cart item on the transaction with the same index.  Together, these will augment the `cartItems` values sent to the Forter validation API.
+	CartItems *[]ConnectionOptionsForterAntiFraudCartItems `json:"cart_items,omitempty"`
+	TotalDiscount NullableConnectionOptionsForterAntiFraudTotalDiscount `json:"total_discount,omitempty"`
 }
 
 // NewConnectionOptionsForterAntiFraud instantiates a new ConnectionOptionsForterAntiFraud object
@@ -29,6 +34,8 @@ type ConnectionOptionsForterAntiFraud struct {
 // will change when the set of required properties is changed
 func NewConnectionOptionsForterAntiFraud() *ConnectionOptionsForterAntiFraud {
 	this := ConnectionOptionsForterAntiFraud{}
+	var isGuestBuyer bool = false
+	this.IsGuestBuyer = &isGuestBuyer
 	return &this
 }
 
@@ -37,6 +44,8 @@ func NewConnectionOptionsForterAntiFraud() *ConnectionOptionsForterAntiFraud {
 // but it doesn't guarantee that properties required by API are set
 func NewConnectionOptionsForterAntiFraudWithDefaults() *ConnectionOptionsForterAntiFraud {
 	this := ConnectionOptionsForterAntiFraud{}
+	var isGuestBuyer bool = false
+	this.IsGuestBuyer = &isGuestBuyer
 	return &this
 }
 
@@ -124,6 +133,112 @@ func (o *ConnectionOptionsForterAntiFraud) UnsetDeliveryMethod() {
 	o.DeliveryMethod.Unset()
 }
 
+// GetIsGuestBuyer returns the IsGuestBuyer field value if set, zero value otherwise.
+func (o *ConnectionOptionsForterAntiFraud) GetIsGuestBuyer() bool {
+	if o == nil || o.IsGuestBuyer == nil {
+		var ret bool
+		return ret
+	}
+	return *o.IsGuestBuyer
+}
+
+// GetIsGuestBuyerOk returns a tuple with the IsGuestBuyer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectionOptionsForterAntiFraud) GetIsGuestBuyerOk() (*bool, bool) {
+	if o == nil || o.IsGuestBuyer == nil {
+		return nil, false
+	}
+	return o.IsGuestBuyer, true
+}
+
+// HasIsGuestBuyer returns a boolean if a field has been set.
+func (o *ConnectionOptionsForterAntiFraud) HasIsGuestBuyer() bool {
+	if o != nil && o.IsGuestBuyer != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetIsGuestBuyer gets a reference to the given bool and assigns it to the IsGuestBuyer field.
+func (o *ConnectionOptionsForterAntiFraud) SetIsGuestBuyer(v bool) {
+	o.IsGuestBuyer = &v
+}
+
+// GetCartItems returns the CartItems field value if set, zero value otherwise.
+func (o *ConnectionOptionsForterAntiFraud) GetCartItems() []ConnectionOptionsForterAntiFraudCartItems {
+	if o == nil || o.CartItems == nil {
+		var ret []ConnectionOptionsForterAntiFraudCartItems
+		return ret
+	}
+	return *o.CartItems
+}
+
+// GetCartItemsOk returns a tuple with the CartItems field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectionOptionsForterAntiFraud) GetCartItemsOk() (*[]ConnectionOptionsForterAntiFraudCartItems, bool) {
+	if o == nil || o.CartItems == nil {
+		return nil, false
+	}
+	return o.CartItems, true
+}
+
+// HasCartItems returns a boolean if a field has been set.
+func (o *ConnectionOptionsForterAntiFraud) HasCartItems() bool {
+	if o != nil && o.CartItems != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCartItems gets a reference to the given []ConnectionOptionsForterAntiFraudCartItems and assigns it to the CartItems field.
+func (o *ConnectionOptionsForterAntiFraud) SetCartItems(v []ConnectionOptionsForterAntiFraudCartItems) {
+	o.CartItems = &v
+}
+
+// GetTotalDiscount returns the TotalDiscount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptionsForterAntiFraud) GetTotalDiscount() ConnectionOptionsForterAntiFraudTotalDiscount {
+	if o == nil || o.TotalDiscount.Get() == nil {
+		var ret ConnectionOptionsForterAntiFraudTotalDiscount
+		return ret
+	}
+	return *o.TotalDiscount.Get()
+}
+
+// GetTotalDiscountOk returns a tuple with the TotalDiscount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptionsForterAntiFraud) GetTotalDiscountOk() (*ConnectionOptionsForterAntiFraudTotalDiscount, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.TotalDiscount.Get(), o.TotalDiscount.IsSet()
+}
+
+// HasTotalDiscount returns a boolean if a field has been set.
+func (o *ConnectionOptionsForterAntiFraud) HasTotalDiscount() bool {
+	if o != nil && o.TotalDiscount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTotalDiscount gets a reference to the given NullableConnectionOptionsForterAntiFraudTotalDiscount and assigns it to the TotalDiscount field.
+func (o *ConnectionOptionsForterAntiFraud) SetTotalDiscount(v ConnectionOptionsForterAntiFraudTotalDiscount) {
+	o.TotalDiscount.Set(&v)
+}
+// SetTotalDiscountNil sets the value for TotalDiscount to be an explicit nil
+func (o *ConnectionOptionsForterAntiFraud) SetTotalDiscountNil() {
+	o.TotalDiscount.Set(nil)
+}
+
+// UnsetTotalDiscount ensures that no value is present for TotalDiscount, not even an explicit nil
+func (o *ConnectionOptionsForterAntiFraud) UnsetTotalDiscount() {
+	o.TotalDiscount.Unset()
+}
+
 func (o ConnectionOptionsForterAntiFraud) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.DeliveryType.IsSet() {
@@ -131,6 +246,15 @@ func (o ConnectionOptionsForterAntiFraud) MarshalJSON() ([]byte, error) {
 	}
 	if o.DeliveryMethod.IsSet() {
 		toSerialize["delivery_method"] = o.DeliveryMethod.Get()
+	}
+	if o.IsGuestBuyer != nil {
+		toSerialize["is_guest_buyer"] = o.IsGuestBuyer
+	}
+	if o.CartItems != nil {
+		toSerialize["cart_items"] = o.CartItems
+	}
+	if o.TotalDiscount.IsSet() {
+		toSerialize["total_discount"] = o.TotalDiscount.Get()
 	}
 	return json.Marshal(toSerialize)
 }

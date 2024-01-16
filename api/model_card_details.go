@@ -24,7 +24,7 @@ type CardDetails struct {
 	// The type of card.
 	CardType *string `json:"card_type,omitempty"`
 	// The scheme/brand of the card.
-	Scheme *string `json:"scheme,omitempty"`
+	Scheme NullableString `json:"scheme,omitempty"`
 	// An icon to display for the card scheme.
 	SchemeIconUrl *string `json:"scheme_icon_url,omitempty"`
 	// The 2-letter ISO code of the issuing country of the card.
@@ -145,36 +145,46 @@ func (o *CardDetails) SetCardType(v string) {
 	o.CardType = &v
 }
 
-// GetScheme returns the Scheme field value if set, zero value otherwise.
+// GetScheme returns the Scheme field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CardDetails) GetScheme() string {
-	if o == nil || o.Scheme == nil {
+	if o == nil || o.Scheme.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Scheme
+	return *o.Scheme.Get()
 }
 
 // GetSchemeOk returns a tuple with the Scheme field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *CardDetails) GetSchemeOk() (*string, bool) {
-	if o == nil || o.Scheme == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Scheme, true
+	return o.Scheme.Get(), o.Scheme.IsSet()
 }
 
 // HasScheme returns a boolean if a field has been set.
 func (o *CardDetails) HasScheme() bool {
-	if o != nil && o.Scheme != nil {
+	if o != nil && o.Scheme.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetScheme gets a reference to the given string and assigns it to the Scheme field.
+// SetScheme gets a reference to the given NullableString and assigns it to the Scheme field.
 func (o *CardDetails) SetScheme(v string) {
-	o.Scheme = &v
+	o.Scheme.Set(&v)
+}
+// SetSchemeNil sets the value for Scheme to be an explicit nil
+func (o *CardDetails) SetSchemeNil() {
+	o.Scheme.Set(nil)
+}
+
+// UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
+func (o *CardDetails) UnsetScheme() {
+	o.Scheme.Unset()
 }
 
 // GetSchemeIconUrl returns the SchemeIconUrl field value if set, zero value otherwise.
@@ -284,8 +294,8 @@ func (o CardDetails) MarshalJSON() ([]byte, error) {
 	if o.CardType != nil {
 		toSerialize["card_type"] = o.CardType
 	}
-	if o.Scheme != nil {
-		toSerialize["scheme"] = o.Scheme
+	if o.Scheme.IsSet() {
+		toSerialize["scheme"] = o.Scheme.Get()
 	}
 	if o.SchemeIconUrl != nil {
 		toSerialize["scheme_icon_url"] = o.SchemeIconUrl

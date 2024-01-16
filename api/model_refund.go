@@ -24,6 +24,8 @@ type Refund struct {
 	Id *string `json:"id,omitempty"`
 	// The ID of the transaction associated with this refund.
 	TransactionId *string `json:"transaction_id,omitempty"`
+	// The payment service's unique ID for the refund.
+	PaymentServiceRefundId *string `json:"payment_service_refund_id,omitempty"`
 	// The status of the refund. It may change over time as asynchronous processing events occur.  - `processing` - The refund is being processed. - `succeeded` - The refund was successful. - `declined` - The refund was declined by the underlying PSP. - `failed` - The refund could not proceed due to a technical issue. - `voided` - The refund was voided and will not proceed.
 	Status *string `json:"status,omitempty"`
 	// The currency code for this refund. Will always match that of the associated transaction.
@@ -34,6 +36,10 @@ type Refund struct {
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this refund was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// The type of the instrument that was refunded.
+	TargetType *string `json:"target_type,omitempty"`
+	// The optional ID of the instrument that was refunded. This may be `null` if the instrument was not stored.
+	TargetId NullableString `json:"target_id,omitempty"`
 }
 
 // NewRefund instantiates a new Refund object
@@ -147,6 +153,38 @@ func (o *Refund) HasTransactionId() bool {
 // SetTransactionId gets a reference to the given string and assigns it to the TransactionId field.
 func (o *Refund) SetTransactionId(v string) {
 	o.TransactionId = &v
+}
+
+// GetPaymentServiceRefundId returns the PaymentServiceRefundId field value if set, zero value otherwise.
+func (o *Refund) GetPaymentServiceRefundId() string {
+	if o == nil || o.PaymentServiceRefundId == nil {
+		var ret string
+		return ret
+	}
+	return *o.PaymentServiceRefundId
+}
+
+// GetPaymentServiceRefundIdOk returns a tuple with the PaymentServiceRefundId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Refund) GetPaymentServiceRefundIdOk() (*string, bool) {
+	if o == nil || o.PaymentServiceRefundId == nil {
+		return nil, false
+	}
+	return o.PaymentServiceRefundId, true
+}
+
+// HasPaymentServiceRefundId returns a boolean if a field has been set.
+func (o *Refund) HasPaymentServiceRefundId() bool {
+	if o != nil && o.PaymentServiceRefundId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentServiceRefundId gets a reference to the given string and assigns it to the PaymentServiceRefundId field.
+func (o *Refund) SetPaymentServiceRefundId(v string) {
+	o.PaymentServiceRefundId = &v
 }
 
 // GetStatus returns the Status field value if set, zero value otherwise.
@@ -309,6 +347,80 @@ func (o *Refund) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetTargetType returns the TargetType field value if set, zero value otherwise.
+func (o *Refund) GetTargetType() string {
+	if o == nil || o.TargetType == nil {
+		var ret string
+		return ret
+	}
+	return *o.TargetType
+}
+
+// GetTargetTypeOk returns a tuple with the TargetType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Refund) GetTargetTypeOk() (*string, bool) {
+	if o == nil || o.TargetType == nil {
+		return nil, false
+	}
+	return o.TargetType, true
+}
+
+// HasTargetType returns a boolean if a field has been set.
+func (o *Refund) HasTargetType() bool {
+	if o != nil && o.TargetType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetType gets a reference to the given string and assigns it to the TargetType field.
+func (o *Refund) SetTargetType(v string) {
+	o.TargetType = &v
+}
+
+// GetTargetId returns the TargetId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Refund) GetTargetId() string {
+	if o == nil || o.TargetId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.TargetId.Get()
+}
+
+// GetTargetIdOk returns a tuple with the TargetId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Refund) GetTargetIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.TargetId.Get(), o.TargetId.IsSet()
+}
+
+// HasTargetId returns a boolean if a field has been set.
+func (o *Refund) HasTargetId() bool {
+	if o != nil && o.TargetId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTargetId gets a reference to the given NullableString and assigns it to the TargetId field.
+func (o *Refund) SetTargetId(v string) {
+	o.TargetId.Set(&v)
+}
+// SetTargetIdNil sets the value for TargetId to be an explicit nil
+func (o *Refund) SetTargetIdNil() {
+	o.TargetId.Set(nil)
+}
+
+// UnsetTargetId ensures that no value is present for TargetId, not even an explicit nil
+func (o *Refund) UnsetTargetId() {
+	o.TargetId.Unset()
+}
+
 func (o Refund) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -319,6 +431,9 @@ func (o Refund) MarshalJSON() ([]byte, error) {
 	}
 	if o.TransactionId != nil {
 		toSerialize["transaction_id"] = o.TransactionId
+	}
+	if o.PaymentServiceRefundId != nil {
+		toSerialize["payment_service_refund_id"] = o.PaymentServiceRefundId
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status
@@ -334,6 +449,12 @@ func (o Refund) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if o.TargetType != nil {
+		toSerialize["target_type"] = o.TargetType
+	}
+	if o.TargetId.IsSet() {
+		toSerialize["target_id"] = o.TargetId.Get()
 	}
 	return json.Marshal(toSerialize)
 }

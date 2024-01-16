@@ -26,7 +26,7 @@ type PaymentServiceDefinition struct {
 	// The ID of the payment method that this services handles.
 	Method *string `json:"method,omitempty"`
 	// A list of fields that need to be submitted when activating the payment. service.
-	Fields *[]PaymentServiceDefinitionFields `json:"fields,omitempty"`
+	Fields *[]GiftCardServiceDefinitionFields `json:"fields,omitempty"`
 	// A list of three-letter ISO currency codes that this service supports.
 	SupportedCurrencies *[]string `json:"supported_currencies,omitempty"`
 	// A list of two-letter ISO country codes that this service supports.
@@ -189,9 +189,9 @@ func (o *PaymentServiceDefinition) SetMethod(v string) {
 }
 
 // GetFields returns the Fields field value if set, zero value otherwise.
-func (o *PaymentServiceDefinition) GetFields() []PaymentServiceDefinitionFields {
+func (o *PaymentServiceDefinition) GetFields() []GiftCardServiceDefinitionFields {
 	if o == nil || o.Fields == nil {
-		var ret []PaymentServiceDefinitionFields
+		var ret []GiftCardServiceDefinitionFields
 		return ret
 	}
 	return *o.Fields
@@ -199,7 +199,7 @@ func (o *PaymentServiceDefinition) GetFields() []PaymentServiceDefinitionFields 
 
 // GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentServiceDefinition) GetFieldsOk() (*[]PaymentServiceDefinitionFields, bool) {
+func (o *PaymentServiceDefinition) GetFieldsOk() (*[]GiftCardServiceDefinitionFields, bool) {
 	if o == nil || o.Fields == nil {
 		return nil, false
 	}
@@ -215,8 +215,8 @@ func (o *PaymentServiceDefinition) HasFields() bool {
 	return false
 }
 
-// SetFields gets a reference to the given []PaymentServiceDefinitionFields and assigns it to the Fields field.
-func (o *PaymentServiceDefinition) SetFields(v []PaymentServiceDefinitionFields) {
+// SetFields gets a reference to the given []GiftCardServiceDefinitionFields and assigns it to the Fields field.
+func (o *PaymentServiceDefinition) SetFields(v []GiftCardServiceDefinitionFields) {
 	o.Fields = &v
 }
 

@@ -27,10 +27,6 @@ type TransactionRedirectRequest struct {
 	Country string `json:"country"`
 	// An external identifier that can be used to match the account against your own records. This can only be set if the `store` flag is set to `true`.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
-	// The ID of the buyer to associate this payment method to. If this field is provided then the `buyer_external_identifier` field needs to be unset.
-	BuyerId *string `json:"buyer_id,omitempty"`
-	// The `external_identifier` of the buyer to associate this payment method to. If this field is provided then the `buyer_id` field needs to be unset.
-	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 }
 
 // NewTransactionRedirectRequest instantiates a new TransactionRedirectRequest object
@@ -192,70 +188,6 @@ func (o *TransactionRedirectRequest) UnsetExternalIdentifier() {
 	o.ExternalIdentifier.Unset()
 }
 
-// GetBuyerId returns the BuyerId field value if set, zero value otherwise.
-func (o *TransactionRedirectRequest) GetBuyerId() string {
-	if o == nil || o.BuyerId == nil {
-		var ret string
-		return ret
-	}
-	return *o.BuyerId
-}
-
-// GetBuyerIdOk returns a tuple with the BuyerId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionRedirectRequest) GetBuyerIdOk() (*string, bool) {
-	if o == nil || o.BuyerId == nil {
-		return nil, false
-	}
-	return o.BuyerId, true
-}
-
-// HasBuyerId returns a boolean if a field has been set.
-func (o *TransactionRedirectRequest) HasBuyerId() bool {
-	if o != nil && o.BuyerId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBuyerId gets a reference to the given string and assigns it to the BuyerId field.
-func (o *TransactionRedirectRequest) SetBuyerId(v string) {
-	o.BuyerId = &v
-}
-
-// GetBuyerExternalIdentifier returns the BuyerExternalIdentifier field value if set, zero value otherwise.
-func (o *TransactionRedirectRequest) GetBuyerExternalIdentifier() string {
-	if o == nil || o.BuyerExternalIdentifier == nil {
-		var ret string
-		return ret
-	}
-	return *o.BuyerExternalIdentifier
-}
-
-// GetBuyerExternalIdentifierOk returns a tuple with the BuyerExternalIdentifier field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionRedirectRequest) GetBuyerExternalIdentifierOk() (*string, bool) {
-	if o == nil || o.BuyerExternalIdentifier == nil {
-		return nil, false
-	}
-	return o.BuyerExternalIdentifier, true
-}
-
-// HasBuyerExternalIdentifier returns a boolean if a field has been set.
-func (o *TransactionRedirectRequest) HasBuyerExternalIdentifier() bool {
-	if o != nil && o.BuyerExternalIdentifier != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBuyerExternalIdentifier gets a reference to the given string and assigns it to the BuyerExternalIdentifier field.
-func (o *TransactionRedirectRequest) SetBuyerExternalIdentifier(v string) {
-	o.BuyerExternalIdentifier = &v
-}
-
 func (o TransactionRedirectRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -272,12 +204,6 @@ func (o TransactionRedirectRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
-	}
-	if o.BuyerId != nil {
-		toSerialize["buyer_id"] = o.BuyerId
-	}
-	if o.BuyerExternalIdentifier != nil {
-		toSerialize["buyer_external_identifier"] = o.BuyerExternalIdentifier
 	}
 	return json.Marshal(toSerialize)
 }

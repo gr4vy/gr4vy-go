@@ -35,6 +35,8 @@ type PaymentConnectorResponseTransactionCaptureDeclinedEventContext struct {
 	AvsResponseCode NullableString `json:"avs_response_code,omitempty"`
 	// The response code received from the payment service for the Card Verification Value (CVV). This code is mapped to a standardized Gr4vy CVV response code.  - `no_match` - the CVV does not match the expected value - `match` - the CVV matches the expected value - `unavailable ` - CVV check unavailable for card our country - `not_provided ` - CVV not provided  The value of this field can be `null` if the payment service did not provide a response.
 	CvvResponseCode NullableString `json:"cvv_response_code,omitempty"`
+	// The card scheme sent to the connector.
+	PaymentMethodScheme NullableString `json:"payment_method_scheme,omitempty"`
 }
 
 // NewPaymentConnectorResponseTransactionCaptureDeclinedEventContext instantiates a new PaymentConnectorResponseTransactionCaptureDeclinedEventContext object
@@ -402,6 +404,48 @@ func (o *PaymentConnectorResponseTransactionCaptureDeclinedEventContext) UnsetCv
 	o.CvvResponseCode.Unset()
 }
 
+// GetPaymentMethodScheme returns the PaymentMethodScheme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentConnectorResponseTransactionCaptureDeclinedEventContext) GetPaymentMethodScheme() string {
+	if o == nil || o.PaymentMethodScheme.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.PaymentMethodScheme.Get()
+}
+
+// GetPaymentMethodSchemeOk returns a tuple with the PaymentMethodScheme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentConnectorResponseTransactionCaptureDeclinedEventContext) GetPaymentMethodSchemeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.PaymentMethodScheme.Get(), o.PaymentMethodScheme.IsSet()
+}
+
+// HasPaymentMethodScheme returns a boolean if a field has been set.
+func (o *PaymentConnectorResponseTransactionCaptureDeclinedEventContext) HasPaymentMethodScheme() bool {
+	if o != nil && o.PaymentMethodScheme.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentMethodScheme gets a reference to the given NullableString and assigns it to the PaymentMethodScheme field.
+func (o *PaymentConnectorResponseTransactionCaptureDeclinedEventContext) SetPaymentMethodScheme(v string) {
+	o.PaymentMethodScheme.Set(&v)
+}
+// SetPaymentMethodSchemeNil sets the value for PaymentMethodScheme to be an explicit nil
+func (o *PaymentConnectorResponseTransactionCaptureDeclinedEventContext) SetPaymentMethodSchemeNil() {
+	o.PaymentMethodScheme.Set(nil)
+}
+
+// UnsetPaymentMethodScheme ensures that no value is present for PaymentMethodScheme, not even an explicit nil
+func (o *PaymentConnectorResponseTransactionCaptureDeclinedEventContext) UnsetPaymentMethodScheme() {
+	o.PaymentMethodScheme.Unset()
+}
+
 func (o PaymentConnectorResponseTransactionCaptureDeclinedEventContext) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.PaymentServiceId != nil {
@@ -430,6 +474,9 @@ func (o PaymentConnectorResponseTransactionCaptureDeclinedEventContext) MarshalJ
 	}
 	if o.CvvResponseCode.IsSet() {
 		toSerialize["cvv_response_code"] = o.CvvResponseCode.Get()
+	}
+	if o.PaymentMethodScheme.IsSet() {
+		toSerialize["payment_method_scheme"] = o.PaymentMethodScheme.Get()
 	}
 	return json.Marshal(toSerialize)
 }

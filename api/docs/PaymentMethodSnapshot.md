@@ -6,16 +6,18 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;payment-method&#x60;. | [optional] 
 **Id** | Pointer to **NullableString** | The unique ID of the payment method. | [optional] 
-**Method** | Pointer to **string** | The type of this payment method. | [optional] 
-**ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the payment method against your own records. | [optional] 
-**Label** | Pointer to **string** | A label for the payment method. This can be the last 4 digits for a card, or the email address for an alternative payment method. | [optional] 
-**Scheme** | Pointer to **NullableString** | An additional label used to differentiate different sub-types of a payment method. Most notably this can include the type of card used in a transaction. | [optional] 
-**ExpirationDate** | Pointer to **NullableString** | The expiration date for this payment method. This is mostly used by cards where the card might have an expiration date. | [optional] 
 **ApprovalTarget** | Pointer to **NullableString** | The browser target that an approval URL must be opened in. If &#x60;any&#x60; or &#x60;null&#x60;, then there is no specific requirement. | [optional] 
 **ApprovalUrl** | Pointer to **NullableString** | The optional URL that the buyer needs to be redirected to to further authorize their payment. | [optional] 
-**Currency** | Pointer to **NullableString** | The ISO-4217 currency code that this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used for multiple currencies. | [optional] 
 **Country** | Pointer to **NullableString** | The 2-letter ISO code of the country this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used in multiple countries. | [optional] 
+**Currency** | Pointer to **NullableString** | The ISO-4217 currency code that this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used for multiple currencies. | [optional] 
 **Details** | Pointer to [**PaymentMethodDetailsCard**](PaymentMethodDetailsCard.md) |  | [optional] 
+**ExpirationDate** | Pointer to **NullableString** | The expiration date for this payment method. This is mostly used by cards where the card might have an expiration date. | [optional] 
+**ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the payment method against your own records. | [optional] 
+**Label** | Pointer to **string** | A label for the payment method. This can be the last 4 digits for a card, or the email address for an alternative payment method. | [optional] 
+**LastReplacedAt** | Pointer to **NullableTime** | The date and time when this card was last replaced.  When the Account Updater determines that new card details are available, existing details are not changed immediately. There are three scenarios in which the actual replacement occurs:  1. When this card has expired. 2. When only the expiration date changed. 3. When a transaction using this card is declined with any of the following codes:     * &#x60;canceled_payment_method&#x60;     * &#x60;expired_payment_method&#x60;     * &#x60;unavailable_payment_method&#x60;     * &#x60;unknown_payment_method&#x60;  When the replacement is applied, this field is updated. For non-card payment methods, the value of this field is always set to &#x60;null&#x60;. | [optional] 
+**Method** | Pointer to **string** | The type of this payment method. | [optional] 
+**PaymentAccountReference** | Pointer to **NullableString** | The payment account reference (PAR) returned by the card scheme. This is a unique reference to the underlying account that has been used to fund this payment method. This value will be unique if the same underlying account was used, regardless of the actual payment method used. For example, a network token or an Apple Pay device token will return the same PAR when possible.  The uniqueness of this value will depend on the card scheme, please refer to their documentation for further details. The availability of the PAR in our API depends on the availability of its value in the API of the payment service used for the transaction. | [optional] 
+**Scheme** | Pointer to **NullableString** | An additional label used to differentiate different sub-types of a payment method. Most notably this can include the type of card used in a transaction. | [optional] 
 
 ## Methods
 
@@ -96,161 +98,6 @@ HasId returns a boolean if a field has been set.
 `func (o *PaymentMethodSnapshot) UnsetId()`
 
 UnsetId ensures that no value is present for Id, not even an explicit nil
-### GetMethod
-
-`func (o *PaymentMethodSnapshot) GetMethod() string`
-
-GetMethod returns the Method field if non-nil, zero value otherwise.
-
-### GetMethodOk
-
-`func (o *PaymentMethodSnapshot) GetMethodOk() (*string, bool)`
-
-GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMethod
-
-`func (o *PaymentMethodSnapshot) SetMethod(v string)`
-
-SetMethod sets Method field to given value.
-
-### HasMethod
-
-`func (o *PaymentMethodSnapshot) HasMethod() bool`
-
-HasMethod returns a boolean if a field has been set.
-
-### GetExternalIdentifier
-
-`func (o *PaymentMethodSnapshot) GetExternalIdentifier() string`
-
-GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
-
-### GetExternalIdentifierOk
-
-`func (o *PaymentMethodSnapshot) GetExternalIdentifierOk() (*string, bool)`
-
-GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExternalIdentifier
-
-`func (o *PaymentMethodSnapshot) SetExternalIdentifier(v string)`
-
-SetExternalIdentifier sets ExternalIdentifier field to given value.
-
-### HasExternalIdentifier
-
-`func (o *PaymentMethodSnapshot) HasExternalIdentifier() bool`
-
-HasExternalIdentifier returns a boolean if a field has been set.
-
-### SetExternalIdentifierNil
-
-`func (o *PaymentMethodSnapshot) SetExternalIdentifierNil(b bool)`
-
- SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
-
-### UnsetExternalIdentifier
-`func (o *PaymentMethodSnapshot) UnsetExternalIdentifier()`
-
-UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
-### GetLabel
-
-`func (o *PaymentMethodSnapshot) GetLabel() string`
-
-GetLabel returns the Label field if non-nil, zero value otherwise.
-
-### GetLabelOk
-
-`func (o *PaymentMethodSnapshot) GetLabelOk() (*string, bool)`
-
-GetLabelOk returns a tuple with the Label field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetLabel
-
-`func (o *PaymentMethodSnapshot) SetLabel(v string)`
-
-SetLabel sets Label field to given value.
-
-### HasLabel
-
-`func (o *PaymentMethodSnapshot) HasLabel() bool`
-
-HasLabel returns a boolean if a field has been set.
-
-### GetScheme
-
-`func (o *PaymentMethodSnapshot) GetScheme() string`
-
-GetScheme returns the Scheme field if non-nil, zero value otherwise.
-
-### GetSchemeOk
-
-`func (o *PaymentMethodSnapshot) GetSchemeOk() (*string, bool)`
-
-GetSchemeOk returns a tuple with the Scheme field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetScheme
-
-`func (o *PaymentMethodSnapshot) SetScheme(v string)`
-
-SetScheme sets Scheme field to given value.
-
-### HasScheme
-
-`func (o *PaymentMethodSnapshot) HasScheme() bool`
-
-HasScheme returns a boolean if a field has been set.
-
-### SetSchemeNil
-
-`func (o *PaymentMethodSnapshot) SetSchemeNil(b bool)`
-
- SetSchemeNil sets the value for Scheme to be an explicit nil
-
-### UnsetScheme
-`func (o *PaymentMethodSnapshot) UnsetScheme()`
-
-UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
-### GetExpirationDate
-
-`func (o *PaymentMethodSnapshot) GetExpirationDate() string`
-
-GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
-
-### GetExpirationDateOk
-
-`func (o *PaymentMethodSnapshot) GetExpirationDateOk() (*string, bool)`
-
-GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetExpirationDate
-
-`func (o *PaymentMethodSnapshot) SetExpirationDate(v string)`
-
-SetExpirationDate sets ExpirationDate field to given value.
-
-### HasExpirationDate
-
-`func (o *PaymentMethodSnapshot) HasExpirationDate() bool`
-
-HasExpirationDate returns a boolean if a field has been set.
-
-### SetExpirationDateNil
-
-`func (o *PaymentMethodSnapshot) SetExpirationDateNil(b bool)`
-
- SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
-
-### UnsetExpirationDate
-`func (o *PaymentMethodSnapshot) UnsetExpirationDate()`
-
-UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
 ### GetApprovalTarget
 
 `func (o *PaymentMethodSnapshot) GetApprovalTarget() string`
@@ -321,41 +168,6 @@ HasApprovalUrl returns a boolean if a field has been set.
 `func (o *PaymentMethodSnapshot) UnsetApprovalUrl()`
 
 UnsetApprovalUrl ensures that no value is present for ApprovalUrl, not even an explicit nil
-### GetCurrency
-
-`func (o *PaymentMethodSnapshot) GetCurrency() string`
-
-GetCurrency returns the Currency field if non-nil, zero value otherwise.
-
-### GetCurrencyOk
-
-`func (o *PaymentMethodSnapshot) GetCurrencyOk() (*string, bool)`
-
-GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrency
-
-`func (o *PaymentMethodSnapshot) SetCurrency(v string)`
-
-SetCurrency sets Currency field to given value.
-
-### HasCurrency
-
-`func (o *PaymentMethodSnapshot) HasCurrency() bool`
-
-HasCurrency returns a boolean if a field has been set.
-
-### SetCurrencyNil
-
-`func (o *PaymentMethodSnapshot) SetCurrencyNil(b bool)`
-
- SetCurrencyNil sets the value for Currency to be an explicit nil
-
-### UnsetCurrency
-`func (o *PaymentMethodSnapshot) UnsetCurrency()`
-
-UnsetCurrency ensures that no value is present for Currency, not even an explicit nil
 ### GetCountry
 
 `func (o *PaymentMethodSnapshot) GetCountry() string`
@@ -391,6 +203,41 @@ HasCountry returns a boolean if a field has been set.
 `func (o *PaymentMethodSnapshot) UnsetCountry()`
 
 UnsetCountry ensures that no value is present for Country, not even an explicit nil
+### GetCurrency
+
+`func (o *PaymentMethodSnapshot) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *PaymentMethodSnapshot) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *PaymentMethodSnapshot) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *PaymentMethodSnapshot) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
+
+### SetCurrencyNil
+
+`func (o *PaymentMethodSnapshot) SetCurrencyNil(b bool)`
+
+ SetCurrencyNil sets the value for Currency to be an explicit nil
+
+### UnsetCurrency
+`func (o *PaymentMethodSnapshot) UnsetCurrency()`
+
+UnsetCurrency ensures that no value is present for Currency, not even an explicit nil
 ### GetDetails
 
 `func (o *PaymentMethodSnapshot) GetDetails() PaymentMethodDetailsCard`
@@ -416,6 +263,231 @@ SetDetails sets Details field to given value.
 
 HasDetails returns a boolean if a field has been set.
 
+### GetExpirationDate
+
+`func (o *PaymentMethodSnapshot) GetExpirationDate() string`
+
+GetExpirationDate returns the ExpirationDate field if non-nil, zero value otherwise.
+
+### GetExpirationDateOk
+
+`func (o *PaymentMethodSnapshot) GetExpirationDateOk() (*string, bool)`
+
+GetExpirationDateOk returns a tuple with the ExpirationDate field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpirationDate
+
+`func (o *PaymentMethodSnapshot) SetExpirationDate(v string)`
+
+SetExpirationDate sets ExpirationDate field to given value.
+
+### HasExpirationDate
+
+`func (o *PaymentMethodSnapshot) HasExpirationDate() bool`
+
+HasExpirationDate returns a boolean if a field has been set.
+
+### SetExpirationDateNil
+
+`func (o *PaymentMethodSnapshot) SetExpirationDateNil(b bool)`
+
+ SetExpirationDateNil sets the value for ExpirationDate to be an explicit nil
+
+### UnsetExpirationDate
+`func (o *PaymentMethodSnapshot) UnsetExpirationDate()`
+
+UnsetExpirationDate ensures that no value is present for ExpirationDate, not even an explicit nil
+### GetExternalIdentifier
+
+`func (o *PaymentMethodSnapshot) GetExternalIdentifier() string`
+
+GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetExternalIdentifierOk
+
+`func (o *PaymentMethodSnapshot) GetExternalIdentifierOk() (*string, bool)`
+
+GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalIdentifier
+
+`func (o *PaymentMethodSnapshot) SetExternalIdentifier(v string)`
+
+SetExternalIdentifier sets ExternalIdentifier field to given value.
+
+### HasExternalIdentifier
+
+`func (o *PaymentMethodSnapshot) HasExternalIdentifier() bool`
+
+HasExternalIdentifier returns a boolean if a field has been set.
+
+### SetExternalIdentifierNil
+
+`func (o *PaymentMethodSnapshot) SetExternalIdentifierNil(b bool)`
+
+ SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
+
+### UnsetExternalIdentifier
+`func (o *PaymentMethodSnapshot) UnsetExternalIdentifier()`
+
+UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
+### GetLabel
+
+`func (o *PaymentMethodSnapshot) GetLabel() string`
+
+GetLabel returns the Label field if non-nil, zero value otherwise.
+
+### GetLabelOk
+
+`func (o *PaymentMethodSnapshot) GetLabelOk() (*string, bool)`
+
+GetLabelOk returns a tuple with the Label field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLabel
+
+`func (o *PaymentMethodSnapshot) SetLabel(v string)`
+
+SetLabel sets Label field to given value.
+
+### HasLabel
+
+`func (o *PaymentMethodSnapshot) HasLabel() bool`
+
+HasLabel returns a boolean if a field has been set.
+
+### GetLastReplacedAt
+
+`func (o *PaymentMethodSnapshot) GetLastReplacedAt() time.Time`
+
+GetLastReplacedAt returns the LastReplacedAt field if non-nil, zero value otherwise.
+
+### GetLastReplacedAtOk
+
+`func (o *PaymentMethodSnapshot) GetLastReplacedAtOk() (*time.Time, bool)`
+
+GetLastReplacedAtOk returns a tuple with the LastReplacedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastReplacedAt
+
+`func (o *PaymentMethodSnapshot) SetLastReplacedAt(v time.Time)`
+
+SetLastReplacedAt sets LastReplacedAt field to given value.
+
+### HasLastReplacedAt
+
+`func (o *PaymentMethodSnapshot) HasLastReplacedAt() bool`
+
+HasLastReplacedAt returns a boolean if a field has been set.
+
+### SetLastReplacedAtNil
+
+`func (o *PaymentMethodSnapshot) SetLastReplacedAtNil(b bool)`
+
+ SetLastReplacedAtNil sets the value for LastReplacedAt to be an explicit nil
+
+### UnsetLastReplacedAt
+`func (o *PaymentMethodSnapshot) UnsetLastReplacedAt()`
+
+UnsetLastReplacedAt ensures that no value is present for LastReplacedAt, not even an explicit nil
+### GetMethod
+
+`func (o *PaymentMethodSnapshot) GetMethod() string`
+
+GetMethod returns the Method field if non-nil, zero value otherwise.
+
+### GetMethodOk
+
+`func (o *PaymentMethodSnapshot) GetMethodOk() (*string, bool)`
+
+GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMethod
+
+`func (o *PaymentMethodSnapshot) SetMethod(v string)`
+
+SetMethod sets Method field to given value.
+
+### HasMethod
+
+`func (o *PaymentMethodSnapshot) HasMethod() bool`
+
+HasMethod returns a boolean if a field has been set.
+
+### GetPaymentAccountReference
+
+`func (o *PaymentMethodSnapshot) GetPaymentAccountReference() string`
+
+GetPaymentAccountReference returns the PaymentAccountReference field if non-nil, zero value otherwise.
+
+### GetPaymentAccountReferenceOk
+
+`func (o *PaymentMethodSnapshot) GetPaymentAccountReferenceOk() (*string, bool)`
+
+GetPaymentAccountReferenceOk returns a tuple with the PaymentAccountReference field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentAccountReference
+
+`func (o *PaymentMethodSnapshot) SetPaymentAccountReference(v string)`
+
+SetPaymentAccountReference sets PaymentAccountReference field to given value.
+
+### HasPaymentAccountReference
+
+`func (o *PaymentMethodSnapshot) HasPaymentAccountReference() bool`
+
+HasPaymentAccountReference returns a boolean if a field has been set.
+
+### SetPaymentAccountReferenceNil
+
+`func (o *PaymentMethodSnapshot) SetPaymentAccountReferenceNil(b bool)`
+
+ SetPaymentAccountReferenceNil sets the value for PaymentAccountReference to be an explicit nil
+
+### UnsetPaymentAccountReference
+`func (o *PaymentMethodSnapshot) UnsetPaymentAccountReference()`
+
+UnsetPaymentAccountReference ensures that no value is present for PaymentAccountReference, not even an explicit nil
+### GetScheme
+
+`func (o *PaymentMethodSnapshot) GetScheme() string`
+
+GetScheme returns the Scheme field if non-nil, zero value otherwise.
+
+### GetSchemeOk
+
+`func (o *PaymentMethodSnapshot) GetSchemeOk() (*string, bool)`
+
+GetSchemeOk returns a tuple with the Scheme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheme
+
+`func (o *PaymentMethodSnapshot) SetScheme(v string)`
+
+SetScheme sets Scheme field to given value.
+
+### HasScheme
+
+`func (o *PaymentMethodSnapshot) HasScheme() bool`
+
+HasScheme returns a boolean if a field has been set.
+
+### SetSchemeNil
+
+`func (o *PaymentMethodSnapshot) SetSchemeNil(b bool)`
+
+ SetSchemeNil sets the value for Scheme to be an explicit nil
+
+### UnsetScheme
+`func (o *PaymentMethodSnapshot) UnsetScheme()`
+
+UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

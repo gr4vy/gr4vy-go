@@ -21,7 +21,7 @@ type CartItem struct {
 	Name string `json:"name"`
 	// The quantity of this item in the cart. This value cannot be negative or zero.
 	Quantity int32 `json:"quantity"`
-	// The amount for an individual item represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` USD cents represents `$12.99`.
+	// The amount for an individual item represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` USD cents represents `$12.99`. The amount sent through to the payment processor as unitary amount will be calculated to include the discount and tax values sent as part of this cart item.
 	UnitAmount int32 `json:"unit_amount"`
 	// The amount discounted for this item represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` USD cents represents `$12.99`.  Please note that this amount is for the total of the cart item and not for an individual item. For example, if the quantity is 5, this value should be the total discount amount for 5 of the cart item.  You might see unexpected failed transactions if the `discount_amount` can not be equally divided by the `quantity` value. This is due to the fact that some payment services require this amount to be specified per unit.  In this situation we recommend splitting this item into separate items, each with their own specific discount.
 	DiscountAmount NullableInt32 `json:"discount_amount,omitempty"`

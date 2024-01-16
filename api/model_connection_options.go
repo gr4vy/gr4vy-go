@@ -20,6 +20,8 @@ type ConnectionOptions struct {
 	CybersourceAntiFraud NullableConnectionOptionsCybersourceAntiFraud `json:"cybersource-anti-fraud,omitempty"`
 	ForterAntiFraud NullableConnectionOptionsForterAntiFraud `json:"forter-anti-fraud,omitempty"`
 	AdyenCard NullableConnectionOptionsAdyenCard `json:"adyen-card,omitempty"`
+	PaypalPaypal NullableConnectionOptionsPaypalPaypal `json:"paypal-paypal,omitempty"`
+	PaypalPaypalpaylater NullableConnectionOptionsPaypalPaypal `json:"paypal-paypalpaylater,omitempty"`
 }
 
 // NewConnectionOptions instantiates a new ConnectionOptions object
@@ -165,6 +167,90 @@ func (o *ConnectionOptions) UnsetAdyenCard() {
 	o.AdyenCard.Unset()
 }
 
+// GetPaypalPaypal returns the PaypalPaypal field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetPaypalPaypal() ConnectionOptionsPaypalPaypal {
+	if o == nil || o.PaypalPaypal.Get() == nil {
+		var ret ConnectionOptionsPaypalPaypal
+		return ret
+	}
+	return *o.PaypalPaypal.Get()
+}
+
+// GetPaypalPaypalOk returns a tuple with the PaypalPaypal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetPaypalPaypalOk() (*ConnectionOptionsPaypalPaypal, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.PaypalPaypal.Get(), o.PaypalPaypal.IsSet()
+}
+
+// HasPaypalPaypal returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasPaypalPaypal() bool {
+	if o != nil && o.PaypalPaypal.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaypalPaypal gets a reference to the given NullableConnectionOptionsPaypalPaypal and assigns it to the PaypalPaypal field.
+func (o *ConnectionOptions) SetPaypalPaypal(v ConnectionOptionsPaypalPaypal) {
+	o.PaypalPaypal.Set(&v)
+}
+// SetPaypalPaypalNil sets the value for PaypalPaypal to be an explicit nil
+func (o *ConnectionOptions) SetPaypalPaypalNil() {
+	o.PaypalPaypal.Set(nil)
+}
+
+// UnsetPaypalPaypal ensures that no value is present for PaypalPaypal, not even an explicit nil
+func (o *ConnectionOptions) UnsetPaypalPaypal() {
+	o.PaypalPaypal.Unset()
+}
+
+// GetPaypalPaypalpaylater returns the PaypalPaypalpaylater field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetPaypalPaypalpaylater() ConnectionOptionsPaypalPaypal {
+	if o == nil || o.PaypalPaypalpaylater.Get() == nil {
+		var ret ConnectionOptionsPaypalPaypal
+		return ret
+	}
+	return *o.PaypalPaypalpaylater.Get()
+}
+
+// GetPaypalPaypalpaylaterOk returns a tuple with the PaypalPaypalpaylater field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetPaypalPaypalpaylaterOk() (*ConnectionOptionsPaypalPaypal, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.PaypalPaypalpaylater.Get(), o.PaypalPaypalpaylater.IsSet()
+}
+
+// HasPaypalPaypalpaylater returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasPaypalPaypalpaylater() bool {
+	if o != nil && o.PaypalPaypalpaylater.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaypalPaypalpaylater gets a reference to the given NullableConnectionOptionsPaypalPaypal and assigns it to the PaypalPaypalpaylater field.
+func (o *ConnectionOptions) SetPaypalPaypalpaylater(v ConnectionOptionsPaypalPaypal) {
+	o.PaypalPaypalpaylater.Set(&v)
+}
+// SetPaypalPaypalpaylaterNil sets the value for PaypalPaypalpaylater to be an explicit nil
+func (o *ConnectionOptions) SetPaypalPaypalpaylaterNil() {
+	o.PaypalPaypalpaylater.Set(nil)
+}
+
+// UnsetPaypalPaypalpaylater ensures that no value is present for PaypalPaypalpaylater, not even an explicit nil
+func (o *ConnectionOptions) UnsetPaypalPaypalpaylater() {
+	o.PaypalPaypalpaylater.Unset()
+}
+
 func (o ConnectionOptions) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CybersourceAntiFraud.IsSet() {
@@ -175,6 +261,12 @@ func (o ConnectionOptions) MarshalJSON() ([]byte, error) {
 	}
 	if o.AdyenCard.IsSet() {
 		toSerialize["adyen-card"] = o.AdyenCard.Get()
+	}
+	if o.PaypalPaypal.IsSet() {
+		toSerialize["paypal-paypal"] = o.PaypalPaypal.Get()
+	}
+	if o.PaypalPaypalpaylater.IsSet() {
+		toSerialize["paypal-paypalpaylater"] = o.PaypalPaypalpaylater.Get()
 	}
 	return json.Marshal(toSerialize)
 }

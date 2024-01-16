@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Method** | **string** | &#x60;googlepay&#x60;. | 
-**Token** | **map[string]interface{}** | The encrypted (opaque) token returned by the Google Pay API that represents a payment method. | 
+**Token** | **string** | The encrypted (opaque) token returned by the Google Pay API that represents a payment method. | 
 **AssuranceDetails** | Pointer to [**NullableGooglePayRequestAssuranceDetails**](GooglePayRequestAssuranceDetails.md) |  | [optional] 
 **CardHolderName** | Pointer to **NullableString** | Name of the card holder. | [optional] 
 **RedirectUrl** | Pointer to **NullableString** | We strongly recommend providing a &#x60;redirect_url&#x60; either when 3-D Secure is enabled and &#x60;three_d_secure_data&#x60; is not provided, or when using connections where 3DS is enabled. This value will be appended with both a transaction ID and status (e.g. &#x60;https://example.com/callback?gr4vy_transaction_id&#x3D;123 &amp;gr4vy_transaction_status&#x3D;capture_succeeded&#x60;) after 3-D Secure has completed. For those cases, if the value is not present, the transaction will be marked as failed. | [optional] 
@@ -14,7 +14,7 @@ Name | Type | Description | Notes
 
 ### NewGooglePayRequest
 
-`func NewGooglePayRequest(method string, token map[string]interface{}, ) *GooglePayRequest`
+`func NewGooglePayRequest(method string, token string, ) *GooglePayRequest`
 
 NewGooglePayRequest instantiates a new GooglePayRequest object
 This constructor will assign default values to properties that have it defined,
@@ -51,20 +51,20 @@ SetMethod sets Method field to given value.
 
 ### GetToken
 
-`func (o *GooglePayRequest) GetToken() map[string]interface{}`
+`func (o *GooglePayRequest) GetToken() string`
 
 GetToken returns the Token field if non-nil, zero value otherwise.
 
 ### GetTokenOk
 
-`func (o *GooglePayRequest) GetTokenOk() (*map[string]interface{}, bool)`
+`func (o *GooglePayRequest) GetTokenOk() (*string, bool)`
 
 GetTokenOk returns a tuple with the Token field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetToken
 
-`func (o *GooglePayRequest) SetToken(v map[string]interface{})`
+`func (o *GooglePayRequest) SetToken(v string)`
 
 SetToken sets Token field to given value.
 

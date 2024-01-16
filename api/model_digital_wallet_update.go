@@ -21,6 +21,12 @@ type DigitalWalletUpdate struct {
 	MerchantName *string `json:"merchant_name,omitempty"`
 	// The list of domain names that a digital wallet can be used on. To use a digital wallet on a website, the domain of the site is required to be in this list.
 	DomainNames *[]string `json:"domain_names,omitempty"`
+	// The consumer facing name of the merchant.
+	MerchantDisplayName NullableString `json:"merchant_display_name,omitempty"`
+	// The country code where the merchant is registered.
+	MerchantCountryCode NullableString `json:"merchant_country_code,omitempty"`
+	// The main URL of the merchant.
+	MerchantUrl *string `json:"merchant_url,omitempty"`
 }
 
 // NewDigitalWalletUpdate instantiates a new DigitalWalletUpdate object
@@ -104,6 +110,122 @@ func (o *DigitalWalletUpdate) SetDomainNames(v []string) {
 	o.DomainNames = &v
 }
 
+// GetMerchantDisplayName returns the MerchantDisplayName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DigitalWalletUpdate) GetMerchantDisplayName() string {
+	if o == nil || o.MerchantDisplayName.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantDisplayName.Get()
+}
+
+// GetMerchantDisplayNameOk returns a tuple with the MerchantDisplayName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DigitalWalletUpdate) GetMerchantDisplayNameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.MerchantDisplayName.Get(), o.MerchantDisplayName.IsSet()
+}
+
+// HasMerchantDisplayName returns a boolean if a field has been set.
+func (o *DigitalWalletUpdate) HasMerchantDisplayName() bool {
+	if o != nil && o.MerchantDisplayName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantDisplayName gets a reference to the given NullableString and assigns it to the MerchantDisplayName field.
+func (o *DigitalWalletUpdate) SetMerchantDisplayName(v string) {
+	o.MerchantDisplayName.Set(&v)
+}
+// SetMerchantDisplayNameNil sets the value for MerchantDisplayName to be an explicit nil
+func (o *DigitalWalletUpdate) SetMerchantDisplayNameNil() {
+	o.MerchantDisplayName.Set(nil)
+}
+
+// UnsetMerchantDisplayName ensures that no value is present for MerchantDisplayName, not even an explicit nil
+func (o *DigitalWalletUpdate) UnsetMerchantDisplayName() {
+	o.MerchantDisplayName.Unset()
+}
+
+// GetMerchantCountryCode returns the MerchantCountryCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *DigitalWalletUpdate) GetMerchantCountryCode() string {
+	if o == nil || o.MerchantCountryCode.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantCountryCode.Get()
+}
+
+// GetMerchantCountryCodeOk returns a tuple with the MerchantCountryCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *DigitalWalletUpdate) GetMerchantCountryCodeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.MerchantCountryCode.Get(), o.MerchantCountryCode.IsSet()
+}
+
+// HasMerchantCountryCode returns a boolean if a field has been set.
+func (o *DigitalWalletUpdate) HasMerchantCountryCode() bool {
+	if o != nil && o.MerchantCountryCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantCountryCode gets a reference to the given NullableString and assigns it to the MerchantCountryCode field.
+func (o *DigitalWalletUpdate) SetMerchantCountryCode(v string) {
+	o.MerchantCountryCode.Set(&v)
+}
+// SetMerchantCountryCodeNil sets the value for MerchantCountryCode to be an explicit nil
+func (o *DigitalWalletUpdate) SetMerchantCountryCodeNil() {
+	o.MerchantCountryCode.Set(nil)
+}
+
+// UnsetMerchantCountryCode ensures that no value is present for MerchantCountryCode, not even an explicit nil
+func (o *DigitalWalletUpdate) UnsetMerchantCountryCode() {
+	o.MerchantCountryCode.Unset()
+}
+
+// GetMerchantUrl returns the MerchantUrl field value if set, zero value otherwise.
+func (o *DigitalWalletUpdate) GetMerchantUrl() string {
+	if o == nil || o.MerchantUrl == nil {
+		var ret string
+		return ret
+	}
+	return *o.MerchantUrl
+}
+
+// GetMerchantUrlOk returns a tuple with the MerchantUrl field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *DigitalWalletUpdate) GetMerchantUrlOk() (*string, bool) {
+	if o == nil || o.MerchantUrl == nil {
+		return nil, false
+	}
+	return o.MerchantUrl, true
+}
+
+// HasMerchantUrl returns a boolean if a field has been set.
+func (o *DigitalWalletUpdate) HasMerchantUrl() bool {
+	if o != nil && o.MerchantUrl != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantUrl gets a reference to the given string and assigns it to the MerchantUrl field.
+func (o *DigitalWalletUpdate) SetMerchantUrl(v string) {
+	o.MerchantUrl = &v
+}
+
 func (o DigitalWalletUpdate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.MerchantName != nil {
@@ -111,6 +233,15 @@ func (o DigitalWalletUpdate) MarshalJSON() ([]byte, error) {
 	}
 	if o.DomainNames != nil {
 		toSerialize["domain_names"] = o.DomainNames
+	}
+	if o.MerchantDisplayName.IsSet() {
+		toSerialize["merchant_display_name"] = o.MerchantDisplayName.Get()
+	}
+	if o.MerchantCountryCode.IsSet() {
+		toSerialize["merchant_country_code"] = o.MerchantCountryCode.Get()
+	}
+	if o.MerchantUrl != nil {
+		toSerialize["merchant_url"] = o.MerchantUrl
 	}
 	return json.Marshal(toSerialize)
 }

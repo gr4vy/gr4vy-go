@@ -6,25 +6,27 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;transaction&#x60;. | [optional] 
 **Id** | Pointer to **string** | The unique identifier for this transaction. | [optional] 
-**MerchantAccountId** | Pointer to **string** | The ID of the merchant account to which this transaction belongs to. | [optional] 
-**Status** | Pointer to **string** | The status of the transaction. The status may change over time as asynchronous processing events occur. | [optional] 
-**Intent** | Pointer to **string** | The original &#x60;intent&#x60; used when the transaction was [created](#operation/authorize-new-transaction). | [optional] 
 **Amount** | Pointer to **int32** | The authorized amount for this transaction. This can be more than the actual captured amount and part of this amount may be refunded. | [optional] 
-**CapturedAmount** | Pointer to **int32** | The captured amount for this transaction. This can be the total or a portion of the authorized amount. | [optional] 
-**RefundedAmount** | Pointer to **int32** | The refunded amount for this transaction. This can be the total or a portion of the captured amount. | [optional] 
-**Currency** | Pointer to **string** | The currency code for this transaction. | [optional] 
-**Country** | Pointer to **NullableString** | The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.  | [optional] 
-**PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) | The payment method used for this transaction. | [optional] 
+**AuthorizedAmount** | Pointer to **int32** | The amount for this transaction that has been authorized for the &#x60;payment_method&#x60;. This can be less than the &#x60;amount&#x60; if gift cards were used. | [optional] 
 **Buyer** | Pointer to [**NullableBuyerSnapshot**](Buyer--Snapshot.md) | The buyer used for this transaction. | [optional] 
+**CapturedAmount** | Pointer to **int32** | The captured amount for this transaction. This can be the full value of the &#x60;authorized_amount&#x60; or less. | [optional] 
+**CheckoutSessionId** | Pointer to **string** | The identifier for the checkout session this transaction is associated with. | [optional] 
+**Country** | Pointer to **NullableString** | The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.  | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this transaction was created in our system. | [optional] 
+**Currency** | Pointer to **string** | The currency code for this transaction. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
-**UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
+**Intent** | Pointer to **string** | The original &#x60;intent&#x60; used when the transaction was [created](#operation/authorize-new-transaction). | [optional] 
+**MerchantAccountId** | Pointer to **string** | The ID of the merchant account to which this transaction belongs to. | [optional] 
+**Method** | Pointer to **string** |  | [optional] 
+**PaymentMethod** | Pointer to [**PaymentMethodSnapshot**](PaymentMethod--Snapshot.md) | The payment method used for this transaction. | [optional] 
 **PaymentService** | Pointer to [**PaymentServiceSnapshot**](PaymentService--Snapshot.md) | The payment service used for this transaction. | [optional] 
 **PendingReview** | Pointer to **bool** | Whether a manual review is pending. | [optional] 
-**Method** | Pointer to **string** |  | [optional] 
 **RawResponseCode** | Pointer to **NullableString** | This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
 **RawResponseDescription** | Pointer to **NullableString** | This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services. | [optional] 
-**CheckoutSessionId** | Pointer to **string** | The identifier for the checkout session this transaction is associated with. | [optional] 
+**ReconciliationId** | Pointer to **string** | The base62 encoded transaction ID. This represents a shorter version of this transaction&#39;s &#x60;id&#x60; which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service&#39;s transaction against our system.  This ID is sent instead of the transaction ID because not all services support 36 digit identifiers. | [optional] 
+**RefundedAmount** | Pointer to **int32** | The refunded amount for this transaction. This can be the full value of the &#x60;captured_amount&#x60; or less. | [optional] 
+**Status** | Pointer to **string** | The status of the transaction. The status may change over time as asynchronous processing events occur. | [optional] 
+**UpdatedAt** | Pointer to **time.Time** | Defines when the transaction was last updated. | [optional] 
 
 ## Methods
 
@@ -95,81 +97,6 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
-### GetMerchantAccountId
-
-`func (o *TransactionSummary) GetMerchantAccountId() string`
-
-GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
-
-### GetMerchantAccountIdOk
-
-`func (o *TransactionSummary) GetMerchantAccountIdOk() (*string, bool)`
-
-GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMerchantAccountId
-
-`func (o *TransactionSummary) SetMerchantAccountId(v string)`
-
-SetMerchantAccountId sets MerchantAccountId field to given value.
-
-### HasMerchantAccountId
-
-`func (o *TransactionSummary) HasMerchantAccountId() bool`
-
-HasMerchantAccountId returns a boolean if a field has been set.
-
-### GetStatus
-
-`func (o *TransactionSummary) GetStatus() string`
-
-GetStatus returns the Status field if non-nil, zero value otherwise.
-
-### GetStatusOk
-
-`func (o *TransactionSummary) GetStatusOk() (*string, bool)`
-
-GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetStatus
-
-`func (o *TransactionSummary) SetStatus(v string)`
-
-SetStatus sets Status field to given value.
-
-### HasStatus
-
-`func (o *TransactionSummary) HasStatus() bool`
-
-HasStatus returns a boolean if a field has been set.
-
-### GetIntent
-
-`func (o *TransactionSummary) GetIntent() string`
-
-GetIntent returns the Intent field if non-nil, zero value otherwise.
-
-### GetIntentOk
-
-`func (o *TransactionSummary) GetIntentOk() (*string, bool)`
-
-GetIntentOk returns a tuple with the Intent field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIntent
-
-`func (o *TransactionSummary) SetIntent(v string)`
-
-SetIntent sets Intent field to given value.
-
-### HasIntent
-
-`func (o *TransactionSummary) HasIntent() bool`
-
-HasIntent returns a boolean if a field has been set.
-
 ### GetAmount
 
 `func (o *TransactionSummary) GetAmount() int32`
@@ -195,140 +122,30 @@ SetAmount sets Amount field to given value.
 
 HasAmount returns a boolean if a field has been set.
 
-### GetCapturedAmount
+### GetAuthorizedAmount
 
-`func (o *TransactionSummary) GetCapturedAmount() int32`
+`func (o *TransactionSummary) GetAuthorizedAmount() int32`
 
-GetCapturedAmount returns the CapturedAmount field if non-nil, zero value otherwise.
+GetAuthorizedAmount returns the AuthorizedAmount field if non-nil, zero value otherwise.
 
-### GetCapturedAmountOk
+### GetAuthorizedAmountOk
 
-`func (o *TransactionSummary) GetCapturedAmountOk() (*int32, bool)`
+`func (o *TransactionSummary) GetAuthorizedAmountOk() (*int32, bool)`
 
-GetCapturedAmountOk returns a tuple with the CapturedAmount field if it's non-nil, zero value otherwise
+GetAuthorizedAmountOk returns a tuple with the AuthorizedAmount field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCapturedAmount
+### SetAuthorizedAmount
 
-`func (o *TransactionSummary) SetCapturedAmount(v int32)`
+`func (o *TransactionSummary) SetAuthorizedAmount(v int32)`
 
-SetCapturedAmount sets CapturedAmount field to given value.
+SetAuthorizedAmount sets AuthorizedAmount field to given value.
 
-### HasCapturedAmount
+### HasAuthorizedAmount
 
-`func (o *TransactionSummary) HasCapturedAmount() bool`
+`func (o *TransactionSummary) HasAuthorizedAmount() bool`
 
-HasCapturedAmount returns a boolean if a field has been set.
-
-### GetRefundedAmount
-
-`func (o *TransactionSummary) GetRefundedAmount() int32`
-
-GetRefundedAmount returns the RefundedAmount field if non-nil, zero value otherwise.
-
-### GetRefundedAmountOk
-
-`func (o *TransactionSummary) GetRefundedAmountOk() (*int32, bool)`
-
-GetRefundedAmountOk returns a tuple with the RefundedAmount field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetRefundedAmount
-
-`func (o *TransactionSummary) SetRefundedAmount(v int32)`
-
-SetRefundedAmount sets RefundedAmount field to given value.
-
-### HasRefundedAmount
-
-`func (o *TransactionSummary) HasRefundedAmount() bool`
-
-HasRefundedAmount returns a boolean if a field has been set.
-
-### GetCurrency
-
-`func (o *TransactionSummary) GetCurrency() string`
-
-GetCurrency returns the Currency field if non-nil, zero value otherwise.
-
-### GetCurrencyOk
-
-`func (o *TransactionSummary) GetCurrencyOk() (*string, bool)`
-
-GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCurrency
-
-`func (o *TransactionSummary) SetCurrency(v string)`
-
-SetCurrency sets Currency field to given value.
-
-### HasCurrency
-
-`func (o *TransactionSummary) HasCurrency() bool`
-
-HasCurrency returns a boolean if a field has been set.
-
-### GetCountry
-
-`func (o *TransactionSummary) GetCountry() string`
-
-GetCountry returns the Country field if non-nil, zero value otherwise.
-
-### GetCountryOk
-
-`func (o *TransactionSummary) GetCountryOk() (*string, bool)`
-
-GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetCountry
-
-`func (o *TransactionSummary) SetCountry(v string)`
-
-SetCountry sets Country field to given value.
-
-### HasCountry
-
-`func (o *TransactionSummary) HasCountry() bool`
-
-HasCountry returns a boolean if a field has been set.
-
-### SetCountryNil
-
-`func (o *TransactionSummary) SetCountryNil(b bool)`
-
- SetCountryNil sets the value for Country to be an explicit nil
-
-### UnsetCountry
-`func (o *TransactionSummary) UnsetCountry()`
-
-UnsetCountry ensures that no value is present for Country, not even an explicit nil
-### GetPaymentMethod
-
-`func (o *TransactionSummary) GetPaymentMethod() PaymentMethodSnapshot`
-
-GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
-
-### GetPaymentMethodOk
-
-`func (o *TransactionSummary) GetPaymentMethodOk() (*PaymentMethodSnapshot, bool)`
-
-GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetPaymentMethod
-
-`func (o *TransactionSummary) SetPaymentMethod(v PaymentMethodSnapshot)`
-
-SetPaymentMethod sets PaymentMethod field to given value.
-
-### HasPaymentMethod
-
-`func (o *TransactionSummary) HasPaymentMethod() bool`
-
-HasPaymentMethod returns a boolean if a field has been set.
+HasAuthorizedAmount returns a boolean if a field has been set.
 
 ### GetBuyer
 
@@ -365,6 +182,91 @@ HasBuyer returns a boolean if a field has been set.
 `func (o *TransactionSummary) UnsetBuyer()`
 
 UnsetBuyer ensures that no value is present for Buyer, not even an explicit nil
+### GetCapturedAmount
+
+`func (o *TransactionSummary) GetCapturedAmount() int32`
+
+GetCapturedAmount returns the CapturedAmount field if non-nil, zero value otherwise.
+
+### GetCapturedAmountOk
+
+`func (o *TransactionSummary) GetCapturedAmountOk() (*int32, bool)`
+
+GetCapturedAmountOk returns a tuple with the CapturedAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCapturedAmount
+
+`func (o *TransactionSummary) SetCapturedAmount(v int32)`
+
+SetCapturedAmount sets CapturedAmount field to given value.
+
+### HasCapturedAmount
+
+`func (o *TransactionSummary) HasCapturedAmount() bool`
+
+HasCapturedAmount returns a boolean if a field has been set.
+
+### GetCheckoutSessionId
+
+`func (o *TransactionSummary) GetCheckoutSessionId() string`
+
+GetCheckoutSessionId returns the CheckoutSessionId field if non-nil, zero value otherwise.
+
+### GetCheckoutSessionIdOk
+
+`func (o *TransactionSummary) GetCheckoutSessionIdOk() (*string, bool)`
+
+GetCheckoutSessionIdOk returns a tuple with the CheckoutSessionId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCheckoutSessionId
+
+`func (o *TransactionSummary) SetCheckoutSessionId(v string)`
+
+SetCheckoutSessionId sets CheckoutSessionId field to given value.
+
+### HasCheckoutSessionId
+
+`func (o *TransactionSummary) HasCheckoutSessionId() bool`
+
+HasCheckoutSessionId returns a boolean if a field has been set.
+
+### GetCountry
+
+`func (o *TransactionSummary) GetCountry() string`
+
+GetCountry returns the Country field if non-nil, zero value otherwise.
+
+### GetCountryOk
+
+`func (o *TransactionSummary) GetCountryOk() (*string, bool)`
+
+GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountry
+
+`func (o *TransactionSummary) SetCountry(v string)`
+
+SetCountry sets Country field to given value.
+
+### HasCountry
+
+`func (o *TransactionSummary) HasCountry() bool`
+
+HasCountry returns a boolean if a field has been set.
+
+### SetCountryNil
+
+`func (o *TransactionSummary) SetCountryNil(b bool)`
+
+ SetCountryNil sets the value for Country to be an explicit nil
+
+### UnsetCountry
+`func (o *TransactionSummary) UnsetCountry()`
+
+UnsetCountry ensures that no value is present for Country, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *TransactionSummary) GetCreatedAt() time.Time`
@@ -389,6 +291,31 @@ SetCreatedAt sets CreatedAt field to given value.
 `func (o *TransactionSummary) HasCreatedAt() bool`
 
 HasCreatedAt returns a boolean if a field has been set.
+
+### GetCurrency
+
+`func (o *TransactionSummary) GetCurrency() string`
+
+GetCurrency returns the Currency field if non-nil, zero value otherwise.
+
+### GetCurrencyOk
+
+`func (o *TransactionSummary) GetCurrencyOk() (*string, bool)`
+
+GetCurrencyOk returns a tuple with the Currency field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCurrency
+
+`func (o *TransactionSummary) SetCurrency(v string)`
+
+SetCurrency sets Currency field to given value.
+
+### HasCurrency
+
+`func (o *TransactionSummary) HasCurrency() bool`
+
+HasCurrency returns a boolean if a field has been set.
 
 ### GetExternalIdentifier
 
@@ -425,30 +352,105 @@ HasExternalIdentifier returns a boolean if a field has been set.
 `func (o *TransactionSummary) UnsetExternalIdentifier()`
 
 UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
-### GetUpdatedAt
+### GetIntent
 
-`func (o *TransactionSummary) GetUpdatedAt() time.Time`
+`func (o *TransactionSummary) GetIntent() string`
 
-GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
+GetIntent returns the Intent field if non-nil, zero value otherwise.
 
-### GetUpdatedAtOk
+### GetIntentOk
 
-`func (o *TransactionSummary) GetUpdatedAtOk() (*time.Time, bool)`
+`func (o *TransactionSummary) GetIntentOk() (*string, bool)`
 
-GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
+GetIntentOk returns a tuple with the Intent field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetUpdatedAt
+### SetIntent
 
-`func (o *TransactionSummary) SetUpdatedAt(v time.Time)`
+`func (o *TransactionSummary) SetIntent(v string)`
 
-SetUpdatedAt sets UpdatedAt field to given value.
+SetIntent sets Intent field to given value.
 
-### HasUpdatedAt
+### HasIntent
 
-`func (o *TransactionSummary) HasUpdatedAt() bool`
+`func (o *TransactionSummary) HasIntent() bool`
 
-HasUpdatedAt returns a boolean if a field has been set.
+HasIntent returns a boolean if a field has been set.
+
+### GetMerchantAccountId
+
+`func (o *TransactionSummary) GetMerchantAccountId() string`
+
+GetMerchantAccountId returns the MerchantAccountId field if non-nil, zero value otherwise.
+
+### GetMerchantAccountIdOk
+
+`func (o *TransactionSummary) GetMerchantAccountIdOk() (*string, bool)`
+
+GetMerchantAccountIdOk returns a tuple with the MerchantAccountId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMerchantAccountId
+
+`func (o *TransactionSummary) SetMerchantAccountId(v string)`
+
+SetMerchantAccountId sets MerchantAccountId field to given value.
+
+### HasMerchantAccountId
+
+`func (o *TransactionSummary) HasMerchantAccountId() bool`
+
+HasMerchantAccountId returns a boolean if a field has been set.
+
+### GetMethod
+
+`func (o *TransactionSummary) GetMethod() string`
+
+GetMethod returns the Method field if non-nil, zero value otherwise.
+
+### GetMethodOk
+
+`func (o *TransactionSummary) GetMethodOk() (*string, bool)`
+
+GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetMethod
+
+`func (o *TransactionSummary) SetMethod(v string)`
+
+SetMethod sets Method field to given value.
+
+### HasMethod
+
+`func (o *TransactionSummary) HasMethod() bool`
+
+HasMethod returns a boolean if a field has been set.
+
+### GetPaymentMethod
+
+`func (o *TransactionSummary) GetPaymentMethod() PaymentMethodSnapshot`
+
+GetPaymentMethod returns the PaymentMethod field if non-nil, zero value otherwise.
+
+### GetPaymentMethodOk
+
+`func (o *TransactionSummary) GetPaymentMethodOk() (*PaymentMethodSnapshot, bool)`
+
+GetPaymentMethodOk returns a tuple with the PaymentMethod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentMethod
+
+`func (o *TransactionSummary) SetPaymentMethod(v PaymentMethodSnapshot)`
+
+SetPaymentMethod sets PaymentMethod field to given value.
+
+### HasPaymentMethod
+
+`func (o *TransactionSummary) HasPaymentMethod() bool`
+
+HasPaymentMethod returns a boolean if a field has been set.
 
 ### GetPaymentService
 
@@ -499,31 +501,6 @@ SetPendingReview sets PendingReview field to given value.
 `func (o *TransactionSummary) HasPendingReview() bool`
 
 HasPendingReview returns a boolean if a field has been set.
-
-### GetMethod
-
-`func (o *TransactionSummary) GetMethod() string`
-
-GetMethod returns the Method field if non-nil, zero value otherwise.
-
-### GetMethodOk
-
-`func (o *TransactionSummary) GetMethodOk() (*string, bool)`
-
-GetMethodOk returns a tuple with the Method field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetMethod
-
-`func (o *TransactionSummary) SetMethod(v string)`
-
-SetMethod sets Method field to given value.
-
-### HasMethod
-
-`func (o *TransactionSummary) HasMethod() bool`
-
-HasMethod returns a boolean if a field has been set.
 
 ### GetRawResponseCode
 
@@ -595,30 +572,105 @@ HasRawResponseDescription returns a boolean if a field has been set.
 `func (o *TransactionSummary) UnsetRawResponseDescription()`
 
 UnsetRawResponseDescription ensures that no value is present for RawResponseDescription, not even an explicit nil
-### GetCheckoutSessionId
+### GetReconciliationId
 
-`func (o *TransactionSummary) GetCheckoutSessionId() string`
+`func (o *TransactionSummary) GetReconciliationId() string`
 
-GetCheckoutSessionId returns the CheckoutSessionId field if non-nil, zero value otherwise.
+GetReconciliationId returns the ReconciliationId field if non-nil, zero value otherwise.
 
-### GetCheckoutSessionIdOk
+### GetReconciliationIdOk
 
-`func (o *TransactionSummary) GetCheckoutSessionIdOk() (*string, bool)`
+`func (o *TransactionSummary) GetReconciliationIdOk() (*string, bool)`
 
-GetCheckoutSessionIdOk returns a tuple with the CheckoutSessionId field if it's non-nil, zero value otherwise
+GetReconciliationIdOk returns a tuple with the ReconciliationId field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCheckoutSessionId
+### SetReconciliationId
 
-`func (o *TransactionSummary) SetCheckoutSessionId(v string)`
+`func (o *TransactionSummary) SetReconciliationId(v string)`
 
-SetCheckoutSessionId sets CheckoutSessionId field to given value.
+SetReconciliationId sets ReconciliationId field to given value.
 
-### HasCheckoutSessionId
+### HasReconciliationId
 
-`func (o *TransactionSummary) HasCheckoutSessionId() bool`
+`func (o *TransactionSummary) HasReconciliationId() bool`
 
-HasCheckoutSessionId returns a boolean if a field has been set.
+HasReconciliationId returns a boolean if a field has been set.
+
+### GetRefundedAmount
+
+`func (o *TransactionSummary) GetRefundedAmount() int32`
+
+GetRefundedAmount returns the RefundedAmount field if non-nil, zero value otherwise.
+
+### GetRefundedAmountOk
+
+`func (o *TransactionSummary) GetRefundedAmountOk() (*int32, bool)`
+
+GetRefundedAmountOk returns a tuple with the RefundedAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRefundedAmount
+
+`func (o *TransactionSummary) SetRefundedAmount(v int32)`
+
+SetRefundedAmount sets RefundedAmount field to given value.
+
+### HasRefundedAmount
+
+`func (o *TransactionSummary) HasRefundedAmount() bool`
+
+HasRefundedAmount returns a boolean if a field has been set.
+
+### GetStatus
+
+`func (o *TransactionSummary) GetStatus() string`
+
+GetStatus returns the Status field if non-nil, zero value otherwise.
+
+### GetStatusOk
+
+`func (o *TransactionSummary) GetStatusOk() (*string, bool)`
+
+GetStatusOk returns a tuple with the Status field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStatus
+
+`func (o *TransactionSummary) SetStatus(v string)`
+
+SetStatus sets Status field to given value.
+
+### HasStatus
+
+`func (o *TransactionSummary) HasStatus() bool`
+
+HasStatus returns a boolean if a field has been set.
+
+### GetUpdatedAt
+
+`func (o *TransactionSummary) GetUpdatedAt() time.Time`
+
+GetUpdatedAt returns the UpdatedAt field if non-nil, zero value otherwise.
+
+### GetUpdatedAtOk
+
+`func (o *TransactionSummary) GetUpdatedAtOk() (*time.Time, bool)`
+
+GetUpdatedAtOk returns a tuple with the UpdatedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUpdatedAt
+
+`func (o *TransactionSummary) SetUpdatedAt(v time.Time)`
+
+SetUpdatedAt sets UpdatedAt field to given value.
+
+### HasUpdatedAt
+
+`func (o *TransactionSummary) HasUpdatedAt() bool`
+
+HasUpdatedAt returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -23,10 +23,6 @@ type TransactionCheckoutSessionRequest struct {
 	Id string `json:"id"`
 	// An external identifier that can be used to match the card against your own records. This can only be set if the `store` flag is set to `true`.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
-	// The ID of the buyer to associate this payment method to. If this field is provided then the `buyer_external_identifier` field needs to be unset.
-	BuyerId *string `json:"buyer_id,omitempty"`
-	// The `external_identifier` of the buyer to associate this payment method to. If this field is provided then the `buyer_id` field needs to be unset.
-	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 	// We strongly recommend providing a `redirect_url` either when 3-D Secure is enabled and `three_d_secure_data` is not provided, or when using connections where 3DS is enabled. This value will be appended with both a transaction ID and status (e.g. `https://example.com/callback?gr4vy_transaction_id=123 &gr4vy_transaction_status=capture_succeeded`) after 3-D Secure has completed. For those cases, if the value is not present, the transaction will be marked as failed.
 	RedirectUrl NullableString `json:"redirect_url,omitempty"`
 }
@@ -140,70 +136,6 @@ func (o *TransactionCheckoutSessionRequest) UnsetExternalIdentifier() {
 	o.ExternalIdentifier.Unset()
 }
 
-// GetBuyerId returns the BuyerId field value if set, zero value otherwise.
-func (o *TransactionCheckoutSessionRequest) GetBuyerId() string {
-	if o == nil || o.BuyerId == nil {
-		var ret string
-		return ret
-	}
-	return *o.BuyerId
-}
-
-// GetBuyerIdOk returns a tuple with the BuyerId field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionCheckoutSessionRequest) GetBuyerIdOk() (*string, bool) {
-	if o == nil || o.BuyerId == nil {
-		return nil, false
-	}
-	return o.BuyerId, true
-}
-
-// HasBuyerId returns a boolean if a field has been set.
-func (o *TransactionCheckoutSessionRequest) HasBuyerId() bool {
-	if o != nil && o.BuyerId != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBuyerId gets a reference to the given string and assigns it to the BuyerId field.
-func (o *TransactionCheckoutSessionRequest) SetBuyerId(v string) {
-	o.BuyerId = &v
-}
-
-// GetBuyerExternalIdentifier returns the BuyerExternalIdentifier field value if set, zero value otherwise.
-func (o *TransactionCheckoutSessionRequest) GetBuyerExternalIdentifier() string {
-	if o == nil || o.BuyerExternalIdentifier == nil {
-		var ret string
-		return ret
-	}
-	return *o.BuyerExternalIdentifier
-}
-
-// GetBuyerExternalIdentifierOk returns a tuple with the BuyerExternalIdentifier field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *TransactionCheckoutSessionRequest) GetBuyerExternalIdentifierOk() (*string, bool) {
-	if o == nil || o.BuyerExternalIdentifier == nil {
-		return nil, false
-	}
-	return o.BuyerExternalIdentifier, true
-}
-
-// HasBuyerExternalIdentifier returns a boolean if a field has been set.
-func (o *TransactionCheckoutSessionRequest) HasBuyerExternalIdentifier() bool {
-	if o != nil && o.BuyerExternalIdentifier != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetBuyerExternalIdentifier gets a reference to the given string and assigns it to the BuyerExternalIdentifier field.
-func (o *TransactionCheckoutSessionRequest) SetBuyerExternalIdentifier(v string) {
-	o.BuyerExternalIdentifier = &v
-}
-
 // GetRedirectUrl returns the RedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionCheckoutSessionRequest) GetRedirectUrl() string {
 	if o == nil || o.RedirectUrl.Get() == nil {
@@ -256,12 +188,6 @@ func (o TransactionCheckoutSessionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
-	}
-	if o.BuyerId != nil {
-		toSerialize["buyer_id"] = o.BuyerId
-	}
-	if o.BuyerExternalIdentifier != nil {
-		toSerialize["buyer_external_identifier"] = o.BuyerExternalIdentifier
 	}
 	if o.RedirectUrl.IsSet() {
 		toSerialize["redirect_url"] = o.RedirectUrl.Get()

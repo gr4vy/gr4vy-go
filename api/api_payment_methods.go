@@ -18,6 +18,7 @@ import (
 	_nethttp "net/http"
 	_neturl "net/url"
 	"strings"
+	"reflect"
 )
 
 // Linger please
@@ -427,7 +428,7 @@ type ApiListPaymentMethodsRequest struct {
 	ApiService *PaymentMethodsApiService
 	buyerId *string
 	buyerExternalIdentifier *string
-	status *string
+	status *[]string
 	limit *int32
 	cursor *string
 }
@@ -440,7 +441,7 @@ func (r ApiListPaymentMethodsRequest) BuyerExternalIdentifier(buyerExternalIdent
 	r.buyerExternalIdentifier = &buyerExternalIdentifier
 	return r
 }
-func (r ApiListPaymentMethodsRequest) Status(status string) ApiListPaymentMethodsRequest {
+func (r ApiListPaymentMethodsRequest) Status(status []string) ApiListPaymentMethodsRequest {
 	r.status = &status
 	return r
 }
@@ -502,7 +503,15 @@ func (a *PaymentMethodsApiService) ListPaymentMethodsExecute(r ApiListPaymentMet
 		localVarQueryParams.Add("buyer_external_identifier", parameterToString(*r.buyerExternalIdentifier, ""))
 	}
 	if r.status != nil {
-		localVarQueryParams.Add("status", parameterToString(*r.status, ""))
+		t := *r.status
+		if reflect.TypeOf(t).Kind() == reflect.Slice {
+			s := reflect.ValueOf(t)
+			for i := 0; i < s.Len(); i++ {
+				localVarQueryParams.Add("status", parameterToString(s.Index(i), "multi"))
+			}
+		} else {
+			localVarQueryParams.Add("status", parameterToString(t, "multi"))
+		}
 	}
 	if r.limit != nil {
 		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))

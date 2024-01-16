@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | &#x60;card-detail&#x60;. | [optional] 
 **Id** | Pointer to **string** | The 8 digit BIN of the card. When looking up card details using a &#x60;payment_method_id&#x60; this value will be &#x60;null&#x60;. | [optional] 
 **CardType** | Pointer to **string** | The type of card. | [optional] 
-**Scheme** | Pointer to **string** | The scheme/brand of the card. | [optional] 
+**Scheme** | Pointer to **NullableString** | The scheme/brand of the card. | [optional] 
 **SchemeIconUrl** | Pointer to **string** | An icon to display for the card scheme. | [optional] 
 **Country** | Pointer to **string** | The 2-letter ISO code of the issuing country of the card. | [optional] 
 **RequiredFields** | Pointer to [**RequiredFields**](RequiredFields.md) |  | [optional] 
@@ -131,6 +131,16 @@ SetScheme sets Scheme field to given value.
 
 HasScheme returns a boolean if a field has been set.
 
+### SetSchemeNil
+
+`func (o *CardDetails) SetSchemeNil(b bool)`
+
+ SetSchemeNil sets the value for Scheme to be an explicit nil
+
+### UnsetScheme
+`func (o *CardDetails) UnsetScheme()`
+
+UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
 ### GetSchemeIconUrl
 
 `func (o *CardDetails) GetSchemeIconUrl() string`

@@ -30,6 +30,8 @@ type PaymentMethodTokenized struct {
 	Label *string `json:"label,omitempty"`
 	// The type of the card, if the payment method is a card.
 	Scheme NullableString `json:"scheme,omitempty"`
+	// Additional schemes of the card. Only applies to card payment methods.
+	AdditionalSchemes []string `json:"additional_schemes,omitempty"`
 	// The expiration date for the payment method.
 	ExpirationDate NullableString `json:"expiration_date,omitempty"`
 	// The browser target that an approval URL must be opened in. If `any` or `null`, then there is no specific requirement.
@@ -40,9 +42,9 @@ type PaymentMethodTokenized struct {
 	Currency NullableString `json:"currency,omitempty"`
 	// The 2-letter ISO code of the country this payment method can be used for. If this value is `null` the payment method may be used in multiple countries.
 	Country NullableString `json:"country,omitempty"`
-	// The date and time when this card was last replaced.  When the Account Updater determines that new card details are available (e.g. when it's about to expire), existing details are not changed immediately. The actual replacement occurs when a transaction using this payment method is declined with any of the following codes:  * `canceled_payment_method` * `expired_payment_method` * `unavailable_payment_method` * `unknown_payment_method`  When the replacement is applied, this field is updated. For non-card payment methods, the value of this field is always set to `null`.
+	// The date and time when this card was last replaced.  When the Account Updater determines that new card details are available, existing details are not changed immediately. There are three scenarios in which the actual replacement occurs:  1. When this card has expired. 2. When only the expiration date changed. 3. When a transaction using this card is declined with any of the following codes:     * `canceled_payment_method`     * `expired_payment_method`     * `unavailable_payment_method`     * `unknown_payment_method`  When the replacement is applied, this field is updated. For non-card payment methods, the value of this field is always set to `null`.
 	LastReplacedAt NullableTime `json:"last_replaced_at,omitempty"`
-	// Whether this card has a pending replacement that hasn't been applied yet.  When the Account Updater determines that new card details are available (e.g. when it's about to expire), existing details are not changed immediately, but this field is set to `true`. The actual replacement occurs when a transaction using this payment method is declined with any of the following codes:  * `canceled_payment_method` * `expired_payment_method` * `unavailable_payment_method` * `unknown_payment_method`  When the replacement is applied, this field is set to `false`. For non-card payment methods, the value of this field is always set to `false`.
+	// Whether this card has a pending replacement that hasn't been applied yet.  When the Account Updater determines that new card details are available, existing details are not changed immediately, but this field is set to `true`. There are three scenarios in which the actual replacement occurs:  1. When this card has expired. 2. When only the expiration date changed. 3. When a transaction using this card is declined with any of the following codes:     * `canceled_payment_method`     * `expired_payment_method`     * `unavailable_payment_method`     * `unknown_payment_method`  When the replacement is applied, this field is set to `false`. For non-card payment methods, the value of this field is always set to `false`.
 	HasReplacement *bool `json:"has_replacement,omitempty"`
 }
 
@@ -263,6 +265,39 @@ func (o *PaymentMethodTokenized) SetSchemeNil() {
 // UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
 func (o *PaymentMethodTokenized) UnsetScheme() {
 	o.Scheme.Unset()
+}
+
+// GetAdditionalSchemes returns the AdditionalSchemes field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethodTokenized) GetAdditionalSchemes() []string {
+	if o == nil  {
+		var ret []string
+		return ret
+	}
+	return o.AdditionalSchemes
+}
+
+// GetAdditionalSchemesOk returns a tuple with the AdditionalSchemes field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethodTokenized) GetAdditionalSchemesOk() (*[]string, bool) {
+	if o == nil || o.AdditionalSchemes == nil {
+		return nil, false
+	}
+	return &o.AdditionalSchemes, true
+}
+
+// HasAdditionalSchemes returns a boolean if a field has been set.
+func (o *PaymentMethodTokenized) HasAdditionalSchemes() bool {
+	if o != nil && o.AdditionalSchemes != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAdditionalSchemes gets a reference to the given []string and assigns it to the AdditionalSchemes field.
+func (o *PaymentMethodTokenized) SetAdditionalSchemes(v []string) {
+	o.AdditionalSchemes = v
 }
 
 // GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -568,6 +603,9 @@ func (o PaymentMethodTokenized) MarshalJSON() ([]byte, error) {
 	}
 	if o.Scheme.IsSet() {
 		toSerialize["scheme"] = o.Scheme.Get()
+	}
+	if o.AdditionalSchemes != nil {
+		toSerialize["additional_schemes"] = o.AdditionalSchemes
 	}
 	if o.ExpirationDate.IsSet() {
 		toSerialize["expiration_date"] = o.ExpirationDate.Get()
