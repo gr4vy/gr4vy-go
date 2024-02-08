@@ -521,12 +521,17 @@ type ApiListBuyersRequest struct {
 	ctx _context.Context
 	ApiService *BuyersApiService
 	search *string
+	externalIdentifier *string
 	limit *int32
 	cursor *string
 }
 
 func (r ApiListBuyersRequest) Search(search string) ApiListBuyersRequest {
 	r.search = &search
+	return r
+}
+func (r ApiListBuyersRequest) ExternalIdentifier(externalIdentifier string) ApiListBuyersRequest {
+	r.externalIdentifier = &externalIdentifier
 	return r
 }
 func (r ApiListBuyersRequest) Limit(limit int32) ApiListBuyersRequest {
@@ -582,6 +587,9 @@ func (a *BuyersApiService) ListBuyersExecute(r ApiListBuyersRequest) (Buyers, *_
 
 	if r.search != nil {
 		localVarQueryParams.Add("search", parameterToString(*r.search, ""))
+	}
+	if r.externalIdentifier != nil {
+		localVarQueryParams.Add("external_identifier", parameterToString(*r.externalIdentifier, ""))
 	}
 	if r.limit != nil {
 		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))

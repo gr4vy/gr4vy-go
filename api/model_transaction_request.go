@@ -40,7 +40,7 @@ type TransactionRequest struct {
 	Country NullableString `json:"country,omitempty"`
 	// An external identifier that can be used to match the transaction against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
-	// The optional gift-card to use for this transaction. At least one gift card is required if no other `payment_method` has been added.
+	// The optional gift card(s) to use for this transaction. At least one gift card is required if no other `payment_method` has been added. By default, only a maximum limit of 10 gift cards may be used in a single transaction. Please contact our team to change this limit.
 	GiftCards []TransactionGiftCardRequest `json:"gift_cards,omitempty"`
 	// Defines the intent of this API call. This determines the desired initial state of the transaction.  * `authorize` - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * `capture` - Optionally approves and then authorizes and captures the funds of the transaction.
 	Intent *string `json:"intent,omitempty"`

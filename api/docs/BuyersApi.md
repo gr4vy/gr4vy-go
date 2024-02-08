@@ -297,7 +297,7 @@ Name | Type | Description  | Notes
 
 ## ListBuyers
 
-> Buyers ListBuyers(ctx).Search(search).Limit(limit).Cursor(cursor).Execute()
+> Buyers ListBuyers(ctx).Search(search).ExternalIdentifier(externalIdentifier).Limit(limit).Cursor(cursor).Execute()
 
 List buyers
 
@@ -317,12 +317,13 @@ import (
 
 func main() {
     search := "John" // string | Filters the results to only the buyers for which the `display_name` or `external_identifier` matches this value. This field allows for a partial match, matching any buyer for which either of the fields partially or completely matches. (optional)
+    externalIdentifier := "user-12345" // string | Filters the results to only the items for which the `buyer` has an `external_identifier` that exactly matches this value. (optional)
     limit := int32(1) // int32 | Defines the maximum number of items to return for this request. (optional) (default to 20)
     cursor := "ZXhhbXBsZTE" // string | A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the `next_cursor` field. Similarly the `previous_cursor` can be used to reverse backwards in the list. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.BuyersApi.ListBuyers(context.Background()).Search(search).Limit(limit).Cursor(cursor).Execute()
+    resp, r, err := api_client.BuyersApi.ListBuyers(context.Background()).Search(search).ExternalIdentifier(externalIdentifier).Limit(limit).Cursor(cursor).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `BuyersApi.ListBuyers``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -344,6 +345,7 @@ Other parameters are passed through a pointer to a apiListBuyersRequest struct v
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **search** | **string** | Filters the results to only the buyers for which the &#x60;display_name&#x60; or &#x60;external_identifier&#x60; matches this value. This field allows for a partial match, matching any buyer for which either of the fields partially or completely matches. | 
+ **externalIdentifier** | **string** | Filters the results to only the items for which the &#x60;buyer&#x60; has an &#x60;external_identifier&#x60; that exactly matches this value. | 
  **limit** | **int32** | Defines the maximum number of items to return for this request. | [default to 20]
  **cursor** | **string** | A cursor that identifies the page of results to return. This is used to paginate the results of this API.  For the first page of results, this parameter can be left out. For additional pages, use the value returned by the API in the &#x60;next_cursor&#x60; field. Similarly the &#x60;previous_cursor&#x60; can be used to reverse backwards in the list. | 
 

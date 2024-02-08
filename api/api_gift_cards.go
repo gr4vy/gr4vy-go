@@ -143,6 +143,16 @@ func (a *GiftCardsApiService) CheckGiftCardBalancesExecute(r ApiCheckGiftCardBal
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v Error429TooManyRequests
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
 		}
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
@@ -715,6 +725,9 @@ service.
 It is only possible to store a gift card against a buyer if the same card is
 not already stored on the buyer and the gift card has not expired yet.
 
+Buyers by default can only have a maximum limit of 10 gift cards stored against
+them. Please contact our team to change this limit.
+
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiStoreGiftCardRequest
  */
@@ -813,6 +826,16 @@ func (a *GiftCardsApiService) StoreGiftCardExecute(r ApiStoreGiftCardRequest) (G
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
 			var v Error409DuplicateRecord
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v Error429TooManyRequests
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

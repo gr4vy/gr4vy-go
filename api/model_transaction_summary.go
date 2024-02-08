@@ -40,6 +40,8 @@ type TransactionSummary struct {
 	Currency *string `json:"currency,omitempty"`
 	// An external identifier that can be used to match the transaction against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
+	// The gift cards redeemed for this transaction.
+	GiftCardRedemptions *[]GiftCardRedemption `json:"gift_card_redemptions,omitempty"`
 	// The original `intent` used when the transaction was [created](#operation/authorize-new-transaction).
 	Intent *string `json:"intent,omitempty"`
 	// The ID of the merchant account to which this transaction belongs to.
@@ -462,6 +464,38 @@ func (o *TransactionSummary) SetExternalIdentifierNil() {
 // UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
 func (o *TransactionSummary) UnsetExternalIdentifier() {
 	o.ExternalIdentifier.Unset()
+}
+
+// GetGiftCardRedemptions returns the GiftCardRedemptions field value if set, zero value otherwise.
+func (o *TransactionSummary) GetGiftCardRedemptions() []GiftCardRedemption {
+	if o == nil || o.GiftCardRedemptions == nil {
+		var ret []GiftCardRedemption
+		return ret
+	}
+	return *o.GiftCardRedemptions
+}
+
+// GetGiftCardRedemptionsOk returns a tuple with the GiftCardRedemptions field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionSummary) GetGiftCardRedemptionsOk() (*[]GiftCardRedemption, bool) {
+	if o == nil || o.GiftCardRedemptions == nil {
+		return nil, false
+	}
+	return o.GiftCardRedemptions, true
+}
+
+// HasGiftCardRedemptions returns a boolean if a field has been set.
+func (o *TransactionSummary) HasGiftCardRedemptions() bool {
+	if o != nil && o.GiftCardRedemptions != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetGiftCardRedemptions gets a reference to the given []GiftCardRedemption and assigns it to the GiftCardRedemptions field.
+func (o *TransactionSummary) SetGiftCardRedemptions(v []GiftCardRedemption) {
+	o.GiftCardRedemptions = &v
 }
 
 // GetIntent returns the Intent field value if set, zero value otherwise.
@@ -902,6 +936,9 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
+	}
+	if o.GiftCardRedemptions != nil {
+		toSerialize["gift_card_redemptions"] = o.GiftCardRedemptions
 	}
 	if o.Intent != nil {
 		toSerialize["intent"] = o.Intent

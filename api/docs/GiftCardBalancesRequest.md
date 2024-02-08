@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**Items** | Pointer to [**[]GiftCardBalanceRequest**](GiftCardBalanceRequest.md) | One or more gift cards to check balances for. | [optional] 
+**Items** | Pointer to [**[]GiftCardBalanceRequest**](GiftCardBalanceRequest.md) | One or more gift cards to check balances for, up to a default limit of 10 gift cards. Please contact our team to change this limit. | [optional] 
 
 ## Methods
 

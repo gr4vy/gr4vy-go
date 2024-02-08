@@ -4,11 +4,13 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**CybersourceCard** | Pointer to [**NullableConnectionOptionsCybersourceCard**](ConnectionOptionsCybersourceCard.md) |  | [optional] 
 **CybersourceAntiFraud** | Pointer to [**NullableConnectionOptionsCybersourceAntiFraud**](ConnectionOptionsCybersourceAntiFraud.md) |  | [optional] 
 **ForterAntiFraud** | Pointer to [**NullableConnectionOptionsForterAntiFraud**](ConnectionOptionsForterAntiFraud.md) |  | [optional] 
 **AdyenCard** | Pointer to [**NullableConnectionOptionsAdyenCard**](ConnectionOptionsAdyenCard.md) |  | [optional] 
 **PaypalPaypal** | Pointer to [**NullableConnectionOptionsPaypalPaypal**](ConnectionOptionsPaypalPaypal.md) |  | [optional] 
 **PaypalPaypalpaylater** | Pointer to [**NullableConnectionOptionsPaypalPaypal**](ConnectionOptionsPaypalPaypal.md) |  | [optional] 
+**StripeCard** | Pointer to [**NullableConnectionOptionsStripeCard**](ConnectionOptionsStripeCard.md) |  | [optional] 
 
 ## Methods
 
@@ -29,6 +31,41 @@ NewConnectionOptionsWithDefaults instantiates a new ConnectionOptions object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
 
+### GetCybersourceCard
+
+`func (o *ConnectionOptions) GetCybersourceCard() ConnectionOptionsCybersourceCard`
+
+GetCybersourceCard returns the CybersourceCard field if non-nil, zero value otherwise.
+
+### GetCybersourceCardOk
+
+`func (o *ConnectionOptions) GetCybersourceCardOk() (*ConnectionOptionsCybersourceCard, bool)`
+
+GetCybersourceCardOk returns a tuple with the CybersourceCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCybersourceCard
+
+`func (o *ConnectionOptions) SetCybersourceCard(v ConnectionOptionsCybersourceCard)`
+
+SetCybersourceCard sets CybersourceCard field to given value.
+
+### HasCybersourceCard
+
+`func (o *ConnectionOptions) HasCybersourceCard() bool`
+
+HasCybersourceCard returns a boolean if a field has been set.
+
+### SetCybersourceCardNil
+
+`func (o *ConnectionOptions) SetCybersourceCardNil(b bool)`
+
+ SetCybersourceCardNil sets the value for CybersourceCard to be an explicit nil
+
+### UnsetCybersourceCard
+`func (o *ConnectionOptions) UnsetCybersourceCard()`
+
+UnsetCybersourceCard ensures that no value is present for CybersourceCard, not even an explicit nil
 ### GetCybersourceAntiFraud
 
 `func (o *ConnectionOptions) GetCybersourceAntiFraud() ConnectionOptionsCybersourceAntiFraud`
@@ -204,6 +241,41 @@ HasPaypalPaypalpaylater returns a boolean if a field has been set.
 `func (o *ConnectionOptions) UnsetPaypalPaypalpaylater()`
 
 UnsetPaypalPaypalpaylater ensures that no value is present for PaypalPaypalpaylater, not even an explicit nil
+### GetStripeCard
+
+`func (o *ConnectionOptions) GetStripeCard() ConnectionOptionsStripeCard`
+
+GetStripeCard returns the StripeCard field if non-nil, zero value otherwise.
+
+### GetStripeCardOk
+
+`func (o *ConnectionOptions) GetStripeCardOk() (*ConnectionOptionsStripeCard, bool)`
+
+GetStripeCardOk returns a tuple with the StripeCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetStripeCard
+
+`func (o *ConnectionOptions) SetStripeCard(v ConnectionOptionsStripeCard)`
+
+SetStripeCard sets StripeCard field to given value.
+
+### HasStripeCard
+
+`func (o *ConnectionOptions) HasStripeCard() bool`
+
+HasStripeCard returns a boolean if a field has been set.
+
+### SetStripeCardNil
+
+`func (o *ConnectionOptions) SetStripeCardNil(b bool)`
+
+ SetStripeCardNil sets the value for StripeCard to be an explicit nil
+
+### UnsetStripeCard
+`func (o *ConnectionOptions) UnsetStripeCard()`
+
+UnsetStripeCard ensures that no value is present for StripeCard, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

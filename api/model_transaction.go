@@ -57,7 +57,7 @@ type Transaction struct {
 	// The gift card service used for this transaction.
 	GiftCardService *GiftCardServiceSnapshot `json:"gift_card_service,omitempty"`
 	// The gift cards redeemed for this transaction.
-	GiftCardsRedemptions *[]GiftCardRedemption `json:"gift_cards_redemptions,omitempty"`
+	GiftCardRedemptions *[]GiftCardRedemption `json:"gift_card_redemptions,omitempty"`
 	// The original `intent` used when the transaction was [created](#operation/authorize-new-transaction).
 	Intent *string `json:"intent,omitempty"`
 	// The outcome of the original intent of a transaction.  This allows you to understand if the intent of the transaction (e.g. `capture` or `authorize`) has been achieved when dealing with multiple payment instruments.  If all payment instruments (`payment_method` and/or `gift_cards`) have succeeded to get an authorization or direct sale **at any point in time** then this will return a `succeeded` value.  If any of the payment instruments fails or declines then this will return a `failed` value.  If any payment instruments is still in a `pending` or `processing` state then the result will be `pending`.  Please note that if any of the payment instruments are voided or refunded after the result reaches a `succeeded` state  then the result will remain unchanged.
@@ -832,36 +832,36 @@ func (o *Transaction) SetGiftCardService(v GiftCardServiceSnapshot) {
 	o.GiftCardService = &v
 }
 
-// GetGiftCardsRedemptions returns the GiftCardsRedemptions field value if set, zero value otherwise.
-func (o *Transaction) GetGiftCardsRedemptions() []GiftCardRedemption {
-	if o == nil || o.GiftCardsRedemptions == nil {
+// GetGiftCardRedemptions returns the GiftCardRedemptions field value if set, zero value otherwise.
+func (o *Transaction) GetGiftCardRedemptions() []GiftCardRedemption {
+	if o == nil || o.GiftCardRedemptions == nil {
 		var ret []GiftCardRedemption
 		return ret
 	}
-	return *o.GiftCardsRedemptions
+	return *o.GiftCardRedemptions
 }
 
-// GetGiftCardsRedemptionsOk returns a tuple with the GiftCardsRedemptions field value if set, nil otherwise
+// GetGiftCardRedemptionsOk returns a tuple with the GiftCardRedemptions field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *Transaction) GetGiftCardsRedemptionsOk() (*[]GiftCardRedemption, bool) {
-	if o == nil || o.GiftCardsRedemptions == nil {
+func (o *Transaction) GetGiftCardRedemptionsOk() (*[]GiftCardRedemption, bool) {
+	if o == nil || o.GiftCardRedemptions == nil {
 		return nil, false
 	}
-	return o.GiftCardsRedemptions, true
+	return o.GiftCardRedemptions, true
 }
 
-// HasGiftCardsRedemptions returns a boolean if a field has been set.
-func (o *Transaction) HasGiftCardsRedemptions() bool {
-	if o != nil && o.GiftCardsRedemptions != nil {
+// HasGiftCardRedemptions returns a boolean if a field has been set.
+func (o *Transaction) HasGiftCardRedemptions() bool {
+	if o != nil && o.GiftCardRedemptions != nil {
 		return true
 	}
 
 	return false
 }
 
-// SetGiftCardsRedemptions gets a reference to the given []GiftCardRedemption and assigns it to the GiftCardsRedemptions field.
-func (o *Transaction) SetGiftCardsRedemptions(v []GiftCardRedemption) {
-	o.GiftCardsRedemptions = &v
+// SetGiftCardRedemptions gets a reference to the given []GiftCardRedemption and assigns it to the GiftCardRedemptions field.
+func (o *Transaction) SetGiftCardRedemptions(v []GiftCardRedemption) {
+	o.GiftCardRedemptions = &v
 }
 
 // GetIntent returns the Intent field value if set, zero value otherwise.
@@ -1751,8 +1751,8 @@ func (o Transaction) MarshalJSON() ([]byte, error) {
 	if o.GiftCardService != nil {
 		toSerialize["gift_card_service"] = o.GiftCardService
 	}
-	if o.GiftCardsRedemptions != nil {
-		toSerialize["gift_cards_redemptions"] = o.GiftCardsRedemptions
+	if o.GiftCardRedemptions != nil {
+		toSerialize["gift_card_redemptions"] = o.GiftCardRedemptions
 	}
 	if o.Intent != nil {
 		toSerialize["intent"] = o.Intent

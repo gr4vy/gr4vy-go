@@ -17,11 +17,13 @@ import (
 
 // ConnectionOptions struct for ConnectionOptions
 type ConnectionOptions struct {
+	CybersourceCard NullableConnectionOptionsCybersourceCard `json:"cybersource-card,omitempty"`
 	CybersourceAntiFraud NullableConnectionOptionsCybersourceAntiFraud `json:"cybersource-anti-fraud,omitempty"`
 	ForterAntiFraud NullableConnectionOptionsForterAntiFraud `json:"forter-anti-fraud,omitempty"`
 	AdyenCard NullableConnectionOptionsAdyenCard `json:"adyen-card,omitempty"`
 	PaypalPaypal NullableConnectionOptionsPaypalPaypal `json:"paypal-paypal,omitempty"`
 	PaypalPaypalpaylater NullableConnectionOptionsPaypalPaypal `json:"paypal-paypalpaylater,omitempty"`
+	StripeCard NullableConnectionOptionsStripeCard `json:"stripe-card,omitempty"`
 }
 
 // NewConnectionOptions instantiates a new ConnectionOptions object
@@ -39,6 +41,48 @@ func NewConnectionOptions() *ConnectionOptions {
 func NewConnectionOptionsWithDefaults() *ConnectionOptions {
 	this := ConnectionOptions{}
 	return &this
+}
+
+// GetCybersourceCard returns the CybersourceCard field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetCybersourceCard() ConnectionOptionsCybersourceCard {
+	if o == nil || o.CybersourceCard.Get() == nil {
+		var ret ConnectionOptionsCybersourceCard
+		return ret
+	}
+	return *o.CybersourceCard.Get()
+}
+
+// GetCybersourceCardOk returns a tuple with the CybersourceCard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetCybersourceCardOk() (*ConnectionOptionsCybersourceCard, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CybersourceCard.Get(), o.CybersourceCard.IsSet()
+}
+
+// HasCybersourceCard returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasCybersourceCard() bool {
+	if o != nil && o.CybersourceCard.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCybersourceCard gets a reference to the given NullableConnectionOptionsCybersourceCard and assigns it to the CybersourceCard field.
+func (o *ConnectionOptions) SetCybersourceCard(v ConnectionOptionsCybersourceCard) {
+	o.CybersourceCard.Set(&v)
+}
+// SetCybersourceCardNil sets the value for CybersourceCard to be an explicit nil
+func (o *ConnectionOptions) SetCybersourceCardNil() {
+	o.CybersourceCard.Set(nil)
+}
+
+// UnsetCybersourceCard ensures that no value is present for CybersourceCard, not even an explicit nil
+func (o *ConnectionOptions) UnsetCybersourceCard() {
+	o.CybersourceCard.Unset()
 }
 
 // GetCybersourceAntiFraud returns the CybersourceAntiFraud field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -251,8 +295,53 @@ func (o *ConnectionOptions) UnsetPaypalPaypalpaylater() {
 	o.PaypalPaypalpaylater.Unset()
 }
 
+// GetStripeCard returns the StripeCard field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetStripeCard() ConnectionOptionsStripeCard {
+	if o == nil || o.StripeCard.Get() == nil {
+		var ret ConnectionOptionsStripeCard
+		return ret
+	}
+	return *o.StripeCard.Get()
+}
+
+// GetStripeCardOk returns a tuple with the StripeCard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetStripeCardOk() (*ConnectionOptionsStripeCard, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.StripeCard.Get(), o.StripeCard.IsSet()
+}
+
+// HasStripeCard returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasStripeCard() bool {
+	if o != nil && o.StripeCard.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetStripeCard gets a reference to the given NullableConnectionOptionsStripeCard and assigns it to the StripeCard field.
+func (o *ConnectionOptions) SetStripeCard(v ConnectionOptionsStripeCard) {
+	o.StripeCard.Set(&v)
+}
+// SetStripeCardNil sets the value for StripeCard to be an explicit nil
+func (o *ConnectionOptions) SetStripeCardNil() {
+	o.StripeCard.Set(nil)
+}
+
+// UnsetStripeCard ensures that no value is present for StripeCard, not even an explicit nil
+func (o *ConnectionOptions) UnsetStripeCard() {
+	o.StripeCard.Unset()
+}
+
 func (o ConnectionOptions) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.CybersourceCard.IsSet() {
+		toSerialize["cybersource-card"] = o.CybersourceCard.Get()
+	}
 	if o.CybersourceAntiFraud.IsSet() {
 		toSerialize["cybersource-anti-fraud"] = o.CybersourceAntiFraud.Get()
 	}
@@ -267,6 +356,9 @@ func (o ConnectionOptions) MarshalJSON() ([]byte, error) {
 	}
 	if o.PaypalPaypalpaylater.IsSet() {
 		toSerialize["paypal-paypalpaylater"] = o.PaypalPaypalpaylater.Get()
+	}
+	if o.StripeCard.IsSet() {
+		toSerialize["stripe-card"] = o.StripeCard.Get()
 	}
 	return json.Marshal(toSerialize)
 }

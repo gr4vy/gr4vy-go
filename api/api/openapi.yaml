@@ -364,6 +364,17 @@ paths:
           example: John
           type: string
         style: form
+      - description: |-
+          Filters the results to only the items for which the `buyer` has an
+          `external_identifier` that exactly matches this value.
+        explode: true
+        in: query
+        name: external_identifier
+        required: false
+        schema:
+          example: user-12345
+          type: string
+        style: form
       - description: Defines the maximum number of items to return for this request.
         explode: true
         in: query
@@ -2191,6 +2202,20 @@ paths:
           type: string
         style: form
       - description: |-
+          Filters for transactions that have at least one gift card
+          redemption where the last 4 digits of its gift card number
+          matches exactly with the provided value.
+        explode: true
+        in: query
+        name: gift_card_last4
+        required: false
+        schema:
+          example: "7890"
+          maxLength: 4
+          minLength: 4
+          type: string
+        style: form
+      - description: |-
           When set to `true`, filters for transactions that have at least one gift
           card redemption associated with it. When set to `false`, filter for
           transactions that have no gift card redemptions.
@@ -2621,6 +2646,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error409DuplicateRecord'
           description: Returns an error if duplicate resource has been found.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429TooManyRequests'
+          description: |-
+            Returns an error if the same token is used for too many requests per minute.
+            The exact rate limit differs per instance.
       summary: New transaction
       tags:
       - Transactions
@@ -3033,6 +3066,9 @@ paths:
 
         It is only possible to store a gift card against a buyer if the same card is
         not already stored on the buyer and the gift card has not expired yet.
+
+        Buyers by default can only have a maximum limit of 10 gift cards stored against
+        them. Please contact our team to change this limit.
       operationId: store-gift-card
       requestBody:
         content:
@@ -3065,6 +3101,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error409DuplicateRecord'
           description: Returns an error if duplicate resource has been found.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429TooManyRequests'
+          description: |-
+            Returns an error if the same token is used for too many requests per minute.
+            The exact rate limit differs per instance.
       summary: Store gift card
       tags:
       - Gift Cards
@@ -3178,6 +3222,14 @@ paths:
               schema:
                 $ref: '#/components/schemas/Error401Unauthorized'
           description: Returns an error if no valid authentication was provided.
+        "429":
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error429TooManyRequests'
+          description: |-
+            Returns an error if the same token is used for too many requests per minute.
+            The exact rate limit differs per instance.
       summary: Check gift card balances
       tags:
       - Gift Cards
@@ -6584,6 +6636,8 @@ components:
       - Discovery
     ConnectionOptions:
       properties:
+        cybersource-card:
+          $ref: '#/components/schemas/ConnectionOptions_cybersource_card'
         cybersource-anti-fraud:
           $ref: '#/components/schemas/ConnectionOptions_cybersource_anti_fraud'
         forter-anti-fraud:
@@ -6594,6 +6648,8 @@ components:
           $ref: '#/components/schemas/ConnectionOptions_paypal_paypal'
         paypal-paypalpaylater:
           $ref: '#/components/schemas/ConnectionOptions_paypal_paypal'
+        stripe-card:
+          $ref: '#/components/schemas/ConnectionOptions_stripe_card'
       title: Connection Options
       type: object
     CartItem:
@@ -7710,7 +7766,7 @@ components:
           type: integer
         message:
           description: Further details on the field that triggered the error.
-          example: A duplicate ecord exists with this external_identifier value
+          example: A duplicate record exists with this external_identifier value
           type: string
         details:
           description: |-
@@ -7721,6 +7777,43 @@ components:
             $ref: '#/components/schemas/ErrorDetail'
           type: array
       title: Duplicate Record Error
+      type: object
+      x-tags:
+      - Errors
+    Error429TooManyRequests:
+      description: Too Many Requests Error (HTTP 429).
+      properties:
+        type:
+          description: '`error`.'
+          enum:
+          - error
+          example: error
+          type: string
+        code:
+          description: '`too_many_requests`.'
+          enum:
+          - too_many_requests
+          example: too_many_requests
+          type: string
+        status:
+          description: '`429`.'
+          enum:
+          - 429
+          example: 429
+          type: integer
+        message:
+          description: Further details on the field that triggered the error.
+          example: Too many requests
+          type: string
+        details:
+          description: |-
+            A list of detail objects that further clarify the reason for the error.
+            Not every error supports more detail.
+          example: []
+          items:
+            $ref: '#/components/schemas/ErrorDetail'
+          type: array
+      title: Too Many Requests Error
       type: object
       x-tags:
       - Errors
@@ -8046,8 +8139,8 @@ components:
             If the last balance update failed, this will contain the
             internal code for this error.
           enum:
-          - deactivated_card
           - expired_card
+          - inactive_card
           - incorrect_currency
           - insufficient_funds
           - invalid_amount
@@ -8197,9 +8290,12 @@ components:
           id: e6cdf979-87e2-4796-8ff6-9784d5aed893
       properties:
         items:
-          description: One or more gift cards to check balances for.
+          description: |-
+            One or more gift cards to check balances for, up to a default limit
+            of 10 gift cards. Please contact our team to change this limit.
           items:
             $ref: '#/components/schemas/GiftCardBalanceRequest'
+          minItems: 1
           type: array
       title: A gift card balance check request
       type: object
@@ -8269,8 +8365,8 @@ components:
             If this gift card redemption resulted in an error, this will
             contain the internal code for the error.
           enum:
-          - deactivated_card
           - expired_card
+          - inactive_card
           - incorrect_currency
           - insufficient_funds
           - invalid_amount
@@ -9595,6 +9691,134 @@ components:
       type: object
       x-tags:
       - Tokens
+    NetworkTokenCryptogramProvisionFailed:
+      description: This event logs the request and response details of HTTP calls
+        made to provision a cryptogram for a network token, in case the call failed.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `network-token-cryptogram-provision-failed`.
+          enum:
+          - network-token-cryptogram-provision-failed
+          example: network-token-cryptogram-provision-failed
+          type: string
+        created_at:
+          description: The date and time when this event was created in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/NetworkTokenCryptogramProvisionFailed_context'
+      title: Network Token Cryptogram Provision - Failure
+      type: object
+      x-tags:
+      - Transactions
+    NetworkTokenCryptogramProvisionSucceeded:
+      description: This event logs the request and response details of HTTP calls
+        made to provision a cryptogram for a network token, in case the call succeeded.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `network-token-cryptogram-provision-succeeded`.
+          enum:
+          - network-token-cryptogram-provision-succeeded
+          example: network-token-cryptogram-provision-succeeded
+          type: string
+        created_at:
+          description: The date and time when this event was created in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/NetworkTokenCryptogramProvisionSucceeded_context'
+      title: Network Token Cryptogram Provision - Succeeded
+      type: object
+      x-tags:
+      - Transactions
+    NetworkTokenProvisionFailed:
+      description: This event logs the request and response details of HTTP calls
+        made to provision a network token, in case the call failed.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `network-token-provision-failed`.
+          enum:
+          - network-token-provision-failed
+          example: network-token-provision-failed
+          type: string
+        created_at:
+          description: The date and time when this event was created in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/NetworkTokenProvisionFailed_context'
+      title: Network Token Provision - Failure
+      type: object
+      x-tags:
+      - Transactions
+    NetworkTokenProvisionSucceeded:
+      description: This event logs the request and response details of HTTP calls
+        made to provision a network token, in case the call succeeded.
+      properties:
+        type:
+          description: The type of this resource. Is always `transaction-event`.
+          enum:
+          - transaction-event
+          example: transaction-event
+          type: string
+        id:
+          description: The unique identifier for this event.
+          example: fe26475d-ec3e-4884-9553-f7356683f7f9
+          format: uuid
+          type: string
+        name:
+          description: The name of this resource. Is always `network-token-provision-succeeded`.
+          enum:
+          - network-token-provision-succeeded
+          example: network-token-provision-succeeded
+          type: string
+        created_at:
+          description: The date and time when this event was created in our system.
+          example: 2013-07-16T19:23:00Z
+          format: date-time
+          type: string
+        context:
+          $ref: '#/components/schemas/NetworkTokenCryptogramProvisionSucceeded_context'
+      title: Network Token Provision - Succeeded
+      type: object
+      x-tags:
+      - Transactions
     PaymentConnectorResponseTransactionAuthorizationSucceededEvent:
       description: |-
         This event logs the exact details parsed details for a succeeded authorization
@@ -10769,7 +10993,13 @@ components:
           description: |-
             An additional label used to differentiate different sub-types of a payment
             method. Most notably this can include the type of card used in a
-            transaction.
+            transaction. This field is `null` for the non-card payment methods.
+            This represents the card scheme sent to the connector and it could be different from the
+            actual card scheme that is being used by the PSP to process the transaction
+            in the following situations: 1. `use_additional_scheme` transformation is used
+            with the `PAN` instrument but we already have a PSP token for the card.
+            2. `use_additional_scheme` transformation is used but PSP has fallen back to the
+            main card scheme internally.
           enum:
           - accel
           - amex
@@ -14469,6 +14699,37 @@ components:
         type: transaction
         authorized_at: 2013-07-16T19:23:00Z
         statement_descriptor: ""
+        gift_card_redemptions:
+        - raw_error_code: "10001"
+          amount: 1299
+          gift_card:
+            last4: "1234"
+            bin: "412345"
+            id: e6cdf979-87e2-4796-8ff6-9784d5aed893
+            type: gift-card
+            sub_bin: "554"
+          gift_card_service_redemption_id: xYqd43gySMtori
+          error_code: expired_card
+          id: bc3f0d5a-3529-4d31-b2b4-848d14926bbc
+          type: gift-card-redemption
+          raw_error_message: Card expired.
+          status: succeeded
+          refunded_amount: 1299
+        - raw_error_code: "10001"
+          amount: 1299
+          gift_card:
+            last4: "1234"
+            bin: "412345"
+            id: e6cdf979-87e2-4796-8ff6-9784d5aed893
+            type: gift-card
+            sub_bin: "554"
+          gift_card_service_redemption_id: xYqd43gySMtori
+          error_code: expired_card
+          id: bc3f0d5a-3529-4d31-b2b4-848d14926bbc
+          type: gift-card-redemption
+          raw_error_message: Card expired.
+          status: succeeded
+          refunded_amount: 1299
         updated_at: 2013-07-16T19:23:00Z
         captured_amount: 999
         merchant_account_id: default
@@ -14514,37 +14775,6 @@ components:
           - categories
           sku: sku-789123
         avs_response_code: partial_match_address
-        gift_cards_redemptions:
-        - raw_error_code: "10001"
-          amount: 1299
-          gift_card:
-            last4: "1234"
-            bin: "412345"
-            id: e6cdf979-87e2-4796-8ff6-9784d5aed893
-            type: gift-card
-            sub_bin: "554"
-          gift_card_service_redemption_id: xYqd43gySMtori
-          error_code: expired_card
-          id: bc3f0d5a-3529-4d31-b2b4-848d14926bbc
-          type: gift-card-redemption
-          raw_error_message: Card expired.
-          status: succeeded
-          refunded_amount: 1299
-        - raw_error_code: "10001"
-          amount: 1299
-          gift_card:
-            last4: "1234"
-            bin: "412345"
-            id: e6cdf979-87e2-4796-8ff6-9784d5aed893
-            type: gift-card
-            sub_bin: "554"
-          gift_card_service_redemption_id: xYqd43gySMtori
-          error_code: expired_card
-          id: bc3f0d5a-3529-4d31-b2b4-848d14926bbc
-          type: gift-card-redemption
-          raw_error_message: Card expired.
-          status: succeeded
-          refunded_amount: 1299
         scheme_transaction_id: "123456789012345"
         intent: authorize
         buyer: ""
@@ -14727,7 +14957,7 @@ components:
           allOf:
           - $ref: '#/components/schemas/GiftCardService--Snapshot'
           description: The gift card service used for this transaction.
-        gift_cards_redemptions:
+        gift_card_redemptions:
           description: The gift cards redeemed for this transaction.
           items:
             $ref: '#/components/schemas/GiftCardRedemption'
@@ -15043,6 +15273,10 @@ components:
           - gift-card-redemption-succeeded
           - gift-card-refund-failed
           - gift-card-refund-succeeded
+          - network-token-cryptogram-provision-failed
+          - network-token-cryptogram-provision-succeeded
+          - network-token-provision-failed
+          - network-token-provision-succeeded
           - payment-connector-response-transaction-authorization-failed
           - payment-connector-response-transaction-authorization-succeeded
           - payment-connector-response-transaction-capture-declined
@@ -15100,6 +15334,10 @@ components:
             - $ref: '#/components/schemas/GiftCardRedemptionSucceeded'
             - $ref: '#/components/schemas/GiftCardRefundFailed'
             - $ref: '#/components/schemas/GiftCardRefundSucceeded'
+            - $ref: '#/components/schemas/NetworkTokenCryptogramProvisionFailed'
+            - $ref: '#/components/schemas/NetworkTokenCryptogramProvisionSucceeded'
+            - $ref: '#/components/schemas/NetworkTokenProvisionFailed'
+            - $ref: '#/components/schemas/NetworkTokenProvisionSucceeded'
             - $ref: '#/components/schemas/PaymentConnectorResponseTransactionAuthorizationSucceededEvent'
             - $ref: '#/components/schemas/PaymentConnectorResponseTransactionDeclinedEvent'
             - $ref: '#/components/schemas/PaymentConnectorResponseTransactionAuthorizationFailedEvent'
@@ -15193,6 +15431,37 @@ components:
         intent: authorize
         buyer: ""
         refunded_amount: 100
+        gift_card_redemptions:
+        - raw_error_code: "10001"
+          amount: 1299
+          gift_card:
+            last4: "1234"
+            bin: "412345"
+            id: e6cdf979-87e2-4796-8ff6-9784d5aed893
+            type: gift-card
+            sub_bin: "554"
+          gift_card_service_redemption_id: xYqd43gySMtori
+          error_code: expired_card
+          id: bc3f0d5a-3529-4d31-b2b4-848d14926bbc
+          type: gift-card-redemption
+          raw_error_message: Card expired.
+          status: succeeded
+          refunded_amount: 1299
+        - raw_error_code: "10001"
+          amount: 1299
+          gift_card:
+            last4: "1234"
+            bin: "412345"
+            id: e6cdf979-87e2-4796-8ff6-9784d5aed893
+            type: gift-card
+            sub_bin: "554"
+          gift_card_service_redemption_id: xYqd43gySMtori
+          error_code: expired_card
+          id: bc3f0d5a-3529-4d31-b2b4-848d14926bbc
+          type: gift-card-redemption
+          raw_error_message: Card expired.
+          status: succeeded
+          refunded_amount: 1299
         updated_at: 2013-07-16T19:23:00Z
         captured_amount: 999
         merchant_account_id: default
@@ -15276,6 +15545,11 @@ components:
           example: user-789123
           nullable: true
           type: string
+        gift_card_redemptions:
+          description: The gift cards redeemed for this transaction.
+          items:
+            $ref: '#/components/schemas/GiftCardRedemption'
+          type: array
         intent:
           description: |-
             The original `intent` used when the transaction was
@@ -15452,6 +15726,37 @@ components:
           intent: authorize
           buyer: ""
           refunded_amount: 100
+          gift_card_redemptions:
+          - raw_error_code: "10001"
+            amount: 1299
+            gift_card:
+              last4: "1234"
+              bin: "412345"
+              id: e6cdf979-87e2-4796-8ff6-9784d5aed893
+              type: gift-card
+              sub_bin: "554"
+            gift_card_service_redemption_id: xYqd43gySMtori
+            error_code: expired_card
+            id: bc3f0d5a-3529-4d31-b2b4-848d14926bbc
+            type: gift-card-redemption
+            raw_error_message: Card expired.
+            status: succeeded
+            refunded_amount: 1299
+          - raw_error_code: "10001"
+            amount: 1299
+            gift_card:
+              last4: "1234"
+              bin: "412345"
+              id: e6cdf979-87e2-4796-8ff6-9784d5aed893
+              type: gift-card
+              sub_bin: "554"
+            gift_card_service_redemption_id: xYqd43gySMtori
+            error_code: expired_card
+            id: bc3f0d5a-3529-4d31-b2b4-848d14926bbc
+            type: gift-card-redemption
+            raw_error_message: Card expired.
+            status: succeeded
+            refunded_amount: 1299
           updated_at: 2013-07-16T19:23:00Z
           captured_amount: 999
           merchant_account_id: default
@@ -15477,6 +15782,37 @@ components:
           intent: authorize
           buyer: ""
           refunded_amount: 100
+          gift_card_redemptions:
+          - raw_error_code: "10001"
+            amount: 1299
+            gift_card:
+              last4: "1234"
+              bin: "412345"
+              id: e6cdf979-87e2-4796-8ff6-9784d5aed893
+              type: gift-card
+              sub_bin: "554"
+            gift_card_service_redemption_id: xYqd43gySMtori
+            error_code: expired_card
+            id: bc3f0d5a-3529-4d31-b2b4-848d14926bbc
+            type: gift-card-redemption
+            raw_error_message: Card expired.
+            status: succeeded
+            refunded_amount: 1299
+          - raw_error_code: "10001"
+            amount: 1299
+            gift_card:
+              last4: "1234"
+              bin: "412345"
+              id: e6cdf979-87e2-4796-8ff6-9784d5aed893
+              type: gift-card
+              sub_bin: "554"
+            gift_card_service_redemption_id: xYqd43gySMtori
+            error_code: expired_card
+            id: bc3f0d5a-3529-4d31-b2b4-848d14926bbc
+            type: gift-card-redemption
+            raw_error_message: Card expired.
+            status: succeeded
+            refunded_amount: 1299
           updated_at: 2013-07-16T19:23:00Z
           captured_amount: 999
           merchant_account_id: default
@@ -15804,8 +16140,9 @@ components:
           nullable: true
           type: string
         gift_cards:
-          description: The optional gift-card to use for this transaction. At least
-            one gift card is required if no other `payment_method` has been added.
+          description: |-
+            The optional gift card(s) to use for this transaction. At least one gift card is required if no other `payment_method` has been added.
+            By default, only a maximum limit of 10 gift cards may be used in a single transaction. Please contact our team to change this limit.
           items:
             $ref: '#/components/schemas/TransactionGiftCardRequest'
           nullable: true
@@ -17148,6 +17485,17 @@ components:
           readOnly: true
           type: boolean
       type: object
+    ConnectionOptions_cybersource_card:
+      description: Additional options for Cybersource payment gateway.
+      nullable: true
+      properties:
+        meta_key_merchant_id:
+          description: |-
+            An override for the merchant ID configured for the connector,
+            used in combination with meta keys.
+          nullable: true
+          type: string
+      type: object
     ConnectionOptions_cybersource_anti_fraud:
       description: Additional options for Cybersource Decision Manager (anti-fraud).
       nullable: true
@@ -17484,6 +17832,35 @@ components:
             $ref: '#/components/schemas/ConnectionOptions_paypal_paypal_additional_data'
           type: array
       type: object
+    ConnectionOptions_stripe_card_stripe_connect:
+      description: Stripe Connect configuration options.
+      nullable: true
+      properties:
+        stripe_account:
+          description: The ID of the connected Stripe account to process for.
+          nullable: true
+          type: string
+        application_fee_amount:
+          description: The application fee to charge when processing for a connected
+            account.
+          nullable: true
+          type: number
+      type: object
+    ConnectionOptions_stripe_card:
+      description: |-
+        Additional options to be passed through to Stripe when processing
+        transactions.
+      nullable: true
+      properties:
+        error_on_requires_action:
+          default: false
+          description: |-
+            Defines if Stripe should automatically fail the payment if it
+            requires two-factor authentication from the user.
+          type: boolean
+        stripe_connect:
+          $ref: '#/components/schemas/ConnectionOptions_stripe_card_stripe_connect'
+      type: object
     CheckoutSession_payment_method_details:
       example:
         bin: "411111"
@@ -17817,6 +18194,74 @@ components:
           example: false
           nullable: true
           type: boolean
+      type: object
+    NetworkTokenCryptogramProvisionFailed_context:
+      description: Additional context for this event.
+      properties:
+        url:
+          description: The endpoint for the request, if performed.
+          nullable: true
+          type: string
+        request:
+          description: The HTTP body sent to the Network Token provider, if performed.
+          nullable: true
+          type: string
+        response:
+          description: The HTTP body received from the Network Token provider, if
+            any.
+          nullable: true
+          type: string
+        response_status_code:
+          description: The HTTP response status code from the Network Token provider,
+            if any.
+          nullable: true
+          type: number
+        reason:
+          description: The reason we could not provision the cryptogram.
+          example: Network Error
+          type: string
+      type: object
+    NetworkTokenCryptogramProvisionSucceeded_context:
+      description: Additional context for this event.
+      properties:
+        url:
+          description: The endpoint for the request.
+          type: string
+        request:
+          description: The HTTP body sent to the Network Token provider.
+          type: string
+        response:
+          description: The HTTP body received from the Network Token provider.
+          type: string
+        response_status_code:
+          description: The HTTP response status code from the Network Token provider.
+          type: number
+      type: object
+    NetworkTokenProvisionFailed_context:
+      description: Additional context for this event.
+      properties:
+        url:
+          description: The endpoint for the request, if performed.
+          nullable: true
+          type: string
+        request:
+          description: The HTTP body sent to the Network Token provider, if performed.
+          nullable: true
+          type: string
+        response:
+          description: The HTTP body received from the Network Token provider, if
+            any.
+          nullable: true
+          type: string
+        response_status_code:
+          description: The HTTP response status code from the Network Token provider,
+            if any.
+          nullable: true
+          type: number
+        reason:
+          description: The reason we could not provision the network token.
+          example: Network Error
+          type: string
       type: object
     PaymentConnectorResponseTransactionAuthorizationSucceededEvent_context:
       description: Additional context for this event.

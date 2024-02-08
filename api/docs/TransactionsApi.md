@@ -303,7 +303,7 @@ Name | Type | Description  | Notes
 
 ## ListTransactions
 
-> Transactions ListTransactions(ctx).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CheckoutSessionId(checkoutSessionId).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).GiftCardId(giftCardId).HasGiftCardRedemptions(hasGiftCardRedemptions).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentMethodId(paymentMethodId).PaymentMethodLabel(paymentMethodLabel).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).PendingReview(pendingReview).ReconciliationId(reconciliationId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).Execute()
+> Transactions ListTransactions(ctx).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CheckoutSessionId(checkoutSessionId).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).GiftCardId(giftCardId).GiftCardLast4(giftCardLast4).HasGiftCardRedemptions(hasGiftCardRedemptions).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentMethodId(paymentMethodId).PaymentMethodLabel(paymentMethodLabel).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).PendingReview(pendingReview).ReconciliationId(reconciliationId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).Execute()
 
 List transactions
 
@@ -336,6 +336,7 @@ func main() {
     currency := []string{"Inner_example"} // []string | Filters for transactions that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency code. (optional)
     externalIdentifier := "user-12345" // string | Filters the results to only the items for which the `external_identifier` matches this value. (optional)
     giftCardId := TODO // string | Filters for transactions that have at least one gift card redemption with a matching `gift_card_id` value. (optional)
+    giftCardLast4 := "7890" // string | Filters for transactions that have at least one gift card redemption where the last 4 digits of its gift card number matches exactly with the provided value. (optional)
     hasGiftCardRedemptions := true // bool | When set to `true`, filters for transactions that have at least one gift card redemption associated with it. When set to `false`, filter for transactions that have no gift card redemptions. (optional)
     hasRefunds := true // bool | When set to `true`, filter for transactions that have at least one completed refund (including gift card refunds) associated with it. When set to `false`, filter for transactions that have no completed refunds. (optional)
     id := TODO // string | Filters for the transaction that has a matching `id` value. (optional)
@@ -354,7 +355,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CheckoutSessionId(checkoutSessionId).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).GiftCardId(giftCardId).HasGiftCardRedemptions(hasGiftCardRedemptions).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentMethodId(paymentMethodId).PaymentMethodLabel(paymentMethodLabel).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).PendingReview(pendingReview).ReconciliationId(reconciliationId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).Execute()
+    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CheckoutSessionId(checkoutSessionId).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).GiftCardId(giftCardId).GiftCardLast4(giftCardLast4).HasGiftCardRedemptions(hasGiftCardRedemptions).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentMethodId(paymentMethodId).PaymentMethodLabel(paymentMethodLabel).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).PendingReview(pendingReview).ReconciliationId(reconciliationId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.ListTransactions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -388,6 +389,7 @@ Name | Type | Description  | Notes
  **currency** | **[]string** | Filters for transactions that have matching &#x60;currency&#x60; values. The &#x60;currency&#x60; values provided must be formatted as 3-letter ISO currency code. | 
  **externalIdentifier** | **string** | Filters the results to only the items for which the &#x60;external_identifier&#x60; matches this value. | 
  **giftCardId** | [**string**](string.md) | Filters for transactions that have at least one gift card redemption with a matching &#x60;gift_card_id&#x60; value. | 
+ **giftCardLast4** | **string** | Filters for transactions that have at least one gift card redemption where the last 4 digits of its gift card number matches exactly with the provided value. | 
  **hasGiftCardRedemptions** | **bool** | When set to &#x60;true&#x60;, filters for transactions that have at least one gift card redemption associated with it. When set to &#x60;false&#x60;, filter for transactions that have no gift card redemptions. | 
  **hasRefunds** | **bool** | When set to &#x60;true&#x60;, filter for transactions that have at least one completed refund (including gift card refunds) associated with it. When set to &#x60;false&#x60;, filter for transactions that have no completed refunds. | 
  **id** | [**string**](string.md) | Filters for the transaction that has a matching &#x60;id&#x60; value. | 

@@ -43,7 +43,7 @@ type PaymentMethodSnapshot struct {
 	Method *string `json:"method,omitempty"`
 	// The payment account reference (PAR) returned by the card scheme. This is a unique reference to the underlying account that has been used to fund this payment method. This value will be unique if the same underlying account was used, regardless of the actual payment method used. For example, a network token or an Apple Pay device token will return the same PAR when possible.  The uniqueness of this value will depend on the card scheme, please refer to their documentation for further details. The availability of the PAR in our API depends on the availability of its value in the API of the payment service used for the transaction.
 	PaymentAccountReference NullableString `json:"payment_account_reference,omitempty"`
-	// An additional label used to differentiate different sub-types of a payment method. Most notably this can include the type of card used in a transaction.
+	// An additional label used to differentiate different sub-types of a payment method. Most notably this can include the type of card used in a transaction. This field is `null` for the non-card payment methods. This represents the card scheme sent to the connector and it could be different from the actual card scheme that is being used by the PSP to process the transaction in the following situations: 1. `use_additional_scheme` transformation is used with the `PAN` instrument but we already have a PSP token for the card. 2. `use_additional_scheme` transformation is used but PSP has fallen back to the main card scheme internally.
 	Scheme NullableString `json:"scheme,omitempty"`
 }
 
