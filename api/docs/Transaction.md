@@ -23,7 +23,7 @@ Name | Type | Description | Notes
 **ErrorCode** | Pointer to **NullableString** | This is an error code set by Gr4vy. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **GiftCardService** | Pointer to [**GiftCardServiceSnapshot**](GiftCardService--Snapshot.md) | The gift card service used for this transaction. | [optional] 
-**GiftCardsRedemptions** | Pointer to [**[]GiftCardRedemption**](GiftCardRedemption.md) | The gift cards redeemed for this transaction. | [optional] 
+**GiftCardRedemptions** | Pointer to [**[]GiftCardRedemption**](GiftCardRedemption.md) | The gift cards redeemed for this transaction. | [optional] 
 **Intent** | Pointer to **string** | The original &#x60;intent&#x60; used when the transaction was [created](#operation/authorize-new-transaction). | [optional] 
 **IntentOutcome** | Pointer to **string** | The outcome of the original intent of a transaction.  This allows you to understand if the intent of the transaction (e.g. &#x60;capture&#x60; or &#x60;authorize&#x60;) has been achieved when dealing with multiple payment instruments.  If all payment instruments (&#x60;payment_method&#x60; and/or &#x60;gift_cards&#x60;) have succeeded to get an authorization or direct sale **at any point in time** then this will return a &#x60;succeeded&#x60; value.  If any of the payment instruments fails or declines then this will return a &#x60;failed&#x60; value.  If any payment instruments is still in a &#x60;pending&#x60; or &#x60;processing&#x60; state then the result will be &#x60;pending&#x60;.  Please note that if any of the payment instruments are voided or refunded after the result reaches a &#x60;succeeded&#x60; state  then the result will remain unchanged. | [optional] 
 **IsSubsequentPayment** | Pointer to **bool** | Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.  The flag can only be &#x60;false&#x60; (or not set) when the transaction meets one of the following criteria:  * It is not &#x60;merchant_initiated&#x60;. * &#x60;payment_source&#x60; is set to &#x60;card_on_file&#x60;.  The flag can only be set to &#x60;true&#x60; when the transaction meets one of the following criteria:  * It is not &#x60;merchant_initiated&#x60;. * &#x60;payment_source&#x60; is set to &#x60;recurring&#x60; or &#x60;installment&#x60; and &#x60;merchant_initiated&#x60; is set to &#x60;true&#x60;. * &#x60;payment_source&#x60; is set to &#x60;card_on_file&#x60;. | [optional] [default to false]
@@ -633,30 +633,30 @@ SetGiftCardService sets GiftCardService field to given value.
 
 HasGiftCardService returns a boolean if a field has been set.
 
-### GetGiftCardsRedemptions
+### GetGiftCardRedemptions
 
-`func (o *Transaction) GetGiftCardsRedemptions() []GiftCardRedemption`
+`func (o *Transaction) GetGiftCardRedemptions() []GiftCardRedemption`
 
-GetGiftCardsRedemptions returns the GiftCardsRedemptions field if non-nil, zero value otherwise.
+GetGiftCardRedemptions returns the GiftCardRedemptions field if non-nil, zero value otherwise.
 
-### GetGiftCardsRedemptionsOk
+### GetGiftCardRedemptionsOk
 
-`func (o *Transaction) GetGiftCardsRedemptionsOk() (*[]GiftCardRedemption, bool)`
+`func (o *Transaction) GetGiftCardRedemptionsOk() (*[]GiftCardRedemption, bool)`
 
-GetGiftCardsRedemptionsOk returns a tuple with the GiftCardsRedemptions field if it's non-nil, zero value otherwise
+GetGiftCardRedemptionsOk returns a tuple with the GiftCardRedemptions field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetGiftCardsRedemptions
+### SetGiftCardRedemptions
 
-`func (o *Transaction) SetGiftCardsRedemptions(v []GiftCardRedemption)`
+`func (o *Transaction) SetGiftCardRedemptions(v []GiftCardRedemption)`
 
-SetGiftCardsRedemptions sets GiftCardsRedemptions field to given value.
+SetGiftCardRedemptions sets GiftCardRedemptions field to given value.
 
-### HasGiftCardsRedemptions
+### HasGiftCardRedemptions
 
-`func (o *Transaction) HasGiftCardsRedemptions() bool`
+`func (o *Transaction) HasGiftCardRedemptions() bool`
 
-HasGiftCardsRedemptions returns a boolean if a field has been set.
+HasGiftCardRedemptions returns a boolean if a field has been set.
 
 ### GetIntent
 

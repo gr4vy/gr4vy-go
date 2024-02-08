@@ -92,6 +92,7 @@ docs/ConnectionDefinitions.md
 docs/ConnectionOptions.md
 docs/ConnectionOptionsAdyenCard.md
 docs/ConnectionOptionsCybersourceAntiFraud.md
+docs/ConnectionOptionsCybersourceCard.md
 docs/ConnectionOptionsForterAntiFraud.md
 docs/ConnectionOptionsForterAntiFraudAddress.md
 docs/ConnectionOptionsForterAntiFraudBasicItemData.md
@@ -105,6 +106,8 @@ docs/ConnectionOptionsForterAntiFraudTotalDiscount.md
 docs/ConnectionOptionsForterAntiFraudTotalDiscountCouponDiscountAmount.md
 docs/ConnectionOptionsPaypalPaypal.md
 docs/ConnectionOptionsPaypalPaypalAdditionalData.md
+docs/ConnectionOptionsStripeCard.md
+docs/ConnectionOptionsStripeCardStripeConnect.md
 docs/Connections.md
 docs/Cryptogram.md
 docs/DigitalWallet.md
@@ -127,6 +130,7 @@ docs/Error403Forbidden.md
 docs/Error404NotFound.md
 docs/Error404PendingCreation.md
 docs/Error409DuplicateRecord.md
+docs/Error429TooManyRequests.md
 docs/ErrorDetail.md
 docs/ErrorGeneric.md
 docs/GiftCard.md
@@ -173,6 +177,13 @@ docs/MerchantAccountsApi.md
 docs/MerchantProfile.md
 docs/MerchantProfileScheme.md
 docs/NetworkToken.md
+docs/NetworkTokenCryptogramProvisionFailed.md
+docs/NetworkTokenCryptogramProvisionFailedContext.md
+docs/NetworkTokenCryptogramProvisionSucceeded.md
+docs/NetworkTokenCryptogramProvisionSucceededContext.md
+docs/NetworkTokenProvisionFailed.md
+docs/NetworkTokenProvisionFailedContext.md
+docs/NetworkTokenProvisionSucceeded.md
 docs/NetworkTokenRequest.md
 docs/NetworkTokens.md
 docs/PaymentConnectorExternalTransactionRequest.md
@@ -368,6 +379,7 @@ model_connection_definitions.go
 model_connection_options.go
 model_connection_options_adyen_card.go
 model_connection_options_cybersource_anti_fraud.go
+model_connection_options_cybersource_card.go
 model_connection_options_forter_anti_fraud.go
 model_connection_options_forter_anti_fraud_address.go
 model_connection_options_forter_anti_fraud_basic_item_data.go
@@ -381,6 +393,8 @@ model_connection_options_forter_anti_fraud_total_discount.go
 model_connection_options_forter_anti_fraud_total_discount_coupon_discount_amount.go
 model_connection_options_paypal_paypal.go
 model_connection_options_paypal_paypal_additional_data.go
+model_connection_options_stripe_card.go
+model_connection_options_stripe_card_stripe_connect.go
 model_connections.go
 model_cryptogram.go
 model_digital_wallet.go
@@ -402,6 +416,7 @@ model_error403_forbidden.go
 model_error404_not_found.go
 model_error404_pending_creation.go
 model_error409_duplicate_record.go
+model_error429_too_many_requests.go
 model_error_detail.go
 model_error_generic.go
 model_gift_card.go
@@ -444,6 +459,13 @@ model_merchant_accounts.go
 model_merchant_profile.go
 model_merchant_profile_scheme.go
 model_network_token.go
+model_network_token_cryptogram_provision_failed.go
+model_network_token_cryptogram_provision_failed_context.go
+model_network_token_cryptogram_provision_succeeded.go
+model_network_token_cryptogram_provision_succeeded_context.go
+model_network_token_provision_failed.go
+model_network_token_provision_failed_context.go
+model_network_token_provision_succeeded.go
 model_network_token_request.go
 model_network_tokens.go
 model_payment_connector_external_transaction_request.go

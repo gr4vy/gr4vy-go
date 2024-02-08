@@ -31,7 +31,7 @@ type TransactionRefundRequest struct {
 // will change when the set of required properties is changed
 func NewTransactionRefundRequest() *TransactionRefundRequest {
 	this := TransactionRefundRequest{}
-	var targetType string = "payment-method"
+	var targetType TARGET_TYPE = "payment-method"
 	this.TargetType = *NewNullableString(&targetType)
 	return &this
 }
@@ -41,7 +41,7 @@ func NewTransactionRefundRequest() *TransactionRefundRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewTransactionRefundRequestWithDefaults() *TransactionRefundRequest {
 	this := TransactionRefundRequest{}
-	var targetType string = "payment-method"
+	var targetType TARGET_TYPE = "payment-method"
 	this.TargetType = *NewNullableString(&targetType)
 	return &this
 }

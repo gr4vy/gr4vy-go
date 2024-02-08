@@ -567,6 +567,7 @@ type ApiListTransactionsRequest struct {
 	currency *[]string
 	externalIdentifier *string
 	giftCardId *string
+	giftCardLast4 *string
 	hasGiftCardRedemptions *bool
 	hasRefunds *bool
 	id *string
@@ -634,6 +635,10 @@ func (r ApiListTransactionsRequest) ExternalIdentifier(externalIdentifier string
 }
 func (r ApiListTransactionsRequest) GiftCardId(giftCardId string) ApiListTransactionsRequest {
 	r.giftCardId = &giftCardId
+	return r
+}
+func (r ApiListTransactionsRequest) GiftCardLast4(giftCardLast4 string) ApiListTransactionsRequest {
+	r.giftCardLast4 = &giftCardLast4
 	return r
 }
 func (r ApiListTransactionsRequest) HasGiftCardRedemptions(hasGiftCardRedemptions bool) ApiListTransactionsRequest {
@@ -785,6 +790,9 @@ func (a *TransactionsApiService) ListTransactionsExecute(r ApiListTransactionsRe
 	}
 	if r.giftCardId != nil {
 		localVarQueryParams.Add("gift_card_id", parameterToString(*r.giftCardId, ""))
+	}
+	if r.giftCardLast4 != nil {
+		localVarQueryParams.Add("gift_card_last4", parameterToString(*r.giftCardLast4, ""))
 	}
 	if r.hasGiftCardRedemptions != nil {
 		localVarQueryParams.Add("has_gift_card_redemptions", parameterToString(*r.hasGiftCardRedemptions, ""))
@@ -1203,6 +1211,16 @@ func (a *TransactionsApiService) NewTransactionExecute(r ApiNewTransactionReques
 		}
 		if localVarHTTPResponse.StatusCode == 409 {
 			var v Error409DuplicateRecord
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 429 {
+			var v Error429TooManyRequests
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

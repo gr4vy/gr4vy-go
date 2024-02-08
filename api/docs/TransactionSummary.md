@@ -15,6 +15,7 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **time.Time** | The date and time when this transaction was created in our system. | [optional] 
 **Currency** | Pointer to **string** | The currency code for this transaction. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
+**GiftCardRedemptions** | Pointer to [**[]GiftCardRedemption**](GiftCardRedemption.md) | The gift cards redeemed for this transaction. | [optional] 
 **Intent** | Pointer to **string** | The original &#x60;intent&#x60; used when the transaction was [created](#operation/authorize-new-transaction). | [optional] 
 **MerchantAccountId** | Pointer to **string** | The ID of the merchant account to which this transaction belongs to. | [optional] 
 **Method** | Pointer to **string** |  | [optional] 
@@ -352,6 +353,31 @@ HasExternalIdentifier returns a boolean if a field has been set.
 `func (o *TransactionSummary) UnsetExternalIdentifier()`
 
 UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
+### GetGiftCardRedemptions
+
+`func (o *TransactionSummary) GetGiftCardRedemptions() []GiftCardRedemption`
+
+GetGiftCardRedemptions returns the GiftCardRedemptions field if non-nil, zero value otherwise.
+
+### GetGiftCardRedemptionsOk
+
+`func (o *TransactionSummary) GetGiftCardRedemptionsOk() (*[]GiftCardRedemption, bool)`
+
+GetGiftCardRedemptionsOk returns a tuple with the GiftCardRedemptions field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGiftCardRedemptions
+
+`func (o *TransactionSummary) SetGiftCardRedemptions(v []GiftCardRedemption)`
+
+SetGiftCardRedemptions sets GiftCardRedemptions field to given value.
+
+### HasGiftCardRedemptions
+
+`func (o *TransactionSummary) HasGiftCardRedemptions() bool`
+
+HasGiftCardRedemptions returns a boolean if a field has been set.
+
 ### GetIntent
 
 `func (o *TransactionSummary) GetIntent() string`
