@@ -18,6 +18,7 @@ Name | Type | Description | Notes
 **Method** | Pointer to **string** | The type of this payment method. | [optional] 
 **PaymentAccountReference** | Pointer to **NullableString** | The payment account reference (PAR) returned by the card scheme. This is a unique reference to the underlying account that has been used to fund this payment method. This value will be unique if the same underlying account was used, regardless of the actual payment method used. For example, a network token or an Apple Pay device token will return the same PAR when possible.  The uniqueness of this value will depend on the card scheme, please refer to their documentation for further details. The availability of the PAR in our API depends on the availability of its value in the API of the payment service used for the transaction. | [optional] 
 **Scheme** | Pointer to **NullableString** | An additional label used to differentiate different sub-types of a payment method. Most notably this can include the type of card used in a transaction. This field is &#x60;null&#x60; for the non-card payment methods. This represents the card scheme sent to the connector and it could be different from the actual card scheme that is being used by the PSP to process the transaction in the following situations: 1. &#x60;use_additional_scheme&#x60; transformation is used with the &#x60;PAN&#x60; instrument but we already have a PSP token for the card. 2. &#x60;use_additional_scheme&#x60; transformation is used but PSP has fallen back to the main card scheme internally. | [optional] 
+**Fingerprint** | Pointer to **NullableString** | The unique hash derived from the payment method identifier (e.g. card number). | [optional] 
 
 ## Methods
 
@@ -488,6 +489,41 @@ HasScheme returns a boolean if a field has been set.
 `func (o *PaymentMethodSnapshot) UnsetScheme()`
 
 UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
+### GetFingerprint
+
+`func (o *PaymentMethodSnapshot) GetFingerprint() string`
+
+GetFingerprint returns the Fingerprint field if non-nil, zero value otherwise.
+
+### GetFingerprintOk
+
+`func (o *PaymentMethodSnapshot) GetFingerprintOk() (*string, bool)`
+
+GetFingerprintOk returns a tuple with the Fingerprint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFingerprint
+
+`func (o *PaymentMethodSnapshot) SetFingerprint(v string)`
+
+SetFingerprint sets Fingerprint field to given value.
+
+### HasFingerprint
+
+`func (o *PaymentMethodSnapshot) HasFingerprint() bool`
+
+HasFingerprint returns a boolean if a field has been set.
+
+### SetFingerprintNil
+
+`func (o *PaymentMethodSnapshot) SetFingerprintNil(b bool)`
+
+ SetFingerprintNil sets the value for Fingerprint to be an explicit nil
+
+### UnsetFingerprint
+`func (o *PaymentMethodSnapshot) UnsetFingerprint()`
+
+UnsetFingerprint ensures that no value is present for Fingerprint, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
