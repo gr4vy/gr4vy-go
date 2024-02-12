@@ -59,6 +59,8 @@ type PaymentMethod struct {
 	Status *string `json:"status,omitempty"`
 	// The date and time when this payment method was last updated in our system.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// The unique hash derived from the payment method identifier (e.g. card number).
+	Fingerprint NullableString `json:"fingerprint,omitempty"`
 }
 
 // NewPaymentMethod instantiates a new PaymentMethod object
@@ -851,6 +853,48 @@ func (o *PaymentMethod) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetFingerprint returns the Fingerprint field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethod) GetFingerprint() string {
+	if o == nil || o.Fingerprint.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Fingerprint.Get()
+}
+
+// GetFingerprintOk returns a tuple with the Fingerprint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethod) GetFingerprintOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Fingerprint.Get(), o.Fingerprint.IsSet()
+}
+
+// HasFingerprint returns a boolean if a field has been set.
+func (o *PaymentMethod) HasFingerprint() bool {
+	if o != nil && o.Fingerprint.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFingerprint gets a reference to the given NullableString and assigns it to the Fingerprint field.
+func (o *PaymentMethod) SetFingerprint(v string) {
+	o.Fingerprint.Set(&v)
+}
+// SetFingerprintNil sets the value for Fingerprint to be an explicit nil
+func (o *PaymentMethod) SetFingerprintNil() {
+	o.Fingerprint.Set(nil)
+}
+
+// UnsetFingerprint ensures that no value is present for Fingerprint, not even an explicit nil
+func (o *PaymentMethod) UnsetFingerprint() {
+	o.Fingerprint.Unset()
+}
+
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -915,6 +959,9 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if o.Fingerprint.IsSet() {
+		toSerialize["fingerprint"] = o.Fingerprint.Get()
 	}
 	return json.Marshal(toSerialize)
 }

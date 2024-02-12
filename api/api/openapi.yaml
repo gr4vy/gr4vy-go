@@ -6911,6 +6911,7 @@ components:
         payment_method:
           method: card
           scheme: visa
+          fingerprint: 20eb353620155d2b5fc864cc46a73ea77cb92c725238650839da1813fa987a17
           details:
             bin: "411111"
             card_country: US
@@ -10174,6 +10175,7 @@ components:
         approval_target: any
         updated_at: 2013-07-16T19:23:00Z
         merchant_account_id: default
+        fingerprint: 20eb353620155d2b5fc864cc46a73ea77cb92c725238650839da1813fa987a17
         currency: USD
         details:
           bin: "412345"
@@ -10466,6 +10468,12 @@ components:
           example: 2013-07-16T19:23:00Z
           format: date-time
           type: string
+        fingerprint:
+          description: The unique hash derived from the payment method identifier
+            (e.g. card number).
+          example: 20eb353620155d2b5fc864cc46a73ea77cb92c725238650839da1813fa987a17
+          nullable: true
+          type: string
       title: Payment method
       type: object
       x-tags:
@@ -10743,6 +10751,7 @@ components:
           approval_target: any
           updated_at: 2013-07-16T19:23:00Z
           merchant_account_id: default
+          fingerprint: 20eb353620155d2b5fc864cc46a73ea77cb92c725238650839da1813fa987a17
           currency: USD
           details:
             bin: "412345"
@@ -10768,6 +10777,7 @@ components:
           approval_target: any
           updated_at: 2013-07-16T19:23:00Z
           merchant_account_id: default
+          fingerprint: 20eb353620155d2b5fc864cc46a73ea77cb92c725238650839da1813fa987a17
           currency: USD
           details:
             bin: "412345"
@@ -11024,6 +11034,12 @@ components:
           - unionpay
           - visa
           example: visa
+          nullable: true
+          type: string
+        fingerprint:
+          description: The unique hash derived from the payment method identifier
+            (e.g. card number).
+          example: 20eb353620155d2b5fc864cc46a73ea77cb92c725238650839da1813fa987a17
           nullable: true
           type: string
       title: Payment method (Snapshot)
@@ -17894,6 +17910,7 @@ components:
       example:
         method: card
         scheme: visa
+        fingerprint: 20eb353620155d2b5fc864cc46a73ea77cb92c725238650839da1813fa987a17
         details:
           bin: "411111"
           card_country: US
@@ -17951,6 +17968,12 @@ components:
           type: string
         details:
           $ref: '#/components/schemas/CheckoutSession_payment_method_details'
+        fingerprint:
+          description: The unique hash derived from the payment method identifier
+            (e.g. card number).
+          example: 20eb353620155d2b5fc864cc46a73ea77cb92c725238650839da1813fa987a17
+          nullable: true
+          type: string
       type: object
     GiftCardRedemptionFailed_context:
       description: Additional context for this event.

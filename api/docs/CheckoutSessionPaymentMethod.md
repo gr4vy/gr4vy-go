@@ -10,6 +10,7 @@ Name | Type | Description | Notes
 **Scheme** | Pointer to **NullableString** | The scheme/brand of the card. | [optional] 
 **Label** | Pointer to **NullableString** | Last four digits of PAN. | [optional] 
 **Details** | Pointer to [**NullableCheckoutSessionPaymentMethodDetails**](CheckoutSessionPaymentMethodDetails.md) |  | [optional] 
+**Fingerprint** | Pointer to **NullableString** | The unique hash derived from the payment method identifier (e.g. card number). | [optional] 
 
 ## Methods
 
@@ -220,6 +221,41 @@ HasDetails returns a boolean if a field has been set.
 `func (o *CheckoutSessionPaymentMethod) UnsetDetails()`
 
 UnsetDetails ensures that no value is present for Details, not even an explicit nil
+### GetFingerprint
+
+`func (o *CheckoutSessionPaymentMethod) GetFingerprint() string`
+
+GetFingerprint returns the Fingerprint field if non-nil, zero value otherwise.
+
+### GetFingerprintOk
+
+`func (o *CheckoutSessionPaymentMethod) GetFingerprintOk() (*string, bool)`
+
+GetFingerprintOk returns a tuple with the Fingerprint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFingerprint
+
+`func (o *CheckoutSessionPaymentMethod) SetFingerprint(v string)`
+
+SetFingerprint sets Fingerprint field to given value.
+
+### HasFingerprint
+
+`func (o *CheckoutSessionPaymentMethod) HasFingerprint() bool`
+
+HasFingerprint returns a boolean if a field has been set.
+
+### SetFingerprintNil
+
+`func (o *CheckoutSessionPaymentMethod) SetFingerprintNil(b bool)`
+
+ SetFingerprintNil sets the value for Fingerprint to be an explicit nil
+
+### UnsetFingerprint
+`func (o *CheckoutSessionPaymentMethod) UnsetFingerprint()`
+
+UnsetFingerprint ensures that no value is present for Fingerprint, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

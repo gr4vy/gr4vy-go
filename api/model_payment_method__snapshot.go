@@ -45,6 +45,8 @@ type PaymentMethodSnapshot struct {
 	PaymentAccountReference NullableString `json:"payment_account_reference,omitempty"`
 	// An additional label used to differentiate different sub-types of a payment method. Most notably this can include the type of card used in a transaction. This field is `null` for the non-card payment methods. This represents the card scheme sent to the connector and it could be different from the actual card scheme that is being used by the PSP to process the transaction in the following situations: 1. `use_additional_scheme` transformation is used with the `PAN` instrument but we already have a PSP token for the card. 2. `use_additional_scheme` transformation is used but PSP has fallen back to the main card scheme internally.
 	Scheme NullableString `json:"scheme,omitempty"`
+	// The unique hash derived from the payment method identifier (e.g. card number).
+	Fingerprint NullableString `json:"fingerprint,omitempty"`
 }
 
 // NewPaymentMethodSnapshot instantiates a new PaymentMethodSnapshot object
@@ -612,6 +614,48 @@ func (o *PaymentMethodSnapshot) UnsetScheme() {
 	o.Scheme.Unset()
 }
 
+// GetFingerprint returns the Fingerprint field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethodSnapshot) GetFingerprint() string {
+	if o == nil || o.Fingerprint.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Fingerprint.Get()
+}
+
+// GetFingerprintOk returns a tuple with the Fingerprint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethodSnapshot) GetFingerprintOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Fingerprint.Get(), o.Fingerprint.IsSet()
+}
+
+// HasFingerprint returns a boolean if a field has been set.
+func (o *PaymentMethodSnapshot) HasFingerprint() bool {
+	if o != nil && o.Fingerprint.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFingerprint gets a reference to the given NullableString and assigns it to the Fingerprint field.
+func (o *PaymentMethodSnapshot) SetFingerprint(v string) {
+	o.Fingerprint.Set(&v)
+}
+// SetFingerprintNil sets the value for Fingerprint to be an explicit nil
+func (o *PaymentMethodSnapshot) SetFingerprintNil() {
+	o.Fingerprint.Set(nil)
+}
+
+// UnsetFingerprint ensures that no value is present for Fingerprint, not even an explicit nil
+func (o *PaymentMethodSnapshot) UnsetFingerprint() {
+	o.Fingerprint.Unset()
+}
+
 func (o PaymentMethodSnapshot) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -655,6 +699,9 @@ func (o PaymentMethodSnapshot) MarshalJSON() ([]byte, error) {
 	}
 	if o.Scheme.IsSet() {
 		toSerialize["scheme"] = o.Scheme.Get()
+	}
+	if o.Fingerprint.IsSet() {
+		toSerialize["fingerprint"] = o.Fingerprint.Get()
 	}
 	return json.Marshal(toSerialize)
 }

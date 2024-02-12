@@ -27,6 +27,8 @@ type CheckoutSessionPaymentMethod struct {
 	// Last four digits of PAN.
 	Label NullableString `json:"label,omitempty"`
 	Details NullableCheckoutSessionPaymentMethodDetails `json:"details,omitempty"`
+	// The unique hash derived from the payment method identifier (e.g. card number).
+	Fingerprint NullableString `json:"fingerprint,omitempty"`
 }
 
 // NewCheckoutSessionPaymentMethod instantiates a new CheckoutSessionPaymentMethod object
@@ -278,6 +280,48 @@ func (o *CheckoutSessionPaymentMethod) UnsetDetails() {
 	o.Details.Unset()
 }
 
+// GetFingerprint returns the Fingerprint field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CheckoutSessionPaymentMethod) GetFingerprint() string {
+	if o == nil || o.Fingerprint.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Fingerprint.Get()
+}
+
+// GetFingerprintOk returns a tuple with the Fingerprint field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CheckoutSessionPaymentMethod) GetFingerprintOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Fingerprint.Get(), o.Fingerprint.IsSet()
+}
+
+// HasFingerprint returns a boolean if a field has been set.
+func (o *CheckoutSessionPaymentMethod) HasFingerprint() bool {
+	if o != nil && o.Fingerprint.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFingerprint gets a reference to the given NullableString and assigns it to the Fingerprint field.
+func (o *CheckoutSessionPaymentMethod) SetFingerprint(v string) {
+	o.Fingerprint.Set(&v)
+}
+// SetFingerprintNil sets the value for Fingerprint to be an explicit nil
+func (o *CheckoutSessionPaymentMethod) SetFingerprintNil() {
+	o.Fingerprint.Set(nil)
+}
+
+// UnsetFingerprint ensures that no value is present for Fingerprint, not even an explicit nil
+func (o *CheckoutSessionPaymentMethod) UnsetFingerprint() {
+	o.Fingerprint.Unset()
+}
+
 func (o CheckoutSessionPaymentMethod) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -297,6 +341,9 @@ func (o CheckoutSessionPaymentMethod) MarshalJSON() ([]byte, error) {
 	}
 	if o.Details.IsSet() {
 		toSerialize["details"] = o.Details.Get()
+	}
+	if o.Fingerprint.IsSet() {
+		toSerialize["fingerprint"] = o.Fingerprint.Get()
 	}
 	return json.Marshal(toSerialize)
 }

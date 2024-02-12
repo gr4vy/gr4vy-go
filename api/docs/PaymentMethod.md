@@ -25,6 +25,7 @@ Name | Type | Description | Notes
 **Scheme** | Pointer to **NullableString** | The scheme of the card. Only applies to card payments. | [optional] 
 **Status** | Pointer to **string** | The state of the payment method.  - &#x60;processing&#x60; - The payment method is stored but has not been used yet. - &#x60;buyer_approval_required&#x60; - Storing the payment method requires   the buyer to provide approval. Follow the &#x60;approval_url&#x60; for next steps. - &#x60;succeeded&#x60; - The payment method is stored and has been used. - &#x60;failed&#x60; - The payment method could not be stored, or failed first use. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this payment method was last updated in our system. | [optional] 
+**Fingerprint** | Pointer to **NullableString** | The unique hash derived from the payment method identifier (e.g. card number). | [optional] 
 
 ## Methods
 
@@ -680,6 +681,41 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 HasUpdatedAt returns a boolean if a field has been set.
 
+### GetFingerprint
+
+`func (o *PaymentMethod) GetFingerprint() string`
+
+GetFingerprint returns the Fingerprint field if non-nil, zero value otherwise.
+
+### GetFingerprintOk
+
+`func (o *PaymentMethod) GetFingerprintOk() (*string, bool)`
+
+GetFingerprintOk returns a tuple with the Fingerprint field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFingerprint
+
+`func (o *PaymentMethod) SetFingerprint(v string)`
+
+SetFingerprint sets Fingerprint field to given value.
+
+### HasFingerprint
+
+`func (o *PaymentMethod) HasFingerprint() bool`
+
+HasFingerprint returns a boolean if a field has been set.
+
+### SetFingerprintNil
+
+`func (o *PaymentMethod) SetFingerprintNil(b bool)`
+
+ SetFingerprintNil sets the value for Fingerprint to be an explicit nil
+
+### UnsetFingerprint
+`func (o *PaymentMethod) UnsetFingerprint()`
+
+UnsetFingerprint ensures that no value is present for Fingerprint, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
