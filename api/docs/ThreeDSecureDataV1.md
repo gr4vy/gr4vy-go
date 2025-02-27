@@ -5,9 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Cavv** | **string** | The cardholder authentication value or AAV. | 
-**Eci** | **string** | The electronic commerce indicator for the 3DS transaction. | 
+**Eci** | **string** | The ecommerce indicator for the 3DS transaction. | 
 **Version** | **string** | The version of 3-D Secure that was used. | 
 **DirectoryResponse** | **string** | For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the &#x60;ARes&#x60;. | 
+**Scheme** | Pointer to **NullableString** | The scheme/brand of the card that is used for 3-D Secure. | [optional] 
 **AuthenticationResponse** | **string** | The response for the 3DS authentication call. | 
 **CavvAlgorithm** | **string** | The CAVV algorithm used. | 
 **Xid** | **string** | The transaction identifier. | 
@@ -111,6 +112,41 @@ and a boolean to check if the value has been set.
 SetDirectoryResponse sets DirectoryResponse field to given value.
 
 
+### GetScheme
+
+`func (o *ThreeDSecureDataV1) GetScheme() string`
+
+GetScheme returns the Scheme field if non-nil, zero value otherwise.
+
+### GetSchemeOk
+
+`func (o *ThreeDSecureDataV1) GetSchemeOk() (*string, bool)`
+
+GetSchemeOk returns a tuple with the Scheme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheme
+
+`func (o *ThreeDSecureDataV1) SetScheme(v string)`
+
+SetScheme sets Scheme field to given value.
+
+### HasScheme
+
+`func (o *ThreeDSecureDataV1) HasScheme() bool`
+
+HasScheme returns a boolean if a field has been set.
+
+### SetSchemeNil
+
+`func (o *ThreeDSecureDataV1) SetSchemeNil(b bool)`
+
+ SetSchemeNil sets the value for Scheme to be an explicit nil
+
+### UnsetScheme
+`func (o *ThreeDSecureDataV1) UnsetScheme()`
+
+UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
 ### GetAuthenticationResponse
 
 `func (o *ThreeDSecureDataV1) GetAuthenticationResponse() string`

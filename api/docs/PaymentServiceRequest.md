@@ -7,14 +7,16 @@ Name | Type | Description | Notes
 **PaymentServiceDefinitionId** | **string** | The ID of the payment service to use. | 
 **DisplayName** | **string** | A custom name for the payment service. This will be shown in the Admin UI. | 
 **Fields** | [**[]PaymentServiceRequestFields**](PaymentServiceRequestFields.md) | A list of fields, each containing a key-value pair for each field defined by the definition for this payment service e.g. for stripe-card &#x60;secret_key&#x60; is required and so must be sent within this field. | 
+**ReportingFields** | Pointer to [**[]PaymentServiceRequestReportingFields**](PaymentServiceRequestReportingFields.md) | The &#x60;reporting_fields&#x60; field should contain a list of key-value pairs. Each key-value pair represents a reporting field defined by the payment service. For example, when enabling settlement reporting for &#x60;nuvei-card&#x60;, the &#x60;ssh_username&#x60; field is required and must be included in &#x60;reporting_fields&#x60;. | [optional] 
 **AcceptedCountries** | **[]string** | A list of countries that this payment service needs to support in ISO two-letter code format. | 
 **AcceptedCurrencies** | **[]string** | A list of currencies that this payment service needs to support in ISO 4217 three-letter code format. | 
-**ThreeDSecureEnabled** | Pointer to **bool** | Defines if 3-D Secure is enabled for the service (can only be enabled if the payment service definition supports the &#x60;three_d_secure_hosted&#x60; feature). This does not affect pass through 3-D Secure data. | [optional] [default to false]
+**ThreeDSecureEnabled** | Pointer to **bool** | Defines if 3-D Secure is enabled for the service. This feature can only be enabled if the payment service definition supports the &#x60;three_d_secure_hosted&#x60; feature. This does not affect pass through 3-D Secure data. | [optional] [default to false]
 **MerchantProfile** | Pointer to [**NullableMerchantProfile**](MerchantProfile.md) | Configuration for each supported card scheme. | [optional] 
 **Active** | Pointer to **bool** | Defines if this service is currently active or not. | [optional] [default to true]
 **OpenLoop** | Pointer to **NullableBool** | Defines if the service works as an open-loop service. This feature can only be enabled if the PSP is set up to accept previous scheme transaction IDs.  If this value is not provided or is set to &#x60;null&#x60;, it will be set to the value of &#x60;open_loop&#x60; in the payment service definition.  If &#x60;open_loop_toggle&#x60; is &#x60;false&#x60; in the payment service definition, &#x60;open_loop&#x60; should either not be provided or set to &#x60;null&#x60;, or it will fail with a validation error. | [optional] 
-**PaymentMethodTokenizationEnabled** | Pointer to **bool** | Defines if tokenization is enabled for the service. This feature can only be enabled if the payment service is NOT set as &#x60;open_loop&#x60; and the PSP is set up to tokenize. | [optional] [default to false]
+**PaymentMethodTokenizationEnabled** | Pointer to **NullableBool** | Defines if tokenization is enabled for the service. This feature can only be enabled if the payment service is NOT set as &#x60;open_loop&#x60; and the PSP is set up to tokenize. | [optional] 
 **NetworkTokensEnabled** | Pointer to **NullableBool** | Defines if network tokens are enabled for the service. This feature can only be enabled if the payment service is set as &#x60;open_loop&#x60; and the PSP is set up to accept network tokens.  If this value is not provided or is set to &#x60;null&#x60;, it will be set to the value of &#x60;network_tokens_default&#x60; in the payment service definition.  If &#x60;network_tokens_toggle&#x60; is &#x60;false&#x60; in the payment service definition, &#x60;network_tokens_enabled&#x60; should either not be provided or set to &#x60;null&#x60;, or it will fail with a validation error. | [optional] 
+**SettlementReportingEnabled** | Pointer to **bool** | Defines if settlement reporting is enabled for the service. This feature can only be enabled if the payment service definition supports the &#x60;settlement_reporting&#x60; feature. | [optional] [default to false]
 
 ## Methods
 
@@ -94,6 +96,31 @@ and a boolean to check if the value has been set.
 
 SetFields sets Fields field to given value.
 
+
+### GetReportingFields
+
+`func (o *PaymentServiceRequest) GetReportingFields() []PaymentServiceRequestReportingFields`
+
+GetReportingFields returns the ReportingFields field if non-nil, zero value otherwise.
+
+### GetReportingFieldsOk
+
+`func (o *PaymentServiceRequest) GetReportingFieldsOk() (*[]PaymentServiceRequestReportingFields, bool)`
+
+GetReportingFieldsOk returns a tuple with the ReportingFields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReportingFields
+
+`func (o *PaymentServiceRequest) SetReportingFields(v []PaymentServiceRequestReportingFields)`
+
+SetReportingFields sets ReportingFields field to given value.
+
+### HasReportingFields
+
+`func (o *PaymentServiceRequest) HasReportingFields() bool`
+
+HasReportingFields returns a boolean if a field has been set.
 
 ### GetAcceptedCountries
 
@@ -280,6 +307,16 @@ SetPaymentMethodTokenizationEnabled sets PaymentMethodTokenizationEnabled field 
 
 HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
 
+### SetPaymentMethodTokenizationEnabledNil
+
+`func (o *PaymentServiceRequest) SetPaymentMethodTokenizationEnabledNil(b bool)`
+
+ SetPaymentMethodTokenizationEnabledNil sets the value for PaymentMethodTokenizationEnabled to be an explicit nil
+
+### UnsetPaymentMethodTokenizationEnabled
+`func (o *PaymentServiceRequest) UnsetPaymentMethodTokenizationEnabled()`
+
+UnsetPaymentMethodTokenizationEnabled ensures that no value is present for PaymentMethodTokenizationEnabled, not even an explicit nil
 ### GetNetworkTokensEnabled
 
 `func (o *PaymentServiceRequest) GetNetworkTokensEnabled() bool`
@@ -315,6 +352,31 @@ HasNetworkTokensEnabled returns a boolean if a field has been set.
 `func (o *PaymentServiceRequest) UnsetNetworkTokensEnabled()`
 
 UnsetNetworkTokensEnabled ensures that no value is present for NetworkTokensEnabled, not even an explicit nil
+### GetSettlementReportingEnabled
+
+`func (o *PaymentServiceRequest) GetSettlementReportingEnabled() bool`
+
+GetSettlementReportingEnabled returns the SettlementReportingEnabled field if non-nil, zero value otherwise.
+
+### GetSettlementReportingEnabledOk
+
+`func (o *PaymentServiceRequest) GetSettlementReportingEnabledOk() (*bool, bool)`
+
+GetSettlementReportingEnabledOk returns a tuple with the SettlementReportingEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSettlementReportingEnabled
+
+`func (o *PaymentServiceRequest) SetSettlementReportingEnabled(v bool)`
+
+SetSettlementReportingEnabled sets SettlementReportingEnabled field to given value.
+
+### HasSettlementReportingEnabled
+
+`func (o *PaymentServiceRequest) HasSettlementReportingEnabled() bool`
+
+HasSettlementReportingEnabled returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

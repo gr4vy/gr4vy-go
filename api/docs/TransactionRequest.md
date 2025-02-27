@@ -12,9 +12,10 @@ Name | Type | Description | Notes
 **BrowserInfo** | Pointer to [**NullableBrowserInfo**](BrowserInfo.md) | Information about the browser used by the buyer. | [optional] 
 **BuyerExternalIdentifier** | Pointer to **string** | The &#x60;external_identifier&#x60; of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_id&#x60; field needs to be unset.  If a stored payment method or gift card is provided, then the buyer for that payment method needs to match the buyer for this field. | [optional] 
 **BuyerId** | Pointer to **string** | The ID of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_external_identifier&#x60; field needs to be unset.  If a stored payment method or gift card is provided, then the buyer for that payment method needs to match the buyer for this field. | [optional] 
+**Buyer** | Pointer to [**TransactionBuyerRequest**](TransactionBuyerRequest.md) |  | [optional] 
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
-**ConnectionOptions** | Pointer to [**NullableConnectionOptions**](ConnectionOptions.md) | Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.  Please note that each of the keys this object are in kebab-case, for example &#x60;cybersource-anti-fraud&#x60; as they represent the ID of the connector. All the other keys will be snake-case, for example &#x60;merchant_defined_data&#x60;. | [optional] 
-**Country** | Pointer to **NullableString** | The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.  If this value is provided for redirect requests and it&#39;s not &#x60;null&#x60;, it must match the one specified for &#x60;country&#x60; in &#x60;payment_method&#x60;. Otherwise, the value specified for &#x60;country&#x60; in &#x60;payment_method&#x60; will be assumed implicitly.  | [optional] 
+**ConnectionOptions** | Pointer to [**NullableConnectionOptions**](ConnectionOptions.md) | Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.  Please note that each of the keys this object are in kebab-case, for example &#x60;cybersource-anti-fraud&#x60; as they represent the ID of the connector. All the other keys will be snake case, for example &#x60;merchant_defined_data&#x60; or camel case to match an external API that the connector uses. | [optional] 
+**Country** | Pointer to **NullableString** | The 2-letter ISO code of the country where the transaction is processed. This is also used to filter the payment services that can process the transaction.  If this value is provided for redirect requests and it&#39;s not &#x60;null&#x60;, it must match the one specified for &#x60;country&#x60; in &#x60;payment_method&#x60;. Otherwise, the value specified for &#x60;country&#x60; in &#x60;payment_method&#x60; will be assumed implicitly.  | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the transaction against your own records. | [optional] 
 **GiftCards** | Pointer to [**[]TransactionGiftCardRequest**](TransactionGiftCardRequest.md) | The optional gift card(s) to use for this transaction. At least one gift card is required if no other &#x60;payment_method&#x60; has been added. By default, only a maximum limit of 10 gift cards may be used in a single transaction. Please contact our team to change this limit. | [optional] 
 **Intent** | Pointer to **string** | Defines the intent of this API call. This determines the desired initial state of the transaction.  * &#x60;authorize&#x60; - (Default) Optionally approves and then authorizes a transaction but does not capture the funds. * &#x60;capture&#x60; - Optionally approves and then authorizes and captures the funds of the transaction. | [optional] [default to "authorize"]
@@ -27,6 +28,10 @@ Name | Type | Description | Notes
 **StatementDescriptor** | Pointer to [**NullableStatementDescriptor**](StatementDescriptor.md) |  | [optional] 
 **Store** | Pointer to **bool** | Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. There are also a few restrictions on how the flag may be set:  * The flag has to be set to &#x60;true&#x60; when the &#x60;payment_source&#x60; is set to &#x60;recurring&#x60; or &#x60;installment&#x60;, and &#x60;merchant_initiated&#x60; is set to &#x60;false&#x60;.  * The flag has to be set to &#x60;false&#x60; (or not set) when using a previously vaulted payment method. | [optional] [default to false]
 **ThreeDSecureData** | Pointer to [**ThreeDSecureDataV1V2**](ThreeDSecureDataV1V2.md) |  | [optional] 
+**PaymentServiceId** | Pointer to **NullableString** | The unique identifier of an existing payment service. When provided, the created transaction will be processed by the given payment service and any routing rules will be skipped. | [optional] 
+**Airline** | Pointer to [**NullableAirline**](Airline.md) | The airline addendum data which describes the airline booking associated with this transaction. | [optional] 
+**AccountFundingTransaction** | Pointer to **NullableBool** | Whether or not the transaction is an account funding transaction. | [optional] [default to false]
+**Recipient** | Pointer to [**NullableRecipient**](Recipient.md) | The recipient of an account funding transaction. | [optional] 
 
 ## Methods
 
@@ -256,6 +261,31 @@ SetBuyerId sets BuyerId field to given value.
 `func (o *TransactionRequest) HasBuyerId() bool`
 
 HasBuyerId returns a boolean if a field has been set.
+
+### GetBuyer
+
+`func (o *TransactionRequest) GetBuyer() TransactionBuyerRequest`
+
+GetBuyer returns the Buyer field if non-nil, zero value otherwise.
+
+### GetBuyerOk
+
+`func (o *TransactionRequest) GetBuyerOk() (*TransactionBuyerRequest, bool)`
+
+GetBuyerOk returns a tuple with the Buyer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuyer
+
+`func (o *TransactionRequest) SetBuyer(v TransactionBuyerRequest)`
+
+SetBuyer sets Buyer field to given value.
+
+### HasBuyer
+
+`func (o *TransactionRequest) HasBuyer() bool`
+
+HasBuyer returns a boolean if a field has been set.
 
 ### GetCartItems
 
@@ -702,6 +732,146 @@ SetThreeDSecureData sets ThreeDSecureData field to given value.
 
 HasThreeDSecureData returns a boolean if a field has been set.
 
+### GetPaymentServiceId
+
+`func (o *TransactionRequest) GetPaymentServiceId() string`
+
+GetPaymentServiceId returns the PaymentServiceId field if non-nil, zero value otherwise.
+
+### GetPaymentServiceIdOk
+
+`func (o *TransactionRequest) GetPaymentServiceIdOk() (*string, bool)`
+
+GetPaymentServiceIdOk returns a tuple with the PaymentServiceId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPaymentServiceId
+
+`func (o *TransactionRequest) SetPaymentServiceId(v string)`
+
+SetPaymentServiceId sets PaymentServiceId field to given value.
+
+### HasPaymentServiceId
+
+`func (o *TransactionRequest) HasPaymentServiceId() bool`
+
+HasPaymentServiceId returns a boolean if a field has been set.
+
+### SetPaymentServiceIdNil
+
+`func (o *TransactionRequest) SetPaymentServiceIdNil(b bool)`
+
+ SetPaymentServiceIdNil sets the value for PaymentServiceId to be an explicit nil
+
+### UnsetPaymentServiceId
+`func (o *TransactionRequest) UnsetPaymentServiceId()`
+
+UnsetPaymentServiceId ensures that no value is present for PaymentServiceId, not even an explicit nil
+### GetAirline
+
+`func (o *TransactionRequest) GetAirline() Airline`
+
+GetAirline returns the Airline field if non-nil, zero value otherwise.
+
+### GetAirlineOk
+
+`func (o *TransactionRequest) GetAirlineOk() (*Airline, bool)`
+
+GetAirlineOk returns a tuple with the Airline field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAirline
+
+`func (o *TransactionRequest) SetAirline(v Airline)`
+
+SetAirline sets Airline field to given value.
+
+### HasAirline
+
+`func (o *TransactionRequest) HasAirline() bool`
+
+HasAirline returns a boolean if a field has been set.
+
+### SetAirlineNil
+
+`func (o *TransactionRequest) SetAirlineNil(b bool)`
+
+ SetAirlineNil sets the value for Airline to be an explicit nil
+
+### UnsetAirline
+`func (o *TransactionRequest) UnsetAirline()`
+
+UnsetAirline ensures that no value is present for Airline, not even an explicit nil
+### GetAccountFundingTransaction
+
+`func (o *TransactionRequest) GetAccountFundingTransaction() bool`
+
+GetAccountFundingTransaction returns the AccountFundingTransaction field if non-nil, zero value otherwise.
+
+### GetAccountFundingTransactionOk
+
+`func (o *TransactionRequest) GetAccountFundingTransactionOk() (*bool, bool)`
+
+GetAccountFundingTransactionOk returns a tuple with the AccountFundingTransaction field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountFundingTransaction
+
+`func (o *TransactionRequest) SetAccountFundingTransaction(v bool)`
+
+SetAccountFundingTransaction sets AccountFundingTransaction field to given value.
+
+### HasAccountFundingTransaction
+
+`func (o *TransactionRequest) HasAccountFundingTransaction() bool`
+
+HasAccountFundingTransaction returns a boolean if a field has been set.
+
+### SetAccountFundingTransactionNil
+
+`func (o *TransactionRequest) SetAccountFundingTransactionNil(b bool)`
+
+ SetAccountFundingTransactionNil sets the value for AccountFundingTransaction to be an explicit nil
+
+### UnsetAccountFundingTransaction
+`func (o *TransactionRequest) UnsetAccountFundingTransaction()`
+
+UnsetAccountFundingTransaction ensures that no value is present for AccountFundingTransaction, not even an explicit nil
+### GetRecipient
+
+`func (o *TransactionRequest) GetRecipient() Recipient`
+
+GetRecipient returns the Recipient field if non-nil, zero value otherwise.
+
+### GetRecipientOk
+
+`func (o *TransactionRequest) GetRecipientOk() (*Recipient, bool)`
+
+GetRecipientOk returns a tuple with the Recipient field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRecipient
+
+`func (o *TransactionRequest) SetRecipient(v Recipient)`
+
+SetRecipient sets Recipient field to given value.
+
+### HasRecipient
+
+`func (o *TransactionRequest) HasRecipient() bool`
+
+HasRecipient returns a boolean if a field has been set.
+
+### SetRecipientNil
+
+`func (o *TransactionRequest) SetRecipientNil(b bool)`
+
+ SetRecipientNil sets the value for Recipient to be an explicit nil
+
+### UnsetRecipient
+`func (o *TransactionRequest) UnsetRecipient()`
+
+UnsetRecipient ensures that no value is present for Recipient, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

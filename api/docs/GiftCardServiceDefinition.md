@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Id** | Pointer to **string** | The ID of the gift card service definition. | [optional] 
 **Type** | Pointer to **string** | &#x60;gift-card-service-definition&#x60;. | [optional] [default to "gift-card-service-definition"]
 **DisplayName** | Pointer to **string** | The display name of this service. | [optional] 
-**Fields** | Pointer to [**[]GiftCardServiceDefinitionFields**](GiftCardServiceDefinitionFields.md) | A list of fields that need to be submitted when activating the payment. service. | [optional] 
+**Fields** | Pointer to [**[]AntiFraudServiceDefinitionFields**](AntiFraudServiceDefinitionFields.md) | A list of fields that need to be submitted when activating the payment. service. | [optional] 
 **IconUrl** | Pointer to **string** | An icon to display for the payment service. | [optional] 
 
 ## Methods
@@ -106,20 +106,20 @@ HasDisplayName returns a boolean if a field has been set.
 
 ### GetFields
 
-`func (o *GiftCardServiceDefinition) GetFields() []GiftCardServiceDefinitionFields`
+`func (o *GiftCardServiceDefinition) GetFields() []AntiFraudServiceDefinitionFields`
 
 GetFields returns the Fields field if non-nil, zero value otherwise.
 
 ### GetFieldsOk
 
-`func (o *GiftCardServiceDefinition) GetFieldsOk() (*[]GiftCardServiceDefinitionFields, bool)`
+`func (o *GiftCardServiceDefinition) GetFieldsOk() (*[]AntiFraudServiceDefinitionFields, bool)`
 
 GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFields
 
-`func (o *GiftCardServiceDefinition) SetFields(v []GiftCardServiceDefinitionFields)`
+`func (o *GiftCardServiceDefinition) SetFields(v []AntiFraudServiceDefinitionFields)`
 
 SetFields sets Fields field to given value.
 

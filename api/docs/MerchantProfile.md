@@ -5,8 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Amex** | Pointer to [**NullableMerchantProfileScheme**](MerchantProfileScheme.md) | Merchant profile for Amex. | [optional] 
+**Dankort** | Pointer to [**NullableMerchantProfileScheme**](MerchantProfileScheme.md) | Merchant profile for Dankort. | [optional] 
 **Discover** | Pointer to [**NullableMerchantProfileScheme**](MerchantProfileScheme.md) | Merchant profile for Discover. | [optional] 
+**Jcb** | Pointer to [**NullableMerchantProfileScheme**](MerchantProfileScheme.md) | Merchant profile for JCB. | [optional] 
 **Mastercard** | Pointer to [**NullableMerchantProfileScheme**](MerchantProfileScheme.md) | Merchant profile for Mastercard. | [optional] 
+**Unionpay** | Pointer to [**NullableMerchantProfileScheme**](MerchantProfileScheme.md) | Merchant profile for UnionPay. | [optional] 
 **Visa** | Pointer to [**NullableMerchantProfileScheme**](MerchantProfileScheme.md) | Merchant profile for Visa. | [optional] 
 
 ## Methods
@@ -63,6 +66,41 @@ HasAmex returns a boolean if a field has been set.
 `func (o *MerchantProfile) UnsetAmex()`
 
 UnsetAmex ensures that no value is present for Amex, not even an explicit nil
+### GetDankort
+
+`func (o *MerchantProfile) GetDankort() MerchantProfileScheme`
+
+GetDankort returns the Dankort field if non-nil, zero value otherwise.
+
+### GetDankortOk
+
+`func (o *MerchantProfile) GetDankortOk() (*MerchantProfileScheme, bool)`
+
+GetDankortOk returns a tuple with the Dankort field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetDankort
+
+`func (o *MerchantProfile) SetDankort(v MerchantProfileScheme)`
+
+SetDankort sets Dankort field to given value.
+
+### HasDankort
+
+`func (o *MerchantProfile) HasDankort() bool`
+
+HasDankort returns a boolean if a field has been set.
+
+### SetDankortNil
+
+`func (o *MerchantProfile) SetDankortNil(b bool)`
+
+ SetDankortNil sets the value for Dankort to be an explicit nil
+
+### UnsetDankort
+`func (o *MerchantProfile) UnsetDankort()`
+
+UnsetDankort ensures that no value is present for Dankort, not even an explicit nil
 ### GetDiscover
 
 `func (o *MerchantProfile) GetDiscover() MerchantProfileScheme`
@@ -98,6 +136,41 @@ HasDiscover returns a boolean if a field has been set.
 `func (o *MerchantProfile) UnsetDiscover()`
 
 UnsetDiscover ensures that no value is present for Discover, not even an explicit nil
+### GetJcb
+
+`func (o *MerchantProfile) GetJcb() MerchantProfileScheme`
+
+GetJcb returns the Jcb field if non-nil, zero value otherwise.
+
+### GetJcbOk
+
+`func (o *MerchantProfile) GetJcbOk() (*MerchantProfileScheme, bool)`
+
+GetJcbOk returns a tuple with the Jcb field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetJcb
+
+`func (o *MerchantProfile) SetJcb(v MerchantProfileScheme)`
+
+SetJcb sets Jcb field to given value.
+
+### HasJcb
+
+`func (o *MerchantProfile) HasJcb() bool`
+
+HasJcb returns a boolean if a field has been set.
+
+### SetJcbNil
+
+`func (o *MerchantProfile) SetJcbNil(b bool)`
+
+ SetJcbNil sets the value for Jcb to be an explicit nil
+
+### UnsetJcb
+`func (o *MerchantProfile) UnsetJcb()`
+
+UnsetJcb ensures that no value is present for Jcb, not even an explicit nil
 ### GetMastercard
 
 `func (o *MerchantProfile) GetMastercard() MerchantProfileScheme`
@@ -133,6 +206,41 @@ HasMastercard returns a boolean if a field has been set.
 `func (o *MerchantProfile) UnsetMastercard()`
 
 UnsetMastercard ensures that no value is present for Mastercard, not even an explicit nil
+### GetUnionpay
+
+`func (o *MerchantProfile) GetUnionpay() MerchantProfileScheme`
+
+GetUnionpay returns the Unionpay field if non-nil, zero value otherwise.
+
+### GetUnionpayOk
+
+`func (o *MerchantProfile) GetUnionpayOk() (*MerchantProfileScheme, bool)`
+
+GetUnionpayOk returns a tuple with the Unionpay field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUnionpay
+
+`func (o *MerchantProfile) SetUnionpay(v MerchantProfileScheme)`
+
+SetUnionpay sets Unionpay field to given value.
+
+### HasUnionpay
+
+`func (o *MerchantProfile) HasUnionpay() bool`
+
+HasUnionpay returns a boolean if a field has been set.
+
+### SetUnionpayNil
+
+`func (o *MerchantProfile) SetUnionpayNil(b bool)`
+
+ SetUnionpayNil sets the value for Unionpay to be an explicit nil
+
+### UnsetUnionpay
+`func (o *MerchantProfile) UnsetUnionpay()`
+
+UnsetUnionpay ensures that no value is present for Unionpay, not even an explicit nil
 ### GetVisa
 
 `func (o *MerchantProfile) GetVisa() MerchantProfileScheme`

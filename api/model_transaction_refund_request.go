@@ -23,6 +23,10 @@ type TransactionRefundRequest struct {
 	TargetType NullableString `json:"target_type,omitempty"`
 	// The optional ID of the instrument to refund for. This is only required when the `target_type` is set to `gift-card-redemption`.
 	TargetId NullableString `json:"target_id,omitempty"`
+	// An optional reason to attach extra context to the refund request.
+	Reason NullableString `json:"reason,omitempty"`
+	// An external identifier that can be used to match the refund against your own records.
+	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 }
 
 // NewTransactionRefundRequest instantiates a new TransactionRefundRequest object
@@ -162,6 +166,90 @@ func (o *TransactionRefundRequest) UnsetTargetId() {
 	o.TargetId.Unset()
 }
 
+// GetReason returns the Reason field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRefundRequest) GetReason() string {
+	if o == nil || o.Reason.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Reason.Get()
+}
+
+// GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRefundRequest) GetReasonOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Reason.Get(), o.Reason.IsSet()
+}
+
+// HasReason returns a boolean if a field has been set.
+func (o *TransactionRefundRequest) HasReason() bool {
+	if o != nil && o.Reason.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReason gets a reference to the given NullableString and assigns it to the Reason field.
+func (o *TransactionRefundRequest) SetReason(v string) {
+	o.Reason.Set(&v)
+}
+// SetReasonNil sets the value for Reason to be an explicit nil
+func (o *TransactionRefundRequest) SetReasonNil() {
+	o.Reason.Set(nil)
+}
+
+// UnsetReason ensures that no value is present for Reason, not even an explicit nil
+func (o *TransactionRefundRequest) UnsetReason() {
+	o.Reason.Unset()
+}
+
+// GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRefundRequest) GetExternalIdentifier() string {
+	if o == nil || o.ExternalIdentifier.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ExternalIdentifier.Get()
+}
+
+// GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRefundRequest) GetExternalIdentifierOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ExternalIdentifier.Get(), o.ExternalIdentifier.IsSet()
+}
+
+// HasExternalIdentifier returns a boolean if a field has been set.
+func (o *TransactionRefundRequest) HasExternalIdentifier() bool {
+	if o != nil && o.ExternalIdentifier.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalIdentifier gets a reference to the given NullableString and assigns it to the ExternalIdentifier field.
+func (o *TransactionRefundRequest) SetExternalIdentifier(v string) {
+	o.ExternalIdentifier.Set(&v)
+}
+// SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
+func (o *TransactionRefundRequest) SetExternalIdentifierNil() {
+	o.ExternalIdentifier.Set(nil)
+}
+
+// UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
+func (o *TransactionRefundRequest) UnsetExternalIdentifier() {
+	o.ExternalIdentifier.Unset()
+}
+
 func (o TransactionRefundRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Amount != nil {
@@ -172,6 +260,12 @@ func (o TransactionRefundRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.TargetId.IsSet() {
 		toSerialize["target_id"] = o.TargetId.Get()
+	}
+	if o.Reason.IsSet() {
+		toSerialize["reason"] = o.Reason.Get()
+	}
+	if o.ExternalIdentifier.IsSet() {
+		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
 	}
 	return json.Marshal(toSerialize)
 }

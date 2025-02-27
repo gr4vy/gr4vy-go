@@ -7,6 +7,8 @@ Name | Type | Description | Notes
 **Amount** | Pointer to **int32** | The amount requested to refund.  If omitted, a full refund will be requested for the main payment method.  When set, the amount must be lower than or equal to the remaining balance in the associated transaction. Negative and zero-amount refunds are not supported. | [optional] 
 **TargetType** | Pointer to **NullableString** | The target type to refund for. This can be used to target a gift card to refund to instead of the main payment method. | [optional] [default to "payment-method"]
 **TargetId** | Pointer to **NullableString** | The optional ID of the instrument to refund for. This is only required when the &#x60;target_type&#x60; is set to &#x60;gift-card-redemption&#x60;. | [optional] 
+**Reason** | Pointer to **NullableString** | An optional reason to attach extra context to the refund request. | [optional] 
+**ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the refund against your own records. | [optional] 
 
 ## Methods
 
@@ -122,6 +124,76 @@ HasTargetId returns a boolean if a field has been set.
 `func (o *TransactionRefundRequest) UnsetTargetId()`
 
 UnsetTargetId ensures that no value is present for TargetId, not even an explicit nil
+### GetReason
+
+`func (o *TransactionRefundRequest) GetReason() string`
+
+GetReason returns the Reason field if non-nil, zero value otherwise.
+
+### GetReasonOk
+
+`func (o *TransactionRefundRequest) GetReasonOk() (*string, bool)`
+
+GetReasonOk returns a tuple with the Reason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReason
+
+`func (o *TransactionRefundRequest) SetReason(v string)`
+
+SetReason sets Reason field to given value.
+
+### HasReason
+
+`func (o *TransactionRefundRequest) HasReason() bool`
+
+HasReason returns a boolean if a field has been set.
+
+### SetReasonNil
+
+`func (o *TransactionRefundRequest) SetReasonNil(b bool)`
+
+ SetReasonNil sets the value for Reason to be an explicit nil
+
+### UnsetReason
+`func (o *TransactionRefundRequest) UnsetReason()`
+
+UnsetReason ensures that no value is present for Reason, not even an explicit nil
+### GetExternalIdentifier
+
+`func (o *TransactionRefundRequest) GetExternalIdentifier() string`
+
+GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetExternalIdentifierOk
+
+`func (o *TransactionRefundRequest) GetExternalIdentifierOk() (*string, bool)`
+
+GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalIdentifier
+
+`func (o *TransactionRefundRequest) SetExternalIdentifier(v string)`
+
+SetExternalIdentifier sets ExternalIdentifier field to given value.
+
+### HasExternalIdentifier
+
+`func (o *TransactionRefundRequest) HasExternalIdentifier() bool`
+
+HasExternalIdentifier returns a boolean if a field has been set.
+
+### SetExternalIdentifierNil
+
+`func (o *TransactionRefundRequest) SetExternalIdentifierNil(b bool)`
+
+ SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
+
+### UnsetExternalIdentifier
+`func (o *TransactionRefundRequest) UnsetExternalIdentifier()`
+
+UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

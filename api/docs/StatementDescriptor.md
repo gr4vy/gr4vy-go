@@ -6,9 +6,10 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Name** | Pointer to **NullableString** | Reflects your doing business as (DBA) name.  Other validations:  1. Contains only Latin characters. 2. Contain at least one letter 3. Does not contain any of the special characters &#x60;&lt; &gt; \\ &#39; \&quot; *&#x60; 4. Supports:   1. Lower case: &#x60;a-z&#x60;   2. Upper case: &#x60;A-Z&#x60;   3. Numbers: &#x60;0-9&#x60;   4. Spaces: &#x60; &#x60;   5. Special characters: &#x60;. , _ - ? + /&#x60;. | [optional] 
 **Description** | Pointer to **NullableString** | A short description about the purchase.  Other validations: 1. Contains only Latin characters. 2. Contain at least one letter 3. Does not contain any of the special characters &#x60;&lt; &gt; \\ &#39; \&quot; *&#x60; 4. Supports:   1. Lower case: &#x60;a-z&#x60;   2. Upper case: &#x60;A-Z&#x60;   3. Numbers: &#x60;0-9&#x60;   4. Spaces: &#x60; &#x60;   5. Special characters: &#x60;. , _ - ? + /&#x60;. | [optional] 
-**City** | Pointer to **NullableString** | City from which the charge originated. | [optional] 
+**City** | Pointer to **NullableString** | The merchant&#39;s city to be displayed in a statement descriptor. | [optional] 
+**Country** | Pointer to **NullableString** | The 2-letter ISO country code of the merchant to be displayed in a statement descriptor.  | [optional] 
 **PhoneNumber** | Pointer to **NullableString** | The value in the phone number field of a customer&#39;s statement which should be formatted according to the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164). | [optional] 
-**Url** | Pointer to **NullableString** | The value in the URL/web address field of a customer&#39;s statement. | [optional] 
+**Url** | Pointer to **NullableString** | The merchant&#39;s URL to be displayed in a statement descriptor. | [optional] 
 
 ## Methods
 
@@ -134,6 +135,41 @@ HasCity returns a boolean if a field has been set.
 `func (o *StatementDescriptor) UnsetCity()`
 
 UnsetCity ensures that no value is present for City, not even an explicit nil
+### GetCountry
+
+`func (o *StatementDescriptor) GetCountry() string`
+
+GetCountry returns the Country field if non-nil, zero value otherwise.
+
+### GetCountryOk
+
+`func (o *StatementDescriptor) GetCountryOk() (*string, bool)`
+
+GetCountryOk returns a tuple with the Country field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCountry
+
+`func (o *StatementDescriptor) SetCountry(v string)`
+
+SetCountry sets Country field to given value.
+
+### HasCountry
+
+`func (o *StatementDescriptor) HasCountry() bool`
+
+HasCountry returns a boolean if a field has been set.
+
+### SetCountryNil
+
+`func (o *StatementDescriptor) SetCountryNil(b bool)`
+
+ SetCountryNil sets the value for Country to be an explicit nil
+
+### UnsetCountry
+`func (o *StatementDescriptor) UnsetCountry()`
+
+UnsetCountry ensures that no value is present for Country, not even an explicit nil
 ### GetPhoneNumber
 
 `func (o *StatementDescriptor) GetPhoneNumber() string`

@@ -115,6 +115,16 @@ func NewConfiguration() *Configuration {
 					},
 				},
 			},
+			{
+				URL: "https://api.sandbox.{gr4vy_id}.gr4vy.app",
+				Description: "No description provided",
+				Variables: map[string]ServerVariable{
+					"gr4vy_id": ServerVariable{
+						Description: "The subdomain for your Gr4vy instance.",
+						DefaultValue: "plantly",
+					},
+				},
+			},
 		},
 		OperationServers: map[string]ServerConfigurations{
 		},

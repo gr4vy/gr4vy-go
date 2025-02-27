@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// AntiFraudTransactionStatusUpdateEvent This event logs the request and response details of HTTP calls made to an anti-fraud provider to update a decision.
+// AntiFraudTransactionStatusUpdateEvent This event logs the request and response details of HTTP calls made to an anti-fraud provider to update a transaction.
 type AntiFraudTransactionStatusUpdateEvent struct {
 	// The type of this resource. Is always `transaction-event`.
 	Type *string `json:"type,omitempty"`

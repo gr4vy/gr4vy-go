@@ -20,14 +20,14 @@ type ReportSpec struct {
 	// The model (dataset) that the data used for the report is retrieved from.
 	Model string `json:"model"`
 	// Parameters used to configure the report. Acceptable values for this property depend on the value specified for `model`.
-	Params map[string]map[string]interface{} `json:"params"`
+	Params map[string]interface{} `json:"params"`
 }
 
 // NewReportSpec instantiates a new ReportSpec object
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewReportSpec(model string, params map[string]map[string]interface{}) *ReportSpec {
+func NewReportSpec(model string, params map[string]interface{}) *ReportSpec {
 	this := ReportSpec{}
 	this.Model = model
 	this.Params = params
@@ -67,9 +67,9 @@ func (o *ReportSpec) SetModel(v string) {
 }
 
 // GetParams returns the Params field value
-func (o *ReportSpec) GetParams() map[string]map[string]interface{} {
+func (o *ReportSpec) GetParams() map[string]interface{} {
 	if o == nil {
-		var ret map[string]map[string]interface{}
+		var ret map[string]interface{}
 		return ret
 	}
 
@@ -78,7 +78,7 @@ func (o *ReportSpec) GetParams() map[string]map[string]interface{} {
 
 // GetParamsOk returns a tuple with the Params field value
 // and a boolean to check if the value has been set.
-func (o *ReportSpec) GetParamsOk() (*map[string]map[string]interface{}, bool) {
+func (o *ReportSpec) GetParamsOk() (*map[string]interface{}, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -86,7 +86,7 @@ func (o *ReportSpec) GetParamsOk() (*map[string]map[string]interface{}, bool) {
 }
 
 // SetParams sets field value
-func (o *ReportSpec) SetParams(v map[string]map[string]interface{}) {
+func (o *ReportSpec) SetParams(v map[string]interface{}) {
 	o.Params = v
 }
 

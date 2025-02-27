@@ -550,8 +550,6 @@ func (r ApiIssueCryptogramRequest) Execute() (Cryptogram, *_nethttp.Response, er
 /*
  * IssueCryptogram Issue cryptogram
  * Issue a cryptogram for a stored network token of a stored card.
-The endpoint is disabled by default, please contact our team for more information on enablement.
-
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @param paymentMethodId The ID of the payment method.
  * @param networkTokenId The ID of the network token.
@@ -635,7 +633,7 @@ func (a *TokensApiService) IssueCryptogramExecute(r ApiIssueCryptogramRequest) (
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
+			var v Error400BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

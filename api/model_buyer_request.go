@@ -23,6 +23,8 @@ type BuyerRequest struct {
 	DisplayName NullableString `json:"display_name,omitempty"`
 	// The optional billing details to associate with a buyer.
 	BillingDetails NullableBillingDetailsRequest `json:"billing_details,omitempty"`
+	// The source account number to perform an account funding transaction.
+	AccountNumber NullableString `json:"account_number,omitempty"`
 }
 
 // NewBuyerRequest instantiates a new BuyerRequest object
@@ -168,6 +170,48 @@ func (o *BuyerRequest) UnsetBillingDetails() {
 	o.BillingDetails.Unset()
 }
 
+// GetAccountNumber returns the AccountNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BuyerRequest) GetAccountNumber() string {
+	if o == nil || o.AccountNumber.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.AccountNumber.Get()
+}
+
+// GetAccountNumberOk returns a tuple with the AccountNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BuyerRequest) GetAccountNumberOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AccountNumber.Get(), o.AccountNumber.IsSet()
+}
+
+// HasAccountNumber returns a boolean if a field has been set.
+func (o *BuyerRequest) HasAccountNumber() bool {
+	if o != nil && o.AccountNumber.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountNumber gets a reference to the given NullableString and assigns it to the AccountNumber field.
+func (o *BuyerRequest) SetAccountNumber(v string) {
+	o.AccountNumber.Set(&v)
+}
+// SetAccountNumberNil sets the value for AccountNumber to be an explicit nil
+func (o *BuyerRequest) SetAccountNumberNil() {
+	o.AccountNumber.Set(nil)
+}
+
+// UnsetAccountNumber ensures that no value is present for AccountNumber, not even an explicit nil
+func (o *BuyerRequest) UnsetAccountNumber() {
+	o.AccountNumber.Unset()
+}
+
 func (o BuyerRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ExternalIdentifier.IsSet() {
@@ -178,6 +222,9 @@ func (o BuyerRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.BillingDetails.IsSet() {
 		toSerialize["billing_details"] = o.BillingDetails.Get()
+	}
+	if o.AccountNumber.IsSet() {
+		toSerialize["account_number"] = o.AccountNumber.Get()
 	}
 	return json.Marshal(toSerialize)
 }

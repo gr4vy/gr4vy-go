@@ -5,10 +5,11 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | The type of this resource. Is always &#x60;buyer&#x60;. | [optional] 
-**Id** | Pointer to **string** | The unique Gr4vy ID for this buyer. | [optional] 
+**Id** | Pointer to **NullableString** | The unique Gr4vy ID for this buyer. | [optional] 
 **BillingDetails** | Pointer to [**NullableBillingDetails**](BillingDetails.md) | The billing details associated with the buyer, which include the address and tax ID. | [optional] 
 **DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. | [optional] 
+**AccountNumber** | Pointer to **NullableString** | The source account number to perform an account funding transaction. | [optional] 
 
 ## Methods
 
@@ -79,6 +80,16 @@ SetId sets Id field to given value.
 
 HasId returns a boolean if a field has been set.
 
+### SetIdNil
+
+`func (o *BuyerSnapshot) SetIdNil(b bool)`
+
+ SetIdNil sets the value for Id to be an explicit nil
+
+### UnsetId
+`func (o *BuyerSnapshot) UnsetId()`
+
+UnsetId ensures that no value is present for Id, not even an explicit nil
 ### GetBillingDetails
 
 `func (o *BuyerSnapshot) GetBillingDetails() BillingDetails`
@@ -184,6 +195,41 @@ HasExternalIdentifier returns a boolean if a field has been set.
 `func (o *BuyerSnapshot) UnsetExternalIdentifier()`
 
 UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
+### GetAccountNumber
+
+`func (o *BuyerSnapshot) GetAccountNumber() string`
+
+GetAccountNumber returns the AccountNumber field if non-nil, zero value otherwise.
+
+### GetAccountNumberOk
+
+`func (o *BuyerSnapshot) GetAccountNumberOk() (*string, bool)`
+
+GetAccountNumberOk returns a tuple with the AccountNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountNumber
+
+`func (o *BuyerSnapshot) SetAccountNumber(v string)`
+
+SetAccountNumber sets AccountNumber field to given value.
+
+### HasAccountNumber
+
+`func (o *BuyerSnapshot) HasAccountNumber() bool`
+
+HasAccountNumber returns a boolean if a field has been set.
+
+### SetAccountNumberNil
+
+`func (o *BuyerSnapshot) SetAccountNumberNil(b bool)`
+
+ SetAccountNumberNil sets the value for AccountNumber to be an explicit nil
+
+### UnsetAccountNumber
+`func (o *BuyerSnapshot) UnsetAccountNumber()`
+
+UnsetAccountNumber ensures that no value is present for AccountNumber, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

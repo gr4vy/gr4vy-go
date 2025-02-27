@@ -6,12 +6,16 @@ Method | HTTP request | Description
 ------------- | ------------- | -------------
 [**CaptureTransaction**](TransactionsApi.md#CaptureTransaction) | **Post** /transactions/{transaction_id}/capture | Capture transaction
 [**GetRefund**](TransactionsApi.md#GetRefund) | **Get** /transactions/{transaction_id}/refunds/{refund_id} | Get refund
+[**GetSingleRefund**](TransactionsApi.md#GetSingleRefund) | **Get** /refunds/{refund_id} | Get refund
 [**GetTransaction**](TransactionsApi.md#GetTransaction) | **Get** /transactions/{transaction_id} | Get transaction
+[**GetTransactionSettlement**](TransactionsApi.md#GetTransactionSettlement) | **Get** /transactions/{transaction_id}/settlements/{settlement_id} | Get settlement
+[**GetTransactionSettlements**](TransactionsApi.md#GetTransactionSettlements) | **Get** /transactions/{transaction_id}/settlements | List settlements for transaction
 [**ListTransactionRefunds**](TransactionsApi.md#ListTransactionRefunds) | **Get** /transactions/{transaction_id}/refunds | List refunds
 [**ListTransactions**](TransactionsApi.md#ListTransactions) | **Get** /transactions | List transactions
 [**NewRefund**](TransactionsApi.md#NewRefund) | **Post** /transactions/{transaction_id}/refunds | Refund transaction
 [**NewTransaction**](TransactionsApi.md#NewTransaction) | **Post** /transactions | New transaction
 [**RefundAll**](TransactionsApi.md#RefundAll) | **Post** /transactions/{transaction_id}/refunds/all | Refund all instruments in a transaction
+[**SyncTransaction**](TransactionsApi.md#SyncTransaction) | **Post** /transactions/{transaction_id}/sync | Sync transaction
 [**VoidTransaction**](TransactionsApi.md#VoidTransaction) | **Post** /transactions/{transaction_id}/void | Void transaction
 
 
@@ -76,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -149,7 +153,77 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetSingleRefund
+
+> Refund GetSingleRefund(ctx, refundId).Execute()
+
+Get refund
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    refundId := "8724fd24-5489-4a5d-90fd-0604df7d3b83" // string | The unique ID of the refund.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TransactionsApi.GetSingleRefund(context.Background(), refundId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.GetSingleRefund``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetSingleRefund`: Refund
+    fmt.Fprintf(os.Stdout, "Response from `TransactionsApi.GetSingleRefund`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**refundId** | **string** | The unique ID of the refund. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetSingleRefundRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**Refund**](Refund.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -219,7 +293,150 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTransactionSettlement
+
+> Settlement GetTransactionSettlement(ctx, transactionId, settlementId).Execute()
+
+Get settlement
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    transactionId := "fe26475d-ec3e-4884-9553-f7356683f7f9" // string | The ID for the transaction to get the information for.
+    settlementId := "8724fd24-5489-4a5d-90fd-0604df7d3b83" // string | The unique ID of the settlement.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TransactionsApi.GetTransactionSettlement(context.Background(), transactionId, settlementId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.GetTransactionSettlement``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetTransactionSettlement`: Settlement
+    fmt.Fprintf(os.Stdout, "Response from `TransactionsApi.GetTransactionSettlement`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**transactionId** | **string** | The ID for the transaction to get the information for. | 
+**settlementId** | **string** | The unique ID of the settlement. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTransactionSettlementRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+
+### Return type
+
+[**Settlement**](Settlement.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## GetTransactionSettlements
+
+> Settlements GetTransactionSettlements(ctx, transactionId).Execute()
+
+List settlements for transaction
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    transactionId := "fe26475d-ec3e-4884-9553-f7356683f7f9" // string | The ID for the transaction to get the information for.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TransactionsApi.GetTransactionSettlements(context.Background(), transactionId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.GetTransactionSettlements``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `GetTransactionSettlements`: Settlements
+    fmt.Fprintf(os.Stdout, "Response from `TransactionsApi.GetTransactionSettlements`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**transactionId** | **string** | The ID for the transaction to get the information for. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiGetTransactionSettlementsRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**Settlements**](Settlements.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -289,7 +506,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -303,7 +520,7 @@ Name | Type | Description  | Notes
 
 ## ListTransactions
 
-> Transactions ListTransactions(ctx).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CheckoutSessionId(checkoutSessionId).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).GiftCardId(giftCardId).GiftCardLast4(giftCardLast4).HasGiftCardRedemptions(hasGiftCardRedemptions).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentMethodId(paymentMethodId).PaymentMethodLabel(paymentMethodLabel).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).PendingReview(pendingReview).ReconciliationId(reconciliationId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).Execute()
+> Transactions ListTransactions(ctx).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CheckoutSessionId(checkoutSessionId).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).GiftCardId(giftCardId).GiftCardLast4(giftCardLast4).HasGiftCardRedemptions(hasGiftCardRedemptions).HasRefunds(hasRefunds).HasSettlements(hasSettlements).Id(id).Metadata(metadata).Method(method).PaymentMethodId(paymentMethodId).PaymentMethodLabel(paymentMethodLabel).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).PendingReview(pendingReview).ReconciliationId(reconciliationId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).IsSubsequentPayment(isSubsequentPayment).MerchantInitiated(merchantInitiated).PaymentMethodBin(paymentMethodBin).PaymentSource(paymentSource).Execute()
 
 List transactions
 
@@ -339,6 +556,7 @@ func main() {
     giftCardLast4 := "7890" // string | Filters for transactions that have at least one gift card redemption where the last 4 digits of its gift card number matches exactly with the provided value. (optional)
     hasGiftCardRedemptions := true // bool | When set to `true`, filters for transactions that have at least one gift card redemption associated with it. When set to `false`, filter for transactions that have no gift card redemptions. (optional)
     hasRefunds := true // bool | When set to `true`, filter for transactions that have at least one completed refund (including gift card refunds) associated with it. When set to `false`, filter for transactions that have no completed refunds. (optional)
+    hasSettlements := true // bool | When set to `true`, filter for transactions that have at least one settlement. When set to `false`, filter for transactions that have no settlements. (optional)
     id := TODO // string | Filters for the transaction that has a matching `id` value. (optional)
     metadata := []string{"Inner_example"} // []string | Filters for transactions where their `metadata` values contain all of the provided `metadata` keys. The value sent for `metadata` must be formatted as a JSON string, and all keys and values must be strings. This value should also be URL encoded.  Duplicate keys are not supported. If a key is duplicated, only the last appearing value will be used. (optional)
     method := []string{"card"} // []string | Filters the results to only the items for which the `method` has been set to this value. (optional)
@@ -348,14 +566,18 @@ func main() {
     paymentServiceTransactionId := "transaction_123" // string | Filters for transactions that have a matching `payment_service_transaction_id` value. The `payment_service_transaction_id` is the identifier of the transaction given by the payment service. (optional)
     pendingReview := true // bool | When set to `true`, filter for transactions that have a manual review pending. When set to `false`, filter for transactions that don't have a manual review pending. (optional)
     reconciliationId := "7EgeeeTX0DS45RBDNt4AEY" // string | Filters for transactions based on their transaction reconciliation identifier. (optional)
-    search := "be828248-56de-481e-a580-44b6e1d4df81" // string | Filters for transactions that have one of the following fields match exactly with the provided `search` value.  * `buyer_external_identifier` * `buyer_id` * `external_identifier` * `id` * `payment_service_transaction_id`  The search will apply against all fields at the same time. (optional)
+    search := "be828248-56de-481e-a580-44b6e1d4df81" // string | Filters for transactions that have one of the following fields match exactly with the provided `search` value.  * `buyer_external_identifier` * `buyer_id` * `external_identifier` * `id` * `payment_service_transaction_id`  The search will apply against all fields at the same time. Please do not use this query parameter in a production application, as this API call is very inefficient and may negatively impact transaction performance. (optional)
     status := []string{"Status_example"} // []string | Filters the results to only the transactions that have a `status` that matches with any of the provided status values. (optional)
     updatedAtGte := time.Now() // time.Time | Filters the results to only transactions last updated after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`. (optional)
     updatedAtLte := time.Now() // time.Time | Filters the results to only transactions last updated before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`. (optional)
+    isSubsequentPayment := true // bool | When set to `true`, filter for transactions that are a subsequent payment. When set to `false`, filter for transactions that are not an initial payment. (optional)
+    merchantInitiated := true // bool | When set to `true`, filter for transactions that are merchant initiated. When set to `false`, filter for transactions that are not merchant initiated. (optional)
+    paymentMethodBin := "411111" // string | Filter for transactions that have a card with a BIN that matches exactly with the provided value. (optional)
+    paymentSource := []string{"recurring"} // []string | Filters the results to only the transactions that have a payment source that matches with any of the provided values. (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CheckoutSessionId(checkoutSessionId).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).GiftCardId(giftCardId).GiftCardLast4(giftCardLast4).HasGiftCardRedemptions(hasGiftCardRedemptions).HasRefunds(hasRefunds).Id(id).Metadata(metadata).Method(method).PaymentMethodId(paymentMethodId).PaymentMethodLabel(paymentMethodLabel).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).PendingReview(pendingReview).ReconciliationId(reconciliationId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).Execute()
+    resp, r, err := api_client.TransactionsApi.ListTransactions(context.Background()).BuyerExternalIdentifier(buyerExternalIdentifier).BuyerId(buyerId).Cursor(cursor).Limit(limit).AmountEq(amountEq).AmountGte(amountGte).AmountLte(amountLte).CheckoutSessionId(checkoutSessionId).CreatedAtGte(createdAtGte).CreatedAtLte(createdAtLte).Currency(currency).ExternalIdentifier(externalIdentifier).GiftCardId(giftCardId).GiftCardLast4(giftCardLast4).HasGiftCardRedemptions(hasGiftCardRedemptions).HasRefunds(hasRefunds).HasSettlements(hasSettlements).Id(id).Metadata(metadata).Method(method).PaymentMethodId(paymentMethodId).PaymentMethodLabel(paymentMethodLabel).PaymentServiceId(paymentServiceId).PaymentServiceTransactionId(paymentServiceTransactionId).PendingReview(pendingReview).ReconciliationId(reconciliationId).Search(search).Status(status).UpdatedAtGte(updatedAtGte).UpdatedAtLte(updatedAtLte).IsSubsequentPayment(isSubsequentPayment).MerchantInitiated(merchantInitiated).PaymentMethodBin(paymentMethodBin).PaymentSource(paymentSource).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.ListTransactions``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -392,6 +614,7 @@ Name | Type | Description  | Notes
  **giftCardLast4** | **string** | Filters for transactions that have at least one gift card redemption where the last 4 digits of its gift card number matches exactly with the provided value. | 
  **hasGiftCardRedemptions** | **bool** | When set to &#x60;true&#x60;, filters for transactions that have at least one gift card redemption associated with it. When set to &#x60;false&#x60;, filter for transactions that have no gift card redemptions. | 
  **hasRefunds** | **bool** | When set to &#x60;true&#x60;, filter for transactions that have at least one completed refund (including gift card refunds) associated with it. When set to &#x60;false&#x60;, filter for transactions that have no completed refunds. | 
+ **hasSettlements** | **bool** | When set to &#x60;true&#x60;, filter for transactions that have at least one settlement. When set to &#x60;false&#x60;, filter for transactions that have no settlements. | 
  **id** | [**string**](string.md) | Filters for the transaction that has a matching &#x60;id&#x60; value. | 
  **metadata** | **[]string** | Filters for transactions where their &#x60;metadata&#x60; values contain all of the provided &#x60;metadata&#x60; keys. The value sent for &#x60;metadata&#x60; must be formatted as a JSON string, and all keys and values must be strings. This value should also be URL encoded.  Duplicate keys are not supported. If a key is duplicated, only the last appearing value will be used. | 
  **method** | **[]string** | Filters the results to only the items for which the &#x60;method&#x60; has been set to this value. | 
@@ -401,10 +624,14 @@ Name | Type | Description  | Notes
  **paymentServiceTransactionId** | **string** | Filters for transactions that have a matching &#x60;payment_service_transaction_id&#x60; value. The &#x60;payment_service_transaction_id&#x60; is the identifier of the transaction given by the payment service. | 
  **pendingReview** | **bool** | When set to &#x60;true&#x60;, filter for transactions that have a manual review pending. When set to &#x60;false&#x60;, filter for transactions that don&#39;t have a manual review pending. | 
  **reconciliationId** | **string** | Filters for transactions based on their transaction reconciliation identifier. | 
- **search** | **string** | Filters for transactions that have one of the following fields match exactly with the provided &#x60;search&#x60; value.  * &#x60;buyer_external_identifier&#x60; * &#x60;buyer_id&#x60; * &#x60;external_identifier&#x60; * &#x60;id&#x60; * &#x60;payment_service_transaction_id&#x60;  The search will apply against all fields at the same time. | 
+ **search** | **string** | Filters for transactions that have one of the following fields match exactly with the provided &#x60;search&#x60; value.  * &#x60;buyer_external_identifier&#x60; * &#x60;buyer_id&#x60; * &#x60;external_identifier&#x60; * &#x60;id&#x60; * &#x60;payment_service_transaction_id&#x60;  The search will apply against all fields at the same time. Please do not use this query parameter in a production application, as this API call is very inefficient and may negatively impact transaction performance. | 
  **status** | **[]string** | Filters the results to only the transactions that have a &#x60;status&#x60; that matches with any of the provided status values. | 
  **updatedAtGte** | **time.Time** | Filters the results to only transactions last updated after this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;. | 
  **updatedAtLte** | **time.Time** | Filters the results to only transactions last updated before this ISO date-time string. The time zone must be included.  Ensure that the date-time string is URL encoded, e.g. &#x60;2022-01-01T12:00:00+08:00&#x60; must be encoded as &#x60;2022-01-01T12%3A00%3A00%2B08%3A00&#x60;. | 
+ **isSubsequentPayment** | **bool** | When set to &#x60;true&#x60;, filter for transactions that are a subsequent payment. When set to &#x60;false&#x60;, filter for transactions that are not an initial payment. | 
+ **merchantInitiated** | **bool** | When set to &#x60;true&#x60;, filter for transactions that are merchant initiated. When set to &#x60;false&#x60;, filter for transactions that are not merchant initiated. | 
+ **paymentMethodBin** | **string** | Filter for transactions that have a card with a BIN that matches exactly with the provided value. | 
+ **paymentSource** | **[]string** | Filters the results to only the transactions that have a payment source that matches with any of the provided values. | 
 
 ### Return type
 
@@ -412,7 +639,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -484,7 +711,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -552,7 +779,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -566,7 +793,7 @@ Name | Type | Description  | Notes
 
 ## RefundAll
 
-> Refunds RefundAll(ctx, transactionId).Execute()
+> Refunds RefundAll(ctx, transactionId).TransactionRefundAllRequest(transactionRefundAllRequest).Execute()
 
 Refund all instruments in a transaction
 
@@ -586,10 +813,11 @@ import (
 
 func main() {
     transactionId := "fe26475d-ec3e-4884-9553-f7356683f7f9" // string | The ID for the transaction to get the information for.
+    transactionRefundAllRequest := *openapiclient.NewTransactionRefundAllRequest() // TransactionRefundAllRequest |  (optional)
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.TransactionsApi.RefundAll(context.Background(), transactionId).Execute()
+    resp, r, err := api_client.TransactionsApi.RefundAll(context.Background(), transactionId).TransactionRefundAllRequest(transactionRefundAllRequest).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.RefundAll``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -615,6 +843,7 @@ Other parameters are passed through a pointer to a apiRefundAllRequest struct vi
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
 
+ **transactionRefundAllRequest** | [**TransactionRefundAllRequest**](TransactionRefundAllRequest.md) |  | 
 
 ### Return type
 
@@ -622,7 +851,77 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## SyncTransaction
+
+> Transaction SyncTransaction(ctx, transactionId).Execute()
+
+Sync transaction
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    transactionId := "fe26475d-ec3e-4884-9553-f7356683f7f9" // string | The ID for the transaction to get the information for.
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.TransactionsApi.SyncTransaction(context.Background(), transactionId).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `TransactionsApi.SyncTransaction``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `SyncTransaction`: Transaction
+    fmt.Fprintf(os.Stdout, "Response from `TransactionsApi.SyncTransaction`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**transactionId** | **string** | The ID for the transaction to get the information for. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiSyncTransactionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+
+### Return type
+
+[**Transaction**](Transaction.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -692,7 +991,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

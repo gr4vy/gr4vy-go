@@ -18,12 +18,18 @@ import (
 // ConnectionOptions struct for ConnectionOptions
 type ConnectionOptions struct {
 	CybersourceCard NullableConnectionOptionsCybersourceCard `json:"cybersource-card,omitempty"`
+	CybersourceKcp NullableConnectionOptionsCybersourceKcp `json:"cybersource-kcp,omitempty"`
+	CybersourceIdeal NullableConnectionOptionsCybersourceIdeal `json:"cybersource-ideal,omitempty"`
 	CybersourceAntiFraud NullableConnectionOptionsCybersourceAntiFraud `json:"cybersource-anti-fraud,omitempty"`
+	GivingblockGivingblock NullableConnectionOptionsGivingblockGivingblock `json:"givingblock-givingblock,omitempty"`
 	ForterAntiFraud NullableConnectionOptionsForterAntiFraud `json:"forter-anti-fraud,omitempty"`
 	AdyenCard NullableConnectionOptionsAdyenCard `json:"adyen-card,omitempty"`
+	AdyenSepa NullableConnectionOptionsAdyenSepa `json:"adyen-sepa,omitempty"`
 	PaypalPaypal NullableConnectionOptionsPaypalPaypal `json:"paypal-paypal,omitempty"`
 	PaypalPaypalpaylater NullableConnectionOptionsPaypalPaypal `json:"paypal-paypalpaylater,omitempty"`
+	PowertranzCard NullableConnectionOptionsPowertranzCard `json:"powertranz-card,omitempty"`
 	StripeCard NullableConnectionOptionsStripeCard `json:"stripe-card,omitempty"`
+	FiservCard NullableConnectionOptionsFiservCard `json:"fiserv-card,omitempty"`
 }
 
 // NewConnectionOptions instantiates a new ConnectionOptions object
@@ -85,6 +91,90 @@ func (o *ConnectionOptions) UnsetCybersourceCard() {
 	o.CybersourceCard.Unset()
 }
 
+// GetCybersourceKcp returns the CybersourceKcp field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetCybersourceKcp() ConnectionOptionsCybersourceKcp {
+	if o == nil || o.CybersourceKcp.Get() == nil {
+		var ret ConnectionOptionsCybersourceKcp
+		return ret
+	}
+	return *o.CybersourceKcp.Get()
+}
+
+// GetCybersourceKcpOk returns a tuple with the CybersourceKcp field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetCybersourceKcpOk() (*ConnectionOptionsCybersourceKcp, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CybersourceKcp.Get(), o.CybersourceKcp.IsSet()
+}
+
+// HasCybersourceKcp returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasCybersourceKcp() bool {
+	if o != nil && o.CybersourceKcp.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCybersourceKcp gets a reference to the given NullableConnectionOptionsCybersourceKcp and assigns it to the CybersourceKcp field.
+func (o *ConnectionOptions) SetCybersourceKcp(v ConnectionOptionsCybersourceKcp) {
+	o.CybersourceKcp.Set(&v)
+}
+// SetCybersourceKcpNil sets the value for CybersourceKcp to be an explicit nil
+func (o *ConnectionOptions) SetCybersourceKcpNil() {
+	o.CybersourceKcp.Set(nil)
+}
+
+// UnsetCybersourceKcp ensures that no value is present for CybersourceKcp, not even an explicit nil
+func (o *ConnectionOptions) UnsetCybersourceKcp() {
+	o.CybersourceKcp.Unset()
+}
+
+// GetCybersourceIdeal returns the CybersourceIdeal field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetCybersourceIdeal() ConnectionOptionsCybersourceIdeal {
+	if o == nil || o.CybersourceIdeal.Get() == nil {
+		var ret ConnectionOptionsCybersourceIdeal
+		return ret
+	}
+	return *o.CybersourceIdeal.Get()
+}
+
+// GetCybersourceIdealOk returns a tuple with the CybersourceIdeal field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetCybersourceIdealOk() (*ConnectionOptionsCybersourceIdeal, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CybersourceIdeal.Get(), o.CybersourceIdeal.IsSet()
+}
+
+// HasCybersourceIdeal returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasCybersourceIdeal() bool {
+	if o != nil && o.CybersourceIdeal.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCybersourceIdeal gets a reference to the given NullableConnectionOptionsCybersourceIdeal and assigns it to the CybersourceIdeal field.
+func (o *ConnectionOptions) SetCybersourceIdeal(v ConnectionOptionsCybersourceIdeal) {
+	o.CybersourceIdeal.Set(&v)
+}
+// SetCybersourceIdealNil sets the value for CybersourceIdeal to be an explicit nil
+func (o *ConnectionOptions) SetCybersourceIdealNil() {
+	o.CybersourceIdeal.Set(nil)
+}
+
+// UnsetCybersourceIdeal ensures that no value is present for CybersourceIdeal, not even an explicit nil
+func (o *ConnectionOptions) UnsetCybersourceIdeal() {
+	o.CybersourceIdeal.Unset()
+}
+
 // GetCybersourceAntiFraud returns the CybersourceAntiFraud field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConnectionOptions) GetCybersourceAntiFraud() ConnectionOptionsCybersourceAntiFraud {
 	if o == nil || o.CybersourceAntiFraud.Get() == nil {
@@ -125,6 +215,48 @@ func (o *ConnectionOptions) SetCybersourceAntiFraudNil() {
 // UnsetCybersourceAntiFraud ensures that no value is present for CybersourceAntiFraud, not even an explicit nil
 func (o *ConnectionOptions) UnsetCybersourceAntiFraud() {
 	o.CybersourceAntiFraud.Unset()
+}
+
+// GetGivingblockGivingblock returns the GivingblockGivingblock field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetGivingblockGivingblock() ConnectionOptionsGivingblockGivingblock {
+	if o == nil || o.GivingblockGivingblock.Get() == nil {
+		var ret ConnectionOptionsGivingblockGivingblock
+		return ret
+	}
+	return *o.GivingblockGivingblock.Get()
+}
+
+// GetGivingblockGivingblockOk returns a tuple with the GivingblockGivingblock field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetGivingblockGivingblockOk() (*ConnectionOptionsGivingblockGivingblock, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.GivingblockGivingblock.Get(), o.GivingblockGivingblock.IsSet()
+}
+
+// HasGivingblockGivingblock returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasGivingblockGivingblock() bool {
+	if o != nil && o.GivingblockGivingblock.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetGivingblockGivingblock gets a reference to the given NullableConnectionOptionsGivingblockGivingblock and assigns it to the GivingblockGivingblock field.
+func (o *ConnectionOptions) SetGivingblockGivingblock(v ConnectionOptionsGivingblockGivingblock) {
+	o.GivingblockGivingblock.Set(&v)
+}
+// SetGivingblockGivingblockNil sets the value for GivingblockGivingblock to be an explicit nil
+func (o *ConnectionOptions) SetGivingblockGivingblockNil() {
+	o.GivingblockGivingblock.Set(nil)
+}
+
+// UnsetGivingblockGivingblock ensures that no value is present for GivingblockGivingblock, not even an explicit nil
+func (o *ConnectionOptions) UnsetGivingblockGivingblock() {
+	o.GivingblockGivingblock.Unset()
 }
 
 // GetForterAntiFraud returns the ForterAntiFraud field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -211,6 +343,48 @@ func (o *ConnectionOptions) UnsetAdyenCard() {
 	o.AdyenCard.Unset()
 }
 
+// GetAdyenSepa returns the AdyenSepa field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetAdyenSepa() ConnectionOptionsAdyenSepa {
+	if o == nil || o.AdyenSepa.Get() == nil {
+		var ret ConnectionOptionsAdyenSepa
+		return ret
+	}
+	return *o.AdyenSepa.Get()
+}
+
+// GetAdyenSepaOk returns a tuple with the AdyenSepa field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetAdyenSepaOk() (*ConnectionOptionsAdyenSepa, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AdyenSepa.Get(), o.AdyenSepa.IsSet()
+}
+
+// HasAdyenSepa returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasAdyenSepa() bool {
+	if o != nil && o.AdyenSepa.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAdyenSepa gets a reference to the given NullableConnectionOptionsAdyenSepa and assigns it to the AdyenSepa field.
+func (o *ConnectionOptions) SetAdyenSepa(v ConnectionOptionsAdyenSepa) {
+	o.AdyenSepa.Set(&v)
+}
+// SetAdyenSepaNil sets the value for AdyenSepa to be an explicit nil
+func (o *ConnectionOptions) SetAdyenSepaNil() {
+	o.AdyenSepa.Set(nil)
+}
+
+// UnsetAdyenSepa ensures that no value is present for AdyenSepa, not even an explicit nil
+func (o *ConnectionOptions) UnsetAdyenSepa() {
+	o.AdyenSepa.Unset()
+}
+
 // GetPaypalPaypal returns the PaypalPaypal field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConnectionOptions) GetPaypalPaypal() ConnectionOptionsPaypalPaypal {
 	if o == nil || o.PaypalPaypal.Get() == nil {
@@ -295,6 +469,48 @@ func (o *ConnectionOptions) UnsetPaypalPaypalpaylater() {
 	o.PaypalPaypalpaylater.Unset()
 }
 
+// GetPowertranzCard returns the PowertranzCard field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetPowertranzCard() ConnectionOptionsPowertranzCard {
+	if o == nil || o.PowertranzCard.Get() == nil {
+		var ret ConnectionOptionsPowertranzCard
+		return ret
+	}
+	return *o.PowertranzCard.Get()
+}
+
+// GetPowertranzCardOk returns a tuple with the PowertranzCard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetPowertranzCardOk() (*ConnectionOptionsPowertranzCard, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.PowertranzCard.Get(), o.PowertranzCard.IsSet()
+}
+
+// HasPowertranzCard returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasPowertranzCard() bool {
+	if o != nil && o.PowertranzCard.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPowertranzCard gets a reference to the given NullableConnectionOptionsPowertranzCard and assigns it to the PowertranzCard field.
+func (o *ConnectionOptions) SetPowertranzCard(v ConnectionOptionsPowertranzCard) {
+	o.PowertranzCard.Set(&v)
+}
+// SetPowertranzCardNil sets the value for PowertranzCard to be an explicit nil
+func (o *ConnectionOptions) SetPowertranzCardNil() {
+	o.PowertranzCard.Set(nil)
+}
+
+// UnsetPowertranzCard ensures that no value is present for PowertranzCard, not even an explicit nil
+func (o *ConnectionOptions) UnsetPowertranzCard() {
+	o.PowertranzCard.Unset()
+}
+
 // GetStripeCard returns the StripeCard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *ConnectionOptions) GetStripeCard() ConnectionOptionsStripeCard {
 	if o == nil || o.StripeCard.Get() == nil {
@@ -337,13 +553,64 @@ func (o *ConnectionOptions) UnsetStripeCard() {
 	o.StripeCard.Unset()
 }
 
+// GetFiservCard returns the FiservCard field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptions) GetFiservCard() ConnectionOptionsFiservCard {
+	if o == nil || o.FiservCard.Get() == nil {
+		var ret ConnectionOptionsFiservCard
+		return ret
+	}
+	return *o.FiservCard.Get()
+}
+
+// GetFiservCardOk returns a tuple with the FiservCard field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptions) GetFiservCardOk() (*ConnectionOptionsFiservCard, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.FiservCard.Get(), o.FiservCard.IsSet()
+}
+
+// HasFiservCard returns a boolean if a field has been set.
+func (o *ConnectionOptions) HasFiservCard() bool {
+	if o != nil && o.FiservCard.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetFiservCard gets a reference to the given NullableConnectionOptionsFiservCard and assigns it to the FiservCard field.
+func (o *ConnectionOptions) SetFiservCard(v ConnectionOptionsFiservCard) {
+	o.FiservCard.Set(&v)
+}
+// SetFiservCardNil sets the value for FiservCard to be an explicit nil
+func (o *ConnectionOptions) SetFiservCardNil() {
+	o.FiservCard.Set(nil)
+}
+
+// UnsetFiservCard ensures that no value is present for FiservCard, not even an explicit nil
+func (o *ConnectionOptions) UnsetFiservCard() {
+	o.FiservCard.Unset()
+}
+
 func (o ConnectionOptions) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CybersourceCard.IsSet() {
 		toSerialize["cybersource-card"] = o.CybersourceCard.Get()
 	}
+	if o.CybersourceKcp.IsSet() {
+		toSerialize["cybersource-kcp"] = o.CybersourceKcp.Get()
+	}
+	if o.CybersourceIdeal.IsSet() {
+		toSerialize["cybersource-ideal"] = o.CybersourceIdeal.Get()
+	}
 	if o.CybersourceAntiFraud.IsSet() {
 		toSerialize["cybersource-anti-fraud"] = o.CybersourceAntiFraud.Get()
+	}
+	if o.GivingblockGivingblock.IsSet() {
+		toSerialize["givingblock-givingblock"] = o.GivingblockGivingblock.Get()
 	}
 	if o.ForterAntiFraud.IsSet() {
 		toSerialize["forter-anti-fraud"] = o.ForterAntiFraud.Get()
@@ -351,14 +618,23 @@ func (o ConnectionOptions) MarshalJSON() ([]byte, error) {
 	if o.AdyenCard.IsSet() {
 		toSerialize["adyen-card"] = o.AdyenCard.Get()
 	}
+	if o.AdyenSepa.IsSet() {
+		toSerialize["adyen-sepa"] = o.AdyenSepa.Get()
+	}
 	if o.PaypalPaypal.IsSet() {
 		toSerialize["paypal-paypal"] = o.PaypalPaypal.Get()
 	}
 	if o.PaypalPaypalpaylater.IsSet() {
 		toSerialize["paypal-paypalpaylater"] = o.PaypalPaypalpaylater.Get()
 	}
+	if o.PowertranzCard.IsSet() {
+		toSerialize["powertranz-card"] = o.PowertranzCard.Get()
+	}
 	if o.StripeCard.IsSet() {
 		toSerialize["stripe-card"] = o.StripeCard.Get()
+	}
+	if o.FiservCard.IsSet() {
+		toSerialize["fiserv-card"] = o.FiservCard.Get()
 	}
 	return json.Marshal(toSerialize)
 }

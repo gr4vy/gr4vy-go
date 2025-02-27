@@ -30,13 +30,13 @@ type PaymentMethodSnapshot struct {
 	Country NullableString `json:"country,omitempty"`
 	// The ISO-4217 currency code that this payment method can be used for. If this value is `null` the payment method may be used for multiple currencies.
 	Currency NullableString `json:"currency,omitempty"`
-	Details *PaymentMethodDetailsCard `json:"details,omitempty"`
+	Details NullablePaymentMethodDetailsCard `json:"details,omitempty"`
 	// The expiration date for this payment method. This is mostly used by cards where the card might have an expiration date.
 	ExpirationDate NullableString `json:"expiration_date,omitempty"`
 	// An external identifier that can be used to match the payment method against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// A label for the payment method. This can be the last 4 digits for a card, or the email address for an alternative payment method.
-	Label *string `json:"label,omitempty"`
+	Label NullableString `json:"label,omitempty"`
 	// The date and time when this card was last replaced.  When the Account Updater determines that new card details are available, existing details are not changed immediately. There are three scenarios in which the actual replacement occurs:  1. When this card has expired. 2. When only the expiration date changed. 3. When a transaction using this card is declined with any of the following codes:     * `canceled_payment_method`     * `expired_payment_method`     * `unavailable_payment_method`     * `unknown_payment_method`  When the replacement is applied, this field is updated. For non-card payment methods, the value of this field is always set to `null`.
 	LastReplacedAt NullableTime `json:"last_replaced_at,omitempty"`
 	// The type of this payment method.
@@ -308,36 +308,46 @@ func (o *PaymentMethodSnapshot) UnsetCurrency() {
 	o.Currency.Unset()
 }
 
-// GetDetails returns the Details field value if set, zero value otherwise.
+// GetDetails returns the Details field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentMethodSnapshot) GetDetails() PaymentMethodDetailsCard {
-	if o == nil || o.Details == nil {
+	if o == nil || o.Details.Get() == nil {
 		var ret PaymentMethodDetailsCard
 		return ret
 	}
-	return *o.Details
+	return *o.Details.Get()
 }
 
 // GetDetailsOk returns a tuple with the Details field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentMethodSnapshot) GetDetailsOk() (*PaymentMethodDetailsCard, bool) {
-	if o == nil || o.Details == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Details, true
+	return o.Details.Get(), o.Details.IsSet()
 }
 
 // HasDetails returns a boolean if a field has been set.
 func (o *PaymentMethodSnapshot) HasDetails() bool {
-	if o != nil && o.Details != nil {
+	if o != nil && o.Details.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetDetails gets a reference to the given PaymentMethodDetailsCard and assigns it to the Details field.
+// SetDetails gets a reference to the given NullablePaymentMethodDetailsCard and assigns it to the Details field.
 func (o *PaymentMethodSnapshot) SetDetails(v PaymentMethodDetailsCard) {
-	o.Details = &v
+	o.Details.Set(&v)
+}
+// SetDetailsNil sets the value for Details to be an explicit nil
+func (o *PaymentMethodSnapshot) SetDetailsNil() {
+	o.Details.Set(nil)
+}
+
+// UnsetDetails ensures that no value is present for Details, not even an explicit nil
+func (o *PaymentMethodSnapshot) UnsetDetails() {
+	o.Details.Unset()
 }
 
 // GetExpirationDate returns the ExpirationDate field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -424,36 +434,46 @@ func (o *PaymentMethodSnapshot) UnsetExternalIdentifier() {
 	o.ExternalIdentifier.Unset()
 }
 
-// GetLabel returns the Label field value if set, zero value otherwise.
+// GetLabel returns the Label field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentMethodSnapshot) GetLabel() string {
-	if o == nil || o.Label == nil {
+	if o == nil || o.Label.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Label
+	return *o.Label.Get()
 }
 
 // GetLabelOk returns a tuple with the Label field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentMethodSnapshot) GetLabelOk() (*string, bool) {
-	if o == nil || o.Label == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Label, true
+	return o.Label.Get(), o.Label.IsSet()
 }
 
 // HasLabel returns a boolean if a field has been set.
 func (o *PaymentMethodSnapshot) HasLabel() bool {
-	if o != nil && o.Label != nil {
+	if o != nil && o.Label.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetLabel gets a reference to the given string and assigns it to the Label field.
+// SetLabel gets a reference to the given NullableString and assigns it to the Label field.
 func (o *PaymentMethodSnapshot) SetLabel(v string) {
-	o.Label = &v
+	o.Label.Set(&v)
+}
+// SetLabelNil sets the value for Label to be an explicit nil
+func (o *PaymentMethodSnapshot) SetLabelNil() {
+	o.Label.Set(nil)
+}
+
+// UnsetLabel ensures that no value is present for Label, not even an explicit nil
+func (o *PaymentMethodSnapshot) UnsetLabel() {
+	o.Label.Unset()
 }
 
 // GetLastReplacedAt returns the LastReplacedAt field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -676,8 +696,8 @@ func (o PaymentMethodSnapshot) MarshalJSON() ([]byte, error) {
 	if o.Currency.IsSet() {
 		toSerialize["currency"] = o.Currency.Get()
 	}
-	if o.Details != nil {
-		toSerialize["details"] = o.Details
+	if o.Details.IsSet() {
+		toSerialize["details"] = o.Details.Get()
 	}
 	if o.ExpirationDate.IsSet() {
 		toSerialize["expiration_date"] = o.ExpirationDate.Get()
@@ -685,8 +705,8 @@ func (o PaymentMethodSnapshot) MarshalJSON() ([]byte, error) {
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
 	}
-	if o.Label != nil {
-		toSerialize["label"] = o.Label
+	if o.Label.IsSet() {
+		toSerialize["label"] = o.Label.Get()
 	}
 	if o.LastReplacedAt.IsSet() {
 		toSerialize["last_replaced_at"] = o.LastReplacedAt.Get()

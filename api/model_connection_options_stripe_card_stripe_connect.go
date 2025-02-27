@@ -21,6 +21,8 @@ type ConnectionOptionsStripeCardStripeConnect struct {
 	StripeAccount NullableString `json:"stripe_account,omitempty"`
 	// The application fee to charge when processing for a connected account.
 	ApplicationFeeAmount NullableFloat32 `json:"application_fee_amount,omitempty"`
+	// The Stripe account ID that these funds are intended for.
+	OnBehalfOf NullableString `json:"on_behalf_of,omitempty"`
 }
 
 // NewConnectionOptionsStripeCardStripeConnect instantiates a new ConnectionOptionsStripeCardStripeConnect object
@@ -124,6 +126,48 @@ func (o *ConnectionOptionsStripeCardStripeConnect) UnsetApplicationFeeAmount() {
 	o.ApplicationFeeAmount.Unset()
 }
 
+// GetOnBehalfOf returns the OnBehalfOf field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptionsStripeCardStripeConnect) GetOnBehalfOf() string {
+	if o == nil || o.OnBehalfOf.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.OnBehalfOf.Get()
+}
+
+// GetOnBehalfOfOk returns a tuple with the OnBehalfOf field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptionsStripeCardStripeConnect) GetOnBehalfOfOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.OnBehalfOf.Get(), o.OnBehalfOf.IsSet()
+}
+
+// HasOnBehalfOf returns a boolean if a field has been set.
+func (o *ConnectionOptionsStripeCardStripeConnect) HasOnBehalfOf() bool {
+	if o != nil && o.OnBehalfOf.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOnBehalfOf gets a reference to the given NullableString and assigns it to the OnBehalfOf field.
+func (o *ConnectionOptionsStripeCardStripeConnect) SetOnBehalfOf(v string) {
+	o.OnBehalfOf.Set(&v)
+}
+// SetOnBehalfOfNil sets the value for OnBehalfOf to be an explicit nil
+func (o *ConnectionOptionsStripeCardStripeConnect) SetOnBehalfOfNil() {
+	o.OnBehalfOf.Set(nil)
+}
+
+// UnsetOnBehalfOf ensures that no value is present for OnBehalfOf, not even an explicit nil
+func (o *ConnectionOptionsStripeCardStripeConnect) UnsetOnBehalfOf() {
+	o.OnBehalfOf.Unset()
+}
+
 func (o ConnectionOptionsStripeCardStripeConnect) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.StripeAccount.IsSet() {
@@ -131,6 +175,9 @@ func (o ConnectionOptionsStripeCardStripeConnect) MarshalJSON() ([]byte, error) 
 	}
 	if o.ApplicationFeeAmount.IsSet() {
 		toSerialize["application_fee_amount"] = o.ApplicationFeeAmount.Get()
+	}
+	if o.OnBehalfOf.IsSet() {
+		toSerialize["on_behalf_of"] = o.OnBehalfOf.Get()
 	}
 	return json.Marshal(toSerialize)
 }

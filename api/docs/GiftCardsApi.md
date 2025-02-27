@@ -4,10 +4,10 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
-[**CheckGiftCardBalances**](GiftCardsApi.md#CheckGiftCardBalances) | **Post** /gift-cards/balances | Check gift card balances
+[**CheckGiftCardBalances**](GiftCardsApi.md#CheckGiftCardBalances) | **Post** /gift-cards/balances | Verify and check gift card balances
 [**DeleteGiftCard**](GiftCardsApi.md#DeleteGiftCard) | **Delete** /gift-cards/{gift_card_id} | Delete gift card
 [**GetGiftCard**](GiftCardsApi.md#GetGiftCard) | **Get** /gift-cards/{gift_card_id} | Get gift card
-[**ListBuyerGiftCards**](GiftCardsApi.md#ListBuyerGiftCards) | **Get** /buyers/gift-cards | List gift cards buyer
+[**ListBuyerGiftCards**](GiftCardsApi.md#ListBuyerGiftCards) | **Get** /buyers/gift-cards | List gift cards for buyer
 [**ListGiftCards**](GiftCardsApi.md#ListGiftCards) | **Get** /gift-cards | List gift cards
 [**StoreGiftCard**](GiftCardsApi.md#StoreGiftCard) | **Post** /gift-cards | Store gift card
 
@@ -17,7 +17,7 @@ Method | HTTP request | Description
 
 > GiftCardsSummary CheckGiftCardBalances(ctx).GiftCardBalancesRequest(giftCardBalancesRequest).Execute()
 
-Check gift card balances
+Verify and check gift card balances
 
 
 
@@ -67,7 +67,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -135,7 +135,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -205,7 +205,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -221,7 +221,7 @@ Name | Type | Description  | Notes
 
 > GiftCardsSummary ListBuyerGiftCards(ctx).BuyerId(buyerId).BuyerExternalIdentifier(buyerExternalIdentifier).Execute()
 
-List gift cards buyer
+List gift cards for buyer
 
 
 
@@ -273,7 +273,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -345,7 +345,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -411,7 +411,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

@@ -17,10 +17,12 @@ import (
 
 // PaymentMethodDetailsCard A credit or debit card payment method.
 type PaymentMethodDetailsCard struct {
-	// The type of card, one of `credit`, `debit` or `prepaid`.
-	CardType *string `json:"card_type,omitempty"`
 	// The first 6 digits of the full card number (the BIN).
 	Bin *string `json:"bin,omitempty"`
+	// The type of card, one of `credit`, `debit` or `prepaid`.
+	CardType *string `json:"card_type,omitempty"`
+	// The name of the card issuer.
+	CardIssuerName *string `json:"card_issuer_name,omitempty"`
 }
 
 // NewPaymentMethodDetailsCard instantiates a new PaymentMethodDetailsCard object
@@ -38,38 +40,6 @@ func NewPaymentMethodDetailsCard() *PaymentMethodDetailsCard {
 func NewPaymentMethodDetailsCardWithDefaults() *PaymentMethodDetailsCard {
 	this := PaymentMethodDetailsCard{}
 	return &this
-}
-
-// GetCardType returns the CardType field value if set, zero value otherwise.
-func (o *PaymentMethodDetailsCard) GetCardType() string {
-	if o == nil || o.CardType == nil {
-		var ret string
-		return ret
-	}
-	return *o.CardType
-}
-
-// GetCardTypeOk returns a tuple with the CardType field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-func (o *PaymentMethodDetailsCard) GetCardTypeOk() (*string, bool) {
-	if o == nil || o.CardType == nil {
-		return nil, false
-	}
-	return o.CardType, true
-}
-
-// HasCardType returns a boolean if a field has been set.
-func (o *PaymentMethodDetailsCard) HasCardType() bool {
-	if o != nil && o.CardType != nil {
-		return true
-	}
-
-	return false
-}
-
-// SetCardType gets a reference to the given string and assigns it to the CardType field.
-func (o *PaymentMethodDetailsCard) SetCardType(v string) {
-	o.CardType = &v
 }
 
 // GetBin returns the Bin field value if set, zero value otherwise.
@@ -104,13 +74,80 @@ func (o *PaymentMethodDetailsCard) SetBin(v string) {
 	o.Bin = &v
 }
 
+// GetCardType returns the CardType field value if set, zero value otherwise.
+func (o *PaymentMethodDetailsCard) GetCardType() string {
+	if o == nil || o.CardType == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardType
+}
+
+// GetCardTypeOk returns a tuple with the CardType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodDetailsCard) GetCardTypeOk() (*string, bool) {
+	if o == nil || o.CardType == nil {
+		return nil, false
+	}
+	return o.CardType, true
+}
+
+// HasCardType returns a boolean if a field has been set.
+func (o *PaymentMethodDetailsCard) HasCardType() bool {
+	if o != nil && o.CardType != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCardType gets a reference to the given string and assigns it to the CardType field.
+func (o *PaymentMethodDetailsCard) SetCardType(v string) {
+	o.CardType = &v
+}
+
+// GetCardIssuerName returns the CardIssuerName field value if set, zero value otherwise.
+func (o *PaymentMethodDetailsCard) GetCardIssuerName() string {
+	if o == nil || o.CardIssuerName == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardIssuerName
+}
+
+// GetCardIssuerNameOk returns a tuple with the CardIssuerName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethodDetailsCard) GetCardIssuerNameOk() (*string, bool) {
+	if o == nil || o.CardIssuerName == nil {
+		return nil, false
+	}
+	return o.CardIssuerName, true
+}
+
+// HasCardIssuerName returns a boolean if a field has been set.
+func (o *PaymentMethodDetailsCard) HasCardIssuerName() bool {
+	if o != nil && o.CardIssuerName != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCardIssuerName gets a reference to the given string and assigns it to the CardIssuerName field.
+func (o *PaymentMethodDetailsCard) SetCardIssuerName(v string) {
+	o.CardIssuerName = &v
+}
+
 func (o PaymentMethodDetailsCard) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.Bin != nil {
+		toSerialize["bin"] = o.Bin
+	}
 	if o.CardType != nil {
 		toSerialize["card_type"] = o.CardType
 	}
-	if o.Bin != nil {
-		toSerialize["bin"] = o.Bin
+	if o.CardIssuerName != nil {
+		toSerialize["card_issuer_name"] = o.CardIssuerName
 	}
 	return json.Marshal(toSerialize)
 }

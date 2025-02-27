@@ -27,7 +27,6 @@ type ReportCreate struct {
 	ScheduleEnabled NullableBool `json:"schedule_enabled,omitempty"`
 	// The time zone in which the report's executions will be scheduled. This value is used to compute the report's `next_execution_at` value and is only relevant when this is a recurring report. This time zone is also used to calculate the timestamp range for reports that use date-time placeholders. Date-time placeholders are dynamic timestamps that change with every report execution.  This value must be set to the time zone's name as presented in the IANA time zone database. For example, to schedule reports in the time zone of New York, set this value to `America/New_York`.
 	ScheduleTimezone *string `json:"schedule_timezone,omitempty"`
-	// The specifications of the report.
 	Spec ReportSpec `json:"spec"`
 }
 

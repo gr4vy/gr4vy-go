@@ -23,6 +23,8 @@ type CardRequest struct {
 	Number string `json:"number"`
 	// The expiration date of the card, formatted `MM/YY`.
 	ExpirationDate string `json:"expiration_date"`
+	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card.
+	SecurityCode NullableString `json:"security_code,omitempty"`
 	// An external identifier that can be used to match the card against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// The ID of the buyer to associate this payment method to. If this field is provided then the `buyer_external_identifier` field needs to be unset.
@@ -123,6 +125,48 @@ func (o *CardRequest) GetExpirationDateOk() (*string, bool) {
 // SetExpirationDate sets field value
 func (o *CardRequest) SetExpirationDate(v string) {
 	o.ExpirationDate = v
+}
+
+// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CardRequest) GetSecurityCode() string {
+	if o == nil || o.SecurityCode.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.SecurityCode.Get()
+}
+
+// GetSecurityCodeOk returns a tuple with the SecurityCode field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CardRequest) GetSecurityCodeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.SecurityCode.Get(), o.SecurityCode.IsSet()
+}
+
+// HasSecurityCode returns a boolean if a field has been set.
+func (o *CardRequest) HasSecurityCode() bool {
+	if o != nil && o.SecurityCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurityCode gets a reference to the given NullableString and assigns it to the SecurityCode field.
+func (o *CardRequest) SetSecurityCode(v string) {
+	o.SecurityCode.Set(&v)
+}
+// SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+func (o *CardRequest) SetSecurityCodeNil() {
+	o.SecurityCode.Set(nil)
+}
+
+// UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
+func (o *CardRequest) UnsetSecurityCode() {
+	o.SecurityCode.Unset()
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -283,6 +327,9 @@ func (o CardRequest) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["expiration_date"] = o.ExpirationDate
+	}
+	if o.SecurityCode.IsSet() {
+		toSerialize["security_code"] = o.SecurityCode.Get()
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()

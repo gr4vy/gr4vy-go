@@ -32,7 +32,6 @@ type Report struct {
 	ScheduleEnabled *bool `json:"schedule_enabled,omitempty"`
 	// The time zone in which the next execution will be scheduled. This value is used to calculate this report's `next_execution_at` value and is only relevant if this is a recurring report. This time zone is also used to calculate the timestamp range for reports that use date-time placeholders. Date-time placeholders are dynamic timestamps that change with every report execution.
 	ScheduleTimezone *string `json:"schedule_timezone,omitempty"`
-	// The specifications of this report.
 	Spec *ReportSpec `json:"spec,omitempty"`
 	// Details of the latest execution of this report.
 	LatestExecution NullableReportExecutionSummary `json:"latest_execution,omitempty"`

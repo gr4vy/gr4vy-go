@@ -19,7 +19,7 @@ import (
 type PaymentServiceRequestFields struct {
 	// The key of the field to set a value for.
 	Key string `json:"key"`
-	// The value of a field to set; you can unset optional fields by setting this to an empty string `\"\"`.
+	// The value of a field to set.
 	Value string `json:"value"`
 }
 

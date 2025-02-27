@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 **Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. | [optional] 
+**Airline** | Pointer to [**NullableAirline**](Airline.md) | The airline addendum data which describes the airline booking associated with this transaction. | [optional] 
 
 ## Methods
 
@@ -96,6 +97,41 @@ HasMetadata returns a boolean if a field has been set.
 `func (o *CheckoutSessionUpdateRequest) UnsetMetadata()`
 
 UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
+### GetAirline
+
+`func (o *CheckoutSessionUpdateRequest) GetAirline() Airline`
+
+GetAirline returns the Airline field if non-nil, zero value otherwise.
+
+### GetAirlineOk
+
+`func (o *CheckoutSessionUpdateRequest) GetAirlineOk() (*Airline, bool)`
+
+GetAirlineOk returns a tuple with the Airline field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAirline
+
+`func (o *CheckoutSessionUpdateRequest) SetAirline(v Airline)`
+
+SetAirline sets Airline field to given value.
+
+### HasAirline
+
+`func (o *CheckoutSessionUpdateRequest) HasAirline() bool`
+
+HasAirline returns a boolean if a field has been set.
+
+### SetAirlineNil
+
+`func (o *CheckoutSessionUpdateRequest) SetAirlineNil(b bool)`
+
+ SetAirlineNil sets the value for Airline to be an explicit nil
+
+### UnsetAirline
+`func (o *CheckoutSessionUpdateRequest) UnsetAirline()`
+
+UnsetAirline ensures that no value is present for Airline, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

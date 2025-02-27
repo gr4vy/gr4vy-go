@@ -17,7 +17,7 @@ import (
 
 // ThreeDSecureSuccessEventContext 3DS context.
 type ThreeDSecureSuccessEventContext struct {
-	// The electronic commerce indicator for the 3DS transaction.
+	// The ecommerce indicator for the 3DS transaction.
 	Eci *string `json:"eci,omitempty"`
 	// The cardholder authentication value or AAV.
 	Cavv *string `json:"cavv,omitempty"`

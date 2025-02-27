@@ -57,7 +57,7 @@ Other parameters are passed through a pointer to a apiListPaymentMethodDefinitio
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

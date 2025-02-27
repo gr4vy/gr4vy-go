@@ -45,6 +45,10 @@ type MerchantAccountCreate struct {
 	LoonSecretKey NullableString `json:"loon_secret_key,omitempty"`
 	// Card schemes accepted when creating jobs using this set of Loon API keys. Loon is the Account Updater service used by Gr4vy.  * If the field is not set or if it's set to `null`, the Account Updater service doesn't get configured. * If the field is set to `null`, the other `loon_*` fields must be set to `null` as well.
 	LoonAcceptedSchemes []string `json:"loon_accepted_schemes,omitempty"`
+	// The maximum monetary amount allowed for over-capture, in the smallest currency unit, for example `1299` cents to allow for an over-capture of `$12.99`.
+	OverCaptureAmount NullableFloat32 `json:"over_capture_amount,omitempty"`
+	// The maximum percentage allowed for over-capture, for example `25` to allow for an over-capture of 25% of the original transaction amount.
+	OverCapturePercentage NullableFloat32 `json:"over_capture_percentage,omitempty"`
 }
 
 // NewMerchantAccountCreate instantiates a new MerchantAccountCreate object
@@ -623,6 +627,90 @@ func (o *MerchantAccountCreate) SetLoonAcceptedSchemes(v []string) {
 	o.LoonAcceptedSchemes = v
 }
 
+// GetOverCaptureAmount returns the OverCaptureAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccountCreate) GetOverCaptureAmount() float32 {
+	if o == nil || o.OverCaptureAmount.Get() == nil {
+		var ret float32
+		return ret
+	}
+	return *o.OverCaptureAmount.Get()
+}
+
+// GetOverCaptureAmountOk returns a tuple with the OverCaptureAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccountCreate) GetOverCaptureAmountOk() (*float32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.OverCaptureAmount.Get(), o.OverCaptureAmount.IsSet()
+}
+
+// HasOverCaptureAmount returns a boolean if a field has been set.
+func (o *MerchantAccountCreate) HasOverCaptureAmount() bool {
+	if o != nil && o.OverCaptureAmount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOverCaptureAmount gets a reference to the given NullableFloat32 and assigns it to the OverCaptureAmount field.
+func (o *MerchantAccountCreate) SetOverCaptureAmount(v float32) {
+	o.OverCaptureAmount.Set(&v)
+}
+// SetOverCaptureAmountNil sets the value for OverCaptureAmount to be an explicit nil
+func (o *MerchantAccountCreate) SetOverCaptureAmountNil() {
+	o.OverCaptureAmount.Set(nil)
+}
+
+// UnsetOverCaptureAmount ensures that no value is present for OverCaptureAmount, not even an explicit nil
+func (o *MerchantAccountCreate) UnsetOverCaptureAmount() {
+	o.OverCaptureAmount.Unset()
+}
+
+// GetOverCapturePercentage returns the OverCapturePercentage field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccountCreate) GetOverCapturePercentage() float32 {
+	if o == nil || o.OverCapturePercentage.Get() == nil {
+		var ret float32
+		return ret
+	}
+	return *o.OverCapturePercentage.Get()
+}
+
+// GetOverCapturePercentageOk returns a tuple with the OverCapturePercentage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccountCreate) GetOverCapturePercentageOk() (*float32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.OverCapturePercentage.Get(), o.OverCapturePercentage.IsSet()
+}
+
+// HasOverCapturePercentage returns a boolean if a field has been set.
+func (o *MerchantAccountCreate) HasOverCapturePercentage() bool {
+	if o != nil && o.OverCapturePercentage.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOverCapturePercentage gets a reference to the given NullableFloat32 and assigns it to the OverCapturePercentage field.
+func (o *MerchantAccountCreate) SetOverCapturePercentage(v float32) {
+	o.OverCapturePercentage.Set(&v)
+}
+// SetOverCapturePercentageNil sets the value for OverCapturePercentage to be an explicit nil
+func (o *MerchantAccountCreate) SetOverCapturePercentageNil() {
+	o.OverCapturePercentage.Set(nil)
+}
+
+// UnsetOverCapturePercentage ensures that no value is present for OverCapturePercentage, not even an explicit nil
+func (o *MerchantAccountCreate) UnsetOverCapturePercentage() {
+	o.OverCapturePercentage.Unset()
+}
+
 func (o MerchantAccountCreate) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Id != nil {
@@ -666,6 +754,12 @@ func (o MerchantAccountCreate) MarshalJSON() ([]byte, error) {
 	}
 	if o.LoonAcceptedSchemes != nil {
 		toSerialize["loon_accepted_schemes"] = o.LoonAcceptedSchemes
+	}
+	if o.OverCaptureAmount.IsSet() {
+		toSerialize["over_capture_amount"] = o.OverCaptureAmount.Get()
+	}
+	if o.OverCapturePercentage.IsSet() {
+		toSerialize["over_capture_percentage"] = o.OverCapturePercentage.Get()
 	}
 	return json.Marshal(toSerialize)
 }

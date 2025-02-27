@@ -30,8 +30,8 @@ type PaymentServiceToken struct {
 	Status *string `json:"status,omitempty"`
 	// The optional URL that the buyer needs to be redirected to to further authorize their payment.
 	ApprovalUrl NullableString `json:"approval_url,omitempty"`
-	// The token value.
-	Token *string `json:"token,omitempty"`
+	// The token value. Will be present if succeeded.
+	Token NullableString `json:"token,omitempty"`
 	// The date and time when this token was first created in our system.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this token was last updated in our system.
@@ -257,36 +257,46 @@ func (o *PaymentServiceToken) UnsetApprovalUrl() {
 	o.ApprovalUrl.Unset()
 }
 
-// GetToken returns the Token field value if set, zero value otherwise.
+// GetToken returns the Token field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentServiceToken) GetToken() string {
-	if o == nil || o.Token == nil {
+	if o == nil || o.Token.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Token
+	return *o.Token.Get()
 }
 
 // GetTokenOk returns a tuple with the Token field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentServiceToken) GetTokenOk() (*string, bool) {
-	if o == nil || o.Token == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Token, true
+	return o.Token.Get(), o.Token.IsSet()
 }
 
 // HasToken returns a boolean if a field has been set.
 func (o *PaymentServiceToken) HasToken() bool {
-	if o != nil && o.Token != nil {
+	if o != nil && o.Token.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetToken gets a reference to the given string and assigns it to the Token field.
+// SetToken gets a reference to the given NullableString and assigns it to the Token field.
 func (o *PaymentServiceToken) SetToken(v string) {
-	o.Token = &v
+	o.Token.Set(&v)
+}
+// SetTokenNil sets the value for Token to be an explicit nil
+func (o *PaymentServiceToken) SetTokenNil() {
+	o.Token.Set(nil)
+}
+
+// UnsetToken ensures that no value is present for Token, not even an explicit nil
+func (o *PaymentServiceToken) UnsetToken() {
+	o.Token.Unset()
 }
 
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
@@ -373,8 +383,8 @@ func (o PaymentServiceToken) MarshalJSON() ([]byte, error) {
 	if o.ApprovalUrl.IsSet() {
 		toSerialize["approval_url"] = o.ApprovalUrl.Get()
 	}
-	if o.Token != nil {
-		toSerialize["token"] = o.Token
+	if o.Token.IsSet() {
+		toSerialize["token"] = o.Token.Get()
 	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt

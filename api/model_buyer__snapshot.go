@@ -20,13 +20,15 @@ type BuyerSnapshot struct {
 	// The type of this resource. Is always `buyer`.
 	Type *string `json:"type,omitempty"`
 	// The unique Gr4vy ID for this buyer.
-	Id *string `json:"id,omitempty"`
+	Id NullableString `json:"id,omitempty"`
 	// The billing details associated with the buyer, which include the address and tax ID.
 	BillingDetails NullableBillingDetails `json:"billing_details,omitempty"`
 	// A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name.
 	DisplayName NullableString `json:"display_name,omitempty"`
 	// An external identifier that can be used to match the buyer against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
+	// The source account number to perform an account funding transaction.
+	AccountNumber NullableString `json:"account_number,omitempty"`
 }
 
 // NewBuyerSnapshot instantiates a new BuyerSnapshot object
@@ -78,36 +80,46 @@ func (o *BuyerSnapshot) SetType(v string) {
 	o.Type = &v
 }
 
-// GetId returns the Id field value if set, zero value otherwise.
+// GetId returns the Id field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BuyerSnapshot) GetId() string {
-	if o == nil || o.Id == nil {
+	if o == nil || o.Id.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Id
+	return *o.Id.Get()
 }
 
 // GetIdOk returns a tuple with the Id field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *BuyerSnapshot) GetIdOk() (*string, bool) {
-	if o == nil || o.Id == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Id, true
+	return o.Id.Get(), o.Id.IsSet()
 }
 
 // HasId returns a boolean if a field has been set.
 func (o *BuyerSnapshot) HasId() bool {
-	if o != nil && o.Id != nil {
+	if o != nil && o.Id.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetId gets a reference to the given string and assigns it to the Id field.
+// SetId gets a reference to the given NullableString and assigns it to the Id field.
 func (o *BuyerSnapshot) SetId(v string) {
-	o.Id = &v
+	o.Id.Set(&v)
+}
+// SetIdNil sets the value for Id to be an explicit nil
+func (o *BuyerSnapshot) SetIdNil() {
+	o.Id.Set(nil)
+}
+
+// UnsetId ensures that no value is present for Id, not even an explicit nil
+func (o *BuyerSnapshot) UnsetId() {
+	o.Id.Unset()
 }
 
 // GetBillingDetails returns the BillingDetails field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -236,13 +248,55 @@ func (o *BuyerSnapshot) UnsetExternalIdentifier() {
 	o.ExternalIdentifier.Unset()
 }
 
+// GetAccountNumber returns the AccountNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BuyerSnapshot) GetAccountNumber() string {
+	if o == nil || o.AccountNumber.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.AccountNumber.Get()
+}
+
+// GetAccountNumberOk returns a tuple with the AccountNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BuyerSnapshot) GetAccountNumberOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AccountNumber.Get(), o.AccountNumber.IsSet()
+}
+
+// HasAccountNumber returns a boolean if a field has been set.
+func (o *BuyerSnapshot) HasAccountNumber() bool {
+	if o != nil && o.AccountNumber.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountNumber gets a reference to the given NullableString and assigns it to the AccountNumber field.
+func (o *BuyerSnapshot) SetAccountNumber(v string) {
+	o.AccountNumber.Set(&v)
+}
+// SetAccountNumberNil sets the value for AccountNumber to be an explicit nil
+func (o *BuyerSnapshot) SetAccountNumberNil() {
+	o.AccountNumber.Set(nil)
+}
+
+// UnsetAccountNumber ensures that no value is present for AccountNumber, not even an explicit nil
+func (o *BuyerSnapshot) UnsetAccountNumber() {
+	o.AccountNumber.Unset()
+}
+
 func (o BuyerSnapshot) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
 		toSerialize["type"] = o.Type
 	}
-	if o.Id != nil {
-		toSerialize["id"] = o.Id
+	if o.Id.IsSet() {
+		toSerialize["id"] = o.Id.Get()
 	}
 	if o.BillingDetails.IsSet() {
 		toSerialize["billing_details"] = o.BillingDetails.Get()
@@ -252,6 +306,9 @@ func (o BuyerSnapshot) MarshalJSON() ([]byte, error) {
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
+	}
+	if o.AccountNumber.IsSet() {
+		toSerialize["account_number"] = o.AccountNumber.Get()
 	}
 	return json.Marshal(toSerialize)
 }

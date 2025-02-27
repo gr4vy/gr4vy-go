@@ -28,6 +28,153 @@ var (
 // PaymentServiceDefinitionsApiService PaymentServiceDefinitionsApi service
 type PaymentServiceDefinitionsApiService service
 
+type ApiCreatePaymentServiceDefinitionSessionRequest struct {
+	ctx _context.Context
+	ApiService *PaymentServiceDefinitionsApiService
+	paymentServiceDefinitionId string
+	requestBody *map[string]map[string]interface{}
+}
+
+func (r ApiCreatePaymentServiceDefinitionSessionRequest) RequestBody(requestBody map[string]map[string]interface{}) ApiCreatePaymentServiceDefinitionSessionRequest {
+	r.requestBody = &requestBody
+	return r
+}
+
+func (r ApiCreatePaymentServiceDefinitionSessionRequest) Execute() (PaymentServiceSession, *_nethttp.Response, error) {
+	return r.ApiService.CreatePaymentServiceDefinitionSessionExecute(r)
+}
+
+/*
+ * CreatePaymentServiceDefinitionSession Create a session for a payment service
+ * Creates a session for a payment service. This endpoint directly
+passes the request through to the relevant payment service for processing,
+and so the schema will differ based on the service used.
+
+If the downstream service returns an error, this API will return a successful response
+with the status code in the response.
+ * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
+ * @param paymentServiceDefinitionId The unique ID of the payment service definition.
+ * @return ApiCreatePaymentServiceDefinitionSessionRequest
+ */
+func (a *PaymentServiceDefinitionsApiService) CreatePaymentServiceDefinitionSession(ctx _context.Context, paymentServiceDefinitionId string) ApiCreatePaymentServiceDefinitionSessionRequest {
+	return ApiCreatePaymentServiceDefinitionSessionRequest{
+		ApiService: a,
+		ctx: ctx,
+		paymentServiceDefinitionId: paymentServiceDefinitionId,
+	}
+}
+
+/*
+ * Execute executes the request
+ * @return PaymentServiceSession
+ */
+func (a *PaymentServiceDefinitionsApiService) CreatePaymentServiceDefinitionSessionExecute(r ApiCreatePaymentServiceDefinitionSessionRequest) (PaymentServiceSession, *_nethttp.Response, error) {
+	var (
+		localVarHTTPMethod   = _nethttp.MethodPost
+		localVarPostBody     interface{}
+		localVarFormFileName string
+		localVarFileName     string
+		localVarFileBytes    []byte
+		localVarReturnValue  PaymentServiceSession
+	)
+
+	localBasePath, err := a.client.cfg.ServerURLWithContext(r.ctx, "PaymentServiceDefinitionsApiService.CreatePaymentServiceDefinitionSession")
+	if err != nil {
+		return localVarReturnValue, nil, GenericOpenAPIError{error: err.Error()}
+	}
+
+	localVarPath := localBasePath + "/payment-service-definitions/{payment_service_definition_id}/sessions"
+	localVarPath = strings.Replace(localVarPath, "{"+"payment_service_definition_id"+"}", _neturl.PathEscape(parameterToString(r.paymentServiceDefinitionId, "")), -1)
+
+	localVarHeaderParams := make(map[string]string)
+	localVarQueryParams := _neturl.Values{}
+	localVarFormParams := _neturl.Values{}
+
+	// to determine the Content-Type header
+	localVarHTTPContentTypes := []string{"application/json"}
+
+	// set Content-Type header
+	localVarHTTPContentType := selectHeaderContentType(localVarHTTPContentTypes)
+	if localVarHTTPContentType != "" {
+		localVarHeaderParams["Content-Type"] = localVarHTTPContentType
+	}
+
+	// to determine the Accept header
+	localVarHTTPHeaderAccepts := []string{"application/json"}
+
+	// set Accept header
+	localVarHTTPHeaderAccept := selectHeaderAccept(localVarHTTPHeaderAccepts)
+	if localVarHTTPHeaderAccept != "" {
+		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
+	}
+	// body params
+	localVarPostBody = r.requestBody
+	req, err := a.client.prepareRequest(r.ctx, localVarPath, localVarHTTPMethod, localVarPostBody, localVarHeaderParams, localVarQueryParams, localVarFormParams, localVarFormFileName, localVarFileName, localVarFileBytes)
+	if err != nil {
+		return localVarReturnValue, nil, err
+	}
+
+	localVarHTTPResponse, err := a.client.callAPI(req)
+	if err != nil || localVarHTTPResponse == nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	localVarBody, err := _ioutil.ReadAll(localVarHTTPResponse.Body)
+	localVarHTTPResponse.Body.Close()
+	localVarHTTPResponse.Body = _ioutil.NopCloser(bytes.NewBuffer(localVarBody))
+	if err != nil {
+		return localVarReturnValue, localVarHTTPResponse, err
+	}
+
+	if localVarHTTPResponse.StatusCode >= 300 {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: localVarHTTPResponse.Status,
+		}
+		if localVarHTTPResponse.StatusCode == 400 {
+			var v Error400BadRequest
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 401 {
+			var v Error401Unauthorized
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+			return localVarReturnValue, localVarHTTPResponse, newErr
+		}
+		if localVarHTTPResponse.StatusCode == 404 {
+			var v Error404NotFound
+			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+			if err != nil {
+				newErr.error = err.Error()
+				return localVarReturnValue, localVarHTTPResponse, newErr
+			}
+			newErr.model = v
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	err = a.client.decode(&localVarReturnValue, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
+	if err != nil {
+		newErr := GenericOpenAPIError{
+			body:  localVarBody,
+			error: err.Error(),
+		}
+		return localVarReturnValue, localVarHTTPResponse, newErr
+	}
+
+	return localVarReturnValue, localVarHTTPResponse, nil
+}
+
 type ApiGetPaymentServiceDefinitionRequest struct {
 	ctx _context.Context
 	ApiService *PaymentServiceDefinitionsApiService

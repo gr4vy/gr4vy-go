@@ -52,6 +52,10 @@ type MerchantAccount struct {
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this merchant account was updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// The maximum monetary amount allowed for over-capture, in the smallest currency unit, for example `1299` cents to allow for an over-capture of `$12.99`.
+	OverCaptureAmount NullableFloat32 `json:"over_capture_amount,omitempty"`
+	// The maximum percentage allowed for over-capture, for example `25` to allow for an over-capture of 25% of the original transaction amount.
+	OverCapturePercentage NullableFloat32 `json:"over_capture_percentage,omitempty"`
 }
 
 // NewMerchantAccount instantiates a new MerchantAccount object
@@ -726,6 +730,90 @@ func (o *MerchantAccount) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetOverCaptureAmount returns the OverCaptureAmount field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccount) GetOverCaptureAmount() float32 {
+	if o == nil || o.OverCaptureAmount.Get() == nil {
+		var ret float32
+		return ret
+	}
+	return *o.OverCaptureAmount.Get()
+}
+
+// GetOverCaptureAmountOk returns a tuple with the OverCaptureAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccount) GetOverCaptureAmountOk() (*float32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.OverCaptureAmount.Get(), o.OverCaptureAmount.IsSet()
+}
+
+// HasOverCaptureAmount returns a boolean if a field has been set.
+func (o *MerchantAccount) HasOverCaptureAmount() bool {
+	if o != nil && o.OverCaptureAmount.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOverCaptureAmount gets a reference to the given NullableFloat32 and assigns it to the OverCaptureAmount field.
+func (o *MerchantAccount) SetOverCaptureAmount(v float32) {
+	o.OverCaptureAmount.Set(&v)
+}
+// SetOverCaptureAmountNil sets the value for OverCaptureAmount to be an explicit nil
+func (o *MerchantAccount) SetOverCaptureAmountNil() {
+	o.OverCaptureAmount.Set(nil)
+}
+
+// UnsetOverCaptureAmount ensures that no value is present for OverCaptureAmount, not even an explicit nil
+func (o *MerchantAccount) UnsetOverCaptureAmount() {
+	o.OverCaptureAmount.Unset()
+}
+
+// GetOverCapturePercentage returns the OverCapturePercentage field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantAccount) GetOverCapturePercentage() float32 {
+	if o == nil || o.OverCapturePercentage.Get() == nil {
+		var ret float32
+		return ret
+	}
+	return *o.OverCapturePercentage.Get()
+}
+
+// GetOverCapturePercentageOk returns a tuple with the OverCapturePercentage field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantAccount) GetOverCapturePercentageOk() (*float32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.OverCapturePercentage.Get(), o.OverCapturePercentage.IsSet()
+}
+
+// HasOverCapturePercentage returns a boolean if a field has been set.
+func (o *MerchantAccount) HasOverCapturePercentage() bool {
+	if o != nil && o.OverCapturePercentage.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetOverCapturePercentage gets a reference to the given NullableFloat32 and assigns it to the OverCapturePercentage field.
+func (o *MerchantAccount) SetOverCapturePercentage(v float32) {
+	o.OverCapturePercentage.Set(&v)
+}
+// SetOverCapturePercentageNil sets the value for OverCapturePercentage to be an explicit nil
+func (o *MerchantAccount) SetOverCapturePercentageNil() {
+	o.OverCapturePercentage.Set(nil)
+}
+
+// UnsetOverCapturePercentage ensures that no value is present for OverCapturePercentage, not even an explicit nil
+func (o *MerchantAccount) UnsetOverCapturePercentage() {
+	o.OverCapturePercentage.Unset()
+}
+
 func (o MerchantAccount) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -778,6 +866,12 @@ func (o MerchantAccount) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if o.OverCaptureAmount.IsSet() {
+		toSerialize["over_capture_amount"] = o.OverCaptureAmount.Get()
+	}
+	if o.OverCapturePercentage.IsSet() {
+		toSerialize["over_capture_percentage"] = o.OverCapturePercentage.Get()
 	}
 	return json.Marshal(toSerialize)
 }

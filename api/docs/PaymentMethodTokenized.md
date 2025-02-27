@@ -18,6 +18,10 @@ Name | Type | Description | Notes
 **Country** | Pointer to **NullableString** | The 2-letter ISO code of the country this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used in multiple countries. | [optional] 
 **LastReplacedAt** | Pointer to **NullableTime** | The date and time when this card was last replaced.  When the Account Updater determines that new card details are available, existing details are not changed immediately. There are three scenarios in which the actual replacement occurs:  1. When this card has expired. 2. When only the expiration date changed. 3. When a transaction using this card is declined with any of the following codes:     * &#x60;canceled_payment_method&#x60;     * &#x60;expired_payment_method&#x60;     * &#x60;unavailable_payment_method&#x60;     * &#x60;unknown_payment_method&#x60;  When the replacement is applied, this field is updated. For non-card payment methods, the value of this field is always set to &#x60;null&#x60;. | [optional] 
 **HasReplacement** | Pointer to **bool** | Whether this card has a pending replacement that hasn&#39;t been applied yet.  When the Account Updater determines that new card details are available, existing details are not changed immediately, but this field is set to &#x60;true&#x60;. There are three scenarios in which the actual replacement occurs:  1. When this card has expired. 2. When only the expiration date changed. 3. When a transaction using this card is declined with any of the following codes:     * &#x60;canceled_payment_method&#x60;     * &#x60;expired_payment_method&#x60;     * &#x60;unavailable_payment_method&#x60;     * &#x60;unknown_payment_method&#x60;  When the replacement is applied, this field is set to &#x60;false&#x60;. For non-card payment methods, the value of this field is always set to &#x60;false&#x60;. | [optional] 
+**LastUsedAt** | Pointer to **NullableTime** | The timestamp when this payment method was last used in a transaction. | [optional] 
+**UsageCount** | Pointer to **int32** | The number of times this payment method has been used in transactions. | [optional] 
+**CitLastUsedAt** | Pointer to **NullableTime** | The timestamp when this payment method was last used in a transaction for client initiated transactions. | [optional] 
+**CitUsageCount** | Pointer to **int32** | The number of times this payment method has been used in transactions for client initiated transactions. | [optional] 
 
 ## Methods
 
@@ -467,6 +471,126 @@ SetHasReplacement sets HasReplacement field to given value.
 `func (o *PaymentMethodTokenized) HasHasReplacement() bool`
 
 HasHasReplacement returns a boolean if a field has been set.
+
+### GetLastUsedAt
+
+`func (o *PaymentMethodTokenized) GetLastUsedAt() time.Time`
+
+GetLastUsedAt returns the LastUsedAt field if non-nil, zero value otherwise.
+
+### GetLastUsedAtOk
+
+`func (o *PaymentMethodTokenized) GetLastUsedAtOk() (*time.Time, bool)`
+
+GetLastUsedAtOk returns a tuple with the LastUsedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastUsedAt
+
+`func (o *PaymentMethodTokenized) SetLastUsedAt(v time.Time)`
+
+SetLastUsedAt sets LastUsedAt field to given value.
+
+### HasLastUsedAt
+
+`func (o *PaymentMethodTokenized) HasLastUsedAt() bool`
+
+HasLastUsedAt returns a boolean if a field has been set.
+
+### SetLastUsedAtNil
+
+`func (o *PaymentMethodTokenized) SetLastUsedAtNil(b bool)`
+
+ SetLastUsedAtNil sets the value for LastUsedAt to be an explicit nil
+
+### UnsetLastUsedAt
+`func (o *PaymentMethodTokenized) UnsetLastUsedAt()`
+
+UnsetLastUsedAt ensures that no value is present for LastUsedAt, not even an explicit nil
+### GetUsageCount
+
+`func (o *PaymentMethodTokenized) GetUsageCount() int32`
+
+GetUsageCount returns the UsageCount field if non-nil, zero value otherwise.
+
+### GetUsageCountOk
+
+`func (o *PaymentMethodTokenized) GetUsageCountOk() (*int32, bool)`
+
+GetUsageCountOk returns a tuple with the UsageCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsageCount
+
+`func (o *PaymentMethodTokenized) SetUsageCount(v int32)`
+
+SetUsageCount sets UsageCount field to given value.
+
+### HasUsageCount
+
+`func (o *PaymentMethodTokenized) HasUsageCount() bool`
+
+HasUsageCount returns a boolean if a field has been set.
+
+### GetCitLastUsedAt
+
+`func (o *PaymentMethodTokenized) GetCitLastUsedAt() time.Time`
+
+GetCitLastUsedAt returns the CitLastUsedAt field if non-nil, zero value otherwise.
+
+### GetCitLastUsedAtOk
+
+`func (o *PaymentMethodTokenized) GetCitLastUsedAtOk() (*time.Time, bool)`
+
+GetCitLastUsedAtOk returns a tuple with the CitLastUsedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCitLastUsedAt
+
+`func (o *PaymentMethodTokenized) SetCitLastUsedAt(v time.Time)`
+
+SetCitLastUsedAt sets CitLastUsedAt field to given value.
+
+### HasCitLastUsedAt
+
+`func (o *PaymentMethodTokenized) HasCitLastUsedAt() bool`
+
+HasCitLastUsedAt returns a boolean if a field has been set.
+
+### SetCitLastUsedAtNil
+
+`func (o *PaymentMethodTokenized) SetCitLastUsedAtNil(b bool)`
+
+ SetCitLastUsedAtNil sets the value for CitLastUsedAt to be an explicit nil
+
+### UnsetCitLastUsedAt
+`func (o *PaymentMethodTokenized) UnsetCitLastUsedAt()`
+
+UnsetCitLastUsedAt ensures that no value is present for CitLastUsedAt, not even an explicit nil
+### GetCitUsageCount
+
+`func (o *PaymentMethodTokenized) GetCitUsageCount() int32`
+
+GetCitUsageCount returns the CitUsageCount field if non-nil, zero value otherwise.
+
+### GetCitUsageCountOk
+
+`func (o *PaymentMethodTokenized) GetCitUsageCountOk() (*int32, bool)`
+
+GetCitUsageCountOk returns a tuple with the CitUsageCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCitUsageCount
+
+`func (o *PaymentMethodTokenized) SetCitUsageCount(v int32)`
+
+SetCitUsageCount sets CitUsageCount field to given value.
+
+### HasCitUsageCount
+
+`func (o *PaymentMethodTokenized) HasCitUsageCount() bool`
+
+HasCitUsageCount returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

@@ -8,12 +8,12 @@ Name | Type | Description | Notes
 **ResponseStatusCode** | Pointer to **int32** | The response status code received from the &#x60;url&#x60;. | [optional] 
 **Success** | Pointer to **bool** | Whether the BIN lookup was successful or not. | [optional] 
 **Bin** | Pointer to **NullableString** | The value used to lookup BIN details. | [optional] 
+**Instrument** | Pointer to **NullableString** | The instrument type used to lookup BIN details. | [optional] 
 **Type** | Pointer to **NullableString** | The type of card, i.e. credit or debit, from the lookup response. | [optional] 
 **Scheme** | Pointer to **NullableString** | The card scheme result from the lookup response. | [optional] 
 **AdditionalSchemes** | Pointer to **[]string** | The card additional schemes from the lookup response. | [optional] 
 **CountryCode** | Pointer to **NullableString** | The card country code result from the lookup response. | [optional] 
-**AccountUpdater** | Pointer to **NullableBool** | Whether Account Updater is enabled for this card. | [optional] 
-**IssuerTokenization** | Pointer to **NullableBool** | Whether the issuing bank supports network tokenization for this card. | [optional] 
+**SupportsNetworkTokens** | Pointer to **NullableBool** | Whether the issuing bank supports network tokenization for this card. | [optional] 
 
 ## Methods
 
@@ -154,6 +154,41 @@ HasBin returns a boolean if a field has been set.
 `func (o *BINLookupRequestContext) UnsetBin()`
 
 UnsetBin ensures that no value is present for Bin, not even an explicit nil
+### GetInstrument
+
+`func (o *BINLookupRequestContext) GetInstrument() string`
+
+GetInstrument returns the Instrument field if non-nil, zero value otherwise.
+
+### GetInstrumentOk
+
+`func (o *BINLookupRequestContext) GetInstrumentOk() (*string, bool)`
+
+GetInstrumentOk returns a tuple with the Instrument field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetInstrument
+
+`func (o *BINLookupRequestContext) SetInstrument(v string)`
+
+SetInstrument sets Instrument field to given value.
+
+### HasInstrument
+
+`func (o *BINLookupRequestContext) HasInstrument() bool`
+
+HasInstrument returns a boolean if a field has been set.
+
+### SetInstrumentNil
+
+`func (o *BINLookupRequestContext) SetInstrumentNil(b bool)`
+
+ SetInstrumentNil sets the value for Instrument to be an explicit nil
+
+### UnsetInstrument
+`func (o *BINLookupRequestContext) UnsetInstrument()`
+
+UnsetInstrument ensures that no value is present for Instrument, not even an explicit nil
 ### GetType
 
 `func (o *BINLookupRequestContext) GetType() string`
@@ -294,76 +329,41 @@ HasCountryCode returns a boolean if a field has been set.
 `func (o *BINLookupRequestContext) UnsetCountryCode()`
 
 UnsetCountryCode ensures that no value is present for CountryCode, not even an explicit nil
-### GetAccountUpdater
+### GetSupportsNetworkTokens
 
-`func (o *BINLookupRequestContext) GetAccountUpdater() bool`
+`func (o *BINLookupRequestContext) GetSupportsNetworkTokens() bool`
 
-GetAccountUpdater returns the AccountUpdater field if non-nil, zero value otherwise.
+GetSupportsNetworkTokens returns the SupportsNetworkTokens field if non-nil, zero value otherwise.
 
-### GetAccountUpdaterOk
+### GetSupportsNetworkTokensOk
 
-`func (o *BINLookupRequestContext) GetAccountUpdaterOk() (*bool, bool)`
+`func (o *BINLookupRequestContext) GetSupportsNetworkTokensOk() (*bool, bool)`
 
-GetAccountUpdaterOk returns a tuple with the AccountUpdater field if it's non-nil, zero value otherwise
+GetSupportsNetworkTokensOk returns a tuple with the SupportsNetworkTokens field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetAccountUpdater
+### SetSupportsNetworkTokens
 
-`func (o *BINLookupRequestContext) SetAccountUpdater(v bool)`
+`func (o *BINLookupRequestContext) SetSupportsNetworkTokens(v bool)`
 
-SetAccountUpdater sets AccountUpdater field to given value.
+SetSupportsNetworkTokens sets SupportsNetworkTokens field to given value.
 
-### HasAccountUpdater
+### HasSupportsNetworkTokens
 
-`func (o *BINLookupRequestContext) HasAccountUpdater() bool`
+`func (o *BINLookupRequestContext) HasSupportsNetworkTokens() bool`
 
-HasAccountUpdater returns a boolean if a field has been set.
+HasSupportsNetworkTokens returns a boolean if a field has been set.
 
-### SetAccountUpdaterNil
+### SetSupportsNetworkTokensNil
 
-`func (o *BINLookupRequestContext) SetAccountUpdaterNil(b bool)`
+`func (o *BINLookupRequestContext) SetSupportsNetworkTokensNil(b bool)`
 
- SetAccountUpdaterNil sets the value for AccountUpdater to be an explicit nil
+ SetSupportsNetworkTokensNil sets the value for SupportsNetworkTokens to be an explicit nil
 
-### UnsetAccountUpdater
-`func (o *BINLookupRequestContext) UnsetAccountUpdater()`
+### UnsetSupportsNetworkTokens
+`func (o *BINLookupRequestContext) UnsetSupportsNetworkTokens()`
 
-UnsetAccountUpdater ensures that no value is present for AccountUpdater, not even an explicit nil
-### GetIssuerTokenization
-
-`func (o *BINLookupRequestContext) GetIssuerTokenization() bool`
-
-GetIssuerTokenization returns the IssuerTokenization field if non-nil, zero value otherwise.
-
-### GetIssuerTokenizationOk
-
-`func (o *BINLookupRequestContext) GetIssuerTokenizationOk() (*bool, bool)`
-
-GetIssuerTokenizationOk returns a tuple with the IssuerTokenization field if it's non-nil, zero value otherwise
-and a boolean to check if the value has been set.
-
-### SetIssuerTokenization
-
-`func (o *BINLookupRequestContext) SetIssuerTokenization(v bool)`
-
-SetIssuerTokenization sets IssuerTokenization field to given value.
-
-### HasIssuerTokenization
-
-`func (o *BINLookupRequestContext) HasIssuerTokenization() bool`
-
-HasIssuerTokenization returns a boolean if a field has been set.
-
-### SetIssuerTokenizationNil
-
-`func (o *BINLookupRequestContext) SetIssuerTokenizationNil(b bool)`
-
- SetIssuerTokenizationNil sets the value for IssuerTokenization to be an explicit nil
-
-### UnsetIssuerTokenization
-`func (o *BINLookupRequestContext) UnsetIssuerTokenization()`
-
-UnsetIssuerTokenization ensures that no value is present for IssuerTokenization, not even an explicit nil
+UnsetSupportsNetworkTokens ensures that no value is present for SupportsNetworkTokens, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

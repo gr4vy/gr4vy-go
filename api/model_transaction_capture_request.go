@@ -17,8 +17,10 @@ import (
 
 // TransactionCaptureRequest A request to capture a transaction.
 type TransactionCaptureRequest struct {
-	// The monetary amount to capture an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.  When omitted blank, this will capture the entire amount.  Capturing an amount that is greater than the authorized amount is not supported.
+	// The monetary amount to capture an authorization for, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`.  When omitted blank, this will capture the entire amount.
 	Amount *int32 `json:"amount,omitempty"`
+	// The airline addendum data which describes the airline booking associated with this transaction. When provided, this will override any airline data provided when authorizing the transaction. Only the data on this request will be passed to the payment service, and none of the original data will be sent or kept.
+	Airline NullableAirline `json:"airline,omitempty"`
 }
 
 // NewTransactionCaptureRequest instantiates a new TransactionCaptureRequest object
@@ -70,10 +72,55 @@ func (o *TransactionCaptureRequest) SetAmount(v int32) {
 	o.Amount = &v
 }
 
+// GetAirline returns the Airline field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionCaptureRequest) GetAirline() Airline {
+	if o == nil || o.Airline.Get() == nil {
+		var ret Airline
+		return ret
+	}
+	return *o.Airline.Get()
+}
+
+// GetAirlineOk returns a tuple with the Airline field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionCaptureRequest) GetAirlineOk() (*Airline, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Airline.Get(), o.Airline.IsSet()
+}
+
+// HasAirline returns a boolean if a field has been set.
+func (o *TransactionCaptureRequest) HasAirline() bool {
+	if o != nil && o.Airline.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAirline gets a reference to the given NullableAirline and assigns it to the Airline field.
+func (o *TransactionCaptureRequest) SetAirline(v Airline) {
+	o.Airline.Set(&v)
+}
+// SetAirlineNil sets the value for Airline to be an explicit nil
+func (o *TransactionCaptureRequest) SetAirlineNil() {
+	o.Airline.Set(nil)
+}
+
+// UnsetAirline ensures that no value is present for Airline, not even an explicit nil
+func (o *TransactionCaptureRequest) UnsetAirline() {
+	o.Airline.Unset()
+}
+
 func (o TransactionCaptureRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Amount != nil {
 		toSerialize["amount"] = o.Amount
+	}
+	if o.Airline.IsSet() {
+		toSerialize["airline"] = o.Airline.Get()
 	}
 	return json.Marshal(toSerialize)
 }

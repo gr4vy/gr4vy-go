@@ -4,8 +4,9 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**CardType** | Pointer to **string** | The type of card, one of &#x60;credit&#x60;, &#x60;debit&#x60; or &#x60;prepaid&#x60;. | [optional] 
 **Bin** | Pointer to **string** | The first 6 digits of the full card number (the BIN). | [optional] 
+**CardType** | Pointer to **string** | The type of card, one of &#x60;credit&#x60;, &#x60;debit&#x60; or &#x60;prepaid&#x60;. | [optional] 
+**CardIssuerName** | Pointer to **string** | The name of the card issuer. | [optional] 
 
 ## Methods
 
@@ -25,6 +26,31 @@ will change when the set of required properties is changed
 NewPaymentMethodDetailsCardWithDefaults instantiates a new PaymentMethodDetailsCard object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetBin
+
+`func (o *PaymentMethodDetailsCard) GetBin() string`
+
+GetBin returns the Bin field if non-nil, zero value otherwise.
+
+### GetBinOk
+
+`func (o *PaymentMethodDetailsCard) GetBinOk() (*string, bool)`
+
+GetBinOk returns a tuple with the Bin field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBin
+
+`func (o *PaymentMethodDetailsCard) SetBin(v string)`
+
+SetBin sets Bin field to given value.
+
+### HasBin
+
+`func (o *PaymentMethodDetailsCard) HasBin() bool`
+
+HasBin returns a boolean if a field has been set.
 
 ### GetCardType
 
@@ -51,30 +77,30 @@ SetCardType sets CardType field to given value.
 
 HasCardType returns a boolean if a field has been set.
 
-### GetBin
+### GetCardIssuerName
 
-`func (o *PaymentMethodDetailsCard) GetBin() string`
+`func (o *PaymentMethodDetailsCard) GetCardIssuerName() string`
 
-GetBin returns the Bin field if non-nil, zero value otherwise.
+GetCardIssuerName returns the CardIssuerName field if non-nil, zero value otherwise.
 
-### GetBinOk
+### GetCardIssuerNameOk
 
-`func (o *PaymentMethodDetailsCard) GetBinOk() (*string, bool)`
+`func (o *PaymentMethodDetailsCard) GetCardIssuerNameOk() (*string, bool)`
 
-GetBinOk returns a tuple with the Bin field if it's non-nil, zero value otherwise
+GetCardIssuerNameOk returns a tuple with the CardIssuerName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetBin
+### SetCardIssuerName
 
-`func (o *PaymentMethodDetailsCard) SetBin(v string)`
+`func (o *PaymentMethodDetailsCard) SetCardIssuerName(v string)`
 
-SetBin sets Bin field to given value.
+SetCardIssuerName sets CardIssuerName field to given value.
 
-### HasBin
+### HasCardIssuerName
 
-`func (o *PaymentMethodDetailsCard) HasBin() bool`
+`func (o *PaymentMethodDetailsCard) HasCardIssuerName() bool`
 
-HasBin returns a boolean if a field has been set.
+HasCardIssuerName returns a boolean if a field has been set.
 
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)

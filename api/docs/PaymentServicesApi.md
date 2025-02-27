@@ -4,12 +4,85 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**CreatePaymentServiceSession**](PaymentServicesApi.md#CreatePaymentServiceSession) | **Post** /payment-services/{payment_service_id}/sessions | Create a session for a payment service by ID
 [**DeletePaymentService**](PaymentServicesApi.md#DeletePaymentService) | **Delete** /payment-services/{payment_service_id} | Delete payment service
 [**GetPaymentService**](PaymentServicesApi.md#GetPaymentService) | **Get** /payment-services/{payment_service_id} | Get payment service
 [**ListPaymentServices**](PaymentServicesApi.md#ListPaymentServices) | **Get** /payment-services | List payment services
 [**NewPaymentService**](PaymentServicesApi.md#NewPaymentService) | **Post** /payment-services | New payment service
 [**UpdatePaymentService**](PaymentServicesApi.md#UpdatePaymentService) | **Put** /payment-services/{payment_service_id} | Update payment service
 
+
+
+## CreatePaymentServiceSession
+
+> PaymentServiceSession CreatePaymentServiceSession(ctx, paymentServiceId).RequestBody(requestBody).Execute()
+
+Create a session for a payment service by ID
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    paymentServiceId := "46973e9d-88a7-44a6-abfe-be4ff0134ff4" // string | The ID of the payment service.
+    requestBody := map[string]map[string]interface{}{"key": map[string]interface{}(123)} // map[string]map[string]interface{} |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.PaymentServicesApi.CreatePaymentServiceSession(context.Background(), paymentServiceId).RequestBody(requestBody).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `PaymentServicesApi.CreatePaymentServiceSession``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+    // response from `CreatePaymentServiceSession`: PaymentServiceSession
+    fmt.Fprintf(os.Stdout, "Response from `PaymentServicesApi.CreatePaymentServiceSession`: %v\n", resp)
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**paymentServiceId** | **string** | The ID of the payment service. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiCreatePaymentServiceSessionRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **requestBody** | **map[string]map[string]interface{}** |  | 
+
+### Return type
+
+[**PaymentServiceSession**](PaymentServiceSession.md)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## DeletePaymentService
@@ -68,7 +141,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -138,7 +211,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -210,7 +283,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -276,7 +349,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -348,7 +421,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

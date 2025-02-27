@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **ApprovalUrl** | Pointer to **NullableString** | The optional URL that the buyer needs to be redirected to to further authorize their payment. | [optional] 
 **Country** | Pointer to **NullableString** | The 2-letter ISO code of the country this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used in multiple countries. | [optional] 
 **Currency** | Pointer to **NullableString** | The ISO-4217 currency code that this payment method can be used for. If this value is &#x60;null&#x60; the payment method may be used for multiple currencies. | [optional] 
-**Details** | Pointer to [**PaymentMethodDetailsCard**](PaymentMethodDetailsCard.md) |  | [optional] 
+**Details** | Pointer to [**NullablePaymentMethodDetailsCard**](PaymentMethodDetailsCard.md) |  | [optional] 
 **ExpirationDate** | Pointer to **NullableString** | The expiration date for this payment method. This is mostly used by cards where the card might have an expiration date. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the payment method against your own records. | [optional] 
-**Label** | Pointer to **string** | A label for the payment method. This can be the last 4 digits for a card, or the email address for an alternative payment method. | [optional] 
+**Label** | Pointer to **NullableString** | A label for the payment method. This can be the last 4 digits for a card, or the email address for an alternative payment method. | [optional] 
 **LastReplacedAt** | Pointer to **NullableTime** | The date and time when this card was last replaced.  When the Account Updater determines that new card details are available, existing details are not changed immediately. There are three scenarios in which the actual replacement occurs:  1. When this card has expired. 2. When only the expiration date changed. 3. When a transaction using this card is declined with any of the following codes:     * &#x60;canceled_payment_method&#x60;     * &#x60;expired_payment_method&#x60;     * &#x60;unavailable_payment_method&#x60;     * &#x60;unknown_payment_method&#x60;  When the replacement is applied, this field is updated. For non-card payment methods, the value of this field is always set to &#x60;null&#x60;. | [optional] 
 **Method** | Pointer to **string** | The type of this payment method. | [optional] 
 **PaymentAccountReference** | Pointer to **NullableString** | The payment account reference (PAR) returned by the card scheme. This is a unique reference to the underlying account that has been used to fund this payment method. This value will be unique if the same underlying account was used, regardless of the actual payment method used. For example, a network token or an Apple Pay device token will return the same PAR when possible.  The uniqueness of this value will depend on the card scheme, please refer to their documentation for further details. The availability of the PAR in our API depends on the availability of its value in the API of the payment service used for the transaction. | [optional] 
@@ -264,6 +264,16 @@ SetDetails sets Details field to given value.
 
 HasDetails returns a boolean if a field has been set.
 
+### SetDetailsNil
+
+`func (o *PaymentMethodSnapshot) SetDetailsNil(b bool)`
+
+ SetDetailsNil sets the value for Details to be an explicit nil
+
+### UnsetDetails
+`func (o *PaymentMethodSnapshot) UnsetDetails()`
+
+UnsetDetails ensures that no value is present for Details, not even an explicit nil
 ### GetExpirationDate
 
 `func (o *PaymentMethodSnapshot) GetExpirationDate() string`
@@ -359,6 +369,16 @@ SetLabel sets Label field to given value.
 
 HasLabel returns a boolean if a field has been set.
 
+### SetLabelNil
+
+`func (o *PaymentMethodSnapshot) SetLabelNil(b bool)`
+
+ SetLabelNil sets the value for Label to be an explicit nil
+
+### UnsetLabel
+`func (o *PaymentMethodSnapshot) UnsetLabel()`
+
+UnsetLabel ensures that no value is present for Label, not even an explicit nil
 ### GetLastReplacedAt
 
 `func (o *PaymentMethodSnapshot) GetLastReplacedAt() time.Time`

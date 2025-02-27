@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Method** | **string** | &#x60;card&#x60;. | 
 **Number** | **string** | The 13-19 digit number for this card as it can be found on the front of the card. | 
 **ExpirationDate** | **string** | The expiration date of the card, formatted &#x60;MM/YY&#x60;. | 
+**SecurityCode** | Pointer to **NullableString** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the card against your own records. | [optional] 
 **BuyerId** | Pointer to **string** | The ID of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_external_identifier&#x60; field needs to be unset. | [optional] 
 **BuyerExternalIdentifier** | Pointer to **string** | The &#x60;external_identifier&#x60; of the buyer to associate this payment method to. If this field is provided then the &#x60;buyer_id&#x60; field needs to be unset. | [optional] 
@@ -91,6 +92,41 @@ and a boolean to check if the value has been set.
 SetExpirationDate sets ExpirationDate field to given value.
 
 
+### GetSecurityCode
+
+`func (o *CardRequest) GetSecurityCode() string`
+
+GetSecurityCode returns the SecurityCode field if non-nil, zero value otherwise.
+
+### GetSecurityCodeOk
+
+`func (o *CardRequest) GetSecurityCodeOk() (*string, bool)`
+
+GetSecurityCodeOk returns a tuple with the SecurityCode field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSecurityCode
+
+`func (o *CardRequest) SetSecurityCode(v string)`
+
+SetSecurityCode sets SecurityCode field to given value.
+
+### HasSecurityCode
+
+`func (o *CardRequest) HasSecurityCode() bool`
+
+HasSecurityCode returns a boolean if a field has been set.
+
+### SetSecurityCodeNil
+
+`func (o *CardRequest) SetSecurityCodeNil(b bool)`
+
+ SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+
+### UnsetSecurityCode
+`func (o *CardRequest) UnsetSecurityCode()`
+
+UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
 ### GetExternalIdentifier
 
 `func (o *CardRequest) GetExternalIdentifier() string`

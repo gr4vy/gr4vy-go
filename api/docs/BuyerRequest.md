@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. This value needs to be unique for all buyers. | [optional] 
 **DisplayName** | Pointer to **NullableString** | A unique name for this buyer which is used in the Gr4vy admin panel to give a buyer a human readable name. | [optional] 
 **BillingDetails** | Pointer to [**NullableBillingDetailsRequest**](BillingDetailsRequest.md) | The optional billing details to associate with a buyer. | [optional] 
+**AccountNumber** | Pointer to **NullableString** | The source account number to perform an account funding transaction. | [optional] 
 
 ## Methods
 
@@ -132,6 +133,41 @@ HasBillingDetails returns a boolean if a field has been set.
 `func (o *BuyerRequest) UnsetBillingDetails()`
 
 UnsetBillingDetails ensures that no value is present for BillingDetails, not even an explicit nil
+### GetAccountNumber
+
+`func (o *BuyerRequest) GetAccountNumber() string`
+
+GetAccountNumber returns the AccountNumber field if non-nil, zero value otherwise.
+
+### GetAccountNumberOk
+
+`func (o *BuyerRequest) GetAccountNumberOk() (*string, bool)`
+
+GetAccountNumberOk returns a tuple with the AccountNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountNumber
+
+`func (o *BuyerRequest) SetAccountNumber(v string)`
+
+SetAccountNumber sets AccountNumber field to given value.
+
+### HasAccountNumber
+
+`func (o *BuyerRequest) HasAccountNumber() bool`
+
+HasAccountNumber returns a boolean if a field has been set.
+
+### SetAccountNumberNil
+
+`func (o *BuyerRequest) SetAccountNumberNil(b bool)`
+
+ SetAccountNumberNil sets the value for AccountNumber to be an explicit nil
+
+### UnsetAccountNumber
+`func (o *BuyerRequest) UnsetAccountNumber()`
+
+UnsetAccountNumber ensures that no value is present for AccountNumber, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -9,7 +9,7 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | The status of the gift card redemption for the &#x60;payment_method&#x60;. | [optional] 
 **Amount** | Pointer to **int32** | The amount redeemed for this gift card. | [optional] 
 **RefundedAmount** | Pointer to **int32** | The amount refunded for this gift card. This can not be larger than &#x60;amount&#x60;. | [optional] 
-**GiftCardServiceRedemptionId** | Pointer to **string** | The gift card service&#39;s unique ID for the redemption. | [optional] 
+**GiftCardServiceRedemptionId** | Pointer to **NullableString** | The gift card service&#39;s unique ID for the redemption. | [optional] 
 **ErrorCode** | Pointer to **NullableString** | If this gift card redemption resulted in an error, this will contain the internal code for the error. | [optional] 
 **RawErrorCode** | Pointer to **NullableString** | If this gift card redemption resulted in an error, this will contain the raw error code received from the gift card provider. | [optional] 
 **RawErrorMessage** | Pointer to **NullableString** | If this gift card redemption resulted in an error, this will contain the raw error message received from the gift card provider. | [optional] 
@@ -194,6 +194,16 @@ SetGiftCardServiceRedemptionId sets GiftCardServiceRedemptionId field to given v
 
 HasGiftCardServiceRedemptionId returns a boolean if a field has been set.
 
+### SetGiftCardServiceRedemptionIdNil
+
+`func (o *GiftCardRedemption) SetGiftCardServiceRedemptionIdNil(b bool)`
+
+ SetGiftCardServiceRedemptionIdNil sets the value for GiftCardServiceRedemptionId to be an explicit nil
+
+### UnsetGiftCardServiceRedemptionId
+`func (o *GiftCardRedemption) UnsetGiftCardServiceRedemptionId()`
+
+UnsetGiftCardServiceRedemptionId ensures that no value is present for GiftCardServiceRedemptionId, not even an explicit nil
 ### GetErrorCode
 
 `func (o *GiftCardRedemption) GetErrorCode() string`

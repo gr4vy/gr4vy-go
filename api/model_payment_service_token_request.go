@@ -18,7 +18,7 @@ import (
 // PaymentServiceTokenRequest Request body for provision a payment service token.
 type PaymentServiceTokenRequest struct {
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card.
-	SecurityCode string `json:"security_code"`
+	SecurityCode NullableString `json:"security_code,omitempty"`
 	// The ID of the payment service.
 	PaymentServiceId string `json:"payment_service_id"`
 	// The redirect URL to redirect a buyer to after they have authorized their payment method. This only applies to payment methods that require buyer approval.
@@ -29,9 +29,8 @@ type PaymentServiceTokenRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewPaymentServiceTokenRequest(securityCode string, paymentServiceId string, redirectUrl string) *PaymentServiceTokenRequest {
+func NewPaymentServiceTokenRequest(paymentServiceId string, redirectUrl string) *PaymentServiceTokenRequest {
 	this := PaymentServiceTokenRequest{}
-	this.SecurityCode = securityCode
 	this.PaymentServiceId = paymentServiceId
 	this.RedirectUrl = redirectUrl
 	return &this
@@ -45,28 +44,46 @@ func NewPaymentServiceTokenRequestWithDefaults() *PaymentServiceTokenRequest {
 	return &this
 }
 
-// GetSecurityCode returns the SecurityCode field value
+// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentServiceTokenRequest) GetSecurityCode() string {
-	if o == nil {
+	if o == nil || o.SecurityCode.Get() == nil {
 		var ret string
 		return ret
 	}
-
-	return o.SecurityCode
+	return *o.SecurityCode.Get()
 }
 
-// GetSecurityCodeOk returns a tuple with the SecurityCode field value
+// GetSecurityCodeOk returns a tuple with the SecurityCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentServiceTokenRequest) GetSecurityCodeOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.SecurityCode, true
+	return o.SecurityCode.Get(), o.SecurityCode.IsSet()
 }
 
-// SetSecurityCode sets field value
+// HasSecurityCode returns a boolean if a field has been set.
+func (o *PaymentServiceTokenRequest) HasSecurityCode() bool {
+	if o != nil && o.SecurityCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurityCode gets a reference to the given NullableString and assigns it to the SecurityCode field.
 func (o *PaymentServiceTokenRequest) SetSecurityCode(v string) {
-	o.SecurityCode = v
+	o.SecurityCode.Set(&v)
+}
+// SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+func (o *PaymentServiceTokenRequest) SetSecurityCodeNil() {
+	o.SecurityCode.Set(nil)
+}
+
+// UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
+func (o *PaymentServiceTokenRequest) UnsetSecurityCode() {
+	o.SecurityCode.Unset()
 }
 
 // GetPaymentServiceId returns the PaymentServiceId field value
@@ -119,8 +136,8 @@ func (o *PaymentServiceTokenRequest) SetRedirectUrl(v string) {
 
 func (o PaymentServiceTokenRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if true {
-		toSerialize["security_code"] = o.SecurityCode
+	if o.SecurityCode.IsSet() {
+		toSerialize["security_code"] = o.SecurityCode.Get()
 	}
 	if true {
 		toSerialize["payment_service_id"] = o.PaymentServiceId

@@ -30,13 +30,13 @@ type DigitalWalletClickToPayTokenDecryptedContext struct {
 	// The cardholder name.
 	CardholderName NullableString `json:"cardholder_name,omitempty"`
 	// First six digits of underlying card.
-	CardBin *string `json:"card_bin,omitempty"`
+	CardBin NullableString `json:"card_bin,omitempty"`
 	// Last four digits of underlying card.
-	CardLastFour *string `json:"card_last_four,omitempty"`
+	CardLastFour NullableString `json:"card_last_four,omitempty"`
 	// Expiration date of underlying card.
-	CardExpirationDate *string `json:"card_expiration_date,omitempty"`
+	CardExpirationDate NullableString `json:"card_expiration_date,omitempty"`
 	// Card type.
-	CardType *string `json:"card_type,omitempty"`
+	CardType NullableString `json:"card_type,omitempty"`
 	// Address line 1.
 	BillingLine1 NullableString `json:"billing_line1,omitempty"`
 	// Address line 2.
@@ -270,132 +270,172 @@ func (o *DigitalWalletClickToPayTokenDecryptedContext) UnsetCardholderName() {
 	o.CardholderName.Unset()
 }
 
-// GetCardBin returns the CardBin field value if set, zero value otherwise.
+// GetCardBin returns the CardBin field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardBin() string {
-	if o == nil || o.CardBin == nil {
+	if o == nil || o.CardBin.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CardBin
+	return *o.CardBin.Get()
 }
 
 // GetCardBinOk returns a tuple with the CardBin field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardBinOk() (*string, bool) {
-	if o == nil || o.CardBin == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.CardBin, true
+	return o.CardBin.Get(), o.CardBin.IsSet()
 }
 
 // HasCardBin returns a boolean if a field has been set.
 func (o *DigitalWalletClickToPayTokenDecryptedContext) HasCardBin() bool {
-	if o != nil && o.CardBin != nil {
+	if o != nil && o.CardBin.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCardBin gets a reference to the given string and assigns it to the CardBin field.
+// SetCardBin gets a reference to the given NullableString and assigns it to the CardBin field.
 func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardBin(v string) {
-	o.CardBin = &v
+	o.CardBin.Set(&v)
+}
+// SetCardBinNil sets the value for CardBin to be an explicit nil
+func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardBinNil() {
+	o.CardBin.Set(nil)
 }
 
-// GetCardLastFour returns the CardLastFour field value if set, zero value otherwise.
+// UnsetCardBin ensures that no value is present for CardBin, not even an explicit nil
+func (o *DigitalWalletClickToPayTokenDecryptedContext) UnsetCardBin() {
+	o.CardBin.Unset()
+}
+
+// GetCardLastFour returns the CardLastFour field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardLastFour() string {
-	if o == nil || o.CardLastFour == nil {
+	if o == nil || o.CardLastFour.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CardLastFour
+	return *o.CardLastFour.Get()
 }
 
 // GetCardLastFourOk returns a tuple with the CardLastFour field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardLastFourOk() (*string, bool) {
-	if o == nil || o.CardLastFour == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.CardLastFour, true
+	return o.CardLastFour.Get(), o.CardLastFour.IsSet()
 }
 
 // HasCardLastFour returns a boolean if a field has been set.
 func (o *DigitalWalletClickToPayTokenDecryptedContext) HasCardLastFour() bool {
-	if o != nil && o.CardLastFour != nil {
+	if o != nil && o.CardLastFour.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCardLastFour gets a reference to the given string and assigns it to the CardLastFour field.
+// SetCardLastFour gets a reference to the given NullableString and assigns it to the CardLastFour field.
 func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardLastFour(v string) {
-	o.CardLastFour = &v
+	o.CardLastFour.Set(&v)
+}
+// SetCardLastFourNil sets the value for CardLastFour to be an explicit nil
+func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardLastFourNil() {
+	o.CardLastFour.Set(nil)
 }
 
-// GetCardExpirationDate returns the CardExpirationDate field value if set, zero value otherwise.
+// UnsetCardLastFour ensures that no value is present for CardLastFour, not even an explicit nil
+func (o *DigitalWalletClickToPayTokenDecryptedContext) UnsetCardLastFour() {
+	o.CardLastFour.Unset()
+}
+
+// GetCardExpirationDate returns the CardExpirationDate field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardExpirationDate() string {
-	if o == nil || o.CardExpirationDate == nil {
+	if o == nil || o.CardExpirationDate.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CardExpirationDate
+	return *o.CardExpirationDate.Get()
 }
 
 // GetCardExpirationDateOk returns a tuple with the CardExpirationDate field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardExpirationDateOk() (*string, bool) {
-	if o == nil || o.CardExpirationDate == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.CardExpirationDate, true
+	return o.CardExpirationDate.Get(), o.CardExpirationDate.IsSet()
 }
 
 // HasCardExpirationDate returns a boolean if a field has been set.
 func (o *DigitalWalletClickToPayTokenDecryptedContext) HasCardExpirationDate() bool {
-	if o != nil && o.CardExpirationDate != nil {
+	if o != nil && o.CardExpirationDate.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCardExpirationDate gets a reference to the given string and assigns it to the CardExpirationDate field.
+// SetCardExpirationDate gets a reference to the given NullableString and assigns it to the CardExpirationDate field.
 func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardExpirationDate(v string) {
-	o.CardExpirationDate = &v
+	o.CardExpirationDate.Set(&v)
+}
+// SetCardExpirationDateNil sets the value for CardExpirationDate to be an explicit nil
+func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardExpirationDateNil() {
+	o.CardExpirationDate.Set(nil)
 }
 
-// GetCardType returns the CardType field value if set, zero value otherwise.
+// UnsetCardExpirationDate ensures that no value is present for CardExpirationDate, not even an explicit nil
+func (o *DigitalWalletClickToPayTokenDecryptedContext) UnsetCardExpirationDate() {
+	o.CardExpirationDate.Unset()
+}
+
+// GetCardType returns the CardType field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardType() string {
-	if o == nil || o.CardType == nil {
+	if o == nil || o.CardType.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CardType
+	return *o.CardType.Get()
 }
 
 // GetCardTypeOk returns a tuple with the CardType field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardTypeOk() (*string, bool) {
-	if o == nil || o.CardType == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.CardType, true
+	return o.CardType.Get(), o.CardType.IsSet()
 }
 
 // HasCardType returns a boolean if a field has been set.
 func (o *DigitalWalletClickToPayTokenDecryptedContext) HasCardType() bool {
-	if o != nil && o.CardType != nil {
+	if o != nil && o.CardType.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCardType gets a reference to the given string and assigns it to the CardType field.
+// SetCardType gets a reference to the given NullableString and assigns it to the CardType field.
 func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardType(v string) {
-	o.CardType = &v
+	o.CardType.Set(&v)
+}
+// SetCardTypeNil sets the value for CardType to be an explicit nil
+func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardTypeNil() {
+	o.CardType.Set(nil)
+}
+
+// UnsetCardType ensures that no value is present for CardType, not even an explicit nil
+func (o *DigitalWalletClickToPayTokenDecryptedContext) UnsetCardType() {
+	o.CardType.Unset()
 }
 
 // GetBillingLine1 returns the BillingLine1 field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -670,17 +710,17 @@ func (o DigitalWalletClickToPayTokenDecryptedContext) MarshalJSON() ([]byte, err
 	if o.CardholderName.IsSet() {
 		toSerialize["cardholder_name"] = o.CardholderName.Get()
 	}
-	if o.CardBin != nil {
-		toSerialize["card_bin"] = o.CardBin
+	if o.CardBin.IsSet() {
+		toSerialize["card_bin"] = o.CardBin.Get()
 	}
-	if o.CardLastFour != nil {
-		toSerialize["card_last_four"] = o.CardLastFour
+	if o.CardLastFour.IsSet() {
+		toSerialize["card_last_four"] = o.CardLastFour.Get()
 	}
-	if o.CardExpirationDate != nil {
-		toSerialize["card_expiration_date"] = o.CardExpirationDate
+	if o.CardExpirationDate.IsSet() {
+		toSerialize["card_expiration_date"] = o.CardExpirationDate.Get()
 	}
-	if o.CardType != nil {
-		toSerialize["card_type"] = o.CardType
+	if o.CardType.IsSet() {
+		toSerialize["card_type"] = o.CardType.Get()
 	}
 	if o.BillingLine1.IsSet() {
 		toSerialize["billing_line1"] = o.BillingLine1.Get()

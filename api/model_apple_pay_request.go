@@ -21,6 +21,12 @@ type ApplePayRequest struct {
 	Method string `json:"method"`
 	// The encrypted (opaque) token that was passed to the `onpaymentauthorized` callback by the Apple Pay integration.
 	Token map[string]interface{} `json:"token"`
+	// Last 4 digits of the PAN for identification purposes.
+	CardSuffix NullableString `json:"card_suffix,omitempty"`
+	// The scheme/brand of the card.
+	CardScheme NullableString `json:"card_scheme,omitempty"`
+	// The type of card.
+	CardType NullableString `json:"card_type,omitempty"`
 }
 
 // NewApplePayRequest instantiates a new ApplePayRequest object
@@ -90,6 +96,132 @@ func (o *ApplePayRequest) SetToken(v map[string]interface{}) {
 	o.Token = v
 }
 
+// GetCardSuffix returns the CardSuffix field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ApplePayRequest) GetCardSuffix() string {
+	if o == nil || o.CardSuffix.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardSuffix.Get()
+}
+
+// GetCardSuffixOk returns a tuple with the CardSuffix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ApplePayRequest) GetCardSuffixOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CardSuffix.Get(), o.CardSuffix.IsSet()
+}
+
+// HasCardSuffix returns a boolean if a field has been set.
+func (o *ApplePayRequest) HasCardSuffix() bool {
+	if o != nil && o.CardSuffix.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCardSuffix gets a reference to the given NullableString and assigns it to the CardSuffix field.
+func (o *ApplePayRequest) SetCardSuffix(v string) {
+	o.CardSuffix.Set(&v)
+}
+// SetCardSuffixNil sets the value for CardSuffix to be an explicit nil
+func (o *ApplePayRequest) SetCardSuffixNil() {
+	o.CardSuffix.Set(nil)
+}
+
+// UnsetCardSuffix ensures that no value is present for CardSuffix, not even an explicit nil
+func (o *ApplePayRequest) UnsetCardSuffix() {
+	o.CardSuffix.Unset()
+}
+
+// GetCardScheme returns the CardScheme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ApplePayRequest) GetCardScheme() string {
+	if o == nil || o.CardScheme.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardScheme.Get()
+}
+
+// GetCardSchemeOk returns a tuple with the CardScheme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ApplePayRequest) GetCardSchemeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CardScheme.Get(), o.CardScheme.IsSet()
+}
+
+// HasCardScheme returns a boolean if a field has been set.
+func (o *ApplePayRequest) HasCardScheme() bool {
+	if o != nil && o.CardScheme.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCardScheme gets a reference to the given NullableString and assigns it to the CardScheme field.
+func (o *ApplePayRequest) SetCardScheme(v string) {
+	o.CardScheme.Set(&v)
+}
+// SetCardSchemeNil sets the value for CardScheme to be an explicit nil
+func (o *ApplePayRequest) SetCardSchemeNil() {
+	o.CardScheme.Set(nil)
+}
+
+// UnsetCardScheme ensures that no value is present for CardScheme, not even an explicit nil
+func (o *ApplePayRequest) UnsetCardScheme() {
+	o.CardScheme.Unset()
+}
+
+// GetCardType returns the CardType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ApplePayRequest) GetCardType() string {
+	if o == nil || o.CardType.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardType.Get()
+}
+
+// GetCardTypeOk returns a tuple with the CardType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ApplePayRequest) GetCardTypeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CardType.Get(), o.CardType.IsSet()
+}
+
+// HasCardType returns a boolean if a field has been set.
+func (o *ApplePayRequest) HasCardType() bool {
+	if o != nil && o.CardType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCardType gets a reference to the given NullableString and assigns it to the CardType field.
+func (o *ApplePayRequest) SetCardType(v string) {
+	o.CardType.Set(&v)
+}
+// SetCardTypeNil sets the value for CardType to be an explicit nil
+func (o *ApplePayRequest) SetCardTypeNil() {
+	o.CardType.Set(nil)
+}
+
+// UnsetCardType ensures that no value is present for CardType, not even an explicit nil
+func (o *ApplePayRequest) UnsetCardType() {
+	o.CardType.Unset()
+}
+
 func (o ApplePayRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -97,6 +229,15 @@ func (o ApplePayRequest) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["token"] = o.Token
+	}
+	if o.CardSuffix.IsSet() {
+		toSerialize["card_suffix"] = o.CardSuffix.Get()
+	}
+	if o.CardScheme.IsSet() {
+		toSerialize["card_scheme"] = o.CardScheme.Get()
+	}
+	if o.CardType.IsSet() {
+		toSerialize["card_type"] = o.CardType.Get()
 	}
 	return json.Marshal(toSerialize)
 }

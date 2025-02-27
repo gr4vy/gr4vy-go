@@ -32,6 +32,8 @@ type Refund struct {
 	Currency *string `json:"currency,omitempty"`
 	// The amount requested for this refund.
 	Amount *int32 `json:"amount,omitempty"`
+	// The reason for this refund. Could be a multiline string.
+	Reason NullableString `json:"reason,omitempty"`
 	// The date and time when this refund was created.
 	CreatedAt *time.Time `json:"created_at,omitempty"`
 	// The date and time when this refund was last updated.
@@ -40,6 +42,14 @@ type Refund struct {
 	TargetType *string `json:"target_type,omitempty"`
 	// The optional ID of the instrument that was refunded. This may be `null` if the instrument was not stored.
 	TargetId NullableString `json:"target_id,omitempty"`
+	// An external identifier that can be used to match the refund against your own records.
+	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
+	// The base62 encoded refund ID. This represents a shorter version of this refund's `id` which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service's refund against our system.
+	ReconciliationId *string `json:"reconciliation_id,omitempty"`
+	// The external identifier of the related transaction.
+	TransactionExternalIdentifier NullableString `json:"transaction_external_identifier,omitempty"`
+	// The base62 encoded transaction ID. This represents a shorter version of the related transaction's `id` which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service's transaction against our system.
+	TransactionReconciliationId *string `json:"transaction_reconciliation_id,omitempty"`
 }
 
 // NewRefund instantiates a new Refund object
@@ -48,6 +58,8 @@ type Refund struct {
 // will change when the set of required properties is changed
 func NewRefund() *Refund {
 	this := Refund{}
+	var reason string = "null"
+	this.Reason = *NewNullableString(&reason)
 	return &this
 }
 
@@ -56,6 +68,8 @@ func NewRefund() *Refund {
 // but it doesn't guarantee that properties required by API are set
 func NewRefundWithDefaults() *Refund {
 	this := Refund{}
+	var reason string = "null"
+	this.Reason = *NewNullableString(&reason)
 	return &this
 }
 
@@ -283,6 +297,48 @@ func (o *Refund) SetAmount(v int32) {
 	o.Amount = &v
 }
 
+// GetReason returns the Reason field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Refund) GetReason() string {
+	if o == nil || o.Reason.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Reason.Get()
+}
+
+// GetReasonOk returns a tuple with the Reason field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Refund) GetReasonOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Reason.Get(), o.Reason.IsSet()
+}
+
+// HasReason returns a boolean if a field has been set.
+func (o *Refund) HasReason() bool {
+	if o != nil && o.Reason.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetReason gets a reference to the given NullableString and assigns it to the Reason field.
+func (o *Refund) SetReason(v string) {
+	o.Reason.Set(&v)
+}
+// SetReasonNil sets the value for Reason to be an explicit nil
+func (o *Refund) SetReasonNil() {
+	o.Reason.Set(nil)
+}
+
+// UnsetReason ensures that no value is present for Reason, not even an explicit nil
+func (o *Refund) UnsetReason() {
+	o.Reason.Unset()
+}
+
 // GetCreatedAt returns the CreatedAt field value if set, zero value otherwise.
 func (o *Refund) GetCreatedAt() time.Time {
 	if o == nil || o.CreatedAt == nil {
@@ -421,6 +477,154 @@ func (o *Refund) UnsetTargetId() {
 	o.TargetId.Unset()
 }
 
+// GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Refund) GetExternalIdentifier() string {
+	if o == nil || o.ExternalIdentifier.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ExternalIdentifier.Get()
+}
+
+// GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Refund) GetExternalIdentifierOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ExternalIdentifier.Get(), o.ExternalIdentifier.IsSet()
+}
+
+// HasExternalIdentifier returns a boolean if a field has been set.
+func (o *Refund) HasExternalIdentifier() bool {
+	if o != nil && o.ExternalIdentifier.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetExternalIdentifier gets a reference to the given NullableString and assigns it to the ExternalIdentifier field.
+func (o *Refund) SetExternalIdentifier(v string) {
+	o.ExternalIdentifier.Set(&v)
+}
+// SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
+func (o *Refund) SetExternalIdentifierNil() {
+	o.ExternalIdentifier.Set(nil)
+}
+
+// UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
+func (o *Refund) UnsetExternalIdentifier() {
+	o.ExternalIdentifier.Unset()
+}
+
+// GetReconciliationId returns the ReconciliationId field value if set, zero value otherwise.
+func (o *Refund) GetReconciliationId() string {
+	if o == nil || o.ReconciliationId == nil {
+		var ret string
+		return ret
+	}
+	return *o.ReconciliationId
+}
+
+// GetReconciliationIdOk returns a tuple with the ReconciliationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Refund) GetReconciliationIdOk() (*string, bool) {
+	if o == nil || o.ReconciliationId == nil {
+		return nil, false
+	}
+	return o.ReconciliationId, true
+}
+
+// HasReconciliationId returns a boolean if a field has been set.
+func (o *Refund) HasReconciliationId() bool {
+	if o != nil && o.ReconciliationId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReconciliationId gets a reference to the given string and assigns it to the ReconciliationId field.
+func (o *Refund) SetReconciliationId(v string) {
+	o.ReconciliationId = &v
+}
+
+// GetTransactionExternalIdentifier returns the TransactionExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Refund) GetTransactionExternalIdentifier() string {
+	if o == nil || o.TransactionExternalIdentifier.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.TransactionExternalIdentifier.Get()
+}
+
+// GetTransactionExternalIdentifierOk returns a tuple with the TransactionExternalIdentifier field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Refund) GetTransactionExternalIdentifierOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.TransactionExternalIdentifier.Get(), o.TransactionExternalIdentifier.IsSet()
+}
+
+// HasTransactionExternalIdentifier returns a boolean if a field has been set.
+func (o *Refund) HasTransactionExternalIdentifier() bool {
+	if o != nil && o.TransactionExternalIdentifier.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetTransactionExternalIdentifier gets a reference to the given NullableString and assigns it to the TransactionExternalIdentifier field.
+func (o *Refund) SetTransactionExternalIdentifier(v string) {
+	o.TransactionExternalIdentifier.Set(&v)
+}
+// SetTransactionExternalIdentifierNil sets the value for TransactionExternalIdentifier to be an explicit nil
+func (o *Refund) SetTransactionExternalIdentifierNil() {
+	o.TransactionExternalIdentifier.Set(nil)
+}
+
+// UnsetTransactionExternalIdentifier ensures that no value is present for TransactionExternalIdentifier, not even an explicit nil
+func (o *Refund) UnsetTransactionExternalIdentifier() {
+	o.TransactionExternalIdentifier.Unset()
+}
+
+// GetTransactionReconciliationId returns the TransactionReconciliationId field value if set, zero value otherwise.
+func (o *Refund) GetTransactionReconciliationId() string {
+	if o == nil || o.TransactionReconciliationId == nil {
+		var ret string
+		return ret
+	}
+	return *o.TransactionReconciliationId
+}
+
+// GetTransactionReconciliationIdOk returns a tuple with the TransactionReconciliationId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *Refund) GetTransactionReconciliationIdOk() (*string, bool) {
+	if o == nil || o.TransactionReconciliationId == nil {
+		return nil, false
+	}
+	return o.TransactionReconciliationId, true
+}
+
+// HasTransactionReconciliationId returns a boolean if a field has been set.
+func (o *Refund) HasTransactionReconciliationId() bool {
+	if o != nil && o.TransactionReconciliationId != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetTransactionReconciliationId gets a reference to the given string and assigns it to the TransactionReconciliationId field.
+func (o *Refund) SetTransactionReconciliationId(v string) {
+	o.TransactionReconciliationId = &v
+}
+
 func (o Refund) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -444,6 +648,9 @@ func (o Refund) MarshalJSON() ([]byte, error) {
 	if o.Amount != nil {
 		toSerialize["amount"] = o.Amount
 	}
+	if o.Reason.IsSet() {
+		toSerialize["reason"] = o.Reason.Get()
+	}
 	if o.CreatedAt != nil {
 		toSerialize["created_at"] = o.CreatedAt
 	}
@@ -455,6 +662,18 @@ func (o Refund) MarshalJSON() ([]byte, error) {
 	}
 	if o.TargetId.IsSet() {
 		toSerialize["target_id"] = o.TargetId.Get()
+	}
+	if o.ExternalIdentifier.IsSet() {
+		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()
+	}
+	if o.ReconciliationId != nil {
+		toSerialize["reconciliation_id"] = o.ReconciliationId
+	}
+	if o.TransactionExternalIdentifier.IsSet() {
+		toSerialize["transaction_external_identifier"] = o.TransactionExternalIdentifier.Get()
+	}
+	if o.TransactionReconciliationId != nil {
+		toSerialize["transaction_reconciliation_id"] = o.TransactionReconciliationId
 	}
 	return json.Marshal(toSerialize)
 }

@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SecurityCode** | **string** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card. | 
+**SecurityCode** | Pointer to **NullableString** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card. | [optional] 
 **PaymentServiceId** | **string** | The ID of the payment service. | 
 **RedirectUrl** | **string** | The redirect URL to redirect a buyer to after they have authorized their payment method. This only applies to payment methods that require buyer approval. | 
 
@@ -12,7 +12,7 @@ Name | Type | Description | Notes
 
 ### NewPaymentServiceTokenRequest
 
-`func NewPaymentServiceTokenRequest(securityCode string, paymentServiceId string, redirectUrl string, ) *PaymentServiceTokenRequest`
+`func NewPaymentServiceTokenRequest(paymentServiceId string, redirectUrl string, ) *PaymentServiceTokenRequest`
 
 NewPaymentServiceTokenRequest instantiates a new PaymentServiceTokenRequest object
 This constructor will assign default values to properties that have it defined,
@@ -46,7 +46,22 @@ and a boolean to check if the value has been set.
 
 SetSecurityCode sets SecurityCode field to given value.
 
+### HasSecurityCode
 
+`func (o *PaymentServiceTokenRequest) HasSecurityCode() bool`
+
+HasSecurityCode returns a boolean if a field has been set.
+
+### SetSecurityCodeNil
+
+`func (o *PaymentServiceTokenRequest) SetSecurityCodeNil(b bool)`
+
+ SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+
+### UnsetSecurityCode
+`func (o *PaymentServiceTokenRequest) UnsetSecurityCode()`
+
+UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
 ### GetPaymentServiceId
 
 `func (o *PaymentServiceTokenRequest) GetPaymentServiceId() string`

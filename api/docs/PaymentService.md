@@ -12,15 +12,17 @@ Name | Type | Description | Notes
 **CreatedAt** | Pointer to **time.Time** | The date and time when this service was created. | [optional] 
 **DisplayName** | Pointer to **string** | The custom name set for this service. | [optional] 
 **Fields** | Pointer to [**[]GiftCardServiceFields**](GiftCardServiceFields.md) | A list of fields, each containing a key-value pair for each field configured for this payment service. Fields marked as &#x60;secret&#x60; (see Payment Service Definition) are not returned. | [optional] 
+**ReportingFields** | Pointer to [**[]PaymentServiceReportingFields**](PaymentServiceReportingFields.md) | A list of fields, each containing a key-value pair for each field configured for reporting for this payment service. Fields marked as &#x60;secret&#x60; (see Payment Service Definition) are not returned. | [optional] 
 **MerchantAccountId** | Pointer to **string** | The unique ID for a merchant account. | [optional] 
-**MerchantProfile** | Pointer to [**NullableMerchantProfile**](MerchantProfile.md) | An object containing a key for each supported card scheme (Amex, Discover, Mastercard and Visa), and for each key an object with the merchant profile for this service and the corresponding scheme. | [optional] 
+**MerchantProfile** | Pointer to [**NullableMerchantProfileSummary**](MerchantProfileSummary.md) | An object containing a key for each supported card scheme (Amex, Discover, Mastercard and Visa), and for each key an object with the merchant profile for this service and the corresponding scheme. | [optional] 
 **Method** | Pointer to **string** | The payment method that this service handles. | [optional] 
 **NetworkTokensEnabled** | Pointer to **bool** | Defines if network tokens are enabled for the service. This feature can only be enabled if the payment service is set as &#x60;open_loop&#x60; and the PSP is set up to accept network tokens. | [optional] 
 **OpenLoop** | Pointer to **bool** | Defines if the service works as an open-loop service. This feature can only be enabled if the PSP is set up to accept previous scheme transaction IDs. | [optional] 
 **PaymentMethodTokenizationEnabled** | Pointer to **bool** | Defines if tokenization is enabled for the service. This feature can only be enabled if the payment service is NOT set as &#x60;open_loop&#x60; and the PSP is set up to tokenize. | [optional] [default to false]
 **PaymentServiceDefinitionId** | Pointer to **string** | The ID of the payment service definition used to create this service.  | [optional] 
+**SettlementReportingEnabled** | Pointer to **bool** | Defines if settlement reporting is enabled for the service. This feature can only be enabled if the payment service definition supports the &#x60;settlement_reporting&#x60; feature. | [optional] 
 **Status** | Pointer to **string** | The current status of this service. This will start off as pending, move to created, and might eventually move to an error status if and when the credentials are no longer valid.  | [optional] 
-**ThreeDSecureEnabled** | Pointer to **bool** | Defines if 3-D Secure is enabled for the service (can only be enabled if the payment service definition supports the &#x60;three_d_secure_hosted&#x60; feature). This does not affect pass through 3-D Secure data. | [optional] [default to false]
+**ThreeDSecureEnabled** | Pointer to **bool** | Defines if 3-D Secure is enabled for the service. This feature can only be enabled if the payment service definition supports the &#x60;three_d_secure_hosted&#x60; feature. This does not affect pass through 3-D Secure data. | [optional] [default to false]
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this service was last updated. | [optional] 
 **WebhookUrl** | Pointer to **NullableString** | The URL that needs to be configured with this payment service as the receiving endpoint for webhooks from the service to Gr4vy. Currently, Gr4vy does not yet automatically register webhooks on setup, and therefore webhooks need to be registered manually by the merchant. | [optional] 
 
@@ -243,6 +245,31 @@ SetFields sets Fields field to given value.
 
 HasFields returns a boolean if a field has been set.
 
+### GetReportingFields
+
+`func (o *PaymentService) GetReportingFields() []PaymentServiceReportingFields`
+
+GetReportingFields returns the ReportingFields field if non-nil, zero value otherwise.
+
+### GetReportingFieldsOk
+
+`func (o *PaymentService) GetReportingFieldsOk() (*[]PaymentServiceReportingFields, bool)`
+
+GetReportingFieldsOk returns a tuple with the ReportingFields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReportingFields
+
+`func (o *PaymentService) SetReportingFields(v []PaymentServiceReportingFields)`
+
+SetReportingFields sets ReportingFields field to given value.
+
+### HasReportingFields
+
+`func (o *PaymentService) HasReportingFields() bool`
+
+HasReportingFields returns a boolean if a field has been set.
+
 ### GetMerchantAccountId
 
 `func (o *PaymentService) GetMerchantAccountId() string`
@@ -270,20 +297,20 @@ HasMerchantAccountId returns a boolean if a field has been set.
 
 ### GetMerchantProfile
 
-`func (o *PaymentService) GetMerchantProfile() MerchantProfile`
+`func (o *PaymentService) GetMerchantProfile() MerchantProfileSummary`
 
 GetMerchantProfile returns the MerchantProfile field if non-nil, zero value otherwise.
 
 ### GetMerchantProfileOk
 
-`func (o *PaymentService) GetMerchantProfileOk() (*MerchantProfile, bool)`
+`func (o *PaymentService) GetMerchantProfileOk() (*MerchantProfileSummary, bool)`
 
 GetMerchantProfileOk returns a tuple with the MerchantProfile field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetMerchantProfile
 
-`func (o *PaymentService) SetMerchantProfile(v MerchantProfile)`
+`func (o *PaymentService) SetMerchantProfile(v MerchantProfileSummary)`
 
 SetMerchantProfile sets MerchantProfile field to given value.
 
@@ -427,6 +454,31 @@ SetPaymentServiceDefinitionId sets PaymentServiceDefinitionId field to given val
 `func (o *PaymentService) HasPaymentServiceDefinitionId() bool`
 
 HasPaymentServiceDefinitionId returns a boolean if a field has been set.
+
+### GetSettlementReportingEnabled
+
+`func (o *PaymentService) GetSettlementReportingEnabled() bool`
+
+GetSettlementReportingEnabled returns the SettlementReportingEnabled field if non-nil, zero value otherwise.
+
+### GetSettlementReportingEnabledOk
+
+`func (o *PaymentService) GetSettlementReportingEnabledOk() (*bool, bool)`
+
+GetSettlementReportingEnabledOk returns a tuple with the SettlementReportingEnabled field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetSettlementReportingEnabled
+
+`func (o *PaymentService) SetSettlementReportingEnabled(v bool)`
+
+SetSettlementReportingEnabled sets SettlementReportingEnabled field to given value.
+
+### HasSettlementReportingEnabled
+
+`func (o *PaymentService) HasSettlementReportingEnabled() bool`
+
+HasSettlementReportingEnabled returns a boolean if a field has been set.
 
 ### GetStatus
 

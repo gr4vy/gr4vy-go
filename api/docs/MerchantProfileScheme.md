@@ -8,8 +8,8 @@ Name | Type | Description | Notes
 **MerchantUrl** | Pointer to **string** | URL to send when calling 3DS through this scheme. | [optional] 
 **MerchantAcquirerId** | Pointer to **string** | Merchant ID to use when calling 3DS through this scheme. | [optional] 
 **MerchantName** | Pointer to **string** | Merchant name to use when calling 3DS through this scheme. | [optional] 
-**MerchantCountryCode** | Pointer to **string** | Acquirer bin to use when calling 3DS through this scheme. | [optional] 
-**MerchantCategoryCode** | Pointer to **string** | Acquirer bin to use when calling 3DS through this scheme. | [optional] 
+**MerchantCountryCode** | Pointer to **string** | Merchant country code to use when calling 3DS through this scheme. | [optional] 
+**MerchantCategoryCode** | Pointer to **string** | Merchant category code to use when calling 3DS through this scheme. | [optional] 
 
 ## Methods
 

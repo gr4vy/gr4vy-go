@@ -22,6 +22,8 @@ type CheckoutSessionPaymentMethodDetails struct {
 	CardType NullableString `json:"card_type,omitempty"`
 	// ISO 3166 two letter country code.
 	CardCountry NullableString `json:"card_country,omitempty"`
+	// The name of the card issuer.
+	CardIssuerName NullableString `json:"card_issuer_name,omitempty"`
 }
 
 // NewCheckoutSessionPaymentMethodDetails instantiates a new CheckoutSessionPaymentMethodDetails object
@@ -167,6 +169,48 @@ func (o *CheckoutSessionPaymentMethodDetails) UnsetCardCountry() {
 	o.CardCountry.Unset()
 }
 
+// GetCardIssuerName returns the CardIssuerName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CheckoutSessionPaymentMethodDetails) GetCardIssuerName() string {
+	if o == nil || o.CardIssuerName.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardIssuerName.Get()
+}
+
+// GetCardIssuerNameOk returns a tuple with the CardIssuerName field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CheckoutSessionPaymentMethodDetails) GetCardIssuerNameOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CardIssuerName.Get(), o.CardIssuerName.IsSet()
+}
+
+// HasCardIssuerName returns a boolean if a field has been set.
+func (o *CheckoutSessionPaymentMethodDetails) HasCardIssuerName() bool {
+	if o != nil && o.CardIssuerName.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCardIssuerName gets a reference to the given NullableString and assigns it to the CardIssuerName field.
+func (o *CheckoutSessionPaymentMethodDetails) SetCardIssuerName(v string) {
+	o.CardIssuerName.Set(&v)
+}
+// SetCardIssuerNameNil sets the value for CardIssuerName to be an explicit nil
+func (o *CheckoutSessionPaymentMethodDetails) SetCardIssuerNameNil() {
+	o.CardIssuerName.Set(nil)
+}
+
+// UnsetCardIssuerName ensures that no value is present for CardIssuerName, not even an explicit nil
+func (o *CheckoutSessionPaymentMethodDetails) UnsetCardIssuerName() {
+	o.CardIssuerName.Unset()
+}
+
 func (o CheckoutSessionPaymentMethodDetails) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Bin.IsSet() {
@@ -177,6 +221,9 @@ func (o CheckoutSessionPaymentMethodDetails) MarshalJSON() ([]byte, error) {
 	}
 	if o.CardCountry.IsSet() {
 		toSerialize["card_country"] = o.CardCountry.Get()
+	}
+	if o.CardIssuerName.IsSet() {
+		toSerialize["card_issuer_name"] = o.CardIssuerName.Get()
 	}
 	return json.Marshal(toSerialize)
 }

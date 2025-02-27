@@ -39,7 +39,9 @@ type TransactionPaymentMethodRequest struct {
 	Token map[string]interface{} `json:"token,omitempty"`
 	AssuranceDetails NullableGooglePayRequestAssuranceDetails `json:"assurance_details,omitempty"`
 	// Name of the card holder.
-	CardHolderName NullableString `json:"card_holder_name,omitempty"`
+	CardholderName NullableString `json:"cardholder_name,omitempty"`
+	// The cryptogram of the network token.
+	Cryptogram NullableString `json:"cryptogram,omitempty"`
 }
 
 // NewTransactionPaymentMethodRequest instantiates a new TransactionPaymentMethodRequest object
@@ -495,46 +497,88 @@ func (o *TransactionPaymentMethodRequest) UnsetAssuranceDetails() {
 	o.AssuranceDetails.Unset()
 }
 
-// GetCardHolderName returns the CardHolderName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *TransactionPaymentMethodRequest) GetCardHolderName() string {
-	if o == nil || o.CardHolderName.Get() == nil {
+// GetCardholderName returns the CardholderName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionPaymentMethodRequest) GetCardholderName() string {
+	if o == nil || o.CardholderName.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CardHolderName.Get()
+	return *o.CardholderName.Get()
 }
 
-// GetCardHolderNameOk returns a tuple with the CardHolderName field value if set, nil otherwise
+// GetCardholderNameOk returns a tuple with the CardholderName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *TransactionPaymentMethodRequest) GetCardHolderNameOk() (*string, bool) {
+func (o *TransactionPaymentMethodRequest) GetCardholderNameOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return o.CardHolderName.Get(), o.CardHolderName.IsSet()
+	return o.CardholderName.Get(), o.CardholderName.IsSet()
 }
 
-// HasCardHolderName returns a boolean if a field has been set.
-func (o *TransactionPaymentMethodRequest) HasCardHolderName() bool {
-	if o != nil && o.CardHolderName.IsSet() {
+// HasCardholderName returns a boolean if a field has been set.
+func (o *TransactionPaymentMethodRequest) HasCardholderName() bool {
+	if o != nil && o.CardholderName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCardHolderName gets a reference to the given NullableString and assigns it to the CardHolderName field.
-func (o *TransactionPaymentMethodRequest) SetCardHolderName(v string) {
-	o.CardHolderName.Set(&v)
+// SetCardholderName gets a reference to the given NullableString and assigns it to the CardholderName field.
+func (o *TransactionPaymentMethodRequest) SetCardholderName(v string) {
+	o.CardholderName.Set(&v)
 }
-// SetCardHolderNameNil sets the value for CardHolderName to be an explicit nil
-func (o *TransactionPaymentMethodRequest) SetCardHolderNameNil() {
-	o.CardHolderName.Set(nil)
+// SetCardholderNameNil sets the value for CardholderName to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetCardholderNameNil() {
+	o.CardholderName.Set(nil)
 }
 
-// UnsetCardHolderName ensures that no value is present for CardHolderName, not even an explicit nil
-func (o *TransactionPaymentMethodRequest) UnsetCardHolderName() {
-	o.CardHolderName.Unset()
+// UnsetCardholderName ensures that no value is present for CardholderName, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetCardholderName() {
+	o.CardholderName.Unset()
+}
+
+// GetCryptogram returns the Cryptogram field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionPaymentMethodRequest) GetCryptogram() string {
+	if o == nil || o.Cryptogram.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Cryptogram.Get()
+}
+
+// GetCryptogramOk returns a tuple with the Cryptogram field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionPaymentMethodRequest) GetCryptogramOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Cryptogram.Get(), o.Cryptogram.IsSet()
+}
+
+// HasCryptogram returns a boolean if a field has been set.
+func (o *TransactionPaymentMethodRequest) HasCryptogram() bool {
+	if o != nil && o.Cryptogram.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCryptogram gets a reference to the given NullableString and assigns it to the Cryptogram field.
+func (o *TransactionPaymentMethodRequest) SetCryptogram(v string) {
+	o.Cryptogram.Set(&v)
+}
+// SetCryptogramNil sets the value for Cryptogram to be an explicit nil
+func (o *TransactionPaymentMethodRequest) SetCryptogramNil() {
+	o.Cryptogram.Set(nil)
+}
+
+// UnsetCryptogram ensures that no value is present for Cryptogram, not even an explicit nil
+func (o *TransactionPaymentMethodRequest) UnsetCryptogram() {
+	o.Cryptogram.Unset()
 }
 
 func (o TransactionPaymentMethodRequest) MarshalJSON() ([]byte, error) {
@@ -572,8 +616,11 @@ func (o TransactionPaymentMethodRequest) MarshalJSON() ([]byte, error) {
 	if o.AssuranceDetails.IsSet() {
 		toSerialize["assurance_details"] = o.AssuranceDetails.Get()
 	}
-	if o.CardHolderName.IsSet() {
-		toSerialize["card_holder_name"] = o.CardHolderName.Get()
+	if o.CardholderName.IsSet() {
+		toSerialize["cardholder_name"] = o.CardholderName.Get()
+	}
+	if o.Cryptogram.IsSet() {
+		toSerialize["cryptogram"] = o.Cryptogram.Get()
 	}
 	return json.Marshal(toSerialize)
 }

@@ -7,6 +7,7 @@ Name | Type | Description | Notes
 **Bin** | Pointer to **NullableString** | First six digits of PAN. | [optional] 
 **CardType** | Pointer to **NullableString** |  | [optional] 
 **CardCountry** | Pointer to **NullableString** | ISO 3166 two letter country code. | [optional] 
+**CardIssuerName** | Pointer to **NullableString** | The name of the card issuer. | [optional] 
 
 ## Methods
 
@@ -132,6 +133,41 @@ HasCardCountry returns a boolean if a field has been set.
 `func (o *CheckoutSessionPaymentMethodDetails) UnsetCardCountry()`
 
 UnsetCardCountry ensures that no value is present for CardCountry, not even an explicit nil
+### GetCardIssuerName
+
+`func (o *CheckoutSessionPaymentMethodDetails) GetCardIssuerName() string`
+
+GetCardIssuerName returns the CardIssuerName field if non-nil, zero value otherwise.
+
+### GetCardIssuerNameOk
+
+`func (o *CheckoutSessionPaymentMethodDetails) GetCardIssuerNameOk() (*string, bool)`
+
+GetCardIssuerNameOk returns a tuple with the CardIssuerName field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardIssuerName
+
+`func (o *CheckoutSessionPaymentMethodDetails) SetCardIssuerName(v string)`
+
+SetCardIssuerName sets CardIssuerName field to given value.
+
+### HasCardIssuerName
+
+`func (o *CheckoutSessionPaymentMethodDetails) HasCardIssuerName() bool`
+
+HasCardIssuerName returns a boolean if a field has been set.
+
+### SetCardIssuerNameNil
+
+`func (o *CheckoutSessionPaymentMethodDetails) SetCardIssuerNameNil(b bool)`
+
+ SetCardIssuerNameNil sets the value for CardIssuerName to be an explicit nil
+
+### UnsetCardIssuerName
+`func (o *CheckoutSessionPaymentMethodDetails) UnsetCardIssuerName()`
+
+UnsetCardIssuerName ensures that no value is present for CardIssuerName, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

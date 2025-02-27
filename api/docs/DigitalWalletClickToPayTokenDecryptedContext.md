@@ -10,10 +10,10 @@ Name | Type | Description | Notes
 **ExpirationDate** | Pointer to **string** | Expiration of the card/token. | [optional] 
 **HasCryptogram** | Pointer to **bool** | Online payment cryptogram, as defined by 3-D Secure. | [optional] 
 **CardholderName** | Pointer to **NullableString** | The cardholder name. | [optional] 
-**CardBin** | Pointer to **string** | First six digits of underlying card. | [optional] 
-**CardLastFour** | Pointer to **string** | Last four digits of underlying card. | [optional] 
-**CardExpirationDate** | Pointer to **string** | Expiration date of underlying card. | [optional] 
-**CardType** | Pointer to **string** | Card type. | [optional] 
+**CardBin** | Pointer to **NullableString** | First six digits of underlying card. | [optional] 
+**CardLastFour** | Pointer to **NullableString** | Last four digits of underlying card. | [optional] 
+**CardExpirationDate** | Pointer to **NullableString** | Expiration date of underlying card. | [optional] 
+**CardType** | Pointer to **NullableString** | Card type. | [optional] 
 **BillingLine1** | Pointer to **NullableString** | Address line 1. | [optional] 
 **BillingLine2** | Pointer to **NullableString** | Address line 2. | [optional] 
 **BillingCity** | Pointer to **NullableString** | Address city. | [optional] 
@@ -225,6 +225,16 @@ SetCardBin sets CardBin field to given value.
 
 HasCardBin returns a boolean if a field has been set.
 
+### SetCardBinNil
+
+`func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardBinNil(b bool)`
+
+ SetCardBinNil sets the value for CardBin to be an explicit nil
+
+### UnsetCardBin
+`func (o *DigitalWalletClickToPayTokenDecryptedContext) UnsetCardBin()`
+
+UnsetCardBin ensures that no value is present for CardBin, not even an explicit nil
 ### GetCardLastFour
 
 `func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardLastFour() string`
@@ -250,6 +260,16 @@ SetCardLastFour sets CardLastFour field to given value.
 
 HasCardLastFour returns a boolean if a field has been set.
 
+### SetCardLastFourNil
+
+`func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardLastFourNil(b bool)`
+
+ SetCardLastFourNil sets the value for CardLastFour to be an explicit nil
+
+### UnsetCardLastFour
+`func (o *DigitalWalletClickToPayTokenDecryptedContext) UnsetCardLastFour()`
+
+UnsetCardLastFour ensures that no value is present for CardLastFour, not even an explicit nil
 ### GetCardExpirationDate
 
 `func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardExpirationDate() string`
@@ -275,6 +295,16 @@ SetCardExpirationDate sets CardExpirationDate field to given value.
 
 HasCardExpirationDate returns a boolean if a field has been set.
 
+### SetCardExpirationDateNil
+
+`func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardExpirationDateNil(b bool)`
+
+ SetCardExpirationDateNil sets the value for CardExpirationDate to be an explicit nil
+
+### UnsetCardExpirationDate
+`func (o *DigitalWalletClickToPayTokenDecryptedContext) UnsetCardExpirationDate()`
+
+UnsetCardExpirationDate ensures that no value is present for CardExpirationDate, not even an explicit nil
 ### GetCardType
 
 `func (o *DigitalWalletClickToPayTokenDecryptedContext) GetCardType() string`
@@ -300,6 +330,16 @@ SetCardType sets CardType field to given value.
 
 HasCardType returns a boolean if a field has been set.
 
+### SetCardTypeNil
+
+`func (o *DigitalWalletClickToPayTokenDecryptedContext) SetCardTypeNil(b bool)`
+
+ SetCardTypeNil sets the value for CardType to be an explicit nil
+
+### UnsetCardType
+`func (o *DigitalWalletClickToPayTokenDecryptedContext) UnsetCardType()`
+
+UnsetCardType ensures that no value is present for CardType, not even an explicit nil
 ### GetBillingLine1
 
 `func (o *DigitalWalletClickToPayTokenDecryptedContext) GetBillingLine1() string`

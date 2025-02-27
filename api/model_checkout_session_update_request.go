@@ -21,6 +21,8 @@ type CheckoutSessionUpdateRequest struct {
 	CartItems []CartItem `json:"cart_items,omitempty"`
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it.
 	Metadata map[string]string `json:"metadata,omitempty"`
+	// The airline addendum data which describes the airline booking associated with this transaction.
+	Airline NullableAirline `json:"airline,omitempty"`
 }
 
 // NewCheckoutSessionUpdateRequest instantiates a new CheckoutSessionUpdateRequest object
@@ -106,6 +108,48 @@ func (o *CheckoutSessionUpdateRequest) SetMetadata(v map[string]string) {
 	o.Metadata = v
 }
 
+// GetAirline returns the Airline field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CheckoutSessionUpdateRequest) GetAirline() Airline {
+	if o == nil || o.Airline.Get() == nil {
+		var ret Airline
+		return ret
+	}
+	return *o.Airline.Get()
+}
+
+// GetAirlineOk returns a tuple with the Airline field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CheckoutSessionUpdateRequest) GetAirlineOk() (*Airline, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Airline.Get(), o.Airline.IsSet()
+}
+
+// HasAirline returns a boolean if a field has been set.
+func (o *CheckoutSessionUpdateRequest) HasAirline() bool {
+	if o != nil && o.Airline.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAirline gets a reference to the given NullableAirline and assigns it to the Airline field.
+func (o *CheckoutSessionUpdateRequest) SetAirline(v Airline) {
+	o.Airline.Set(&v)
+}
+// SetAirlineNil sets the value for Airline to be an explicit nil
+func (o *CheckoutSessionUpdateRequest) SetAirlineNil() {
+	o.Airline.Set(nil)
+}
+
+// UnsetAirline ensures that no value is present for Airline, not even an explicit nil
+func (o *CheckoutSessionUpdateRequest) UnsetAirline() {
+	o.Airline.Unset()
+}
+
 func (o CheckoutSessionUpdateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.CartItems != nil {
@@ -113,6 +157,9 @@ func (o CheckoutSessionUpdateRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.Airline.IsSet() {
+		toSerialize["airline"] = o.Airline.Get()
 	}
 	return json.Marshal(toSerialize)
 }

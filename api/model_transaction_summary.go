@@ -31,7 +31,7 @@ type TransactionSummary struct {
 	// The captured amount for this transaction. This can be the full value of the `authorized_amount` or less.
 	CapturedAmount *int32 `json:"captured_amount,omitempty"`
 	// The identifier for the checkout session this transaction is associated with.
-	CheckoutSessionId *string `json:"checkout_session_id,omitempty"`
+	CheckoutSessionId NullableString `json:"checkout_session_id,omitempty"`
 	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction. 
 	Country NullableString `json:"country,omitempty"`
 	// The date and time when this transaction was created in our system.
@@ -42,15 +42,17 @@ type TransactionSummary struct {
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// The gift cards redeemed for this transaction.
 	GiftCardRedemptions *[]GiftCardRedemption `json:"gift_card_redemptions,omitempty"`
+	// The name of the instrument used to process the transaction. 
+	InstrumentType NullableString `json:"instrument_type,omitempty"`
 	// The original `intent` used when the transaction was [created](#operation/authorize-new-transaction).
 	Intent *string `json:"intent,omitempty"`
 	// The ID of the merchant account to which this transaction belongs to.
 	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
-	Method *string `json:"method,omitempty"`
+	Method NullableString `json:"method,omitempty"`
 	// The payment method used for this transaction.
-	PaymentMethod *PaymentMethodSnapshot `json:"payment_method,omitempty"`
+	PaymentMethod NullablePaymentMethodSnapshot `json:"payment_method,omitempty"`
 	// The payment service used for this transaction.
-	PaymentService *PaymentServiceSnapshot `json:"payment_service,omitempty"`
+	PaymentService NullablePaymentServiceSnapshot `json:"payment_service,omitempty"`
 	// Whether a manual review is pending.
 	PendingReview *bool `json:"pending_review,omitempty"`
 	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
@@ -65,6 +67,12 @@ type TransactionSummary struct {
 	Status *string `json:"status,omitempty"`
 	// Defines when the transaction was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// The currency of this transaction's settlement in ISO 4217 three-letter code format.
+	SettledCurrency NullableString `json:"settled_currency,omitempty"`
+	// The net amount settled for this transaction.
+	SettledAmount *int32 `json:"settled_amount,omitempty"`
+	// Indicates whether this transaction has been settled.
+	Settled *bool `json:"settled,omitempty"`
 }
 
 // NewTransactionSummary instantiates a new TransactionSummary object
@@ -286,36 +294,46 @@ func (o *TransactionSummary) SetCapturedAmount(v int32) {
 	o.CapturedAmount = &v
 }
 
-// GetCheckoutSessionId returns the CheckoutSessionId field value if set, zero value otherwise.
+// GetCheckoutSessionId returns the CheckoutSessionId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionSummary) GetCheckoutSessionId() string {
-	if o == nil || o.CheckoutSessionId == nil {
+	if o == nil || o.CheckoutSessionId.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CheckoutSessionId
+	return *o.CheckoutSessionId.Get()
 }
 
 // GetCheckoutSessionIdOk returns a tuple with the CheckoutSessionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionSummary) GetCheckoutSessionIdOk() (*string, bool) {
-	if o == nil || o.CheckoutSessionId == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.CheckoutSessionId, true
+	return o.CheckoutSessionId.Get(), o.CheckoutSessionId.IsSet()
 }
 
 // HasCheckoutSessionId returns a boolean if a field has been set.
 func (o *TransactionSummary) HasCheckoutSessionId() bool {
-	if o != nil && o.CheckoutSessionId != nil {
+	if o != nil && o.CheckoutSessionId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCheckoutSessionId gets a reference to the given string and assigns it to the CheckoutSessionId field.
+// SetCheckoutSessionId gets a reference to the given NullableString and assigns it to the CheckoutSessionId field.
 func (o *TransactionSummary) SetCheckoutSessionId(v string) {
-	o.CheckoutSessionId = &v
+	o.CheckoutSessionId.Set(&v)
+}
+// SetCheckoutSessionIdNil sets the value for CheckoutSessionId to be an explicit nil
+func (o *TransactionSummary) SetCheckoutSessionIdNil() {
+	o.CheckoutSessionId.Set(nil)
+}
+
+// UnsetCheckoutSessionId ensures that no value is present for CheckoutSessionId, not even an explicit nil
+func (o *TransactionSummary) UnsetCheckoutSessionId() {
+	o.CheckoutSessionId.Unset()
 }
 
 // GetCountry returns the Country field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -498,6 +516,48 @@ func (o *TransactionSummary) SetGiftCardRedemptions(v []GiftCardRedemption) {
 	o.GiftCardRedemptions = &v
 }
 
+// GetInstrumentType returns the InstrumentType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionSummary) GetInstrumentType() string {
+	if o == nil || o.InstrumentType.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.InstrumentType.Get()
+}
+
+// GetInstrumentTypeOk returns a tuple with the InstrumentType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionSummary) GetInstrumentTypeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.InstrumentType.Get(), o.InstrumentType.IsSet()
+}
+
+// HasInstrumentType returns a boolean if a field has been set.
+func (o *TransactionSummary) HasInstrumentType() bool {
+	if o != nil && o.InstrumentType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInstrumentType gets a reference to the given NullableString and assigns it to the InstrumentType field.
+func (o *TransactionSummary) SetInstrumentType(v string) {
+	o.InstrumentType.Set(&v)
+}
+// SetInstrumentTypeNil sets the value for InstrumentType to be an explicit nil
+func (o *TransactionSummary) SetInstrumentTypeNil() {
+	o.InstrumentType.Set(nil)
+}
+
+// UnsetInstrumentType ensures that no value is present for InstrumentType, not even an explicit nil
+func (o *TransactionSummary) UnsetInstrumentType() {
+	o.InstrumentType.Unset()
+}
+
 // GetIntent returns the Intent field value if set, zero value otherwise.
 func (o *TransactionSummary) GetIntent() string {
 	if o == nil || o.Intent == nil {
@@ -562,100 +622,130 @@ func (o *TransactionSummary) SetMerchantAccountId(v string) {
 	o.MerchantAccountId = &v
 }
 
-// GetMethod returns the Method field value if set, zero value otherwise.
+// GetMethod returns the Method field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionSummary) GetMethod() string {
-	if o == nil || o.Method == nil {
+	if o == nil || o.Method.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.Method
+	return *o.Method.Get()
 }
 
 // GetMethodOk returns a tuple with the Method field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionSummary) GetMethodOk() (*string, bool) {
-	if o == nil || o.Method == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.Method, true
+	return o.Method.Get(), o.Method.IsSet()
 }
 
 // HasMethod returns a boolean if a field has been set.
 func (o *TransactionSummary) HasMethod() bool {
-	if o != nil && o.Method != nil {
+	if o != nil && o.Method.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetMethod gets a reference to the given string and assigns it to the Method field.
+// SetMethod gets a reference to the given NullableString and assigns it to the Method field.
 func (o *TransactionSummary) SetMethod(v string) {
-	o.Method = &v
+	o.Method.Set(&v)
+}
+// SetMethodNil sets the value for Method to be an explicit nil
+func (o *TransactionSummary) SetMethodNil() {
+	o.Method.Set(nil)
 }
 
-// GetPaymentMethod returns the PaymentMethod field value if set, zero value otherwise.
+// UnsetMethod ensures that no value is present for Method, not even an explicit nil
+func (o *TransactionSummary) UnsetMethod() {
+	o.Method.Unset()
+}
+
+// GetPaymentMethod returns the PaymentMethod field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionSummary) GetPaymentMethod() PaymentMethodSnapshot {
-	if o == nil || o.PaymentMethod == nil {
+	if o == nil || o.PaymentMethod.Get() == nil {
 		var ret PaymentMethodSnapshot
 		return ret
 	}
-	return *o.PaymentMethod
+	return *o.PaymentMethod.Get()
 }
 
 // GetPaymentMethodOk returns a tuple with the PaymentMethod field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionSummary) GetPaymentMethodOk() (*PaymentMethodSnapshot, bool) {
-	if o == nil || o.PaymentMethod == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.PaymentMethod, true
+	return o.PaymentMethod.Get(), o.PaymentMethod.IsSet()
 }
 
 // HasPaymentMethod returns a boolean if a field has been set.
 func (o *TransactionSummary) HasPaymentMethod() bool {
-	if o != nil && o.PaymentMethod != nil {
+	if o != nil && o.PaymentMethod.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPaymentMethod gets a reference to the given PaymentMethodSnapshot and assigns it to the PaymentMethod field.
+// SetPaymentMethod gets a reference to the given NullablePaymentMethodSnapshot and assigns it to the PaymentMethod field.
 func (o *TransactionSummary) SetPaymentMethod(v PaymentMethodSnapshot) {
-	o.PaymentMethod = &v
+	o.PaymentMethod.Set(&v)
+}
+// SetPaymentMethodNil sets the value for PaymentMethod to be an explicit nil
+func (o *TransactionSummary) SetPaymentMethodNil() {
+	o.PaymentMethod.Set(nil)
 }
 
-// GetPaymentService returns the PaymentService field value if set, zero value otherwise.
+// UnsetPaymentMethod ensures that no value is present for PaymentMethod, not even an explicit nil
+func (o *TransactionSummary) UnsetPaymentMethod() {
+	o.PaymentMethod.Unset()
+}
+
+// GetPaymentService returns the PaymentService field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionSummary) GetPaymentService() PaymentServiceSnapshot {
-	if o == nil || o.PaymentService == nil {
+	if o == nil || o.PaymentService.Get() == nil {
 		var ret PaymentServiceSnapshot
 		return ret
 	}
-	return *o.PaymentService
+	return *o.PaymentService.Get()
 }
 
 // GetPaymentServiceOk returns a tuple with the PaymentService field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionSummary) GetPaymentServiceOk() (*PaymentServiceSnapshot, bool) {
-	if o == nil || o.PaymentService == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.PaymentService, true
+	return o.PaymentService.Get(), o.PaymentService.IsSet()
 }
 
 // HasPaymentService returns a boolean if a field has been set.
 func (o *TransactionSummary) HasPaymentService() bool {
-	if o != nil && o.PaymentService != nil {
+	if o != nil && o.PaymentService.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPaymentService gets a reference to the given PaymentServiceSnapshot and assigns it to the PaymentService field.
+// SetPaymentService gets a reference to the given NullablePaymentServiceSnapshot and assigns it to the PaymentService field.
 func (o *TransactionSummary) SetPaymentService(v PaymentServiceSnapshot) {
-	o.PaymentService = &v
+	o.PaymentService.Set(&v)
+}
+// SetPaymentServiceNil sets the value for PaymentService to be an explicit nil
+func (o *TransactionSummary) SetPaymentServiceNil() {
+	o.PaymentService.Set(nil)
+}
+
+// UnsetPaymentService ensures that no value is present for PaymentService, not even an explicit nil
+func (o *TransactionSummary) UnsetPaymentService() {
+	o.PaymentService.Unset()
 }
 
 // GetPendingReview returns the PendingReview field value if set, zero value otherwise.
@@ -902,6 +992,112 @@ func (o *TransactionSummary) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetSettledCurrency returns the SettledCurrency field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionSummary) GetSettledCurrency() string {
+	if o == nil || o.SettledCurrency.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.SettledCurrency.Get()
+}
+
+// GetSettledCurrencyOk returns a tuple with the SettledCurrency field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionSummary) GetSettledCurrencyOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.SettledCurrency.Get(), o.SettledCurrency.IsSet()
+}
+
+// HasSettledCurrency returns a boolean if a field has been set.
+func (o *TransactionSummary) HasSettledCurrency() bool {
+	if o != nil && o.SettledCurrency.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSettledCurrency gets a reference to the given NullableString and assigns it to the SettledCurrency field.
+func (o *TransactionSummary) SetSettledCurrency(v string) {
+	o.SettledCurrency.Set(&v)
+}
+// SetSettledCurrencyNil sets the value for SettledCurrency to be an explicit nil
+func (o *TransactionSummary) SetSettledCurrencyNil() {
+	o.SettledCurrency.Set(nil)
+}
+
+// UnsetSettledCurrency ensures that no value is present for SettledCurrency, not even an explicit nil
+func (o *TransactionSummary) UnsetSettledCurrency() {
+	o.SettledCurrency.Unset()
+}
+
+// GetSettledAmount returns the SettledAmount field value if set, zero value otherwise.
+func (o *TransactionSummary) GetSettledAmount() int32 {
+	if o == nil || o.SettledAmount == nil {
+		var ret int32
+		return ret
+	}
+	return *o.SettledAmount
+}
+
+// GetSettledAmountOk returns a tuple with the SettledAmount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionSummary) GetSettledAmountOk() (*int32, bool) {
+	if o == nil || o.SettledAmount == nil {
+		return nil, false
+	}
+	return o.SettledAmount, true
+}
+
+// HasSettledAmount returns a boolean if a field has been set.
+func (o *TransactionSummary) HasSettledAmount() bool {
+	if o != nil && o.SettledAmount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSettledAmount gets a reference to the given int32 and assigns it to the SettledAmount field.
+func (o *TransactionSummary) SetSettledAmount(v int32) {
+	o.SettledAmount = &v
+}
+
+// GetSettled returns the Settled field value if set, zero value otherwise.
+func (o *TransactionSummary) GetSettled() bool {
+	if o == nil || o.Settled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.Settled
+}
+
+// GetSettledOk returns a tuple with the Settled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionSummary) GetSettledOk() (*bool, bool) {
+	if o == nil || o.Settled == nil {
+		return nil, false
+	}
+	return o.Settled, true
+}
+
+// HasSettled returns a boolean if a field has been set.
+func (o *TransactionSummary) HasSettled() bool {
+	if o != nil && o.Settled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSettled gets a reference to the given bool and assigns it to the Settled field.
+func (o *TransactionSummary) SetSettled(v bool) {
+	o.Settled = &v
+}
+
 func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -922,8 +1118,8 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	if o.CapturedAmount != nil {
 		toSerialize["captured_amount"] = o.CapturedAmount
 	}
-	if o.CheckoutSessionId != nil {
-		toSerialize["checkout_session_id"] = o.CheckoutSessionId
+	if o.CheckoutSessionId.IsSet() {
+		toSerialize["checkout_session_id"] = o.CheckoutSessionId.Get()
 	}
 	if o.Country.IsSet() {
 		toSerialize["country"] = o.Country.Get()
@@ -940,20 +1136,23 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	if o.GiftCardRedemptions != nil {
 		toSerialize["gift_card_redemptions"] = o.GiftCardRedemptions
 	}
+	if o.InstrumentType.IsSet() {
+		toSerialize["instrument_type"] = o.InstrumentType.Get()
+	}
 	if o.Intent != nil {
 		toSerialize["intent"] = o.Intent
 	}
 	if o.MerchantAccountId != nil {
 		toSerialize["merchant_account_id"] = o.MerchantAccountId
 	}
-	if o.Method != nil {
-		toSerialize["method"] = o.Method
+	if o.Method.IsSet() {
+		toSerialize["method"] = o.Method.Get()
 	}
-	if o.PaymentMethod != nil {
-		toSerialize["payment_method"] = o.PaymentMethod
+	if o.PaymentMethod.IsSet() {
+		toSerialize["payment_method"] = o.PaymentMethod.Get()
 	}
-	if o.PaymentService != nil {
-		toSerialize["payment_service"] = o.PaymentService
+	if o.PaymentService.IsSet() {
+		toSerialize["payment_service"] = o.PaymentService.Get()
 	}
 	if o.PendingReview != nil {
 		toSerialize["pending_review"] = o.PendingReview
@@ -975,6 +1174,15 @@ func (o TransactionSummary) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if o.SettledCurrency.IsSet() {
+		toSerialize["settled_currency"] = o.SettledCurrency.Get()
+	}
+	if o.SettledAmount != nil {
+		toSerialize["settled_amount"] = o.SettledAmount
+	}
+	if o.Settled != nil {
+		toSerialize["settled"] = o.Settled
 	}
 	return json.Marshal(toSerialize)
 }

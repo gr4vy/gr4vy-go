@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;error&#x60;. | [optional] 
-**Code** | Pointer to **string** | &#x60;not_found&#x60;. | [optional] 
+**Code** | Pointer to **string** | The reason code for the error. | [optional] 
 **Status** | Pointer to **int32** | &#x60;404&#x60;. | [optional] 
-**Message** | Pointer to **string** | The resource could not be found. | [optional] 
+**Message** | Pointer to **string** | The human readable reason for the error. | [optional] 
 **Details** | Pointer to [**[]ErrorDetail**](ErrorDetail.md) | A list of detail objects that further clarify the reason for the error. Not every error supports more detail. | [optional] 
 
 ## Methods

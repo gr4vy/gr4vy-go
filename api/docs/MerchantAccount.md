@@ -21,6 +21,8 @@ Name | Type | Description | Notes
 **LoonAcceptedSchemes** | Pointer to **[]string** | Card schemes accepted when creating jobs using this set of Loon API keys. Loon is the Account Updater service used by Gr4vy. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this merchant account was created. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this merchant account was updated. | [optional] 
+**OverCaptureAmount** | Pointer to **NullableFloat32** | The maximum monetary amount allowed for over-capture, in the smallest currency unit, for example &#x60;1299&#x60; cents to allow for an over-capture of &#x60;$12.99&#x60;. | [optional] 
+**OverCapturePercentage** | Pointer to **NullableFloat32** | The maximum percentage allowed for over-capture, for example &#x60;25&#x60; to allow for an over-capture of 25% of the original transaction amount. | [optional] 
 
 ## Methods
 
@@ -586,6 +588,76 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 HasUpdatedAt returns a boolean if a field has been set.
 
+### GetOverCaptureAmount
+
+`func (o *MerchantAccount) GetOverCaptureAmount() float32`
+
+GetOverCaptureAmount returns the OverCaptureAmount field if non-nil, zero value otherwise.
+
+### GetOverCaptureAmountOk
+
+`func (o *MerchantAccount) GetOverCaptureAmountOk() (*float32, bool)`
+
+GetOverCaptureAmountOk returns a tuple with the OverCaptureAmount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverCaptureAmount
+
+`func (o *MerchantAccount) SetOverCaptureAmount(v float32)`
+
+SetOverCaptureAmount sets OverCaptureAmount field to given value.
+
+### HasOverCaptureAmount
+
+`func (o *MerchantAccount) HasOverCaptureAmount() bool`
+
+HasOverCaptureAmount returns a boolean if a field has been set.
+
+### SetOverCaptureAmountNil
+
+`func (o *MerchantAccount) SetOverCaptureAmountNil(b bool)`
+
+ SetOverCaptureAmountNil sets the value for OverCaptureAmount to be an explicit nil
+
+### UnsetOverCaptureAmount
+`func (o *MerchantAccount) UnsetOverCaptureAmount()`
+
+UnsetOverCaptureAmount ensures that no value is present for OverCaptureAmount, not even an explicit nil
+### GetOverCapturePercentage
+
+`func (o *MerchantAccount) GetOverCapturePercentage() float32`
+
+GetOverCapturePercentage returns the OverCapturePercentage field if non-nil, zero value otherwise.
+
+### GetOverCapturePercentageOk
+
+`func (o *MerchantAccount) GetOverCapturePercentageOk() (*float32, bool)`
+
+GetOverCapturePercentageOk returns a tuple with the OverCapturePercentage field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOverCapturePercentage
+
+`func (o *MerchantAccount) SetOverCapturePercentage(v float32)`
+
+SetOverCapturePercentage sets OverCapturePercentage field to given value.
+
+### HasOverCapturePercentage
+
+`func (o *MerchantAccount) HasOverCapturePercentage() bool`
+
+HasOverCapturePercentage returns a boolean if a field has been set.
+
+### SetOverCapturePercentageNil
+
+`func (o *MerchantAccount) SetOverCapturePercentageNil(b bool)`
+
+ SetOverCapturePercentageNil sets the value for OverCapturePercentage to be an explicit nil
+
+### UnsetOverCapturePercentage
+`func (o *MerchantAccount) UnsetOverCapturePercentage()`
+
+UnsetOverCapturePercentage ensures that no value is present for OverCapturePercentage, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

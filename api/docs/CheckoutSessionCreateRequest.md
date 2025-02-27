@@ -4,8 +4,11 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
+**ExpiresIn** | Pointer to **int32** | Defines when the checkout session will expire (in seconds). Defaults to an hour (3600 seconds). | [optional] [default to 3600]
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 **Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. | [optional] 
+**Airline** | Pointer to [**NullableAirline**](Airline.md) | The airline addendum data which describes the airline booking associated with this transaction. | [optional] 
+**Buyer** | Pointer to [**TransactionBuyerRequest**](TransactionBuyerRequest.md) |  | [optional] 
 
 ## Methods
 
@@ -25,6 +28,31 @@ will change when the set of required properties is changed
 NewCheckoutSessionCreateRequestWithDefaults instantiates a new CheckoutSessionCreateRequest object
 This constructor will only assign default values to properties that have it defined,
 but it doesn't guarantee that properties required by API are set
+
+### GetExpiresIn
+
+`func (o *CheckoutSessionCreateRequest) GetExpiresIn() int32`
+
+GetExpiresIn returns the ExpiresIn field if non-nil, zero value otherwise.
+
+### GetExpiresInOk
+
+`func (o *CheckoutSessionCreateRequest) GetExpiresInOk() (*int32, bool)`
+
+GetExpiresInOk returns a tuple with the ExpiresIn field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExpiresIn
+
+`func (o *CheckoutSessionCreateRequest) SetExpiresIn(v int32)`
+
+SetExpiresIn sets ExpiresIn field to given value.
+
+### HasExpiresIn
+
+`func (o *CheckoutSessionCreateRequest) HasExpiresIn() bool`
+
+HasExpiresIn returns a boolean if a field has been set.
 
 ### GetCartItems
 
@@ -96,6 +124,66 @@ HasMetadata returns a boolean if a field has been set.
 `func (o *CheckoutSessionCreateRequest) UnsetMetadata()`
 
 UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
+### GetAirline
+
+`func (o *CheckoutSessionCreateRequest) GetAirline() Airline`
+
+GetAirline returns the Airline field if non-nil, zero value otherwise.
+
+### GetAirlineOk
+
+`func (o *CheckoutSessionCreateRequest) GetAirlineOk() (*Airline, bool)`
+
+GetAirlineOk returns a tuple with the Airline field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAirline
+
+`func (o *CheckoutSessionCreateRequest) SetAirline(v Airline)`
+
+SetAirline sets Airline field to given value.
+
+### HasAirline
+
+`func (o *CheckoutSessionCreateRequest) HasAirline() bool`
+
+HasAirline returns a boolean if a field has been set.
+
+### SetAirlineNil
+
+`func (o *CheckoutSessionCreateRequest) SetAirlineNil(b bool)`
+
+ SetAirlineNil sets the value for Airline to be an explicit nil
+
+### UnsetAirline
+`func (o *CheckoutSessionCreateRequest) UnsetAirline()`
+
+UnsetAirline ensures that no value is present for Airline, not even an explicit nil
+### GetBuyer
+
+`func (o *CheckoutSessionCreateRequest) GetBuyer() TransactionBuyerRequest`
+
+GetBuyer returns the Buyer field if non-nil, zero value otherwise.
+
+### GetBuyerOk
+
+`func (o *CheckoutSessionCreateRequest) GetBuyerOk() (*TransactionBuyerRequest, bool)`
+
+GetBuyerOk returns a tuple with the Buyer field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetBuyer
+
+`func (o *CheckoutSessionCreateRequest) SetBuyer(v TransactionBuyerRequest)`
+
+SetBuyer sets Buyer field to given value.
+
+### HasBuyer
+
+`func (o *CheckoutSessionCreateRequest) HasBuyer() bool`
+
+HasBuyer returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

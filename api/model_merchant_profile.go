@@ -19,10 +19,16 @@ import (
 type MerchantProfile struct {
 	// Merchant profile for Amex.
 	Amex NullableMerchantProfileScheme `json:"amex,omitempty"`
+	// Merchant profile for Dankort.
+	Dankort NullableMerchantProfileScheme `json:"dankort,omitempty"`
 	// Merchant profile for Discover.
 	Discover NullableMerchantProfileScheme `json:"discover,omitempty"`
+	// Merchant profile for JCB.
+	Jcb NullableMerchantProfileScheme `json:"jcb,omitempty"`
 	// Merchant profile for Mastercard.
 	Mastercard NullableMerchantProfileScheme `json:"mastercard,omitempty"`
+	// Merchant profile for UnionPay.
+	Unionpay NullableMerchantProfileScheme `json:"unionpay,omitempty"`
 	// Merchant profile for Visa.
 	Visa NullableMerchantProfileScheme `json:"visa,omitempty"`
 }
@@ -86,6 +92,48 @@ func (o *MerchantProfile) UnsetAmex() {
 	o.Amex.Unset()
 }
 
+// GetDankort returns the Dankort field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantProfile) GetDankort() MerchantProfileScheme {
+	if o == nil || o.Dankort.Get() == nil {
+		var ret MerchantProfileScheme
+		return ret
+	}
+	return *o.Dankort.Get()
+}
+
+// GetDankortOk returns a tuple with the Dankort field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantProfile) GetDankortOk() (*MerchantProfileScheme, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Dankort.Get(), o.Dankort.IsSet()
+}
+
+// HasDankort returns a boolean if a field has been set.
+func (o *MerchantProfile) HasDankort() bool {
+	if o != nil && o.Dankort.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetDankort gets a reference to the given NullableMerchantProfileScheme and assigns it to the Dankort field.
+func (o *MerchantProfile) SetDankort(v MerchantProfileScheme) {
+	o.Dankort.Set(&v)
+}
+// SetDankortNil sets the value for Dankort to be an explicit nil
+func (o *MerchantProfile) SetDankortNil() {
+	o.Dankort.Set(nil)
+}
+
+// UnsetDankort ensures that no value is present for Dankort, not even an explicit nil
+func (o *MerchantProfile) UnsetDankort() {
+	o.Dankort.Unset()
+}
+
 // GetDiscover returns the Discover field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MerchantProfile) GetDiscover() MerchantProfileScheme {
 	if o == nil || o.Discover.Get() == nil {
@@ -128,6 +176,48 @@ func (o *MerchantProfile) UnsetDiscover() {
 	o.Discover.Unset()
 }
 
+// GetJcb returns the Jcb field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantProfile) GetJcb() MerchantProfileScheme {
+	if o == nil || o.Jcb.Get() == nil {
+		var ret MerchantProfileScheme
+		return ret
+	}
+	return *o.Jcb.Get()
+}
+
+// GetJcbOk returns a tuple with the Jcb field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantProfile) GetJcbOk() (*MerchantProfileScheme, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Jcb.Get(), o.Jcb.IsSet()
+}
+
+// HasJcb returns a boolean if a field has been set.
+func (o *MerchantProfile) HasJcb() bool {
+	if o != nil && o.Jcb.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetJcb gets a reference to the given NullableMerchantProfileScheme and assigns it to the Jcb field.
+func (o *MerchantProfile) SetJcb(v MerchantProfileScheme) {
+	o.Jcb.Set(&v)
+}
+// SetJcbNil sets the value for Jcb to be an explicit nil
+func (o *MerchantProfile) SetJcbNil() {
+	o.Jcb.Set(nil)
+}
+
+// UnsetJcb ensures that no value is present for Jcb, not even an explicit nil
+func (o *MerchantProfile) UnsetJcb() {
+	o.Jcb.Unset()
+}
+
 // GetMastercard returns the Mastercard field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *MerchantProfile) GetMastercard() MerchantProfileScheme {
 	if o == nil || o.Mastercard.Get() == nil {
@@ -168,6 +258,48 @@ func (o *MerchantProfile) SetMastercardNil() {
 // UnsetMastercard ensures that no value is present for Mastercard, not even an explicit nil
 func (o *MerchantProfile) UnsetMastercard() {
 	o.Mastercard.Unset()
+}
+
+// GetUnionpay returns the Unionpay field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *MerchantProfile) GetUnionpay() MerchantProfileScheme {
+	if o == nil || o.Unionpay.Get() == nil {
+		var ret MerchantProfileScheme
+		return ret
+	}
+	return *o.Unionpay.Get()
+}
+
+// GetUnionpayOk returns a tuple with the Unionpay field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *MerchantProfile) GetUnionpayOk() (*MerchantProfileScheme, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Unionpay.Get(), o.Unionpay.IsSet()
+}
+
+// HasUnionpay returns a boolean if a field has been set.
+func (o *MerchantProfile) HasUnionpay() bool {
+	if o != nil && o.Unionpay.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetUnionpay gets a reference to the given NullableMerchantProfileScheme and assigns it to the Unionpay field.
+func (o *MerchantProfile) SetUnionpay(v MerchantProfileScheme) {
+	o.Unionpay.Set(&v)
+}
+// SetUnionpayNil sets the value for Unionpay to be an explicit nil
+func (o *MerchantProfile) SetUnionpayNil() {
+	o.Unionpay.Set(nil)
+}
+
+// UnsetUnionpay ensures that no value is present for Unionpay, not even an explicit nil
+func (o *MerchantProfile) UnsetUnionpay() {
+	o.Unionpay.Unset()
 }
 
 // GetVisa returns the Visa field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -217,11 +349,20 @@ func (o MerchantProfile) MarshalJSON() ([]byte, error) {
 	if o.Amex.IsSet() {
 		toSerialize["amex"] = o.Amex.Get()
 	}
+	if o.Dankort.IsSet() {
+		toSerialize["dankort"] = o.Dankort.Get()
+	}
 	if o.Discover.IsSet() {
 		toSerialize["discover"] = o.Discover.Get()
 	}
+	if o.Jcb.IsSet() {
+		toSerialize["jcb"] = o.Jcb.Get()
+	}
 	if o.Mastercard.IsSet() {
 		toSerialize["mastercard"] = o.Mastercard.Get()
+	}
+	if o.Unionpay.IsSet() {
+		toSerialize["unionpay"] = o.Unionpay.Get()
 	}
 	if o.Visa.IsSet() {
 		toSerialize["visa"] = o.Visa.Get()

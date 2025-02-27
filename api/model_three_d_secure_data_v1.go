@@ -19,12 +19,14 @@ import (
 type ThreeDSecureDataV1 struct {
 	// The cardholder authentication value or AAV.
 	Cavv string `json:"cavv"`
-	// The electronic commerce indicator for the 3DS transaction.
+	// The ecommerce indicator for the 3DS transaction.
 	Eci string `json:"eci"`
 	// The version of 3-D Secure that was used.
 	Version string `json:"version"`
 	// For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the `ARes`.
 	DirectoryResponse string `json:"directory_response"`
+	// The scheme/brand of the card that is used for 3-D Secure.
+	Scheme NullableString `json:"scheme,omitempty"`
 	// The response for the 3DS authentication call.
 	AuthenticationResponse string `json:"authentication_response"`
 	// The CAVV algorithm used.
@@ -153,6 +155,48 @@ func (o *ThreeDSecureDataV1) SetDirectoryResponse(v string) {
 	o.DirectoryResponse = v
 }
 
+// GetScheme returns the Scheme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ThreeDSecureDataV1) GetScheme() string {
+	if o == nil || o.Scheme.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Scheme.Get()
+}
+
+// GetSchemeOk returns a tuple with the Scheme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ThreeDSecureDataV1) GetSchemeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Scheme.Get(), o.Scheme.IsSet()
+}
+
+// HasScheme returns a boolean if a field has been set.
+func (o *ThreeDSecureDataV1) HasScheme() bool {
+	if o != nil && o.Scheme.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetScheme gets a reference to the given NullableString and assigns it to the Scheme field.
+func (o *ThreeDSecureDataV1) SetScheme(v string) {
+	o.Scheme.Set(&v)
+}
+// SetSchemeNil sets the value for Scheme to be an explicit nil
+func (o *ThreeDSecureDataV1) SetSchemeNil() {
+	o.Scheme.Set(nil)
+}
+
+// UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
+func (o *ThreeDSecureDataV1) UnsetScheme() {
+	o.Scheme.Unset()
+}
+
 // GetAuthenticationResponse returns the AuthenticationResponse field value
 func (o *ThreeDSecureDataV1) GetAuthenticationResponse() string {
 	if o == nil {
@@ -238,6 +282,9 @@ func (o ThreeDSecureDataV1) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["directory_response"] = o.DirectoryResponse
+	}
+	if o.Scheme.IsSet() {
+		toSerialize["scheme"] = o.Scheme.Get()
 	}
 	if true {
 		toSerialize["authentication_response"] = o.AuthenticationResponse

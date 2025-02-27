@@ -308,7 +308,7 @@ func TestStorePaymentMethod(t *testing.T) {
 	req := Gr4vyPaymentMethodRequest{
 		Method:         "card",
 		Number:         StringPtr("4111111111111111"),
-		ExpirationDate: StringPtr("12/24"),
+		ExpirationDate: StringPtr("12/25"),
 	}
 
 	var response *Gr4vyPaymentMethod
@@ -640,7 +640,7 @@ func TestAuthorizeNewTransaction(t *testing.T) {
 	paymentMethod := Gr4vyTransactionPaymentMethodRequest{
 		Method:         "card",
 		Number:         Gr4vyNullableString("4111111111111111"),
-		ExpirationDate: Gr4vyNullableString("12/24"),
+		ExpirationDate: Gr4vyNullableString("12/25"),
 		SecurityCode:   Gr4vyNullableString("123"),
 	}
 

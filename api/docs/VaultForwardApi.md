@@ -10,7 +10,7 @@ Method | HTTP request | Description
 
 ## MakeVaultForward
 
-> string MakeVaultForward(ctx).XVaultForwardPaymentMethods(xVaultForwardPaymentMethods).XVaultForwardUrl(xVaultForwardUrl).XVaultForwardHttpMethod(xVaultForwardHttpMethod).XVaultForwardHeaderHEADERNAME(xVaultForwardHeaderHEADERNAME).XVaultForwardTimeout(xVaultForwardTimeout).Body(body).Execute()
+> string MakeVaultForward(ctx).XVaultForwardPaymentMethods(xVaultForwardPaymentMethods).XVaultForwardCheckoutSession(xVaultForwardCheckoutSession).XVaultForwardUrl(xVaultForwardUrl).XVaultForwardHttpMethod(xVaultForwardHttpMethod).XVaultForwardAuthentications(xVaultForwardAuthentications).XVaultForwardHeaderHEADERNAME(xVaultForwardHeaderHEADERNAME).XVaultForwardTimeout(xVaultForwardTimeout).Body(body).Execute()
 
 Forward PCI data
 
@@ -30,8 +30,10 @@ import (
 
 func main() {
     xVaultForwardPaymentMethods := "faaad066-30b4-4997-a438-242b0752d7e1,faaad066-30b4-4997-a438-242b0752d7e2" // string | A comma-separated list of Payment Method IDs that can be used to fill in the request template. At least 1 must be given, and a maximum of 100 are accepted.
+    xVaultForwardCheckoutSession := "faaad066-30b4-4997-a438-242b0752d7e2" // string | A Checkout Session IDs that can be used to fill in the request template. At most 1 can be provided.
     xVaultForwardUrl := "https://api.amadeus.com/booking" // string | The URL to forward card data to.
     xVaultForwardHttpMethod := "POST" // string | The HTTP method that is used when forwarding the request to the `x-vault-forward-url`.
+    xVaultForwardAuthentications := "faaad066-30b4-4997-a438-242b0752d7e1,faaad066-30b4-4997-a438-242b0752d7e2" // string | A comma-separated list of IDs for the authentication methods that will be applied to a Vault Forward request. (optional)
     xVaultForwardHeaderHEADERNAME := "x-vault-forward-header-x-frame-options" // string | A header that is forwarded to the `x-vault-forward-url`. The header will be forwarded without the `x-vault-forward-header` part. For example, `x-vault-forward-header-x-frame-options: SAMEORIGIN` is forwarded as `x-frame-options: SAMEORIGIN`. (optional)
     xVaultForwardTimeout := int32(10) // int32 | The number of seconds to wait before timing out when forwarding the request. (optional) (default to 30)
     body := "{
@@ -42,7 +44,7 @@ func main() {
 
     configuration := openapiclient.NewConfiguration()
     api_client := openapiclient.NewAPIClient(configuration)
-    resp, r, err := api_client.VaultForwardApi.MakeVaultForward(context.Background()).XVaultForwardPaymentMethods(xVaultForwardPaymentMethods).XVaultForwardUrl(xVaultForwardUrl).XVaultForwardHttpMethod(xVaultForwardHttpMethod).XVaultForwardHeaderHEADERNAME(xVaultForwardHeaderHEADERNAME).XVaultForwardTimeout(xVaultForwardTimeout).Body(body).Execute()
+    resp, r, err := api_client.VaultForwardApi.MakeVaultForward(context.Background()).XVaultForwardPaymentMethods(xVaultForwardPaymentMethods).XVaultForwardCheckoutSession(xVaultForwardCheckoutSession).XVaultForwardUrl(xVaultForwardUrl).XVaultForwardHttpMethod(xVaultForwardHttpMethod).XVaultForwardAuthentications(xVaultForwardAuthentications).XVaultForwardHeaderHEADERNAME(xVaultForwardHeaderHEADERNAME).XVaultForwardTimeout(xVaultForwardTimeout).Body(body).Execute()
     if err != nil {
         fmt.Fprintf(os.Stderr, "Error when calling `VaultForwardApi.MakeVaultForward``: %v\n", err)
         fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
@@ -64,8 +66,10 @@ Other parameters are passed through a pointer to a apiMakeVaultForwardRequest st
 Name | Type | Description  | Notes
 ------------- | ------------- | ------------- | -------------
  **xVaultForwardPaymentMethods** | **string** | A comma-separated list of Payment Method IDs that can be used to fill in the request template. At least 1 must be given, and a maximum of 100 are accepted. | 
+ **xVaultForwardCheckoutSession** | **string** | A Checkout Session IDs that can be used to fill in the request template. At most 1 can be provided. | 
  **xVaultForwardUrl** | **string** | The URL to forward card data to. | 
  **xVaultForwardHttpMethod** | **string** | The HTTP method that is used when forwarding the request to the &#x60;x-vault-forward-url&#x60;. | 
+ **xVaultForwardAuthentications** | **string** | A comma-separated list of IDs for the authentication methods that will be applied to a Vault Forward request. | 
  **xVaultForwardHeaderHEADERNAME** | **string** | A header that is forwarded to the &#x60;x-vault-forward-url&#x60;. The header will be forwarded without the &#x60;x-vault-forward-header&#x60; part. For example, &#x60;x-vault-forward-header-x-frame-options: SAMEORIGIN&#x60; is forwarded as &#x60;x-frame-options: SAMEORIGIN&#x60;. | 
  **xVaultForwardTimeout** | **int32** | The number of seconds to wait before timing out when forwarding the request. | [default to 30]
  **body** | **string** | Payload to forward in the request. | 
@@ -76,7 +80,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
