@@ -5,7 +5,8 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **MetaKeyMerchantId** | Pointer to **NullableString** | An override for the merchant ID configured for the connector, used in combination with meta keys. | [optional] 
-**MerchantDefinedData** | Pointer to **map[string]string** | This is a key-value object for merchant defined data. Each key needs to be a numeric string identifying the MDD field to set. For example, for field 1 set the key to \&quot;1\&quot;. | [optional] 
+**MerchantDefinedData** | Pointer to **map[string]string** | This is a key-value object for merchant defined data. Each key needs to be a numeric string identifying the MDD field to set. For example, for field 1 set the key to \&quot;1\&quot;.  Please avoid fields \&quot;31\&quot;, \&quot;48\&quot;, \&quot;50\&quot;-\&quot;56\&quot; and \&quot;63\&quot;-\&quot;76\&quot; as these are auto-populated based on the transaction profile. | [optional] 
+**ShippingMethod** | Pointer to **NullableString** | Shipping method for the order. | [optional] 
 
 ## Methods
 
@@ -86,6 +87,41 @@ SetMerchantDefinedData sets MerchantDefinedData field to given value.
 
 HasMerchantDefinedData returns a boolean if a field has been set.
 
+### GetShippingMethod
+
+`func (o *ConnectionOptionsCybersourceAntiFraud) GetShippingMethod() string`
+
+GetShippingMethod returns the ShippingMethod field if non-nil, zero value otherwise.
+
+### GetShippingMethodOk
+
+`func (o *ConnectionOptionsCybersourceAntiFraud) GetShippingMethodOk() (*string, bool)`
+
+GetShippingMethodOk returns a tuple with the ShippingMethod field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetShippingMethod
+
+`func (o *ConnectionOptionsCybersourceAntiFraud) SetShippingMethod(v string)`
+
+SetShippingMethod sets ShippingMethod field to given value.
+
+### HasShippingMethod
+
+`func (o *ConnectionOptionsCybersourceAntiFraud) HasShippingMethod() bool`
+
+HasShippingMethod returns a boolean if a field has been set.
+
+### SetShippingMethodNil
+
+`func (o *ConnectionOptionsCybersourceAntiFraud) SetShippingMethodNil(b bool)`
+
+ SetShippingMethodNil sets the value for ShippingMethod to be an explicit nil
+
+### UnsetShippingMethod
+`func (o *ConnectionOptionsCybersourceAntiFraud) UnsetShippingMethod()`
+
+UnsetShippingMethod ensures that no value is present for ShippingMethod, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

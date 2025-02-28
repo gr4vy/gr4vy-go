@@ -15,7 +15,8 @@ Name | Type | Description | Notes
 **Country** | Pointer to **NullableString** | The 2-letter ISO code of the country to use this payment method for. This is used to select the payment service to use. | [optional] 
 **Token** | Pointer to **map[string]interface{}** | The encrypted (opaque) token that was passed to the &#x60;onpaymentauthorized&#x60; callback by the Apple Pay integration. | [optional] 
 **AssuranceDetails** | Pointer to [**NullableGooglePayRequestAssuranceDetails**](GooglePayRequestAssuranceDetails.md) |  | [optional] 
-**CardHolderName** | Pointer to **NullableString** | Name of the card holder. | [optional] 
+**CardholderName** | Pointer to **NullableString** | Name of the card holder. | [optional] 
+**Cryptogram** | Pointer to **NullableString** | The cryptogram of the network token. | [optional] 
 
 ## Methods
 
@@ -406,41 +407,76 @@ HasAssuranceDetails returns a boolean if a field has been set.
 `func (o *TransactionPaymentMethodRequest) UnsetAssuranceDetails()`
 
 UnsetAssuranceDetails ensures that no value is present for AssuranceDetails, not even an explicit nil
-### GetCardHolderName
+### GetCardholderName
 
-`func (o *TransactionPaymentMethodRequest) GetCardHolderName() string`
+`func (o *TransactionPaymentMethodRequest) GetCardholderName() string`
 
-GetCardHolderName returns the CardHolderName field if non-nil, zero value otherwise.
+GetCardholderName returns the CardholderName field if non-nil, zero value otherwise.
 
-### GetCardHolderNameOk
+### GetCardholderNameOk
 
-`func (o *TransactionPaymentMethodRequest) GetCardHolderNameOk() (*string, bool)`
+`func (o *TransactionPaymentMethodRequest) GetCardholderNameOk() (*string, bool)`
 
-GetCardHolderNameOk returns a tuple with the CardHolderName field if it's non-nil, zero value otherwise
+GetCardholderNameOk returns a tuple with the CardholderName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCardHolderName
+### SetCardholderName
 
-`func (o *TransactionPaymentMethodRequest) SetCardHolderName(v string)`
+`func (o *TransactionPaymentMethodRequest) SetCardholderName(v string)`
 
-SetCardHolderName sets CardHolderName field to given value.
+SetCardholderName sets CardholderName field to given value.
 
-### HasCardHolderName
+### HasCardholderName
 
-`func (o *TransactionPaymentMethodRequest) HasCardHolderName() bool`
+`func (o *TransactionPaymentMethodRequest) HasCardholderName() bool`
 
-HasCardHolderName returns a boolean if a field has been set.
+HasCardholderName returns a boolean if a field has been set.
 
-### SetCardHolderNameNil
+### SetCardholderNameNil
 
-`func (o *TransactionPaymentMethodRequest) SetCardHolderNameNil(b bool)`
+`func (o *TransactionPaymentMethodRequest) SetCardholderNameNil(b bool)`
 
- SetCardHolderNameNil sets the value for CardHolderName to be an explicit nil
+ SetCardholderNameNil sets the value for CardholderName to be an explicit nil
 
-### UnsetCardHolderName
-`func (o *TransactionPaymentMethodRequest) UnsetCardHolderName()`
+### UnsetCardholderName
+`func (o *TransactionPaymentMethodRequest) UnsetCardholderName()`
 
-UnsetCardHolderName ensures that no value is present for CardHolderName, not even an explicit nil
+UnsetCardholderName ensures that no value is present for CardholderName, not even an explicit nil
+### GetCryptogram
+
+`func (o *TransactionPaymentMethodRequest) GetCryptogram() string`
+
+GetCryptogram returns the Cryptogram field if non-nil, zero value otherwise.
+
+### GetCryptogramOk
+
+`func (o *TransactionPaymentMethodRequest) GetCryptogramOk() (*string, bool)`
+
+GetCryptogramOk returns a tuple with the Cryptogram field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCryptogram
+
+`func (o *TransactionPaymentMethodRequest) SetCryptogram(v string)`
+
+SetCryptogram sets Cryptogram field to given value.
+
+### HasCryptogram
+
+`func (o *TransactionPaymentMethodRequest) HasCryptogram() bool`
+
+HasCryptogram returns a boolean if a field has been set.
+
+### SetCryptogramNil
+
+`func (o *TransactionPaymentMethodRequest) SetCryptogramNil(b bool)`
+
+ SetCryptogramNil sets the value for Cryptogram to be an explicit nil
+
+### UnsetCryptogram
+`func (o *TransactionPaymentMethodRequest) UnsetCryptogram()`
+
+UnsetCryptogram ensures that no value is present for Cryptogram, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

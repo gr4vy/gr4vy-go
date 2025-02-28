@@ -521,7 +521,7 @@ func (a *RolesApiService) NewRoleAssignmentExecute(r ApiNewRoleAssignmentRequest
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
+			var v Error400BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

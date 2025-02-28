@@ -19,11 +19,11 @@ import (
 type Error400BadRequest struct {
 	// `error`.
 	Type *string `json:"type,omitempty"`
-	// `bad_request`.
+	// A short code that describes the reason for the error.
 	Code *string `json:"code,omitempty"`
 	// `400`.
 	Status *int32 `json:"status,omitempty"`
-	// Describes the fields that are missing or incorrectly formatted in the API request.
+	// A human-readable reason for the error.
 	Message *string `json:"message,omitempty"`
 	// A list of detail objects that further clarify the reason for the error.
 	Details *[]ErrorDetail `json:"details,omitempty"`

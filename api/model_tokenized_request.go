@@ -24,7 +24,7 @@ type TokenizedRequest struct {
 	// This value is mandatory for stored redirect payment methods. For stored cards, we strongly recommend providing a `redirect_url` either when 3-D Secure is enabled and `three_d_secure_data` is not provided, or when using connections where 3DS is enabled. This value will be appended with both a transaction ID and status (e.g. `https://example.com/callback?gr4vy_transaction_id=123 &gr4vy_transaction_status=capture_succeeded`) after 3-D Secure has completed. For those cases, if the value is not present, the transaction will be marked as failed.
 	RedirectUrl *string `json:"redirect_url,omitempty"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card.
-	SecurityCode *string `json:"security_code,omitempty"`
+	SecurityCode NullableString `json:"security_code,omitempty"`
 }
 
 // NewTokenizedRequest instantiates a new TokenizedRequest object
@@ -126,36 +126,46 @@ func (o *TokenizedRequest) SetRedirectUrl(v string) {
 	o.RedirectUrl = &v
 }
 
-// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise.
+// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TokenizedRequest) GetSecurityCode() string {
-	if o == nil || o.SecurityCode == nil {
+	if o == nil || o.SecurityCode.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.SecurityCode
+	return *o.SecurityCode.Get()
 }
 
 // GetSecurityCodeOk returns a tuple with the SecurityCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TokenizedRequest) GetSecurityCodeOk() (*string, bool) {
-	if o == nil || o.SecurityCode == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.SecurityCode, true
+	return o.SecurityCode.Get(), o.SecurityCode.IsSet()
 }
 
 // HasSecurityCode returns a boolean if a field has been set.
 func (o *TokenizedRequest) HasSecurityCode() bool {
-	if o != nil && o.SecurityCode != nil {
+	if o != nil && o.SecurityCode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecurityCode gets a reference to the given string and assigns it to the SecurityCode field.
+// SetSecurityCode gets a reference to the given NullableString and assigns it to the SecurityCode field.
 func (o *TokenizedRequest) SetSecurityCode(v string) {
-	o.SecurityCode = &v
+	o.SecurityCode.Set(&v)
+}
+// SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+func (o *TokenizedRequest) SetSecurityCodeNil() {
+	o.SecurityCode.Set(nil)
+}
+
+// UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
+func (o *TokenizedRequest) UnsetSecurityCode() {
+	o.SecurityCode.Unset()
 }
 
 func (o TokenizedRequest) MarshalJSON() ([]byte, error) {
@@ -169,8 +179,8 @@ func (o TokenizedRequest) MarshalJSON() ([]byte, error) {
 	if o.RedirectUrl != nil {
 		toSerialize["redirect_url"] = o.RedirectUrl
 	}
-	if o.SecurityCode != nil {
-		toSerialize["security_code"] = o.SecurityCode
+	if o.SecurityCode.IsSet() {
+		toSerialize["security_code"] = o.SecurityCode.Get()
 	}
 	return json.Marshal(toSerialize)
 }

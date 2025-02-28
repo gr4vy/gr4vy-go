@@ -5,12 +5,18 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **CybersourceCard** | Pointer to [**NullableConnectionOptionsCybersourceCard**](ConnectionOptionsCybersourceCard.md) |  | [optional] 
+**CybersourceKcp** | Pointer to [**NullableConnectionOptionsCybersourceKcp**](ConnectionOptionsCybersourceKcp.md) |  | [optional] 
+**CybersourceIdeal** | Pointer to [**NullableConnectionOptionsCybersourceIdeal**](ConnectionOptionsCybersourceIdeal.md) |  | [optional] 
 **CybersourceAntiFraud** | Pointer to [**NullableConnectionOptionsCybersourceAntiFraud**](ConnectionOptionsCybersourceAntiFraud.md) |  | [optional] 
+**GivingblockGivingblock** | Pointer to [**NullableConnectionOptionsGivingblockGivingblock**](ConnectionOptionsGivingblockGivingblock.md) |  | [optional] 
 **ForterAntiFraud** | Pointer to [**NullableConnectionOptionsForterAntiFraud**](ConnectionOptionsForterAntiFraud.md) |  | [optional] 
 **AdyenCard** | Pointer to [**NullableConnectionOptionsAdyenCard**](ConnectionOptionsAdyenCard.md) |  | [optional] 
+**AdyenSepa** | Pointer to [**NullableConnectionOptionsAdyenSepa**](ConnectionOptionsAdyenSepa.md) |  | [optional] 
 **PaypalPaypal** | Pointer to [**NullableConnectionOptionsPaypalPaypal**](ConnectionOptionsPaypalPaypal.md) |  | [optional] 
 **PaypalPaypalpaylater** | Pointer to [**NullableConnectionOptionsPaypalPaypal**](ConnectionOptionsPaypalPaypal.md) |  | [optional] 
+**PowertranzCard** | Pointer to [**NullableConnectionOptionsPowertranzCard**](ConnectionOptionsPowertranzCard.md) |  | [optional] 
 **StripeCard** | Pointer to [**NullableConnectionOptionsStripeCard**](ConnectionOptionsStripeCard.md) |  | [optional] 
+**FiservCard** | Pointer to [**NullableConnectionOptionsFiservCard**](ConnectionOptionsFiservCard.md) |  | [optional] 
 
 ## Methods
 
@@ -66,6 +72,76 @@ HasCybersourceCard returns a boolean if a field has been set.
 `func (o *ConnectionOptions) UnsetCybersourceCard()`
 
 UnsetCybersourceCard ensures that no value is present for CybersourceCard, not even an explicit nil
+### GetCybersourceKcp
+
+`func (o *ConnectionOptions) GetCybersourceKcp() ConnectionOptionsCybersourceKcp`
+
+GetCybersourceKcp returns the CybersourceKcp field if non-nil, zero value otherwise.
+
+### GetCybersourceKcpOk
+
+`func (o *ConnectionOptions) GetCybersourceKcpOk() (*ConnectionOptionsCybersourceKcp, bool)`
+
+GetCybersourceKcpOk returns a tuple with the CybersourceKcp field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCybersourceKcp
+
+`func (o *ConnectionOptions) SetCybersourceKcp(v ConnectionOptionsCybersourceKcp)`
+
+SetCybersourceKcp sets CybersourceKcp field to given value.
+
+### HasCybersourceKcp
+
+`func (o *ConnectionOptions) HasCybersourceKcp() bool`
+
+HasCybersourceKcp returns a boolean if a field has been set.
+
+### SetCybersourceKcpNil
+
+`func (o *ConnectionOptions) SetCybersourceKcpNil(b bool)`
+
+ SetCybersourceKcpNil sets the value for CybersourceKcp to be an explicit nil
+
+### UnsetCybersourceKcp
+`func (o *ConnectionOptions) UnsetCybersourceKcp()`
+
+UnsetCybersourceKcp ensures that no value is present for CybersourceKcp, not even an explicit nil
+### GetCybersourceIdeal
+
+`func (o *ConnectionOptions) GetCybersourceIdeal() ConnectionOptionsCybersourceIdeal`
+
+GetCybersourceIdeal returns the CybersourceIdeal field if non-nil, zero value otherwise.
+
+### GetCybersourceIdealOk
+
+`func (o *ConnectionOptions) GetCybersourceIdealOk() (*ConnectionOptionsCybersourceIdeal, bool)`
+
+GetCybersourceIdealOk returns a tuple with the CybersourceIdeal field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCybersourceIdeal
+
+`func (o *ConnectionOptions) SetCybersourceIdeal(v ConnectionOptionsCybersourceIdeal)`
+
+SetCybersourceIdeal sets CybersourceIdeal field to given value.
+
+### HasCybersourceIdeal
+
+`func (o *ConnectionOptions) HasCybersourceIdeal() bool`
+
+HasCybersourceIdeal returns a boolean if a field has been set.
+
+### SetCybersourceIdealNil
+
+`func (o *ConnectionOptions) SetCybersourceIdealNil(b bool)`
+
+ SetCybersourceIdealNil sets the value for CybersourceIdeal to be an explicit nil
+
+### UnsetCybersourceIdeal
+`func (o *ConnectionOptions) UnsetCybersourceIdeal()`
+
+UnsetCybersourceIdeal ensures that no value is present for CybersourceIdeal, not even an explicit nil
 ### GetCybersourceAntiFraud
 
 `func (o *ConnectionOptions) GetCybersourceAntiFraud() ConnectionOptionsCybersourceAntiFraud`
@@ -101,6 +177,41 @@ HasCybersourceAntiFraud returns a boolean if a field has been set.
 `func (o *ConnectionOptions) UnsetCybersourceAntiFraud()`
 
 UnsetCybersourceAntiFraud ensures that no value is present for CybersourceAntiFraud, not even an explicit nil
+### GetGivingblockGivingblock
+
+`func (o *ConnectionOptions) GetGivingblockGivingblock() ConnectionOptionsGivingblockGivingblock`
+
+GetGivingblockGivingblock returns the GivingblockGivingblock field if non-nil, zero value otherwise.
+
+### GetGivingblockGivingblockOk
+
+`func (o *ConnectionOptions) GetGivingblockGivingblockOk() (*ConnectionOptionsGivingblockGivingblock, bool)`
+
+GetGivingblockGivingblockOk returns a tuple with the GivingblockGivingblock field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetGivingblockGivingblock
+
+`func (o *ConnectionOptions) SetGivingblockGivingblock(v ConnectionOptionsGivingblockGivingblock)`
+
+SetGivingblockGivingblock sets GivingblockGivingblock field to given value.
+
+### HasGivingblockGivingblock
+
+`func (o *ConnectionOptions) HasGivingblockGivingblock() bool`
+
+HasGivingblockGivingblock returns a boolean if a field has been set.
+
+### SetGivingblockGivingblockNil
+
+`func (o *ConnectionOptions) SetGivingblockGivingblockNil(b bool)`
+
+ SetGivingblockGivingblockNil sets the value for GivingblockGivingblock to be an explicit nil
+
+### UnsetGivingblockGivingblock
+`func (o *ConnectionOptions) UnsetGivingblockGivingblock()`
+
+UnsetGivingblockGivingblock ensures that no value is present for GivingblockGivingblock, not even an explicit nil
 ### GetForterAntiFraud
 
 `func (o *ConnectionOptions) GetForterAntiFraud() ConnectionOptionsForterAntiFraud`
@@ -171,6 +282,41 @@ HasAdyenCard returns a boolean if a field has been set.
 `func (o *ConnectionOptions) UnsetAdyenCard()`
 
 UnsetAdyenCard ensures that no value is present for AdyenCard, not even an explicit nil
+### GetAdyenSepa
+
+`func (o *ConnectionOptions) GetAdyenSepa() ConnectionOptionsAdyenSepa`
+
+GetAdyenSepa returns the AdyenSepa field if non-nil, zero value otherwise.
+
+### GetAdyenSepaOk
+
+`func (o *ConnectionOptions) GetAdyenSepaOk() (*ConnectionOptionsAdyenSepa, bool)`
+
+GetAdyenSepaOk returns a tuple with the AdyenSepa field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAdyenSepa
+
+`func (o *ConnectionOptions) SetAdyenSepa(v ConnectionOptionsAdyenSepa)`
+
+SetAdyenSepa sets AdyenSepa field to given value.
+
+### HasAdyenSepa
+
+`func (o *ConnectionOptions) HasAdyenSepa() bool`
+
+HasAdyenSepa returns a boolean if a field has been set.
+
+### SetAdyenSepaNil
+
+`func (o *ConnectionOptions) SetAdyenSepaNil(b bool)`
+
+ SetAdyenSepaNil sets the value for AdyenSepa to be an explicit nil
+
+### UnsetAdyenSepa
+`func (o *ConnectionOptions) UnsetAdyenSepa()`
+
+UnsetAdyenSepa ensures that no value is present for AdyenSepa, not even an explicit nil
 ### GetPaypalPaypal
 
 `func (o *ConnectionOptions) GetPaypalPaypal() ConnectionOptionsPaypalPaypal`
@@ -241,6 +387,41 @@ HasPaypalPaypalpaylater returns a boolean if a field has been set.
 `func (o *ConnectionOptions) UnsetPaypalPaypalpaylater()`
 
 UnsetPaypalPaypalpaylater ensures that no value is present for PaypalPaypalpaylater, not even an explicit nil
+### GetPowertranzCard
+
+`func (o *ConnectionOptions) GetPowertranzCard() ConnectionOptionsPowertranzCard`
+
+GetPowertranzCard returns the PowertranzCard field if non-nil, zero value otherwise.
+
+### GetPowertranzCardOk
+
+`func (o *ConnectionOptions) GetPowertranzCardOk() (*ConnectionOptionsPowertranzCard, bool)`
+
+GetPowertranzCardOk returns a tuple with the PowertranzCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetPowertranzCard
+
+`func (o *ConnectionOptions) SetPowertranzCard(v ConnectionOptionsPowertranzCard)`
+
+SetPowertranzCard sets PowertranzCard field to given value.
+
+### HasPowertranzCard
+
+`func (o *ConnectionOptions) HasPowertranzCard() bool`
+
+HasPowertranzCard returns a boolean if a field has been set.
+
+### SetPowertranzCardNil
+
+`func (o *ConnectionOptions) SetPowertranzCardNil(b bool)`
+
+ SetPowertranzCardNil sets the value for PowertranzCard to be an explicit nil
+
+### UnsetPowertranzCard
+`func (o *ConnectionOptions) UnsetPowertranzCard()`
+
+UnsetPowertranzCard ensures that no value is present for PowertranzCard, not even an explicit nil
 ### GetStripeCard
 
 `func (o *ConnectionOptions) GetStripeCard() ConnectionOptionsStripeCard`
@@ -276,6 +457,41 @@ HasStripeCard returns a boolean if a field has been set.
 `func (o *ConnectionOptions) UnsetStripeCard()`
 
 UnsetStripeCard ensures that no value is present for StripeCard, not even an explicit nil
+### GetFiservCard
+
+`func (o *ConnectionOptions) GetFiservCard() ConnectionOptionsFiservCard`
+
+GetFiservCard returns the FiservCard field if non-nil, zero value otherwise.
+
+### GetFiservCardOk
+
+`func (o *ConnectionOptions) GetFiservCardOk() (*ConnectionOptionsFiservCard, bool)`
+
+GetFiservCardOk returns a tuple with the FiservCard field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetFiservCard
+
+`func (o *ConnectionOptions) SetFiservCard(v ConnectionOptionsFiservCard)`
+
+SetFiservCard sets FiservCard field to given value.
+
+### HasFiservCard
+
+`func (o *ConnectionOptions) HasFiservCard() bool`
+
+HasFiservCard returns a boolean if a field has been set.
+
+### SetFiservCardNil
+
+`func (o *ConnectionOptions) SetFiservCardNil(b bool)`
+
+ SetFiservCardNil sets the value for FiservCard to be an explicit nil
+
+### UnsetFiservCard
+`func (o *ConnectionOptions) UnsetFiservCard()`
+
+UnsetFiservCard ensures that no value is present for FiservCard, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

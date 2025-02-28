@@ -6,6 +6,7 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **StripeAccount** | Pointer to **NullableString** | The ID of the connected Stripe account to process for. | [optional] 
 **ApplicationFeeAmount** | Pointer to **NullableFloat32** | The application fee to charge when processing for a connected account. | [optional] 
+**OnBehalfOf** | Pointer to **NullableString** | The Stripe account ID that these funds are intended for. | [optional] 
 
 ## Methods
 
@@ -96,6 +97,41 @@ HasApplicationFeeAmount returns a boolean if a field has been set.
 `func (o *ConnectionOptionsStripeCardStripeConnect) UnsetApplicationFeeAmount()`
 
 UnsetApplicationFeeAmount ensures that no value is present for ApplicationFeeAmount, not even an explicit nil
+### GetOnBehalfOf
+
+`func (o *ConnectionOptionsStripeCardStripeConnect) GetOnBehalfOf() string`
+
+GetOnBehalfOf returns the OnBehalfOf field if non-nil, zero value otherwise.
+
+### GetOnBehalfOfOk
+
+`func (o *ConnectionOptionsStripeCardStripeConnect) GetOnBehalfOfOk() (*string, bool)`
+
+GetOnBehalfOfOk returns a tuple with the OnBehalfOf field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetOnBehalfOf
+
+`func (o *ConnectionOptionsStripeCardStripeConnect) SetOnBehalfOf(v string)`
+
+SetOnBehalfOf sets OnBehalfOf field to given value.
+
+### HasOnBehalfOf
+
+`func (o *ConnectionOptionsStripeCardStripeConnect) HasOnBehalfOf() bool`
+
+HasOnBehalfOf returns a boolean if a field has been set.
+
+### SetOnBehalfOfNil
+
+`func (o *ConnectionOptionsStripeCardStripeConnect) SetOnBehalfOfNil(b bool)`
+
+ SetOnBehalfOfNil sets the value for OnBehalfOf to be an explicit nil
+
+### UnsetOnBehalfOf
+`func (o *ConnectionOptionsStripeCardStripeConnect) UnsetOnBehalfOf()`
+
+UnsetOnBehalfOf ensures that no value is present for OnBehalfOf, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

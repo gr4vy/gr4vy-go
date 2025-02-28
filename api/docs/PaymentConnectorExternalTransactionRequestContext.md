@@ -14,6 +14,8 @@ Name | Type | Description | Notes
 **PaymentServiceDisplayName** | Pointer to **NullableString** | The payment service display name. | [optional] 
 **Method** | Pointer to **NullableString** | The HTTP method. | [optional] 
 **Url** | Pointer to **NullableString** | The endpoint for the request. | [optional] 
+**RefundId** | Pointer to **NullableString** | The ID of the refund, in case this links to a refund. | [optional] 
+**RefundXid** | Pointer to **NullableString** | The external ID of the refund. | [optional] 
 
 ## Methods
 
@@ -374,6 +376,76 @@ HasUrl returns a boolean if a field has been set.
 `func (o *PaymentConnectorExternalTransactionRequestContext) UnsetUrl()`
 
 UnsetUrl ensures that no value is present for Url, not even an explicit nil
+### GetRefundId
+
+`func (o *PaymentConnectorExternalTransactionRequestContext) GetRefundId() string`
+
+GetRefundId returns the RefundId field if non-nil, zero value otherwise.
+
+### GetRefundIdOk
+
+`func (o *PaymentConnectorExternalTransactionRequestContext) GetRefundIdOk() (*string, bool)`
+
+GetRefundIdOk returns a tuple with the RefundId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRefundId
+
+`func (o *PaymentConnectorExternalTransactionRequestContext) SetRefundId(v string)`
+
+SetRefundId sets RefundId field to given value.
+
+### HasRefundId
+
+`func (o *PaymentConnectorExternalTransactionRequestContext) HasRefundId() bool`
+
+HasRefundId returns a boolean if a field has been set.
+
+### SetRefundIdNil
+
+`func (o *PaymentConnectorExternalTransactionRequestContext) SetRefundIdNil(b bool)`
+
+ SetRefundIdNil sets the value for RefundId to be an explicit nil
+
+### UnsetRefundId
+`func (o *PaymentConnectorExternalTransactionRequestContext) UnsetRefundId()`
+
+UnsetRefundId ensures that no value is present for RefundId, not even an explicit nil
+### GetRefundXid
+
+`func (o *PaymentConnectorExternalTransactionRequestContext) GetRefundXid() string`
+
+GetRefundXid returns the RefundXid field if non-nil, zero value otherwise.
+
+### GetRefundXidOk
+
+`func (o *PaymentConnectorExternalTransactionRequestContext) GetRefundXidOk() (*string, bool)`
+
+GetRefundXidOk returns a tuple with the RefundXid field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetRefundXid
+
+`func (o *PaymentConnectorExternalTransactionRequestContext) SetRefundXid(v string)`
+
+SetRefundXid sets RefundXid field to given value.
+
+### HasRefundXid
+
+`func (o *PaymentConnectorExternalTransactionRequestContext) HasRefundXid() bool`
+
+HasRefundXid returns a boolean if a field has been set.
+
+### SetRefundXidNil
+
+`func (o *PaymentConnectorExternalTransactionRequestContext) SetRefundXidNil(b bool)`
+
+ SetRefundXidNil sets the value for RefundXid to be an explicit nil
+
+### UnsetRefundXid
+`func (o *PaymentConnectorExternalTransactionRequestContext) UnsetRefundXid()`
+
+UnsetRefundXid ensures that no value is present for RefundXid, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

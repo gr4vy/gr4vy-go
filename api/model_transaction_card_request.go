@@ -24,7 +24,7 @@ type TransactionCardRequest struct {
 	// The expiration date of the card, formatted `MM/YY`.
 	ExpirationDate string `json:"expiration_date"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
-	SecurityCode string `json:"security_code"`
+	SecurityCode NullableString `json:"security_code,omitempty"`
 	// An external identifier that can be used to match the card against your own records. This can only be set if the `store` flag is set to `true`.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
 	// We strongly recommend providing a `redirect_url` either when 3-D Secure is enabled and `three_d_secure_data` is not provided, or when using connections where 3DS is enabled. This value will be appended with both a transaction ID and status (e.g. `https://example.com/callback?gr4vy_transaction_id=123 &gr4vy_transaction_status=capture_succeeded`) after 3-D Secure has completed. For those cases, if the value is not present, the transaction will be marked as failed.
@@ -35,12 +35,11 @@ type TransactionCardRequest struct {
 // This constructor will assign default values to properties that have it defined,
 // and makes sure properties required by API are set, but the set of arguments
 // will change when the set of required properties is changed
-func NewTransactionCardRequest(method string, number string, expirationDate string, securityCode string) *TransactionCardRequest {
+func NewTransactionCardRequest(method string, number string, expirationDate string) *TransactionCardRequest {
 	this := TransactionCardRequest{}
 	this.Method = method
 	this.Number = number
 	this.ExpirationDate = expirationDate
-	this.SecurityCode = securityCode
 	return &this
 }
 
@@ -124,28 +123,46 @@ func (o *TransactionCardRequest) SetExpirationDate(v string) {
 	o.ExpirationDate = v
 }
 
-// GetSecurityCode returns the SecurityCode field value
+// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *TransactionCardRequest) GetSecurityCode() string {
-	if o == nil {
+	if o == nil || o.SecurityCode.Get() == nil {
 		var ret string
 		return ret
 	}
-
-	return o.SecurityCode
+	return *o.SecurityCode.Get()
 }
 
-// GetSecurityCodeOk returns a tuple with the SecurityCode field value
+// GetSecurityCodeOk returns a tuple with the SecurityCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *TransactionCardRequest) GetSecurityCodeOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return &o.SecurityCode, true
+	return o.SecurityCode.Get(), o.SecurityCode.IsSet()
 }
 
-// SetSecurityCode sets field value
+// HasSecurityCode returns a boolean if a field has been set.
+func (o *TransactionCardRequest) HasSecurityCode() bool {
+	if o != nil && o.SecurityCode.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetSecurityCode gets a reference to the given NullableString and assigns it to the SecurityCode field.
 func (o *TransactionCardRequest) SetSecurityCode(v string) {
-	o.SecurityCode = v
+	o.SecurityCode.Set(&v)
+}
+// SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+func (o *TransactionCardRequest) SetSecurityCodeNil() {
+	o.SecurityCode.Set(nil)
+}
+
+// UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
+func (o *TransactionCardRequest) UnsetSecurityCode() {
+	o.SecurityCode.Unset()
 }
 
 // GetExternalIdentifier returns the ExternalIdentifier field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -243,8 +260,8 @@ func (o TransactionCardRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["expiration_date"] = o.ExpirationDate
 	}
-	if true {
-		toSerialize["security_code"] = o.SecurityCode
+	if o.SecurityCode.IsSet() {
+		toSerialize["security_code"] = o.SecurityCode.Get()
 	}
 	if o.ExternalIdentifier.IsSet() {
 		toSerialize["external_identifier"] = o.ExternalIdentifier.Get()

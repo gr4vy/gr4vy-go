@@ -23,9 +23,13 @@ Name | Type | Description | Notes
 **Method** | Pointer to **string** | The type of this payment method. | [optional] 
 **Mode** | Pointer to **string** | The mode to use with this payment method. | [optional] 
 **Scheme** | Pointer to **NullableString** | The scheme of the card. Only applies to card payments. | [optional] 
-**Status** | Pointer to **string** | The state of the payment method.  - &#x60;processing&#x60; - The payment method is stored but has not been used yet. - &#x60;buyer_approval_required&#x60; - Storing the payment method requires   the buyer to provide approval. Follow the &#x60;approval_url&#x60; for next steps. - &#x60;succeeded&#x60; - The payment method is stored and has been used. - &#x60;failed&#x60; - The payment method could not be stored, or failed first use. | [optional] 
+**Status** | Pointer to **string** | The state of the payment method.  - &#x60;processing&#x60; - The payment method is stored but is not ready to be    used yet, as we may be waiting for a notification from a connector    to complete the setup. - &#x60;buyer_approval_required&#x60; - Storing the payment method requires   the buyer to provide approval. Follow the &#x60;approval_url&#x60; for next steps. - &#x60;succeeded&#x60; - The payment method is stored and can be used. - &#x60;failed&#x60; - The payment method could not be stored, or failed verification. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this payment method was last updated in our system. | [optional] 
 **Fingerprint** | Pointer to **NullableString** | The unique hash derived from the payment method identifier (e.g. card number). | [optional] 
+**LastUsedAt** | Pointer to **NullableTime** | The timestamp when this payment method was last used in a transaction. | [optional] 
+**UsageCount** | Pointer to **int32** | The number of times this payment method has been used in transactions. | [optional] 
+**CitLastUsedAt** | Pointer to **NullableTime** | The timestamp when this payment method was last used in a transaction for client initiated transactions. | [optional] 
+**CitUsageCount** | Pointer to **int32** | The number of times this payment method has been used in transactions for client initiated transactions. | [optional] 
 
 ## Methods
 
@@ -716,6 +720,126 @@ HasFingerprint returns a boolean if a field has been set.
 `func (o *PaymentMethod) UnsetFingerprint()`
 
 UnsetFingerprint ensures that no value is present for Fingerprint, not even an explicit nil
+### GetLastUsedAt
+
+`func (o *PaymentMethod) GetLastUsedAt() time.Time`
+
+GetLastUsedAt returns the LastUsedAt field if non-nil, zero value otherwise.
+
+### GetLastUsedAtOk
+
+`func (o *PaymentMethod) GetLastUsedAtOk() (*time.Time, bool)`
+
+GetLastUsedAtOk returns a tuple with the LastUsedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetLastUsedAt
+
+`func (o *PaymentMethod) SetLastUsedAt(v time.Time)`
+
+SetLastUsedAt sets LastUsedAt field to given value.
+
+### HasLastUsedAt
+
+`func (o *PaymentMethod) HasLastUsedAt() bool`
+
+HasLastUsedAt returns a boolean if a field has been set.
+
+### SetLastUsedAtNil
+
+`func (o *PaymentMethod) SetLastUsedAtNil(b bool)`
+
+ SetLastUsedAtNil sets the value for LastUsedAt to be an explicit nil
+
+### UnsetLastUsedAt
+`func (o *PaymentMethod) UnsetLastUsedAt()`
+
+UnsetLastUsedAt ensures that no value is present for LastUsedAt, not even an explicit nil
+### GetUsageCount
+
+`func (o *PaymentMethod) GetUsageCount() int32`
+
+GetUsageCount returns the UsageCount field if non-nil, zero value otherwise.
+
+### GetUsageCountOk
+
+`func (o *PaymentMethod) GetUsageCountOk() (*int32, bool)`
+
+GetUsageCountOk returns a tuple with the UsageCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetUsageCount
+
+`func (o *PaymentMethod) SetUsageCount(v int32)`
+
+SetUsageCount sets UsageCount field to given value.
+
+### HasUsageCount
+
+`func (o *PaymentMethod) HasUsageCount() bool`
+
+HasUsageCount returns a boolean if a field has been set.
+
+### GetCitLastUsedAt
+
+`func (o *PaymentMethod) GetCitLastUsedAt() time.Time`
+
+GetCitLastUsedAt returns the CitLastUsedAt field if non-nil, zero value otherwise.
+
+### GetCitLastUsedAtOk
+
+`func (o *PaymentMethod) GetCitLastUsedAtOk() (*time.Time, bool)`
+
+GetCitLastUsedAtOk returns a tuple with the CitLastUsedAt field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCitLastUsedAt
+
+`func (o *PaymentMethod) SetCitLastUsedAt(v time.Time)`
+
+SetCitLastUsedAt sets CitLastUsedAt field to given value.
+
+### HasCitLastUsedAt
+
+`func (o *PaymentMethod) HasCitLastUsedAt() bool`
+
+HasCitLastUsedAt returns a boolean if a field has been set.
+
+### SetCitLastUsedAtNil
+
+`func (o *PaymentMethod) SetCitLastUsedAtNil(b bool)`
+
+ SetCitLastUsedAtNil sets the value for CitLastUsedAt to be an explicit nil
+
+### UnsetCitLastUsedAt
+`func (o *PaymentMethod) UnsetCitLastUsedAt()`
+
+UnsetCitLastUsedAt ensures that no value is present for CitLastUsedAt, not even an explicit nil
+### GetCitUsageCount
+
+`func (o *PaymentMethod) GetCitUsageCount() int32`
+
+GetCitUsageCount returns the CitUsageCount field if non-nil, zero value otherwise.
+
+### GetCitUsageCountOk
+
+`func (o *PaymentMethod) GetCitUsageCountOk() (*int32, bool)`
+
+GetCitUsageCountOk returns a tuple with the CitUsageCount field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCitUsageCount
+
+`func (o *PaymentMethod) SetCitUsageCount(v int32)`
+
+SetCitUsageCount sets CitUsageCount field to given value.
+
+### HasCitUsageCount
+
+`func (o *PaymentMethod) HasCitUsageCount() bool`
+
+HasCitUsageCount returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

@@ -9,6 +9,7 @@ Name | Type | Description | Notes
 **ExpiresAt** | Pointer to **time.Time** | The date and time when the Checkout Session will expire. By default this will be set to 1 hour from the date of creation. | [optional] 
 **CartItems** | Pointer to [**[]CartItem**](CartItem.md) | An array of cart items that represents the line items of a transaction. | [optional] 
 **Metadata** | Pointer to **map[string]string** | Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it. | [optional] 
+**Airline** | Pointer to [**NullableAirline**](Airline.md) | Contains information about an airline travel, if applicable. | [optional] 
 **PaymentMethod** | Pointer to [**NullableCheckoutSessionPaymentMethod**](CheckoutSessionPaymentMethod.md) |  | [optional] 
 
 ## Methods
@@ -175,6 +176,41 @@ HasMetadata returns a boolean if a field has been set.
 `func (o *CheckoutSession) UnsetMetadata()`
 
 UnsetMetadata ensures that no value is present for Metadata, not even an explicit nil
+### GetAirline
+
+`func (o *CheckoutSession) GetAirline() Airline`
+
+GetAirline returns the Airline field if non-nil, zero value otherwise.
+
+### GetAirlineOk
+
+`func (o *CheckoutSession) GetAirlineOk() (*Airline, bool)`
+
+GetAirlineOk returns a tuple with the Airline field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAirline
+
+`func (o *CheckoutSession) SetAirline(v Airline)`
+
+SetAirline sets Airline field to given value.
+
+### HasAirline
+
+`func (o *CheckoutSession) HasAirline() bool`
+
+HasAirline returns a boolean if a field has been set.
+
+### SetAirlineNil
+
+`func (o *CheckoutSession) SetAirlineNil(b bool)`
+
+ SetAirlineNil sets the value for Airline to be an explicit nil
+
+### UnsetAirline
+`func (o *CheckoutSession) UnsetAirline()`
+
+UnsetAirline ensures that no value is present for Airline, not even an explicit nil
 ### GetPaymentMethod
 
 `func (o *CheckoutSession) GetPaymentMethod() CheckoutSessionPaymentMethod`

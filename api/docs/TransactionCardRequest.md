@@ -7,7 +7,7 @@ Name | Type | Description | Notes
 **Method** | **string** | &#x60;card&#x60;. | 
 **Number** | **string** | The 13-19 digit number for this card as it can be found on the front of the card. | 
 **ExpirationDate** | **string** | The expiration date of the card, formatted &#x60;MM/YY&#x60;. | 
-**SecurityCode** | **string** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD. | 
+**SecurityCode** | Pointer to **NullableString** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD. | [optional] 
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the card against your own records. This can only be set if the &#x60;store&#x60; flag is set to &#x60;true&#x60;. | [optional] 
 **RedirectUrl** | Pointer to **NullableString** | We strongly recommend providing a &#x60;redirect_url&#x60; either when 3-D Secure is enabled and &#x60;three_d_secure_data&#x60; is not provided, or when using connections where 3DS is enabled. This value will be appended with both a transaction ID and status (e.g. &#x60;https://example.com/callback?gr4vy_transaction_id&#x3D;123 &amp;gr4vy_transaction_status&#x3D;capture_succeeded&#x60;) after 3-D Secure has completed. For those cases, if the value is not present, the transaction will be marked as failed. | [optional] 
 
@@ -15,7 +15,7 @@ Name | Type | Description | Notes
 
 ### NewTransactionCardRequest
 
-`func NewTransactionCardRequest(method string, number string, expirationDate string, securityCode string, ) *TransactionCardRequest`
+`func NewTransactionCardRequest(method string, number string, expirationDate string, ) *TransactionCardRequest`
 
 NewTransactionCardRequest instantiates a new TransactionCardRequest object
 This constructor will assign default values to properties that have it defined,
@@ -109,7 +109,22 @@ and a boolean to check if the value has been set.
 
 SetSecurityCode sets SecurityCode field to given value.
 
+### HasSecurityCode
 
+`func (o *TransactionCardRequest) HasSecurityCode() bool`
+
+HasSecurityCode returns a boolean if a field has been set.
+
+### SetSecurityCodeNil
+
+`func (o *TransactionCardRequest) SetSecurityCodeNil(b bool)`
+
+ SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+
+### UnsetSecurityCode
+`func (o *TransactionCardRequest) UnsetSecurityCode()`
+
+UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
 ### GetExternalIdentifier
 
 `func (o *TransactionCardRequest) GetExternalIdentifier() string`

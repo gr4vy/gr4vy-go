@@ -4,12 +4,84 @@ All URIs are relative to *https://api.plantly.gr4vy.app*
 
 Method | HTTP request | Description
 ------------- | ------------- | -------------
+[**AddDigitalWalletDomainName**](DigitalWalletsApi.md#AddDigitalWalletDomainName) | **Post** /digital-wallets/{digital_wallet_id}/domains | Add digital wallet domain name
 [**DeleteDigitalWallet**](DigitalWalletsApi.md#DeleteDigitalWallet) | **Delete** /digital-wallets/{digital_wallet_id} | De-register digital wallet
+[**DeleteDigitalWalletDomainName**](DigitalWalletsApi.md#DeleteDigitalWalletDomainName) | **Delete** /digital-wallets/{digital_wallet_id}/domains | Remove digital wallet domain name
 [**GetDigitalWallet**](DigitalWalletsApi.md#GetDigitalWallet) | **Get** /digital-wallets/{digital_wallet_id} | Get digital wallet
 [**ListDigitalWallets**](DigitalWalletsApi.md#ListDigitalWallets) | **Get** /digital-wallets | List digital wallets
 [**NewDigitalWallet**](DigitalWalletsApi.md#NewDigitalWallet) | **Post** /digital-wallets | Register digital wallet
 [**UpdateDigitalWallet**](DigitalWalletsApi.md#UpdateDigitalWallet) | **Put** /digital-wallets/{digital_wallet_id} | Update digital wallet
 
+
+
+## AddDigitalWalletDomainName
+
+> AddDigitalWalletDomainName(ctx, digitalWalletId).DigitalWalletDomain(digitalWalletDomain).Execute()
+
+Add digital wallet domain name
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    digitalWalletId := "fe26475d-ec3e-4884-9553-f7356683f7f9" // string | The ID of the registered digital wallet.
+    digitalWalletDomain := *openapiclient.NewDigitalWalletDomain("example.com") // DigitalWalletDomain |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.DigitalWalletsApi.AddDigitalWalletDomainName(context.Background(), digitalWalletId).DigitalWalletDomain(digitalWalletDomain).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletsApi.AddDigitalWalletDomainName``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**digitalWalletId** | **string** | The ID of the registered digital wallet. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiAddDigitalWalletDomainNameRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **digitalWalletDomain** | [**DigitalWalletDomain**](DigitalWalletDomain.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
 
 
 ## DeleteDigitalWallet
@@ -68,11 +140,81 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
 - **Content-Type**: Not defined
+- **Accept**: application/json
+
+[[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
+[[Back to Model list]](../README.md#documentation-for-models)
+[[Back to README]](../README.md)
+
+
+## DeleteDigitalWalletDomainName
+
+> DeleteDigitalWalletDomainName(ctx, digitalWalletId).DigitalWalletDomain(digitalWalletDomain).Execute()
+
+Remove digital wallet domain name
+
+
+
+### Example
+
+```go
+package main
+
+import (
+    "context"
+    "fmt"
+    "os"
+    openapiclient "./openapi"
+)
+
+func main() {
+    digitalWalletId := "fe26475d-ec3e-4884-9553-f7356683f7f9" // string | The ID of the registered digital wallet.
+    digitalWalletDomain := *openapiclient.NewDigitalWalletDomain("example.com") // DigitalWalletDomain |  (optional)
+
+    configuration := openapiclient.NewConfiguration()
+    api_client := openapiclient.NewAPIClient(configuration)
+    resp, r, err := api_client.DigitalWalletsApi.DeleteDigitalWalletDomainName(context.Background(), digitalWalletId).DigitalWalletDomain(digitalWalletDomain).Execute()
+    if err != nil {
+        fmt.Fprintf(os.Stderr, "Error when calling `DigitalWalletsApi.DeleteDigitalWalletDomainName``: %v\n", err)
+        fmt.Fprintf(os.Stderr, "Full HTTP response: %v\n", r)
+    }
+}
+```
+
+### Path Parameters
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+**ctx** | **context.Context** | context for authentication, logging, cancellation, deadlines, tracing, etc.
+**digitalWalletId** | **string** | The ID of the registered digital wallet. | 
+
+### Other Parameters
+
+Other parameters are passed through a pointer to a apiDeleteDigitalWalletDomainNameRequest struct via the builder pattern
+
+
+Name | Type | Description  | Notes
+------------- | ------------- | ------------- | -------------
+
+ **digitalWalletDomain** | [**DigitalWalletDomain**](DigitalWalletDomain.md) |  | 
+
+### Return type
+
+ (empty response body)
+
+### Authorization
+
+[bearerAuth](../README.md#bearerAuth)
+
+### HTTP request headers
+
+- **Content-Type**: application/json
 - **Accept**: application/json
 
 [[Back to top]](#) [[Back to API list]](../README.md#documentation-for-api-endpoints)
@@ -138,7 +280,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -199,7 +341,7 @@ Other parameters are passed through a pointer to a apiListDigitalWalletsRequest 
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -265,7 +407,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 
@@ -337,7 +479,7 @@ Name | Type | Description  | Notes
 
 ### Authorization
 
-[BearerAuth](../README.md#BearerAuth)
+[bearerAuth](../README.md#bearerAuth)
 
 ### HTTP request headers
 

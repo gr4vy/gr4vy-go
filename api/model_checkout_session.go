@@ -28,6 +28,8 @@ type CheckoutSession struct {
 	CartItems []CartItem `json:"cart_items,omitempty"`
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it.
 	Metadata map[string]string `json:"metadata,omitempty"`
+	// Contains information about an airline travel, if applicable.
+	Airline NullableAirline `json:"airline,omitempty"`
 	PaymentMethod NullableCheckoutSessionPaymentMethod `json:"payment_method,omitempty"`
 }
 
@@ -210,6 +212,48 @@ func (o *CheckoutSession) SetMetadata(v map[string]string) {
 	o.Metadata = v
 }
 
+// GetAirline returns the Airline field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CheckoutSession) GetAirline() Airline {
+	if o == nil || o.Airline.Get() == nil {
+		var ret Airline
+		return ret
+	}
+	return *o.Airline.Get()
+}
+
+// GetAirlineOk returns a tuple with the Airline field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CheckoutSession) GetAirlineOk() (*Airline, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Airline.Get(), o.Airline.IsSet()
+}
+
+// HasAirline returns a boolean if a field has been set.
+func (o *CheckoutSession) HasAirline() bool {
+	if o != nil && o.Airline.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAirline gets a reference to the given NullableAirline and assigns it to the Airline field.
+func (o *CheckoutSession) SetAirline(v Airline) {
+	o.Airline.Set(&v)
+}
+// SetAirlineNil sets the value for Airline to be an explicit nil
+func (o *CheckoutSession) SetAirlineNil() {
+	o.Airline.Set(nil)
+}
+
+// UnsetAirline ensures that no value is present for Airline, not even an explicit nil
+func (o *CheckoutSession) UnsetAirline() {
+	o.Airline.Unset()
+}
+
 // GetPaymentMethod returns the PaymentMethod field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *CheckoutSession) GetPaymentMethod() CheckoutSessionPaymentMethod {
 	if o == nil || o.PaymentMethod.Get() == nil {
@@ -268,6 +312,9 @@ func (o CheckoutSession) MarshalJSON() ([]byte, error) {
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.Airline.IsSet() {
+		toSerialize["airline"] = o.Airline.Get()
 	}
 	if o.PaymentMethod.IsSet() {
 		toSerialize["payment_method"] = o.PaymentMethod.Get()

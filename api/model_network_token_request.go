@@ -18,7 +18,7 @@ import (
 // NetworkTokenRequest Request body for provision a network token.
 type NetworkTokenRequest struct {
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card.
-	SecurityCode *string `json:"security_code,omitempty"`
+	SecurityCode NullableString `json:"security_code,omitempty"`
 	// Defines if the request is merchant initiated or not.
 	MerchantInitiated bool `json:"merchant_initiated"`
 	// Defines if the request is a subsequent of another request or not.
@@ -44,36 +44,46 @@ func NewNetworkTokenRequestWithDefaults() *NetworkTokenRequest {
 	return &this
 }
 
-// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise.
+// GetSecurityCode returns the SecurityCode field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *NetworkTokenRequest) GetSecurityCode() string {
-	if o == nil || o.SecurityCode == nil {
+	if o == nil || o.SecurityCode.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.SecurityCode
+	return *o.SecurityCode.Get()
 }
 
 // GetSecurityCodeOk returns a tuple with the SecurityCode field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *NetworkTokenRequest) GetSecurityCodeOk() (*string, bool) {
-	if o == nil || o.SecurityCode == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.SecurityCode, true
+	return o.SecurityCode.Get(), o.SecurityCode.IsSet()
 }
 
 // HasSecurityCode returns a boolean if a field has been set.
 func (o *NetworkTokenRequest) HasSecurityCode() bool {
-	if o != nil && o.SecurityCode != nil {
+	if o != nil && o.SecurityCode.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetSecurityCode gets a reference to the given string and assigns it to the SecurityCode field.
+// SetSecurityCode gets a reference to the given NullableString and assigns it to the SecurityCode field.
 func (o *NetworkTokenRequest) SetSecurityCode(v string) {
-	o.SecurityCode = &v
+	o.SecurityCode.Set(&v)
+}
+// SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+func (o *NetworkTokenRequest) SetSecurityCodeNil() {
+	o.SecurityCode.Set(nil)
+}
+
+// UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
+func (o *NetworkTokenRequest) UnsetSecurityCode() {
+	o.SecurityCode.Unset()
 }
 
 // GetMerchantInitiated returns the MerchantInitiated field value
@@ -126,8 +136,8 @@ func (o *NetworkTokenRequest) SetIsSubsequentPayment(v bool) {
 
 func (o NetworkTokenRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
-	if o.SecurityCode != nil {
-		toSerialize["security_code"] = o.SecurityCode
+	if o.SecurityCode.IsSet() {
+		toSerialize["security_code"] = o.SecurityCode.Get()
 	}
 	if true {
 		toSerialize["merchant_initiated"] = o.MerchantInitiated

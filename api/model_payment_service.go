@@ -34,10 +34,12 @@ type PaymentService struct {
 	DisplayName *string `json:"display_name,omitempty"`
 	// A list of fields, each containing a key-value pair for each field configured for this payment service. Fields marked as `secret` (see Payment Service Definition) are not returned.
 	Fields *[]GiftCardServiceFields `json:"fields,omitempty"`
+	// A list of fields, each containing a key-value pair for each field configured for reporting for this payment service. Fields marked as `secret` (see Payment Service Definition) are not returned.
+	ReportingFields *[]PaymentServiceReportingFields `json:"reporting_fields,omitempty"`
 	// The unique ID for a merchant account.
 	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
 	// An object containing a key for each supported card scheme (Amex, Discover, Mastercard and Visa), and for each key an object with the merchant profile for this service and the corresponding scheme.
-	MerchantProfile NullableMerchantProfile `json:"merchant_profile,omitempty"`
+	MerchantProfile NullableMerchantProfileSummary `json:"merchant_profile,omitempty"`
 	// The payment method that this service handles.
 	Method *string `json:"method,omitempty"`
 	// Defines if network tokens are enabled for the service. This feature can only be enabled if the payment service is set as `open_loop` and the PSP is set up to accept network tokens.
@@ -48,9 +50,11 @@ type PaymentService struct {
 	PaymentMethodTokenizationEnabled *bool `json:"payment_method_tokenization_enabled,omitempty"`
 	// The ID of the payment service definition used to create this service. 
 	PaymentServiceDefinitionId *string `json:"payment_service_definition_id,omitempty"`
+	// Defines if settlement reporting is enabled for the service. This feature can only be enabled if the payment service definition supports the `settlement_reporting` feature.
+	SettlementReportingEnabled *bool `json:"settlement_reporting_enabled,omitempty"`
 	// The current status of this service. This will start off as pending, move to created, and might eventually move to an error status if and when the credentials are no longer valid. 
 	Status *string `json:"status,omitempty"`
-	// Defines if 3-D Secure is enabled for the service (can only be enabled if the payment service definition supports the `three_d_secure_hosted` feature). This does not affect pass through 3-D Secure data.
+	// Defines if 3-D Secure is enabled for the service. This feature can only be enabled if the payment service definition supports the `three_d_secure_hosted` feature. This does not affect pass through 3-D Secure data.
 	ThreeDSecureEnabled *bool `json:"three_d_secure_enabled,omitempty"`
 	// The date and time when this service was last updated.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
@@ -343,6 +347,38 @@ func (o *PaymentService) SetFields(v []GiftCardServiceFields) {
 	o.Fields = &v
 }
 
+// GetReportingFields returns the ReportingFields field value if set, zero value otherwise.
+func (o *PaymentService) GetReportingFields() []PaymentServiceReportingFields {
+	if o == nil || o.ReportingFields == nil {
+		var ret []PaymentServiceReportingFields
+		return ret
+	}
+	return *o.ReportingFields
+}
+
+// GetReportingFieldsOk returns a tuple with the ReportingFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentService) GetReportingFieldsOk() (*[]PaymentServiceReportingFields, bool) {
+	if o == nil || o.ReportingFields == nil {
+		return nil, false
+	}
+	return o.ReportingFields, true
+}
+
+// HasReportingFields returns a boolean if a field has been set.
+func (o *PaymentService) HasReportingFields() bool {
+	if o != nil && o.ReportingFields != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReportingFields gets a reference to the given []PaymentServiceReportingFields and assigns it to the ReportingFields field.
+func (o *PaymentService) SetReportingFields(v []PaymentServiceReportingFields) {
+	o.ReportingFields = &v
+}
+
 // GetMerchantAccountId returns the MerchantAccountId field value if set, zero value otherwise.
 func (o *PaymentService) GetMerchantAccountId() string {
 	if o == nil || o.MerchantAccountId == nil {
@@ -376,9 +412,9 @@ func (o *PaymentService) SetMerchantAccountId(v string) {
 }
 
 // GetMerchantProfile returns the MerchantProfile field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *PaymentService) GetMerchantProfile() MerchantProfile {
+func (o *PaymentService) GetMerchantProfile() MerchantProfileSummary {
 	if o == nil || o.MerchantProfile.Get() == nil {
-		var ret MerchantProfile
+		var ret MerchantProfileSummary
 		return ret
 	}
 	return *o.MerchantProfile.Get()
@@ -387,7 +423,7 @@ func (o *PaymentService) GetMerchantProfile() MerchantProfile {
 // GetMerchantProfileOk returns a tuple with the MerchantProfile field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *PaymentService) GetMerchantProfileOk() (*MerchantProfile, bool) {
+func (o *PaymentService) GetMerchantProfileOk() (*MerchantProfileSummary, bool) {
 	if o == nil  {
 		return nil, false
 	}
@@ -403,8 +439,8 @@ func (o *PaymentService) HasMerchantProfile() bool {
 	return false
 }
 
-// SetMerchantProfile gets a reference to the given NullableMerchantProfile and assigns it to the MerchantProfile field.
-func (o *PaymentService) SetMerchantProfile(v MerchantProfile) {
+// SetMerchantProfile gets a reference to the given NullableMerchantProfileSummary and assigns it to the MerchantProfile field.
+func (o *PaymentService) SetMerchantProfile(v MerchantProfileSummary) {
 	o.MerchantProfile.Set(&v)
 }
 // SetMerchantProfileNil sets the value for MerchantProfile to be an explicit nil
@@ -577,6 +613,38 @@ func (o *PaymentService) SetPaymentServiceDefinitionId(v string) {
 	o.PaymentServiceDefinitionId = &v
 }
 
+// GetSettlementReportingEnabled returns the SettlementReportingEnabled field value if set, zero value otherwise.
+func (o *PaymentService) GetSettlementReportingEnabled() bool {
+	if o == nil || o.SettlementReportingEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SettlementReportingEnabled
+}
+
+// GetSettlementReportingEnabledOk returns a tuple with the SettlementReportingEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentService) GetSettlementReportingEnabledOk() (*bool, bool) {
+	if o == nil || o.SettlementReportingEnabled == nil {
+		return nil, false
+	}
+	return o.SettlementReportingEnabled, true
+}
+
+// HasSettlementReportingEnabled returns a boolean if a field has been set.
+func (o *PaymentService) HasSettlementReportingEnabled() bool {
+	if o != nil && o.SettlementReportingEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSettlementReportingEnabled gets a reference to the given bool and assigns it to the SettlementReportingEnabled field.
+func (o *PaymentService) SetSettlementReportingEnabled(v bool) {
+	o.SettlementReportingEnabled = &v
+}
+
 // GetStatus returns the Status field value if set, zero value otherwise.
 func (o *PaymentService) GetStatus() string {
 	if o == nil || o.Status == nil {
@@ -741,6 +809,9 @@ func (o PaymentService) MarshalJSON() ([]byte, error) {
 	if o.Fields != nil {
 		toSerialize["fields"] = o.Fields
 	}
+	if o.ReportingFields != nil {
+		toSerialize["reporting_fields"] = o.ReportingFields
+	}
 	if o.MerchantAccountId != nil {
 		toSerialize["merchant_account_id"] = o.MerchantAccountId
 	}
@@ -761,6 +832,9 @@ func (o PaymentService) MarshalJSON() ([]byte, error) {
 	}
 	if o.PaymentServiceDefinitionId != nil {
 		toSerialize["payment_service_definition_id"] = o.PaymentServiceDefinitionId
+	}
+	if o.SettlementReportingEnabled != nil {
+		toSerialize["settlement_reporting_enabled"] = o.SettlementReportingEnabled
 	}
 	if o.Status != nil {
 		toSerialize["status"] = o.Status

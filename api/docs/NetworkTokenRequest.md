@@ -4,7 +4,7 @@
 
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
-**SecurityCode** | Pointer to **string** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card. | [optional] 
+**SecurityCode** | Pointer to **NullableString** | The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.  The security code can only be set if the stored payment method represents a card. | [optional] 
 **MerchantInitiated** | **bool** | Defines if the request is merchant initiated or not. | 
 **IsSubsequentPayment** | **bool** | Defines if the request is a subsequent of another request or not. | 
 
@@ -52,6 +52,16 @@ SetSecurityCode sets SecurityCode field to given value.
 
 HasSecurityCode returns a boolean if a field has been set.
 
+### SetSecurityCodeNil
+
+`func (o *NetworkTokenRequest) SetSecurityCodeNil(b bool)`
+
+ SetSecurityCodeNil sets the value for SecurityCode to be an explicit nil
+
+### UnsetSecurityCode
+`func (o *NetworkTokenRequest) UnsetSecurityCode()`
+
+UnsetSecurityCode ensures that no value is present for SecurityCode, not even an explicit nil
 ### GetMerchantInitiated
 
 `func (o *NetworkTokenRequest) GetMerchantInitiated() bool`

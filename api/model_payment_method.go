@@ -55,12 +55,20 @@ type PaymentMethod struct {
 	Mode *string `json:"mode,omitempty"`
 	// The scheme of the card. Only applies to card payments.
 	Scheme NullableString `json:"scheme,omitempty"`
-	// The state of the payment method.  - `processing` - The payment method is stored but has not been used yet. - `buyer_approval_required` - Storing the payment method requires   the buyer to provide approval. Follow the `approval_url` for next steps. - `succeeded` - The payment method is stored and has been used. - `failed` - The payment method could not be stored, or failed first use.
+	// The state of the payment method.  - `processing` - The payment method is stored but is not ready to be    used yet, as we may be waiting for a notification from a connector    to complete the setup. - `buyer_approval_required` - Storing the payment method requires   the buyer to provide approval. Follow the `approval_url` for next steps. - `succeeded` - The payment method is stored and can be used. - `failed` - The payment method could not be stored, or failed verification.
 	Status *string `json:"status,omitempty"`
 	// The date and time when this payment method was last updated in our system.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
 	// The unique hash derived from the payment method identifier (e.g. card number).
 	Fingerprint NullableString `json:"fingerprint,omitempty"`
+	// The timestamp when this payment method was last used in a transaction.
+	LastUsedAt NullableTime `json:"last_used_at,omitempty"`
+	// The number of times this payment method has been used in transactions.
+	UsageCount *int32 `json:"usage_count,omitempty"`
+	// The timestamp when this payment method was last used in a transaction for client initiated transactions.
+	CitLastUsedAt NullableTime `json:"cit_last_used_at,omitempty"`
+	// The number of times this payment method has been used in transactions for client initiated transactions.
+	CitUsageCount *int32 `json:"cit_usage_count,omitempty"`
 }
 
 // NewPaymentMethod instantiates a new PaymentMethod object
@@ -895,6 +903,154 @@ func (o *PaymentMethod) UnsetFingerprint() {
 	o.Fingerprint.Unset()
 }
 
+// GetLastUsedAt returns the LastUsedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethod) GetLastUsedAt() time.Time {
+	if o == nil || o.LastUsedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.LastUsedAt.Get()
+}
+
+// GetLastUsedAtOk returns a tuple with the LastUsedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethod) GetLastUsedAtOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.LastUsedAt.Get(), o.LastUsedAt.IsSet()
+}
+
+// HasLastUsedAt returns a boolean if a field has been set.
+func (o *PaymentMethod) HasLastUsedAt() bool {
+	if o != nil && o.LastUsedAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetLastUsedAt gets a reference to the given NullableTime and assigns it to the LastUsedAt field.
+func (o *PaymentMethod) SetLastUsedAt(v time.Time) {
+	o.LastUsedAt.Set(&v)
+}
+// SetLastUsedAtNil sets the value for LastUsedAt to be an explicit nil
+func (o *PaymentMethod) SetLastUsedAtNil() {
+	o.LastUsedAt.Set(nil)
+}
+
+// UnsetLastUsedAt ensures that no value is present for LastUsedAt, not even an explicit nil
+func (o *PaymentMethod) UnsetLastUsedAt() {
+	o.LastUsedAt.Unset()
+}
+
+// GetUsageCount returns the UsageCount field value if set, zero value otherwise.
+func (o *PaymentMethod) GetUsageCount() int32 {
+	if o == nil || o.UsageCount == nil {
+		var ret int32
+		return ret
+	}
+	return *o.UsageCount
+}
+
+// GetUsageCountOk returns a tuple with the UsageCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetUsageCountOk() (*int32, bool) {
+	if o == nil || o.UsageCount == nil {
+		return nil, false
+	}
+	return o.UsageCount, true
+}
+
+// HasUsageCount returns a boolean if a field has been set.
+func (o *PaymentMethod) HasUsageCount() bool {
+	if o != nil && o.UsageCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetUsageCount gets a reference to the given int32 and assigns it to the UsageCount field.
+func (o *PaymentMethod) SetUsageCount(v int32) {
+	o.UsageCount = &v
+}
+
+// GetCitLastUsedAt returns the CitLastUsedAt field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentMethod) GetCitLastUsedAt() time.Time {
+	if o == nil || o.CitLastUsedAt.Get() == nil {
+		var ret time.Time
+		return ret
+	}
+	return *o.CitLastUsedAt.Get()
+}
+
+// GetCitLastUsedAtOk returns a tuple with the CitLastUsedAt field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentMethod) GetCitLastUsedAtOk() (*time.Time, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CitLastUsedAt.Get(), o.CitLastUsedAt.IsSet()
+}
+
+// HasCitLastUsedAt returns a boolean if a field has been set.
+func (o *PaymentMethod) HasCitLastUsedAt() bool {
+	if o != nil && o.CitLastUsedAt.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCitLastUsedAt gets a reference to the given NullableTime and assigns it to the CitLastUsedAt field.
+func (o *PaymentMethod) SetCitLastUsedAt(v time.Time) {
+	o.CitLastUsedAt.Set(&v)
+}
+// SetCitLastUsedAtNil sets the value for CitLastUsedAt to be an explicit nil
+func (o *PaymentMethod) SetCitLastUsedAtNil() {
+	o.CitLastUsedAt.Set(nil)
+}
+
+// UnsetCitLastUsedAt ensures that no value is present for CitLastUsedAt, not even an explicit nil
+func (o *PaymentMethod) UnsetCitLastUsedAt() {
+	o.CitLastUsedAt.Unset()
+}
+
+// GetCitUsageCount returns the CitUsageCount field value if set, zero value otherwise.
+func (o *PaymentMethod) GetCitUsageCount() int32 {
+	if o == nil || o.CitUsageCount == nil {
+		var ret int32
+		return ret
+	}
+	return *o.CitUsageCount
+}
+
+// GetCitUsageCountOk returns a tuple with the CitUsageCount field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentMethod) GetCitUsageCountOk() (*int32, bool) {
+	if o == nil || o.CitUsageCount == nil {
+		return nil, false
+	}
+	return o.CitUsageCount, true
+}
+
+// HasCitUsageCount returns a boolean if a field has been set.
+func (o *PaymentMethod) HasCitUsageCount() bool {
+	if o != nil && o.CitUsageCount != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetCitUsageCount gets a reference to the given int32 and assigns it to the CitUsageCount field.
+func (o *PaymentMethod) SetCitUsageCount(v int32) {
+	o.CitUsageCount = &v
+}
+
 func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -962,6 +1118,18 @@ func (o PaymentMethod) MarshalJSON() ([]byte, error) {
 	}
 	if o.Fingerprint.IsSet() {
 		toSerialize["fingerprint"] = o.Fingerprint.Get()
+	}
+	if o.LastUsedAt.IsSet() {
+		toSerialize["last_used_at"] = o.LastUsedAt.Get()
+	}
+	if o.UsageCount != nil {
+		toSerialize["usage_count"] = o.UsageCount
+	}
+	if o.CitLastUsedAt.IsSet() {
+		toSerialize["cit_last_used_at"] = o.CitLastUsedAt.Get()
+	}
+	if o.CitUsageCount != nil {
+		toSerialize["cit_usage_count"] = o.CitUsageCount
 	}
 	return json.Marshal(toSerialize)
 }

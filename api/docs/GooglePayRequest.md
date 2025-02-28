@@ -6,8 +6,11 @@ Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Method** | **string** | &#x60;googlepay&#x60;. | 
 **Token** | **string** | The encrypted (opaque) token returned by the Google Pay API that represents a payment method. | 
+**CardSuffix** | Pointer to **NullableString** | Last 4 digits of the PAN for identification purposes. | [optional] 
+**CardScheme** | Pointer to **NullableString** | The scheme/brand of the card. | [optional] 
+**CardType** | Pointer to **NullableString** | The type of card. | [optional] 
 **AssuranceDetails** | Pointer to [**NullableGooglePayRequestAssuranceDetails**](GooglePayRequestAssuranceDetails.md) |  | [optional] 
-**CardHolderName** | Pointer to **NullableString** | Name of the card holder. | [optional] 
+**CardholderName** | Pointer to **NullableString** | Name of the card holder. | [optional] 
 **RedirectUrl** | Pointer to **NullableString** | We strongly recommend providing a &#x60;redirect_url&#x60; either when 3-D Secure is enabled and &#x60;three_d_secure_data&#x60; is not provided, or when using connections where 3DS is enabled. This value will be appended with both a transaction ID and status (e.g. &#x60;https://example.com/callback?gr4vy_transaction_id&#x3D;123 &amp;gr4vy_transaction_status&#x3D;capture_succeeded&#x60;) after 3-D Secure has completed. For those cases, if the value is not present, the transaction will be marked as failed. | [optional] 
 
 ## Methods
@@ -69,6 +72,111 @@ and a boolean to check if the value has been set.
 SetToken sets Token field to given value.
 
 
+### GetCardSuffix
+
+`func (o *GooglePayRequest) GetCardSuffix() string`
+
+GetCardSuffix returns the CardSuffix field if non-nil, zero value otherwise.
+
+### GetCardSuffixOk
+
+`func (o *GooglePayRequest) GetCardSuffixOk() (*string, bool)`
+
+GetCardSuffixOk returns a tuple with the CardSuffix field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardSuffix
+
+`func (o *GooglePayRequest) SetCardSuffix(v string)`
+
+SetCardSuffix sets CardSuffix field to given value.
+
+### HasCardSuffix
+
+`func (o *GooglePayRequest) HasCardSuffix() bool`
+
+HasCardSuffix returns a boolean if a field has been set.
+
+### SetCardSuffixNil
+
+`func (o *GooglePayRequest) SetCardSuffixNil(b bool)`
+
+ SetCardSuffixNil sets the value for CardSuffix to be an explicit nil
+
+### UnsetCardSuffix
+`func (o *GooglePayRequest) UnsetCardSuffix()`
+
+UnsetCardSuffix ensures that no value is present for CardSuffix, not even an explicit nil
+### GetCardScheme
+
+`func (o *GooglePayRequest) GetCardScheme() string`
+
+GetCardScheme returns the CardScheme field if non-nil, zero value otherwise.
+
+### GetCardSchemeOk
+
+`func (o *GooglePayRequest) GetCardSchemeOk() (*string, bool)`
+
+GetCardSchemeOk returns a tuple with the CardScheme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardScheme
+
+`func (o *GooglePayRequest) SetCardScheme(v string)`
+
+SetCardScheme sets CardScheme field to given value.
+
+### HasCardScheme
+
+`func (o *GooglePayRequest) HasCardScheme() bool`
+
+HasCardScheme returns a boolean if a field has been set.
+
+### SetCardSchemeNil
+
+`func (o *GooglePayRequest) SetCardSchemeNil(b bool)`
+
+ SetCardSchemeNil sets the value for CardScheme to be an explicit nil
+
+### UnsetCardScheme
+`func (o *GooglePayRequest) UnsetCardScheme()`
+
+UnsetCardScheme ensures that no value is present for CardScheme, not even an explicit nil
+### GetCardType
+
+`func (o *GooglePayRequest) GetCardType() string`
+
+GetCardType returns the CardType field if non-nil, zero value otherwise.
+
+### GetCardTypeOk
+
+`func (o *GooglePayRequest) GetCardTypeOk() (*string, bool)`
+
+GetCardTypeOk returns a tuple with the CardType field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetCardType
+
+`func (o *GooglePayRequest) SetCardType(v string)`
+
+SetCardType sets CardType field to given value.
+
+### HasCardType
+
+`func (o *GooglePayRequest) HasCardType() bool`
+
+HasCardType returns a boolean if a field has been set.
+
+### SetCardTypeNil
+
+`func (o *GooglePayRequest) SetCardTypeNil(b bool)`
+
+ SetCardTypeNil sets the value for CardType to be an explicit nil
+
+### UnsetCardType
+`func (o *GooglePayRequest) UnsetCardType()`
+
+UnsetCardType ensures that no value is present for CardType, not even an explicit nil
 ### GetAssuranceDetails
 
 `func (o *GooglePayRequest) GetAssuranceDetails() GooglePayRequestAssuranceDetails`
@@ -104,41 +212,41 @@ HasAssuranceDetails returns a boolean if a field has been set.
 `func (o *GooglePayRequest) UnsetAssuranceDetails()`
 
 UnsetAssuranceDetails ensures that no value is present for AssuranceDetails, not even an explicit nil
-### GetCardHolderName
+### GetCardholderName
 
-`func (o *GooglePayRequest) GetCardHolderName() string`
+`func (o *GooglePayRequest) GetCardholderName() string`
 
-GetCardHolderName returns the CardHolderName field if non-nil, zero value otherwise.
+GetCardholderName returns the CardholderName field if non-nil, zero value otherwise.
 
-### GetCardHolderNameOk
+### GetCardholderNameOk
 
-`func (o *GooglePayRequest) GetCardHolderNameOk() (*string, bool)`
+`func (o *GooglePayRequest) GetCardholderNameOk() (*string, bool)`
 
-GetCardHolderNameOk returns a tuple with the CardHolderName field if it's non-nil, zero value otherwise
+GetCardholderNameOk returns a tuple with the CardholderName field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
-### SetCardHolderName
+### SetCardholderName
 
-`func (o *GooglePayRequest) SetCardHolderName(v string)`
+`func (o *GooglePayRequest) SetCardholderName(v string)`
 
-SetCardHolderName sets CardHolderName field to given value.
+SetCardholderName sets CardholderName field to given value.
 
-### HasCardHolderName
+### HasCardholderName
 
-`func (o *GooglePayRequest) HasCardHolderName() bool`
+`func (o *GooglePayRequest) HasCardholderName() bool`
 
-HasCardHolderName returns a boolean if a field has been set.
+HasCardholderName returns a boolean if a field has been set.
 
-### SetCardHolderNameNil
+### SetCardholderNameNil
 
-`func (o *GooglePayRequest) SetCardHolderNameNil(b bool)`
+`func (o *GooglePayRequest) SetCardholderNameNil(b bool)`
 
- SetCardHolderNameNil sets the value for CardHolderName to be an explicit nil
+ SetCardholderNameNil sets the value for CardholderName to be an explicit nil
 
-### UnsetCardHolderName
-`func (o *GooglePayRequest) UnsetCardHolderName()`
+### UnsetCardholderName
+`func (o *GooglePayRequest) UnsetCardholderName()`
 
-UnsetCardHolderName ensures that no value is present for CardHolderName, not even an explicit nil
+UnsetCardholderName ensures that no value is present for CardholderName, not even an explicit nil
 ### GetRedirectUrl
 
 `func (o *GooglePayRequest) GetRedirectUrl() string`

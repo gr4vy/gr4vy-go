@@ -16,7 +16,7 @@ import (
 	"time"
 )
 
-// AntiFraudTransactionStatusUpdateErrorEvent This event logs the reason why we were unable to update an anti-fraud decision.
+// AntiFraudTransactionStatusUpdateErrorEvent This event logs the reason why we were unable to update an anti-fraud transaction.
 type AntiFraudTransactionStatusUpdateErrorEvent struct {
 	// The type of this resource. Is always `transaction-event`.
 	Type *string `json:"type,omitempty"`

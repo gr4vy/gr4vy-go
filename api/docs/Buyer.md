@@ -12,6 +12,7 @@ Name | Type | Description | Notes
 **ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the buyer against your own records. | [optional] 
 **MerchantAccountId** | Pointer to **string** | The unique ID for a merchant account. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this buyer was last updated in our system. | [optional] 
+**AccountNumber** | Pointer to **NullableString** | The source account number to perform an account funding transaction. | [optional] 
 
 ## Methods
 
@@ -262,6 +263,41 @@ SetUpdatedAt sets UpdatedAt field to given value.
 
 HasUpdatedAt returns a boolean if a field has been set.
 
+### GetAccountNumber
+
+`func (o *Buyer) GetAccountNumber() string`
+
+GetAccountNumber returns the AccountNumber field if non-nil, zero value otherwise.
+
+### GetAccountNumberOk
+
+`func (o *Buyer) GetAccountNumberOk() (*string, bool)`
+
+GetAccountNumberOk returns a tuple with the AccountNumber field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetAccountNumber
+
+`func (o *Buyer) SetAccountNumber(v string)`
+
+SetAccountNumber sets AccountNumber field to given value.
+
+### HasAccountNumber
+
+`func (o *Buyer) HasAccountNumber() bool`
+
+HasAccountNumber returns a boolean if a field has been set.
+
+### SetAccountNumberNil
+
+`func (o *Buyer) SetAccountNumberNil(b bool)`
+
+ SetAccountNumberNil sets the value for AccountNumber to be an explicit nil
+
+### UnsetAccountNumber
+`func (o *Buyer) UnsetAccountNumber()`
+
+UnsetAccountNumber ensures that no value is present for AccountNumber, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

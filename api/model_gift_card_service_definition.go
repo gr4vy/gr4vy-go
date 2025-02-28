@@ -24,7 +24,7 @@ type GiftCardServiceDefinition struct {
 	// The display name of this service.
 	DisplayName *string `json:"display_name,omitempty"`
 	// A list of fields that need to be submitted when activating the payment. service.
-	Fields *[]GiftCardServiceDefinitionFields `json:"fields,omitempty"`
+	Fields *[]AntiFraudServiceDefinitionFields `json:"fields,omitempty"`
 	// An icon to display for the payment service.
 	IconUrl *string `json:"icon_url,omitempty"`
 }
@@ -147,9 +147,9 @@ func (o *GiftCardServiceDefinition) SetDisplayName(v string) {
 }
 
 // GetFields returns the Fields field value if set, zero value otherwise.
-func (o *GiftCardServiceDefinition) GetFields() []GiftCardServiceDefinitionFields {
+func (o *GiftCardServiceDefinition) GetFields() []AntiFraudServiceDefinitionFields {
 	if o == nil || o.Fields == nil {
-		var ret []GiftCardServiceDefinitionFields
+		var ret []AntiFraudServiceDefinitionFields
 		return ret
 	}
 	return *o.Fields
@@ -157,7 +157,7 @@ func (o *GiftCardServiceDefinition) GetFields() []GiftCardServiceDefinitionField
 
 // GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *GiftCardServiceDefinition) GetFieldsOk() (*[]GiftCardServiceDefinitionFields, bool) {
+func (o *GiftCardServiceDefinition) GetFieldsOk() (*[]AntiFraudServiceDefinitionFields, bool) {
 	if o == nil || o.Fields == nil {
 		return nil, false
 	}
@@ -173,8 +173,8 @@ func (o *GiftCardServiceDefinition) HasFields() bool {
 	return false
 }
 
-// SetFields gets a reference to the given []GiftCardServiceDefinitionFields and assigns it to the Fields field.
-func (o *GiftCardServiceDefinition) SetFields(v []GiftCardServiceDefinitionFields) {
+// SetFields gets a reference to the given []AntiFraudServiceDefinitionFields and assigns it to the Fields field.
+func (o *GiftCardServiceDefinition) SetFields(v []AntiFraudServiceDefinitionFields) {
 	o.Fields = &v
 }
 

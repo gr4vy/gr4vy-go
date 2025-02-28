@@ -25,9 +25,9 @@ type MerchantProfileScheme struct {
 	MerchantAcquirerId *string `json:"merchant_acquirer_id,omitempty"`
 	// Merchant name to use when calling 3DS through this scheme.
 	MerchantName *string `json:"merchant_name,omitempty"`
-	// Acquirer bin to use when calling 3DS through this scheme.
+	// Merchant country code to use when calling 3DS through this scheme.
 	MerchantCountryCode *string `json:"merchant_country_code,omitempty"`
-	// Acquirer bin to use when calling 3DS through this scheme.
+	// Merchant category code to use when calling 3DS through this scheme.
 	MerchantCategoryCode *string `json:"merchant_category_code,omitempty"`
 }
 

@@ -34,6 +34,8 @@ type Buyer struct {
 	MerchantAccountId *string `json:"merchant_account_id,omitempty"`
 	// The date and time when this buyer was last updated in our system.
 	UpdatedAt *time.Time `json:"updated_at,omitempty"`
+	// The source account number to perform an account funding transaction.
+	AccountNumber NullableString `json:"account_number,omitempty"`
 }
 
 // NewBuyer instantiates a new Buyer object
@@ -339,6 +341,48 @@ func (o *Buyer) SetUpdatedAt(v time.Time) {
 	o.UpdatedAt = &v
 }
 
+// GetAccountNumber returns the AccountNumber field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *Buyer) GetAccountNumber() string {
+	if o == nil || o.AccountNumber.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.AccountNumber.Get()
+}
+
+// GetAccountNumberOk returns a tuple with the AccountNumber field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *Buyer) GetAccountNumberOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AccountNumber.Get(), o.AccountNumber.IsSet()
+}
+
+// HasAccountNumber returns a boolean if a field has been set.
+func (o *Buyer) HasAccountNumber() bool {
+	if o != nil && o.AccountNumber.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountNumber gets a reference to the given NullableString and assigns it to the AccountNumber field.
+func (o *Buyer) SetAccountNumber(v string) {
+	o.AccountNumber.Set(&v)
+}
+// SetAccountNumberNil sets the value for AccountNumber to be an explicit nil
+func (o *Buyer) SetAccountNumberNil() {
+	o.AccountNumber.Set(nil)
+}
+
+// UnsetAccountNumber ensures that no value is present for AccountNumber, not even an explicit nil
+func (o *Buyer) UnsetAccountNumber() {
+	o.AccountNumber.Unset()
+}
+
 func (o Buyer) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.Type != nil {
@@ -364,6 +408,9 @@ func (o Buyer) MarshalJSON() ([]byte, error) {
 	}
 	if o.UpdatedAt != nil {
 		toSerialize["updated_at"] = o.UpdatedAt
+	}
+	if o.AccountNumber.IsSet() {
+		toSerialize["account_number"] = o.AccountNumber.Get()
 	}
 	return json.Marshal(toSerialize)
 }

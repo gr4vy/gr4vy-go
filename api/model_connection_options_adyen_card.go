@@ -19,6 +19,12 @@ import (
 type ConnectionOptionsAdyenCard struct {
 	// A key-value object representing additional data to be passed to Adyen.
 	AdditionalData *map[string]string `json:"additionalData,omitempty"`
+	// Enabled Adyen's auto-rescue feature.
+	AutoRescue *bool `json:"autoRescue,omitempty"`
+	// Defines the number of days to auto-retry a payment for if `autoRescue` is enabled.
+	MaxDaysToRescue NullableInt32 `json:"maxDaysToRescue,omitempty"`
+	// Defines the Adyen auto-rescue test scenario to invoke.
+	AutoRescueScenario NullableString `json:"autoRescueScenario,omitempty"`
 }
 
 // NewConnectionOptionsAdyenCard instantiates a new ConnectionOptionsAdyenCard object
@@ -27,6 +33,10 @@ type ConnectionOptionsAdyenCard struct {
 // will change when the set of required properties is changed
 func NewConnectionOptionsAdyenCard() *ConnectionOptionsAdyenCard {
 	this := ConnectionOptionsAdyenCard{}
+	var autoRescue bool = false
+	this.AutoRescue = &autoRescue
+	var autoRescueScenario string = "null"
+	this.AutoRescueScenario = *NewNullableString(&autoRescueScenario)
 	return &this
 }
 
@@ -35,6 +45,10 @@ func NewConnectionOptionsAdyenCard() *ConnectionOptionsAdyenCard {
 // but it doesn't guarantee that properties required by API are set
 func NewConnectionOptionsAdyenCardWithDefaults() *ConnectionOptionsAdyenCard {
 	this := ConnectionOptionsAdyenCard{}
+	var autoRescue bool = false
+	this.AutoRescue = &autoRescue
+	var autoRescueScenario string = "null"
+	this.AutoRescueScenario = *NewNullableString(&autoRescueScenario)
 	return &this
 }
 
@@ -70,10 +84,135 @@ func (o *ConnectionOptionsAdyenCard) SetAdditionalData(v map[string]string) {
 	o.AdditionalData = &v
 }
 
+// GetAutoRescue returns the AutoRescue field value if set, zero value otherwise.
+func (o *ConnectionOptionsAdyenCard) GetAutoRescue() bool {
+	if o == nil || o.AutoRescue == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AutoRescue
+}
+
+// GetAutoRescueOk returns a tuple with the AutoRescue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectionOptionsAdyenCard) GetAutoRescueOk() (*bool, bool) {
+	if o == nil || o.AutoRescue == nil {
+		return nil, false
+	}
+	return o.AutoRescue, true
+}
+
+// HasAutoRescue returns a boolean if a field has been set.
+func (o *ConnectionOptionsAdyenCard) HasAutoRescue() bool {
+	if o != nil && o.AutoRescue != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoRescue gets a reference to the given bool and assigns it to the AutoRescue field.
+func (o *ConnectionOptionsAdyenCard) SetAutoRescue(v bool) {
+	o.AutoRescue = &v
+}
+
+// GetMaxDaysToRescue returns the MaxDaysToRescue field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptionsAdyenCard) GetMaxDaysToRescue() int32 {
+	if o == nil || o.MaxDaysToRescue.Get() == nil {
+		var ret int32
+		return ret
+	}
+	return *o.MaxDaysToRescue.Get()
+}
+
+// GetMaxDaysToRescueOk returns a tuple with the MaxDaysToRescue field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptionsAdyenCard) GetMaxDaysToRescueOk() (*int32, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.MaxDaysToRescue.Get(), o.MaxDaysToRescue.IsSet()
+}
+
+// HasMaxDaysToRescue returns a boolean if a field has been set.
+func (o *ConnectionOptionsAdyenCard) HasMaxDaysToRescue() bool {
+	if o != nil && o.MaxDaysToRescue.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetMaxDaysToRescue gets a reference to the given NullableInt32 and assigns it to the MaxDaysToRescue field.
+func (o *ConnectionOptionsAdyenCard) SetMaxDaysToRescue(v int32) {
+	o.MaxDaysToRescue.Set(&v)
+}
+// SetMaxDaysToRescueNil sets the value for MaxDaysToRescue to be an explicit nil
+func (o *ConnectionOptionsAdyenCard) SetMaxDaysToRescueNil() {
+	o.MaxDaysToRescue.Set(nil)
+}
+
+// UnsetMaxDaysToRescue ensures that no value is present for MaxDaysToRescue, not even an explicit nil
+func (o *ConnectionOptionsAdyenCard) UnsetMaxDaysToRescue() {
+	o.MaxDaysToRescue.Unset()
+}
+
+// GetAutoRescueScenario returns the AutoRescueScenario field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptionsAdyenCard) GetAutoRescueScenario() string {
+	if o == nil || o.AutoRescueScenario.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.AutoRescueScenario.Get()
+}
+
+// GetAutoRescueScenarioOk returns a tuple with the AutoRescueScenario field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptionsAdyenCard) GetAutoRescueScenarioOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AutoRescueScenario.Get(), o.AutoRescueScenario.IsSet()
+}
+
+// HasAutoRescueScenario returns a boolean if a field has been set.
+func (o *ConnectionOptionsAdyenCard) HasAutoRescueScenario() bool {
+	if o != nil && o.AutoRescueScenario.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAutoRescueScenario gets a reference to the given NullableString and assigns it to the AutoRescueScenario field.
+func (o *ConnectionOptionsAdyenCard) SetAutoRescueScenario(v string) {
+	o.AutoRescueScenario.Set(&v)
+}
+// SetAutoRescueScenarioNil sets the value for AutoRescueScenario to be an explicit nil
+func (o *ConnectionOptionsAdyenCard) SetAutoRescueScenarioNil() {
+	o.AutoRescueScenario.Set(nil)
+}
+
+// UnsetAutoRescueScenario ensures that no value is present for AutoRescueScenario, not even an explicit nil
+func (o *ConnectionOptionsAdyenCard) UnsetAutoRescueScenario() {
+	o.AutoRescueScenario.Unset()
+}
+
 func (o ConnectionOptionsAdyenCard) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.AdditionalData != nil {
 		toSerialize["additionalData"] = o.AdditionalData
+	}
+	if o.AutoRescue != nil {
+		toSerialize["autoRescue"] = o.AutoRescue
+	}
+	if o.MaxDaysToRescue.IsSet() {
+		toSerialize["maxDaysToRescue"] = o.MaxDaysToRescue.Get()
+	}
+	if o.AutoRescueScenario.IsSet() {
+		toSerialize["autoRescueScenario"] = o.AutoRescueScenario.Get()
 	}
 	return json.Marshal(toSerialize)
 }

@@ -44,8 +44,12 @@ func (r ApiCheckGiftCardBalancesRequest) Execute() (GiftCardsSummary, *_nethttp.
 }
 
 /*
- * CheckGiftCardBalances Check gift card balances
- * Returns details for a list of gift cards with updated balances.
+ * CheckGiftCardBalances Verify and check gift card balances
+ * Verify gift cards are enrolled and fetch their balances.
+
+This verifies a list of gift cards are enrolled for your gift card programme,
+if this feature is available via your gift card service. It then also fetches each card's
+current balance.
 
 Duplicated gift card numbers are not supported. This includes both stored gift
 cards, as well as those directly provided via the request.
@@ -126,7 +130,7 @@ func (a *GiftCardsApiService) CheckGiftCardBalancesExecute(r ApiCheckGiftCardBal
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
+			var v Error400BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()
@@ -392,15 +396,7 @@ func (a *GiftCardsApiService) GetGiftCardExecute(r ApiGetGiftCardRequest) (GiftC
 				return localVarReturnValue, localVarHTTPResponse, newErr
 			}
 			newErr.model = v
-			return localVarReturnValue, localVarHTTPResponse, newErr
 		}
-			var v ErrorGeneric
-			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
-			if err != nil {
-				newErr.error = err.Error()
-				return localVarReturnValue, localVarHTTPResponse, newErr
-			}
-			newErr.model = v
 		return localVarReturnValue, localVarHTTPResponse, newErr
 	}
 
@@ -437,12 +433,14 @@ func (r ApiListBuyerGiftCardsRequest) Execute() (GiftCardsSummary, *_nethttp.Res
 }
 
 /*
- * ListBuyerGiftCards List gift cards buyer
+ * ListBuyerGiftCards List gift cards for buyer
  * Returns a list of all stored, not-expired gift cards and
-their balances for a buyer in a summarized format.
+their balances for a buyer in a summarized format. Any
+expired or empty gift cards will be automatically filtered
+out and removed from the list of returned cards.
 
-All stored gift cards are returned, even if we were not able
-to fetch the latest balance.
+If we were not able to fetch the latest balance then all
+stored gift cards are returned.
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiListBuyerGiftCardsRequest
  */
@@ -726,7 +724,9 @@ It is only possible to store a gift card against a buyer if the same card is
 not already stored on the buyer and the gift card has not expired yet.
 
 Buyers by default can only have a maximum limit of 10 gift cards stored against
-them. Please contact our team to change this limit.
+them. Please contact our team to change this limit. To clear out any expired or
+empty gift cards, you can call the `GET /buyers/gift-cards` endpoint which will
+automatically archive any of those cards and allow new cards to be stored.
 
  * @param ctx _context.Context - for authentication, logging, cancellation, deadlines, tracing, etc. Passed from http.Request or context.Background().
  * @return ApiStoreGiftCardRequest
@@ -805,7 +805,7 @@ func (a *GiftCardsApiService) StoreGiftCardExecute(r ApiStoreGiftCardRequest) (G
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
+			var v Error400BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

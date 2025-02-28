@@ -23,11 +23,13 @@ type PaymentServiceRequest struct {
 	DisplayName string `json:"display_name"`
 	// A list of fields, each containing a key-value pair for each field defined by the definition for this payment service e.g. for stripe-card `secret_key` is required and so must be sent within this field.
 	Fields []PaymentServiceRequestFields `json:"fields"`
+	// The `reporting_fields` field should contain a list of key-value pairs. Each key-value pair represents a reporting field defined by the payment service. For example, when enabling settlement reporting for `nuvei-card`, the `ssh_username` field is required and must be included in `reporting_fields`.
+	ReportingFields *[]PaymentServiceRequestReportingFields `json:"reporting_fields,omitempty"`
 	// A list of countries that this payment service needs to support in ISO two-letter code format.
 	AcceptedCountries []string `json:"accepted_countries"`
 	// A list of currencies that this payment service needs to support in ISO 4217 three-letter code format.
 	AcceptedCurrencies []string `json:"accepted_currencies"`
-	// Defines if 3-D Secure is enabled for the service (can only be enabled if the payment service definition supports the `three_d_secure_hosted` feature). This does not affect pass through 3-D Secure data.
+	// Defines if 3-D Secure is enabled for the service. This feature can only be enabled if the payment service definition supports the `three_d_secure_hosted` feature. This does not affect pass through 3-D Secure data.
 	ThreeDSecureEnabled *bool `json:"three_d_secure_enabled,omitempty"`
 	// Configuration for each supported card scheme.
 	MerchantProfile NullableMerchantProfile `json:"merchant_profile,omitempty"`
@@ -36,9 +38,11 @@ type PaymentServiceRequest struct {
 	// Defines if the service works as an open-loop service. This feature can only be enabled if the PSP is set up to accept previous scheme transaction IDs.  If this value is not provided or is set to `null`, it will be set to the value of `open_loop` in the payment service definition.  If `open_loop_toggle` is `false` in the payment service definition, `open_loop` should either not be provided or set to `null`, or it will fail with a validation error.
 	OpenLoop NullableBool `json:"open_loop,omitempty"`
 	// Defines if tokenization is enabled for the service. This feature can only be enabled if the payment service is NOT set as `open_loop` and the PSP is set up to tokenize.
-	PaymentMethodTokenizationEnabled *bool `json:"payment_method_tokenization_enabled,omitempty"`
+	PaymentMethodTokenizationEnabled NullableBool `json:"payment_method_tokenization_enabled,omitempty"`
 	// Defines if network tokens are enabled for the service. This feature can only be enabled if the payment service is set as `open_loop` and the PSP is set up to accept network tokens.  If this value is not provided or is set to `null`, it will be set to the value of `network_tokens_default` in the payment service definition.  If `network_tokens_toggle` is `false` in the payment service definition, `network_tokens_enabled` should either not be provided or set to `null`, or it will fail with a validation error.
 	NetworkTokensEnabled NullableBool `json:"network_tokens_enabled,omitempty"`
+	// Defines if settlement reporting is enabled for the service. This feature can only be enabled if the payment service definition supports the `settlement_reporting` feature.
+	SettlementReportingEnabled *bool `json:"settlement_reporting_enabled,omitempty"`
 }
 
 // NewPaymentServiceRequest instantiates a new PaymentServiceRequest object
@@ -56,8 +60,8 @@ func NewPaymentServiceRequest(paymentServiceDefinitionId string, displayName str
 	this.ThreeDSecureEnabled = &threeDSecureEnabled
 	var active bool = true
 	this.Active = &active
-	var paymentMethodTokenizationEnabled bool = false
-	this.PaymentMethodTokenizationEnabled = &paymentMethodTokenizationEnabled
+	var settlementReportingEnabled bool = false
+	this.SettlementReportingEnabled = &settlementReportingEnabled
 	return &this
 }
 
@@ -70,8 +74,8 @@ func NewPaymentServiceRequestWithDefaults() *PaymentServiceRequest {
 	this.ThreeDSecureEnabled = &threeDSecureEnabled
 	var active bool = true
 	this.Active = &active
-	var paymentMethodTokenizationEnabled bool = false
-	this.PaymentMethodTokenizationEnabled = &paymentMethodTokenizationEnabled
+	var settlementReportingEnabled bool = false
+	this.SettlementReportingEnabled = &settlementReportingEnabled
 	return &this
 }
 
@@ -145,6 +149,38 @@ func (o *PaymentServiceRequest) GetFieldsOk() (*[]PaymentServiceRequestFields, b
 // SetFields sets field value
 func (o *PaymentServiceRequest) SetFields(v []PaymentServiceRequestFields) {
 	o.Fields = v
+}
+
+// GetReportingFields returns the ReportingFields field value if set, zero value otherwise.
+func (o *PaymentServiceRequest) GetReportingFields() []PaymentServiceRequestReportingFields {
+	if o == nil || o.ReportingFields == nil {
+		var ret []PaymentServiceRequestReportingFields
+		return ret
+	}
+	return *o.ReportingFields
+}
+
+// GetReportingFieldsOk returns a tuple with the ReportingFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceRequest) GetReportingFieldsOk() (*[]PaymentServiceRequestReportingFields, bool) {
+	if o == nil || o.ReportingFields == nil {
+		return nil, false
+	}
+	return o.ReportingFields, true
+}
+
+// HasReportingFields returns a boolean if a field has been set.
+func (o *PaymentServiceRequest) HasReportingFields() bool {
+	if o != nil && o.ReportingFields != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReportingFields gets a reference to the given []PaymentServiceRequestReportingFields and assigns it to the ReportingFields field.
+func (o *PaymentServiceRequest) SetReportingFields(v []PaymentServiceRequestReportingFields) {
+	o.ReportingFields = &v
 }
 
 // GetAcceptedCountries returns the AcceptedCountries field value
@@ -343,36 +379,46 @@ func (o *PaymentServiceRequest) UnsetOpenLoop() {
 	o.OpenLoop.Unset()
 }
 
-// GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field value if set, zero value otherwise.
+// GetPaymentMethodTokenizationEnabled returns the PaymentMethodTokenizationEnabled field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *PaymentServiceRequest) GetPaymentMethodTokenizationEnabled() bool {
-	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
+	if o == nil || o.PaymentMethodTokenizationEnabled.Get() == nil {
 		var ret bool
 		return ret
 	}
-	return *o.PaymentMethodTokenizationEnabled
+	return *o.PaymentMethodTokenizationEnabled.Get()
 }
 
 // GetPaymentMethodTokenizationEnabledOk returns a tuple with the PaymentMethodTokenizationEnabled field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *PaymentServiceRequest) GetPaymentMethodTokenizationEnabledOk() (*bool, bool) {
-	if o == nil || o.PaymentMethodTokenizationEnabled == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.PaymentMethodTokenizationEnabled, true
+	return o.PaymentMethodTokenizationEnabled.Get(), o.PaymentMethodTokenizationEnabled.IsSet()
 }
 
 // HasPaymentMethodTokenizationEnabled returns a boolean if a field has been set.
 func (o *PaymentServiceRequest) HasPaymentMethodTokenizationEnabled() bool {
-	if o != nil && o.PaymentMethodTokenizationEnabled != nil {
+	if o != nil && o.PaymentMethodTokenizationEnabled.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetPaymentMethodTokenizationEnabled gets a reference to the given bool and assigns it to the PaymentMethodTokenizationEnabled field.
+// SetPaymentMethodTokenizationEnabled gets a reference to the given NullableBool and assigns it to the PaymentMethodTokenizationEnabled field.
 func (o *PaymentServiceRequest) SetPaymentMethodTokenizationEnabled(v bool) {
-	o.PaymentMethodTokenizationEnabled = &v
+	o.PaymentMethodTokenizationEnabled.Set(&v)
+}
+// SetPaymentMethodTokenizationEnabledNil sets the value for PaymentMethodTokenizationEnabled to be an explicit nil
+func (o *PaymentServiceRequest) SetPaymentMethodTokenizationEnabledNil() {
+	o.PaymentMethodTokenizationEnabled.Set(nil)
+}
+
+// UnsetPaymentMethodTokenizationEnabled ensures that no value is present for PaymentMethodTokenizationEnabled, not even an explicit nil
+func (o *PaymentServiceRequest) UnsetPaymentMethodTokenizationEnabled() {
+	o.PaymentMethodTokenizationEnabled.Unset()
 }
 
 // GetNetworkTokensEnabled returns the NetworkTokensEnabled field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -417,6 +463,38 @@ func (o *PaymentServiceRequest) UnsetNetworkTokensEnabled() {
 	o.NetworkTokensEnabled.Unset()
 }
 
+// GetSettlementReportingEnabled returns the SettlementReportingEnabled field value if set, zero value otherwise.
+func (o *PaymentServiceRequest) GetSettlementReportingEnabled() bool {
+	if o == nil || o.SettlementReportingEnabled == nil {
+		var ret bool
+		return ret
+	}
+	return *o.SettlementReportingEnabled
+}
+
+// GetSettlementReportingEnabledOk returns a tuple with the SettlementReportingEnabled field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceRequest) GetSettlementReportingEnabledOk() (*bool, bool) {
+	if o == nil || o.SettlementReportingEnabled == nil {
+		return nil, false
+	}
+	return o.SettlementReportingEnabled, true
+}
+
+// HasSettlementReportingEnabled returns a boolean if a field has been set.
+func (o *PaymentServiceRequest) HasSettlementReportingEnabled() bool {
+	if o != nil && o.SettlementReportingEnabled != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetSettlementReportingEnabled gets a reference to the given bool and assigns it to the SettlementReportingEnabled field.
+func (o *PaymentServiceRequest) SetSettlementReportingEnabled(v bool) {
+	o.SettlementReportingEnabled = &v
+}
+
 func (o PaymentServiceRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -427,6 +505,9 @@ func (o PaymentServiceRequest) MarshalJSON() ([]byte, error) {
 	}
 	if true {
 		toSerialize["fields"] = o.Fields
+	}
+	if o.ReportingFields != nil {
+		toSerialize["reporting_fields"] = o.ReportingFields
 	}
 	if true {
 		toSerialize["accepted_countries"] = o.AcceptedCountries
@@ -446,11 +527,14 @@ func (o PaymentServiceRequest) MarshalJSON() ([]byte, error) {
 	if o.OpenLoop.IsSet() {
 		toSerialize["open_loop"] = o.OpenLoop.Get()
 	}
-	if o.PaymentMethodTokenizationEnabled != nil {
-		toSerialize["payment_method_tokenization_enabled"] = o.PaymentMethodTokenizationEnabled
+	if o.PaymentMethodTokenizationEnabled.IsSet() {
+		toSerialize["payment_method_tokenization_enabled"] = o.PaymentMethodTokenizationEnabled.Get()
 	}
 	if o.NetworkTokensEnabled.IsSet() {
 		toSerialize["network_tokens_enabled"] = o.NetworkTokensEnabled.Get()
+	}
+	if o.SettlementReportingEnabled != nil {
+		toSerialize["settlement_reporting_enabled"] = o.SettlementReportingEnabled
 	}
 	return json.Marshal(toSerialize)
 }

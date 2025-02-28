@@ -21,11 +21,13 @@ type StatementDescriptor struct {
 	Name NullableString `json:"name,omitempty"`
 	// A short description about the purchase.  Other validations: 1. Contains only Latin characters. 2. Contain at least one letter 3. Does not contain any of the special characters `< > \\ ' \" *` 4. Supports:   1. Lower case: `a-z`   2. Upper case: `A-Z`   3. Numbers: `0-9`   4. Spaces: ` `   5. Special characters: `. , _ - ? + /`.
 	Description NullableString `json:"description,omitempty"`
-	// City from which the charge originated.
+	// The merchant's city to be displayed in a statement descriptor.
 	City NullableString `json:"city,omitempty"`
+	// The 2-letter ISO country code of the merchant to be displayed in a statement descriptor. 
+	Country NullableString `json:"country,omitempty"`
 	// The value in the phone number field of a customer's statement which should be formatted according to the [E164 number standard](https://www.twilio.com/docs/glossary/what-e164).
 	PhoneNumber NullableString `json:"phone_number,omitempty"`
-	// The value in the URL/web address field of a customer's statement.
+	// The merchant's URL to be displayed in a statement descriptor.
 	Url NullableString `json:"url,omitempty"`
 }
 
@@ -172,6 +174,48 @@ func (o *StatementDescriptor) UnsetCity() {
 	o.City.Unset()
 }
 
+// GetCountry returns the Country field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *StatementDescriptor) GetCountry() string {
+	if o == nil || o.Country.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Country.Get()
+}
+
+// GetCountryOk returns a tuple with the Country field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *StatementDescriptor) GetCountryOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Country.Get(), o.Country.IsSet()
+}
+
+// HasCountry returns a boolean if a field has been set.
+func (o *StatementDescriptor) HasCountry() bool {
+	if o != nil && o.Country.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCountry gets a reference to the given NullableString and assigns it to the Country field.
+func (o *StatementDescriptor) SetCountry(v string) {
+	o.Country.Set(&v)
+}
+// SetCountryNil sets the value for Country to be an explicit nil
+func (o *StatementDescriptor) SetCountryNil() {
+	o.Country.Set(nil)
+}
+
+// UnsetCountry ensures that no value is present for Country, not even an explicit nil
+func (o *StatementDescriptor) UnsetCountry() {
+	o.Country.Unset()
+}
+
 // GetPhoneNumber returns the PhoneNumber field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *StatementDescriptor) GetPhoneNumber() string {
 	if o == nil || o.PhoneNumber.Get() == nil {
@@ -266,6 +310,9 @@ func (o StatementDescriptor) MarshalJSON() ([]byte, error) {
 	}
 	if o.City.IsSet() {
 		toSerialize["city"] = o.City.Get()
+	}
+	if o.Country.IsSet() {
+		toSerialize["country"] = o.Country.Get()
 	}
 	if o.PhoneNumber.IsSet() {
 		toSerialize["phone_number"] = o.PhoneNumber.Get()

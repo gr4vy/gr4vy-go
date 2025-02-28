@@ -17,10 +17,15 @@ import (
 
 // CheckoutSessionCreateRequest A request to create a checkout session.
 type CheckoutSessionCreateRequest struct {
+	// Defines when the checkout session will expire (in seconds). Defaults to an hour (3600 seconds).
+	ExpiresIn *int32 `json:"expires_in,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
 	CartItems []CartItem `json:"cart_items,omitempty"`
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it.
 	Metadata map[string]string `json:"metadata,omitempty"`
+	// The airline addendum data which describes the airline booking associated with this transaction.
+	Airline NullableAirline `json:"airline,omitempty"`
+	Buyer *TransactionBuyerRequest `json:"buyer,omitempty"`
 }
 
 // NewCheckoutSessionCreateRequest instantiates a new CheckoutSessionCreateRequest object
@@ -29,6 +34,8 @@ type CheckoutSessionCreateRequest struct {
 // will change when the set of required properties is changed
 func NewCheckoutSessionCreateRequest() *CheckoutSessionCreateRequest {
 	this := CheckoutSessionCreateRequest{}
+	var expiresIn int32 = 3600
+	this.ExpiresIn = &expiresIn
 	return &this
 }
 
@@ -37,7 +44,41 @@ func NewCheckoutSessionCreateRequest() *CheckoutSessionCreateRequest {
 // but it doesn't guarantee that properties required by API are set
 func NewCheckoutSessionCreateRequestWithDefaults() *CheckoutSessionCreateRequest {
 	this := CheckoutSessionCreateRequest{}
+	var expiresIn int32 = 3600
+	this.ExpiresIn = &expiresIn
 	return &this
+}
+
+// GetExpiresIn returns the ExpiresIn field value if set, zero value otherwise.
+func (o *CheckoutSessionCreateRequest) GetExpiresIn() int32 {
+	if o == nil || o.ExpiresIn == nil {
+		var ret int32
+		return ret
+	}
+	return *o.ExpiresIn
+}
+
+// GetExpiresInOk returns a tuple with the ExpiresIn field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CheckoutSessionCreateRequest) GetExpiresInOk() (*int32, bool) {
+	if o == nil || o.ExpiresIn == nil {
+		return nil, false
+	}
+	return o.ExpiresIn, true
+}
+
+// HasExpiresIn returns a boolean if a field has been set.
+func (o *CheckoutSessionCreateRequest) HasExpiresIn() bool {
+	if o != nil && o.ExpiresIn != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetExpiresIn gets a reference to the given int32 and assigns it to the ExpiresIn field.
+func (o *CheckoutSessionCreateRequest) SetExpiresIn(v int32) {
+	o.ExpiresIn = &v
 }
 
 // GetCartItems returns the CartItems field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -106,13 +147,96 @@ func (o *CheckoutSessionCreateRequest) SetMetadata(v map[string]string) {
 	o.Metadata = v
 }
 
+// GetAirline returns the Airline field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *CheckoutSessionCreateRequest) GetAirline() Airline {
+	if o == nil || o.Airline.Get() == nil {
+		var ret Airline
+		return ret
+	}
+	return *o.Airline.Get()
+}
+
+// GetAirlineOk returns a tuple with the Airline field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *CheckoutSessionCreateRequest) GetAirlineOk() (*Airline, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Airline.Get(), o.Airline.IsSet()
+}
+
+// HasAirline returns a boolean if a field has been set.
+func (o *CheckoutSessionCreateRequest) HasAirline() bool {
+	if o != nil && o.Airline.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAirline gets a reference to the given NullableAirline and assigns it to the Airline field.
+func (o *CheckoutSessionCreateRequest) SetAirline(v Airline) {
+	o.Airline.Set(&v)
+}
+// SetAirlineNil sets the value for Airline to be an explicit nil
+func (o *CheckoutSessionCreateRequest) SetAirlineNil() {
+	o.Airline.Set(nil)
+}
+
+// UnsetAirline ensures that no value is present for Airline, not even an explicit nil
+func (o *CheckoutSessionCreateRequest) UnsetAirline() {
+	o.Airline.Unset()
+}
+
+// GetBuyer returns the Buyer field value if set, zero value otherwise.
+func (o *CheckoutSessionCreateRequest) GetBuyer() TransactionBuyerRequest {
+	if o == nil || o.Buyer == nil {
+		var ret TransactionBuyerRequest
+		return ret
+	}
+	return *o.Buyer
+}
+
+// GetBuyerOk returns a tuple with the Buyer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *CheckoutSessionCreateRequest) GetBuyerOk() (*TransactionBuyerRequest, bool) {
+	if o == nil || o.Buyer == nil {
+		return nil, false
+	}
+	return o.Buyer, true
+}
+
+// HasBuyer returns a boolean if a field has been set.
+func (o *CheckoutSessionCreateRequest) HasBuyer() bool {
+	if o != nil && o.Buyer != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBuyer gets a reference to the given TransactionBuyerRequest and assigns it to the Buyer field.
+func (o *CheckoutSessionCreateRequest) SetBuyer(v TransactionBuyerRequest) {
+	o.Buyer = &v
+}
+
 func (o CheckoutSessionCreateRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
+	if o.ExpiresIn != nil {
+		toSerialize["expires_in"] = o.ExpiresIn
+	}
 	if o.CartItems != nil {
 		toSerialize["cart_items"] = o.CartItems
 	}
 	if o.Metadata != nil {
 		toSerialize["metadata"] = o.Metadata
+	}
+	if o.Airline.IsSet() {
+		toSerialize["airline"] = o.Airline.Get()
+	}
+	if o.Buyer != nil {
+		toSerialize["buyer"] = o.Buyer
 	}
 	return json.Marshal(toSerialize)
 }

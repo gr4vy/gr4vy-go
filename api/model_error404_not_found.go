@@ -19,11 +19,11 @@ import (
 type Error404NotFound struct {
 	// `error`.
 	Type *string `json:"type,omitempty"`
-	// `not_found`.
+	// The reason code for the error.
 	Code *string `json:"code,omitempty"`
 	// `404`.
 	Status *int32 `json:"status,omitempty"`
-	// The resource could not be found.
+	// The human readable reason for the error.
 	Message *string `json:"message,omitempty"`
 	// A list of detail objects that further clarify the reason for the error. Not every error supports more detail.
 	Details *[]ErrorDetail `json:"details,omitempty"`

@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Cavv** | Pointer to **NullableString** | The cardholder authentication value or AAV. | [optional] 
-**Eci** | Pointer to **NullableString** | The electronic commerce indicator for the 3DS transaction. | [optional] 
+**Eci** | Pointer to **NullableString** | The ecommerce indicator for the 3DS transaction. | [optional] 
 **Version** | Pointer to **string** | The version of 3-D Secure that was used. | [optional] 
 **AuthenticationResponse** | Pointer to **NullableString** | The transaction status after a the 3DS challenge. This will be null in case of a frictionless 3DS flow. | [optional] 
 **DirectoryResponse** | Pointer to **NullableString** | The transaction status received as part of the authentication request. | [optional] 

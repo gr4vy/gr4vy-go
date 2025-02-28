@@ -275,6 +275,8 @@ type ApiListBuyerPaymentMethodsRequest struct {
 	buyerExternalIdentifier *string
 	country *string
 	currency *string
+	sortBy *string
+	orderBy *string
 }
 
 func (r ApiListBuyerPaymentMethodsRequest) BuyerId(buyerId string) ApiListBuyerPaymentMethodsRequest {
@@ -291,6 +293,14 @@ func (r ApiListBuyerPaymentMethodsRequest) Country(country string) ApiListBuyerP
 }
 func (r ApiListBuyerPaymentMethodsRequest) Currency(currency string) ApiListBuyerPaymentMethodsRequest {
 	r.currency = &currency
+	return r
+}
+func (r ApiListBuyerPaymentMethodsRequest) SortBy(sortBy string) ApiListBuyerPaymentMethodsRequest {
+	r.sortBy = &sortBy
+	return r
+}
+func (r ApiListBuyerPaymentMethodsRequest) OrderBy(orderBy string) ApiListBuyerPaymentMethodsRequest {
+	r.orderBy = &orderBy
 	return r
 }
 
@@ -349,6 +359,12 @@ func (a *PaymentMethodsApiService) ListBuyerPaymentMethodsExecute(r ApiListBuyer
 	}
 	if r.currency != nil {
 		localVarQueryParams.Add("currency", parameterToString(*r.currency, ""))
+	}
+	if r.sortBy != nil {
+		localVarQueryParams.Add("sort_by", parameterToString(*r.sortBy, ""))
+	}
+	if r.orderBy != nil {
+		localVarQueryParams.Add("order_by", parameterToString(*r.orderBy, ""))
 	}
 	// to determine the Content-Type header
 	localVarHTTPContentTypes := []string{}
@@ -429,6 +445,7 @@ type ApiListPaymentMethodsRequest struct {
 	buyerId *string
 	buyerExternalIdentifier *string
 	status *[]string
+	externalIdentifier *string
 	limit *int32
 	cursor *string
 }
@@ -443,6 +460,10 @@ func (r ApiListPaymentMethodsRequest) BuyerExternalIdentifier(buyerExternalIdent
 }
 func (r ApiListPaymentMethodsRequest) Status(status []string) ApiListPaymentMethodsRequest {
 	r.status = &status
+	return r
+}
+func (r ApiListPaymentMethodsRequest) ExternalIdentifier(externalIdentifier string) ApiListPaymentMethodsRequest {
+	r.externalIdentifier = &externalIdentifier
 	return r
 }
 func (r ApiListPaymentMethodsRequest) Limit(limit int32) ApiListPaymentMethodsRequest {
@@ -512,6 +533,9 @@ func (a *PaymentMethodsApiService) ListPaymentMethodsExecute(r ApiListPaymentMet
 		} else {
 			localVarQueryParams.Add("status", parameterToString(t, "multi"))
 		}
+	}
+	if r.externalIdentifier != nil {
+		localVarQueryParams.Add("external_identifier", parameterToString(*r.externalIdentifier, ""))
 	}
 	if r.limit != nil {
 		localVarQueryParams.Add("limit", parameterToString(*r.limit, ""))
@@ -683,7 +707,7 @@ func (a *PaymentMethodsApiService) NewPaymentMethodExecute(r ApiNewPaymentMethod
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
+			var v Error400BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

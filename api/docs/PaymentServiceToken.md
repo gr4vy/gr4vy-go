@@ -10,7 +10,7 @@ Name | Type | Description | Notes
 **PaymentServiceId** | Pointer to **string** | The unique ID of the payment service. | [optional] 
 **Status** | Pointer to **string** | The state of the token.  - &#x60;processing&#x60; - The payment method is still being stored. - &#x60;buyer_approval_required&#x60; - Storing the payment method requires   the buyer to provide approval. Follow the &#x60;approval_url&#x60; for next steps. - &#x60;succeeded&#x60; - The payment method is approved and stored with all   relevant payment services. - &#x60;failed&#x60; - Storing the payment method did not succeed. | [optional] 
 **ApprovalUrl** | Pointer to **NullableString** | The optional URL that the buyer needs to be redirected to to further authorize their payment. | [optional] 
-**Token** | Pointer to **string** | The token value. | [optional] 
+**Token** | Pointer to **NullableString** | The token value. Will be present if succeeded. | [optional] 
 **CreatedAt** | Pointer to **time.Time** | The date and time when this token was first created in our system. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this token was last updated in our system. | [optional] 
 
@@ -218,6 +218,16 @@ SetToken sets Token field to given value.
 
 HasToken returns a boolean if a field has been set.
 
+### SetTokenNil
+
+`func (o *PaymentServiceToken) SetTokenNil(b bool)`
+
+ SetTokenNil sets the value for Token to be an explicit nil
+
+### UnsetToken
+`func (o *PaymentServiceToken) UnsetToken()`
+
+UnsetToken ensures that no value is present for Token, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *PaymentServiceToken) GetCreatedAt() time.Time`

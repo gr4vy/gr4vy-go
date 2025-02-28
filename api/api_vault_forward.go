@@ -31,8 +31,10 @@ type ApiMakeVaultForwardRequest struct {
 	ctx _context.Context
 	ApiService *VaultForwardApiService
 	xVaultForwardPaymentMethods *string
+	xVaultForwardCheckoutSession *string
 	xVaultForwardUrl *string
 	xVaultForwardHttpMethod *string
+	xVaultForwardAuthentications *string
 	xVaultForwardHeaderHEADERNAME *string
 	xVaultForwardTimeout *int32
 	body *string
@@ -42,12 +44,20 @@ func (r ApiMakeVaultForwardRequest) XVaultForwardPaymentMethods(xVaultForwardPay
 	r.xVaultForwardPaymentMethods = &xVaultForwardPaymentMethods
 	return r
 }
+func (r ApiMakeVaultForwardRequest) XVaultForwardCheckoutSession(xVaultForwardCheckoutSession string) ApiMakeVaultForwardRequest {
+	r.xVaultForwardCheckoutSession = &xVaultForwardCheckoutSession
+	return r
+}
 func (r ApiMakeVaultForwardRequest) XVaultForwardUrl(xVaultForwardUrl string) ApiMakeVaultForwardRequest {
 	r.xVaultForwardUrl = &xVaultForwardUrl
 	return r
 }
 func (r ApiMakeVaultForwardRequest) XVaultForwardHttpMethod(xVaultForwardHttpMethod string) ApiMakeVaultForwardRequest {
 	r.xVaultForwardHttpMethod = &xVaultForwardHttpMethod
+	return r
+}
+func (r ApiMakeVaultForwardRequest) XVaultForwardAuthentications(xVaultForwardAuthentications string) ApiMakeVaultForwardRequest {
+	r.xVaultForwardAuthentications = &xVaultForwardAuthentications
 	return r
 }
 func (r ApiMakeVaultForwardRequest) XVaultForwardHeaderHEADERNAME(xVaultForwardHeaderHEADERNAME string) ApiMakeVaultForwardRequest {
@@ -107,6 +117,9 @@ func (a *VaultForwardApiService) MakeVaultForwardExecute(r ApiMakeVaultForwardRe
 	if r.xVaultForwardPaymentMethods == nil {
 		return localVarReturnValue, nil, reportError("xVaultForwardPaymentMethods is required and must be specified")
 	}
+	if r.xVaultForwardCheckoutSession == nil {
+		return localVarReturnValue, nil, reportError("xVaultForwardCheckoutSession is required and must be specified")
+	}
 	if r.xVaultForwardUrl == nil {
 		return localVarReturnValue, nil, reportError("xVaultForwardUrl is required and must be specified")
 	}
@@ -132,6 +145,10 @@ func (a *VaultForwardApiService) MakeVaultForwardExecute(r ApiMakeVaultForwardRe
 		localVarHeaderParams["Accept"] = localVarHTTPHeaderAccept
 	}
 	localVarHeaderParams["x-vault-forward-payment-methods"] = parameterToString(*r.xVaultForwardPaymentMethods, "")
+	localVarHeaderParams["x-vault-forward-checkout-session"] = parameterToString(*r.xVaultForwardCheckoutSession, "")
+	if r.xVaultForwardAuthentications != nil {
+		localVarHeaderParams["x-vault-forward-authentications"] = parameterToString(*r.xVaultForwardAuthentications, "")
+	}
 	localVarHeaderParams["x-vault-forward-url"] = parameterToString(*r.xVaultForwardUrl, "")
 	localVarHeaderParams["x-vault-forward-http-method"] = parameterToString(*r.xVaultForwardHttpMethod, "")
 	if r.xVaultForwardHeaderHEADERNAME != nil {
@@ -165,7 +182,7 @@ func (a *VaultForwardApiService) MakeVaultForwardExecute(r ApiMakeVaultForwardRe
 			error: localVarHTTPResponse.Status,
 		}
 		if localVarHTTPResponse.StatusCode == 400 {
-			var v ErrorGeneric
+			var v Error400BadRequest
 			err = a.client.decode(&v, localVarBody, localVarHTTPResponse.Header.Get("Content-Type"))
 			if err != nil {
 				newErr.error = err.Error()

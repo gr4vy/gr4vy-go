@@ -37,6 +37,10 @@ type PaymentConnectorExternalTransactionRequestContext struct {
 	Method NullableString `json:"method,omitempty"`
 	// The endpoint for the request.
 	Url NullableString `json:"url,omitempty"`
+	// The ID of the refund, in case this links to a refund.
+	RefundId NullableString `json:"refund_id,omitempty"`
+	// The external ID of the refund.
+	RefundXid NullableString `json:"refund_xid,omitempty"`
 }
 
 // NewPaymentConnectorExternalTransactionRequestContext instantiates a new PaymentConnectorExternalTransactionRequestContext object
@@ -466,6 +470,90 @@ func (o *PaymentConnectorExternalTransactionRequestContext) UnsetUrl() {
 	o.Url.Unset()
 }
 
+// GetRefundId returns the RefundId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentConnectorExternalTransactionRequestContext) GetRefundId() string {
+	if o == nil || o.RefundId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RefundId.Get()
+}
+
+// GetRefundIdOk returns a tuple with the RefundId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentConnectorExternalTransactionRequestContext) GetRefundIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.RefundId.Get(), o.RefundId.IsSet()
+}
+
+// HasRefundId returns a boolean if a field has been set.
+func (o *PaymentConnectorExternalTransactionRequestContext) HasRefundId() bool {
+	if o != nil && o.RefundId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRefundId gets a reference to the given NullableString and assigns it to the RefundId field.
+func (o *PaymentConnectorExternalTransactionRequestContext) SetRefundId(v string) {
+	o.RefundId.Set(&v)
+}
+// SetRefundIdNil sets the value for RefundId to be an explicit nil
+func (o *PaymentConnectorExternalTransactionRequestContext) SetRefundIdNil() {
+	o.RefundId.Set(nil)
+}
+
+// UnsetRefundId ensures that no value is present for RefundId, not even an explicit nil
+func (o *PaymentConnectorExternalTransactionRequestContext) UnsetRefundId() {
+	o.RefundId.Unset()
+}
+
+// GetRefundXid returns the RefundXid field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *PaymentConnectorExternalTransactionRequestContext) GetRefundXid() string {
+	if o == nil || o.RefundXid.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.RefundXid.Get()
+}
+
+// GetRefundXidOk returns a tuple with the RefundXid field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *PaymentConnectorExternalTransactionRequestContext) GetRefundXidOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.RefundXid.Get(), o.RefundXid.IsSet()
+}
+
+// HasRefundXid returns a boolean if a field has been set.
+func (o *PaymentConnectorExternalTransactionRequestContext) HasRefundXid() bool {
+	if o != nil && o.RefundXid.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRefundXid gets a reference to the given NullableString and assigns it to the RefundXid field.
+func (o *PaymentConnectorExternalTransactionRequestContext) SetRefundXid(v string) {
+	o.RefundXid.Set(&v)
+}
+// SetRefundXidNil sets the value for RefundXid to be an explicit nil
+func (o *PaymentConnectorExternalTransactionRequestContext) SetRefundXidNil() {
+	o.RefundXid.Set(nil)
+}
+
+// UnsetRefundXid ensures that no value is present for RefundXid, not even an explicit nil
+func (o *PaymentConnectorExternalTransactionRequestContext) UnsetRefundXid() {
+	o.RefundXid.Unset()
+}
+
 func (o PaymentConnectorExternalTransactionRequestContext) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.ConnectorRequestId != nil {
@@ -497,6 +585,12 @@ func (o PaymentConnectorExternalTransactionRequestContext) MarshalJSON() ([]byte
 	}
 	if o.Url.IsSet() {
 		toSerialize["url"] = o.Url.Get()
+	}
+	if o.RefundId.IsSet() {
+		toSerialize["refund_id"] = o.RefundId.Get()
+	}
+	if o.RefundXid.IsSet() {
+		toSerialize["refund_xid"] = o.RefundXid.Get()
 	}
 	return json.Marshal(toSerialize)
 }

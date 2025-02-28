@@ -5,7 +5,7 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Key** | **string** | The key of the field to set a value for. | 
-**Value** | **string** | The value of a field to set; you can unset optional fields by setting this to an empty string &#x60;\&quot;\&quot;&#x60;. | 
+**Value** | **string** | The value of a field to set. | 
 
 ## Methods
 

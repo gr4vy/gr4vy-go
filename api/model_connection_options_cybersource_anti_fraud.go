@@ -19,8 +19,10 @@ import (
 type ConnectionOptionsCybersourceAntiFraud struct {
 	// An override for the merchant ID configured for the connector, used in combination with meta keys.
 	MetaKeyMerchantId NullableString `json:"meta_key_merchant_id,omitempty"`
-	// This is a key-value object for merchant defined data. Each key needs to be a numeric string identifying the MDD field to set. For example, for field 1 set the key to \"1\".
+	// This is a key-value object for merchant defined data. Each key needs to be a numeric string identifying the MDD field to set. For example, for field 1 set the key to \"1\".  Please avoid fields \"31\", \"48\", \"50\"-\"56\" and \"63\"-\"76\" as these are auto-populated based on the transaction profile.
 	MerchantDefinedData *map[string]string `json:"merchant_defined_data,omitempty"`
+	// Shipping method for the order.
+	ShippingMethod NullableString `json:"shipping_method,omitempty"`
 }
 
 // NewConnectionOptionsCybersourceAntiFraud instantiates a new ConnectionOptionsCybersourceAntiFraud object
@@ -114,6 +116,48 @@ func (o *ConnectionOptionsCybersourceAntiFraud) SetMerchantDefinedData(v map[str
 	o.MerchantDefinedData = &v
 }
 
+// GetShippingMethod returns the ShippingMethod field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptionsCybersourceAntiFraud) GetShippingMethod() string {
+	if o == nil || o.ShippingMethod.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ShippingMethod.Get()
+}
+
+// GetShippingMethodOk returns a tuple with the ShippingMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptionsCybersourceAntiFraud) GetShippingMethodOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ShippingMethod.Get(), o.ShippingMethod.IsSet()
+}
+
+// HasShippingMethod returns a boolean if a field has been set.
+func (o *ConnectionOptionsCybersourceAntiFraud) HasShippingMethod() bool {
+	if o != nil && o.ShippingMethod.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetShippingMethod gets a reference to the given NullableString and assigns it to the ShippingMethod field.
+func (o *ConnectionOptionsCybersourceAntiFraud) SetShippingMethod(v string) {
+	o.ShippingMethod.Set(&v)
+}
+// SetShippingMethodNil sets the value for ShippingMethod to be an explicit nil
+func (o *ConnectionOptionsCybersourceAntiFraud) SetShippingMethodNil() {
+	o.ShippingMethod.Set(nil)
+}
+
+// UnsetShippingMethod ensures that no value is present for ShippingMethod, not even an explicit nil
+func (o *ConnectionOptionsCybersourceAntiFraud) UnsetShippingMethod() {
+	o.ShippingMethod.Unset()
+}
+
 func (o ConnectionOptionsCybersourceAntiFraud) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.MetaKeyMerchantId.IsSet() {
@@ -121,6 +165,9 @@ func (o ConnectionOptionsCybersourceAntiFraud) MarshalJSON() ([]byte, error) {
 	}
 	if o.MerchantDefinedData != nil {
 		toSerialize["merchant_defined_data"] = o.MerchantDefinedData
+	}
+	if o.ShippingMethod.IsSet() {
+		toSerialize["shipping_method"] = o.ShippingMethod.Get()
 	}
 	return json.Marshal(toSerialize)
 }

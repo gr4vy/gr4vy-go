@@ -26,7 +26,9 @@ type PaymentServiceDefinition struct {
 	// The ID of the payment method that this services handles.
 	Method *string `json:"method,omitempty"`
 	// A list of fields that need to be submitted when activating the payment. service.
-	Fields *[]GiftCardServiceDefinitionFields `json:"fields,omitempty"`
+	Fields *[]AntiFraudServiceDefinitionFields `json:"fields,omitempty"`
+	// A list of fields that need to be submitted when enabling the payment service settlement reporting.
+	ReportingFields *[]PaymentServiceDefinitionReportingFields `json:"reporting_fields,omitempty"`
 	// A list of three-letter ISO currency codes that this service supports.
 	SupportedCurrencies *[]string `json:"supported_currencies,omitempty"`
 	// A list of two-letter ISO country codes that this service supports.
@@ -189,9 +191,9 @@ func (o *PaymentServiceDefinition) SetMethod(v string) {
 }
 
 // GetFields returns the Fields field value if set, zero value otherwise.
-func (o *PaymentServiceDefinition) GetFields() []GiftCardServiceDefinitionFields {
+func (o *PaymentServiceDefinition) GetFields() []AntiFraudServiceDefinitionFields {
 	if o == nil || o.Fields == nil {
-		var ret []GiftCardServiceDefinitionFields
+		var ret []AntiFraudServiceDefinitionFields
 		return ret
 	}
 	return *o.Fields
@@ -199,7 +201,7 @@ func (o *PaymentServiceDefinition) GetFields() []GiftCardServiceDefinitionFields
 
 // GetFieldsOk returns a tuple with the Fields field value if set, nil otherwise
 // and a boolean to check if the value has been set.
-func (o *PaymentServiceDefinition) GetFieldsOk() (*[]GiftCardServiceDefinitionFields, bool) {
+func (o *PaymentServiceDefinition) GetFieldsOk() (*[]AntiFraudServiceDefinitionFields, bool) {
 	if o == nil || o.Fields == nil {
 		return nil, false
 	}
@@ -215,9 +217,41 @@ func (o *PaymentServiceDefinition) HasFields() bool {
 	return false
 }
 
-// SetFields gets a reference to the given []GiftCardServiceDefinitionFields and assigns it to the Fields field.
-func (o *PaymentServiceDefinition) SetFields(v []GiftCardServiceDefinitionFields) {
+// SetFields gets a reference to the given []AntiFraudServiceDefinitionFields and assigns it to the Fields field.
+func (o *PaymentServiceDefinition) SetFields(v []AntiFraudServiceDefinitionFields) {
 	o.Fields = &v
+}
+
+// GetReportingFields returns the ReportingFields field value if set, zero value otherwise.
+func (o *PaymentServiceDefinition) GetReportingFields() []PaymentServiceDefinitionReportingFields {
+	if o == nil || o.ReportingFields == nil {
+		var ret []PaymentServiceDefinitionReportingFields
+		return ret
+	}
+	return *o.ReportingFields
+}
+
+// GetReportingFieldsOk returns a tuple with the ReportingFields field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *PaymentServiceDefinition) GetReportingFieldsOk() (*[]PaymentServiceDefinitionReportingFields, bool) {
+	if o == nil || o.ReportingFields == nil {
+		return nil, false
+	}
+	return o.ReportingFields, true
+}
+
+// HasReportingFields returns a boolean if a field has been set.
+func (o *PaymentServiceDefinition) HasReportingFields() bool {
+	if o != nil && o.ReportingFields != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetReportingFields gets a reference to the given []PaymentServiceDefinitionReportingFields and assigns it to the ReportingFields field.
+func (o *PaymentServiceDefinition) SetReportingFields(v []PaymentServiceDefinitionReportingFields) {
+	o.ReportingFields = &v
 }
 
 // GetSupportedCurrencies returns the SupportedCurrencies field value if set, zero value otherwise.
@@ -438,6 +472,9 @@ func (o PaymentServiceDefinition) MarshalJSON() ([]byte, error) {
 	}
 	if o.Fields != nil {
 		toSerialize["fields"] = o.Fields
+	}
+	if o.ReportingFields != nil {
+		toSerialize["reporting_fields"] = o.ReportingFields
 	}
 	if o.SupportedCurrencies != nil {
 		toSerialize["supported_currencies"] = o.SupportedCurrencies

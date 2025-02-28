@@ -53,6 +53,8 @@ type APIClient struct {
 
 	AccountUpdaterApi *AccountUpdaterApiService
 
+	AntiFraudServiceDefinitionsApi *AntiFraudServiceDefinitionsApiService
+
 	AuditLogsApi *AuditLogsApiService
 
 	BuyersApi *BuyersApiService
@@ -71,6 +73,8 @@ type APIClient struct {
 
 	MerchantAccountsApi *MerchantAccountsApiService
 
+	PaymentLinksApi *PaymentLinksApiService
+
 	PaymentMethodDefinitionsApi *PaymentMethodDefinitionsApiService
 
 	PaymentMethodsApi *PaymentMethodsApiService
@@ -81,6 +85,8 @@ type APIClient struct {
 
 	PaymentServicesApi *PaymentServicesApiService
 
+	PayoutsApi *PayoutsApiService
+
 	ReportsApi *ReportsApiService
 
 	RolesApi *RolesApiService
@@ -90,6 +96,8 @@ type APIClient struct {
 	TransactionsApi *TransactionsApiService
 
 	VaultForwardApi *VaultForwardApiService
+
+	WebhookSubscriptionsApi *WebhookSubscriptionsApiService
 }
 
 type service struct {
@@ -110,6 +118,7 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	// API Services
 	c.APILogsApi = (*APILogsApiService)(&c.common)
 	c.AccountUpdaterApi = (*AccountUpdaterApiService)(&c.common)
+	c.AntiFraudServiceDefinitionsApi = (*AntiFraudServiceDefinitionsApiService)(&c.common)
 	c.AuditLogsApi = (*AuditLogsApiService)(&c.common)
 	c.BuyersApi = (*BuyersApiService)(&c.common)
 	c.CardSchemeDefinitionsApi = (*CardSchemeDefinitionsApiService)(&c.common)
@@ -119,16 +128,19 @@ func NewAPIClient(cfg *Configuration) *APIClient {
 	c.GiftCardServicesApi = (*GiftCardServicesApiService)(&c.common)
 	c.GiftCardsApi = (*GiftCardsApiService)(&c.common)
 	c.MerchantAccountsApi = (*MerchantAccountsApiService)(&c.common)
+	c.PaymentLinksApi = (*PaymentLinksApiService)(&c.common)
 	c.PaymentMethodDefinitionsApi = (*PaymentMethodDefinitionsApiService)(&c.common)
 	c.PaymentMethodsApi = (*PaymentMethodsApiService)(&c.common)
 	c.PaymentOptionsApi = (*PaymentOptionsApiService)(&c.common)
 	c.PaymentServiceDefinitionsApi = (*PaymentServiceDefinitionsApiService)(&c.common)
 	c.PaymentServicesApi = (*PaymentServicesApiService)(&c.common)
+	c.PayoutsApi = (*PayoutsApiService)(&c.common)
 	c.ReportsApi = (*ReportsApiService)(&c.common)
 	c.RolesApi = (*RolesApiService)(&c.common)
 	c.TokensApi = (*TokensApiService)(&c.common)
 	c.TransactionsApi = (*TransactionsApiService)(&c.common)
 	c.VaultForwardApi = (*VaultForwardApiService)(&c.common)
+	c.WebhookSubscriptionsApi = (*WebhookSubscriptionsApiService)(&c.common)
 
 	return c
 }

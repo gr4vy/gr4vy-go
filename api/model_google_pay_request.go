@@ -21,9 +21,15 @@ type GooglePayRequest struct {
 	Method string `json:"method"`
 	// The encrypted (opaque) token returned by the Google Pay API that represents a payment method.
 	Token string `json:"token"`
+	// Last 4 digits of the PAN for identification purposes.
+	CardSuffix NullableString `json:"card_suffix,omitempty"`
+	// The scheme/brand of the card.
+	CardScheme NullableString `json:"card_scheme,omitempty"`
+	// The type of card.
+	CardType NullableString `json:"card_type,omitempty"`
 	AssuranceDetails NullableGooglePayRequestAssuranceDetails `json:"assurance_details,omitempty"`
 	// Name of the card holder.
-	CardHolderName NullableString `json:"card_holder_name,omitempty"`
+	CardholderName NullableString `json:"cardholder_name,omitempty"`
 	// We strongly recommend providing a `redirect_url` either when 3-D Secure is enabled and `three_d_secure_data` is not provided, or when using connections where 3DS is enabled. This value will be appended with both a transaction ID and status (e.g. `https://example.com/callback?gr4vy_transaction_id=123 &gr4vy_transaction_status=capture_succeeded`) after 3-D Secure has completed. For those cases, if the value is not present, the transaction will be marked as failed.
 	RedirectUrl NullableString `json:"redirect_url,omitempty"`
 }
@@ -95,6 +101,132 @@ func (o *GooglePayRequest) SetToken(v string) {
 	o.Token = v
 }
 
+// GetCardSuffix returns the CardSuffix field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GooglePayRequest) GetCardSuffix() string {
+	if o == nil || o.CardSuffix.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardSuffix.Get()
+}
+
+// GetCardSuffixOk returns a tuple with the CardSuffix field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GooglePayRequest) GetCardSuffixOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CardSuffix.Get(), o.CardSuffix.IsSet()
+}
+
+// HasCardSuffix returns a boolean if a field has been set.
+func (o *GooglePayRequest) HasCardSuffix() bool {
+	if o != nil && o.CardSuffix.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCardSuffix gets a reference to the given NullableString and assigns it to the CardSuffix field.
+func (o *GooglePayRequest) SetCardSuffix(v string) {
+	o.CardSuffix.Set(&v)
+}
+// SetCardSuffixNil sets the value for CardSuffix to be an explicit nil
+func (o *GooglePayRequest) SetCardSuffixNil() {
+	o.CardSuffix.Set(nil)
+}
+
+// UnsetCardSuffix ensures that no value is present for CardSuffix, not even an explicit nil
+func (o *GooglePayRequest) UnsetCardSuffix() {
+	o.CardSuffix.Unset()
+}
+
+// GetCardScheme returns the CardScheme field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GooglePayRequest) GetCardScheme() string {
+	if o == nil || o.CardScheme.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardScheme.Get()
+}
+
+// GetCardSchemeOk returns a tuple with the CardScheme field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GooglePayRequest) GetCardSchemeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CardScheme.Get(), o.CardScheme.IsSet()
+}
+
+// HasCardScheme returns a boolean if a field has been set.
+func (o *GooglePayRequest) HasCardScheme() bool {
+	if o != nil && o.CardScheme.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCardScheme gets a reference to the given NullableString and assigns it to the CardScheme field.
+func (o *GooglePayRequest) SetCardScheme(v string) {
+	o.CardScheme.Set(&v)
+}
+// SetCardSchemeNil sets the value for CardScheme to be an explicit nil
+func (o *GooglePayRequest) SetCardSchemeNil() {
+	o.CardScheme.Set(nil)
+}
+
+// UnsetCardScheme ensures that no value is present for CardScheme, not even an explicit nil
+func (o *GooglePayRequest) UnsetCardScheme() {
+	o.CardScheme.Unset()
+}
+
+// GetCardType returns the CardType field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GooglePayRequest) GetCardType() string {
+	if o == nil || o.CardType.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.CardType.Get()
+}
+
+// GetCardTypeOk returns a tuple with the CardType field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *GooglePayRequest) GetCardTypeOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.CardType.Get(), o.CardType.IsSet()
+}
+
+// HasCardType returns a boolean if a field has been set.
+func (o *GooglePayRequest) HasCardType() bool {
+	if o != nil && o.CardType.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetCardType gets a reference to the given NullableString and assigns it to the CardType field.
+func (o *GooglePayRequest) SetCardType(v string) {
+	o.CardType.Set(&v)
+}
+// SetCardTypeNil sets the value for CardType to be an explicit nil
+func (o *GooglePayRequest) SetCardTypeNil() {
+	o.CardType.Set(nil)
+}
+
+// UnsetCardType ensures that no value is present for CardType, not even an explicit nil
+func (o *GooglePayRequest) UnsetCardType() {
+	o.CardType.Unset()
+}
+
 // GetAssuranceDetails returns the AssuranceDetails field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GooglePayRequest) GetAssuranceDetails() GooglePayRequestAssuranceDetails {
 	if o == nil || o.AssuranceDetails.Get() == nil {
@@ -137,46 +269,46 @@ func (o *GooglePayRequest) UnsetAssuranceDetails() {
 	o.AssuranceDetails.Unset()
 }
 
-// GetCardHolderName returns the CardHolderName field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *GooglePayRequest) GetCardHolderName() string {
-	if o == nil || o.CardHolderName.Get() == nil {
+// GetCardholderName returns the CardholderName field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *GooglePayRequest) GetCardholderName() string {
+	if o == nil || o.CardholderName.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.CardHolderName.Get()
+	return *o.CardholderName.Get()
 }
 
-// GetCardHolderNameOk returns a tuple with the CardHolderName field value if set, nil otherwise
+// GetCardholderNameOk returns a tuple with the CardholderName field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *GooglePayRequest) GetCardHolderNameOk() (*string, bool) {
+func (o *GooglePayRequest) GetCardholderNameOk() (*string, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return o.CardHolderName.Get(), o.CardHolderName.IsSet()
+	return o.CardholderName.Get(), o.CardholderName.IsSet()
 }
 
-// HasCardHolderName returns a boolean if a field has been set.
-func (o *GooglePayRequest) HasCardHolderName() bool {
-	if o != nil && o.CardHolderName.IsSet() {
+// HasCardholderName returns a boolean if a field has been set.
+func (o *GooglePayRequest) HasCardholderName() bool {
+	if o != nil && o.CardholderName.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetCardHolderName gets a reference to the given NullableString and assigns it to the CardHolderName field.
-func (o *GooglePayRequest) SetCardHolderName(v string) {
-	o.CardHolderName.Set(&v)
+// SetCardholderName gets a reference to the given NullableString and assigns it to the CardholderName field.
+func (o *GooglePayRequest) SetCardholderName(v string) {
+	o.CardholderName.Set(&v)
 }
-// SetCardHolderNameNil sets the value for CardHolderName to be an explicit nil
-func (o *GooglePayRequest) SetCardHolderNameNil() {
-	o.CardHolderName.Set(nil)
+// SetCardholderNameNil sets the value for CardholderName to be an explicit nil
+func (o *GooglePayRequest) SetCardholderNameNil() {
+	o.CardholderName.Set(nil)
 }
 
-// UnsetCardHolderName ensures that no value is present for CardHolderName, not even an explicit nil
-func (o *GooglePayRequest) UnsetCardHolderName() {
-	o.CardHolderName.Unset()
+// UnsetCardholderName ensures that no value is present for CardholderName, not even an explicit nil
+func (o *GooglePayRequest) UnsetCardholderName() {
+	o.CardholderName.Unset()
 }
 
 // GetRedirectUrl returns the RedirectUrl field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -229,11 +361,20 @@ func (o GooglePayRequest) MarshalJSON() ([]byte, error) {
 	if true {
 		toSerialize["token"] = o.Token
 	}
+	if o.CardSuffix.IsSet() {
+		toSerialize["card_suffix"] = o.CardSuffix.Get()
+	}
+	if o.CardScheme.IsSet() {
+		toSerialize["card_scheme"] = o.CardScheme.Get()
+	}
+	if o.CardType.IsSet() {
+		toSerialize["card_type"] = o.CardType.Get()
+	}
 	if o.AssuranceDetails.IsSet() {
 		toSerialize["assurance_details"] = o.AssuranceDetails.Get()
 	}
-	if o.CardHolderName.IsSet() {
-		toSerialize["card_holder_name"] = o.CardHolderName.Get()
+	if o.CardholderName.IsSet() {
+		toSerialize["cardholder_name"] = o.CardholderName.Get()
 	}
 	if o.RedirectUrl.IsSet() {
 		toSerialize["redirect_url"] = o.RedirectUrl.Get()

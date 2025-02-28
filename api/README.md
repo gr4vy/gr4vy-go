@@ -82,6 +82,7 @@ Class | Method | HTTP request | Description
 ------------ | ------------- | ------------- | -------------
 *APILogsApi* | [**ListApiLogs**](docs/APILogsApi.md#listapilogs) | **Get** /api-logs | List API error logs
 *AccountUpdaterApi* | [**NewAccountUpdaterJob**](docs/AccountUpdaterApi.md#newaccountupdaterjob) | **Post** /account-updater/jobs | Create Account Updater job
+*AntiFraudServiceDefinitionsApi* | [**GetAntiFraudServiceDefinition**](docs/AntiFraudServiceDefinitionsApi.md#getantifraudservicedefinition) | **Get** /anti-fraud-service-definitions/{anti_fraud_service_definition_id} | Get anti fraud service definition
 *AuditLogsApi* | [**ListAuditLogs**](docs/AuditLogsApi.md#listauditlogs) | **Get** /audit-logs | List audit logs
 *BuyersApi* | [**DeleteBuyer**](docs/BuyersApi.md#deletebuyer) | **Delete** /buyers/{buyer_id} | Delete buyer
 *BuyersApi* | [**DeleteBuyerShippingDetail**](docs/BuyersApi.md#deletebuyershippingdetail) | **Delete** /buyers/{buyer_id}/shipping-details/{shipping_detail_id} | Delete buyer shipping detail
@@ -97,7 +98,9 @@ Class | Method | HTTP request | Description
 *CheckoutSessionsApi* | [**GetCheckoutSession**](docs/CheckoutSessionsApi.md#getcheckoutsession) | **Get** /checkout/sessions/{checkout_session_id} | Get checkout session
 *CheckoutSessionsApi* | [**NewCheckoutSession**](docs/CheckoutSessionsApi.md#newcheckoutsession) | **Post** /checkout/sessions | New checkout session
 *CheckoutSessionsApi* | [**UpdateCheckoutSession**](docs/CheckoutSessionsApi.md#updatecheckoutsession) | **Put** /checkout/sessions/{checkout_session_id} | Update checkout session
+*DigitalWalletsApi* | [**AddDigitalWalletDomainName**](docs/DigitalWalletsApi.md#adddigitalwalletdomainname) | **Post** /digital-wallets/{digital_wallet_id}/domains | Add digital wallet domain name
 *DigitalWalletsApi* | [**DeleteDigitalWallet**](docs/DigitalWalletsApi.md#deletedigitalwallet) | **Delete** /digital-wallets/{digital_wallet_id} | De-register digital wallet
+*DigitalWalletsApi* | [**DeleteDigitalWalletDomainName**](docs/DigitalWalletsApi.md#deletedigitalwalletdomainname) | **Delete** /digital-wallets/{digital_wallet_id}/domains | Remove digital wallet domain name
 *DigitalWalletsApi* | [**GetDigitalWallet**](docs/DigitalWalletsApi.md#getdigitalwallet) | **Get** /digital-wallets/{digital_wallet_id} | Get digital wallet
 *DigitalWalletsApi* | [**ListDigitalWallets**](docs/DigitalWalletsApi.md#listdigitalwallets) | **Get** /digital-wallets | List digital wallets
 *DigitalWalletsApi* | [**NewDigitalWallet**](docs/DigitalWalletsApi.md#newdigitalwallet) | **Post** /digital-wallets | Register digital wallet
@@ -108,10 +111,10 @@ Class | Method | HTTP request | Description
 *GiftCardServicesApi* | [**NewGiftCardService**](docs/GiftCardServicesApi.md#newgiftcardservice) | **Post** /gift-card-services | New gift card service
 *GiftCardServicesApi* | [**UpdateGiftCardService**](docs/GiftCardServicesApi.md#updategiftcardservice) | **Put** /gift-card-services/{gift_card_service_id} | Update gift card service
 *GiftCardServicesApi* | [**VerifyGiftCardService**](docs/GiftCardServicesApi.md#verifygiftcardservice) | **Post** /gift-card-services/verify | Verify gift card service credentials
-*GiftCardsApi* | [**CheckGiftCardBalances**](docs/GiftCardsApi.md#checkgiftcardbalances) | **Post** /gift-cards/balances | Check gift card balances
+*GiftCardsApi* | [**CheckGiftCardBalances**](docs/GiftCardsApi.md#checkgiftcardbalances) | **Post** /gift-cards/balances | Verify and check gift card balances
 *GiftCardsApi* | [**DeleteGiftCard**](docs/GiftCardsApi.md#deletegiftcard) | **Delete** /gift-cards/{gift_card_id} | Delete gift card
 *GiftCardsApi* | [**GetGiftCard**](docs/GiftCardsApi.md#getgiftcard) | **Get** /gift-cards/{gift_card_id} | Get gift card
-*GiftCardsApi* | [**ListBuyerGiftCards**](docs/GiftCardsApi.md#listbuyergiftcards) | **Get** /buyers/gift-cards | List gift cards buyer
+*GiftCardsApi* | [**ListBuyerGiftCards**](docs/GiftCardsApi.md#listbuyergiftcards) | **Get** /buyers/gift-cards | List gift cards for buyer
 *GiftCardsApi* | [**ListGiftCards**](docs/GiftCardsApi.md#listgiftcards) | **Get** /gift-cards | List gift cards
 *GiftCardsApi* | [**StoreGiftCard**](docs/GiftCardsApi.md#storegiftcard) | **Post** /gift-cards | Store gift card
 *MerchantAccountsApi* | [**DeleteMerchantAccuont**](docs/MerchantAccountsApi.md#deletemerchantaccuont) | **Delete** /merchant-accounts/{merchant_account_id} | Delete merchant account
@@ -119,6 +122,10 @@ Class | Method | HTTP request | Description
 *MerchantAccountsApi* | [**ListMerchantAccounts**](docs/MerchantAccountsApi.md#listmerchantaccounts) | **Get** /merchant-accounts | List merchant accounts
 *MerchantAccountsApi* | [**NewMerchantAccount**](docs/MerchantAccountsApi.md#newmerchantaccount) | **Post** /merchant-accounts | New merchant account
 *MerchantAccountsApi* | [**UpdateMerchantAccount**](docs/MerchantAccountsApi.md#updatemerchantaccount) | **Put** /merchant-accounts/{merchant_account_id} | Update merchant account
+*PaymentLinksApi* | [**ExpirePaymentLink**](docs/PaymentLinksApi.md#expirepaymentlink) | **Post** /payment-links/{payment_link_id}/expire | Expire payment link
+*PaymentLinksApi* | [**GetPaymentLink**](docs/PaymentLinksApi.md#getpaymentlink) | **Get** /payment-links/{payment_link_id} | Get payment link
+*PaymentLinksApi* | [**ListPaymentLinks**](docs/PaymentLinksApi.md#listpaymentlinks) | **Get** /payment-links | List payment links
+*PaymentLinksApi* | [**NewPaymentLink**](docs/PaymentLinksApi.md#newpaymentlink) | **Post** /payment-links | Create payment link
 *PaymentMethodDefinitionsApi* | [**ListPaymentMethodDefinitions**](docs/PaymentMethodDefinitionsApi.md#listpaymentmethoddefinitions) | **Get** /payment-method-definitions | List payment method definitions
 *PaymentMethodsApi* | [**DeletePaymentMethod**](docs/PaymentMethodsApi.md#deletepaymentmethod) | **Delete** /payment-methods/{payment_method_id} | Delete payment method
 *PaymentMethodsApi* | [**GetPaymentMethod**](docs/PaymentMethodsApi.md#getpaymentmethod) | **Get** /payment-methods/{payment_method_id} | Get payment method
@@ -127,13 +134,18 @@ Class | Method | HTTP request | Description
 *PaymentMethodsApi* | [**NewPaymentMethod**](docs/PaymentMethodsApi.md#newpaymentmethod) | **Post** /payment-methods | New payment method
 *PaymentOptionsApi* | [**ListPaymentOptions**](docs/PaymentOptionsApi.md#listpaymentoptions) | **Get** /payment-options | List payment options
 *PaymentOptionsApi* | [**PostListPaymentOptions**](docs/PaymentOptionsApi.md#postlistpaymentoptions) | **Post** /payment-options | List payment options with POST
+*PaymentServiceDefinitionsApi* | [**CreatePaymentServiceDefinitionSession**](docs/PaymentServiceDefinitionsApi.md#createpaymentservicedefinitionsession) | **Post** /payment-service-definitions/{payment_service_definition_id}/sessions | Create a session for a payment service
 *PaymentServiceDefinitionsApi* | [**GetPaymentServiceDefinition**](docs/PaymentServiceDefinitionsApi.md#getpaymentservicedefinition) | **Get** /payment-service-definitions/{payment_service_definition_id} | Get payment service definition
 *PaymentServiceDefinitionsApi* | [**ListPaymentServiceDefinitions**](docs/PaymentServiceDefinitionsApi.md#listpaymentservicedefinitions) | **Get** /payment-service-definitions | List payment service definitions
+*PaymentServicesApi* | [**CreatePaymentServiceSession**](docs/PaymentServicesApi.md#createpaymentservicesession) | **Post** /payment-services/{payment_service_id}/sessions | Create a session for a payment service by ID
 *PaymentServicesApi* | [**DeletePaymentService**](docs/PaymentServicesApi.md#deletepaymentservice) | **Delete** /payment-services/{payment_service_id} | Delete payment service
 *PaymentServicesApi* | [**GetPaymentService**](docs/PaymentServicesApi.md#getpaymentservice) | **Get** /payment-services/{payment_service_id} | Get payment service
 *PaymentServicesApi* | [**ListPaymentServices**](docs/PaymentServicesApi.md#listpaymentservices) | **Get** /payment-services | List payment services
 *PaymentServicesApi* | [**NewPaymentService**](docs/PaymentServicesApi.md#newpaymentservice) | **Post** /payment-services | New payment service
 *PaymentServicesApi* | [**UpdatePaymentService**](docs/PaymentServicesApi.md#updatepaymentservice) | **Put** /payment-services/{payment_service_id} | Update payment service
+*PayoutsApi* | [**GetSinglePayout**](docs/PayoutsApi.md#getsinglepayout) | **Get** /payouts/{payout_id} | Get payout
+*PayoutsApi* | [**ListPayouts**](docs/PayoutsApi.md#listpayouts) | **Get** /payouts | List payouts
+*PayoutsApi* | [**NewPayout**](docs/PayoutsApi.md#newpayout) | **Post** /payouts | Create payout
 *ReportsApi* | [**GenerateDownloadUrl**](docs/ReportsApi.md#generatedownloadurl) | **Post** /reports/{report_id}/executions/{report_execution_id}/url | Generate report download URL
 *ReportsApi* | [**GetReport**](docs/ReportsApi.md#getreport) | **Get** /reports/{report_id} | Get report
 *ReportsApi* | [**GetReportExecution**](docs/ReportsApi.md#getreportexecution) | **Get** /report-executions/{report_execution_id} | Get report execution
@@ -157,14 +169,23 @@ Class | Method | HTTP request | Description
 *TokensApi* | [**SuspendNetworkToken**](docs/TokensApi.md#suspendnetworktoken) | **Post** /payment-methods/{payment_method_id}/network-tokens/{network_token_id}/suspend | Suspend network token
 *TransactionsApi* | [**CaptureTransaction**](docs/TransactionsApi.md#capturetransaction) | **Post** /transactions/{transaction_id}/capture | Capture transaction
 *TransactionsApi* | [**GetRefund**](docs/TransactionsApi.md#getrefund) | **Get** /transactions/{transaction_id}/refunds/{refund_id} | Get refund
+*TransactionsApi* | [**GetSingleRefund**](docs/TransactionsApi.md#getsinglerefund) | **Get** /refunds/{refund_id} | Get refund
 *TransactionsApi* | [**GetTransaction**](docs/TransactionsApi.md#gettransaction) | **Get** /transactions/{transaction_id} | Get transaction
+*TransactionsApi* | [**GetTransactionSettlement**](docs/TransactionsApi.md#gettransactionsettlement) | **Get** /transactions/{transaction_id}/settlements/{settlement_id} | Get settlement
+*TransactionsApi* | [**GetTransactionSettlements**](docs/TransactionsApi.md#gettransactionsettlements) | **Get** /transactions/{transaction_id}/settlements | List settlements for transaction
 *TransactionsApi* | [**ListTransactionRefunds**](docs/TransactionsApi.md#listtransactionrefunds) | **Get** /transactions/{transaction_id}/refunds | List refunds
 *TransactionsApi* | [**ListTransactions**](docs/TransactionsApi.md#listtransactions) | **Get** /transactions | List transactions
 *TransactionsApi* | [**NewRefund**](docs/TransactionsApi.md#newrefund) | **Post** /transactions/{transaction_id}/refunds | Refund transaction
 *TransactionsApi* | [**NewTransaction**](docs/TransactionsApi.md#newtransaction) | **Post** /transactions | New transaction
 *TransactionsApi* | [**RefundAll**](docs/TransactionsApi.md#refundall) | **Post** /transactions/{transaction_id}/refunds/all | Refund all instruments in a transaction
+*TransactionsApi* | [**SyncTransaction**](docs/TransactionsApi.md#synctransaction) | **Post** /transactions/{transaction_id}/sync | Sync transaction
 *TransactionsApi* | [**VoidTransaction**](docs/TransactionsApi.md#voidtransaction) | **Post** /transactions/{transaction_id}/void | Void transaction
 *VaultForwardApi* | [**MakeVaultForward**](docs/VaultForwardApi.md#makevaultforward) | **Post** /vault-forward | Forward PCI data
+*WebhookSubscriptionsApi* | [**DeleteWebhookSubscription**](docs/WebhookSubscriptionsApi.md#deletewebhooksubscription) | **Delete** /webhook-subscriptions/{webhook_subscription_id} | Delete a webhook subscription
+*WebhookSubscriptionsApi* | [**GetWebhookSubscription**](docs/WebhookSubscriptionsApi.md#getwebhooksubscription) | **Get** /webhook-subscriptions/{webhook_subscription_id} | Get webhook subscription
+*WebhookSubscriptionsApi* | [**ListWebhookSubscriptions**](docs/WebhookSubscriptionsApi.md#listwebhooksubscriptions) | **Get** /webhook-subscriptions | List webhook subscriptions
+*WebhookSubscriptionsApi* | [**NewWebhookSubscription**](docs/WebhookSubscriptionsApi.md#newwebhooksubscription) | **Post** /webhook-subscriptions | New webhook subscription
+*WebhookSubscriptionsApi* | [**UpdateWebhookSubscription**](docs/WebhookSubscriptionsApi.md#updatewebhooksubscription) | **Put** /webhook-subscriptions/{webhook_subscription_id} | Update webhook subscription
 
 
 ## Documentation For Models
@@ -174,14 +195,24 @@ Class | Method | HTTP request | Description
  - [AccountUpdaterInquirySummary](docs/AccountUpdaterInquirySummary.md)
  - [AccountUpdaterJob](docs/AccountUpdaterJob.md)
  - [AccountUpdaterJobCreate](docs/AccountUpdaterJobCreate.md)
+ - [AdditionalIdentifiers](docs/AdditionalIdentifiers.md)
  - [Address](docs/Address.md)
+ - [Airline](docs/Airline.md)
+ - [AirlineLeg](docs/AirlineLeg.md)
+ - [AirlinePassenger](docs/AirlinePassenger.md)
  - [AntiFraudDecisionErrorEvent](docs/AntiFraudDecisionErrorEvent.md)
  - [AntiFraudDecisionErrorEventContext](docs/AntiFraudDecisionErrorEventContext.md)
  - [AntiFraudDecisionEvent](docs/AntiFraudDecisionEvent.md)
  - [AntiFraudDecisionEventContext](docs/AntiFraudDecisionEventContext.md)
  - [AntiFraudDecisionSkippedEvent](docs/AntiFraudDecisionSkippedEvent.md)
  - [AntiFraudDecisionSkippedEventContext](docs/AntiFraudDecisionSkippedEventContext.md)
+ - [AntiFraudDecisionUpdateErrorEvent](docs/AntiFraudDecisionUpdateErrorEvent.md)
+ - [AntiFraudDecisionUpdateErrorEventContext](docs/AntiFraudDecisionUpdateErrorEventContext.md)
+ - [AntiFraudDecisionUpdateEvent](docs/AntiFraudDecisionUpdateEvent.md)
+ - [AntiFraudDecisionUpdateEventContext](docs/AntiFraudDecisionUpdateEventContext.md)
  - [AntiFraudServiceCreate](docs/AntiFraudServiceCreate.md)
+ - [AntiFraudServiceDefinition](docs/AntiFraudServiceDefinition.md)
+ - [AntiFraudServiceDefinitionFields](docs/AntiFraudServiceDefinitionFields.md)
  - [AntiFraudServiceUpdate](docs/AntiFraudServiceUpdate.md)
  - [AntiFraudServiceUpdateFields](docs/AntiFraudServiceUpdateFields.md)
  - [AntiFraudTransactionStatusUpdateErrorEvent](docs/AntiFraudTransactionStatusUpdateErrorEvent.md)
@@ -228,8 +259,13 @@ Class | Method | HTTP request | Description
  - [ConnectionDefinitions](docs/ConnectionDefinitions.md)
  - [ConnectionOptions](docs/ConnectionOptions.md)
  - [ConnectionOptionsAdyenCard](docs/ConnectionOptionsAdyenCard.md)
+ - [ConnectionOptionsAdyenSepa](docs/ConnectionOptionsAdyenSepa.md)
  - [ConnectionOptionsCybersourceAntiFraud](docs/ConnectionOptionsCybersourceAntiFraud.md)
  - [ConnectionOptionsCybersourceCard](docs/ConnectionOptionsCybersourceCard.md)
+ - [ConnectionOptionsCybersourceIdeal](docs/ConnectionOptionsCybersourceIdeal.md)
+ - [ConnectionOptionsCybersourceKcp](docs/ConnectionOptionsCybersourceKcp.md)
+ - [ConnectionOptionsFiservCard](docs/ConnectionOptionsFiservCard.md)
+ - [ConnectionOptionsFiservCardInstallmentOptions](docs/ConnectionOptionsFiservCardInstallmentOptions.md)
  - [ConnectionOptionsForterAntiFraud](docs/ConnectionOptionsForterAntiFraud.md)
  - [ConnectionOptionsForterAntiFraudAddress](docs/ConnectionOptionsForterAntiFraudAddress.md)
  - [ConnectionOptionsForterAntiFraudBasicItemData](docs/ConnectionOptionsForterAntiFraudBasicItemData.md)
@@ -241,34 +277,37 @@ Class | Method | HTTP request | Description
  - [ConnectionOptionsForterAntiFraudPhone](docs/ConnectionOptionsForterAntiFraudPhone.md)
  - [ConnectionOptionsForterAntiFraudTotalDiscount](docs/ConnectionOptionsForterAntiFraudTotalDiscount.md)
  - [ConnectionOptionsForterAntiFraudTotalDiscountCouponDiscountAmount](docs/ConnectionOptionsForterAntiFraudTotalDiscountCouponDiscountAmount.md)
+ - [ConnectionOptionsGivingblockGivingblock](docs/ConnectionOptionsGivingblockGivingblock.md)
  - [ConnectionOptionsPaypalPaypal](docs/ConnectionOptionsPaypalPaypal.md)
  - [ConnectionOptionsPaypalPaypalAdditionalData](docs/ConnectionOptionsPaypalPaypalAdditionalData.md)
+ - [ConnectionOptionsPowertranzCard](docs/ConnectionOptionsPowertranzCard.md)
  - [ConnectionOptionsStripeCard](docs/ConnectionOptionsStripeCard.md)
  - [ConnectionOptionsStripeCardStripeConnect](docs/ConnectionOptionsStripeCardStripeConnect.md)
  - [Connections](docs/Connections.md)
  - [Cryptogram](docs/Cryptogram.md)
+ - [DetailedSettlementReportSpec](docs/DetailedSettlementReportSpec.md)
+ - [DetailedSettlementReportSpecParams](docs/DetailedSettlementReportSpecParams.md)
+ - [DetailedSettlementReportSpecParamsFilters](docs/DetailedSettlementReportSpecParamsFilters.md)
+ - [DetailedSettlementReportSpecParamsFiltersIngestedAt](docs/DetailedSettlementReportSpecParamsFiltersIngestedAt.md)
  - [DigitalWallet](docs/DigitalWallet.md)
  - [DigitalWalletApplePayTokenDecrypted](docs/DigitalWalletApplePayTokenDecrypted.md)
  - [DigitalWalletApplePayTokenDecryptedContext](docs/DigitalWalletApplePayTokenDecryptedContext.md)
  - [DigitalWalletClickToPayFields](docs/DigitalWalletClickToPayFields.md)
  - [DigitalWalletClickToPayTokenDecrypted](docs/DigitalWalletClickToPayTokenDecrypted.md)
  - [DigitalWalletClickToPayTokenDecryptedContext](docs/DigitalWalletClickToPayTokenDecryptedContext.md)
+ - [DigitalWalletDomain](docs/DigitalWalletDomain.md)
  - [DigitalWalletGooglePayTokenDecrypted](docs/DigitalWalletGooglePayTokenDecrypted.md)
  - [DigitalWalletGooglePayTokenDecryptedContext](docs/DigitalWalletGooglePayTokenDecryptedContext.md)
  - [DigitalWalletRequest](docs/DigitalWalletRequest.md)
  - [DigitalWalletUpdate](docs/DigitalWalletUpdate.md)
  - [DigitalWallets](docs/DigitalWallets.md)
  - [Error400BadRequest](docs/Error400BadRequest.md)
- - [Error400IncorrectJson](docs/Error400IncorrectJson.md)
- - [Error400InvalidCredentials](docs/Error400InvalidCredentials.md)
  - [Error401Unauthorized](docs/Error401Unauthorized.md)
  - [Error403Forbidden](docs/Error403Forbidden.md)
  - [Error404NotFound](docs/Error404NotFound.md)
- - [Error404PendingCreation](docs/Error404PendingCreation.md)
  - [Error409DuplicateRecord](docs/Error409DuplicateRecord.md)
  - [Error429TooManyRequests](docs/Error429TooManyRequests.md)
  - [ErrorDetail](docs/ErrorDetail.md)
- - [ErrorGeneric](docs/ErrorGeneric.md)
  - [GiftCard](docs/GiftCard.md)
  - [GiftCardBalanceNewRequest](docs/GiftCardBalanceNewRequest.md)
  - [GiftCardBalanceRequest](docs/GiftCardBalanceRequest.md)
@@ -286,7 +325,6 @@ Class | Method | HTTP request | Description
  - [GiftCardServiceCreateRequest](docs/GiftCardServiceCreateRequest.md)
  - [GiftCardServiceCreateRequestFields](docs/GiftCardServiceCreateRequestFields.md)
  - [GiftCardServiceDefinition](docs/GiftCardServiceDefinition.md)
- - [GiftCardServiceDefinitionFields](docs/GiftCardServiceDefinitionFields.md)
  - [GiftCardServiceFields](docs/GiftCardServiceFields.md)
  - [GiftCardServiceSnapshot](docs/GiftCardServiceSnapshot.md)
  - [GiftCardServiceUpdateRequest](docs/GiftCardServiceUpdateRequest.md)
@@ -302,12 +340,16 @@ Class | Method | HTTP request | Description
  - [GooglePayRequestAssuranceDetails](docs/GooglePayRequestAssuranceDetails.md)
  - [GooglePaySessionRequest](docs/GooglePaySessionRequest.md)
  - [IssueCryptogramRequest](docs/IssueCryptogramRequest.md)
+ - [Merchant](docs/Merchant.md)
  - [MerchantAccount](docs/MerchantAccount.md)
  - [MerchantAccountCreate](docs/MerchantAccountCreate.md)
  - [MerchantAccountUpdate](docs/MerchantAccountUpdate.md)
  - [MerchantAccounts](docs/MerchantAccounts.md)
  - [MerchantProfile](docs/MerchantProfile.md)
  - [MerchantProfileScheme](docs/MerchantProfileScheme.md)
+ - [MerchantProfileSchemeSummary](docs/MerchantProfileSchemeSummary.md)
+ - [MerchantProfileSummary](docs/MerchantProfileSummary.md)
+ - [MerchantRequest](docs/MerchantRequest.md)
  - [NetworkToken](docs/NetworkToken.md)
  - [NetworkTokenCryptogramProvisionFailed](docs/NetworkTokenCryptogramProvisionFailed.md)
  - [NetworkTokenCryptogramProvisionFailedContext](docs/NetworkTokenCryptogramProvisionFailedContext.md)
@@ -320,6 +362,8 @@ Class | Method | HTTP request | Description
  - [NetworkTokens](docs/NetworkTokens.md)
  - [PaymentConnectorExternalTransactionRequest](docs/PaymentConnectorExternalTransactionRequest.md)
  - [PaymentConnectorExternalTransactionRequestContext](docs/PaymentConnectorExternalTransactionRequestContext.md)
+ - [PaymentConnectorReportTransactionSettled](docs/PaymentConnectorReportTransactionSettled.md)
+ - [PaymentConnectorReportTransactionSettledContext](docs/PaymentConnectorReportTransactionSettledContext.md)
  - [PaymentConnectorResponseTransactionAuthorizationFailedEvent](docs/PaymentConnectorResponseTransactionAuthorizationFailedEvent.md)
  - [PaymentConnectorResponseTransactionAuthorizationFailedEventContext](docs/PaymentConnectorResponseTransactionAuthorizationFailedEventContext.md)
  - [PaymentConnectorResponseTransactionAuthorizationSucceededEvent](docs/PaymentConnectorResponseTransactionAuthorizationSucceededEvent.md)
@@ -337,6 +381,9 @@ Class | Method | HTTP request | Description
  - [PaymentConnectorResponseTransactionVoidFailedEventContext](docs/PaymentConnectorResponseTransactionVoidFailedEventContext.md)
  - [PaymentConnectorResponseTransactionVoidSucceededEvent](docs/PaymentConnectorResponseTransactionVoidSucceededEvent.md)
  - [PaymentConnectorResponseTransactionVoidSucceededEventContext](docs/PaymentConnectorResponseTransactionVoidSucceededEventContext.md)
+ - [PaymentLink](docs/PaymentLink.md)
+ - [PaymentLinkRequest](docs/PaymentLinkRequest.md)
+ - [PaymentLinks](docs/PaymentLinks.md)
  - [PaymentMethod](docs/PaymentMethod.md)
  - [PaymentMethodDefinition](docs/PaymentMethodDefinition.md)
  - [PaymentMethodDefinitions](docs/PaymentMethodDefinitions.md)
@@ -354,16 +401,32 @@ Class | Method | HTTP request | Description
  - [PaymentService](docs/PaymentService.md)
  - [PaymentServiceDefinition](docs/PaymentServiceDefinition.md)
  - [PaymentServiceDefinitionConfiguration](docs/PaymentServiceDefinitionConfiguration.md)
+ - [PaymentServiceDefinitionReportingFields](docs/PaymentServiceDefinitionReportingFields.md)
  - [PaymentServiceDefinitionSupportedFeatures](docs/PaymentServiceDefinitionSupportedFeatures.md)
  - [PaymentServiceDefinitions](docs/PaymentServiceDefinitions.md)
+ - [PaymentServiceReportingFields](docs/PaymentServiceReportingFields.md)
  - [PaymentServiceRequest](docs/PaymentServiceRequest.md)
  - [PaymentServiceRequestFields](docs/PaymentServiceRequestFields.md)
+ - [PaymentServiceRequestReportingFields](docs/PaymentServiceRequestReportingFields.md)
+ - [PaymentServiceSession](docs/PaymentServiceSession.md)
  - [PaymentServiceSnapshot](docs/PaymentServiceSnapshot.md)
  - [PaymentServiceToken](docs/PaymentServiceToken.md)
  - [PaymentServiceTokenRequest](docs/PaymentServiceTokenRequest.md)
  - [PaymentServiceTokens](docs/PaymentServiceTokens.md)
  - [PaymentServiceUpdate](docs/PaymentServiceUpdate.md)
+ - [PaymentServiceUpdateFields](docs/PaymentServiceUpdateFields.md)
+ - [PaymentServiceUpdateReportingFields](docs/PaymentServiceUpdateReportingFields.md)
  - [PaymentServices](docs/PaymentServices.md)
+ - [Payout](docs/Payout.md)
+ - [PayoutConnectionOptionsRequest](docs/PayoutConnectionOptionsRequest.md)
+ - [PayoutConnectionOptionsRequestCheckoutCard](docs/PayoutConnectionOptionsRequestCheckoutCard.md)
+ - [PayoutInlineCardRequest](docs/PayoutInlineCardRequest.md)
+ - [PayoutPaymentMethodRequest](docs/PayoutPaymentMethodRequest.md)
+ - [PayoutRequest](docs/PayoutRequest.md)
+ - [PayoutStoredCardRequest](docs/PayoutStoredCardRequest.md)
+ - [Payouts](docs/Payouts.md)
+ - [Recipient](docs/Recipient.md)
+ - [RecipientSnapshot](docs/RecipientSnapshot.md)
  - [RedirectRequest](docs/RedirectRequest.md)
  - [Refund](docs/Refund.md)
  - [Refunds](docs/Refunds.md)
@@ -391,6 +454,8 @@ Class | Method | HTTP request | Description
  - [RolePermissions](docs/RolePermissions.md)
  - [Roles](docs/Roles.md)
  - [SetPasswordRequest](docs/SetPasswordRequest.md)
+ - [Settlement](docs/Settlement.md)
+ - [Settlements](docs/Settlements.md)
  - [ShippingDetail](docs/ShippingDetail.md)
  - [ShippingDetailRequest](docs/ShippingDetailRequest.md)
  - [ShippingDetailUpdateRequest](docs/ShippingDetailUpdateRequest.md)
@@ -418,6 +483,7 @@ Class | Method | HTTP request | Description
  - [ThreeDSecureV2](docs/ThreeDSecureV2.md)
  - [TokenizedRequest](docs/TokenizedRequest.md)
  - [Transaction](docs/Transaction.md)
+ - [TransactionBuyerRequest](docs/TransactionBuyerRequest.md)
  - [TransactionCaptureRequest](docs/TransactionCaptureRequest.md)
  - [TransactionCardRequest](docs/TransactionCardRequest.md)
  - [TransactionCheckoutSessionRequest](docs/TransactionCheckoutSessionRequest.md)
@@ -426,25 +492,45 @@ Class | Method | HTTP request | Description
  - [TransactionGiftCardStoredRequest](docs/TransactionGiftCardStoredRequest.md)
  - [TransactionHistoryEvent](docs/TransactionHistoryEvent.md)
  - [TransactionHistoryEvents](docs/TransactionHistoryEvents.md)
+ - [TransactionNetworkTokenApplePayRequest](docs/TransactionNetworkTokenApplePayRequest.md)
+ - [TransactionNetworkTokenGooglePayRequest](docs/TransactionNetworkTokenGooglePayRequest.md)
+ - [TransactionNetworkTokenRequest](docs/TransactionNetworkTokenRequest.md)
  - [TransactionPaymentMethodRequest](docs/TransactionPaymentMethodRequest.md)
  - [TransactionRedirectRequest](docs/TransactionRedirectRequest.md)
+ - [TransactionRefundAllRequest](docs/TransactionRefundAllRequest.md)
  - [TransactionRefundRequest](docs/TransactionRefundRequest.md)
  - [TransactionRequest](docs/TransactionRequest.md)
+ - [TransactionRetriesReportSpec](docs/TransactionRetriesReportSpec.md)
+ - [TransactionRetriesReportSpecParams](docs/TransactionRetriesReportSpecParams.md)
+ - [TransactionRetriesReportSpecParamsFilters](docs/TransactionRetriesReportSpecParamsFilters.md)
+ - [TransactionRetriesReportSpecParamsFiltersCreatedAt](docs/TransactionRetriesReportSpecParamsFiltersCreatedAt.md)
  - [TransactionStatusSummary](docs/TransactionStatusSummary.md)
  - [TransactionSummary](docs/TransactionSummary.md)
  - [Transactions](docs/Transactions.md)
  - [TransactionsBatchCaptureRequest](docs/TransactionsBatchCaptureRequest.md)
+ - [TransactionsReportSpec](docs/TransactionsReportSpec.md)
+ - [TransactionsReportSpecParams](docs/TransactionsReportSpecParams.md)
+ - [TransactionsReportSpecParamsFilters](docs/TransactionsReportSpecParamsFilters.md)
+ - [TransactionsReportSpecParamsFiltersAuthorizedAt](docs/TransactionsReportSpecParamsFiltersAuthorizedAt.md)
+ - [TransactionsReportSpecParamsFiltersCapturedAt](docs/TransactionsReportSpecParamsFiltersCapturedAt.md)
+ - [TransactionsReportSpecParamsFiltersUpdatedAt](docs/TransactionsReportSpecParamsFiltersUpdatedAt.md)
+ - [TransactionsReportSpecParamsFiltersVoidedAt](docs/TransactionsReportSpecParamsFiltersVoidedAt.md)
  - [UserCurrentUpdate](docs/UserCurrentUpdate.md)
  - [UserRequest](docs/UserRequest.md)
  - [UserRole](docs/UserRole.md)
  - [UserUpdate](docs/UserUpdate.md)
+ - [WebhookSubscription](docs/WebhookSubscription.md)
+ - [WebhookSubscriptionAuthentication](docs/WebhookSubscriptionAuthentication.md)
+ - [WebhookSubscriptionRequest](docs/WebhookSubscriptionRequest.md)
+ - [WebhookSubscriptionUpdateRequest](docs/WebhookSubscriptionUpdateRequest.md)
+ - [WebhookSubscriptions](docs/WebhookSubscriptions.md)
 
 
 ## Documentation For Authorization
 
 
 
-### BearerAuth
+### bearerAuth
 
 - **Type**: HTTP Bearer token authentication
 

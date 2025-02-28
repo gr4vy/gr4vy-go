@@ -5,9 +5,9 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Type** | Pointer to **string** | &#x60;error&#x60;. | [optional] 
-**Code** | Pointer to **string** | &#x60;bad_request&#x60;. | [optional] 
+**Code** | Pointer to **string** | A short code that describes the reason for the error. | [optional] 
 **Status** | Pointer to **int32** | &#x60;400&#x60;. | [optional] 
-**Message** | Pointer to **string** | Describes the fields that are missing or incorrectly formatted in the API request. | [optional] 
+**Message** | Pointer to **string** | A human-readable reason for the error. | [optional] 
 **Details** | Pointer to [**[]ErrorDetail**](ErrorDetail.md) | A list of detail objects that further clarify the reason for the error. | [optional] 
 
 ## Methods

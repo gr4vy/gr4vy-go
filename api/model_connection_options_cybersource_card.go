@@ -19,6 +19,10 @@ import (
 type ConnectionOptionsCybersourceCard struct {
 	// An override for the merchant ID configured for the connector, used in combination with meta keys.
 	MetaKeyMerchantId NullableString `json:"meta_key_merchant_id,omitempty"`
+	// This is a key-value object for merchant defined information. Each key needs to be a numeric string identifying the MDI field to set. For example, for field 1 set the key to \"1\".
+	MerchantDefinedInformation *map[string]string `json:"merchant_defined_information,omitempty"`
+	// Shipping method for the order.
+	ShipToMethod NullableString `json:"ship_to_method,omitempty"`
 }
 
 // NewConnectionOptionsCybersourceCard instantiates a new ConnectionOptionsCybersourceCard object
@@ -80,10 +84,90 @@ func (o *ConnectionOptionsCybersourceCard) UnsetMetaKeyMerchantId() {
 	o.MetaKeyMerchantId.Unset()
 }
 
+// GetMerchantDefinedInformation returns the MerchantDefinedInformation field value if set, zero value otherwise.
+func (o *ConnectionOptionsCybersourceCard) GetMerchantDefinedInformation() map[string]string {
+	if o == nil || o.MerchantDefinedInformation == nil {
+		var ret map[string]string
+		return ret
+	}
+	return *o.MerchantDefinedInformation
+}
+
+// GetMerchantDefinedInformationOk returns a tuple with the MerchantDefinedInformation field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *ConnectionOptionsCybersourceCard) GetMerchantDefinedInformationOk() (*map[string]string, bool) {
+	if o == nil || o.MerchantDefinedInformation == nil {
+		return nil, false
+	}
+	return o.MerchantDefinedInformation, true
+}
+
+// HasMerchantDefinedInformation returns a boolean if a field has been set.
+func (o *ConnectionOptionsCybersourceCard) HasMerchantDefinedInformation() bool {
+	if o != nil && o.MerchantDefinedInformation != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetMerchantDefinedInformation gets a reference to the given map[string]string and assigns it to the MerchantDefinedInformation field.
+func (o *ConnectionOptionsCybersourceCard) SetMerchantDefinedInformation(v map[string]string) {
+	o.MerchantDefinedInformation = &v
+}
+
+// GetShipToMethod returns the ShipToMethod field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *ConnectionOptionsCybersourceCard) GetShipToMethod() string {
+	if o == nil || o.ShipToMethod.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.ShipToMethod.Get()
+}
+
+// GetShipToMethodOk returns a tuple with the ShipToMethod field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *ConnectionOptionsCybersourceCard) GetShipToMethodOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.ShipToMethod.Get(), o.ShipToMethod.IsSet()
+}
+
+// HasShipToMethod returns a boolean if a field has been set.
+func (o *ConnectionOptionsCybersourceCard) HasShipToMethod() bool {
+	if o != nil && o.ShipToMethod.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetShipToMethod gets a reference to the given NullableString and assigns it to the ShipToMethod field.
+func (o *ConnectionOptionsCybersourceCard) SetShipToMethod(v string) {
+	o.ShipToMethod.Set(&v)
+}
+// SetShipToMethodNil sets the value for ShipToMethod to be an explicit nil
+func (o *ConnectionOptionsCybersourceCard) SetShipToMethodNil() {
+	o.ShipToMethod.Set(nil)
+}
+
+// UnsetShipToMethod ensures that no value is present for ShipToMethod, not even an explicit nil
+func (o *ConnectionOptionsCybersourceCard) UnsetShipToMethod() {
+	o.ShipToMethod.Unset()
+}
+
 func (o ConnectionOptionsCybersourceCard) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if o.MetaKeyMerchantId.IsSet() {
 		toSerialize["meta_key_merchant_id"] = o.MetaKeyMerchantId.Get()
+	}
+	if o.MerchantDefinedInformation != nil {
+		toSerialize["merchant_defined_information"] = o.MerchantDefinedInformation
+	}
+	if o.ShipToMethod.IsSet() {
+		toSerialize["ship_to_method"] = o.ShipToMethod.Get()
 	}
 	return json.Marshal(toSerialize)
 }

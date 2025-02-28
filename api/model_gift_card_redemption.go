@@ -28,7 +28,7 @@ type GiftCardRedemption struct {
 	// The amount refunded for this gift card. This can not be larger than `amount`.
 	RefundedAmount *int32 `json:"refunded_amount,omitempty"`
 	// The gift card service's unique ID for the redemption.
-	GiftCardServiceRedemptionId *string `json:"gift_card_service_redemption_id,omitempty"`
+	GiftCardServiceRedemptionId NullableString `json:"gift_card_service_redemption_id,omitempty"`
 	// If this gift card redemption resulted in an error, this will contain the internal code for the error.
 	ErrorCode NullableString `json:"error_code,omitempty"`
 	// If this gift card redemption resulted in an error, this will contain the raw error code received from the gift card provider.
@@ -225,36 +225,46 @@ func (o *GiftCardRedemption) SetRefundedAmount(v int32) {
 	o.RefundedAmount = &v
 }
 
-// GetGiftCardServiceRedemptionId returns the GiftCardServiceRedemptionId field value if set, zero value otherwise.
+// GetGiftCardServiceRedemptionId returns the GiftCardServiceRedemptionId field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *GiftCardRedemption) GetGiftCardServiceRedemptionId() string {
-	if o == nil || o.GiftCardServiceRedemptionId == nil {
+	if o == nil || o.GiftCardServiceRedemptionId.Get() == nil {
 		var ret string
 		return ret
 	}
-	return *o.GiftCardServiceRedemptionId
+	return *o.GiftCardServiceRedemptionId.Get()
 }
 
 // GetGiftCardServiceRedemptionIdOk returns a tuple with the GiftCardServiceRedemptionId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *GiftCardRedemption) GetGiftCardServiceRedemptionIdOk() (*string, bool) {
-	if o == nil || o.GiftCardServiceRedemptionId == nil {
+	if o == nil  {
 		return nil, false
 	}
-	return o.GiftCardServiceRedemptionId, true
+	return o.GiftCardServiceRedemptionId.Get(), o.GiftCardServiceRedemptionId.IsSet()
 }
 
 // HasGiftCardServiceRedemptionId returns a boolean if a field has been set.
 func (o *GiftCardRedemption) HasGiftCardServiceRedemptionId() bool {
-	if o != nil && o.GiftCardServiceRedemptionId != nil {
+	if o != nil && o.GiftCardServiceRedemptionId.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetGiftCardServiceRedemptionId gets a reference to the given string and assigns it to the GiftCardServiceRedemptionId field.
+// SetGiftCardServiceRedemptionId gets a reference to the given NullableString and assigns it to the GiftCardServiceRedemptionId field.
 func (o *GiftCardRedemption) SetGiftCardServiceRedemptionId(v string) {
-	o.GiftCardServiceRedemptionId = &v
+	o.GiftCardServiceRedemptionId.Set(&v)
+}
+// SetGiftCardServiceRedemptionIdNil sets the value for GiftCardServiceRedemptionId to be an explicit nil
+func (o *GiftCardRedemption) SetGiftCardServiceRedemptionIdNil() {
+	o.GiftCardServiceRedemptionId.Set(nil)
+}
+
+// UnsetGiftCardServiceRedemptionId ensures that no value is present for GiftCardServiceRedemptionId, not even an explicit nil
+func (o *GiftCardRedemption) UnsetGiftCardServiceRedemptionId() {
+	o.GiftCardServiceRedemptionId.Unset()
 }
 
 // GetErrorCode returns the ErrorCode field value if set, zero value otherwise (both if not set or set to explicit null).
@@ -432,8 +442,8 @@ func (o GiftCardRedemption) MarshalJSON() ([]byte, error) {
 	if o.RefundedAmount != nil {
 		toSerialize["refunded_amount"] = o.RefundedAmount
 	}
-	if o.GiftCardServiceRedemptionId != nil {
-		toSerialize["gift_card_service_redemption_id"] = o.GiftCardServiceRedemptionId
+	if o.GiftCardServiceRedemptionId.IsSet() {
+		toSerialize["gift_card_service_redemption_id"] = o.GiftCardServiceRedemptionId.Get()
 	}
 	if o.ErrorCode.IsSet() {
 		toSerialize["error_code"] = o.ErrorCode.Get()

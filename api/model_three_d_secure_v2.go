@@ -19,7 +19,7 @@ import (
 type ThreeDSecureV2 struct {
 	// The cardholder authentication value or AAV.
 	Cavv NullableString `json:"cavv,omitempty"`
-	// The electronic commerce indicator for the 3DS transaction.
+	// The ecommerce indicator for the 3DS transaction.
 	Eci NullableString `json:"eci,omitempty"`
 	// The version of 3-D Secure that was used.
 	Version *string `json:"version,omitempty"`

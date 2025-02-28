@@ -8,7 +8,8 @@ Name | Type | Description | Notes
 **Type** | Pointer to **string** | &#x60;payment-service-definition&#x60;. | [optional] [default to "payment-service-definition"]
 **DisplayName** | Pointer to **string** | The display name of this service. | [optional] 
 **Method** | Pointer to **string** | The ID of the payment method that this services handles. | [optional] 
-**Fields** | Pointer to [**[]GiftCardServiceDefinitionFields**](GiftCardServiceDefinitionFields.md) | A list of fields that need to be submitted when activating the payment. service. | [optional] 
+**Fields** | Pointer to [**[]AntiFraudServiceDefinitionFields**](AntiFraudServiceDefinitionFields.md) | A list of fields that need to be submitted when activating the payment. service. | [optional] 
+**ReportingFields** | Pointer to [**[]PaymentServiceDefinitionReportingFields**](PaymentServiceDefinitionReportingFields.md) | A list of fields that need to be submitted when enabling the payment service settlement reporting. | [optional] 
 **SupportedCurrencies** | Pointer to **[]string** | A list of three-letter ISO currency codes that this service supports. | [optional] 
 **SupportedCountries** | Pointer to **[]string** | A list of two-letter ISO country codes that this service supports. | [optional] 
 **Mode** | Pointer to **string** | The mode of this payment service. | [optional] 
@@ -137,20 +138,20 @@ HasMethod returns a boolean if a field has been set.
 
 ### GetFields
 
-`func (o *PaymentServiceDefinition) GetFields() []GiftCardServiceDefinitionFields`
+`func (o *PaymentServiceDefinition) GetFields() []AntiFraudServiceDefinitionFields`
 
 GetFields returns the Fields field if non-nil, zero value otherwise.
 
 ### GetFieldsOk
 
-`func (o *PaymentServiceDefinition) GetFieldsOk() (*[]GiftCardServiceDefinitionFields, bool)`
+`func (o *PaymentServiceDefinition) GetFieldsOk() (*[]AntiFraudServiceDefinitionFields, bool)`
 
 GetFieldsOk returns a tuple with the Fields field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetFields
 
-`func (o *PaymentServiceDefinition) SetFields(v []GiftCardServiceDefinitionFields)`
+`func (o *PaymentServiceDefinition) SetFields(v []AntiFraudServiceDefinitionFields)`
 
 SetFields sets Fields field to given value.
 
@@ -159,6 +160,31 @@ SetFields sets Fields field to given value.
 `func (o *PaymentServiceDefinition) HasFields() bool`
 
 HasFields returns a boolean if a field has been set.
+
+### GetReportingFields
+
+`func (o *PaymentServiceDefinition) GetReportingFields() []PaymentServiceDefinitionReportingFields`
+
+GetReportingFields returns the ReportingFields field if non-nil, zero value otherwise.
+
+### GetReportingFieldsOk
+
+`func (o *PaymentServiceDefinition) GetReportingFieldsOk() (*[]PaymentServiceDefinitionReportingFields, bool)`
+
+GetReportingFieldsOk returns a tuple with the ReportingFields field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReportingFields
+
+`func (o *PaymentServiceDefinition) SetReportingFields(v []PaymentServiceDefinitionReportingFields)`
+
+SetReportingFields sets ReportingFields field to given value.
+
+### HasReportingFields
+
+`func (o *PaymentServiceDefinition) HasReportingFields() bool`
+
+HasReportingFields returns a boolean if a field has been set.
 
 ### GetSupportedCurrencies
 

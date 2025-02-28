@@ -25,6 +25,8 @@ type BINLookupRequestContext struct {
 	Success *bool `json:"success,omitempty"`
 	// The value used to lookup BIN details.
 	Bin NullableString `json:"bin,omitempty"`
+	// The instrument type used to lookup BIN details.
+	Instrument NullableString `json:"instrument,omitempty"`
 	// The type of card, i.e. credit or debit, from the lookup response.
 	Type NullableString `json:"type,omitempty"`
 	// The card scheme result from the lookup response.
@@ -33,10 +35,8 @@ type BINLookupRequestContext struct {
 	AdditionalSchemes []string `json:"additional_schemes,omitempty"`
 	// The card country code result from the lookup response.
 	CountryCode NullableString `json:"country_code,omitempty"`
-	// Whether Account Updater is enabled for this card.
-	AccountUpdater NullableBool `json:"account_updater,omitempty"`
 	// Whether the issuing bank supports network tokenization for this card.
-	IssuerTokenization NullableBool `json:"issuer_tokenization,omitempty"`
+	SupportsNetworkTokens NullableBool `json:"supports_network_tokens,omitempty"`
 }
 
 // NewBINLookupRequestContext instantiates a new BINLookupRequestContext object
@@ -204,6 +204,48 @@ func (o *BINLookupRequestContext) UnsetBin() {
 	o.Bin.Unset()
 }
 
+// GetInstrument returns the Instrument field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BINLookupRequestContext) GetInstrument() string {
+	if o == nil || o.Instrument.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.Instrument.Get()
+}
+
+// GetInstrumentOk returns a tuple with the Instrument field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *BINLookupRequestContext) GetInstrumentOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Instrument.Get(), o.Instrument.IsSet()
+}
+
+// HasInstrument returns a boolean if a field has been set.
+func (o *BINLookupRequestContext) HasInstrument() bool {
+	if o != nil && o.Instrument.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetInstrument gets a reference to the given NullableString and assigns it to the Instrument field.
+func (o *BINLookupRequestContext) SetInstrument(v string) {
+	o.Instrument.Set(&v)
+}
+// SetInstrumentNil sets the value for Instrument to be an explicit nil
+func (o *BINLookupRequestContext) SetInstrumentNil() {
+	o.Instrument.Set(nil)
+}
+
+// UnsetInstrument ensures that no value is present for Instrument, not even an explicit nil
+func (o *BINLookupRequestContext) UnsetInstrument() {
+	o.Instrument.Unset()
+}
+
 // GetType returns the Type field value if set, zero value otherwise (both if not set or set to explicit null).
 func (o *BINLookupRequestContext) GetType() string {
 	if o == nil || o.Type.Get() == nil {
@@ -363,88 +405,46 @@ func (o *BINLookupRequestContext) UnsetCountryCode() {
 	o.CountryCode.Unset()
 }
 
-// GetAccountUpdater returns the AccountUpdater field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BINLookupRequestContext) GetAccountUpdater() bool {
-	if o == nil || o.AccountUpdater.Get() == nil {
+// GetSupportsNetworkTokens returns the SupportsNetworkTokens field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *BINLookupRequestContext) GetSupportsNetworkTokens() bool {
+	if o == nil || o.SupportsNetworkTokens.Get() == nil {
 		var ret bool
 		return ret
 	}
-	return *o.AccountUpdater.Get()
+	return *o.SupportsNetworkTokens.Get()
 }
 
-// GetAccountUpdaterOk returns a tuple with the AccountUpdater field value if set, nil otherwise
+// GetSupportsNetworkTokensOk returns a tuple with the SupportsNetworkTokens field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BINLookupRequestContext) GetAccountUpdaterOk() (*bool, bool) {
+func (o *BINLookupRequestContext) GetSupportsNetworkTokensOk() (*bool, bool) {
 	if o == nil  {
 		return nil, false
 	}
-	return o.AccountUpdater.Get(), o.AccountUpdater.IsSet()
+	return o.SupportsNetworkTokens.Get(), o.SupportsNetworkTokens.IsSet()
 }
 
-// HasAccountUpdater returns a boolean if a field has been set.
-func (o *BINLookupRequestContext) HasAccountUpdater() bool {
-	if o != nil && o.AccountUpdater.IsSet() {
+// HasSupportsNetworkTokens returns a boolean if a field has been set.
+func (o *BINLookupRequestContext) HasSupportsNetworkTokens() bool {
+	if o != nil && o.SupportsNetworkTokens.IsSet() {
 		return true
 	}
 
 	return false
 }
 
-// SetAccountUpdater gets a reference to the given NullableBool and assigns it to the AccountUpdater field.
-func (o *BINLookupRequestContext) SetAccountUpdater(v bool) {
-	o.AccountUpdater.Set(&v)
+// SetSupportsNetworkTokens gets a reference to the given NullableBool and assigns it to the SupportsNetworkTokens field.
+func (o *BINLookupRequestContext) SetSupportsNetworkTokens(v bool) {
+	o.SupportsNetworkTokens.Set(&v)
 }
-// SetAccountUpdaterNil sets the value for AccountUpdater to be an explicit nil
-func (o *BINLookupRequestContext) SetAccountUpdaterNil() {
-	o.AccountUpdater.Set(nil)
-}
-
-// UnsetAccountUpdater ensures that no value is present for AccountUpdater, not even an explicit nil
-func (o *BINLookupRequestContext) UnsetAccountUpdater() {
-	o.AccountUpdater.Unset()
+// SetSupportsNetworkTokensNil sets the value for SupportsNetworkTokens to be an explicit nil
+func (o *BINLookupRequestContext) SetSupportsNetworkTokensNil() {
+	o.SupportsNetworkTokens.Set(nil)
 }
 
-// GetIssuerTokenization returns the IssuerTokenization field value if set, zero value otherwise (both if not set or set to explicit null).
-func (o *BINLookupRequestContext) GetIssuerTokenization() bool {
-	if o == nil || o.IssuerTokenization.Get() == nil {
-		var ret bool
-		return ret
-	}
-	return *o.IssuerTokenization.Get()
-}
-
-// GetIssuerTokenizationOk returns a tuple with the IssuerTokenization field value if set, nil otherwise
-// and a boolean to check if the value has been set.
-// NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *BINLookupRequestContext) GetIssuerTokenizationOk() (*bool, bool) {
-	if o == nil  {
-		return nil, false
-	}
-	return o.IssuerTokenization.Get(), o.IssuerTokenization.IsSet()
-}
-
-// HasIssuerTokenization returns a boolean if a field has been set.
-func (o *BINLookupRequestContext) HasIssuerTokenization() bool {
-	if o != nil && o.IssuerTokenization.IsSet() {
-		return true
-	}
-
-	return false
-}
-
-// SetIssuerTokenization gets a reference to the given NullableBool and assigns it to the IssuerTokenization field.
-func (o *BINLookupRequestContext) SetIssuerTokenization(v bool) {
-	o.IssuerTokenization.Set(&v)
-}
-// SetIssuerTokenizationNil sets the value for IssuerTokenization to be an explicit nil
-func (o *BINLookupRequestContext) SetIssuerTokenizationNil() {
-	o.IssuerTokenization.Set(nil)
-}
-
-// UnsetIssuerTokenization ensures that no value is present for IssuerTokenization, not even an explicit nil
-func (o *BINLookupRequestContext) UnsetIssuerTokenization() {
-	o.IssuerTokenization.Unset()
+// UnsetSupportsNetworkTokens ensures that no value is present for SupportsNetworkTokens, not even an explicit nil
+func (o *BINLookupRequestContext) UnsetSupportsNetworkTokens() {
+	o.SupportsNetworkTokens.Unset()
 }
 
 func (o BINLookupRequestContext) MarshalJSON() ([]byte, error) {
@@ -461,6 +461,9 @@ func (o BINLookupRequestContext) MarshalJSON() ([]byte, error) {
 	if o.Bin.IsSet() {
 		toSerialize["bin"] = o.Bin.Get()
 	}
+	if o.Instrument.IsSet() {
+		toSerialize["instrument"] = o.Instrument.Get()
+	}
 	if o.Type.IsSet() {
 		toSerialize["type"] = o.Type.Get()
 	}
@@ -473,11 +476,8 @@ func (o BINLookupRequestContext) MarshalJSON() ([]byte, error) {
 	if o.CountryCode.IsSet() {
 		toSerialize["country_code"] = o.CountryCode.Get()
 	}
-	if o.AccountUpdater.IsSet() {
-		toSerialize["account_updater"] = o.AccountUpdater.Get()
-	}
-	if o.IssuerTokenization.IsSet() {
-		toSerialize["issuer_tokenization"] = o.IssuerTokenization.Get()
+	if o.SupportsNetworkTokens.IsSet() {
+		toSerialize["supports_network_tokens"] = o.SupportsNetworkTokens.Get()
 	}
 	return json.Marshal(toSerialize)
 }

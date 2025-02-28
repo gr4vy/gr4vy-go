@@ -5,13 +5,13 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Model** | **string** | The model (dataset) that the data used for the report is retrieved from. | 
-**Params** | **map[string]map[string]interface{}** | Parameters used to configure the report. Acceptable values for this property depend on the value specified for &#x60;model&#x60;. | 
+**Params** | **map[string]interface{}** | Parameters used to configure the report. Acceptable values for this property depend on the value specified for &#x60;model&#x60;. | 
 
 ## Methods
 
 ### NewReportSpec
 
-`func NewReportSpec(model string, params map[string]map[string]interface{}, ) *ReportSpec`
+`func NewReportSpec(model string, params map[string]interface{}, ) *ReportSpec`
 
 NewReportSpec instantiates a new ReportSpec object
 This constructor will assign default values to properties that have it defined,
@@ -48,20 +48,20 @@ SetModel sets Model field to given value.
 
 ### GetParams
 
-`func (o *ReportSpec) GetParams() map[string]map[string]interface{}`
+`func (o *ReportSpec) GetParams() map[string]interface{}`
 
 GetParams returns the Params field if non-nil, zero value otherwise.
 
 ### GetParamsOk
 
-`func (o *ReportSpec) GetParamsOk() (*map[string]map[string]interface{}, bool)`
+`func (o *ReportSpec) GetParamsOk() (*map[string]interface{}, bool)`
 
 GetParamsOk returns a tuple with the Params field if it's non-nil, zero value otherwise
 and a boolean to check if the value has been set.
 
 ### SetParams
 
-`func (o *ReportSpec) SetParams(v map[string]map[string]interface{})`
+`func (o *ReportSpec) SetParams(v map[string]interface{})`
 
 SetParams sets Params field to given value.
 

@@ -11,10 +11,15 @@ Name | Type | Description | Notes
 **Status** | Pointer to **string** | The status of the refund. It may change over time as asynchronous processing events occur.  - &#x60;processing&#x60; - The refund is being processed. - &#x60;succeeded&#x60; - The refund was successful. - &#x60;declined&#x60; - The refund was declined by the underlying PSP. - &#x60;failed&#x60; - The refund could not proceed due to a technical issue. - &#x60;voided&#x60; - The refund was voided and will not proceed. | [optional] 
 **Currency** | Pointer to **string** | The currency code for this refund. Will always match that of the associated transaction. | [optional] 
 **Amount** | Pointer to **int32** | The amount requested for this refund. | [optional] 
+**Reason** | Pointer to **NullableString** | The reason for this refund. Could be a multiline string. | [optional] [default to "null"]
 **CreatedAt** | Pointer to **time.Time** | The date and time when this refund was created. | [optional] 
 **UpdatedAt** | Pointer to **time.Time** | The date and time when this refund was last updated. | [optional] 
 **TargetType** | Pointer to **string** | The type of the instrument that was refunded. | [optional] 
 **TargetId** | Pointer to **NullableString** | The optional ID of the instrument that was refunded. This may be &#x60;null&#x60; if the instrument was not stored. | [optional] 
+**ExternalIdentifier** | Pointer to **NullableString** | An external identifier that can be used to match the refund against your own records. | [optional] 
+**ReconciliationId** | Pointer to **string** | The base62 encoded refund ID. This represents a shorter version of this refund&#39;s &#x60;id&#x60; which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service&#39;s refund against our system. | [optional] 
+**TransactionExternalIdentifier** | Pointer to **NullableString** | The external identifier of the related transaction. | [optional] 
+**TransactionReconciliationId** | Pointer to **string** | The base62 encoded transaction ID. This represents a shorter version of the related transaction&#39;s &#x60;id&#x60; which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service&#39;s transaction against our system. | [optional] 
 
 ## Methods
 
@@ -210,6 +215,41 @@ SetAmount sets Amount field to given value.
 
 HasAmount returns a boolean if a field has been set.
 
+### GetReason
+
+`func (o *Refund) GetReason() string`
+
+GetReason returns the Reason field if non-nil, zero value otherwise.
+
+### GetReasonOk
+
+`func (o *Refund) GetReasonOk() (*string, bool)`
+
+GetReasonOk returns a tuple with the Reason field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReason
+
+`func (o *Refund) SetReason(v string)`
+
+SetReason sets Reason field to given value.
+
+### HasReason
+
+`func (o *Refund) HasReason() bool`
+
+HasReason returns a boolean if a field has been set.
+
+### SetReasonNil
+
+`func (o *Refund) SetReasonNil(b bool)`
+
+ SetReasonNil sets the value for Reason to be an explicit nil
+
+### UnsetReason
+`func (o *Refund) UnsetReason()`
+
+UnsetReason ensures that no value is present for Reason, not even an explicit nil
 ### GetCreatedAt
 
 `func (o *Refund) GetCreatedAt() time.Time`
@@ -320,6 +360,126 @@ HasTargetId returns a boolean if a field has been set.
 `func (o *Refund) UnsetTargetId()`
 
 UnsetTargetId ensures that no value is present for TargetId, not even an explicit nil
+### GetExternalIdentifier
+
+`func (o *Refund) GetExternalIdentifier() string`
+
+GetExternalIdentifier returns the ExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetExternalIdentifierOk
+
+`func (o *Refund) GetExternalIdentifierOk() (*string, bool)`
+
+GetExternalIdentifierOk returns a tuple with the ExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetExternalIdentifier
+
+`func (o *Refund) SetExternalIdentifier(v string)`
+
+SetExternalIdentifier sets ExternalIdentifier field to given value.
+
+### HasExternalIdentifier
+
+`func (o *Refund) HasExternalIdentifier() bool`
+
+HasExternalIdentifier returns a boolean if a field has been set.
+
+### SetExternalIdentifierNil
+
+`func (o *Refund) SetExternalIdentifierNil(b bool)`
+
+ SetExternalIdentifierNil sets the value for ExternalIdentifier to be an explicit nil
+
+### UnsetExternalIdentifier
+`func (o *Refund) UnsetExternalIdentifier()`
+
+UnsetExternalIdentifier ensures that no value is present for ExternalIdentifier, not even an explicit nil
+### GetReconciliationId
+
+`func (o *Refund) GetReconciliationId() string`
+
+GetReconciliationId returns the ReconciliationId field if non-nil, zero value otherwise.
+
+### GetReconciliationIdOk
+
+`func (o *Refund) GetReconciliationIdOk() (*string, bool)`
+
+GetReconciliationIdOk returns a tuple with the ReconciliationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetReconciliationId
+
+`func (o *Refund) SetReconciliationId(v string)`
+
+SetReconciliationId sets ReconciliationId field to given value.
+
+### HasReconciliationId
+
+`func (o *Refund) HasReconciliationId() bool`
+
+HasReconciliationId returns a boolean if a field has been set.
+
+### GetTransactionExternalIdentifier
+
+`func (o *Refund) GetTransactionExternalIdentifier() string`
+
+GetTransactionExternalIdentifier returns the TransactionExternalIdentifier field if non-nil, zero value otherwise.
+
+### GetTransactionExternalIdentifierOk
+
+`func (o *Refund) GetTransactionExternalIdentifierOk() (*string, bool)`
+
+GetTransactionExternalIdentifierOk returns a tuple with the TransactionExternalIdentifier field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionExternalIdentifier
+
+`func (o *Refund) SetTransactionExternalIdentifier(v string)`
+
+SetTransactionExternalIdentifier sets TransactionExternalIdentifier field to given value.
+
+### HasTransactionExternalIdentifier
+
+`func (o *Refund) HasTransactionExternalIdentifier() bool`
+
+HasTransactionExternalIdentifier returns a boolean if a field has been set.
+
+### SetTransactionExternalIdentifierNil
+
+`func (o *Refund) SetTransactionExternalIdentifierNil(b bool)`
+
+ SetTransactionExternalIdentifierNil sets the value for TransactionExternalIdentifier to be an explicit nil
+
+### UnsetTransactionExternalIdentifier
+`func (o *Refund) UnsetTransactionExternalIdentifier()`
+
+UnsetTransactionExternalIdentifier ensures that no value is present for TransactionExternalIdentifier, not even an explicit nil
+### GetTransactionReconciliationId
+
+`func (o *Refund) GetTransactionReconciliationId() string`
+
+GetTransactionReconciliationId returns the TransactionReconciliationId field if non-nil, zero value otherwise.
+
+### GetTransactionReconciliationIdOk
+
+`func (o *Refund) GetTransactionReconciliationIdOk() (*string, bool)`
+
+GetTransactionReconciliationIdOk returns a tuple with the TransactionReconciliationId field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetTransactionReconciliationId
+
+`func (o *Refund) SetTransactionReconciliationId(v string)`
+
+SetTransactionReconciliationId sets TransactionReconciliationId field to given value.
+
+### HasTransactionReconciliationId
+
+`func (o *Refund) HasTransactionReconciliationId() bool`
+
+HasTransactionReconciliationId returns a boolean if a field has been set.
+
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 

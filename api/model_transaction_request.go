@@ -32,11 +32,12 @@ type TransactionRequest struct {
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 	// The ID of the buyer to associate this payment method to. If this field is provided then the `buyer_external_identifier` field needs to be unset.  If a stored payment method or gift card is provided, then the buyer for that payment method needs to match the buyer for this field.
 	BuyerId *string `json:"buyer_id,omitempty"`
+	Buyer *TransactionBuyerRequest `json:"buyer,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
 	CartItems *[]CartItem `json:"cart_items,omitempty"`
-	// Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.  Please note that each of the keys this object are in kebab-case, for example `cybersource-anti-fraud` as they represent the ID of the connector. All the other keys will be snake-case, for example `merchant_defined_data`.
+	// Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections.  Please note that each of the keys this object are in kebab-case, for example `cybersource-anti-fraud` as they represent the ID of the connector. All the other keys will be snake case, for example `merchant_defined_data` or camel case to match an external API that the connector uses.
 	ConnectionOptions NullableConnectionOptions `json:"connection_options,omitempty"`
-	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.  If this value is provided for redirect requests and it's not `null`, it must match the one specified for `country` in `payment_method`. Otherwise, the value specified for `country` in `payment_method` will be assumed implicitly. 
+	// The 2-letter ISO code of the country where the transaction is processed. This is also used to filter the payment services that can process the transaction.  If this value is provided for redirect requests and it's not `null`, it must match the one specified for `country` in `payment_method`. Otherwise, the value specified for `country` in `payment_method` will be assumed implicitly. 
 	Country NullableString `json:"country,omitempty"`
 	// An external identifier that can be used to match the transaction against your own records.
 	ExternalIdentifier NullableString `json:"external_identifier,omitempty"`
@@ -60,6 +61,14 @@ type TransactionRequest struct {
 	// Whether or not to also try and store the payment method with us so that it can be used again for future use. This is only supported for payment methods that support this feature. There are also a few restrictions on how the flag may be set:  * The flag has to be set to `true` when the `payment_source` is set to `recurring` or `installment`, and `merchant_initiated` is set to `false`.  * The flag has to be set to `false` (or not set) when using a previously vaulted payment method.
 	Store *bool `json:"store,omitempty"`
 	ThreeDSecureData *ThreeDSecureDataV1V2 `json:"three_d_secure_data,omitempty"`
+	// The unique identifier of an existing payment service. When provided, the created transaction will be processed by the given payment service and any routing rules will be skipped.
+	PaymentServiceId NullableString `json:"payment_service_id,omitempty"`
+	// The airline addendum data which describes the airline booking associated with this transaction.
+	Airline NullableAirline `json:"airline,omitempty"`
+	// Whether or not the transaction is an account funding transaction.
+	AccountFundingTransaction NullableBool `json:"account_funding_transaction,omitempty"`
+	// The recipient of an account funding transaction.
+	Recipient NullableRecipient `json:"recipient,omitempty"`
 }
 
 // NewTransactionRequest instantiates a new TransactionRequest object
@@ -84,6 +93,8 @@ func NewTransactionRequest(amount int32, currency string) *TransactionRequest {
 	this.PreviousSchemeTransactionId = *NewNullableString(&previousSchemeTransactionId)
 	var store bool = false
 	this.Store = &store
+	var accountFundingTransaction bool = false
+	this.AccountFundingTransaction = *NewNullableBool(&accountFundingTransaction)
 	return &this
 }
 
@@ -106,6 +117,8 @@ func NewTransactionRequestWithDefaults() *TransactionRequest {
 	this.PreviousSchemeTransactionId = *NewNullableString(&previousSchemeTransactionId)
 	var store bool = false
 	this.Store = &store
+	var accountFundingTransaction bool = false
+	this.AccountFundingTransaction = *NewNullableBool(&accountFundingTransaction)
 	return &this
 }
 
@@ -367,6 +380,38 @@ func (o *TransactionRequest) HasBuyerId() bool {
 // SetBuyerId gets a reference to the given string and assigns it to the BuyerId field.
 func (o *TransactionRequest) SetBuyerId(v string) {
 	o.BuyerId = &v
+}
+
+// GetBuyer returns the Buyer field value if set, zero value otherwise.
+func (o *TransactionRequest) GetBuyer() TransactionBuyerRequest {
+	if o == nil || o.Buyer == nil {
+		var ret TransactionBuyerRequest
+		return ret
+	}
+	return *o.Buyer
+}
+
+// GetBuyerOk returns a tuple with the Buyer field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+func (o *TransactionRequest) GetBuyerOk() (*TransactionBuyerRequest, bool) {
+	if o == nil || o.Buyer == nil {
+		return nil, false
+	}
+	return o.Buyer, true
+}
+
+// HasBuyer returns a boolean if a field has been set.
+func (o *TransactionRequest) HasBuyer() bool {
+	if o != nil && o.Buyer != nil {
+		return true
+	}
+
+	return false
+}
+
+// SetBuyer gets a reference to the given TransactionBuyerRequest and assigns it to the Buyer field.
+func (o *TransactionRequest) SetBuyer(v TransactionBuyerRequest) {
+	o.Buyer = &v
 }
 
 // GetCartItems returns the CartItems field value if set, zero value otherwise.
@@ -910,6 +955,174 @@ func (o *TransactionRequest) SetThreeDSecureData(v ThreeDSecureDataV1V2) {
 	o.ThreeDSecureData = &v
 }
 
+// GetPaymentServiceId returns the PaymentServiceId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRequest) GetPaymentServiceId() string {
+	if o == nil || o.PaymentServiceId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.PaymentServiceId.Get()
+}
+
+// GetPaymentServiceIdOk returns a tuple with the PaymentServiceId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRequest) GetPaymentServiceIdOk() (*string, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.PaymentServiceId.Get(), o.PaymentServiceId.IsSet()
+}
+
+// HasPaymentServiceId returns a boolean if a field has been set.
+func (o *TransactionRequest) HasPaymentServiceId() bool {
+	if o != nil && o.PaymentServiceId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentServiceId gets a reference to the given NullableString and assigns it to the PaymentServiceId field.
+func (o *TransactionRequest) SetPaymentServiceId(v string) {
+	o.PaymentServiceId.Set(&v)
+}
+// SetPaymentServiceIdNil sets the value for PaymentServiceId to be an explicit nil
+func (o *TransactionRequest) SetPaymentServiceIdNil() {
+	o.PaymentServiceId.Set(nil)
+}
+
+// UnsetPaymentServiceId ensures that no value is present for PaymentServiceId, not even an explicit nil
+func (o *TransactionRequest) UnsetPaymentServiceId() {
+	o.PaymentServiceId.Unset()
+}
+
+// GetAirline returns the Airline field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRequest) GetAirline() Airline {
+	if o == nil || o.Airline.Get() == nil {
+		var ret Airline
+		return ret
+	}
+	return *o.Airline.Get()
+}
+
+// GetAirlineOk returns a tuple with the Airline field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRequest) GetAirlineOk() (*Airline, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Airline.Get(), o.Airline.IsSet()
+}
+
+// HasAirline returns a boolean if a field has been set.
+func (o *TransactionRequest) HasAirline() bool {
+	if o != nil && o.Airline.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAirline gets a reference to the given NullableAirline and assigns it to the Airline field.
+func (o *TransactionRequest) SetAirline(v Airline) {
+	o.Airline.Set(&v)
+}
+// SetAirlineNil sets the value for Airline to be an explicit nil
+func (o *TransactionRequest) SetAirlineNil() {
+	o.Airline.Set(nil)
+}
+
+// UnsetAirline ensures that no value is present for Airline, not even an explicit nil
+func (o *TransactionRequest) UnsetAirline() {
+	o.Airline.Unset()
+}
+
+// GetAccountFundingTransaction returns the AccountFundingTransaction field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRequest) GetAccountFundingTransaction() bool {
+	if o == nil || o.AccountFundingTransaction.Get() == nil {
+		var ret bool
+		return ret
+	}
+	return *o.AccountFundingTransaction.Get()
+}
+
+// GetAccountFundingTransactionOk returns a tuple with the AccountFundingTransaction field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRequest) GetAccountFundingTransactionOk() (*bool, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.AccountFundingTransaction.Get(), o.AccountFundingTransaction.IsSet()
+}
+
+// HasAccountFundingTransaction returns a boolean if a field has been set.
+func (o *TransactionRequest) HasAccountFundingTransaction() bool {
+	if o != nil && o.AccountFundingTransaction.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetAccountFundingTransaction gets a reference to the given NullableBool and assigns it to the AccountFundingTransaction field.
+func (o *TransactionRequest) SetAccountFundingTransaction(v bool) {
+	o.AccountFundingTransaction.Set(&v)
+}
+// SetAccountFundingTransactionNil sets the value for AccountFundingTransaction to be an explicit nil
+func (o *TransactionRequest) SetAccountFundingTransactionNil() {
+	o.AccountFundingTransaction.Set(nil)
+}
+
+// UnsetAccountFundingTransaction ensures that no value is present for AccountFundingTransaction, not even an explicit nil
+func (o *TransactionRequest) UnsetAccountFundingTransaction() {
+	o.AccountFundingTransaction.Unset()
+}
+
+// GetRecipient returns the Recipient field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *TransactionRequest) GetRecipient() Recipient {
+	if o == nil || o.Recipient.Get() == nil {
+		var ret Recipient
+		return ret
+	}
+	return *o.Recipient.Get()
+}
+
+// GetRecipientOk returns a tuple with the Recipient field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+func (o *TransactionRequest) GetRecipientOk() (*Recipient, bool) {
+	if o == nil  {
+		return nil, false
+	}
+	return o.Recipient.Get(), o.Recipient.IsSet()
+}
+
+// HasRecipient returns a boolean if a field has been set.
+func (o *TransactionRequest) HasRecipient() bool {
+	if o != nil && o.Recipient.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetRecipient gets a reference to the given NullableRecipient and assigns it to the Recipient field.
+func (o *TransactionRequest) SetRecipient(v Recipient) {
+	o.Recipient.Set(&v)
+}
+// SetRecipientNil sets the value for Recipient to be an explicit nil
+func (o *TransactionRequest) SetRecipientNil() {
+	o.Recipient.Set(nil)
+}
+
+// UnsetRecipient ensures that no value is present for Recipient, not even an explicit nil
+func (o *TransactionRequest) UnsetRecipient() {
+	o.Recipient.Unset()
+}
+
 func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	toSerialize := map[string]interface{}{}
 	if true {
@@ -935,6 +1148,9 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.BuyerId != nil {
 		toSerialize["buyer_id"] = o.BuyerId
+	}
+	if o.Buyer != nil {
+		toSerialize["buyer"] = o.Buyer
 	}
 	if o.CartItems != nil {
 		toSerialize["cart_items"] = o.CartItems
@@ -980,6 +1196,18 @@ func (o TransactionRequest) MarshalJSON() ([]byte, error) {
 	}
 	if o.ThreeDSecureData != nil {
 		toSerialize["three_d_secure_data"] = o.ThreeDSecureData
+	}
+	if o.PaymentServiceId.IsSet() {
+		toSerialize["payment_service_id"] = o.PaymentServiceId.Get()
+	}
+	if o.Airline.IsSet() {
+		toSerialize["airline"] = o.Airline.Get()
+	}
+	if o.AccountFundingTransaction.IsSet() {
+		toSerialize["account_funding_transaction"] = o.AccountFundingTransaction.Get()
+	}
+	if o.Recipient.IsSet() {
+		toSerialize["recipient"] = o.Recipient.Get()
 	}
 	return json.Marshal(toSerialize)
 }

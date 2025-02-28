@@ -5,9 +5,10 @@
 Name | Type | Description | Notes
 ------------ | ------------- | ------------- | -------------
 **Cavv** | **string** | The cardholder authentication value or AAV. | 
-**Eci** | **string** | The electronic commerce indicator for the 3DS transaction. | 
+**Eci** | **string** | The ecommerce indicator for the 3DS transaction. | 
 **Version** | **string** | The version of 3-D Secure that was used. | 
 **DirectoryResponse** | **string** | For 3-D Secure version 1, the enrolment response. For 3-D Secure version , the transaction status from the &#x60;ARes&#x60;. | 
+**Scheme** | Pointer to **NullableString** | The scheme/brand of the card that is used for 3-D Secure. | [optional] 
 
 ## Methods
 
@@ -108,6 +109,41 @@ and a boolean to check if the value has been set.
 SetDirectoryResponse sets DirectoryResponse field to given value.
 
 
+### GetScheme
+
+`func (o *ThreeDSecureData) GetScheme() string`
+
+GetScheme returns the Scheme field if non-nil, zero value otherwise.
+
+### GetSchemeOk
+
+`func (o *ThreeDSecureData) GetSchemeOk() (*string, bool)`
+
+GetSchemeOk returns a tuple with the Scheme field if it's non-nil, zero value otherwise
+and a boolean to check if the value has been set.
+
+### SetScheme
+
+`func (o *ThreeDSecureData) SetScheme(v string)`
+
+SetScheme sets Scheme field to given value.
+
+### HasScheme
+
+`func (o *ThreeDSecureData) HasScheme() bool`
+
+HasScheme returns a boolean if a field has been set.
+
+### SetSchemeNil
+
+`func (o *ThreeDSecureData) SetSchemeNil(b bool)`
+
+ SetSchemeNil sets the value for Scheme to be an explicit nil
+
+### UnsetScheme
+`func (o *ThreeDSecureData) UnsetScheme()`
+
+UnsetScheme ensures that no value is present for Scheme, not even an explicit nil
 
 [[Back to Model list]](../README.md#documentation-for-models) [[Back to API list]](../README.md#documentation-for-api-endpoints) [[Back to README]](../README.md)
 
