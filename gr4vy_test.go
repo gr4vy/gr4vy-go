@@ -785,8 +785,8 @@ func TestVoidTransaction(t *testing.T) {
 		fmt.Printf("%+v\n", body)
 		return
 	}
-	if response.StatusCode != 201 {
-		t.Errorf("expected StatusCode 201: received: " + strconv.Itoa(response.StatusCode))
+	if response.StatusCode != 200 {
+		t.Errorf("expected StatusCode 200: received: " + strconv.Itoa(response.StatusCode))
 	}
 }
 
