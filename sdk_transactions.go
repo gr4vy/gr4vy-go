@@ -248,7 +248,7 @@ func (c *Gr4vyClient) VoidTransaction(transaction_id string) (*http.Response, er
     auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
     p := client.TransactionsApi.VoidTransaction(auth, transaction_id)
 
-    http, err := p.Execute()
+    response, http, err := p.Execute()
     c.HandleResponse(http, err)
     if (err != nil) {
         return http, err
