@@ -735,6 +735,62 @@ func TestRefundTransaction(t *testing.T) {
 		t.Errorf("expected StatusCode 201: received: " + strconv.Itoa(response.StatusCode))
 	}
 }
+func TestAuthorizeSecondTransaction(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key, environment)
+
+	req := Gr4vyTransactionRequest{
+		Amount:   1299,
+		Currency: "USD",
+	}
+
+	paymentMethod := Gr4vyTransactionPaymentMethodRequest{
+		Method:         "card",
+		Number:         Gr4vyNullableString("4111111111111111"),
+		ExpirationDate: Gr4vyNullableString("12/25"),
+		SecurityCode:   Gr4vyNullableString("123"),
+	}
+
+	id := uuid.New()
+
+	var response *Gr4vyTransaction
+	var body *http.Response
+	response, body, err = client.AuthorizeNewTransactionWithIdempotencyKey(req, paymentMethod, id.String())
+	if err != nil {
+		t.Errorf(err.Error())
+		fmt.Printf("%+v\n", response)
+		fmt.Printf("%+v\n", body)
+		return
+	}
+
+	transactionId = *response.Id
+	t.Log("Set transactionId: " + transactionId)
+}
+func TestVoidTransaction(t *testing.T) {
+	key, err := GetKeyFromFile(keyPath)
+	if err != nil {
+		t.Errorf(err.Error())
+		return
+	}
+	client := NewGr4vyClient(gr4vyId, key, environment)
+
+	req := Gr4vyTransactionRefundRequest{}
+
+	body, response, err := client.VoidTransaction(transactionId, req)
+	if err != nil {
+		t.Errorf(err.Error())
+		fmt.Printf("%+v\n", response)
+		fmt.Printf("%+v\n", body)
+		return
+	}
+	if response.StatusCode != 201 {
+		t.Errorf("expected StatusCode 201: received: " + strconv.Itoa(response.StatusCode))
+	}
+}
 
 func TestEmbedTokenWithCheckoutSession(t *testing.T) {
 	// fetch/decode the private key
