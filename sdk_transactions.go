@@ -240,10 +240,10 @@ func (c *Gr4vyClient) RefundTransactionContext(ctx context.Context, transaction_
     var r Gr4vyRefund = Gr4vyRefund(response)
     return &r, http, err
 }
-func (c *Gr4vyClient) VoidTransaction(transaction_id string) (*http.Response, error) {
+func (c *Gr4vyClient) VoidTransaction(transaction_id string) (*Gr4vyTransaction, *http.Response, error) {
     client, err := GetClient(c)
     if err != nil {
-        return nil, err
+        return nil, nil, err
     }
     auth := context.WithValue(context.Background(), ContextAccessToken, c.accessToken)
     p := client.TransactionsApi.VoidTransaction(auth, transaction_id)
@@ -251,7 +251,8 @@ func (c *Gr4vyClient) VoidTransaction(transaction_id string) (*http.Response, er
     response, http, err := p.Execute()
     c.HandleResponse(http, err)
     if (err != nil) {
-        return http, err
+        return nil, http, err
     }
-    return http, err
+    var r Gr4vyTransaction = Gr4vyTransaction(response)
+    return &r, http, err
 }

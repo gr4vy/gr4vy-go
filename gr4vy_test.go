@@ -778,9 +778,7 @@ func TestVoidTransaction(t *testing.T) {
 	}
 	client := NewGr4vyClient(gr4vyId, key, environment)
 
-	req := Gr4vyTransactionRefundRequest{}
-
-	body, response, err := client.VoidTransaction(transactionId, req)
+	body, response, err := client.VoidTransaction(transactionId)
 	if err != nil {
 		t.Errorf(err.Error())
 		fmt.Printf("%+v\n", response)
