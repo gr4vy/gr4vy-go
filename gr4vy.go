@@ -2,13 +2,18 @@ package gr4vy
 
 import (
 	"bytes"
+	"crypto/hmac"
+	"crypto/sha256"
+	"encoding/hex"
+	"errors"
 	"fmt"
 	"io"
-	"io/ioutil"
 	"net/http"
 	"os"
 	"runtime"
+	"strconv"
 	"strings"
+	"time"
 
 	. "github.com/gr4vy/gr4vy-go/api"
 )
@@ -109,6 +114,48 @@ func (c *Gr4vyClient) GetToken() (string, error) {
 	return getToken(c.privateKey, scopes)
 }
 
+// VerifyWebhook verifies the webhook signature and timestamp.
+func VerifyWebhook(secret string, payload string, signatureHeader *string, timestampHeader *string, timestampTolerance int) error {
+	if signatureHeader == nil || timestampHeader == nil {
+		return errors.New("missing header values")
+	}
+
+	timestamp, err := strconv.Atoi(*timestampHeader)
+	if err != nil {
+		return errors.New("invalid header timestamp")
+	}
+
+	signatures := strings.Split(*signatureHeader, ",")
+	expectedSignature := computeHMAC(secret, strconv.Itoa(timestamp)+"."+payload)
+
+	if !contains(signatures, expectedSignature) {
+		return errors.New("no matching signature found")
+	}
+
+	if timestampTolerance > 0 && timestamp < int(time.Now().Unix())-timestampTolerance {
+		return errors.New("timestamp too old")
+	}
+
+	return nil
+}
+
+// computeHMAC computes the HMAC-SHA256 signature.
+func computeHMAC(secret string, message string) string {
+	h := hmac.New(sha256.New, []byte(secret))
+	h.Write([]byte(message))
+	return hex.EncodeToString(h.Sum(nil))
+}
+
+// contains checks if a slice contains a specific string.
+func contains(slice []string, item string) bool {
+	for _, s := range slice {
+		if s == item {
+			return true
+		}
+	}
+	return false
+}
+
 func (c *Gr4vyClient) HandleResponse(response *http.Response, error error) {
 	if c.Debug {
 		var sb strings.Builder
@@ -119,7 +166,7 @@ func (c *Gr4vyClient) HandleResponse(response *http.Response, error error) {
 			body, err := io.ReadAll(response.Body)
 			if err == nil {
 				sb.WriteString(string(body))
-				response.Body = ioutil.NopCloser(bytes.NewBuffer(body))
+				response.Body = io.NopCloser(bytes.NewBuffer(body))
 			}
 		} else {
 			body, err := io.ReadAll(response.Body)
@@ -127,7 +174,7 @@ func (c *Gr4vyClient) HandleResponse(response *http.Response, error error) {
 				sb.WriteString("error: " + err.Error())
 			} else {
 				sb.WriteString(string(body))
-				response.Body = ioutil.NopCloser(bytes.NewBuffer(body))
+				response.Body = io.NopCloser(bytes.NewBuffer(body))
 			}
 		}
 
@@ -159,7 +206,7 @@ func GetKeyFromFile(fileName string) (string, error) {
 	if exists {
 		return string(value), nil
 	}
-	b, err := ioutil.ReadFile(fileName)
+	b, err := os.ReadFile(fileName)
 	if err != nil {
 		return "", err
 	}
