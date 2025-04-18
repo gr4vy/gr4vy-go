@@ -176,6 +176,50 @@ So to update a buyer you will need to pass in the `Gr4vyBuyerUpdate` to the
   response, err := client.UpdateBuyer(buyerId, req)
 ```
 
+## Verifying Webhooks
+
+The `VerifyWebhook` function allows you to verify the authenticity of incoming webhooks from Gr4vy. It validates the signature and timestamp of the webhook payload to ensure it has not been tampered with.
+
+### Usage
+
+```golang
+import (
+  "fmt"
+  "github.com/gr4vy/gr4vy-go"
+)
+
+func main() {
+  secret := "your_webhook_secret"
+  payload := "webhook_payload"
+  signatureHeader := "signature_from_header"
+  timestampHeader := "timestamp_from_header"
+  timestampTolerance := 300 // Optional: Tolerance in seconds for timestamp validation
+
+  err := gr4vy.VerifyWebhook(secret, payload, &signatureHeader, &timestampHeader, timestampTolerance)
+  if err != nil {
+    fmt.Println("Webhook verification failed:", err)
+    return
+  }
+
+  fmt.Println("Webhook verified successfully!")
+}
+```
+
+### Parameters
+
+- `secret` (string): The webhook secret used to sign the payload.
+- `payload` (string): The raw payload of the webhook.
+- `signatureHeader` (*string): The `X-Gr4vy-Signature` header from the webhook request.
+- `timestampHeader` (*string): The `X-Gr4vy-Timestamp` header from the webhook request.
+- `timestampTolerance` (int): The maximum allowed difference (in seconds) between the current time and the timestamp in the header. Set to `0` to disable timestamp validation.
+
+### Errors
+
+The function returns an error if:
+- The `signatureHeader` or `timestampHeader` is missing.
+- The `timestampHeader` is invalid or too old (if `timestampTolerance` is set).
+- The signature does not match the expected value.
+
 ## Response
 
 Every resolved API call returns the requested resource, a `*http.Response`
