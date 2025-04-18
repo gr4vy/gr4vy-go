@@ -871,3 +871,62 @@ func TestEmbedTokenWithCheckoutSession(t *testing.T) {
 		return
 	}
 }
+
+func TestVerifyWebhook_HappyCase(t *testing.T) {
+	secret := "Ik4L-8FH0ihWczctcIPXZRR_8F0fPNgmhEfVBbZ3zNwqQVa1Or4tBz4Pgw2eNaVDod7H56Y268h_wohEUaWbUg"
+	signatureHeader := "78aca0c78005107a654a957b8566fa6e0e5e06aea92d7da72a6da9e5a690d013,other"
+	timestampHeader := "1744018920"
+	payload := "payload"
+
+	err := VerifyWebhook(secret, payload, &signatureHeader, &timestampHeader, 0)
+	if err != nil {
+		t.Errorf("unexpected error: %v", err)
+	}
+}
+
+func TestVerifyWebhook_OldTimestamp(t *testing.T) {
+	secret := "Ik4L-8FH0ihWczctcIPXZRR_8F0fPNgmhEfVBbZ3zNwqQVa1Or4tBz4Pgw2eNaVDod7H56Y268h_wohEUaWbUg"
+	signatureHeader := "78aca0c78005107a654a957b8566fa6e0e5e06aea92d7da72a6da9e5a690d013,other"
+	timestampHeader := "1744018920"
+	payload := "payload"
+
+	err := VerifyWebhook(secret, payload, &signatureHeader, &timestampHeader, 60)
+	if err == nil || err.Error() != "timestamp too old" {
+		t.Errorf("expected 'timestamp too old' error, got: %v", err)
+	}
+}
+
+func TestVerifyWebhook_WrongSignature(t *testing.T) {
+	secret := "Ik4L-8FH0ihWczctcIPXZRR_8F0fPNgmhEfVBbZ3zNwqQVa1Or4tBz4Pgw2eNaVDod7H56Y268h_wohEUaWbUg"
+	signatureHeader := "other"
+	timestampHeader := "1744018920"
+	payload := "payload"
+
+	err := VerifyWebhook(secret, payload, &signatureHeader, &timestampHeader, 0)
+	if err == nil || err.Error() != "no matching signature found" {
+		t.Errorf("expected 'no matching signature found' error, got: %v", err)
+	}
+}
+
+func TestVerifyWebhook_InvalidTimestamp(t *testing.T) {
+	secret := "Ik4L-8FH0ihWczctcIPXZRR_8F0fPNgmhEfVBbZ3zNwqQVa1Or4tBz4Pgw2eNaVDod7H56Y268h_wohEUaWbUg"
+	signatureHeader := "78aca0c78005107a654a957b8566fa6e0e5e06aea92d7da72a6da9e5a690d013,other"
+	timestampHeader := "wrong"
+	payload := "payload"
+
+	err := VerifyWebhook(secret, payload, &signatureHeader, &timestampHeader, 0)
+	if err == nil || err.Error() != "invalid header timestamp" {
+		t.Errorf("expected 'invalid header timestamp' error, got: %v", err)
+	}
+}
+
+func TestVerifyWebhook_MissingHeader(t *testing.T) {
+	secret := "Ik4L-8FH0ihWczctcIPXZRR_8F0fPNgmhEfVBbZ3zNwqQVa1Or4tBz4Pgw2eNaVDod7H56Y268h_wohEUaWbUg"
+	timestampHeader := "1744018920"
+	payload := "payload"
+
+	err := VerifyWebhook(secret, payload, nil, &timestampHeader, 0)
+	if err == nil || err.Error() != "missing header values" {
+		t.Errorf("expected 'missing header values' error, got: %v", err)
+	}
+}
