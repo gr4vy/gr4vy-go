@@ -3,17 +3,13 @@ module github.com/gr4vy/gr4vy-go
 go 1.16
 
 require (
-	github.com/deepmap/oapi-codegen v1.6.1
-	github.com/getkin/kin-openapi v0.55.0
+	github.com/davecgh/go-spew v1.1.1 // indirect
 	github.com/golang-jwt/jwt v3.2.1+incompatible
-	github.com/google/uuid v1.3.0 // indirect
-	github.com/labstack/echo/v4 v4.2.2
+	github.com/google/uuid v1.3.0
 	github.com/myesui/uuid v1.0.0 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
-	github.com/stretchr/testify v1.7.0 // indirect
 	github.com/twinj/uuid v1.0.0
-	golang.org/x/crypto v0.0.0-20201221181555-eec23a3978ad
-	golang.org/x/net v0.0.0-20210119194325-5f4716e94777
-	golang.org/x/oauth2 v0.0.0-20210427180440-81ed05c6b58c // indirect
+	golang.org/x/crypto v0.36.0
+	golang.org/x/net v0.38.0 // indirect
+	golang.org/x/oauth2 v0.0.0-20210427180440-81ed05c6b58c
 	gopkg.in/stretchr/testify.v1 v1.2.2 // indirect
 )
