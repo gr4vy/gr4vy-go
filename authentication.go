@@ -10,7 +10,7 @@ import (
 	"time"
 
 	"github.com/golang-jwt/jwt"
-	"github.com/twinj/uuid"
+	"github.com/google/uuid"
 	"golang.org/x/crypto/ssh"
 )
 
@@ -28,7 +28,7 @@ func getEmbedToken(private_key string, embed EmbedParams, checkout_session_id st
 		"nbf":    float64(time.Now().Unix()),
 		"exp":    float64(time.Now().Unix() + 3000),
 		"scopes": []string{"embed"},
-		"jti":    uuid.NewV4(),
+		"jti":    uuid.New(),
 	}
 
 	if len(checkout_session_id) != 0 {
@@ -46,7 +46,7 @@ func getToken(private_key string, scopes []string) (string, error) {
 		"nbf":    float64(time.Now().Unix()),
 		"exp":    float64(time.Now().Unix() + 3000),
 		"scopes": scopes,
-		"jti":    uuid.NewV4(),
+		"jti":    uuid.New(),
 	}
 
 	return getTokenWithClaims(private_key, claims)
