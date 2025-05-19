@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type PayoutStatus string
 
 const (
@@ -18,23 +13,4 @@ const (
 
 func (e PayoutStatus) ToPointer() *PayoutStatus {
 	return &e
-}
-func (e *PayoutStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "declined":
-		fallthrough
-	case "failed":
-		fallthrough
-	case "pending":
-		fallthrough
-	case "succeeded":
-		*e = PayoutStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for PayoutStatus: %v", v)
-	}
 }

@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // GiftCardErrorCode - Gift card error codes.
 //
 // Gr4vy normalised gift card error codes. Keep the naming and style in line with
@@ -33,39 +28,4 @@ const (
 
 func (e GiftCardErrorCode) ToPointer() *GiftCardErrorCode {
 	return &e
-}
-func (e *GiftCardErrorCode) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "invalid_gift_card":
-		fallthrough
-	case "expired_card":
-		fallthrough
-	case "inactive_card":
-		fallthrough
-	case "invalid_service_credentials":
-		fallthrough
-	case "invalid_amount":
-		fallthrough
-	case "incorrect_currency":
-		fallthrough
-	case "insufficient_funds":
-		fallthrough
-	case "invalid_service_configuration":
-		fallthrough
-	case "operation_canceled":
-		fallthrough
-	case "service_error":
-		fallthrough
-	case "service_network_error":
-		fallthrough
-	case "unknown_error":
-		*e = GiftCardErrorCode(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for GiftCardErrorCode: %v", v)
-	}
 }

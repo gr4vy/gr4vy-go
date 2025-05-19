@@ -7,11 +7,22 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type CreateTransactionRefundGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *CreateTransactionRefundGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type CreateTransactionRefundRequest struct {
 	TransactionID    string   `pathParam:"style=simple,explode=false,name=transaction_id"`
 	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string                            `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID       *string                            `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	TransactionRefundCreate components.TransactionRefundCreate `request:"mediaType=application/json"`
 }
 
@@ -40,11 +51,11 @@ func (o *CreateTransactionRefundRequest) GetTimeoutInSeconds() *float64 {
 	return o.TimeoutInSeconds
 }
 
-func (o *CreateTransactionRefundRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *CreateTransactionRefundRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 func (o *CreateTransactionRefundRequest) GetTransactionRefundCreate() components.TransactionRefundCreate {

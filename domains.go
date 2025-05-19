@@ -27,12 +27,16 @@ func newDomains(sdkConfig sdkConfiguration) *Domains {
 
 // Create - Register a digital wallet domain
 // Register a digital wallet domain (Apple Pay only).
-func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.RegisterDigitalWalletDomainResponse, error) {
+func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.RegisterDigitalWalletDomainResponse, error) {
 	request := operations.RegisterDigitalWalletDomainRequest{
-		DigitalWalletID:         digitalWalletID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		DigitalWalletDomain:     digitalWalletDomain,
+		DigitalWalletID:     digitalWalletID,
+		TimeoutInSeconds:    timeoutInSeconds,
+		MerchantAccountID:   merchantAccountID,
+		DigitalWalletDomain: digitalWalletDomain,
+	}
+
+	globals := operations.RegisterDigitalWalletDomainGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -53,7 +57,7 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/digital-wallets/{digital_wallet_id}/domains", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/digital-wallets/{digital_wallet_id}/domains", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -90,9 +94,9 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -544,12 +548,16 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 
 // Delete - Remove a digital wallet domain
 // Remove a digital wallet domain (Apple Pay only).
-func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.UnregisterDigitalWalletDomainResponse, error) {
+func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.UnregisterDigitalWalletDomainResponse, error) {
 	request := operations.UnregisterDigitalWalletDomainRequest{
-		DigitalWalletID:         digitalWalletID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		DigitalWalletDomain:     digitalWalletDomain,
+		DigitalWalletID:     digitalWalletID,
+		TimeoutInSeconds:    timeoutInSeconds,
+		MerchantAccountID:   merchantAccountID,
+		DigitalWalletDomain: digitalWalletDomain,
+	}
+
+	globals := operations.UnregisterDigitalWalletDomainGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -570,7 +578,7 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/digital-wallets/{digital_wallet_id}/domains", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/digital-wallets/{digital_wallet_id}/domains", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -607,9 +615,9 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

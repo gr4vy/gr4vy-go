@@ -18,8 +18,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -28,11 +28,10 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Refunds.All.Create(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil, gr4vygo.String("default"), &components.TransactionRefundAllCreate{
+    res, err := s.Transactions.Refunds.All.Create(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil, nil, &components.TransactionRefundAllCreate{
         Reason: gr4vygo.String("Refund due to user request."),
         ExternalIdentifier: gr4vygo.String("refund-12345"),
     })
@@ -52,7 +51,7 @@ func main() {
 | `ctx`                                                                                           | [context.Context](https://pkg.go.dev/context#Context)                                           | :heavy_check_mark:                                                                              | The context to use for the request.                                                             |                                                                                                 |
 | `transactionID`                                                                                 | *string*                                                                                        | :heavy_check_mark:                                                                              | N/A                                                                                             | 7099948d-7286-47e4-aad8-b68f7eb44591                                                            |
 | `timeoutInSeconds`                                                                              | **float64*                                                                                      | :heavy_minus_sign:                                                                              | N/A                                                                                             |                                                                                                 |
-| `xGr4vyMerchantAccountID`                                                                       | **string*                                                                                       | :heavy_minus_sign:                                                                              | The ID of the merchant account to use for this request.                                         | default                                                                                         |
+| `merchantAccountID`                                                                             | **string*                                                                                       | :heavy_minus_sign:                                                                              | The ID of the merchant account to use for this request.                                         |                                                                                                 |
 | `transactionRefundAllCreate`                                                                    | [*components.TransactionRefundAllCreate](../../models/components/transactionrefundallcreate.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |                                                                                                 |
 | `opts`                                                                                          | [][operations.Option](../../models/operations/option.md)                                        | :heavy_minus_sign:                                                                              | The options for this request.                                                                   |                                                                                                 |
 

@@ -20,8 +20,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -29,8 +29,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.PaymentServiceDefinitions.List(ctx, gr4vygo.String("ZXhhbXBsZTE"), nil)
@@ -97,8 +96,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -106,8 +105,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.PaymentServiceDefinitions.Get(ctx, "adyen-ideal")
@@ -161,8 +159,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -170,8 +168,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.PaymentServiceDefinitions.Session(ctx, "adyen-ideal", map[string]any{

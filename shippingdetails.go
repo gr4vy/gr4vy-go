@@ -27,12 +27,16 @@ func newShippingDetails(sdkConfig sdkConfiguration) *ShippingDetails {
 
 // Create - Add buyer shipping details
 // Associate shipping details to a buyer.
-func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDetailsCreate components.ShippingDetailsCreate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.AddBuyerShippingDetailsResponse, error) {
+func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDetailsCreate components.ShippingDetailsCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.AddBuyerShippingDetailsResponse, error) {
 	request := operations.AddBuyerShippingDetailsRequest{
-		BuyerID:                 buyerID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		ShippingDetailsCreate:   shippingDetailsCreate,
+		BuyerID:               buyerID,
+		TimeoutInSeconds:      timeoutInSeconds,
+		MerchantAccountID:     merchantAccountID,
+		ShippingDetailsCreate: shippingDetailsCreate,
+	}
+
+	globals := operations.AddBuyerShippingDetailsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -53,7 +57,7 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -90,9 +94,9 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -544,10 +548,14 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 
 // List a buyer's shipping details
 // List all the shipping details associated to a specific buyer.
-func (s *ShippingDetails) List(ctx context.Context, buyerID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.ListBuyerShippingDetailsResponse, error) {
+func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAccountID *string, opts ...operations.Option) (*operations.ListBuyerShippingDetailsResponse, error) {
 	request := operations.ListBuyerShippingDetailsRequest{
-		BuyerID:                 buyerID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		BuyerID:           buyerID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.ListBuyerShippingDetailsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -568,7 +576,7 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, xGr4vyMercha
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -598,7 +606,7 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, xGr4vyMercha
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -613,6 +621,16 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, xGr4vyMercha
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -621,11 +639,7 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, xGr4vyMercha
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -1048,11 +1062,15 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, xGr4vyMercha
 
 // Get buyer shipping details
 // Get a buyer's shipping details.
-func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetailsID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetBuyerShippingDetailsResponse, error) {
+func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetailsID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetBuyerShippingDetailsResponse, error) {
 	request := operations.GetBuyerShippingDetailsRequest{
-		BuyerID:                 buyerID,
-		ShippingDetailsID:       shippingDetailsID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		BuyerID:           buyerID,
+		ShippingDetailsID: shippingDetailsID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetBuyerShippingDetailsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1073,7 +1091,7 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details/{shipping_details_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details/{shipping_details_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1103,7 +1121,7 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1118,6 +1136,16 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -1126,11 +1154,7 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -1554,6 +1578,10 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 // Update a buyer's shipping details
 // Update the shipping details associated to a specific buyer.
 func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateBuyerShippingDetailsRequest, opts ...operations.Option) (*operations.UpdateBuyerShippingDetailsResponse, error) {
+	globals := operations.UpdateBuyerShippingDetailsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1572,7 +1600,7 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details/{shipping_details_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details/{shipping_details_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1609,9 +1637,9 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2063,12 +2091,16 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 
 // Delete a buyer's shipping details
 // Delete the shipping details associated to a specific buyer.
-func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDetailsID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.DeleteBuyerShippingDetailsResponse, error) {
+func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDetailsID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.DeleteBuyerShippingDetailsResponse, error) {
 	request := operations.DeleteBuyerShippingDetailsRequest{
-		BuyerID:                 buyerID,
-		ShippingDetailsID:       shippingDetailsID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		BuyerID:           buyerID,
+		ShippingDetailsID: shippingDetailsID,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.DeleteBuyerShippingDetailsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -2089,7 +2121,7 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details/{shipping_details_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details/{shipping_details_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -2119,9 +2151,9 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

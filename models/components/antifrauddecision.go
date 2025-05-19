@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type AntiFraudDecision string
 
 const (
@@ -20,27 +15,4 @@ const (
 
 func (e AntiFraudDecision) ToPointer() *AntiFraudDecision {
 	return &e
-}
-func (e *AntiFraudDecision) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "accept":
-		fallthrough
-	case "error":
-		fallthrough
-	case "exception":
-		fallthrough
-	case "reject":
-		fallthrough
-	case "review":
-		fallthrough
-	case "skipped":
-		*e = AntiFraudDecision(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AntiFraudDecision: %v", v)
-	}
 }

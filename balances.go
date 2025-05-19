@@ -28,11 +28,15 @@ func newBalances(sdkConfig sdkConfiguration) *Balances {
 
 // List gift card balances
 // Fetch the balances for one or more gift cards.
-func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.GiftCardBalanceRequest, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.ListGiftCardBalancesResponse, error) {
+func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.GiftCardBalanceRequest, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.ListGiftCardBalancesResponse, error) {
 	request := operations.ListGiftCardBalancesRequest{
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		GiftCardBalanceRequest:  giftCardBalanceRequest,
+		TimeoutInSeconds:       timeoutInSeconds,
+		MerchantAccountID:      merchantAccountID,
+		GiftCardBalanceRequest: giftCardBalanceRequest,
+	}
+
+	globals := operations.ListGiftCardBalancesGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -90,9 +94,9 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

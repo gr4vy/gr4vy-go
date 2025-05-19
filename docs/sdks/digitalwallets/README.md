@@ -22,8 +22,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -32,8 +32,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.DigitalWallets.Create(ctx, components.DigitalWalletCreate{
@@ -41,7 +40,7 @@ func main() {
         MerchantName: "<value>",
         MerchantCountryCode: gr4vygo.String("US"),
         AcceptTermsAndConditions: false,
-    }, nil, gr4vygo.String("default"))
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -53,13 +52,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
-| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
-| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |                                                                                  |
-| `digitalWalletCreate`                                                            | [components.DigitalWalletCreate](../../models/components/digitalwalletcreate.md) | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
-| `timeoutInSeconds`                                                               | **float64*                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
-| `xGr4vyMerchantAccountID`                                                        | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          | default                                                                          |
-| `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |                                                                                  |
+| Parameter                                                                        | Type                                                                             | Required                                                                         | Description                                                                      |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |
+| `digitalWalletCreate`                                                            | [components.DigitalWalletCreate](../../models/components/digitalwalletcreate.md) | :heavy_check_mark:                                                               | N/A                                                                              |
+| `timeoutInSeconds`                                                               | **float64*                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |
+| `merchantAccountID`                                                              | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          |
+| `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |
 
 ### Response
 
@@ -94,8 +93,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -103,11 +102,10 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.List(ctx, gr4vygo.String("default"))
+    res, err := s.DigitalWallets.List(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -119,11 +117,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `xGr4vyMerchantAccountID`                                | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  | default                                                  |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
@@ -158,8 +156,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -167,11 +165,10 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Get(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", gr4vygo.String("default"))
+    res, err := s.DigitalWallets.Get(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -187,7 +184,7 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `digitalWalletID`                                        | *string*                                                 | :heavy_check_mark:                                       | The ID of the digital wallet to read.                    | 1808f5e6-b49c-4db9-94fa-22371ea352f5                     |
-| `xGr4vyMerchantAccountID`                                | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  | default                                                  |
+| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -223,8 +220,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -232,11 +229,10 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Delete(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", nil, gr4vygo.String("default"))
+    res, err := s.DigitalWallets.Delete(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -253,7 +249,7 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `digitalWalletID`                                        | *string*                                                 | :heavy_check_mark:                                       | The ID of the digital wallet to delete.                  | 1808f5e6-b49c-4db9-94fa-22371ea352f5                     |
 | `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |                                                          |
-| `xGr4vyMerchantAccountID`                                | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  | default                                                  |
+| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -289,8 +285,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -299,13 +295,12 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.DigitalWallets.Update(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletUpdate{
         MerchantCountryCode: gr4vygo.String("DE"),
-    }, nil, gr4vygo.String("default"))
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -323,7 +318,7 @@ func main() {
 | `digitalWalletID`                                                                | *string*                                                                         | :heavy_check_mark:                                                               | The ID of the digital wallet to edit.                                            | 1808f5e6-b49c-4db9-94fa-22371ea352f5                                             |
 | `digitalWalletUpdate`                                                            | [components.DigitalWalletUpdate](../../models/components/digitalwalletupdate.md) | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
 | `timeoutInSeconds`                                                               | **float64*                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
-| `xGr4vyMerchantAccountID`                                                        | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          | default                                                                          |
+| `merchantAccountID`                                                              | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          |                                                                                  |
 | `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |                                                                                  |
 
 ### Response

@@ -28,11 +28,15 @@ func newJobs(sdkConfig sdkConfiguration) *Jobs {
 
 // Create account updater job
 // Schedule one or more stored cards for an account update.
-func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.AccountUpdaterJobCreate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CreateAccountUpdaterJobResponse, error) {
+func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.AccountUpdaterJobCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CreateAccountUpdaterJobResponse, error) {
 	request := operations.CreateAccountUpdaterJobRequest{
 		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		MerchantAccountID:       merchantAccountID,
 		AccountUpdaterJobCreate: accountUpdaterJobCreate,
+	}
+
+	globals := operations.CreateAccountUpdaterJobGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -90,9 +94,9 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

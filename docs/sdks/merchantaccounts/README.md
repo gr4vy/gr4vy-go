@@ -21,8 +21,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -30,8 +30,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.MerchantAccounts.List(ctx, gr4vygo.String("ZXhhbXBsZTE"), nil, gr4vygo.String("merchant-12345"))
@@ -99,8 +98,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -109,8 +108,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.MerchantAccounts.Create(ctx, components.MerchantAccountCreate{
@@ -188,8 +186,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -197,8 +195,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.MerchantAccounts.Get(ctx, "merchant-12345")
@@ -252,8 +249,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -262,8 +259,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.MerchantAccounts.Update(ctx, "merchant-12345", components.MerchantAccountUpdate{

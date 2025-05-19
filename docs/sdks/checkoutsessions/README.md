@@ -21,8 +21,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
@@ -32,11 +32,10 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Create(ctx, nil, gr4vygo.String("default"), gr4vygo.Pointer(operations.CreateCreateCheckoutSessionBodyArrayOfBaseModel(
+    res, err := s.CheckoutSessions.Create(ctx, nil, nil, gr4vygo.Pointer(operations.CreateCreateCheckoutSessionBodyArrayOfBaseModel(
         []components.BaseModel{
             components.BaseModel{},
             components.BaseModel{},
@@ -53,13 +52,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   | Example                                                                                       |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |                                                                                               |
-| `timeoutInSeconds`                                                                            | **float64*                                                                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |                                                                                               |
-| `xGr4vyMerchantAccountID`                                                                     | **string*                                                                                     | :heavy_minus_sign:                                                                            | The ID of the merchant account to use for this request.                                       | default                                                                                       |
-| `requestBody`                                                                                 | [*operations.CreateCheckoutSessionBody](../../models/operations/createcheckoutsessionbody.md) | :heavy_minus_sign:                                                                            | N/A                                                                                           |                                                                                               |
-| `opts`                                                                                        | [][operations.Option](../../models/operations/option.md)                                      | :heavy_minus_sign:                                                                            | The options for this request.                                                                 |                                                                                               |
+| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
+| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |
+| `timeoutInSeconds`                                                                            | **float64*                                                                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `merchantAccountID`                                                                           | **string*                                                                                     | :heavy_minus_sign:                                                                            | The ID of the merchant account to use for this request.                                       |
+| `requestBody`                                                                                 | [*operations.CreateCheckoutSessionBody](../../models/operations/createcheckoutsessionbody.md) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
+| `opts`                                                                                        | [][operations.Option](../../models/operations/option.md)                                      | :heavy_minus_sign:                                                                            | The options for this request.                                                                 |
 
 ### Response
 
@@ -94,8 +93,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/types"
 	"log"
@@ -105,8 +104,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.CheckoutSessions.Update(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", components.CheckoutSessionUpdate{
@@ -305,7 +303,7 @@ func main() {
             TravelAgencyName: gr4vygo.String("ACME Agency"),
             TravelAgencyPlanName: gr4vygo.String("B733"),
         },
-    }, nil, gr4vygo.String("default"))
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -323,7 +321,7 @@ func main() {
 | `sessionID`                                                                          | *string*                                                                             | :heavy_check_mark:                                                                   | The ID of the checkout session.                                                      | 4137b1cf-39ac-42a8-bad6-1c680d5dab6b                                                 |
 | `checkoutSessionUpdate`                                                              | [components.CheckoutSessionUpdate](../../models/components/checkoutsessionupdate.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
 | `timeoutInSeconds`                                                                   | **float64*                                                                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
-| `xGr4vyMerchantAccountID`                                                            | **string*                                                                            | :heavy_minus_sign:                                                                   | The ID of the merchant account to use for this request.                              | default                                                                              |
+| `merchantAccountID`                                                                  | **string*                                                                            | :heavy_minus_sign:                                                                   | The ID of the merchant account to use for this request.                              |                                                                                      |
 | `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |                                                                                      |
 
 ### Response
@@ -359,8 +357,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -368,11 +366,10 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Get(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil, gr4vygo.String("default"))
+    res, err := s.CheckoutSessions.Get(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -389,7 +386,7 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `sessionID`                                              | *string*                                                 | :heavy_check_mark:                                       | The ID of the checkout session.                          | 4137b1cf-39ac-42a8-bad6-1c680d5dab6b                     |
 | `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |                                                          |
-| `xGr4vyMerchantAccountID`                                | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  | default                                                  |
+| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -424,8 +421,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -433,11 +430,10 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Delete(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil, gr4vygo.String("default"))
+    res, err := s.CheckoutSessions.Delete(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -454,7 +450,7 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `sessionID`                                              | *string*                                                 | :heavy_check_mark:                                       | The ID of the checkout session.                          | 4137b1cf-39ac-42a8-bad6-1c680d5dab6b                     |
 | `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |                                                          |
-| `xGr4vyMerchantAccountID`                                | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  | default                                                  |
+| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response

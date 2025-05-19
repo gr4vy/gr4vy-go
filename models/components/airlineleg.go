@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"time"
 )
@@ -18,21 +16,6 @@ const (
 
 func (e RouteType) ToPointer() *RouteType {
 	return &e
-}
-func (e *RouteType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "round_trip":
-		fallthrough
-	case "one_way":
-		*e = RouteType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RouteType: %v", v)
-	}
 }
 
 type AirlineLeg struct {

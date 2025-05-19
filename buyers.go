@@ -38,6 +38,10 @@ func newBuyers(sdkConfig sdkConfiguration) *Buyers {
 // List all buyers
 // List all buyers or search for a specific buyer.
 func (s *Buyers) List(ctx context.Context, request operations.ListBuyersRequest, opts ...operations.Option) (*operations.ListBuyersResponse, error) {
+	globals := operations.ListBuyersGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -86,9 +90,9 @@ func (s *Buyers) List(ctx context.Context, request operations.ListBuyersRequest,
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -105,6 +109,16 @@ func (s *Buyers) List(ctx context.Context, request operations.ListBuyersRequest,
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -113,11 +127,7 @@ func (s *Buyers) List(ctx context.Context, request operations.ListBuyersRequest,
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -232,11 +242,11 @@ func (s *Buyers) List(ctx context.Context, request operations.ListBuyersRequest,
 		return s.List(
 			ctx,
 			operations.ListBuyersRequest{
-				Cursor:                  &nCVal,
-				Limit:                   request.Limit,
-				Search:                  request.Search,
-				ExternalIdentifier:      request.ExternalIdentifier,
-				XGr4vyMerchantAccountID: request.XGr4vyMerchantAccountID,
+				Cursor:             &nCVal,
+				Limit:              request.Limit,
+				Search:             request.Search,
+				ExternalIdentifier: request.ExternalIdentifier,
+				MerchantAccountID:  request.MerchantAccountID,
 			},
 			opts...,
 		)
@@ -586,11 +596,15 @@ func (s *Buyers) List(ctx context.Context, request operations.ListBuyersRequest,
 
 // Create - Add a buyer
 // Create a new buyer record.
-func (s *Buyers) Create(ctx context.Context, buyerCreate components.BuyerCreate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.AddBuyerResponse, error) {
+func (s *Buyers) Create(ctx context.Context, buyerCreate components.BuyerCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.AddBuyerResponse, error) {
 	request := operations.AddBuyerRequest{
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		BuyerCreate:             buyerCreate,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+		BuyerCreate:       buyerCreate,
+	}
+
+	globals := operations.AddBuyerGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -648,9 +662,9 @@ func (s *Buyers) Create(ctx context.Context, buyerCreate components.BuyerCreate,
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1102,10 +1116,14 @@ func (s *Buyers) Create(ctx context.Context, buyerCreate components.BuyerCreate,
 
 // Get a buyer
 // Fetches a buyer by its ID.
-func (s *Buyers) Get(ctx context.Context, buyerID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetBuyerResponse, error) {
+func (s *Buyers) Get(ctx context.Context, buyerID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetBuyerResponse, error) {
 	request := operations.GetBuyerRequest{
-		BuyerID:                 buyerID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		BuyerID:           buyerID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetBuyerGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1126,7 +1144,7 @@ func (s *Buyers) Get(ctx context.Context, buyerID string, xGr4vyMerchantAccountI
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1156,7 +1174,7 @@ func (s *Buyers) Get(ctx context.Context, buyerID string, xGr4vyMerchantAccountI
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1171,6 +1189,16 @@ func (s *Buyers) Get(ctx context.Context, buyerID string, xGr4vyMerchantAccountI
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -1179,11 +1207,7 @@ func (s *Buyers) Get(ctx context.Context, buyerID string, xGr4vyMerchantAccountI
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -1606,12 +1630,16 @@ func (s *Buyers) Get(ctx context.Context, buyerID string, xGr4vyMerchantAccountI
 
 // Update a buyer
 // Updates a buyer record.
-func (s *Buyers) Update(ctx context.Context, buyerID string, buyerUpdate components.BuyerUpdate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.UpdateBuyerResponse, error) {
+func (s *Buyers) Update(ctx context.Context, buyerID string, buyerUpdate components.BuyerUpdate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.UpdateBuyerResponse, error) {
 	request := operations.UpdateBuyerRequest{
-		BuyerID:                 buyerID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		BuyerUpdate:             buyerUpdate,
+		BuyerID:           buyerID,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+		BuyerUpdate:       buyerUpdate,
+	}
+
+	globals := operations.UpdateBuyerGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1632,7 +1660,7 @@ func (s *Buyers) Update(ctx context.Context, buyerID string, buyerUpdate compone
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1669,9 +1697,9 @@ func (s *Buyers) Update(ctx context.Context, buyerID string, buyerUpdate compone
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2123,11 +2151,15 @@ func (s *Buyers) Update(ctx context.Context, buyerID string, buyerUpdate compone
 
 // Delete a buyer
 // Permanently removes a buyer record.
-func (s *Buyers) Delete(ctx context.Context, buyerID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.DeleteBuyerResponse, error) {
+func (s *Buyers) Delete(ctx context.Context, buyerID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.DeleteBuyerResponse, error) {
 	request := operations.DeleteBuyerRequest{
-		BuyerID:                 buyerID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		BuyerID:           buyerID,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.DeleteBuyerGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -2148,7 +2180,7 @@ func (s *Buyers) Delete(ctx context.Context, buyerID string, timeoutInSeconds *f
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -2178,9 +2210,9 @@ func (s *Buyers) Delete(ctx context.Context, buyerID string, timeoutInSeconds *f
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

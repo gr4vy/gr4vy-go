@@ -6,10 +6,21 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type GetTransactionGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *GetTransactionGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type GetTransactionRequest struct {
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (o *GetTransactionRequest) GetTransactionID() string {
@@ -19,11 +30,11 @@ func (o *GetTransactionRequest) GetTransactionID() string {
 	return o.TransactionID
 }
 
-func (o *GetTransactionRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *GetTransactionRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type GetTransactionResponse struct {

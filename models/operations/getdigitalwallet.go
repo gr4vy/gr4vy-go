@@ -6,11 +6,22 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type GetDigitalWalletGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *GetDigitalWalletGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type GetDigitalWalletRequest struct {
 	// The ID of the digital wallet to read.
 	DigitalWalletID string `pathParam:"style=simple,explode=false,name=digital_wallet_id"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (o *GetDigitalWalletRequest) GetDigitalWalletID() string {
@@ -20,11 +31,11 @@ func (o *GetDigitalWalletRequest) GetDigitalWalletID() string {
 	return o.DigitalWalletID
 }
 
-func (o *GetDigitalWalletRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *GetDigitalWalletRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type GetDigitalWalletResponse struct {

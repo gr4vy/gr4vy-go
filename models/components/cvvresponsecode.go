@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type CVVResponseCode string
 
 const (
@@ -18,23 +13,4 @@ const (
 
 func (e CVVResponseCode) ToPointer() *CVVResponseCode {
 	return &e
-}
-func (e *CVVResponseCode) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "match":
-		fallthrough
-	case "no_match":
-		fallthrough
-	case "unavailable":
-		fallthrough
-	case "not_provided":
-		*e = CVVResponseCode(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CVVResponseCode: %v", v)
-	}
 }

@@ -6,13 +6,24 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type GetBuyerShippingDetailsGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *GetBuyerShippingDetailsGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type GetBuyerShippingDetailsRequest struct {
 	// The ID of the buyer to retrieve shipping details for.
 	BuyerID string `pathParam:"style=simple,explode=false,name=buyer_id"`
 	// The ID of the shipping details to retrieve.
 	ShippingDetailsID string `pathParam:"style=simple,explode=false,name=shipping_details_id"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (o *GetBuyerShippingDetailsRequest) GetBuyerID() string {
@@ -29,11 +40,11 @@ func (o *GetBuyerShippingDetailsRequest) GetShippingDetailsID() string {
 	return o.ShippingDetailsID
 }
 
-func (o *GetBuyerShippingDetailsRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *GetBuyerShippingDetailsRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type GetBuyerShippingDetailsResponse struct {

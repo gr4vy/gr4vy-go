@@ -7,13 +7,24 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type ListPayoutsGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *ListPayoutsGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type ListPayoutsRequest struct {
 	// A pointer to the page of results to return.
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The maximum number of items that are at returned.
 	Limit *int64 `default:"20" queryParam:"style=form,explode=true,name=limit"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (l ListPayoutsRequest) MarshalJSON() ([]byte, error) {
@@ -41,11 +52,11 @@ func (o *ListPayoutsRequest) GetLimit() *int64 {
 	return o.Limit
 }
 
-func (o *ListPayoutsRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *ListPayoutsRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type ListPayoutsResponse struct {

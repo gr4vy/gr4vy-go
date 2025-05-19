@@ -18,8 +18,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -28,8 +28,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
@@ -37,7 +36,7 @@ func main() {
             "ef9496d8-53a5-4aad-8ca2-00eb68334389",
             "f29e886e-93cc-4714-b4a3-12b7a718e595",
         },
-    }, nil, gr4vygo.String("default"))
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -49,13 +48,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              | Example                                                                                  |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |                                                                                          |
-| `accountUpdaterJobCreate`                                                                | [components.AccountUpdaterJobCreate](../../models/components/accountupdaterjobcreate.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |                                                                                          |
-| `timeoutInSeconds`                                                                       | **float64*                                                                               | :heavy_minus_sign:                                                                       | N/A                                                                                      |                                                                                          |
-| `xGr4vyMerchantAccountID`                                                                | **string*                                                                                | :heavy_minus_sign:                                                                       | The ID of the merchant account to use for this request.                                  | default                                                                                  |
-| `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |                                                                                          |
+| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
+| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
+| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
+| `accountUpdaterJobCreate`                                                                | [components.AccountUpdaterJobCreate](../../models/components/accountupdaterjobcreate.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
+| `timeoutInSeconds`                                                                       | **float64*                                                                               | :heavy_minus_sign:                                                                       | N/A                                                                                      |
+| `merchantAccountID`                                                                      | **string*                                                                                | :heavy_minus_sign:                                                                       | The ID of the merchant account to use for this request.                                  |
+| `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
 ### Response
 

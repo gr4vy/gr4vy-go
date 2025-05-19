@@ -3,12 +3,21 @@
 package operations
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/types"
 )
+
+type ListBuyerPaymentMethodsGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *ListBuyerPaymentMethodsGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
 
 // OrderBy - The direction to sort the payment methods in.
 type OrderBy string
@@ -20,21 +29,6 @@ const (
 
 func (e OrderBy) ToPointer() *OrderBy {
 	return &e
-}
-func (e *OrderBy) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "asc":
-		fallthrough
-	case "desc":
-		*e = OrderBy(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for OrderBy: %v", v)
-	}
 }
 
 type ListBuyerPaymentMethodsRequest struct {
@@ -51,7 +45,7 @@ type ListBuyerPaymentMethodsRequest struct {
 	// The currency code to filter payment methods by. This only applies to payment methods with a `currency` value.
 	Currency *string `queryParam:"style=form,explode=true,name=currency"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (l ListBuyerPaymentMethodsRequest) MarshalJSON() ([]byte, error) {
@@ -104,11 +98,11 @@ func (o *ListBuyerPaymentMethodsRequest) GetCurrency() *string {
 	return o.Currency
 }
 
-func (o *ListBuyerPaymentMethodsRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *ListBuyerPaymentMethodsRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type ListBuyerPaymentMethodsResponse struct {

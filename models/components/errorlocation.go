@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type ErrorLocation string
 
 const (
@@ -19,25 +14,4 @@ const (
 
 func (e ErrorLocation) ToPointer() *ErrorLocation {
 	return &e
-}
-func (e *ErrorLocation) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "query":
-		fallthrough
-	case "body":
-		fallthrough
-	case "path":
-		fallthrough
-	case "header":
-		fallthrough
-	case "unknown":
-		*e = ErrorLocation(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ErrorLocation: %v", v)
-	}
 }

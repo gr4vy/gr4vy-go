@@ -34,6 +34,10 @@ func newTransactions(sdkConfig sdkConfiguration) *Transactions {
 // List transactions
 // List all transactions for a specific merchant account sorted by most recently created.
 func (s *Transactions) List(ctx context.Context, request operations.ListTransactionsRequest, opts ...operations.Option) (*operations.ListTransactionsResponse, error) {
+	globals := operations.ListTransactionsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -82,9 +86,9 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -101,6 +105,16 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -109,11 +123,7 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -265,7 +275,7 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				PaymentSource:               request.PaymentSource,
 				IsSubsequentPayment:         request.IsSubsequentPayment,
 				MerchantInitiated:           request.MerchantInitiated,
-				XGr4vyMerchantAccountID:     request.XGr4vyMerchantAccountID,
+				MerchantAccountID:           request.MerchantAccountID,
 			},
 			opts...,
 		)
@@ -615,12 +625,16 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 
 // Create transaction
 // Create a transaction.
-func (s *Transactions) Create(ctx context.Context, transactionCreate components.TransactionCreate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, idempotencyKey *string, opts ...operations.Option) (*operations.CreateTransactionResponse, error) {
+func (s *Transactions) Create(ctx context.Context, transactionCreate components.TransactionCreate, timeoutInSeconds *float64, merchantAccountID *string, idempotencyKey *string, opts ...operations.Option) (*operations.CreateTransactionResponse, error) {
 	request := operations.CreateTransactionRequest{
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		IdempotencyKey:          idempotencyKey,
-		TransactionCreate:       transactionCreate,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+		IdempotencyKey:    idempotencyKey,
+		TransactionCreate: transactionCreate,
+	}
+
+	globals := operations.CreateTransactionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -678,9 +692,9 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1132,10 +1146,14 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 
 // Get transaction
 // Fetch a single transaction by its ID.
-func (s *Transactions) Get(ctx context.Context, transactionID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetTransactionResponse, error) {
+func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetTransactionResponse, error) {
 	request := operations.GetTransactionRequest{
-		TransactionID:           transactionID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		TransactionID:     transactionID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetTransactionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1156,7 +1174,7 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, xGr4vyMerc
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1186,7 +1204,7 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, xGr4vyMerc
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1201,6 +1219,16 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, xGr4vyMerc
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -1209,11 +1237,7 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, xGr4vyMerc
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -1636,12 +1660,16 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, xGr4vyMerc
 
 // Capture transaction
 // Capture a previously authorized transaction.
-func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCapture components.TransactionCapture, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CaptureTransactionResponse, error) {
+func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCapture components.TransactionCapture, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CaptureTransactionResponse, error) {
 	request := operations.CaptureTransactionRequest{
-		TransactionID:           transactionID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		TransactionCapture:      transactionCapture,
+		TransactionID:      transactionID,
+		TimeoutInSeconds:   timeoutInSeconds,
+		MerchantAccountID:  merchantAccountID,
+		TransactionCapture: transactionCapture,
+	}
+
+	globals := operations.CaptureTransactionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1662,7 +1690,7 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/capture", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/capture", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1699,9 +1727,9 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2153,11 +2181,15 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 
 // Void transaction
 // Void a previously authorized transaction.
-func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.VoidTransactionResponse, error) {
+func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.VoidTransactionResponse, error) {
 	request := operations.VoidTransactionRequest{
-		TransactionID:           transactionID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		TransactionID:     transactionID,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.VoidTransactionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -2178,7 +2210,7 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/void", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/void", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -2208,9 +2240,9 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2662,10 +2694,14 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 
 // Summary - Get transaction summary
 // Fetch a summary for a transaction.
-func (s *Transactions) Summary(ctx context.Context, transactionID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetTransactionSummaryResponse, error) {
+func (s *Transactions) Summary(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetTransactionSummaryResponse, error) {
 	request := operations.GetTransactionSummaryRequest{
-		TransactionID:           transactionID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		TransactionID:     transactionID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetTransactionSummaryGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -2686,7 +2722,7 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, xGr4vy
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/summary", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/summary", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -2716,7 +2752,7 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, xGr4vy
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2731,6 +2767,16 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, xGr4vy
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -2739,11 +2785,7 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, xGr4vy
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -3166,11 +3208,15 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, xGr4vy
 
 // Sync transaction
 // Fetch the latest status for a transaction.
-func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.SyncTransactionResponse, error) {
+func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.SyncTransactionResponse, error) {
 	request := operations.SyncTransactionRequest{
-		TransactionID:           transactionID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		TransactionID:     transactionID,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.SyncTransactionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -3191,7 +3237,7 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/sync", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/sync", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -3221,9 +3267,9 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

@@ -27,12 +27,16 @@ func newAll(sdkConfig sdkConfiguration) *All {
 
 // Create batch transaction refund
 // Create a refund for all instruments on a transaction.
-func (s *All) Create(ctx context.Context, transactionID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, transactionRefundAllCreate *components.TransactionRefundAllCreate, opts ...operations.Option) (*operations.CreateFullTransactionRefundResponse, error) {
+func (s *All) Create(ctx context.Context, transactionID string, timeoutInSeconds *float64, merchantAccountID *string, transactionRefundAllCreate *components.TransactionRefundAllCreate, opts ...operations.Option) (*operations.CreateFullTransactionRefundResponse, error) {
 	request := operations.CreateFullTransactionRefundRequest{
 		TransactionID:              transactionID,
 		TimeoutInSeconds:           timeoutInSeconds,
-		XGr4vyMerchantAccountID:    xGr4vyMerchantAccountID,
+		MerchantAccountID:          merchantAccountID,
 		TransactionRefundAllCreate: transactionRefundAllCreate,
+	}
+
+	globals := operations.CreateFullTransactionRefundGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -53,7 +57,7 @@ func (s *All) Create(ctx context.Context, transactionID string, timeoutInSeconds
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/refunds/all", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/refunds/all", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -90,9 +94,9 @@ func (s *All) Create(ctx context.Context, transactionID string, timeoutInSeconds
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

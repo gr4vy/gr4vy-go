@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // UserDevice - The platform that is being used to access the website.
 type UserDevice string
 
@@ -17,21 +12,6 @@ const (
 
 func (e UserDevice) ToPointer() *UserDevice {
 	return &e
-}
-func (e *UserDevice) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "desktop":
-		fallthrough
-	case "mobile":
-		*e = UserDevice(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UserDevice: %v", v)
-	}
 }
 
 // BrowserInfo - Merchant provided browser info

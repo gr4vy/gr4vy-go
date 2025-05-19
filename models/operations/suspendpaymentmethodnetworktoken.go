@@ -7,6 +7,17 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type SuspendPaymentMethodNetworkTokenGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *SuspendPaymentMethodNetworkTokenGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type SuspendPaymentMethodNetworkTokenRequest struct {
 	// The ID of the payment method
 	PaymentMethodID string `pathParam:"style=simple,explode=false,name=payment_method_id"`
@@ -14,7 +25,7 @@ type SuspendPaymentMethodNetworkTokenRequest struct {
 	NetworkTokenID   string   `pathParam:"style=simple,explode=false,name=network_token_id"`
 	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (s SuspendPaymentMethodNetworkTokenRequest) MarshalJSON() ([]byte, error) {
@@ -49,11 +60,11 @@ func (o *SuspendPaymentMethodNetworkTokenRequest) GetTimeoutInSeconds() *float64
 	return o.TimeoutInSeconds
 }
 
-func (o *SuspendPaymentMethodNetworkTokenRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *SuspendPaymentMethodNetworkTokenRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type SuspendPaymentMethodNetworkTokenResponse struct {

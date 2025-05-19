@@ -6,11 +6,22 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type GetTransactionRefundGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *GetTransactionRefundGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type GetTransactionRefundRequest struct {
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
 	RefundID      string `pathParam:"style=simple,explode=false,name=refund_id"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (o *GetTransactionRefundRequest) GetTransactionID() string {
@@ -27,11 +38,11 @@ func (o *GetTransactionRefundRequest) GetRefundID() string {
 	return o.RefundID
 }
 
-func (o *GetTransactionRefundRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *GetTransactionRefundRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type GetTransactionRefundResponse struct {

@@ -6,17 +6,28 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
-type CreateApplePayDigitalWalletSessionRequest struct {
-	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string                           `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-	ApplePaySessionRequest  components.ApplePaySessionRequest `request:"mediaType=application/json"`
+type CreateApplePayDigitalWalletSessionGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreateApplePayDigitalWalletSessionRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *CreateApplePayDigitalWalletSessionGlobals) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
+}
+
+type CreateApplePayDigitalWalletSessionRequest struct {
+	// The ID of the merchant account to use for this request.
+	MerchantAccountID      *string                           `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	ApplePaySessionRequest components.ApplePaySessionRequest `request:"mediaType=application/json"`
+}
+
+func (o *CreateApplePayDigitalWalletSessionRequest) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
 }
 
 func (o *CreateApplePayDigitalWalletSessionRequest) GetApplePaySessionRequest() components.ApplePaySessionRequest {

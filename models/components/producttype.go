@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type ProductType string
 
 const (
@@ -22,31 +17,4 @@ const (
 
 func (e ProductType) ToPointer() *ProductType {
 	return &e
-}
-func (e *ProductType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "physical":
-		fallthrough
-	case "discount":
-		fallthrough
-	case "shipping_fee":
-		fallthrough
-	case "sales_tax":
-		fallthrough
-	case "digital":
-		fallthrough
-	case "gift_card":
-		fallthrough
-	case "store_credit":
-		fallthrough
-	case "surcharge":
-		*e = ProductType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ProductType: %v", v)
-	}
 }

@@ -36,6 +36,10 @@ func newPaymentMethods(sdkConfig sdkConfiguration) *PaymentMethods {
 // List all payment methods
 // List all stored payment method.
 func (s *PaymentMethods) List(ctx context.Context, request operations.ListPaymentMethodsRequest, opts ...operations.Option) (*operations.ListPaymentMethodsResponse, error) {
+	globals := operations.ListPaymentMethodsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -84,9 +88,9 @@ func (s *PaymentMethods) List(ctx context.Context, request operations.ListPaymen
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -103,6 +107,16 @@ func (s *PaymentMethods) List(ctx context.Context, request operations.ListPaymen
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -111,11 +125,7 @@ func (s *PaymentMethods) List(ctx context.Context, request operations.ListPaymen
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -236,7 +246,7 @@ func (s *PaymentMethods) List(ctx context.Context, request operations.ListPaymen
 				BuyerExternalIdentifier: request.BuyerExternalIdentifier,
 				Status:                  request.Status,
 				ExternalIdentifier:      request.ExternalIdentifier,
-				XGr4vyMerchantAccountID: request.XGr4vyMerchantAccountID,
+				MerchantAccountID:       request.MerchantAccountID,
 			},
 			opts...,
 		)
@@ -586,11 +596,15 @@ func (s *PaymentMethods) List(ctx context.Context, request operations.ListPaymen
 
 // Create payment method
 // Store a new payment method.
-func (s *PaymentMethods) Create(ctx context.Context, requestBody operations.CreatePaymentMethodBody, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CreatePaymentMethodResponse, error) {
+func (s *PaymentMethods) Create(ctx context.Context, requestBody operations.CreatePaymentMethodBody, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CreatePaymentMethodResponse, error) {
 	request := operations.CreatePaymentMethodRequest{
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		RequestBody:             requestBody,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+		RequestBody:       requestBody,
+	}
+
+	globals := operations.CreatePaymentMethodGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -648,9 +662,9 @@ func (s *PaymentMethods) Create(ctx context.Context, requestBody operations.Crea
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1102,10 +1116,14 @@ func (s *PaymentMethods) Create(ctx context.Context, requestBody operations.Crea
 
 // Get payment method
 // Retrieve a payment method.
-func (s *PaymentMethods) Get(ctx context.Context, paymentMethodID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetPaymentMethodResponse, error) {
+func (s *PaymentMethods) Get(ctx context.Context, paymentMethodID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetPaymentMethodResponse, error) {
 	request := operations.GetPaymentMethodRequest{
-		PaymentMethodID:         paymentMethodID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		PaymentMethodID:   paymentMethodID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetPaymentMethodGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1126,7 +1144,7 @@ func (s *PaymentMethods) Get(ctx context.Context, paymentMethodID string, xGr4vy
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1156,7 +1174,7 @@ func (s *PaymentMethods) Get(ctx context.Context, paymentMethodID string, xGr4vy
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1171,6 +1189,16 @@ func (s *PaymentMethods) Get(ctx context.Context, paymentMethodID string, xGr4vy
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -1179,11 +1207,7 @@ func (s *PaymentMethods) Get(ctx context.Context, paymentMethodID string, xGr4vy
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -1606,10 +1630,14 @@ func (s *PaymentMethods) Get(ctx context.Context, paymentMethodID string, xGr4vy
 
 // Delete payment method
 // Delete a payment method.
-func (s *PaymentMethods) Delete(ctx context.Context, paymentMethodID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.DeletePaymentMethodResponse, error) {
+func (s *PaymentMethods) Delete(ctx context.Context, paymentMethodID string, merchantAccountID *string, opts ...operations.Option) (*operations.DeletePaymentMethodResponse, error) {
 	request := operations.DeletePaymentMethodRequest{
-		PaymentMethodID:         paymentMethodID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		PaymentMethodID:   paymentMethodID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.DeletePaymentMethodGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1630,7 +1658,7 @@ func (s *PaymentMethods) Delete(ctx context.Context, paymentMethodID string, xGr
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1660,7 +1688,7 @@ func (s *PaymentMethods) Delete(ctx context.Context, paymentMethodID string, xGr
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

@@ -22,8 +22,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 )
@@ -32,15 +32,13 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{
         Cursor: gr4vygo.String("ZXhhbXBsZTE"),
         Search: gr4vygo.String("John"),
         ExternalIdentifier: gr4vygo.String("buyer-12345"),
-        XGr4vyMerchantAccountID: gr4vygo.String("default"),
     })
     if err != nil {
         log.Fatal(err)
@@ -104,8 +102,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -114,8 +112,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.Buyers.Create(ctx, components.BuyerCreate{
@@ -142,7 +139,7 @@ func main() {
                 Kind: components.TaxIDKindCaPstMb,
             },
         },
-    }, nil, gr4vygo.String("default"))
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -154,13 +151,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                        | Type                                                             | Required                                                         | Description                                                      | Example                                                          |
-| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
-| `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |                                                                  |
-| `buyerCreate`                                                    | [components.BuyerCreate](../../models/components/buyercreate.md) | :heavy_check_mark:                                               | N/A                                                              |                                                                  |
-| `timeoutInSeconds`                                               | **float64*                                                       | :heavy_minus_sign:                                               | N/A                                                              |                                                                  |
-| `xGr4vyMerchantAccountID`                                        | **string*                                                        | :heavy_minus_sign:                                               | The ID of the merchant account to use for this request.          | default                                                          |
-| `opts`                                                           | [][operations.Option](../../models/operations/option.md)         | :heavy_minus_sign:                                               | The options for this request.                                    |                                                                  |
+| Parameter                                                        | Type                                                             | Required                                                         | Description                                                      |
+| ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
+| `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |
+| `buyerCreate`                                                    | [components.BuyerCreate](../../models/components/buyercreate.md) | :heavy_check_mark:                                               | N/A                                                              |
+| `timeoutInSeconds`                                               | **float64*                                                       | :heavy_minus_sign:                                               | N/A                                                              |
+| `merchantAccountID`                                              | **string*                                                        | :heavy_minus_sign:                                               | The ID of the merchant account to use for this request.          |
+| `opts`                                                           | [][operations.Option](../../models/operations/option.md)         | :heavy_minus_sign:                                               | The options for this request.                                    |
 
 ### Response
 
@@ -195,8 +192,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -204,11 +201,10 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.Get(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", gr4vygo.String("default"))
+    res, err := s.Buyers.Get(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -224,7 +220,7 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `buyerID`                                                | *string*                                                 | :heavy_check_mark:                                       | The ID of the buyer to retrieve.                         | fe26475d-ec3e-4884-9553-f7356683f7f9                     |
-| `xGr4vyMerchantAccountID`                                | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  | default                                                  |
+| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
@@ -260,8 +256,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -270,8 +266,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.Buyers.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.BuyerUpdate{
@@ -298,7 +293,7 @@ func main() {
                 Kind: components.TaxIDKindAuAbn,
             },
         },
-    }, nil, gr4vygo.String("default"))
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -316,7 +311,7 @@ func main() {
 | `buyerID`                                                        | *string*                                                         | :heavy_check_mark:                                               | The ID of the buyer to edit.                                     | fe26475d-ec3e-4884-9553-f7356683f7f9                             |
 | `buyerUpdate`                                                    | [components.BuyerUpdate](../../models/components/buyerupdate.md) | :heavy_check_mark:                                               | N/A                                                              |                                                                  |
 | `timeoutInSeconds`                                               | **float64*                                                       | :heavy_minus_sign:                                               | N/A                                                              |                                                                  |
-| `xGr4vyMerchantAccountID`                                        | **string*                                                        | :heavy_minus_sign:                                               | The ID of the merchant account to use for this request.          | default                                                          |
+| `merchantAccountID`                                              | **string*                                                        | :heavy_minus_sign:                                               | The ID of the merchant account to use for this request.          |                                                                  |
 | `opts`                                                           | [][operations.Option](../../models/operations/option.md)         | :heavy_minus_sign:                                               | The options for this request.                                    |                                                                  |
 
 ### Response
@@ -352,8 +347,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -361,11 +356,10 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil, gr4vygo.String("default"))
+    res, err := s.Buyers.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -382,7 +376,7 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `buyerID`                                                | *string*                                                 | :heavy_check_mark:                                       | The ID of the buyer to delete.                           | fe26475d-ec3e-4884-9553-f7356683f7f9                     |
 | `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |                                                          |
-| `xGr4vyMerchantAccountID`                                | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  | default                                                  |
+| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response

@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 // TransactionPaymentSource - The way payment method information made it to this transaction.
 type TransactionPaymentSource string
 
@@ -20,25 +15,4 @@ const (
 
 func (e TransactionPaymentSource) ToPointer() *TransactionPaymentSource {
 	return &e
-}
-func (e *TransactionPaymentSource) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "ecommerce":
-		fallthrough
-	case "moto":
-		fallthrough
-	case "recurring":
-		fallthrough
-	case "installment":
-		fallthrough
-	case "card_on_file":
-		*e = TransactionPaymentSource(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransactionPaymentSource: %v", v)
-	}
 }

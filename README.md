@@ -31,6 +31,7 @@ Gr4vy: The Gr4vy API.
   * [Pagination](#pagination)
   * [Retries](#retries)
   * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
   * [Custom HTTP Client](#custom-http-client)
   * [Special Types](#special-types)
 * [Development](#development)
@@ -68,8 +69,7 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		"https://api.example.com",
-		gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
 	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
@@ -77,7 +77,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil, gr4vygo.String("default"))
+	}, nil, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -96,9 +96,9 @@ func main() {
 
 This SDK supports the following security scheme globally:
 
-| Name                   | Type   | Scheme       | Environment Variable            |
-| ---------------------- | ------ | ------------ | ------------------------------- |
-| `OAuth2PasswordBearer` | oauth2 | OAuth2 token | `GR4VY_O_AUTH2_PASSWORD_BEARER` |
+| Name         | Type | Scheme      | Environment Variable |
+| ------------ | ---- | ----------- | -------------------- |
+| `BearerAuth` | http | HTTP Bearer | `GR4VY_BEARER_AUTH`  |
 
 You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
 ```go
@@ -116,8 +116,7 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		"https://api.example.com",
-		gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
 	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
@@ -125,7 +124,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil, gr4vygo.String("default"))
+	}, nil, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -328,15 +327,13 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		"https://api.example.com",
-		gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
 	res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{
-		Cursor:                  gr4vygo.String("ZXhhbXBsZTE"),
-		Search:                  gr4vygo.String("John"),
-		ExternalIdentifier:      gr4vygo.String("buyer-12345"),
-		XGr4vyMerchantAccountID: gr4vygo.String("default"),
+		Cursor:             gr4vygo.String("ZXhhbXBsZTE"),
+		Search:             gr4vygo.String("John"),
+		ExternalIdentifier: gr4vygo.String("buyer-12345"),
 	})
 	if err != nil {
 		log.Fatal(err)
@@ -384,8 +381,7 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		"https://api.example.com",
-		gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
 	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
@@ -393,7 +389,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil, gr4vygo.String("default"), operations.WithRetries(
+	}, nil, nil, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -431,7 +427,6 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		"https://api.example.com",
 		gr4vygo.WithRetryConfig(
 			retry.Config{
 				Strategy: "backoff",
@@ -443,7 +438,7 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
 	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
@@ -451,7 +446,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil, gr4vygo.String("default"))
+	}, nil, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -507,8 +502,7 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		"https://api.example.com",
-		gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
 	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
@@ -516,7 +510,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil, gr4vygo.String("default"))
+	}, nil, nil)
 	if err != nil {
 
 		var e *apierrors.Error400
@@ -601,6 +595,101 @@ func main() {
 
 ```
 <!-- End Error Handling [errors] -->
+
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+### Select Server by Name
+
+You can override the default server globally using the `WithServer(server string)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
+
+| Name         | Server                               | Variables | Description |
+| ------------ | ------------------------------------ | --------- | ----------- |
+| `production` | `https://api.{id}.gr4vy.app`         | `id`      |             |
+| `sandbox`    | `https://api.sandbox.{id}.gr4vy.app` | `id`      |             |
+
+If the selected server has variables, you may override its default values using the associated option(s):
+
+| Variable | Option              | Default     | Description                            |
+| -------- | ------------------- | ----------- | -------------------------------------- |
+| `id`     | `WithID(id string)` | `"example"` | The subdomain for your Gr4vy instance. |
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"log"
+	"os"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := gr4vygo.New(
+		gr4vygo.WithServer("sandbox"),
+		gr4vygo.WithID("<id>"),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+	)
+
+	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
+		PaymentMethodIds: []string{
+			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
+			"f29e886e-93cc-4714-b4a3-12b7a718e595",
+		},
+	}, nil, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.AccountUpdaterJob != nil {
+		// handle response
+	}
+}
+
+```
+
+### Override Server URL Per-Client
+
+The default server can also be overridden globally using the `WithServerURL(serverURL string)` option when initializing the SDK client instance. For example:
+```go
+package main
+
+import (
+	"context"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"log"
+	"os"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := gr4vygo.New(
+		gr4vygo.WithServerURL("https://api.example.gr4vy.app"),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+	)
+
+	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
+		PaymentMethodIds: []string{
+			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
+			"f29e886e-93cc-4714-b4a3-12b7a718e595",
+		},
+	}, nil, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res.AccountUpdaterJob != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Server Selection [server] -->
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client

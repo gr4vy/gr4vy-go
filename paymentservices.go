@@ -31,6 +31,10 @@ func newPaymentServices(sdkConfig sdkConfiguration) *PaymentServices {
 // List payment services
 // List the configured payment services.
 func (s *PaymentServices) List(ctx context.Context, request operations.ListPaymentServicesRequest, opts ...operations.Option) (*operations.ListPaymentServicesResponse, error) {
+	globals := operations.ListPaymentServicesGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -79,9 +83,9 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -98,6 +102,16 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -106,11 +120,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -225,11 +235,11 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 		return s.List(
 			ctx,
 			operations.ListPaymentServicesRequest{
-				Method:                  request.Method,
-				Cursor:                  &nCVal,
-				Limit:                   request.Limit,
-				Deleted:                 request.Deleted,
-				XGr4vyMerchantAccountID: request.XGr4vyMerchantAccountID,
+				Method:            request.Method,
+				Cursor:            &nCVal,
+				Limit:             request.Limit,
+				Deleted:           request.Deleted,
+				MerchantAccountID: request.MerchantAccountID,
 			},
 			opts...,
 		)
@@ -579,10 +589,14 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 // Create - Update a configured payment service
 // Updates the configuration of a payment service.
-func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate components.PaymentServiceCreate, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.UpdatePaymentServiceResponse, error) {
+func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate components.PaymentServiceCreate, merchantAccountID *string, opts ...operations.Option) (*operations.UpdatePaymentServiceResponse, error) {
 	request := operations.UpdatePaymentServiceRequest{
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		PaymentServiceCreate:    paymentServiceCreate,
+		MerchantAccountID:    merchantAccountID,
+		PaymentServiceCreate: paymentServiceCreate,
+	}
+
+	globals := operations.UpdatePaymentServiceGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -640,7 +654,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1090,10 +1104,14 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 // Get payment service
 // Get the details of a configured payment service.
-func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetPaymentServiceResponse, error) {
+func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetPaymentServiceResponse, error) {
 	request := operations.GetPaymentServiceRequest{
-		PaymentServiceID:        paymentServiceID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		PaymentServiceID:  paymentServiceID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetPaymentServiceGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1114,7 +1132,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, xGr4
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-services/{payment_service_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-services/{payment_service_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1144,7 +1162,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, xGr4
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1159,6 +1177,16 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, xGr4
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -1167,11 +1195,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, xGr4
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -1594,11 +1618,15 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, xGr4
 
 // Update - Configure a payment service
 // Configures a new payment service for use by merchants.
-func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, paymentServiceUpdate components.PaymentServiceUpdate, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CreatePaymentServiceResponse, error) {
+func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, paymentServiceUpdate components.PaymentServiceUpdate, merchantAccountID *string, opts ...operations.Option) (*operations.CreatePaymentServiceResponse, error) {
 	request := operations.CreatePaymentServiceRequest{
-		PaymentServiceID:        paymentServiceID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		PaymentServiceUpdate:    paymentServiceUpdate,
+		PaymentServiceID:     paymentServiceID,
+		MerchantAccountID:    merchantAccountID,
+		PaymentServiceUpdate: paymentServiceUpdate,
+	}
+
+	globals := operations.CreatePaymentServiceGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1619,7 +1647,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-services/{payment_service_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-services/{payment_service_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1656,7 +1684,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2106,11 +2134,15 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 // Delete a configured payment service
 // Deletes all the configuration of a payment service.
-func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.DeletePaymentServiceResponse, error) {
+func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.DeletePaymentServiceResponse, error) {
 	request := operations.DeletePaymentServiceRequest{
-		PaymentServiceID:        paymentServiceID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		PaymentServiceID:  paymentServiceID,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.DeletePaymentServiceGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -2131,7 +2163,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-services/{payment_service_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-services/{payment_service_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -2161,9 +2193,9 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2615,11 +2647,15 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 
 // Verify payment service credentials
 // Verify the credentials of a configured payment service
-func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials components.VerifyCredentials, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.VerifyPaymentServiceCredentialsResponse, error) {
+func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials components.VerifyCredentials, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.VerifyPaymentServiceCredentialsResponse, error) {
 	request := operations.VerifyPaymentServiceCredentialsRequest{
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		VerifyCredentials:       verifyCredentials,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+		VerifyCredentials: verifyCredentials,
+	}
+
+	globals := operations.VerifyPaymentServiceCredentialsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -2677,9 +2713,9 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -3131,11 +3167,15 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 // Session - Create a session for apayment service definition
 // Creates a session for a payment service that supports sessions.
-func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, requestBody map[string]any, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CreatePaymentServiceSessionResponse, error) {
+func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, requestBody map[string]any, merchantAccountID *string, opts ...operations.Option) (*operations.CreatePaymentServiceSessionResponse, error) {
 	request := operations.CreatePaymentServiceSessionRequest{
-		PaymentServiceID:        paymentServiceID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		RequestBody:             requestBody,
+		PaymentServiceID:  paymentServiceID,
+		MerchantAccountID: merchantAccountID,
+		RequestBody:       requestBody,
+	}
+
+	globals := operations.CreatePaymentServiceSessionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -3156,7 +3196,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-services/{payment_service_id}/sessions", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-services/{payment_service_id}/sessions", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -3193,7 +3233,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

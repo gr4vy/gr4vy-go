@@ -33,11 +33,15 @@ func newDigitalWallets(sdkConfig sdkConfiguration) *DigitalWallets {
 
 // Create - Register digital wallet
 // Register a digital wallet like Apple Pay, Google Pay, or Click to Pay.
-func (s *DigitalWallets) Create(ctx context.Context, digitalWalletCreate components.DigitalWalletCreate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.ConfigureDigitalWalletResponse, error) {
+func (s *DigitalWallets) Create(ctx context.Context, digitalWalletCreate components.DigitalWalletCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.ConfigureDigitalWalletResponse, error) {
 	request := operations.ConfigureDigitalWalletRequest{
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		DigitalWalletCreate:     digitalWalletCreate,
+		TimeoutInSeconds:    timeoutInSeconds,
+		MerchantAccountID:   merchantAccountID,
+		DigitalWalletCreate: digitalWalletCreate,
+	}
+
+	globals := operations.ConfigureDigitalWalletGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -95,9 +99,9 @@ func (s *DigitalWallets) Create(ctx context.Context, digitalWalletCreate compone
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -549,9 +553,13 @@ func (s *DigitalWallets) Create(ctx context.Context, digitalWalletCreate compone
 
 // List digital wallets
 // List configured digital wallets.
-func (s *DigitalWallets) List(ctx context.Context, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.ListDigitalWalletsResponse, error) {
+func (s *DigitalWallets) List(ctx context.Context, merchantAccountID *string, opts ...operations.Option) (*operations.ListDigitalWalletsResponse, error) {
 	request := operations.ListDigitalWalletsRequest{
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.ListDigitalWalletsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -602,7 +610,7 @@ func (s *DigitalWallets) List(ctx context.Context, xGr4vyMerchantAccountID *stri
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -617,6 +625,16 @@ func (s *DigitalWallets) List(ctx context.Context, xGr4vyMerchantAccountID *stri
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -625,11 +643,7 @@ func (s *DigitalWallets) List(ctx context.Context, xGr4vyMerchantAccountID *stri
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -1052,10 +1066,14 @@ func (s *DigitalWallets) List(ctx context.Context, xGr4vyMerchantAccountID *stri
 
 // Get digital wallet
 // Fetch the details a digital wallet.
-func (s *DigitalWallets) Get(ctx context.Context, digitalWalletID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetDigitalWalletResponse, error) {
+func (s *DigitalWallets) Get(ctx context.Context, digitalWalletID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetDigitalWalletResponse, error) {
 	request := operations.GetDigitalWalletRequest{
-		DigitalWalletID:         digitalWalletID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		DigitalWalletID:   digitalWalletID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetDigitalWalletGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1076,7 +1094,7 @@ func (s *DigitalWallets) Get(ctx context.Context, digitalWalletID string, xGr4vy
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/digital-wallets/{digital_wallet_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/digital-wallets/{digital_wallet_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1106,7 +1124,7 @@ func (s *DigitalWallets) Get(ctx context.Context, digitalWalletID string, xGr4vy
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1121,6 +1139,16 @@ func (s *DigitalWallets) Get(ctx context.Context, digitalWalletID string, xGr4vy
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -1129,11 +1157,7 @@ func (s *DigitalWallets) Get(ctx context.Context, digitalWalletID string, xGr4vy
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -1556,11 +1580,15 @@ func (s *DigitalWallets) Get(ctx context.Context, digitalWalletID string, xGr4vy
 
 // Delete digital wallet
 // Delete a configured digital wallet.
-func (s *DigitalWallets) Delete(ctx context.Context, digitalWalletID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.DeleteDigitalWalletResponse, error) {
+func (s *DigitalWallets) Delete(ctx context.Context, digitalWalletID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.DeleteDigitalWalletResponse, error) {
 	request := operations.DeleteDigitalWalletRequest{
-		DigitalWalletID:         digitalWalletID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		DigitalWalletID:   digitalWalletID,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.DeleteDigitalWalletGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1581,7 +1609,7 @@ func (s *DigitalWallets) Delete(ctx context.Context, digitalWalletID string, tim
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/digital-wallets/{digital_wallet_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/digital-wallets/{digital_wallet_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1611,9 +1639,9 @@ func (s *DigitalWallets) Delete(ctx context.Context, digitalWalletID string, tim
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -2065,12 +2093,16 @@ func (s *DigitalWallets) Delete(ctx context.Context, digitalWalletID string, tim
 
 // Update digital wallet
 // Update a digital wallet.
-func (s *DigitalWallets) Update(ctx context.Context, digitalWalletID string, digitalWalletUpdate components.DigitalWalletUpdate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.UpdateDigitalWalletResponse, error) {
+func (s *DigitalWallets) Update(ctx context.Context, digitalWalletID string, digitalWalletUpdate components.DigitalWalletUpdate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.UpdateDigitalWalletResponse, error) {
 	request := operations.UpdateDigitalWalletRequest{
-		DigitalWalletID:         digitalWalletID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		DigitalWalletUpdate:     digitalWalletUpdate,
+		DigitalWalletID:     digitalWalletID,
+		TimeoutInSeconds:    timeoutInSeconds,
+		MerchantAccountID:   merchantAccountID,
+		DigitalWalletUpdate: digitalWalletUpdate,
+	}
+
+	globals := operations.UpdateDigitalWalletGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -2091,7 +2123,7 @@ func (s *DigitalWallets) Update(ctx context.Context, digitalWalletID string, dig
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/digital-wallets/{digital_wallet_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/digital-wallets/{digital_wallet_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -2128,9 +2160,9 @@ func (s *DigitalWallets) Update(ctx context.Context, digitalWalletID string, dig
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

@@ -30,11 +30,15 @@ func newPayouts(sdkConfig sdkConfiguration) *Payouts {
 
 // List payouts created.
 // Returns a list of payouts made.
-func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.ListPayoutsResponse, error) {
+func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, merchantAccountID *string, opts ...operations.Option) (*operations.ListPayoutsResponse, error) {
 	request := operations.ListPayoutsRequest{
-		Cursor:                  cursor,
-		Limit:                   limit,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		Cursor:            cursor,
+		Limit:             limit,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.ListPayoutsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -85,9 +89,9 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, xGr4vy
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -104,6 +108,16 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, xGr4vy
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -112,11 +126,7 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, xGr4vy
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -232,7 +242,7 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, xGr4vy
 			ctx,
 			&nCVal,
 			limit,
-			xGr4vyMerchantAccountID,
+			merchantAccountID,
 			opts...,
 		)
 	}
@@ -581,11 +591,15 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, xGr4vy
 
 // Create a payout.
 // Creates a new payout.
-func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCreate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CreatePayoutResponse, error) {
+func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CreatePayoutResponse, error) {
 	request := operations.CreatePayoutRequest{
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		PayoutCreate:            payoutCreate,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+		PayoutCreate:      payoutCreate,
+	}
+
+	globals := operations.CreatePayoutGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -643,9 +657,9 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1097,10 +1111,14 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 
 // Get a payout.
 // Retreives a payout.
-func (s *Payouts) Get(ctx context.Context, payoutID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetPayoutResponse, error) {
+func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetPayoutResponse, error) {
 	request := operations.GetPayoutRequest{
-		PayoutID:                payoutID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		PayoutID:          payoutID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetPayoutGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1121,7 +1139,7 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, xGr4vyMerchantAccoun
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payouts/{payout_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payouts/{payout_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1151,7 +1169,7 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, xGr4vyMerchantAccoun
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1166,6 +1184,16 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, xGr4vyMerchantAccoun
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -1174,11 +1202,7 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, xGr4vyMerchantAccoun
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {

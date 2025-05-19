@@ -19,8 +19,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -29,13 +29,12 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.DigitalWallets.Domains.Create(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletDomain{
         DomainName: "example.com",
-    }, nil, gr4vygo.String("default"))
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -53,7 +52,7 @@ func main() {
 | `digitalWalletID`                                                                | *string*                                                                         | :heavy_check_mark:                                                               | The ID of the digital wallet to remove a domain for.                             | 1808f5e6-b49c-4db9-94fa-22371ea352f5                                             |
 | `digitalWalletDomain`                                                            | [components.DigitalWalletDomain](../../models/components/digitalwalletdomain.md) | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
 | `timeoutInSeconds`                                                               | **float64*                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
-| `xGr4vyMerchantAccountID`                                                        | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          | default                                                                          |
+| `merchantAccountID`                                                              | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          |                                                                                  |
 | `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |                                                                                  |
 
 ### Response
@@ -89,8 +88,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -99,13 +98,12 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.DigitalWallets.Domains.Delete(ctx, "", components.DigitalWalletDomain{
         DomainName: "example.com",
-    }, nil, gr4vygo.String("default"))
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -123,7 +121,7 @@ func main() {
 | `digitalWalletID`                                                                | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
 | `digitalWalletDomain`                                                            | [components.DigitalWalletDomain](../../models/components/digitalwalletdomain.md) | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
 | `timeoutInSeconds`                                                               | **float64*                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
-| `xGr4vyMerchantAccountID`                                                        | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          | default                                                                          |
+| `merchantAccountID`                                                              | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          |                                                                                  |
 | `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |                                                                                  |
 
 ### Response

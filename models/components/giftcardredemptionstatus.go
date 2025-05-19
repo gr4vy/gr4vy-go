@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type GiftCardRedemptionStatus string
 
 const (
@@ -18,23 +13,4 @@ const (
 
 func (e GiftCardRedemptionStatus) ToPointer() *GiftCardRedemptionStatus {
 	return &e
-}
-func (e *GiftCardRedemptionStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "created":
-		fallthrough
-	case "succeeded":
-		fallthrough
-	case "failed":
-		fallthrough
-	case "skipped":
-		*e = GiftCardRedemptionStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for GiftCardRedemptionStatus: %v", v)
-	}
 }

@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type RefundTargetType string
 
 const (
@@ -16,19 +11,4 @@ const (
 
 func (e RefundTargetType) ToPointer() *RefundTargetType {
 	return &e
-}
-func (e *RefundTargetType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "payment-method":
-		fallthrough
-	case "gift-card-redemption":
-		*e = RefundTargetType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RefundTargetType: %v", v)
-	}
 }

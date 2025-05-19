@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type GiftCardServiceProvider string
 
 const (
@@ -16,19 +11,4 @@ const (
 
 func (e GiftCardServiceProvider) ToPointer() *GiftCardServiceProvider {
 	return &e
-}
-func (e *GiftCardServiceProvider) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "mock-gift-card":
-		fallthrough
-	case "qwikcilver-gift-card":
-		*e = GiftCardServiceProvider(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for GiftCardServiceProvider: %v", v)
-	}
 }

@@ -28,12 +28,16 @@ func newBuyersGiftCards(sdkConfig sdkConfiguration) *BuyersGiftCards {
 
 // List gift cards for a buyer
 // List all the stored gift cards for a specific buyer.
-func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *string, buyerID *string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.ListBuyerGiftCardsResponse, error) {
+func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *string, buyerID *string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.ListBuyerGiftCardsResponse, error) {
 	request := operations.ListBuyerGiftCardsRequest{
 		BuyerExternalIdentifier: buyerExternalIdentifier,
 		BuyerID:                 buyerID,
 		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		MerchantAccountID:       merchantAccountID,
+	}
+
+	globals := operations.ListBuyerGiftCardsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -84,9 +88,9 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -103,6 +107,16 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -111,11 +125,7 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {

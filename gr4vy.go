@@ -4,6 +4,8 @@ package gr4vygo
 
 import (
 	"context"
+	"fmt"
+	"github.com/gr4vy/gr4vy-go/internal/globals"
 	"github.com/gr4vy/gr4vy-go/internal/hooks"
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
@@ -11,6 +13,17 @@ import (
 	"net/http"
 	"time"
 )
+
+const (
+	ServerProduction string = "production"
+	ServerSandbox    string = "sandbox"
+)
+
+// ServerList contains the list of servers available to the SDK
+var ServerList = map[string]string{
+	ServerProduction: "https://api.{id}.gr4vy.app",
+	ServerSandbox:    "https://api.sandbox.{id}.gr4vy.app",
+}
 
 // HTTPClient provides an interface for suplying the SDK with a custom HTTP client
 type HTTPClient interface {
@@ -42,18 +55,29 @@ type sdkConfiguration struct {
 	Client            HTTPClient
 	Security          func(context.Context) (interface{}, error)
 	ServerURL         string
+	Server            string
+	ServerDefaults    map[string]map[string]string
 	Language          string
 	OpenAPIDocVersion string
 	SDKVersion        string
 	GenVersion        string
 	UserAgent         string
+	Globals           globals.Globals
 	RetryConfig       *retry.Config
 	Hooks             *hooks.Hooks
 	Timeout           *time.Duration
 }
 
 func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
-	return c.ServerURL, map[string]string{}
+	if c.ServerURL != "" {
+		return c.ServerURL, nil
+	}
+
+	if c.Server == "" {
+		c.Server = "production"
+	}
+
+	return ServerList[c.Server], c.ServerDefaults[c.Server]
 }
 
 // Gr4vy - Gr4vy: The Gr4vy API.
@@ -79,6 +103,49 @@ type Gr4vy struct {
 
 type SDKOption func(*Gr4vy)
 
+// WithServerURL allows the overriding of the default server URL
+func WithServerURL(serverURL string) SDKOption {
+	return func(sdk *Gr4vy) {
+		sdk.sdkConfiguration.ServerURL = serverURL
+	}
+}
+
+// WithTemplatedServerURL allows the overriding of the default server URL with a templated URL populated with the provided parameters
+func WithTemplatedServerURL(serverURL string, params map[string]string) SDKOption {
+	return func(sdk *Gr4vy) {
+		if params != nil {
+			serverURL = utils.ReplaceParameters(serverURL, params)
+		}
+
+		sdk.sdkConfiguration.ServerURL = serverURL
+	}
+}
+
+// WithServer allows the overriding of the default server by name
+func WithServer(server string) SDKOption {
+	return func(sdk *Gr4vy) {
+		_, ok := ServerList[server]
+		if !ok {
+			panic(fmt.Errorf("server %s not found", server))
+		}
+
+		sdk.sdkConfiguration.Server = server
+	}
+}
+
+// WithID allows setting the id variable for url substitution
+func WithID(id string) SDKOption {
+	return func(sdk *Gr4vy) {
+		for server := range sdk.sdkConfiguration.ServerDefaults {
+			if _, ok := sdk.sdkConfiguration.ServerDefaults[server]["id"]; !ok {
+				continue
+			}
+
+			sdk.sdkConfiguration.ServerDefaults[server]["id"] = fmt.Sprintf("%v", id)
+		}
+	}
+}
+
 // WithClient allows the overriding of the default HTTP client used by the SDK
 func WithClient(client HTTPClient) SDKOption {
 	return func(sdk *Gr4vy) {
@@ -87,9 +154,9 @@ func WithClient(client HTTPClient) SDKOption {
 }
 
 // WithSecurity configures the SDK to use the provided security details
-func WithSecurity(oAuth2PasswordBearer string) SDKOption {
+func WithSecurity(bearerAuth string) SDKOption {
 	return func(sdk *Gr4vy) {
-		security := components.Security{OAuth2PasswordBearer: &oAuth2PasswordBearer}
+		security := components.Security{BearerAuth: &bearerAuth}
 		sdk.sdkConfiguration.Security = utils.AsSecuritySource(&security)
 	}
 }
@@ -100,6 +167,13 @@ func WithSecuritySource(security func(context.Context) (components.Security, err
 		sdk.sdkConfiguration.Security = func(ctx context.Context) (interface{}, error) {
 			return security(ctx)
 		}
+	}
+}
+
+// WithMerchantAccountID allows setting the MerchantAccountID parameter for all supported operations
+func WithMerchantAccountID(merchantAccountID string) SDKOption {
+	return func(sdk *Gr4vy) {
+		sdk.sdkConfiguration.Globals.MerchantAccountID = &merchantAccountID
 	}
 }
 
@@ -115,23 +189,43 @@ func WithTimeout(timeout time.Duration) SDKOption {
 		sdk.sdkConfiguration.Timeout = &timeout
 	}
 }
+func (sdk *Gr4vy) fillGlobalsFromEnv() {
+	if sdk.sdkConfiguration.Globals.MerchantAccountID == nil {
+		if val := utils.ValueFromEnvVar("GR4VY_MERCHANT_ACCOUNT_ID", sdk.sdkConfiguration.Globals.MerchantAccountID); val != nil {
+			if typedVal, ok := val.(string); ok {
+				sdk.sdkConfiguration.Globals.MerchantAccountID = &typedVal
+			}
+		}
+	}
 
-// New creates a new instance of the SDK with the provided serverURL and options
-func New(serverURL string, opts ...SDKOption) *Gr4vy {
+}
+
+// New creates a new instance of the SDK with the provided options
+func New(opts ...SDKOption) *Gr4vy {
 	sdk := &Gr4vy{
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.0.6",
+			SDKVersion:        "0.1.0",
 			GenVersion:        "2.604.4",
-			UserAgent:         "speakeasy-sdk/go 0.0.6 2.604.4 1.0.0 github.com/gr4vy/gr4vy-go",
-			ServerURL:         serverURL,
-			Hooks:             hooks.New(),
+			UserAgent:         "speakeasy-sdk/go 0.1.0 2.604.4 1.0.0 github.com/gr4vy/gr4vy-go",
+			Globals:           globals.Globals{},
+			ServerDefaults: map[string]map[string]string{
+				"production": {
+					"id": "example",
+				},
+				"sandbox": {
+					"id": "example",
+				},
+			},
+			Hooks: hooks.New(),
 		},
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
+
+	sdk.fillGlobalsFromEnv()
 
 	if sdk.sdkConfiguration.Security == nil {
 		var envVarSecurity components.Security
@@ -145,7 +239,8 @@ func New(serverURL string, opts ...SDKOption) *Gr4vy {
 		sdk.sdkConfiguration.Client = &http.Client{Timeout: 60 * time.Second}
 	}
 
-	currentServerURL := serverURL
+	currentServerURL, _ := sdk.sdkConfiguration.GetServerDetails()
+	serverURL := currentServerURL
 	serverURL, sdk.sdkConfiguration.Client = sdk.sdkConfiguration.Hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.Client)
 	if serverURL != currentServerURL {
 		sdk.sdkConfiguration.ServerURL = serverURL

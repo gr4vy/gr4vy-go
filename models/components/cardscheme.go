@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type CardScheme string
 
 const (
@@ -38,63 +33,4 @@ const (
 
 func (e CardScheme) ToPointer() *CardScheme {
 	return &e
-}
-func (e *CardScheme) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "accel":
-		fallthrough
-	case "amex":
-		fallthrough
-	case "bancontact":
-		fallthrough
-	case "carte-bancaire":
-		fallthrough
-	case "cirrus":
-		fallthrough
-	case "culiance":
-		fallthrough
-	case "dankort":
-		fallthrough
-	case "diners-club":
-		fallthrough
-	case "discover":
-		fallthrough
-	case "eftpos-australia":
-		fallthrough
-	case "elo":
-		fallthrough
-	case "hipercard":
-		fallthrough
-	case "jcb":
-		fallthrough
-	case "maestro":
-		fallthrough
-	case "mastercard":
-		fallthrough
-	case "mir":
-		fallthrough
-	case "nyce":
-		fallthrough
-	case "other":
-		fallthrough
-	case "pulse":
-		fallthrough
-	case "rupay":
-		fallthrough
-	case "star":
-		fallthrough
-	case "uatp":
-		fallthrough
-	case "unionpay":
-		fallthrough
-	case "visa":
-		*e = CardScheme(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CardScheme: %v", v)
-	}
 }

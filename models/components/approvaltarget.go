@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type ApprovalTarget string
 
 const (
@@ -16,19 +11,4 @@ const (
 
 func (e ApprovalTarget) ToPointer() *ApprovalTarget {
 	return &e
-}
-func (e *ApprovalTarget) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "new_window":
-		fallthrough
-	case "any":
-		*e = ApprovalTarget(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ApprovalTarget: %v", v)
-	}
 }

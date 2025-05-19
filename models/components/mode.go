@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type Mode string
 
 const (
@@ -21,29 +16,4 @@ const (
 
 func (e Mode) ToPointer() *Mode {
 	return &e
-}
-func (e *Mode) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "card":
-		fallthrough
-	case "redirect":
-		fallthrough
-	case "applepay":
-		fallthrough
-	case "googlepay":
-		fallthrough
-	case "checkout-session":
-		fallthrough
-	case "click-to-pay":
-		fallthrough
-	case "gift-card":
-		*e = Mode(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for Mode: %v", v)
-	}
 }

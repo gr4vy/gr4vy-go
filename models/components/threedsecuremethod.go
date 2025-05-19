@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type ThreeDSecureMethod string
 
 const (
@@ -16,19 +11,4 @@ const (
 
 func (e ThreeDSecureMethod) ToPointer() *ThreeDSecureMethod {
 	return &e
-}
-func (e *ThreeDSecureMethod) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "challenge":
-		fallthrough
-	case "frictionless":
-		*e = ThreeDSecureMethod(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ThreeDSecureMethod: %v", v)
-	}
 }

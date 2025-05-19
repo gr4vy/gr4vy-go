@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type ThreeDSecureStatus string
 
 const (
@@ -19,25 +14,4 @@ const (
 
 func (e ThreeDSecureStatus) ToPointer() *ThreeDSecureStatus {
 	return &e
-}
-func (e *ThreeDSecureStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "setup_error":
-		fallthrough
-	case "error":
-		fallthrough
-	case "declined":
-		fallthrough
-	case "cancelled":
-		fallthrough
-	case "complete":
-		*e = ThreeDSecureStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for ThreeDSecureStatus: %v", v)
-	}
 }

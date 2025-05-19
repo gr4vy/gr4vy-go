@@ -7,13 +7,24 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type CreatePaymentMethodNetworkTokenGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *CreatePaymentMethodNetworkTokenGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type CreatePaymentMethodNetworkTokenRequest struct {
 	// The ID of the payment method
 	PaymentMethodID  string   `pathParam:"style=simple,explode=false,name=payment_method_id"`
 	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string                       `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-	NetworkTokenCreate      components.NetworkTokenCreate `request:"mediaType=application/json"`
+	MerchantAccountID  *string                       `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	NetworkTokenCreate components.NetworkTokenCreate `request:"mediaType=application/json"`
 }
 
 func (c CreatePaymentMethodNetworkTokenRequest) MarshalJSON() ([]byte, error) {
@@ -41,11 +52,11 @@ func (o *CreatePaymentMethodNetworkTokenRequest) GetTimeoutInSeconds() *float64 
 	return o.TimeoutInSeconds
 }
 
-func (o *CreatePaymentMethodNetworkTokenRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *CreatePaymentMethodNetworkTokenRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 func (o *CreatePaymentMethodNetworkTokenRequest) GetNetworkTokenCreate() components.NetworkTokenCreate {

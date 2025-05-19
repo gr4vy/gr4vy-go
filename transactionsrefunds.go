@@ -30,10 +30,14 @@ func newTransactionsRefunds(sdkConfig sdkConfiguration) *TransactionsRefunds {
 
 // List transaction refunds
 // List refunds for a transaction.
-func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.ListTransactionRefundsResponse, error) {
+func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*operations.ListTransactionRefundsResponse, error) {
 	request := operations.ListTransactionRefundsRequest{
-		TransactionID:           transactionID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		TransactionID:     transactionID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.ListTransactionRefundsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -54,7 +58,7 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, xG
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/refunds", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/refunds", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -84,7 +88,7 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, xG
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -99,6 +103,16 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, xG
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -107,11 +121,7 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, xG
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -534,12 +544,16 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, xG
 
 // Create transaction refund
 // Create a refund for a transaction.
-func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, transactionRefundCreate components.TransactionRefundCreate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CreateTransactionRefundResponse, error) {
+func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, transactionRefundCreate components.TransactionRefundCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CreateTransactionRefundResponse, error) {
 	request := operations.CreateTransactionRefundRequest{
 		TransactionID:           transactionID,
 		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		MerchantAccountID:       merchantAccountID,
 		TransactionRefundCreate: transactionRefundCreate,
+	}
+
+	globals := operations.CreateTransactionRefundGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -560,7 +574,7 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/refunds", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/refunds", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -597,9 +611,9 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1051,11 +1065,15 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 
 // Get transaction refund
 // Fetch refund for a transaction.
-func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, refundID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetTransactionRefundResponse, error) {
+func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, refundID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetTransactionRefundResponse, error) {
 	request := operations.GetTransactionRefundRequest{
-		TransactionID:           transactionID,
-		RefundID:                refundID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		TransactionID:     transactionID,
+		RefundID:          refundID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetTransactionRefundGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1076,7 +1094,7 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/refunds/{refund_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/refunds/{refund_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1106,7 +1124,7 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1121,6 +1139,16 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -1129,11 +1157,7 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {

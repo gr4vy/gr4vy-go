@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type DefinitionFieldFormat string
 
 const (
@@ -19,25 +14,4 @@ const (
 
 func (e DefinitionFieldFormat) ToPointer() *DefinitionFieldFormat {
 	return &e
-}
-func (e *DefinitionFieldFormat) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "text":
-		fallthrough
-	case "multiline":
-		fallthrough
-	case "number":
-		fallthrough
-	case "timezone":
-		fallthrough
-	case "boolean":
-		*e = DefinitionFieldFormat(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for DefinitionFieldFormat: %v", v)
-	}
 }

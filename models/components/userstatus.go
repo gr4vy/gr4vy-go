@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type UserStatus string
 
 const (
@@ -17,21 +12,4 @@ const (
 
 func (e UserStatus) ToPointer() *UserStatus {
 	return &e
-}
-func (e *UserStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "active":
-		fallthrough
-	case "pending":
-		fallthrough
-	case "deleted":
-		*e = UserStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for UserStatus: %v", v)
-	}
 }

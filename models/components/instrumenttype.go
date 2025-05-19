@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type InstrumentType string
 
 const (
@@ -21,29 +16,4 @@ const (
 
 func (e InstrumentType) ToPointer() *InstrumentType {
 	return &e
-}
-func (e *InstrumentType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "pan":
-		fallthrough
-	case "card_token":
-		fallthrough
-	case "redirect":
-		fallthrough
-	case "redirect_token":
-		fallthrough
-	case "googlepay":
-		fallthrough
-	case "applepay":
-		fallthrough
-	case "network_token":
-		*e = InstrumentType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for InstrumentType: %v", v)
-	}
 }

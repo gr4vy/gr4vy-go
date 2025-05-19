@@ -6,10 +6,21 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type GetPayoutGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *GetPayoutGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type GetPayoutRequest struct {
 	PayoutID string `pathParam:"style=simple,explode=false,name=payout_id"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (o *GetPayoutRequest) GetPayoutID() string {
@@ -19,11 +30,11 @@ func (o *GetPayoutRequest) GetPayoutID() string {
 	return o.PayoutID
 }
 
-func (o *GetPayoutRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *GetPayoutRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type GetPayoutResponse struct {

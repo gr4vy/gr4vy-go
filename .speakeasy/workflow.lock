@@ -8,27 +8,20 @@ sources:
             - latest
             - 1.0.0
     openapi:
-        sourceNamespace: gr-4-vy
-        sourceRevisionDigest: sha256:4e0492d35a75974644c880a946749131df09fb30d23270c15ca7a11fedc54306
-        sourceBlobDigest: sha256:9dc5203f8085cd3b605313a5d7e93d6a9262a4663273121d27fed764355d4e86
+        sourceNamespace: openapi
+        sourceRevisionDigest: sha256:32f90cdcc92421c4db0e57e0707e72803a7b1d824cd9065201f0836263e6407c
+        sourceBlobDigest: sha256:e0b58e29fa952d392a9c67d35bea82069996ecabac493f17ec7d3e0d91934c85
         tags:
             - latest
             - 1.0.0
 targets:
     go:
         source: openapi
-        sourceNamespace: gr-4-vy
-        sourceRevisionDigest: sha256:4e0492d35a75974644c880a946749131df09fb30d23270c15ca7a11fedc54306
-        sourceBlobDigest: sha256:9dc5203f8085cd3b605313a5d7e93d6a9262a4663273121d27fed764355d4e86
-        codeSamplesNamespace: openapi-typescript-go-code-samples
-        codeSamplesRevisionDigest: sha256:2d49ee69174d817d97e679da35d30f952411172ecce6d6129da1dabdd888a39b
-    gr-4-vy:
-        source: Gr4vy
-        sourceNamespace: gr-4-vy
-        sourceRevisionDigest: sha256:4e0492d35a75974644c880a946749131df09fb30d23270c15ca7a11fedc54306
-        sourceBlobDigest: sha256:9dc5203f8085cd3b605313a5d7e93d6a9262a4663273121d27fed764355d4e86
-        codeSamplesNamespace: gr-4-vy-go-code-samples
-        codeSamplesRevisionDigest: sha256:021acd905445195610afcb98ffa20a6a748a87965e1fe735244ea916f6bb76f9
+        sourceNamespace: openapi
+        sourceRevisionDigest: sha256:32f90cdcc92421c4db0e57e0707e72803a7b1d824cd9065201f0836263e6407c
+        sourceBlobDigest: sha256:e0b58e29fa952d392a9c67d35bea82069996ecabac493f17ec7d3e0d91934c85
+        codeSamplesNamespace: openapi-go-code-samples
+        codeSamplesRevisionDigest: sha256:1502c027f658601b48d164a7b392237674b952da1c3aa41f6ffbe7bb07dbe187
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -36,15 +29,21 @@ workflow:
         openapi:
             inputs:
                 - location: https://gr4vy.github.io/gr4vy-openapi/core/openapi.json
+            overlays:
+                - location: ./.speakeasy/overlays/servers.yaml
+                - location: ./.speakeasy/overlays/security.yaml
+                - location: ./.speakeasy/overlays/enums.yaml
+                - location: ./.speakeasy/overlays/retries.yaml
+                - location: ./.speakeasy/overlays/mid-global.yaml
             registry:
-                location: registry.speakeasyapi.dev/gr4vy/gr4vy/gr-4-vy
+                location: registry.speakeasyapi.dev/gr4vy/gr4vy/openapi
     targets:
         go:
             target: go
             source: openapi
             codeSamples:
                 registry:
-                    location: registry.speakeasyapi.dev/gr4vy/gr4vy/openapi-typescript-go-code-samples
+                    location: registry.speakeasyapi.dev/gr4vy/gr4vy/openapi-go-code-samples
                 labelOverride:
                     fixedValue: Go
                 blocking: false

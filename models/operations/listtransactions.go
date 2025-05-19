@@ -8,6 +8,17 @@ import (
 	"time"
 )
 
+type ListTransactionsGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *ListTransactionsGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type ListTransactionsRequest struct {
 	// A pointer to the page of results to return.
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
@@ -74,7 +85,7 @@ type ListTransactionsRequest struct {
 	// Filters for transactions where the `merchant_initiated` matches the provided value.
 	MerchantInitiated *bool `queryParam:"style=form,explode=true,name=merchant_initiated"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (l ListTransactionsRequest) MarshalJSON() ([]byte, error) {
@@ -347,11 +358,11 @@ func (o *ListTransactionsRequest) GetMerchantInitiated() *bool {
 	return o.MerchantInitiated
 }
 
-func (o *ListTransactionsRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *ListTransactionsRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type ListTransactionsResponse struct {

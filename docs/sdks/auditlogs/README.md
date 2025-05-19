@@ -18,8 +18,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
@@ -29,8 +29,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.AuditLogs.List(ctx, operations.ListAuditLogsRequest{
@@ -38,7 +37,6 @@ func main() {
         Action: components.AuditLogActionCreated.ToPointer(),
         UserID: gr4vygo.String("14b7b8c5-a6ba-4fb6-bbab-52d43c7f37ef"),
         ResourceType: gr4vygo.String("user"),
-        XGr4vyMerchantAccountID: gr4vygo.String("default"),
     })
     if err != nil {
         log.Fatal(err)

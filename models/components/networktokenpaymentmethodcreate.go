@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 )
 
@@ -17,21 +15,6 @@ const (
 
 func (e CardSource) ToPointer() *CardSource {
 	return &e
-}
-func (e *CardSource) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "apple-pay":
-		fallthrough
-	case "google-pay":
-		*e = CardSource(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CardSource: %v", v)
-	}
 }
 
 type NetworkTokenPaymentMethodCreate struct {

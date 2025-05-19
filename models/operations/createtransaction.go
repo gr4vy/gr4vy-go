@@ -7,10 +7,21 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type CreateTransactionGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *CreateTransactionGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type CreateTransactionRequest struct {
 	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	// A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions.
 	IdempotencyKey    *string                      `header:"style=simple,explode=false,name=idempotency-key"`
 	TransactionCreate components.TransactionCreate `request:"mediaType=application/json"`
@@ -34,11 +45,11 @@ func (o *CreateTransactionRequest) GetTimeoutInSeconds() *float64 {
 	return o.TimeoutInSeconds
 }
 
-func (o *CreateTransactionRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *CreateTransactionRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 func (o *CreateTransactionRequest) GetIdempotencyKey() *string {

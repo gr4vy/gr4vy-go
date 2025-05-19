@@ -7,6 +7,17 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type ListPaymentMethodsGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *ListPaymentMethodsGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type ListPaymentMethodsRequest struct {
 	// A pointer to the page of results to return.
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
@@ -20,7 +31,7 @@ type ListPaymentMethodsRequest struct {
 	// The external identifier of the payment method to filter by.
 	ExternalIdentifier *string `queryParam:"style=form,explode=true,name=external_identifier"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (l ListPaymentMethodsRequest) MarshalJSON() ([]byte, error) {
@@ -76,11 +87,11 @@ func (o *ListPaymentMethodsRequest) GetExternalIdentifier() *string {
 	return o.ExternalIdentifier
 }
 
-func (o *ListPaymentMethodsRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *ListPaymentMethodsRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type ListPaymentMethodsResponse struct {

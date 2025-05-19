@@ -33,10 +33,14 @@ func newGiftCards(sdkConfig sdkConfiguration) *GiftCards {
 
 // Get gift card
 // Fetch details about a gift card.
-func (s *GiftCards) Get(ctx context.Context, giftCardID string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetGiftCardResponse, error) {
+func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetGiftCardResponse, error) {
 	request := operations.GetGiftCardRequest{
-		GiftCardID:              giftCardID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		GiftCardID:        giftCardID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetGiftCardGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -57,7 +61,7 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, xGr4vyMerchantAc
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/gift-cards/{gift_card_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/gift-cards/{gift_card_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -87,7 +91,7 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, xGr4vyMerchantAc
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -102,6 +106,16 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, xGr4vyMerchantAc
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -110,11 +124,7 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, xGr4vyMerchantAc
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -537,11 +547,15 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, xGr4vyMerchantAc
 
 // Delete a gift card
 // Removes a gift card from our system.
-func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.DeleteGiftCardResponse, error) {
+func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.DeleteGiftCardResponse, error) {
 	request := operations.DeleteGiftCardRequest{
-		GiftCardID:              giftCardID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		GiftCardID:        giftCardID,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.DeleteGiftCardGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -562,7 +576,7 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/gift-cards/{gift_card_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/gift-cards/{gift_card_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -592,9 +606,9 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1046,11 +1060,15 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 
 // Create gift card
 // Store a new gift card in the vault.
-func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCardCreate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CreateGiftCardResponse, error) {
+func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCardCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CreateGiftCardResponse, error) {
 	request := operations.CreateGiftCardRequest{
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		GiftCardCreate:          giftCardCreate,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+		GiftCardCreate:    giftCardCreate,
+	}
+
+	globals := operations.CreateGiftCardGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1108,9 +1126,9 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1563,6 +1581,10 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 // List gift cards
 // Browser all gift cards.
 func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRequest, opts ...operations.Option) (*operations.ListGiftCardsResponse, error) {
+	globals := operations.ListGiftCardsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1611,9 +1633,9 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1630,6 +1652,16 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -1638,11 +1670,7 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -1761,7 +1789,7 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				BuyerID:                 request.BuyerID,
 				Cursor:                  &nCVal,
 				Limit:                   request.Limit,
-				XGr4vyMerchantAccountID: request.XGr4vyMerchantAccountID,
+				MerchantAccountID:       request.MerchantAccountID,
 			},
 			opts...,
 		)

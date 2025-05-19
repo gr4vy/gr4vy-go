@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type AuditLogAction string
 
 const (
@@ -19,25 +14,4 @@ const (
 
 func (e AuditLogAction) ToPointer() *AuditLogAction {
 	return &e
-}
-func (e *AuditLogAction) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "created":
-		fallthrough
-	case "updated":
-		fallthrough
-	case "deleted":
-		fallthrough
-	case "voided":
-		fallthrough
-	case "captured":
-		*e = AuditLogAction(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AuditLogAction: %v", v)
-	}
 }

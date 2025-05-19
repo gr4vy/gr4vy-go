@@ -28,6 +28,10 @@ func newCryptogram(sdkConfig sdkConfiguration) *Cryptogram {
 // Create - Provision network token cryptogram
 // Provision a cryptogram for a network token.
 func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymentMethodNetworkTokenCryptogramRequest, opts ...operations.Option) (*operations.CreatePaymentMethodNetworkTokenCryptogramResponse, error) {
+	globals := operations.CreatePaymentMethodNetworkTokenCryptogramGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -46,7 +50,7 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}/network-tokens/{network_token_id}/cryptogram", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}/network-tokens/{network_token_id}/cryptogram", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -83,9 +87,9 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

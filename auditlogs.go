@@ -31,6 +31,10 @@ func newAuditLogs(sdkConfig sdkConfiguration) *AuditLogs {
 // List audit log entries
 // Returns a list of activity by dashboard users.
 func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRequest, opts ...operations.Option) (*operations.ListAuditLogsResponse, error) {
+	globals := operations.ListAuditLogsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
+	}
+
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -79,9 +83,9 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -98,6 +102,16 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -106,11 +120,7 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -225,12 +235,12 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 		return s.List(
 			ctx,
 			operations.ListAuditLogsRequest{
-				Cursor:                  &nCVal,
-				Limit:                   request.Limit,
-				Action:                  request.Action,
-				UserID:                  request.UserID,
-				ResourceType:            request.ResourceType,
-				XGr4vyMerchantAccountID: request.XGr4vyMerchantAccountID,
+				Cursor:            &nCVal,
+				Limit:             request.Limit,
+				Action:            request.Action,
+				UserID:            request.UserID,
+				ResourceType:      request.ResourceType,
+				MerchantAccountID: request.MerchantAccountID,
 			},
 			opts...,
 		)

@@ -7,6 +7,17 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type ListBuyersGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *ListBuyersGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type ListBuyersRequest struct {
 	// A pointer to the page of results to return.
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
@@ -17,7 +28,7 @@ type ListBuyersRequest struct {
 	// Filters the results to only the buyers for which the `external_identifier` matches this value.
 	ExternalIdentifier *string `queryParam:"style=form,explode=true,name=external_identifier"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (l ListBuyersRequest) MarshalJSON() ([]byte, error) {
@@ -59,11 +70,11 @@ func (o *ListBuyersRequest) GetExternalIdentifier() *string {
 	return o.ExternalIdentifier
 }
 
-func (o *ListBuyersRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *ListBuyersRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type ListBuyersResponse struct {

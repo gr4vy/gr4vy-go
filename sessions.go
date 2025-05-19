@@ -28,10 +28,14 @@ func newSessions(sdkConfig sdkConfiguration) *Sessions {
 
 // GooglePay - Create a Google Pay session
 // Create a session for use with Google Pay.
-func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest components.GooglePaySessionRequest, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CreateGooglePayDigitalWalletSessionResponse, error) {
+func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest components.GooglePaySessionRequest, merchantAccountID *string, opts ...operations.Option) (*operations.CreateGooglePayDigitalWalletSessionResponse, error) {
 	request := operations.CreateGooglePayDigitalWalletSessionRequest{
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		MerchantAccountID:       merchantAccountID,
 		GooglePaySessionRequest: googlePaySessionRequest,
+	}
+
+	globals := operations.CreateGooglePayDigitalWalletSessionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -89,7 +93,7 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -539,10 +543,14 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 
 // ApplePay - Create a Apple Pay session
 // Create a session for use with Apple Pay.
-func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest components.ApplePaySessionRequest, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CreateApplePayDigitalWalletSessionResponse, error) {
+func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest components.ApplePaySessionRequest, merchantAccountID *string, opts ...operations.Option) (*operations.CreateApplePayDigitalWalletSessionResponse, error) {
 	request := operations.CreateApplePayDigitalWalletSessionRequest{
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		ApplePaySessionRequest:  applePaySessionRequest,
+		MerchantAccountID:      merchantAccountID,
+		ApplePaySessionRequest: applePaySessionRequest,
+	}
+
+	globals := operations.CreateApplePayDigitalWalletSessionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -600,7 +608,7 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

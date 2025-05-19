@@ -6,11 +6,22 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type DeletePaymentMethodGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *DeletePaymentMethodGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type DeletePaymentMethodRequest struct {
 	// The ID of the payment method
 	PaymentMethodID string `pathParam:"style=simple,explode=false,name=payment_method_id"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (o *DeletePaymentMethodRequest) GetPaymentMethodID() string {
@@ -20,11 +31,11 @@ func (o *DeletePaymentMethodRequest) GetPaymentMethodID() string {
 	return o.PaymentMethodID
 }
 
-func (o *DeletePaymentMethodRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *DeletePaymentMethodRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type DeletePaymentMethodResponse struct {

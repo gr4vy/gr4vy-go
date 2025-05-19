@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type TransactionStatus string
 
 const (
@@ -23,33 +18,4 @@ const (
 
 func (e TransactionStatus) ToPointer() *TransactionStatus {
 	return &e
-}
-func (e *TransactionStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "processing":
-		fallthrough
-	case "authorization_succeeded":
-		fallthrough
-	case "authorization_declined":
-		fallthrough
-	case "authorization_failed":
-		fallthrough
-	case "authorization_voided":
-		fallthrough
-	case "authorization_void_pending":
-		fallthrough
-	case "capture_succeeded":
-		fallthrough
-	case "capture_pending":
-		fallthrough
-	case "buyer_approval_pending":
-		*e = TransactionStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransactionStatus: %v", v)
-	}
 }

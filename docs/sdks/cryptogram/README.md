@@ -18,8 +18,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
@@ -29,14 +29,12 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
-        "https://api.example.com",
-        gr4vygo.WithSecurity(os.Getenv("GR4VY_O_AUTH2_PASSWORD_BEARER")),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.PaymentMethods.NetworkTokens.Cryptogram.Create(ctx, operations.CreatePaymentMethodNetworkTokenCryptogramRequest{
         PaymentMethodID: "ef9496d8-53a5-4aad-8ca2-00eb68334389",
         NetworkTokenID: "f8dd5cfc-7834-4847-95dc-f75a360e2298",
-        XGr4vyMerchantAccountID: gr4vygo.String("default"),
         CryptogramCreate: components.CryptogramCreate{
             MerchantInitiated: false,
         },

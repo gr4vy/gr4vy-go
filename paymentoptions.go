@@ -28,10 +28,14 @@ func newPaymentOptions(sdkConfig sdkConfiguration) *PaymentOptions {
 
 // List payment options
 // List the payment options available at checkout. filtering by country, currency, and additional fields passed to Flow rules.
-func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest components.PaymentOptionRequest, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.ListPaymentOptionsResponse, error) {
+func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest components.PaymentOptionRequest, merchantAccountID *string, opts ...operations.Option) (*operations.ListPaymentOptionsResponse, error) {
 	request := operations.ListPaymentOptionsRequest{
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		PaymentOptionRequest:    paymentOptionRequest,
+		MerchantAccountID:    merchantAccountID,
+		PaymentOptionRequest: paymentOptionRequest,
+	}
+
+	globals := operations.ListPaymentOptionsGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -89,7 +93,7 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

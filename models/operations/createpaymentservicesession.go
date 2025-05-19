@@ -6,12 +6,23 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type CreatePaymentServiceSessionGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *CreatePaymentServiceSessionGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type CreatePaymentServiceSessionRequest struct {
 	// the ID of the payment service
 	PaymentServiceID string `pathParam:"style=simple,explode=false,name=payment_service_id"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string        `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-	RequestBody             map[string]any `request:"mediaType=application/json"`
+	MerchantAccountID *string        `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	RequestBody       map[string]any `request:"mediaType=application/json"`
 }
 
 func (o *CreatePaymentServiceSessionRequest) GetPaymentServiceID() string {
@@ -21,11 +32,11 @@ func (o *CreatePaymentServiceSessionRequest) GetPaymentServiceID() string {
 	return o.PaymentServiceID
 }
 
-func (o *CreatePaymentServiceSessionRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *CreatePaymentServiceSessionRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 func (o *CreatePaymentServiceSessionRequest) GetRequestBody() map[string]any {

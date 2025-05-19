@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type NetworkTokenStatus string
 
 const (
@@ -18,23 +13,4 @@ const (
 
 func (e NetworkTokenStatus) ToPointer() *NetworkTokenStatus {
 	return &e
-}
-func (e *NetworkTokenStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "active":
-		fallthrough
-	case "inactive":
-		fallthrough
-	case "suspended":
-		fallthrough
-	case "deleted":
-		*e = NetworkTokenStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for NetworkTokenStatus: %v", v)
-	}
 }

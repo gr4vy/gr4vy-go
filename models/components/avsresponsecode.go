@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type AVSResponseCode string
 
 const (
@@ -19,25 +14,4 @@ const (
 
 func (e AVSResponseCode) ToPointer() *AVSResponseCode {
 	return &e
-}
-func (e *AVSResponseCode) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "match":
-		fallthrough
-	case "no_match":
-		fallthrough
-	case "partial_match_address":
-		fallthrough
-	case "partial_match_postcode":
-		fallthrough
-	case "unavailable":
-		*e = AVSResponseCode(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AVSResponseCode: %v", v)
-	}
 }

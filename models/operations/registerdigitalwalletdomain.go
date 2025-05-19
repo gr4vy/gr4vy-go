@@ -7,13 +7,24 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type RegisterDigitalWalletDomainGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *RegisterDigitalWalletDomainGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type RegisterDigitalWalletDomainRequest struct {
 	// The ID of the digital wallet to remove a domain for.
 	DigitalWalletID  string   `pathParam:"style=simple,explode=false,name=digital_wallet_id"`
 	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string                        `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-	DigitalWalletDomain     components.DigitalWalletDomain `request:"mediaType=application/json"`
+	MerchantAccountID   *string                        `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	DigitalWalletDomain components.DigitalWalletDomain `request:"mediaType=application/json"`
 }
 
 func (r RegisterDigitalWalletDomainRequest) MarshalJSON() ([]byte, error) {
@@ -41,11 +52,11 @@ func (o *RegisterDigitalWalletDomainRequest) GetTimeoutInSeconds() *float64 {
 	return o.TimeoutInSeconds
 }
 
-func (o *RegisterDigitalWalletDomainRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *RegisterDigitalWalletDomainRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 func (o *RegisterDigitalWalletDomainRequest) GetDigitalWalletDomain() components.DigitalWalletDomain {

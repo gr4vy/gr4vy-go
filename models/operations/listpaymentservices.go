@@ -7,6 +7,17 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type ListPaymentServicesGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *ListPaymentServicesGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type ListPaymentServicesRequest struct {
 	// Return any payment service for this method.
 	Method *components.Method `queryParam:"style=form,explode=true,name=method"`
@@ -17,7 +28,7 @@ type ListPaymentServicesRequest struct {
 	// Return any deleted payment service.
 	Deleted *bool `queryParam:"style=form,explode=true,name=deleted"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (l ListPaymentServicesRequest) MarshalJSON() ([]byte, error) {
@@ -59,11 +70,11 @@ func (o *ListPaymentServicesRequest) GetDeleted() *bool {
 	return o.Deleted
 }
 
-func (o *ListPaymentServicesRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *ListPaymentServicesRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type ListPaymentServicesResponse struct {

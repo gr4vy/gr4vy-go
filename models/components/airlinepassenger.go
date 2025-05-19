@@ -3,8 +3,6 @@
 package components
 
 import (
-	"encoding/json"
-	"fmt"
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/types"
 )
@@ -18,21 +16,6 @@ const (
 
 func (e AgeGroup) ToPointer() *AgeGroup {
 	return &e
-}
-func (e *AgeGroup) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "adult":
-		fallthrough
-	case "infant":
-		*e = AgeGroup(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for AgeGroup: %v", v)
-	}
 }
 
 type AirlinePassenger struct {

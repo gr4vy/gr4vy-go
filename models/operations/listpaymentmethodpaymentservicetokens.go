@@ -6,13 +6,24 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type ListPaymentMethodPaymentServiceTokensGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *ListPaymentMethodPaymentServiceTokensGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type ListPaymentMethodPaymentServiceTokensRequest struct {
 	// The ID of the payment method
 	PaymentMethodID string `pathParam:"style=simple,explode=false,name=payment_method_id"`
 	// The ID of the payment service
 	PaymentServiceID *string `queryParam:"style=form,explode=true,name=payment_service_id"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (o *ListPaymentMethodPaymentServiceTokensRequest) GetPaymentMethodID() string {
@@ -29,11 +40,11 @@ func (o *ListPaymentMethodPaymentServiceTokensRequest) GetPaymentServiceID() *st
 	return o.PaymentServiceID
 }
 
-func (o *ListPaymentMethodPaymentServiceTokensRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *ListPaymentMethodPaymentServiceTokensRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type ListPaymentMethodPaymentServiceTokensResponse struct {

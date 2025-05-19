@@ -7,12 +7,23 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type ListBuyerGiftCardsGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *ListBuyerGiftCardsGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type ListBuyerGiftCardsRequest struct {
 	BuyerExternalIdentifier *string  `queryParam:"style=form,explode=true,name=buyer_external_identifier"`
 	BuyerID                 *string  `queryParam:"style=form,explode=true,name=buyer_id"`
 	TimeoutInSeconds        *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (l ListBuyerGiftCardsRequest) MarshalJSON() ([]byte, error) {
@@ -47,11 +58,11 @@ func (o *ListBuyerGiftCardsRequest) GetTimeoutInSeconds() *float64 {
 	return o.TimeoutInSeconds
 }
 
-func (o *ListBuyerGiftCardsRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *ListBuyerGiftCardsRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type ListBuyerGiftCardsResponse struct {

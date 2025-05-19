@@ -28,11 +28,15 @@ func newCheckoutSessions(sdkConfig sdkConfiguration) *CheckoutSessions {
 
 // Create checkout session
 // Create a new checkout session.
-func (s *CheckoutSessions) Create(ctx context.Context, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, requestBody *operations.CreateCheckoutSessionBody, opts ...operations.Option) (*operations.CreateCheckoutSessionResponse, error) {
+func (s *CheckoutSessions) Create(ctx context.Context, timeoutInSeconds *float64, merchantAccountID *string, requestBody *operations.CreateCheckoutSessionBody, opts ...operations.Option) (*operations.CreateCheckoutSessionResponse, error) {
 	request := operations.CreateCheckoutSessionRequest{
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		RequestBody:             requestBody,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+		RequestBody:       requestBody,
+	}
+
+	globals := operations.CreateCheckoutSessionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -90,9 +94,9 @@ func (s *CheckoutSessions) Create(ctx context.Context, timeoutInSeconds *float64
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -544,12 +548,16 @@ func (s *CheckoutSessions) Create(ctx context.Context, timeoutInSeconds *float64
 
 // Update checkout session
 // Update the information stored on a checkout session.
-func (s *CheckoutSessions) Update(ctx context.Context, sessionID string, checkoutSessionUpdate components.CheckoutSessionUpdate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.UpdateCheckoutSessionResponse, error) {
+func (s *CheckoutSessions) Update(ctx context.Context, sessionID string, checkoutSessionUpdate components.CheckoutSessionUpdate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.UpdateCheckoutSessionResponse, error) {
 	request := operations.UpdateCheckoutSessionRequest{
-		SessionID:               sessionID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
-		CheckoutSessionUpdate:   checkoutSessionUpdate,
+		SessionID:             sessionID,
+		TimeoutInSeconds:      timeoutInSeconds,
+		MerchantAccountID:     merchantAccountID,
+		CheckoutSessionUpdate: checkoutSessionUpdate,
+	}
+
+	globals := operations.UpdateCheckoutSessionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -570,7 +578,7 @@ func (s *CheckoutSessions) Update(ctx context.Context, sessionID string, checkou
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/checkout/sessions/{session_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/checkout/sessions/{session_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -607,9 +615,9 @@ func (s *CheckoutSessions) Update(ctx context.Context, sessionID string, checkou
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1061,11 +1069,15 @@ func (s *CheckoutSessions) Update(ctx context.Context, sessionID string, checkou
 
 // Get checkout session
 // Retrieve the information stored on a checkout session.
-func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.GetCheckoutSessionResponse, error) {
+func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.GetCheckoutSessionResponse, error) {
 	request := operations.GetCheckoutSessionRequest{
-		SessionID:               sessionID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		SessionID:         sessionID,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.GetCheckoutSessionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1086,7 +1098,7 @@ func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, timeoutInS
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/checkout/sessions/{session_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/checkout/sessions/{session_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1116,9 +1128,9 @@ func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, timeoutInS
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1135,6 +1147,16 @@ func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, timeoutInS
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -1143,11 +1165,7 @@ func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, timeoutInS
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -1547,11 +1565,15 @@ func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, timeoutInS
 
 // Delete checkout session
 // Deleta a checkout session and all of its (PCI) data.
-func (s *CheckoutSessions) Delete(ctx context.Context, sessionID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.DeleteCheckoutSessionResponse, error) {
+func (s *CheckoutSessions) Delete(ctx context.Context, sessionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.DeleteCheckoutSessionResponse, error) {
 	request := operations.DeleteCheckoutSessionRequest{
-		SessionID:               sessionID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		SessionID:         sessionID,
+		TimeoutInSeconds:  timeoutInSeconds,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.DeleteCheckoutSessionGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1572,7 +1594,7 @@ func (s *CheckoutSessions) Delete(ctx context.Context, sessionID string, timeout
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/checkout/sessions/{session_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/checkout/sessions/{session_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1602,9 +1624,9 @@ func (s *CheckoutSessions) Delete(ctx context.Context, sessionID string, timeout
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

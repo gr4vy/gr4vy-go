@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type CardType string
 
 const (
@@ -17,21 +12,4 @@ const (
 
 func (e CardType) ToPointer() *CardType {
 	return &e
-}
-func (e *CardType) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "credit":
-		fallthrough
-	case "debit":
-		fallthrough
-	case "prepaid":
-		*e = CardType(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for CardType: %v", v)
-	}
 }

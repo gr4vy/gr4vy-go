@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type RefundStatus string
 
 const (
@@ -19,25 +14,4 @@ const (
 
 func (e RefundStatus) ToPointer() *RefundStatus {
 	return &e
-}
-func (e *RefundStatus) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "processing":
-		fallthrough
-	case "succeeded":
-		fallthrough
-	case "failed":
-		fallthrough
-	case "declined":
-		fallthrough
-	case "voided":
-		*e = RefundStatus(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for RefundStatus: %v", v)
-	}
 }

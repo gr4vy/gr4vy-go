@@ -7,11 +7,22 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type ListGiftCardBalancesGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *ListGiftCardBalancesGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type ListGiftCardBalancesRequest struct {
 	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string                           `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-	GiftCardBalanceRequest  components.GiftCardBalanceRequest `request:"mediaType=application/json"`
+	MerchantAccountID      *string                           `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	GiftCardBalanceRequest components.GiftCardBalanceRequest `request:"mediaType=application/json"`
 }
 
 func (l ListGiftCardBalancesRequest) MarshalJSON() ([]byte, error) {
@@ -32,11 +43,11 @@ func (o *ListGiftCardBalancesRequest) GetTimeoutInSeconds() *float64 {
 	return o.TimeoutInSeconds
 }
 
-func (o *ListGiftCardBalancesRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *ListGiftCardBalancesRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 func (o *ListGiftCardBalancesRequest) GetGiftCardBalanceRequest() components.GiftCardBalanceRequest {

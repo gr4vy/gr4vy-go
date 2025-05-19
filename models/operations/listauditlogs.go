@@ -7,6 +7,17 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
+type ListAuditLogsGlobals struct {
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (o *ListAuditLogsGlobals) GetMerchantAccountID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantAccountID
+}
+
 type ListAuditLogsRequest struct {
 	// A pointer to the page of results to return.
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
@@ -19,7 +30,7 @@ type ListAuditLogsRequest struct {
 	// Filters the results to only the items for which the `audit-log` has a `resource` that matches this type value.
 	ResourceType *string `queryParam:"style=form,explode=true,name=resource_type"`
 	// The ID of the merchant account to use for this request.
-	XGr4vyMerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
 func (l ListAuditLogsRequest) MarshalJSON() ([]byte, error) {
@@ -68,11 +79,11 @@ func (o *ListAuditLogsRequest) GetResourceType() *string {
 	return o.ResourceType
 }
 
-func (o *ListAuditLogsRequest) GetXGr4vyMerchantAccountID() *string {
+func (o *ListAuditLogsRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
-	return o.XGr4vyMerchantAccountID
+	return o.MerchantAccountID
 }
 
 type ListAuditLogsResponse struct {

@@ -27,11 +27,15 @@ func newPaymentServiceTokens(sdkConfig sdkConfiguration) *PaymentServiceTokens {
 
 // List payment service tokens
 // List all gateway tokens stored for a payment method.
-func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string, paymentServiceID *string, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.ListPaymentMethodPaymentServiceTokensResponse, error) {
+func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string, paymentServiceID *string, merchantAccountID *string, opts ...operations.Option) (*operations.ListPaymentMethodPaymentServiceTokensResponse, error) {
 	request := operations.ListPaymentMethodPaymentServiceTokensRequest{
-		PaymentMethodID:         paymentMethodID,
-		PaymentServiceID:        paymentServiceID,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		PaymentMethodID:   paymentMethodID,
+		PaymentServiceID:  paymentServiceID,
+		MerchantAccountID: merchantAccountID,
+	}
+
+	globals := operations.ListPaymentMethodPaymentServiceTokensGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -52,7 +56,7 @@ func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string,
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}/payment-service-tokens", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}/payment-service-tokens", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -82,9 +86,9 @@ func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string,
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -101,6 +105,16 @@ func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string,
 	if retryConfig == nil {
 		if globalRetryConfig != nil {
 			retryConfig = globalRetryConfig
+		} else {
+			retryConfig = &retry.Config{
+				Strategy: "backoff", Backoff: &retry.BackoffStrategy{
+					InitialInterval: 200,
+					MaxInterval:     200,
+					Exponent:        1,
+					MaxElapsedTime:  1000,
+				},
+				RetryConnectionErrors: true,
+			}
 		}
 	}
 
@@ -109,11 +123,7 @@ func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string,
 		httpRes, err = utils.Retry(ctx, utils.Retries{
 			Config: retryConfig,
 			StatusCodes: []string{
-				"429",
-				"500",
-				"502",
-				"503",
-				"504",
+				"5XX",
 			},
 		}, func() (*http.Response, error) {
 			if req.Body != nil {
@@ -536,12 +546,16 @@ func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string,
 
 // Create payment service token
 // Create a gateway tokens for a payment method.
-func (s *PaymentServiceTokens) Create(ctx context.Context, paymentMethodID string, paymentServiceTokenCreate components.PaymentServiceTokenCreate, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.CreatePaymentMethodPaymentServiceTokenResponse, error) {
+func (s *PaymentServiceTokens) Create(ctx context.Context, paymentMethodID string, paymentServiceTokenCreate components.PaymentServiceTokenCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CreatePaymentMethodPaymentServiceTokenResponse, error) {
 	request := operations.CreatePaymentMethodPaymentServiceTokenRequest{
 		PaymentMethodID:           paymentMethodID,
 		TimeoutInSeconds:          timeoutInSeconds,
-		XGr4vyMerchantAccountID:   xGr4vyMerchantAccountID,
+		MerchantAccountID:         merchantAccountID,
 		PaymentServiceTokenCreate: paymentServiceTokenCreate,
+	}
+
+	globals := operations.CreatePaymentMethodPaymentServiceTokenGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -562,7 +576,7 @@ func (s *PaymentServiceTokens) Create(ctx context.Context, paymentMethodID strin
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}/payment-service-tokens", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}/payment-service-tokens", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -599,9 +613,9 @@ func (s *PaymentServiceTokens) Create(ctx context.Context, paymentMethodID strin
 		req.Header.Set("Content-Type", reqContentType)
 	}
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
@@ -1053,12 +1067,16 @@ func (s *PaymentServiceTokens) Create(ctx context.Context, paymentMethodID strin
 
 // Delete payment service token
 // Delete a gateway tokens for a payment method.
-func (s *PaymentServiceTokens) Delete(ctx context.Context, paymentMethodID string, paymentServiceTokenID string, timeoutInSeconds *float64, xGr4vyMerchantAccountID *string, opts ...operations.Option) (*operations.DeletePaymentMethodPaymentServiceTokenResponse, error) {
+func (s *PaymentServiceTokens) Delete(ctx context.Context, paymentMethodID string, paymentServiceTokenID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.DeletePaymentMethodPaymentServiceTokenResponse, error) {
 	request := operations.DeletePaymentMethodPaymentServiceTokenRequest{
-		PaymentMethodID:         paymentMethodID,
-		PaymentServiceTokenID:   paymentServiceTokenID,
-		TimeoutInSeconds:        timeoutInSeconds,
-		XGr4vyMerchantAccountID: xGr4vyMerchantAccountID,
+		PaymentMethodID:       paymentMethodID,
+		PaymentServiceTokenID: paymentServiceTokenID,
+		TimeoutInSeconds:      timeoutInSeconds,
+		MerchantAccountID:     merchantAccountID,
+	}
+
+	globals := operations.DeletePaymentMethodPaymentServiceTokenGlobals{
+		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
 	o := operations.Options{}
@@ -1079,7 +1097,7 @@ func (s *PaymentServiceTokens) Delete(ctx context.Context, paymentMethodID strin
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}/payment-service-tokens/{payment_service_token_id}", request, nil)
+	opURL, err := utils.GenerateURL(ctx, baseURL, "/payment-methods/{payment_method_id}/payment-service-tokens/{payment_service_token_id}", request, globals)
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -1109,9 +1127,9 @@ func (s *PaymentServiceTokens) Delete(ctx context.Context, paymentMethodID strin
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
-	utils.PopulateHeaders(ctx, req, request, nil)
+	utils.PopulateHeaders(ctx, req, request, globals)
 
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
+	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
 		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 

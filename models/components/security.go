@@ -3,12 +3,12 @@
 package components
 
 type Security struct {
-	OAuth2PasswordBearer *string `security:"scheme,type=oauth2,name=Authorization,env=gr4vy_o_auth2_password_bearer"`
+	BearerAuth *string `security:"scheme,type=http,subtype=bearer,name=Authorization,env=gr4vy_bearer_auth"`
 }
 
-func (o *Security) GetOAuth2PasswordBearer() *string {
+func (o *Security) GetBearerAuth() *string {
 	if o == nil {
 		return nil
 	}
-	return o.OAuth2PasswordBearer
+	return o.BearerAuth
 }

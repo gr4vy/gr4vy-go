@@ -2,11 +2,6 @@
 
 package components
 
-import (
-	"encoding/json"
-	"fmt"
-)
-
 type TransactionIntent string
 
 const (
@@ -16,19 +11,4 @@ const (
 
 func (e TransactionIntent) ToPointer() *TransactionIntent {
 	return &e
-}
-func (e *TransactionIntent) UnmarshalJSON(data []byte) error {
-	var v string
-	if err := json.Unmarshal(data, &v); err != nil {
-		return err
-	}
-	switch v {
-	case "authorize":
-		fallthrough
-	case "capture":
-		*e = TransactionIntent(v)
-		return nil
-	default:
-		return fmt.Errorf("invalid value for TransactionIntent: %v", v)
-	}
 }
