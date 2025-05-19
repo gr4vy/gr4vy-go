@@ -3,7 +3,7 @@
 Developer-friendly & type-safe Go SDK specifically catered to leverage the **Gr4vy** API.
 
 <div align="left">
-	<img alt="GitHub go.mod Go version" src="https://img.shields.io/github/go-mod/go-version/gr4vy/gr4vy-go?style=for-the-badge">
+	<img alt="GitHub Tag" src="https://img.shields.io/github/v/tag/gr4vy/gr4vy-go?style=for-the-badge&label=Version&color=blue">
     <a href="https://www.speakeasy.com/?utm_source=github-com/gr4vy/gr4vy-go&utm_campaign=go"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
 </div>
 
