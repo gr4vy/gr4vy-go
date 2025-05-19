@@ -1,0 +1,10 @@
+# ConfigureDigitalWalletRequest
+
+
+## Fields
+
+| Field                                                                            | Type                                                                             | Required                                                                         | Description                                                                      | Example                                                                          |
+| -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- | -------------------------------------------------------------------------------- |
+| `TimeoutInSeconds`                                                               | **float64*                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
+| `XGr4vyMerchantAccountID`                                                        | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          | default                                                                          |
+| `DigitalWalletCreate`                                                            | [components.DigitalWalletCreate](../../models/components/digitalwalletcreate.md) | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |

@@ -1,0 +1,50 @@
+speakeasyVersion: 1.547.0
+sources:
+    Gr4vy:
+        sourceNamespace: gr-4-vy
+        sourceRevisionDigest: sha256:4e0492d35a75974644c880a946749131df09fb30d23270c15ca7a11fedc54306
+        sourceBlobDigest: sha256:9dc5203f8085cd3b605313a5d7e93d6a9262a4663273121d27fed764355d4e86
+        tags:
+            - latest
+            - 1.0.0
+    openapi:
+        sourceNamespace: gr-4-vy
+        sourceRevisionDigest: sha256:4e0492d35a75974644c880a946749131df09fb30d23270c15ca7a11fedc54306
+        sourceBlobDigest: sha256:9dc5203f8085cd3b605313a5d7e93d6a9262a4663273121d27fed764355d4e86
+        tags:
+            - latest
+            - 1.0.0
+targets:
+    go:
+        source: openapi
+        sourceNamespace: gr-4-vy
+        sourceRevisionDigest: sha256:4e0492d35a75974644c880a946749131df09fb30d23270c15ca7a11fedc54306
+        sourceBlobDigest: sha256:9dc5203f8085cd3b605313a5d7e93d6a9262a4663273121d27fed764355d4e86
+        codeSamplesNamespace: openapi-typescript-go-code-samples
+        codeSamplesRevisionDigest: sha256:2d49ee69174d817d97e679da35d30f952411172ecce6d6129da1dabdd888a39b
+    gr-4-vy:
+        source: Gr4vy
+        sourceNamespace: gr-4-vy
+        sourceRevisionDigest: sha256:4e0492d35a75974644c880a946749131df09fb30d23270c15ca7a11fedc54306
+        sourceBlobDigest: sha256:9dc5203f8085cd3b605313a5d7e93d6a9262a4663273121d27fed764355d4e86
+        codeSamplesNamespace: gr-4-vy-go-code-samples
+        codeSamplesRevisionDigest: sha256:021acd905445195610afcb98ffa20a6a748a87965e1fe735244ea916f6bb76f9
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        openapi:
+            inputs:
+                - location: https://gr4vy.github.io/gr4vy-openapi/core/openapi.json
+            registry:
+                location: registry.speakeasyapi.dev/gr4vy/gr4vy/gr-4-vy
+    targets:
+        go:
+            target: go
+            source: openapi
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/gr4vy/gr4vy/openapi-typescript-go-code-samples
+                labelOverride:
+                    fixedValue: Go
+                blocking: false

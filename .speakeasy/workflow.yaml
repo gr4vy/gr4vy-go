@@ -1,0 +1,18 @@
+workflowVersion: 1.0.0
+speakeasyVersion: latest
+sources:
+    openapi:
+        inputs:
+            - location: https://gr4vy.github.io/gr4vy-openapi/core/openapi.json
+        registry:
+            location: registry.speakeasyapi.dev/gr4vy/gr4vy/gr-4-vy
+targets:
+    go:
+        target: go
+        source: openapi
+        codeSamples:
+            registry:
+                location: registry.speakeasyapi.dev/gr4vy/gr4vy/openapi-typescript-go-code-samples
+            labelOverride:
+                fixedValue: Go
+            blocking: false

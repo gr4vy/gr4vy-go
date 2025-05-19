@@ -1,0 +1,9 @@
+# ListTransactionsResponse
+
+
+## Fields
+
+| Field                                                                                               | Type                                                                                                | Required                                                                                            | Description                                                                                         |
+| --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------- |
+| `HTTPMeta`                                                                                          | [components.HTTPMetadata](../../models/components/httpmetadata.md)                                  | :heavy_check_mark:                                                                                  | N/A                                                                                                 |
+| `CollectionTransactionSummary`                                                                      | [*components.CollectionTransactionSummary](../../models/components/collectiontransactionsummary.md) | :heavy_minus_sign:                                                                                  | Successful Response                                                                                 |
