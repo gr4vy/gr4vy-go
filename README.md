@@ -1,18 +1,16 @@
-# github.com/gr4vy/gr4vy-go
+# Gr4vy Go SDK (Beta)
 
-Developer-friendly & type-safe Go SDK specifically catered to leverage *github.com/gr4vy/gr4vy-go* API.
+Developer-friendly & type-safe Go SDK specifically catered to leverage the **Gr4vy** API.
 
 <div align="left">
+	<img alt="GitHub go.mod Go version" src="https://img.shields.io/github/go-mod/go-version/gr4vy/gr4vy-go?style=for-the-badge">
     <a href="https://www.speakeasy.com/?utm_source=github-com/gr4vy/gr4vy-go&utm_campaign=go"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
-    <a href="https://opensource.org/licenses/MIT">
-        <img src="https://img.shields.io/badge/License-MIT-blue.svg" style="width: 100px; height: 28px;" />
-    </a>
 </div>
 
 
 <br /><br />
 > [!IMPORTANT]
-> This SDK is not yet ready for production use. To complete setup please follow the steps outlined in your [workspace](https://app.speakeasy.com/org/gr4vy/gr4vy). Delete this section before > publishing to a package manager.
+> This is a Beta release of our latest SDK. Please refer to the [legacy Go SDK](https://github.com/gr4vy/gr4vy-go/tree/legacy) for the latest stable build.
 
 <!-- Start Summary [summary] -->
 ## Summary
