@@ -280,11 +280,15 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			var out apierrors.Response403ListTransactionRefunds
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -801,11 +805,15 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			var out apierrors.Response403CreateTransactionRefund
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1316,11 +1324,15 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			var out apierrors.Response403GetTransactionRefund
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

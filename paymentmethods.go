@@ -332,11 +332,15 @@ func (s *PaymentMethods) List(ctx context.Context, request operations.ListPaymen
 				return nil, err
 			}
 
-			var out apierrors.Response403ListPaymentMethods
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -852,11 +856,15 @@ func (s *PaymentMethods) Create(ctx context.Context, requestBody operations.Crea
 				return nil, err
 			}
 
-			var out apierrors.Response403CreatePaymentMethod
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1366,11 +1374,15 @@ func (s *PaymentMethods) Get(ctx context.Context, paymentMethodID string, mercha
 				return nil, err
 			}
 
-			var out apierrors.Response403GetPaymentMethod
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1854,11 +1866,15 @@ func (s *PaymentMethods) Delete(ctx context.Context, paymentMethodID string, mer
 				return nil, err
 			}
 
-			var out apierrors.Response403DeletePaymentMethod
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

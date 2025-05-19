@@ -289,11 +289,15 @@ func (s *DigitalWallets) Create(ctx context.Context, digitalWalletCreate compone
 				return nil, err
 			}
 
-			var out apierrors.Response403ConfigureDigitalWallet
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -802,11 +806,15 @@ func (s *DigitalWallets) List(ctx context.Context, merchantAccountID *string, op
 				return nil, err
 			}
 
-			var out apierrors.Response403ListDigitalWallets
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1316,11 +1324,15 @@ func (s *DigitalWallets) Get(ctx context.Context, digitalWalletID string, mercha
 				return nil, err
 			}
 
-			var out apierrors.Response403GetDigitalWallet
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1829,11 +1841,15 @@ func (s *DigitalWallets) Delete(ctx context.Context, digitalWalletID string, tim
 				return nil, err
 			}
 
-			var out apierrors.Response403DeleteDigitalWallet
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2350,11 +2366,15 @@ func (s *DigitalWallets) Update(ctx context.Context, digitalWalletID string, dig
 				return nil, err
 			}
 
-			var out apierrors.Response403UpdateDigitalWallet
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

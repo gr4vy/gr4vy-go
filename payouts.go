@@ -327,11 +327,15 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			var out apierrors.Response403ListPayouts
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -847,11 +851,15 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			var out apierrors.Response403CreatePayout
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1361,11 +1369,15 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			var out apierrors.Response403GetPayout
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

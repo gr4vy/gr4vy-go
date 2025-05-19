@@ -284,11 +284,15 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			var out apierrors.Response403RegisterDigitalWalletDomain
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -805,11 +809,15 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			var out apierrors.Response403UnregisterDigitalWalletDomain
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

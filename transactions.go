@@ -361,11 +361,15 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			var out apierrors.Response403ListTransactions
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -882,11 +886,15 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			var out apierrors.Response403CreateTransaction
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1396,11 +1404,15 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			var out apierrors.Response403GetTransaction
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1917,11 +1929,15 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			var out apierrors.Response403CaptureTransaction
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2430,11 +2446,15 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			var out apierrors.Response403VoidTransaction
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2944,11 +2964,15 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			var out apierrors.Response403GetTransactionSummary
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3457,11 +3481,15 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			var out apierrors.Response403SyncTransaction
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

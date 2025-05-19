@@ -282,11 +282,15 @@ func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string,
 				return nil, err
 			}
 
-			var out apierrors.Response403ListPaymentMethodPaymentServiceTokens
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -803,11 +807,15 @@ func (s *PaymentServiceTokens) Create(ctx context.Context, paymentMethodID strin
 				return nil, err
 			}
 
-			var out apierrors.Response403CreatePaymentMethodPaymentServiceToken
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1297,11 +1305,15 @@ func (s *PaymentServiceTokens) Delete(ctx context.Context, paymentMethodID strin
 				return nil, err
 			}
 
-			var out apierrors.Response403DeletePaymentMethodPaymentServiceToken
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

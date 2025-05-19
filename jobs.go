@@ -285,11 +285,15 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			var out apierrors.Response403CreateAccountUpdaterJob
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

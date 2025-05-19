@@ -21,7 +21,7 @@ Gr4vy: The Gr4vy API.
 <!-- Start Table of Contents [toc] -->
 ## Table of Contents
 <!-- $toc-max-depth=2 -->
-* [github.com/gr4vy/gr4vy-go](#githubcomgr4vygr4vy-go)
+* [Gr4vy Go SDK (Beta)](#gr4vy-go-sdk-beta)
   * [SDK Installation](#sdk-installation)
   * [SDK Example Usage](#sdk-example-usage)
   * [Authentication](#authentication)
@@ -465,21 +465,21 @@ By Default, an API error will return `apierrors.APIError`. When custom error res
 
 For example, the `Create` function may return the following errors:
 
-| Error Type                                   | Status Code | Content Type     |
-| -------------------------------------------- | ----------- | ---------------- |
-| apierrors.Error400                           | 400         | application/json |
-| apierrors.Error401                           | 401         | application/json |
-| apierrors.Response403CreateAccountUpdaterJob | 403         | application/json |
-| apierrors.Error404                           | 404         | application/json |
-| apierrors.Error405                           | 405         | application/json |
-| apierrors.Error409                           | 409         | application/json |
-| apierrors.HTTPValidationError                | 422         | application/json |
-| apierrors.Error425                           | 425         | application/json |
-| apierrors.Error429                           | 429         | application/json |
-| apierrors.Error500                           | 500         | application/json |
-| apierrors.Error502                           | 502         | application/json |
-| apierrors.Error504                           | 504         | application/json |
-| apierrors.APIError                           | 4XX, 5XX    | \*/\*            |
+| Error Type                    | Status Code | Content Type     |
+| ----------------------------- | ----------- | ---------------- |
+| apierrors.Error400            | 400         | application/json |
+| apierrors.Error401            | 401         | application/json |
+| apierrors.Error403            | 403         | application/json |
+| apierrors.Error404            | 404         | application/json |
+| apierrors.Error405            | 405         | application/json |
+| apierrors.Error409            | 409         | application/json |
+| apierrors.HTTPValidationError | 422         | application/json |
+| apierrors.Error425            | 425         | application/json |
+| apierrors.Error429            | 429         | application/json |
+| apierrors.Error500            | 500         | application/json |
+| apierrors.Error502            | 502         | application/json |
+| apierrors.Error504            | 504         | application/json |
+| apierrors.APIError            | 4XX, 5XX    | \*/\*            |
 
 ### Example
 
@@ -523,7 +523,7 @@ func main() {
 			log.Fatal(e.Error())
 		}
 
-		var e *apierrors.Response403CreateAccountUpdaterJob
+		var e *apierrors.Error403
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())

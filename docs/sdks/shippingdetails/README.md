@@ -78,21 +78,21 @@ func main() {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| apierrors.Error400                           | 400                                          | application/json                             |
-| apierrors.Error401                           | 401                                          | application/json                             |
-| apierrors.Response403AddBuyerShippingDetails | 403                                          | application/json                             |
-| apierrors.Error404                           | 404                                          | application/json                             |
-| apierrors.Error405                           | 405                                          | application/json                             |
-| apierrors.Error409                           | 409                                          | application/json                             |
-| apierrors.HTTPValidationError                | 422                                          | application/json                             |
-| apierrors.Error425                           | 425                                          | application/json                             |
-| apierrors.Error429                           | 429                                          | application/json                             |
-| apierrors.Error500                           | 500                                          | application/json                             |
-| apierrors.Error502                           | 502                                          | application/json                             |
-| apierrors.Error504                           | 504                                          | application/json                             |
-| apierrors.APIError                           | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.Error400            | 400                           | application/json              |
+| apierrors.Error401            | 401                           | application/json              |
+| apierrors.Error403            | 403                           | application/json              |
+| apierrors.Error404            | 404                           | application/json              |
+| apierrors.Error405            | 405                           | application/json              |
+| apierrors.Error409            | 409                           | application/json              |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.Error425            | 425                           | application/json              |
+| apierrors.Error429            | 429                           | application/json              |
+| apierrors.Error500            | 500                           | application/json              |
+| apierrors.Error502            | 502                           | application/json              |
+| apierrors.Error504            | 504                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
 ## List
 
@@ -142,21 +142,21 @@ func main() {
 
 ### Errors
 
-| Error Type                                    | Status Code                                   | Content Type                                  |
-| --------------------------------------------- | --------------------------------------------- | --------------------------------------------- |
-| apierrors.Error400                            | 400                                           | application/json                              |
-| apierrors.Error401                            | 401                                           | application/json                              |
-| apierrors.Response403ListBuyerShippingDetails | 403                                           | application/json                              |
-| apierrors.Error404                            | 404                                           | application/json                              |
-| apierrors.Error405                            | 405                                           | application/json                              |
-| apierrors.Error409                            | 409                                           | application/json                              |
-| apierrors.HTTPValidationError                 | 422                                           | application/json                              |
-| apierrors.Error425                            | 425                                           | application/json                              |
-| apierrors.Error429                            | 429                                           | application/json                              |
-| apierrors.Error500                            | 500                                           | application/json                              |
-| apierrors.Error502                            | 502                                           | application/json                              |
-| apierrors.Error504                            | 504                                           | application/json                              |
-| apierrors.APIError                            | 4XX, 5XX                                      | \*/\*                                         |
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.Error400            | 400                           | application/json              |
+| apierrors.Error401            | 401                           | application/json              |
+| apierrors.Error403            | 403                           | application/json              |
+| apierrors.Error404            | 404                           | application/json              |
+| apierrors.Error405            | 405                           | application/json              |
+| apierrors.Error409            | 409                           | application/json              |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.Error425            | 425                           | application/json              |
+| apierrors.Error429            | 429                           | application/json              |
+| apierrors.Error500            | 500                           | application/json              |
+| apierrors.Error502            | 502                           | application/json              |
+| apierrors.Error504            | 504                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
 ## Get
 
@@ -207,21 +207,21 @@ func main() {
 
 ### Errors
 
-| Error Type                                   | Status Code                                  | Content Type                                 |
-| -------------------------------------------- | -------------------------------------------- | -------------------------------------------- |
-| apierrors.Error400                           | 400                                          | application/json                             |
-| apierrors.Error401                           | 401                                          | application/json                             |
-| apierrors.Response403GetBuyerShippingDetails | 403                                          | application/json                             |
-| apierrors.Error404                           | 404                                          | application/json                             |
-| apierrors.Error405                           | 405                                          | application/json                             |
-| apierrors.Error409                           | 409                                          | application/json                             |
-| apierrors.HTTPValidationError                | 422                                          | application/json                             |
-| apierrors.Error425                           | 425                                          | application/json                             |
-| apierrors.Error429                           | 429                                          | application/json                             |
-| apierrors.Error500                           | 500                                          | application/json                             |
-| apierrors.Error502                           | 502                                          | application/json                             |
-| apierrors.Error504                           | 504                                          | application/json                             |
-| apierrors.APIError                           | 4XX, 5XX                                     | \*/\*                                        |
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.Error400            | 400                           | application/json              |
+| apierrors.Error401            | 401                           | application/json              |
+| apierrors.Error403            | 403                           | application/json              |
+| apierrors.Error404            | 404                           | application/json              |
+| apierrors.Error405            | 405                           | application/json              |
+| apierrors.Error409            | 409                           | application/json              |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.Error425            | 425                           | application/json              |
+| apierrors.Error429            | 429                           | application/json              |
+| apierrors.Error500            | 500                           | application/json              |
+| apierrors.Error502            | 502                           | application/json              |
+| apierrors.Error504            | 504                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
 ## Update
 
@@ -292,21 +292,21 @@ func main() {
 
 ### Errors
 
-| Error Type                                      | Status Code                                     | Content Type                                    |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| apierrors.Error400                              | 400                                             | application/json                                |
-| apierrors.Error401                              | 401                                             | application/json                                |
-| apierrors.Response403UpdateBuyerShippingDetails | 403                                             | application/json                                |
-| apierrors.Error404                              | 404                                             | application/json                                |
-| apierrors.Error405                              | 405                                             | application/json                                |
-| apierrors.Error409                              | 409                                             | application/json                                |
-| apierrors.HTTPValidationError                   | 422                                             | application/json                                |
-| apierrors.Error425                              | 425                                             | application/json                                |
-| apierrors.Error429                              | 429                                             | application/json                                |
-| apierrors.Error500                              | 500                                             | application/json                                |
-| apierrors.Error502                              | 502                                             | application/json                                |
-| apierrors.Error504                              | 504                                             | application/json                                |
-| apierrors.APIError                              | 4XX, 5XX                                        | \*/\*                                           |
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.Error400            | 400                           | application/json              |
+| apierrors.Error401            | 401                           | application/json              |
+| apierrors.Error403            | 403                           | application/json              |
+| apierrors.Error404            | 404                           | application/json              |
+| apierrors.Error405            | 405                           | application/json              |
+| apierrors.Error409            | 409                           | application/json              |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.Error425            | 425                           | application/json              |
+| apierrors.Error429            | 429                           | application/json              |
+| apierrors.Error500            | 500                           | application/json              |
+| apierrors.Error502            | 502                           | application/json              |
+| apierrors.Error504            | 504                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
 
 ## Delete
 
@@ -358,18 +358,18 @@ func main() {
 
 ### Errors
 
-| Error Type                                      | Status Code                                     | Content Type                                    |
-| ----------------------------------------------- | ----------------------------------------------- | ----------------------------------------------- |
-| apierrors.Error400                              | 400                                             | application/json                                |
-| apierrors.Error401                              | 401                                             | application/json                                |
-| apierrors.Response403DeleteBuyerShippingDetails | 403                                             | application/json                                |
-| apierrors.Error404                              | 404                                             | application/json                                |
-| apierrors.Error405                              | 405                                             | application/json                                |
-| apierrors.Error409                              | 409                                             | application/json                                |
-| apierrors.HTTPValidationError                   | 422                                             | application/json                                |
-| apierrors.Error425                              | 425                                             | application/json                                |
-| apierrors.Error429                              | 429                                             | application/json                                |
-| apierrors.Error500                              | 500                                             | application/json                                |
-| apierrors.Error502                              | 502                                             | application/json                                |
-| apierrors.Error504                              | 504                                             | application/json                                |
-| apierrors.APIError                              | 4XX, 5XX                                        | \*/\*                                           |
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.Error400            | 400                           | application/json              |
+| apierrors.Error401            | 401                           | application/json              |
+| apierrors.Error403            | 403                           | application/json              |
+| apierrors.Error404            | 404                           | application/json              |
+| apierrors.Error405            | 405                           | application/json              |
+| apierrors.Error409            | 409                           | application/json              |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.Error425            | 425                           | application/json              |
+| apierrors.Error429            | 429                           | application/json              |
+| apierrors.Error500            | 500                           | application/json              |
+| apierrors.Error502            | 502                           | application/json              |
+| apierrors.Error504            | 504                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |

@@ -1,4 +1,4 @@
-# Error403Forbidden
+# Error403
 
 
 ## Fields
@@ -10,3 +10,4 @@
 | `Status`                                                           | **int64*                                                           | :heavy_minus_sign:                                                 | Always `403`.                                                      | 403                                                                |
 | `Message`                                                          | *string*                                                           | :heavy_check_mark:                                                 | A human readable message that provides more context to the error.  | Request failed validation                                          |
 | `Details`                                                          | [][components.ErrorDetail](../../models/components/errordetail.md) | :heavy_minus_sign:                                                 | A list of details that further ellaborate on the error.            |                                                                    |
+| `HTTPMeta`                                                         | [components.HTTPMetadata](../../models/components/httpmetadata.md) | :heavy_check_mark:                                                 | N/A                                                                |                                                                    |

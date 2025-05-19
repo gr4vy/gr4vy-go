@@ -284,11 +284,15 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			var out apierrors.Response403AddBuyerShippingDetails
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -798,11 +802,15 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			var out apierrors.Response403ListBuyerShippingDetails
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1313,11 +1321,15 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			var out apierrors.Response403GetBuyerShippingDetails
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1827,11 +1839,15 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			var out apierrors.Response403UpdateBuyerShippingDetails
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2341,11 +2357,15 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			var out apierrors.Response403DeleteBuyerShippingDetails
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

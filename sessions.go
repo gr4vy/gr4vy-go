@@ -279,11 +279,15 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			var out apierrors.Response403CreateGooglePayDigitalWalletSession
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -794,11 +798,15 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			var out apierrors.Response403CreateApplePayDigitalWalletSession
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1298,11 +1306,15 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			var out apierrors.Response403CreateClickToPayDigitalWalletSession
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

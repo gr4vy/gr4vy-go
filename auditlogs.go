@@ -326,11 +326,15 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			var out apierrors.Response403ListAuditLogs
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

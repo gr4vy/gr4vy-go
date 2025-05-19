@@ -283,11 +283,15 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			var out apierrors.Response403GetGiftCard
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -796,11 +800,15 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			var out apierrors.Response403DeleteGiftCard
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1316,11 +1324,15 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			var out apierrors.Response403CreateGiftCard
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1875,11 +1887,15 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			var out apierrors.Response403ListGiftCards
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

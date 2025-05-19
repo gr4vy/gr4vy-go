@@ -319,11 +319,15 @@ func (s *PaymentServiceDefinitions) List(ctx context.Context, cursor *string, li
 				return nil, err
 			}
 
-			var out apierrors.Response403ListPaymentServiceDefinitions
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -826,11 +830,15 @@ func (s *PaymentServiceDefinitions) Get(ctx context.Context, paymentServiceDefin
 				return nil, err
 			}
 
-			var out apierrors.Response403GetPaymentServiceDefinition
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1335,11 +1343,15 @@ func (s *PaymentServiceDefinitions) Session(ctx context.Context, paymentServiceD
 				return nil, err
 			}
 
-			var out apierrors.Response403CreatePaymentServiceDefinitionSession
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

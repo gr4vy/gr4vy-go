@@ -277,11 +277,15 @@ func (s *Refunds) Get(ctx context.Context, refundID string, merchantAccountID *s
 				return nil, err
 			}
 
-			var out apierrors.Response403GetRefund
+			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
+			out.HTTPMeta = components.HTTPMetadata{
+				Request:  req,
+				Response: httpRes,
+			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
