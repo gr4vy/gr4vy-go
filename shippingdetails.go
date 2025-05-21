@@ -27,7 +27,7 @@ func newShippingDetails(sdkConfig sdkConfiguration) *ShippingDetails {
 
 // Create - Add buyer shipping details
 // Associate shipping details to a buyer.
-func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDetailsCreate components.ShippingDetailsCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.AddBuyerShippingDetailsResponse, error) {
+func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDetailsCreate components.ShippingDetailsCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.ShippingDetails, error) {
 	request := operations.AddBuyerShippingDetailsRequest{
 		BuyerID:               buyerID,
 		TimeoutInSeconds:      timeoutInSeconds,
@@ -197,13 +197,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 		}
 	}
 
-	res := &operations.AddBuyerShippingDetailsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 201:
 		switch {
@@ -218,7 +211,7 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			res.ShippingDetails = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -239,10 +232,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -264,10 +253,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -289,10 +274,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -314,10 +295,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -339,10 +316,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -364,10 +337,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -389,10 +358,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -414,10 +379,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -439,10 +400,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -464,10 +421,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -489,10 +442,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -514,10 +463,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -546,13 +491,13 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // List a buyer's shipping details
 // List all the shipping details associated to a specific buyer.
-func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAccountID *string, opts ...operations.Option) (*operations.ListBuyerShippingDetailsResponse, error) {
+func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorShippingDetails, error) {
 	request := operations.ListBuyerShippingDetailsRequest{
 		BuyerID:           buyerID,
 		MerchantAccountID: merchantAccountID,
@@ -715,13 +660,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 		}
 	}
 
-	res := &operations.ListBuyerShippingDetailsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -736,7 +674,7 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			res.CollectionNoCursorShippingDetails = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -757,10 +695,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -782,10 +716,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -807,10 +737,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -832,10 +758,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -857,10 +779,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -882,10 +800,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -907,10 +821,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -932,10 +842,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -957,10 +863,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -982,10 +884,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1007,10 +905,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1032,10 +926,6 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1064,13 +954,13 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Get buyer shipping details
 // Get a buyer's shipping details.
-func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetailsID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetBuyerShippingDetailsResponse, error) {
+func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetailsID string, merchantAccountID *string, opts ...operations.Option) (*components.ShippingDetails, error) {
 	request := operations.GetBuyerShippingDetailsRequest{
 		BuyerID:           buyerID,
 		ShippingDetailsID: shippingDetailsID,
@@ -1234,13 +1124,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 		}
 	}
 
-	res := &operations.GetBuyerShippingDetailsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1255,7 +1138,7 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			res.ShippingDetails = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1276,10 +1159,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1301,10 +1180,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1326,10 +1201,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1351,10 +1222,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1376,10 +1243,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1401,10 +1264,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1426,10 +1285,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1451,10 +1306,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1476,10 +1327,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1501,10 +1348,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1526,10 +1369,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1551,10 +1390,6 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1583,13 +1418,13 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Update a buyer's shipping details
 // Update the shipping details associated to a specific buyer.
-func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateBuyerShippingDetailsRequest, opts ...operations.Option) (*operations.UpdateBuyerShippingDetailsResponse, error) {
+func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateBuyerShippingDetailsRequest, opts ...operations.Option) (*components.ShippingDetails, error) {
 	globals := operations.UpdateBuyerShippingDetailsGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
@@ -1752,13 +1587,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 		}
 	}
 
-	res := &operations.UpdateBuyerShippingDetailsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1773,7 +1601,7 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			res.ShippingDetails = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1794,10 +1622,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1819,10 +1643,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1844,10 +1664,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1869,10 +1685,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1894,10 +1706,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1919,10 +1727,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1944,10 +1748,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1969,10 +1769,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1994,10 +1790,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2019,10 +1811,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2044,10 +1832,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2069,10 +1853,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2101,13 +1881,13 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Delete a buyer's shipping details
 // Delete the shipping details associated to a specific buyer.
-func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDetailsID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.DeleteBuyerShippingDetailsResponse, error) {
+func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDetailsID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.DeleteBuyerShippingDetailsRequest{
 		BuyerID:           buyerID,
 		ShippingDetailsID: shippingDetailsID,
@@ -2270,13 +2050,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 		}
 	}
 
-	res := &operations.DeleteBuyerShippingDetailsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -2291,7 +2064,7 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			res.Any = out
+			return out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2312,10 +2085,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2337,10 +2106,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2362,10 +2127,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2387,10 +2148,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2412,10 +2169,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2437,10 +2190,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2462,10 +2211,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2487,10 +2232,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2512,10 +2253,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2537,10 +2274,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2562,10 +2295,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2587,10 +2316,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2619,6 +2344,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

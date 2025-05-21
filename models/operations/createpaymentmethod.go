@@ -20,76 +20,76 @@ func (o *CreatePaymentMethodGlobals) GetMerchantAccountID() *string {
 	return o.MerchantAccountID
 }
 
-type CreatePaymentMethodBodyType string
+type BodyType string
 
 const (
-	CreatePaymentMethodBodyTypeCardPaymentMethodCreate            CreatePaymentMethodBodyType = "CardPaymentMethodCreate"
-	CreatePaymentMethodBodyTypeRedirectPaymentMethodCreate        CreatePaymentMethodBodyType = "RedirectPaymentMethodCreate"
-	CreatePaymentMethodBodyTypeCheckoutSessionPaymentMethodCreate CreatePaymentMethodBodyType = "CheckoutSessionPaymentMethodCreate"
+	BodyTypeCardPaymentMethodCreate            BodyType = "CardPaymentMethodCreate"
+	BodyTypeRedirectPaymentMethodCreate        BodyType = "RedirectPaymentMethodCreate"
+	BodyTypeCheckoutSessionPaymentMethodCreate BodyType = "CheckoutSessionPaymentMethodCreate"
 )
 
-type CreatePaymentMethodBody struct {
+type Body struct {
 	CardPaymentMethodCreate            *components.CardPaymentMethodCreate            `queryParam:"inline"`
 	RedirectPaymentMethodCreate        *components.RedirectPaymentMethodCreate        `queryParam:"inline"`
 	CheckoutSessionPaymentMethodCreate *components.CheckoutSessionPaymentMethodCreate `queryParam:"inline"`
 
-	Type CreatePaymentMethodBodyType
+	Type BodyType
 }
 
-func CreateCreatePaymentMethodBodyCardPaymentMethodCreate(cardPaymentMethodCreate components.CardPaymentMethodCreate) CreatePaymentMethodBody {
-	typ := CreatePaymentMethodBodyTypeCardPaymentMethodCreate
+func CreateBodyCardPaymentMethodCreate(cardPaymentMethodCreate components.CardPaymentMethodCreate) Body {
+	typ := BodyTypeCardPaymentMethodCreate
 
-	return CreatePaymentMethodBody{
+	return Body{
 		CardPaymentMethodCreate: &cardPaymentMethodCreate,
 		Type:                    typ,
 	}
 }
 
-func CreateCreatePaymentMethodBodyRedirectPaymentMethodCreate(redirectPaymentMethodCreate components.RedirectPaymentMethodCreate) CreatePaymentMethodBody {
-	typ := CreatePaymentMethodBodyTypeRedirectPaymentMethodCreate
+func CreateBodyRedirectPaymentMethodCreate(redirectPaymentMethodCreate components.RedirectPaymentMethodCreate) Body {
+	typ := BodyTypeRedirectPaymentMethodCreate
 
-	return CreatePaymentMethodBody{
+	return Body{
 		RedirectPaymentMethodCreate: &redirectPaymentMethodCreate,
 		Type:                        typ,
 	}
 }
 
-func CreateCreatePaymentMethodBodyCheckoutSessionPaymentMethodCreate(checkoutSessionPaymentMethodCreate components.CheckoutSessionPaymentMethodCreate) CreatePaymentMethodBody {
-	typ := CreatePaymentMethodBodyTypeCheckoutSessionPaymentMethodCreate
+func CreateBodyCheckoutSessionPaymentMethodCreate(checkoutSessionPaymentMethodCreate components.CheckoutSessionPaymentMethodCreate) Body {
+	typ := BodyTypeCheckoutSessionPaymentMethodCreate
 
-	return CreatePaymentMethodBody{
+	return Body{
 		CheckoutSessionPaymentMethodCreate: &checkoutSessionPaymentMethodCreate,
 		Type:                               typ,
 	}
 }
 
-func (u *CreatePaymentMethodBody) UnmarshalJSON(data []byte) error {
+func (u *Body) UnmarshalJSON(data []byte) error {
 
 	var checkoutSessionPaymentMethodCreate components.CheckoutSessionPaymentMethodCreate = components.CheckoutSessionPaymentMethodCreate{}
 	if err := utils.UnmarshalJSON(data, &checkoutSessionPaymentMethodCreate, "", true, true); err == nil {
 		u.CheckoutSessionPaymentMethodCreate = &checkoutSessionPaymentMethodCreate
-		u.Type = CreatePaymentMethodBodyTypeCheckoutSessionPaymentMethodCreate
+		u.Type = BodyTypeCheckoutSessionPaymentMethodCreate
 		return nil
 	}
 
 	var redirectPaymentMethodCreate components.RedirectPaymentMethodCreate = components.RedirectPaymentMethodCreate{}
 	if err := utils.UnmarshalJSON(data, &redirectPaymentMethodCreate, "", true, true); err == nil {
 		u.RedirectPaymentMethodCreate = &redirectPaymentMethodCreate
-		u.Type = CreatePaymentMethodBodyTypeRedirectPaymentMethodCreate
+		u.Type = BodyTypeRedirectPaymentMethodCreate
 		return nil
 	}
 
 	var cardPaymentMethodCreate components.CardPaymentMethodCreate = components.CardPaymentMethodCreate{}
 	if err := utils.UnmarshalJSON(data, &cardPaymentMethodCreate, "", true, true); err == nil {
 		u.CardPaymentMethodCreate = &cardPaymentMethodCreate
-		u.Type = CreatePaymentMethodBodyTypeCardPaymentMethodCreate
+		u.Type = BodyTypeCardPaymentMethodCreate
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreatePaymentMethodBody", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Body", string(data))
 }
 
-func (u CreatePaymentMethodBody) MarshalJSON() ([]byte, error) {
+func (u Body) MarshalJSON() ([]byte, error) {
 	if u.CardPaymentMethodCreate != nil {
 		return utils.MarshalJSON(u.CardPaymentMethodCreate, "", true)
 	}
@@ -102,14 +102,14 @@ func (u CreatePaymentMethodBody) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.CheckoutSessionPaymentMethodCreate, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type CreatePaymentMethodBody: all fields are null")
+	return nil, errors.New("could not marshal union type Body: all fields are null")
 }
 
 type CreatePaymentMethodRequest struct {
 	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
-	MerchantAccountID *string                 `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-	RequestBody       CreatePaymentMethodBody `request:"mediaType=application/json"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	RequestBody       Body    `request:"mediaType=application/json"`
 }
 
 func (c CreatePaymentMethodRequest) MarshalJSON() ([]byte, error) {
@@ -137,29 +137,9 @@ func (o *CreatePaymentMethodRequest) GetMerchantAccountID() *string {
 	return o.MerchantAccountID
 }
 
-func (o *CreatePaymentMethodRequest) GetRequestBody() CreatePaymentMethodBody {
+func (o *CreatePaymentMethodRequest) GetRequestBody() Body {
 	if o == nil {
-		return CreatePaymentMethodBody{}
+		return Body{}
 	}
 	return o.RequestBody
-}
-
-type CreatePaymentMethodResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	PaymentMethod *components.PaymentMethod
-}
-
-func (o *CreatePaymentMethodResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreatePaymentMethodResponse) GetPaymentMethod() *components.PaymentMethod {
-	if o == nil {
-		return nil
-	}
-	return o.PaymentMethod
 }

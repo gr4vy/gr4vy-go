@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/models/components"
-)
-
 type CreatePaymentServiceSessionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -44,24 +40,4 @@ func (o *CreatePaymentServiceSessionRequest) GetRequestBody() map[string]any {
 		return map[string]any{}
 	}
 	return o.RequestBody
-}
-
-type CreatePaymentServiceSessionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CreateSession *components.CreateSession
-}
-
-func (o *CreatePaymentServiceSessionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreatePaymentServiceSessionResponse) GetCreateSession() *components.CreateSession {
-	if o == nil {
-		return nil
-	}
-	return o.CreateSession
 }

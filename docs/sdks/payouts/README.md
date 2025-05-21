@@ -36,7 +36,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionPayoutSummary != nil {
+    if res != nil {
         for {
             // handle items
 
@@ -112,7 +112,7 @@ func main() {
 
     res, err := s.Payouts.Create(ctx, components.PayoutCreate{
         Amount: 1299,
-        Currency: "USD",
+        Currency: "EUR",
         PaymentServiceID: "ed8bd87d-85ad-40cf-8e8f-007e21e55aad",
         PaymentMethod: components.CreatePayoutCreatePaymentMethodPaymentMethodStoredCard(
             components.PaymentMethodStoredCard{
@@ -168,7 +168,7 @@ func main() {
         Merchant: &components.PayoutMerchant{
             Name: "Acme Inc",
             IdentificationNumber: "12345",
-            PhoneNumber: "+442071838750",
+            PhoneNumber: "+14155552671",
             URL: "https://example.com",
             StatementDescriptor: "Winnings",
             MerchantCategoryCode: "123456",
@@ -194,7 +194,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.PayoutSummary != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -212,7 +212,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreatePayoutResponse](../../models/operations/createpayoutresponse.md), error**
+**[*components.PayoutSummary](../../models/components/payoutsummary.md), error**
 
 ### Errors
 
@@ -259,7 +259,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.PayoutSummary != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -276,7 +276,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetPayoutResponse](../../models/operations/getpayoutresponse.md), error**
+**[*components.PayoutSummary](../../models/components/payoutsummary.md), error**
 
 ### Errors
 

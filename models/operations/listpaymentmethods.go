@@ -95,23 +95,14 @@ func (o *ListPaymentMethodsRequest) GetMerchantAccountID() *string {
 }
 
 type ListPaymentMethodsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionPaymentMethod *components.CollectionPaymentMethod
+	Result components.CollectionPaymentMethod
 
 	Next func() (*ListPaymentMethodsResponse, error)
 }
 
-func (o *ListPaymentMethodsResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *ListPaymentMethodsResponse) GetResult() components.CollectionPaymentMethod {
 	if o == nil {
-		return components.HTTPMetadata{}
+		return components.CollectionPaymentMethod{}
 	}
-	return o.HTTPMeta
-}
-
-func (o *ListPaymentMethodsResponse) GetCollectionPaymentMethod() *components.CollectionPaymentMethod {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionPaymentMethod
+	return o.Result
 }

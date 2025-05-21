@@ -74,23 +74,3 @@ func (o *CreatePaymentMethodNetworkTokenCryptogramRequest) GetCryptogramCreate()
 	}
 	return o.CryptogramCreate
 }
-
-type CreatePaymentMethodNetworkTokenCryptogramResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	Cryptogram *components.Cryptogram
-}
-
-func (o *CreatePaymentMethodNetworkTokenCryptogramResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreatePaymentMethodNetworkTokenCryptogramResponse) GetCryptogram() *components.Cryptogram {
-	if o == nil {
-		return nil
-	}
-	return o.Cryptogram
-}

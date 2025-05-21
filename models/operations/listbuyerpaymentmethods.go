@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
-	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/types"
 )
 
@@ -103,24 +102,4 @@ func (o *ListBuyerPaymentMethodsRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return o.MerchantAccountID
-}
-
-type ListBuyerPaymentMethodsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionNoCursorPaymentMethodSummary *components.CollectionNoCursorPaymentMethodSummary
-}
-
-func (o *ListBuyerPaymentMethodsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *ListBuyerPaymentMethodsResponse) GetCollectionNoCursorPaymentMethodSummary() *components.CollectionNoCursorPaymentMethodSummary {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionNoCursorPaymentMethodSummary
 }

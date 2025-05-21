@@ -37,7 +37,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.GiftCard != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -54,7 +54,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetGiftCardResponse](../../models/operations/getgiftcardresponse.md), error**
+**[*components.GiftCard](../../models/components/giftcard.md), error**
 
 ### Errors
 
@@ -101,7 +101,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Any != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -119,7 +119,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteGiftCardResponse](../../models/operations/deletegiftcardresponse.md), error**
+**[any](../../.md), error**
 
 ### Errors
 
@@ -172,7 +172,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.GiftCard != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -190,7 +190,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateGiftCardResponse](../../models/operations/creategiftcardresponse.md), error**
+**[*components.GiftCard](../../models/components/giftcard.md), error**
 
 ### Errors
 
@@ -238,7 +238,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionGiftCard != nil {
+    if res != nil {
         for {
             // handle items
 

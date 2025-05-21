@@ -28,7 +28,7 @@ func newSessions(sdkConfig sdkConfiguration) *Sessions {
 
 // GooglePay - Create a Google Pay session
 // Create a session for use with Google Pay.
-func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest components.GooglePaySessionRequest, merchantAccountID *string, opts ...operations.Option) (*operations.CreateGooglePayDigitalWalletSessionResponse, error) {
+func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest components.GooglePaySessionRequest, merchantAccountID *string, opts ...operations.Option) (*components.GooglePaySession, error) {
 	request := operations.CreateGooglePayDigitalWalletSessionRequest{
 		MerchantAccountID:       merchantAccountID,
 		GooglePaySessionRequest: googlePaySessionRequest,
@@ -192,13 +192,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 		}
 	}
 
-	res := &operations.CreateGooglePayDigitalWalletSessionResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -213,7 +206,7 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			res.GooglePaySession = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -234,10 +227,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -259,10 +248,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -284,10 +269,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -309,10 +290,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -334,10 +311,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -359,10 +332,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -384,10 +353,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -409,10 +374,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -434,10 +395,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -459,10 +416,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -484,10 +437,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -509,10 +458,6 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -541,13 +486,13 @@ func (s *Sessions) GooglePay(ctx context.Context, googlePaySessionRequest compon
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // ApplePay - Create a Apple Pay session
 // Create a session for use with Apple Pay.
-func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest components.ApplePaySessionRequest, merchantAccountID *string, opts ...operations.Option) (*operations.CreateApplePayDigitalWalletSessionResponse, error) {
+func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest components.ApplePaySessionRequest, merchantAccountID *string, opts ...operations.Option) (map[string]any, error) {
 	request := operations.CreateApplePayDigitalWalletSessionRequest{
 		MerchantAccountID:      merchantAccountID,
 		ApplePaySessionRequest: applePaySessionRequest,
@@ -711,13 +656,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 		}
 	}
 
-	res := &operations.CreateApplePayDigitalWalletSessionResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -732,7 +670,7 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			res.ApplePaySession = out
+			return out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -753,10 +691,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -778,10 +712,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -803,10 +733,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -828,10 +754,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -853,10 +775,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -878,10 +796,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -903,10 +817,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -928,10 +838,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -953,10 +859,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -978,10 +880,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1003,10 +901,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1028,10 +922,6 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1060,13 +950,13 @@ func (s *Sessions) ApplePay(ctx context.Context, applePaySessionRequest componen
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // ClickToPay - Create a Click to Pay session
 // Create a session for use with Click to Pay.
-func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPaySessionRequest, opts ...operations.Option) (*operations.CreateClickToPayDigitalWalletSessionResponse, error) {
+func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPaySessionRequest, opts ...operations.Option) (*components.ClickToPaySession, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -1219,13 +1109,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 		}
 	}
 
-	res := &operations.CreateClickToPayDigitalWalletSessionResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1240,7 +1123,7 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			res.ClickToPaySession = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1261,10 +1144,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1286,10 +1165,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1311,10 +1186,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1336,10 +1207,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1361,10 +1228,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1386,10 +1249,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1411,10 +1270,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1436,10 +1291,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1461,10 +1312,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1486,10 +1333,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1511,10 +1354,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1536,10 +1375,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1568,6 +1403,6 @@ func (s *Sessions) ClickToPay(ctx context.Context, request components.ClickToPay
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

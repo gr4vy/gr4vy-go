@@ -27,7 +27,7 @@ func newCryptogram(sdkConfig sdkConfiguration) *Cryptogram {
 
 // Create - Provision network token cryptogram
 // Provision a cryptogram for a network token.
-func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymentMethodNetworkTokenCryptogramRequest, opts ...operations.Option) (*operations.CreatePaymentMethodNetworkTokenCryptogramResponse, error) {
+func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymentMethodNetworkTokenCryptogramRequest, opts ...operations.Option) (*components.Cryptogram, error) {
 	globals := operations.CreatePaymentMethodNetworkTokenCryptogramGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
@@ -190,13 +190,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 		}
 	}
 
-	res := &operations.CreatePaymentMethodNetworkTokenCryptogramResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 201:
 		switch {
@@ -211,7 +204,7 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			res.Cryptogram = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -232,10 +225,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -257,10 +246,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -282,10 +267,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -307,10 +288,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -332,10 +309,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -357,10 +330,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -382,10 +351,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -407,10 +372,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -432,10 +393,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -457,10 +414,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -482,10 +435,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -507,10 +456,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -539,6 +484,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

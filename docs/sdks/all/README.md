@@ -38,7 +38,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionNoCursorRefund != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -57,7 +57,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateFullTransactionRefundResponse](../../models/operations/createfulltransactionrefundresponse.md), error**
+**[*components.CollectionNoCursorRefund](../../models/components/collectionnocursorrefund.md), error**
 
 ### Errors
 

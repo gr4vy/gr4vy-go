@@ -36,23 +36,3 @@ func (o *CreateMerchantAccountRequest) GetMerchantAccountCreate() components.Mer
 	}
 	return o.MerchantAccountCreate
 }
-
-type CreateMerchantAccountResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	MerchantAccount *components.MerchantAccount
-}
-
-func (o *CreateMerchantAccountResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreateMerchantAccountResponse) GetMerchantAccount() *components.MerchantAccount {
-	if o == nil {
-		return nil
-	}
-	return o.MerchantAccount
-}

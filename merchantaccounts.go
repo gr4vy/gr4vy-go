@@ -192,12 +192,7 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 		}
 	}
 
-	res := &operations.ListMerchantAccountsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
+	res := &operations.ListMerchantAccountsResponse{}
 	res.Next = func() (*operations.ListMerchantAccountsResponse, error) {
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
@@ -255,7 +250,7 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			res.CollectionMerchantAccount = &out
+			res.Result = out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -276,10 +271,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -301,10 +292,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -326,10 +313,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -351,10 +334,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -376,10 +355,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -401,10 +376,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -426,10 +397,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -451,10 +418,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -476,10 +439,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -501,10 +460,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -526,10 +481,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -551,10 +502,6 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -589,7 +536,7 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 
 // Create a merchant account
 // Create a new merchant account in an instance.
-func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate components.MerchantAccountCreate, timeoutInSeconds *float64, opts ...operations.Option) (*operations.CreateMerchantAccountResponse, error) {
+func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate components.MerchantAccountCreate, timeoutInSeconds *float64, opts ...operations.Option) (*components.MerchantAccount, error) {
 	request := operations.CreateMerchantAccountRequest{
 		TimeoutInSeconds:      timeoutInSeconds,
 		MerchantAccountCreate: merchantAccountCreate,
@@ -751,13 +698,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 		}
 	}
 
-	res := &operations.CreateMerchantAccountResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 201:
 		switch {
@@ -772,7 +712,7 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			res.MerchantAccount = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -793,10 +733,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -818,10 +754,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -843,10 +775,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -868,10 +796,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -893,10 +817,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -918,10 +838,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -943,10 +859,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -968,10 +880,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -993,10 +901,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1018,10 +922,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1043,10 +943,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1068,10 +964,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1100,13 +992,13 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Get a merchant account
 // Get info about a merchant account in an instance.
-func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, opts ...operations.Option) (*operations.GetMerchantAccountResponse, error) {
+func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, opts ...operations.Option) (*components.MerchantAccount, error) {
 	request := operations.GetMerchantAccountRequest{
 		MerchantAccountID: merchantAccountID,
 	}
@@ -1262,13 +1154,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 		}
 	}
 
-	res := &operations.GetMerchantAccountResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1283,7 +1168,7 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			res.MerchantAccount = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1304,10 +1189,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1329,10 +1210,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1354,10 +1231,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1379,10 +1252,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1404,10 +1273,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1429,10 +1294,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1454,10 +1315,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1479,10 +1336,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1504,10 +1357,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1529,10 +1378,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1554,10 +1399,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1579,10 +1420,6 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1611,13 +1448,13 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Update a merchant account
 // Update info for a merchant account in an instance.
-func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string, merchantAccountUpdate components.MerchantAccountUpdate, timeoutInSeconds *float64, opts ...operations.Option) (*operations.UpdateMerchantAccountResponse, error) {
+func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string, merchantAccountUpdate components.MerchantAccountUpdate, timeoutInSeconds *float64, opts ...operations.Option) (*components.MerchantAccount, error) {
 	request := operations.UpdateMerchantAccountRequest{
 		MerchantAccountID:     merchantAccountID,
 		TimeoutInSeconds:      timeoutInSeconds,
@@ -1780,13 +1617,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 		}
 	}
 
-	res := &operations.UpdateMerchantAccountResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1801,7 +1631,7 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			res.MerchantAccount = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1822,10 +1652,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1847,10 +1673,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1872,10 +1694,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1897,10 +1715,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1922,10 +1736,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1947,10 +1757,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1972,10 +1778,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1997,10 +1799,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2022,10 +1820,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2047,10 +1841,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2072,10 +1862,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2097,10 +1883,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2129,6 +1911,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

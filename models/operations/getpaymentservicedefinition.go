@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/models/components"
-)
-
 type GetPaymentServiceDefinitionRequest struct {
 	PaymentServiceDefinitionID string `pathParam:"style=simple,explode=false,name=payment_service_definition_id"`
 }
@@ -15,24 +11,4 @@ func (o *GetPaymentServiceDefinitionRequest) GetPaymentServiceDefinitionID() str
 		return ""
 	}
 	return o.PaymentServiceDefinitionID
-}
-
-type GetPaymentServiceDefinitionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	PaymentServiceDefinition *components.PaymentServiceDefinition
-}
-
-func (o *GetPaymentServiceDefinitionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *GetPaymentServiceDefinitionResponse) GetPaymentServiceDefinition() *components.PaymentServiceDefinition {
-	if o == nil {
-		return nil
-	}
-	return o.PaymentServiceDefinition
 }

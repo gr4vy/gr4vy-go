@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/models/components"
-)
-
 type ListDigitalWalletsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -27,24 +23,4 @@ func (o *ListDigitalWalletsRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return o.MerchantAccountID
-}
-
-type ListDigitalWalletsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionNoCursorDigitalWallet *components.CollectionNoCursorDigitalWallet
-}
-
-func (o *ListDigitalWalletsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *ListDigitalWalletsResponse) GetCollectionNoCursorDigitalWallet() *components.CollectionNoCursorDigitalWallet {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionNoCursorDigitalWallet
 }

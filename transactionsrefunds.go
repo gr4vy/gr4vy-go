@@ -30,7 +30,7 @@ func newTransactionsRefunds(sdkConfig sdkConfiguration) *TransactionsRefunds {
 
 // List transaction refunds
 // List refunds for a transaction.
-func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*operations.ListTransactionRefundsResponse, error) {
+func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.CollectionRefund, error) {
 	request := operations.ListTransactionRefundsRequest{
 		TransactionID:     transactionID,
 		MerchantAccountID: merchantAccountID,
@@ -193,13 +193,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 		}
 	}
 
-	res := &operations.ListTransactionRefundsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -214,7 +207,7 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			res.CollectionRefund = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -235,10 +228,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -260,10 +249,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -285,10 +270,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -310,10 +291,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -335,10 +312,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -360,10 +333,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -385,10 +354,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -410,10 +375,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -435,10 +396,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -460,10 +417,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -485,10 +438,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -510,10 +459,6 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -542,13 +487,13 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Create transaction refund
 // Create a refund for a transaction.
-func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, transactionRefundCreate components.TransactionRefundCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CreateTransactionRefundResponse, error) {
+func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, transactionRefundCreate components.TransactionRefundCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.Refund, error) {
 	request := operations.CreateTransactionRefundRequest{
 		TransactionID:           transactionID,
 		TimeoutInSeconds:        timeoutInSeconds,
@@ -718,13 +663,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 		}
 	}
 
-	res := &operations.CreateTransactionRefundResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 201:
 		switch {
@@ -739,7 +677,7 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			res.Refund = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -760,10 +698,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -785,10 +719,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -810,10 +740,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -835,10 +761,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -860,10 +782,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -885,10 +803,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -910,10 +824,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -935,10 +845,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -960,10 +866,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -985,10 +887,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1010,10 +908,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1035,10 +929,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1067,13 +957,13 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Get transaction refund
 // Fetch refund for a transaction.
-func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, refundID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetTransactionRefundResponse, error) {
+func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, refundID string, merchantAccountID *string, opts ...operations.Option) (*components.Refund, error) {
 	request := operations.GetTransactionRefundRequest{
 		TransactionID:     transactionID,
 		RefundID:          refundID,
@@ -1237,13 +1127,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 		}
 	}
 
-	res := &operations.GetTransactionRefundResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1258,7 +1141,7 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			res.Refund = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1279,10 +1162,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1304,10 +1183,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1329,10 +1204,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1354,10 +1225,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1379,10 +1246,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1404,10 +1267,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1429,10 +1288,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1454,10 +1309,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1479,10 +1330,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1504,10 +1351,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1529,10 +1372,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1554,10 +1393,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1586,6 +1421,6 @@ func (s *TransactionsRefunds) Get(ctx context.Context, transactionID string, ref
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

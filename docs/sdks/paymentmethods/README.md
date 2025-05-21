@@ -43,7 +43,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionPaymentMethod != nil {
+    if res != nil {
         for {
             // handle items
 
@@ -116,7 +116,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.Create(ctx, operations.CreateCreatePaymentMethodBodyCheckoutSessionPaymentMethodCreate(
+    res, err := s.PaymentMethods.Create(ctx, operations.CreateBodyCheckoutSessionPaymentMethodCreate(
         components.CheckoutSessionPaymentMethodCreate{
             ID: "4137b1cf-39ac-42a8-bad6-1c680d5dab6b",
             ExternalIdentifier: gr4vygo.String("card-12345"),
@@ -127,7 +127,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.PaymentMethod != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -135,17 +135,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                | Type                                                                                     | Required                                                                                 | Description                                                                              |
-| ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
-| `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
-| `requestBody`                                                                            | [operations.CreatePaymentMethodBody](../../models/operations/createpaymentmethodbody.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `timeoutInSeconds`                                                                       | **float64*                                                                               | :heavy_minus_sign:                                                                       | N/A                                                                                      |
-| `merchantAccountID`                                                                      | **string*                                                                                | :heavy_minus_sign:                                                                       | The ID of the merchant account to use for this request.                                  |
-| `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
+| `requestBody`                                            | [operations.Body](../../models/operations/body.md)       | :heavy_check_mark:                                       | N/A                                                      |
+| `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |
+| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
 ### Response
 
-**[*operations.CreatePaymentMethodResponse](../../models/operations/createpaymentmethodresponse.md), error**
+**[*components.PaymentMethod](../../models/components/paymentmethod.md), error**
 
 ### Errors
 
@@ -192,7 +192,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.PaymentMethod != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -209,7 +209,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetPaymentMethodResponse](../../models/operations/getpaymentmethodresponse.md), error**
+**[*components.PaymentMethod](../../models/components/paymentmethod.md), error**
 
 ### Errors
 
@@ -252,12 +252,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", nil)
+    err := s.PaymentMethods.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", nil)
     if err != nil {
         log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
     }
 }
 ```
@@ -273,7 +270,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeletePaymentMethodResponse](../../models/operations/deletepaymentmethodresponse.md), error**
+**error**
 
 ### Errors
 

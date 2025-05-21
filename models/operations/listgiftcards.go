@@ -74,23 +74,14 @@ func (o *ListGiftCardsRequest) GetMerchantAccountID() *string {
 }
 
 type ListGiftCardsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionGiftCard *components.CollectionGiftCard
+	Result components.CollectionGiftCard
 
 	Next func() (*ListGiftCardsResponse, error)
 }
 
-func (o *ListGiftCardsResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *ListGiftCardsResponse) GetResult() components.CollectionGiftCard {
 	if o == nil {
-		return components.HTTPMetadata{}
+		return components.CollectionGiftCard{}
 	}
-	return o.HTTPMeta
-}
-
-func (o *ListGiftCardsResponse) GetCollectionGiftCard() *components.CollectionGiftCard {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionGiftCard
+	return o.Result
 }

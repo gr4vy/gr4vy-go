@@ -65,23 +65,3 @@ func (o *RegisterDigitalWalletDomainRequest) GetDigitalWalletDomain() components
 	}
 	return o.DigitalWalletDomain
 }
-
-type RegisterDigitalWalletDomainResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	Any any
-}
-
-func (o *RegisterDigitalWalletDomainResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *RegisterDigitalWalletDomainResponse) GetAny() any {
-	if o == nil {
-		return nil
-	}
-	return o.Any
-}

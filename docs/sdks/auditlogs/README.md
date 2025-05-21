@@ -41,7 +41,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionAuditLogEntry != nil {
+    if res != nil {
         for {
             // handle items
 

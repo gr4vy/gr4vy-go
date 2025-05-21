@@ -78,23 +78,14 @@ func (o *ListBuyersRequest) GetMerchantAccountID() *string {
 }
 
 type ListBuyersResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionBuyer *components.CollectionBuyer
+	Result components.CollectionBuyer
 
 	Next func() (*ListBuyersResponse, error)
 }
 
-func (o *ListBuyersResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *ListBuyersResponse) GetResult() components.CollectionBuyer {
 	if o == nil {
-		return components.HTTPMetadata{}
+		return components.CollectionBuyer{}
 	}
-	return o.HTTPMeta
-}
-
-func (o *ListBuyersResponse) GetCollectionBuyer() *components.CollectionBuyer {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionBuyer
+	return o.Result
 }

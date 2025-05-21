@@ -26,7 +26,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.AccountUpdaterJob != nil {
+	if res != nil {
 		// handle response
 	}
 }

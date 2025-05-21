@@ -64,23 +64,3 @@ func (o *UnregisterDigitalWalletDomainRequest) GetDigitalWalletDomain() componen
 	}
 	return o.DigitalWalletDomain
 }
-
-type UnregisterDigitalWalletDomainResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	Any any
-}
-
-func (o *UnregisterDigitalWalletDomainResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *UnregisterDigitalWalletDomainResponse) GetAny() any {
-	if o == nil {
-		return nil
-	}
-	return o.Any
-}

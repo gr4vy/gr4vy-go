@@ -38,13 +38,13 @@ func main() {
     res, err := s.DigitalWallets.Create(ctx, components.DigitalWalletCreate{
         Provider: components.DigitalWalletProviderClickToPay,
         MerchantName: "<value>",
-        MerchantCountryCode: gr4vygo.String("US"),
+        MerchantCountryCode: gr4vygo.String("DE"),
         AcceptTermsAndConditions: false,
     }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
-    if res.DigitalWallet != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -62,7 +62,7 @@ func main() {
 
 ### Response
 
-**[*operations.ConfigureDigitalWalletResponse](../../models/operations/configuredigitalwalletresponse.md), error**
+**[*components.DigitalWallet](../../models/components/digitalwallet.md), error**
 
 ### Errors
 
@@ -109,7 +109,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionNoCursorDigitalWallet != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -125,7 +125,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListDigitalWalletsResponse](../../models/operations/listdigitalwalletsresponse.md), error**
+**[*components.CollectionNoCursorDigitalWallet](../../models/components/collectionnocursordigitalwallet.md), error**
 
 ### Errors
 
@@ -172,7 +172,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.DigitalWallet != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -189,7 +189,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetDigitalWalletResponse](../../models/operations/getdigitalwalletresponse.md), error**
+**[*components.DigitalWallet](../../models/components/digitalwallet.md), error**
 
 ### Errors
 
@@ -236,7 +236,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Any != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -254,7 +254,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteDigitalWalletResponse](../../models/operations/deletedigitalwalletresponse.md), error**
+**[any](../../.md), error**
 
 ### Errors
 
@@ -304,7 +304,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.DigitalWallet != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -323,7 +323,7 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateDigitalWalletResponse](../../models/operations/updatedigitalwalletresponse.md), error**
+**[*components.DigitalWallet](../../models/components/digitalwallet.md), error**
 
 ### Errors
 

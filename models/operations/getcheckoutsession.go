@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
-	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
 type GetCheckoutSessionGlobals struct {
@@ -56,24 +55,4 @@ func (o *GetCheckoutSessionRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return o.MerchantAccountID
-}
-
-type GetCheckoutSessionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CheckoutSession *components.CheckoutSession
-}
-
-func (o *GetCheckoutSessionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *GetCheckoutSessionResponse) GetCheckoutSession() *components.CheckoutSession {
-	if o == nil {
-		return nil
-	}
-	return o.CheckoutSession
 }

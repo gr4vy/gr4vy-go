@@ -36,23 +36,3 @@ func (o *CreateGooglePayDigitalWalletSessionRequest) GetGooglePaySessionRequest(
 	}
 	return o.GooglePaySessionRequest
 }
-
-type CreateGooglePayDigitalWalletSessionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	GooglePaySession *components.GooglePaySession
-}
-
-func (o *CreateGooglePayDigitalWalletSessionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreateGooglePayDigitalWalletSessionResponse) GetGooglePaySession() *components.GooglePaySession {
-	if o == nil {
-		return nil
-	}
-	return o.GooglePaySession
-}

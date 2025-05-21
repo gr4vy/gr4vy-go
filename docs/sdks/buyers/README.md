@@ -43,7 +43,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionBuyer != nil {
+    if res != nil {
         for {
             // handle items
 
@@ -143,7 +143,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Buyer != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -161,7 +161,7 @@ func main() {
 
 ### Response
 
-**[*operations.AddBuyerResponse](../../models/operations/addbuyerresponse.md), error**
+**[*components.Buyer](../../models/components/buyer.md), error**
 
 ### Errors
 
@@ -208,7 +208,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Buyer != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -225,7 +225,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetBuyerResponse](../../models/operations/getbuyerresponse.md), error**
+**[*components.Buyer](../../models/components/buyer.md), error**
 
 ### Errors
 
@@ -297,7 +297,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Buyer != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -316,7 +316,7 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateBuyerResponse](../../models/operations/updatebuyerresponse.md), error**
+**[*components.Buyer](../../models/components/buyer.md), error**
 
 ### Errors
 
@@ -359,12 +359,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil, nil)
+    err := s.Buyers.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil, nil)
     if err != nil {
         log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
     }
 }
 ```
@@ -381,7 +378,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteBuyerResponse](../../models/operations/deletebuyerresponse.md), error**
+**error**
 
 ### Errors
 

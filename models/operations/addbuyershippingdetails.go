@@ -65,23 +65,3 @@ func (o *AddBuyerShippingDetailsRequest) GetShippingDetailsCreate() components.S
 	}
 	return o.ShippingDetailsCreate
 }
-
-type AddBuyerShippingDetailsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	ShippingDetails *components.ShippingDetails
-}
-
-func (o *AddBuyerShippingDetailsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *AddBuyerShippingDetailsResponse) GetShippingDetails() *components.ShippingDetails {
-	if o == nil {
-		return nil
-	}
-	return o.ShippingDetails
-}

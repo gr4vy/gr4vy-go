@@ -55,7 +55,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.ShippingDetails != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -74,7 +74,7 @@ func main() {
 
 ### Response
 
-**[*operations.AddBuyerShippingDetailsResponse](../../models/operations/addbuyershippingdetailsresponse.md), error**
+**[*components.ShippingDetails](../../models/components/shippingdetails.md), error**
 
 ### Errors
 
@@ -121,7 +121,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionNoCursorShippingDetails != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -138,7 +138,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListBuyerShippingDetailsResponse](../../models/operations/listbuyershippingdetailsresponse.md), error**
+**[*components.CollectionNoCursorShippingDetails](../../models/components/collectionnocursorshippingdetails.md), error**
 
 ### Errors
 
@@ -185,7 +185,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.ShippingDetails != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -203,7 +203,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetBuyerShippingDetailsResponse](../../models/operations/getbuyershippingdetailsresponse.md), error**
+**[*components.ShippingDetails](../../models/components/shippingdetails.md), error**
 
 ### Errors
 
@@ -272,7 +272,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.ShippingDetails != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -288,7 +288,7 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateBuyerShippingDetailsResponse](../../models/operations/updatebuyershippingdetailsresponse.md), error**
+**[*components.ShippingDetails](../../models/components/shippingdetails.md), error**
 
 ### Errors
 
@@ -335,7 +335,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Any != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -354,7 +354,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteBuyerShippingDetailsResponse](../../models/operations/deletebuyershippingdetailsresponse.md), error**
+**[any](../../.md), error**
 
 ### Errors
 

@@ -36,7 +36,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionRefund != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -53,7 +53,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListTransactionRefundsResponse](../../models/operations/listtransactionrefundsresponse.md), error**
+**[*components.CollectionRefund](../../models/components/collectionrefund.md), error**
 
 ### Errors
 
@@ -106,7 +106,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Refund != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -125,7 +125,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateTransactionRefundResponse](../../models/operations/createtransactionrefundresponse.md), error**
+**[*components.Refund](../../models/components/refund.md), error**
 
 ### Errors
 
@@ -172,7 +172,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Refund != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -190,7 +190,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetTransactionRefundResponse](../../models/operations/gettransactionrefundresponse.md), error**
+**[*components.Refund](../../models/components/refund.md), error**
 
 ### Errors
 

@@ -56,23 +56,3 @@ func (o *VerifyPaymentServiceCredentialsRequest) GetVerifyCredentials() componen
 	}
 	return o.VerifyCredentials
 }
-
-type VerifyPaymentServiceCredentialsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	Any any
-}
-
-func (o *VerifyPaymentServiceCredentialsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *VerifyPaymentServiceCredentialsResponse) GetAny() any {
-	if o == nil {
-		return nil
-	}
-	return o.Any
-}

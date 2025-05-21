@@ -366,23 +366,14 @@ func (o *ListTransactionsRequest) GetMerchantAccountID() *string {
 }
 
 type ListTransactionsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionTransactionSummary *components.CollectionTransactionSummary
+	Result components.CollectionTransactionSummary
 
 	Next func() (*ListTransactionsResponse, error)
 }
 
-func (o *ListTransactionsResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *ListTransactionsResponse) GetResult() components.CollectionTransactionSummary {
 	if o == nil {
-		return components.HTTPMetadata{}
+		return components.CollectionTransactionSummary{}
 	}
-	return o.HTTPMeta
-}
-
-func (o *ListTransactionsResponse) GetCollectionTransactionSummary() *components.CollectionTransactionSummary {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionTransactionSummary
+	return o.Result
 }

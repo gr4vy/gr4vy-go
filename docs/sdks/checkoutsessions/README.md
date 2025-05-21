@@ -24,7 +24,7 @@ import(
 	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
-	"github.com/gr4vy/gr4vy-go/models/operations"
+	"github.com/gr4vy/gr4vy-go/types"
 	"log"
 )
 
@@ -35,16 +35,129 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Create(ctx, nil, nil, gr4vygo.Pointer(operations.CreateCreateCheckoutSessionBodyArrayOfBaseModel(
-        []components.BaseModel{
-            components.BaseModel{},
-            components.BaseModel{},
+    res, err := s.CheckoutSessions.Create(ctx, nil, nil, &components.CheckoutSessionCreate{
+        CartItems: []components.CartItem{
+            components.CartItem{
+                Name: "GoPro HD",
+                Quantity: 2,
+                UnitAmount: 1299,
+                DiscountAmount: gr4vygo.Int64(0),
+                TaxAmount: gr4vygo.Int64(0),
+                ExternalIdentifier: gr4vygo.String("goprohd"),
+                Sku: gr4vygo.String("GPHD1078"),
+                ProductURL: gr4vygo.String("https://example.com/catalog/go-pro-hd"),
+                ImageURL: gr4vygo.String("https://example.com/images/go-pro-hd.jpg"),
+                Categories: []string{
+                    "camera",
+                    "travel",
+                    "gear",
+                },
+                ProductType: components.ProductTypePhysical.ToPointer(),
+                SellerCountry: gr4vygo.String("US"),
+            },
+            components.CartItem{
+                Name: "GoPro HD",
+                Quantity: 2,
+                UnitAmount: 1299,
+                DiscountAmount: gr4vygo.Int64(0),
+                TaxAmount: gr4vygo.Int64(0),
+                ExternalIdentifier: gr4vygo.String("goprohd"),
+                Sku: gr4vygo.String("GPHD1078"),
+                ProductURL: gr4vygo.String("https://example.com/catalog/go-pro-hd"),
+                ImageURL: gr4vygo.String("https://example.com/images/go-pro-hd.jpg"),
+                Categories: []string{
+                    "camera",
+                    "travel",
+                    "gear",
+                },
+                ProductType: components.ProductTypePhysical.ToPointer(),
+                SellerCountry: gr4vygo.String("US"),
+            },
         },
-    )))
+        Metadata: map[string]string{
+            "cohort": "cohort-a",
+            "order_id": "order-12345",
+        },
+        Buyer: nil,
+        Airline: &components.Airline{
+            BookingCode: gr4vygo.String("X36Q9C"),
+            IsCardholderTraveling: gr4vygo.Bool(true),
+            IssuedAddress: gr4vygo.String("123 Broadway, New York"),
+            IssuedAt: types.MustNewTimeFromString("2013-07-16T19:23:00.000+00:00"),
+            IssuingCarrierCode: gr4vygo.String("649"),
+            IssuingCarrierName: gr4vygo.String("Air Transat A.T. Inc"),
+            IssuingIataDesignator: gr4vygo.String("TS"),
+            IssuingIcaoCode: gr4vygo.String("TSC"),
+            Legs: []components.AirlineLeg{
+                components.AirlineLeg{
+                    ArrivalAirport: gr4vygo.String("LAX"),
+                    ArrivalAt: types.MustNewTimeFromString("2013-07-16T19:23:00.000+00:00"),
+                    ArrivalCity: gr4vygo.String("Los Angeles"),
+                    ArrivalCountry: gr4vygo.String("US"),
+                    CarrierCode: gr4vygo.String("649"),
+                    CarrierName: gr4vygo.String("Air Transat A.T. Inc"),
+                    IataDesignator: gr4vygo.String("TS"),
+                    IcaoCode: gr4vygo.String("TSC"),
+                    CouponNumber: gr4vygo.String("15885566"),
+                    DepartureAirport: gr4vygo.String("LHR"),
+                    DepartureAt: types.MustNewTimeFromString("2013-07-16T19:23:00.000+00:00"),
+                    DepartureCity: gr4vygo.String("London"),
+                    DepartureCountry: gr4vygo.String("GB"),
+                    DepartureTaxAmount: gr4vygo.Int64(1200),
+                    FareAmount: gr4vygo.Int64(129900),
+                    FareBasisCode: gr4vygo.String("FY"),
+                    FeeAmount: gr4vygo.Int64(1200),
+                    FlightClass: gr4vygo.String("E"),
+                    FlightNumber: gr4vygo.String("101"),
+                    RouteType: components.RouteTypeRoundTrip.ToPointer(),
+                    SeatClass: gr4vygo.String("F"),
+                    StopOver: gr4vygo.Bool(false),
+                    TaxAmount: gr4vygo.Int64(1200),
+                },
+            },
+            PassengerNameRecord: gr4vygo.String("JOHN L"),
+            Passengers: []components.AirlinePassenger{
+                components.AirlinePassenger{
+                    AgeGroup: components.AgeGroupAdult.ToPointer(),
+                    DateOfBirth: types.MustNewDateFromString("2013-07-16"),
+                    EmailAddress: gr4vygo.String("john@example.com"),
+                    FirstName: gr4vygo.String("John"),
+                    FrequentFlyerNumber: gr4vygo.String("15885566"),
+                    LastName: gr4vygo.String("Luhn"),
+                    PassportNumber: gr4vygo.String("11117700225"),
+                    PhoneNumber: gr4vygo.String("+1234567890"),
+                    TicketNumber: gr4vygo.String("BA1236699999"),
+                    Title: gr4vygo.String("Mr."),
+                    CountryCode: gr4vygo.String("US"),
+                },
+                components.AirlinePassenger{
+                    AgeGroup: components.AgeGroupAdult.ToPointer(),
+                    DateOfBirth: types.MustNewDateFromString("2013-07-16"),
+                    EmailAddress: gr4vygo.String("john@example.com"),
+                    FirstName: gr4vygo.String("John"),
+                    FrequentFlyerNumber: gr4vygo.String("15885566"),
+                    LastName: gr4vygo.String("Luhn"),
+                    PassportNumber: gr4vygo.String("11117700225"),
+                    PhoneNumber: gr4vygo.String("+1234567890"),
+                    TicketNumber: gr4vygo.String("BA1236699999"),
+                    Title: gr4vygo.String("Mr."),
+                    CountryCode: gr4vygo.String("US"),
+                },
+            },
+            ReservationSystem: gr4vygo.String("Amadeus"),
+            RestrictedTicket: gr4vygo.Bool(false),
+            TicketDeliveryMethod: components.TicketDeliveryMethodElectronic.ToPointer(),
+            TicketNumber: gr4vygo.String("123-1234-151555"),
+            TravelAgencyCode: gr4vygo.String("12345"),
+            TravelAgencyInvoiceNumber: gr4vygo.String("EG15555155"),
+            TravelAgencyName: gr4vygo.String("ACME Agency"),
+            TravelAgencyPlanName: gr4vygo.String("B733"),
+        },
+    })
     if err != nil {
         log.Fatal(err)
     }
-    if res.CheckoutSession != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -52,17 +165,17 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                     | Type                                                                                          | Required                                                                                      | Description                                                                                   |
-| --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------- |
-| `ctx`                                                                                         | [context.Context](https://pkg.go.dev/context#Context)                                         | :heavy_check_mark:                                                                            | The context to use for the request.                                                           |
-| `timeoutInSeconds`                                                                            | **float64*                                                                                    | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `merchantAccountID`                                                                           | **string*                                                                                     | :heavy_minus_sign:                                                                            | The ID of the merchant account to use for this request.                                       |
-| `requestBody`                                                                                 | [*operations.CreateCheckoutSessionBody](../../models/operations/createcheckoutsessionbody.md) | :heavy_minus_sign:                                                                            | N/A                                                                                           |
-| `opts`                                                                                        | [][operations.Option](../../models/operations/option.md)                                      | :heavy_minus_sign:                                                                            | The options for this request.                                                                 |
+| Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
+| ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
+| `ctx`                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                 | :heavy_check_mark:                                                                    | The context to use for the request.                                                   |
+| `timeoutInSeconds`                                                                    | **float64*                                                                            | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `merchantAccountID`                                                                   | **string*                                                                             | :heavy_minus_sign:                                                                    | The ID of the merchant account to use for this request.                               |
+| `checkoutSessionCreate`                                                               | [*components.CheckoutSessionCreate](../../models/components/checkoutsessioncreate.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
+| `opts`                                                                                | [][operations.Option](../../models/operations/option.md)                              | :heavy_minus_sign:                                                                    | The options for this request.                                                         |
 
 ### Response
 
-**[*operations.CreateCheckoutSessionResponse](../../models/operations/createcheckoutsessionresponse.md), error**
+**[*components.CheckoutSession](../../models/components/checkoutsession.md), error**
 
 ### Errors
 
@@ -107,7 +220,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Update(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", components.CheckoutSessionUpdate{
+    res, err := s.CheckoutSessions.Update(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", components.CheckoutSessionCreate{
         CartItems: []components.CartItem{
             components.CartItem{
                 Name: "GoPro HD",
@@ -194,6 +307,7 @@ func main() {
         },
         Airline: &components.Airline{
             BookingCode: gr4vygo.String("X36Q9C"),
+            IsCardholderTraveling: gr4vygo.Bool(true),
             IssuedAddress: gr4vygo.String("123 Broadway, New York"),
             IssuedAt: types.MustNewTimeFromString("2013-07-16T19:23:00.000+00:00"),
             IssuingCarrierCode: gr4vygo.String("649"),
@@ -307,7 +421,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CheckoutSession != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -319,14 +433,14 @@ func main() {
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |                                                                                      |
 | `sessionID`                                                                          | *string*                                                                             | :heavy_check_mark:                                                                   | The ID of the checkout session.                                                      | 4137b1cf-39ac-42a8-bad6-1c680d5dab6b                                                 |
-| `checkoutSessionUpdate`                                                              | [components.CheckoutSessionUpdate](../../models/components/checkoutsessionupdate.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
+| `checkoutSessionCreate`                                                              | [components.CheckoutSessionCreate](../../models/components/checkoutsessioncreate.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
 | `timeoutInSeconds`                                                                   | **float64*                                                                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
 | `merchantAccountID`                                                                  | **string*                                                                            | :heavy_minus_sign:                                                                   | The ID of the merchant account to use for this request.                              |                                                                                      |
 | `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |                                                                                      |
 
 ### Response
 
-**[*operations.UpdateCheckoutSessionResponse](../../models/operations/updatecheckoutsessionresponse.md), error**
+**[*components.CheckoutSession](../../models/components/checkoutsession.md), error**
 
 ### Errors
 
@@ -373,7 +487,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CheckoutSession != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -391,7 +505,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetCheckoutSessionResponse](../../models/operations/getcheckoutsessionresponse.md), error**
+**[*components.CheckoutSession](../../models/components/checkoutsession.md), error**
 
 ### Errors
 
@@ -433,12 +547,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Delete(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil, nil)
+    err := s.CheckoutSessions.Delete(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil, nil)
     if err != nil {
         log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
     }
 }
 ```
@@ -455,7 +566,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeleteCheckoutSessionResponse](../../models/operations/deletecheckoutsessionresponse.md), error**
+**error**
 
 ### Errors
 

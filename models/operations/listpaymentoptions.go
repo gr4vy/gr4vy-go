@@ -36,23 +36,3 @@ func (o *ListPaymentOptionsRequest) GetPaymentOptionRequest() components.Payment
 	}
 	return o.PaymentOptionRequest
 }
-
-type ListPaymentOptionsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionNoCursorPaymentOption *components.CollectionNoCursorPaymentOption
-}
-
-func (o *ListPaymentOptionsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *ListPaymentOptionsResponse) GetCollectionNoCursorPaymentOption() *components.CollectionNoCursorPaymentOption {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionNoCursorPaymentOption
-}

@@ -24,7 +24,7 @@ type UpdateCheckoutSessionRequest struct {
 	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID     *string                          `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-	CheckoutSessionUpdate components.CheckoutSessionUpdate `request:"mediaType=application/json"`
+	CheckoutSessionCreate components.CheckoutSessionCreate `request:"mediaType=application/json"`
 }
 
 func (u UpdateCheckoutSessionRequest) MarshalJSON() ([]byte, error) {
@@ -59,29 +59,9 @@ func (o *UpdateCheckoutSessionRequest) GetMerchantAccountID() *string {
 	return o.MerchantAccountID
 }
 
-func (o *UpdateCheckoutSessionRequest) GetCheckoutSessionUpdate() components.CheckoutSessionUpdate {
+func (o *UpdateCheckoutSessionRequest) GetCheckoutSessionCreate() components.CheckoutSessionCreate {
 	if o == nil {
-		return components.CheckoutSessionUpdate{}
+		return components.CheckoutSessionCreate{}
 	}
-	return o.CheckoutSessionUpdate
-}
-
-type UpdateCheckoutSessionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CheckoutSession *components.CheckoutSession
-}
-
-func (o *UpdateCheckoutSessionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *UpdateCheckoutSessionResponse) GetCheckoutSession() *components.CheckoutSession {
-	if o == nil {
-		return nil
-	}
-	return o.CheckoutSession
+	return o.CheckoutSessionCreate
 }

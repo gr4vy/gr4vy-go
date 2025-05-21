@@ -49,23 +49,14 @@ func (o *ListMerchantAccountsRequest) GetSearch() *string {
 }
 
 type ListMerchantAccountsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionMerchantAccount *components.CollectionMerchantAccount
+	Result components.CollectionMerchantAccount
 
 	Next func() (*ListMerchantAccountsResponse, error)
 }
 
-func (o *ListMerchantAccountsResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *ListMerchantAccountsResponse) GetResult() components.CollectionMerchantAccount {
 	if o == nil {
-		return components.HTTPMetadata{}
+		return components.CollectionMerchantAccount{}
 	}
-	return o.HTTPMeta
-}
-
-func (o *ListMerchantAccountsResponse) GetCollectionMerchantAccount() *components.CollectionMerchantAccount {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionMerchantAccount
+	return o.Result
 }

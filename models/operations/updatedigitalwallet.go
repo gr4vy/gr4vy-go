@@ -65,23 +65,3 @@ func (o *UpdateDigitalWalletRequest) GetDigitalWalletUpdate() components.Digital
 	}
 	return o.DigitalWalletUpdate
 }
-
-type UpdateDigitalWalletResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	DigitalWallet *components.DigitalWallet
-}
-
-func (o *UpdateDigitalWalletResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *UpdateDigitalWalletResponse) GetDigitalWallet() *components.DigitalWallet {
-	if o == nil {
-		return nil
-	}
-	return o.DigitalWallet
-}

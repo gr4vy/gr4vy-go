@@ -33,7 +33,7 @@ func newGiftCards(sdkConfig sdkConfiguration) *GiftCards {
 
 // Get gift card
 // Fetch details about a gift card.
-func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetGiftCardResponse, error) {
+func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountID *string, opts ...operations.Option) (*components.GiftCard, error) {
 	request := operations.GetGiftCardRequest{
 		GiftCardID:        giftCardID,
 		MerchantAccountID: merchantAccountID,
@@ -196,13 +196,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 		}
 	}
 
-	res := &operations.GetGiftCardResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -217,7 +210,7 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			res.GiftCard = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -238,10 +231,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -263,10 +252,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -288,10 +273,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -313,10 +294,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -338,10 +315,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -363,10 +336,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -388,10 +357,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -413,10 +378,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -438,10 +399,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -463,10 +420,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -488,10 +441,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -513,10 +462,6 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -545,13 +490,13 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Delete a gift card
 // Removes a gift card from our system.
-func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.DeleteGiftCardResponse, error) {
+func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.DeleteGiftCardRequest{
 		GiftCardID:        giftCardID,
 		TimeoutInSeconds:  timeoutInSeconds,
@@ -713,13 +658,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 		}
 	}
 
-	res := &operations.DeleteGiftCardResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -734,7 +672,7 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			res.Any = out
+			return out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -755,10 +693,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -780,10 +714,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -805,10 +735,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -830,10 +756,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -855,10 +777,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -880,10 +798,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -905,10 +819,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -930,10 +840,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -955,10 +861,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -980,10 +882,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1005,10 +903,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1030,10 +924,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1062,13 +952,13 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Create gift card
 // Store a new gift card in the vault.
-func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCardCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CreateGiftCardResponse, error) {
+func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCardCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.GiftCard, error) {
 	request := operations.CreateGiftCardRequest{
 		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
@@ -1237,13 +1127,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 		}
 	}
 
-	res := &operations.CreateGiftCardResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 201:
 		switch {
@@ -1258,7 +1141,7 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			res.GiftCard = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1279,10 +1162,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1304,10 +1183,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1329,10 +1204,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1354,10 +1225,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1379,10 +1246,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1404,10 +1267,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1429,10 +1288,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1454,10 +1309,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1479,10 +1330,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1504,10 +1351,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1529,10 +1372,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1554,10 +1393,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1586,7 +1421,7 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
@@ -1754,12 +1589,7 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 		}
 	}
 
-	res := &operations.ListGiftCardsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
+	res := &operations.ListGiftCardsResponse{}
 	res.Next = func() (*operations.ListGiftCardsResponse, error) {
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
@@ -1821,7 +1651,7 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			res.CollectionGiftCard = &out
+			res.Result = out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1842,10 +1672,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1867,10 +1693,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1892,10 +1714,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1917,10 +1735,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1942,10 +1756,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1967,10 +1777,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1992,10 +1798,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2017,10 +1819,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2042,10 +1840,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2067,10 +1861,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2092,10 +1882,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2117,10 +1903,6 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

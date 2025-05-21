@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/models/components"
-)
-
 type CreatePaymentServiceDefinitionSessionRequest struct {
 	PaymentServiceDefinitionID string         `pathParam:"style=simple,explode=false,name=payment_service_definition_id"`
 	RequestBody                map[string]any `request:"mediaType=application/json"`
@@ -23,24 +19,4 @@ func (o *CreatePaymentServiceDefinitionSessionRequest) GetRequestBody() map[stri
 		return map[string]any{}
 	}
 	return o.RequestBody
-}
-
-type CreatePaymentServiceDefinitionSessionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CreateSession *components.CreateSession
-}
-
-func (o *CreatePaymentServiceDefinitionSessionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreatePaymentServiceDefinitionSessionResponse) GetCreateSession() *components.CreateSession {
-	if o == nil {
-		return nil
-	}
-	return o.CreateSession
 }

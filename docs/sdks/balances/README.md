@@ -54,7 +54,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionNoCursorGiftCardSummary != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -72,7 +72,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListGiftCardBalancesResponse](../../models/operations/listgiftcardbalancesresponse.md), error**
+**[*components.CollectionNoCursorGiftCardSummary](../../models/components/collectionnocursorgiftcardsummary.md), error**
 
 ### Errors
 

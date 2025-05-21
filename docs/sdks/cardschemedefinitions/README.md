@@ -34,7 +34,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionNoCursorCardSchemeDefinition != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -50,7 +50,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListCardSchemeDefinitionsResponse](../../models/operations/listcardschemedefinitionsresponse.md), error**
+**[*components.CollectionNoCursorCardSchemeDefinition](../../models/components/collectionnocursorcardschemedefinition.md), error**
 
 ### Errors
 

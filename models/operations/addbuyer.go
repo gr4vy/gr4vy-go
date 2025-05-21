@@ -56,23 +56,3 @@ func (o *AddBuyerRequest) GetBuyerCreate() components.BuyerCreate {
 	}
 	return o.BuyerCreate
 }
-
-type AddBuyerResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	Buyer *components.Buyer
-}
-
-func (o *AddBuyerResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *AddBuyerResponse) GetBuyer() *components.Buyer {
-	if o == nil {
-		return nil
-	}
-	return o.Buyer
-}

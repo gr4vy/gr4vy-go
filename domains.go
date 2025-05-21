@@ -27,7 +27,7 @@ func newDomains(sdkConfig sdkConfiguration) *Domains {
 
 // Create - Register a digital wallet domain
 // Register a digital wallet domain (Apple Pay only).
-func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.RegisterDigitalWalletDomainResponse, error) {
+func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.RegisterDigitalWalletDomainRequest{
 		DigitalWalletID:     digitalWalletID,
 		TimeoutInSeconds:    timeoutInSeconds,
@@ -197,13 +197,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 		}
 	}
 
-	res := &operations.RegisterDigitalWalletDomainResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -218,7 +211,7 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			res.Any = out
+			return out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -239,10 +232,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -264,10 +253,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -289,10 +274,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -314,10 +295,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -339,10 +316,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -364,10 +337,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -389,10 +358,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -414,10 +379,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -439,10 +400,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -464,10 +421,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -489,10 +442,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -514,10 +463,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -546,13 +491,13 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Delete - Remove a digital wallet domain
 // Remove a digital wallet domain (Apple Pay only).
-func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.UnregisterDigitalWalletDomainResponse, error) {
+func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.UnregisterDigitalWalletDomainRequest{
 		DigitalWalletID:     digitalWalletID,
 		TimeoutInSeconds:    timeoutInSeconds,
@@ -722,13 +667,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 		}
 	}
 
-	res := &operations.UnregisterDigitalWalletDomainResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -743,7 +681,7 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			res.Any = out
+			return out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -764,10 +702,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -789,10 +723,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -814,10 +744,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -839,10 +765,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -864,10 +786,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -889,10 +807,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -914,10 +828,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -939,10 +849,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -964,10 +870,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -989,10 +891,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1014,10 +912,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1039,10 +933,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1071,6 +961,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

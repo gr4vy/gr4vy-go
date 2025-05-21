@@ -64,23 +64,3 @@ func (o *CreateFullTransactionRefundRequest) GetTransactionRefundAllCreate() *co
 	}
 	return o.TransactionRefundAllCreate
 }
-
-type CreateFullTransactionRefundResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionNoCursorRefund *components.CollectionNoCursorRefund
-}
-
-func (o *CreateFullTransactionRefundResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreateFullTransactionRefundResponse) GetCollectionNoCursorRefund() *components.CollectionNoCursorRefund {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionNoCursorRefund
-}

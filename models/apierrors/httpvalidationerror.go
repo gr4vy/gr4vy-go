@@ -8,8 +8,7 @@ import (
 )
 
 type HTTPValidationError struct {
-	Detail   []components.ValidationError `json:"detail,omitempty"`
-	HTTPMeta components.HTTPMetadata      `json:"-"`
+	Detail []components.ValidationError `json:"detail,omitempty"`
 }
 
 var _ error = &HTTPValidationError{}

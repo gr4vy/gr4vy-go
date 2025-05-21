@@ -64,23 +64,3 @@ func (o *CaptureTransactionRequest) GetTransactionCapture() components.Transacti
 	}
 	return o.TransactionCapture
 }
-
-type CaptureTransactionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	Transaction *components.Transaction
-}
-
-func (o *CaptureTransactionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CaptureTransactionResponse) GetTransaction() *components.Transaction {
-	if o == nil {
-		return nil
-	}
-	return o.Transaction
-}

@@ -65,23 +65,3 @@ func (o *UpdateBuyerRequest) GetBuyerUpdate() components.BuyerUpdate {
 	}
 	return o.BuyerUpdate
 }
-
-type UpdateBuyerResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	Buyer *components.Buyer
-}
-
-func (o *UpdateBuyerResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *UpdateBuyerResponse) GetBuyer() *components.Buyer {
-	if o == nil {
-		return nil
-	}
-	return o.Buyer
-}

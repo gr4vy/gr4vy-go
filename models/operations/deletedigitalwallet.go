@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
-	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
 type DeleteDigitalWalletGlobals struct {
@@ -56,24 +55,4 @@ func (o *DeleteDigitalWalletRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return o.MerchantAccountID
-}
-
-type DeleteDigitalWalletResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	Any any
-}
-
-func (o *DeleteDigitalWalletResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *DeleteDigitalWalletResponse) GetAny() any {
-	if o == nil {
-		return nil
-	}
-	return o.Any
 }

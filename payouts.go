@@ -198,12 +198,7 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 		}
 	}
 
-	res := &operations.ListPayoutsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
+	res := &operations.ListPayoutsResponse{}
 	res.Next = func() (*operations.ListPayoutsResponse, error) {
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
@@ -261,7 +256,7 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			res.CollectionPayoutSummary = &out
+			res.Result = out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -282,10 +277,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -307,10 +298,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -332,10 +319,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -357,10 +340,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -382,10 +361,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -407,10 +382,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -432,10 +403,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -457,10 +424,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -482,10 +445,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -507,10 +466,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -532,10 +487,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -557,10 +508,6 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -595,7 +542,7 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 
 // Create a payout.
 // Creates a new payout.
-func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CreatePayoutResponse, error) {
+func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.PayoutSummary, error) {
 	request := operations.CreatePayoutRequest{
 		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
@@ -764,13 +711,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 		}
 	}
 
-	res := &operations.CreatePayoutResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 201:
 		switch {
@@ -785,7 +725,7 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			res.PayoutSummary = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -806,10 +746,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -831,10 +767,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -856,10 +788,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -881,10 +809,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -906,10 +830,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -931,10 +851,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -956,10 +872,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -981,10 +893,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1006,10 +914,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1031,10 +935,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1056,10 +956,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1081,10 +977,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1113,13 +1005,13 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Get a payout.
 // Retreives a payout.
-func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetPayoutResponse, error) {
+func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *string, opts ...operations.Option) (*components.PayoutSummary, error) {
 	request := operations.GetPayoutRequest{
 		PayoutID:          payoutID,
 		MerchantAccountID: merchantAccountID,
@@ -1282,13 +1174,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 		}
 	}
 
-	res := &operations.GetPayoutResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1303,7 +1188,7 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			res.PayoutSummary = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1324,10 +1209,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1349,10 +1230,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1374,10 +1251,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1399,10 +1272,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1424,10 +1293,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1449,10 +1314,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1474,10 +1335,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1499,10 +1356,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1524,10 +1377,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1549,10 +1398,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1574,10 +1419,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1599,10 +1440,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1631,6 +1468,6 @@ func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *s
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

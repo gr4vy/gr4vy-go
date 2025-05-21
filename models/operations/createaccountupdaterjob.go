@@ -56,23 +56,3 @@ func (o *CreateAccountUpdaterJobRequest) GetAccountUpdaterJobCreate() components
 	}
 	return o.AccountUpdaterJobCreate
 }
-
-type CreateAccountUpdaterJobResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// A scheduled account updater job when one or more payment methods were scheduled for update.
-	AccountUpdaterJob *components.AccountUpdaterJob
-}
-
-func (o *CreateAccountUpdaterJobResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreateAccountUpdaterJobResponse) GetAccountUpdaterJob() *components.AccountUpdaterJob {
-	if o == nil {
-		return nil
-	}
-	return o.AccountUpdaterJob
-}

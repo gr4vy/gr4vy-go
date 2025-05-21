@@ -16,8 +16,7 @@ type Error504 struct {
 	// A human readable message that provides more context to the error.
 	Message *string `default:"Request could not be processed" json:"message"`
 	// A list of details that further ellaborate on the error.
-	Details  []components.ErrorDetail `json:"details,omitempty"`
-	HTTPMeta components.HTTPMetadata  `json:"-"`
+	Details []components.ErrorDetail `json:"details,omitempty"`
 }
 
 var _ error = &Error504{}

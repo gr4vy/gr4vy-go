@@ -42,7 +42,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Cryptogram != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -58,7 +58,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreatePaymentMethodNetworkTokenCryptogramResponse](../../models/operations/createpaymentmethodnetworktokencryptogramresponse.md), error**
+**[*components.Cryptogram](../../models/components/cryptogram.md), error**
 
 ### Errors
 

@@ -62,8 +62,6 @@ func main() {
         AmountLte: gr4vygo.Int64(1299),
         AmountGte: gr4vygo.Int64(1299),
         Currency: []string{
-            "EUR",
-            "GBP",
             "USD",
         },
         PaymentServiceID: []string{
@@ -96,7 +94,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionTransactionSummary != nil {
+    if res != nil {
         for {
             // handle items
 
@@ -268,6 +266,7 @@ func main() {
         },
         Airline: &components.Airline{
             BookingCode: gr4vygo.String("X36Q9C"),
+            IsCardholderTraveling: gr4vygo.Bool(true),
             IssuedAddress: gr4vygo.String("123 Broadway, New York"),
             IssuedAt: types.MustNewTimeFromString("2013-07-16T19:23:00.000+00:00"),
             IssuingCarrierCode: gr4vygo.String("649"),
@@ -503,7 +502,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Transaction != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -522,7 +521,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateTransactionResponse](../../models/operations/createtransactionresponse.md), error**
+**[*components.Transaction](../../models/components/transaction.md), error**
 
 ### Errors
 
@@ -569,7 +568,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Transaction != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -586,7 +585,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetTransactionResponse](../../models/operations/gettransactionresponse.md), error**
+**[*components.Transaction](../../models/components/transaction.md), error**
 
 ### Errors
 
@@ -635,6 +634,7 @@ func main() {
         Amount: gr4vygo.Int64(1299),
         Airline: &components.Airline{
             BookingCode: gr4vygo.String("X36Q9C"),
+            IsCardholderTraveling: gr4vygo.Bool(true),
             IssuedAddress: gr4vygo.String("123 Broadway, New York"),
             IssuedAt: types.MustNewTimeFromString("2013-07-16T19:23:00.000+00:00"),
             IssuingCarrierCode: gr4vygo.String("649"),
@@ -760,7 +760,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Transaction != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -779,7 +779,7 @@ func main() {
 
 ### Response
 
-**[*operations.CaptureTransactionResponse](../../models/operations/capturetransactionresponse.md), error**
+**[*components.Transaction](../../models/components/transaction.md), error**
 
 ### Errors
 
@@ -826,7 +826,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Transaction != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -844,7 +844,7 @@ func main() {
 
 ### Response
 
-**[*operations.VoidTransactionResponse](../../models/operations/voidtransactionresponse.md), error**
+**[*components.Transaction](../../models/components/transaction.md), error**
 
 ### Errors
 
@@ -891,7 +891,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.TransactionStatusSummary != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -908,7 +908,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetTransactionSummaryResponse](../../models/operations/gettransactionsummaryresponse.md), error**
+**[*components.TransactionStatusSummary](../../models/components/transactionstatussummary.md), error**
 
 ### Errors
 
@@ -955,7 +955,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Transaction != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -973,7 +973,7 @@ func main() {
 
 ### Response
 
-**[*operations.SyncTransactionResponse](../../models/operations/synctransactionresponse.md), error**
+**[*components.Transaction](../../models/components/transaction.md), error**
 
 ### Errors
 

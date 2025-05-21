@@ -45,23 +45,3 @@ func (o *CreatePaymentServiceRequest) GetPaymentServiceUpdate() components.Payme
 	}
 	return o.PaymentServiceUpdate
 }
-
-type CreatePaymentServiceResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	PaymentService *components.PaymentService
-}
-
-func (o *CreatePaymentServiceResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreatePaymentServiceResponse) GetPaymentService() *components.PaymentService {
-	if o == nil {
-		return nil
-	}
-	return o.PaymentService
-}

@@ -192,12 +192,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 		}
 	}
 
-	res := &operations.ListPaymentServicesResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
+	res := &operations.ListPaymentServicesResponse{}
 	res.Next = func() (*operations.ListPaymentServicesResponse, error) {
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
@@ -259,7 +254,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			res.CollectionPaymentService = &out
+			res.Result = out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -280,10 +275,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -305,10 +296,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -330,10 +317,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -355,10 +338,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -380,10 +359,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -405,10 +380,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -430,10 +401,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -455,10 +422,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -480,10 +443,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -505,10 +464,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -530,10 +485,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -555,10 +506,6 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -593,7 +540,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 // Create - Update a configured payment service
 // Updates the configuration of a payment service.
-func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate components.PaymentServiceCreate, merchantAccountID *string, opts ...operations.Option) (*operations.UpdatePaymentServiceResponse, error) {
+func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate components.PaymentServiceCreate, merchantAccountID *string, opts ...operations.Option) (*components.PaymentService, error) {
 	request := operations.UpdatePaymentServiceRequest{
 		MerchantAccountID:    merchantAccountID,
 		PaymentServiceCreate: paymentServiceCreate,
@@ -757,13 +704,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 		}
 	}
 
-	res := &operations.UpdatePaymentServiceResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 201:
 		switch {
@@ -778,7 +718,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			res.PaymentService = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -799,10 +739,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -824,10 +760,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -849,10 +781,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -874,10 +802,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -899,10 +823,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -924,10 +844,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -949,10 +865,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -974,10 +886,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -999,10 +907,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1024,10 +928,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1049,10 +949,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1074,10 +970,6 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1106,13 +998,13 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Get payment service
 // Get the details of a configured payment service.
-func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetPaymentServiceResponse, error) {
+func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merchantAccountID *string, opts ...operations.Option) (*components.PaymentService, error) {
 	request := operations.GetPaymentServiceRequest{
 		PaymentServiceID:  paymentServiceID,
 		MerchantAccountID: merchantAccountID,
@@ -1275,13 +1167,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 		}
 	}
 
-	res := &operations.GetPaymentServiceResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1296,7 +1181,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			res.PaymentService = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1317,10 +1202,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1342,10 +1223,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1367,10 +1244,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1392,10 +1265,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1417,10 +1286,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1442,10 +1307,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1467,10 +1328,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1492,10 +1349,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1517,10 +1370,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1542,10 +1391,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1567,10 +1412,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1592,10 +1433,6 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1624,13 +1461,13 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Update - Configure a payment service
 // Configures a new payment service for use by merchants.
-func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, paymentServiceUpdate components.PaymentServiceUpdate, merchantAccountID *string, opts ...operations.Option) (*operations.CreatePaymentServiceResponse, error) {
+func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, paymentServiceUpdate components.PaymentServiceUpdate, merchantAccountID *string, opts ...operations.Option) (*components.PaymentService, error) {
 	request := operations.CreatePaymentServiceRequest{
 		PaymentServiceID:     paymentServiceID,
 		MerchantAccountID:    merchantAccountID,
@@ -1795,13 +1632,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 		}
 	}
 
-	res := &operations.CreatePaymentServiceResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1816,7 +1646,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			res.PaymentService = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1837,10 +1667,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1862,10 +1688,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1887,10 +1709,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1912,10 +1730,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1937,10 +1751,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1962,10 +1772,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1987,10 +1793,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2012,10 +1814,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2037,10 +1835,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2062,10 +1856,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2087,10 +1877,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2112,10 +1898,6 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2144,13 +1926,13 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Delete a configured payment service
 // Deletes all the configuration of a payment service.
-func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.DeletePaymentServiceResponse, error) {
+func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.DeletePaymentServiceRequest{
 		PaymentServiceID:  paymentServiceID,
 		TimeoutInSeconds:  timeoutInSeconds,
@@ -2312,13 +2094,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 		}
 	}
 
-	res := &operations.DeletePaymentServiceResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -2333,7 +2108,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			res.Any = out
+			return out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2354,10 +2129,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2379,10 +2150,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2404,10 +2171,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2429,10 +2192,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2454,10 +2213,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2479,10 +2234,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2504,10 +2255,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2529,10 +2276,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2554,10 +2297,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2579,10 +2318,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2604,10 +2339,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2629,10 +2360,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2661,13 +2388,13 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Verify payment service credentials
 // Verify the credentials of a configured payment service
-func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials components.VerifyCredentials, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.VerifyPaymentServiceCredentialsResponse, error) {
+func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials components.VerifyCredentials, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.VerifyPaymentServiceCredentialsRequest{
 		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
@@ -2836,13 +2563,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 		}
 	}
 
-	res := &operations.VerifyPaymentServiceCredentialsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -2857,7 +2577,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			res.Any = out
+			return out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2878,10 +2598,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2903,10 +2619,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2928,10 +2640,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2953,10 +2661,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2978,10 +2682,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3003,10 +2703,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3028,10 +2724,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3053,10 +2745,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3078,10 +2766,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3103,10 +2787,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3128,10 +2808,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3153,10 +2829,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3185,13 +2857,13 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Session - Create a session for apayment service definition
 // Creates a session for a payment service that supports sessions.
-func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, requestBody map[string]any, merchantAccountID *string, opts ...operations.Option) (*operations.CreatePaymentServiceSessionResponse, error) {
+func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, requestBody map[string]any, merchantAccountID *string, opts ...operations.Option) (*components.CreateSession, error) {
 	request := operations.CreatePaymentServiceSessionRequest{
 		PaymentServiceID:  paymentServiceID,
 		MerchantAccountID: merchantAccountID,
@@ -3356,13 +3028,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 		}
 	}
 
-	res := &operations.CreatePaymentServiceSessionResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -3377,7 +3042,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			res.CreateSession = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -3398,10 +3063,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3423,10 +3084,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3448,10 +3105,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3473,10 +3126,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3498,10 +3147,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3523,10 +3168,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3548,10 +3189,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3573,10 +3210,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3598,10 +3231,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3623,10 +3252,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3648,10 +3273,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3673,10 +3294,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3705,6 +3322,6 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

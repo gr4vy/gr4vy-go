@@ -45,23 +45,3 @@ func (o *UpdateMerchantAccountRequest) GetMerchantAccountUpdate() components.Mer
 	}
 	return o.MerchantAccountUpdate
 }
-
-type UpdateMerchantAccountResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	MerchantAccount *components.MerchantAccount
-}
-
-func (o *UpdateMerchantAccountResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *UpdateMerchantAccountResponse) GetMerchantAccount() *components.MerchantAccount {
-	if o == nil {
-		return nil
-	}
-	return o.MerchantAccount
-}

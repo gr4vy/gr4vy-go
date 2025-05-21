@@ -40,7 +40,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.AccountUpdaterJob != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -58,7 +58,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateAccountUpdaterJobResponse](../../models/operations/createaccountupdaterjobresponse.md), error**
+**[*components.AccountUpdaterJob](../../models/components/accountupdaterjob.md), error**
 
 ### Errors
 

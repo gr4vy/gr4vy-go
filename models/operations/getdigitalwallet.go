@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/models/components"
-)
-
 type GetDigitalWalletGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -36,24 +32,4 @@ func (o *GetDigitalWalletRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return o.MerchantAccountID
-}
-
-type GetDigitalWalletResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	DigitalWallet *components.DigitalWallet
-}
-
-func (o *GetDigitalWalletResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *GetDigitalWalletResponse) GetDigitalWallet() *components.DigitalWallet {
-	if o == nil {
-		return nil
-	}
-	return o.DigitalWallet
 }

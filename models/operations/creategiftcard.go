@@ -56,23 +56,3 @@ func (o *CreateGiftCardRequest) GetGiftCardCreate() components.GiftCardCreate {
 	}
 	return o.GiftCardCreate
 }
-
-type CreateGiftCardResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	GiftCard *components.GiftCard
-}
-
-func (o *CreateGiftCardResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreateGiftCardResponse) GetGiftCard() *components.GiftCard {
-	if o == nil {
-		return nil
-	}
-	return o.GiftCard
-}

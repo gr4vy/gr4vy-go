@@ -60,23 +60,14 @@ func (o *ListPayoutsRequest) GetMerchantAccountID() *string {
 }
 
 type ListPayoutsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionPayoutSummary *components.CollectionPayoutSummary
+	Result components.CollectionPayoutSummary
 
 	Next func() (*ListPayoutsResponse, error)
 }
 
-func (o *ListPayoutsResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *ListPayoutsResponse) GetResult() components.CollectionPayoutSummary {
 	if o == nil {
-		return components.HTTPMetadata{}
+		return components.CollectionPayoutSummary{}
 	}
-	return o.HTTPMeta
-}
-
-func (o *ListPayoutsResponse) GetCollectionPayoutSummary() *components.CollectionPayoutSummary {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionPayoutSummary
+	return o.Result
 }

@@ -28,7 +28,7 @@ func newPaymentOptions(sdkConfig sdkConfiguration) *PaymentOptions {
 
 // List payment options
 // List the payment options available at checkout. filtering by country, currency, and additional fields passed to Flow rules.
-func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest components.PaymentOptionRequest, merchantAccountID *string, opts ...operations.Option) (*operations.ListPaymentOptionsResponse, error) {
+func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest components.PaymentOptionRequest, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorPaymentOption, error) {
 	request := operations.ListPaymentOptionsRequest{
 		MerchantAccountID:    merchantAccountID,
 		PaymentOptionRequest: paymentOptionRequest,
@@ -192,13 +192,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 		}
 	}
 
-	res := &operations.ListPaymentOptionsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -213,7 +206,7 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			res.CollectionNoCursorPaymentOption = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -234,10 +227,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -259,10 +248,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -284,10 +269,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -309,10 +290,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -334,10 +311,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -359,10 +332,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -384,10 +353,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -409,10 +374,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -434,10 +395,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -459,10 +416,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -484,10 +437,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -509,10 +458,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -541,6 +486,6 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

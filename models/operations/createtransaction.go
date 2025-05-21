@@ -65,23 +65,3 @@ func (o *CreateTransactionRequest) GetTransactionCreate() components.Transaction
 	}
 	return o.TransactionCreate
 }
-
-type CreateTransactionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Returns the transaction.
-	Transaction *components.Transaction
-}
-
-func (o *CreateTransactionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreateTransactionResponse) GetTransaction() *components.Transaction {
-	if o == nil {
-		return nil
-	}
-	return o.Transaction
-}

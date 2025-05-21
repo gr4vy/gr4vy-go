@@ -28,7 +28,7 @@ func newJobs(sdkConfig sdkConfiguration) *Jobs {
 
 // Create account updater job
 // Schedule one or more stored cards for an account update.
-func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.AccountUpdaterJobCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CreateAccountUpdaterJobResponse, error) {
+func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.AccountUpdaterJobCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.AccountUpdaterJob, error) {
 	request := operations.CreateAccountUpdaterJobRequest{
 		TimeoutInSeconds:        timeoutInSeconds,
 		MerchantAccountID:       merchantAccountID,
@@ -197,13 +197,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 		}
 	}
 
-	res := &operations.CreateAccountUpdaterJobResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 201:
 		switch {
@@ -218,7 +211,7 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			res.AccountUpdaterJob = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -240,10 +233,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -265,10 +254,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -290,10 +275,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -315,10 +296,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -340,10 +317,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -365,10 +338,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -390,10 +359,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -415,10 +380,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -440,10 +401,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -465,10 +422,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -490,10 +443,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -515,10 +464,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -547,6 +492,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

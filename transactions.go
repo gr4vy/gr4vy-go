@@ -195,12 +195,7 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 		}
 	}
 
-	res := &operations.ListTransactionsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
+	res := &operations.ListTransactionsResponse{}
 	res.Next = func() (*operations.ListTransactionsResponse, error) {
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
@@ -295,7 +290,7 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			res.CollectionTransactionSummary = &out
+			res.Result = out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -316,10 +311,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -341,10 +332,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -366,10 +353,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -391,10 +374,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -416,10 +395,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -441,10 +416,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -466,10 +437,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -491,10 +458,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -516,10 +479,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -541,10 +500,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -566,10 +521,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -591,10 +542,6 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -629,7 +576,7 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 
 // Create transaction
 // Create a transaction.
-func (s *Transactions) Create(ctx context.Context, transactionCreate components.TransactionCreate, timeoutInSeconds *float64, merchantAccountID *string, idempotencyKey *string, opts ...operations.Option) (*operations.CreateTransactionResponse, error) {
+func (s *Transactions) Create(ctx context.Context, transactionCreate components.TransactionCreate, timeoutInSeconds *float64, merchantAccountID *string, idempotencyKey *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.CreateTransactionRequest{
 		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
@@ -799,13 +746,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 		}
 	}
 
-	res := &operations.CreateTransactionResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 201:
 		switch {
@@ -820,7 +760,7 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			res.Transaction = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -841,10 +781,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -866,10 +802,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -891,10 +823,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -916,10 +844,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -941,10 +865,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -966,10 +886,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -991,10 +907,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1016,10 +928,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1041,10 +949,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1066,10 +970,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1091,10 +991,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1116,10 +1012,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1148,13 +1040,13 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Get transaction
 // Fetch a single transaction by its ID.
-func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetTransactionResponse, error) {
+func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.GetTransactionRequest{
 		TransactionID:     transactionID,
 		MerchantAccountID: merchantAccountID,
@@ -1317,13 +1209,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 		}
 	}
 
-	res := &operations.GetTransactionResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1338,7 +1223,7 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			res.Transaction = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1359,10 +1244,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1384,10 +1265,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1409,10 +1286,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1434,10 +1307,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1459,10 +1328,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1484,10 +1349,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1509,10 +1370,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1534,10 +1391,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1559,10 +1412,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1584,10 +1433,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1609,10 +1454,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1634,10 +1475,6 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1666,13 +1503,13 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Capture transaction
 // Capture a previously authorized transaction.
-func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCapture components.TransactionCapture, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.CaptureTransactionResponse, error) {
+func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCapture components.TransactionCapture, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.CaptureTransactionRequest{
 		TransactionID:      transactionID,
 		TimeoutInSeconds:   timeoutInSeconds,
@@ -1842,13 +1679,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 		}
 	}
 
-	res := &operations.CaptureTransactionResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -1863,7 +1693,7 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			res.Transaction = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -1884,10 +1714,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1909,10 +1735,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1934,10 +1756,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1959,10 +1777,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -1984,10 +1798,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2009,10 +1819,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2034,10 +1840,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2059,10 +1861,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2084,10 +1882,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2109,10 +1903,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2134,10 +1924,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2159,10 +1945,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2191,13 +1973,13 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Void transaction
 // Void a previously authorized transaction.
-func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.VoidTransactionResponse, error) {
+func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.VoidTransactionRequest{
 		TransactionID:     transactionID,
 		TimeoutInSeconds:  timeoutInSeconds,
@@ -2359,13 +2141,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 		}
 	}
 
-	res := &operations.VoidTransactionResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -2380,7 +2155,7 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			res.Transaction = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2401,10 +2176,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2426,10 +2197,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2451,10 +2218,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2476,10 +2239,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2501,10 +2260,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2526,10 +2281,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2551,10 +2302,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2576,10 +2323,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2601,10 +2344,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2626,10 +2365,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2651,10 +2386,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2676,10 +2407,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2708,13 +2435,13 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Summary - Get transaction summary
 // Fetch a summary for a transaction.
-func (s *Transactions) Summary(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*operations.GetTransactionSummaryResponse, error) {
+func (s *Transactions) Summary(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.TransactionStatusSummary, error) {
 	request := operations.GetTransactionSummaryRequest{
 		TransactionID:     transactionID,
 		MerchantAccountID: merchantAccountID,
@@ -2877,13 +2604,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 		}
 	}
 
-	res := &operations.GetTransactionSummaryResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -2898,7 +2618,7 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			res.TransactionStatusSummary = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -2919,10 +2639,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2944,10 +2660,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2969,10 +2681,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -2994,10 +2702,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3019,10 +2723,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3044,10 +2744,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3069,10 +2765,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3094,10 +2786,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3119,10 +2807,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3144,10 +2828,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3169,10 +2849,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3194,10 +2870,6 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3226,13 +2898,13 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }
 
 // Sync transaction
 // Fetch the latest status for a transaction.
-func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.SyncTransactionResponse, error) {
+func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.SyncTransactionRequest{
 		TransactionID:     transactionID,
 		TimeoutInSeconds:  timeoutInSeconds,
@@ -3394,13 +3066,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 		}
 	}
 
-	res := &operations.SyncTransactionResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -3415,7 +3080,7 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			res.Transaction = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -3436,10 +3101,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3461,10 +3122,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3486,10 +3143,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3511,10 +3164,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3536,10 +3185,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3561,10 +3206,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3586,10 +3227,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3611,10 +3248,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3636,10 +3269,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3661,10 +3290,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3686,10 +3311,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3711,10 +3332,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -3743,6 +3360,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

@@ -65,23 +65,3 @@ func (o *CreatePaymentMethodNetworkTokenRequest) GetNetworkTokenCreate() compone
 	}
 	return o.NetworkTokenCreate
 }
-
-type CreatePaymentMethodNetworkTokenResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	NetworkToken *components.NetworkToken
-}
-
-func (o *CreatePaymentMethodNetworkTokenResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreatePaymentMethodNetworkTokenResponse) GetNetworkToken() *components.NetworkToken {
-	if o == nil {
-		return nil
-	}
-	return o.NetworkToken
-}

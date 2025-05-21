@@ -28,7 +28,7 @@ func newBalances(sdkConfig sdkConfiguration) *Balances {
 
 // List gift card balances
 // Fetch the balances for one or more gift cards.
-func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.GiftCardBalanceRequest, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.ListGiftCardBalancesResponse, error) {
+func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.GiftCardBalanceRequest, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorGiftCardSummary, error) {
 	request := operations.ListGiftCardBalancesRequest{
 		TimeoutInSeconds:       timeoutInSeconds,
 		MerchantAccountID:      merchantAccountID,
@@ -197,13 +197,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 		}
 	}
 
-	res := &operations.ListGiftCardBalancesResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -218,7 +211,7 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			res.CollectionNoCursorGiftCardSummary = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -239,10 +232,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -264,10 +253,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -289,10 +274,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -314,10 +295,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -339,10 +316,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -364,10 +337,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -389,10 +358,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -414,10 +379,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -439,10 +400,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -464,10 +421,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -489,10 +442,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -514,10 +463,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -546,6 +491,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

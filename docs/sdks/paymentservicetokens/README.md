@@ -36,7 +36,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionNoCursorPaymentServiceToken != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -54,7 +54,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListPaymentMethodPaymentServiceTokensResponse](../../models/operations/listpaymentmethodpaymentservicetokensresponse.md), error**
+**[*components.CollectionNoCursorPaymentServiceToken](../../models/components/collectionnocursorpaymentservicetoken.md), error**
 
 ### Errors
 
@@ -106,7 +106,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.PaymentServiceToken != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -125,7 +125,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreatePaymentMethodPaymentServiceTokenResponse](../../models/operations/createpaymentmethodpaymentservicetokenresponse.md), error**
+**[*components.PaymentServiceToken](../../models/components/paymentservicetoken.md), error**
 
 ### Errors
 
@@ -168,12 +168,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.PaymentServiceTokens.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "703f2d99-3fd1-44bc-9cbd-a25a2d597886", nil, nil)
+    err := s.PaymentMethods.PaymentServiceTokens.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "703f2d99-3fd1-44bc-9cbd-a25a2d597886", nil, nil)
     if err != nil {
         log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
     }
 }
 ```
@@ -191,7 +188,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeletePaymentMethodPaymentServiceTokenResponse](../../models/operations/deletepaymentmethodpaymentservicetokenresponse.md), error**
+**error**
 
 ### Errors
 

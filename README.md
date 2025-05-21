@@ -79,7 +79,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.AccountUpdaterJob != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -126,7 +126,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.AccountUpdaterJob != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -336,7 +336,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.CollectionBuyer != nil {
+	if res != nil {
 		for {
 			// handle items
 
@@ -401,7 +401,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.AccountUpdaterJob != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -448,7 +448,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.AccountUpdaterJob != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -643,7 +643,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.AccountUpdaterJob != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -681,7 +681,7 @@ func main() {
 	if err != nil {
 		log.Fatal(err)
 	}
-	if res.AccountUpdaterJob != nil {
+	if res != nil {
 		// handle response
 	}
 }
@@ -747,6 +747,16 @@ d6 := types.MustDateFromString("2019-01-01") // returns types.Date and panics on
 <!-- Placeholder for Future Speakeasy SDK Sections -->
 
 # Development
+
+## Testing
+
+To run the tests, install Go and run the following.
+
+```sh
+go install
+go test
+```
+
 
 ## Maturity
 

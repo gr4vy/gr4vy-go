@@ -56,23 +56,3 @@ func (o *ConfigureDigitalWalletRequest) GetDigitalWalletCreate() components.Digi
 	}
 	return o.DigitalWalletCreate
 }
-
-type ConfigureDigitalWalletResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	DigitalWallet *components.DigitalWallet
-}
-
-func (o *ConfigureDigitalWalletResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *ConfigureDigitalWalletResponse) GetDigitalWallet() *components.DigitalWallet {
-	if o == nil {
-		return nil
-	}
-	return o.DigitalWallet
-}

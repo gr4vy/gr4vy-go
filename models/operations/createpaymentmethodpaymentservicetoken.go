@@ -65,23 +65,3 @@ func (o *CreatePaymentMethodPaymentServiceTokenRequest) GetPaymentServiceTokenCr
 	}
 	return o.PaymentServiceTokenCreate
 }
-
-type CreatePaymentMethodPaymentServiceTokenResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	PaymentServiceToken *components.PaymentServiceToken
-}
-
-func (o *CreatePaymentMethodPaymentServiceTokenResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreatePaymentMethodPaymentServiceTokenResponse) GetPaymentServiceToken() *components.PaymentServiceToken {
-	if o == nil {
-		return nil
-	}
-	return o.PaymentServiceToken
-}

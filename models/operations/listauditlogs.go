@@ -87,23 +87,14 @@ func (o *ListAuditLogsRequest) GetMerchantAccountID() *string {
 }
 
 type ListAuditLogsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionAuditLogEntry *components.CollectionAuditLogEntry
+	Result components.CollectionAuditLogEntry
 
 	Next func() (*ListAuditLogsResponse, error)
 }
 
-func (o *ListAuditLogsResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *ListAuditLogsResponse) GetResult() components.CollectionAuditLogEntry {
 	if o == nil {
-		return components.HTTPMetadata{}
+		return components.CollectionAuditLogEntry{}
 	}
-	return o.HTTPMeta
-}
-
-func (o *ListAuditLogsResponse) GetCollectionAuditLogEntry() *components.CollectionAuditLogEntry {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionAuditLogEntry
+	return o.Result
 }

@@ -40,7 +40,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionNoCursorPaymentMethodSummary != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -56,7 +56,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListBuyerPaymentMethodsResponse](../../models/operations/listbuyerpaymentmethodsresponse.md), error**
+**[*components.CollectionNoCursorPaymentMethodSummary](../../models/components/collectionnocursorpaymentmethodsummary.md), error**
 
 ### Errors
 

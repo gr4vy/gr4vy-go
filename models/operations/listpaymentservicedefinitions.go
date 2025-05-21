@@ -40,23 +40,14 @@ func (o *ListPaymentServiceDefinitionsRequest) GetLimit() *int64 {
 }
 
 type ListPaymentServiceDefinitionsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionPaymentServiceDefinition *components.CollectionPaymentServiceDefinition
+	Result components.CollectionPaymentServiceDefinition
 
 	Next func() (*ListPaymentServiceDefinitionsResponse, error)
 }
 
-func (o *ListPaymentServiceDefinitionsResponse) GetHTTPMeta() components.HTTPMetadata {
+func (o *ListPaymentServiceDefinitionsResponse) GetResult() components.CollectionPaymentServiceDefinition {
 	if o == nil {
-		return components.HTTPMetadata{}
+		return components.CollectionPaymentServiceDefinition{}
 	}
-	return o.HTTPMeta
-}
-
-func (o *ListPaymentServiceDefinitionsResponse) GetCollectionPaymentServiceDefinition() *components.CollectionPaymentServiceDefinition {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionPaymentServiceDefinition
+	return o.Result
 }

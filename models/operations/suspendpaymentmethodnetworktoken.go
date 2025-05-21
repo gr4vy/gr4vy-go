@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
-	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
 type SuspendPaymentMethodNetworkTokenGlobals struct {
@@ -65,24 +64,4 @@ func (o *SuspendPaymentMethodNetworkTokenRequest) GetMerchantAccountID() *string
 		return nil
 	}
 	return o.MerchantAccountID
-}
-
-type SuspendPaymentMethodNetworkTokenResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	NetworkToken *components.NetworkToken
-}
-
-func (o *SuspendPaymentMethodNetworkTokenResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *SuspendPaymentMethodNetworkTokenResponse) GetNetworkToken() *components.NetworkToken {
-	if o == nil {
-		return nil
-	}
-	return o.NetworkToken
 }

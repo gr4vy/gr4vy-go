@@ -56,23 +56,3 @@ func (o *ListGiftCardBalancesRequest) GetGiftCardBalanceRequest() components.Gif
 	}
 	return o.GiftCardBalanceRequest
 }
-
-type ListGiftCardBalancesResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionNoCursorGiftCardSummary *components.CollectionNoCursorGiftCardSummary
-}
-
-func (o *ListGiftCardBalancesResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *ListGiftCardBalancesResponse) GetCollectionNoCursorGiftCardSummary() *components.CollectionNoCursorGiftCardSummary {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionNoCursorGiftCardSummary
-}

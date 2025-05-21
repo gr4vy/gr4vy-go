@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
-	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
 type DeletePaymentMethodNetworkTokenGlobals struct {
@@ -65,15 +64,4 @@ func (o *DeletePaymentMethodNetworkTokenRequest) GetMerchantAccountID() *string 
 		return nil
 	}
 	return o.MerchantAccountID
-}
-
-type DeletePaymentMethodNetworkTokenResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-}
-
-func (o *DeletePaymentMethodNetworkTokenResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
 }

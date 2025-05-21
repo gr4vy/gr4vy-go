@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
-	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
 type ListBuyerGiftCardsGlobals struct {
@@ -63,24 +62,4 @@ func (o *ListBuyerGiftCardsRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return o.MerchantAccountID
-}
-
-type ListBuyerGiftCardsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionNoCursorGiftCardSummary *components.CollectionNoCursorGiftCardSummary
-}
-
-func (o *ListBuyerGiftCardsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *ListBuyerGiftCardsResponse) GetCollectionNoCursorGiftCardSummary() *components.CollectionNoCursorGiftCardSummary {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionNoCursorGiftCardSummary
 }

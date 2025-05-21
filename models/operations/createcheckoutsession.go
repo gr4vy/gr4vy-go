@@ -3,8 +3,6 @@
 package operations
 
 import (
-	"errors"
-	"fmt"
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
@@ -20,74 +18,11 @@ func (o *CreateCheckoutSessionGlobals) GetMerchantAccountID() *string {
 	return o.MerchantAccountID
 }
 
-type CreateCheckoutSessionBodyType string
-
-const (
-	CreateCheckoutSessionBodyTypeCheckoutSessionUpdate CreateCheckoutSessionBodyType = "CheckoutSessionUpdate"
-	CreateCheckoutSessionBodyTypeArrayOfBaseModel      CreateCheckoutSessionBodyType = "arrayOfBaseModel"
-)
-
-type CreateCheckoutSessionBody struct {
-	CheckoutSessionUpdate *components.CheckoutSessionUpdate `queryParam:"inline"`
-	ArrayOfBaseModel      []components.BaseModel            `queryParam:"inline"`
-
-	Type CreateCheckoutSessionBodyType
-}
-
-func CreateCreateCheckoutSessionBodyCheckoutSessionUpdate(checkoutSessionUpdate components.CheckoutSessionUpdate) CreateCheckoutSessionBody {
-	typ := CreateCheckoutSessionBodyTypeCheckoutSessionUpdate
-
-	return CreateCheckoutSessionBody{
-		CheckoutSessionUpdate: &checkoutSessionUpdate,
-		Type:                  typ,
-	}
-}
-
-func CreateCreateCheckoutSessionBodyArrayOfBaseModel(arrayOfBaseModel []components.BaseModel) CreateCheckoutSessionBody {
-	typ := CreateCheckoutSessionBodyTypeArrayOfBaseModel
-
-	return CreateCheckoutSessionBody{
-		ArrayOfBaseModel: arrayOfBaseModel,
-		Type:             typ,
-	}
-}
-
-func (u *CreateCheckoutSessionBody) UnmarshalJSON(data []byte) error {
-
-	var checkoutSessionUpdate components.CheckoutSessionUpdate = components.CheckoutSessionUpdate{}
-	if err := utils.UnmarshalJSON(data, &checkoutSessionUpdate, "", true, true); err == nil {
-		u.CheckoutSessionUpdate = &checkoutSessionUpdate
-		u.Type = CreateCheckoutSessionBodyTypeCheckoutSessionUpdate
-		return nil
-	}
-
-	var arrayOfBaseModel []components.BaseModel = []components.BaseModel{}
-	if err := utils.UnmarshalJSON(data, &arrayOfBaseModel, "", true, true); err == nil {
-		u.ArrayOfBaseModel = arrayOfBaseModel
-		u.Type = CreateCheckoutSessionBodyTypeArrayOfBaseModel
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for CreateCheckoutSessionBody", string(data))
-}
-
-func (u CreateCheckoutSessionBody) MarshalJSON() ([]byte, error) {
-	if u.CheckoutSessionUpdate != nil {
-		return utils.MarshalJSON(u.CheckoutSessionUpdate, "", true)
-	}
-
-	if u.ArrayOfBaseModel != nil {
-		return utils.MarshalJSON(u.ArrayOfBaseModel, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type CreateCheckoutSessionBody: all fields are null")
-}
-
 type CreateCheckoutSessionRequest struct {
 	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
-	MerchantAccountID *string                    `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-	RequestBody       *CreateCheckoutSessionBody `request:"mediaType=application/json"`
+	MerchantAccountID     *string                           `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	CheckoutSessionCreate *components.CheckoutSessionCreate `request:"mediaType=application/json"`
 }
 
 func (c CreateCheckoutSessionRequest) MarshalJSON() ([]byte, error) {
@@ -115,29 +50,9 @@ func (o *CreateCheckoutSessionRequest) GetMerchantAccountID() *string {
 	return o.MerchantAccountID
 }
 
-func (o *CreateCheckoutSessionRequest) GetRequestBody() *CreateCheckoutSessionBody {
+func (o *CreateCheckoutSessionRequest) GetCheckoutSessionCreate() *components.CheckoutSessionCreate {
 	if o == nil {
 		return nil
 	}
-	return o.RequestBody
-}
-
-type CreateCheckoutSessionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CheckoutSession *components.CheckoutSession
-}
-
-func (o *CreateCheckoutSessionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreateCheckoutSessionResponse) GetCheckoutSession() *components.CheckoutSession {
-	if o == nil {
-		return nil
-	}
-	return o.CheckoutSession
+	return o.CheckoutSessionCreate
 }

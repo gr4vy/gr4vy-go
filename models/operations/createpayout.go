@@ -56,23 +56,3 @@ func (o *CreatePayoutRequest) GetPayoutCreate() components.PayoutCreate {
 	}
 	return o.PayoutCreate
 }
-
-type CreatePayoutResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	PayoutSummary *components.PayoutSummary
-}
-
-func (o *CreatePayoutResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreatePayoutResponse) GetPayoutSummary() *components.PayoutSummary {
-	if o == nil {
-		return nil
-	}
-	return o.PayoutSummary
-}

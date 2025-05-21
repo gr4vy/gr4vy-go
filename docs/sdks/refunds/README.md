@@ -34,7 +34,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Refund != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -51,7 +51,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetRefundResponse](../../models/operations/getrefundresponse.md), error**
+**[*components.Refund](../../models/components/refund.md), error**
 
 ### Errors
 

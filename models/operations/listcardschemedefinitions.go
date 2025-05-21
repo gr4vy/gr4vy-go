@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/models/components"
-)
-
 type ListCardSchemeDefinitionsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -27,24 +23,4 @@ func (o *ListCardSchemeDefinitionsRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return o.MerchantAccountID
-}
-
-type ListCardSchemeDefinitionsResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	CollectionNoCursorCardSchemeDefinition *components.CollectionNoCursorCardSchemeDefinition
-}
-
-func (o *ListCardSchemeDefinitionsResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *ListCardSchemeDefinitionsResponse) GetCollectionNoCursorCardSchemeDefinition() *components.CollectionNoCursorCardSchemeDefinition {
-	if o == nil {
-		return nil
-	}
-	return o.CollectionNoCursorCardSchemeDefinition
 }

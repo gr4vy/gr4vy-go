@@ -192,12 +192,7 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 		}
 	}
 
-	res := &operations.ListAuditLogsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
+	res := &operations.ListAuditLogsResponse{}
 	res.Next = func() (*operations.ListAuditLogsResponse, error) {
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
@@ -260,7 +255,7 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			res.CollectionAuditLogEntry = &out
+			res.Result = out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -281,10 +276,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -306,10 +297,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -331,10 +318,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -356,10 +339,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -381,10 +360,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -406,10 +381,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -431,10 +402,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -456,10 +423,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -481,10 +444,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -506,10 +465,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -531,10 +486,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -556,10 +507,6 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)

@@ -4,7 +4,6 @@ package operations
 
 import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
-	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
 type SyncTransactionGlobals struct {
@@ -55,24 +54,4 @@ func (o *SyncTransactionRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return o.MerchantAccountID
-}
-
-type SyncTransactionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	Transaction *components.Transaction
-}
-
-func (o *SyncTransactionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *SyncTransactionResponse) GetTransaction() *components.Transaction {
-	if o == nil {
-		return nil
-	}
-	return o.Transaction
 }

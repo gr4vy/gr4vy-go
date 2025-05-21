@@ -38,7 +38,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Any != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -57,7 +57,7 @@ func main() {
 
 ### Response
 
-**[*operations.RegisterDigitalWalletDomainResponse](../../models/operations/registerdigitalwalletdomainresponse.md), error**
+**[any](../../.md), error**
 
 ### Errors
 
@@ -107,7 +107,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Any != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -126,7 +126,7 @@ func main() {
 
 ### Response
 
-**[*operations.UnregisterDigitalWalletDomainResponse](../../models/operations/unregisterdigitalwalletdomainresponse.md), error**
+**[any](../../.md), error**
 
 ### Errors
 

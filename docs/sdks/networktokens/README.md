@@ -38,7 +38,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionNoCursorNetworkToken != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -55,7 +55,7 @@ func main() {
 
 ### Response
 
-**[*operations.ListPaymentMethodNetworkTokensResponse](../../models/operations/listpaymentmethodnetworktokensresponse.md), error**
+**[*components.CollectionNoCursorNetworkToken](../../models/components/collectionnocursornetworktoken.md), error**
 
 ### Errors
 
@@ -107,7 +107,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.NetworkToken != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -126,7 +126,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreatePaymentMethodNetworkTokenResponse](../../models/operations/createpaymentmethodnetworktokenresponse.md), error**
+**[*components.NetworkToken](../../models/components/networktoken.md), error**
 
 ### Errors
 
@@ -173,7 +173,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.NetworkToken != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -192,7 +192,7 @@ func main() {
 
 ### Response
 
-**[*operations.SuspendPaymentMethodNetworkTokenResponse](../../models/operations/suspendpaymentmethodnetworktokenresponse.md), error**
+**[*components.NetworkToken](../../models/components/networktoken.md), error**
 
 ### Errors
 
@@ -239,7 +239,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.NetworkToken != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -258,7 +258,7 @@ func main() {
 
 ### Response
 
-**[*operations.ResumePaymentMethodNetworkTokenResponse](../../models/operations/resumepaymentmethodnetworktokenresponse.md), error**
+**[*components.NetworkToken](../../models/components/networktoken.md), error**
 
 ### Errors
 
@@ -301,12 +301,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.NetworkTokens.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "f8dd5cfc-7834-4847-95dc-f75a360e2298", nil, nil)
+    err := s.PaymentMethods.NetworkTokens.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "f8dd5cfc-7834-4847-95dc-f75a360e2298", nil, nil)
     if err != nil {
         log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
     }
 }
 ```
@@ -324,7 +321,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeletePaymentMethodNetworkTokenResponse](../../models/operations/deletepaymentmethodnetworktokenresponse.md), error**
+**error**
 
 ### Errors
 

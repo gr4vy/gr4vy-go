@@ -44,7 +44,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionPaymentService != nil {
+    if res != nil {
         for {
             // handle items
 
@@ -145,16 +145,16 @@ func main() {
         },
         Position: gr4vygo.Int64(1),
         AcceptedCurrencies: []string{
+            "USD",
             "EUR",
             "GBP",
-            "USD",
         },
         AcceptedCountries: []string{
+            "US",
             "DE",
             "GB",
-            "US",
         },
-        Active: gr4vygo.Bool(false),
+        Active: gr4vygo.Bool(true),
         MerchantProfile: map[string]*components.MerchantProfileScheme{
             "key": &components.MerchantProfileScheme{
                 MerchantAcquirerBin: "516327",
@@ -180,7 +180,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.PaymentService != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -197,7 +197,7 @@ func main() {
 
 ### Response
 
-**[*operations.UpdatePaymentServiceResponse](../../models/operations/updatepaymentserviceresponse.md), error**
+**[*components.PaymentService](../../models/components/paymentservice.md), error**
 
 ### Errors
 
@@ -244,7 +244,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.PaymentService != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -261,7 +261,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetPaymentServiceResponse](../../models/operations/getpaymentserviceresponse.md), error**
+**[*components.PaymentService](../../models/components/paymentservice.md), error**
 
 ### Errors
 
@@ -309,16 +309,16 @@ func main() {
         DisplayName: gr4vygo.String("Stripe"),
         Position: gr4vygo.Int64(1),
         AcceptedCurrencies: []string{
+            "USD",
             "EUR",
             "GBP",
-            "USD",
         },
         AcceptedCountries: []string{
+            "US",
             "DE",
             "GB",
-            "US",
         },
-        Active: gr4vygo.Bool(false),
+        Active: gr4vygo.Bool(true),
         ThreeDSecureEnabled: gr4vygo.Bool(true),
         MerchantProfile: map[string]*components.MerchantProfileScheme{
             "key": &components.MerchantProfileScheme{
@@ -337,7 +337,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.PaymentService != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -355,7 +355,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreatePaymentServiceResponse](../../models/operations/createpaymentserviceresponse.md), error**
+**[*components.PaymentService](../../models/components/paymentservice.md), error**
 
 ### Errors
 
@@ -402,7 +402,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Any != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -420,7 +420,7 @@ func main() {
 
 ### Response
 
-**[*operations.DeletePaymentServiceResponse](../../models/operations/deletepaymentserviceresponse.md), error**
+**[any](../../.md), error**
 
 ### Errors
 
@@ -472,7 +472,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.Any != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -490,7 +490,7 @@ func main() {
 
 ### Response
 
-**[*operations.VerifyPaymentServiceCredentialsResponse](../../models/operations/verifypaymentservicecredentialsresponse.md), error**
+**[any](../../.md), error**
 
 ### Errors
 
@@ -539,7 +539,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CreateSession != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -557,7 +557,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreatePaymentServiceSessionResponse](../../models/operations/createpaymentservicesessionresponse.md), error**
+**[*components.CreateSession](../../models/components/createsession.md), error**
 
 ### Errors
 

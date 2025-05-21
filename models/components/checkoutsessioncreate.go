@@ -6,7 +6,7 @@ import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 )
 
-type CheckoutSessionUpdate struct {
+type CheckoutSessionCreate struct {
 	// An array of cart items that represents the line items of a transaction.
 	CartItems []CartItem `json:"cart_items,omitempty"`
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it.
@@ -18,46 +18,46 @@ type CheckoutSessionUpdate struct {
 	ExpiresIn *float64 `default:"3600" json:"expires_in"`
 }
 
-func (c CheckoutSessionUpdate) MarshalJSON() ([]byte, error) {
+func (c CheckoutSessionCreate) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(c, "", false)
 }
 
-func (c *CheckoutSessionUpdate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
+func (c *CheckoutSessionCreate) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CheckoutSessionUpdate) GetCartItems() []CartItem {
+func (o *CheckoutSessionCreate) GetCartItems() []CartItem {
 	if o == nil {
 		return nil
 	}
 	return o.CartItems
 }
 
-func (o *CheckoutSessionUpdate) GetMetadata() map[string]string {
+func (o *CheckoutSessionCreate) GetMetadata() map[string]string {
 	if o == nil {
 		return nil
 	}
 	return o.Metadata
 }
 
-func (o *CheckoutSessionUpdate) GetBuyer() *GuestBuyerInput {
+func (o *CheckoutSessionCreate) GetBuyer() *GuestBuyerInput {
 	if o == nil {
 		return nil
 	}
 	return o.Buyer
 }
 
-func (o *CheckoutSessionUpdate) GetAirline() *Airline {
+func (o *CheckoutSessionCreate) GetAirline() *Airline {
 	if o == nil {
 		return nil
 	}
 	return o.Airline
 }
 
-func (o *CheckoutSessionUpdate) GetExpiresIn() *float64 {
+func (o *CheckoutSessionCreate) GetExpiresIn() *float64 {
 	if o == nil {
 		return nil
 	}

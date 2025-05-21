@@ -22,6 +22,8 @@ func (e TicketDeliveryMethod) ToPointer() *TicketDeliveryMethod {
 type Airline struct {
 	// The unique identifier of the reservation in the global distribution system.
 	BookingCode *string `json:"booking_code,omitempty"`
+	// Indicates whether the cardholder is traveling.
+	IsCardholderTraveling *bool `json:"is_cardholder_traveling,omitempty"`
 	// The address of the place/agency that issued the ticket.
 	IssuedAddress *string `json:"issued_address,omitempty"`
 	// The date that the ticket was last issued in the airline reservation system.
@@ -74,6 +76,13 @@ func (o *Airline) GetBookingCode() *string {
 		return nil
 	}
 	return o.BookingCode
+}
+
+func (o *Airline) GetIsCardholderTraveling() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.IsCardholderTraveling
 }
 
 func (o *Airline) GetIssuedAddress() *string {

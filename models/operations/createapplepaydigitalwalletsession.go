@@ -36,23 +36,3 @@ func (o *CreateApplePayDigitalWalletSessionRequest) GetApplePaySessionRequest() 
 	}
 	return o.ApplePaySessionRequest
 }
-
-type CreateApplePayDigitalWalletSessionResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	ApplePaySession map[string]any
-}
-
-func (o *CreateApplePayDigitalWalletSessionResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreateApplePayDigitalWalletSessionResponse) GetApplePaySession() map[string]any {
-	if o == nil {
-		return nil
-	}
-	return o.ApplePaySession
-}

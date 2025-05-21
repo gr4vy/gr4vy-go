@@ -37,7 +37,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionMerchantAccount != nil {
+    if res != nil {
         for {
             // handle items
 
@@ -138,7 +138,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.MerchantAccount != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -155,7 +155,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateMerchantAccountResponse](../../models/operations/createmerchantaccountresponse.md), error**
+**[*components.MerchantAccount](../../models/components/merchantaccount.md), error**
 
 ### Errors
 
@@ -202,7 +202,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.MerchantAccount != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -218,7 +218,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetMerchantAccountResponse](../../models/operations/getmerchantaccountresponse.md), error**
+**[*components.MerchantAccount](../../models/components/merchantaccount.md), error**
 
 ### Errors
 
@@ -288,7 +288,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.MerchantAccount != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -306,7 +306,7 @@ func main() {
 
 ### Response
 
-**[*operations.UpdateMerchantAccountResponse](../../models/operations/updatemerchantaccountresponse.md), error**
+**[*components.MerchantAccount](../../models/components/merchantaccount.md), error**
 
 ### Errors
 

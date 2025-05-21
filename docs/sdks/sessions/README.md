@@ -39,7 +39,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.GooglePaySession != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -56,7 +56,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateGooglePayDigitalWalletSessionResponse](../../models/operations/creategooglepaydigitalwalletsessionresponse.md), error**
+**[*components.GooglePaySession](../../models/components/googlepaysession.md), error**
 
 ### Errors
 
@@ -107,7 +107,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.ApplePaySession != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -124,7 +124,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateApplePayDigitalWalletSessionResponse](../../models/operations/createapplepaydigitalwalletsessionresponse.md), error**
+**[map[string]any](../../.md), error**
 
 ### Errors
 
@@ -174,7 +174,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.ClickToPaySession != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -190,7 +190,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreateClickToPayDigitalWalletSessionResponse](../../models/operations/createclicktopaydigitalwalletsessionresponse.md), error**
+**[*components.ClickToPaySession](../../models/components/clicktopaysession.md), error**
 
 ### Errors
 

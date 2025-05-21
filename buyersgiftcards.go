@@ -28,7 +28,7 @@ func newBuyersGiftCards(sdkConfig sdkConfiguration) *BuyersGiftCards {
 
 // List gift cards for a buyer
 // List all the stored gift cards for a specific buyer.
-func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *string, buyerID *string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*operations.ListBuyerGiftCardsResponse, error) {
+func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *string, buyerID *string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorGiftCardSummary, error) {
 	request := operations.ListBuyerGiftCardsRequest{
 		BuyerExternalIdentifier: buyerExternalIdentifier,
 		BuyerID:                 buyerID,
@@ -197,13 +197,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 		}
 	}
 
-	res := &operations.ListBuyerGiftCardsResponse{
-		HTTPMeta: components.HTTPMetadata{
-			Request:  req,
-			Response: httpRes,
-		},
-	}
-
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -218,7 +211,7 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			res.CollectionNoCursorGiftCardSummary = &out
+			return &out, nil
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -239,10 +232,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -264,10 +253,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -289,10 +274,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -314,10 +295,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -339,10 +316,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -364,10 +337,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -389,10 +358,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -414,10 +379,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -439,10 +400,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -464,10 +421,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -489,10 +442,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -514,10 +463,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			out.HTTPMeta = components.HTTPMetadata{
-				Request:  req,
-				Response: httpRes,
-			}
 			return nil, &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
@@ -546,6 +491,6 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return res, nil
+	return nil, nil
 
 }

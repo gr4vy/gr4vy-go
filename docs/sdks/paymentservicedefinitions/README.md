@@ -36,7 +36,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CollectionPaymentServiceDefinition != nil {
+    if res != nil {
         for {
             // handle items
 
@@ -112,7 +112,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.PaymentServiceDefinition != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -128,7 +128,7 @@ func main() {
 
 ### Response
 
-**[*operations.GetPaymentServiceDefinitionResponse](../../models/operations/getpaymentservicedefinitionresponse.md), error**
+**[*components.PaymentServiceDefinition](../../models/components/paymentservicedefinition.md), error**
 
 ### Errors
 
@@ -177,7 +177,7 @@ func main() {
     if err != nil {
         log.Fatal(err)
     }
-    if res.CreateSession != nil {
+    if res != nil {
         // handle response
     }
 }
@@ -194,7 +194,7 @@ func main() {
 
 ### Response
 
-**[*operations.CreatePaymentServiceDefinitionSessionResponse](../../models/operations/createpaymentservicedefinitionsessionresponse.md), error**
+**[*components.CreateSession](../../models/components/createsession.md), error**
 
 ### Errors
 

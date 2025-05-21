@@ -64,23 +64,3 @@ func (o *CreateTransactionRefundRequest) GetTransactionRefundCreate() components
 	}
 	return o.TransactionRefundCreate
 }
-
-type CreateTransactionRefundResponse struct {
-	HTTPMeta components.HTTPMetadata `json:"-"`
-	// Successful Response
-	Refund *components.Refund
-}
-
-func (o *CreateTransactionRefundResponse) GetHTTPMeta() components.HTTPMetadata {
-	if o == nil {
-		return components.HTTPMetadata{}
-	}
-	return o.HTTPMeta
-}
-
-func (o *CreateTransactionRefundResponse) GetRefund() *components.Refund {
-	if o == nil {
-		return nil
-	}
-	return o.Refund
-}
