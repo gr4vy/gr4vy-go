@@ -42,6 +42,7 @@ This SDK is designed to simplify development, reduce boilerplate code, and help 
   * [Custom HTTP Client](#custom-http-client)
   * [Special Types](#special-types)
 * [Development](#development)
+  * [Testing](#testing)
   * [Maturity](#maturity)
   * [Contributions](#contributions)
 
