@@ -23,6 +23,8 @@ type AdditionalIdentifiers struct {
 	PaymentServiceCaptureId NullableString `json:"payment_service_capture_id,omitempty"`
 	// The optional ID provided by the processor for this transaction. Availability of this ID will vary per connector used.
 	PaymentServiceProcessorId NullableString `json:"payment_service_processor_id,omitempty"`
+	// The optional legacy ID provided by the processor for this transaction. Availability of this ID will vary per connector used.
+	PaymentServiceLegacyId NullableString `json:"payment_service_legacy_id,omitempty"`
 }
 
 // NewAdditionalIdentifiers instantiates a new AdditionalIdentifiers object
@@ -55,7 +57,7 @@ func (o *AdditionalIdentifiers) GetPaymentServiceAuthorizationId() string {
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
 func (o *AdditionalIdentifiers) GetPaymentServiceAuthorizationIdOk() (*string, bool) {
-	if o == nil  {
+	if o == nil {
 		return nil, false
 	}
 	return o.PaymentServiceAuthorizationId.Get(), o.PaymentServiceAuthorizationId.IsSet()
@@ -74,6 +76,8 @@ func (o *AdditionalIdentifiers) HasPaymentServiceAuthorizationId() bool {
 func (o *AdditionalIdentifiers) SetPaymentServiceAuthorizationId(v string) {
 	o.PaymentServiceAuthorizationId.Set(&v)
 }
+
+// SetPaymentServiceAuthorizationIdNil sets the value for PaymentServiceAuthorizationId to be an explicit ni
 // SetPaymentServiceAuthorizationIdNil sets the value for PaymentServiceAuthorizationId to be an explicit nil
 func (o *AdditionalIdentifiers) SetPaymentServiceAuthorizationIdNil() {
 	o.PaymentServiceAuthorizationId.Set(nil)
@@ -96,7 +100,7 @@ func (o *AdditionalIdentifiers) GetPaymentServiceCaptureId() string {
 // GetPaymentServiceCaptureIdOk returns a tuple with the PaymentServiceCaptureId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AdditionalIdentifiers) GetPaymentServiceCaptureIdOk() (*string, bool) {
+	if o == nil {
 	if o == nil  {
 		return nil, false
 	}
@@ -115,6 +119,7 @@ func (o *AdditionalIdentifiers) HasPaymentServiceCaptureId() bool {
 // SetPaymentServiceCaptureId gets a reference to the given NullableString and assigns it to the PaymentServiceCaptureId field.
 func (o *AdditionalIdentifiers) SetPaymentServiceCaptureId(v string) {
 	o.PaymentServiceCaptureId.Set(&v)
+ 
 }
 // SetPaymentServiceCaptureIdNil sets the value for PaymentServiceCaptureId to be an explicit nil
 func (o *AdditionalIdentifiers) SetPaymentServiceCaptureIdNil() {
@@ -138,7 +143,7 @@ func (o *AdditionalIdentifiers) GetPaymentServiceProcessorId() string {
 // GetPaymentServiceProcessorIdOk returns a tuple with the PaymentServiceProcessorId field value if set, nil otherwise
 // and a boolean to check if the value has been set.
 // NOTE: If the value is an explicit nil, `nil, true` will be returned
-func (o *AdditionalIdentifiers) GetPaymentServiceProcessorIdOk() (*string, bool) {
+	if o == nil {
 	if o == nil  {
 		return nil, false
 	}
@@ -157,6 +162,7 @@ func (o *AdditionalIdentifiers) HasPaymentServiceProcessorId() bool {
 // SetPaymentServiceProcessorId gets a reference to the given NullableString and assigns it to the PaymentServiceProcessorId field.
 func (o *AdditionalIdentifiers) SetPaymentServiceProcessorId(v string) {
 	o.PaymentServiceProcessorId.Set(&v)
+c
 }
 // SetPaymentServiceProcessorIdNil sets the value for PaymentServiceProcessorId to be an explicit nil
 func (o *AdditionalIdentifiers) SetPaymentServiceProcessorIdNil() {
@@ -166,6 +172,49 @@ func (o *AdditionalIdentifiers) SetPaymentServiceProcessorIdNil() {
 // UnsetPaymentServiceProcessorId ensures that no value is present for PaymentServiceProcessorId, not even an explicit nil
 func (o *AdditionalIdentifiers) UnsetPaymentServiceProcessorId() {
 	o.PaymentServiceProcessorId.Unset()
+}
+
+// GetPaymentServiceLegacyId returns the PaymentServiceLegacyId field value if set, zero value otherwise (both if not set or set to explicit null).
+func (o *AdditionalIdentifiers) GetPaymentServiceLegacyId() string {
+	if o == nil || o.PaymentServiceLegacyId.Get() == nil {
+		var ret string
+		return ret
+	}
+	return *o.PaymentServiceLegacyId.Get()
+}
+
+// GetPaymentServiceLegacyIdOk returns a tuple with the PaymentServiceLegacyId field value if set, nil otherwise
+// and a boolean to check if the value has been set.
+// NOTE: If the value is an explicit nil, `nil, true` will be returned
+	if o == nil {
+	if o == nil  {
+		return nil, false
+	}
+	return o.PaymentServiceLegacyId.Get(), o.PaymentServiceLegacyId.IsSet()
+}
+
+// HasPaymentServiceLegacyId returns a boolean if a field has been set.
+func (o *AdditionalIdentifiers) HasPaymentServiceLegacyId() bool {
+	if o != nil && o.PaymentServiceLegacyId.IsSet() {
+		return true
+	}
+
+	return false
+}
+
+// SetPaymentServiceLegacyId gets a reference to the given NullableString and assigns it to the PaymentServiceLegacyId field.
+func (o *AdditionalIdentifiers) SetPaymentServiceLegacyId(v string) {
+	o.PaymentServiceLegacyId.Set(&v)
+I
+}
+// SetPaymentServiceLegacyIdNil sets the value for PaymentServiceLegacyId to be an explicit nil
+func (o *AdditionalIdentifiers) SetPaymentServiceLegacyIdNil() {
+	o.PaymentServiceLegacyId.Set(nil)
+}
+
+// UnsetPaymentServiceLegacyId ensures that no value is present for PaymentServiceLegacyId, not even an explicit nil
+func (o *AdditionalIdentifiers) UnsetPaymentServiceLegacyId() {
+	o.PaymentServiceLegacyId.Unset()
 }
 
 func (o AdditionalIdentifiers) MarshalJSON() ([]byte, error) {
@@ -178,6 +227,9 @@ func (o AdditionalIdentifiers) MarshalJSON() ([]byte, error) {
 	}
 	if o.PaymentServiceProcessorId.IsSet() {
 		toSerialize["payment_service_processor_id"] = o.PaymentServiceProcessorId.Get()
+	}
+	if o.PaymentServiceLegacyId.IsSet() {
+		toSerialize["payment_service_legacy_id"] = o.PaymentServiceLegacyId.Get()
 	}
 	return json.Marshal(toSerialize)
 }
@@ -217,5 +269,3 @@ func (v *NullableAdditionalIdentifiers) UnmarshalJSON(src []byte) error {
 	v.isSet = true
 	return json.Unmarshal(src, &v.value)
 }
-
-
