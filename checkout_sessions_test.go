@@ -1,44 +1,137 @@
 package gr4vygo
 
 import (
+	"bytes"
+	"context"
+	"encoding/json"
+	"fmt"
+	"io"
+	"net/http"
+	"os"
+	"path/filepath"
 	"strings"
 	"testing"
+	"time"
+
+	"github.com/google/uuid"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"github.com/gr4vy/gr4vy-go/models/operations"
 )
 
-var testClient *Gr4vyClient
+// Test configuration
+var (
+	merchantAccountID string
+)
 
-func setupClient(t *testing.T) *Gr4vyClient {
-	if testClient != nil {
-		return testClient
+// loadPrivateKey loads the private key from environment or file
+func loadPrivateKey() (string, error) {
+	// First try environment variable
+	privateKey := os.Getenv("PRIVATE_KEY")
+	if privateKey != "" {
+		return privateKey, nil
 	}
 
-	setup, err := NewTestSetup()
+	// Try loading from file
+	filename := filepath.Join("..", "..", "private_key.pem")
+	data, err := os.ReadFile(filename)
 	if err != nil {
-		t.Skipf("Skipping integration test: failed to create test setup: %v", err)
+		// Try current directory
+		filename = "private_key.pem"
+		data, err = os.ReadFile(filename)
+		if err != nil {
+			return "", fmt.Errorf("failed to load private key: %w", err)
+		}
 	}
 
-	client, err := setup.SetupEnvironment()
+	return string(data), nil
+}
+
+// setupTestEnvironment sets up the test environment
+func setupTestEnvironment(t *testing.T) *Gr4vy {
+	// Load private key
+	privateKey, err := loadPrivateKey()
 	if err != nil {
-		t.Skipf("Skipping integration test: failed to setup environment: %v", err)
+		t.Skipf("Skipping test: %v", err)
 	}
 
-	testClient = client
-	return testClient
+	// Generate JWT token
+	token, err := GetToken(privateKey, []JWTScope{ReadAll, WriteAll}, 3600, nil, "")
+	if err != nil {
+		t.Fatalf("Failed to generate token: %v", err)
+	}
+
+	// Create admin client
+	adminClient := New(
+		WithServer(ServerSandbox),
+		WithID("e2e"),
+		WithSecurity(token),
+	)
+
+	// Generate random merchant account ID
+	merchantAccountID = uuid.New().String()[:8]
+
+	// Create merchant account
+	ctx := context.Background()
+
+	merchantAccountCreate := components.MerchantAccountCreate{}
+	timeout := float64(60)
+
+	merchantAccount, err := adminClient.MerchantAccounts.Create(ctx, merchantAccountCreate, &timeout)
+	if err != nil {
+		t.Fatalf("Failed to create merchant account: %v", err)
+	}
+
+	// Create merchant client
+	merchantClient := New(
+		WithServer(ServerSandbox),
+		WithID("e2e"),
+		WithSecurity(token),
+		WithMerchantAccountID(merchantAccount.ID),
+	)
+
+	// Setup payment service - adjust Fields type based on your SDK
+	paymentServiceCreate := components.PaymentServiceCreate{
+		DisplayName:                "Payment service",
+		PaymentServiceDefinitionID: "mock-card",
+		AcceptedCurrencies:         []string{"USD"},
+		AcceptedCountries:          []string{"US"},
+	}
+
+	_, err = merchantClient.PaymentServices.Create(ctx, paymentServiceCreate, &merchantAccountID)
+	if err != nil {
+		t.Fatalf("Failed to create payment service: %v", err)
+	}
+
+	return merchantClient
+}
+
+// TestMain sets up and tears down the test environment
+func TestMain(m *testing.M) {
+	// Run tests
+	code := m.Run()
+
+	// Exit with test result code
+	os.Exit(code)
 }
 
 func TestProcessPaymentWithCheckoutSession(t *testing.T) {
-	client := setupClient(t)
+	client := setupTestEnvironment(t)
+	ctx := context.Background()
 
-	checkoutSession, err := client.CreateCheckoutSession()
+	// Create checkout session
+	checkoutSession, err := client.CheckoutSessions.Create(ctx, nil, nil, nil)
 	if err != nil {
 		t.Fatalf("Failed to create checkout session: %v", err)
 	}
 
 	if checkoutSession.ID == "" {
-		t.Fatal("Checkout session ID should not be empty")
+		t.Fatal("Checkout session ID is nil")
 	}
 
-	cardFields := map[string]interface{}{
+	// Direct API call to update checkout session fields
+	url := fmt.Sprintf("https://api.sandbox.e2e.gr4vy.app/checkout/sessions/%s/fields", checkoutSession.ID)
+
+	updateData := map[string]interface{}{
 		"payment_method": map[string]interface{}{
 			"method":          "card",
 			"number":          "4111111111111111",
@@ -47,90 +140,147 @@ func TestProcessPaymentWithCheckoutSession(t *testing.T) {
 		},
 	}
 
-	err = client.UpdateCheckoutSessionFields(checkoutSession.ID, cardFields)
+	jsonData, err := json.Marshal(updateData)
+	if err != nil {
+		t.Fatalf("Failed to marshal update data: %v", err)
+	}
+
+	req, err := http.NewRequest("PUT", url, bytes.NewBuffer(jsonData))
+	if err != nil {
+		t.Fatalf("Failed to create request: %v", err)
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	httpClient := &http.Client{Timeout: 5 * time.Second}
+	resp, err := httpClient.Do(req)
 	if err != nil {
 		t.Fatalf("Failed to update checkout session fields: %v", err)
 	}
+	defer resp.Body.Close()
 
-	paymentMethod := map[string]interface{}{
-		"method": "checkout-session",
-		"id":     checkoutSession.ID,
+	if resp.StatusCode != 204 {
+		body, _ := io.ReadAll(resp.Body)
+		t.Fatalf("Expected status code 204, got %d. Body: %s", resp.StatusCode, string(body))
 	}
 
-	transaction, err := client.CreateTransaction(1299, "USD", paymentMethod)
+	// Create a transaction using the checkout session
+	amount := int64(1299)
+	currency := "USD"
+
+	checkoutSessionWithURLPaymentMethodCreate := components.CheckoutSessionWithURLPaymentMethodCreate{
+		ID: checkoutSession.ID,
+	}
+	paymentMethod := components.CreateTransactionCreatePaymentMethodCheckoutSessionWithURLPaymentMethodCreate(checkoutSessionWithURLPaymentMethodCreate)
+
+	transactionCreate := components.TransactionCreate{
+		Amount:        amount,
+		Currency:      currency,
+		PaymentMethod: &paymentMethod,
+	}
+
+	transaction, err := client.Transactions.Create(ctx, transactionCreate, nil, nil, nil)
+
 	if err != nil {
 		t.Fatalf("Failed to create transaction: %v", err)
 	}
 
 	if transaction.ID == "" {
-		t.Error("Transaction ID should not be empty")
+		t.Fatal("Transaction ID is nil")
 	}
 
-	if transaction.Status != "authorization_succeeded" {
-		t.Errorf("Expected transaction status 'authorization_succeeded', got '%s'", transaction.Status)
+	if transaction.Status == "" || transaction.Status != components.TransactionStatusAuthorizationSucceeded {
+		t.Errorf("Expected status 'authorization_succeeded', got %v", transaction.Status)
 	}
 
-	if transaction.Amount != 1299 {
-		t.Errorf("Expected transaction amount 1299, got %d", transaction.Amount)
+	if transaction.Amount == 0 || transaction.Amount != amount {
+		t.Errorf("Expected amount %d, got %v", amount, transaction.Amount)
 	}
 }
 
 func TestHandleErrorOnMissingCardData(t *testing.T) {
-	client := setupClient(t)
+	client := setupTestEnvironment(t)
+	ctx := context.Background()
 
-	checkoutSession, err := client.CreateCheckoutSession()
+	// Create a checkout session
+	checkoutSession, err := client.CheckoutSessions.Create(ctx, nil, nil, nil)
 	if err != nil {
 		t.Fatalf("Failed to create checkout session: %v", err)
 	}
 
 	if checkoutSession.ID == "" {
-		t.Fatal("Checkout session ID should not be empty")
+		t.Fatal("Checkout session ID is nil")
 	}
 
-	paymentMethod := map[string]interface{}{
-		"method": "checkout-session",
-		"id":     checkoutSession.ID,
+	// Attempt to create a transaction with missing card data
+	amount := int64(1299)
+	currency := "USD"
+	checkoutSessionWithURLPaymentMethodCreate := components.CheckoutSessionWithURLPaymentMethodCreate{
+		ID: checkoutSession.ID,
+	}
+	paymentMethod := components.CreateTransactionCreatePaymentMethodCheckoutSessionWithURLPaymentMethodCreate(checkoutSessionWithURLPaymentMethodCreate)
+
+	transactionCreate := components.TransactionCreate{
+		Amount:        amount,
+		Currency:      currency,
+		PaymentMethod: &paymentMethod,
 	}
 
-	_, err = client.CreateTransaction(1299, "USD", paymentMethod)
+	_, err = client.Transactions.Create(ctx, transactionCreate, nil, nil, nil)
+
 	if err == nil {
-		t.Fatal("Expected error when creating transaction without card data")
+		t.Fatal("Expected error for missing card data, but got nil")
 	}
 
-	if !strings.Contains(err.Error(), "Request failed validation") &&
-		!strings.Contains(err.Error(), "failed to create transaction") {
+	// Check if error contains expected message
+	if !strings.Contains(err.Error(), "validation") && !strings.Contains(err.Error(), "400") {
 		t.Errorf("Expected validation error, got: %v", err)
 	}
 }
 
 func TestHandleStoredPaymentMethod(t *testing.T) {
-	client := setupClient(t)
+	client := setupTestEnvironment(t)
+	ctx := context.Background()
 
-	cardData := CardPaymentMethodCreate{
-		Number:         "4111111111111111",
-		ExpirationDate: "11/25",
-		SecurityCode:   "123",
+	// Create a card payment method
+	number := "4111111111111111"
+	expirationDate := "11/25"
+	securityCode := "123"
+
+	cardPaymentMethodCreate := components.CardPaymentMethodCreate{
+		Number:         number,
+		ExpirationDate: expirationDate,
+		SecurityCode:   &securityCode,
 	}
 
-	paymentMethod, err := client.CreatePaymentMethod(cardData)
+	request := operations.Body{
+		CardPaymentMethodCreate: &cardPaymentMethodCreate,
+	}
+
+	paymentMethod, err := client.PaymentMethods.Create(ctx, request, nil, nil)
+
 	if err != nil {
 		t.Fatalf("Failed to create payment method: %v", err)
 	}
 
 	if paymentMethod.ID == "" {
-		t.Fatal("Payment method ID should not be empty")
+		t.Fatal("Payment method ID is nil")
 	}
 
-	checkoutSession, err := client.CreateCheckoutSession()
+	// Create a checkout session
+	checkoutSession, err := client.CheckoutSessions.Create(ctx, nil, nil, nil)
 	if err != nil {
 		t.Fatalf("Failed to create checkout session: %v", err)
 	}
 
 	if checkoutSession.ID == "" {
-		t.Fatal("Checkout session ID should not be empty")
+		t.Fatal("Checkout session ID is nil")
 	}
 
-	storedFields := map[string]interface{}{
+	// Direct API call to update checkout session fields
+	url := fmt.Sprintf("https://api.sandbox.e2e.gr4vy.app/checkout/sessions/%s/fields", checkoutSession.ID)
+
+	updateData := map[string]interface{}{
 		"payment_method": map[string]interface{}{
 			"method":        "id",
 			"id":            paymentMethod.ID,
@@ -138,30 +288,60 @@ func TestHandleStoredPaymentMethod(t *testing.T) {
 		},
 	}
 
-	err = client.UpdateCheckoutSessionFields(checkoutSession.ID, storedFields)
+	jsonData, err := json.Marshal(updateData)
+	if err != nil {
+		t.Fatalf("Failed to marshal update data: %v", err)
+	}
+
+	req, err := http.NewRequest("PUT", url, bytes.NewBuffer(jsonData))
+	if err != nil {
+		t.Fatalf("Failed to create request: %v", err)
+	}
+
+	req.Header.Set("Content-Type", "application/json")
+
+	httpClient := &http.Client{Timeout: 5 * time.Second}
+	resp, err := httpClient.Do(req)
 	if err != nil {
 		t.Fatalf("Failed to update checkout session fields: %v", err)
 	}
+	defer resp.Body.Close()
 
-	transactionPaymentMethod := map[string]interface{}{
-		"method": "checkout-session",
-		"id":     checkoutSession.ID,
+	if resp.StatusCode != 204 {
+		body, _ := io.ReadAll(resp.Body)
+		t.Fatalf("Expected status code 204, got %d. Body: %s", resp.StatusCode, string(body))
 	}
 
-	transaction, err := client.CreateTransaction(1299, "USD", transactionPaymentMethod)
+	// Create a transaction using the checkout session
+	amount := int64(1299)
+	currency := "USD"
+
+	checkoutSessionWithURLPaymentMethodCreate := components.CheckoutSessionWithURLPaymentMethodCreate{
+		ID: checkoutSession.ID,
+	}
+	pm := components.CreateTransactionCreatePaymentMethodCheckoutSessionWithURLPaymentMethodCreate(checkoutSessionWithURLPaymentMethodCreate)
+
+	transactionCreate := components.TransactionCreate{
+		Amount:        amount,
+		Currency:      currency,
+		PaymentMethod: &pm,
+	}
+
+	transaction, err := client.Transactions.Create(ctx, transactionCreate, nil, nil, nil)
+
 	if err != nil {
 		t.Fatalf("Failed to create transaction: %v", err)
 	}
 
 	if transaction.ID == "" {
-		t.Error("Transaction ID should not be empty")
+		t.Fatal("Transaction ID is nil")
 	}
 
-	if transaction.Status != "authorization_succeeded" {
-		t.Errorf("Expected transaction status 'authorization_succeeded', got '%s'", transaction.Status)
+	if transaction.Status == "" || transaction.Status != components.TransactionStatusAuthorizationSucceeded {
+		t.Errorf("Expected status 'authorization_succeeded', got %v", transaction.Status)
 	}
 
-	if transaction.Amount != 1299 {
-		t.Errorf("Expected transaction amount 1299, got %d", transaction.Amount)
+	if transaction.Amount == 0 || transaction.Amount != amount {
+		t.Errorf("Expected amount %d, got %v", amount, transaction.Amount)
 	}
 }
