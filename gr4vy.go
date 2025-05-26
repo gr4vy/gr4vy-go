@@ -206,9 +206,9 @@ func New(opts ...SDKOption) *Gr4vy {
 		sdkConfiguration: sdkConfiguration{
 			Language:          "go",
 			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "0.2.19",
+			SDKVersion:        "0.2.21",
 			GenVersion:        "2.610.0",
-			UserAgent:         "speakeasy-sdk/go 0.2.19 2.610.0 1.0.0 github.com/gr4vy/gr4vy-go",
+			UserAgent:         "speakeasy-sdk/go 0.2.21 2.610.0 1.0.0 github.com/gr4vy/gr4vy-go",
 			Globals:           globals.Globals{},
 			ServerDefaults: map[string]map[string]string{
 				"production": {
