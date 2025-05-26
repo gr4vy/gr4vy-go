@@ -288,8 +288,16 @@ func TestUpdateTokenAllowsEmbedTokenUpdateWithNewParams(t *testing.T) {
 func TestWithToken(t *testing.T) {
 	tokenFunc := WithToken(testPrivateKeyPEM, nil, 3600)
 
-	token1 := tokenFunc()
-	token2 := tokenFunc()
+	token1, err1 := tokenFunc()
+	token2, err2 := tokenFunc()
+
+	if err1 != nil {
+		t.Fatalf("Failed to create embed token: %v", err1)
+	}
+
+	if err2 != nil {
+		t.Fatalf("Failed to create embed token: %v", err2)
+	}
 
 	if token1 == token2 {
 		t.Error("Expected different tokens from multiple calls, but got the same token")

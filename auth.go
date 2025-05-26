@@ -193,14 +193,9 @@ func UpdateToken(token string, privateKeyPEM string, scopes []JWTScope, expiresI
 }
 
 // WithToken generates a function that creates a new token for every API request
-func WithToken(privateKeyPEM string, scopes []JWTScope, expiresIn int) TokenFunc {
-	return func() string {
-		token, err := GetToken(privateKeyPEM, scopes, expiresIn, nil, "")
-		if err != nil {
-			// In a real implementation, you might want to handle this differently
-			panic(fmt.Sprintf("failed to generate token: %v", err))
-		}
-		return token
+func WithToken(privateKeyPEM string, scopes []JWTScope, expiresIn int) func() (string, error) {
+	return func() (string, error) {
+		return GetToken(privateKeyPEM, scopes, expiresIn, nil, "")
 	}
 }
 
