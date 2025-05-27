@@ -49,7 +49,7 @@ var testEmbedParams = map[string]interface{}{
 const testCheckoutSessionID = "0ebde6a1-f66c-43ea-bb8b-73751864c604"
 
 func TestGetTokenCreatesValidSignedJWT(t *testing.T) {
-	token, err := GetToken(testPrivateKeyPEM, []JWTScope{ReadAll, WriteAll}, 3600, nil, "")
+	token, err := GetToken(testPrivateKeyPEM, []JWTScope{ReadAll, WriteAll}, 3600)
 	if err != nil {
 		t.Fatalf("Failed to create token: %v", err)
 	}
@@ -90,7 +90,7 @@ func TestGetTokenCreatesValidSignedJWT(t *testing.T) {
 }
 
 func TestGetTokenAcceptsOptionalEmbedData(t *testing.T) {
-	token, err := GetToken(testPrivateKeyPEM, []JWTScope{Embed}, 3600, testEmbedParams, "")
+	token, err := GetTokenWithEmbedProperties(testPrivateKeyPEM, []JWTScope{Embed}, 3600, testEmbedParams, "")
 	if err != nil {
 		t.Fatalf("Failed to create token: %v", err)
 	}
@@ -122,7 +122,7 @@ func TestGetTokenAcceptsOptionalEmbedData(t *testing.T) {
 }
 
 func TestGetTokenIgnoresEmbedDataWithoutEmbedScope(t *testing.T) {
-	token, err := GetToken(testPrivateKeyPEM, []JWTScope{ReadAll}, 3600, testEmbedParams, "")
+	token, err := GetTokenWithEmbedProperties(testPrivateKeyPEM, []JWTScope{ReadAll}, 3600, testEmbedParams, "")
 	if err != nil {
 		t.Fatalf("Failed to create token: %v", err)
 	}
@@ -202,7 +202,7 @@ func TestGetEmbedTokenTakesOptionalCheckoutSessionID(t *testing.T) {
 }
 
 func TestUpdateTokenResignsWithNewSignatureAndExpiration(t *testing.T) {
-	originalToken, err := GetToken(testPrivateKeyPEM, nil, 5, nil, "")
+	originalToken, err := GetToken(testPrivateKeyPEM, nil, 5)
 	if err != nil {
 		t.Fatalf("Failed to create original token: %v", err)
 	}
@@ -284,42 +284,3 @@ func TestUpdateTokenAllowsEmbedTokenUpdateWithNewParams(t *testing.T) {
 			newClaims.CheckoutSessionID, originalClaims.CheckoutSessionID)
 	}
 }
-
-// func TestWithToken(t *testing.T) {
-// 	tokenFunc := WithToken(testPrivateKeyPEM, nil, 3600, nil, nil)
-
-// 	token1, err1 := tokenFunc()
-// 	token2, err2 := tokenFunc()
-
-// 	if err1 != nil {
-// 		t.Fatalf("Failed to create embed token: %v", err1)
-// 	}
-
-// 	if err2 != nil {
-// 		t.Fatalf("Failed to create embed token: %v", err2)
-// 	}
-
-// 	if token1 == token2 {
-// 		t.Error("Expected different tokens from multiple calls, but got the same token")
-// 	}
-
-// 	_, err := jwt.Parse(token1, func(token *jwt.Token) (interface{}, error) {
-// 		block, _ := pem.Decode([]byte(testPrivateKeyPEM))
-// 		privateKey, _ := x509.ParsePKCS8PrivateKey(block.Bytes)
-// 		ecdsaKey := privateKey.(*ecdsa.PrivateKey)
-// 		return &ecdsaKey.PublicKey, nil
-// 	})
-// 	if err != nil {
-// 		t.Errorf("Token1 is invalid: %v", err)
-// 	}
-
-// 	_, err = jwt.Parse(token2, func(token *jwt.Token) (interface{}, error) {
-// 		block, _ := pem.Decode([]byte(testPrivateKeyPEM))
-// 		privateKey, _ := x509.ParsePKCS8PrivateKey(block.Bytes)
-// 		ecdsaKey := privateKey.(*ecdsa.PrivateKey)
-// 		return &ecdsaKey.PublicKey, nil
-// 	})
-// 	if err != nil {
-// 		t.Errorf("Token2 is invalid: %v", err)
-// 	}
-// }

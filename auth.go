@@ -78,8 +78,16 @@ type TokenClaims struct {
 // TokenFunc is a function that returns a JWT token
 type TokenFunc func() string
 
+func GetToken(privateKeyPEM string, scopes []JWTScope, expiresIn int) (string, error) {
+	return getToken(privateKeyPEM, scopes, expiresIn, nil, "")
+}
+
+func GetTokenWithEmbedProperties(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParams map[string]interface{}, checkoutSessionID string) (string, error) {
+	return getToken(privateKeyPEM, scopes, expiresIn, embedParams, checkoutSessionID)
+}
+
 // GetToken generates a JWT token with the specified parameters
-func GetToken(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParams map[string]interface{}, checkoutSessionID string) (string, error) {
+func getToken(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParams map[string]interface{}, checkoutSessionID string) (string, error) {
 	// Parse private key
 	block, _ := pem.Decode([]byte(privateKeyPEM))
 	if block == nil {
@@ -158,7 +166,7 @@ func GetToken(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParam
 
 // GetEmbedToken generates a token specifically for embed use
 func GetEmbedToken(privateKeyPEM string, embedParams map[string]interface{}, checkoutSessionID string) (string, error) {
-	return GetToken(privateKeyPEM, []JWTScope{Embed}, 3600, embedParams, checkoutSessionID)
+	return getToken(privateKeyPEM, []JWTScope{Embed}, 3600, embedParams, checkoutSessionID)
 }
 
 // UpdateToken updates an existing token with a new signature, and optionally new data
@@ -191,13 +199,22 @@ func UpdateToken(token string, privateKeyPEM string, scopes []JWTScope, expiresI
 		checkoutSessionID = claims.CheckoutSessionID
 	}
 
-	return GetToken(privateKeyPEM, scopes, expiresIn, embedParams, checkoutSessionID)
+	return getToken(privateKeyPEM, scopes, expiresIn, embedParams, checkoutSessionID)
 }
 
 // WithToken generates a function that creates a new token for every API request
-func WithToken(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParams map[string]interface{}, checkoutSessionID string) func(ctx context.Context) (components.Security, error) {
+func WithToken(privateKeyPEM string, scopes []JWTScope, expiresIn int) func(ctx context.Context) (components.Security, error) {
+	return withToken(privateKeyPEM, scopes, expiresIn, nil, "")
+}
+
+func WithTokenWithEmbedProperties(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParams map[string]interface{}, checkoutSessionID string) func(ctx context.Context) (components.Security, error) {
+	return withToken(privateKeyPEM, scopes, expiresIn, embedParams, checkoutSessionID)
+}
+
+// WithToken generates a function that creates a new token for every API request
+func withToken(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParams map[string]interface{}, checkoutSessionID string) func(ctx context.Context) (components.Security, error) {
 	return func(ctx context.Context) (components.Security, error) {
-		token, err := GetToken(privateKeyPEM, scopes, expiresIn, embedParams, checkoutSessionID)
+		token, err := getToken(privateKeyPEM, scopes, expiresIn, embedParams, checkoutSessionID)
 		if err != nil {
 			return components.Security{}, err
 		}

@@ -55,7 +55,7 @@ func setupTestEnvironment(t *testing.T) *Gr4vy {
 	}
 
 	// Generate JWT token
-	token, err := GetToken(privateKey, []JWTScope{ReadAll, WriteAll}, 3600, nil, "")
+	token, err := GetToken(privateKey, []JWTScope{ReadAll, WriteAll}, 3600)
 	if err != nil {
 		t.Fatalf("Failed to generate token: %v", err)
 	}
@@ -85,7 +85,7 @@ func setupTestEnvironment(t *testing.T) *Gr4vy {
 	}
 
 	// Create merchant client
-	withToken := WithToken(privateKey, []JWTScope{ReadAll, WriteAll}, 3600, nil, "")
+	withToken := WithToken(privateKey, []JWTScope{ReadAll, WriteAll}, 3600)
 	merchantClient := New(
 		WithServer(ServerSandbox),
 		WithID("e2e"),
