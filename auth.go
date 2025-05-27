@@ -1,6 +1,7 @@
 package gr4vygo
 
 import (
+	"context"
 	"crypto/ecdsa"
 	"crypto/sha256"
 	"crypto/x509"
@@ -12,6 +13,7 @@ import (
 
 	"github.com/golang-jwt/jwt/v5"
 	"github.com/google/uuid"
+	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
 // JWTScope represents the available JWT scopes
@@ -193,9 +195,13 @@ func UpdateToken(token string, privateKeyPEM string, scopes []JWTScope, expiresI
 }
 
 // WithToken generates a function that creates a new token for every API request
-func WithToken(privateKeyPEM string, scopes []JWTScope, expiresIn int) func() (string, error) {
-	return func() (string, error) {
-		return GetToken(privateKeyPEM, scopes, expiresIn, nil, "")
+func WithToken(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParams map[string]interface{}, checkoutSessionID string) func(ctx context.Context) (components.Security, error) {
+	return func(ctx context.Context) (components.Security, error) {
+		token, err := GetToken(privateKeyPEM, scopes, expiresIn, embedParams, checkoutSessionID)
+		if err != nil {
+			return components.Security{}, err
+		}
+		return components.Security{BearerAuth: &token}, nil
 	}
 }
 

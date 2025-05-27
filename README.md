@@ -764,7 +764,7 @@ To run the tests, install Go and run the following.
 
 ```sh
 go install
-go test
+go test -v
 ```
 
 

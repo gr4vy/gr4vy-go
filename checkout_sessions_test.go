@@ -73,7 +73,10 @@ func setupTestEnvironment(t *testing.T) *Gr4vy {
 	// Create merchant account
 	ctx := context.Background()
 
-	merchantAccountCreate := components.MerchantAccountCreate{}
+	merchantAccountCreate := components.MerchantAccountCreate{
+		DisplayName: merchantAccountID,
+		ID:          merchantAccountID,
+	}
 	timeout := float64(60)
 
 	merchantAccount, err := adminClient.MerchantAccounts.Create(ctx, merchantAccountCreate, &timeout)
@@ -82,10 +85,11 @@ func setupTestEnvironment(t *testing.T) *Gr4vy {
 	}
 
 	// Create merchant client
+	withToken := WithToken(privateKey, []JWTScope{ReadAll, WriteAll}, 3600, nil, "")
 	merchantClient := New(
 		WithServer(ServerSandbox),
 		WithID("e2e"),
-		WithSecurity(token),
+		WithSecuritySource(withToken),
 		WithMerchantAccountID(merchantAccount.ID),
 	)
 
@@ -95,6 +99,12 @@ func setupTestEnvironment(t *testing.T) *Gr4vy {
 		PaymentServiceDefinitionID: "mock-card",
 		AcceptedCurrencies:         []string{"USD"},
 		AcceptedCountries:          []string{"US"},
+		Fields: []components.Field{
+			components.Field{
+				Key:   "merchant_id",
+				Value: merchantAccountID,
+			},
+		},
 	}
 
 	_, err = merchantClient.PaymentServices.Create(ctx, paymentServiceCreate, &merchantAccountID)
