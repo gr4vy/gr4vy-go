@@ -1,3 +1,6 @@
+# .gitignore
+.DS_Store
+**/.speakeasy/temp/
+**/.speakeasy/logs/
+.speakeasy/reports
 *.pem
-/test
-openapi.v1.json

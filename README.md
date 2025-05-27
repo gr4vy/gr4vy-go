@@ -1,191 +1,179 @@
-# Gr4vy SDK for Go
+# Gr4vy Go SDK (Beta)
 
-Gr4vy provides any of your payment integrations through one unified API. For
-more details, visit [gr4vy.com](https://gr4vy.com).
+Developer-friendly & type-safe Go SDK specifically catered to leverage the **Gr4vy** API.
 
-## Installation
+<div align="left">
+	<img alt="GitHub Tag" src="https://img.shields.io/github/v/tag/gr4vy/gr4vy-go?style=for-the-badge&label=Version&color=blue">
+    <a href="https://www.speakeasy.com/?utm_source=github-com/gr4vy/gr4vy-go&utm_campaign=go"><img src="https://custom-icon-badges.demolab.com/badge/-Built%20By%20Speakeasy-212015?style=for-the-badge&logoColor=FBE331&logo=speakeasy&labelColor=545454" /></a>
+</div>
 
-To add Gr4vy to your project, add the `github.com/gr4vy/gr4vy-go` package to
-your project.
+<br /><br />
+> [!IMPORTANT]
+> This is a Beta release of our latest SDK. Please refer to the [legacy Go SDK](https://github.com/gr4vy/gr4vy-go/tree/legacy) for the latest stable build.
 
-```sh
+## Summary
+
+Gr4vy Go SDK
+
+The official Gr4vy SDK for Go provides a convenient way to interact with the Gr4vy API from your server-side application. This SDK allows you to seamlessly integrate Gr4vy's powerful payment orchestration capabilities, including:
+
+* Creating Transactions: Initiate and process payments with various payment methods and services.
+* Managing Buyers: Store and manage buyer information securely.
+* Storing Payment Methods: Securely store and tokenize payment methods for future use.
+* Handling Webhooks: Easily process and respond to webhook events from Gr4vy.
+* And much more: Access the full suite of Gr4vy API payment features.
+
+This SDK is designed to simplify development, reduce boilerplate code, and help you get up and running with Gr4vy quickly and efficiently. It handles authentication, request signing, and provides easy-to-use methods for most API endpoints.
+
+<!-- No Summary [summary] -->
+
+<!-- Start Table of Contents [toc] -->
+## Table of Contents
+<!-- $toc-max-depth=2 -->
+* [Gr4vy Go SDK (Beta)](#gr4vy-go-sdk-beta)
+  * [SDK Installation](#sdk-installation)
+  * [SDK Example Usage](#sdk-example-usage)
+  * [Bearer token generation](#bearer-token-generation)
+  * [Embed token generation](#embed-token-generation)
+  * [Merchant account ID selection](#merchant-account-id-selection)
+  * [Webhooks verification](#webhooks-verification)
+  * [Authentication](#authentication)
+  * [Available Resources and Operations](#available-resources-and-operations)
+  * [Pagination](#pagination)
+  * [Retries](#retries)
+  * [Error Handling](#error-handling)
+  * [Server Selection](#server-selection)
+  * [Custom HTTP Client](#custom-http-client)
+  * [Special Types](#special-types)
+* [Development](#development)
+  * [Testing](#testing)
+  * [Maturity](#maturity)
+  * [Contributions](#contributions)
+
+<!-- End Table of Contents [toc] -->
+
+<!-- Start SDK Installation [installation] -->
+## SDK Installation
+
+To add the SDK as a dependency to your project:
+```bash
 go get github.com/gr4vy/gr4vy-go
 ```
+<!-- End SDK Installation [installation] -->
 
-Add import:
+## SDK Example Usage
 
-```golang
-import "github.com/gr4vy/gr4vy-go"
-```
+### Example
 
-## Getting Started
-
-To make your first API call, you will need to [request](https://gr4vy.com) a
-Gr4vy instance to be set up. Please contact our sales team for a demo.
-
-Once you have been set up with a Gr4vy account you will need to head over to the
-**Integrations** panel and generate a private key. We recommend storing this key
-in a secure location but in this code sample we simply read the file from disk.
-
-```golang
+```go
 package main
 
 import (
-  "io"
-  "io/ioutil"
-  "fmt"
-  "github.com/gr4vy/gr4vy-go"
+	"context"
+	gr4vy "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/operations"
+	"log"
+	"os"
 )
 
 func main() {
-  key, err := gr4vy.GetKeyFromFile(PRIVATE_KEY_FILENAME)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  client := gr4vy.NewGr4vyClient("demo", key, "sandbox")
-  client.Debug = true
+	ctx := context.Background()
 
-  var response *gr4vy.Gr4vyBuyers
-  response, _, err = client.ListBuyers(gr4vy.Int32(2))
-  if err != nil {
-    fmt.Println(err.Error())
-    return;
-  }
-  fmt.Printf("%+v\n", (*response.Items)[0].GetId())
+	privateKey := "...." // Private key loaded from disk or env var
+	withToken := gr4vy.WithToken(privateKey, []JWTScope{ReadAll, WriteAll}, 60)
+
+	s := gr4vy.New(
+		gr4vy.WithID("example"),
+		gr4vy.WithServer(gr4vy.ServerSandbox),
+		gr4vy.WithSecuritySource(withToken),
+		gr4vy.WithMerchantAccountID("default"),
+	)
+
+	res, err := s.Transactions.List(ctx, operations.ListTransactionsRequest{}, nil, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res != nil {
+		// handle response
+	}
 }
+
 ```
 
-## Multi merchant
+<br /><br />
+> [!IMPORTANT]
+> Please use `WithToken` where the documentation mentions `os.Getenv("GR4VY_BEARER_AUTH")`.
 
-In a multi-merchant environment, the merchant account ID can be set by using `NewGr4vyClientWithMid`:
+<!-- No SDK Example Usage [usage] -->
+
+## Bearer token generation
+
+Alternatively, you can create a token for use with the SDK or with your own client library.
 
 ```go
-  client := gr4vy.NewGr4vyClientWithMid("demo", key, "sandbox", "my_merchant_account_id")
-```
-
-
-## Gr4vy Embed
-
-To create a token for Gr4vy Embed, call the `client.GetEmbedToken(embed)`
-function with the amount, currency, and optional buyer information for Gr4vy
-Embed.
-
-```golang
-embed := gr4vy.EmbedParams{
-  Amount:   200,
-  Currency: "USD",
-  BuyerID:  "d757c76a-cbd7-4b56-95a3-40125b51b29c",
-}
-token, err = client.GetEmbedToken(embed)
-```
-
-You can now pass this token to your frontend where it can be used to
-authenticate Gr4vy Embed.
-
-The `buyer_id` and/or `buyer_external_identifier` fields can be used to allow
-the token to pull in previously stored payment methods for a user. A buyer
-needs to be created before it can be used in this way.
-
-```golang
-  key, err := gr4vy.GetKeyFromFile(PRIVATE_KEY)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-  client := gr4vy.NewGr4vyClient("demo", key, "sandbox")
-  client.Debug = true
-  req := gr4vy.Gr4vyBuyerRequest{
-    DisplayName: gr4vy.String("Jane Smith"),
-  }
-  var response *gr4vy.Gr4vyBuyer
-  response, _, err = client.AddBuyer(req)
-  if err != nil {
-    fmt.Println(err)
-    return
-  }
-
-  embed := gr4vy.EmbedParams{
-    Amount:   200,
-    Currency: "USD",
-    BuyerID:  (*response.Id),
-  }
-  client = gr4vy.NewGr4vyClient("demo", key, "sandbox")
-  client.Debug = true
-  var responseStr string
-  responseStr, err = client.GetEmbedToken(embed)
-
-  if err != nil {
-    fmt.Println(err)
-    return;
-  }
-
-  fmt.Println("embed token: " + responseStr)
-```
-
-## Initialization
-
-The client can be initialized with the Gr4vy ID (`gr4vyId`), the private key
-string and the environment (`sandbox` or `production`).
-
-```golang
-  client := gr4vy.NewGr4vyClient("acme", key, "sandbox")
-```
-
-Alternatively, instead of the `gr4vyId` it can be initialized with the `baseUrl`
-of the server to use directly.
-
-```golang
-  client := gr4vy.NewGr4vyClientWithBaseUrl("https://api.acme.gr4vy.app", key, "sandbox")
-```
-
-Your API private key can be created in your admin panel on the **Integrations**
-tab.
-
-
-## Making API calls
-
-This library conveniently maps every API path to a seperate function. For
-example, `GET /buyers?limit=100` would be:
-
-```golang
-  response, _, error := client.ListBuyers(2)
-```
-
-To create, the API requires a request object for that resource that is conventiently
-named `Gr4vy<Resource>Request`.  To update, the API requires a request object
-for that resource that is named `Gr4vy<Resource>Update`.
-
-For example, to create a buyer you will need to pass a `Gr4vyBuyerRequest` object to
-the `AddBuyer` method.
-
-```golang
-  req := gr4vy.Gr4vyBuyerRequest{
-    DisplayName: gr4vy.String("Jane Smith"),
-  }
-  response, _, error := client.AddBuyer(req)
-```
-
-So to update a buyer you will need to pass in the `Gr4vyBuyerUpdate` to the
-`UpdateBuyer` method.
-
-```golang
-  req := gr4vy.Gr4vyBuyerUpdate{
-    DisplayName: gr4vy.String("Janet Smith"),
-  }
-  response, err := client.UpdateBuyer(buyerId, req)
-```
-
-## Verifying Webhooks
-
-The `VerifyWebhook` function allows you to verify the authenticity of incoming webhooks from Gr4vy. It validates the signature and timestamp of the webhook payload to ensure it has not been tampered with.
-
-### Usage
-
-```golang
 import (
-  "fmt"
-  "github.com/gr4vy/gr4vy-go"
+	gr4vy "github.com/gr4vy/gr4vy-go"
+	"log"
+	"os"
+)
+
+privateKey := "...." // Private key loaded from disk or env var
+
+token, err := GetToken(privateKey, []JWTScope{ReadAll, WriteAll}, 5)
+if err != nil {
+	log.Fatal(err)
+}
+```
+
+> **Note:** This will only create a token once. Use `WithToken` to dynamically generate a token
+> for every request.
+
+
+## Embed token generation
+
+Alternatively, you can create a token for use with Embed as follows.
+
+```go
+import (
+	gr4vy "github.com/gr4vy/gr4vy-go"
+	"log"
+	"os"
+)
+
+privateKey := "...." // Private key loaded from disk or env var
+
+token, err := GetEmbedToken(privateKey, nil, "")
+if err != nil {
+	log.Fatal(err)
+}
+```
+
+> **Note:** This will only create a token once. Use `withToken` to dynamically generate a token
+> for every request.
+
+## Merchant account ID selection
+
+Depending on the key used, you might need to explicitly define a merchant account ID to use. In our API, 
+this uses the `X-GR4VY-MERCHANT-ACCOUNT-ID` header. When using the SDK, you can set the `merchantAccountId`
+on every request.
+
+```js
+s := gr4vy.New(
+	gr4vy.WithID("example"),
+	gr4vy.WithServer(gr4vy.ServerSandbox),
+	gr4vy.WithSecuritySource(withToken),
+	gr4vy.WithMerchantAccountID("my-merchant-id"),
+)
+```
+
+## Webhooks verification
+
+The SDK provides a `VerifyWebhook` method to validate incoming webhook requests from Gr4vy. This ensures that the webhook payload is authentic and has not been tampered with.
+
+```go
+import (
+  "log"
+  gr4vy "github.com/gr4vy/gr4vy-go"
 )
 
 func main() {
@@ -197,86 +185,691 @@ func main() {
 
   err := gr4vy.VerifyWebhook(secret, payload, &signatureHeader, &timestampHeader, timestampTolerance)
   if err != nil {
-    fmt.Println("Webhook verification failed:", err)
-    return
+    log.Fatal(err)
   }
-
-  fmt.Println("Webhook verified successfully!")
 }
 ```
 
-### Parameters
+<!-- Start Authentication [security] -->
+## Authentication
 
-- `secret` (string): The webhook secret used to sign the payload.
-- `payload` (string): The raw payload of the webhook.
-- `signatureHeader` (*string): The `X-Gr4vy-Signature` header from the webhook request.
-- `timestampHeader` (*string): The `X-Gr4vy-Timestamp` header from the webhook request.
-- `timestampTolerance` (int): The maximum allowed difference (in seconds) between the current time and the timestamp in the header. Set to `0` to disable timestamp validation.
+### Per-Client Security Schemes
 
-### Errors
+This SDK supports the following security scheme globally:
 
-The function returns an error if:
-- The `signatureHeader` or `timestampHeader` is missing.
-- The `timestampHeader` is invalid or too old (if `timestampTolerance` is set).
-- The signature does not match the expected value.
+| Name         | Type | Scheme      | Environment Variable |
+| ------------ | ---- | ----------- | -------------------- |
+| `BearerAuth` | http | HTTP Bearer | `GR4VY_BEARER_AUTH`  |
 
-## Response
+You can configure it using the `WithSecurity` option when initializing the SDK client instance. For example:
+```go
+package main
 
-Every resolved API call returns the requested resource, a `*http.Response`
-object from the "net/http" package and an `error` object.
+import (
+	"context"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"log"
+	"os"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := gr4vygo.New(
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+	)
+
+	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
+		PaymentMethodIds: []string{
+			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
+			"f29e886e-93cc-4714-b4a3-12b7a718e595",
+		},
+	}, nil, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Authentication [security] -->
+
+<!-- Start Available Resources and Operations [operations] -->
+## Available Resources and Operations
+
+<details open>
+<summary>Available methods</summary>
+
+### [AccountUpdater](docs/sdks/accountupdater/README.md)
 
 
-```golang
-  var response *gr4vy.Gr4vyBuyers
-  response, http, err = client.ListBuyers(gr4vy.Int32(2))
-  if err != nil {
-    fmt.Println(err.Error())
-    return;
-  }
+#### [AccountUpdater.Jobs](docs/sdks/jobs/README.md)
+
+* [Create](docs/sdks/jobs/README.md#create) - Create account updater job
+
+### [AuditLogs](docs/sdks/auditlogs/README.md)
+
+* [List](docs/sdks/auditlogs/README.md#list) - List audit log entries
+
+### [Buyers](docs/sdks/buyers/README.md)
+
+* [List](docs/sdks/buyers/README.md#list) - List all buyers
+* [Create](docs/sdks/buyers/README.md#create) - Add a buyer
+* [Get](docs/sdks/buyers/README.md#get) - Get a buyer
+* [Update](docs/sdks/buyers/README.md#update) - Update a buyer
+* [Delete](docs/sdks/buyers/README.md#delete) - Delete a buyer
+
+#### [Buyers.GiftCards](docs/sdks/buyersgiftcards/README.md)
+
+* [List](docs/sdks/buyersgiftcards/README.md#list) - List gift cards for a buyer
+
+#### [Buyers.PaymentMethods](docs/sdks/buyerspaymentmethods/README.md)
+
+* [List](docs/sdks/buyerspaymentmethods/README.md#list) - List payment methods for a buyer
+
+#### [Buyers.ShippingDetails](docs/sdks/shippingdetails/README.md)
+
+* [Create](docs/sdks/shippingdetails/README.md#create) - Add buyer shipping details
+* [List](docs/sdks/shippingdetails/README.md#list) - List a buyer's shipping details
+* [Get](docs/sdks/shippingdetails/README.md#get) - Get buyer shipping details
+* [Update](docs/sdks/shippingdetails/README.md#update) - Update a buyer's shipping details
+* [Delete](docs/sdks/shippingdetails/README.md#delete) - Delete a buyer's shipping details
+
+### [CardSchemeDefinitions](docs/sdks/cardschemedefinitions/README.md)
+
+* [List](docs/sdks/cardschemedefinitions/README.md#list) - List card scheme definitions
+
+### [CheckoutSessions](docs/sdks/checkoutsessions/README.md)
+
+* [Create](docs/sdks/checkoutsessions/README.md#create) - Create checkout session
+* [Update](docs/sdks/checkoutsessions/README.md#update) - Update checkout session
+* [Get](docs/sdks/checkoutsessions/README.md#get) - Get checkout session
+* [Delete](docs/sdks/checkoutsessions/README.md#delete) - Delete checkout session
+
+### [DigitalWallets](docs/sdks/digitalwallets/README.md)
+
+* [Create](docs/sdks/digitalwallets/README.md#create) - Register digital wallet
+* [List](docs/sdks/digitalwallets/README.md#list) - List digital wallets
+* [Get](docs/sdks/digitalwallets/README.md#get) - Get digital wallet
+* [Delete](docs/sdks/digitalwallets/README.md#delete) - Delete digital wallet
+* [Update](docs/sdks/digitalwallets/README.md#update) - Update digital wallet
+
+#### [DigitalWallets.Domains](docs/sdks/domains/README.md)
+
+* [Create](docs/sdks/domains/README.md#create) - Register a digital wallet domain
+* [Delete](docs/sdks/domains/README.md#delete) - Remove a digital wallet domain
+
+#### [DigitalWallets.Sessions](docs/sdks/sessions/README.md)
+
+* [GooglePay](docs/sdks/sessions/README.md#googlepay) - Create a Google Pay session
+* [ApplePay](docs/sdks/sessions/README.md#applepay) - Create a Apple Pay session
+* [ClickToPay](docs/sdks/sessions/README.md#clicktopay) - Create a Click to Pay session
+
+### [GiftCards](docs/sdks/giftcards/README.md)
+
+* [Get](docs/sdks/giftcards/README.md#get) - Get gift card
+* [Delete](docs/sdks/giftcards/README.md#delete) - Delete a gift card
+* [Create](docs/sdks/giftcards/README.md#create) - Create gift card
+* [List](docs/sdks/giftcards/README.md#list) - List gift cards
+
+#### [GiftCards.Balances](docs/sdks/balances/README.md)
+
+* [List](docs/sdks/balances/README.md#list) - List gift card balances
+
+
+### [MerchantAccounts](docs/sdks/merchantaccounts/README.md)
+
+* [List](docs/sdks/merchantaccounts/README.md#list) - List all merchant accounts
+* [Create](docs/sdks/merchantaccounts/README.md#create) - Create a merchant account
+* [Get](docs/sdks/merchantaccounts/README.md#get) - Get a merchant account
+* [Update](docs/sdks/merchantaccounts/README.md#update) - Update a merchant account
+
+### [PaymentMethods](docs/sdks/paymentmethods/README.md)
+
+* [List](docs/sdks/paymentmethods/README.md#list) - List all payment methods
+* [Create](docs/sdks/paymentmethods/README.md#create) - Create payment method
+* [Get](docs/sdks/paymentmethods/README.md#get) - Get payment method
+* [Delete](docs/sdks/paymentmethods/README.md#delete) - Delete payment method
+
+#### [PaymentMethods.NetworkTokens](docs/sdks/networktokens/README.md)
+
+* [List](docs/sdks/networktokens/README.md#list) - List network tokens
+* [Create](docs/sdks/networktokens/README.md#create) - Provision network token
+* [Suspend](docs/sdks/networktokens/README.md#suspend) - Suspend network token
+* [Resume](docs/sdks/networktokens/README.md#resume) - Resume network token
+* [Delete](docs/sdks/networktokens/README.md#delete) - Delete network token
+
+#### [PaymentMethods.NetworkTokens.Cryptogram](docs/sdks/cryptogram/README.md)
+
+* [Create](docs/sdks/cryptogram/README.md#create) - Provision network token cryptogram
+
+#### [PaymentMethods.PaymentServiceTokens](docs/sdks/paymentservicetokens/README.md)
+
+* [List](docs/sdks/paymentservicetokens/README.md#list) - List payment service tokens
+* [Create](docs/sdks/paymentservicetokens/README.md#create) - Create payment service token
+* [Delete](docs/sdks/paymentservicetokens/README.md#delete) - Delete payment service token
+
+### [PaymentOptions](docs/sdks/paymentoptions/README.md)
+
+* [List](docs/sdks/paymentoptions/README.md#list) - List payment options
+
+### [PaymentServiceDefinitions](docs/sdks/paymentservicedefinitions/README.md)
+
+* [List](docs/sdks/paymentservicedefinitions/README.md#list) - List payment service definitions
+* [Get](docs/sdks/paymentservicedefinitions/README.md#get) - Get a payment service definition
+* [Session](docs/sdks/paymentservicedefinitions/README.md#session) - Create a session for apayment service definition
+
+### [PaymentServices](docs/sdks/paymentservices/README.md)
+
+* [List](docs/sdks/paymentservices/README.md#list) - List payment services
+* [Create](docs/sdks/paymentservices/README.md#create) - Update a configured payment service
+* [Get](docs/sdks/paymentservices/README.md#get) - Get payment service
+* [Update](docs/sdks/paymentservices/README.md#update) - Configure a payment service
+* [Delete](docs/sdks/paymentservices/README.md#delete) - Delete a configured payment service
+* [Verify](docs/sdks/paymentservices/README.md#verify) - Verify payment service credentials
+* [Session](docs/sdks/paymentservices/README.md#session) - Create a session for apayment service definition
+
+### [Payouts](docs/sdks/payouts/README.md)
+
+* [List](docs/sdks/payouts/README.md#list) - List payouts created.
+* [Create](docs/sdks/payouts/README.md#create) - Create a payout.
+* [Get](docs/sdks/payouts/README.md#get) - Get a payout.
+
+### [Refunds](docs/sdks/refunds/README.md)
+
+* [Get](docs/sdks/refunds/README.md#get) - Get refund
+
+### [Transactions](docs/sdks/transactions/README.md)
+
+* [List](docs/sdks/transactions/README.md#list) - List transactions
+* [Create](docs/sdks/transactions/README.md#create) - Create transaction
+* [Get](docs/sdks/transactions/README.md#get) - Get transaction
+* [Capture](docs/sdks/transactions/README.md#capture) - Capture transaction
+* [Void](docs/sdks/transactions/README.md#void) - Void transaction
+* [Summary](docs/sdks/transactions/README.md#summary) - Get transaction summary
+* [Sync](docs/sdks/transactions/README.md#sync) - Sync transaction
+
+#### [Transactions.Refunds](docs/sdks/transactionsrefunds/README.md)
+
+* [List](docs/sdks/transactionsrefunds/README.md#list) - List transaction refunds
+* [Create](docs/sdks/transactionsrefunds/README.md#create) - Create transaction refund
+* [Get](docs/sdks/transactionsrefunds/README.md#get) - Get transaction refund
+
+#### [Transactions.Refunds.All](docs/sdks/all/README.md)
+
+* [Create](docs/sdks/all/README.md#create) - Create batch transaction refund
+
+</details>
+<!-- End Available Resources and Operations [operations] -->
+
+<!-- Start Pagination [pagination] -->
+## Pagination
+
+Some of the endpoints in this SDK support pagination. To use pagination, you make your SDK calls as usual, but the
+returned response object will have a `Next` method that can be called to pull down the next group of results. If the
+return value of `Next` is `nil`, then there are no more pages to be fetched.
+
+Here's an example of one such pagination call:
+```go
+package main
+
+import (
+	"context"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/operations"
+	"log"
+	"os"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := gr4vygo.New(
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+	)
+
+	res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{
+		Cursor:             gr4vygo.String("ZXhhbXBsZTE"),
+		Search:             gr4vygo.String("John"),
+		ExternalIdentifier: gr4vygo.String("buyer-12345"),
+	})
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res != nil {
+		for {
+			// handle items
+
+			res, err = res.Next()
+
+			if err != nil {
+				// handle error
+			}
+
+			if res == nil {
+				break
+			}
+		}
+	}
+}
+
+```
+<!-- End Pagination [pagination] -->
+
+<!-- Start Retries [retries] -->
+## Retries
+
+Some of the endpoints in this SDK support retries. If you use the SDK without any configuration, it will fall back to the default retry strategy provided by the API. However, the default retry strategy can be overridden on a per-operation basis, or across the entire SDK.
+
+To change the default retry strategy for a single API call, simply provide a `retry.Config` object to the call by using the `WithRetries` option:
+```go
+package main
+
+import (
+	"context"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"github.com/gr4vy/gr4vy-go/retry"
+	"log"
+	"models/operations"
+	"os"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := gr4vygo.New(
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+	)
+
+	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
+		PaymentMethodIds: []string{
+			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
+			"f29e886e-93cc-4714-b4a3-12b7a718e595",
+		},
+	}, nil, nil, operations.WithRetries(
+		retry.Config{
+			Strategy: "backoff",
+			Backoff: &retry.BackoffStrategy{
+				InitialInterval: 1,
+				MaxInterval:     50,
+				Exponent:        1.1,
+				MaxElapsedTime:  100,
+			},
+			RetryConnectionErrors: false,
+		}))
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res != nil {
+		// handle response
+	}
+}
+
 ```
 
-## Logging & Debugging
+If you'd like to override the default retry strategy for all operations that support retries, you can use the `WithRetryConfig` option at SDK initialization:
+```go
+package main
 
-The SDK makes it easy possible to the requests and responses to the console.
+import (
+	"context"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"github.com/gr4vy/gr4vy-go/retry"
+	"log"
+	"os"
+)
 
-```golang
-  client := gr4vy.NewGr4vyClient("YOUR_GR4VY_ID", key)
-  client.Debug = true
+func main() {
+	ctx := context.Background()
+
+	s := gr4vygo.New(
+		gr4vygo.WithRetryConfig(
+			retry.Config{
+				Strategy: "backoff",
+				Backoff: &retry.BackoffStrategy{
+					InitialInterval: 1,
+					MaxInterval:     50,
+					Exponent:        1.1,
+					MaxElapsedTime:  100,
+				},
+				RetryConnectionErrors: false,
+			}),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+	)
+
+	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
+		PaymentMethodIds: []string{
+			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
+			"f29e886e-93cc-4714-b4a3-12b7a718e595",
+		},
+	}, nil, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Retries [retries] -->
+
+<!-- Start Error Handling [errors] -->
+## Error Handling
+
+Handling errors in this SDK should largely match your expectations. All operations return a response object or an error, they will never return both.
+
+By Default, an API error will return `apierrors.APIError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
+
+For example, the `Create` function may return the following errors:
+
+| Error Type                    | Status Code | Content Type     |
+| ----------------------------- | ----------- | ---------------- |
+| apierrors.Error400            | 400         | application/json |
+| apierrors.Error401            | 401         | application/json |
+| apierrors.Error403            | 403         | application/json |
+| apierrors.Error404            | 404         | application/json |
+| apierrors.Error405            | 405         | application/json |
+| apierrors.Error409            | 409         | application/json |
+| apierrors.HTTPValidationError | 422         | application/json |
+| apierrors.Error425            | 425         | application/json |
+| apierrors.Error429            | 429         | application/json |
+| apierrors.Error500            | 500         | application/json |
+| apierrors.Error502            | 502         | application/json |
+| apierrors.Error504            | 504         | application/json |
+| apierrors.APIError            | 4XX, 5XX    | \*/\*            |
+
+### Example
+
+```go
+package main
+
+import (
+	"context"
+	"errors"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/apierrors"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"log"
+	"os"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := gr4vygo.New(
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+	)
+
+	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
+		PaymentMethodIds: []string{
+			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
+			"f29e886e-93cc-4714-b4a3-12b7a718e595",
+		},
+	}, nil, nil)
+	if err != nil {
+
+		var e *apierrors.Error400
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.Error401
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.Error403
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.Error404
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.Error405
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.Error409
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.HTTPValidationError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.Error425
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.Error429
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.Error500
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.Error502
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.Error504
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+
+		var e *apierrors.APIError
+		if errors.As(err, &e) {
+			// handle error
+			log.Fatal(e.Error())
+		}
+	}
+}
+
+```
+<!-- End Error Handling [errors] -->
+
+<!-- Start Server Selection [server] -->
+## Server Selection
+
+### Select Server by Name
+
+You can override the default server globally using the `WithServer(server string)` option when initializing the SDK client instance. The selected server will then be used as the default on the operations that use it. This table lists the names associated with the available servers:
+
+| Name         | Server                               | Variables | Description |
+| ------------ | ------------------------------------ | --------- | ----------- |
+| `production` | `https://api.{id}.gr4vy.app`         | `id`      |             |
+| `sandbox`    | `https://api.sandbox.{id}.gr4vy.app` | `id`      |             |
+
+If the selected server has variables, you may override its default values using the associated option(s):
+
+| Variable | Option              | Default     | Description                            |
+| -------- | ------------------- | ----------- | -------------------------------------- |
+| `id`     | `WithID(id string)` | `"example"` | The subdomain for your Gr4vy instance. |
+
+#### Example
+
+```go
+package main
+
+import (
+	"context"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"log"
+	"os"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := gr4vygo.New(
+		gr4vygo.WithServer("sandbox"),
+		gr4vygo.WithID("<id>"),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+	)
+
+	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
+		PaymentMethodIds: []string{
+			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
+			"f29e886e-93cc-4714-b4a3-12b7a718e595",
+		},
+	}, nil, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res != nil {
+		// handle response
+	}
+}
+
 ```
 
-This will output the request parameters and response to the console as follows.
+### Override Server URL Per-Client
+
+The default server can also be overridden globally using the `WithServerURL(serverURL string)` option when initializing the SDK client instance. For example:
+```go
+package main
+
+import (
+	"context"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"log"
+	"os"
+)
+
+func main() {
+	ctx := context.Background()
+
+	s := gr4vygo.New(
+		gr4vygo.WithServerURL("https://api.example.gr4vy.app"),
+		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+	)
+
+	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
+		PaymentMethodIds: []string{
+			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
+			"f29e886e-93cc-4714-b4a3-12b7a718e595",
+		},
+	}, nil, nil)
+	if err != nil {
+		log.Fatal(err)
+	}
+	if res != nil {
+		// handle response
+	}
+}
+
+```
+<!-- End Server Selection [server] -->
+
+<!-- Start Custom HTTP Client [http-client] -->
+## Custom HTTP Client
+
+The Go SDK makes API calls that wrap an internal HTTP client. The requirements for the HTTP client are very simple. It must match this interface:
+
+```go
+type HTTPClient interface {
+	Do(req *http.Request) (*http.Response, error)
+}
+```
+
+The built-in `net/http` client satisfies this interface and a default client based on the built-in is provided by default. To replace this default with a client of your own, you can implement this interface yourself or provide your own client configured as desired. Here's a simple example, which adds a client with a 30 second timeout.
+
+```go
+import (
+	"net/http"
+	"time"
+	"github.com/myorg/your-go-sdk"
+)
+
+var (
+	httpClient = &http.Client{Timeout: 30 * time.Second}
+	sdkClient  = sdk.New(sdk.WithClient(httpClient))
+)
+```
+
+This can be a convenient way to configure timeouts, cookies, proxies, custom headers, and other low-level configuration.
+<!-- End Custom HTTP Client [http-client] -->
+
+<!-- Start Special Types [types] -->
+## Special Types
+
+This SDK defines the following custom types to assist with marshalling and unmarshalling data.
+
+### Date
+
+`types.Date` is a wrapper around time.Time that allows for JSON marshaling a date string formatted as "2006-01-02".
+
+#### Usage
+
+```go
+d1 := types.NewDate(time.Now()) // returns *types.Date
+
+d2 := types.DateFromTime(time.Now()) // returns types.Date
+
+d3, err := types.NewDateFromString("2019-01-01") // returns *types.Date, error
+
+d4, err := types.DateFromString("2019-01-01") // returns types.Date, error
+
+d5 := types.MustNewDateFromString("2019-01-01") // returns *types.Date and panics on error
+
+d6 := types.MustDateFromString("2019-01-01") // returns types.Date and panics on error
+```
+<!-- End Special Types [types] -->
+
+<!-- Placeholder for Future Speakeasy SDK Sections -->
+
+# Development
+
+## Testing
+
+To run the tests, install Go and run the following.
 
 ```sh
-Gr4vy - Request - ListBuyers
-Gr4vy - Response - {"items":[{"id":"b8433347-a16f-46b5-958f-d681876546a6","type":"buyer","display_name":"Jane Smith","external_identifier":null,"created_at":"2021-04-22T06:51:16.910297+00:00","updated_at":"2021-04-22T07:18:49.816242+00:00"}],"limit":1,"next_cursor":"fAA0YjY5NmU2My00NzY5LTQ2OGMtOTEyNC0xODVjMDdjZTY5MzEAMjAyMS0wNC0yMlQwNjozNTowNy4yNTMxMDY","previous_cursor":null}
-```
-
-## Development
-
-### Adding new APIs
-
-To add new APIs, run the following command to update the models and APIs based
-on the API spec.
-
-```sh
-./openapi-generator-generate.sh
-```
-
-Next, update `sdk_<object_name>.go` to bind any new APIs or remove any APIs that are no
-longer available.
-
-Run the tests to ensure the changes do not break any existing tests.
-
-```sh
+go install
 go test -v
 ```
 
-### Publishing
 
-Once the changes are merged, update the `VERSION` in `gr4vy.go` and push the
-changes to main to release a new version. Then tag that release as the current
-version in git.
+## Maturity
 
-## License
+This SDK is in beta, and there may be breaking changes between versions without a major version update. Therefore, we recommend pinning usage
+to a specific package version. This way, you can install the same version each time without breaking changes unless you are intentionally
+looking for the latest version.
 
-This library is released under the [MIT License](LICENSE).
+## Contributions
+
+While we value open-source contributions to this SDK, this library is generated programmatically. Any manual changes added to internal files will be overwritten on the next generation. 
+We look forward to hearing your feedback. Feel free to open a PR or an issue with a proof of concept and we'll do our best to include it in a future release. 
+
+### SDK Created by [Speakeasy](https://www.speakeasy.com/?utm_source=github-com/gr4vy/gr4vy-go&utm_campaign=go)
