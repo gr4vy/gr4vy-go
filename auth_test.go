@@ -84,8 +84,8 @@ func TestGetTokenCreatesValidSignedJWT(t *testing.T) {
 		t.Error("Expected exp claim to be present")
 	}
 
-	if !strings.HasPrefix(claims.Issuer, "Gr4vy Python SDK") {
-		t.Errorf("Expected issuer to start with 'Gr4vy Python SDK', got %s", claims.Issuer)
+	if !strings.HasPrefix(claims.Issuer, "speakeasy-sdk/go") {
+		t.Errorf("Expected issuer to start with 'speakeasy-sdk/go', got %s", claims.Issuer)
 	}
 }
 

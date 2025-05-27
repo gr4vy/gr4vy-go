@@ -78,10 +78,24 @@ type TokenClaims struct {
 // TokenFunc is a function that returns a JWT token
 type TokenFunc func() string
 
+// GetToken generates a JWT token signed with the provided ECDSA private key.
+//   - privateKeyPEM: PEM-encoded ECDSA private key string.
+//   - scopes: List of JWTScope values to include in the token.
+//   - expiresIn: Token expiration in seconds from now.
+//
+// Returns the signed JWT token string or an error.
 func GetToken(privateKeyPEM string, scopes []JWTScope, expiresIn int) (string, error) {
 	return getToken(privateKeyPEM, scopes, expiresIn, nil, "")
 }
 
+// GetTokenWithEmbedProperties generates a JWT token with embed parameters and an optional checkout session ID.
+//   - privateKeyPEM: PEM-encoded ECDSA private key string.
+//   - scopes: List of JWTScope values to include in the token.
+//   - expiresIn: Token expiration in seconds from now.
+//   - embedParams: Optional map of embed parameters to include in the token.
+//   - checkoutSessionID: Optional checkout session ID to include in the token.
+//
+// Returns the signed JWT token string or an error.
 func GetTokenWithEmbedProperties(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParams map[string]interface{}, checkoutSessionID string) (string, error) {
 	return getToken(privateKeyPEM, scopes, expiresIn, embedParams, checkoutSessionID)
 }
@@ -117,10 +131,13 @@ func getToken(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParam
 
 	now := time.Now().UTC()
 
+	sdk := New()
+	issuer := sdk.sdkConfiguration.UserAgent
+
 	// Create claims
 	claims := TokenClaims{
 		Scopes:    scopeStrings,
-		Issuer:    "Gr4vy Python SDK", // Keep the same issuer as Python version
+		Issuer:    issuer,
 		IssuedAt:  jwt.NewNumericDate(now),
 		NotBefore: jwt.NewNumericDate(now),
 		ExpiresAt: jwt.NewNumericDate(now.Add(time.Duration(expiresIn) * time.Second)),
@@ -164,12 +181,25 @@ func getToken(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParam
 	return tokenString, nil
 }
 
-// GetEmbedToken generates a token specifically for embed use
+// GetEmbedToken generates a JWT token specifically for embed use, with embed parameters and an optional checkout session ID.
+//   - privateKeyPEM: PEM-encoded ECDSA private key string.
+//   - embedParams: Map of embed parameters to include in the token.
+//   - checkoutSessionID: Optional checkout session ID to include in the token.
+//
+// Returns the signed JWT token string or an error.
 func GetEmbedToken(privateKeyPEM string, embedParams map[string]interface{}, checkoutSessionID string) (string, error) {
 	return getToken(privateKeyPEM, []JWTScope{Embed}, 3600, embedParams, checkoutSessionID)
 }
 
-// UpdateToken updates an existing token with a new signature, and optionally new data
+// UpdateToken updates an existing JWT token with a new signature and optionally new data.
+//   - token: The existing JWT token string.
+//   - privateKeyPEM: PEM-encoded ECDSA private key string.
+//   - scopes: Optional list of JWTScope values to include in the new token. If empty, uses previous scopes.
+//   - expiresIn: Token expiration in seconds from now.
+//   - embedParams: Optional map of embed parameters. If nil, uses previous embed params.
+//   - checkoutSessionID: Optional checkout session ID. If empty, uses previous value.
+//
+// Returns the updated signed JWT token string or an error.
 func UpdateToken(token string, privateKeyPEM string, scopes []JWTScope, expiresIn int, embedParams map[string]interface{}, checkoutSessionID string) (string, error) {
 	// Parse the existing token without signature verification to get claims
 	parsedToken, _, err := new(jwt.Parser).ParseUnverified(token, &TokenClaims{})
@@ -202,7 +232,12 @@ func UpdateToken(token string, privateKeyPEM string, scopes []JWTScope, expiresI
 	return getToken(privateKeyPEM, scopes, expiresIn, embedParams, checkoutSessionID)
 }
 
-// WithToken generates a function that creates a new token for every API request
+// WithToken returns a function that generates a new JWT token for every API request, suitable for use with the SDK's WithSecuritySource option.
+//   - privateKeyPEM: PEM-encoded ECDSA private key string.
+//   - scopes: List of JWTScope values to include in the token.
+//   - expiresIn: Token expiration in seconds from now.
+//
+// Returns a function that generates a Security struct with a fresh token.
 func WithToken(privateKeyPEM string, scopes []JWTScope, expiresIn int) func(ctx context.Context) (components.Security, error) {
 	return withToken(privateKeyPEM, scopes, expiresIn, nil, "")
 }

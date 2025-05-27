@@ -10,7 +10,17 @@ import (
 	"time"
 )
 
-// VerifyWebhook verifies a webhook signature
+// VerifyWebhook verifies the authenticity of a webhook request by checking its signature and timestamp.
+//
+// Parameters:
+//   - payload: The raw webhook payload as a string.
+//   - secret: The webhook secret used to sign the payload.
+//   - signatureHeader: The value of the X-Gr4vy-Signature header from the webhook request.
+//   - timestampHeader: The value of the X-Gr4vy-Timestamp header from the webhook request.
+//   - timestampTolerance: The maximum allowed difference (in seconds) between the current time and the timestamp in the header. Set to 0 to disable timestamp validation.
+//
+// Returns:
+//   - error: Returns an error if verification fails due to missing headers, invalid timestamp, signature mismatch, or timestamp being too old. Returns nil if verification succeeds.
 func VerifyWebhook(payload, secret, signatureHeader, timestampHeader string, timestampTolerance int) error {
 	// Check for missing headers
 	if signatureHeader == "" || timestampHeader == "" {
