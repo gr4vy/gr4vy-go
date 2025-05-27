@@ -5,8 +5,10 @@ management:
   docVersion: 1.0.0
   speakeasyVersion: 1.551.0
   generationVersion: 2.610.0
-  releaseVersion: 1.0.0-beta.1
-  configChecksum: e25598218164aed8a3e996ca0d7a43a0
+  releaseVersion: 1.0.0-beta.2
+  configChecksum: aa6ad1a9ea38bdf5aa21fa3444eb2bd6
+  repoURL: https://github.com/gr4vy/gr4vy-go.git
+  installationURL: https://github.com/gr4vy/gr4vy-go
 features:
   go:
     additionalDependencies: 0.1.0
