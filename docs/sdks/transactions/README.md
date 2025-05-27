@@ -49,6 +49,8 @@ func main() {
         BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
         BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
         BuyerEmailAddress: gr4vygo.String("john@example.com"),
+        BuyerSearch: gr4vygo.String("John"),
+        IPAddress: gr4vygo.String("8.214.133.47"),
         Status: []components.TransactionStatus{
             components.TransactionStatusAuthorizationSucceeded,
         },
@@ -64,11 +66,16 @@ func main() {
         Currency: []string{
             "USD",
         },
+        Country: []string{
+            "US",
+        },
         PaymentServiceID: []string{
             "fffd152a-9532-4087-9a4f-de58754210f0",
         },
         PaymentMethodID: gr4vygo.String("ef9496d8-53a5-4aad-8ca2-00eb68334389"),
         PaymentMethodLabel: gr4vygo.String("1234"),
+        PaymentMethodScheme: gr4vygo.String("[\"visa\"]"),
+        PaymentMethodCountry: gr4vygo.String("[\"US\"]"),
         PaymentMethodFingerprint: gr4vygo.String("a50b85c200ee0795d6fd33a5c66f37a4564f554355c5b46a756aac485dd168a4"),
         Method: []components.Method{
             components.MethodCard,
@@ -90,6 +97,7 @@ func main() {
         },
         IsSubsequentPayment: gr4vygo.Bool(true),
         MerchantInitiated: gr4vygo.Bool(true),
+        Used3ds: gr4vygo.Bool(true),
     })
     if err != nil {
         log.Fatal(err)

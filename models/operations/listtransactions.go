@@ -36,6 +36,8 @@ type ListTransactionsRequest struct {
 	BuyerExternalIdentifier *string    `queryParam:"style=form,explode=true,name=buyer_external_identifier"`
 	BuyerID                 *string    `queryParam:"style=form,explode=true,name=buyer_id"`
 	BuyerEmailAddress       *string    `queryParam:"style=form,explode=true,name=buyer_email_address"`
+	BuyerSearch             *string    `queryParam:"style=form,explode=true,name=buyer_search"`
+	IPAddress               *string    `queryParam:"style=form,explode=true,name=ip_address"`
 	// Filters the results to only the transactions that have a `status` that matches with any of the provided status values.
 	Status                      []components.TransactionStatus `queryParam:"style=form,explode=true,name=status"`
 	ID                          *string                        `queryParam:"style=form,explode=true,name=id"`
@@ -51,11 +53,17 @@ type ListTransactionsRequest struct {
 	AmountGte *int64 `queryParam:"style=form,explode=true,name=amount_gte"`
 	// Filters for transactions that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency code.
 	Currency []string `queryParam:"style=form,explode=true,name=currency"`
+	// Filters for transactions that have matching `country` values.
+	Country []string `queryParam:"style=form,explode=true,name=country"`
 	// Filters for transactions that were processed by the provided `payment_service_id` values.
-	PaymentServiceID         []string `queryParam:"style=form,explode=true,name=payment_service_id"`
-	PaymentMethodID          *string  `queryParam:"style=form,explode=true,name=payment_method_id"`
-	PaymentMethodLabel       *string  `queryParam:"style=form,explode=true,name=payment_method_label"`
-	PaymentMethodFingerprint *string  `queryParam:"style=form,explode=true,name=payment_method_fingerprint"`
+	PaymentServiceID   []string `queryParam:"style=form,explode=true,name=payment_service_id"`
+	PaymentMethodID    *string  `queryParam:"style=form,explode=true,name=payment_method_id"`
+	PaymentMethodLabel *string  `queryParam:"style=form,explode=true,name=payment_method_label"`
+	// Filters for transactions that have a payment method with a scheme that matches with the provided value.
+	PaymentMethodScheme *string `queryParam:"style=form,explode=true,name=payment_method_scheme"`
+	// Filters for transactions that have a payment method with a country that matches with the provided value.
+	PaymentMethodCountry     *string `queryParam:"style=form,explode=true,name=payment_method_country"`
+	PaymentMethodFingerprint *string `queryParam:"style=form,explode=true,name=payment_method_fingerprint"`
 	// Filters for transactions that have matching `method` values.
 	Method []components.Method `queryParam:"style=form,explode=true,name=method"`
 	// Filters for transactions where the `error_code` matches one for the provided values.
@@ -84,6 +92,8 @@ type ListTransactionsRequest struct {
 	IsSubsequentPayment *bool `queryParam:"style=form,explode=true,name=is_subsequent_payment"`
 	// Filters for transactions where the `merchant_initiated` matches the provided value.
 	MerchantInitiated *bool `queryParam:"style=form,explode=true,name=merchant_initiated"`
+	// Filters for transactions that attempted 3DS authentication or not.
+	Used3ds *bool `queryParam:"style=form,explode=true,name=used_3ds"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -169,6 +179,20 @@ func (o *ListTransactionsRequest) GetBuyerEmailAddress() *string {
 	return o.BuyerEmailAddress
 }
 
+func (o *ListTransactionsRequest) GetBuyerSearch() *string {
+	if o == nil {
+		return nil
+	}
+	return o.BuyerSearch
+}
+
+func (o *ListTransactionsRequest) GetIPAddress() *string {
+	if o == nil {
+		return nil
+	}
+	return o.IPAddress
+}
+
 func (o *ListTransactionsRequest) GetStatus() []components.TransactionStatus {
 	if o == nil {
 		return nil
@@ -232,6 +256,13 @@ func (o *ListTransactionsRequest) GetCurrency() []string {
 	return o.Currency
 }
 
+func (o *ListTransactionsRequest) GetCountry() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Country
+}
+
 func (o *ListTransactionsRequest) GetPaymentServiceID() []string {
 	if o == nil {
 		return nil
@@ -251,6 +282,20 @@ func (o *ListTransactionsRequest) GetPaymentMethodLabel() *string {
 		return nil
 	}
 	return o.PaymentMethodLabel
+}
+
+func (o *ListTransactionsRequest) GetPaymentMethodScheme() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentMethodScheme
+}
+
+func (o *ListTransactionsRequest) GetPaymentMethodCountry() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PaymentMethodCountry
 }
 
 func (o *ListTransactionsRequest) GetPaymentMethodFingerprint() *string {
@@ -356,6 +401,13 @@ func (o *ListTransactionsRequest) GetMerchantInitiated() *bool {
 		return nil
 	}
 	return o.MerchantInitiated
+}
+
+func (o *ListTransactionsRequest) GetUsed3ds() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Used3ds
 }
 
 func (o *ListTransactionsRequest) GetMerchantAccountID() *string {
