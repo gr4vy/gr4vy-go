@@ -20,8 +20,10 @@ generation:
     oAuth2PasswordEnabled: false
   sdkHooksConfigAccess: true
 go:
-  version: 0.2.1
-  additionalDependencies: {}
+  version: 0.2.21
+  additionalDependencies:
+    github.com/golang-jwt/jwt/v5: v5.2.2
+    github.com/google/uuid: v1.6.0
   allowUnknownFieldsInWeakUnions: false
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
