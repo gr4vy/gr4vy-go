@@ -57,7 +57,6 @@ go get github.com/gr4vy/gr4vy-go
 ```
 <!-- End SDK Installation [installation] -->
 
-<!-- Start SDK Example Usage [usage] -->
 ## SDK Example Usage
 
 ### Example
@@ -67,8 +66,8 @@ package main
 
 import (
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
-	"github.com/gr4vy/gr4vy-go/models/components"
+	gr4vy "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 	"os"
 )
@@ -76,16 +75,17 @@ import (
 func main() {
 	ctx := context.Background()
 
-	s := gr4vygo.New(
-		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+	privateKey := "...." // Private key loaded from disk or env var
+	withToken := gr4vy.WithToken(privateKey, []JWTScope{ReadAll, WriteAll}, 60)
+
+	s := gr4vy.New(
+		gr4vy.WithID("example"),
+		gr4vy.WithServer(gr4vy.ServerSandbox),
+		gr4vy.WithSecuritySource(withToken),
+		gr4vy.WithMerchantAccountID("default"),
 	)
 
-	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
-		PaymentMethodIds: []string{
-			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
-			"f29e886e-93cc-4714-b4a3-12b7a718e595",
-		},
-	}, nil, nil)
+	res, err := s.Transactions.List(ctx, operations.ListTransactionsRequest{}, nil, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -95,7 +95,96 @@ func main() {
 }
 
 ```
-<!-- End SDK Example Usage [usage] -->
+
+<br /><br />
+> [!IMPORTANT]
+> Please use `WithToken` where the documentation mentions `os.Getenv("GR4VY_BEARER_AUTH")`.
+
+<!-- No SDK Example Usage [usage] -->
+
+## Bearer token generation
+
+Alternatively, you can create a token for use with the SDK or with your own client library.
+
+```go
+import (
+	gr4vy "github.com/gr4vy/gr4vy-go"
+	"log"
+	"os"
+)
+
+privateKey := "...." // Private key loaded from disk or env var
+
+token, err := GetToken(privateKey, []JWTScope{ReadAll, WriteAll}, 5)
+if err != nil {
+	log.Fatal(err)
+}
+```
+
+> **Note:** This will only create a token once. Use `WithToken` to dynamically generate a token
+> for every request.
+
+
+## Embed token generation
+
+Alternatively, you can create a token for use with Embed as follows.
+
+```go
+import (
+	gr4vy "github.com/gr4vy/gr4vy-go"
+	"log"
+	"os"
+)
+
+privateKey := "...." // Private key loaded from disk or env var
+
+token, err := GetEmbedToken(privateKey, nil, "")
+if err != nil {
+	log.Fatal(err)
+}
+```
+
+> **Note:** This will only create a token once. Use `withToken` to dynamically generate a token
+> for every request.
+
+## Merchant account ID selection
+
+Depending on the key used, you might need to explicitly define a merchant account ID to use. In our API, 
+this uses the `X-GR4VY-MERCHANT-ACCOUNT-ID` header. When using the SDK, you can set the `merchantAccountId`
+on every request.
+
+```js
+s := gr4vy.New(
+	gr4vy.WithID("example"),
+	gr4vy.WithServer(gr4vy.ServerSandbox),
+	gr4vy.WithSecuritySource(withToken),
+	gr4vy.WithMerchantAccountID("my-merchant-id"),
+)
+```
+
+## Webhooks verification
+
+The SDK provides a `VerifyWebhook` method to validate incoming webhook requests from Gr4vy. This ensures that the webhook payload is authentic and has not been tampered with.
+
+```go
+import (
+  "log"
+  gr4vy "github.com/gr4vy/gr4vy-go"
+)
+
+func main() {
+  secret := "your_webhook_secret"
+  payload := "webhook_payload"
+  signatureHeader := "signature_from_header"
+  timestampHeader := "timestamp_from_header"
+  timestampTolerance := 300 // Optional: Tolerance in seconds for timestamp validation
+
+  err := gr4vy.VerifyWebhook(secret, payload, &signatureHeader, &timestampHeader, timestampTolerance)
+  if err != nil {
+    log.Fatal(err)
+  }
+}
+```
 
 <!-- Start Authentication [security] -->
 ## Authentication
