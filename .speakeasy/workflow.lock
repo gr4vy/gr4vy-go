@@ -1,0 +1,51 @@
+speakeasyVersion: 1.551.0
+sources:
+    Gr4vy:
+        sourceNamespace: gr-4-vy
+        sourceRevisionDigest: sha256:4e0492d35a75974644c880a946749131df09fb30d23270c15ca7a11fedc54306
+        sourceBlobDigest: sha256:9dc5203f8085cd3b605313a5d7e93d6a9262a4663273121d27fed764355d4e86
+        tags:
+            - latest
+            - 1.0.0
+    openapi:
+        sourceNamespace: openapi
+        sourceRevisionDigest: sha256:50fc6f364d387a852c9d66eafe81621a4d3146af85eea94452351dcc8e424506
+        sourceBlobDigest: sha256:9bcb222d6e9922bc8edb9a260a6eadd8ec02d0c7a965e07463a8dbe55ada360d
+        tags:
+            - latest
+            - 1.0.0
+targets:
+    go:
+        source: openapi
+        sourceNamespace: openapi
+        sourceRevisionDigest: sha256:50fc6f364d387a852c9d66eafe81621a4d3146af85eea94452351dcc8e424506
+        sourceBlobDigest: sha256:9bcb222d6e9922bc8edb9a260a6eadd8ec02d0c7a965e07463a8dbe55ada360d
+        codeSamplesNamespace: openapi-go-code-samples
+        codeSamplesRevisionDigest: sha256:8b54a7b3627ca536bb68969f6c2cb46df0768b7dd924b48fdac0774f04cddfa2
+workflow:
+    workflowVersion: 1.0.0
+    speakeasyVersion: latest
+    sources:
+        openapi:
+            inputs:
+                - location: https://gr4vy.github.io/gr4vy-openapi/core/openapi.json
+            overlays:
+                - location: ./.speakeasy/overlays/servers.yaml
+                - location: ./.speakeasy/overlays/security.yaml
+                - location: ./.speakeasy/overlays/enums.yaml
+                - location: ./.speakeasy/overlays/retries.yaml
+                - location: ./.speakeasy/overlays/mid-global.yaml
+                - location: ./.speakeasy/overlays/fix-base-model.yaml
+                - location: ./.speakeasy/overlays/fix-checkout-session-body.yaml
+            registry:
+                location: registry.speakeasyapi.dev/gr4vy/gr4vy/openapi
+    targets:
+        go:
+            target: go
+            source: openapi
+            codeSamples:
+                registry:
+                    location: registry.speakeasyapi.dev/gr4vy/gr4vy/openapi-go-code-samples
+                labelOverride:
+                    fixedValue: Go
+                blocking: false

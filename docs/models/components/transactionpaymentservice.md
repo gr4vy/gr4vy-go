@@ -1,0 +1,12 @@
+# TransactionPaymentService
+
+
+## Fields
+
+| Field                                                          | Type                                                           | Required                                                       | Description                                                    | Example                                                        |
+| -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- | -------------------------------------------------------------- |
+| `Type`                                                         | **string*                                                      | :heavy_minus_sign:                                             | Always `payment-service`.                                      | payment-service                                                |
+| `ID`                                                           | *string*                                                       | :heavy_check_mark:                                             | The ID for the payment-service.                                | 824ff064-7f4b-430b-9801-59aff90d013e                           |
+| `PaymentServiceDefinitionID`                                   | *string*                                                       | :heavy_check_mark:                                             | The definition ID of the service used to process this payment. | stripe-card                                                    |
+| `Method`                                                       | [components.Method](../../models/components/method.md)         | :heavy_check_mark:                                             | N/A                                                            |                                                                |
+| `DisplayName`                                                  | *string*                                                       | :heavy_check_mark:                                             | The display name for the payment service.                      | Stripe USA                                                     |

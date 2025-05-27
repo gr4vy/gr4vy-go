@@ -1,0 +1,12 @@
+# Error404
+
+
+## Fields
+
+| Field                                                              | Type                                                               | Required                                                           | Description                                                        | Example                                                            |
+| ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ | ------------------------------------------------------------------ |
+| `Type`                                                             | **string*                                                          | :heavy_minus_sign:                                                 | Always `error`.                                                    | error                                                              |
+| `Code`                                                             | **string*                                                          | :heavy_minus_sign:                                                 | Always `not_found`                                                 | not_found                                                          |
+| `Status`                                                           | **int64*                                                           | :heavy_minus_sign:                                                 | Always `404`.                                                      | 404                                                                |
+| `Message`                                                          | **string*                                                          | :heavy_minus_sign:                                                 | A human readable message that provides more context to the error.  | The resource could not be found                                    |
+| `Details`                                                          | [][components.ErrorDetail](../../models/components/errordetail.md) | :heavy_minus_sign:                                                 | A list of details that further ellaborate on the error.            |                                                                    |
