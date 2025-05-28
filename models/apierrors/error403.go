@@ -15,7 +15,7 @@ type Error403 struct {
 	// Always `403`.
 	Status *int64 `default:"403" json:"status"`
 	// A human readable message that provides more context to the error.
-	Message *string `json:"message"`
+	Message *string `default:"Generic error" json:"message"`
 	// A list of details that further ellaborate on the error.
 	Details []components.ErrorDetail `json:"details,omitempty"`
 }
