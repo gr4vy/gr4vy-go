@@ -547,9 +547,8 @@ func (s *Buyers) List(ctx context.Context, request operations.ListBuyersRequest,
 
 // Create - Add a buyer
 // Create a new buyer record.
-func (s *Buyers) Create(ctx context.Context, buyerCreate components.BuyerCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.Buyer, error) {
+func (s *Buyers) Create(ctx context.Context, buyerCreate components.BuyerCreate, merchantAccountID *string, opts ...operations.Option) (*components.Buyer, error) {
 	request := operations.AddBuyerRequest{
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 		BuyerCreate:       buyerCreate,
 	}
@@ -614,10 +613,6 @@ func (s *Buyers) Create(ctx context.Context, buyerCreate components.BuyerCreate,
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1479,10 +1474,9 @@ func (s *Buyers) Get(ctx context.Context, buyerID string, merchantAccountID *str
 
 // Update a buyer
 // Updates a buyer record.
-func (s *Buyers) Update(ctx context.Context, buyerID string, buyerUpdate components.BuyerUpdate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.Buyer, error) {
+func (s *Buyers) Update(ctx context.Context, buyerID string, buyerUpdate components.BuyerUpdate, merchantAccountID *string, opts ...operations.Option) (*components.Buyer, error) {
 	request := operations.UpdateBuyerRequest{
 		BuyerID:           buyerID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 		BuyerUpdate:       buyerUpdate,
 	}
@@ -1547,10 +1541,6 @@ func (s *Buyers) Update(ctx context.Context, buyerID string, buyerUpdate compone
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1949,10 +1939,9 @@ func (s *Buyers) Update(ctx context.Context, buyerID string, buyerUpdate compone
 
 // Delete a buyer
 // Permanently removes a buyer record.
-func (s *Buyers) Delete(ctx context.Context, buyerID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) error {
+func (s *Buyers) Delete(ctx context.Context, buyerID string, merchantAccountID *string, opts ...operations.Option) error {
 	request := operations.DeleteBuyerRequest{
 		BuyerID:           buyerID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -2009,10 +1998,6 @@ func (s *Buyers) Delete(ctx context.Context, buyerID string, timeoutInSeconds *f
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return err

@@ -493,10 +493,9 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 
 // Create transaction refund
 // Create a refund for a transaction.
-func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, transactionRefundCreate components.TransactionRefundCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.Refund, error) {
+func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, transactionRefundCreate components.TransactionRefundCreate, merchantAccountID *string, opts ...operations.Option) (*components.Refund, error) {
 	request := operations.CreateTransactionRefundRequest{
 		TransactionID:           transactionID,
-		TimeoutInSeconds:        timeoutInSeconds,
 		MerchantAccountID:       merchantAccountID,
 		TransactionRefundCreate: transactionRefundCreate,
 	}
@@ -561,10 +560,6 @@ func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, 
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

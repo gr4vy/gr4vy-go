@@ -27,10 +27,9 @@ func newAll(sdkConfig sdkConfiguration) *All {
 
 // Create batch transaction refund
 // Create a refund for all instruments on a transaction.
-func (s *All) Create(ctx context.Context, transactionID string, timeoutInSeconds *float64, merchantAccountID *string, transactionRefundAllCreate *components.TransactionRefundAllCreate, opts ...operations.Option) (*components.CollectionNoCursorRefund, error) {
+func (s *All) Create(ctx context.Context, transactionID string, merchantAccountID *string, transactionRefundAllCreate *components.TransactionRefundAllCreate, opts ...operations.Option) (*components.CollectionNoCursorRefund, error) {
 	request := operations.CreateFullTransactionRefundRequest{
 		TransactionID:              transactionID,
-		TimeoutInSeconds:           timeoutInSeconds,
 		MerchantAccountID:          merchantAccountID,
 		TransactionRefundAllCreate: transactionRefundAllCreate,
 	}
@@ -95,10 +94,6 @@ func (s *All) Create(ctx context.Context, transactionID string, timeoutInSeconds
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

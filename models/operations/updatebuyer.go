@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
@@ -20,22 +19,10 @@ func (o *UpdateBuyerGlobals) GetMerchantAccountID() *string {
 
 type UpdateBuyerRequest struct {
 	// The ID of the buyer to edit.
-	BuyerID          string   `pathParam:"style=simple,explode=false,name=buyer_id"`
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
+	BuyerID string `pathParam:"style=simple,explode=false,name=buyer_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string                `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	BuyerUpdate       components.BuyerUpdate `request:"mediaType=application/json"`
-}
-
-func (u UpdateBuyerRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(u, "", false)
-}
-
-func (u *UpdateBuyerRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *UpdateBuyerRequest) GetBuyerID() string {
@@ -43,13 +30,6 @@ func (o *UpdateBuyerRequest) GetBuyerID() string {
 		return ""
 	}
 	return o.BuyerID
-}
-
-func (o *UpdateBuyerRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *UpdateBuyerRequest) GetMerchantAccountID() *string {

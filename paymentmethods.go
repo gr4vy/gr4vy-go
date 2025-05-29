@@ -547,9 +547,8 @@ func (s *PaymentMethods) List(ctx context.Context, request operations.ListPaymen
 
 // Create payment method
 // Store a new payment method.
-func (s *PaymentMethods) Create(ctx context.Context, requestBody operations.Body, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.PaymentMethod, error) {
+func (s *PaymentMethods) Create(ctx context.Context, requestBody operations.Body, merchantAccountID *string, opts ...operations.Option) (*components.PaymentMethod, error) {
 	request := operations.CreatePaymentMethodRequest{
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 		RequestBody:       requestBody,
 	}
@@ -614,10 +613,6 @@ func (s *PaymentMethods) Create(ctx context.Context, requestBody operations.Body
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

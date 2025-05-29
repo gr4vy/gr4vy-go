@@ -582,9 +582,8 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 
 // Create transaction
 // Create a transaction.
-func (s *Transactions) Create(ctx context.Context, transactionCreate components.TransactionCreate, timeoutInSeconds *float64, merchantAccountID *string, idempotencyKey *string, opts ...operations.Option) (*components.Transaction, error) {
+func (s *Transactions) Create(ctx context.Context, transactionCreate components.TransactionCreate, merchantAccountID *string, idempotencyKey *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.CreateTransactionRequest{
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 		IdempotencyKey:    idempotencyKey,
 		TransactionCreate: transactionCreate,
@@ -650,10 +649,6 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1515,10 +1510,9 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 
 // Capture transaction
 // Capture a previously authorized transaction.
-func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCapture components.TransactionCapture, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
+func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCapture components.TransactionCapture, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.CaptureTransactionRequest{
 		TransactionID:      transactionID,
-		TimeoutInSeconds:   timeoutInSeconds,
 		MerchantAccountID:  merchantAccountID,
 		TransactionCapture: transactionCapture,
 	}
@@ -1583,10 +1577,6 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1985,10 +1975,9 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 
 // Void transaction
 // Void a previously authorized transaction.
-func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
+func (s *Transactions) Void(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.VoidTransactionRequest{
 		TransactionID:     transactionID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -2045,10 +2034,6 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, timeoutIn
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2910,10 +2895,9 @@ func (s *Transactions) Summary(ctx context.Context, transactionID string, mercha
 
 // Sync transaction
 // Fetch the latest status for a transaction.
-func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
+func (s *Transactions) Sync(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.SyncTransactionRequest{
 		TransactionID:     transactionID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -2970,10 +2954,6 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, timeoutIn
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

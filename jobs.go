@@ -28,9 +28,8 @@ func newJobs(sdkConfig sdkConfiguration) *Jobs {
 
 // Create account updater job
 // Schedule one or more stored cards for an account update.
-func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.AccountUpdaterJobCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.AccountUpdaterJob, error) {
+func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.AccountUpdaterJobCreate, merchantAccountID *string, opts ...operations.Option) (*components.AccountUpdaterJob, error) {
 	request := operations.CreateAccountUpdaterJobRequest{
-		TimeoutInSeconds:        timeoutInSeconds,
 		MerchantAccountID:       merchantAccountID,
 		AccountUpdaterJobCreate: accountUpdaterJobCreate,
 	}
@@ -95,10 +94,6 @@ func (s *Jobs) Create(ctx context.Context, accountUpdaterJobCreate components.Ac
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

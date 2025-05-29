@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
@@ -20,22 +19,10 @@ func (o *UpdateDigitalWalletGlobals) GetMerchantAccountID() *string {
 
 type UpdateDigitalWalletRequest struct {
 	// The ID of the digital wallet to edit.
-	DigitalWalletID  string   `pathParam:"style=simple,explode=false,name=digital_wallet_id"`
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
+	DigitalWalletID string `pathParam:"style=simple,explode=false,name=digital_wallet_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID   *string                        `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	DigitalWalletUpdate components.DigitalWalletUpdate `request:"mediaType=application/json"`
-}
-
-func (u UpdateDigitalWalletRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(u, "", false)
-}
-
-func (u *UpdateDigitalWalletRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *UpdateDigitalWalletRequest) GetDigitalWalletID() string {
@@ -43,13 +30,6 @@ func (o *UpdateDigitalWalletRequest) GetDigitalWalletID() string {
 		return ""
 	}
 	return o.DigitalWalletID
-}
-
-func (o *UpdateDigitalWalletRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *UpdateDigitalWalletRequest) GetMerchantAccountID() *string {

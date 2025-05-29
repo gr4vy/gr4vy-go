@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
@@ -19,22 +18,10 @@ func (o *CreateTransactionRefundGlobals) GetMerchantAccountID() *string {
 }
 
 type CreateTransactionRefundRequest struct {
-	TransactionID    string   `pathParam:"style=simple,explode=false,name=transaction_id"`
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
+	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID       *string                            `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	TransactionRefundCreate components.TransactionRefundCreate `request:"mediaType=application/json"`
-}
-
-func (c CreateTransactionRefundRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateTransactionRefundRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *CreateTransactionRefundRequest) GetTransactionID() string {
@@ -42,13 +29,6 @@ func (o *CreateTransactionRefundRequest) GetTransactionID() string {
 		return ""
 	}
 	return o.TransactionID
-}
-
-func (o *CreateTransactionRefundRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *CreateTransactionRefundRequest) GetMerchantAccountID() *string {

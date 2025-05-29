@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
@@ -19,28 +18,9 @@ func (o *ConfigureDigitalWalletGlobals) GetMerchantAccountID() *string {
 }
 
 type ConfigureDigitalWalletRequest struct {
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID   *string                        `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	DigitalWalletCreate components.DigitalWalletCreate `request:"mediaType=application/json"`
-}
-
-func (c ConfigureDigitalWalletRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *ConfigureDigitalWalletRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *ConfigureDigitalWalletRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *ConfigureDigitalWalletRequest) GetMerchantAccountID() *string {

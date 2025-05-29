@@ -33,9 +33,8 @@ func newDigitalWallets(sdkConfig sdkConfiguration) *DigitalWallets {
 
 // Create - Register digital wallet
 // Register a digital wallet like Apple Pay, Google Pay, or Click to Pay.
-func (s *DigitalWallets) Create(ctx context.Context, digitalWalletCreate components.DigitalWalletCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.DigitalWallet, error) {
+func (s *DigitalWallets) Create(ctx context.Context, digitalWalletCreate components.DigitalWalletCreate, merchantAccountID *string, opts ...operations.Option) (*components.DigitalWallet, error) {
 	request := operations.ConfigureDigitalWalletRequest{
-		TimeoutInSeconds:    timeoutInSeconds,
 		MerchantAccountID:   merchantAccountID,
 		DigitalWalletCreate: digitalWalletCreate,
 	}
@@ -100,10 +99,6 @@ func (s *DigitalWallets) Create(ctx context.Context, digitalWalletCreate compone
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1427,10 +1422,9 @@ func (s *DigitalWallets) Get(ctx context.Context, digitalWalletID string, mercha
 
 // Delete digital wallet
 // Delete a configured digital wallet.
-func (s *DigitalWallets) Delete(ctx context.Context, digitalWalletID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
+func (s *DigitalWallets) Delete(ctx context.Context, digitalWalletID string, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.DeleteDigitalWalletRequest{
 		DigitalWalletID:   digitalWalletID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -1487,10 +1481,6 @@ func (s *DigitalWallets) Delete(ctx context.Context, digitalWalletID string, tim
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1889,10 +1879,9 @@ func (s *DigitalWallets) Delete(ctx context.Context, digitalWalletID string, tim
 
 // Update digital wallet
 // Update a digital wallet.
-func (s *DigitalWallets) Update(ctx context.Context, digitalWalletID string, digitalWalletUpdate components.DigitalWalletUpdate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.DigitalWallet, error) {
+func (s *DigitalWallets) Update(ctx context.Context, digitalWalletID string, digitalWalletUpdate components.DigitalWalletUpdate, merchantAccountID *string, opts ...operations.Option) (*components.DigitalWallet, error) {
 	request := operations.UpdateDigitalWalletRequest{
 		DigitalWalletID:     digitalWalletID,
-		TimeoutInSeconds:    timeoutInSeconds,
 		MerchantAccountID:   merchantAccountID,
 		DigitalWalletUpdate: digitalWalletUpdate,
 	}
@@ -1957,10 +1946,6 @@ func (s *DigitalWallets) Update(ctx context.Context, digitalWalletID string, dig
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

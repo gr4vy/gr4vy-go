@@ -139,7 +139,7 @@ func main() {
                 Kind: components.TaxIDKindCaPstMb,
             },
         },
-    }, nil, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -155,7 +155,6 @@ func main() {
 | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- | ---------------------------------------------------------------- |
 | `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |
 | `buyerCreate`                                                    | [components.BuyerCreate](../../models/components/buyercreate.md) | :heavy_check_mark:                                               | N/A                                                              |
-| `timeoutInSeconds`                                               | **float64*                                                       | :heavy_minus_sign:                                               | N/A                                                              |
 | `merchantAccountID`                                              | **string*                                                        | :heavy_minus_sign:                                               | The ID of the merchant account to use for this request.          |
 | `opts`                                                           | [][operations.Option](../../models/operations/option.md)         | :heavy_minus_sign:                                               | The options for this request.                                    |
 
@@ -293,7 +292,7 @@ func main() {
                 Kind: components.TaxIDKindAuAbn,
             },
         },
-    }, nil, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -310,7 +309,6 @@ func main() {
 | `ctx`                                                            | [context.Context](https://pkg.go.dev/context#Context)            | :heavy_check_mark:                                               | The context to use for the request.                              |                                                                  |
 | `buyerID`                                                        | *string*                                                         | :heavy_check_mark:                                               | The ID of the buyer to edit.                                     | fe26475d-ec3e-4884-9553-f7356683f7f9                             |
 | `buyerUpdate`                                                    | [components.BuyerUpdate](../../models/components/buyerupdate.md) | :heavy_check_mark:                                               | N/A                                                              |                                                                  |
-| `timeoutInSeconds`                                               | **float64*                                                       | :heavy_minus_sign:                                               | N/A                                                              |                                                                  |
 | `merchantAccountID`                                              | **string*                                                        | :heavy_minus_sign:                                               | The ID of the merchant account to use for this request.          |                                                                  |
 | `opts`                                                           | [][operations.Option](../../models/operations/option.md)         | :heavy_minus_sign:                                               | The options for this request.                                    |                                                                  |
 
@@ -359,7 +357,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.Buyers.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil, nil)
+    err := s.Buyers.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -372,7 +370,6 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `buyerID`                                                | *string*                                                 | :heavy_check_mark:                                       | The ID of the buyer to delete.                           | fe26475d-ec3e-4884-9553-f7356683f7f9                     |
-| `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |                                                          |
 | `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 

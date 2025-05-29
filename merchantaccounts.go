@@ -536,12 +536,7 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 
 // Create a merchant account
 // Create a new merchant account in an instance.
-func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate components.MerchantAccountCreate, timeoutInSeconds *float64, opts ...operations.Option) (*components.MerchantAccount, error) {
-	request := operations.CreateMerchantAccountRequest{
-		TimeoutInSeconds:      timeoutInSeconds,
-		MerchantAccountCreate: merchantAccountCreate,
-	}
-
+func (s *MerchantAccounts) Create(ctx context.Context, request components.MerchantAccountCreate, opts ...operations.Option) (*components.MerchantAccount, error) {
 	o := operations.Options{}
 	supportedOptions := []string{
 		operations.SupportedOptionRetries,
@@ -571,7 +566,7 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 		OperationID:    "create_merchant_account",
 		SecuritySource: s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "MerchantAccountCreate", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "Request", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -595,10 +590,6 @@ func (s *MerchantAccounts) Create(ctx context.Context, merchantAccountCreate com
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
@@ -1454,10 +1445,9 @@ func (s *MerchantAccounts) Get(ctx context.Context, merchantAccountID string, op
 
 // Update a merchant account
 // Update info for a merchant account in an instance.
-func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string, merchantAccountUpdate components.MerchantAccountUpdate, timeoutInSeconds *float64, opts ...operations.Option) (*components.MerchantAccount, error) {
+func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string, merchantAccountUpdate components.MerchantAccountUpdate, opts ...operations.Option) (*components.MerchantAccount, error) {
 	request := operations.UpdateMerchantAccountRequest{
 		MerchantAccountID:     merchantAccountID,
-		TimeoutInSeconds:      timeoutInSeconds,
 		MerchantAccountUpdate: merchantAccountUpdate,
 	}
 
@@ -1514,10 +1504,6 @@ func (s *MerchantAccounts) Update(ctx context.Context, merchantAccountID string,
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	if reqContentType != "" {
 		req.Header.Set("Content-Type", reqContentType)
-	}
-
-	if err := utils.PopulateQueryParams(ctx, req, request, nil); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
 	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {

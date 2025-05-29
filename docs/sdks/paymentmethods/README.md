@@ -123,7 +123,7 @@ func main() {
             BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
             BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
         },
-    ), nil, nil)
+    ), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -139,7 +139,6 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `requestBody`                                            | [operations.Body](../../models/operations/body.md)       | :heavy_check_mark:                                       | N/A                                                      |
-| `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |
 | `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 

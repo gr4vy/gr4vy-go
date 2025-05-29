@@ -493,10 +493,9 @@ func (s *NetworkTokens) List(ctx context.Context, paymentMethodID string, mercha
 
 // Create - Provision network token
 // Provision a network token for a payment method.
-func (s *NetworkTokens) Create(ctx context.Context, paymentMethodID string, networkTokenCreate components.NetworkTokenCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.NetworkToken, error) {
+func (s *NetworkTokens) Create(ctx context.Context, paymentMethodID string, networkTokenCreate components.NetworkTokenCreate, merchantAccountID *string, opts ...operations.Option) (*components.NetworkToken, error) {
 	request := operations.CreatePaymentMethodNetworkTokenRequest{
 		PaymentMethodID:    paymentMethodID,
-		TimeoutInSeconds:   timeoutInSeconds,
 		MerchantAccountID:  merchantAccountID,
 		NetworkTokenCreate: networkTokenCreate,
 	}
@@ -561,10 +560,6 @@ func (s *NetworkTokens) Create(ctx context.Context, paymentMethodID string, netw
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -963,11 +958,10 @@ func (s *NetworkTokens) Create(ctx context.Context, paymentMethodID string, netw
 
 // Suspend network token
 // Suspend a network token for a payment method.
-func (s *NetworkTokens) Suspend(ctx context.Context, paymentMethodID string, networkTokenID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.NetworkToken, error) {
+func (s *NetworkTokens) Suspend(ctx context.Context, paymentMethodID string, networkTokenID string, merchantAccountID *string, opts ...operations.Option) (*components.NetworkToken, error) {
 	request := operations.SuspendPaymentMethodNetworkTokenRequest{
 		PaymentMethodID:   paymentMethodID,
 		NetworkTokenID:    networkTokenID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -1024,10 +1018,6 @@ func (s *NetworkTokens) Suspend(ctx context.Context, paymentMethodID string, net
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1426,11 +1416,10 @@ func (s *NetworkTokens) Suspend(ctx context.Context, paymentMethodID string, net
 
 // Resume network token
 // Resume a suspended network token for a payment method.
-func (s *NetworkTokens) Resume(ctx context.Context, paymentMethodID string, networkTokenID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.NetworkToken, error) {
+func (s *NetworkTokens) Resume(ctx context.Context, paymentMethodID string, networkTokenID string, merchantAccountID *string, opts ...operations.Option) (*components.NetworkToken, error) {
 	request := operations.ResumePaymentMethodNetworkTokenRequest{
 		PaymentMethodID:   paymentMethodID,
 		NetworkTokenID:    networkTokenID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -1487,10 +1476,6 @@ func (s *NetworkTokens) Resume(ctx context.Context, paymentMethodID string, netw
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1889,11 +1874,10 @@ func (s *NetworkTokens) Resume(ctx context.Context, paymentMethodID string, netw
 
 // Delete network token
 // Delete a network token for a payment method.
-func (s *NetworkTokens) Delete(ctx context.Context, paymentMethodID string, networkTokenID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) error {
+func (s *NetworkTokens) Delete(ctx context.Context, paymentMethodID string, networkTokenID string, merchantAccountID *string, opts ...operations.Option) error {
 	request := operations.DeletePaymentMethodNetworkTokenRequest{
 		PaymentMethodID:   paymentMethodID,
 		NetworkTokenID:    networkTokenID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -1950,10 +1934,6 @@ func (s *NetworkTokens) Delete(ctx context.Context, paymentMethodID string, netw
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return err

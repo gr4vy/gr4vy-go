@@ -495,10 +495,9 @@ func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string,
 
 // Create payment service token
 // Create a gateway tokens for a payment method.
-func (s *PaymentServiceTokens) Create(ctx context.Context, paymentMethodID string, paymentServiceTokenCreate components.PaymentServiceTokenCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.PaymentServiceToken, error) {
+func (s *PaymentServiceTokens) Create(ctx context.Context, paymentMethodID string, paymentServiceTokenCreate components.PaymentServiceTokenCreate, merchantAccountID *string, opts ...operations.Option) (*components.PaymentServiceToken, error) {
 	request := operations.CreatePaymentMethodPaymentServiceTokenRequest{
 		PaymentMethodID:           paymentMethodID,
-		TimeoutInSeconds:          timeoutInSeconds,
 		MerchantAccountID:         merchantAccountID,
 		PaymentServiceTokenCreate: paymentServiceTokenCreate,
 	}
@@ -563,10 +562,6 @@ func (s *PaymentServiceTokens) Create(ctx context.Context, paymentMethodID strin
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -965,11 +960,10 @@ func (s *PaymentServiceTokens) Create(ctx context.Context, paymentMethodID strin
 
 // Delete payment service token
 // Delete a gateway tokens for a payment method.
-func (s *PaymentServiceTokens) Delete(ctx context.Context, paymentMethodID string, paymentServiceTokenID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) error {
+func (s *PaymentServiceTokens) Delete(ctx context.Context, paymentMethodID string, paymentServiceTokenID string, merchantAccountID *string, opts ...operations.Option) error {
 	request := operations.DeletePaymentMethodPaymentServiceTokenRequest{
 		PaymentMethodID:       paymentMethodID,
 		PaymentServiceTokenID: paymentServiceTokenID,
-		TimeoutInSeconds:      timeoutInSeconds,
 		MerchantAccountID:     merchantAccountID,
 	}
 
@@ -1026,10 +1020,6 @@ func (s *PaymentServiceTokens) Delete(ctx context.Context, paymentMethodID strin
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return err

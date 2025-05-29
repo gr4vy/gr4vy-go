@@ -3,26 +3,13 @@
 package operations
 
 import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
 type UpdateMerchantAccountRequest struct {
 	// The ID of the merchant account
 	MerchantAccountID     string                           `pathParam:"style=simple,explode=false,name=merchant_account_id"`
-	TimeoutInSeconds      *float64                         `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	MerchantAccountUpdate components.MerchantAccountUpdate `request:"mediaType=application/json"`
-}
-
-func (u UpdateMerchantAccountRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(u, "", false)
-}
-
-func (u *UpdateMerchantAccountRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &u, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *UpdateMerchantAccountRequest) GetMerchantAccountID() string {
@@ -30,13 +17,6 @@ func (o *UpdateMerchantAccountRequest) GetMerchantAccountID() string {
 		return ""
 	}
 	return o.MerchantAccountID
-}
-
-func (o *UpdateMerchantAccountRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *UpdateMerchantAccountRequest) GetMerchantAccountUpdate() components.MerchantAccountUpdate {

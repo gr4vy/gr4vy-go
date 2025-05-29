@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
@@ -19,28 +18,9 @@ func (o *VerifyPaymentServiceCredentialsGlobals) GetMerchantAccountID() *string 
 }
 
 type VerifyPaymentServiceCredentialsRequest struct {
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string                      `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	VerifyCredentials components.VerifyCredentials `request:"mediaType=application/json"`
-}
-
-func (v VerifyPaymentServiceCredentialsRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(v, "", false)
-}
-
-func (v *VerifyPaymentServiceCredentialsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &v, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *VerifyPaymentServiceCredentialsRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *VerifyPaymentServiceCredentialsRequest) GetMerchantAccountID() *string {
