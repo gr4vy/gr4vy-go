@@ -2,15 +2,24 @@
 
 package gr4vygo
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/config"
+	"github.com/gr4vy/gr4vy-go/internal/hooks"
+)
+
 type AccountUpdater struct {
 	Jobs *Jobs
 
-	sdkConfiguration sdkConfiguration
+	rootSDK          *Gr4vy
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
-func newAccountUpdater(sdkConfig sdkConfiguration) *AccountUpdater {
+func newAccountUpdater(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *AccountUpdater {
 	return &AccountUpdater{
+		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
-		Jobs:             newJobs(sdkConfig),
+		hooks:            hooks,
+		Jobs:             newJobs(rootSDK, sdkConfig, hooks),
 	}
 }
