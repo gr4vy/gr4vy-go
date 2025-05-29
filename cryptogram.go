@@ -27,7 +27,14 @@ func newCryptogram(sdkConfig sdkConfiguration) *Cryptogram {
 
 // Create - Provision network token cryptogram
 // Provision a cryptogram for a network token.
-func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymentMethodNetworkTokenCryptogramRequest, opts ...operations.Option) (*components.Cryptogram, error) {
+func (s *Cryptogram) Create(ctx context.Context, paymentMethodID string, networkTokenID string, cryptogramCreate components.CryptogramCreate, merchantAccountID *string, opts ...operations.Option) (*components.Cryptogram, error) {
+	request := operations.CreatePaymentMethodNetworkTokenCryptogramRequest{
+		PaymentMethodID:   paymentMethodID,
+		NetworkTokenID:    networkTokenID,
+		MerchantAccountID: merchantAccountID,
+		CryptogramCreate:  cryptogramCreate,
+	}
+
 	globals := operations.CreatePaymentMethodNetworkTokenCryptogramGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
@@ -88,10 +95,6 @@ func (s *Cryptogram) Create(ctx context.Context, request operations.CreatePaymen
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

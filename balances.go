@@ -28,9 +28,8 @@ func newBalances(sdkConfig sdkConfiguration) *Balances {
 
 // List gift card balances
 // Fetch the balances for one or more gift cards.
-func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.GiftCardBalanceRequest, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorGiftCardSummary, error) {
+func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.GiftCardBalanceRequest, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorGiftCardSummary, error) {
 	request := operations.ListGiftCardBalancesRequest{
-		TimeoutInSeconds:       timeoutInSeconds,
 		MerchantAccountID:      merchantAccountID,
 		GiftCardBalanceRequest: giftCardBalanceRequest,
 	}
@@ -95,10 +94,6 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

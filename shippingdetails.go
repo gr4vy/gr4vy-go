@@ -27,10 +27,9 @@ func newShippingDetails(sdkConfig sdkConfiguration) *ShippingDetails {
 
 // Create - Add buyer shipping details
 // Associate shipping details to a buyer.
-func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDetailsCreate components.ShippingDetailsCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.ShippingDetails, error) {
+func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDetailsCreate components.ShippingDetailsCreate, merchantAccountID *string, opts ...operations.Option) (*components.ShippingDetails, error) {
 	request := operations.AddBuyerShippingDetailsRequest{
 		BuyerID:               buyerID,
-		TimeoutInSeconds:      timeoutInSeconds,
 		MerchantAccountID:     merchantAccountID,
 		ShippingDetailsCreate: shippingDetailsCreate,
 	}
@@ -95,10 +94,6 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1424,7 +1419,14 @@ func (s *ShippingDetails) Get(ctx context.Context, buyerID string, shippingDetai
 
 // Update a buyer's shipping details
 // Update the shipping details associated to a specific buyer.
-func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateBuyerShippingDetailsRequest, opts ...operations.Option) (*components.ShippingDetails, error) {
+func (s *ShippingDetails) Update(ctx context.Context, buyerID string, shippingDetailsID string, shippingDetailsUpdate components.ShippingDetailsUpdate, merchantAccountID *string, opts ...operations.Option) (*components.ShippingDetails, error) {
+	request := operations.UpdateBuyerShippingDetailsRequest{
+		BuyerID:               buyerID,
+		ShippingDetailsID:     shippingDetailsID,
+		MerchantAccountID:     merchantAccountID,
+		ShippingDetailsUpdate: shippingDetailsUpdate,
+	}
+
 	globals := operations.UpdateBuyerShippingDetailsGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
@@ -1485,10 +1487,6 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1887,11 +1885,10 @@ func (s *ShippingDetails) Update(ctx context.Context, request operations.UpdateB
 
 // Delete a buyer's shipping details
 // Delete the shipping details associated to a specific buyer.
-func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDetailsID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
+func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDetailsID string, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.DeleteBuyerShippingDetailsRequest{
 		BuyerID:           buyerID,
 		ShippingDetailsID: shippingDetailsID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -1948,10 +1945,6 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

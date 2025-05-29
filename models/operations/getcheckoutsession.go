@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type GetCheckoutSessionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -19,21 +15,9 @@ func (o *GetCheckoutSessionGlobals) GetMerchantAccountID() *string {
 
 type GetCheckoutSessionRequest struct {
 	// The ID of the checkout session.
-	SessionID        string   `pathParam:"style=simple,explode=false,name=session_id"`
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
+	SessionID string `pathParam:"style=simple,explode=false,name=session_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-}
-
-func (g GetCheckoutSessionRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
-
-func (g *GetCheckoutSessionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *GetCheckoutSessionRequest) GetSessionID() string {
@@ -41,13 +25,6 @@ func (o *GetCheckoutSessionRequest) GetSessionID() string {
 		return ""
 	}
 	return o.SessionID
-}
-
-func (o *GetCheckoutSessionRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *GetCheckoutSessionRequest) GetMerchantAccountID() *string {

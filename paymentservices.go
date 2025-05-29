@@ -1932,10 +1932,9 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 // Delete a configured payment service
 // Deletes all the configuration of a payment service.
-func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
+func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.DeletePaymentServiceRequest{
 		PaymentServiceID:  paymentServiceID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -1992,10 +1991,6 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -2394,9 +2389,8 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, t
 
 // Verify payment service credentials
 // Verify the credentials of a configured payment service
-func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials components.VerifyCredentials, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
+func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials components.VerifyCredentials, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.VerifyPaymentServiceCredentialsRequest{
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 		VerifyCredentials: verifyCredentials,
 	}
@@ -2461,10 +2455,6 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

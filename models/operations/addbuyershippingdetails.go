@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
@@ -20,22 +19,10 @@ func (o *AddBuyerShippingDetailsGlobals) GetMerchantAccountID() *string {
 
 type AddBuyerShippingDetailsRequest struct {
 	// The ID of the buyer to add shipping details to.
-	BuyerID          string   `pathParam:"style=simple,explode=false,name=buyer_id"`
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
+	BuyerID string `pathParam:"style=simple,explode=false,name=buyer_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID     *string                          `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	ShippingDetailsCreate components.ShippingDetailsCreate `request:"mediaType=application/json"`
-}
-
-func (a AddBuyerShippingDetailsRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *AddBuyerShippingDetailsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *AddBuyerShippingDetailsRequest) GetBuyerID() string {
@@ -43,13 +30,6 @@ func (o *AddBuyerShippingDetailsRequest) GetBuyerID() string {
 		return ""
 	}
 	return o.BuyerID
-}
-
-func (o *AddBuyerShippingDetailsRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *AddBuyerShippingDetailsRequest) GetMerchantAccountID() *string {

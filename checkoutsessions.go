@@ -28,9 +28,8 @@ func newCheckoutSessions(sdkConfig sdkConfiguration) *CheckoutSessions {
 
 // Create checkout session
 // Create a new checkout session.
-func (s *CheckoutSessions) Create(ctx context.Context, timeoutInSeconds *float64, merchantAccountID *string, checkoutSessionCreate *components.CheckoutSessionCreate, opts ...operations.Option) (*components.CheckoutSession, error) {
+func (s *CheckoutSessions) Create(ctx context.Context, merchantAccountID *string, checkoutSessionCreate *components.CheckoutSessionCreate, opts ...operations.Option) (*components.CheckoutSession, error) {
 	request := operations.CreateCheckoutSessionRequest{
-		TimeoutInSeconds:      timeoutInSeconds,
 		MerchantAccountID:     merchantAccountID,
 		CheckoutSessionCreate: checkoutSessionCreate,
 	}
@@ -95,10 +94,6 @@ func (s *CheckoutSessions) Create(ctx context.Context, timeoutInSeconds *float64
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -497,10 +492,9 @@ func (s *CheckoutSessions) Create(ctx context.Context, timeoutInSeconds *float64
 
 // Update checkout session
 // Update the information stored on a checkout session.
-func (s *CheckoutSessions) Update(ctx context.Context, sessionID string, checkoutSessionCreate components.CheckoutSessionCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.CheckoutSession, error) {
+func (s *CheckoutSessions) Update(ctx context.Context, sessionID string, checkoutSessionCreate components.CheckoutSessionCreate, merchantAccountID *string, opts ...operations.Option) (*components.CheckoutSession, error) {
 	request := operations.UpdateCheckoutSessionRequest{
 		SessionID:             sessionID,
-		TimeoutInSeconds:      timeoutInSeconds,
 		MerchantAccountID:     merchantAccountID,
 		CheckoutSessionCreate: checkoutSessionCreate,
 	}
@@ -565,10 +559,6 @@ func (s *CheckoutSessions) Update(ctx context.Context, sessionID string, checkou
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -967,10 +957,9 @@ func (s *CheckoutSessions) Update(ctx context.Context, sessionID string, checkou
 
 // Get checkout session
 // Retrieve the information stored on a checkout session.
-func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.CheckoutSession, error) {
+func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, merchantAccountID *string, opts ...operations.Option) (*components.CheckoutSession, error) {
 	request := operations.GetCheckoutSessionRequest{
 		SessionID:         sessionID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -1027,10 +1016,6 @@ func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, timeoutInS
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -1416,10 +1401,9 @@ func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, timeoutInS
 
 // Delete checkout session
 // Deleta a checkout session and all of its (PCI) data.
-func (s *CheckoutSessions) Delete(ctx context.Context, sessionID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) error {
+func (s *CheckoutSessions) Delete(ctx context.Context, sessionID string, merchantAccountID *string, opts ...operations.Option) error {
 	request := operations.DeleteCheckoutSessionRequest{
 		SessionID:         sessionID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -1476,10 +1460,6 @@ func (s *CheckoutSessions) Delete(ctx context.Context, sessionID string, timeout
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return err

@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type DeleteDigitalWalletGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -19,21 +15,9 @@ func (o *DeleteDigitalWalletGlobals) GetMerchantAccountID() *string {
 
 type DeleteDigitalWalletRequest struct {
 	// The ID of the digital wallet to delete.
-	DigitalWalletID  string   `pathParam:"style=simple,explode=false,name=digital_wallet_id"`
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
+	DigitalWalletID string `pathParam:"style=simple,explode=false,name=digital_wallet_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-}
-
-func (d DeleteDigitalWalletRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(d, "", false)
-}
-
-func (d *DeleteDigitalWalletRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *DeleteDigitalWalletRequest) GetDigitalWalletID() string {
@@ -41,13 +25,6 @@ func (o *DeleteDigitalWalletRequest) GetDigitalWalletID() string {
 		return ""
 	}
 	return o.DigitalWalletID
-}
-
-func (o *DeleteDigitalWalletRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *DeleteDigitalWalletRequest) GetMerchantAccountID() *string {

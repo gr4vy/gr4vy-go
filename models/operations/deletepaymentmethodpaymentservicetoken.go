@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type DeletePaymentMethodPaymentServiceTokenGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -21,21 +17,9 @@ type DeletePaymentMethodPaymentServiceTokenRequest struct {
 	// The ID of the payment method
 	PaymentMethodID string `pathParam:"style=simple,explode=false,name=payment_method_id"`
 	// The ID of the payment service token
-	PaymentServiceTokenID string   `pathParam:"style=simple,explode=false,name=payment_service_token_id"`
-	TimeoutInSeconds      *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
+	PaymentServiceTokenID string `pathParam:"style=simple,explode=false,name=payment_service_token_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-}
-
-func (d DeletePaymentMethodPaymentServiceTokenRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(d, "", false)
-}
-
-func (d *DeletePaymentMethodPaymentServiceTokenRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *DeletePaymentMethodPaymentServiceTokenRequest) GetPaymentMethodID() string {
@@ -50,13 +34,6 @@ func (o *DeletePaymentMethodPaymentServiceTokenRequest) GetPaymentServiceTokenID
 		return ""
 	}
 	return o.PaymentServiceTokenID
-}
-
-func (o *DeletePaymentMethodPaymentServiceTokenRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *DeletePaymentMethodPaymentServiceTokenRequest) GetMerchantAccountID() *string {

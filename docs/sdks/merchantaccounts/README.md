@@ -134,7 +134,7 @@ func main() {
         OutboundWebhookPassword: gr4vygo.String("password-12345"),
         ID: "merchant-12345",
         DisplayName: "Example",
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -149,8 +149,7 @@ func main() {
 | Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          |
 | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |
-| `merchantAccountCreate`                                                              | [components.MerchantAccountCreate](../../models/components/merchantaccountcreate.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |
-| `timeoutInSeconds`                                                                   | **float64*                                                                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |
+| `request`                                                                            | [components.MerchantAccountCreate](../../models/components/merchantaccountcreate.md) | :heavy_check_mark:                                                                   | The request object to use for the request.                                           |
 | `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |
 
 ### Response
@@ -284,7 +283,7 @@ func main() {
         OutboundWebhookURL: gr4vygo.String("https://example.com/callback"),
         OutboundWebhookUsername: gr4vygo.String("user-12345"),
         OutboundWebhookPassword: gr4vygo.String("password-12345"),
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -301,7 +300,6 @@ func main() {
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |                                                                                      |
 | `merchantAccountID`                                                                  | *string*                                                                             | :heavy_check_mark:                                                                   | The ID of the merchant account                                                       | merchant-12345                                                                       |
 | `merchantAccountUpdate`                                                              | [components.MerchantAccountUpdate](../../models/components/merchantaccountupdate.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
-| `timeoutInSeconds`                                                                   | **float64*                                                                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
 | `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |                                                                                      |
 
 ### Response

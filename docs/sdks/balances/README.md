@@ -50,7 +50,7 @@ func main() {
                 },
             ),
         },
-    }, nil, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -66,7 +66,6 @@ func main() {
 | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
 | `ctx`                                                                                  | [context.Context](https://pkg.go.dev/context#Context)                                  | :heavy_check_mark:                                                                     | The context to use for the request.                                                    |
 | `giftCardBalanceRequest`                                                               | [components.GiftCardBalanceRequest](../../models/components/giftcardbalancerequest.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |
-| `timeoutInSeconds`                                                                     | **float64*                                                                             | :heavy_minus_sign:                                                                     | N/A                                                                                    |
 | `merchantAccountID`                                                                    | **string*                                                                              | :heavy_minus_sign:                                                                     | The ID of the merchant account to use for this request.                                |
 | `opts`                                                                                 | [][operations.Option](../../models/operations/option.md)                               | :heavy_minus_sign:                                                                     | The options for this request.                                                          |
 

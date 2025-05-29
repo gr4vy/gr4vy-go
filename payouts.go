@@ -542,9 +542,8 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 
 // Create a payout.
 // Creates a new payout.
-func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.PayoutSummary, error) {
+func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCreate, merchantAccountID *string, opts ...operations.Option) (*components.PayoutSummary, error) {
 	request := operations.CreatePayoutRequest{
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 		PayoutCreate:      payoutCreate,
 	}
@@ -609,10 +608,6 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

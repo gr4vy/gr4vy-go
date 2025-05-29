@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type SyncTransactionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -18,21 +14,9 @@ func (o *SyncTransactionGlobals) GetMerchantAccountID() *string {
 }
 
 type SyncTransactionRequest struct {
-	TransactionID    string   `pathParam:"style=simple,explode=false,name=transaction_id"`
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
+	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-}
-
-func (s SyncTransactionRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(s, "", false)
-}
-
-func (s *SyncTransactionRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *SyncTransactionRequest) GetTransactionID() string {
@@ -40,13 +24,6 @@ func (o *SyncTransactionRequest) GetTransactionID() string {
 		return ""
 	}
 	return o.TransactionID
-}
-
-func (o *SyncTransactionRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *SyncTransactionRequest) GetMerchantAccountID() *string {

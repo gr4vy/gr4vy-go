@@ -34,7 +34,7 @@ func main() {
 
     res, err := s.DigitalWallets.Domains.Create(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletDomain{
         DomainName: "example.com",
-    }, nil, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -51,7 +51,6 @@ func main() {
 | `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |                                                                                  |
 | `digitalWalletID`                                                                | *string*                                                                         | :heavy_check_mark:                                                               | The ID of the digital wallet to remove a domain for.                             | 1808f5e6-b49c-4db9-94fa-22371ea352f5                                             |
 | `digitalWalletDomain`                                                            | [components.DigitalWalletDomain](../../models/components/digitalwalletdomain.md) | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
-| `timeoutInSeconds`                                                               | **float64*                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 | `merchantAccountID`                                                              | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          |                                                                                  |
 | `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |                                                                                  |
 
@@ -103,7 +102,7 @@ func main() {
 
     res, err := s.DigitalWallets.Domains.Delete(ctx, "", components.DigitalWalletDomain{
         DomainName: "example.com",
-    }, nil, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -120,7 +119,6 @@ func main() {
 | `ctx`                                                                            | [context.Context](https://pkg.go.dev/context#Context)                            | :heavy_check_mark:                                                               | The context to use for the request.                                              |                                                                                  |
 | `digitalWalletID`                                                                | *string*                                                                         | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
 | `digitalWalletDomain`                                                            | [components.DigitalWalletDomain](../../models/components/digitalwalletdomain.md) | :heavy_check_mark:                                                               | N/A                                                                              |                                                                                  |
-| `timeoutInSeconds`                                                               | **float64*                                                                       | :heavy_minus_sign:                                                               | N/A                                                                              |                                                                                  |
 | `merchantAccountID`                                                              | **string*                                                                        | :heavy_minus_sign:                                                               | The ID of the merchant account to use for this request.                          |                                                                                  |
 | `opts`                                                                           | [][operations.Option](../../models/operations/option.md)                         | :heavy_minus_sign:                                                               | The options for this request.                                                    |                                                                                  |
 

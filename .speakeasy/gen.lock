@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: f2376e63ed1bbc35b61e58d65cfbbcb1
+  docChecksum: 9ce8ed217c0d3137e861c40f5535b7e4
   docVersion: 1.0.0
   speakeasyVersion: 1.552.0
   generationVersion: 2.610.0
-  releaseVersion: 1.0.0-beta.4
-  configChecksum: 0cb6451bb2a1c885703bb20745ee8a17
+  releaseVersion: 1.0.0-beta.5
+  configChecksum: b3142a8d4c8f5cef1b29327a163c5643
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -236,7 +236,6 @@ generatedFiles:
   - /models/operations/createfulltransactionrefund.go
   - /models/operations/creategiftcard.go
   - /models/operations/creategooglepaydigitalwalletsession.go
-  - /models/operations/createmerchantaccount.go
   - /models/operations/createpaymentmethod.go
   - /models/operations/createpaymentmethodnetworktoken.go
   - /models/operations/createpaymentmethodnetworktokencryptogram.go
@@ -539,7 +538,6 @@ generatedFiles:
   - docs/models/operations/creategiftcardrequest.md
   - docs/models/operations/creategooglepaydigitalwalletsessionglobals.md
   - docs/models/operations/creategooglepaydigitalwalletsessionrequest.md
-  - docs/models/operations/createmerchantaccountrequest.md
   - docs/models/operations/createpaymentmethodglobals.md
   - docs/models/operations/createpaymentmethodnetworktokencryptogramglobals.md
   - docs/models/operations/createpaymentmethodnetworktokencryptogramrequest.md

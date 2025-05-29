@@ -2,10 +2,6 @@
 
 package operations
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type DeleteBuyerShippingDetailsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -21,21 +17,9 @@ type DeleteBuyerShippingDetailsRequest struct {
 	// The ID of the buyer to delete shipping details for.
 	BuyerID string `pathParam:"style=simple,explode=false,name=buyer_id"`
 	// The ID of the shipping details to delete.
-	ShippingDetailsID string   `pathParam:"style=simple,explode=false,name=shipping_details_id"`
-	TimeoutInSeconds  *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
+	ShippingDetailsID string `pathParam:"style=simple,explode=false,name=shipping_details_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-}
-
-func (d DeleteBuyerShippingDetailsRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(d, "", false)
-}
-
-func (d *DeleteBuyerShippingDetailsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *DeleteBuyerShippingDetailsRequest) GetBuyerID() string {
@@ -50,13 +34,6 @@ func (o *DeleteBuyerShippingDetailsRequest) GetShippingDetailsID() string {
 		return ""
 	}
 	return o.ShippingDetailsID
-}
-
-func (o *DeleteBuyerShippingDetailsRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *DeleteBuyerShippingDetailsRequest) GetMerchantAccountID() *string {

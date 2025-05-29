@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
@@ -19,28 +18,9 @@ func (o *CreateGiftCardGlobals) GetMerchantAccountID() *string {
 }
 
 type CreateGiftCardRequest struct {
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string                   `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	GiftCardCreate    components.GiftCardCreate `request:"mediaType=application/json"`
-}
-
-func (c CreateGiftCardRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreateGiftCardRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreateGiftCardRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *CreateGiftCardRequest) GetMerchantAccountID() *string {

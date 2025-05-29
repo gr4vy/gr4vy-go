@@ -106,28 +106,9 @@ func (u Body) MarshalJSON() ([]byte, error) {
 }
 
 type CreatePaymentMethodRequest struct {
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	RequestBody       Body    `request:"mediaType=application/json"`
-}
-
-func (c CreatePaymentMethodRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatePaymentMethodRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
-}
-
-func (o *CreatePaymentMethodRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *CreatePaymentMethodRequest) GetMerchantAccountID() *string {

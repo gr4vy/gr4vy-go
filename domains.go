@@ -27,10 +27,9 @@ func newDomains(sdkConfig sdkConfiguration) *Domains {
 
 // Create - Register a digital wallet domain
 // Register a digital wallet domain (Apple Pay only).
-func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
+func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.RegisterDigitalWalletDomainRequest{
 		DigitalWalletID:     digitalWalletID,
-		TimeoutInSeconds:    timeoutInSeconds,
 		MerchantAccountID:   merchantAccountID,
 		DigitalWalletDomain: digitalWalletDomain,
 	}
@@ -95,10 +94,6 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -497,10 +492,9 @@ func (s *Domains) Create(ctx context.Context, digitalWalletID string, digitalWal
 
 // Delete - Remove a digital wallet domain
 // Remove a digital wallet domain (Apple Pay only).
-func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
+func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWalletDomain components.DigitalWalletDomain, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.UnregisterDigitalWalletDomainRequest{
 		DigitalWalletID:     digitalWalletID,
-		TimeoutInSeconds:    timeoutInSeconds,
 		MerchantAccountID:   merchantAccountID,
 		DigitalWalletDomain: digitalWalletDomain,
 	}
@@ -565,10 +559,6 @@ func (s *Domains) Delete(ctx context.Context, digitalWalletID string, digitalWal
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

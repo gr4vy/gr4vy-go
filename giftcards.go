@@ -496,10 +496,9 @@ func (s *GiftCards) Get(ctx context.Context, giftCardID string, merchantAccountI
 
 // Delete a gift card
 // Removes a gift card from our system.
-func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (any, error) {
+func (s *GiftCards) Delete(ctx context.Context, giftCardID string, merchantAccountID *string, opts ...operations.Option) (any, error) {
 	request := operations.DeleteGiftCardRequest{
 		GiftCardID:        giftCardID,
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -556,10 +555,6 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err
@@ -958,9 +953,8 @@ func (s *GiftCards) Delete(ctx context.Context, giftCardID string, timeoutInSeco
 
 // Create gift card
 // Store a new gift card in the vault.
-func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCardCreate, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.GiftCard, error) {
+func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCardCreate, merchantAccountID *string, opts ...operations.Option) (*components.GiftCard, error) {
 	request := operations.CreateGiftCardRequest{
-		TimeoutInSeconds:  timeoutInSeconds,
 		MerchantAccountID: merchantAccountID,
 		GiftCardCreate:    giftCardCreate,
 	}
@@ -1025,10 +1019,6 @@ func (s *GiftCards) Create(ctx context.Context, giftCardCreate components.GiftCa
 	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
-
-	if err := utils.PopulateQueryParams(ctx, req, request, globals); err != nil {
-		return nil, fmt.Errorf("error populating query params: %w", err)
-	}
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return nil, err

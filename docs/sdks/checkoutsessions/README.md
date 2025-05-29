@@ -35,7 +35,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Create(ctx, nil, nil, &components.CheckoutSessionCreate{
+    res, err := s.CheckoutSessions.Create(ctx, nil, &components.CheckoutSessionCreate{
         CartItems: []components.CartItem{
             components.CartItem{
                 Name: "GoPro HD",
@@ -168,7 +168,6 @@ func main() {
 | Parameter                                                                             | Type                                                                                  | Required                                                                              | Description                                                                           |
 | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------- |
 | `ctx`                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                 | :heavy_check_mark:                                                                    | The context to use for the request.                                                   |
-| `timeoutInSeconds`                                                                    | **float64*                                                                            | :heavy_minus_sign:                                                                    | N/A                                                                                   |
 | `merchantAccountID`                                                                   | **string*                                                                             | :heavy_minus_sign:                                                                    | The ID of the merchant account to use for this request.                               |
 | `checkoutSessionCreate`                                                               | [*components.CheckoutSessionCreate](../../models/components/checkoutsessioncreate.md) | :heavy_minus_sign:                                                                    | N/A                                                                                   |
 | `opts`                                                                                | [][operations.Option](../../models/operations/option.md)                              | :heavy_minus_sign:                                                                    | The options for this request.                                                         |
@@ -417,7 +416,7 @@ func main() {
             TravelAgencyName: gr4vygo.String("ACME Agency"),
             TravelAgencyPlanName: gr4vygo.String("B733"),
         },
-    }, nil, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -434,7 +433,6 @@ func main() {
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |                                                                                      |
 | `sessionID`                                                                          | *string*                                                                             | :heavy_check_mark:                                                                   | The ID of the checkout session.                                                      | 4137b1cf-39ac-42a8-bad6-1c680d5dab6b                                                 |
 | `checkoutSessionCreate`                                                              | [components.CheckoutSessionCreate](../../models/components/checkoutsessioncreate.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
-| `timeoutInSeconds`                                                                   | **float64*                                                                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
 | `merchantAccountID`                                                                  | **string*                                                                            | :heavy_minus_sign:                                                                   | The ID of the merchant account to use for this request.                              |                                                                                      |
 | `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |                                                                                      |
 
@@ -483,7 +481,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Get(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil, nil)
+    res, err := s.CheckoutSessions.Get(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -499,7 +497,6 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `sessionID`                                              | *string*                                                 | :heavy_check_mark:                                       | The ID of the checkout session.                          | 4137b1cf-39ac-42a8-bad6-1c680d5dab6b                     |
-| `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |                                                          |
 | `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
@@ -547,7 +544,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.CheckoutSessions.Delete(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil, nil)
+    err := s.CheckoutSessions.Delete(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -560,7 +557,6 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `sessionID`                                              | *string*                                                 | :heavy_check_mark:                                       | The ID of the checkout session.                          | 4137b1cf-39ac-42a8-bad6-1c680d5dab6b                     |
-| `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |                                                          |
 | `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 

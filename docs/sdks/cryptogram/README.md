@@ -21,7 +21,6 @@ import(
 	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
-	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 )
 
@@ -32,13 +31,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.NetworkTokens.Cryptogram.Create(ctx, operations.CreatePaymentMethodNetworkTokenCryptogramRequest{
-        PaymentMethodID: "ef9496d8-53a5-4aad-8ca2-00eb68334389",
-        NetworkTokenID: "f8dd5cfc-7834-4847-95dc-f75a360e2298",
-        CryptogramCreate: components.CryptogramCreate{
-            MerchantInitiated: false,
-        },
-    })
+    res, err := s.PaymentMethods.NetworkTokens.Cryptogram.Create(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "f8dd5cfc-7834-4847-95dc-f75a360e2298", components.CryptogramCreate{
+        MerchantInitiated: false,
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -50,11 +45,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                                                  | Type                                                                                                                                       | Required                                                                                                                                   | Description                                                                                                                                |
-| ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                                                                      | :heavy_check_mark:                                                                                                                         | The context to use for the request.                                                                                                        |
-| `request`                                                                                                                                  | [operations.CreatePaymentMethodNetworkTokenCryptogramRequest](../../models/operations/createpaymentmethodnetworktokencryptogramrequest.md) | :heavy_check_mark:                                                                                                                         | The request object to use for the request.                                                                                                 |
-| `opts`                                                                                                                                     | [][operations.Option](../../models/operations/option.md)                                                                                   | :heavy_minus_sign:                                                                                                                         | The options for this request.                                                                                                              |
+| Parameter                                                                  | Type                                                                       | Required                                                                   | Description                                                                | Example                                                                    |
+| -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- | -------------------------------------------------------------------------- |
+| `ctx`                                                                      | [context.Context](https://pkg.go.dev/context#Context)                      | :heavy_check_mark:                                                         | The context to use for the request.                                        |                                                                            |
+| `paymentMethodID`                                                          | *string*                                                                   | :heavy_check_mark:                                                         | The ID of the payment method                                               | ef9496d8-53a5-4aad-8ca2-00eb68334389                                       |
+| `networkTokenID`                                                           | *string*                                                                   | :heavy_check_mark:                                                         | The ID of the network token                                                | f8dd5cfc-7834-4847-95dc-f75a360e2298                                       |
+| `cryptogramCreate`                                                         | [components.CryptogramCreate](../../models/components/cryptogramcreate.md) | :heavy_check_mark:                                                         | N/A                                                                        |                                                                            |
+| `merchantAccountID`                                                        | **string*                                                                  | :heavy_minus_sign:                                                         | The ID of the merchant account to use for this request.                    |                                                                            |
+| `opts`                                                                     | [][operations.Option](../../models/operations/option.md)                   | :heavy_minus_sign:                                                         | The options for this request.                                              |                                                                            |
 
 ### Response
 

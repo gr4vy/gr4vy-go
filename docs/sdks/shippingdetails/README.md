@@ -51,7 +51,7 @@ func main() {
             Line2: gr4vygo.String("29th Street"),
             Organization: gr4vygo.String("Gr4vy"),
         },
-    }, nil, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -68,7 +68,6 @@ func main() {
 | `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |                                                                                      |
 | `buyerID`                                                                            | *string*                                                                             | :heavy_check_mark:                                                                   | The ID of the buyer to add shipping details to.                                      | fe26475d-ec3e-4884-9553-f7356683f7f9                                                 |
 | `shippingDetailsCreate`                                                              | [components.ShippingDetailsCreate](../../models/components/shippingdetailscreate.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
-| `timeoutInSeconds`                                                                   | **float64*                                                                           | :heavy_minus_sign:                                                                   | N/A                                                                                  |                                                                                      |
 | `merchantAccountID`                                                                  | **string*                                                                            | :heavy_minus_sign:                                                                   | The ID of the merchant account to use for this request.                              |                                                                                      |
 | `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |                                                                                      |
 
@@ -237,7 +236,6 @@ import(
 	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
-	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 )
 
@@ -248,27 +246,23 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Update(ctx, operations.UpdateBuyerShippingDetailsRequest{
-        BuyerID: "fe26475d-ec3e-4884-9553-f7356683f7f9",
-        ShippingDetailsID: "bf8c36ad-02d9-4904-b0f9-a230b149e341",
-        ShippingDetailsUpdate: components.ShippingDetailsUpdate{
-            FirstName: gr4vygo.String("John"),
-            LastName: gr4vygo.String("Doe"),
-            EmailAddress: gr4vygo.String("john@example.com"),
-            PhoneNumber: gr4vygo.String("+1234567890"),
-            Address: &components.Address{
-                City: gr4vygo.String("San Jose"),
-                Country: gr4vygo.String("US"),
-                PostalCode: gr4vygo.String("94560"),
-                State: gr4vygo.String("California"),
-                StateCode: gr4vygo.String("US-CA"),
-                HouseNumberOrName: gr4vygo.String("10"),
-                Line1: gr4vygo.String("Stafford Appartments"),
-                Line2: gr4vygo.String("29th Street"),
-                Organization: gr4vygo.String("Gr4vy"),
-            },
+    res, err := s.Buyers.ShippingDetails.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", components.ShippingDetailsUpdate{
+        FirstName: gr4vygo.String("John"),
+        LastName: gr4vygo.String("Doe"),
+        EmailAddress: gr4vygo.String("john@example.com"),
+        PhoneNumber: gr4vygo.String("+1234567890"),
+        Address: &components.Address{
+            City: gr4vygo.String("San Jose"),
+            Country: gr4vygo.String("US"),
+            PostalCode: gr4vygo.String("94560"),
+            State: gr4vygo.String("California"),
+            StateCode: gr4vygo.String("US-CA"),
+            HouseNumberOrName: gr4vygo.String("10"),
+            Line1: gr4vygo.String("Stafford Appartments"),
+            Line2: gr4vygo.String("29th Street"),
+            Organization: gr4vygo.String("Gr4vy"),
         },
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -280,11 +274,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                                    | Type                                                                                                         | Required                                                                                                     | Description                                                                                                  |
-| ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                                        | :heavy_check_mark:                                                                                           | The context to use for the request.                                                                          |
-| `request`                                                                                                    | [operations.UpdateBuyerShippingDetailsRequest](../../models/operations/updatebuyershippingdetailsrequest.md) | :heavy_check_mark:                                                                                           | The request object to use for the request.                                                                   |
-| `opts`                                                                                                       | [][operations.Option](../../models/operations/option.md)                                                     | :heavy_minus_sign:                                                                                           | The options for this request.                                                                                |
+| Parameter                                                                            | Type                                                                                 | Required                                                                             | Description                                                                          | Example                                                                              |
+| ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------ |
+| `ctx`                                                                                | [context.Context](https://pkg.go.dev/context#Context)                                | :heavy_check_mark:                                                                   | The context to use for the request.                                                  |                                                                                      |
+| `buyerID`                                                                            | *string*                                                                             | :heavy_check_mark:                                                                   | The ID of the buyer to update shipping details for.                                  | fe26475d-ec3e-4884-9553-f7356683f7f9                                                 |
+| `shippingDetailsID`                                                                  | *string*                                                                             | :heavy_check_mark:                                                                   | The ID of the shipping details to update.                                            | bf8c36ad-02d9-4904-b0f9-a230b149e341                                                 |
+| `shippingDetailsUpdate`                                                              | [components.ShippingDetailsUpdate](../../models/components/shippingdetailsupdate.md) | :heavy_check_mark:                                                                   | N/A                                                                                  |                                                                                      |
+| `merchantAccountID`                                                                  | **string*                                                                            | :heavy_minus_sign:                                                                   | The ID of the merchant account to use for this request.                              |                                                                                      |
+| `opts`                                                                               | [][operations.Option](../../models/operations/option.md)                             | :heavy_minus_sign:                                                                   | The options for this request.                                                        |                                                                                      |
 
 ### Response
 
@@ -331,7 +328,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", nil, nil)
+    res, err := s.Buyers.ShippingDetails.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -348,7 +345,6 @@ func main() {
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `buyerID`                                                | *string*                                                 | :heavy_check_mark:                                       | The ID of the buyer to delete shipping details for.      | fe26475d-ec3e-4884-9553-f7356683f7f9                     |
 | `shippingDetailsID`                                      | *string*                                                 | :heavy_check_mark:                                       | The ID of the shipping details to delete.                | bf8c36ad-02d9-4904-b0f9-a230b149e341                     |
-| `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |                                                          |
 | `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 

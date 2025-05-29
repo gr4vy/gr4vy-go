@@ -3,7 +3,6 @@
 package operations
 
 import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
@@ -22,22 +21,10 @@ type CreatePaymentMethodNetworkTokenCryptogramRequest struct {
 	// The ID of the payment method
 	PaymentMethodID string `pathParam:"style=simple,explode=false,name=payment_method_id"`
 	// The ID of the network token
-	NetworkTokenID   string   `pathParam:"style=simple,explode=false,name=network_token_id"`
-	TimeoutInSeconds *float64 `default:"1" queryParam:"style=form,explode=true,name=timeout_in_seconds"`
+	NetworkTokenID string `pathParam:"style=simple,explode=false,name=network_token_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string                     `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	CryptogramCreate  components.CryptogramCreate `request:"mediaType=application/json"`
-}
-
-func (c CreatePaymentMethodNetworkTokenCryptogramRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CreatePaymentMethodNetworkTokenCryptogramRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *CreatePaymentMethodNetworkTokenCryptogramRequest) GetPaymentMethodID() string {
@@ -52,13 +39,6 @@ func (o *CreatePaymentMethodNetworkTokenCryptogramRequest) GetNetworkTokenID() s
 		return ""
 	}
 	return o.NetworkTokenID
-}
-
-func (o *CreatePaymentMethodNetworkTokenCryptogramRequest) GetTimeoutInSeconds() *float64 {
-	if o == nil {
-		return nil
-	}
-	return o.TimeoutInSeconds
 }
 
 func (o *CreatePaymentMethodNetworkTokenCryptogramRequest) GetMerchantAccountID() *string {

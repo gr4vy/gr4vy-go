@@ -28,11 +28,10 @@ func newBuyersGiftCards(sdkConfig sdkConfiguration) *BuyersGiftCards {
 
 // List gift cards for a buyer
 // List all the stored gift cards for a specific buyer.
-func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *string, buyerID *string, timeoutInSeconds *float64, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorGiftCardSummary, error) {
+func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *string, buyerID *string, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorGiftCardSummary, error) {
 	request := operations.ListBuyerGiftCardsRequest{
 		BuyerExternalIdentifier: buyerExternalIdentifier,
 		BuyerID:                 buyerID,
-		TimeoutInSeconds:        timeoutInSeconds,
 		MerchantAccountID:       merchantAccountID,
 	}
 

@@ -506,7 +506,7 @@ func main() {
             AccountNumber: gr4vygo.String("act12345"),
             DateOfBirth: types.MustNewDateFromString("1995-12-23"),
         },
-    }, nil, nil, gr4vygo.String("request-12345"))
+    }, nil, gr4vygo.String("request-12345"))
     if err != nil {
         log.Fatal(err)
     }
@@ -522,7 +522,6 @@ func main() {
 | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | `ctx`                                                                                                                                                                                                 | [context.Context](https://pkg.go.dev/context#Context)                                                                                                                                                 | :heavy_check_mark:                                                                                                                                                                                    | The context to use for the request.                                                                                                                                                                   |                                                                                                                                                                                                       |
 | `transactionCreate`                                                                                                                                                                                   | [components.TransactionCreate](../../models/components/transactioncreate.md)                                                                                                                          | :heavy_check_mark:                                                                                                                                                                                    | N/A                                                                                                                                                                                                   |                                                                                                                                                                                                       |
-| `timeoutInSeconds`                                                                                                                                                                                    | **float64*                                                                                                                                                                                            | :heavy_minus_sign:                                                                                                                                                                                    | N/A                                                                                                                                                                                                   |                                                                                                                                                                                                       |
 | `merchantAccountID`                                                                                                                                                                                   | **string*                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                    | The ID of the merchant account to use for this request.                                                                                                                                               |                                                                                                                                                                                                       |
 | `idempotencyKey`                                                                                                                                                                                      | **string*                                                                                                                                                                                             | :heavy_minus_sign:                                                                                                                                                                                    | A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions. | request-12345                                                                                                                                                                                         |
 | `opts`                                                                                                                                                                                                | [][operations.Option](../../models/operations/option.md)                                                                                                                                              | :heavy_minus_sign:                                                                                                                                                                                    | The options for this request.                                                                                                                                                                         |                                                                                                                                                                                                       |
@@ -764,7 +763,7 @@ func main() {
             TravelAgencyName: gr4vygo.String("ACME Agency"),
             TravelAgencyPlanName: gr4vygo.String("B733"),
         },
-    }, nil, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -781,7 +780,6 @@ func main() {
 | `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
 | `transactionID`                                                                | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
 | `transactionCapture`                                                           | [components.TransactionCapture](../../models/components/transactioncapture.md) | :heavy_check_mark:                                                             | N/A                                                                            |
-| `timeoutInSeconds`                                                             | **float64*                                                                     | :heavy_minus_sign:                                                             | N/A                                                                            |
 | `merchantAccountID`                                                            | **string*                                                                      | :heavy_minus_sign:                                                             | The ID of the merchant account to use for this request.                        |
 | `opts`                                                                         | [][operations.Option](../../models/operations/option.md)                       | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
@@ -830,7 +828,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Void(ctx, "7dbc44c9-1ea3-4853-87be-9923dd281b0d", nil, nil)
+    res, err := s.Transactions.Void(ctx, "7dbc44c9-1ea3-4853-87be-9923dd281b0d", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -846,7 +844,6 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `transactionID`                                          | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |
 | `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 
@@ -959,7 +956,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Sync(ctx, "2ee546e0-3b11-478e-afec-fdb362611e22", nil, nil)
+    res, err := s.Transactions.Sync(ctx, "2ee546e0-3b11-478e-afec-fdb362611e22", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -975,7 +972,6 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
 | `transactionID`                                          | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `timeoutInSeconds`                                       | **float64*                                               | :heavy_minus_sign:                                       | N/A                                                      |
 | `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
 

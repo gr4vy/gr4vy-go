@@ -36,7 +36,7 @@ func main() {
             "ef9496d8-53a5-4aad-8ca2-00eb68334389",
             "f29e886e-93cc-4714-b4a3-12b7a718e595",
         },
-    }, nil, nil)
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -52,7 +52,6 @@ func main() {
 | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------- |
 | `ctx`                                                                                    | [context.Context](https://pkg.go.dev/context#Context)                                    | :heavy_check_mark:                                                                       | The context to use for the request.                                                      |
 | `accountUpdaterJobCreate`                                                                | [components.AccountUpdaterJobCreate](../../models/components/accountupdaterjobcreate.md) | :heavy_check_mark:                                                                       | N/A                                                                                      |
-| `timeoutInSeconds`                                                                       | **float64*                                                                               | :heavy_minus_sign:                                                                       | N/A                                                                                      |
 | `merchantAccountID`                                                                      | **string*                                                                                | :heavy_minus_sign:                                                                       | The ID of the merchant account to use for this request.                                  |
 | `opts`                                                                                   | [][operations.Option](../../models/operations/option.md)                                 | :heavy_minus_sign:                                                                       | The options for this request.                                                            |
 
