@@ -43,6 +43,7 @@ This SDK is designed to simplify development, reduce boilerplate code, and help 
   * [Retries](#retries)
   * [Error Handling](#error-handling)
   * [Server Selection](#server-selection)
+  * [Timeouts](#timeouts)
   * [Custom HTTP Client](#custom-http-client)
   * [Special Types](#special-types)
 * [Development](#development)
@@ -791,6 +792,29 @@ func main() {
 
 ```
 <!-- End Server Selection [server] -->
+
+## Timeouts
+
+The GO SDK supports custom timeouts for the API requests. This timeout can be set globally or per request. To set it globally, pass the `WithTimeout` function to the SDK constructor.
+
+```go
+s := gr4vy.New(
+	gr4vy.WithID("example"),
+	gr4vy.WithServer(gr4vy.ServerSandbox),
+	gr4vy.WithSecuritySource(withToken),
+	gr4vy.WithMerchantAccountID("default"),
+	// 5 second timeout
+	gr4vy.WithTimeout(time.Duration(5*time.Second))
+)
+```
+
+Alternatively, the timeout can be set for every API request.
+
+```go
+_, err = merchantClient.PaymentServices.Create(ctx, paymentServiceCreate, &merchantAccountID,
+	operations.WithOperationTimeout(time.Duration(5*time.Second)),
+)
+```
 
 <!-- Start Custom HTTP Client [http-client] -->
 ## Custom HTTP Client
