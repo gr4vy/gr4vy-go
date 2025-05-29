@@ -2,9 +2,12 @@
 
 package gr4vygo
 
+// Generated from OpenAPI doc version 1.0.0 and generator version 2.614.0
+
 import (
 	"context"
 	"fmt"
+	"github.com/gr4vy/gr4vy-go/internal/config"
 	"github.com/gr4vy/gr4vy-go/internal/globals"
 	"github.com/gr4vy/gr4vy-go/internal/hooks"
 	"github.com/gr4vy/gr4vy-go/internal/utils"
@@ -25,7 +28,7 @@ var ServerList = map[string]string{
 	ServerSandbox:    "https://api.sandbox.{id}.gr4vy.app",
 }
 
-// HTTPClient provides an interface for suplying the SDK with a custom HTTP client
+// HTTPClient provides an interface for supplying the SDK with a custom HTTP client
 type HTTPClient interface {
 	Do(req *http.Request) (*http.Response, error)
 }
@@ -51,37 +54,9 @@ func Float64(f float64) *float64 { return &f }
 // Pointer provides a helper function to return a pointer to a type
 func Pointer[T any](v T) *T { return &v }
 
-type sdkConfiguration struct {
-	Client            HTTPClient
-	Security          func(context.Context) (interface{}, error)
-	ServerURL         string
-	Server            string
-	ServerDefaults    map[string]map[string]string
-	Language          string
-	OpenAPIDocVersion string
-	SDKVersion        string
-	GenVersion        string
-	UserAgent         string
-	Globals           globals.Globals
-	RetryConfig       *retry.Config
-	Hooks             *hooks.Hooks
-	Timeout           *time.Duration
-}
-
-func (c *sdkConfiguration) GetServerDetails() (string, map[string]string) {
-	if c.ServerURL != "" {
-		return c.ServerURL, nil
-	}
-
-	if c.Server == "" {
-		c.Server = "production"
-	}
-
-	return ServerList[c.Server], c.ServerDefaults[c.Server]
-}
-
 // Gr4vy - Gr4vy: The Gr4vy API.
 type Gr4vy struct {
+	SDKVersion                string
 	AccountUpdater            *AccountUpdater
 	Buyers                    *Buyers
 	PaymentMethods            *PaymentMethods
@@ -98,7 +73,8 @@ type Gr4vy struct {
 	MerchantAccounts          *MerchantAccounts
 	Payouts                   *Payouts
 
-	sdkConfiguration sdkConfiguration
+	sdkConfiguration config.SDKConfiguration
+	hooks            *hooks.Hooks
 }
 
 type SDKOption func(*Gr4vy)
@@ -136,12 +112,12 @@ func WithServer(server string) SDKOption {
 // WithID allows setting the id variable for url substitution
 func WithID(id string) SDKOption {
 	return func(sdk *Gr4vy) {
-		for server := range sdk.sdkConfiguration.ServerDefaults {
-			if _, ok := sdk.sdkConfiguration.ServerDefaults[server]["id"]; !ok {
+		for server := range sdk.sdkConfiguration.ServerVariables {
+			if _, ok := sdk.sdkConfiguration.ServerVariables[server]["id"]; !ok {
 				continue
 			}
 
-			sdk.sdkConfiguration.ServerDefaults[server]["id"] = fmt.Sprintf("%v", id)
+			sdk.sdkConfiguration.ServerVariables[server]["id"] = fmt.Sprintf("%v", id)
 		}
 	}
 }
@@ -189,28 +165,16 @@ func WithTimeout(timeout time.Duration) SDKOption {
 		sdk.sdkConfiguration.Timeout = &timeout
 	}
 }
-func (sdk *Gr4vy) fillGlobalsFromEnv() {
-	if sdk.sdkConfiguration.Globals.MerchantAccountID == nil {
-		if val := utils.ValueFromEnvVar("GR4VY_MERCHANT_ACCOUNT_ID", sdk.sdkConfiguration.Globals.MerchantAccountID); val != nil {
-			if typedVal, ok := val.(string); ok {
-				sdk.sdkConfiguration.Globals.MerchantAccountID = &typedVal
-			}
-		}
-	}
-
-}
 
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Gr4vy {
 	sdk := &Gr4vy{
-		sdkConfiguration: sdkConfiguration{
-			Language:          "go",
-			OpenAPIDocVersion: "1.0.0",
-			SDKVersion:        "1.0.0-beta.5",
-			GenVersion:        "2.610.0",
-			UserAgent:         "speakeasy-sdk/go 1.0.0-beta.5 2.610.0 1.0.0 github.com/gr4vy/gr4vy-go",
-			Globals:           globals.Globals{},
-			ServerDefaults: map[string]map[string]string{
+		SDKVersion: "1.0.0-beta.6",
+		sdkConfiguration: config.SDKConfiguration{
+			UserAgent:  "speakeasy-sdk/go 1.0.0-beta.6 2.614.0 1.0.0 github.com/gr4vy/gr4vy-go",
+			Globals:    globals.Globals{},
+			ServerList: ServerList,
+			ServerVariables: map[string]map[string]string{
 				"production": {
 					"id": "example",
 				},
@@ -218,14 +182,14 @@ func New(opts ...SDKOption) *Gr4vy {
 					"id": "example",
 				},
 			},
-			Hooks: hooks.New(),
 		},
+		hooks: hooks.New(),
 	}
 	for _, opt := range opts {
 		opt(sdk)
 	}
 
-	sdk.fillGlobalsFromEnv()
+	sdk.sdkConfiguration.FillGlobalsFromEnv()
 
 	if sdk.sdkConfiguration.Security == nil {
 		var envVarSecurity components.Security
@@ -239,42 +203,23 @@ func New(opts ...SDKOption) *Gr4vy {
 		sdk.sdkConfiguration.Client = &http.Client{Timeout: 60 * time.Second}
 	}
 
-	currentServerURL, _ := sdk.sdkConfiguration.GetServerDetails()
-	serverURL := currentServerURL
-	serverURL, sdk.sdkConfiguration.Client = sdk.sdkConfiguration.Hooks.SDKInit(currentServerURL, sdk.sdkConfiguration.Client)
-	if serverURL != currentServerURL {
-		sdk.sdkConfiguration.ServerURL = serverURL
-	}
+	sdk.sdkConfiguration = sdk.hooks.SDKInit(sdk.sdkConfiguration)
 
-	sdk.AccountUpdater = newAccountUpdater(sdk.sdkConfiguration)
-
-	sdk.Buyers = newBuyers(sdk.sdkConfiguration)
-
-	sdk.PaymentMethods = newPaymentMethods(sdk.sdkConfiguration)
-
-	sdk.GiftCards = newGiftCards(sdk.sdkConfiguration)
-
-	sdk.CardSchemeDefinitions = newCardSchemeDefinitions(sdk.sdkConfiguration)
-
-	sdk.DigitalWallets = newDigitalWallets(sdk.sdkConfiguration)
-
-	sdk.Transactions = newTransactions(sdk.sdkConfiguration)
-
-	sdk.Refunds = newRefunds(sdk.sdkConfiguration)
-
-	sdk.PaymentOptions = newPaymentOptions(sdk.sdkConfiguration)
-
-	sdk.PaymentServiceDefinitions = newPaymentServiceDefinitions(sdk.sdkConfiguration)
-
-	sdk.PaymentServices = newPaymentServices(sdk.sdkConfiguration)
-
-	sdk.AuditLogs = newAuditLogs(sdk.sdkConfiguration)
-
-	sdk.CheckoutSessions = newCheckoutSessions(sdk.sdkConfiguration)
-
-	sdk.MerchantAccounts = newMerchantAccounts(sdk.sdkConfiguration)
-
-	sdk.Payouts = newPayouts(sdk.sdkConfiguration)
+	sdk.AccountUpdater = newAccountUpdater(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Buyers = newBuyers(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PaymentMethods = newPaymentMethods(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.GiftCards = newGiftCards(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.CardSchemeDefinitions = newCardSchemeDefinitions(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.DigitalWallets = newDigitalWallets(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Transactions = newTransactions(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Refunds = newRefunds(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PaymentOptions = newPaymentOptions(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PaymentServiceDefinitions = newPaymentServiceDefinitions(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.PaymentServices = newPaymentServices(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.AuditLogs = newAuditLogs(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.CheckoutSessions = newCheckoutSessions(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.MerchantAccounts = newMerchantAccounts(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.Payouts = newPayouts(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }

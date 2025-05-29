@@ -571,7 +571,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Get(ctx, "bde12786-dce8-4654-b031-196961d1ddcc", nil)
+    res, err := s.Transactions.Get(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -583,12 +583,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `transactionID`                                          | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `transactionID`                                          | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      | 7099948d-7286-47e4-aad8-b68f7eb44591                     |
+| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
 
@@ -637,7 +637,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Capture(ctx, "9a049029-b958-45dd-86d7-d7f9fc92c411", components.TransactionCapture{
+    res, err := s.Transactions.Capture(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.TransactionCapture{
         Amount: gr4vygo.Int64(1299),
         Airline: &components.Airline{
             BookingCode: gr4vygo.String("X36Q9C"),
@@ -775,13 +775,13 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
-| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
-| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
-| `transactionID`                                                                | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            |
-| `transactionCapture`                                                           | [components.TransactionCapture](../../models/components/transactioncapture.md) | :heavy_check_mark:                                                             | N/A                                                                            |
-| `merchantAccountID`                                                            | **string*                                                                      | :heavy_minus_sign:                                                             | The ID of the merchant account to use for this request.                        |
-| `opts`                                                                         | [][operations.Option](../../models/operations/option.md)                       | :heavy_minus_sign:                                                             | The options for this request.                                                  |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    | Example                                                                        |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |                                                                                |
+| `transactionID`                                                                | *string*                                                                       | :heavy_check_mark:                                                             | N/A                                                                            | 7099948d-7286-47e4-aad8-b68f7eb44591                                           |
+| `transactionCapture`                                                           | [components.TransactionCapture](../../models/components/transactioncapture.md) | :heavy_check_mark:                                                             | N/A                                                                            |                                                                                |
+| `merchantAccountID`                                                            | **string*                                                                      | :heavy_minus_sign:                                                             | The ID of the merchant account to use for this request.                        |                                                                                |
+| `opts`                                                                         | [][operations.Option](../../models/operations/option.md)                       | :heavy_minus_sign:                                                             | The options for this request.                                                  |                                                                                |
 
 ### Response
 
@@ -828,7 +828,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Void(ctx, "7dbc44c9-1ea3-4853-87be-9923dd281b0d", nil)
+    res, err := s.Transactions.Void(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -840,12 +840,12 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |
-| `transactionID`                                          | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      |
-| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `transactionID`                                          | *string*                                                 | :heavy_check_mark:                                       | N/A                                                      | 7099948d-7286-47e4-aad8-b68f7eb44591                     |
+| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
 
