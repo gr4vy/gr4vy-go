@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 6427901b8f11097c656fe537d6785c07
+  docChecksum: 54768a8cff7268de4ecc82c9f638e1f3
   docVersion: 1.0.0
-  speakeasyVersion: 1.553.2
-  generationVersion: 2.614.0
-  releaseVersion: 1.0.0-beta.6
-  configChecksum: efd0c04f48ab9b3964ccfccebc62ab1c
+  speakeasyVersion: 1.554.1
+  generationVersion: 2.616.1
+  releaseVersion: 1.0.0-beta.7
+  configChecksum: 4504d97f0230e092866b651763118d4a
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -220,7 +220,6 @@ generatedFiles:
   - /models/components/transactionrefundallcreate.go
   - /models/components/transactionrefundcreate.go
   - /models/components/transactionstatus.go
-  - /models/components/transactionstatussummary.go
   - /models/components/transactionsummary.go
   - /models/components/transactionthreedsecuresummary.go
   - /models/components/userstatus.go
@@ -270,7 +269,6 @@ generatedFiles:
   - /models/operations/getrefund.go
   - /models/operations/gettransaction.go
   - /models/operations/gettransactionrefund.go
-  - /models/operations/gettransactionsummary.go
   - /models/operations/listauditlogs.go
   - /models/operations/listbuyergiftcards.go
   - /models/operations/listbuyerpaymentmethods.go
@@ -514,7 +512,6 @@ generatedFiles:
   - docs/models/components/transactionrefundallcreate.md
   - docs/models/components/transactionrefundcreate.md
   - docs/models/components/transactionstatus.md
-  - docs/models/components/transactionstatussummary.md
   - docs/models/components/transactionsummary.md
   - docs/models/components/transactionthreedsecuresummary.md
   - docs/models/components/userdevice.md
@@ -605,8 +602,6 @@ generatedFiles:
   - docs/models/operations/gettransactionrefundglobals.md
   - docs/models/operations/gettransactionrefundrequest.md
   - docs/models/operations/gettransactionrequest.md
-  - docs/models/operations/gettransactionsummaryglobals.md
-  - docs/models/operations/gettransactionsummaryrequest.md
   - docs/models/operations/listauditlogsglobals.md
   - docs/models/operations/listauditlogsrequest.md
   - docs/models/operations/listauditlogsresponse.md
