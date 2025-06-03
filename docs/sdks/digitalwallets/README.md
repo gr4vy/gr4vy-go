@@ -38,7 +38,6 @@ func main() {
     res, err := s.DigitalWallets.Create(ctx, components.DigitalWalletCreate{
         Provider: components.DigitalWalletProviderClickToPay,
         MerchantName: "<value>",
-        MerchantCountryCode: gr4vygo.String("DE"),
         AcceptTermsAndConditions: false,
     }, nil)
     if err != nil {
@@ -296,9 +295,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Update(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletUpdate{
-        MerchantCountryCode: gr4vygo.String("DE"),
-    }, nil)
+    res, err := s.DigitalWallets.Update(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }

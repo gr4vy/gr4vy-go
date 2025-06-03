@@ -37,10 +37,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentServices.List(ctx, operations.ListPaymentServicesRequest{
-        Cursor: gr4vygo.String("ZXhhbXBsZTE"),
-        Deleted: gr4vygo.Bool(true),
-    })
+    res, err := s.PaymentServices.List(ctx, operations.ListPaymentServicesRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -129,21 +126,6 @@ func main() {
                 Value: "key-12345",
             },
         },
-        ReportingFields: []components.Field{
-            components.Field{
-                Key: "api_key",
-                Value: "key-12345",
-            },
-            components.Field{
-                Key: "api_key",
-                Value: "key-12345",
-            },
-            components.Field{
-                Key: "api_key",
-                Value: "key-12345",
-            },
-        },
-        Position: gr4vygo.Int64(1),
         AcceptedCurrencies: []string{
             "USD",
             "EUR",
@@ -154,28 +136,6 @@ func main() {
             "DE",
             "GB",
         },
-        Active: gr4vygo.Bool(true),
-        MerchantProfile: map[string]*components.MerchantProfileScheme{
-            "key": &components.MerchantProfileScheme{
-                MerchantAcquirerBin: "516327",
-                MerchantURL: "https://example.com",
-                MerchantAcquirerID: "123456789012345",
-                MerchantName: "Acme Inc.",
-                MerchantCountryCode: "USD",
-                MerchantCategoryCode: "1234",
-            },
-            "key1": &components.MerchantProfileScheme{
-                MerchantAcquirerBin: "516327",
-                MerchantURL: "https://example.com",
-                MerchantAcquirerID: "123456789012345",
-                MerchantName: "Acme Inc.",
-                MerchantCountryCode: "USD",
-                MerchantCategoryCode: "1234",
-            },
-        },
-        PaymentMethodTokenizationEnabled: gr4vygo.Bool(true),
-        NetworkTokensEnabled: gr4vygo.Bool(true),
-        OpenLoop: gr4vygo.Bool(true),
     }, nil)
     if err != nil {
         log.Fatal(err)
@@ -305,35 +265,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentServices.Update(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", components.PaymentServiceUpdate{
-        DisplayName: gr4vygo.String("Stripe"),
-        Position: gr4vygo.Int64(1),
-        AcceptedCurrencies: []string{
-            "USD",
-            "EUR",
-            "GBP",
-        },
-        AcceptedCountries: []string{
-            "US",
-            "DE",
-            "GB",
-        },
-        Active: gr4vygo.Bool(true),
-        ThreeDSecureEnabled: gr4vygo.Bool(true),
-        MerchantProfile: map[string]*components.MerchantProfileScheme{
-            "key": &components.MerchantProfileScheme{
-                MerchantAcquirerBin: "516327",
-                MerchantURL: "https://example.com",
-                MerchantAcquirerID: "123456789012345",
-                MerchantName: "Acme Inc.",
-                MerchantCountryCode: "USD",
-                MerchantCategoryCode: "1234",
-            },
-        },
-        PaymentMethodTokenizationEnabled: gr4vygo.Bool(true),
-        NetworkTokensEnabled: gr4vygo.Bool(true),
-        OpenLoop: gr4vygo.Bool(true),
-    }, nil)
+    res, err := s.PaymentServices.Update(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", components.PaymentServiceUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -465,7 +397,6 @@ func main() {
 
     res, err := s.PaymentServices.Verify(ctx, components.VerifyCredentials{
         PaymentServiceDefinitionID: "stripe-card",
-        PaymentServiceID: gr4vygo.String("fffd152a-9532-4087-9a4f-de58754210f0"),
         Fields: []components.Field{},
     }, nil)
     if err != nil {

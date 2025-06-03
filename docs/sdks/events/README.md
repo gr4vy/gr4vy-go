@@ -30,7 +30,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Events.List(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", gr4vygo.String("ZXhhbXBsZTE"), nil, nil)
+    res, err := s.Transactions.Events.List(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

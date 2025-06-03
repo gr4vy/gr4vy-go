@@ -34,12 +34,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.List(ctx, operations.ListPaymentMethodsRequest{
-        Cursor: gr4vygo.String("ZXhhbXBsZTE"),
-        BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
-        BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
-        ExternalIdentifier: gr4vygo.String("payment-method-12345"),
-    })
+    res, err := s.PaymentMethods.List(ctx, operations.ListPaymentMethodsRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -119,9 +114,6 @@ func main() {
     res, err := s.PaymentMethods.Create(ctx, operations.CreateBodyCheckoutSessionPaymentMethodCreate(
         components.CheckoutSessionPaymentMethodCreate{
             ID: "4137b1cf-39ac-42a8-bad6-1c680d5dab6b",
-            ExternalIdentifier: gr4vygo.String("card-12345"),
-            BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
-            BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
         },
     ), nil)
     if err != nil {

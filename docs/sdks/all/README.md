@@ -20,7 +20,6 @@ import(
 	"context"
 	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
-	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
 
@@ -31,10 +30,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Refunds.All.Create(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil, &components.TransactionRefundAllCreate{
-        Reason: gr4vygo.String("Refund due to user request."),
-        ExternalIdentifier: gr4vygo.String("refund-12345"),
-    })
+    res, err := s.Transactions.Refunds.All.Create(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -56,7 +52,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionNoCursorRefund](../../models/components/collectionnocursorrefund.md), error**
+**[*components.CollectionRefund](../../models/components/collectionrefund.md), error**
 
 ### Errors
 

@@ -32,7 +32,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.PaymentServiceTokens.List(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", gr4vygo.String("fffd152a-9532-4087-9a4f-de58754210f0"), nil)
+    res, err := s.PaymentMethods.PaymentServiceTokens.List(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -99,7 +99,6 @@ func main() {
     )
 
     res, err := s.PaymentMethods.PaymentServiceTokens.Create(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", components.PaymentServiceTokenCreate{
-        SecurityCode: gr4vygo.String("123"),
         PaymentServiceID: "fffd152a-9532-4087-9a4f-de58754210f0",
         RedirectURL: "https://dual-futon.biz",
     }, nil)

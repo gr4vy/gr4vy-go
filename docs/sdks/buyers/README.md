@@ -35,11 +35,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{
-        Cursor: gr4vygo.String("ZXhhbXBsZTE"),
-        Search: gr4vygo.String("John"),
-        ExternalIdentifier: gr4vygo.String("buyer-12345"),
-    })
+    res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{})
     if err != nil {
         log.Fatal(err)
     }
@@ -115,31 +111,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.Create(ctx, components.BuyerCreate{
-        DisplayName: gr4vygo.String("John Doe"),
-        ExternalIdentifier: gr4vygo.String("buyer-12345"),
-        BillingDetails: &components.BillingDetailsInput{
-            FirstName: gr4vygo.String("John"),
-            LastName: gr4vygo.String("Doe"),
-            EmailAddress: gr4vygo.String("john@example.com"),
-            PhoneNumber: gr4vygo.String("+1234567890"),
-            Address: &components.Address{
-                City: gr4vygo.String("San Jose"),
-                Country: gr4vygo.String("US"),
-                PostalCode: gr4vygo.String("94560"),
-                State: gr4vygo.String("California"),
-                StateCode: gr4vygo.String("US-CA"),
-                HouseNumberOrName: gr4vygo.String("10"),
-                Line1: gr4vygo.String("Stafford Appartments"),
-                Line2: gr4vygo.String("29th Street"),
-                Organization: gr4vygo.String("Gr4vy"),
-            },
-            TaxID: &components.TaxID{
-                Value: "12345678931",
-                Kind: components.TaxIDKindCaPstMb,
-            },
-        },
-    }, nil)
+    res, err := s.Buyers.Create(ctx, components.BuyerCreate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -268,31 +240,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.BuyerUpdate{
-        DisplayName: gr4vygo.String("John Doe"),
-        ExternalIdentifier: gr4vygo.String("buyer-12345"),
-        BillingDetails: &components.BillingDetailsInput{
-            FirstName: gr4vygo.String("John"),
-            LastName: gr4vygo.String("Doe"),
-            EmailAddress: gr4vygo.String("john@example.com"),
-            PhoneNumber: gr4vygo.String("+1234567890"),
-            Address: &components.Address{
-                City: gr4vygo.String("San Jose"),
-                Country: gr4vygo.String("US"),
-                PostalCode: gr4vygo.String("94560"),
-                State: gr4vygo.String("California"),
-                StateCode: gr4vygo.String("US-CA"),
-                HouseNumberOrName: gr4vygo.String("10"),
-                Line1: gr4vygo.String("Stafford Appartments"),
-                Line2: gr4vygo.String("29th Street"),
-                Organization: gr4vygo.String("Gr4vy"),
-            },
-            TaxID: &components.TaxID{
-                Value: "12345678931",
-                Kind: components.TaxIDKindAuAbn,
-            },
-        },
-    }, nil)
+    res, err := s.Buyers.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.BuyerUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }

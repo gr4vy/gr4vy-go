@@ -97,12 +97,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Refunds.Create(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.TransactionRefundCreate{
-        Amount: gr4vygo.Int64(1299),
-        TargetID: gr4vygo.String("7a6c366d-9205-45ab-8021-0d9ee37f20f2"),
-        Reason: gr4vygo.String("Refund due to user request."),
-        ExternalIdentifier: gr4vygo.String("refund-12345"),
-    }, nil)
+    res, err := s.Transactions.Refunds.Create(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.TransactionRefundCreate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
