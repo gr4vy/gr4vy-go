@@ -418,14 +418,14 @@ func (o *ListTransactionsRequest) GetMerchantAccountID() *string {
 }
 
 type ListTransactionsResponse struct {
-	Result components.CollectionTransactionSummary
+	Result components.TransactionSummaries
 
 	Next func() (*ListTransactionsResponse, error)
 }
 
-func (o *ListTransactionsResponse) GetResult() components.CollectionTransactionSummary {
+func (o *ListTransactionsResponse) GetResult() components.TransactionSummaries {
 	if o == nil {
-		return components.CollectionTransactionSummary{}
+		return components.TransactionSummaries{}
 	}
 	return o.Result
 }

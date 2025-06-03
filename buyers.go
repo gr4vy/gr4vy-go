@@ -263,7 +263,7 @@ func (s *Buyers) List(ctx context.Context, request operations.ListBuyersRequest,
 				return nil, err
 			}
 
-			var out components.CollectionBuyer
+			var out components.Buyers
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

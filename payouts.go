@@ -258,7 +258,7 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, err
 			}
 
-			var out components.CollectionPayoutSummary
+			var out components.PayoutSummaries
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

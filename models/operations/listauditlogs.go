@@ -87,14 +87,14 @@ func (o *ListAuditLogsRequest) GetMerchantAccountID() *string {
 }
 
 type ListAuditLogsResponse struct {
-	Result components.CollectionAuditLogEntry
+	Result components.AuditLogEntries
 
 	Next func() (*ListAuditLogsResponse, error)
 }
 
-func (o *ListAuditLogsResponse) GetResult() components.CollectionAuditLogEntry {
+func (o *ListAuditLogsResponse) GetResult() components.AuditLogEntries {
 	if o == nil {
-		return components.CollectionAuditLogEntry{}
+		return components.AuditLogEntries{}
 	}
 	return o.Result
 }

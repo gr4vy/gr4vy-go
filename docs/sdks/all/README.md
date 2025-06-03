@@ -52,7 +52,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionRefund](../../models/components/collectionrefund.md), error**
+**[*components.Refunds](../../models/components/refunds.md), error**
 
 ### Errors
 

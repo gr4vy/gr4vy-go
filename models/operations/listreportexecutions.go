@@ -69,14 +69,14 @@ func (o *ListReportExecutionsRequest) GetMerchantAccountID() *string {
 }
 
 type ListReportExecutionsResponse struct {
-	Result components.CollectionReportExecution
+	Result components.ReportExecutions
 
 	Next func() (*ListReportExecutionsResponse, error)
 }
 
-func (o *ListReportExecutionsResponse) GetResult() components.CollectionReportExecution {
+func (o *ListReportExecutionsResponse) GetResult() components.ReportExecutions {
 	if o == nil {
-		return components.CollectionReportExecution{}
+		return components.ReportExecutions{}
 	}
 	return o.Result
 }

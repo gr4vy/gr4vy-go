@@ -54,7 +54,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionNoCursorPaymentServiceToken](../../models/components/collectionnocursorpaymentservicetoken.md), error**
+**[*components.PaymentServiceTokens](../../models/components/paymentservicetokens.md), error**
 
 ### Errors
 

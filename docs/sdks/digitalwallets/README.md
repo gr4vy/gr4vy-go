@@ -123,7 +123,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionNoCursorDigitalWallet](../../models/components/collectionnocursordigitalwallet.md), error**
+**[*components.DigitalWallets](../../models/components/digitalwallets.md), error**
 
 ### Errors
 

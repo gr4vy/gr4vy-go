@@ -50,7 +50,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionNoCursorCardSchemeDefinition](../../models/components/collectionnocursorcardschemedefinition.md), error**
+**[*components.CardSchemeDefinitions](../../models/components/cardschemedefinitions.md), error**
 
 ### Errors
 

@@ -33,7 +33,7 @@ func newPaymentOptions(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks 
 
 // List payment options
 // List the payment options available at checkout. filtering by country, currency, and additional fields passed to Flow rules.
-func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest components.PaymentOptionRequest, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorPaymentOption, error) {
+func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest components.PaymentOptionRequest, merchantAccountID *string, opts ...operations.Option) (*components.PaymentOptions, error) {
 	request := operations.ListPaymentOptionsRequest{
 		MerchantAccountID:    merchantAccountID,
 		PaymentOptionRequest: paymentOptionRequest,
@@ -208,7 +208,7 @@ func (s *PaymentOptions) List(ctx context.Context, paymentOptionRequest componen
 				return nil, err
 			}
 
-			var out components.CollectionNoCursorPaymentOption
+			var out components.PaymentOptions
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

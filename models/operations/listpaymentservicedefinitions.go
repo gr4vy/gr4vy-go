@@ -40,14 +40,14 @@ func (o *ListPaymentServiceDefinitionsRequest) GetLimit() *int64 {
 }
 
 type ListPaymentServiceDefinitionsResponse struct {
-	Result components.CollectionPaymentServiceDefinition
+	Result components.PaymentServiceDefinitions
 
 	Next func() (*ListPaymentServiceDefinitionsResponse, error)
 }
 
-func (o *ListPaymentServiceDefinitionsResponse) GetResult() components.CollectionPaymentServiceDefinition {
+func (o *ListPaymentServiceDefinitionsResponse) GetResult() components.PaymentServiceDefinitions {
 	if o == nil {
-		return components.CollectionPaymentServiceDefinition{}
+		return components.PaymentServiceDefinitions{}
 	}
 	return o.Result
 }

@@ -33,7 +33,7 @@ func newBuyersPaymentMethods(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, 
 
 // List payment methods for a buyer
 // List all the stored payment methods for a specific buyer.
-func (s *BuyersPaymentMethods) List(ctx context.Context, request operations.ListBuyerPaymentMethodsRequest, opts ...operations.Option) (*components.CollectionNoCursorPaymentMethodSummary, error) {
+func (s *BuyersPaymentMethods) List(ctx context.Context, request operations.ListBuyerPaymentMethodsRequest, opts ...operations.Option) (*components.PaymentMethodSummaries, error) {
 	globals := operations.ListBuyerPaymentMethodsGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
@@ -206,7 +206,7 @@ func (s *BuyersPaymentMethods) List(ctx context.Context, request operations.List
 				return nil, err
 			}
 
-			var out components.CollectionNoCursorPaymentMethodSummary
+			var out components.PaymentMethodSummaries
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 48a44769384139d6b6305fa66d74fb96
+  docChecksum: 364092fb70c396560e5b6dd40244599c
   docVersion: 1.0.0
   speakeasyVersion: 1.555.0
   generationVersion: 2.618.0
-  releaseVersion: 1.0.0-beta.9
-  configChecksum: f1841451d08c8ee70cf0e199d9c2225e
+  releaseVersion: 1.0.0-beta.10
+  configChecksum: a885890fdcc296d03427e775087ff7a7
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -63,6 +63,7 @@ generatedFiles:
   - /models/components/applepaysessionrequest.go
   - /models/components/approvaltarget.go
   - /models/components/auditlogaction.go
+  - /models/components/auditlogentries.go
   - /models/components/auditlogentry.go
   - /models/components/auditlogentryresource.go
   - /models/components/auditlogentryuser.go
@@ -72,10 +73,12 @@ generatedFiles:
   - /models/components/browserinfo.go
   - /models/components/buyer.go
   - /models/components/buyercreate.go
+  - /models/components/buyers.go
   - /models/components/buyerupdate.go
   - /models/components/cardpaymentmethodcreate.go
   - /models/components/cardscheme.go
   - /models/components/cardschemedefinition.go
+  - /models/components/cardschemedefinitions.go
   - /models/components/cardtype.go
   - /models/components/cardwithurlpaymentmethodcreate.go
   - /models/components/cartitem.go
@@ -90,27 +93,6 @@ generatedFiles:
   - /models/components/clicktopaypaymentmethodcreate.go
   - /models/components/clicktopaysession.go
   - /models/components/clicktopaysessionrequest.go
-  - /models/components/collectionauditlogentry.go
-  - /models/components/collectionbuyer.go
-  - /models/components/collectiongiftcard.go
-  - /models/components/collectionmerchantaccount.go
-  - /models/components/collectionnocursorcardschemedefinition.go
-  - /models/components/collectionnocursordigitalwallet.go
-  - /models/components/collectionnocursorgiftcardsummary.go
-  - /models/components/collectionnocursornetworktoken.go
-  - /models/components/collectionnocursorpaymentmethodsummary.go
-  - /models/components/collectionnocursorpaymentoption.go
-  - /models/components/collectionnocursorpaymentservicetoken.go
-  - /models/components/collectionnocursorshippingdetails.go
-  - /models/components/collectionpaymentmethod.go
-  - /models/components/collectionpaymentservice.go
-  - /models/components/collectionpaymentservicedefinition.go
-  - /models/components/collectionpayoutsummary.go
-  - /models/components/collectionrefund.go
-  - /models/components/collectionreport.go
-  - /models/components/collectionreportexecution.go
-  - /models/components/collectiontransactionevent.go
-  - /models/components/collectiontransactionsummary.go
   - /models/components/connectionoptions.go
   - /models/components/createsession.go
   - /models/components/createsessionstatus.go
@@ -125,6 +107,7 @@ generatedFiles:
   - /models/components/digitalwalletcreate.go
   - /models/components/digitalwalletdomain.go
   - /models/components/digitalwalletprovider.go
+  - /models/components/digitalwallets.go
   - /models/components/digitalwalletupdate.go
   - /models/components/errordetail.go
   - /models/components/errorlocation.go
@@ -136,9 +119,11 @@ generatedFiles:
   - /models/components/giftcardredemption.go
   - /models/components/giftcardredemptionstatus.go
   - /models/components/giftcardrequest.go
+  - /models/components/giftcards.go
   - /models/components/giftcardservice.go
   - /models/components/giftcardserviceprovider.go
   - /models/components/giftcardstoredrequest.go
+  - /models/components/giftcardsummaries.go
   - /models/components/giftcardsummary.go
   - /models/components/giftcardtokentransactioncreate.go
   - /models/components/giftcardtransactioncreate.go
@@ -153,6 +138,7 @@ generatedFiles:
   - /models/components/instrumenttype.go
   - /models/components/merchantaccount.go
   - /models/components/merchantaccountcreate.go
+  - /models/components/merchantaccounts.go
   - /models/components/merchantaccountupdate.go
   - /models/components/merchantprofilescheme.go
   - /models/components/merchantprofileschemesummary.go
@@ -161,24 +147,31 @@ generatedFiles:
   - /models/components/networktoken.go
   - /models/components/networktokencreate.go
   - /models/components/networktokenpaymentmethodcreate.go
+  - /models/components/networktokens.go
   - /models/components/networktokenstatus.go
   - /models/components/paymentmethod.go
   - /models/components/paymentmethodcard.go
   - /models/components/paymentmethoddetailscard.go
+  - /models/components/paymentmethods.go
   - /models/components/paymentmethodstatus.go
   - /models/components/paymentmethodstoredcard.go
+  - /models/components/paymentmethodsummaries.go
   - /models/components/paymentmethodsummary.go
   - /models/components/paymentoption.go
   - /models/components/paymentoptioncontext.go
   - /models/components/paymentoptioncontextapprovalui.go
   - /models/components/paymentoptionrequest.go
+  - /models/components/paymentoptions.go
   - /models/components/paymentservice.go
   - /models/components/paymentserviceconfiguration.go
   - /models/components/paymentservicecreate.go
   - /models/components/paymentservicedefinition.go
+  - /models/components/paymentservicedefinitions.go
+  - /models/components/paymentservices.go
   - /models/components/paymentservicestatus.go
   - /models/components/paymentservicetoken.go
   - /models/components/paymentservicetokencreate.go
+  - /models/components/paymentservicetokens.go
   - /models/components/paymentserviceupdate.go
   - /models/components/payoutcategory.go
   - /models/components/payoutcreate.go
@@ -186,11 +179,13 @@ generatedFiles:
   - /models/components/payoutmerchantsummary.go
   - /models/components/payoutpaymentservice.go
   - /models/components/payoutstatus.go
+  - /models/components/payoutsummaries.go
   - /models/components/payoutsummary.go
   - /models/components/producttype.go
   - /models/components/recipient.go
   - /models/components/redirectpaymentmethodcreate.go
   - /models/components/refund.go
+  - /models/components/refunds.go
   - /models/components/refundstatus.go
   - /models/components/refundtargettype.go
   - /models/components/report.go
@@ -198,9 +193,11 @@ generatedFiles:
   - /models/components/reportcreatortype.go
   - /models/components/reportexecution.go
   - /models/components/reportexecutioncontext.go
+  - /models/components/reportexecutions.go
   - /models/components/reportexecutionstatus.go
   - /models/components/reportexecutionsummary.go
   - /models/components/reportexecutionurl.go
+  - /models/components/reports.go
   - /models/components/reportschedule.go
   - /models/components/reportspec.go
   - /models/components/reportspecmodel.go
@@ -210,6 +207,7 @@ generatedFiles:
   - /models/components/security.go
   - /models/components/shippingdetails.go
   - /models/components/shippingdetailscreate.go
+  - /models/components/shippingdetailslist.go
   - /models/components/shippingdetailsupdate.go
   - /models/components/statementdescriptor.go
   - /models/components/taxid.go
@@ -226,6 +224,7 @@ generatedFiles:
   - /models/components/transactioncapture.go
   - /models/components/transactioncreate.go
   - /models/components/transactionevent.go
+  - /models/components/transactionevents.go
   - /models/components/transactiongiftcard.go
   - /models/components/transactionintent.go
   - /models/components/transactionintentoutcome.go
@@ -237,6 +236,7 @@ generatedFiles:
   - /models/components/transactionretriesreportspec.go
   - /models/components/transactionsreportspec.go
   - /models/components/transactionstatus.go
+  - /models/components/transactionsummaries.go
   - /models/components/transactionsummary.go
   - /models/components/transactionthreedsecuresummary.go
   - /models/components/userstatus.go
@@ -364,6 +364,7 @@ generatedFiles:
   - docs/models/components/applepaysessionrequest.md
   - docs/models/components/approvaltarget.md
   - docs/models/components/auditlogaction.md
+  - docs/models/components/auditlogentries.md
   - docs/models/components/auditlogentry.md
   - docs/models/components/auditlogentryresource.md
   - docs/models/components/auditlogentryuser.md
@@ -373,10 +374,12 @@ generatedFiles:
   - docs/models/components/browserinfo.md
   - docs/models/components/buyer.md
   - docs/models/components/buyercreate.md
+  - docs/models/components/buyers.md
   - docs/models/components/buyerupdate.md
   - docs/models/components/cardpaymentmethodcreate.md
   - docs/models/components/cardscheme.md
   - docs/models/components/cardschemedefinition.md
+  - docs/models/components/cardschemedefinitions.md
   - docs/models/components/cardsource.md
   - docs/models/components/cardtype.md
   - docs/models/components/cardwithurlpaymentmethodcreate.md
@@ -392,27 +395,6 @@ generatedFiles:
   - docs/models/components/clicktopaypaymentmethodcreate.md
   - docs/models/components/clicktopaysession.md
   - docs/models/components/clicktopaysessionrequest.md
-  - docs/models/components/collectionauditlogentry.md
-  - docs/models/components/collectionbuyer.md
-  - docs/models/components/collectiongiftcard.md
-  - docs/models/components/collectionmerchantaccount.md
-  - docs/models/components/collectionnocursorcardschemedefinition.md
-  - docs/models/components/collectionnocursordigitalwallet.md
-  - docs/models/components/collectionnocursorgiftcardsummary.md
-  - docs/models/components/collectionnocursornetworktoken.md
-  - docs/models/components/collectionnocursorpaymentmethodsummary.md
-  - docs/models/components/collectionnocursorpaymentoption.md
-  - docs/models/components/collectionnocursorpaymentservicetoken.md
-  - docs/models/components/collectionnocursorshippingdetails.md
-  - docs/models/components/collectionpaymentmethod.md
-  - docs/models/components/collectionpaymentservice.md
-  - docs/models/components/collectionpaymentservicedefinition.md
-  - docs/models/components/collectionpayoutsummary.md
-  - docs/models/components/collectionrefund.md
-  - docs/models/components/collectionreport.md
-  - docs/models/components/collectionreportexecution.md
-  - docs/models/components/collectiontransactionevent.md
-  - docs/models/components/collectiontransactionsummary.md
   - docs/models/components/connectionoptions.md
   - docs/models/components/context.md
   - docs/models/components/createsession.md
@@ -428,6 +410,7 @@ generatedFiles:
   - docs/models/components/digitalwalletcreate.md
   - docs/models/components/digitalwalletdomain.md
   - docs/models/components/digitalwalletprovider.md
+  - docs/models/components/digitalwallets.md
   - docs/models/components/digitalwalletupdate.md
   - docs/models/components/errordetail.md
   - docs/models/components/errorlocation.md
@@ -439,9 +422,11 @@ generatedFiles:
   - docs/models/components/giftcardredemption.md
   - docs/models/components/giftcardredemptionstatus.md
   - docs/models/components/giftcardrequest.md
+  - docs/models/components/giftcards.md
   - docs/models/components/giftcardservice.md
   - docs/models/components/giftcardserviceprovider.md
   - docs/models/components/giftcardstoredrequest.md
+  - docs/models/components/giftcardsummaries.md
   - docs/models/components/giftcardsummary.md
   - docs/models/components/giftcardtokentransactioncreate.md
   - docs/models/components/giftcardtransactioncreate.md
@@ -459,6 +444,7 @@ generatedFiles:
   - docs/models/components/loc.md
   - docs/models/components/merchantaccount.md
   - docs/models/components/merchantaccountcreate.md
+  - docs/models/components/merchantaccounts.md
   - docs/models/components/merchantaccountupdate.md
   - docs/models/components/merchantprofilescheme.md
   - docs/models/components/merchantprofileschemesummary.md
@@ -468,24 +454,31 @@ generatedFiles:
   - docs/models/components/networktoken.md
   - docs/models/components/networktokencreate.md
   - docs/models/components/networktokenpaymentmethodcreate.md
+  - docs/models/components/networktokens.md
   - docs/models/components/networktokenstatus.md
   - docs/models/components/paymentmethod.md
   - docs/models/components/paymentmethodcard.md
   - docs/models/components/paymentmethoddetailscard.md
+  - docs/models/components/paymentmethods.md
   - docs/models/components/paymentmethodstatus.md
   - docs/models/components/paymentmethodstoredcard.md
+  - docs/models/components/paymentmethodsummaries.md
   - docs/models/components/paymentmethodsummary.md
   - docs/models/components/paymentoption.md
   - docs/models/components/paymentoptioncontext.md
   - docs/models/components/paymentoptioncontextapprovalui.md
   - docs/models/components/paymentoptionrequest.md
+  - docs/models/components/paymentoptions.md
   - docs/models/components/paymentservice.md
   - docs/models/components/paymentserviceconfiguration.md
   - docs/models/components/paymentservicecreate.md
   - docs/models/components/paymentservicedefinition.md
+  - docs/models/components/paymentservicedefinitions.md
+  - docs/models/components/paymentservices.md
   - docs/models/components/paymentservicestatus.md
   - docs/models/components/paymentservicetoken.md
   - docs/models/components/paymentservicetokencreate.md
+  - docs/models/components/paymentservicetokens.md
   - docs/models/components/paymentserviceupdate.md
   - docs/models/components/payoutcategory.md
   - docs/models/components/payoutcreate.md
@@ -494,12 +487,14 @@ generatedFiles:
   - docs/models/components/payoutmerchantsummary.md
   - docs/models/components/payoutpaymentservice.md
   - docs/models/components/payoutstatus.md
+  - docs/models/components/payoutsummaries.md
   - docs/models/components/payoutsummary.md
   - docs/models/components/producttype.md
   - docs/models/components/recipient.md
   - docs/models/components/redirectpaymentmethodcreate.md
   - docs/models/components/redirectpaymentmethodcreatemethod.md
   - docs/models/components/refund.md
+  - docs/models/components/refunds.md
   - docs/models/components/refundstatus.md
   - docs/models/components/refundtargettype.md
   - docs/models/components/report.md
@@ -507,9 +502,11 @@ generatedFiles:
   - docs/models/components/reportcreatortype.md
   - docs/models/components/reportexecution.md
   - docs/models/components/reportexecutioncontext.md
+  - docs/models/components/reportexecutions.md
   - docs/models/components/reportexecutionstatus.md
   - docs/models/components/reportexecutionsummary.md
   - docs/models/components/reportexecutionurl.md
+  - docs/models/components/reports.md
   - docs/models/components/reportschedule.md
   - docs/models/components/reportspec.md
   - docs/models/components/reportspecmodel.md
@@ -523,6 +520,7 @@ generatedFiles:
   - docs/models/components/security.md
   - docs/models/components/shippingdetails.md
   - docs/models/components/shippingdetailscreate.md
+  - docs/models/components/shippingdetailslist.md
   - docs/models/components/shippingdetailsupdate.md
   - docs/models/components/spec.md
   - docs/models/components/statementdescriptor.md
@@ -544,6 +542,7 @@ generatedFiles:
   - docs/models/components/transactioncreate.md
   - docs/models/components/transactioncreatepaymentmethod.md
   - docs/models/components/transactionevent.md
+  - docs/models/components/transactionevents.md
   - docs/models/components/transactiongiftcard.md
   - docs/models/components/transactionintent.md
   - docs/models/components/transactionintentoutcome.md
@@ -555,6 +554,7 @@ generatedFiles:
   - docs/models/components/transactionretriesreportspec.md
   - docs/models/components/transactionsreportspec.md
   - docs/models/components/transactionstatus.md
+  - docs/models/components/transactionsummaries.md
   - docs/models/components/transactionsummary.md
   - docs/models/components/transactionthreedsecuresummary.md
   - docs/models/components/userdevice.md

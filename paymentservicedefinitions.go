@@ -250,7 +250,7 @@ func (s *PaymentServiceDefinitions) List(ctx context.Context, cursor *string, li
 				return nil, err
 			}
 
-			var out components.CollectionPaymentServiceDefinition
+			var out components.PaymentServiceDefinitions
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

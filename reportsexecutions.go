@@ -33,7 +33,7 @@ func newReportsExecutions(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hoo
 
 // List executed reports
 // List all executed reports that have been generated.
-func (s *ReportsExecutions) List(ctx context.Context, request operations.ListAllReportExecutionsRequest, opts ...operations.Option) (*components.CollectionReportExecution, error) {
+func (s *ReportsExecutions) List(ctx context.Context, request operations.ListAllReportExecutionsRequest, opts ...operations.Option) (*components.ReportExecutions, error) {
 	globals := operations.ListAllReportExecutionsGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
@@ -206,7 +206,7 @@ func (s *ReportsExecutions) List(ctx context.Context, request operations.ListAll
 				return nil, err
 			}
 
-			var out components.CollectionReportExecution
+			var out components.ReportExecutions
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

@@ -1649,7 +1649,7 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, err
 			}
 
-			var out components.CollectionGiftCard
+			var out components.GiftCards
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

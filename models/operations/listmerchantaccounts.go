@@ -49,14 +49,14 @@ func (o *ListMerchantAccountsRequest) GetSearch() *string {
 }
 
 type ListMerchantAccountsResponse struct {
-	Result components.CollectionMerchantAccount
+	Result components.MerchantAccounts
 
 	Next func() (*ListMerchantAccountsResponse, error)
 }
 
-func (o *ListMerchantAccountsResponse) GetResult() components.CollectionMerchantAccount {
+func (o *ListMerchantAccountsResponse) GetResult() components.MerchantAccounts {
 	if o == nil {
-		return components.CollectionMerchantAccount{}
+		return components.MerchantAccounts{}
 	}
 	return o.Result
 }

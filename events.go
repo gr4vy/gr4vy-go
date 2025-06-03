@@ -32,7 +32,7 @@ func newEvents(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hooks.H
 
 // List transaction events
 // Fetch a list of events for a transaction.
-func (s *Events) List(ctx context.Context, transactionID string, cursor *string, limit *int64, merchantAccountID *string, opts ...operations.Option) (*components.CollectionTransactionEvent, error) {
+func (s *Events) List(ctx context.Context, transactionID string, cursor *string, limit *int64, merchantAccountID *string, opts ...operations.Option) (*components.TransactionEvents, error) {
 	request := operations.ListTransactionEventsRequest{
 		TransactionID:     transactionID,
 		Cursor:            cursor,
@@ -212,7 +212,7 @@ func (s *Events) List(ctx context.Context, transactionID string, cursor *string,
 				return nil, err
 			}
 
-			var out components.CollectionTransactionEvent
+			var out components.TransactionEvents
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

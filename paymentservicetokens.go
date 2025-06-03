@@ -32,7 +32,7 @@ func newPaymentServiceTokens(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, 
 
 // List payment service tokens
 // List all gateway tokens stored for a payment method.
-func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string, paymentServiceID *string, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorPaymentServiceToken, error) {
+func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string, paymentServiceID *string, merchantAccountID *string, opts ...operations.Option) (*components.PaymentServiceTokens, error) {
 	request := operations.ListPaymentMethodPaymentServiceTokensRequest{
 		PaymentMethodID:   paymentMethodID,
 		PaymentServiceID:  paymentServiceID,
@@ -211,7 +211,7 @@ func (s *PaymentServiceTokens) List(ctx context.Context, paymentMethodID string,
 				return nil, err
 			}
 
-			var out components.CollectionNoCursorPaymentServiceToken
+			var out components.PaymentServiceTokens
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

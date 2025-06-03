@@ -35,7 +35,7 @@ func newTransactionsRefunds(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, h
 
 // List transaction refunds
 // List refunds for a transaction.
-func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.CollectionRefund, error) {
+func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.Refunds, error) {
 	request := operations.ListTransactionRefundsRequest{
 		TransactionID:     transactionID,
 		MerchantAccountID: merchantAccountID,
@@ -209,7 +209,7 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 				return nil, err
 			}
 
-			var out components.CollectionRefund
+			var out components.Refunds
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

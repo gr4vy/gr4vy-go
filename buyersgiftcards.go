@@ -33,7 +33,7 @@ func newBuyersGiftCards(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks
 
 // List gift cards for a buyer
 // List all the stored gift cards for a specific buyer.
-func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *string, buyerID *string, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorGiftCardSummary, error) {
+func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *string, buyerID *string, merchantAccountID *string, opts ...operations.Option) (*components.GiftCardSummaries, error) {
 	request := operations.ListBuyerGiftCardsRequest{
 		BuyerExternalIdentifier: buyerExternalIdentifier,
 		BuyerID:                 buyerID,
@@ -212,7 +212,7 @@ func (s *BuyersGiftCards) List(ctx context.Context, buyerExternalIdentifier *str
 				return nil, err
 			}
 
-			var out components.CollectionNoCursorGiftCardSummary
+			var out components.GiftCardSummaries
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

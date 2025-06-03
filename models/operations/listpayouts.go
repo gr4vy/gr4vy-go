@@ -60,14 +60,14 @@ func (o *ListPayoutsRequest) GetMerchantAccountID() *string {
 }
 
 type ListPayoutsResponse struct {
-	Result components.CollectionPayoutSummary
+	Result components.PayoutSummaries
 
 	Next func() (*ListPayoutsResponse, error)
 }
 
-func (o *ListPayoutsResponse) GetResult() components.CollectionPayoutSummary {
+func (o *ListPayoutsResponse) GetResult() components.PayoutSummaries {
 	if o == nil {
-		return components.CollectionPayoutSummary{}
+		return components.PayoutSummaries{}
 	}
 	return o.Result
 }

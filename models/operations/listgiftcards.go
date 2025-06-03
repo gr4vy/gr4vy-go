@@ -74,14 +74,14 @@ func (o *ListGiftCardsRequest) GetMerchantAccountID() *string {
 }
 
 type ListGiftCardsResponse struct {
-	Result components.CollectionGiftCard
+	Result components.GiftCards
 
 	Next func() (*ListGiftCardsResponse, error)
 }
 
-func (o *ListGiftCardsResponse) GetResult() components.CollectionGiftCard {
+func (o *ListGiftCardsResponse) GetResult() components.GiftCards {
 	if o == nil {
-		return components.CollectionGiftCard{}
+		return components.GiftCards{}
 	}
 	return o.Result
 }

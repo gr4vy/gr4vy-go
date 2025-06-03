@@ -33,7 +33,7 @@ func newCardSchemeDefinitions(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration,
 
 // List card scheme definitions
 // Fetch a list of the definitions of each card scheme.
-func (s *CardSchemeDefinitions) List(ctx context.Context, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorCardSchemeDefinition, error) {
+func (s *CardSchemeDefinitions) List(ctx context.Context, merchantAccountID *string, opts ...operations.Option) (*components.CardSchemeDefinitions, error) {
 	request := operations.ListCardSchemeDefinitionsRequest{
 		MerchantAccountID: merchantAccountID,
 	}
@@ -206,7 +206,7 @@ func (s *CardSchemeDefinitions) List(ctx context.Context, merchantAccountID *str
 				return nil, err
 			}
 
-			var out components.CollectionNoCursorCardSchemeDefinition
+			var out components.CardSchemeDefinitions
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
