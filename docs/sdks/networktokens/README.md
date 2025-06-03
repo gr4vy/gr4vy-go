@@ -100,7 +100,6 @@ func main() {
     )
 
     res, err := s.PaymentMethods.NetworkTokens.Create(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", components.NetworkTokenCreate{
-        SecurityCode: gr4vygo.String("123"),
         MerchantInitiated: false,
         IsSubsequentPayment: false,
     }, nil)

@@ -32,7 +32,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Payouts.List(ctx, gr4vygo.String("ZXhhbXBsZTE"), nil, nil)
+    res, err := s.Payouts.List(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -119,77 +119,6 @@ func main() {
                 ID: "852b951c-d7ea-4c98-b09e-4a1c9e97c077",
             },
         ),
-        Category: components.PayoutCategoryOnlineGambling.ToPointer(),
-        ExternalIdentifier: gr4vygo.String("payout-12345"),
-        BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
-        Buyer: &components.GuestBuyerInput{
-            DisplayName: gr4vygo.String("John Doe"),
-            ExternalIdentifier: gr4vygo.String("buyer-12345"),
-            BillingDetails: &components.BillingDetailsInput{
-                FirstName: gr4vygo.String("John"),
-                LastName: gr4vygo.String("Doe"),
-                EmailAddress: gr4vygo.String("john@example.com"),
-                PhoneNumber: gr4vygo.String("+1234567890"),
-                Address: &components.Address{
-                    City: gr4vygo.String("San Jose"),
-                    Country: gr4vygo.String("US"),
-                    PostalCode: gr4vygo.String("94560"),
-                    State: gr4vygo.String("California"),
-                    StateCode: gr4vygo.String("US-CA"),
-                    HouseNumberOrName: gr4vygo.String("10"),
-                    Line1: gr4vygo.String("Stafford Appartments"),
-                    Line2: gr4vygo.String("29th Street"),
-                    Organization: gr4vygo.String("Gr4vy"),
-                },
-                TaxID: &components.TaxID{
-                    Value: "12345678931",
-                    Kind: components.TaxIDKindNoVat,
-                },
-            },
-            ShippingDetails: &components.ShippingDetailsCreate{
-                FirstName: gr4vygo.String("John"),
-                LastName: gr4vygo.String("Doe"),
-                EmailAddress: gr4vygo.String("john@example.com"),
-                PhoneNumber: gr4vygo.String("+1234567890"),
-                Address: &components.Address{
-                    City: gr4vygo.String("San Jose"),
-                    Country: gr4vygo.String("US"),
-                    PostalCode: gr4vygo.String("94560"),
-                    State: gr4vygo.String("California"),
-                    StateCode: gr4vygo.String("US-CA"),
-                    HouseNumberOrName: gr4vygo.String("10"),
-                    Line1: gr4vygo.String("Stafford Appartments"),
-                    Line2: gr4vygo.String("29th Street"),
-                    Organization: gr4vygo.String("Gr4vy"),
-                },
-            },
-        },
-        BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
-        Merchant: &components.PayoutMerchant{
-            Name: "Acme Inc",
-            IdentificationNumber: "12345",
-            PhoneNumber: "+14155552671",
-            URL: "https://example.com",
-            StatementDescriptor: "Winnings",
-            MerchantCategoryCode: "123456",
-            Address: &components.Address{
-                City: gr4vygo.String("San Jose"),
-                Country: gr4vygo.String("US"),
-                PostalCode: gr4vygo.String("94560"),
-                State: gr4vygo.String("California"),
-                StateCode: gr4vygo.String("US-CA"),
-                HouseNumberOrName: gr4vygo.String("10"),
-                Line1: gr4vygo.String("Stafford Appartments"),
-                Line2: gr4vygo.String("29th Street"),
-                Organization: gr4vygo.String("Gr4vy"),
-            },
-        },
-        ConnectionOptions: &components.ConnectionOptions{
-            CheckoutCard: &components.CheckoutCardConnectionOptions{
-                ProcessingChannelID: "channel-1234",
-                SourceID: "acct-1234",
-            },
-        },
     }, nil)
     if err != nil {
         log.Fatal(err)

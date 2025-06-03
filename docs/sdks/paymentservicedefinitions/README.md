@@ -32,7 +32,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentServiceDefinitions.List(ctx, gr4vygo.String("ZXhhbXBsZTE"), nil)
+    res, err := s.PaymentServiceDefinitions.List(ctx, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

@@ -435,11 +435,7 @@ func main() {
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
-	res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{
-		Cursor:             gr4vygo.String("ZXhhbXBsZTE"),
-		Search:             gr4vygo.String("John"),
-		ExternalIdentifier: gr4vygo.String("buyer-12345"),
-	})
+	res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{})
 	if err != nil {
 		log.Fatal(err)
 	}

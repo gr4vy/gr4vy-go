@@ -1,4 +1,4 @@
-speakeasyVersion: 1.554.1
+speakeasyVersion: 1.555.0
 sources:
     Gr4vy:
         sourceNamespace: gr-4-vy
@@ -9,20 +9,20 @@ sources:
             - 1.0.0
     openapi:
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:927a7e63c62ee53b9397b0fb53dfc34a9be77f3c6e22357e20a42dbb7e7e4432
-        sourceBlobDigest: sha256:9ff5353d35de69bf75a1516b4c38752715a9ad8f1b28065600ad4561f0d508ee
+        sourceRevisionDigest: sha256:bddf86f2abf8692330de8d7da3ad29d10e742274ea0685a1681dbb98b269f310
+        sourceBlobDigest: sha256:eec22a89979b9a4c610d4b987740302d2a23869f8c1656f9858af9f073f49211
         tags:
             - latest
-            - speakeasy-sdk-regen-1748613299
+            - speakeasy-sdk-regen-1748952173
             - 1.0.0
 targets:
     go:
         source: openapi
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:927a7e63c62ee53b9397b0fb53dfc34a9be77f3c6e22357e20a42dbb7e7e4432
-        sourceBlobDigest: sha256:9ff5353d35de69bf75a1516b4c38752715a9ad8f1b28065600ad4561f0d508ee
+        sourceRevisionDigest: sha256:bddf86f2abf8692330de8d7da3ad29d10e742274ea0685a1681dbb98b269f310
+        sourceBlobDigest: sha256:eec22a89979b9a4c610d4b987740302d2a23869f8c1656f9858af9f073f49211
         codeSamplesNamespace: openapi-go-code-samples
-        codeSamplesRevisionDigest: sha256:eab6543a425ff93d9c823039c83250a3cf9d80e55540355bdf9cee43f94f0b13
+        codeSamplesRevisionDigest: sha256:420c39f05e024a9b9645cd95429ac6f8ea586e6d26e20ed9c7c69be924609642
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
@@ -38,7 +38,7 @@ workflow:
                 - location: ./.speakeasy/overlays/mid-global.yaml
                 - location: ./.speakeasy/overlays/fix-base-model.yaml
                 - location: ./.speakeasy/overlays/fix-checkout-session-body.yaml
-                - location: ./.speakeasy/overlays/fix-remove-timeout-in-seconds.yaml
+                - location: ./.speakeasy/overlays/fix-remove-unwanted-headers.yaml
             registry:
                 location: registry.speakeasyapi.dev/gr4vy/gr4vy/openapi
     targets:

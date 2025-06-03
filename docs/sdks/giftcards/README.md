@@ -165,8 +165,6 @@ func main() {
     res, err := s.GiftCards.Create(ctx, components.GiftCardCreate{
         Number: "4123455541234561234",
         Pin: "1234",
-        BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
-        BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
     }, nil)
     if err != nil {
         log.Fatal(err)

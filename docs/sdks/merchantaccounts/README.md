@@ -33,7 +33,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.MerchantAccounts.List(ctx, gr4vygo.String("ZXhhbXBsZTE"), nil, gr4vygo.String("merchant-12345"))
+    res, err := s.MerchantAccounts.List(ctx, nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -112,26 +112,6 @@ func main() {
     )
 
     res, err := s.MerchantAccounts.Create(ctx, components.MerchantAccountCreate{
-        AccountUpdaterRequestEncryptionKey: gr4vygo.String("key-1234"),
-        AccountUpdaterRequestEncryptionKeyID: gr4vygo.String("key-id-1234"),
-        AccountUpdaterResponseDecryptionKey: gr4vygo.String("key-1234"),
-        AccountUpdaterResponseDecryptionKeyID: gr4vygo.String("key-id-1234"),
-        OverCaptureAmount: gr4vygo.Int64(1299),
-        OverCapturePercentage: gr4vygo.Int64(25),
-        LoonClientKey: gr4vygo.String("client-key-1234"),
-        LoonSecretKey: gr4vygo.String("key-12345"),
-        LoonAcceptedSchemes: []components.CardScheme{
-            components.CardSchemeVisa,
-        },
-        VisaNetworkTokensRequestorID: gr4vygo.String("id-12345"),
-        VisaNetworkTokensAppID: gr4vygo.String("id-12345"),
-        AmexNetworkTokensRequestorID: gr4vygo.String("id-12345"),
-        AmexNetworkTokensAppID: gr4vygo.String("id-12345"),
-        MastercardNetworkTokensRequestorID: gr4vygo.String("id-12345"),
-        MastercardNetworkTokensAppID: gr4vygo.String("id-12345"),
-        OutboundWebhookURL: gr4vygo.String("https://example.com/callback"),
-        OutboundWebhookUsername: gr4vygo.String("user-12345"),
-        OutboundWebhookPassword: gr4vygo.String("password-12345"),
         ID: "merchant-12345",
         DisplayName: "Example",
     })
@@ -261,29 +241,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.MerchantAccounts.Update(ctx, "merchant-12345", components.MerchantAccountUpdate{
-        AccountUpdaterRequestEncryptionKey: gr4vygo.String("key-1234"),
-        AccountUpdaterRequestEncryptionKeyID: gr4vygo.String("key-id-1234"),
-        AccountUpdaterResponseDecryptionKey: gr4vygo.String("key-1234"),
-        AccountUpdaterResponseDecryptionKeyID: gr4vygo.String("key-id-1234"),
-        OverCaptureAmount: gr4vygo.Int64(1299),
-        OverCapturePercentage: gr4vygo.Int64(25),
-        LoonClientKey: gr4vygo.String("client-key-1234"),
-        LoonSecretKey: gr4vygo.String("key-12345"),
-        LoonAcceptedSchemes: []components.CardScheme{
-            components.CardSchemeVisa,
-        },
-        VisaNetworkTokensRequestorID: gr4vygo.String("id-12345"),
-        VisaNetworkTokensAppID: gr4vygo.String("id-12345"),
-        AmexNetworkTokensRequestorID: gr4vygo.String("id-12345"),
-        AmexNetworkTokensAppID: gr4vygo.String("id-12345"),
-        MastercardNetworkTokensRequestorID: gr4vygo.String("id-12345"),
-        MastercardNetworkTokensAppID: gr4vygo.String("id-12345"),
-        DisplayName: gr4vygo.String("Example"),
-        OutboundWebhookURL: gr4vygo.String("https://example.com/callback"),
-        OutboundWebhookUsername: gr4vygo.String("user-12345"),
-        OutboundWebhookPassword: gr4vygo.String("password-12345"),
-    })
+    res, err := s.MerchantAccounts.Update(ctx, "merchant-12345", components.MerchantAccountUpdate{})
     if err != nil {
         log.Fatal(err)
     }

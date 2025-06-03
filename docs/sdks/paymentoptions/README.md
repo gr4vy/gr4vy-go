@@ -31,34 +31,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentOptions.List(ctx, components.PaymentOptionRequest{
-        Metadata: map[string]string{
-            "cohort": "a",
-        },
-        Country: gr4vygo.String("US"),
-        Currency: gr4vygo.String("USD"),
-        Amount: gr4vygo.Int64(1299),
-        CartItems: []components.CartItem{
-            components.CartItem{
-                Name: "GoPro HD",
-                Quantity: 2,
-                UnitAmount: 1299,
-                DiscountAmount: gr4vygo.Int64(0),
-                TaxAmount: gr4vygo.Int64(0),
-                ExternalIdentifier: gr4vygo.String("goprohd"),
-                Sku: gr4vygo.String("GPHD1078"),
-                ProductURL: gr4vygo.String("https://example.com/catalog/go-pro-hd"),
-                ImageURL: gr4vygo.String("https://example.com/images/go-pro-hd.jpg"),
-                Categories: []string{
-                    "camera",
-                    "travel",
-                    "gear",
-                },
-                ProductType: components.ProductTypePhysical.ToPointer(),
-                SellerCountry: gr4vygo.String("US"),
-            },
-        },
-    }, nil)
+    res, err := s.PaymentOptions.List(ctx, components.PaymentOptionRequest{}, nil)
     if err != nil {
         log.Fatal(err)
     }

@@ -35,23 +35,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Create(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.ShippingDetailsCreate{
-        FirstName: gr4vygo.String("John"),
-        LastName: gr4vygo.String("Doe"),
-        EmailAddress: gr4vygo.String("john@example.com"),
-        PhoneNumber: gr4vygo.String("+1234567890"),
-        Address: &components.Address{
-            City: gr4vygo.String("San Jose"),
-            Country: gr4vygo.String("US"),
-            PostalCode: gr4vygo.String("94560"),
-            State: gr4vygo.String("California"),
-            StateCode: gr4vygo.String("US-CA"),
-            HouseNumberOrName: gr4vygo.String("10"),
-            Line1: gr4vygo.String("Stafford Appartments"),
-            Line2: gr4vygo.String("29th Street"),
-            Organization: gr4vygo.String("Gr4vy"),
-        },
-    }, nil)
+    res, err := s.Buyers.ShippingDetails.Create(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.ShippingDetailsCreate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -246,23 +230,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", components.ShippingDetailsUpdate{
-        FirstName: gr4vygo.String("John"),
-        LastName: gr4vygo.String("Doe"),
-        EmailAddress: gr4vygo.String("john@example.com"),
-        PhoneNumber: gr4vygo.String("+1234567890"),
-        Address: &components.Address{
-            City: gr4vygo.String("San Jose"),
-            Country: gr4vygo.String("US"),
-            PostalCode: gr4vygo.String("94560"),
-            State: gr4vygo.String("California"),
-            StateCode: gr4vygo.String("US-CA"),
-            HouseNumberOrName: gr4vygo.String("10"),
-            Line1: gr4vygo.String("Stafford Appartments"),
-            Line2: gr4vygo.String("29th Street"),
-            Organization: gr4vygo.String("Gr4vy"),
-        },
-    }, nil)
+    res, err := s.Buyers.ShippingDetails.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", components.ShippingDetailsUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
