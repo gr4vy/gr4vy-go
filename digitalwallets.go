@@ -504,7 +504,7 @@ func (s *DigitalWallets) Create(ctx context.Context, digitalWalletCreate compone
 
 // List digital wallets
 // List configured digital wallets.
-func (s *DigitalWallets) List(ctx context.Context, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorDigitalWallet, error) {
+func (s *DigitalWallets) List(ctx context.Context, merchantAccountID *string, opts ...operations.Option) (*components.DigitalWallets, error) {
 	request := operations.ListDigitalWalletsRequest{
 		MerchantAccountID: merchantAccountID,
 	}
@@ -677,7 +677,7 @@ func (s *DigitalWallets) List(ctx context.Context, merchantAccountID *string, op
 				return nil, err
 			}
 
-			var out components.CollectionNoCursorDigitalWallet
+			var out components.DigitalWallets
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

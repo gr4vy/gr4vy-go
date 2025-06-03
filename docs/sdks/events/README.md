@@ -53,7 +53,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionTransactionEvent](../../models/components/collectiontransactionevent.md), error**
+**[*components.TransactionEvents](../../models/components/transactionevents.md), error**
 
 ### Errors
 

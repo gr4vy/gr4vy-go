@@ -259,7 +259,7 @@ func (s *Executions) List(ctx context.Context, reportID string, cursor *string, 
 				return nil, err
 			}
 
-			var out components.CollectionReportExecution
+			var out components.ReportExecutions
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

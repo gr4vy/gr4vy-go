@@ -300,7 +300,7 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				return nil, err
 			}
 
-			var out components.CollectionTransactionSummary
+			var out components.TransactionSummaries
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

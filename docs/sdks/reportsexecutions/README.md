@@ -52,7 +52,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionReportExecution](../../models/components/collectionreportexecution.md), error**
+**[*components.ReportExecutions](../../models/components/reportexecutions.md), error**
 
 ### Errors
 

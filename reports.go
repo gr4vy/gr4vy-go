@@ -260,7 +260,7 @@ func (s *Reports) List(ctx context.Context, request operations.ListReportsReques
 				return nil, err
 			}
 
-			var out components.CollectionReport
+			var out components.Reports
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

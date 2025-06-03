@@ -52,7 +52,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionNoCursorGiftCardSummary](../../models/components/collectionnocursorgiftcardsummary.md), error**
+**[*components.GiftCardSummaries](../../models/components/giftcardsummaries.md), error**
 
 ### Errors
 

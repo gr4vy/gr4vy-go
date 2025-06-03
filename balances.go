@@ -33,7 +33,7 @@ func newBalances(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hooks
 
 // List gift card balances
 // Fetch the balances for one or more gift cards.
-func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.GiftCardBalanceRequest, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorGiftCardSummary, error) {
+func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.GiftCardBalanceRequest, merchantAccountID *string, opts ...operations.Option) (*components.GiftCardSummaries, error) {
 	request := operations.ListGiftCardBalancesRequest{
 		MerchantAccountID:      merchantAccountID,
 		GiftCardBalanceRequest: giftCardBalanceRequest,
@@ -208,7 +208,7 @@ func (s *Balances) List(ctx context.Context, giftCardBalanceRequest components.G
 				return nil, err
 			}
 
-			var out components.CollectionNoCursorGiftCardSummary
+			var out components.GiftCardSummaries
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

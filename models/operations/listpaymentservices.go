@@ -78,14 +78,14 @@ func (o *ListPaymentServicesRequest) GetMerchantAccountID() *string {
 }
 
 type ListPaymentServicesResponse struct {
-	Result components.CollectionPaymentService
+	Result components.PaymentServices
 
 	Next func() (*ListPaymentServicesResponse, error)
 }
 
-func (o *ListPaymentServicesResponse) GetResult() components.CollectionPaymentService {
+func (o *ListPaymentServicesResponse) GetResult() components.PaymentServices {
 	if o == nil {
-		return components.CollectionPaymentService{}
+		return components.PaymentServices{}
 	}
 	return o.Result
 }

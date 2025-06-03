@@ -263,7 +263,7 @@ func (s *PaymentMethods) List(ctx context.Context, request operations.ListPaymen
 				return nil, err
 			}
 
-			var out components.CollectionPaymentMethod
+			var out components.PaymentMethods
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

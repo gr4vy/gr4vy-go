@@ -52,7 +52,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionNoCursorPaymentOption](../../models/components/collectionnocursorpaymentoption.md), error**
+**[*components.PaymentOptions](../../models/components/paymentoptions.md), error**
 
 ### Errors
 

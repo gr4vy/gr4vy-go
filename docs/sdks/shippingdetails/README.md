@@ -121,7 +121,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionNoCursorShippingDetails](../../models/components/collectionnocursorshippingdetails.md), error**
+**[*components.ShippingDetailsList](../../models/components/shippingdetailslist.md), error**
 
 ### Errors
 

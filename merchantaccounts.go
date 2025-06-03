@@ -252,7 +252,7 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, err
 			}
 
-			var out components.CollectionMerchantAccount
+			var out components.MerchantAccounts
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

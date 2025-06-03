@@ -35,7 +35,7 @@ func newNetworkTokens(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *
 
 // List network tokens
 // List all network tokens stored for a payment method.
-func (s *NetworkTokens) List(ctx context.Context, paymentMethodID string, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorNetworkToken, error) {
+func (s *NetworkTokens) List(ctx context.Context, paymentMethodID string, merchantAccountID *string, opts ...operations.Option) (*components.NetworkTokens, error) {
 	request := operations.ListPaymentMethodNetworkTokensRequest{
 		PaymentMethodID:   paymentMethodID,
 		MerchantAccountID: merchantAccountID,
@@ -209,7 +209,7 @@ func (s *NetworkTokens) List(ctx context.Context, paymentMethodID string, mercha
 				return nil, err
 			}
 
-			var out components.CollectionNoCursorNetworkToken
+			var out components.NetworkTokens
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

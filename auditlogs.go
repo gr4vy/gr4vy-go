@@ -257,7 +257,7 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, err
 			}
 
-			var out components.CollectionAuditLogEntry
+			var out components.AuditLogEntries
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

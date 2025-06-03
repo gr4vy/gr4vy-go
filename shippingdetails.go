@@ -499,7 +499,7 @@ func (s *ShippingDetails) Create(ctx context.Context, buyerID string, shippingDe
 
 // List a buyer's shipping details
 // List all the shipping details associated to a specific buyer.
-func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAccountID *string, opts ...operations.Option) (*components.CollectionNoCursorShippingDetails, error) {
+func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAccountID *string, opts ...operations.Option) (*components.ShippingDetailsList, error) {
 	request := operations.ListBuyerShippingDetailsRequest{
 		BuyerID:           buyerID,
 		MerchantAccountID: merchantAccountID,
@@ -673,7 +673,7 @@ func (s *ShippingDetails) List(ctx context.Context, buyerID string, merchantAcco
 				return nil, err
 			}
 
-			var out components.CollectionNoCursorShippingDetails
+			var out components.ShippingDetailsList
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

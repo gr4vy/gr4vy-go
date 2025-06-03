@@ -55,7 +55,7 @@ func main() {
 
 ### Response
 
-**[*components.CollectionNoCursorNetworkToken](../../models/components/collectionnocursornetworktoken.md), error**
+**[*components.NetworkTokens](../../models/components/networktokens.md), error**
 
 ### Errors
 
