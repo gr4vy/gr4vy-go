@@ -13,8 +13,10 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"github.com/gr4vy/gr4vy-go/retry"
+	"github.com/spyzhov/ajson"
 	"net/http"
 	"net/url"
+	"strconv"
 )
 
 type ReportsExecutions struct {
@@ -33,7 +35,7 @@ func newReportsExecutions(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hoo
 
 // List executed reports
 // List all executed reports that have been generated.
-func (s *ReportsExecutions) List(ctx context.Context, request operations.ListAllReportExecutionsRequest, opts ...operations.Option) (*components.ReportExecutions, error) {
+func (s *ReportsExecutions) List(ctx context.Context, request operations.ListAllReportExecutionsRequest, opts ...operations.Option) (*operations.ListAllReportExecutionsResponse, error) {
 	globals := operations.ListAllReportExecutionsGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
@@ -199,6 +201,57 @@ func (s *ReportsExecutions) List(ctx context.Context, request operations.ListAll
 		}
 	}
 
+	res := &operations.ListAllReportExecutionsResponse{}
+	res.Next = func() (*operations.ListAllReportExecutionsResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err := ajson.Unmarshal(rawBody)
+		if err != nil {
+			return nil, err
+		}
+		nC, err := ajson.Eval(b, "$.next_cursor")
+		if err != nil {
+			return nil, err
+		}
+		var nCVal string
+
+		if nC.IsNumeric() {
+			numVal, err := nC.GetNumeric()
+			if err != nil {
+				return nil, err
+			}
+			// GetNumeric returns as float64 so convert to the appropriate type.
+			nCVal = strconv.FormatFloat(numVal, 'f', 0, 64)
+		} else {
+			val, err := nC.Value()
+			if err != nil {
+				return nil, err
+			}
+			if val == nil {
+				return nil, nil
+			}
+			nCVal = val.(string)
+		}
+
+		return s.List(
+			ctx,
+			operations.ListAllReportExecutionsRequest{
+				Cursor:            &nCVal,
+				Limit:             request.Limit,
+				ReportName:        request.ReportName,
+				CreatedAtLte:      request.CreatedAtLte,
+				CreatedAtGte:      request.CreatedAtGte,
+				Status:            request.Status,
+				CreatorID:         request.CreatorID,
+				MerchantAccountID: request.MerchantAccountID,
+			},
+			opts...,
+		)
+	}
+
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -213,7 +266,7 @@ func (s *ReportsExecutions) List(ctx context.Context, request operations.ListAll
 				return nil, err
 			}
 
-			return &out, nil
+			res.Result = out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -493,7 +546,7 @@ func (s *ReportsExecutions) List(ctx context.Context, request operations.ListAll
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return nil, nil
+	return res, nil
 
 }
 

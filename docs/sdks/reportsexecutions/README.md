@@ -38,7 +38,19 @@ func main() {
         log.Fatal(err)
     }
     if res != nil {
-        // handle response
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
     }
 }
 ```
@@ -53,7 +65,7 @@ func main() {
 
 ### Response
 
-**[*components.ReportExecutions](../../models/components/reportexecutions.md), error**
+**[*operations.ListAllReportExecutionsResponse](../../models/operations/listallreportexecutionsresponse.md), error**
 
 ### Errors
 
