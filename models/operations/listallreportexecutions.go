@@ -104,3 +104,16 @@ func (o *ListAllReportExecutionsRequest) GetMerchantAccountID() *string {
 	}
 	return o.MerchantAccountID
 }
+
+type ListAllReportExecutionsResponse struct {
+	Result components.ReportExecutions
+
+	Next func() (*ListAllReportExecutionsResponse, error)
+}
+
+func (o *ListAllReportExecutionsResponse) GetResult() components.ReportExecutions {
+	if o == nil {
+		return components.ReportExecutions{}
+	}
+	return o.Result
+}

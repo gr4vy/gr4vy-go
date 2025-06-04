@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: e2abc64a68cdcc226ed3a78e35d0ce6a
+  docChecksum: 03e0b880baa84cd17ed3d1bf4a0f45ba
   docVersion: 1.0.0
   speakeasyVersion: 1.555.2
   generationVersion: 2.620.2
-  releaseVersion: 1.0.0-beta.11
-  configChecksum: 4fe7ba20d6a23c613ecfbe8936e1b75d
+  releaseVersion: 1.0.0-beta.12
+  configChecksum: b3e2f909f0e0b23c6e7ac31d493de40d
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -674,6 +674,7 @@ generatedFiles:
   - docs/models/operations/gettransactionrequest.md
   - docs/models/operations/listallreportexecutionsglobals.md
   - docs/models/operations/listallreportexecutionsrequest.md
+  - docs/models/operations/listallreportexecutionsresponse.md
   - docs/models/operations/listauditlogsglobals.md
   - docs/models/operations/listauditlogsrequest.md
   - docs/models/operations/listauditlogsresponse.md
