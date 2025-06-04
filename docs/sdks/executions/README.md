@@ -19,8 +19,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -28,10 +28,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("<id>"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Reports.Executions.List(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", nil, nil, nil)
+    res, err := s.Reports.Executions.List(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", nil, gr4vygo.Int64(20))
     if err != nil {
         log.Fatal(err)
     }
@@ -97,8 +98,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -106,10 +107,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("<id>"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Reports.Executions.URL(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", "003bc416-f32a-420c-8eb2-062a386e1fb0", nil)
+    res, err := s.Reports.Executions.URL(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", "003bc416-f32a-420c-8eb2-062a386e1fb0")
     if err != nil {
         log.Fatal(err)
     }

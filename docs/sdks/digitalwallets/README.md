@@ -22,8 +22,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -32,6 +32,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
@@ -39,7 +40,7 @@ func main() {
         Provider: components.DigitalWalletProviderClickToPay,
         MerchantName: "<value>",
         AcceptTermsAndConditions: false,
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -91,8 +92,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -100,10 +101,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.List(ctx, nil)
+    res, err := s.DigitalWallets.List(ctx)
     if err != nil {
         log.Fatal(err)
     }
@@ -154,8 +156,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -163,10 +165,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Get(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", nil)
+    res, err := s.DigitalWallets.Get(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5")
     if err != nil {
         log.Fatal(err)
     }
@@ -218,8 +221,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -227,10 +230,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Delete(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", nil)
+    res, err := s.DigitalWallets.Delete(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5")
     if err != nil {
         log.Fatal(err)
     }
@@ -282,8 +286,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -292,10 +296,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Update(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletUpdate{}, nil)
+    res, err := s.DigitalWallets.Update(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletUpdate{})
     if err != nil {
         log.Fatal(err)
     }

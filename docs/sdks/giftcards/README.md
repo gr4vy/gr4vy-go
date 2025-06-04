@@ -21,8 +21,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -30,10 +30,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.GiftCards.Get(ctx, "356d56e5-fe16-42ae-97ee-8d55d846ae2e", nil)
+    res, err := s.GiftCards.Get(ctx, "356d56e5-fe16-42ae-97ee-8d55d846ae2e")
     if err != nil {
         log.Fatal(err)
     }
@@ -85,8 +86,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -94,10 +95,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.GiftCards.Delete(ctx, "356d56e5-fe16-42ae-97ee-8d55d846ae2e", nil)
+    res, err := s.GiftCards.Delete(ctx, "356d56e5-fe16-42ae-97ee-8d55d846ae2e")
     if err != nil {
         log.Fatal(err)
     }
@@ -149,8 +151,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -159,13 +161,14 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.GiftCards.Create(ctx, components.GiftCardCreate{
         Number: "4123455541234561234",
         Pin: "1234",
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -217,8 +220,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 )
@@ -227,6 +230,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 

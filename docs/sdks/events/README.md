@@ -18,8 +18,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -27,10 +27,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("<id>"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Events.List(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil, nil, nil)
+    res, err := s.Transactions.Events.List(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", gr4vygo.String("ZXhhbXBsZTE"), gr4vygo.Int64(100))
     if err != nil {
         log.Fatal(err)
     }

@@ -18,8 +18,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 )
@@ -28,10 +28,16 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.PaymentMethods.List(ctx, operations.ListBuyerPaymentMethodsRequest{})
+    res, err := s.Buyers.PaymentMethods.List(ctx, operations.ListBuyerPaymentMethodsRequest{
+        BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
+        BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
+        Country: gr4vygo.String("US"),
+        Currency: gr4vygo.String("USD"),
+    })
     if err != nil {
         log.Fatal(err)
     }

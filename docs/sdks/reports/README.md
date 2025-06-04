@@ -21,8 +21,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 )
@@ -31,6 +31,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("<id>"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
@@ -97,8 +98,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -107,6 +108,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("<id>"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
@@ -114,6 +116,7 @@ func main() {
         Name: "Monthly Transaction Report",
         Schedule: components.ReportScheduleDaily,
         ScheduleEnabled: true,
+        ScheduleTimezone: gr4vygo.String("UTC"),
         Spec: components.CreateSpecDetailedSettlement(
             components.DetailedSettlementReportSpec{
                 Params: map[string]any{
@@ -126,7 +129,7 @@ func main() {
                 },
             },
         ),
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -178,8 +181,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -187,10 +190,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("<id>"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Reports.Get(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", nil)
+    res, err := s.Reports.Get(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe")
     if err != nil {
         log.Fatal(err)
     }
@@ -242,8 +246,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -252,10 +256,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("<id>"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Reports.Put(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", components.ReportUpdate{}, nil)
+    res, err := s.Reports.Put(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", components.ReportUpdate{})
     if err != nil {
         log.Fatal(err)
     }
