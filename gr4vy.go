@@ -70,7 +70,6 @@ type Gr4vy struct {
 	PaymentServices           *PaymentServices
 	AuditLogs                 *AuditLogs
 	Reports                   *Reports
-	ReportsExecutions         *ReportsExecutions
 	CheckoutSessions          *CheckoutSessions
 	MerchantAccounts          *MerchantAccounts
 	Payouts                   *Payouts
@@ -172,9 +171,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Gr4vy {
 	sdk := &Gr4vy{
-		SDKVersion: "1.0.0-beta.12",
+		SDKVersion: "1.0.0-beta.13",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.0.0-beta.12 2.620.2 1.0.0 github.com/gr4vy/gr4vy-go",
+			UserAgent:  "speakeasy-sdk/go 1.0.0-beta.13 2.620.2 1.0.0 github.com/gr4vy/gr4vy-go",
 			Globals:    globals.Globals{},
 			ServerList: ServerList,
 			ServerVariables: map[string]map[string]string{
@@ -221,7 +220,6 @@ func New(opts ...SDKOption) *Gr4vy {
 	sdk.PaymentServices = newPaymentServices(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.AuditLogs = newAuditLogs(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Reports = newReports(sdk, sdk.sdkConfiguration, sdk.hooks)
-	sdk.ReportsExecutions = newReportsExecutions(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.CheckoutSessions = newCheckoutSessions(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.MerchantAccounts = newMerchantAccounts(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Payouts = newPayouts(sdk, sdk.sdkConfiguration, sdk.hooks)
