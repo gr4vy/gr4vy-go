@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 03e0b880baa84cd17ed3d1bf4a0f45ba
+  docChecksum: 1a96bc2623e8c30f00446593d599d16c
   docVersion: 1.0.0
   speakeasyVersion: 1.555.2
   generationVersion: 2.620.2
-  releaseVersion: 1.0.0-beta.12
-  configChecksum: b3e2f909f0e0b23c6e7ac31d493de40d
+  releaseVersion: 1.0.0-beta.13
+  configChecksum: 0e066a3eda749fb6ad3b1980eb885010
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -788,7 +788,6 @@ generatedFiles:
   - docs/sdks/payouts/README.md
   - docs/sdks/refunds/README.md
   - docs/sdks/reports/README.md
-  - docs/sdks/reportsexecutions/README.md
   - docs/sdks/sessions/README.md
   - docs/sdks/shippingdetails/README.md
   - docs/sdks/transactions/README.md
@@ -828,7 +827,6 @@ generatedFiles:
   - payouts.go
   - refunds.go
   - reports.go
-  - reportsexecutions.go
   - retry/config.go
   - sessions.go
   - shippingdetails.go
