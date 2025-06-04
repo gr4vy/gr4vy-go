@@ -22,8 +22,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -32,10 +32,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Create(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.ShippingDetailsCreate{}, nil)
+    res, err := s.Buyers.ShippingDetails.Create(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.ShippingDetailsCreate{})
     if err != nil {
         log.Fatal(err)
     }
@@ -88,8 +89,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -97,10 +98,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.List(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil)
+    res, err := s.Buyers.ShippingDetails.List(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9")
     if err != nil {
         log.Fatal(err)
     }
@@ -152,8 +154,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -161,10 +163,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Get(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", nil)
+    res, err := s.Buyers.ShippingDetails.Get(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341")
     if err != nil {
         log.Fatal(err)
     }
@@ -217,8 +220,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -227,10 +230,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", components.ShippingDetailsUpdate{}, nil)
+    res, err := s.Buyers.ShippingDetails.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", components.ShippingDetailsUpdate{})
     if err != nil {
         log.Fatal(err)
     }
@@ -284,8 +288,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -293,10 +297,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", nil)
+    res, err := s.Buyers.ShippingDetails.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341")
     if err != nil {
         log.Fatal(err)
     }

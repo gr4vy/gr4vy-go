@@ -14,6 +14,7 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
+		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
@@ -22,7 +23,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}

@@ -20,8 +20,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -29,10 +29,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.PaymentServiceTokens.List(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", nil, nil)
+    res, err := s.PaymentMethods.PaymentServiceTokens.List(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", gr4vygo.String("fffd152a-9532-4087-9a4f-de58754210f0"))
     if err != nil {
         log.Fatal(err)
     }
@@ -85,8 +86,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -95,13 +96,14 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.PaymentMethods.PaymentServiceTokens.Create(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", components.PaymentServiceTokenCreate{
         PaymentServiceID: "fffd152a-9532-4087-9a4f-de58754210f0",
         RedirectURL: "https://dual-futon.biz",
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -154,8 +156,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -163,10 +165,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.PaymentMethods.PaymentServiceTokens.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "703f2d99-3fd1-44bc-9cbd-a25a2d597886", nil)
+    err := s.PaymentMethods.PaymentServiceTokens.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "703f2d99-3fd1-44bc-9cbd-a25a2d597886")
     if err != nil {
         log.Fatal(err)
     }

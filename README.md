@@ -219,6 +219,7 @@ func main() {
 
 	s := gr4vygo.New(
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+		gr4vygo.WithMerchantAccountID("default"),
 	)
 
 	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
@@ -226,7 +227,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -327,6 +328,13 @@ func main() {
 * [Create](docs/sdks/merchantaccounts/README.md#create) - Create a merchant account
 * [Get](docs/sdks/merchantaccounts/README.md#get) - Get a merchant account
 * [Update](docs/sdks/merchantaccounts/README.md#update) - Update a merchant account
+
+### [PaymentLinks](docs/sdks/paymentlinks/README.md)
+
+* [Create](docs/sdks/paymentlinks/README.md#create) - Add a payment link
+* [List](docs/sdks/paymentlinks/README.md#list) - List all payment links
+* [Expire](docs/sdks/paymentlinks/README.md#expire) - Expire a payment link
+* [Get](docs/sdks/paymentlinks/README.md#get) - Get payment link
 
 ### [PaymentMethods](docs/sdks/paymentmethods/README.md)
 
@@ -449,10 +457,15 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
+		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
-	res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{})
+	res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{
+		Cursor:             gr4vygo.String("ZXhhbXBsZTE"),
+		Search:             gr4vygo.String("John"),
+		ExternalIdentifier: gr4vygo.String("buyer-12345"),
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -499,6 +512,7 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
+		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
@@ -507,7 +521,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil, operations.WithRetries(
+	}, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -556,6 +570,7 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
+		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
@@ -564,7 +579,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -620,6 +635,7 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
+		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
@@ -628,7 +644,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil)
+	})
 	if err != nil {
 
 		var e *apierrors.Error400
@@ -751,6 +767,7 @@ func main() {
 	s := gr4vygo.New(
 		gr4vygo.WithServer("sandbox"),
 		gr4vygo.WithID("<id>"),
+		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
@@ -759,7 +776,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -789,6 +806,7 @@ func main() {
 
 	s := gr4vygo.New(
 		gr4vygo.WithServerURL("https://api.example.gr4vy.app"),
+		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
@@ -797,7 +815,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, nil)
+	})
 	if err != nil {
 		log.Fatal(err)
 	}

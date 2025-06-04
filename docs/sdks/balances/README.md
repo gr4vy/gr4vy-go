@@ -18,8 +18,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -28,6 +28,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
@@ -50,7 +51,7 @@ func main() {
                 },
             ),
         },
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }

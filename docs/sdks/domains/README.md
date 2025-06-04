@@ -19,8 +19,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -29,12 +29,13 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.DigitalWallets.Domains.Create(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletDomain{
         DomainName: "example.com",
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -87,8 +88,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -97,12 +98,13 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.DigitalWallets.Domains.Delete(ctx, "", components.DigitalWalletDomain{
         DomainName: "example.com",
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }

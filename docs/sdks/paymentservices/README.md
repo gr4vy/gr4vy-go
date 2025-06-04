@@ -24,8 +24,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 )
@@ -34,10 +34,14 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentServices.List(ctx, operations.ListPaymentServicesRequest{})
+    res, err := s.PaymentServices.List(ctx, operations.ListPaymentServicesRequest{
+        Cursor: gr4vygo.String("ZXhhbXBsZTE"),
+        Deleted: gr4vygo.Bool(true),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -100,8 +104,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -110,6 +114,7 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
@@ -136,7 +141,9 @@ func main() {
             "DE",
             "GB",
         },
-    }, nil)
+        ThreeDSecureEnabled: gr4vygo.Bool(true),
+        SettlementReportingEnabled: gr4vygo.Bool(true),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -188,8 +195,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -197,10 +204,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentServices.Get(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", nil)
+    res, err := s.PaymentServices.Get(ctx, "fffd152a-9532-4087-9a4f-de58754210f0")
     if err != nil {
         log.Fatal(err)
     }
@@ -252,8 +260,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -262,10 +270,13 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentServices.Update(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", components.PaymentServiceUpdate{}, nil)
+    res, err := s.PaymentServices.Update(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", components.PaymentServiceUpdate{
+        SettlementReportingEnabled: gr4vygo.Bool(true),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -318,8 +329,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -327,10 +338,11 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentServices.Delete(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", nil)
+    res, err := s.PaymentServices.Delete(ctx, "fffd152a-9532-4087-9a4f-de58754210f0")
     if err != nil {
         log.Fatal(err)
     }
@@ -382,8 +394,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -392,13 +404,14 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.PaymentServices.Verify(ctx, components.VerifyCredentials{
         PaymentServiceDefinitionID: "stripe-card",
         Fields: []components.Field{},
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -450,8 +463,8 @@ package main
 
 import(
 	"context"
-	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"os"
 	"log"
 )
 
@@ -459,12 +472,13 @@ func main() {
     ctx := context.Background()
 
     s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("default"),
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
     res, err := s.PaymentServices.Session(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", map[string]any{
 
-    }, nil)
+    })
     if err != nil {
         log.Fatal(err)
     }
