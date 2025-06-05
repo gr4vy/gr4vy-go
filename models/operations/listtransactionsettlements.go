@@ -2,32 +2,32 @@
 
 package operations
 
-type ListTransactionRefundsGlobals struct {
+type ListTransactionSettlementsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListTransactionRefundsGlobals) GetMerchantAccountID() *string {
+func (o *ListTransactionSettlementsGlobals) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.MerchantAccountID
 }
 
-type ListTransactionRefundsRequest struct {
-	// The ID of the transaction
+type ListTransactionSettlementsRequest struct {
+	// The unique identifier of the transaction.
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListTransactionRefundsRequest) GetTransactionID() string {
+func (o *ListTransactionSettlementsRequest) GetTransactionID() string {
 	if o == nil {
 		return ""
 	}
 	return o.TransactionID
 }
 
-func (o *ListTransactionRefundsRequest) GetMerchantAccountID() *string {
+func (o *ListTransactionSettlementsRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
