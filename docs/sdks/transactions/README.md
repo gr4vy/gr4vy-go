@@ -49,7 +49,12 @@ func main() {
         BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
         BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
         BuyerEmailAddress: gr4vygo.String("john@example.com"),
-        BuyerSearch: gr4vygo.String("John"),
+        BuyerSearch: []string{
+            "J",
+            "o",
+            "h",
+            "n",
+        },
         IPAddress: gr4vygo.String("8.214.133.47"),
         Status: []components.TransactionStatus{
             components.TransactionStatusAuthorizationSucceeded,
