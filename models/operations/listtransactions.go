@@ -36,8 +36,9 @@ type ListTransactionsRequest struct {
 	BuyerExternalIdentifier *string    `queryParam:"style=form,explode=true,name=buyer_external_identifier"`
 	BuyerID                 *string    `queryParam:"style=form,explode=true,name=buyer_id"`
 	BuyerEmailAddress       *string    `queryParam:"style=form,explode=true,name=buyer_email_address"`
-	BuyerSearch             *string    `queryParam:"style=form,explode=true,name=buyer_search"`
-	IPAddress               *string    `queryParam:"style=form,explode=true,name=ip_address"`
+	// Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values.
+	BuyerSearch []string `queryParam:"style=form,explode=true,name=buyer_search"`
+	IPAddress   *string  `queryParam:"style=form,explode=true,name=ip_address"`
 	// Filters the results to only the transactions that have a `status` that matches with any of the provided status values.
 	Status                      []components.TransactionStatus `queryParam:"style=form,explode=true,name=status"`
 	ID                          *string                        `queryParam:"style=form,explode=true,name=id"`
@@ -179,7 +180,7 @@ func (o *ListTransactionsRequest) GetBuyerEmailAddress() *string {
 	return o.BuyerEmailAddress
 }
 
-func (o *ListTransactionsRequest) GetBuyerSearch() *string {
+func (o *ListTransactionsRequest) GetBuyerSearch() []string {
 	if o == nil {
 		return nil
 	}
