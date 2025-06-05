@@ -3,7 +3,7 @@
 package components
 
 type TransactionRefundCreate struct {
-	// The amount requested to refund. If omitted, a full refund will be requested.
+	// The amount to refund, in the smallest currency unit (e.g., cents). If omitted, a full refund will be requested.
 	Amount     *int64            `json:"amount,omitempty"`
 	TargetType *RefundTargetType `json:"target_type,omitempty"`
 	// The optional ID of the instrument to refund for. This is only required when the `target_type` is set to `gift-card-redemption`.

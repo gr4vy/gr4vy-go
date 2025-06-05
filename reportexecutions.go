@@ -13,34 +13,30 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"github.com/gr4vy/gr4vy-go/retry"
+	"github.com/spyzhov/ajson"
 	"net/http"
+	"net/url"
+	"strconv"
 )
 
-type Events struct {
+type ReportExecutions struct {
 	rootSDK          *Gr4vy
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
 }
 
-func newEvents(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *Events {
-	return &Events{
+func newReportExecutions(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hooks.Hooks) *ReportExecutions {
+	return &ReportExecutions{
 		rootSDK:          rootSDK,
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
 	}
 }
 
-// List transaction events
-// Retrieve a paginated list of events related to processing a transaction, including status changes, API requests, and webhook delivery attempts. Events are listed in chronological order, with the most recent events first.
-func (s *Events) List(ctx context.Context, transactionID string, cursor *string, limit *int64, merchantAccountID *string, opts ...operations.Option) (*components.TransactionEvents, error) {
-	request := operations.ListTransactionEventsRequest{
-		TransactionID:     transactionID,
-		Cursor:            cursor,
-		Limit:             limit,
-		MerchantAccountID: merchantAccountID,
-	}
-
-	globals := operations.ListTransactionEventsGlobals{
+// List executed reports
+// List all executed reports that have been generated.
+func (s *ReportExecutions) List(ctx context.Context, request operations.ListAllReportExecutionsRequest, opts ...operations.Option) (*operations.ListAllReportExecutionsResponse, error) {
+	globals := operations.ListAllReportExecutionsGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
@@ -62,7 +58,7 @@ func (s *Events) List(ctx context.Context, transactionID string, cursor *string,
 	} else {
 		baseURL = *o.ServerURL
 	}
-	opURL, err := utils.GenerateURL(ctx, baseURL, "/transactions/{transaction_id}/events", request, globals)
+	opURL, err := url.JoinPath(baseURL, "/report-executions")
 	if err != nil {
 		return nil, fmt.Errorf("error generating URL: %w", err)
 	}
@@ -72,7 +68,7 @@ func (s *Events) List(ctx context.Context, transactionID string, cursor *string,
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "list_transaction_events",
+		OperationID:      "list_all_report_executions",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 
@@ -205,6 +201,57 @@ func (s *Events) List(ctx context.Context, transactionID string, cursor *string,
 		}
 	}
 
+	res := &operations.ListAllReportExecutionsResponse{}
+	res.Next = func() (*operations.ListAllReportExecutionsResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err := ajson.Unmarshal(rawBody)
+		if err != nil {
+			return nil, err
+		}
+		nC, err := ajson.Eval(b, "$.next_cursor")
+		if err != nil {
+			return nil, err
+		}
+		var nCVal string
+
+		if nC.IsNumeric() {
+			numVal, err := nC.GetNumeric()
+			if err != nil {
+				return nil, err
+			}
+			// GetNumeric returns as float64 so convert to the appropriate type.
+			nCVal = strconv.FormatFloat(numVal, 'f', 0, 64)
+		} else {
+			val, err := nC.Value()
+			if err != nil {
+				return nil, err
+			}
+			if val == nil {
+				return nil, nil
+			}
+			nCVal = val.(string)
+		}
+
+		return s.List(
+			ctx,
+			operations.ListAllReportExecutionsRequest{
+				Cursor:            &nCVal,
+				Limit:             request.Limit,
+				ReportName:        request.ReportName,
+				CreatedAtLte:      request.CreatedAtLte,
+				CreatedAtGte:      request.CreatedAtGte,
+				Status:            request.Status,
+				CreatorID:         request.CreatorID,
+				MerchantAccountID: request.MerchantAccountID,
+			},
+			opts...,
+		)
+	}
+
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -214,12 +261,12 @@ func (s *Events) List(ctx context.Context, transactionID string, cursor *string,
 				return nil, err
 			}
 
-			var out components.TransactionEvents
+			var out components.ReportExecutions
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
 
-			return &out, nil
+			res.Result = out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -499,6 +546,6 @@ func (s *Events) List(ctx context.Context, transactionID string, cursor *string,
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return nil, nil
+	return res, nil
 
 }

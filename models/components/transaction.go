@@ -25,17 +25,17 @@ type Transaction struct {
 	Status TransactionStatus `json:"status"`
 	// The amount for this transaction that has been authorized for the `payment_method`. This can be less than the `amount` if gift cards were used.
 	AuthorizedAmount int64 `json:"authorized_amount"`
-	// The captured amount for this transaction. This can be the full value of the `authorized_amount` or less.
+	// The total amount captured for this transaction, in the smallest currency unit (for example, cents or pence). This can be the full value of the `authorized_amount` or less.
 	CapturedAmount int64 `json:"captured_amount"`
-	// The refunded amount for this transaction. This can be the full value of the `captured_amount` or less.
+	// The total amount refunded for this transaction, in the smallest currency unit (for example, cents or pence). This can be the full value of the `captured_amount` or less.
 	RefundedAmount int64 `json:"refunded_amount"`
-	// The currency of this transaction's settlement in ISO 4217 three-letter code format.
+	// The ISO 4217 currency code of this transaction's settlement.
 	SettledCurrency *string `json:"settled_currency,omitempty"`
-	// The net amount settled for this transaction.
+	// The net amount settled for this transaction, in the smallest currency unit (for example, cents or pence).
 	SettledAmount int64 `json:"settled_amount"`
 	// Indicates whether this transaction has been settled.
 	Settled bool `json:"settled"`
-	// The 2-letter ISO code of the country of the transaction. This is used to filter the payment services that is used to process the transaction.
+	// The 2-letter ISO 3166-1 alpha-2 country code for the transaction. Used to filter payment services for processing.
 	Country *string `json:"country,omitempty"`
 	// An external identifier that can be used to match the transaction against your own records.
 	ExternalIdentifier *string           `json:"external_identifier,omitempty"`
@@ -66,9 +66,9 @@ type Transaction struct {
 	GiftCardRedemptions []GiftCardRedemption `json:"gift_card_redemptions"`
 	// The gift card service used for this transaction.
 	GiftCardService *GiftCardService `json:"gift_card_service,omitempty"`
-	// The date this buyer was created at.
+	// The date and time when the transaction was created, in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at"`
-	// The date this buyer was last updated at.
+	// The date and time when the transaction was last updated, in ISO 8601 format.
 	UpdatedAt time.Time `json:"updated_at"`
 	// Contains information about an airline travel, if applicable.
 	Airline *Airline `json:"airline,omitempty"`
