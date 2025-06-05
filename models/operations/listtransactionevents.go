@@ -18,6 +18,7 @@ func (o *ListTransactionEventsGlobals) GetMerchantAccountID() *string {
 }
 
 type ListTransactionEventsRequest struct {
+	// The ID of the transaction
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
 	// A pointer to the page of results to return.
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`

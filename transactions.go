@@ -20,8 +20,9 @@ import (
 )
 
 type Transactions struct {
-	Refunds *TransactionsRefunds
-	Events  *Events
+	Refunds     *TransactionsRefunds
+	Events      *Events
+	Settlements *Settlements
 
 	rootSDK          *Gr4vy
 	sdkConfiguration config.SDKConfiguration
@@ -35,6 +36,7 @@ func newTransactions(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *h
 		hooks:            hooks,
 		Refunds:          newTransactionsRefunds(rootSDK, sdkConfig, hooks),
 		Events:           newEvents(rootSDK, sdkConfig, hooks),
+		Settlements:      newSettlements(rootSDK, sdkConfig, hooks),
 	}
 }
 

@@ -2,32 +2,41 @@
 
 package operations
 
-type ListTransactionRefundsGlobals struct {
+type GetTransactionSettlementGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListTransactionRefundsGlobals) GetMerchantAccountID() *string {
+func (o *GetTransactionSettlementGlobals) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.MerchantAccountID
 }
 
-type ListTransactionRefundsRequest struct {
-	// The ID of the transaction
+type GetTransactionSettlementRequest struct {
+	// The unique identifier of the transaction.
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
+	// The unique identifier of the settlement.
+	SettlementID string `pathParam:"style=simple,explode=false,name=settlement_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListTransactionRefundsRequest) GetTransactionID() string {
+func (o *GetTransactionSettlementRequest) GetTransactionID() string {
 	if o == nil {
 		return ""
 	}
 	return o.TransactionID
 }
 
-func (o *ListTransactionRefundsRequest) GetMerchantAccountID() *string {
+func (o *GetTransactionSettlementRequest) GetSettlementID() string {
+	if o == nil {
+		return ""
+	}
+	return o.SettlementID
+}
+
+func (o *GetTransactionSettlementRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}

@@ -14,6 +14,7 @@ func (o *VoidTransactionGlobals) GetMerchantAccountID() *string {
 }
 
 type VoidTransactionRequest struct {
+	// The ID of the transaction
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
