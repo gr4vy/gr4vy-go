@@ -11,16 +11,16 @@ import (
 type Refund struct {
 	// Always `refund`.
 	type_ *string `const:"refund" json:"type"`
-	// The ID for the refund.
+	// The unique identifier for the refund.
 	ID string `json:"id"`
 	// The ID of the transaction associated with this refund.
 	TransactionID string `json:"transaction_id"`
 	// The payment service's unique ID for the refund.
 	PaymentServiceRefundID *string      `json:"payment_service_refund_id,omitempty"`
 	Status                 RefundStatus `json:"status"`
-	// The currency code for this refund.  Will always match that of the associated transaction.
+	// The ISO 4217 currency code for this refund. Will always match that of the associated transaction.
 	Currency string `json:"currency"`
-	// The amount requested for this refund.
+	// The amount of this refund, in the smallest currency unit (for example, cents or pence).
 	Amount int64 `json:"amount"`
 	// The reason for this refund. Could be a multiline string.
 	Reason     *string          `json:"reason,omitempty"`

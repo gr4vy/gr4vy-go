@@ -2,9 +2,9 @@
 
 package components
 
-// TransactionCapture - Request body for capturing an authorized transaction
+// TransactionCapture - Request body for capturing an authorized transaction.
 type TransactionCapture struct {
-	// The amount to capture. This normally needs to be equal or less than the authorized amount, unless over-capture is available.
+	// The amount to capture, in the smallest currency unit (e.g., cents). This must be less than or equal to the authorized amount, unless over-capture is available.
 	Amount *int64 `json:"amount,omitempty"`
 	// The airline data to submit to the payment service during the capture call.
 	Airline *Airline `json:"airline,omitempty"`

@@ -378,7 +378,7 @@ func (u ThreeDSecureData) MarshalJSON() ([]byte, error) {
 type TransactionCreate struct {
 	// The monetary amount for this transaction, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`. If the `intent` is set to `capture`, an amount greater than zero must be supplied. All gift card amounts are subtracted from this amount before the remainder is charged to the provided `payment_method`.
 	Amount int64 `json:"amount"`
-	// A supported ISO-4217 currency code. For redirect requests, this value must match the one specified for `currency` in `payment_method`.
+	// A supported ISO 4217 currency code. For redirect requests, this value must match the one specified for `currency` in `payment_method`.
 	Currency string `json:"currency"`
 	// The 2-letter ISO code of the country where the transaction is processed. This is also used to filter the payment services that can process the transaction. If this value is provided for redirect requests and it's not `null`, it must match the one specified for `country` in `payment_method`. Otherwise, the value specified for `country` in `payment_method` will be assumed implicitly.
 	Country *string `json:"country,omitempty"`

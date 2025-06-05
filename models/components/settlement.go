@@ -16,13 +16,13 @@ type Settlement struct {
 	ID string `json:"id"`
 	// The merchant account this settlement belongs to.
 	MerchantAccountID string `json:"merchant_account_id"`
-	// Date and time the settlement was created.
+	// The date and time the settlement was created, in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at"`
-	// Date and time the settlement was last updated.
+	// The date and time the settlement was last updated, in ISO 8601 format.
 	UpdatedAt time.Time `json:"updated_at"`
-	// Date and time the settlement was posted.
+	// The date and time the settlement was posted, in ISO 8601 format.
 	PostedAt time.Time `json:"posted_at"`
-	// Date and time the settlement was ingested.
+	// The date and time the settlement was ingested, in ISO 8601 format.
 	IngestedAt time.Time `json:"ingested_at"`
 	// ISO 4217 currency code for the settlement.
 	Currency string `json:"currency"`
