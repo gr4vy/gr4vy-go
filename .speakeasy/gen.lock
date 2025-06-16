@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 42646439db6582717cb8818c747169bf
+  docChecksum: b4302c342eab34a45e059f2b064a4e31
   docVersion: 1.0.0
   speakeasyVersion: 1.563.1
   generationVersion: 2.629.1
-  releaseVersion: 1.0.0-beta.17
-  configChecksum: b26decc560dc54c010010db573ebdf4b
+  releaseVersion: 1.0.0-beta.18
+  configChecksum: af6a1771fc379399be9d5fc8f826029d
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -242,7 +242,6 @@ generatedFiles:
   - /models/components/transactionretriesreportspec.go
   - /models/components/transactionsreportspec.go
   - /models/components/transactionstatus.go
-  - /models/components/transactionstatussummary.go
   - /models/components/transactionsummaries.go
   - /models/components/transactionsummary.go
   - /models/components/transactionthreedsecuresummary.go
@@ -301,7 +300,6 @@ generatedFiles:
   - /models/operations/gettransaction.go
   - /models/operations/gettransactionrefund.go
   - /models/operations/gettransactionsettlement.go
-  - /models/operations/gettransactionsummary.go
   - /models/operations/listallreportexecutions.go
   - /models/operations/listauditlogs.go
   - /models/operations/listbuyergiftcards.go
@@ -575,7 +573,6 @@ generatedFiles:
   - docs/models/components/transactionretriesreportspec.md
   - docs/models/components/transactionsreportspec.md
   - docs/models/components/transactionstatus.md
-  - docs/models/components/transactionstatussummary.md
   - docs/models/components/transactionsummaries.md
   - docs/models/components/transactionsummary.md
   - docs/models/components/transactionthreedsecuresummary.md
@@ -683,8 +680,6 @@ generatedFiles:
   - docs/models/operations/gettransactionrequest.md
   - docs/models/operations/gettransactionsettlementglobals.md
   - docs/models/operations/gettransactionsettlementrequest.md
-  - docs/models/operations/gettransactionsummaryglobals.md
-  - docs/models/operations/gettransactionsummaryrequest.md
   - docs/models/operations/listallreportexecutionsglobals.md
   - docs/models/operations/listallreportexecutionsrequest.md
   - docs/models/operations/listallreportexecutionsresponse.md
