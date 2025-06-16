@@ -21,11 +21,12 @@ generation:
     oAuth2PasswordEnabled: false
   sdkHooksConfigAccess: true
 go:
-  version: 1.0.0-beta.16
+  version: 1.0.0-beta.17
   additionalDependencies:
     github.com/golang-jwt/jwt/v5: v5.2.2
     github.com/google/uuid: v1.6.0
   allowUnknownFieldsInWeakUnions: false
+  baseErrorName: Gr4vyError
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
   envVarPrefix: GR4VY
