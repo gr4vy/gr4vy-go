@@ -44,7 +44,6 @@ This SDK is designed to simplify development, reduce boilerplate code, and help 
   * [Special Types](#special-types)
 * [Development](#development)
   * [Testing](#testing)
-  * [Maturity](#maturity)
   * [Contributions](#contributions)
 
 <!-- End Table of Contents [toc] -->

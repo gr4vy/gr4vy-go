@@ -119,6 +119,8 @@ type Transaction struct {
 	Recipient *Recipient `json:"recipient,omitempty"`
 	// An optional merchant advice code which provides insight into the type of transaction or reason why the payment failed.
 	MerchantAdviceCode *string `json:"merchant_advice_code,omitempty"`
+	// The number of installments for this transaction, if applicable.
+	InstallmentCount *int64 `json:"installment_count,omitempty"`
 }
 
 func (t Transaction) MarshalJSON() ([]byte, error) {
@@ -519,4 +521,11 @@ func (o *Transaction) GetMerchantAdviceCode() *string {
 		return nil
 	}
 	return o.MerchantAdviceCode
+}
+
+func (o *Transaction) GetInstallmentCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.InstallmentCount
 }
