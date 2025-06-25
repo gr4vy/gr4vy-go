@@ -21,7 +21,11 @@ type CreateTransactionRequest struct {
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	// A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions.
-	IdempotencyKey    *string                      `header:"style=simple,explode=false,name=idempotency-key"`
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
+	// The IP address to forward from the customer. Use this when calling
+	// our API from the server side to ensure the customer's address is
+	// passed to downstream services, rather than your server IP.
+	XForwardedFor     *string                      `header:"style=simple,explode=false,name=X-Forwarded-For"`
 	TransactionCreate components.TransactionCreate `request:"mediaType=application/json"`
 }
 
@@ -37,6 +41,13 @@ func (o *CreateTransactionRequest) GetIdempotencyKey() *string {
 		return nil
 	}
 	return o.IdempotencyKey
+}
+
+func (o *CreateTransactionRequest) GetXForwardedFor() *string {
+	if o == nil {
+		return nil
+	}
+	return o.XForwardedFor
 }
 
 func (o *CreateTransactionRequest) GetTransactionCreate() components.TransactionCreate {

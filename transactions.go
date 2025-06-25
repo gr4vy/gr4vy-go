@@ -595,10 +595,11 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 
 // Create transaction
 // Create a new transaction using a supported payment method. If additional buyer authorization is required, an approval URL will be returned. Duplicated gift card numbers are not supported.
-func (s *Transactions) Create(ctx context.Context, transactionCreate components.TransactionCreate, merchantAccountID *string, idempotencyKey *string, opts ...operations.Option) (*components.Transaction, error) {
+func (s *Transactions) Create(ctx context.Context, transactionCreate components.TransactionCreate, merchantAccountID *string, idempotencyKey *string, xForwardedFor *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.CreateTransactionRequest{
 		MerchantAccountID: merchantAccountID,
 		IdempotencyKey:    idempotencyKey,
+		XForwardedFor:     xForwardedFor,
 		TransactionCreate: transactionCreate,
 	}
 
