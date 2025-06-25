@@ -188,7 +188,7 @@ func TestProcessPaymentWithCheckoutSession(t *testing.T) {
 		PaymentMethod: &paymentMethod,
 	}
 
-	transaction, err := client.Transactions.Create(ctx, transactionCreate, nil, nil)
+	transaction, err := client.Transactions.Create(ctx, transactionCreate, nil, nil, nil)
 
 	if err != nil {
 		t.Fatalf("Failed to create transaction: %v", err)
@@ -235,7 +235,7 @@ func TestHandleErrorOnMissingCardData(t *testing.T) {
 		PaymentMethod: &paymentMethod,
 	}
 
-	_, err = client.Transactions.Create(ctx, transactionCreate, nil, nil)
+	_, err = client.Transactions.Create(ctx, transactionCreate, nil, nil, nil)
 
 	if err == nil {
 		t.Fatal("Expected error for missing card data, but got nil")
@@ -336,7 +336,7 @@ func TestHandleStoredPaymentMethod(t *testing.T) {
 		PaymentMethod: &pm,
 	}
 
-	transaction, err := client.Transactions.Create(ctx, transactionCreate, nil, nil)
+	transaction, err := client.Transactions.Create(ctx, transactionCreate, nil, nil, nil)
 
 	if err != nil {
 		t.Fatalf("Failed to create transaction: %v", err)
