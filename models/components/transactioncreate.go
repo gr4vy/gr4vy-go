@@ -451,6 +451,8 @@ type TransactionCreate struct {
 	AllowPartialAuthorization *bool `default:"false" json:"allow_partial_authorization"`
 	// The recipient of any account to account funding. For use with AFTs.
 	Recipient *Recipient `json:"recipient,omitempty"`
+	// The number of installments a buyer is required to make.
+	InstallmentCount *int64 `json:"installment_count,omitempty"`
 }
 
 func (t TransactionCreate) MarshalJSON() ([]byte, error) {
@@ -665,4 +667,11 @@ func (o *TransactionCreate) GetRecipient() *Recipient {
 		return nil
 	}
 	return o.Recipient
+}
+
+func (o *TransactionCreate) GetInstallmentCount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.InstallmentCount
 }
