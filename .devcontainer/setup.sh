@@ -12,4 +12,4 @@ go mod download
 go mod tidy
 
 # Generate starter usage sample with speakeasy
-speakeasy generate usage -s https://gr4vy.github.io/gr4vy-openapi/core/openapi.json -l go -o samples/root.go
+speakeasy generate usage -s https://gr4vy.github.io/openapi/core/openapi.json -l go -o samples/root.go

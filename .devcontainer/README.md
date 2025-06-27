@@ -25,11 +25,11 @@ The speakeasy CLI allows you to generate more usage snippets. Here's how:
 - To generate a sample for a specific operation by providing an operation ID, use:
 
 ```
-speakeasy generate usage -s https://gr4vy.github.io/gr4vy-openapi/core/openapi.json -l go -i {INPUT_OPERATION_ID} -o ./samples
+speakeasy generate usage -s https://gr4vy.github.io/openapi/core/openapi.json -l go -i {INPUT_OPERATION_ID} -o ./samples
 ```
 
 - To generate samples for an entire namespace (like a tag or group name), use:
 
 ```
-speakeasy generate usage -s https://gr4vy.github.io/gr4vy-openapi/core/openapi.json -l go -n {INPUT_TAG_NAME} -o ./samples
+speakeasy generate usage -s https://gr4vy.github.io/openapi/core/openapi.json -l go -n {INPUT_TAG_NAME} -o ./samples
 ```

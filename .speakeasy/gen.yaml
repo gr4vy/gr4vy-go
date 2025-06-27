@@ -2,7 +2,7 @@ configVersion: 2.0.0
 generation:
   devContainers:
     enabled: true
-    schemaPath: https://gr4vy.github.io/gr4vy-openapi/core/openapi.json
+    schemaPath: https://gr4vy.github.io/openapi/core/openapi.json
   sdkClassName: Gr4vy
   maintainOpenAPIOrder: true
   usageSnippets:
