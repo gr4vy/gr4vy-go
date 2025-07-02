@@ -34,7 +34,7 @@ func (c *SDKConfiguration) GetServerDetails() (string, map[string]string) {
 	}
 
 	if c.Server == "" {
-		c.Server = "production"
+		c.Server = "sandbox"
 	}
 
 	return c.ServerList[c.Server], c.ServerVariables[c.Server]

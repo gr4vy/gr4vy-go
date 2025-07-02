@@ -739,8 +739,8 @@ You can override the default server globally using the `WithServer(server string
 
 | Name         | Server                               | Variables | Description |
 | ------------ | ------------------------------------ | --------- | ----------- |
-| `production` | `https://api.{id}.gr4vy.app`         | `id`      |             |
 | `sandbox`    | `https://api.sandbox.{id}.gr4vy.app` | `id`      |             |
+| `production` | `https://api.{id}.gr4vy.app`         | `id`      |             |
 
 If the selected server has variables, you may override its default values using the associated option(s):
 
@@ -765,7 +765,7 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		gr4vygo.WithServer("sandbox"),
+		gr4vygo.WithServer("production"),
 		gr4vygo.WithID("<id>"),
 		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
@@ -805,7 +805,7 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		gr4vygo.WithServerURL("https://api.example.gr4vy.app"),
+		gr4vygo.WithServerURL("https://api.sandbox.example.gr4vy.app"),
 		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)

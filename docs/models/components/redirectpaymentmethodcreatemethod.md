@@ -19,6 +19,7 @@ The method to use, this can be any of the methods that support redirect requests
 | `RedirectPaymentMethodCreateMethodBcp`             | bcp                                                |
 | `RedirectPaymentMethodCreateMethodBecs`            | becs                                               |
 | `RedirectPaymentMethodCreateMethodBitpay`          | bitpay                                             |
+| `RedirectPaymentMethodCreateMethodBlik`            | blik                                               |
 | `RedirectPaymentMethodCreateMethodBoleto`          | boleto                                             |
 | `RedirectPaymentMethodCreateMethodBoost`           | boost                                              |
 | `RedirectPaymentMethodCreateMethodCashapp`         | cashapp                                            |

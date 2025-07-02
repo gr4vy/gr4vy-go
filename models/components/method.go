@@ -18,6 +18,7 @@ const (
 	MethodBcp              Method = "bcp"
 	MethodBecs             Method = "becs"
 	MethodBitpay           Method = "bitpay"
+	MethodBlik             Method = "blik"
 	MethodBoleto           Method = "boleto"
 	MethodBoost            Method = "boost"
 	MethodCard             Method = "card"
