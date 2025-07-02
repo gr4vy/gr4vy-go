@@ -18,6 +18,7 @@
 | `MethodBcp`              | bcp                      |
 | `MethodBecs`             | becs                     |
 | `MethodBitpay`           | bitpay                   |
+| `MethodBlik`             | blik                     |
 | `MethodBoleto`           | boleto                   |
 | `MethodBoost`            | boost                    |
 | `MethodCard`             | card                     |

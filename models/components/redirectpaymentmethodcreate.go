@@ -18,6 +18,7 @@ const (
 	RedirectPaymentMethodCreateMethodBcp             RedirectPaymentMethodCreateMethod = "bcp"
 	RedirectPaymentMethodCreateMethodBecs            RedirectPaymentMethodCreateMethod = "becs"
 	RedirectPaymentMethodCreateMethodBitpay          RedirectPaymentMethodCreateMethod = "bitpay"
+	RedirectPaymentMethodCreateMethodBlik            RedirectPaymentMethodCreateMethod = "blik"
 	RedirectPaymentMethodCreateMethodBoleto          RedirectPaymentMethodCreateMethod = "boleto"
 	RedirectPaymentMethodCreateMethodBoost           RedirectPaymentMethodCreateMethod = "boost"
 	RedirectPaymentMethodCreateMethodCashapp         RedirectPaymentMethodCreateMethod = "cashapp"
