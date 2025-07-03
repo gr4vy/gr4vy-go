@@ -9,6 +9,7 @@ const (
 	AVSResponseCodeNoMatch              AVSResponseCode = "no_match"
 	AVSResponseCodePartialMatchAddress  AVSResponseCode = "partial_match_address"
 	AVSResponseCodePartialMatchPostcode AVSResponseCode = "partial_match_postcode"
+	AVSResponseCodePartialMatchName     AVSResponseCode = "partial_match_name"
 	AVSResponseCodeUnavailable          AVSResponseCode = "unavailable"
 )
 
