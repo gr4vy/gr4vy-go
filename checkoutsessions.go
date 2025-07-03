@@ -1417,7 +1417,7 @@ func (s *CheckoutSessions) Get(ctx context.Context, sessionID string, merchantAc
 }
 
 // Delete checkout session
-// Deleta a checkout session and all of its (PCI) data.
+// Delete a checkout session and all of its (PCI) data.
 func (s *CheckoutSessions) Delete(ctx context.Context, sessionID string, merchantAccountID *string, opts ...operations.Option) error {
 	request := operations.DeleteCheckoutSessionRequest{
 		SessionID:         sessionID,
