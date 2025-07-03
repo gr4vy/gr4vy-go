@@ -93,6 +93,7 @@
 | `MethodSpei`             | spei                     |
 | `MethodStitch`           | stitch                   |
 | `MethodStripedd`         | stripedd                 |
+| `MethodTapi`             | tapi                     |
 | `MethodThaiqr`           | thaiqr                   |
 | `MethodTouchngo`         | touchngo                 |
 | `MethodTruemoney`        | truemoney                |

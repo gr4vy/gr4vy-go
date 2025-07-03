@@ -87,6 +87,7 @@ The method to use, this can be any of the methods that support redirect requests
 | `RedirectPaymentMethodCreateMethodSpei`            | spei                                               |
 | `RedirectPaymentMethodCreateMethodStitch`          | stitch                                             |
 | `RedirectPaymentMethodCreateMethodStripedd`        | stripedd                                           |
+| `RedirectPaymentMethodCreateMethodTapi`            | tapi                                               |
 | `RedirectPaymentMethodCreateMethodThaiqr`          | thaiqr                                             |
 | `RedirectPaymentMethodCreateMethodTouchngo`        | touchngo                                           |
 | `RedirectPaymentMethodCreateMethodTruemoney`       | truemoney                                          |
