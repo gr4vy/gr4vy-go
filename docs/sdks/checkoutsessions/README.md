@@ -328,7 +328,7 @@ func main() {
 
 ## Delete
 
-Deleta a checkout session and all of its (PCI) data.
+Delete a checkout session and all of its (PCI) data.
 
 ### Example Usage
 

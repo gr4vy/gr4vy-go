@@ -18,6 +18,7 @@
 | `MethodBcp`              | bcp                      |
 | `MethodBecs`             | becs                     |
 | `MethodBitpay`           | bitpay                   |
+| `MethodBlik`             | blik                     |
 | `MethodBoleto`           | boleto                   |
 | `MethodBoost`            | boost                    |
 | `MethodCard`             | card                     |
@@ -92,6 +93,7 @@
 | `MethodSpei`             | spei                     |
 | `MethodStitch`           | stitch                   |
 | `MethodStripedd`         | stripedd                 |
+| `MethodTapi`             | tapi                     |
 | `MethodThaiqr`           | thaiqr                   |
 | `MethodTouchngo`         | touchngo                 |
 | `MethodTruemoney`        | truemoney                |

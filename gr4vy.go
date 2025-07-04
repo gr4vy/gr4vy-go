@@ -2,7 +2,7 @@
 
 package gr4vygo
 
-// Generated from OpenAPI doc version 1.0.0 and generator version 2.638.1
+// Generated from OpenAPI doc version 1.0.0 and generator version 2.648.5
 
 import (
 	"context"
@@ -18,14 +18,14 @@ import (
 )
 
 const (
-	ServerProduction string = "production"
 	ServerSandbox    string = "sandbox"
+	ServerProduction string = "production"
 )
 
 // ServerList contains the list of servers available to the SDK
 var ServerList = map[string]string{
-	ServerProduction: "https://api.{id}.gr4vy.app",
 	ServerSandbox:    "https://api.sandbox.{id}.gr4vy.app",
+	ServerProduction: "https://api.{id}.gr4vy.app",
 }
 
 // HTTPClient provides an interface for supplying the SDK with a custom HTTP client
@@ -172,16 +172,16 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Gr4vy {
 	sdk := &Gr4vy{
-		SDKVersion: "1.0.4",
+		SDKVersion: "1.1.0",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.0.4 2.638.1 1.0.0 github.com/gr4vy/gr4vy-go",
+			UserAgent:  "speakeasy-sdk/go 1.1.0 2.648.5 1.0.0 github.com/gr4vy/gr4vy-go",
 			Globals:    globals.Globals{},
 			ServerList: ServerList,
 			ServerVariables: map[string]map[string]string{
-				"production": {
+				"sandbox": {
 					"id": "example",
 				},
-				"sandbox": {
+				"production": {
 					"id": "example",
 				},
 			},
