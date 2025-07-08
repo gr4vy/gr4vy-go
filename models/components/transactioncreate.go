@@ -375,6 +375,21 @@ func (u ThreeDSecureData) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type ThreeDSecureData: all fields are null")
 }
 
+// TransactionCreatePaymentSource - The use-case for the the transaction.
+type TransactionCreatePaymentSource string
+
+const (
+	TransactionCreatePaymentSourceEcommerce   TransactionCreatePaymentSource = "ecommerce"
+	TransactionCreatePaymentSourceMoto        TransactionCreatePaymentSource = "moto"
+	TransactionCreatePaymentSourceRecurring   TransactionCreatePaymentSource = "recurring"
+	TransactionCreatePaymentSourceInstallment TransactionCreatePaymentSource = "installment"
+	TransactionCreatePaymentSourceCardOnFile  TransactionCreatePaymentSource = "card_on_file"
+)
+
+func (e TransactionCreatePaymentSource) ToPointer() *TransactionCreatePaymentSource {
+	return &e
+}
+
 type TransactionCreate struct {
 	// The monetary amount for this transaction, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`. If the `intent` is set to `capture`, an amount greater than zero must be supplied. All gift card amounts are subtracted from this amount before the remainder is charged to the provided `payment_method`.
 	Amount int64 `json:"amount"`
@@ -418,8 +433,8 @@ type TransactionCreate struct {
 	IsSubsequentPayment *bool `default:"false" json:"is_subsequent_payment"`
 	// Indicates whether the transaction was initiated by the merchant (true) or customer (false).
 	MerchantInitiated *bool `default:"false" json:"merchant_initiated"`
-	// The way payment method information made it to this transaction.
-	PaymentSource *TransactionPaymentSource `json:"payment_source,omitempty"`
+	// The use-case for the the transaction.
+	PaymentSource *TransactionCreatePaymentSource `default:"ecommerce" json:"payment_source"`
 	// The airline addendum data which describes the airline booking associated with this transaction.
 	Airline *Airline `json:"airline,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
@@ -571,7 +586,7 @@ func (o *TransactionCreate) GetMerchantInitiated() *bool {
 	return o.MerchantInitiated
 }
 
-func (o *TransactionCreate) GetPaymentSource() *TransactionPaymentSource {
+func (o *TransactionCreate) GetPaymentSource() *TransactionCreatePaymentSource {
 	if o == nil {
 		return nil
 	}
