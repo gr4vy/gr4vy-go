@@ -39,12 +39,6 @@ type MerchantAccountCreate struct {
 	MastercardNetworkTokensRequestorID *string `json:"mastercard_network_tokens_requestor_id,omitempty"`
 	// Application ID provided for Mastercard after onboarding to use Network Tokens.
 	MastercardNetworkTokensAppID *string `json:"mastercard_network_tokens_app_id,omitempty"`
-	// An optional endpoint URL to deliver webhook notifications to.
-	OutboundWebhookURL *string `json:"outbound_webhook_url,omitempty"`
-	// The optional username to use when `outbound_webhook_url` is configured and requires basic authentication.
-	OutboundWebhookUsername *string `json:"outbound_webhook_username,omitempty"`
-	// The optional password to use when `outbound_webhook_url` is configured and requires basic authentication
-	OutboundWebhookPassword *string `json:"outbound_webhook_password,omitempty"`
 	// The ID for the merchant account.
 	ID string `json:"id"`
 	// The display name for the merchant account.
@@ -172,27 +166,6 @@ func (o *MerchantAccountCreate) GetMastercardNetworkTokensAppID() *string {
 		return nil
 	}
 	return o.MastercardNetworkTokensAppID
-}
-
-func (o *MerchantAccountCreate) GetOutboundWebhookURL() *string {
-	if o == nil {
-		return nil
-	}
-	return o.OutboundWebhookURL
-}
-
-func (o *MerchantAccountCreate) GetOutboundWebhookUsername() *string {
-	if o == nil {
-		return nil
-	}
-	return o.OutboundWebhookUsername
-}
-
-func (o *MerchantAccountCreate) GetOutboundWebhookPassword() *string {
-	if o == nil {
-		return nil
-	}
-	return o.OutboundWebhookPassword
 }
 
 func (o *MerchantAccountCreate) GetID() string {

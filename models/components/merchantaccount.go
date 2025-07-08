@@ -15,12 +15,6 @@ type MerchantAccount struct {
 	ID string `json:"id"`
 	// The display name for the buyer.
 	DisplayName string `json:"display_name"`
-	// An optional endpoint URL to deliver webhook notifications to.
-	OutboundWebhookURL *string `json:"outbound_webhook_url,omitempty"`
-	// The optional username to use when `outbound_webhook_url` is configured and requires basic authentication.
-	OutboundWebhookUsername *string `json:"outbound_webhook_username,omitempty"`
-	// The optional password to use when `outbound_webhook_url` is configured and requires basic authentication
-	OutboundWebhookPassword *string `json:"outbound_webhook_password,omitempty"`
 	// Client key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.
 	LoonClientKey *string `json:"loon_client_key,omitempty"`
 	// Secret key provided by Pagos to authenticate to the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.
@@ -86,27 +80,6 @@ func (o *MerchantAccount) GetDisplayName() string {
 		return ""
 	}
 	return o.DisplayName
-}
-
-func (o *MerchantAccount) GetOutboundWebhookURL() *string {
-	if o == nil {
-		return nil
-	}
-	return o.OutboundWebhookURL
-}
-
-func (o *MerchantAccount) GetOutboundWebhookUsername() *string {
-	if o == nil {
-		return nil
-	}
-	return o.OutboundWebhookUsername
-}
-
-func (o *MerchantAccount) GetOutboundWebhookPassword() *string {
-	if o == nil {
-		return nil
-	}
-	return o.OutboundWebhookPassword
 }
 
 func (o *MerchantAccount) GetLoonClientKey() *string {

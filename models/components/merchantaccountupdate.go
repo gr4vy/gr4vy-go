@@ -41,12 +41,6 @@ type MerchantAccountUpdate struct {
 	MastercardNetworkTokensAppID *string `json:"mastercard_network_tokens_app_id,omitempty"`
 	// The display name for the merchant account.
 	DisplayName *string `json:"display_name,omitempty"`
-	// An optional endpoint URL to deliver webhook notifications to.
-	OutboundWebhookURL *string `json:"outbound_webhook_url,omitempty"`
-	// The optional username to use when `outbound_webhook_url` is configured and requires basic authentication.
-	OutboundWebhookUsername *string `json:"outbound_webhook_username,omitempty"`
-	// The optional password to use when `outbound_webhook_url` is configured and requires basic authentication
-	OutboundWebhookPassword *string `json:"outbound_webhook_password,omitempty"`
 }
 
 func (m MerchantAccountUpdate) MarshalJSON() ([]byte, error) {
@@ -177,25 +171,4 @@ func (o *MerchantAccountUpdate) GetDisplayName() *string {
 		return nil
 	}
 	return o.DisplayName
-}
-
-func (o *MerchantAccountUpdate) GetOutboundWebhookURL() *string {
-	if o == nil {
-		return nil
-	}
-	return o.OutboundWebhookURL
-}
-
-func (o *MerchantAccountUpdate) GetOutboundWebhookUsername() *string {
-	if o == nil {
-		return nil
-	}
-	return o.OutboundWebhookUsername
-}
-
-func (o *MerchantAccountUpdate) GetOutboundWebhookPassword() *string {
-	if o == nil {
-		return nil
-	}
-	return o.OutboundWebhookPassword
 }
