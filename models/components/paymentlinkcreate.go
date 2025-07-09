@@ -21,21 +21,6 @@ func (e Locale) ToPointer() *Locale {
 	return &e
 }
 
-// PaymentLinkCreatePaymentSource - The payment source for the payment link.
-type PaymentLinkCreatePaymentSource string
-
-const (
-	PaymentLinkCreatePaymentSourceEcommerce   PaymentLinkCreatePaymentSource = "ecommerce"
-	PaymentLinkCreatePaymentSourceMoto        PaymentLinkCreatePaymentSource = "moto"
-	PaymentLinkCreatePaymentSourceRecurring   PaymentLinkCreatePaymentSource = "recurring"
-	PaymentLinkCreatePaymentSourceInstallment PaymentLinkCreatePaymentSource = "installment"
-	PaymentLinkCreatePaymentSourceCardOnFile  PaymentLinkCreatePaymentSource = "card_on_file"
-)
-
-func (e PaymentLinkCreatePaymentSource) ToPointer() *PaymentLinkCreatePaymentSource {
-	return &e
-}
-
 type PaymentLinkCreate struct {
 	// The guest buyer for the payment link.
 	Buyer *GuestBuyerInput `json:"buyer,omitempty"`
@@ -76,8 +61,8 @@ type PaymentLinkCreate struct {
 	CartItems []CartItem `json:"cart_items,omitempty"`
 	// Arbitrary metadata for the payment link.
 	Metadata map[string]any `json:"metadata,omitempty"`
-	// The payment source for the payment link.
-	PaymentSource *PaymentLinkCreatePaymentSource `default:"ecommerce" json:"payment_source"`
+	// The way payment method information made it to this transaction.
+	PaymentSource *TransactionPaymentSource `json:"payment_source,omitempty"`
 }
 
 func (p PaymentLinkCreate) MarshalJSON() ([]byte, error) {
@@ -231,7 +216,7 @@ func (o *PaymentLinkCreate) GetMetadata() map[string]any {
 	return o.Metadata
 }
 
-func (o *PaymentLinkCreate) GetPaymentSource() *PaymentLinkCreatePaymentSource {
+func (o *PaymentLinkCreate) GetPaymentSource() *TransactionPaymentSource {
 	if o == nil {
 		return nil
 	}

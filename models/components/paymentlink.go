@@ -8,21 +8,6 @@ import (
 	"time"
 )
 
-// PaymentLinkPaymentSource - The payment source for the payment link.
-type PaymentLinkPaymentSource string
-
-const (
-	PaymentLinkPaymentSourceEcommerce   PaymentLinkPaymentSource = "ecommerce"
-	PaymentLinkPaymentSourceMoto        PaymentLinkPaymentSource = "moto"
-	PaymentLinkPaymentSourceRecurring   PaymentLinkPaymentSource = "recurring"
-	PaymentLinkPaymentSourceInstallment PaymentLinkPaymentSource = "installment"
-	PaymentLinkPaymentSourceCardOnFile  PaymentLinkPaymentSource = "card_on_file"
-)
-
-func (e PaymentLinkPaymentSource) ToPointer() *PaymentLinkPaymentSource {
-	return &e
-}
-
 type PaymentLink struct {
 	// The unique identifier for the payment link.
 	ID string `json:"id"`
@@ -65,8 +50,8 @@ type PaymentLink struct {
 	CartItems []CartItem `json:"cart_items"`
 	// Arbitrary metadata for the payment link.
 	Metadata map[string]any `json:"metadata,omitempty"`
-	// The payment source for the payment link.
-	PaymentSource PaymentLinkPaymentSource `json:"payment_source"`
+	// The way payment method information made it to this transaction.
+	PaymentSource TransactionPaymentSource `json:"payment_source"`
 	// The date and time the payment link was created.
 	CreatedAt time.Time `json:"created_at"`
 	// The date and time the payment link was last updated.
@@ -233,9 +218,9 @@ func (o *PaymentLink) GetMetadata() map[string]any {
 	return o.Metadata
 }
 
-func (o *PaymentLink) GetPaymentSource() PaymentLinkPaymentSource {
+func (o *PaymentLink) GetPaymentSource() TransactionPaymentSource {
 	if o == nil {
-		return PaymentLinkPaymentSource("")
+		return TransactionPaymentSource("")
 	}
 	return o.PaymentSource
 }
