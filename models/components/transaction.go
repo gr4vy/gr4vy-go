@@ -8,21 +8,6 @@ import (
 	"time"
 )
 
-// TransactionPaymentSource1 - The source of the transaction.
-type TransactionPaymentSource1 string
-
-const (
-	TransactionPaymentSource1Ecommerce   TransactionPaymentSource1 = "ecommerce"
-	TransactionPaymentSource1Moto        TransactionPaymentSource1 = "moto"
-	TransactionPaymentSource1Recurring   TransactionPaymentSource1 = "recurring"
-	TransactionPaymentSource1Installment TransactionPaymentSource1 = "installment"
-	TransactionPaymentSource1CardOnFile  TransactionPaymentSource1 = "card_on_file"
-)
-
-func (e TransactionPaymentSource1) ToPointer() *TransactionPaymentSource1 {
-	return &e
-}
-
 // Transaction - A full transaction resource.
 type Transaction struct {
 	// Always `transaction`.
@@ -95,8 +80,8 @@ type Transaction struct {
 	CvvResponseCode *CVVResponseCode `json:"cvv_response_code,omitempty"`
 	// The mapped decision received from the anti-fraud service. In case of a review decision this field is not updated once the review is resolved.
 	AntiFraudDecision *AntiFraudDecision `json:"anti_fraud_decision,omitempty"`
-	// The source of the transaction.
-	PaymentSource TransactionPaymentSource1 `json:"payment_source"`
+	// The way payment method information made it to this transaction.
+	PaymentSource TransactionPaymentSource `json:"payment_source"`
 	// Indicates whether the transaction was initiated by the merchant or the customer.
 	MerchantInitiated bool `json:"merchant_initiated"`
 	// Indicates whether the transaction represents a subsequent payment or an initial one.
@@ -398,9 +383,9 @@ func (o *Transaction) GetAntiFraudDecision() *AntiFraudDecision {
 	return o.AntiFraudDecision
 }
 
-func (o *Transaction) GetPaymentSource() TransactionPaymentSource1 {
+func (o *Transaction) GetPaymentSource() TransactionPaymentSource {
 	if o == nil {
-		return TransactionPaymentSource1("")
+		return TransactionPaymentSource("")
 	}
 	return o.PaymentSource
 }
