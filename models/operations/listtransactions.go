@@ -60,8 +60,8 @@ type ListTransactionsRequest struct {
 	PaymentServiceID   []string `queryParam:"style=form,explode=true,name=payment_service_id"`
 	PaymentMethodID    *string  `queryParam:"style=form,explode=true,name=payment_method_id"`
 	PaymentMethodLabel *string  `queryParam:"style=form,explode=true,name=payment_method_label"`
-	// Filters for transactions that have a payment method with a scheme that matches with the provided value.
-	PaymentMethodScheme *string `queryParam:"style=form,explode=true,name=payment_method_scheme"`
+	// Filters for transactions where the `payment_method_scheme` matches one of the provided values.
+	PaymentMethodScheme []string `queryParam:"style=form,explode=true,name=payment_method_scheme"`
 	// Filters for transactions that have a payment method with a country that matches with the provided value.
 	PaymentMethodCountry     *string `queryParam:"style=form,explode=true,name=payment_method_country"`
 	PaymentMethodFingerprint *string `queryParam:"style=form,explode=true,name=payment_method_fingerprint"`
@@ -285,7 +285,7 @@ func (o *ListTransactionsRequest) GetPaymentMethodLabel() *string {
 	return o.PaymentMethodLabel
 }
 
-func (o *ListTransactionsRequest) GetPaymentMethodScheme() *string {
+func (o *ListTransactionsRequest) GetPaymentMethodScheme() []string {
 	if o == nil {
 		return nil
 	}
