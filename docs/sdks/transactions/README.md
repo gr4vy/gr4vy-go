@@ -79,7 +79,16 @@ func main() {
         },
         PaymentMethodID: gr4vygo.String("ef9496d8-53a5-4aad-8ca2-00eb68334389"),
         PaymentMethodLabel: gr4vygo.String("1234"),
-        PaymentMethodScheme: gr4vygo.String("[\"visa\"]"),
+        PaymentMethodScheme: []string{
+            "[",
+            "\"",
+            "v",
+            "i",
+            "s",
+            "a",
+            "\"",
+            "]",
+        },
         PaymentMethodCountry: gr4vygo.String("[\"US\"]"),
         PaymentMethodFingerprint: gr4vygo.String("a50b85c200ee0795d6fd33a5c66f37a4564f554355c5b46a756aac485dd168a4"),
         Method: []components.Method{
