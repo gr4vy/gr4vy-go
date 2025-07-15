@@ -24,6 +24,7 @@ const (
 	GiftCardErrorCodeServiceError                GiftCardErrorCode = "service_error"
 	GiftCardErrorCodeServiceNetworkError         GiftCardErrorCode = "service_network_error"
 	GiftCardErrorCodeUnknownError                GiftCardErrorCode = "unknown_error"
+	GiftCardErrorCodeMaxGiftCardsReached         GiftCardErrorCode = "max_gift_cards_reached"
 )
 
 func (e GiftCardErrorCode) ToPointer() *GiftCardErrorCode {
