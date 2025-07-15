@@ -10,6 +10,7 @@ The specific event name.
 | `NameTransactionUpdatedStatus`                                  | transaction-updated-status                                      |
 | `NameTransactionSyncEvent`                                      | transaction-sync-event                                          |
 | `NameTransactionSyncFailedEvent`                                | transaction-sync-failed-event                                   |
+| `NameTransactionModifiedEvent`                                  | transaction-modified-event                                      |
 | `NameTransactionAPIRequest`                                     | transaction-api-request                                         |
 | `NameTransactionAPIResponse`                                    | transaction-api-response                                        |
 | `NameBinLookupRequest`                                          | bin-lookup-request                                              |

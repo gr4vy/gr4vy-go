@@ -15,6 +15,7 @@ const (
 	NameTransactionUpdatedStatus                                  Name = "transaction-updated-status"
 	NameTransactionSyncEvent                                      Name = "transaction-sync-event"
 	NameTransactionSyncFailedEvent                                Name = "transaction-sync-failed-event"
+	NameTransactionModifiedEvent                                  Name = "transaction-modified-event"
 	NameTransactionAPIRequest                                     Name = "transaction-api-request"
 	NameTransactionAPIResponse                                    Name = "transaction-api-response"
 	NameBinLookupRequest                                          Name = "bin-lookup-request"
