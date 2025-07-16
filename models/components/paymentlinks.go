@@ -6,7 +6,7 @@ import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 )
 
-type CollectionPaymentLink struct {
+type PaymentLinks struct {
 	// A list of items returned for this request.
 	Items []PaymentLink `json:"items"`
 	// The number of items for this page.
@@ -17,39 +17,39 @@ type CollectionPaymentLink struct {
 	PreviousCursor *string `json:"previous_cursor,omitempty"`
 }
 
-func (c CollectionPaymentLink) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
+func (p PaymentLinks) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
 }
 
-func (c *CollectionPaymentLink) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+func (p *PaymentLinks) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (o *CollectionPaymentLink) GetItems() []PaymentLink {
+func (o *PaymentLinks) GetItems() []PaymentLink {
 	if o == nil {
 		return []PaymentLink{}
 	}
 	return o.Items
 }
 
-func (o *CollectionPaymentLink) GetLimit() *int64 {
+func (o *PaymentLinks) GetLimit() *int64 {
 	if o == nil {
 		return nil
 	}
 	return o.Limit
 }
 
-func (o *CollectionPaymentLink) GetNextCursor() *string {
+func (o *PaymentLinks) GetNextCursor() *string {
 	if o == nil {
 		return nil
 	}
 	return o.NextCursor
 }
 
-func (o *CollectionPaymentLink) GetPreviousCursor() *string {
+func (o *PaymentLinks) GetPreviousCursor() *string {
 	if o == nil {
 		return nil
 	}

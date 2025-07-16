@@ -97,7 +97,7 @@ type PayoutCreate struct {
 	// Merchant information for the source of the payout.
 	Merchant *PayoutMerchant `json:"merchant,omitempty"`
 	// Optional fields for processing payouts on specific payment services.
-	ConnectionOptions *ConnectionOptions `json:"connection_options,omitempty"`
+	ConnectionOptions *PayoutConnectionOptions `json:"connection_options,omitempty"`
 }
 
 func (o *PayoutCreate) GetAmount() int64 {
@@ -170,7 +170,7 @@ func (o *PayoutCreate) GetMerchant() *PayoutMerchant {
 	return o.Merchant
 }
 
-func (o *PayoutCreate) GetConnectionOptions() *ConnectionOptions {
+func (o *PayoutCreate) GetConnectionOptions() *PayoutConnectionOptions {
 	if o == nil {
 		return nil
 	}

@@ -433,7 +433,7 @@ type TransactionCreate struct {
 	// The unique identifier of a set of shipping details stored for the buyer. If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the detail in the database.
 	ShippingDetailsID *string `json:"shipping_details_id,omitempty"`
 	// Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections. Please note that each of the keys this object are in kebab-case, for example `cybersource-anti-fraud` as they represent the ID of the connector. All the other keys will be snake case, for example `merchant_defined_data` or camel case to match an external API that the connector uses.
-	ConnectionOptions map[string]map[string]any `json:"connection_options,omitempty"`
+	ConnectionOptions *TransactionConnectionOptions `json:"connection_options,omitempty"`
 	// Whether to capture the transaction asynchronously.
 	//
 	// - When `async_capture` is `false` (default), the transaction is captured in the same request.
@@ -620,7 +620,7 @@ func (o *TransactionCreate) GetShippingDetailsID() *string {
 	return o.ShippingDetailsID
 }
 
-func (o *TransactionCreate) GetConnectionOptions() map[string]map[string]any {
+func (o *TransactionCreate) GetConnectionOptions() *TransactionConnectionOptions {
 	if o == nil {
 		return nil
 	}

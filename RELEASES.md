@@ -299,3 +299,13 @@ Based on:
 - [go v1.1.8] .
 ### Releases
 - [Go v1.1.8] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.1.8 - .
+
+## 2025-07-16 10:42:18
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.582.0 (2.657.1) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.1.9] .
+### Releases
+- [Go v1.1.9] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.1.9 - .

@@ -33,7 +33,7 @@ func newPayouts(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hooks.
 	}
 }
 
-// List payouts created.
+// List payouts created
 // Returns a list of payouts made.
 func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, merchantAccountID *string, opts ...operations.Option) (*operations.ListPayoutsResponse, error) {
 	request := operations.ListPayoutsRequest{
@@ -549,7 +549,7 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 
 }
 
-// Create a payout.
+// Create a payout
 // Creates a new payout.
 func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCreate, merchantAccountID *string, opts ...operations.Option) (*components.PayoutSummary, error) {
 	request := operations.CreatePayoutRequest{
@@ -1017,8 +1017,8 @@ func (s *Payouts) Create(ctx context.Context, payoutCreate components.PayoutCrea
 
 }
 
-// Get a payout.
-// Retreives a payout.
+// Get a payout
+// Retrieves a payout.
 func (s *Payouts) Get(ctx context.Context, payoutID string, merchantAccountID *string, opts ...operations.Option) (*components.PayoutSummary, error) {
 	request := operations.GetPayoutRequest{
 		PayoutID:          payoutID,

@@ -8,7 +8,7 @@ type TransactionUpdate struct {
 	// Additional information about the transaction stored as key-value pairs. If provided, the whole value will be overridden.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Allows for passing optional configuration per connection to take advantage of connection specific features. When provided, the data is only passed to the target connection type to prevent sharing configuration across connections. Please note that each of the keys this object are in kebab-case, for example `cybersource-anti-fraud` as they represent the ID of the connector. All the other keys will be snake case, for example `merchant_defined_data` or camel case to match an external API that the connector uses. If provided, the whole value will be overridden.
-	ConnectionOptions map[string]map[string]any `json:"connection_options,omitempty"`
+	ConnectionOptions *TransactionConnectionOptions `json:"connection_options,omitempty"`
 }
 
 func (o *TransactionUpdate) GetExternalIdentifier() *string {
@@ -25,7 +25,7 @@ func (o *TransactionUpdate) GetMetadata() map[string]string {
 	return o.Metadata
 }
 
-func (o *TransactionUpdate) GetConnectionOptions() map[string]map[string]any {
+func (o *TransactionUpdate) GetConnectionOptions() *TransactionConnectionOptions {
 	if o == nil {
 		return nil
 	}
