@@ -2,12 +2,12 @@
 
 package components
 
-type ConnectionOptions struct {
+type PayoutConnectionOptions struct {
 	// Custom options for `checkout-card` payment service.
-	CheckoutCard *CheckoutCardConnectionOptions `json:"checkout-card,omitempty"`
+	CheckoutCard *CheckoutPayoutOptions `json:"checkout-card,omitempty"`
 }
 
-func (o *ConnectionOptions) GetCheckoutCard() *CheckoutCardConnectionOptions {
+func (o *PayoutConnectionOptions) GetCheckoutCard() *CheckoutPayoutOptions {
 	if o == nil {
 		return nil
 	}

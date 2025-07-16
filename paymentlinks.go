@@ -728,7 +728,7 @@ func (s *PaymentLinks) List(ctx context.Context, cursor *string, limit *int64, m
 				return nil, err
 			}
 
-			var out components.CollectionPaymentLink
+			var out components.PaymentLinks
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

@@ -27,7 +27,7 @@ type PaymentLinkCreate struct {
 	// The expiration date and time for the payment link.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 	// Connection options for the payment link.
-	ConnectionOptions map[string]map[string]any `json:"connection_options,omitempty"`
+	ConnectionOptions *TransactionConnectionOptions `json:"connection_options,omitempty"`
 	// The merchant reference for the payment link.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 	// The statement descriptor for the payment link.
@@ -90,7 +90,7 @@ func (o *PaymentLinkCreate) GetExpiresAt() *time.Time {
 	return o.ExpiresAt
 }
 
-func (o *PaymentLinkCreate) GetConnectionOptions() map[string]map[string]any {
+func (o *PaymentLinkCreate) GetConnectionOptions() *TransactionConnectionOptions {
 	if o == nil {
 		return nil
 	}
