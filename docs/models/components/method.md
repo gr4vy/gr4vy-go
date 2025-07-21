@@ -94,6 +94,7 @@
 | `MethodStitch`           | stitch                   |
 | `MethodStripedd`         | stripedd                 |
 | `MethodTapi`             | tapi                     |
+| `MethodTapifintechs`     | tapifintechs             |
 | `MethodThaiqr`           | thaiqr                   |
 | `MethodTouchngo`         | touchngo                 |
 | `MethodTruemoney`        | truemoney                |

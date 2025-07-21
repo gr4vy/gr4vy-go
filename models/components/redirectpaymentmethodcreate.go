@@ -87,6 +87,7 @@ const (
 	RedirectPaymentMethodCreateMethodStitch          RedirectPaymentMethodCreateMethod = "stitch"
 	RedirectPaymentMethodCreateMethodStripedd        RedirectPaymentMethodCreateMethod = "stripedd"
 	RedirectPaymentMethodCreateMethodTapi            RedirectPaymentMethodCreateMethod = "tapi"
+	RedirectPaymentMethodCreateMethodTapifintechs    RedirectPaymentMethodCreateMethod = "tapifintechs"
 	RedirectPaymentMethodCreateMethodThaiqr          RedirectPaymentMethodCreateMethod = "thaiqr"
 	RedirectPaymentMethodCreateMethodTouchngo        RedirectPaymentMethodCreateMethod = "touchngo"
 	RedirectPaymentMethodCreateMethodTruemoney       RedirectPaymentMethodCreateMethod = "truemoney"
