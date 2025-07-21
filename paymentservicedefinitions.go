@@ -1001,7 +1001,7 @@ func (s *PaymentServiceDefinitions) Get(ctx context.Context, paymentServiceDefin
 
 }
 
-// Session - Create a session for apayment service definition
+// Session - Create a session for a payment service definition
 // Creates a session for a payment service that supports sessions.
 func (s *PaymentServiceDefinitions) Session(ctx context.Context, paymentServiceDefinitionID string, requestBody map[string]any, opts ...operations.Option) (*components.CreateSession, error) {
 	request := operations.CreatePaymentServiceDefinitionSessionRequest{

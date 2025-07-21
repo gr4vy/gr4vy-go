@@ -2880,7 +2880,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 }
 
-// Session - Create a session for apayment service definition
+// Session - Create a session for a payment service definition
 // Creates a session for a payment service that supports sessions.
 func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, requestBody map[string]any, merchantAccountID *string, opts ...operations.Option) (*components.CreateSession, error) {
 	request := operations.CreatePaymentServiceSessionRequest{
