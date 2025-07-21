@@ -53,6 +53,8 @@ type TransactionConnectionOptions struct {
 	LatitudeLatitudeds *LatitudeOptions `json:"latitude-latitudeds,omitempty"`
 	// Custom options to be passed to the `mattilda-tapi` connector.
 	MattildaTapi *MattildaTapiOptions `json:"mattilda-tapi,omitempty"`
+	// Custom options to be passed to the `mattilda-tapifintechs` connector.
+	MattildaTapifintechs *MattildaTapiOptions `json:"mattilda-tapifintechs,omitempty"`
 	// Custom options to be passed to the `mock-card` connector.
 	MockCard *MockCardOptions `json:"mock-card,omitempty"`
 	// Custom options to be passed to the `nuvei-card` connector.
@@ -250,6 +252,13 @@ func (o *TransactionConnectionOptions) GetMattildaTapi() *MattildaTapiOptions {
 		return nil
 	}
 	return o.MattildaTapi
+}
+
+func (o *TransactionConnectionOptions) GetMattildaTapifintechs() *MattildaTapiOptions {
+	if o == nil {
+		return nil
+	}
+	return o.MattildaTapifintechs
 }
 
 func (o *TransactionConnectionOptions) GetMockCard() *MockCardOptions {

@@ -94,6 +94,7 @@ const (
 	MethodStitch           Method = "stitch"
 	MethodStripedd         Method = "stripedd"
 	MethodTapi             Method = "tapi"
+	MethodTapifintechs     Method = "tapifintechs"
 	MethodThaiqr           Method = "thaiqr"
 	MethodTouchngo         Method = "touchngo"
 	MethodTruemoney        Method = "truemoney"
