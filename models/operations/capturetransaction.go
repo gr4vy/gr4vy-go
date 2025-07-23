@@ -3,6 +3,9 @@
 package operations
 
 import (
+	"errors"
+	"fmt"
+	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
@@ -20,9 +23,11 @@ func (o *CaptureTransactionGlobals) GetMerchantAccountID() *string {
 type CaptureTransactionRequest struct {
 	// The ID of the transaction
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
+	// The preferred resource type in the response.
+	Prefer *string `header:"style=simple,explode=false,name=prefer"`
 	// The ID of the merchant account to use for this request.
-	MerchantAccountID  *string                       `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-	TransactionCapture components.TransactionCapture `request:"mediaType=application/json"`
+	MerchantAccountID        *string                             `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	TransactionCaptureCreate components.TransactionCaptureCreate `request:"mediaType=application/json"`
 }
 
 func (o *CaptureTransactionRequest) GetTransactionID() string {
@@ -32,6 +37,13 @@ func (o *CaptureTransactionRequest) GetTransactionID() string {
 	return o.TransactionID
 }
 
+func (o *CaptureTransactionRequest) GetPrefer() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Prefer
+}
+
 func (o *CaptureTransactionRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
@@ -39,9 +51,73 @@ func (o *CaptureTransactionRequest) GetMerchantAccountID() *string {
 	return o.MerchantAccountID
 }
 
-func (o *CaptureTransactionRequest) GetTransactionCapture() components.TransactionCapture {
+func (o *CaptureTransactionRequest) GetTransactionCaptureCreate() components.TransactionCaptureCreate {
 	if o == nil {
-		return components.TransactionCapture{}
+		return components.TransactionCaptureCreate{}
 	}
-	return o.TransactionCapture
+	return o.TransactionCaptureCreate
+}
+
+type ResponseCaptureTransactionType string
+
+const (
+	ResponseCaptureTransactionTypeTransaction        ResponseCaptureTransactionType = "Transaction"
+	ResponseCaptureTransactionTypeTransactionCapture ResponseCaptureTransactionType = "TransactionCapture"
+)
+
+// ResponseCaptureTransaction - Successful Response
+type ResponseCaptureTransaction struct {
+	Transaction        *components.Transaction        `queryParam:"inline"`
+	TransactionCapture *components.TransactionCapture `queryParam:"inline"`
+
+	Type ResponseCaptureTransactionType
+}
+
+func CreateResponseCaptureTransactionTransaction(transaction components.Transaction) ResponseCaptureTransaction {
+	typ := ResponseCaptureTransactionTypeTransaction
+
+	return ResponseCaptureTransaction{
+		Transaction: &transaction,
+		Type:        typ,
+	}
+}
+
+func CreateResponseCaptureTransactionTransactionCapture(transactionCapture components.TransactionCapture) ResponseCaptureTransaction {
+	typ := ResponseCaptureTransactionTypeTransactionCapture
+
+	return ResponseCaptureTransaction{
+		TransactionCapture: &transactionCapture,
+		Type:               typ,
+	}
+}
+
+func (u *ResponseCaptureTransaction) UnmarshalJSON(data []byte) error {
+
+	var transactionCapture components.TransactionCapture = components.TransactionCapture{}
+	if err := utils.UnmarshalJSON(data, &transactionCapture, "", true, true); err == nil {
+		u.TransactionCapture = &transactionCapture
+		u.Type = ResponseCaptureTransactionTypeTransactionCapture
+		return nil
+	}
+
+	var transaction components.Transaction = components.Transaction{}
+	if err := utils.UnmarshalJSON(data, &transaction, "", true, true); err == nil {
+		u.Transaction = &transaction
+		u.Type = ResponseCaptureTransactionTypeTransaction
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseCaptureTransaction", string(data))
+}
+
+func (u ResponseCaptureTransaction) MarshalJSON() ([]byte, error) {
+	if u.Transaction != nil {
+		return utils.MarshalJSON(u.Transaction, "", true)
+	}
+
+	if u.TransactionCapture != nil {
+		return utils.MarshalJSON(u.TransactionCapture, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ResponseCaptureTransaction: all fields are null")
 }

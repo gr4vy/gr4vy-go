@@ -2,24 +2,71 @@
 
 package components
 
-// TransactionCapture - Request body for capturing an authorized transaction.
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+	"github.com/gr4vy/gr4vy-go/types"
+)
+
 type TransactionCapture struct {
-	// The amount to capture, in the smallest currency unit (e.g., cents). This must be less than or equal to the authorized amount, unless over-capture is available.
-	Amount *int64 `json:"amount,omitempty"`
-	// The airline data to submit to the payment service during the capture call.
-	Airline *Airline `json:"airline,omitempty"`
+	// Always `transaction-capture`.
+	type_  *string       `const:"transaction-capture" json:"type"`
+	Status CaptureStatus `json:"status"`
+	// The standardized error code set by Gr4vy.
+	Code *string `json:"code"`
+	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
+	RawResponseCode *string `json:"raw_response_code"`
+	// This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
+	RawResponseDescription *string `json:"raw_response_description"`
+	// A full transaction resource.
+	Transaction Transaction `json:"transaction"`
 }
 
-func (o *TransactionCapture) GetAmount() *int64 {
+func (t TransactionCapture) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TransactionCapture) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (o *TransactionCapture) GetType() *string {
+	return types.String("transaction-capture")
+}
+
+func (o *TransactionCapture) GetStatus() CaptureStatus {
+	if o == nil {
+		return CaptureStatus("")
+	}
+	return o.Status
+}
+
+func (o *TransactionCapture) GetCode() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Amount
+	return o.Code
 }
 
-func (o *TransactionCapture) GetAirline() *Airline {
+func (o *TransactionCapture) GetRawResponseCode() *string {
 	if o == nil {
 		return nil
 	}
-	return o.Airline
+	return o.RawResponseCode
+}
+
+func (o *TransactionCapture) GetRawResponseDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponseDescription
+}
+
+func (o *TransactionCapture) GetTransaction() Transaction {
+	if o == nil {
+		return Transaction{}
+	}
+	return o.Transaction
 }
