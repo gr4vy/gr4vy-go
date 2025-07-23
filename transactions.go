@@ -2001,11 +2001,12 @@ func (s *Transactions) Update(ctx context.Context, transactionID string, transac
 
 // Capture transaction
 // Captures a previously authorized transaction. You can capture the full or a partial amount, as long as it does not exceed the authorized amount (unless over-capture is enabled).
-func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCapture components.TransactionCapture, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
+func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCaptureCreate components.TransactionCaptureCreate, prefer *string, merchantAccountID *string, opts ...operations.Option) (*operations.ResponseCaptureTransaction, error) {
 	request := operations.CaptureTransactionRequest{
-		TransactionID:      transactionID,
-		MerchantAccountID:  merchantAccountID,
-		TransactionCapture: transactionCapture,
+		TransactionID:            transactionID,
+		Prefer:                   prefer,
+		MerchantAccountID:        merchantAccountID,
+		TransactionCaptureCreate: transactionCaptureCreate,
 	}
 
 	globals := operations.CaptureTransactionGlobals{
@@ -2043,7 +2044,7 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 		OperationID:      "capture_transaction",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
-	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "TransactionCapture", "json", `request:"mediaType=application/json"`)
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "TransactionCaptureCreate", "json", `request:"mediaType=application/json"`)
 	if err != nil {
 		return nil, err
 	}
@@ -2179,7 +2180,7 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			var out components.Transaction
+			var out operations.ResponseCaptureTransaction
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
