@@ -93,6 +93,7 @@
 | `MethodSpei`             | spei                     |
 | `MethodStitch`           | stitch                   |
 | `MethodStripedd`         | stripedd                 |
+| `MethodStripetoken`      | stripetoken              |
 | `MethodTapi`             | tapi                     |
 | `MethodTapifintechs`     | tapifintechs             |
 | `MethodThaiqr`           | thaiqr                   |

@@ -93,6 +93,7 @@ const (
 	MethodSpei             Method = "spei"
 	MethodStitch           Method = "stitch"
 	MethodStripedd         Method = "stripedd"
+	MethodStripetoken      Method = "stripetoken"
 	MethodTapi             Method = "tapi"
 	MethodTapifintechs     Method = "tapifintechs"
 	MethodThaiqr           Method = "thaiqr"
