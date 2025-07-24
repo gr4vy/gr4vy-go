@@ -8,7 +8,7 @@ type TravelHubCustomData struct {
 	// The value of the custom data field.
 	Value string `json:"value"`
 	// The type of the custom data field.
-	Type string `json:"type"`
+	Type *string `json:"type,omitempty"`
 }
 
 func (o *TravelHubCustomData) GetName() string {
@@ -25,9 +25,9 @@ func (o *TravelHubCustomData) GetValue() string {
 	return o.Value
 }
 
-func (o *TravelHubCustomData) GetType() string {
+func (o *TravelHubCustomData) GetType() *string {
 	if o == nil {
-		return ""
+		return nil
 	}
 	return o.Type
 }

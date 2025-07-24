@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 07206eeb4fd48370de5f1ce3468a5ac8
+  docChecksum: 8750eff822839f94b4a44c191b2ca635
   docVersion: 1.0.0
-  speakeasyVersion: 1.587.0
+  speakeasyVersion: 1.587.2
   generationVersion: 2.662.0
-  releaseVersion: 1.1.13
-  configChecksum: 4483818e695d736133a6e20cf8510f65
+  releaseVersion: 1.1.14
+  configChecksum: c802e19bb01c8cbce32c80e395c88d63
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
