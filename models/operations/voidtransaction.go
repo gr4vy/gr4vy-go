@@ -2,6 +2,13 @@
 
 package operations
 
+import (
+	"errors"
+	"fmt"
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+	"github.com/gr4vy/gr4vy-go/models/components"
+)
+
 type VoidTransactionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -16,6 +23,8 @@ func (o *VoidTransactionGlobals) GetMerchantAccountID() *string {
 type VoidTransactionRequest struct {
 	// The ID of the transaction
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
+	// The preferred resource type in the response.
+	Prefer []string `header:"style=simple,explode=false,name=prefer"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -27,9 +36,80 @@ func (o *VoidTransactionRequest) GetTransactionID() string {
 	return o.TransactionID
 }
 
+func (o *VoidTransactionRequest) GetPrefer() []string {
+	if o == nil {
+		return nil
+	}
+	return o.Prefer
+}
+
 func (o *VoidTransactionRequest) GetMerchantAccountID() *string {
 	if o == nil {
 		return nil
 	}
 	return o.MerchantAccountID
+}
+
+type ResponseVoidTransactionType string
+
+const (
+	ResponseVoidTransactionTypeTransaction     ResponseVoidTransactionType = "Transaction"
+	ResponseVoidTransactionTypeTransactionVoid ResponseVoidTransactionType = "TransactionVoid"
+)
+
+// ResponseVoidTransaction - Successful Response
+type ResponseVoidTransaction struct {
+	Transaction     *components.Transaction     `queryParam:"inline"`
+	TransactionVoid *components.TransactionVoid `queryParam:"inline"`
+
+	Type ResponseVoidTransactionType
+}
+
+func CreateResponseVoidTransactionTransaction(transaction components.Transaction) ResponseVoidTransaction {
+	typ := ResponseVoidTransactionTypeTransaction
+
+	return ResponseVoidTransaction{
+		Transaction: &transaction,
+		Type:        typ,
+	}
+}
+
+func CreateResponseVoidTransactionTransactionVoid(transactionVoid components.TransactionVoid) ResponseVoidTransaction {
+	typ := ResponseVoidTransactionTypeTransactionVoid
+
+	return ResponseVoidTransaction{
+		TransactionVoid: &transactionVoid,
+		Type:            typ,
+	}
+}
+
+func (u *ResponseVoidTransaction) UnmarshalJSON(data []byte) error {
+
+	var transactionVoid components.TransactionVoid = components.TransactionVoid{}
+	if err := utils.UnmarshalJSON(data, &transactionVoid, "", true, true); err == nil {
+		u.TransactionVoid = &transactionVoid
+		u.Type = ResponseVoidTransactionTypeTransactionVoid
+		return nil
+	}
+
+	var transaction components.Transaction = components.Transaction{}
+	if err := utils.UnmarshalJSON(data, &transaction, "", true, true); err == nil {
+		u.Transaction = &transaction
+		u.Type = ResponseVoidTransactionTypeTransaction
+		return nil
+	}
+
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseVoidTransaction", string(data))
+}
+
+func (u ResponseVoidTransaction) MarshalJSON() ([]byte, error) {
+	if u.Transaction != nil {
+		return utils.MarshalJSON(u.Transaction, "", true)
+	}
+
+	if u.TransactionVoid != nil {
+		return utils.MarshalJSON(u.TransactionVoid, "", true)
+	}
+
+	return nil, errors.New("could not marshal union type ResponseVoidTransaction: all fields are null")
 }

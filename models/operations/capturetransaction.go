@@ -24,7 +24,7 @@ type CaptureTransactionRequest struct {
 	// The ID of the transaction
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
 	// The preferred resource type in the response.
-	Prefer *string `header:"style=simple,explode=false,name=prefer"`
+	Prefer []string `header:"style=simple,explode=false,name=prefer"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID        *string                             `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 	TransactionCaptureCreate components.TransactionCaptureCreate `request:"mediaType=application/json"`
@@ -37,7 +37,7 @@ func (o *CaptureTransactionRequest) GetTransactionID() string {
 	return o.TransactionID
 }
 
-func (o *CaptureTransactionRequest) GetPrefer() *string {
+func (o *CaptureTransactionRequest) GetPrefer() []string {
 	if o == nil {
 		return nil
 	}
