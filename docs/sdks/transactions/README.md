@@ -415,7 +415,7 @@ func main() {
 | `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |                                                                                            |
 | `transactionID`                                                                            | *string*                                                                                   | :heavy_check_mark:                                                                         | The ID of the transaction                                                                  | 7099948d-7286-47e4-aad8-b68f7eb44591                                                       |
 | `transactionCaptureCreate`                                                                 | [components.TransactionCaptureCreate](../../models/components/transactioncapturecreate.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |                                                                                            |
-| `prefer`                                                                                   | **string*                                                                                  | :heavy_minus_sign:                                                                         | The preferred resource type in the response.                                               | resource=transaction                                                                       |
+| `prefer`                                                                                   | []*string*                                                                                 | :heavy_minus_sign:                                                                         | The preferred resource type in the response.                                               | resource=transaction                                                                       |
 | `merchantAccountID`                                                                        | **string*                                                                                  | :heavy_minus_sign:                                                                         | The ID of the merchant account to use for this request.                                    |                                                                                            |
 | `opts`                                                                                     | [][operations.Option](../../models/operations/option.md)                                   | :heavy_minus_sign:                                                                         | The options for this request.                                                              |                                                                                            |
 
@@ -465,7 +465,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Void(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591")
+    res, err := s.Transactions.Void(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -481,12 +481,13 @@ func main() {
 | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
 | `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
 | `transactionID`                                          | *string*                                                 | :heavy_check_mark:                                       | The ID of the transaction                                | 7099948d-7286-47e4-aad8-b68f7eb44591                     |
+| `prefer`                                                 | []*string*                                               | :heavy_minus_sign:                                       | The preferred resource type in the response.             | resource=transaction                                     |
 | `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
 | `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
 
 ### Response
 
-**[*components.Transaction](../../models/components/transaction.md), error**
+**[*operations.ResponseVoidTransaction](../../models/operations/responsevoidtransaction.md), error**
 
 ### Errors
 

@@ -2001,7 +2001,7 @@ func (s *Transactions) Update(ctx context.Context, transactionID string, transac
 
 // Capture transaction
 // Captures a previously authorized transaction. You can capture the full or a partial amount, as long as it does not exceed the authorized amount (unless over-capture is enabled).
-func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCaptureCreate components.TransactionCaptureCreate, prefer *string, merchantAccountID *string, opts ...operations.Option) (*operations.ResponseCaptureTransaction, error) {
+func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCaptureCreate components.TransactionCaptureCreate, prefer []string, merchantAccountID *string, opts ...operations.Option) (*operations.ResponseCaptureTransaction, error) {
 	request := operations.CaptureTransactionRequest{
 		TransactionID:            transactionID,
 		Prefer:                   prefer,
@@ -2471,9 +2471,10 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 
 // Void transaction
 // Voids a previously authorized transaction. If the transaction was not yet successfully authorized, or was already captured, the void will not be processed. This operation releases the hold on the buyer's funds. Captured transactions can be refunded instead.
-func (s *Transactions) Void(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
+func (s *Transactions) Void(ctx context.Context, transactionID string, prefer []string, merchantAccountID *string, opts ...operations.Option) (*operations.ResponseVoidTransaction, error) {
 	request := operations.VoidTransactionRequest{
 		TransactionID:     transactionID,
+		Prefer:            prefer,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -2641,7 +2642,7 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, merchantA
 				return nil, err
 			}
 
-			var out components.Transaction
+			var out operations.ResponseVoidTransaction
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 8750eff822839f94b4a44c191b2ca635
+  docChecksum: 5eadec55bdd910e6af48c51cc285018d
   docVersion: 1.0.0
-  speakeasyVersion: 1.587.2
-  generationVersion: 2.662.0
-  releaseVersion: 1.1.14
-  configChecksum: c802e19bb01c8cbce32c80e395c88d63
+  speakeasyVersion: 1.588.0
+  generationVersion: 2.663.0
+  releaseVersion: 1.1.15
+  configChecksum: 95443a3546d241203a1b4d3fa428ca2b
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -289,6 +289,7 @@ generatedFiles:
   - /models/components/transactionsummary.go
   - /models/components/transactionthreedsecuresummary.go
   - /models/components/transactionupdate.go
+  - /models/components/transactionvoid.go
   - /models/components/travelhubcustomdata.go
   - /models/components/travelhuboptions.go
   - /models/components/trustlyoptions.go
@@ -296,6 +297,7 @@ generatedFiles:
   - /models/components/validationerror.go
   - /models/components/verifycredentials.go
   - /models/components/voidablefield.go
+  - /models/components/voidstatus.go
   - /models/components/walletpaymentoptioncontext.go
   - /models/components/wpayeverdaypayoptions.go
   - /models/components/wpaypaytooptions.go
@@ -673,6 +675,7 @@ generatedFiles:
   - docs/models/components/transactionsummary.md
   - docs/models/components/transactionthreedsecuresummary.md
   - docs/models/components/transactionupdate.md
+  - docs/models/components/transactionvoid.md
   - docs/models/components/travelhubcustomdata.md
   - docs/models/components/travelhuboptions.md
   - docs/models/components/trustlyoptions.md
@@ -682,6 +685,7 @@ generatedFiles:
   - docs/models/components/validationerror.md
   - docs/models/components/verifycredentials.md
   - docs/models/components/voidablefield.md
+  - docs/models/components/voidstatus.md
   - docs/models/components/walletpaymentoptioncontext.md
   - docs/models/components/wpayeverdaypayoptions.md
   - docs/models/components/wpaypaytooptions.md
@@ -851,6 +855,7 @@ generatedFiles:
   - docs/models/operations/registerdigitalwalletdomainglobals.md
   - docs/models/operations/registerdigitalwalletdomainrequest.md
   - docs/models/operations/responsecapturetransaction.md
+  - docs/models/operations/responsevoidtransaction.md
   - docs/models/operations/resumepaymentmethodnetworktokenglobals.md
   - docs/models/operations/resumepaymentmethodnetworktokenrequest.md
   - docs/models/operations/suspendpaymentmethodnetworktokenglobals.md
