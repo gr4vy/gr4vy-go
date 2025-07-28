@@ -13,6 +13,7 @@ Returns a list of activity by dashboard users.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_audit_logs" method="get" path="/audit-logs" -->
 ```go
 package main
 

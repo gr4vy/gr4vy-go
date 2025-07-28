@@ -16,6 +16,7 @@ Create a new payment link.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="add_payment_link" method="post" path="/payment-links" -->
 ```go
 package main
 
@@ -86,6 +87,7 @@ List all created payment links.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_payment_links" method="get" path="/payment-links" -->
 ```go
 package main
 
@@ -164,6 +166,7 @@ Expire an existing payment link.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="expire_payment_link" method="post" path="/payment-links/{payment_link_id}/expire" -->
 ```go
 package main
 
@@ -226,6 +229,7 @@ Fetch the details for a payment link.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_payment_link" method="get" path="/payment-links/{payment_link_id}" -->
 ```go
 package main
 

@@ -17,6 +17,7 @@ List all network tokens stored for a payment method.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_payment_method_network_tokens" method="get" path="/payment-methods/{payment_method_id}/network-tokens" -->
 ```go
 package main
 
@@ -82,6 +83,7 @@ Provision a network token for a payment method.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_payment_method_network_token" method="post" path="/payment-methods/{payment_method_id}/network-tokens" -->
 ```go
 package main
 
@@ -152,6 +154,7 @@ Suspend a network token for a payment method.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="suspend_payment_method_network_token" method="post" path="/payment-methods/{payment_method_id}/network-tokens/{network_token_id}/suspend" -->
 ```go
 package main
 
@@ -218,6 +221,7 @@ Resume a suspended network token for a payment method.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="resume_payment_method_network_token" method="post" path="/payment-methods/{payment_method_id}/network-tokens/{network_token_id}/resume" -->
 ```go
 package main
 
@@ -284,6 +288,7 @@ Delete a network token for a payment method.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="delete_payment_method_network_token" method="delete" path="/payment-methods/{payment_method_id}/network-tokens/{network_token_id}" -->
 ```go
 package main
 
