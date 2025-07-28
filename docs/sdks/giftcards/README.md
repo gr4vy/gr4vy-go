@@ -16,6 +16,7 @@ Fetch details about a gift card.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_gift_card" method="get" path="/gift-cards/{gift_card_id}" -->
 ```go
 package main
 
@@ -81,6 +82,7 @@ Removes a gift card from our system.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="delete_gift_card" method="delete" path="/gift-cards/{gift_card_id}" -->
 ```go
 package main
 
@@ -146,6 +148,7 @@ Store a new gift card in the vault.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_gift_card" method="post" path="/gift-cards" -->
 ```go
 package main
 
@@ -215,6 +218,7 @@ Browser all gift cards.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_gift_cards" method="get" path="/gift-cards" -->
 ```go
 package main
 

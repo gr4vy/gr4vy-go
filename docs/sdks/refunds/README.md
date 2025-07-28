@@ -13,6 +13,7 @@ Fetch a refund.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_refund" method="get" path="/refunds/{refund_id}" -->
 ```go
 package main
 

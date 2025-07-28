@@ -14,6 +14,7 @@ Retrieve a specific settlement for a transaction by its unique identifier.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_transaction_settlement" method="get" path="/transactions/{transaction_id}/settlements/{settlement_id}" -->
 ```go
 package main
 
@@ -80,6 +81,7 @@ List all settlements for a specific transaction.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_transaction_settlements" method="get" path="/transactions/{transaction_id}/settlements" -->
 ```go
 package main
 

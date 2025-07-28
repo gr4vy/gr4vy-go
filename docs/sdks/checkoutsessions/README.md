@@ -16,6 +16,7 @@ Create a new checkout session.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_checkout_session" method="post" path="/checkout/sessions" -->
 ```go
 package main
 
@@ -201,6 +202,7 @@ Update the information stored on a checkout session.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="update_checkout_session" method="put" path="/checkout/sessions/{session_id}" -->
 ```go
 package main
 
@@ -268,6 +270,7 @@ Retrieve the information stored on a checkout session.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_checkout_session" method="get" path="/checkout/sessions/{session_id}" -->
 ```go
 package main
 
@@ -332,6 +335,7 @@ Delete a checkout session and all of its (PCI) data.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="delete_checkout_session" method="delete" path="/checkout/sessions/{session_id}" -->
 ```go
 package main
 

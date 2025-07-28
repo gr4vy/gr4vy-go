@@ -15,6 +15,7 @@ List all executions of a specific report.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_report_executions" method="get" path="/reports/{report_id}/executions" -->
 ```go
 package main
 
@@ -94,6 +95,7 @@ Creates a download URL for a specific execution of a report.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_report_execution_url" method="post" path="/reports/{report_id}/executions/{report_execution_id}/url" -->
 ```go
 package main
 
@@ -160,6 +162,7 @@ Fetch a specific executed report.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_report_execution" method="get" path="/report-executions/{report_execution_id}" -->
 ```go
 package main
 

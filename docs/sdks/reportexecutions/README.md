@@ -13,6 +13,7 @@ List all executed reports that have been generated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_all_report_executions" method="get" path="/report-executions" -->
 ```go
 package main
 

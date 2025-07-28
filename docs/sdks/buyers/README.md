@@ -17,6 +17,7 @@ List all buyers or search for a specific buyer.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_buyers" method="get" path="/buyers" -->
 ```go
 package main
 
@@ -98,6 +99,7 @@ Create a new buyer record.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="add_buyer" method="post" path="/buyers" -->
 ```go
 package main
 
@@ -164,6 +166,7 @@ Fetches a buyer by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_buyer" method="get" path="/buyers/{buyer_id}" -->
 ```go
 package main
 
@@ -229,6 +232,7 @@ Updates a buyer record.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="update_buyer" method="put" path="/buyers/{buyer_id}" -->
 ```go
 package main
 
@@ -296,6 +300,7 @@ Permanently removes a buyer record.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="delete_buyer" method="delete" path="/buyers/{buyer_id}" -->
 ```go
 package main
 

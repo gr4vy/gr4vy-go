@@ -19,6 +19,7 @@ Returns a paginated list of transactions for the merchant account, sorted by mos
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_transactions" method="get" path="/transactions" -->
 ```go
 package main
 
@@ -171,6 +172,7 @@ Create a new transaction using a supported payment method. If additional buyer a
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_transaction" method="post" path="/transactions" -->
 ```go
 package main
 
@@ -247,6 +249,7 @@ Retrieve the details of a transaction by its unique identifier.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_transaction" method="get" path="/transactions/{transaction_id}" -->
 ```go
 package main
 
@@ -312,6 +315,7 @@ Manually updates a transaction.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="update_transaction" method="put" path="/transactions/{transaction_id}" -->
 ```go
 package main
 
@@ -379,6 +383,7 @@ Captures a previously authorized transaction. You can capture the full or a part
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="capture_transaction" method="post" path="/transactions/{transaction_id}/capture" -->
 ```go
 package main
 
@@ -447,6 +452,7 @@ Voids a previously authorized transaction. If the transaction was not yet succes
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="void_transaction" method="post" path="/transactions/{transaction_id}/void" -->
 ```go
 package main
 
@@ -513,6 +519,7 @@ Synchronizes the status of a transaction with the underlying payment service pro
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="sync_transaction" method="post" path="/transactions/{transaction_id}/sync" -->
 ```go
 package main
 

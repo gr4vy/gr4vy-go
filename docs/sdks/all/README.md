@@ -13,6 +13,7 @@ Create a refund for all instruments on a transaction.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_full_transaction_refund" method="post" path="/transactions/{transaction_id}/refunds/all" -->
 ```go
 package main
 

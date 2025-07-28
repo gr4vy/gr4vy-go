@@ -15,6 +15,7 @@ Returns a list of payouts made.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_payouts" method="get" path="/payouts" -->
 ```go
 package main
 
@@ -93,6 +94,7 @@ Creates a new payout.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_payout" method="post" path="/payouts" -->
 ```go
 package main
 
@@ -168,6 +170,7 @@ Retrieves a payout.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_payout" method="get" path="/payouts/{payout_id}" -->
 ```go
 package main
 

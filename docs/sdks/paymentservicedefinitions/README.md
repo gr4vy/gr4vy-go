@@ -15,6 +15,7 @@ List the definitions of each payment service that can be configured.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_payment_service_definitions" method="get" path="/payment-service-definitions" -->
 ```go
 package main
 
@@ -91,6 +92,7 @@ Get the definition of a payment service that can be configured.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_payment_service_definition" method="get" path="/payment-service-definitions/{payment_service_definition_id}" -->
 ```go
 package main
 
@@ -154,6 +156,7 @@ Creates a session for a payment service that supports sessions.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_payment_service_definition_session" method="post" path="/payment-service-definitions/{payment_service_definition_id}/sessions" -->
 ```go
 package main
 

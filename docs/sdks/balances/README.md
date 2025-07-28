@@ -13,6 +13,7 @@ Fetch the balances for one or more gift cards.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_gift_card_balances" method="post" path="/gift-cards/balances" -->
 ```go
 package main
 

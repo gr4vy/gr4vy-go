@@ -16,6 +16,7 @@ List all merchant accounts in an instance.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_merchant_accounts" method="get" path="/merchant-accounts" -->
 ```go
 package main
 
@@ -93,6 +94,7 @@ Create a new merchant account in an instance.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_merchant_account" method="post" path="/merchant-accounts" -->
 ```go
 package main
 
@@ -161,6 +163,7 @@ Get info about a merchant account in an instance.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_merchant_account" method="get" path="/merchant-accounts/{merchant_account_id}" -->
 ```go
 package main
 
@@ -224,6 +227,7 @@ Update info for a merchant account in an instance.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="update_merchant_account" method="put" path="/merchant-accounts/{merchant_account_id}" -->
 ```go
 package main
 

@@ -19,6 +19,7 @@ List the configured payment services.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_payment_services" method="get" path="/payment-services" -->
 ```go
 package main
 
@@ -99,6 +100,7 @@ Updates the configuration of a payment service.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="update_payment_service" method="post" path="/payment-services" -->
 ```go
 package main
 
@@ -190,6 +192,7 @@ Get the details of a configured payment service.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_payment_service" method="get" path="/payment-services/{payment_service_id}" -->
 ```go
 package main
 
@@ -255,6 +258,7 @@ Configures a new payment service for use by merchants.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_payment_service" method="put" path="/payment-services/{payment_service_id}" -->
 ```go
 package main
 
@@ -324,6 +328,7 @@ Deletes all the configuration of a payment service.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="delete_payment_service" method="delete" path="/payment-services/{payment_service_id}" -->
 ```go
 package main
 
@@ -389,6 +394,7 @@ Verify the credentials of a configured payment service
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="verify_payment_service_credentials" method="post" path="/payment-services/verify" -->
 ```go
 package main
 
@@ -458,6 +464,7 @@ Creates a session for a payment service that supports sessions.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_payment_service_session" method="post" path="/payment-services/{payment_service_id}/sessions" -->
 ```go
 package main
 
