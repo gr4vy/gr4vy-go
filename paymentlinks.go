@@ -503,10 +503,11 @@ func (s *PaymentLinks) Create(ctx context.Context, paymentLinkCreate components.
 
 // List all payment links
 // List all created payment links.
-func (s *PaymentLinks) List(ctx context.Context, cursor *string, limit *int64, merchantAccountID *string, opts ...operations.Option) (*operations.ListPaymentLinksResponse, error) {
+func (s *PaymentLinks) List(ctx context.Context, cursor *string, limit *int64, buyerSearch []string, merchantAccountID *string, opts ...operations.Option) (*operations.ListPaymentLinksResponse, error) {
 	request := operations.ListPaymentLinksRequest{
 		Cursor:            cursor,
 		Limit:             limit,
+		BuyerSearch:       buyerSearch,
 		MerchantAccountID: merchantAccountID,
 	}
 
@@ -714,6 +715,7 @@ func (s *PaymentLinks) List(ctx context.Context, cursor *string, limit *int64, m
 			ctx,
 			&nCVal,
 			limit,
+			buyerSearch,
 			merchantAccountID,
 			opts...,
 		)

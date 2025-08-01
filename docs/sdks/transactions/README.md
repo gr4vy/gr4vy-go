@@ -51,12 +51,6 @@ func main() {
         BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
         BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
         BuyerEmailAddress: gr4vygo.String("john@example.com"),
-        BuyerSearch: []string{
-            "J",
-            "o",
-            "h",
-            "n",
-        },
         IPAddress: gr4vygo.String("8.214.133.47"),
         Status: []components.TransactionStatus{
             components.TransactionStatusAuthorizationSucceeded,
@@ -114,6 +108,12 @@ func main() {
         IsSubsequentPayment: gr4vygo.Bool(true),
         MerchantInitiated: gr4vygo.Bool(true),
         Used3ds: gr4vygo.Bool(true),
+        BuyerSearch: []string{
+            "J",
+            "o",
+            "h",
+            "n",
+        },
     })
     if err != nil {
         log.Fatal(err)
