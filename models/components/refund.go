@@ -41,6 +41,12 @@ type Refund struct {
 	UpdatedAt time.Time `json:"updated_at"`
 	// The user that created this resource
 	Creator *Creator `json:"creator,omitempty"`
+	// The standardized error code set by Gr4vy.
+	ErrorCode *string `json:"error_code,omitempty"`
+	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
+	RawResponseCode *string `json:"raw_response_code,omitempty"`
+	//  This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
+	RawResponseDescription *string `json:"raw_response_description,omitempty"`
 }
 
 func (r Refund) MarshalJSON() ([]byte, error) {
@@ -168,4 +174,25 @@ func (o *Refund) GetCreator() *Creator {
 		return nil
 	}
 	return o.Creator
+}
+
+func (o *Refund) GetErrorCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.ErrorCode
+}
+
+func (o *Refund) GetRawResponseCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponseCode
+}
+
+func (o *Refund) GetRawResponseDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.RawResponseDescription
 }
