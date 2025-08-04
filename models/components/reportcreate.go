@@ -12,18 +12,29 @@ import (
 type SpecType string
 
 const (
-	SpecTypeDetailedSettlement SpecType = "detailed_settlement"
-	SpecTypeTransactionRetries SpecType = "transaction_retries"
-	SpecTypeTransactions       SpecType = "transactions"
+	SpecTypeAccountsReceivables SpecType = "accounts_receivables"
+	SpecTypeDetailedSettlement  SpecType = "detailed_settlement"
+	SpecTypeTransactionRetries  SpecType = "transaction_retries"
+	SpecTypeTransactions        SpecType = "transactions"
 )
 
 // Spec - The report specification.
 type Spec struct {
-	TransactionsReportSpec       *TransactionsReportSpec       `queryParam:"inline"`
-	TransactionRetriesReportSpec *TransactionRetriesReportSpec `queryParam:"inline"`
-	DetailedSettlementReportSpec *DetailedSettlementReportSpec `queryParam:"inline"`
+	TransactionsReportSpec        *TransactionsReportSpec        `queryParam:"inline"`
+	TransactionRetriesReportSpec  *TransactionRetriesReportSpec  `queryParam:"inline"`
+	DetailedSettlementReportSpec  *DetailedSettlementReportSpec  `queryParam:"inline"`
+	AccountsReceivablesReportSpec *AccountsReceivablesReportSpec `queryParam:"inline"`
 
 	Type SpecType
+}
+
+func CreateSpecAccountsReceivables(accountsReceivables AccountsReceivablesReportSpec) Spec {
+	typ := SpecTypeAccountsReceivables
+
+	return Spec{
+		AccountsReceivablesReportSpec: &accountsReceivables,
+		Type:                          typ,
+	}
 }
 
 func CreateSpecDetailedSettlement(detailedSettlement DetailedSettlementReportSpec) Spec {
@@ -65,6 +76,15 @@ func (u *Spec) UnmarshalJSON(data []byte) error {
 	}
 
 	switch dis.Model {
+	case "accounts_receivables":
+		accountsReceivablesReportSpec := new(AccountsReceivablesReportSpec)
+		if err := utils.UnmarshalJSON(data, &accountsReceivablesReportSpec, "", true, false); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Model == accounts_receivables) type AccountsReceivablesReportSpec within Spec: %w", string(data), err)
+		}
+
+		u.AccountsReceivablesReportSpec = accountsReceivablesReportSpec
+		u.Type = SpecTypeAccountsReceivables
+		return nil
 	case "detailed_settlement":
 		detailedSettlementReportSpec := new(DetailedSettlementReportSpec)
 		if err := utils.UnmarshalJSON(data, &detailedSettlementReportSpec, "", true, false); err != nil {
@@ -108,6 +128,10 @@ func (u Spec) MarshalJSON() ([]byte, error) {
 
 	if u.DetailedSettlementReportSpec != nil {
 		return utils.MarshalJSON(u.DetailedSettlementReportSpec, "", true)
+	}
+
+	if u.AccountsReceivablesReportSpec != nil {
+		return utils.MarshalJSON(u.AccountsReceivablesReportSpec, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type Spec: all fields are null")
@@ -178,6 +202,10 @@ func (o *ReportCreate) GetSpec() Spec {
 		return Spec{}
 	}
 	return o.Spec
+}
+
+func (o *ReportCreate) GetSpecAccountsReceivables() *AccountsReceivablesReportSpec {
+	return o.GetSpec().AccountsReceivablesReportSpec
 }
 
 func (o *ReportCreate) GetSpecDetailedSettlement() *DetailedSettlementReportSpec {
