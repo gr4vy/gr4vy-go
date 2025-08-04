@@ -39,7 +39,7 @@ type Request struct {
 	HTTPMethod       string   `json:"http_method"`
 	ContentType      string   `json:"content_type"`
 	TimeoutSeconds   *int     `json:"timeout,omitempty"`
-	Body             string   `json:"body"`
+	Body             []byte   `json:"body"`
 	Authentications  []string `json:"authentications,omitempty"`
 	Headers          map[string]string `json:"headers,omitempty"`
 }
@@ -82,7 +82,7 @@ func (s *VaultForward) ForwardPCIData(ctx context.Context, request Request, opts
 	}
 
 	// Create request body as string
-	bodyReader := strings.NewReader(request.Body)
+	bodyReader := bytes.NewReader(request.Body)
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -99,7 +99,7 @@ func (s *VaultForward) ForwardPCIData(ctx context.Context, request Request, opts
 	if err != nil {
 		return "", fmt.Errorf("error creating request: %w", err)
 	}
-	req.Header.Set("Accept", "*/*")
+	req.Header.Set("Accept", request.ContentType)
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
 	req.Header.Set("Content-Type", request.ContentType)
 
@@ -107,8 +107,9 @@ func (s *VaultForward) ForwardPCIData(ctx context.Context, request Request, opts
 	req.Header.Set("x-vault-forward-payment-methods", strings.Join(request.PaymentMethodIDs, ","))
 	req.Header.Set("x-vault-forward-url", request.URL)
 	req.Header.Set("x-vault-forward-http-method", request.HTTPMethod)
+	req.Header.Set("x-vault-forward-header-content-type", request.ContentType)
+	req.Header.Set("x-vault-forward-header-accept", request.ContentType)
 
-	// Set required headers
 	req.Header.Set("x-vault-forward-checkout-session", request.CheckoutSession)
 	if request.Authentications != nil && len(request.Authentications) > 0 {
 		req.Header.Set("x-vault-forward-authentications", strings.Join(request.Authentications, ","))
@@ -128,7 +129,6 @@ func (s *VaultForward) ForwardPCIData(ctx context.Context, request Request, opts
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
 		return "", err
 	}
-
 	for k, v := range o.SetHeaders {
 		req.Header.Set(k, v)
 	}
