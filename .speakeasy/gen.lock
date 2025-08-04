@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 3eb5f4ac1a3a566699407e1c8a3b8d45
+  docChecksum: b53c35920c9905d9d09625a4663acd17
   docVersion: 1.0.0
   speakeasyVersion: 1.596.0
   generationVersion: 2.672.0
-  releaseVersion: 1.3.1
-  configChecksum: f97d7985e1d53b4cd52913f523032036
+  releaseVersion: 1.3.2
+  configChecksum: 474ae85a73d28130503fc6f6c958e4fd
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -52,6 +52,7 @@ generatedFiles:
   - /models/apierrors/error502.go
   - /models/apierrors/error504.go
   - /models/apierrors/httpvalidationerror.go
+  - /models/components/accountsreceivablesreportspec.go
   - /models/components/accountupdaterinquirysummary.go
   - /models/components/accountupdaterjob.go
   - /models/components/accountupdaterjobcreate.go
@@ -417,6 +418,7 @@ generatedFiles:
   - docs/models/apierrors/error502.md
   - docs/models/apierrors/error504.md
   - docs/models/apierrors/httpvalidationerror.md
+  - docs/models/components/accountsreceivablesreportspec.md
   - docs/models/components/accountupdaterinquirysummary.md
   - docs/models/components/accountupdaterjob.md
   - docs/models/components/accountupdaterjobcreate.md
