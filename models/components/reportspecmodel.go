@@ -5,9 +5,10 @@ package components
 type ReportSpecModel string
 
 const (
-	ReportSpecModelTransactions       ReportSpecModel = "transactions"
-	ReportSpecModelTransactionRetries ReportSpecModel = "transaction_retries"
-	ReportSpecModelDetailedSettlement ReportSpecModel = "detailed_settlement"
+	ReportSpecModelTransactions        ReportSpecModel = "transactions"
+	ReportSpecModelTransactionRetries  ReportSpecModel = "transaction_retries"
+	ReportSpecModelDetailedSettlement  ReportSpecModel = "detailed_settlement"
+	ReportSpecModelAccountsReceivables ReportSpecModel = "accounts_receivables"
 )
 
 func (e ReportSpecModel) ToPointer() *ReportSpecModel {
