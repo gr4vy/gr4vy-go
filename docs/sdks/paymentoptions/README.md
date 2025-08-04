@@ -13,6 +13,7 @@ List the payment options available at checkout. filtering by country, currency, 
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_payment_options" method="post" path="/payment-options" -->
 ```go
 package main
 

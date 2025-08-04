@@ -17,6 +17,7 @@ Register a digital wallet like Apple Pay, Google Pay, or Click to Pay.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="configure_digital_wallet" method="post" path="/digital-wallets" -->
 ```go
 package main
 
@@ -87,6 +88,7 @@ List configured digital wallets.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_digital_wallets" method="get" path="/digital-wallets" -->
 ```go
 package main
 
@@ -151,6 +153,7 @@ Fetch the details a digital wallet.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_digital_wallet" method="get" path="/digital-wallets/{digital_wallet_id}" -->
 ```go
 package main
 
@@ -216,6 +219,7 @@ Delete a configured digital wallet.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="delete_digital_wallet" method="delete" path="/digital-wallets/{digital_wallet_id}" -->
 ```go
 package main
 
@@ -281,6 +285,7 @@ Update a digital wallet.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="update_digital_wallet" method="put" path="/digital-wallets/{digital_wallet_id}" -->
 ```go
 package main
 

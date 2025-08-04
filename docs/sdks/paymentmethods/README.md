@@ -16,6 +16,7 @@ List all stored payment method.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_payment_methods" method="get" path="/payment-methods" -->
 ```go
 package main
 
@@ -98,6 +99,7 @@ Store a new payment method.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="create_payment_method" method="post" path="/payment-methods" -->
 ```go
 package main
 
@@ -169,6 +171,7 @@ Retrieve a payment method.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_payment_method" method="get" path="/payment-methods/{payment_method_id}" -->
 ```go
 package main
 
@@ -234,6 +237,7 @@ Delete a payment method.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="delete_payment_method" method="delete" path="/payment-methods/{payment_method_id}" -->
 ```go
 package main
 

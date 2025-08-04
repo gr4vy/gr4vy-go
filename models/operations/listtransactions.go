@@ -36,9 +36,7 @@ type ListTransactionsRequest struct {
 	BuyerExternalIdentifier *string    `queryParam:"style=form,explode=true,name=buyer_external_identifier"`
 	BuyerID                 *string    `queryParam:"style=form,explode=true,name=buyer_id"`
 	BuyerEmailAddress       *string    `queryParam:"style=form,explode=true,name=buyer_email_address"`
-	// Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values.
-	BuyerSearch []string `queryParam:"style=form,explode=true,name=buyer_search"`
-	IPAddress   *string  `queryParam:"style=form,explode=true,name=ip_address"`
+	IPAddress               *string    `queryParam:"style=form,explode=true,name=ip_address"`
 	// Filters the results to only the transactions that have a `status` that matches with any of the provided status values.
 	Status                      []components.TransactionStatus `queryParam:"style=form,explode=true,name=status"`
 	ID                          *string                        `queryParam:"style=form,explode=true,name=id"`
@@ -95,6 +93,8 @@ type ListTransactionsRequest struct {
 	MerchantInitiated *bool `queryParam:"style=form,explode=true,name=merchant_initiated"`
 	// Filters for transactions that attempted 3DS authentication or not.
 	Used3ds *bool `queryParam:"style=form,explode=true,name=used_3ds"`
+	// Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values.
+	BuyerSearch []string `queryParam:"style=form,explode=true,name=buyer_search"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -178,13 +178,6 @@ func (o *ListTransactionsRequest) GetBuyerEmailAddress() *string {
 		return nil
 	}
 	return o.BuyerEmailAddress
-}
-
-func (o *ListTransactionsRequest) GetBuyerSearch() []string {
-	if o == nil {
-		return nil
-	}
-	return o.BuyerSearch
 }
 
 func (o *ListTransactionsRequest) GetIPAddress() *string {
@@ -409,6 +402,13 @@ func (o *ListTransactionsRequest) GetUsed3ds() *bool {
 		return nil
 	}
 	return o.Used3ds
+}
+
+func (o *ListTransactionsRequest) GetBuyerSearch() []string {
+	if o == nil {
+		return nil
+	}
+	return o.BuyerSearch
 }
 
 func (o *ListTransactionsRequest) GetMerchantAccountID() *string {

@@ -14,6 +14,7 @@ Register a digital wallet domain (Apple Pay only).
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="register_digital_wallet_domain" method="post" path="/digital-wallets/{digital_wallet_id}/domains" -->
 ```go
 package main
 
@@ -83,6 +84,7 @@ Remove a digital wallet domain (Apple Pay only).
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="unregister_digital_wallet_domain" method="delete" path="/digital-wallets/{digital_wallet_id}/domains" -->
 ```go
 package main
 

@@ -16,6 +16,7 @@ List all configured reports that can be generated.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_reports" method="get" path="/reports" -->
 ```go
 package main
 
@@ -93,6 +94,7 @@ Create a new report.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="add_report" method="post" path="/reports" -->
 ```go
 package main
 
@@ -176,6 +178,7 @@ Fetches a report by its ID.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_report" method="get" path="/reports/{report_id}" -->
 ```go
 package main
 
@@ -241,6 +244,7 @@ Updates the configuration of a report.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="update_report" method="put" path="/reports/{report_id}" -->
 ```go
 package main
 

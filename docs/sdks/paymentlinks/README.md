@@ -16,6 +16,7 @@ Create a new payment link.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="add_payment_link" method="post" path="/payment-links" -->
 ```go
 package main
 
@@ -86,6 +87,7 @@ List all created payment links.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="list_payment_links" method="get" path="/payment-links" -->
 ```go
 package main
 
@@ -104,7 +106,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentLinks.List(ctx, nil, gr4vygo.Int64(20))
+    res, err := s.PaymentLinks.List(ctx, nil, gr4vygo.Int64(20), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -128,13 +130,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `cursor`                                                 | **string*                                                | :heavy_minus_sign:                                       | A pointer to the page of results to return.              | ZXhhbXBsZTE                                              |
-| `limit`                                                  | **int64*                                                 | :heavy_minus_sign:                                       | The maximum number of items that are returned.           | 20                                                       |
-| `merchantAccountID`                                      | **string*                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+| Parameter                                                                                                                       | Type                                                                                                                            | Required                                                                                                                        | Description                                                                                                                     | Example                                                                                                                         |
+| ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                                                           | [context.Context](https://pkg.go.dev/context#Context)                                                                           | :heavy_check_mark:                                                                                                              | The context to use for the request.                                                                                             |                                                                                                                                 |
+| `cursor`                                                                                                                        | **string*                                                                                                                       | :heavy_minus_sign:                                                                                                              | A pointer to the page of results to return.                                                                                     | ZXhhbXBsZTE                                                                                                                     |
+| `limit`                                                                                                                         | **int64*                                                                                                                        | :heavy_minus_sign:                                                                                                              | The maximum number of items that are returned.                                                                                  | 20                                                                                                                              |
+| `buyerSearch`                                                                                                                   | []*string*                                                                                                                      | :heavy_minus_sign:                                                                                                              | Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values. | [<br/>"John",<br/>"London"<br/>]                                                                                                |
+| `merchantAccountID`                                                                                                             | **string*                                                                                                                       | :heavy_minus_sign:                                                                                                              | The ID of the merchant account to use for this request.                                                                         |                                                                                                                                 |
+| `opts`                                                                                                                          | [][operations.Option](../../models/operations/option.md)                                                                        | :heavy_minus_sign:                                                                                                              | The options for this request.                                                                                                   |                                                                                                                                 |
 
 ### Response
 
@@ -164,6 +167,7 @@ Expire an existing payment link.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="expire_payment_link" method="post" path="/payment-links/{payment_link_id}/expire" -->
 ```go
 package main
 
@@ -226,6 +230,7 @@ Fetch the details for a payment link.
 
 ### Example Usage
 
+<!-- UsageSnippet language="go" operationID="get_payment_link" method="get" path="/payment-links/{payment_link_id}" -->
 ```go
 package main
 

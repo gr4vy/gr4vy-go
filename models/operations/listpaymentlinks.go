@@ -23,6 +23,8 @@ type ListPaymentLinksRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The maximum number of items that are returned.
 	Limit *int64 `default:"20" queryParam:"style=form,explode=true,name=limit"`
+	// Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values.
+	BuyerSearch []string `queryParam:"style=form,explode=true,name=buyer_search"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -50,6 +52,13 @@ func (o *ListPaymentLinksRequest) GetLimit() *int64 {
 		return nil
 	}
 	return o.Limit
+}
+
+func (o *ListPaymentLinksRequest) GetBuyerSearch() []string {
+	if o == nil {
+		return nil
+	}
+	return o.BuyerSearch
 }
 
 func (o *ListPaymentLinksRequest) GetMerchantAccountID() *string {
