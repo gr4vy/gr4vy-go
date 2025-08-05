@@ -5,6 +5,12 @@ The report specification.
 
 ## Supported Types
 
+### AccountsReceivablesReportSpec
+
+```go
+spec := components.CreateSpecAccountsReceivables(components.AccountsReceivablesReportSpec{/* values here */})
+```
+
 ### DetailedSettlementReportSpec
 
 ```go
