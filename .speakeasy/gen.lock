@@ -3,10 +3,10 @@ id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
   docChecksum: d69635edd1be8d68fc49487f787bf487
   docVersion: 1.0.0
-  speakeasyVersion: 1.596.1
-  generationVersion: 2.672.0
-  releaseVersion: 1.3.3
-  configChecksum: 067065b2ba7d40cd532a63289aef8c13
+  speakeasyVersion: 1.598.0
+  generationVersion: 2.674.1
+  releaseVersion: 1.3.4
+  configChecksum: 7932a1f68dd602bc796510a3606043f0
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
