@@ -204,7 +204,6 @@ package main
 import (
 	"context"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
-	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 	"os"
 )
@@ -214,15 +213,10 @@ func main() {
 
 	s := gr4vygo.New(
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
-		gr4vygo.WithMerchantAccountID("default"),
+		gr4vygo.WithMerchantAccountID("<id>"),
 	)
 
-	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
-		PaymentMethodIds: []string{
-			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
-			"f29e886e-93cc-4714-b4a3-12b7a718e595",
-		},
-	})
+	res, err := s.BrowsePaymentMethodDefinitionsGet(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -316,6 +310,9 @@ func main() {
 
 * [List](docs/sdks/balances/README.md#list) - List gift card balances
 
+### [Gr4vy SDK](docs/sdks/gr4vy/README.md)
+
+* [BrowsePaymentMethodDefinitionsGet](docs/sdks/gr4vy/README.md#browsepaymentmethoddefinitionsget) - Browse
 
 ### [MerchantAccounts](docs/sdks/merchantaccounts/README.md)
 
@@ -502,7 +499,6 @@ package main
 import (
 	"context"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
-	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/retry"
 	"log"
 	"models/operations"
@@ -513,16 +509,11 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		gr4vygo.WithMerchantAccountID("default"),
+		gr4vygo.WithMerchantAccountID("<id>"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
-	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
-		PaymentMethodIds: []string{
-			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
-			"f29e886e-93cc-4714-b4a3-12b7a718e595",
-		},
-	}, operations.WithRetries(
+	res, err := s.BrowsePaymentMethodDefinitionsGet(ctx, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -550,7 +541,6 @@ package main
 import (
 	"context"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
-	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/retry"
 	"log"
 	"os"
@@ -571,16 +561,11 @@ func main() {
 				},
 				RetryConnectionErrors: false,
 			}),
-		gr4vygo.WithMerchantAccountID("default"),
+		gr4vygo.WithMerchantAccountID("<id>"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
-	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
-		PaymentMethodIds: []string{
-			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
-			"f29e886e-93cc-4714-b4a3-12b7a718e595",
-		},
-	})
+	res, err := s.BrowsePaymentMethodDefinitionsGet(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -599,22 +584,11 @@ Handling errors in this SDK should largely match your expectations. All operatio
 
 By Default, an API error will return `apierrors.APIError`. When custom error responses are specified for an operation, the SDK may also return their associated error. You can refer to respective *Errors* tables in SDK docs for more details on possible error types for each operation.
 
-For example, the `Create` function may return the following errors:
+For example, the `BrowsePaymentMethodDefinitionsGet` function may return the following errors:
 
 | Error Type                    | Status Code | Content Type     |
 | ----------------------------- | ----------- | ---------------- |
-| apierrors.Error400            | 400         | application/json |
-| apierrors.Error401            | 401         | application/json |
-| apierrors.Error403            | 403         | application/json |
-| apierrors.Error404            | 404         | application/json |
-| apierrors.Error405            | 405         | application/json |
-| apierrors.Error409            | 409         | application/json |
 | apierrors.HTTPValidationError | 422         | application/json |
-| apierrors.Error425            | 425         | application/json |
-| apierrors.Error429            | 429         | application/json |
-| apierrors.Error500            | 500         | application/json |
-| apierrors.Error502            | 502         | application/json |
-| apierrors.Error504            | 504         | application/json |
 | apierrors.APIError            | 4XX, 5XX    | \*/\*            |
 
 ### Example
@@ -627,7 +601,6 @@ import (
 	"errors"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/apierrors"
-	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 	"os"
 )
@@ -636,85 +609,14 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		gr4vygo.WithMerchantAccountID("default"),
+		gr4vygo.WithMerchantAccountID("<id>"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
-	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
-		PaymentMethodIds: []string{
-			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
-			"f29e886e-93cc-4714-b4a3-12b7a718e595",
-		},
-	})
+	res, err := s.BrowsePaymentMethodDefinitionsGet(ctx)
 	if err != nil {
 
-		var e *apierrors.Error400
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.Error401
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.Error403
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.Error404
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.Error405
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.Error409
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
 		var e *apierrors.HTTPValidationError
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.Error425
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.Error429
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.Error500
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.Error502
-		if errors.As(err, &e) {
-			// handle error
-			log.Fatal(e.Error())
-		}
-
-		var e *apierrors.Error504
 		if errors.As(err, &e) {
 			// handle error
 			log.Fatal(e.Error())
@@ -757,7 +659,6 @@ package main
 import (
 	"context"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
-	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 	"os"
 )
@@ -768,16 +669,11 @@ func main() {
 	s := gr4vygo.New(
 		gr4vygo.WithServer("production"),
 		gr4vygo.WithID("<id>"),
-		gr4vygo.WithMerchantAccountID("default"),
+		gr4vygo.WithMerchantAccountID("<id>"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
-	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
-		PaymentMethodIds: []string{
-			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
-			"f29e886e-93cc-4714-b4a3-12b7a718e595",
-		},
-	})
+	res, err := s.BrowsePaymentMethodDefinitionsGet(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -797,7 +693,6 @@ package main
 import (
 	"context"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
-	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 	"os"
 )
@@ -807,16 +702,11 @@ func main() {
 
 	s := gr4vygo.New(
 		gr4vygo.WithServerURL("https://api.sandbox.example.gr4vy.app"),
-		gr4vygo.WithMerchantAccountID("default"),
+		gr4vygo.WithMerchantAccountID("<id>"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
-	res, err := s.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
-		PaymentMethodIds: []string{
-			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
-			"f29e886e-93cc-4714-b4a3-12b7a718e595",
-		},
-	})
+	res, err := s.BrowsePaymentMethodDefinitionsGet(ctx)
 	if err != nil {
 		log.Fatal(err)
 	}
