@@ -5,6 +5,8 @@ package components
 type TravelhubOptions struct {
 	// A list of `customData` to pass to the TravelHub API.
 	CustomData []TravelHubCustomData `json:"customData,omitempty"`
+	// Customer company name to pass to the TravelHub API.
+	CompanyName *string `json:"companyName,omitempty"`
 }
 
 func (o *TravelhubOptions) GetCustomData() []TravelHubCustomData {
@@ -12,4 +14,11 @@ func (o *TravelhubOptions) GetCustomData() []TravelHubCustomData {
 		return nil
 	}
 	return o.CustomData
+}
+
+func (o *TravelhubOptions) GetCompanyName() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CompanyName
 }
