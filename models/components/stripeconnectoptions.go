@@ -11,6 +11,8 @@ type StripeConnectOptions struct {
 	OnBehalfOf *string `json:"on_behalf_of,omitempty"`
 	// The Stripe Connect account to target using the `transfer_data.destination` request parameter.
 	TransferDataDestination *string `json:"transfer_data_destination,omitempty"`
+	// A string that identifies the payment as part of a group.
+	TransferGroup *string `json:"transfer_group,omitempty"`
 }
 
 func (o *StripeConnectOptions) GetStripeAccount() *string {
@@ -39,4 +41,11 @@ func (o *StripeConnectOptions) GetTransferDataDestination() *string {
 		return nil
 	}
 	return o.TransferDataDestination
+}
+
+func (o *StripeConnectOptions) GetTransferGroup() *string {
+	if o == nil {
+		return nil
+	}
+	return o.TransferGroup
 }
