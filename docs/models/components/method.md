@@ -69,6 +69,7 @@
 | `MethodOney6x`           | oney_6x                  |
 | `MethodOvo`              | ovo                      |
 | `MethodOxxo`             | oxxo                     |
+| `MethodP24`              | p24                      |
 | `MethodPagoefectivo`     | pagoefectivo             |
 | `MethodPayid`            | payid                    |
 | `MethodPaymaya`          | paymaya                  |

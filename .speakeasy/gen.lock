@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 0d9e8c0d7bd41af12726e7bd3b0adb96
+  docChecksum: 3c54dda144e80593bc33dc98a6ccfbf7
   docVersion: 1.0.0
   speakeasyVersion: 1.606.0
   generationVersion: 2.686.7
-  releaseVersion: 1.3.13
-  configChecksum: a6a07ab16e8aa732aafebb17cece0a86
+  releaseVersion: 1.3.14
+  configChecksum: 9d35402ce08b1dd1ab7019fc27378dbf
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -4268,4 +4268,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.Adyen-Card.Splits` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.Adyen-Card.Splits` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.Adyen-Card.Splits` **Added**\n"
+releaseNotes: "## SDK Changes Detected:\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n* `Gr4vy.Payment-Services.List()`: \n  *  `request.Request.Method` **Changed**\n"
