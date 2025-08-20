@@ -29,7 +29,7 @@ go:
   additionalDependencies:
     github.com/golang-jwt/jwt/v5: v5.2.2
     github.com/google/uuid: v1.6.0
-  allowUnknownFieldsInWeakUnions: false
+  allowUnknownFieldsInWeakUnions: true
   baseErrorName: Gr4vyError
   clientServerStatusCodesAsErrors: true
   defaultErrorName: APIError
