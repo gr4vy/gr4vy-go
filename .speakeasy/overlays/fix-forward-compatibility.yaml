@@ -1,8 +1,8 @@
 overlay: 1.0.0
 x-speakeasy-jsonpath: rfc9535
 info:
-    title: Remove unwanted headers
+    title: Ensure every schema has additionalProperties set to true
     version: 0.0.1
 actions:
-    - target: $.*.["additionalProperties"]
+    - target: $.components.schemas.*.additionalProperties
       update: true
