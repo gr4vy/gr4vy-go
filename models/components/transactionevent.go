@@ -48,6 +48,8 @@ const (
 	NamePaymentConnectorResponseTransactionVoidFailed             Name = "payment-connector-response-transaction-void-failed"
 	NamePaymentConnectorExternalTransactionRequest                Name = "payment-connector-external-transaction-request"
 	NamePaymentConnectorReportTransactionSettled                  Name = "payment-connector-report-transaction-settled"
+	NamePaymentConnectorReportChargebackPosted                    Name = "payment-connector-report-chargeback-posted"
+	NamePaymentConnectorReportChargebackReversalPosted            Name = "payment-connector-report-chargeback-reversal-posted"
 	NameDigitalWalletApplePayTokenDecrypted                       Name = "digital-wallet-apple-pay-token-decrypted"
 	NameDigitalWalletGooglePayTokenDecrypted                      Name = "digital-wallet-google-pay-token-decrypted"
 	NameDigitalWalletClickToPayTokenDecrypted                     Name = "digital-wallet-click-to-pay-token-decrypted"
