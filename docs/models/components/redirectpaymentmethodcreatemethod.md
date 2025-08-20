@@ -63,6 +63,7 @@ The method to use, this can be any of the methods that support redirect requests
 | `RedirectPaymentMethodCreateMethodOney6x`          | oney_6x                                            |
 | `RedirectPaymentMethodCreateMethodOvo`             | ovo                                                |
 | `RedirectPaymentMethodCreateMethodOxxo`            | oxxo                                               |
+| `RedirectPaymentMethodCreateMethodP24`             | p24                                                |
 | `RedirectPaymentMethodCreateMethodPagoefectivo`    | pagoefectivo                                       |
 | `RedirectPaymentMethodCreateMethodPayid`           | payid                                              |
 | `RedirectPaymentMethodCreateMethodPaymaya`         | paymaya                                            |

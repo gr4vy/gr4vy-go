@@ -62,6 +62,7 @@ const (
 	RedirectPaymentMethodCreateMethodOney6x          RedirectPaymentMethodCreateMethod = "oney_6x"
 	RedirectPaymentMethodCreateMethodOvo             RedirectPaymentMethodCreateMethod = "ovo"
 	RedirectPaymentMethodCreateMethodOxxo            RedirectPaymentMethodCreateMethod = "oxxo"
+	RedirectPaymentMethodCreateMethodP24             RedirectPaymentMethodCreateMethod = "p24"
 	RedirectPaymentMethodCreateMethodPagoefectivo    RedirectPaymentMethodCreateMethod = "pagoefectivo"
 	RedirectPaymentMethodCreateMethodPayid           RedirectPaymentMethodCreateMethod = "payid"
 	RedirectPaymentMethodCreateMethodPaymaya         RedirectPaymentMethodCreateMethod = "paymaya"
