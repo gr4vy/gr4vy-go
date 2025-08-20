@@ -61,10 +61,13 @@ jobs:
       pull-requests: write
 
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+
       - uses: actions-ecosystem/action-get-latest-tag@v1
         id: get-latest-tag
 
-      - name: Check out the repo
+      - name: Check out the latest tag
         uses: actions/checkout@v4
         with:
           ref:  ${{ steps.get-latest-tag.outputs.tag }}
