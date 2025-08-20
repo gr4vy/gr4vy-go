@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 265f7179cdb13aea872c18a8544fa05c
+  docChecksum: 54705113194878638f61acaa451105d4
   docVersion: 1.0.0
-  speakeasyVersion: 1.605.1
-  generationVersion: 2.684.0
-  releaseVersion: 1.3.10
-  configChecksum: 0e80045182a7f365c47fc43e50c91604
+  speakeasyVersion: 1.606.0
+  generationVersion: 2.686.7
+  releaseVersion: 1.3.11
+  configChecksum: a95455e50540f35f0a7768e1c7edf22e
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -4266,4 +4266,3 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.Stripe-Card.StripeConnect.TransferGroup` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.Stripe-Card.StripeConnect.TransferGroup` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.Stripe-Card.StripeConnect.TransferGroup` **Added**\n"
