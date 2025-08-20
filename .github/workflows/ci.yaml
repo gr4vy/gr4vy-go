@@ -61,10 +61,13 @@ jobs:
       pull-requests: write
 
     steps:
+      - uses: actions-ecosystem/action-get-latest-tag@v1
+        id: get-latest-tag
+
       - name: Check out the repo
         uses: actions/checkout@v4
         with:
-          ref: v1.3.0
+          ref:  ${{ steps.get-latest-tag.outputs.tag }}
 
       - name: Use Node.js ${{ matrix.go }}
         uses: actions/setup-go@v5
