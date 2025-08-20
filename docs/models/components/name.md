@@ -38,6 +38,8 @@ The specific event name.
 | `NamePaymentConnectorResponseTransactionDeclined`               | payment-connector-response-transaction-declined                 |
 | `NamePaymentConnectorResponseTransactionCaptureFailed`          | payment-connector-response-transaction-capture-failed           |
 | `NamePaymentConnectorResponseTransactionCaptureDeclined`        | payment-connector-response-transaction-capture-declined         |
+| `NamePaymentConnectorResponseTransactionCancelSucceeded`        | payment-connector-response-transaction-cancel-succeeded         |
+| `NamePaymentConnectorResponseTransactionCancelFailed`           | payment-connector-response-transaction-cancel-failed            |
 | `NamePaymentConnectorResponseTransactionVoidSucceeded`          | payment-connector-response-transaction-void-succeeded           |
 | `NamePaymentConnectorResponseTransactionVoidDeclined`           | payment-connector-response-transaction-void-declined            |
 | `NamePaymentConnectorResponseTransactionVoidFailed`             | payment-connector-response-transaction-void-failed              |

@@ -106,6 +106,8 @@ type Transaction struct {
 	CapturedAt *time.Time `json:"captured_at,omitempty"`
 	// The date this transaction was voided at.
 	VoidedAt *time.Time `json:"voided_at,omitempty"`
+	// The date this transaction was canceled at.
+	CanceledAt *time.Time `json:"canceled_at,omitempty"`
 	// The date this transaction's approval URL will expire at.
 	ApprovalExpiresAt *time.Time `json:"approval_expires_at,omitempty"`
 	// The date this transaction's approval timed out at.
@@ -472,6 +474,13 @@ func (o *Transaction) GetVoidedAt() *time.Time {
 		return nil
 	}
 	return o.VoidedAt
+}
+
+func (o *Transaction) GetCanceledAt() *time.Time {
+	if o == nil {
+		return nil
+	}
+	return o.CanceledAt
 }
 
 func (o *Transaction) GetApprovalExpiresAt() *time.Time {

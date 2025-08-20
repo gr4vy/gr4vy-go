@@ -43,6 +43,8 @@ const (
 	NamePaymentConnectorResponseTransactionDeclined               Name = "payment-connector-response-transaction-declined"
 	NamePaymentConnectorResponseTransactionCaptureFailed          Name = "payment-connector-response-transaction-capture-failed"
 	NamePaymentConnectorResponseTransactionCaptureDeclined        Name = "payment-connector-response-transaction-capture-declined"
+	NamePaymentConnectorResponseTransactionCancelSucceeded        Name = "payment-connector-response-transaction-cancel-succeeded"
+	NamePaymentConnectorResponseTransactionCancelFailed           Name = "payment-connector-response-transaction-cancel-failed"
 	NamePaymentConnectorResponseTransactionVoidSucceeded          Name = "payment-connector-response-transaction-void-succeeded"
 	NamePaymentConnectorResponseTransactionVoidDeclined           Name = "payment-connector-response-transaction-void-declined"
 	NamePaymentConnectorResponseTransactionVoidFailed             Name = "payment-connector-response-transaction-void-failed"
