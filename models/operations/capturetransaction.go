@@ -94,14 +94,14 @@ func CreateResponseCaptureTransactionTransactionCapture(transactionCapture compo
 func (u *ResponseCaptureTransaction) UnmarshalJSON(data []byte) error {
 
 	var transactionCapture components.TransactionCapture = components.TransactionCapture{}
-	if err := utils.UnmarshalJSON(data, &transactionCapture, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &transactionCapture, "", true, false); err == nil {
 		u.TransactionCapture = &transactionCapture
 		u.Type = ResponseCaptureTransactionTypeTransactionCapture
 		return nil
 	}
 
 	var transaction components.Transaction = components.Transaction{}
-	if err := utils.UnmarshalJSON(data, &transaction, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &transaction, "", true, false); err == nil {
 		u.Transaction = &transaction
 		u.Type = ResponseCaptureTransactionTypeTransaction
 		return nil

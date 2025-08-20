@@ -44,14 +44,14 @@ func CreateResponseDataThreeDSecureV2(threeDSecureV2 ThreeDSecureV2) ResponseDat
 func (u *ResponseData) UnmarshalJSON(data []byte) error {
 
 	var threeDSecureDataV1 ThreeDSecureDataV1 = ThreeDSecureDataV1{}
-	if err := utils.UnmarshalJSON(data, &threeDSecureDataV1, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &threeDSecureDataV1, "", true, false); err == nil {
 		u.ThreeDSecureDataV1 = &threeDSecureDataV1
 		u.Type = ResponseDataTypeThreeDSecureDataV1
 		return nil
 	}
 
 	var threeDSecureV2 ThreeDSecureV2 = ThreeDSecureV2{}
-	if err := utils.UnmarshalJSON(data, &threeDSecureV2, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &threeDSecureV2, "", true, false); err == nil {
 		u.ThreeDSecureV2 = &threeDSecureV2
 		u.Type = ResponseDataTypeThreeDSecureV2
 		return nil

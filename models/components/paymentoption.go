@@ -55,21 +55,21 @@ func CreateContextPaymentOptionContext(paymentOptionContext PaymentOptionContext
 func (u *Context) UnmarshalJSON(data []byte) error {
 
 	var walletPaymentOptionContext WalletPaymentOptionContext = WalletPaymentOptionContext{}
-	if err := utils.UnmarshalJSON(data, &walletPaymentOptionContext, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &walletPaymentOptionContext, "", true, false); err == nil {
 		u.WalletPaymentOptionContext = &walletPaymentOptionContext
 		u.Type = ContextTypeWalletPaymentOptionContext
 		return nil
 	}
 
 	var googlePayPaymentOptionContext GooglePayPaymentOptionContext = GooglePayPaymentOptionContext{}
-	if err := utils.UnmarshalJSON(data, &googlePayPaymentOptionContext, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &googlePayPaymentOptionContext, "", true, false); err == nil {
 		u.GooglePayPaymentOptionContext = &googlePayPaymentOptionContext
 		u.Type = ContextTypeGooglePayPaymentOptionContext
 		return nil
 	}
 
 	var paymentOptionContext PaymentOptionContext = PaymentOptionContext{}
-	if err := utils.UnmarshalJSON(data, &paymentOptionContext, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &paymentOptionContext, "", true, false); err == nil {
 		u.PaymentOptionContext = &paymentOptionContext
 		u.Type = ContextTypePaymentOptionContext
 		return nil

@@ -43,14 +43,14 @@ func CreateRequiredFields1Any(anyT any) RequiredFields1 {
 func (u *RequiredFields1) UnmarshalJSON(data []byte) error {
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, false); err == nil {
 		u.Boolean = &boolean
 		u.Type = RequiredFields1TypeBoolean
 		return nil
 	}
 
 	var anyVar any = nil
-	if err := utils.UnmarshalJSON(data, &anyVar, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &anyVar, "", true, false); err == nil {
 		u.Any = anyVar
 		u.Type = RequiredFields1TypeAny
 		return nil
@@ -106,14 +106,14 @@ func CreateRequiredFields2MapOfRequiredFields1(mapOfRequiredFields1 map[string]R
 func (u *RequiredFields2) UnmarshalJSON(data []byte) error {
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, false); err == nil {
 		u.Boolean = &boolean
 		u.Type = RequiredFields2TypeBoolean
 		return nil
 	}
 
 	var mapOfRequiredFields1 map[string]RequiredFields1 = map[string]RequiredFields1{}
-	if err := utils.UnmarshalJSON(data, &mapOfRequiredFields1, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &mapOfRequiredFields1, "", true, false); err == nil {
 		u.MapOfRequiredFields1 = mapOfRequiredFields1
 		u.Type = RequiredFields2TypeMapOfRequiredFields1
 		return nil

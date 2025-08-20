@@ -86,14 +86,14 @@ func CreateResponseVoidTransactionTransactionVoid(transactionVoid components.Tra
 func (u *ResponseVoidTransaction) UnmarshalJSON(data []byte) error {
 
 	var transactionVoid components.TransactionVoid = components.TransactionVoid{}
-	if err := utils.UnmarshalJSON(data, &transactionVoid, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &transactionVoid, "", true, false); err == nil {
 		u.TransactionVoid = &transactionVoid
 		u.Type = ResponseVoidTransactionTypeTransactionVoid
 		return nil
 	}
 
 	var transaction components.Transaction = components.Transaction{}
-	if err := utils.UnmarshalJSON(data, &transaction, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &transaction, "", true, false); err == nil {
 		u.Transaction = &transaction
 		u.Type = ResponseVoidTransactionTypeTransaction
 		return nil
