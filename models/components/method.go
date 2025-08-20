@@ -69,6 +69,7 @@ const (
 	MethodOney6x           Method = "oney_6x"
 	MethodOvo              Method = "ovo"
 	MethodOxxo             Method = "oxxo"
+	MethodP24              Method = "p24"
 	MethodPagoefectivo     Method = "pagoefectivo"
 	MethodPayid            Method = "payid"
 	MethodPaymaya          Method = "paymaya"

@@ -13,6 +13,8 @@ type AdyenCardOptions struct {
 	AutoRescueScenario *AdyenCardAutoRescueScenariosEnum `json:"autoRescueScenario,omitempty"`
 	// The origin of the window where the payment is initiated, used for 3D Secure authentication.
 	WindowOrigin *string `json:"window_origin,omitempty"`
+	// Passes information of splitting payment amounts to the Adyen API.
+	Splits *AdyenSplitsOptions `json:"splits,omitempty"`
 }
 
 func (o *AdyenCardOptions) GetAutoRescue() *bool {
@@ -48,4 +50,11 @@ func (o *AdyenCardOptions) GetWindowOrigin() *string {
 		return nil
 	}
 	return o.WindowOrigin
+}
+
+func (o *AdyenCardOptions) GetSplits() *AdyenSplitsOptions {
+	if o == nil {
+		return nil
+	}
+	return o.Splits
 }

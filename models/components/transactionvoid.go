@@ -26,7 +26,7 @@ func (t TransactionVoid) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransactionVoid) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
 		return err
 	}
 	return nil

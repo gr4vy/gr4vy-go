@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 15b7785525097835e7d901e95159b401
+  docChecksum: 3c54dda144e80593bc33dc98a6ccfbf7
   docVersion: 1.0.0
   speakeasyVersion: 1.606.0
   generationVersion: 2.686.7
-  releaseVersion: 1.3.12
-  configChecksum: 6cbc41d7f637ee65229b0ffd9862e962
+  releaseVersion: 1.3.14
+  configChecksum: 9d35402ce08b1dd1ab7019fc27378dbf
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -63,6 +63,7 @@ generatedFiles:
   - /models/components/adyencardoptions.go
   - /models/components/adyenoptions.go
   - /models/components/adyensepaoptions.go
+  - /models/components/adyensplitsoptions.go
   - /models/components/affirmitineraryoptions.go
   - /models/components/affirmoptions.go
   - /models/components/airline.go
@@ -429,6 +430,7 @@ generatedFiles:
   - docs/models/components/adyencardoptions.md
   - docs/models/components/adyenoptions.md
   - docs/models/components/adyensepaoptions.md
+  - docs/models/components/adyensplitsoptions.md
   - docs/models/components/affirmitineraryoptions.md
   - docs/models/components/affirmoptions.md
   - docs/models/components/agegroup.md
@@ -4266,11 +4268,4 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## SDK Changes Detected:
-  * `Gr4vy.Transactions.Create()`:  `response.CanceledAt` **Added**
-  * `Gr4vy.Transactions.Get()`:  `response.CanceledAt` **Added**
-  * `Gr4vy.Transactions.Update()`:  `response.CanceledAt` **Added**
-  * `Gr4vy.Transactions.Capture()`:  `response.[transactionCapture].Transaction.CanceledAt` **Added**
-  * `Gr4vy.Transactions.Void()`:  `response.[transactionVoid].Transaction.CanceledAt` **Added**
-  * `Gr4vy.Transactions.Sync()`:  `response.CanceledAt` **Added**
+releaseNotes: "## SDK Changes Detected:\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n* `Gr4vy.Payment-Services.List()`: \n  *  `request.Request.Method` **Changed**\n"

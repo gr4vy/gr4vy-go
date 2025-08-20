@@ -132,70 +132,70 @@ func CreateTransactionCreatePaymentMethodCheckoutSessionWithURLPaymentMethodCrea
 func (u *TransactionCreatePaymentMethod) UnmarshalJSON(data []byte) error {
 
 	var tokenPaymentMethodCreate TokenPaymentMethodCreate = TokenPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &tokenPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &tokenPaymentMethodCreate, "", true, false); err == nil {
 		u.TokenPaymentMethodCreate = &tokenPaymentMethodCreate
 		u.Type = TransactionCreatePaymentMethodTypeTokenPaymentMethodCreate
 		return nil
 	}
 
 	var checkoutSessionWithURLPaymentMethodCreate CheckoutSessionWithURLPaymentMethodCreate = CheckoutSessionWithURLPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &checkoutSessionWithURLPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &checkoutSessionWithURLPaymentMethodCreate, "", true, false); err == nil {
 		u.CheckoutSessionWithURLPaymentMethodCreate = &checkoutSessionWithURLPaymentMethodCreate
 		u.Type = TransactionCreatePaymentMethodTypeCheckoutSessionWithURLPaymentMethodCreate
 		return nil
 	}
 
 	var redirectPaymentMethodCreate RedirectPaymentMethodCreate = RedirectPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &redirectPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &redirectPaymentMethodCreate, "", true, false); err == nil {
 		u.RedirectPaymentMethodCreate = &redirectPaymentMethodCreate
 		u.Type = TransactionCreatePaymentMethodTypeRedirectPaymentMethodCreate
 		return nil
 	}
 
 	var clickToPayPaymentMethodCreate ClickToPayPaymentMethodCreate = ClickToPayPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &clickToPayPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &clickToPayPaymentMethodCreate, "", true, false); err == nil {
 		u.ClickToPayPaymentMethodCreate = &clickToPayPaymentMethodCreate
 		u.Type = TransactionCreatePaymentMethodTypeClickToPayPaymentMethodCreate
 		return nil
 	}
 
 	var cardWithURLPaymentMethodCreate CardWithURLPaymentMethodCreate = CardWithURLPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &cardWithURLPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &cardWithURLPaymentMethodCreate, "", true, false); err == nil {
 		u.CardWithURLPaymentMethodCreate = &cardWithURLPaymentMethodCreate
 		u.Type = TransactionCreatePaymentMethodTypeCardWithURLPaymentMethodCreate
 		return nil
 	}
 
 	var applePayPaymentMethodCreate ApplePayPaymentMethodCreate = ApplePayPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &applePayPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &applePayPaymentMethodCreate, "", true, false); err == nil {
 		u.ApplePayPaymentMethodCreate = &applePayPaymentMethodCreate
 		u.Type = TransactionCreatePaymentMethodTypeApplePayPaymentMethodCreate
 		return nil
 	}
 
 	var clickToPayFPANPaymentMethodCreate ClickToPayFPANPaymentMethodCreate = ClickToPayFPANPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &clickToPayFPANPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &clickToPayFPANPaymentMethodCreate, "", true, false); err == nil {
 		u.ClickToPayFPANPaymentMethodCreate = &clickToPayFPANPaymentMethodCreate
 		u.Type = TransactionCreatePaymentMethodTypeClickToPayFPANPaymentMethodCreate
 		return nil
 	}
 
 	var googlePayFPANPaymentMethodCreate GooglePayFPANPaymentMethodCreate = GooglePayFPANPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &googlePayFPANPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &googlePayFPANPaymentMethodCreate, "", true, false); err == nil {
 		u.GooglePayFPANPaymentMethodCreate = &googlePayFPANPaymentMethodCreate
 		u.Type = TransactionCreatePaymentMethodTypeGooglePayFPANPaymentMethodCreate
 		return nil
 	}
 
 	var googlePayPaymentMethodCreate GooglePayPaymentMethodCreate = GooglePayPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &googlePayPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &googlePayPaymentMethodCreate, "", true, false); err == nil {
 		u.GooglePayPaymentMethodCreate = &googlePayPaymentMethodCreate
 		u.Type = TransactionCreatePaymentMethodTypeGooglePayPaymentMethodCreate
 		return nil
 	}
 
 	var networkTokenPaymentMethodCreate NetworkTokenPaymentMethodCreate = NetworkTokenPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &networkTokenPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &networkTokenPaymentMethodCreate, "", true, false); err == nil {
 		u.NetworkTokenPaymentMethodCreate = &networkTokenPaymentMethodCreate
 		u.Type = TransactionCreatePaymentMethodTypeNetworkTokenPaymentMethodCreate
 		return nil
@@ -283,14 +283,14 @@ func CreateGiftCardUnionGiftCardTokenTransactionCreate(giftCardTokenTransactionC
 func (u *GiftCardUnion) UnmarshalJSON(data []byte) error {
 
 	var giftCardTokenTransactionCreate GiftCardTokenTransactionCreate = GiftCardTokenTransactionCreate{}
-	if err := utils.UnmarshalJSON(data, &giftCardTokenTransactionCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &giftCardTokenTransactionCreate, "", true, false); err == nil {
 		u.GiftCardTokenTransactionCreate = &giftCardTokenTransactionCreate
 		u.Type = GiftCardUnionTypeGiftCardTokenTransactionCreate
 		return nil
 	}
 
 	var giftCardTransactionCreate GiftCardTransactionCreate = GiftCardTransactionCreate{}
-	if err := utils.UnmarshalJSON(data, &giftCardTransactionCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &giftCardTransactionCreate, "", true, false); err == nil {
 		u.GiftCardTransactionCreate = &giftCardTransactionCreate
 		u.Type = GiftCardUnionTypeGiftCardTransactionCreate
 		return nil
@@ -347,14 +347,14 @@ func CreateThreeDSecureDataThreeDSecureDataV2(threeDSecureDataV2 ThreeDSecureDat
 func (u *ThreeDSecureData) UnmarshalJSON(data []byte) error {
 
 	var threeDSecureDataV2 ThreeDSecureDataV2 = ThreeDSecureDataV2{}
-	if err := utils.UnmarshalJSON(data, &threeDSecureDataV2, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &threeDSecureDataV2, "", true, false); err == nil {
 		u.ThreeDSecureDataV2 = &threeDSecureDataV2
 		u.Type = ThreeDSecureDataTypeThreeDSecureDataV2
 		return nil
 	}
 
 	var threeDSecureDataV1 ThreeDSecureDataV1 = ThreeDSecureDataV1{}
-	if err := utils.UnmarshalJSON(data, &threeDSecureDataV1, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &threeDSecureDataV1, "", true, false); err == nil {
 		u.ThreeDSecureDataV1 = &threeDSecureDataV1
 		u.Type = ThreeDSecureDataTypeThreeDSecureDataV1
 		return nil
