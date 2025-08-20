@@ -47,8 +47,38 @@ jobs:
         with:
           github-token: ${{ secrets.DISPATCH_ACCESS_TOKEN }}
 
+  test-forward:
+    runs-on: ubuntu-latest
+    
+    timeout-minutes: 3
+    strategy:
+      matrix:
+        go:
+          - 1.24
+
+    permissions:
+      contents: write
+      pull-requests: write
+
+    steps:
+      - name: Check out the repo
+        uses: actions/checkout@v4
+        with:
+          ref: v1.3.0
+
+      - name: Use Node.js ${{ matrix.go }}
+        uses: actions/setup-go@v5
+        with:
+          go-version: ${{ matrix.go }}
+
+      - name: Run tests
+        env:
+          PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
+        run: |
+          go test
+
   merge:
-    needs: test
+    needs: [test, test-forward]
     runs-on: ubuntu-latest
 
     permissions:
