@@ -2,11 +2,24 @@
 
 package components
 
+type VaultPaymentMethodCriteria string
+
+const (
+	VaultPaymentMethodCriteriaAlways                  VaultPaymentMethodCriteria = "ALWAYS"
+	VaultPaymentMethodCriteriaOnSuccessfulTransaction VaultPaymentMethodCriteria = "ON_SUCCESSFUL_TRANSACTION"
+)
+
+func (e VaultPaymentMethodCriteria) ToPointer() *VaultPaymentMethodCriteria {
+	return &e
+}
+
 type BraintreeDynamicDataFieldsOptions struct {
 	// Passes the 3DS status to the Braintree API using `customFields` with the key set to the value of `three_ds_auth_status`
 	ThreeDsAuthStatus *string `json:"three_ds_auth_status,omitempty"`
 	// Passes the `transaction.purchaseOrderNumber` field when creating a new transaction.
 	PurchaseOrderNumber *string `json:"purchase_order_number,omitempty"`
+	// Passes the `vaultPaymentMethodCriteria` field when creating a new transaction.
+	VaultPaymentMethodCriteria *VaultPaymentMethodCriteria `json:"vault_payment_method_criteria,omitempty"`
 }
 
 func (o *BraintreeDynamicDataFieldsOptions) GetThreeDsAuthStatus() *string {
@@ -21,4 +34,11 @@ func (o *BraintreeDynamicDataFieldsOptions) GetPurchaseOrderNumber() *string {
 		return nil
 	}
 	return o.PurchaseOrderNumber
+}
+
+func (o *BraintreeDynamicDataFieldsOptions) GetVaultPaymentMethodCriteria() *VaultPaymentMethodCriteria {
+	if o == nil {
+		return nil
+	}
+	return o.VaultPaymentMethodCriteria
 }
