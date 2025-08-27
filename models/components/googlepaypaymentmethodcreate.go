@@ -44,14 +44,14 @@ func CreateTokenMapOfAny(mapOfAny map[string]any) Token {
 func (u *Token) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, false); err == nil {
+	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
 		u.Type = TokenTypeStr
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
-	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, false); err == nil {
+	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
 		u.MapOfAny = mapOfAny
 		u.Type = TokenTypeMapOfAny
 		return nil
@@ -101,7 +101,7 @@ func (g GooglePayPaymentMethodCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GooglePayPaymentMethodCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"method", "token"}); err != nil {
 		return err
 	}
 	return nil

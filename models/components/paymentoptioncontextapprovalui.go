@@ -2,9 +2,24 @@
 
 package components
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 type PaymentOptionContextApprovalUI struct {
 	Height *string `json:"height,omitempty"`
 	Width  *string `json:"width,omitempty"`
+}
+
+func (p PaymentOptionContextApprovalUI) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentOptionContextApprovalUI) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *PaymentOptionContextApprovalUI) GetHeight() *string {

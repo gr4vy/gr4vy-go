@@ -36,7 +36,7 @@ func (l ListBuyersRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListBuyersRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil

@@ -54,7 +54,7 @@ func (r Refund) MarshalJSON() ([]byte, error) {
 }
 
 func (r *Refund) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"id", "transaction_id", "status", "currency", "amount", "target_type", "reconciliation_id", "transaction_reconciliation_id", "created_at", "updated_at"}); err != nil {
 		return err
 	}
 	return nil

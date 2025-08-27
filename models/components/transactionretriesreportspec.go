@@ -19,7 +19,7 @@ func (t TransactionRetriesReportSpec) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransactionRetriesReportSpec) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"params"}); err != nil {
 		return err
 	}
 	return nil

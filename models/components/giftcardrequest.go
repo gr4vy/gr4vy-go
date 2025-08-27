@@ -2,12 +2,27 @@
 
 package components
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 // GiftCardRequest - The number and pin for a gift card to fetch a balance for.
 type GiftCardRequest struct {
 	// The 16-19 digit number for the gift card.
 	Number string `json:"number"`
 	// The PIN for this gift card.
 	Pin string `json:"pin"`
+}
+
+func (g GiftCardRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GiftCardRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"number", "pin"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GiftCardRequest) GetNumber() string {

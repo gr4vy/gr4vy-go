@@ -25,7 +25,7 @@ func (t TransactionGiftCard) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransactionGiftCard) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"bin", "sub_bin", "last4"}); err != nil {
 		return err
 	}
 	return nil

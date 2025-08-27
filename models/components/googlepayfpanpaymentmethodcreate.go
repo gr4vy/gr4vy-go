@@ -33,7 +33,7 @@ func (g GooglePayFPANPaymentMethodCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GooglePayFPANPaymentMethodCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"expiration_date", "number", "method"}); err != nil {
 		return err
 	}
 	return nil

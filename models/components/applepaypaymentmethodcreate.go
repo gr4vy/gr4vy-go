@@ -33,7 +33,7 @@ func (a ApplePayPaymentMethodCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (a *ApplePayPaymentMethodCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"method", "token"}); err != nil {
 		return err
 	}
 	return nil

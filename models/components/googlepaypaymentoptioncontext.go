@@ -2,11 +2,26 @@
 
 package components
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 type GooglePayPaymentOptionContext struct {
 	MerchantName      string   `json:"merchant_name"`
 	SupportedSchemes  []string `json:"supported_schemes"`
 	Gateway           string   `json:"gateway"`
 	GatewayMerchantID string   `json:"gateway_merchant_id"`
+}
+
+func (g GooglePayPaymentOptionContext) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GooglePayPaymentOptionContext) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"merchant_name", "supported_schemes", "gateway", "gateway_merchant_id"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GooglePayPaymentOptionContext) GetMerchantName() string {

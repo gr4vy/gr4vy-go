@@ -22,7 +22,7 @@ func (g GiftCardService) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GiftCardService) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"id", "gift_card_service_definition_id", "display_name"}); err != nil {
 		return err
 	}
 	return nil
