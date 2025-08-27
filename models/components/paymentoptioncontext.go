@@ -43,14 +43,14 @@ func CreateRequiredFields1Any(anyT any) RequiredFields1 {
 func (u *RequiredFields1) UnmarshalJSON(data []byte) error {
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, false); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = RequiredFields1TypeBoolean
 		return nil
 	}
 
 	var anyVar any = nil
-	if err := utils.UnmarshalJSON(data, &anyVar, "", true, false); err == nil {
+	if err := utils.UnmarshalJSON(data, &anyVar, "", true, nil); err == nil {
 		u.Any = anyVar
 		u.Type = RequiredFields1TypeAny
 		return nil
@@ -106,14 +106,14 @@ func CreateRequiredFields2MapOfRequiredFields1(mapOfRequiredFields1 map[string]R
 func (u *RequiredFields2) UnmarshalJSON(data []byte) error {
 
 	var boolean bool = false
-	if err := utils.UnmarshalJSON(data, &boolean, "", true, false); err == nil {
+	if err := utils.UnmarshalJSON(data, &boolean, "", true, nil); err == nil {
 		u.Boolean = &boolean
 		u.Type = RequiredFields2TypeBoolean
 		return nil
 	}
 
 	var mapOfRequiredFields1 map[string]RequiredFields1 = map[string]RequiredFields1{}
-	if err := utils.UnmarshalJSON(data, &mapOfRequiredFields1, "", true, false); err == nil {
+	if err := utils.UnmarshalJSON(data, &mapOfRequiredFields1, "", true, nil); err == nil {
 		u.MapOfRequiredFields1 = mapOfRequiredFields1
 		u.Type = RequiredFields2TypeMapOfRequiredFields1
 		return nil
@@ -139,6 +139,17 @@ type PaymentOptionContext struct {
 	RequiredFields                 map[string]RequiredFields2      `json:"required_fields,omitempty"`
 	RedirectRequiresPopup          bool                            `json:"redirect_requires_popup"`
 	RequiresTokenizedRedirectPopup bool                            `json:"requires_tokenized_redirect_popup"`
+}
+
+func (p PaymentOptionContext) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentOptionContext) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"redirect_requires_popup", "requires_tokenized_redirect_popup"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *PaymentOptionContext) GetApprovalUI() *PaymentOptionContextApprovalUI {

@@ -2,10 +2,25 @@
 
 package components
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 type PaymentMethodDetailsCard struct {
 	Bin            *string   `json:"bin,omitempty"`
 	CardType       *CardType `json:"card_type,omitempty"`
 	CardIssuerName *string   `json:"card_issuer_name,omitempty"`
+}
+
+func (p PaymentMethodDetailsCard) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(p, "", false)
+}
+
+func (p *PaymentMethodDetailsCard) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *PaymentMethodDetailsCard) GetBin() *string {

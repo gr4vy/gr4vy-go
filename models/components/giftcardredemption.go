@@ -33,7 +33,7 @@ func (g GiftCardRedemption) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GiftCardRedemption) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"id", "status", "amount", "refunded_amount", "gift_card"}); err != nil {
 		return err
 	}
 	return nil

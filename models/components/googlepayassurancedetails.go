@@ -2,12 +2,27 @@
 
 package components
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 // GooglePayAssuranceDetails - The assurance details provided by Google Pay
 type GooglePayAssuranceDetails struct {
 	// Defines if an account was verified.
 	AccountVerified *bool `json:"account_verified,omitempty"`
 	// Defines if the card holder was authenticated.
 	CardHolderAuthenticated *bool `json:"card_holder_authenticated,omitempty"`
+}
+
+func (g GooglePayAssuranceDetails) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(g, "", false)
+}
+
+func (g *GooglePayAssuranceDetails) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *GooglePayAssuranceDetails) GetAccountVerified() *bool {

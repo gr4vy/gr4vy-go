@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 // StatementDescriptor - Information to show the user on their payments statement
 type StatementDescriptor struct {
 	// Reflects your doing business as (DBA) name.
@@ -16,6 +20,17 @@ type StatementDescriptor struct {
 	PhoneNumber *string `json:"phone_number,omitempty"`
 	// The merchant's URL to be displayed in a statement descriptor.
 	URL *string `json:"url,omitempty"`
+}
+
+func (s StatementDescriptor) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(s, "", false)
+}
+
+func (s *StatementDescriptor) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &s, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *StatementDescriptor) GetName() *string {

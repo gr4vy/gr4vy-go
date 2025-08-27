@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: d0df336c7a94fb0f96f3b05ce66c4e0e
+  docChecksum: 6fe17029ec1750ff5b0661fd560ad223
   docVersion: 1.0.0
-  speakeasyVersion: 1.606.0
-  generationVersion: 2.686.7
-  releaseVersion: 1.3.15
-  configChecksum: 85944c143e1a65f54bb207497094c426
+  speakeasyVersion: 1.606.8
+  generationVersion: 2.687.13
+  releaseVersion: 1.3.16
+  configChecksum: f7f8a8af464bc8715069edd249cb34ed
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -34,7 +34,7 @@ features:
     retries: 2.84.2
     sdkHooks: 0.2.0
     serverIDs: 2.81.1
-    unions: 2.85.12
+    unions: 2.85.13
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -4269,4 +4269,3 @@ examples:
           application/json: {}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.Braintree-Card.DynamicDataFields.VaultPaymentMethodCriteria` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.Braintree-Card.DynamicDataFields.VaultPaymentMethodCriteria` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.Braintree-Card.DynamicDataFields.VaultPaymentMethodCriteria` **Added**\n"

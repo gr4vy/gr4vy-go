@@ -44,14 +44,14 @@ func CreateResponseDataThreeDSecureV2(threeDSecureV2 ThreeDSecureV2) ResponseDat
 func (u *ResponseData) UnmarshalJSON(data []byte) error {
 
 	var threeDSecureDataV1 ThreeDSecureDataV1 = ThreeDSecureDataV1{}
-	if err := utils.UnmarshalJSON(data, &threeDSecureDataV1, "", true, false); err == nil {
+	if err := utils.UnmarshalJSON(data, &threeDSecureDataV1, "", true, nil); err == nil {
 		u.ThreeDSecureDataV1 = &threeDSecureDataV1
 		u.Type = ResponseDataTypeThreeDSecureDataV1
 		return nil
 	}
 
 	var threeDSecureV2 ThreeDSecureV2 = ThreeDSecureV2{}
-	if err := utils.UnmarshalJSON(data, &threeDSecureV2, "", true, false); err == nil {
+	if err := utils.UnmarshalJSON(data, &threeDSecureV2, "", true, nil); err == nil {
 		u.ThreeDSecureV2 = &threeDSecureV2
 		u.Type = ResponseDataTypeThreeDSecureV2
 		return nil
@@ -83,6 +83,17 @@ type TransactionThreeDSecureSummary struct {
 	ResponseData *ResponseData `json:"response_data,omitempty"`
 	// The error data received from our 3DS server. This will not be populated if the customer failed the authentication with a status code of `N`, `R`, or `U`.  To see full details about the 3DS calls in those situations please use our transaction events API.
 	ErrorData *ThreeDSecureError `json:"error_data,omitempty"`
+}
+
+func (t TransactionThreeDSecureSummary) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TransactionThreeDSecureSummary) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *TransactionThreeDSecureSummary) GetVersion() *string {

@@ -44,6 +44,7 @@ const (
 	NamePaymentConnectorResponseTransactionCaptureFailed          Name = "payment-connector-response-transaction-capture-failed"
 	NamePaymentConnectorResponseTransactionCaptureDeclined        Name = "payment-connector-response-transaction-capture-declined"
 	NamePaymentConnectorResponseTransactionCancelSucceeded        Name = "payment-connector-response-transaction-cancel-succeeded"
+	NamePaymentConnectorResponseTransactionCancelPending          Name = "payment-connector-response-transaction-cancel-pending"
 	NamePaymentConnectorResponseTransactionCancelFailed           Name = "payment-connector-response-transaction-cancel-failed"
 	NamePaymentConnectorResponseTransactionVoidSucceeded          Name = "payment-connector-response-transaction-void-succeeded"
 	NamePaymentConnectorResponseTransactionVoidDeclined           Name = "payment-connector-response-transaction-void-declined"
@@ -84,7 +85,7 @@ func (t TransactionEvent) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransactionEvent) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "name", "created_at", "context"}); err != nil {
 		return err
 	}
 	return nil

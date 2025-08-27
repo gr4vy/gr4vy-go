@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 type ThreeDSecureError struct {
 	// The error code.
 	Code *string `json:"code,omitempty"`
@@ -11,6 +15,17 @@ type ThreeDSecureError struct {
 	Detail *string `json:"detail,omitempty"`
 	// Code indicating the 3-D Secure component that identified the error.
 	Component *string `json:"component,omitempty"`
+}
+
+func (t ThreeDSecureError) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *ThreeDSecureError) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *ThreeDSecureError) GetCode() *string {

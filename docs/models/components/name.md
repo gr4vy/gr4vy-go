@@ -39,6 +39,7 @@ The specific event name.
 | `NamePaymentConnectorResponseTransactionCaptureFailed`          | payment-connector-response-transaction-capture-failed           |
 | `NamePaymentConnectorResponseTransactionCaptureDeclined`        | payment-connector-response-transaction-capture-declined         |
 | `NamePaymentConnectorResponseTransactionCancelSucceeded`        | payment-connector-response-transaction-cancel-succeeded         |
+| `NamePaymentConnectorResponseTransactionCancelPending`          | payment-connector-response-transaction-cancel-pending           |
 | `NamePaymentConnectorResponseTransactionCancelFailed`           | payment-connector-response-transaction-cancel-failed            |
 | `NamePaymentConnectorResponseTransactionVoidSucceeded`          | payment-connector-response-transaction-void-succeeded           |
 | `NamePaymentConnectorResponseTransactionVoidDeclined`           | payment-connector-response-transaction-void-declined            |
