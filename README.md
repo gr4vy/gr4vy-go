@@ -411,6 +411,7 @@ func main() {
 * [Update](docs/sdks/transactions/README.md#update) - Manually update a transaction
 * [Capture](docs/sdks/transactions/README.md#capture) - Capture transaction
 * [Void](docs/sdks/transactions/README.md#void) - Void transaction
+* [Cancel](docs/sdks/transactions/README.md#cancel) - Cancel transaction
 * [Sync](docs/sdks/transactions/README.md#sync) - Sync transaction
 
 #### [Transactions.Events](docs/sdks/events/README.md)
