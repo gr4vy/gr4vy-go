@@ -51,7 +51,7 @@ func (s Settlement) MarshalJSON() ([]byte, error) {
 }
 
 func (s *Settlement) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &s, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &s, "", false, []string{"id", "merchant_account_id", "created_at", "updated_at", "posted_at", "ingested_at", "currency", "amount", "commission", "payment_service_report_id", "payment_service_report_file_ids", "transaction_id"}); err != nil {
 		return err
 	}
 	return nil

@@ -25,7 +25,7 @@ func (c CreateSession) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CreateSession) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"status"}); err != nil {
 		return err
 	}
 	return nil

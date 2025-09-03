@@ -78,7 +78,7 @@ func (u *Spec) UnmarshalJSON(data []byte) error {
 	switch dis.Model {
 	case "accounts_receivables":
 		accountsReceivablesReportSpec := new(AccountsReceivablesReportSpec)
-		if err := utils.UnmarshalJSON(data, &accountsReceivablesReportSpec, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &accountsReceivablesReportSpec, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Model == accounts_receivables) type AccountsReceivablesReportSpec within Spec: %w", string(data), err)
 		}
 
@@ -87,7 +87,7 @@ func (u *Spec) UnmarshalJSON(data []byte) error {
 		return nil
 	case "detailed_settlement":
 		detailedSettlementReportSpec := new(DetailedSettlementReportSpec)
-		if err := utils.UnmarshalJSON(data, &detailedSettlementReportSpec, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &detailedSettlementReportSpec, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Model == detailed_settlement) type DetailedSettlementReportSpec within Spec: %w", string(data), err)
 		}
 
@@ -96,7 +96,7 @@ func (u *Spec) UnmarshalJSON(data []byte) error {
 		return nil
 	case "transaction_retries":
 		transactionRetriesReportSpec := new(TransactionRetriesReportSpec)
-		if err := utils.UnmarshalJSON(data, &transactionRetriesReportSpec, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &transactionRetriesReportSpec, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Model == transaction_retries) type TransactionRetriesReportSpec within Spec: %w", string(data), err)
 		}
 
@@ -105,7 +105,7 @@ func (u *Spec) UnmarshalJSON(data []byte) error {
 		return nil
 	case "transactions":
 		transactionsReportSpec := new(TransactionsReportSpec)
-		if err := utils.UnmarshalJSON(data, &transactionsReportSpec, "", true, false); err != nil {
+		if err := utils.UnmarshalJSON(data, &transactionsReportSpec, "", true, nil); err != nil {
 			return fmt.Errorf("could not unmarshal `%s` into expected (Model == transactions) type TransactionsReportSpec within Spec: %w", string(data), err)
 		}
 
@@ -156,7 +156,7 @@ func (r ReportCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (r *ReportCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"name", "schedule", "schedule_enabled", "spec"}); err != nil {
 		return err
 	}
 	return nil

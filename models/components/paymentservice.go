@@ -59,7 +59,7 @@ func (p PaymentService) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PaymentService) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"merchant_account_id", "payment_service_definition_id", "method", "display_name", "position", "accepted_currencies", "accepted_countries", "payment_method_tokenization_enabled", "network_tokens_enabled", "open_loop", "settlement_reporting_enabled", "created_at", "updated_at"}); err != nil {
 		return err
 	}
 	return nil

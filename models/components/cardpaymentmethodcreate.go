@@ -31,7 +31,7 @@ func (c CardPaymentMethodCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CardPaymentMethodCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"expiration_date", "number"}); err != nil {
 		return err
 	}
 	return nil

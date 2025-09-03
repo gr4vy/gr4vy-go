@@ -3,17 +3,17 @@ id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
   docChecksum: 904b2dfedeb597989c92328bf45c44ea
   docVersion: 1.0.0
-  speakeasyVersion: 1.606.0
-  generationVersion: 2.686.7
-  releaseVersion: 1.3.22
-  configChecksum: 7c1b94f4ddf2211fe09efd399456a87e
+  speakeasyVersion: 1.607.0
+  generationVersion: 2.690.1
+  releaseVersion: 1.3.18
+  configChecksum: cb64889a8fbbe080870ecf6ddf953ffc
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.9.3
+    core: 3.9.5
     defaultEnabledRetries: 0.2.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.3.2
@@ -34,7 +34,7 @@ features:
     retries: 2.84.2
     sdkHooks: 0.2.0
     serverIDs: 2.81.1
-    unions: 2.85.12
+    unions: 2.85.13
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

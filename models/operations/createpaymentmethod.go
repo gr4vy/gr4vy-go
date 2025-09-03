@@ -65,24 +65,24 @@ func CreateBodyCheckoutSessionPaymentMethodCreate(checkoutSessionPaymentMethodCr
 
 func (u *Body) UnmarshalJSON(data []byte) error {
 
-	var checkoutSessionPaymentMethodCreate components.CheckoutSessionPaymentMethodCreate = components.CheckoutSessionPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &checkoutSessionPaymentMethodCreate, "", true, true); err == nil {
-		u.CheckoutSessionPaymentMethodCreate = &checkoutSessionPaymentMethodCreate
-		u.Type = BodyTypeCheckoutSessionPaymentMethodCreate
-		return nil
-	}
-
 	var redirectPaymentMethodCreate components.RedirectPaymentMethodCreate = components.RedirectPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &redirectPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &redirectPaymentMethodCreate, "", true, nil); err == nil {
 		u.RedirectPaymentMethodCreate = &redirectPaymentMethodCreate
 		u.Type = BodyTypeRedirectPaymentMethodCreate
 		return nil
 	}
 
 	var cardPaymentMethodCreate components.CardPaymentMethodCreate = components.CardPaymentMethodCreate{}
-	if err := utils.UnmarshalJSON(data, &cardPaymentMethodCreate, "", true, true); err == nil {
+	if err := utils.UnmarshalJSON(data, &cardPaymentMethodCreate, "", true, nil); err == nil {
 		u.CardPaymentMethodCreate = &cardPaymentMethodCreate
 		u.Type = BodyTypeCardPaymentMethodCreate
+		return nil
+	}
+
+	var checkoutSessionPaymentMethodCreate components.CheckoutSessionPaymentMethodCreate = components.CheckoutSessionPaymentMethodCreate{}
+	if err := utils.UnmarshalJSON(data, &checkoutSessionPaymentMethodCreate, "", true, nil); err == nil {
+		u.CheckoutSessionPaymentMethodCreate = &checkoutSessionPaymentMethodCreate
+		u.Type = BodyTypeCheckoutSessionPaymentMethodCreate
 		return nil
 	}
 

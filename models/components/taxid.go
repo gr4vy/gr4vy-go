@@ -2,10 +2,25 @@
 
 package components
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 type TaxID struct {
 	// The tax ID for the buyer.
 	Value string    `json:"value"`
 	Kind  TaxIDKind `json:"kind"`
+}
+
+func (t TaxID) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TaxID) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"value", "kind"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (o *TaxID) GetValue() string {

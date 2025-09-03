@@ -61,7 +61,6 @@ func (i *jsonInterceptor) RoundTrip(req *http.Request) (*http.Response, error) {
 	resp.Body = io.NopCloser(bytes.NewReader(modifiedBody))
 	resp.ContentLength = int64(len(modifiedBody))
 
-	fmt.Println("Successfully intercepted and modified JSON response.")
 	return resp, nil
 }
 

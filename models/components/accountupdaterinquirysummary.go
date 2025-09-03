@@ -21,7 +21,7 @@ func (a AccountUpdaterInquirySummary) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AccountUpdaterInquirySummary) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"id", "payment_method_id"}); err != nil {
 		return err
 	}
 	return nil

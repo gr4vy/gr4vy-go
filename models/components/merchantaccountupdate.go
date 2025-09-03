@@ -48,7 +48,7 @@ func (m MerchantAccountUpdate) MarshalJSON() ([]byte, error) {
 }
 
 func (m *MerchantAccountUpdate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
 		return err
 	}
 	return nil

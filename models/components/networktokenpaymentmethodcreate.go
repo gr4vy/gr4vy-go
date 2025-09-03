@@ -45,7 +45,7 @@ func (n NetworkTokenPaymentMethodCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (n *NetworkTokenPaymentMethodCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &n, "", false, true); err != nil {
+	if err := utils.UnmarshalJSON(data, &n, "", false, []string{"method", "token", "expiration_date"}); err != nil {
 		return err
 	}
 	return nil

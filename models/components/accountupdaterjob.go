@@ -28,7 +28,7 @@ func (a AccountUpdaterJob) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AccountUpdaterJob) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"id", "merchant_account_id", "inquiries", "created_at", "updated_at"}); err != nil {
 		return err
 	}
 	return nil
