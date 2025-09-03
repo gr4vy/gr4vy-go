@@ -24,15 +24,13 @@ var (
 	merchantAccountID string
 )
 
-// jsonInterceptor is a custom http.RoundTripper. It wraps another
-// RoundTripper (like the default transport) to intercept and modify responses.
+// Adds a custom interceptor that can be added to an HTTP client
+// which adds some random data to JSON responses. This helps catch any
+// forward compatibility issues in the transaction API.
 type jsonInterceptor struct {
-	// next is the underlying transport that will perform the actual HTTP request.
 	next http.RoundTripper
 }
 
-// RoundTrip is the core method that satisfies the http.RoundTripper interface.
-// It intercepts the request, gets the response, modifies it, and returns it.
 func (i *jsonInterceptor) RoundTrip(req *http.Request) (*http.Response, error) {
 	resp, err := i.next.RoundTrip(req)
 	if err != nil {
@@ -53,6 +51,7 @@ func (i *jsonInterceptor) RoundTrip(req *http.Request) (*http.Response, error) {
 	}
 
 	randomKey := fmt.Sprintf("unexpected_field_%d", rand.Intn(1000))
+	// This is where we add the unexpected field field
 	data[randomKey] = "this is an injected test value"
 	modifiedBody, err := json.Marshal(data)
 	if err != nil {
@@ -127,7 +126,9 @@ func setupTestEnvironment(t *testing.T) *Gr4vy {
 	// Create merchant client
 	withToken := WithToken(privateKey, []JWTScope{ReadAll, WriteAll}, 3600)
 
-	// Add random data to responses
+	// Adds a custom interceptor to the HTTP client
+	// which adds some random data to JSON responses. This helps catch any
+	// forward compatibility issues.
 	baseTransport := http.DefaultTransport
 	httpClient := &http.Client{
 		Timeout: 30 * time.Second,
