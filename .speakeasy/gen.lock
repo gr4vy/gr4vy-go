@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 815f1cc2bcf6b0057d5f14e4471cd337
+  docChecksum: 904b2dfedeb597989c92328bf45c44ea
   docVersion: 1.0.0
-  speakeasyVersion: 1.606.8
-  generationVersion: 2.687.13
-  releaseVersion: 1.3.17
-  configChecksum: eb0487704c8e3883ff0d0c021dea0b14
+  speakeasyVersion: 1.607.0
+  generationVersion: 2.690.1
+  releaseVersion: 1.3.18
+  configChecksum: cb64889a8fbbe080870ecf6ddf953ffc
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.9.3
+    core: 3.9.5
     defaultEnabledRetries: 0.2.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.3.2
@@ -4176,7 +4176,7 @@ examples:
           settlement_id: "b1e2c3d4-5678-1234-9abc-1234567890ab"
       responses:
         "200":
-          application/json: {"type": "settlement", "id": "b1e2c3d4-5678-1234-9abc-1234567890ab", "merchant_account_id": "default", "created_at": "2024-06-01T12:00:00.000Z", "updated_at": "2024-06-01T12:00:00.000Z", "posted_at": "2024-06-01T12:00:00.000Z", "ingested_at": "2024-06-01T12:00:00.000Z", "currency": "EUR", "amount": 1100, "commission": 100, "payment_service_report_id": "a1b2c3d4-5678-1234-9abc-1234567890ab", "payment_service_report_file_ids": ["f1e2d3c4-5678-1234-9abc-1234567890ab"], "transaction_id": "7099948d-7286-47e4-aad8-b68f7eb44591"}
+          application/json: {"id": "b1e2c3d4-5678-1234-9abc-1234567890ab", "merchant_account_id": "default", "created_at": "2024-06-01T12:00:00.000Z", "updated_at": "2024-06-01T12:00:00.000Z", "posted_at": "2024-06-01T12:00:00.000Z", "ingested_at": "2024-06-01T12:00:00.000Z", "currency": "EUR", "amount": 1100, "commission": 100, "payment_service_report_id": "a1b2c3d4-5678-1234-9abc-1234567890ab", "payment_service_report_file_ids": ["f1e2d3c4-5678-1234-9abc-1234567890ab"], "transaction_id": "7099948d-7286-47e4-aad8-b68f7eb44591", "type": "settlement"}
         "400":
           application/json: {"type": "error", "code": "bad_request", "status": 400, "message": "Request failed validation"}
         "401":
@@ -4308,6 +4308,3 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## SDK Changes Detected:
-  * `Gr4vy.Transactions.Cancel()`: **Added**
