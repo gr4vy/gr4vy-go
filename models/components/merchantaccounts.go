@@ -22,7 +22,7 @@ func (m MerchantAccounts) MarshalJSON() ([]byte, error) {
 }
 
 func (m *MerchantAccounts) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, []string{"items"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, false); err != nil {
 		return err
 	}
 	return nil

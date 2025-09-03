@@ -38,7 +38,7 @@ func (l ListReportsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListReportsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
 		return err
 	}
 	return nil

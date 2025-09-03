@@ -33,7 +33,7 @@ func (c ClickToPayPaymentMethodCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (c *ClickToPayPaymentMethodCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"method", "token", "cryptogram", "expiration_date"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, true); err != nil {
 		return err
 	}
 	return nil

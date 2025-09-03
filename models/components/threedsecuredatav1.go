@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type ThreeDSecureDataV1 struct {
 	// The cardholder authentication value or AAV.
 	Cavv string `json:"cavv"`
@@ -23,17 +19,6 @@ type ThreeDSecureDataV1 struct {
 	CavvAlgorithm string `json:"cavv_algorithm"`
 	// The transaction identifier.
 	Xid string `json:"xid"`
-}
-
-func (t ThreeDSecureDataV1) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
-}
-
-func (t *ThreeDSecureDataV1) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"cavv", "eci", "version", "directory_response", "authentication_response", "cavv_algorithm", "xid"}); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *ThreeDSecureDataV1) GetCavv() string {

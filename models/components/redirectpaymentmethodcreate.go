@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 // RedirectPaymentMethodCreateMethod - The method to use, this can be any of the methods that support redirect requests.
 type RedirectPaymentMethodCreateMethod string
 
@@ -129,17 +125,6 @@ type RedirectPaymentMethodCreate struct {
 	RedirectURL string `json:"redirect_url"`
 	// The merchant identifier for this payment method.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
-}
-
-func (r RedirectPaymentMethodCreate) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(r, "", false)
-}
-
-func (r *RedirectPaymentMethodCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"method", "country", "currency", "redirect_url"}); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *RedirectPaymentMethodCreate) GetMethod() RedirectPaymentMethodCreateMethod {

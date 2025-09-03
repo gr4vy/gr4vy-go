@@ -45,7 +45,7 @@ func (d DigitalWallet) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DigitalWallet) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"id", "merchant_account_id", "provider", "merchant_name", "domain_names", "created_at", "updated_at"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
 		return err
 	}
 	return nil

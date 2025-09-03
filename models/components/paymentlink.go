@@ -68,7 +68,7 @@ func (p PaymentLink) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PaymentLink) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"id", "url", "amount", "country", "currency", "intent", "cart_items", "payment_source", "created_at", "updated_at", "status"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
 		return err
 	}
 	return nil

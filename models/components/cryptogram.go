@@ -19,7 +19,7 @@ func (c Cryptogram) MarshalJSON() ([]byte, error) {
 }
 
 func (c *Cryptogram) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"cryptogram"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
 		return err
 	}
 	return nil

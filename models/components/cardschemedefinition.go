@@ -23,7 +23,7 @@ func (c CardSchemeDefinition) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CardSchemeDefinition) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"id", "icon_url", "display_name"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
 		return err
 	}
 	return nil

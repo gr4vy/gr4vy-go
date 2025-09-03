@@ -19,7 +19,7 @@ func (a AccountsReceivablesReportSpec) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AccountsReceivablesReportSpec) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"params"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
 		return err
 	}
 	return nil

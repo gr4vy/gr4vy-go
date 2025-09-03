@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 // GiftCardTransactionCreate - Create a charge against a gift card
 type GiftCardTransactionCreate struct {
 	// The 16-19 digit number for the gift card.
@@ -14,17 +10,6 @@ type GiftCardTransactionCreate struct {
 	Pin string `json:"pin"`
 	// The monetary amount for this transaction to charge against the gift card, in the smallest currency unit (for example, cents or pence).
 	Amount int64 `json:"amount"`
-}
-
-func (g GiftCardTransactionCreate) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
-
-func (g *GiftCardTransactionCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"number", "pin", "amount"}); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *GiftCardTransactionCreate) GetNumber() string {

@@ -19,7 +19,7 @@ func (d DetailedSettlementReportSpec) MarshalJSON() ([]byte, error) {
 }
 
 func (d *DetailedSettlementReportSpec) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &d, "", false, []string{"params"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &d, "", false, false); err != nil {
 		return err
 	}
 	return nil

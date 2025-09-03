@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type BillingDetailsOutput struct {
 	// The first name(s) or given name for the buyer.
 	FirstName *string `json:"first_name,omitempty"`
@@ -19,17 +15,6 @@ type BillingDetailsOutput struct {
 	Address *Address `json:"address,omitempty"`
 	// The tax ID information associated with the billing details.
 	TaxID *TaxID `json:"tax_id,omitempty"`
-}
-
-func (b BillingDetailsOutput) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(b, "", false)
-}
-
-func (b *BillingDetailsOutput) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, nil); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *BillingDetailsOutput) GetFirstName() *string {

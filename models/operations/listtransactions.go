@@ -104,7 +104,7 @@ func (l ListTransactionsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListTransactionsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, false); err != nil {
 		return err
 	}
 	return nil

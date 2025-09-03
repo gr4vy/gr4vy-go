@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type Address struct {
 	// The city for the address.
 	City *string `json:"city,omitempty"`
@@ -25,17 +21,6 @@ type Address struct {
 	Line2 *string `json:"line2,omitempty"`
 	// The optional name of the company or organisation to add to the address.
 	Organization *string `json:"organization,omitempty"`
-}
-
-func (a Address) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(a, "", false)
-}
-
-func (a *Address) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *Address) GetCity() *string {

@@ -77,7 +77,7 @@ func (t TransactionSummary) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransactionSummary) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "reconciliation_id", "merchant_account_id", "currency", "amount", "status", "authorized_amount", "captured_amount", "refunded_amount", "settled_amount", "settled", "intent", "gift_card_redemptions", "created_at", "updated_at"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
 		return err
 	}
 	return nil

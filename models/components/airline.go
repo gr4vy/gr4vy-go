@@ -65,7 +65,7 @@ func (a Airline) MarshalJSON() ([]byte, error) {
 }
 
 func (a *Airline) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, false); err != nil {
 		return err
 	}
 	return nil

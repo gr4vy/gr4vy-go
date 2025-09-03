@@ -2,26 +2,11 @@
 
 package components
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type GiftCardTokenTransactionCreate struct {
 	// The ID for the gift card to charge.
 	ID string `json:"id"`
 	// The monetary amount for this transaction to charge against the gift card, in the smallest currency unit (for example, cents or pence).
 	Amount int64 `json:"amount"`
-}
-
-func (g GiftCardTokenTransactionCreate) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
-
-func (g *GiftCardTokenTransactionCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"id", "amount"}); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *GiftCardTokenTransactionCreate) GetID() string {

@@ -2,25 +2,10 @@
 
 package components
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 // GiftCardStoredRequest - The ID of a stored gift card to fetch a balance for.
 type GiftCardStoredRequest struct {
 	// The ID of the field to fetch a balance for.
 	ID string `json:"id"`
-}
-
-func (g GiftCardStoredRequest) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(g, "", false)
-}
-
-func (g *GiftCardStoredRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"id"}); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *GiftCardStoredRequest) GetID() string {

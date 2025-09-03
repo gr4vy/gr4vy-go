@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type CartItem struct {
 	// The name of the cart item. The value you set for this property may be truncated if the maximum length accepted by a payment service provider is less than 255 characters.
 	Name string `json:"name"`
@@ -31,17 +27,6 @@ type CartItem struct {
 	ProductType *ProductType `json:"product_type,omitempty"`
 	// The seller country of the cart item.
 	SellerCountry *string `json:"seller_country,omitempty"`
-}
-
-func (c CartItem) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(c, "", false)
-}
-
-func (c *CartItem) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"name", "quantity", "unit_amount"}); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *CartItem) GetName() string {

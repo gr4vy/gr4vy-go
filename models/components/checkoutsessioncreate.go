@@ -23,7 +23,7 @@ func (c CheckoutSessionCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CheckoutSessionCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, false); err != nil {
 		return err
 	}
 	return nil

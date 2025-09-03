@@ -85,7 +85,7 @@ func (t TransactionEvent) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransactionEvent) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "name", "created_at", "context"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
 		return err
 	}
 	return nil

@@ -2,10 +2,6 @@
 
 package components
 
-import (
-	"github.com/gr4vy/gr4vy-go/internal/utils"
-)
-
 type ThreeDSecureV2 struct {
 	Version                string  `json:"version"`
 	AuthenticationResponse *string `json:"authentication_response,omitempty"`
@@ -15,17 +11,6 @@ type ThreeDSecureV2 struct {
 	Cavv                   *string `json:"cavv,omitempty"`
 	Eci                    *string `json:"eci,omitempty"`
 	CardholderInfo         *string `json:"cardholder_info,omitempty"`
-}
-
-func (t ThreeDSecureV2) MarshalJSON() ([]byte, error) {
-	return utils.MarshalJSON(t, "", false)
-}
-
-func (t *ThreeDSecureV2) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"version"}); err != nil {
-		return err
-	}
-	return nil
 }
 
 func (o *ThreeDSecureV2) GetVersion() string {

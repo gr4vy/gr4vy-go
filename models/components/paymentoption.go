@@ -54,22 +54,22 @@ func CreateContextPaymentOptionContext(paymentOptionContext PaymentOptionContext
 
 func (u *Context) UnmarshalJSON(data []byte) error {
 
-	var googlePayPaymentOptionContext GooglePayPaymentOptionContext = GooglePayPaymentOptionContext{}
-	if err := utils.UnmarshalJSON(data, &googlePayPaymentOptionContext, "", true, nil); err == nil {
-		u.GooglePayPaymentOptionContext = &googlePayPaymentOptionContext
-		u.Type = ContextTypeGooglePayPaymentOptionContext
-		return nil
-	}
-
 	var walletPaymentOptionContext WalletPaymentOptionContext = WalletPaymentOptionContext{}
-	if err := utils.UnmarshalJSON(data, &walletPaymentOptionContext, "", true, nil); err == nil {
+	if err := utils.UnmarshalJSON(data, &walletPaymentOptionContext, "", true, true); err == nil {
 		u.WalletPaymentOptionContext = &walletPaymentOptionContext
 		u.Type = ContextTypeWalletPaymentOptionContext
 		return nil
 	}
 
+	var googlePayPaymentOptionContext GooglePayPaymentOptionContext = GooglePayPaymentOptionContext{}
+	if err := utils.UnmarshalJSON(data, &googlePayPaymentOptionContext, "", true, true); err == nil {
+		u.GooglePayPaymentOptionContext = &googlePayPaymentOptionContext
+		u.Type = ContextTypeGooglePayPaymentOptionContext
+		return nil
+	}
+
 	var paymentOptionContext PaymentOptionContext = PaymentOptionContext{}
-	if err := utils.UnmarshalJSON(data, &paymentOptionContext, "", true, nil); err == nil {
+	if err := utils.UnmarshalJSON(data, &paymentOptionContext, "", true, true); err == nil {
 		u.PaymentOptionContext = &paymentOptionContext
 		u.Type = ContextTypePaymentOptionContext
 		return nil
@@ -110,7 +110,7 @@ func (p PaymentOption) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PaymentOption) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"method", "mode", "can_store_payment_method", "can_delay_capture"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, false); err != nil {
 		return err
 	}
 	return nil

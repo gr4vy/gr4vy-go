@@ -24,7 +24,7 @@ func (t TransactionPaymentService) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransactionPaymentService) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "payment_service_definition_id", "method", "display_name"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, false); err != nil {
 		return err
 	}
 	return nil

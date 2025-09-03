@@ -26,7 +26,7 @@ func (r Recipient) MarshalJSON() ([]byte, error) {
 }
 
 func (r *Recipient) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"first_name", "last_name"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, false); err != nil {
 		return err
 	}
 	return nil
