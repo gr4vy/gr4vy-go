@@ -51,7 +51,7 @@ func (i *jsonInterceptor) RoundTrip(req *http.Request) (*http.Response, error) {
 	}
 
 	randomKey := fmt.Sprintf("unexpected_field_%d", rand.Intn(1000))
-	// This is where we add the unexpected field field
+	// This is where we add the unexpected field
 	data[randomKey] = "this is an injected test value"
 	modifiedBody, err := json.Marshal(data)
 	if err != nil {
