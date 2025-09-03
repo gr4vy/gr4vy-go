@@ -10,25 +10,23 @@ import (
 
 // Settlement - A settlement record for a transaction.
 type Settlement struct {
-	// Always 'settlement'.
-	type_ *string `const:"settlement" json:"type"`
-	// The unique identifier for the settlement.
+	// The unique identifier for the record.
 	ID string `json:"id"`
-	// The merchant account this settlement belongs to.
+	// The merchant account this record belongs to.
 	MerchantAccountID string `json:"merchant_account_id"`
-	// The date and time the settlement was created, in ISO 8601 format.
+	// The date and time the record was created, in ISO 8601 format.
 	CreatedAt time.Time `json:"created_at"`
-	// The date and time the settlement was last updated, in ISO 8601 format.
+	// The date and time the record was last updated, in ISO 8601 format.
 	UpdatedAt time.Time `json:"updated_at"`
-	// The date and time the settlement was posted, in ISO 8601 format.
+	// The date and time the record was posted, in ISO 8601 format.
 	PostedAt time.Time `json:"posted_at"`
-	// The date and time the settlement was ingested, in ISO 8601 format.
+	// The date and time the record was ingested, in ISO 8601 format.
 	IngestedAt time.Time `json:"ingested_at"`
-	// ISO 4217 currency code for the settlement.
+	// ISO 4217 currency code.
 	Currency string `json:"currency"`
-	// The total settled amount in the smallest currency unit (e.g. cents).
+	// The total amount in the smallest currency unit (e.g. cents).
 	Amount int64 `json:"amount"`
-	// The exchange rate used for settlement, if applicable.
+	// The exchange rate, if applicable.
 	ExchangeRate *float64 `json:"exchange_rate,omitempty"`
 	// The commission amount deducted in the smallest currency unit.
 	Commission int64 `json:"commission"`
@@ -42,8 +40,10 @@ type Settlement struct {
 	PaymentServiceReportID string `json:"payment_service_report_id"`
 	// List of file IDs for the payment service report.
 	PaymentServiceReportFileIds []string `json:"payment_service_report_file_ids"`
-	// The transaction this settlement is associated with.
+	// The transaction this record is associated with.
 	TransactionID string `json:"transaction_id"`
+	// Always `settlement`.
+	type_ *string `const:"settlement" json:"type"`
 }
 
 func (s Settlement) MarshalJSON() ([]byte, error) {
@@ -55,10 +55,6 @@ func (s *Settlement) UnmarshalJSON(data []byte) error {
 		return err
 	}
 	return nil
-}
-
-func (o *Settlement) GetType() *string {
-	return types.String("settlement")
 }
 
 func (o *Settlement) GetID() string {
@@ -171,4 +167,8 @@ func (o *Settlement) GetTransactionID() string {
 		return ""
 	}
 	return o.TransactionID
+}
+
+func (o *Settlement) GetType() *string {
+	return types.String("settlement")
 }
