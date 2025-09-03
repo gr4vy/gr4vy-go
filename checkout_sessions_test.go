@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"fmt"
 	"io"
+	"math/rand"
 	"net/http"
 	"os"
 	"path/filepath"
@@ -22,6 +23,45 @@ import (
 var (
 	merchantAccountID string
 )
+
+// Adds a custom interceptor that can be added to an HTTP client
+// which adds some random data to JSON responses. This helps catch any
+// forward compatibility issues in the transaction API.
+type jsonInterceptor struct {
+	next http.RoundTripper
+}
+
+func (i *jsonInterceptor) RoundTrip(req *http.Request) (*http.Response, error) {
+	resp, err := i.next.RoundTrip(req)
+	if err != nil {
+		return nil, err
+	}
+	if !strings.Contains(resp.Header.Get("Content-Type"), "application/json") {
+		return resp, nil
+	}
+	originalBody, err := io.ReadAll(resp.Body)
+	if err != nil {
+		return nil, fmt.Errorf("failed to read original response body: %w", err)
+	}
+	resp.Body.Close()
+	var data map[string]interface{}
+	if err := json.Unmarshal(originalBody, &data); err != nil {
+		resp.Body = io.NopCloser(bytes.NewReader(originalBody))
+		return resp, nil
+	}
+
+	randomKey := fmt.Sprintf("unexpected_field_%d", rand.Intn(1000))
+	// This is where we add the unexpected field
+	data[randomKey] = "this is an injected test value"
+	modifiedBody, err := json.Marshal(data)
+	if err != nil {
+		return nil, fmt.Errorf("failed to marshal modified body: %w", err)
+	}
+	resp.Body = io.NopCloser(bytes.NewReader(modifiedBody))
+	resp.ContentLength = int64(len(modifiedBody))
+
+	return resp, nil
+}
 
 // loadPrivateKey loads the private key from environment or file
 func loadPrivateKey() (string, error) {
@@ -85,7 +125,20 @@ func setupTestEnvironment(t *testing.T) *Gr4vy {
 
 	// Create merchant client
 	withToken := WithToken(privateKey, []JWTScope{ReadAll, WriteAll}, 3600)
+
+	// Adds a custom interceptor to the HTTP client
+	// which adds some random data to JSON responses. This helps catch any
+	// forward compatibility issues.
+	baseTransport := http.DefaultTransport
+	httpClient := &http.Client{
+		Timeout: 30 * time.Second,
+		Transport: &jsonInterceptor{
+			next: baseTransport,
+		},
+	}
+
 	merchantClient := New(
+		WithClient(httpClient),
 		WithServer(ServerSandbox),
 		WithID("e2e"),
 		WithSecuritySource(withToken),
