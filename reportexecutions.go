@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 )
 
 type ReportExecutions struct {
@@ -234,6 +235,9 @@ func (s *ReportExecutions) List(ctx context.Context, request operations.ListAllR
 				return nil, nil
 			}
 			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
 		}
 
 		return s.List(

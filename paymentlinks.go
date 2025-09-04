@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 )
 
 type PaymentLinks struct {
@@ -709,6 +710,9 @@ func (s *PaymentLinks) List(ctx context.Context, cursor *string, limit *int64, b
 				return nil, nil
 			}
 			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
 		}
 
 		return s.List(

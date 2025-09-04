@@ -67,8 +67,8 @@ const (
 
 // ResponseCaptureTransaction - Successful Response
 type ResponseCaptureTransaction struct {
-	Transaction        *components.Transaction        `queryParam:"inline"`
-	TransactionCapture *components.TransactionCapture `queryParam:"inline"`
+	Transaction        *components.Transaction        `queryParam:"inline" name:"Response_Capture_Transaction"`
+	TransactionCapture *components.TransactionCapture `queryParam:"inline" name:"Response_Capture_Transaction"`
 
 	Type ResponseCaptureTransactionType
 }

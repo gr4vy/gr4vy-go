@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 )
 
 type MerchantAccounts struct {
@@ -234,6 +235,9 @@ func (s *MerchantAccounts) List(ctx context.Context, cursor *string, limit *int6
 				return nil, nil
 			}
 			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
 		}
 
 		return s.List(
