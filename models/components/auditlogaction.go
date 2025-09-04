@@ -9,6 +9,7 @@ const (
 	AuditLogActionUpdated  AuditLogAction = "updated"
 	AuditLogActionDeleted  AuditLogAction = "deleted"
 	AuditLogActionVoided   AuditLogAction = "voided"
+	AuditLogActionCanceled AuditLogAction = "canceled"
 	AuditLogActionCaptured AuditLogAction = "captured"
 )
 

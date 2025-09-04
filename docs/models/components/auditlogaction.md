@@ -9,4 +9,5 @@
 | `AuditLogActionUpdated`  | updated                  |
 | `AuditLogActionDeleted`  | deleted                  |
 | `AuditLogActionVoided`   | voided                   |
+| `AuditLogActionCanceled` | canceled                 |
 | `AuditLogActionCaptured` | captured                 |

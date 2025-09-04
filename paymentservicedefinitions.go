@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 )
 
 type PaymentServiceDefinitions struct {
@@ -233,6 +234,9 @@ func (s *PaymentServiceDefinitions) List(ctx context.Context, cursor *string, li
 				return nil, nil
 			}
 			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
 		}
 
 		return s.List(

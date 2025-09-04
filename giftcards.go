@@ -17,6 +17,7 @@ import (
 	"net/http"
 	"net/url"
 	"strconv"
+	"strings"
 )
 
 type GiftCards struct {
@@ -1633,6 +1634,9 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, nil
 			}
 			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
 		}
 
 		return s.List(
