@@ -70,6 +70,8 @@ type Transaction struct {
 	CreatedAt time.Time `json:"created_at"`
 	// The date and time when the transaction was last updated, in ISO 8601 format.
 	UpdatedAt time.Time `json:"updated_at"`
+	// Indicates whether this transaction has been disputed.
+	Disputed bool `json:"disputed"`
 	// Contains information about an airline travel, if applicable.
 	Airline *Airline `json:"airline,omitempty"`
 	// This is the response description received from the processor.
@@ -130,7 +132,7 @@ func (t Transaction) MarshalJSON() ([]byte, error) {
 }
 
 func (t *Transaction) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "reconciliation_id", "merchant_account_id", "currency", "amount", "status", "authorized_amount", "captured_amount", "refunded_amount", "settled_amount", "settled", "intent", "gift_card_redemptions", "created_at", "updated_at", "payment_source", "merchant_initiated", "is_subsequent_payment", "intent_outcome", "multi_tender", "account_funding_transaction"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "reconciliation_id", "merchant_account_id", "currency", "amount", "status", "authorized_amount", "captured_amount", "refunded_amount", "settled_amount", "settled", "intent", "gift_card_redemptions", "created_at", "updated_at", "disputed", "payment_source", "merchant_initiated", "is_subsequent_payment", "intent_outcome", "multi_tender", "account_funding_transaction"}); err != nil {
 		return err
 	}
 	return nil
@@ -348,6 +350,13 @@ func (o *Transaction) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return o.UpdatedAt
+}
+
+func (o *Transaction) GetDisputed() bool {
+	if o == nil {
+		return false
+	}
+	return o.Disputed
 }
 
 func (o *Transaction) GetAirline() *Airline {

@@ -70,6 +70,8 @@ type TransactionSummary struct {
 	CreatedAt time.Time `json:"created_at"`
 	// The date and time when the transaction was last updated, in ISO 8601 format.
 	UpdatedAt time.Time `json:"updated_at"`
+	// Indicates whether this transaction has been disputed.
+	Disputed bool `json:"disputed"`
 }
 
 func (t TransactionSummary) MarshalJSON() ([]byte, error) {
@@ -77,7 +79,7 @@ func (t TransactionSummary) MarshalJSON() ([]byte, error) {
 }
 
 func (t *TransactionSummary) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "reconciliation_id", "merchant_account_id", "currency", "amount", "status", "authorized_amount", "captured_amount", "refunded_amount", "settled_amount", "settled", "intent", "gift_card_redemptions", "created_at", "updated_at"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "reconciliation_id", "merchant_account_id", "currency", "amount", "status", "authorized_amount", "captured_amount", "refunded_amount", "settled_amount", "settled", "intent", "gift_card_redemptions", "created_at", "updated_at", "disputed"}); err != nil {
 		return err
 	}
 	return nil
@@ -295,4 +297,11 @@ func (o *TransactionSummary) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return o.UpdatedAt
+}
+
+func (o *TransactionSummary) GetDisputed() bool {
+	if o == nil {
+		return false
+	}
+	return o.Disputed
 }

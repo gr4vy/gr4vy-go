@@ -93,6 +93,8 @@ type ListTransactionsRequest struct {
 	MerchantInitiated *bool `queryParam:"style=form,explode=true,name=merchant_initiated"`
 	// Filters for transactions that attempted 3DS authentication or not.
 	Used3ds *bool `queryParam:"style=form,explode=true,name=used_3ds"`
+	// Filters for transactions that have been disputed.
+	Disputed *bool `queryParam:"style=form,explode=true,name=disputed"`
 	// Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values.
 	BuyerSearch []string `queryParam:"style=form,explode=true,name=buyer_search"`
 	// The ID of the merchant account to use for this request.
@@ -402,6 +404,13 @@ func (o *ListTransactionsRequest) GetUsed3ds() *bool {
 		return nil
 	}
 	return o.Used3ds
+}
+
+func (o *ListTransactionsRequest) GetDisputed() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.Disputed
 }
 
 func (o *ListTransactionsRequest) GetBuyerSearch() []string {
