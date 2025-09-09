@@ -292,6 +292,7 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 				IsSubsequentPayment:         request.IsSubsequentPayment,
 				MerchantInitiated:           request.MerchantInitiated,
 				Used3ds:                     request.Used3ds,
+				Disputed:                    request.Disputed,
 				BuyerSearch:                 request.BuyerSearch,
 				MerchantAccountID:           request.MerchantAccountID,
 			},
