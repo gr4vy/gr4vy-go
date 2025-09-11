@@ -19,7 +19,7 @@ type CartItem struct {
 	TaxAmount *int64 `json:"tax_amount,omitempty"`
 	// An external identifier for the cart item. This can be set to any value and is not sent to the payment service.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
-	// The SKU for the item.
+	// The SKU or product code for the item.
 	Sku *string `json:"sku,omitempty"`
 	// The product URL for the item.
 	ProductURL *string `json:"product_url,omitempty"`
@@ -31,6 +31,18 @@ type CartItem struct {
 	ProductType *ProductType `json:"product_type,omitempty"`
 	// The seller country of the cart item.
 	SellerCountry *string `json:"seller_country,omitempty"`
+	// Whether the item is exempt of tax.
+	TaxExempt *bool `json:"tax_exempt,omitempty"`
+	// The unit of measure or the unit of measure code.
+	UnitOfMeasure *string `json:"unit_of_measure,omitempty"`
+	// Item commodity code. Generally a UNSPSC code.
+	CommodityCode *string `json:"commodity_code,omitempty"`
+	// Brief item description.
+	Description *string `json:"description,omitempty"`
+	// Item import or export duties represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`
+	DutyAmount *int64 `json:"duty_amount,omitempty"`
+	// Freight/shipping amount represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`
+	ShippingAmount *int64 `json:"shipping_amount,omitempty"`
 }
 
 func (c CartItem) MarshalJSON() ([]byte, error) {
@@ -126,4 +138,46 @@ func (o *CartItem) GetSellerCountry() *string {
 		return nil
 	}
 	return o.SellerCountry
+}
+
+func (o *CartItem) GetTaxExempt() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.TaxExempt
+}
+
+func (o *CartItem) GetUnitOfMeasure() *string {
+	if o == nil {
+		return nil
+	}
+	return o.UnitOfMeasure
+}
+
+func (o *CartItem) GetCommodityCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CommodityCode
+}
+
+func (o *CartItem) GetDescription() *string {
+	if o == nil {
+		return nil
+	}
+	return o.Description
+}
+
+func (o *CartItem) GetDutyAmount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.DutyAmount
+}
+
+func (o *CartItem) GetShippingAmount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ShippingAmount
 }
