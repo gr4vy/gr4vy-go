@@ -20,6 +20,8 @@ type StatementDescriptor struct {
 	PhoneNumber *string `json:"phone_number,omitempty"`
 	// The merchant's URL to be displayed in a statement descriptor.
 	URL *string `json:"url,omitempty"`
+	// The merchant's postal code or zip code.
+	PostalCode *string `json:"postal_code,omitempty"`
 }
 
 func (s StatementDescriptor) MarshalJSON() ([]byte, error) {
@@ -73,4 +75,11 @@ func (o *StatementDescriptor) GetURL() *string {
 		return nil
 	}
 	return o.URL
+}
+
+func (o *StatementDescriptor) GetPostalCode() *string {
+	if o == nil {
+		return nil
+	}
+	return o.PostalCode
 }
