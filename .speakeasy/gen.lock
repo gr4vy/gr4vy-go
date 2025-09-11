@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 97b08aed27249659dca3389f5d188c11
+  docChecksum: 2d2c9ba3ac0a2750a690a1a6b0d43158
   docVersion: 1.0.0
-  speakeasyVersion: 1.613.0
-  generationVersion: 2.696.0
-  releaseVersion: 1.3.20
-  configChecksum: 28420352f280753b8426ba154d0a307f
+  speakeasyVersion: 1.615.2
+  generationVersion: 2.698.4
+  releaseVersion: 1.3.21
+  configChecksum: b2f5a5b4d43a11f283dbde5282be187b
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -18,7 +18,7 @@ features:
     devContainers: 2.90.0
     envVarSecurityUsage: 0.3.2
     flattening: 2.81.1
-    globalSecurity: 2.82.11
+    globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
     globalServerURLs: 2.82.3
@@ -4308,4 +4308,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Disputed` **Added**\n  *  `response.Items.[].Disputed` **Added**\n* `Gr4vy.Transactions.Create()`:  `response.Disputed` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.Disputed` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.Disputed` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.[transaction].Disputed` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.[transaction].Disputed` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.Disputed` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.Disputed` **Added**\n"
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate` **Changed**\n  *  `response.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.[transaction].StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.[transaction].StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Payment-Links.List()`:  `response.Items.[].StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.StatementDescriptor.PostalCode` **Added**\n  *  `response.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Payment-Links.Get()`:  `response.StatementDescriptor.PostalCode` **Added**\n"

@@ -453,6 +453,20 @@ type TransactionCreate struct {
 	Recipient *Recipient `json:"recipient,omitempty"`
 	// The number of installments a buyer is required to make.
 	InstallmentCount *int64 `json:"installment_count,omitempty"`
+	// The sales tax amount for this transaction, represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`
+	TaxAmount *int64 `json:"tax_amount,omitempty"`
+	// Merchant tax ID (for example, EIN or VAT number).
+	MerchantTaxID *string `json:"merchant_tax_id,omitempty"`
+	// Customer code or reference.
+	CustomerReferenceNumber *string `json:"customer_reference_number,omitempty"`
+	// Whether the tax is included in the amount.
+	AmountIncludesTax *bool `json:"amount_includes_tax,omitempty"`
+	// The merchant's unique identifier for the sales order or invoice.
+	SupplierOrderNumber *string `json:"supplier_order_number,omitempty"`
+	// Total charges for import/export duties.
+	DutyAmount *int64 `json:"duty_amount,omitempty"`
+	// Total shipping amount.
+	ShippingAmount *int64 `json:"shipping_amount,omitempty"`
 }
 
 func (t TransactionCreate) MarshalJSON() ([]byte, error) {
@@ -674,4 +688,53 @@ func (o *TransactionCreate) GetInstallmentCount() *int64 {
 		return nil
 	}
 	return o.InstallmentCount
+}
+
+func (o *TransactionCreate) GetTaxAmount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.TaxAmount
+}
+
+func (o *TransactionCreate) GetMerchantTaxID() *string {
+	if o == nil {
+		return nil
+	}
+	return o.MerchantTaxID
+}
+
+func (o *TransactionCreate) GetCustomerReferenceNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.CustomerReferenceNumber
+}
+
+func (o *TransactionCreate) GetAmountIncludesTax() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AmountIncludesTax
+}
+
+func (o *TransactionCreate) GetSupplierOrderNumber() *string {
+	if o == nil {
+		return nil
+	}
+	return o.SupplierOrderNumber
+}
+
+func (o *TransactionCreate) GetDutyAmount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.DutyAmount
+}
+
+func (o *TransactionCreate) GetShippingAmount() *int64 {
+	if o == nil {
+		return nil
+	}
+	return o.ShippingAmount
 }
