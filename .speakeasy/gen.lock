@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 2d2c9ba3ac0a2750a690a1a6b0d43158
+  docChecksum: 5f16d6e3505573b7691975388b01f1d9
   docVersion: 1.0.0
   speakeasyVersion: 1.615.2
   generationVersion: 2.698.4
-  releaseVersion: 1.3.21
-  configChecksum: b2f5a5b4d43a11f283dbde5282be187b
+  releaseVersion: 1.3.22
+  configChecksum: 7e6d0cf82ff43239500a3c53b7a54b4d
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -4308,4 +4308,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate` **Changed**\n  *  `response.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.[transaction].StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.[transaction].StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Payment-Links.List()`:  `response.Items.[].StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.StatementDescriptor.PostalCode` **Added**\n  *  `response.StatementDescriptor.PostalCode` **Added**\n* `Gr4vy.Payment-Links.Get()`:  `response.StatementDescriptor.PostalCode` **Added**\n"
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.CartItems.[]` **Changed**\n  *  `response.CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Get()`:  `response.CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Update()`:  `response.CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Capture()`:  `response.[transaction].CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Void()`:  `response.[transactionVoid].Transaction.CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Sync()`:  `response.CartItems.[]` **Changed**\n* `Gr4vy.Payment-Options.List()`: \n  *  `request.PaymentOptionRequest.CartItems.[]` **Changed**\n* `Gr4vy.Checkout-Sessions.Create()`: \n  *  `request.CheckoutSessionCreate.CartItems.[]` **Changed**\n  *  `response.CartItems.[]` **Changed**\n* `Gr4vy.Checkout-Sessions.Get()`:  `response.CartItems.[]` **Changed**\n* `Gr4vy.Checkout-Sessions.Update()`: \n  *  `request.CheckoutSessionCreate.CartItems.[]` **Changed**\n  *  `response.CartItems.[]` **Changed**\n* `Gr4vy.Payment-Links.List()`:  `response.Items.[].CartItems.[]` **Changed**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.CartItems.[]` **Changed**\n  *  `response.CartItems.[]` **Changed**\n* `Gr4vy.Payment-Links.Get()`:  `response.CartItems.[]` **Changed**\n"
