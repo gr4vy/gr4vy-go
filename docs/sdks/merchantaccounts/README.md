@@ -115,6 +115,7 @@ func main() {
 
     res, err := s.MerchantAccounts.Create(ctx, components.MerchantAccountCreate{
         AccountUpdaterEnabled: gr4vygo.Bool(true),
+        AsyncNetworkTokensEnabled: gr4vygo.Bool(true),
         ID: "merchant-12345",
         DisplayName: "Example",
     })
@@ -248,6 +249,7 @@ func main() {
 
     res, err := s.MerchantAccounts.Update(ctx, "merchant-12345", components.MerchantAccountUpdate{
         AccountUpdaterEnabled: gr4vygo.Bool(true),
+        AsyncNetworkTokensEnabled: gr4vygo.Bool(true),
     })
     if err != nil {
         log.Fatal(err)
