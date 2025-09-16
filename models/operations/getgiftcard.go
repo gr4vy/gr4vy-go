@@ -6,11 +6,11 @@ type GetGiftCardGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *GetGiftCardGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *GetGiftCardGlobals) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }
 
 type GetGiftCardRequest struct {
@@ -20,16 +20,16 @@ type GetGiftCardRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *GetGiftCardRequest) GetGiftCardID() string {
-	if o == nil {
+func (g *GetGiftCardRequest) GetGiftCardID() string {
+	if g == nil {
 		return ""
 	}
-	return o.GiftCardID
+	return g.GiftCardID
 }
 
-func (o *GetGiftCardRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *GetGiftCardRequest) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }

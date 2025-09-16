@@ -25,13 +25,13 @@ func (p *PaymentMethodStoredCard) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentMethodStoredCard) GetMethod() *string {
-	return types.String("id")
+func (p *PaymentMethodStoredCard) GetMethod() *string {
+	return types.Pointer("id")
 }
 
-func (o *PaymentMethodStoredCard) GetID() string {
-	if o == nil {
+func (p *PaymentMethodStoredCard) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }

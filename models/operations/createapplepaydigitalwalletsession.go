@@ -10,11 +10,11 @@ type CreateApplePayDigitalWalletSessionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreateApplePayDigitalWalletSessionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateApplePayDigitalWalletSessionGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreateApplePayDigitalWalletSessionRequest struct {
@@ -23,16 +23,16 @@ type CreateApplePayDigitalWalletSessionRequest struct {
 	ApplePaySessionRequest components.ApplePaySessionRequest `request:"mediaType=application/json"`
 }
 
-func (o *CreateApplePayDigitalWalletSessionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateApplePayDigitalWalletSessionRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreateApplePayDigitalWalletSessionRequest) GetApplePaySessionRequest() components.ApplePaySessionRequest {
-	if o == nil {
+func (c *CreateApplePayDigitalWalletSessionRequest) GetApplePaySessionRequest() components.ApplePaySessionRequest {
+	if c == nil {
 		return components.ApplePaySessionRequest{}
 	}
-	return o.ApplePaySessionRequest
+	return c.ApplePaySessionRequest
 }

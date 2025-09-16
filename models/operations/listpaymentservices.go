@@ -11,11 +11,11 @@ type ListPaymentServicesGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListPaymentServicesGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPaymentServicesGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListPaymentServicesRequest struct {
@@ -42,39 +42,39 @@ func (l *ListPaymentServicesRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListPaymentServicesRequest) GetMethod() *components.Method {
-	if o == nil {
+func (l *ListPaymentServicesRequest) GetMethod() *components.Method {
+	if l == nil {
 		return nil
 	}
-	return o.Method
+	return l.Method
 }
 
-func (o *ListPaymentServicesRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListPaymentServicesRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListPaymentServicesRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListPaymentServicesRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListPaymentServicesRequest) GetDeleted() *bool {
-	if o == nil {
+func (l *ListPaymentServicesRequest) GetDeleted() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.Deleted
+	return l.Deleted
 }
 
-func (o *ListPaymentServicesRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPaymentServicesRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListPaymentServicesResponse struct {
@@ -83,9 +83,9 @@ type ListPaymentServicesResponse struct {
 	Next func() (*ListPaymentServicesResponse, error)
 }
 
-func (o *ListPaymentServicesResponse) GetResult() components.PaymentServices {
-	if o == nil {
+func (l *ListPaymentServicesResponse) GetResult() components.PaymentServices {
+	if l == nil {
 		return components.PaymentServices{}
 	}
-	return o.Result
+	return l.Result
 }

@@ -28,30 +28,30 @@ func (p *PayoutSummaries) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PayoutSummaries) GetItems() []PayoutSummary {
-	if o == nil {
+func (p *PayoutSummaries) GetItems() []PayoutSummary {
+	if p == nil {
 		return []PayoutSummary{}
 	}
-	return o.Items
+	return p.Items
 }
 
-func (o *PayoutSummaries) GetLimit() *int64 {
-	if o == nil {
+func (p *PayoutSummaries) GetLimit() *int64 {
+	if p == nil {
 		return nil
 	}
-	return o.Limit
+	return p.Limit
 }
 
-func (o *PayoutSummaries) GetNextCursor() *string {
-	if o == nil {
+func (p *PayoutSummaries) GetNextCursor() *string {
+	if p == nil {
 		return nil
 	}
-	return o.NextCursor
+	return p.NextCursor
 }
 
-func (o *PayoutSummaries) GetPreviousCursor() *string {
-	if o == nil {
+func (p *PayoutSummaries) GetPreviousCursor() *string {
+	if p == nil {
 		return nil
 	}
-	return o.PreviousCursor
+	return p.PreviousCursor
 }

@@ -19,51 +19,51 @@ type AffirmItineraryOptions struct {
 	Management *string `json:"management,omitempty"`
 }
 
-func (o *AffirmItineraryOptions) GetType() *string {
-	if o == nil {
+func (a *AffirmItineraryOptions) GetType() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Type
+	return a.Type
 }
 
-func (o *AffirmItineraryOptions) GetSku() *string {
-	if o == nil {
+func (a *AffirmItineraryOptions) GetSku() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Sku
+	return a.Sku
 }
 
-func (o *AffirmItineraryOptions) GetDisplayName() *string {
-	if o == nil {
+func (a *AffirmItineraryOptions) GetDisplayName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.DisplayName
+	return a.DisplayName
 }
 
-func (o *AffirmItineraryOptions) GetVenue() *string {
-	if o == nil {
+func (a *AffirmItineraryOptions) GetVenue() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Venue
+	return a.Venue
 }
 
-func (o *AffirmItineraryOptions) GetLocation() *string {
-	if o == nil {
+func (a *AffirmItineraryOptions) GetLocation() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Location
+	return a.Location
 }
 
-func (o *AffirmItineraryOptions) GetDateStart() *string {
-	if o == nil {
+func (a *AffirmItineraryOptions) GetDateStart() *string {
+	if a == nil {
 		return nil
 	}
-	return o.DateStart
+	return a.DateStart
 }
 
-func (o *AffirmItineraryOptions) GetManagement() *string {
-	if o == nil {
+func (a *AffirmItineraryOptions) GetManagement() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Management
+	return a.Management
 }

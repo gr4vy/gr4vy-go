@@ -10,11 +10,11 @@ type UpdateTransactionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *UpdateTransactionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdateTransactionGlobals) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
 type UpdateTransactionRequest struct {
@@ -25,23 +25,23 @@ type UpdateTransactionRequest struct {
 	TransactionUpdate components.TransactionUpdate `request:"mediaType=application/json"`
 }
 
-func (o *UpdateTransactionRequest) GetTransactionID() string {
-	if o == nil {
+func (u *UpdateTransactionRequest) GetTransactionID() string {
+	if u == nil {
 		return ""
 	}
-	return o.TransactionID
+	return u.TransactionID
 }
 
-func (o *UpdateTransactionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdateTransactionRequest) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
-func (o *UpdateTransactionRequest) GetTransactionUpdate() components.TransactionUpdate {
-	if o == nil {
+func (u *UpdateTransactionRequest) GetTransactionUpdate() components.TransactionUpdate {
+	if u == nil {
 		return components.TransactionUpdate{}
 	}
-	return o.TransactionUpdate
+	return u.TransactionUpdate
 }

@@ -13,11 +13,11 @@ type VoidTransactionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *VoidTransactionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (v *VoidTransactionGlobals) GetMerchantAccountID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return v.MerchantAccountID
 }
 
 type VoidTransactionRequest struct {
@@ -29,25 +29,25 @@ type VoidTransactionRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *VoidTransactionRequest) GetTransactionID() string {
-	if o == nil {
+func (v *VoidTransactionRequest) GetTransactionID() string {
+	if v == nil {
 		return ""
 	}
-	return o.TransactionID
+	return v.TransactionID
 }
 
-func (o *VoidTransactionRequest) GetPrefer() []string {
-	if o == nil {
+func (v *VoidTransactionRequest) GetPrefer() []string {
+	if v == nil {
 		return nil
 	}
-	return o.Prefer
+	return v.Prefer
 }
 
-func (o *VoidTransactionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (v *VoidTransactionRequest) GetMerchantAccountID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return v.MerchantAccountID
 }
 
 type ResponseVoidTransactionType string

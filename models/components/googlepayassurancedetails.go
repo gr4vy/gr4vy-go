@@ -25,16 +25,16 @@ func (g *GooglePayAssuranceDetails) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GooglePayAssuranceDetails) GetAccountVerified() *bool {
-	if o == nil {
+func (g *GooglePayAssuranceDetails) GetAccountVerified() *bool {
+	if g == nil {
 		return nil
 	}
-	return o.AccountVerified
+	return g.AccountVerified
 }
 
-func (o *GooglePayAssuranceDetails) GetCardHolderAuthenticated() *bool {
-	if o == nil {
+func (g *GooglePayAssuranceDetails) GetCardHolderAuthenticated() *bool {
+	if g == nil {
 		return nil
 	}
-	return o.CardHolderAuthenticated
+	return g.CardHolderAuthenticated
 }

@@ -6,11 +6,11 @@ type DeletePaymentMethodPaymentServiceTokenGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *DeletePaymentMethodPaymentServiceTokenGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (d *DeletePaymentMethodPaymentServiceTokenGlobals) GetMerchantAccountID() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }
 
 type DeletePaymentMethodPaymentServiceTokenRequest struct {
@@ -22,23 +22,23 @@ type DeletePaymentMethodPaymentServiceTokenRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *DeletePaymentMethodPaymentServiceTokenRequest) GetPaymentMethodID() string {
-	if o == nil {
+func (d *DeletePaymentMethodPaymentServiceTokenRequest) GetPaymentMethodID() string {
+	if d == nil {
 		return ""
 	}
-	return o.PaymentMethodID
+	return d.PaymentMethodID
 }
 
-func (o *DeletePaymentMethodPaymentServiceTokenRequest) GetPaymentServiceTokenID() string {
-	if o == nil {
+func (d *DeletePaymentMethodPaymentServiceTokenRequest) GetPaymentServiceTokenID() string {
+	if d == nil {
 		return ""
 	}
-	return o.PaymentServiceTokenID
+	return d.PaymentServiceTokenID
 }
 
-func (o *DeletePaymentMethodPaymentServiceTokenRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (d *DeletePaymentMethodPaymentServiceTokenRequest) GetMerchantAccountID() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }

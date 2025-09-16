@@ -35,10 +35,10 @@ func main() {
     )
 
     res, err := s.AuditLogs.List(ctx, operations.ListAuditLogsRequest{
-        Cursor: gr4vygo.String("ZXhhbXBsZTE"),
+        Cursor: gr4vygo.Pointer("ZXhhbXBsZTE"),
         Action: components.AuditLogActionCreated.ToPointer(),
-        UserID: gr4vygo.String("14b7b8c5-a6ba-4fb6-bbab-52d43c7f37ef"),
-        ResourceType: gr4vygo.String("user"),
+        UserID: gr4vygo.Pointer("14b7b8c5-a6ba-4fb6-bbab-52d43c7f37ef"),
+        ResourceType: gr4vygo.Pointer("user"),
     })
     if err != nil {
         log.Fatal(err)

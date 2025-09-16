@@ -6,11 +6,11 @@ type ListCardSchemeDefinitionsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListCardSchemeDefinitionsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListCardSchemeDefinitionsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListCardSchemeDefinitionsRequest struct {
@@ -18,9 +18,9 @@ type ListCardSchemeDefinitionsRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListCardSchemeDefinitionsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListCardSchemeDefinitionsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }

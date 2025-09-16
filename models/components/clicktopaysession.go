@@ -9,16 +9,16 @@ type ClickToPaySession struct {
 	DigitalPaymentApplicationName string `json:"digital_payment_application_name"`
 }
 
-func (o *ClickToPaySession) GetDigitalPaymentApplicationID() string {
-	if o == nil {
+func (c *ClickToPaySession) GetDigitalPaymentApplicationID() string {
+	if c == nil {
 		return ""
 	}
-	return o.DigitalPaymentApplicationID
+	return c.DigitalPaymentApplicationID
 }
 
-func (o *ClickToPaySession) GetDigitalPaymentApplicationName() string {
-	if o == nil {
+func (c *ClickToPaySession) GetDigitalPaymentApplicationName() string {
+	if c == nil {
 		return ""
 	}
-	return o.DigitalPaymentApplicationName
+	return c.DigitalPaymentApplicationName
 }

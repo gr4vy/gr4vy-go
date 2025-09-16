@@ -7,9 +7,9 @@ type DigitalWalletDomain struct {
 	DomainName string `json:"domain_name"`
 }
 
-func (o *DigitalWalletDomain) GetDomainName() string {
-	if o == nil {
+func (d *DigitalWalletDomain) GetDomainName() string {
+	if d == nil {
 		return ""
 	}
-	return o.DomainName
+	return d.DomainName
 }

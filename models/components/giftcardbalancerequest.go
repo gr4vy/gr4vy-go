@@ -76,9 +76,9 @@ type GiftCardBalanceRequest struct {
 	Items []Item `json:"items"`
 }
 
-func (o *GiftCardBalanceRequest) GetItems() []Item {
-	if o == nil {
+func (g *GiftCardBalanceRequest) GetItems() []Item {
+	if g == nil {
 		return []Item{}
 	}
-	return o.Items
+	return g.Items
 }

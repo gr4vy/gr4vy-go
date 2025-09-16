@@ -56,128 +56,128 @@ func (c *CartItem) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *CartItem) GetName() string {
-	if o == nil {
+func (c *CartItem) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *CartItem) GetQuantity() int64 {
-	if o == nil {
+func (c *CartItem) GetQuantity() int64 {
+	if c == nil {
 		return 0
 	}
-	return o.Quantity
+	return c.Quantity
 }
 
-func (o *CartItem) GetUnitAmount() int64 {
-	if o == nil {
+func (c *CartItem) GetUnitAmount() int64 {
+	if c == nil {
 		return 0
 	}
-	return o.UnitAmount
+	return c.UnitAmount
 }
 
-func (o *CartItem) GetDiscountAmount() *int64 {
-	if o == nil {
+func (c *CartItem) GetDiscountAmount() *int64 {
+	if c == nil {
 		return nil
 	}
-	return o.DiscountAmount
+	return c.DiscountAmount
 }
 
-func (o *CartItem) GetTaxAmount() *int64 {
-	if o == nil {
+func (c *CartItem) GetTaxAmount() *int64 {
+	if c == nil {
 		return nil
 	}
-	return o.TaxAmount
+	return c.TaxAmount
 }
 
-func (o *CartItem) GetExternalIdentifier() *string {
-	if o == nil {
+func (c *CartItem) GetExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return c.ExternalIdentifier
 }
 
-func (o *CartItem) GetSku() *string {
-	if o == nil {
+func (c *CartItem) GetSku() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Sku
+	return c.Sku
 }
 
-func (o *CartItem) GetProductURL() *string {
-	if o == nil {
+func (c *CartItem) GetProductURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ProductURL
+	return c.ProductURL
 }
 
-func (o *CartItem) GetImageURL() *string {
-	if o == nil {
+func (c *CartItem) GetImageURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ImageURL
+	return c.ImageURL
 }
 
-func (o *CartItem) GetCategories() []string {
-	if o == nil {
+func (c *CartItem) GetCategories() []string {
+	if c == nil {
 		return nil
 	}
-	return o.Categories
+	return c.Categories
 }
 
-func (o *CartItem) GetProductType() *ProductType {
-	if o == nil {
+func (c *CartItem) GetProductType() *ProductType {
+	if c == nil {
 		return nil
 	}
-	return o.ProductType
+	return c.ProductType
 }
 
-func (o *CartItem) GetSellerCountry() *string {
-	if o == nil {
+func (c *CartItem) GetSellerCountry() *string {
+	if c == nil {
 		return nil
 	}
-	return o.SellerCountry
+	return c.SellerCountry
 }
 
-func (o *CartItem) GetTaxExempt() *bool {
-	if o == nil {
+func (c *CartItem) GetTaxExempt() *bool {
+	if c == nil {
 		return nil
 	}
-	return o.TaxExempt
+	return c.TaxExempt
 }
 
-func (o *CartItem) GetUnitOfMeasure() *string {
-	if o == nil {
+func (c *CartItem) GetUnitOfMeasure() *string {
+	if c == nil {
 		return nil
 	}
-	return o.UnitOfMeasure
+	return c.UnitOfMeasure
 }
 
-func (o *CartItem) GetCommodityCode() *string {
-	if o == nil {
+func (c *CartItem) GetCommodityCode() *string {
+	if c == nil {
 		return nil
 	}
-	return o.CommodityCode
+	return c.CommodityCode
 }
 
-func (o *CartItem) GetDescription() *string {
-	if o == nil {
+func (c *CartItem) GetDescription() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Description
+	return c.Description
 }
 
-func (o *CartItem) GetDutyAmount() *int64 {
-	if o == nil {
+func (c *CartItem) GetDutyAmount() *int64 {
+	if c == nil {
 		return nil
 	}
-	return o.DutyAmount
+	return c.DutyAmount
 }
 
-func (o *CartItem) GetShippingAmount() *int64 {
-	if o == nil {
+func (c *CartItem) GetShippingAmount() *int64 {
+	if c == nil {
 		return nil
 	}
-	return o.ShippingAmount
+	return c.ShippingAmount
 }

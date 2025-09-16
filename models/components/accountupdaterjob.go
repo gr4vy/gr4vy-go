@@ -34,41 +34,41 @@ func (a *AccountUpdaterJob) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *AccountUpdaterJob) GetType() *string {
-	return types.String("account-updater-job")
+func (a *AccountUpdaterJob) GetType() *string {
+	return types.Pointer("account-updater-job")
 }
 
-func (o *AccountUpdaterJob) GetID() string {
-	if o == nil {
+func (a *AccountUpdaterJob) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *AccountUpdaterJob) GetMerchantAccountID() string {
-	if o == nil {
+func (a *AccountUpdaterJob) GetMerchantAccountID() string {
+	if a == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return a.MerchantAccountID
 }
 
-func (o *AccountUpdaterJob) GetInquiries() []AccountUpdaterInquirySummary {
-	if o == nil {
+func (a *AccountUpdaterJob) GetInquiries() []AccountUpdaterInquirySummary {
+	if a == nil {
 		return []AccountUpdaterInquirySummary{}
 	}
-	return o.Inquiries
+	return a.Inquiries
 }
 
-func (o *AccountUpdaterJob) GetCreatedAt() time.Time {
-	if o == nil {
+func (a *AccountUpdaterJob) GetCreatedAt() time.Time {
+	if a == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return a.CreatedAt
 }
 
-func (o *AccountUpdaterJob) GetUpdatedAt() time.Time {
-	if o == nil {
+func (a *AccountUpdaterJob) GetUpdatedAt() time.Time {
+	if a == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return a.UpdatedAt
 }

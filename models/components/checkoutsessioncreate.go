@@ -29,37 +29,37 @@ func (c *CheckoutSessionCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *CheckoutSessionCreate) GetCartItems() []CartItem {
-	if o == nil {
+func (c *CheckoutSessionCreate) GetCartItems() []CartItem {
+	if c == nil {
 		return nil
 	}
-	return o.CartItems
+	return c.CartItems
 }
 
-func (o *CheckoutSessionCreate) GetMetadata() map[string]string {
-	if o == nil {
+func (c *CheckoutSessionCreate) GetMetadata() map[string]string {
+	if c == nil {
 		return nil
 	}
-	return o.Metadata
+	return c.Metadata
 }
 
-func (o *CheckoutSessionCreate) GetBuyer() *GuestBuyerInput {
-	if o == nil {
+func (c *CheckoutSessionCreate) GetBuyer() *GuestBuyerInput {
+	if c == nil {
 		return nil
 	}
-	return o.Buyer
+	return c.Buyer
 }
 
-func (o *CheckoutSessionCreate) GetAirline() *Airline {
-	if o == nil {
+func (c *CheckoutSessionCreate) GetAirline() *Airline {
+	if c == nil {
 		return nil
 	}
-	return o.Airline
+	return c.Airline
 }
 
-func (o *CheckoutSessionCreate) GetExpiresIn() *float64 {
-	if o == nil {
+func (c *CheckoutSessionCreate) GetExpiresIn() *float64 {
+	if c == nil {
 		return nil
 	}
-	return o.ExpiresIn
+	return c.ExpiresIn
 }

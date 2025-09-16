@@ -96,37 +96,37 @@ func (t *TransactionThreeDSecureSummary) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionThreeDSecureSummary) GetVersion() *string {
-	if o == nil {
+func (t *TransactionThreeDSecureSummary) GetVersion() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Version
+	return t.Version
 }
 
-func (o *TransactionThreeDSecureSummary) GetStatus() *ThreeDSecureStatus {
-	if o == nil {
+func (t *TransactionThreeDSecureSummary) GetStatus() *ThreeDSecureStatus {
+	if t == nil {
 		return nil
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TransactionThreeDSecureSummary) GetMethod() *ThreeDSecureMethod {
-	if o == nil {
+func (t *TransactionThreeDSecureSummary) GetMethod() *ThreeDSecureMethod {
+	if t == nil {
 		return nil
 	}
-	return o.Method
+	return t.Method
 }
 
-func (o *TransactionThreeDSecureSummary) GetResponseData() *ResponseData {
-	if o == nil {
+func (t *TransactionThreeDSecureSummary) GetResponseData() *ResponseData {
+	if t == nil {
 		return nil
 	}
-	return o.ResponseData
+	return t.ResponseData
 }
 
-func (o *TransactionThreeDSecureSummary) GetErrorData() *ThreeDSecureError {
-	if o == nil {
+func (t *TransactionThreeDSecureSummary) GetErrorData() *ThreeDSecureError {
+	if t == nil {
 		return nil
 	}
-	return o.ErrorData
+	return t.ErrorData
 }

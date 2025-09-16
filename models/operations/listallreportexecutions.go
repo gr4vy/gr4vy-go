@@ -12,11 +12,11 @@ type ListAllReportExecutionsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListAllReportExecutionsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListAllReportExecutionsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListAllReportExecutionsRequest struct {
@@ -49,60 +49,60 @@ func (l *ListAllReportExecutionsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListAllReportExecutionsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListAllReportExecutionsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListAllReportExecutionsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListAllReportExecutionsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListAllReportExecutionsRequest) GetReportName() *string {
-	if o == nil {
+func (l *ListAllReportExecutionsRequest) GetReportName() *string {
+	if l == nil {
 		return nil
 	}
-	return o.ReportName
+	return l.ReportName
 }
 
-func (o *ListAllReportExecutionsRequest) GetCreatedAtLte() *time.Time {
-	if o == nil {
+func (l *ListAllReportExecutionsRequest) GetCreatedAtLte() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return o.CreatedAtLte
+	return l.CreatedAtLte
 }
 
-func (o *ListAllReportExecutionsRequest) GetCreatedAtGte() *time.Time {
-	if o == nil {
+func (l *ListAllReportExecutionsRequest) GetCreatedAtGte() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return o.CreatedAtGte
+	return l.CreatedAtGte
 }
 
-func (o *ListAllReportExecutionsRequest) GetStatus() []components.ReportExecutionStatus {
-	if o == nil {
+func (l *ListAllReportExecutionsRequest) GetStatus() []components.ReportExecutionStatus {
+	if l == nil {
 		return nil
 	}
-	return o.Status
+	return l.Status
 }
 
-func (o *ListAllReportExecutionsRequest) GetCreatorID() []string {
-	if o == nil {
+func (l *ListAllReportExecutionsRequest) GetCreatorID() []string {
+	if l == nil {
 		return nil
 	}
-	return o.CreatorID
+	return l.CreatorID
 }
 
-func (o *ListAllReportExecutionsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListAllReportExecutionsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListAllReportExecutionsResponse struct {
@@ -111,9 +111,9 @@ type ListAllReportExecutionsResponse struct {
 	Next func() (*ListAllReportExecutionsResponse, error)
 }
 
-func (o *ListAllReportExecutionsResponse) GetResult() components.ReportExecutions {
-	if o == nil {
+func (l *ListAllReportExecutionsResponse) GetResult() components.ReportExecutions {
+	if l == nil {
 		return components.ReportExecutions{}
 	}
-	return o.Result
+	return l.Result
 }

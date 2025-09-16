@@ -15,37 +15,37 @@ type StripeConnectOptions struct {
 	TransferGroup *string `json:"transfer_group,omitempty"`
 }
 
-func (o *StripeConnectOptions) GetStripeAccount() *string {
-	if o == nil {
+func (s *StripeConnectOptions) GetStripeAccount() *string {
+	if s == nil {
 		return nil
 	}
-	return o.StripeAccount
+	return s.StripeAccount
 }
 
-func (o *StripeConnectOptions) GetApplicationFeeAmount() *int64 {
-	if o == nil {
+func (s *StripeConnectOptions) GetApplicationFeeAmount() *int64 {
+	if s == nil {
 		return nil
 	}
-	return o.ApplicationFeeAmount
+	return s.ApplicationFeeAmount
 }
 
-func (o *StripeConnectOptions) GetOnBehalfOf() *string {
-	if o == nil {
+func (s *StripeConnectOptions) GetOnBehalfOf() *string {
+	if s == nil {
 		return nil
 	}
-	return o.OnBehalfOf
+	return s.OnBehalfOf
 }
 
-func (o *StripeConnectOptions) GetTransferDataDestination() *string {
-	if o == nil {
+func (s *StripeConnectOptions) GetTransferDataDestination() *string {
+	if s == nil {
 		return nil
 	}
-	return o.TransferDataDestination
+	return s.TransferDataDestination
 }
 
-func (o *StripeConnectOptions) GetTransferGroup() *string {
-	if o == nil {
+func (s *StripeConnectOptions) GetTransferGroup() *string {
+	if s == nil {
 		return nil
 	}
-	return o.TransferGroup
+	return s.TransferGroup
 }

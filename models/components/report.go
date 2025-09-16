@@ -52,111 +52,111 @@ func (r *Report) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Report) GetType() *string {
-	return types.String("report")
+func (r *Report) GetType() *string {
+	return types.Pointer("report")
 }
 
-func (o *Report) GetID() string {
-	if o == nil {
+func (r *Report) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return o.ID
+	return r.ID
 }
 
-func (o *Report) GetMerchantAccountID() string {
-	if o == nil {
+func (r *Report) GetMerchantAccountID() string {
+	if r == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return r.MerchantAccountID
 }
 
-func (o *Report) GetName() string {
-	if o == nil {
+func (r *Report) GetName() string {
+	if r == nil {
 		return ""
 	}
-	return o.Name
+	return r.Name
 }
 
-func (o *Report) GetCreatorID() *string {
-	if o == nil {
+func (r *Report) GetCreatorID() *string {
+	if r == nil {
 		return nil
 	}
-	return o.CreatorID
+	return r.CreatorID
 }
 
-func (o *Report) GetCreatorDisplayName() *string {
-	if o == nil {
+func (r *Report) GetCreatorDisplayName() *string {
+	if r == nil {
 		return nil
 	}
-	return o.CreatorDisplayName
+	return r.CreatorDisplayName
 }
 
-func (o *Report) GetCreatorType() *ReportCreatorType {
-	if o == nil {
+func (r *Report) GetCreatorType() *ReportCreatorType {
+	if r == nil {
 		return nil
 	}
-	return o.CreatorType
+	return r.CreatorType
 }
 
-func (o *Report) GetCreatedAt() time.Time {
-	if o == nil {
+func (r *Report) GetCreatedAt() time.Time {
+	if r == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return r.CreatedAt
 }
 
-func (o *Report) GetUpdatedAt() time.Time {
-	if o == nil {
+func (r *Report) GetUpdatedAt() time.Time {
+	if r == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return r.UpdatedAt
 }
 
-func (o *Report) GetNextExecutionAt() *time.Time {
-	if o == nil {
+func (r *Report) GetNextExecutionAt() *time.Time {
+	if r == nil {
 		return nil
 	}
-	return o.NextExecutionAt
+	return r.NextExecutionAt
 }
 
-func (o *Report) GetDescription() *string {
-	if o == nil {
+func (r *Report) GetDescription() *string {
+	if r == nil {
 		return nil
 	}
-	return o.Description
+	return r.Description
 }
 
-func (o *Report) GetSchedule() ReportSchedule {
-	if o == nil {
+func (r *Report) GetSchedule() ReportSchedule {
+	if r == nil {
 		return ReportSchedule("")
 	}
-	return o.Schedule
+	return r.Schedule
 }
 
-func (o *Report) GetScheduleEnabled() bool {
-	if o == nil {
+func (r *Report) GetScheduleEnabled() bool {
+	if r == nil {
 		return false
 	}
-	return o.ScheduleEnabled
+	return r.ScheduleEnabled
 }
 
-func (o *Report) GetScheduleTimezone() string {
-	if o == nil {
+func (r *Report) GetScheduleTimezone() string {
+	if r == nil {
 		return ""
 	}
-	return o.ScheduleTimezone
+	return r.ScheduleTimezone
 }
 
-func (o *Report) GetSpec() ReportSpec {
-	if o == nil {
+func (r *Report) GetSpec() ReportSpec {
+	if r == nil {
 		return ReportSpec{}
 	}
-	return o.Spec
+	return r.Spec
 }
 
-func (o *Report) GetLatestExecution() *ReportExecutionSummary {
-	if o == nil {
+func (r *Report) GetLatestExecution() *ReportExecutionSummary {
+	if r == nil {
 		return nil
 	}
-	return o.LatestExecution
+	return r.LatestExecution
 }

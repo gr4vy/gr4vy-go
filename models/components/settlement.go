@@ -57,118 +57,118 @@ func (s *Settlement) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Settlement) GetID() string {
-	if o == nil {
+func (s *Settlement) GetID() string {
+	if s == nil {
 		return ""
 	}
-	return o.ID
+	return s.ID
 }
 
-func (o *Settlement) GetMerchantAccountID() string {
-	if o == nil {
+func (s *Settlement) GetMerchantAccountID() string {
+	if s == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return s.MerchantAccountID
 }
 
-func (o *Settlement) GetCreatedAt() time.Time {
-	if o == nil {
+func (s *Settlement) GetCreatedAt() time.Time {
+	if s == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return s.CreatedAt
 }
 
-func (o *Settlement) GetUpdatedAt() time.Time {
-	if o == nil {
+func (s *Settlement) GetUpdatedAt() time.Time {
+	if s == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return s.UpdatedAt
 }
 
-func (o *Settlement) GetPostedAt() time.Time {
-	if o == nil {
+func (s *Settlement) GetPostedAt() time.Time {
+	if s == nil {
 		return time.Time{}
 	}
-	return o.PostedAt
+	return s.PostedAt
 }
 
-func (o *Settlement) GetIngestedAt() time.Time {
-	if o == nil {
+func (s *Settlement) GetIngestedAt() time.Time {
+	if s == nil {
 		return time.Time{}
 	}
-	return o.IngestedAt
+	return s.IngestedAt
 }
 
-func (o *Settlement) GetCurrency() string {
-	if o == nil {
+func (s *Settlement) GetCurrency() string {
+	if s == nil {
 		return ""
 	}
-	return o.Currency
+	return s.Currency
 }
 
-func (o *Settlement) GetAmount() int64 {
-	if o == nil {
+func (s *Settlement) GetAmount() int64 {
+	if s == nil {
 		return 0
 	}
-	return o.Amount
+	return s.Amount
 }
 
-func (o *Settlement) GetExchangeRate() *float64 {
-	if o == nil {
+func (s *Settlement) GetExchangeRate() *float64 {
+	if s == nil {
 		return nil
 	}
-	return o.ExchangeRate
+	return s.ExchangeRate
 }
 
-func (o *Settlement) GetCommission() int64 {
-	if o == nil {
+func (s *Settlement) GetCommission() int64 {
+	if s == nil {
 		return 0
 	}
-	return o.Commission
+	return s.Commission
 }
 
-func (o *Settlement) GetInterchange() *int64 {
-	if o == nil {
+func (s *Settlement) GetInterchange() *int64 {
+	if s == nil {
 		return nil
 	}
-	return o.Interchange
+	return s.Interchange
 }
 
-func (o *Settlement) GetMarkup() *int64 {
-	if o == nil {
+func (s *Settlement) GetMarkup() *int64 {
+	if s == nil {
 		return nil
 	}
-	return o.Markup
+	return s.Markup
 }
 
-func (o *Settlement) GetSchemeFee() *int64 {
-	if o == nil {
+func (s *Settlement) GetSchemeFee() *int64 {
+	if s == nil {
 		return nil
 	}
-	return o.SchemeFee
+	return s.SchemeFee
 }
 
-func (o *Settlement) GetPaymentServiceReportID() string {
-	if o == nil {
+func (s *Settlement) GetPaymentServiceReportID() string {
+	if s == nil {
 		return ""
 	}
-	return o.PaymentServiceReportID
+	return s.PaymentServiceReportID
 }
 
-func (o *Settlement) GetPaymentServiceReportFileIds() []string {
-	if o == nil {
+func (s *Settlement) GetPaymentServiceReportFileIds() []string {
+	if s == nil {
 		return []string{}
 	}
-	return o.PaymentServiceReportFileIds
+	return s.PaymentServiceReportFileIds
 }
 
-func (o *Settlement) GetTransactionID() string {
-	if o == nil {
+func (s *Settlement) GetTransactionID() string {
+	if s == nil {
 		return ""
 	}
-	return o.TransactionID
+	return s.TransactionID
 }
 
-func (o *Settlement) GetType() *string {
-	return types.String("settlement")
+func (s *Settlement) GetType() *string {
+	return types.Pointer("settlement")
 }

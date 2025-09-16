@@ -6,11 +6,11 @@ type GetPaymentServiceGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *GetPaymentServiceGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *GetPaymentServiceGlobals) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }
 
 type GetPaymentServiceRequest struct {
@@ -20,16 +20,16 @@ type GetPaymentServiceRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *GetPaymentServiceRequest) GetPaymentServiceID() string {
-	if o == nil {
+func (g *GetPaymentServiceRequest) GetPaymentServiceID() string {
+	if g == nil {
 		return ""
 	}
-	return o.PaymentServiceID
+	return g.PaymentServiceID
 }
 
-func (o *GetPaymentServiceRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *GetPaymentServiceRequest) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }

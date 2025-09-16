@@ -15,37 +15,37 @@ type DlocalWalletOptions struct {
 	Verify *bool `json:"verify,omitempty"`
 }
 
-func (o *DlocalWalletOptions) GetName() *string {
-	if o == nil {
+func (d *DlocalWalletOptions) GetName() *string {
+	if d == nil {
 		return nil
 	}
-	return o.Name
+	return d.Name
 }
 
-func (o *DlocalWalletOptions) GetEmail() *string {
-	if o == nil {
+func (d *DlocalWalletOptions) GetEmail() *string {
+	if d == nil {
 		return nil
 	}
-	return o.Email
+	return d.Email
 }
 
-func (o *DlocalWalletOptions) GetToken() *string {
-	if o == nil {
+func (d *DlocalWalletOptions) GetToken() *string {
+	if d == nil {
 		return nil
 	}
-	return o.Token
+	return d.Token
 }
 
-func (o *DlocalWalletOptions) GetUsername() *string {
-	if o == nil {
+func (d *DlocalWalletOptions) GetUsername() *string {
+	if d == nil {
 		return nil
 	}
-	return o.Username
+	return d.Username
 }
 
-func (o *DlocalWalletOptions) GetVerify() *bool {
-	if o == nil {
+func (d *DlocalWalletOptions) GetVerify() *bool {
+	if d == nil {
 		return nil
 	}
-	return o.Verify
+	return d.Verify
 }

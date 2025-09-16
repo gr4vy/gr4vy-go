@@ -6,11 +6,11 @@ type DeleteBuyerShippingDetailsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *DeleteBuyerShippingDetailsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (d *DeleteBuyerShippingDetailsGlobals) GetMerchantAccountID() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }
 
 type DeleteBuyerShippingDetailsRequest struct {
@@ -22,23 +22,23 @@ type DeleteBuyerShippingDetailsRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *DeleteBuyerShippingDetailsRequest) GetBuyerID() string {
-	if o == nil {
+func (d *DeleteBuyerShippingDetailsRequest) GetBuyerID() string {
+	if d == nil {
 		return ""
 	}
-	return o.BuyerID
+	return d.BuyerID
 }
 
-func (o *DeleteBuyerShippingDetailsRequest) GetShippingDetailsID() string {
-	if o == nil {
+func (d *DeleteBuyerShippingDetailsRequest) GetShippingDetailsID() string {
+	if d == nil {
 		return ""
 	}
-	return o.ShippingDetailsID
+	return d.ShippingDetailsID
 }
 
-func (o *DeleteBuyerShippingDetailsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (d *DeleteBuyerShippingDetailsRequest) GetMerchantAccountID() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }

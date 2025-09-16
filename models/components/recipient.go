@@ -32,37 +32,37 @@ func (r *Recipient) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Recipient) GetFirstName() string {
-	if o == nil {
+func (r *Recipient) GetFirstName() string {
+	if r == nil {
 		return ""
 	}
-	return o.FirstName
+	return r.FirstName
 }
 
-func (o *Recipient) GetLastName() string {
-	if o == nil {
+func (r *Recipient) GetLastName() string {
+	if r == nil {
 		return ""
 	}
-	return o.LastName
+	return r.LastName
 }
 
-func (o *Recipient) GetAddress() *Address {
-	if o == nil {
+func (r *Recipient) GetAddress() *Address {
+	if r == nil {
 		return nil
 	}
-	return o.Address
+	return r.Address
 }
 
-func (o *Recipient) GetAccountNumber() *string {
-	if o == nil {
+func (r *Recipient) GetAccountNumber() *string {
+	if r == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return r.AccountNumber
 }
 
-func (o *Recipient) GetDateOfBirth() *types.Date {
-	if o == nil {
+func (r *Recipient) GetDateOfBirth() *types.Date {
+	if r == nil {
 		return nil
 	}
-	return o.DateOfBirth
+	return r.DateOfBirth
 }

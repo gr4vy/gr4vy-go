@@ -27,37 +27,37 @@ type ForterAntiFraudOptions struct {
 	TotalDiscount *ForterAntiFraudOptionsDiscount `json:"total_discount,omitempty"`
 }
 
-func (o *ForterAntiFraudOptions) GetDeliveryType() *ForterAntiFraudOptionsDeliveryType {
-	if o == nil {
+func (f *ForterAntiFraudOptions) GetDeliveryType() *ForterAntiFraudOptionsDeliveryType {
+	if f == nil {
 		return nil
 	}
-	return o.DeliveryType
+	return f.DeliveryType
 }
 
-func (o *ForterAntiFraudOptions) GetDeliveryMethod() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptions) GetDeliveryMethod() *string {
+	if f == nil {
 		return nil
 	}
-	return o.DeliveryMethod
+	return f.DeliveryMethod
 }
 
-func (o *ForterAntiFraudOptions) GetIsGuestBuyer() *bool {
-	if o == nil {
+func (f *ForterAntiFraudOptions) GetIsGuestBuyer() *bool {
+	if f == nil {
 		return nil
 	}
-	return o.IsGuestBuyer
+	return f.IsGuestBuyer
 }
 
-func (o *ForterAntiFraudOptions) GetCartItems() []ForterAntiFraudOptionsCartItem {
-	if o == nil {
+func (f *ForterAntiFraudOptions) GetCartItems() []ForterAntiFraudOptionsCartItem {
+	if f == nil {
 		return nil
 	}
-	return o.CartItems
+	return f.CartItems
 }
 
-func (o *ForterAntiFraudOptions) GetTotalDiscount() *ForterAntiFraudOptionsDiscount {
-	if o == nil {
+func (f *ForterAntiFraudOptions) GetTotalDiscount() *ForterAntiFraudOptionsDiscount {
+	if f == nil {
 		return nil
 	}
-	return o.TotalDiscount
+	return f.TotalDiscount
 }

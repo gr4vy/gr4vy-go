@@ -13,30 +13,30 @@ type GiftCardCreate struct {
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 }
 
-func (o *GiftCardCreate) GetNumber() string {
-	if o == nil {
+func (g *GiftCardCreate) GetNumber() string {
+	if g == nil {
 		return ""
 	}
-	return o.Number
+	return g.Number
 }
 
-func (o *GiftCardCreate) GetPin() string {
-	if o == nil {
+func (g *GiftCardCreate) GetPin() string {
+	if g == nil {
 		return ""
 	}
-	return o.Pin
+	return g.Pin
 }
 
-func (o *GiftCardCreate) GetBuyerID() *string {
-	if o == nil {
+func (g *GiftCardCreate) GetBuyerID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.BuyerID
+	return g.BuyerID
 }
 
-func (o *GiftCardCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (g *GiftCardCreate) GetBuyerExternalIdentifier() *string {
+	if g == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return g.BuyerExternalIdentifier
 }

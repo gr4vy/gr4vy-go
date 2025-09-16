@@ -9,16 +9,16 @@ type GooglePaySession struct {
 	Token string `json:"token"`
 }
 
-func (o *GooglePaySession) GetGatewayMerchantID() string {
-	if o == nil {
+func (g *GooglePaySession) GetGatewayMerchantID() string {
+	if g == nil {
 		return ""
 	}
-	return o.GatewayMerchantID
+	return g.GatewayMerchantID
 }
 
-func (o *GooglePaySession) GetToken() string {
-	if o == nil {
+func (g *GooglePaySession) GetToken() string {
+	if g == nil {
 		return ""
 	}
-	return o.Token
+	return g.Token
 }

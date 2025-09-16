@@ -30,34 +30,34 @@ func (t *TransactionPaymentService) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionPaymentService) GetType() *string {
-	return types.String("payment-service")
+func (t *TransactionPaymentService) GetType() *string {
+	return types.Pointer("payment-service")
 }
 
-func (o *TransactionPaymentService) GetID() string {
-	if o == nil {
+func (t *TransactionPaymentService) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TransactionPaymentService) GetPaymentServiceDefinitionID() string {
-	if o == nil {
+func (t *TransactionPaymentService) GetPaymentServiceDefinitionID() string {
+	if t == nil {
 		return ""
 	}
-	return o.PaymentServiceDefinitionID
+	return t.PaymentServiceDefinitionID
 }
 
-func (o *TransactionPaymentService) GetMethod() Method {
-	if o == nil {
+func (t *TransactionPaymentService) GetMethod() Method {
+	if t == nil {
 		return Method("")
 	}
-	return o.Method
+	return t.Method
 }
 
-func (o *TransactionPaymentService) GetDisplayName() string {
-	if o == nil {
+func (t *TransactionPaymentService) GetDisplayName() string {
+	if t == nil {
 		return ""
 	}
-	return o.DisplayName
+	return t.DisplayName
 }

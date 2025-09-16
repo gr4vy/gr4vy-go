@@ -12,30 +12,30 @@ type ForterAntiFraudOptionsCartItemBeneficiary struct {
 	Comments *ForterAntiFraudOptionsCartItemBeneficiaryComments `json:"comments,omitempty"`
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiary) GetPersonalDetails() ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiary) GetPersonalDetails() ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails {
+	if f == nil {
 		return ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails{}
 	}
-	return o.PersonalDetails
+	return f.PersonalDetails
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiary) GetAddress() *ForterAntiFraudOptionsCartItemBeneficiaryAddress {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiary) GetAddress() *ForterAntiFraudOptionsCartItemBeneficiaryAddress {
+	if f == nil {
 		return nil
 	}
-	return o.Address
+	return f.Address
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiary) GetPhone() []ForterAntiFraudOptionsCartItemBeneficiaryPhone {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiary) GetPhone() []ForterAntiFraudOptionsCartItemBeneficiaryPhone {
+	if f == nil {
 		return nil
 	}
-	return o.Phone
+	return f.Phone
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiary) GetComments() *ForterAntiFraudOptionsCartItemBeneficiaryComments {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiary) GetComments() *ForterAntiFraudOptionsCartItemBeneficiaryComments {
+	if f == nil {
 		return nil
 	}
-	return o.Comments
+	return f.Comments
 }

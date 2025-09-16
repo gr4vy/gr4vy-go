@@ -46,83 +46,83 @@ func (g *GiftCardSummary) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GiftCardSummary) GetType() *string {
-	return types.String("gift-card")
+func (g *GiftCardSummary) GetType() *string {
+	return types.Pointer("gift-card")
 }
 
-func (o *GiftCardSummary) GetID() *string {
-	if o == nil {
+func (g *GiftCardSummary) GetID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.ID
+	return g.ID
 }
 
-func (o *GiftCardSummary) GetMerchantAccountID() string {
-	if o == nil {
+func (g *GiftCardSummary) GetMerchantAccountID() string {
+	if g == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }
 
-func (o *GiftCardSummary) GetBin() string {
-	if o == nil {
+func (g *GiftCardSummary) GetBin() string {
+	if g == nil {
 		return ""
 	}
-	return o.Bin
+	return g.Bin
 }
 
-func (o *GiftCardSummary) GetSubBin() string {
-	if o == nil {
+func (g *GiftCardSummary) GetSubBin() string {
+	if g == nil {
 		return ""
 	}
-	return o.SubBin
+	return g.SubBin
 }
 
-func (o *GiftCardSummary) GetLast4() string {
-	if o == nil {
+func (g *GiftCardSummary) GetLast4() string {
+	if g == nil {
 		return ""
 	}
-	return o.Last4
+	return g.Last4
 }
 
-func (o *GiftCardSummary) GetCurrency() *string {
-	if o == nil {
+func (g *GiftCardSummary) GetCurrency() *string {
+	if g == nil {
 		return nil
 	}
-	return o.Currency
+	return g.Currency
 }
 
-func (o *GiftCardSummary) GetExpirationDate() *time.Time {
-	if o == nil {
+func (g *GiftCardSummary) GetExpirationDate() *time.Time {
+	if g == nil {
 		return nil
 	}
-	return o.ExpirationDate
+	return g.ExpirationDate
 }
 
-func (o *GiftCardSummary) GetBalance() *int64 {
-	if o == nil {
+func (g *GiftCardSummary) GetBalance() *int64 {
+	if g == nil {
 		return nil
 	}
-	return o.Balance
+	return g.Balance
 }
 
-func (o *GiftCardSummary) GetBalanceErrorCode() *GiftCardErrorCode {
-	if o == nil {
+func (g *GiftCardSummary) GetBalanceErrorCode() *GiftCardErrorCode {
+	if g == nil {
 		return nil
 	}
-	return o.BalanceErrorCode
+	return g.BalanceErrorCode
 }
 
-func (o *GiftCardSummary) GetBalanceRawErrorCode() *string {
-	if o == nil {
+func (g *GiftCardSummary) GetBalanceRawErrorCode() *string {
+	if g == nil {
 		return nil
 	}
-	return o.BalanceRawErrorCode
+	return g.BalanceRawErrorCode
 }
 
-func (o *GiftCardSummary) GetBalanceRawErrorMessage() *string {
-	if o == nil {
+func (g *GiftCardSummary) GetBalanceRawErrorMessage() *string {
+	if g == nil {
 		return nil
 	}
-	return o.BalanceRawErrorMessage
+	return g.BalanceRawErrorMessage
 }

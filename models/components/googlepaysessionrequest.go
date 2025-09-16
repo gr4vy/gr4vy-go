@@ -7,9 +7,9 @@ type GooglePaySessionRequest struct {
 	OriginDomain string `json:"origin_domain"`
 }
 
-func (o *GooglePaySessionRequest) GetOriginDomain() string {
-	if o == nil {
+func (g *GooglePaySessionRequest) GetOriginDomain() string {
+	if g == nil {
 		return ""
 	}
-	return o.OriginDomain
+	return g.OriginDomain
 }

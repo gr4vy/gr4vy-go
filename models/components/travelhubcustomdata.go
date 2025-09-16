@@ -11,23 +11,23 @@ type TravelHubCustomData struct {
 	Type *string `json:"type,omitempty"`
 }
 
-func (o *TravelHubCustomData) GetName() string {
-	if o == nil {
+func (t *TravelHubCustomData) GetName() string {
+	if t == nil {
 		return ""
 	}
-	return o.Name
+	return t.Name
 }
 
-func (o *TravelHubCustomData) GetValue() string {
-	if o == nil {
+func (t *TravelHubCustomData) GetValue() string {
+	if t == nil {
 		return ""
 	}
-	return o.Value
+	return t.Value
 }
 
-func (o *TravelHubCustomData) GetType() *string {
-	if o == nil {
+func (t *TravelHubCustomData) GetType() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Type
+	return t.Type
 }

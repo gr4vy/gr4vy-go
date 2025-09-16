@@ -10,16 +10,16 @@ type Field struct {
 	Value string `json:"value"`
 }
 
-func (o *Field) GetKey() string {
-	if o == nil {
+func (f *Field) GetKey() string {
+	if f == nil {
 		return ""
 	}
-	return o.Key
+	return f.Key
 }
 
-func (o *Field) GetValue() string {
-	if o == nil {
+func (f *Field) GetValue() string {
+	if f == nil {
 		return ""
 	}
-	return o.Value
+	return f.Value
 }

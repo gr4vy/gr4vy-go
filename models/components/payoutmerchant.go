@@ -19,51 +19,51 @@ type PayoutMerchant struct {
 	Address *Address `json:"address,omitempty"`
 }
 
-func (o *PayoutMerchant) GetName() string {
-	if o == nil {
+func (p *PayoutMerchant) GetName() string {
+	if p == nil {
 		return ""
 	}
-	return o.Name
+	return p.Name
 }
 
-func (o *PayoutMerchant) GetIdentificationNumber() string {
-	if o == nil {
+func (p *PayoutMerchant) GetIdentificationNumber() string {
+	if p == nil {
 		return ""
 	}
-	return o.IdentificationNumber
+	return p.IdentificationNumber
 }
 
-func (o *PayoutMerchant) GetPhoneNumber() string {
-	if o == nil {
+func (p *PayoutMerchant) GetPhoneNumber() string {
+	if p == nil {
 		return ""
 	}
-	return o.PhoneNumber
+	return p.PhoneNumber
 }
 
-func (o *PayoutMerchant) GetURL() string {
-	if o == nil {
+func (p *PayoutMerchant) GetURL() string {
+	if p == nil {
 		return ""
 	}
-	return o.URL
+	return p.URL
 }
 
-func (o *PayoutMerchant) GetStatementDescriptor() string {
-	if o == nil {
+func (p *PayoutMerchant) GetStatementDescriptor() string {
+	if p == nil {
 		return ""
 	}
-	return o.StatementDescriptor
+	return p.StatementDescriptor
 }
 
-func (o *PayoutMerchant) GetMerchantCategoryCode() string {
-	if o == nil {
+func (p *PayoutMerchant) GetMerchantCategoryCode() string {
+	if p == nil {
 		return ""
 	}
-	return o.MerchantCategoryCode
+	return p.MerchantCategoryCode
 }
 
-func (o *PayoutMerchant) GetAddress() *Address {
-	if o == nil {
+func (p *PayoutMerchant) GetAddress() *Address {
+	if p == nil {
 		return nil
 	}
-	return o.Address
+	return p.Address
 }

@@ -464,9 +464,9 @@ func main() {
 	)
 
 	res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{
-		Cursor:             gr4vygo.String("ZXhhbXBsZTE"),
-		Search:             gr4vygo.String("John"),
-		ExternalIdentifier: gr4vygo.String("buyer-12345"),
+		Cursor:             gr4vygo.Pointer("ZXhhbXBsZTE"),
+		Search:             gr4vygo.Pointer("John"),
+		ExternalIdentifier: gr4vygo.Pointer("buyer-12345"),
 	})
 	if err != nil {
 		log.Fatal(err)

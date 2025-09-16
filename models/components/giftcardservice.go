@@ -28,27 +28,27 @@ func (g *GiftCardService) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GiftCardService) GetType() *string {
-	return types.String("gift-card-service")
+func (g *GiftCardService) GetType() *string {
+	return types.Pointer("gift-card-service")
 }
 
-func (o *GiftCardService) GetID() string {
-	if o == nil {
+func (g *GiftCardService) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return o.ID
+	return g.ID
 }
 
-func (o *GiftCardService) GetGiftCardServiceDefinitionID() GiftCardServiceProvider {
-	if o == nil {
+func (g *GiftCardService) GetGiftCardServiceDefinitionID() GiftCardServiceProvider {
+	if g == nil {
 		return GiftCardServiceProvider("")
 	}
-	return o.GiftCardServiceDefinitionID
+	return g.GiftCardServiceDefinitionID
 }
 
-func (o *GiftCardService) GetDisplayName() string {
-	if o == nil {
+func (g *GiftCardService) GetDisplayName() string {
+	if g == nil {
 		return ""
 	}
-	return o.DisplayName
+	return g.DisplayName
 }

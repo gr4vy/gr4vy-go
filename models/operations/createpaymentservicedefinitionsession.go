@@ -7,16 +7,16 @@ type CreatePaymentServiceDefinitionSessionRequest struct {
 	RequestBody                map[string]any `request:"mediaType=application/json"`
 }
 
-func (o *CreatePaymentServiceDefinitionSessionRequest) GetPaymentServiceDefinitionID() string {
-	if o == nil {
+func (c *CreatePaymentServiceDefinitionSessionRequest) GetPaymentServiceDefinitionID() string {
+	if c == nil {
 		return ""
 	}
-	return o.PaymentServiceDefinitionID
+	return c.PaymentServiceDefinitionID
 }
 
-func (o *CreatePaymentServiceDefinitionSessionRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (c *CreatePaymentServiceDefinitionSessionRequest) GetRequestBody() map[string]any {
+	if c == nil {
 		return map[string]any{}
 	}
-	return o.RequestBody
+	return c.RequestBody
 }

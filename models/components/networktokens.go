@@ -7,9 +7,9 @@ type NetworkTokens struct {
 	Items []NetworkToken `json:"items"`
 }
 
-func (o *NetworkTokens) GetItems() []NetworkToken {
-	if o == nil {
+func (n *NetworkTokens) GetItems() []NetworkToken {
+	if n == nil {
 		return []NetworkToken{}
 	}
-	return o.Items
+	return n.Items
 }

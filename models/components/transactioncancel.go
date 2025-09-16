@@ -32,41 +32,41 @@ func (t *TransactionCancel) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionCancel) GetType() *string {
-	return types.String("transaction-cancel")
+func (t *TransactionCancel) GetType() *string {
+	return types.Pointer("transaction-cancel")
 }
 
-func (o *TransactionCancel) GetStatus() CancelStatus {
-	if o == nil {
+func (t *TransactionCancel) GetStatus() CancelStatus {
+	if t == nil {
 		return CancelStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TransactionCancel) GetCode() *string {
-	if o == nil {
+func (t *TransactionCancel) GetCode() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Code
+	return t.Code
 }
 
-func (o *TransactionCancel) GetRawResponseCode() *string {
-	if o == nil {
+func (t *TransactionCancel) GetRawResponseCode() *string {
+	if t == nil {
 		return nil
 	}
-	return o.RawResponseCode
+	return t.RawResponseCode
 }
 
-func (o *TransactionCancel) GetRawResponseDescription() *string {
-	if o == nil {
+func (t *TransactionCancel) GetRawResponseDescription() *string {
+	if t == nil {
 		return nil
 	}
-	return o.RawResponseDescription
+	return t.RawResponseDescription
 }
 
-func (o *TransactionCancel) GetTransaction() Transaction {
-	if o == nil {
+func (t *TransactionCancel) GetTransaction() Transaction {
+	if t == nil {
 		return Transaction{}
 	}
-	return o.Transaction
+	return t.Transaction
 }

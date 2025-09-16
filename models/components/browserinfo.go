@@ -31,72 +31,72 @@ type BrowserInfo struct {
 	AcceptHeader *string `json:"accept_header,omitempty"`
 }
 
-func (o *BrowserInfo) GetJavascriptEnabled() bool {
-	if o == nil {
+func (b *BrowserInfo) GetJavascriptEnabled() bool {
+	if b == nil {
 		return false
 	}
-	return o.JavascriptEnabled
+	return b.JavascriptEnabled
 }
 
-func (o *BrowserInfo) GetJavaEnabled() bool {
-	if o == nil {
+func (b *BrowserInfo) GetJavaEnabled() bool {
+	if b == nil {
 		return false
 	}
-	return o.JavaEnabled
+	return b.JavaEnabled
 }
 
-func (o *BrowserInfo) GetLanguage() string {
-	if o == nil {
+func (b *BrowserInfo) GetLanguage() string {
+	if b == nil {
 		return ""
 	}
-	return o.Language
+	return b.Language
 }
 
-func (o *BrowserInfo) GetColorDepth() int64 {
-	if o == nil {
+func (b *BrowserInfo) GetColorDepth() int64 {
+	if b == nil {
 		return 0
 	}
-	return o.ColorDepth
+	return b.ColorDepth
 }
 
-func (o *BrowserInfo) GetScreenHeight() int64 {
-	if o == nil {
+func (b *BrowserInfo) GetScreenHeight() int64 {
+	if b == nil {
 		return 0
 	}
-	return o.ScreenHeight
+	return b.ScreenHeight
 }
 
-func (o *BrowserInfo) GetScreenWidth() int64 {
-	if o == nil {
+func (b *BrowserInfo) GetScreenWidth() int64 {
+	if b == nil {
 		return 0
 	}
-	return o.ScreenWidth
+	return b.ScreenWidth
 }
 
-func (o *BrowserInfo) GetTimeZoneOffset() int64 {
-	if o == nil {
+func (b *BrowserInfo) GetTimeZoneOffset() int64 {
+	if b == nil {
 		return 0
 	}
-	return o.TimeZoneOffset
+	return b.TimeZoneOffset
 }
 
-func (o *BrowserInfo) GetUserAgent() string {
-	if o == nil {
+func (b *BrowserInfo) GetUserAgent() string {
+	if b == nil {
 		return ""
 	}
-	return o.UserAgent
+	return b.UserAgent
 }
 
-func (o *BrowserInfo) GetUserDevice() UserDevice {
-	if o == nil {
+func (b *BrowserInfo) GetUserDevice() UserDevice {
+	if b == nil {
 		return UserDevice("")
 	}
-	return o.UserDevice
+	return b.UserDevice
 }
 
-func (o *BrowserInfo) GetAcceptHeader() *string {
-	if o == nil {
+func (b *BrowserInfo) GetAcceptHeader() *string {
+	if b == nil {
 		return nil
 	}
-	return o.AcceptHeader
+	return b.AcceptHeader
 }

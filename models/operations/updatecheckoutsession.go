@@ -10,11 +10,11 @@ type UpdateCheckoutSessionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *UpdateCheckoutSessionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdateCheckoutSessionGlobals) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
 type UpdateCheckoutSessionRequest struct {
@@ -25,23 +25,23 @@ type UpdateCheckoutSessionRequest struct {
 	CheckoutSessionCreate components.CheckoutSessionCreate `request:"mediaType=application/json"`
 }
 
-func (o *UpdateCheckoutSessionRequest) GetSessionID() string {
-	if o == nil {
+func (u *UpdateCheckoutSessionRequest) GetSessionID() string {
+	if u == nil {
 		return ""
 	}
-	return o.SessionID
+	return u.SessionID
 }
 
-func (o *UpdateCheckoutSessionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdateCheckoutSessionRequest) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
-func (o *UpdateCheckoutSessionRequest) GetCheckoutSessionCreate() components.CheckoutSessionCreate {
-	if o == nil {
+func (u *UpdateCheckoutSessionRequest) GetCheckoutSessionCreate() components.CheckoutSessionCreate {
+	if u == nil {
 		return components.CheckoutSessionCreate{}
 	}
-	return o.CheckoutSessionCreate
+	return u.CheckoutSessionCreate
 }

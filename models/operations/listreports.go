@@ -11,11 +11,11 @@ type ListReportsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListReportsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListReportsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListReportsRequest struct {
@@ -44,46 +44,46 @@ func (l *ListReportsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListReportsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListReportsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListReportsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListReportsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListReportsRequest) GetSchedule() []components.ReportSchedule {
-	if o == nil {
+func (l *ListReportsRequest) GetSchedule() []components.ReportSchedule {
+	if l == nil {
 		return nil
 	}
-	return o.Schedule
+	return l.Schedule
 }
 
-func (o *ListReportsRequest) GetScheduleEnabled() *bool {
-	if o == nil {
+func (l *ListReportsRequest) GetScheduleEnabled() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.ScheduleEnabled
+	return l.ScheduleEnabled
 }
 
-func (o *ListReportsRequest) GetName() *string {
-	if o == nil {
+func (l *ListReportsRequest) GetName() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Name
+	return l.Name
 }
 
-func (o *ListReportsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListReportsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListReportsResponse struct {
@@ -92,9 +92,9 @@ type ListReportsResponse struct {
 	Next func() (*ListReportsResponse, error)
 }
 
-func (o *ListReportsResponse) GetResult() components.Reports {
-	if o == nil {
+func (l *ListReportsResponse) GetResult() components.Reports {
+	if l == nil {
 		return components.Reports{}
 	}
-	return o.Result
+	return l.Result
 }

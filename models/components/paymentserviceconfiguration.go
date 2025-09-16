@@ -16,44 +16,44 @@ type PaymentServiceConfiguration struct {
 	CartItemsShouldMatchAmount bool `json:"cart_items_should_match_amount"`
 }
 
-func (o *PaymentServiceConfiguration) GetApprovalUITarget() ApprovalTarget {
-	if o == nil {
+func (p *PaymentServiceConfiguration) GetApprovalUITarget() ApprovalTarget {
+	if p == nil {
 		return ApprovalTarget("")
 	}
-	return o.ApprovalUITarget
+	return p.ApprovalUITarget
 }
 
-func (o *PaymentServiceConfiguration) GetApprovalUIHeight() string {
-	if o == nil {
+func (p *PaymentServiceConfiguration) GetApprovalUIHeight() string {
+	if p == nil {
 		return ""
 	}
-	return o.ApprovalUIHeight
+	return p.ApprovalUIHeight
 }
 
-func (o *PaymentServiceConfiguration) GetApprovalUIWidth() string {
-	if o == nil {
+func (p *PaymentServiceConfiguration) GetApprovalUIWidth() string {
+	if p == nil {
 		return ""
 	}
-	return o.ApprovalUIWidth
+	return p.ApprovalUIWidth
 }
 
-func (o *PaymentServiceConfiguration) GetCartItemsLimit() int64 {
-	if o == nil {
+func (p *PaymentServiceConfiguration) GetCartItemsLimit() int64 {
+	if p == nil {
 		return 0
 	}
-	return o.CartItemsLimit
+	return p.CartItemsLimit
 }
 
-func (o *PaymentServiceConfiguration) GetCartItemsRequired() bool {
-	if o == nil {
+func (p *PaymentServiceConfiguration) GetCartItemsRequired() bool {
+	if p == nil {
 		return false
 	}
-	return o.CartItemsRequired
+	return p.CartItemsRequired
 }
 
-func (o *PaymentServiceConfiguration) GetCartItemsShouldMatchAmount() bool {
-	if o == nil {
+func (p *PaymentServiceConfiguration) GetCartItemsShouldMatchAmount() bool {
+	if p == nil {
 		return false
 	}
-	return o.CartItemsShouldMatchAmount
+	return p.CartItemsShouldMatchAmount
 }

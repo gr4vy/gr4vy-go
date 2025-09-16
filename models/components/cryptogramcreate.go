@@ -7,9 +7,9 @@ type CryptogramCreate struct {
 	MerchantInitiated bool `json:"merchant_initiated"`
 }
 
-func (o *CryptogramCreate) GetMerchantInitiated() bool {
-	if o == nil {
+func (c *CryptogramCreate) GetMerchantInitiated() bool {
+	if c == nil {
 		return false
 	}
-	return o.MerchantInitiated
+	return c.MerchantInitiated
 }

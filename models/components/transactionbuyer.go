@@ -33,41 +33,41 @@ func (t *TransactionBuyer) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionBuyer) GetType() *string {
-	return types.String("buyer")
+func (t *TransactionBuyer) GetType() *string {
+	return types.Pointer("buyer")
 }
 
-func (o *TransactionBuyer) GetID() *string {
-	if o == nil {
+func (t *TransactionBuyer) GetID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TransactionBuyer) GetDisplayName() *string {
-	if o == nil {
+func (t *TransactionBuyer) GetDisplayName() *string {
+	if t == nil {
 		return nil
 	}
-	return o.DisplayName
+	return t.DisplayName
 }
 
-func (o *TransactionBuyer) GetExternalIdentifier() *string {
-	if o == nil {
+func (t *TransactionBuyer) GetExternalIdentifier() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return t.ExternalIdentifier
 }
 
-func (o *TransactionBuyer) GetBillingDetails() *BillingDetailsOutput {
-	if o == nil {
+func (t *TransactionBuyer) GetBillingDetails() *BillingDetailsOutput {
+	if t == nil {
 		return nil
 	}
-	return o.BillingDetails
+	return t.BillingDetails
 }
 
-func (o *TransactionBuyer) GetAccountNumber() *string {
-	if o == nil {
+func (t *TransactionBuyer) GetAccountNumber() *string {
+	if t == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return t.AccountNumber
 }

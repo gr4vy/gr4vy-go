@@ -28,30 +28,30 @@ func (m *MerchantAccounts) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *MerchantAccounts) GetItems() []MerchantAccount {
-	if o == nil {
+func (m *MerchantAccounts) GetItems() []MerchantAccount {
+	if m == nil {
 		return []MerchantAccount{}
 	}
-	return o.Items
+	return m.Items
 }
 
-func (o *MerchantAccounts) GetLimit() *int64 {
-	if o == nil {
+func (m *MerchantAccounts) GetLimit() *int64 {
+	if m == nil {
 		return nil
 	}
-	return o.Limit
+	return m.Limit
 }
 
-func (o *MerchantAccounts) GetNextCursor() *string {
-	if o == nil {
+func (m *MerchantAccounts) GetNextCursor() *string {
+	if m == nil {
 		return nil
 	}
-	return o.NextCursor
+	return m.NextCursor
 }
 
-func (o *MerchantAccounts) GetPreviousCursor() *string {
-	if o == nil {
+func (m *MerchantAccounts) GetPreviousCursor() *string {
+	if m == nil {
 		return nil
 	}
-	return o.PreviousCursor
+	return m.PreviousCursor
 }

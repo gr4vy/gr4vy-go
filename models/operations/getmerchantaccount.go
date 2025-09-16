@@ -7,9 +7,9 @@ type GetMerchantAccountRequest struct {
 	MerchantAccountID string `pathParam:"style=simple,explode=false,name=merchant_account_id"`
 }
 
-func (o *GetMerchantAccountRequest) GetMerchantAccountID() string {
-	if o == nil {
+func (g *GetMerchantAccountRequest) GetMerchantAccountID() string {
+	if g == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }

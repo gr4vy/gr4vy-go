@@ -17,44 +17,44 @@ type AdyenCardOptions struct {
 	Splits *AdyenSplitsOptions `json:"splits,omitempty"`
 }
 
-func (o *AdyenCardOptions) GetAutoRescue() *bool {
-	if o == nil {
+func (a *AdyenCardOptions) GetAutoRescue() *bool {
+	if a == nil {
 		return nil
 	}
-	return o.AutoRescue
+	return a.AutoRescue
 }
 
-func (o *AdyenCardOptions) GetMaxDaysToRescue() *int64 {
-	if o == nil {
+func (a *AdyenCardOptions) GetMaxDaysToRescue() *int64 {
+	if a == nil {
 		return nil
 	}
-	return o.MaxDaysToRescue
+	return a.MaxDaysToRescue
 }
 
-func (o *AdyenCardOptions) GetAdditionalData() map[string]string {
-	if o == nil {
+func (a *AdyenCardOptions) GetAdditionalData() map[string]string {
+	if a == nil {
 		return nil
 	}
-	return o.AdditionalData
+	return a.AdditionalData
 }
 
-func (o *AdyenCardOptions) GetAutoRescueScenario() *AdyenCardAutoRescueScenariosEnum {
-	if o == nil {
+func (a *AdyenCardOptions) GetAutoRescueScenario() *AdyenCardAutoRescueScenariosEnum {
+	if a == nil {
 		return nil
 	}
-	return o.AutoRescueScenario
+	return a.AutoRescueScenario
 }
 
-func (o *AdyenCardOptions) GetWindowOrigin() *string {
-	if o == nil {
+func (a *AdyenCardOptions) GetWindowOrigin() *string {
+	if a == nil {
 		return nil
 	}
-	return o.WindowOrigin
+	return a.WindowOrigin
 }
 
-func (o *AdyenCardOptions) GetSplits() *AdyenSplitsOptions {
-	if o == nil {
+func (a *AdyenCardOptions) GetSplits() *AdyenSplitsOptions {
+	if a == nil {
 		return nil
 	}
-	return o.Splits
+	return a.Splits
 }

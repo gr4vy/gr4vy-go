@@ -15,37 +15,37 @@ type WpayEverdaypayOptions struct {
 	PostPaymentRedirect *bool `json:"postPaymentRedirect,omitempty"`
 }
 
-func (o *WpayEverdaypayOptions) GetMerchantDefinedData() map[string]string {
-	if o == nil {
+func (w *WpayEverdaypayOptions) GetMerchantDefinedData() map[string]string {
+	if w == nil {
 		return nil
 	}
-	return o.MerchantDefinedData
+	return w.MerchantDefinedData
 }
 
-func (o *WpayEverdaypayOptions) GetCustomerID() *string {
-	if o == nil {
+func (w *WpayEverdaypayOptions) GetCustomerID() *string {
+	if w == nil {
 		return nil
 	}
-	return o.CustomerID
+	return w.CustomerID
 }
 
-func (o *WpayEverdaypayOptions) GetRewardsAccessToken() *string {
-	if o == nil {
+func (w *WpayEverdaypayOptions) GetRewardsAccessToken() *string {
+	if w == nil {
 		return nil
 	}
-	return o.RewardsAccessToken
+	return w.RewardsAccessToken
 }
 
-func (o *WpayEverdaypayOptions) GetDeviceID() *string {
-	if o == nil {
+func (w *WpayEverdaypayOptions) GetDeviceID() *string {
+	if w == nil {
 		return nil
 	}
-	return o.DeviceID
+	return w.DeviceID
 }
 
-func (o *WpayEverdaypayOptions) GetPostPaymentRedirect() *bool {
-	if o == nil {
+func (w *WpayEverdaypayOptions) GetPostPaymentRedirect() *bool {
+	if w == nil {
 		return nil
 	}
-	return o.PostPaymentRedirect
+	return w.PostPaymentRedirect
 }

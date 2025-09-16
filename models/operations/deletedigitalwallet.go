@@ -6,11 +6,11 @@ type DeleteDigitalWalletGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *DeleteDigitalWalletGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (d *DeleteDigitalWalletGlobals) GetMerchantAccountID() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }
 
 type DeleteDigitalWalletRequest struct {
@@ -20,16 +20,16 @@ type DeleteDigitalWalletRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *DeleteDigitalWalletRequest) GetDigitalWalletID() string {
-	if o == nil {
+func (d *DeleteDigitalWalletRequest) GetDigitalWalletID() string {
+	if d == nil {
 		return ""
 	}
-	return o.DigitalWalletID
+	return d.DigitalWalletID
 }
 
-func (o *DeleteDigitalWalletRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (d *DeleteDigitalWalletRequest) GetMerchantAccountID() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }

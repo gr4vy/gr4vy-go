@@ -11,23 +11,23 @@ type BraintreeOptions struct {
 	DynamicDataFields *BraintreeDynamicDataFieldsOptions `json:"dynamic_data_fields,omitempty"`
 }
 
-func (o *BraintreeOptions) GetDiscountAmount() *int64 {
-	if o == nil {
+func (b *BraintreeOptions) GetDiscountAmount() *int64 {
+	if b == nil {
 		return nil
 	}
-	return o.DiscountAmount
+	return b.DiscountAmount
 }
 
-func (o *BraintreeOptions) GetCustomFields() map[string]string {
-	if o == nil {
+func (b *BraintreeOptions) GetCustomFields() map[string]string {
+	if b == nil {
 		return nil
 	}
-	return o.CustomFields
+	return b.CustomFields
 }
 
-func (o *BraintreeOptions) GetDynamicDataFields() *BraintreeDynamicDataFieldsOptions {
-	if o == nil {
+func (b *BraintreeOptions) GetDynamicDataFields() *BraintreeDynamicDataFieldsOptions {
+	if b == nil {
 		return nil
 	}
-	return o.DynamicDataFields
+	return b.DynamicDataFields
 }

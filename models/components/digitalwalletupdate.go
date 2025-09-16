@@ -11,37 +11,37 @@ type DigitalWalletUpdate struct {
 	MerchantCountryCode *string  `json:"merchant_country_code,omitempty"`
 }
 
-func (o *DigitalWalletUpdate) GetMerchantName() *string {
-	if o == nil {
+func (d *DigitalWalletUpdate) GetMerchantName() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantName
+	return d.MerchantName
 }
 
-func (o *DigitalWalletUpdate) GetDomainNames() []string {
-	if o == nil {
+func (d *DigitalWalletUpdate) GetDomainNames() []string {
+	if d == nil {
 		return nil
 	}
-	return o.DomainNames
+	return d.DomainNames
 }
 
-func (o *DigitalWalletUpdate) GetMerchantDisplayName() *string {
-	if o == nil {
+func (d *DigitalWalletUpdate) GetMerchantDisplayName() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantDisplayName
+	return d.MerchantDisplayName
 }
 
-func (o *DigitalWalletUpdate) GetMerchantURL() *string {
-	if o == nil {
+func (d *DigitalWalletUpdate) GetMerchantURL() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantURL
+	return d.MerchantURL
 }
 
-func (o *DigitalWalletUpdate) GetMerchantCountryCode() *string {
-	if o == nil {
+func (d *DigitalWalletUpdate) GetMerchantCountryCode() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantCountryCode
+	return d.MerchantCountryCode
 }

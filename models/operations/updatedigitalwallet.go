@@ -10,11 +10,11 @@ type UpdateDigitalWalletGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *UpdateDigitalWalletGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdateDigitalWalletGlobals) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
 type UpdateDigitalWalletRequest struct {
@@ -25,23 +25,23 @@ type UpdateDigitalWalletRequest struct {
 	DigitalWalletUpdate components.DigitalWalletUpdate `request:"mediaType=application/json"`
 }
 
-func (o *UpdateDigitalWalletRequest) GetDigitalWalletID() string {
-	if o == nil {
+func (u *UpdateDigitalWalletRequest) GetDigitalWalletID() string {
+	if u == nil {
 		return ""
 	}
-	return o.DigitalWalletID
+	return u.DigitalWalletID
 }
 
-func (o *UpdateDigitalWalletRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdateDigitalWalletRequest) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
-func (o *UpdateDigitalWalletRequest) GetDigitalWalletUpdate() components.DigitalWalletUpdate {
-	if o == nil {
+func (u *UpdateDigitalWalletRequest) GetDigitalWalletUpdate() components.DigitalWalletUpdate {
+	if u == nil {
 		return components.DigitalWalletUpdate{}
 	}
-	return o.DigitalWalletUpdate
+	return u.DigitalWalletUpdate
 }

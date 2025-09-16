@@ -28,30 +28,30 @@ func (a *AuditLogEntries) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *AuditLogEntries) GetItems() []AuditLogEntry {
-	if o == nil {
+func (a *AuditLogEntries) GetItems() []AuditLogEntry {
+	if a == nil {
 		return []AuditLogEntry{}
 	}
-	return o.Items
+	return a.Items
 }
 
-func (o *AuditLogEntries) GetLimit() *int64 {
-	if o == nil {
+func (a *AuditLogEntries) GetLimit() *int64 {
+	if a == nil {
 		return nil
 	}
-	return o.Limit
+	return a.Limit
 }
 
-func (o *AuditLogEntries) GetNextCursor() *string {
-	if o == nil {
+func (a *AuditLogEntries) GetNextCursor() *string {
+	if a == nil {
 		return nil
 	}
-	return o.NextCursor
+	return a.NextCursor
 }
 
-func (o *AuditLogEntries) GetPreviousCursor() *string {
-	if o == nil {
+func (a *AuditLogEntries) GetPreviousCursor() *string {
+	if a == nil {
 		return nil
 	}
-	return o.PreviousCursor
+	return a.PreviousCursor
 }

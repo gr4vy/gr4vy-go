@@ -78,163 +78,163 @@ func (a *AirlineLeg) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *AirlineLeg) GetArrivalAirport() *string {
-	if o == nil {
+func (a *AirlineLeg) GetArrivalAirport() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ArrivalAirport
+	return a.ArrivalAirport
 }
 
-func (o *AirlineLeg) GetArrivalAt() *time.Time {
-	if o == nil {
+func (a *AirlineLeg) GetArrivalAt() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return o.ArrivalAt
+	return a.ArrivalAt
 }
 
-func (o *AirlineLeg) GetArrivalCity() *string {
-	if o == nil {
+func (a *AirlineLeg) GetArrivalCity() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ArrivalCity
+	return a.ArrivalCity
 }
 
-func (o *AirlineLeg) GetArrivalCountry() *string {
-	if o == nil {
+func (a *AirlineLeg) GetArrivalCountry() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ArrivalCountry
+	return a.ArrivalCountry
 }
 
-func (o *AirlineLeg) GetCarrierCode() *string {
-	if o == nil {
+func (a *AirlineLeg) GetCarrierCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.CarrierCode
+	return a.CarrierCode
 }
 
-func (o *AirlineLeg) GetCarrierName() *string {
-	if o == nil {
+func (a *AirlineLeg) GetCarrierName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.CarrierName
+	return a.CarrierName
 }
 
-func (o *AirlineLeg) GetIataDesignator() *string {
-	if o == nil {
+func (a *AirlineLeg) GetIataDesignator() *string {
+	if a == nil {
 		return nil
 	}
-	return o.IataDesignator
+	return a.IataDesignator
 }
 
-func (o *AirlineLeg) GetIcaoCode() *string {
-	if o == nil {
+func (a *AirlineLeg) GetIcaoCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.IcaoCode
+	return a.IcaoCode
 }
 
-func (o *AirlineLeg) GetCouponNumber() *string {
-	if o == nil {
+func (a *AirlineLeg) GetCouponNumber() *string {
+	if a == nil {
 		return nil
 	}
-	return o.CouponNumber
+	return a.CouponNumber
 }
 
-func (o *AirlineLeg) GetDepartureAirport() *string {
-	if o == nil {
+func (a *AirlineLeg) GetDepartureAirport() *string {
+	if a == nil {
 		return nil
 	}
-	return o.DepartureAirport
+	return a.DepartureAirport
 }
 
-func (o *AirlineLeg) GetDepartureAt() *time.Time {
-	if o == nil {
+func (a *AirlineLeg) GetDepartureAt() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return o.DepartureAt
+	return a.DepartureAt
 }
 
-func (o *AirlineLeg) GetDepartureCity() *string {
-	if o == nil {
+func (a *AirlineLeg) GetDepartureCity() *string {
+	if a == nil {
 		return nil
 	}
-	return o.DepartureCity
+	return a.DepartureCity
 }
 
-func (o *AirlineLeg) GetDepartureCountry() *string {
-	if o == nil {
+func (a *AirlineLeg) GetDepartureCountry() *string {
+	if a == nil {
 		return nil
 	}
-	return o.DepartureCountry
+	return a.DepartureCountry
 }
 
-func (o *AirlineLeg) GetDepartureTaxAmount() *int64 {
-	if o == nil {
+func (a *AirlineLeg) GetDepartureTaxAmount() *int64 {
+	if a == nil {
 		return nil
 	}
-	return o.DepartureTaxAmount
+	return a.DepartureTaxAmount
 }
 
-func (o *AirlineLeg) GetFareAmount() *int64 {
-	if o == nil {
+func (a *AirlineLeg) GetFareAmount() *int64 {
+	if a == nil {
 		return nil
 	}
-	return o.FareAmount
+	return a.FareAmount
 }
 
-func (o *AirlineLeg) GetFareBasisCode() *string {
-	if o == nil {
+func (a *AirlineLeg) GetFareBasisCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.FareBasisCode
+	return a.FareBasisCode
 }
 
-func (o *AirlineLeg) GetFeeAmount() *int64 {
-	if o == nil {
+func (a *AirlineLeg) GetFeeAmount() *int64 {
+	if a == nil {
 		return nil
 	}
-	return o.FeeAmount
+	return a.FeeAmount
 }
 
-func (o *AirlineLeg) GetFlightClass() *string {
-	if o == nil {
+func (a *AirlineLeg) GetFlightClass() *string {
+	if a == nil {
 		return nil
 	}
-	return o.FlightClass
+	return a.FlightClass
 }
 
-func (o *AirlineLeg) GetFlightNumber() *string {
-	if o == nil {
+func (a *AirlineLeg) GetFlightNumber() *string {
+	if a == nil {
 		return nil
 	}
-	return o.FlightNumber
+	return a.FlightNumber
 }
 
-func (o *AirlineLeg) GetRouteType() *RouteType {
-	if o == nil {
+func (a *AirlineLeg) GetRouteType() *RouteType {
+	if a == nil {
 		return nil
 	}
-	return o.RouteType
+	return a.RouteType
 }
 
-func (o *AirlineLeg) GetSeatClass() *string {
-	if o == nil {
+func (a *AirlineLeg) GetSeatClass() *string {
+	if a == nil {
 		return nil
 	}
-	return o.SeatClass
+	return a.SeatClass
 }
 
-func (o *AirlineLeg) GetStopOver() *bool {
-	if o == nil {
+func (a *AirlineLeg) GetStopOver() *bool {
+	if a == nil {
 		return nil
 	}
-	return o.StopOver
+	return a.StopOver
 }
 
-func (o *AirlineLeg) GetTaxAmount() *int64 {
-	if o == nil {
+func (a *AirlineLeg) GetTaxAmount() *int64 {
+	if a == nil {
 		return nil
 	}
-	return o.TaxAmount
+	return a.TaxAmount
 }

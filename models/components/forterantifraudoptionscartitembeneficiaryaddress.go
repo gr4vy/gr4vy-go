@@ -19,51 +19,51 @@ type ForterAntiFraudOptionsCartItemBeneficiaryAddress struct {
 	City *string `json:"city,omitempty"`
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetCountry() string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetCountry() string {
+	if f == nil {
 		return ""
 	}
-	return o.Country
+	return f.Country
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetAddress1() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetAddress1() *string {
+	if f == nil {
 		return nil
 	}
-	return o.Address1
+	return f.Address1
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetAddress2() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetAddress2() *string {
+	if f == nil {
 		return nil
 	}
-	return o.Address2
+	return f.Address2
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetZip() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetZip() *string {
+	if f == nil {
 		return nil
 	}
-	return o.Zip
+	return f.Zip
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetRegion() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetRegion() *string {
+	if f == nil {
 		return nil
 	}
-	return o.Region
+	return f.Region
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetCompany() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetCompany() *string {
+	if f == nil {
 		return nil
 	}
-	return o.Company
+	return f.Company
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetCity() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryAddress) GetCity() *string {
+	if f == nil {
 		return nil
 	}
-	return o.City
+	return f.City
 }

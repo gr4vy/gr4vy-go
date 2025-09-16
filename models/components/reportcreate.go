@@ -162,60 +162,60 @@ func (r *ReportCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ReportCreate) GetName() string {
-	if o == nil {
+func (r *ReportCreate) GetName() string {
+	if r == nil {
 		return ""
 	}
-	return o.Name
+	return r.Name
 }
 
-func (o *ReportCreate) GetDescription() *string {
-	if o == nil {
+func (r *ReportCreate) GetDescription() *string {
+	if r == nil {
 		return nil
 	}
-	return o.Description
+	return r.Description
 }
 
-func (o *ReportCreate) GetSchedule() ReportSchedule {
-	if o == nil {
+func (r *ReportCreate) GetSchedule() ReportSchedule {
+	if r == nil {
 		return ReportSchedule("")
 	}
-	return o.Schedule
+	return r.Schedule
 }
 
-func (o *ReportCreate) GetScheduleEnabled() bool {
-	if o == nil {
+func (r *ReportCreate) GetScheduleEnabled() bool {
+	if r == nil {
 		return false
 	}
-	return o.ScheduleEnabled
+	return r.ScheduleEnabled
 }
 
-func (o *ReportCreate) GetScheduleTimezone() *string {
-	if o == nil {
+func (r *ReportCreate) GetScheduleTimezone() *string {
+	if r == nil {
 		return nil
 	}
-	return o.ScheduleTimezone
+	return r.ScheduleTimezone
 }
 
-func (o *ReportCreate) GetSpec() Spec {
-	if o == nil {
+func (r *ReportCreate) GetSpec() Spec {
+	if r == nil {
 		return Spec{}
 	}
-	return o.Spec
+	return r.Spec
 }
 
-func (o *ReportCreate) GetSpecAccountsReceivables() *AccountsReceivablesReportSpec {
-	return o.GetSpec().AccountsReceivablesReportSpec
+func (r *ReportCreate) GetSpecAccountsReceivables() *AccountsReceivablesReportSpec {
+	return r.GetSpec().AccountsReceivablesReportSpec
 }
 
-func (o *ReportCreate) GetSpecDetailedSettlement() *DetailedSettlementReportSpec {
-	return o.GetSpec().DetailedSettlementReportSpec
+func (r *ReportCreate) GetSpecDetailedSettlement() *DetailedSettlementReportSpec {
+	return r.GetSpec().DetailedSettlementReportSpec
 }
 
-func (o *ReportCreate) GetSpecTransactionRetries() *TransactionRetriesReportSpec {
-	return o.GetSpec().TransactionRetriesReportSpec
+func (r *ReportCreate) GetSpecTransactionRetries() *TransactionRetriesReportSpec {
+	return r.GetSpec().TransactionRetriesReportSpec
 }
 
-func (o *ReportCreate) GetSpecTransactions() *TransactionsReportSpec {
-	return o.GetSpec().TransactionsReportSpec
+func (r *ReportCreate) GetSpecTransactions() *TransactionsReportSpec {
+	return r.GetSpec().TransactionsReportSpec
 }

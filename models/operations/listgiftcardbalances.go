@@ -10,11 +10,11 @@ type ListGiftCardBalancesGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListGiftCardBalancesGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListGiftCardBalancesGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListGiftCardBalancesRequest struct {
@@ -23,16 +23,16 @@ type ListGiftCardBalancesRequest struct {
 	GiftCardBalanceRequest components.GiftCardBalanceRequest `request:"mediaType=application/json"`
 }
 
-func (o *ListGiftCardBalancesRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListGiftCardBalancesRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
-func (o *ListGiftCardBalancesRequest) GetGiftCardBalanceRequest() components.GiftCardBalanceRequest {
-	if o == nil {
+func (l *ListGiftCardBalancesRequest) GetGiftCardBalanceRequest() components.GiftCardBalanceRequest {
+	if l == nil {
 		return components.GiftCardBalanceRequest{}
 	}
-	return o.GiftCardBalanceRequest
+	return l.GiftCardBalanceRequest
 }

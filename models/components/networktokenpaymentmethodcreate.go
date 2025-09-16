@@ -51,69 +51,69 @@ func (n *NetworkTokenPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *NetworkTokenPaymentMethodCreate) GetMethod() string {
+func (n *NetworkTokenPaymentMethodCreate) GetMethod() string {
 	return "network-token"
 }
 
-func (o *NetworkTokenPaymentMethodCreate) GetToken() string {
-	if o == nil {
+func (n *NetworkTokenPaymentMethodCreate) GetToken() string {
+	if n == nil {
 		return ""
 	}
-	return o.Token
+	return n.Token
 }
 
-func (o *NetworkTokenPaymentMethodCreate) GetExpirationDate() string {
-	if o == nil {
+func (n *NetworkTokenPaymentMethodCreate) GetExpirationDate() string {
+	if n == nil {
 		return ""
 	}
-	return o.ExpirationDate
+	return n.ExpirationDate
 }
 
-func (o *NetworkTokenPaymentMethodCreate) GetCryptogram() *string {
-	if o == nil {
+func (n *NetworkTokenPaymentMethodCreate) GetCryptogram() *string {
+	if n == nil {
 		return nil
 	}
-	return o.Cryptogram
+	return n.Cryptogram
 }
 
-func (o *NetworkTokenPaymentMethodCreate) GetRedirectURL() *string {
-	if o == nil {
+func (n *NetworkTokenPaymentMethodCreate) GetRedirectURL() *string {
+	if n == nil {
 		return nil
 	}
-	return o.RedirectURL
+	return n.RedirectURL
 }
 
-func (o *NetworkTokenPaymentMethodCreate) GetCardSource() *CardSource {
-	if o == nil {
+func (n *NetworkTokenPaymentMethodCreate) GetCardSource() *CardSource {
+	if n == nil {
 		return nil
 	}
-	return o.CardSource
+	return n.CardSource
 }
 
-func (o *NetworkTokenPaymentMethodCreate) GetCardScheme() *CardScheme {
-	if o == nil {
+func (n *NetworkTokenPaymentMethodCreate) GetCardScheme() *CardScheme {
+	if n == nil {
 		return nil
 	}
-	return o.CardScheme
+	return n.CardScheme
 }
 
-func (o *NetworkTokenPaymentMethodCreate) GetCardSuffix() *string {
-	if o == nil {
+func (n *NetworkTokenPaymentMethodCreate) GetCardSuffix() *string {
+	if n == nil {
 		return nil
 	}
-	return o.CardSuffix
+	return n.CardSuffix
 }
 
-func (o *NetworkTokenPaymentMethodCreate) GetCardholderName() *string {
-	if o == nil {
+func (n *NetworkTokenPaymentMethodCreate) GetCardholderName() *string {
+	if n == nil {
 		return nil
 	}
-	return o.CardholderName
+	return n.CardholderName
 }
 
-func (o *NetworkTokenPaymentMethodCreate) GetEci() *string {
-	if o == nil {
+func (n *NetworkTokenPaymentMethodCreate) GetEci() *string {
+	if n == nil {
 		return nil
 	}
-	return o.Eci
+	return n.Eci
 }

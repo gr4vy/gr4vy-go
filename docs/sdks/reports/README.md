@@ -118,7 +118,7 @@ func main() {
         Name: "Monthly Transaction Report",
         Schedule: components.ReportScheduleDaily,
         ScheduleEnabled: true,
-        ScheduleTimezone: gr4vygo.String("UTC"),
+        ScheduleTimezone: gr4vygo.Pointer("UTC"),
         Spec: components.CreateSpecDetailedSettlement(
             components.DetailedSettlementReportSpec{
                 Params: map[string]any{

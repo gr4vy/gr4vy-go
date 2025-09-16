@@ -7,9 +7,9 @@ type PowertranzOptions struct {
 	SkipThreeDSecure *bool `json:"skipThreeDSecure,omitempty"`
 }
 
-func (o *PowertranzOptions) GetSkipThreeDSecure() *bool {
-	if o == nil {
+func (p *PowertranzOptions) GetSkipThreeDSecure() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.SkipThreeDSecure
+	return p.SkipThreeDSecure
 }

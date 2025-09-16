@@ -7,9 +7,9 @@ type MockCardOptions struct {
 	MerchantAdviceCode *MockCardMerchantAdviceCodeOptions `json:"merchant_advice_code,omitempty"`
 }
 
-func (o *MockCardOptions) GetMerchantAdviceCode() *MockCardMerchantAdviceCodeOptions {
-	if o == nil {
+func (m *MockCardOptions) GetMerchantAdviceCode() *MockCardMerchantAdviceCodeOptions {
+	if m == nil {
 		return nil
 	}
-	return o.MerchantAdviceCode
+	return m.MerchantAdviceCode
 }

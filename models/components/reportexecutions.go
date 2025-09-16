@@ -28,30 +28,30 @@ func (r *ReportExecutions) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ReportExecutions) GetItems() []ReportExecution {
-	if o == nil {
+func (r *ReportExecutions) GetItems() []ReportExecution {
+	if r == nil {
 		return []ReportExecution{}
 	}
-	return o.Items
+	return r.Items
 }
 
-func (o *ReportExecutions) GetLimit() *int64 {
-	if o == nil {
+func (r *ReportExecutions) GetLimit() *int64 {
+	if r == nil {
 		return nil
 	}
-	return o.Limit
+	return r.Limit
 }
 
-func (o *ReportExecutions) GetNextCursor() *string {
-	if o == nil {
+func (r *ReportExecutions) GetNextCursor() *string {
+	if r == nil {
 		return nil
 	}
-	return o.NextCursor
+	return r.NextCursor
 }
 
-func (o *ReportExecutions) GetPreviousCursor() *string {
-	if o == nil {
+func (r *ReportExecutions) GetPreviousCursor() *string {
+	if r == nil {
 		return nil
 	}
-	return o.PreviousCursor
+	return r.PreviousCursor
 }

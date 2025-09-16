@@ -59,6 +59,8 @@ type TransactionConnectionOptions struct {
 	MockCard *MockCardOptions `json:"mock-card,omitempty"`
 	// Custom options to be passed to the `nuvei-card` connector.
 	NuveiCard *NuveiOptions `json:"nuvei-card,omitempty"`
+	// Custom options to be passed to the `nuvei-pse` connector.
+	NuveiPse *NuveiPSEOptions `json:"nuvei-pse,omitempty"`
 	// Custom options to be passed to the `oxxo-oxxo` connector.
 	OxxoOxxo *OxxoOptions `json:"oxxo-oxxo,omitempty"`
 	// Custom options to be passed to the `paypal-paypal` connector.
@@ -79,261 +81,268 @@ type TransactionConnectionOptions struct {
 	WpayPayto *WpayPaytoOptions `json:"wpay-payto,omitempty"`
 }
 
-func (o *TransactionConnectionOptions) GetAccountUpdater() *AccountUpdaterOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAccountUpdater() *AccountUpdaterOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AccountUpdater
+	return t.AccountUpdater
 }
 
-func (o *TransactionConnectionOptions) GetAdyenAfterpay() *AdyenOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAdyenAfterpay() *AdyenOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AdyenAfterpay
+	return t.AdyenAfterpay
 }
 
-func (o *TransactionConnectionOptions) GetAdyenAlipay() *AdyenOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAdyenAlipay() *AdyenOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AdyenAlipay
+	return t.AdyenAlipay
 }
 
-func (o *TransactionConnectionOptions) GetAdyenCard() *AdyenCardOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAdyenCard() *AdyenCardOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AdyenCard
+	return t.AdyenCard
 }
 
-func (o *TransactionConnectionOptions) GetAdyenCashapp() *AdyenOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAdyenCashapp() *AdyenOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AdyenCashapp
+	return t.AdyenCashapp
 }
 
-func (o *TransactionConnectionOptions) GetAdyenGiropay() *AdyenOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAdyenGiropay() *AdyenOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AdyenGiropay
+	return t.AdyenGiropay
 }
 
-func (o *TransactionConnectionOptions) GetAdyenIdeal() *AdyenOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAdyenIdeal() *AdyenOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AdyenIdeal
+	return t.AdyenIdeal
 }
 
-func (o *TransactionConnectionOptions) GetAdyenSepa() *AdyenSepaOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAdyenSepa() *AdyenSepaOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AdyenSepa
+	return t.AdyenSepa
 }
 
-func (o *TransactionConnectionOptions) GetAdyenSofort() *AdyenOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAdyenSofort() *AdyenOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AdyenSofort
+	return t.AdyenSofort
 }
 
-func (o *TransactionConnectionOptions) GetAdyenVipps() *AdyenOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAdyenVipps() *AdyenOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AdyenVipps
+	return t.AdyenVipps
 }
 
-func (o *TransactionConnectionOptions) GetAffirmAffirm() *AffirmOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetAffirmAffirm() *AffirmOptions {
+	if t == nil {
 		return nil
 	}
-	return o.AffirmAffirm
+	return t.AffirmAffirm
 }
 
-func (o *TransactionConnectionOptions) GetBraintreeCard() *BraintreeOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetBraintreeCard() *BraintreeOptions {
+	if t == nil {
 		return nil
 	}
-	return o.BraintreeCard
+	return t.BraintreeCard
 }
 
-func (o *TransactionConnectionOptions) GetCybersourceAntiFraud() *CybersourceAntiFraudOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetCybersourceAntiFraud() *CybersourceAntiFraudOptions {
+	if t == nil {
 		return nil
 	}
-	return o.CybersourceAntiFraud
+	return t.CybersourceAntiFraud
 }
 
-func (o *TransactionConnectionOptions) GetCybersourceCard() *CybersourceOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetCybersourceCard() *CybersourceOptions {
+	if t == nil {
 		return nil
 	}
-	return o.CybersourceCard
+	return t.CybersourceCard
 }
 
-func (o *TransactionConnectionOptions) GetCybersourceIdeal() *CybersourceOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetCybersourceIdeal() *CybersourceOptions {
+	if t == nil {
 		return nil
 	}
-	return o.CybersourceIdeal
+	return t.CybersourceIdeal
 }
 
-func (o *TransactionConnectionOptions) GetCybersourceKcp() *CybersourceOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetCybersourceKcp() *CybersourceOptions {
+	if t == nil {
 		return nil
 	}
-	return o.CybersourceKcp
+	return t.CybersourceKcp
 }
 
-func (o *TransactionConnectionOptions) GetDlocalNequi() *DlocalOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetDlocalNequi() *DlocalOptions {
+	if t == nil {
 		return nil
 	}
-	return o.DlocalNequi
+	return t.DlocalNequi
 }
 
-func (o *TransactionConnectionOptions) GetFiservCard() *FiservOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetFiservCard() *FiservOptions {
+	if t == nil {
 		return nil
 	}
-	return o.FiservCard
+	return t.FiservCard
 }
 
-func (o *TransactionConnectionOptions) GetForterAntiFraud() *ForterAntiFraudOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetForterAntiFraud() *ForterAntiFraudOptions {
+	if t == nil {
 		return nil
 	}
-	return o.ForterAntiFraud
+	return t.ForterAntiFraud
 }
 
-func (o *TransactionConnectionOptions) GetGemGem() *LatitudeOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetGemGem() *LatitudeOptions {
+	if t == nil {
 		return nil
 	}
-	return o.GemGem
+	return t.GemGem
 }
 
-func (o *TransactionConnectionOptions) GetGemGemds() *LatitudeOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetGemGemds() *LatitudeOptions {
+	if t == nil {
 		return nil
 	}
-	return o.GemGemds
+	return t.GemGemds
 }
 
-func (o *TransactionConnectionOptions) GetGivingblockGivingblock() *GivingBlockOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetGivingblockGivingblock() *GivingBlockOptions {
+	if t == nil {
 		return nil
 	}
-	return o.GivingblockGivingblock
+	return t.GivingblockGivingblock
 }
 
-func (o *TransactionConnectionOptions) GetLatitudeLatitude() *LatitudeOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetLatitudeLatitude() *LatitudeOptions {
+	if t == nil {
 		return nil
 	}
-	return o.LatitudeLatitude
+	return t.LatitudeLatitude
 }
 
-func (o *TransactionConnectionOptions) GetLatitudeLatitudeds() *LatitudeOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetLatitudeLatitudeds() *LatitudeOptions {
+	if t == nil {
 		return nil
 	}
-	return o.LatitudeLatitudeds
+	return t.LatitudeLatitudeds
 }
 
-func (o *TransactionConnectionOptions) GetMattildaTapi() *MattildaTapiOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetMattildaTapi() *MattildaTapiOptions {
+	if t == nil {
 		return nil
 	}
-	return o.MattildaTapi
+	return t.MattildaTapi
 }
 
-func (o *TransactionConnectionOptions) GetMattildaTapifintechs() *MattildaTapiOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetMattildaTapifintechs() *MattildaTapiOptions {
+	if t == nil {
 		return nil
 	}
-	return o.MattildaTapifintechs
+	return t.MattildaTapifintechs
 }
 
-func (o *TransactionConnectionOptions) GetMockCard() *MockCardOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetMockCard() *MockCardOptions {
+	if t == nil {
 		return nil
 	}
-	return o.MockCard
+	return t.MockCard
 }
 
-func (o *TransactionConnectionOptions) GetNuveiCard() *NuveiOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetNuveiCard() *NuveiOptions {
+	if t == nil {
 		return nil
 	}
-	return o.NuveiCard
+	return t.NuveiCard
 }
 
-func (o *TransactionConnectionOptions) GetOxxoOxxo() *OxxoOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetNuveiPse() *NuveiPSEOptions {
+	if t == nil {
 		return nil
 	}
-	return o.OxxoOxxo
+	return t.NuveiPse
 }
 
-func (o *TransactionConnectionOptions) GetPaypalPaypal() *PaypalOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetOxxoOxxo() *OxxoOptions {
+	if t == nil {
 		return nil
 	}
-	return o.PaypalPaypal
+	return t.OxxoOxxo
 }
 
-func (o *TransactionConnectionOptions) GetPaypalPaypalpaylater() *PaypalOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetPaypalPaypal() *PaypalOptions {
+	if t == nil {
 		return nil
 	}
-	return o.PaypalPaypalpaylater
+	return t.PaypalPaypal
 }
 
-func (o *TransactionConnectionOptions) GetPowertranzCard() *PowertranzOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetPaypalPaypalpaylater() *PaypalOptions {
+	if t == nil {
 		return nil
 	}
-	return o.PowertranzCard
+	return t.PaypalPaypalpaylater
 }
 
-func (o *TransactionConnectionOptions) GetStripeCard() *StripeOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetPowertranzCard() *PowertranzOptions {
+	if t == nil {
 		return nil
 	}
-	return o.StripeCard
+	return t.PowertranzCard
 }
 
-func (o *TransactionConnectionOptions) GetTravelhubCard() *TravelhubOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetStripeCard() *StripeOptions {
+	if t == nil {
 		return nil
 	}
-	return o.TravelhubCard
+	return t.StripeCard
 }
 
-func (o *TransactionConnectionOptions) GetTrustlyTrustly() *TrustlyOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetTravelhubCard() *TravelhubOptions {
+	if t == nil {
 		return nil
 	}
-	return o.TrustlyTrustly
+	return t.TravelhubCard
 }
 
-func (o *TransactionConnectionOptions) GetWpayEverydaypay() *WpayEverdaypayOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetTrustlyTrustly() *TrustlyOptions {
+	if t == nil {
 		return nil
 	}
-	return o.WpayEverydaypay
+	return t.TrustlyTrustly
 }
 
-func (o *TransactionConnectionOptions) GetWpayPayto() *WpayPaytoOptions {
-	if o == nil {
+func (t *TransactionConnectionOptions) GetWpayEverydaypay() *WpayEverdaypayOptions {
+	if t == nil {
 		return nil
 	}
-	return o.WpayPayto
+	return t.WpayEverydaypay
+}
+
+func (t *TransactionConnectionOptions) GetWpayPayto() *WpayPaytoOptions {
+	if t == nil {
+		return nil
+	}
+	return t.WpayPayto
 }

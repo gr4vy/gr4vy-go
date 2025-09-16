@@ -6,9 +6,9 @@ type Globals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *Globals) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *Globals) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }

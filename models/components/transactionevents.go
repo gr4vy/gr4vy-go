@@ -28,30 +28,30 @@ func (t *TransactionEvents) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionEvents) GetItems() []TransactionEvent {
-	if o == nil {
+func (t *TransactionEvents) GetItems() []TransactionEvent {
+	if t == nil {
 		return []TransactionEvent{}
 	}
-	return o.Items
+	return t.Items
 }
 
-func (o *TransactionEvents) GetLimit() *int64 {
-	if o == nil {
+func (t *TransactionEvents) GetLimit() *int64 {
+	if t == nil {
 		return nil
 	}
-	return o.Limit
+	return t.Limit
 }
 
-func (o *TransactionEvents) GetNextCursor() *string {
-	if o == nil {
+func (t *TransactionEvents) GetNextCursor() *string {
+	if t == nil {
 		return nil
 	}
-	return o.NextCursor
+	return t.NextCursor
 }
 
-func (o *TransactionEvents) GetPreviousCursor() *string {
-	if o == nil {
+func (t *TransactionEvents) GetPreviousCursor() *string {
+	if t == nil {
 		return nil
 	}
-	return o.PreviousCursor
+	return t.PreviousCursor
 }

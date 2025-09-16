@@ -15,37 +15,37 @@ type AdyenSepaOptions struct {
 	OwnerName *string `json:"ownerName,omitempty"`
 }
 
-func (o *AdyenSepaOptions) GetAutoRescue() *bool {
-	if o == nil {
+func (a *AdyenSepaOptions) GetAutoRescue() *bool {
+	if a == nil {
 		return nil
 	}
-	return o.AutoRescue
+	return a.AutoRescue
 }
 
-func (o *AdyenSepaOptions) GetMaxDaysToRescue() *int64 {
-	if o == nil {
+func (a *AdyenSepaOptions) GetMaxDaysToRescue() *int64 {
+	if a == nil {
 		return nil
 	}
-	return o.MaxDaysToRescue
+	return a.MaxDaysToRescue
 }
 
-func (o *AdyenSepaOptions) GetAdditionalData() map[string]string {
-	if o == nil {
+func (a *AdyenSepaOptions) GetAdditionalData() map[string]string {
+	if a == nil {
 		return nil
 	}
-	return o.AdditionalData
+	return a.AdditionalData
 }
 
-func (o *AdyenSepaOptions) GetAutoRescueSepaScenario() *AdyenAutoRescueSepaScenariosEnum {
-	if o == nil {
+func (a *AdyenSepaOptions) GetAutoRescueSepaScenario() *AdyenAutoRescueSepaScenariosEnum {
+	if a == nil {
 		return nil
 	}
-	return o.AutoRescueSepaScenario
+	return a.AutoRescueSepaScenario
 }
 
-func (o *AdyenSepaOptions) GetOwnerName() *string {
-	if o == nil {
+func (a *AdyenSepaOptions) GetOwnerName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.OwnerName
+	return a.OwnerName
 }

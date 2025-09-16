@@ -8,23 +8,23 @@ type Creator struct {
 	EmailAddress string `json:"email_address"`
 }
 
-func (o *Creator) GetID() string {
-	if o == nil {
+func (c *Creator) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *Creator) GetName() string {
-	if o == nil {
+func (c *Creator) GetName() string {
+	if c == nil {
 		return ""
 	}
-	return o.Name
+	return c.Name
 }
 
-func (o *Creator) GetEmailAddress() string {
-	if o == nil {
+func (c *Creator) GetEmailAddress() string {
+	if c == nil {
 		return ""
 	}
-	return o.EmailAddress
+	return c.EmailAddress
 }

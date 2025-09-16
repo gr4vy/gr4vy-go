@@ -35,51 +35,51 @@ func (s *StatementDescriptor) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *StatementDescriptor) GetName() *string {
-	if o == nil {
+func (s *StatementDescriptor) GetName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Name
+	return s.Name
 }
 
-func (o *StatementDescriptor) GetDescription() *string {
-	if o == nil {
+func (s *StatementDescriptor) GetDescription() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Description
+	return s.Description
 }
 
-func (o *StatementDescriptor) GetCity() *string {
-	if o == nil {
+func (s *StatementDescriptor) GetCity() *string {
+	if s == nil {
 		return nil
 	}
-	return o.City
+	return s.City
 }
 
-func (o *StatementDescriptor) GetCountry() *string {
-	if o == nil {
+func (s *StatementDescriptor) GetCountry() *string {
+	if s == nil {
 		return nil
 	}
-	return o.Country
+	return s.Country
 }
 
-func (o *StatementDescriptor) GetPhoneNumber() *string {
-	if o == nil {
+func (s *StatementDescriptor) GetPhoneNumber() *string {
+	if s == nil {
 		return nil
 	}
-	return o.PhoneNumber
+	return s.PhoneNumber
 }
 
-func (o *StatementDescriptor) GetURL() *string {
-	if o == nil {
+func (s *StatementDescriptor) GetURL() *string {
+	if s == nil {
 		return nil
 	}
-	return o.URL
+	return s.URL
 }
 
-func (o *StatementDescriptor) GetPostalCode() *string {
-	if o == nil {
+func (s *StatementDescriptor) GetPostalCode() *string {
+	if s == nil {
 		return nil
 	}
-	return o.PostalCode
+	return s.PostalCode
 }

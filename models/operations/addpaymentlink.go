@@ -10,11 +10,11 @@ type AddPaymentLinkGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *AddPaymentLinkGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (a *AddPaymentLinkGlobals) GetMerchantAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return a.MerchantAccountID
 }
 
 type AddPaymentLinkRequest struct {
@@ -23,16 +23,16 @@ type AddPaymentLinkRequest struct {
 	PaymentLinkCreate components.PaymentLinkCreate `request:"mediaType=application/json"`
 }
 
-func (o *AddPaymentLinkRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (a *AddPaymentLinkRequest) GetMerchantAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return a.MerchantAccountID
 }
 
-func (o *AddPaymentLinkRequest) GetPaymentLinkCreate() components.PaymentLinkCreate {
-	if o == nil {
+func (a *AddPaymentLinkRequest) GetPaymentLinkCreate() components.PaymentLinkCreate {
+	if a == nil {
 		return components.PaymentLinkCreate{}
 	}
-	return o.PaymentLinkCreate
+	return a.PaymentLinkCreate
 }

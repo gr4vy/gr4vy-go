@@ -7,9 +7,9 @@ type PaymentOptions struct {
 	Items []PaymentOption `json:"items"`
 }
 
-func (o *PaymentOptions) GetItems() []PaymentOption {
-	if o == nil {
+func (p *PaymentOptions) GetItems() []PaymentOption {
+	if p == nil {
 		return []PaymentOption{}
 	}
-	return o.Items
+	return p.Items
 }

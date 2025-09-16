@@ -9,16 +9,16 @@ type StripeOptions struct {
 	StripeConnect *StripeConnectOptions `json:"stripe_connect,omitempty"`
 }
 
-func (o *StripeOptions) GetErrorOnRequiresAction() *bool {
-	if o == nil {
+func (s *StripeOptions) GetErrorOnRequiresAction() *bool {
+	if s == nil {
 		return nil
 	}
-	return o.ErrorOnRequiresAction
+	return s.ErrorOnRequiresAction
 }
 
-func (o *StripeOptions) GetStripeConnect() *StripeConnectOptions {
-	if o == nil {
+func (s *StripeOptions) GetStripeConnect() *StripeConnectOptions {
+	if s == nil {
 		return nil
 	}
-	return o.StripeConnect
+	return s.StripeConnect
 }

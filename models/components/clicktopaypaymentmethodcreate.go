@@ -39,55 +39,55 @@ func (c *ClickToPayPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ClickToPayPaymentMethodCreate) GetMethod() string {
+func (c *ClickToPayPaymentMethodCreate) GetMethod() string {
 	return "click-to-pay"
 }
 
-func (o *ClickToPayPaymentMethodCreate) GetToken() string {
-	if o == nil {
+func (c *ClickToPayPaymentMethodCreate) GetToken() string {
+	if c == nil {
 		return ""
 	}
-	return o.Token
+	return c.Token
 }
 
-func (o *ClickToPayPaymentMethodCreate) GetCryptogram() string {
-	if o == nil {
+func (c *ClickToPayPaymentMethodCreate) GetCryptogram() string {
+	if c == nil {
 		return ""
 	}
-	return o.Cryptogram
+	return c.Cryptogram
 }
 
-func (o *ClickToPayPaymentMethodCreate) GetExpirationDate() string {
-	if o == nil {
+func (c *ClickToPayPaymentMethodCreate) GetExpirationDate() string {
+	if c == nil {
 		return ""
 	}
-	return o.ExpirationDate
+	return c.ExpirationDate
 }
 
-func (o *ClickToPayPaymentMethodCreate) GetBuyerID() *string {
-	if o == nil {
+func (c *ClickToPayPaymentMethodCreate) GetBuyerID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerID
+	return c.BuyerID
 }
 
-func (o *ClickToPayPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (c *ClickToPayPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return c.BuyerExternalIdentifier
 }
 
-func (o *ClickToPayPaymentMethodCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (c *ClickToPayPaymentMethodCreate) GetExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return c.ExternalIdentifier
 }
 
-func (o *ClickToPayPaymentMethodCreate) GetRedirectURL() *string {
-	if o == nil {
+func (c *ClickToPayPaymentMethodCreate) GetRedirectURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.RedirectURL
+	return c.RedirectURL
 }

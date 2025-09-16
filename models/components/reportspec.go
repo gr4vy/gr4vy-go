@@ -8,16 +8,16 @@ type ReportSpec struct {
 	Params map[string]any `json:"params"`
 }
 
-func (o *ReportSpec) GetModel() ReportSpecModel {
-	if o == nil {
+func (r *ReportSpec) GetModel() ReportSpecModel {
+	if r == nil {
 		return ReportSpecModel("")
 	}
-	return o.Model
+	return r.Model
 }
 
-func (o *ReportSpec) GetParams() map[string]any {
-	if o == nil {
+func (r *ReportSpec) GetParams() map[string]any {
+	if r == nil {
 		return map[string]any{}
 	}
-	return o.Params
+	return r.Params
 }

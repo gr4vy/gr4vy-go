@@ -10,11 +10,11 @@ type ListTransactionEventsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListTransactionEventsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListTransactionEventsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListTransactionEventsRequest struct {
@@ -39,30 +39,30 @@ func (l *ListTransactionEventsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListTransactionEventsRequest) GetTransactionID() string {
-	if o == nil {
+func (l *ListTransactionEventsRequest) GetTransactionID() string {
+	if l == nil {
 		return ""
 	}
-	return o.TransactionID
+	return l.TransactionID
 }
 
-func (o *ListTransactionEventsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListTransactionEventsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListTransactionEventsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListTransactionEventsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListTransactionEventsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListTransactionEventsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }

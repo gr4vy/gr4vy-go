@@ -6,11 +6,11 @@ type CreatePaymentServiceSessionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreatePaymentServiceSessionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreatePaymentServiceSessionGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreatePaymentServiceSessionRequest struct {
@@ -21,23 +21,23 @@ type CreatePaymentServiceSessionRequest struct {
 	RequestBody       map[string]any `request:"mediaType=application/json"`
 }
 
-func (o *CreatePaymentServiceSessionRequest) GetPaymentServiceID() string {
-	if o == nil {
+func (c *CreatePaymentServiceSessionRequest) GetPaymentServiceID() string {
+	if c == nil {
 		return ""
 	}
-	return o.PaymentServiceID
+	return c.PaymentServiceID
 }
 
-func (o *CreatePaymentServiceSessionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreatePaymentServiceSessionRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreatePaymentServiceSessionRequest) GetRequestBody() map[string]any {
-	if o == nil {
+func (c *CreatePaymentServiceSessionRequest) GetRequestBody() map[string]any {
+	if c == nil {
 		return map[string]any{}
 	}
-	return o.RequestBody
+	return c.RequestBody
 }

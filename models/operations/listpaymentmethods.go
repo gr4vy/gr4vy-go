@@ -11,11 +11,11 @@ type ListPaymentMethodsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListPaymentMethodsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPaymentMethodsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListPaymentMethodsRequest struct {
@@ -45,53 +45,53 @@ func (l *ListPaymentMethodsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListPaymentMethodsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListPaymentMethodsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListPaymentMethodsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListPaymentMethodsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListPaymentMethodsRequest) GetBuyerID() *string {
-	if o == nil {
+func (l *ListPaymentMethodsRequest) GetBuyerID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerID
+	return l.BuyerID
 }
 
-func (o *ListPaymentMethodsRequest) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (l *ListPaymentMethodsRequest) GetBuyerExternalIdentifier() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return l.BuyerExternalIdentifier
 }
 
-func (o *ListPaymentMethodsRequest) GetStatus() []components.PaymentMethodStatus {
-	if o == nil {
+func (l *ListPaymentMethodsRequest) GetStatus() []components.PaymentMethodStatus {
+	if l == nil {
 		return nil
 	}
-	return o.Status
+	return l.Status
 }
 
-func (o *ListPaymentMethodsRequest) GetExternalIdentifier() *string {
-	if o == nil {
+func (l *ListPaymentMethodsRequest) GetExternalIdentifier() *string {
+	if l == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return l.ExternalIdentifier
 }
 
-func (o *ListPaymentMethodsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPaymentMethodsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListPaymentMethodsResponse struct {
@@ -100,9 +100,9 @@ type ListPaymentMethodsResponse struct {
 	Next func() (*ListPaymentMethodsResponse, error)
 }
 
-func (o *ListPaymentMethodsResponse) GetResult() components.PaymentMethods {
-	if o == nil {
+func (l *ListPaymentMethodsResponse) GetResult() components.PaymentMethods {
+	if l == nil {
 		return components.PaymentMethods{}
 	}
-	return o.Result
+	return l.Result
 }

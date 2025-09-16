@@ -11,23 +11,23 @@ type ReportUpdate struct {
 	ScheduleEnabled *bool `json:"schedule_enabled,omitempty"`
 }
 
-func (o *ReportUpdate) GetName() *string {
-	if o == nil {
+func (r *ReportUpdate) GetName() *string {
+	if r == nil {
 		return nil
 	}
-	return o.Name
+	return r.Name
 }
 
-func (o *ReportUpdate) GetDescription() *string {
-	if o == nil {
+func (r *ReportUpdate) GetDescription() *string {
+	if r == nil {
 		return nil
 	}
-	return o.Description
+	return r.Description
 }
 
-func (o *ReportUpdate) GetScheduleEnabled() *bool {
-	if o == nil {
+func (r *ReportUpdate) GetScheduleEnabled() *bool {
+	if r == nil {
 		return nil
 	}
-	return o.ScheduleEnabled
+	return r.ScheduleEnabled
 }

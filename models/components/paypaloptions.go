@@ -7,9 +7,9 @@ type PaypalOptions struct {
 	AdditionalData []map[string]string `json:"additional_data,omitempty"`
 }
 
-func (o *PaypalOptions) GetAdditionalData() []map[string]string {
-	if o == nil {
+func (p *PaypalOptions) GetAdditionalData() []map[string]string {
+	if p == nil {
 		return nil
 	}
-	return o.AdditionalData
+	return p.AdditionalData
 }

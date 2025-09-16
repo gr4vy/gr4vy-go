@@ -25,16 +25,16 @@ func (g *GiftCardRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GiftCardRequest) GetNumber() string {
-	if o == nil {
+func (g *GiftCardRequest) GetNumber() string {
+	if g == nil {
 		return ""
 	}
-	return o.Number
+	return g.Number
 }
 
-func (o *GiftCardRequest) GetPin() string {
-	if o == nil {
+func (g *GiftCardRequest) GetPin() string {
+	if g == nil {
 		return ""
 	}
-	return o.Pin
+	return g.Pin
 }

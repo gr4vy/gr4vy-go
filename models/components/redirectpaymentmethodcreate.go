@@ -142,51 +142,51 @@ func (r *RedirectPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *RedirectPaymentMethodCreate) GetMethod() RedirectPaymentMethodCreateMethod {
-	if o == nil {
+func (r *RedirectPaymentMethodCreate) GetMethod() RedirectPaymentMethodCreateMethod {
+	if r == nil {
 		return RedirectPaymentMethodCreateMethod("")
 	}
-	return o.Method
+	return r.Method
 }
 
-func (o *RedirectPaymentMethodCreate) GetBuyerID() *string {
-	if o == nil {
+func (r *RedirectPaymentMethodCreate) GetBuyerID() *string {
+	if r == nil {
 		return nil
 	}
-	return o.BuyerID
+	return r.BuyerID
 }
 
-func (o *RedirectPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (r *RedirectPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
+	if r == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return r.BuyerExternalIdentifier
 }
 
-func (o *RedirectPaymentMethodCreate) GetCountry() string {
-	if o == nil {
+func (r *RedirectPaymentMethodCreate) GetCountry() string {
+	if r == nil {
 		return ""
 	}
-	return o.Country
+	return r.Country
 }
 
-func (o *RedirectPaymentMethodCreate) GetCurrency() string {
-	if o == nil {
+func (r *RedirectPaymentMethodCreate) GetCurrency() string {
+	if r == nil {
 		return ""
 	}
-	return o.Currency
+	return r.Currency
 }
 
-func (o *RedirectPaymentMethodCreate) GetRedirectURL() string {
-	if o == nil {
+func (r *RedirectPaymentMethodCreate) GetRedirectURL() string {
+	if r == nil {
 		return ""
 	}
-	return o.RedirectURL
+	return r.RedirectURL
 }
 
-func (o *RedirectPaymentMethodCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (r *RedirectPaymentMethodCreate) GetExternalIdentifier() *string {
+	if r == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return r.ExternalIdentifier
 }

@@ -6,11 +6,11 @@ type DeleteBuyerGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *DeleteBuyerGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (d *DeleteBuyerGlobals) GetMerchantAccountID() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }
 
 type DeleteBuyerRequest struct {
@@ -20,16 +20,16 @@ type DeleteBuyerRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *DeleteBuyerRequest) GetBuyerID() string {
-	if o == nil {
+func (d *DeleteBuyerRequest) GetBuyerID() string {
+	if d == nil {
 		return ""
 	}
-	return o.BuyerID
+	return d.BuyerID
 }
 
-func (o *DeleteBuyerRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (d *DeleteBuyerRequest) GetMerchantAccountID() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }

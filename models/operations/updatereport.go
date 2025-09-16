@@ -10,11 +10,11 @@ type UpdateReportGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *UpdateReportGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdateReportGlobals) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
 type UpdateReportRequest struct {
@@ -25,23 +25,23 @@ type UpdateReportRequest struct {
 	ReportUpdate      components.ReportUpdate `request:"mediaType=application/json"`
 }
 
-func (o *UpdateReportRequest) GetReportID() string {
-	if o == nil {
+func (u *UpdateReportRequest) GetReportID() string {
+	if u == nil {
 		return ""
 	}
-	return o.ReportID
+	return u.ReportID
 }
 
-func (o *UpdateReportRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdateReportRequest) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
-func (o *UpdateReportRequest) GetReportUpdate() components.ReportUpdate {
-	if o == nil {
+func (u *UpdateReportRequest) GetReportUpdate() components.ReportUpdate {
+	if u == nil {
 		return components.ReportUpdate{}
 	}
-	return o.ReportUpdate
+	return u.ReportUpdate
 }

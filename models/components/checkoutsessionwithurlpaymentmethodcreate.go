@@ -34,41 +34,41 @@ func (c *CheckoutSessionWithURLPaymentMethodCreate) UnmarshalJSON(data []byte) e
 	return nil
 }
 
-func (o *CheckoutSessionWithURLPaymentMethodCreate) GetMethod() *string {
-	return types.String("checkout-session")
+func (c *CheckoutSessionWithURLPaymentMethodCreate) GetMethod() *string {
+	return types.Pointer("checkout-session")
 }
 
-func (o *CheckoutSessionWithURLPaymentMethodCreate) GetID() string {
-	if o == nil {
+func (c *CheckoutSessionWithURLPaymentMethodCreate) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *CheckoutSessionWithURLPaymentMethodCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (c *CheckoutSessionWithURLPaymentMethodCreate) GetExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return c.ExternalIdentifier
 }
 
-func (o *CheckoutSessionWithURLPaymentMethodCreate) GetBuyerID() *string {
-	if o == nil {
+func (c *CheckoutSessionWithURLPaymentMethodCreate) GetBuyerID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerID
+	return c.BuyerID
 }
 
-func (o *CheckoutSessionWithURLPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (c *CheckoutSessionWithURLPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return c.BuyerExternalIdentifier
 }
 
-func (o *CheckoutSessionWithURLPaymentMethodCreate) GetRedirectURL() *string {
-	if o == nil {
+func (c *CheckoutSessionWithURLPaymentMethodCreate) GetRedirectURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.RedirectURL
+	return c.RedirectURL
 }

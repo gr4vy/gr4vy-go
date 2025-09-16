@@ -6,11 +6,11 @@ type DeletePaymentServiceGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *DeletePaymentServiceGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (d *DeletePaymentServiceGlobals) GetMerchantAccountID() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }
 
 type DeletePaymentServiceRequest struct {
@@ -20,16 +20,16 @@ type DeletePaymentServiceRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *DeletePaymentServiceRequest) GetPaymentServiceID() string {
-	if o == nil {
+func (d *DeletePaymentServiceRequest) GetPaymentServiceID() string {
+	if d == nil {
 		return ""
 	}
-	return o.PaymentServiceID
+	return d.PaymentServiceID
 }
 
-func (o *DeletePaymentServiceRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (d *DeletePaymentServiceRequest) GetMerchantAccountID() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }

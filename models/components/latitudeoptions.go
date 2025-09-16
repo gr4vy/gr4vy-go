@@ -7,9 +7,9 @@ type LatitudeOptions struct {
 	PromotionReference *string `json:"promotion_reference,omitempty"`
 }
 
-func (o *LatitudeOptions) GetPromotionReference() *string {
-	if o == nil {
+func (l *LatitudeOptions) GetPromotionReference() *string {
+	if l == nil {
 		return nil
 	}
-	return o.PromotionReference
+	return l.PromotionReference
 }

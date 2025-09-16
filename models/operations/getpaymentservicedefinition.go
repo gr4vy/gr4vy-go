@@ -6,9 +6,9 @@ type GetPaymentServiceDefinitionRequest struct {
 	PaymentServiceDefinitionID string `pathParam:"style=simple,explode=false,name=payment_service_definition_id"`
 }
 
-func (o *GetPaymentServiceDefinitionRequest) GetPaymentServiceDefinitionID() string {
-	if o == nil {
+func (g *GetPaymentServiceDefinitionRequest) GetPaymentServiceDefinitionID() string {
+	if g == nil {
 		return ""
 	}
-	return o.PaymentServiceDefinitionID
+	return g.PaymentServiceDefinitionID
 }

@@ -11,11 +11,11 @@ type ListGiftCardsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListGiftCardsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListGiftCardsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListGiftCardsRequest struct {
@@ -38,39 +38,39 @@ func (l *ListGiftCardsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListGiftCardsRequest) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (l *ListGiftCardsRequest) GetBuyerExternalIdentifier() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return l.BuyerExternalIdentifier
 }
 
-func (o *ListGiftCardsRequest) GetBuyerID() *string {
-	if o == nil {
+func (l *ListGiftCardsRequest) GetBuyerID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerID
+	return l.BuyerID
 }
 
-func (o *ListGiftCardsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListGiftCardsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListGiftCardsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListGiftCardsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListGiftCardsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListGiftCardsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListGiftCardsResponse struct {
@@ -79,9 +79,9 @@ type ListGiftCardsResponse struct {
 	Next func() (*ListGiftCardsResponse, error)
 }
 
-func (o *ListGiftCardsResponse) GetResult() components.GiftCards {
-	if o == nil {
+func (l *ListGiftCardsResponse) GetResult() components.GiftCards {
+	if l == nil {
 		return components.GiftCards{}
 	}
-	return o.Result
+	return l.Result
 }

@@ -9,16 +9,16 @@ type TravelhubOptions struct {
 	CompanyName *string `json:"companyName,omitempty"`
 }
 
-func (o *TravelhubOptions) GetCustomData() []TravelHubCustomData {
-	if o == nil {
+func (t *TravelhubOptions) GetCustomData() []TravelHubCustomData {
+	if t == nil {
 		return nil
 	}
-	return o.CustomData
+	return t.CustomData
 }
 
-func (o *TravelhubOptions) GetCompanyName() *string {
-	if o == nil {
+func (t *TravelhubOptions) GetCompanyName() *string {
+	if t == nil {
 		return nil
 	}
-	return o.CompanyName
+	return t.CompanyName
 }

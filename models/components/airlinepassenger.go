@@ -54,79 +54,79 @@ func (a *AirlinePassenger) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *AirlinePassenger) GetAgeGroup() *AgeGroup {
-	if o == nil {
+func (a *AirlinePassenger) GetAgeGroup() *AgeGroup {
+	if a == nil {
 		return nil
 	}
-	return o.AgeGroup
+	return a.AgeGroup
 }
 
-func (o *AirlinePassenger) GetDateOfBirth() *types.Date {
-	if o == nil {
+func (a *AirlinePassenger) GetDateOfBirth() *types.Date {
+	if a == nil {
 		return nil
 	}
-	return o.DateOfBirth
+	return a.DateOfBirth
 }
 
-func (o *AirlinePassenger) GetEmailAddress() *string {
-	if o == nil {
+func (a *AirlinePassenger) GetEmailAddress() *string {
+	if a == nil {
 		return nil
 	}
-	return o.EmailAddress
+	return a.EmailAddress
 }
 
-func (o *AirlinePassenger) GetFirstName() *string {
-	if o == nil {
+func (a *AirlinePassenger) GetFirstName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.FirstName
+	return a.FirstName
 }
 
-func (o *AirlinePassenger) GetFrequentFlyerNumber() *string {
-	if o == nil {
+func (a *AirlinePassenger) GetFrequentFlyerNumber() *string {
+	if a == nil {
 		return nil
 	}
-	return o.FrequentFlyerNumber
+	return a.FrequentFlyerNumber
 }
 
-func (o *AirlinePassenger) GetLastName() *string {
-	if o == nil {
+func (a *AirlinePassenger) GetLastName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.LastName
+	return a.LastName
 }
 
-func (o *AirlinePassenger) GetPassportNumber() *string {
-	if o == nil {
+func (a *AirlinePassenger) GetPassportNumber() *string {
+	if a == nil {
 		return nil
 	}
-	return o.PassportNumber
+	return a.PassportNumber
 }
 
-func (o *AirlinePassenger) GetPhoneNumber() *string {
-	if o == nil {
+func (a *AirlinePassenger) GetPhoneNumber() *string {
+	if a == nil {
 		return nil
 	}
-	return o.PhoneNumber
+	return a.PhoneNumber
 }
 
-func (o *AirlinePassenger) GetTicketNumber() *string {
-	if o == nil {
+func (a *AirlinePassenger) GetTicketNumber() *string {
+	if a == nil {
 		return nil
 	}
-	return o.TicketNumber
+	return a.TicketNumber
 }
 
-func (o *AirlinePassenger) GetTitle() *string {
-	if o == nil {
+func (a *AirlinePassenger) GetTitle() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Title
+	return a.Title
 }
 
-func (o *AirlinePassenger) GetCountryCode() *string {
-	if o == nil {
+func (a *AirlinePassenger) GetCountryCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.CountryCode
+	return a.CountryCode
 }

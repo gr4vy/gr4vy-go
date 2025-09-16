@@ -25,13 +25,13 @@ func (a *AccountsReceivablesReportSpec) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *AccountsReceivablesReportSpec) GetModel() *string {
-	return types.String("accounts_receivables")
+func (a *AccountsReceivablesReportSpec) GetModel() *string {
+	return types.Pointer("accounts_receivables")
 }
 
-func (o *AccountsReceivablesReportSpec) GetParams() map[string]any {
-	if o == nil {
+func (a *AccountsReceivablesReportSpec) GetParams() map[string]any {
+	if a == nil {
 		return map[string]any{}
 	}
-	return o.Params
+	return a.Params
 }

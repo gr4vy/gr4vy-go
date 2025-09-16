@@ -13,11 +13,11 @@ type CaptureTransactionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CaptureTransactionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CaptureTransactionGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CaptureTransactionRequest struct {
@@ -30,32 +30,32 @@ type CaptureTransactionRequest struct {
 	TransactionCaptureCreate components.TransactionCaptureCreate `request:"mediaType=application/json"`
 }
 
-func (o *CaptureTransactionRequest) GetTransactionID() string {
-	if o == nil {
+func (c *CaptureTransactionRequest) GetTransactionID() string {
+	if c == nil {
 		return ""
 	}
-	return o.TransactionID
+	return c.TransactionID
 }
 
-func (o *CaptureTransactionRequest) GetPrefer() []string {
-	if o == nil {
+func (c *CaptureTransactionRequest) GetPrefer() []string {
+	if c == nil {
 		return nil
 	}
-	return o.Prefer
+	return c.Prefer
 }
 
-func (o *CaptureTransactionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CaptureTransactionRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CaptureTransactionRequest) GetTransactionCaptureCreate() components.TransactionCaptureCreate {
-	if o == nil {
+func (c *CaptureTransactionRequest) GetTransactionCaptureCreate() components.TransactionCaptureCreate {
+	if c == nil {
 		return components.TransactionCaptureCreate{}
 	}
-	return o.TransactionCaptureCreate
+	return c.TransactionCaptureCreate
 }
 
 type ResponseCaptureTransactionType string

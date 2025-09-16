@@ -43,76 +43,76 @@ func (g *GiftCard) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GiftCard) GetType() *string {
-	return types.String("gift-card")
+func (g *GiftCard) GetType() *string {
+	return types.Pointer("gift-card")
 }
 
-func (o *GiftCard) GetID() string {
-	if o == nil {
+func (g *GiftCard) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return o.ID
+	return g.ID
 }
 
-func (o *GiftCard) GetMerchantAccountID() string {
-	if o == nil {
+func (g *GiftCard) GetMerchantAccountID() string {
+	if g == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }
 
-func (o *GiftCard) GetGiftCardService() GiftCardService {
-	if o == nil {
+func (g *GiftCard) GetGiftCardService() GiftCardService {
+	if g == nil {
 		return GiftCardService{}
 	}
-	return o.GiftCardService
+	return g.GiftCardService
 }
 
-func (o *GiftCard) GetBin() string {
-	if o == nil {
+func (g *GiftCard) GetBin() string {
+	if g == nil {
 		return ""
 	}
-	return o.Bin
+	return g.Bin
 }
 
-func (o *GiftCard) GetSubBin() string {
-	if o == nil {
+func (g *GiftCard) GetSubBin() string {
+	if g == nil {
 		return ""
 	}
-	return o.SubBin
+	return g.SubBin
 }
 
-func (o *GiftCard) GetLast4() string {
-	if o == nil {
+func (g *GiftCard) GetLast4() string {
+	if g == nil {
 		return ""
 	}
-	return o.Last4
+	return g.Last4
 }
 
-func (o *GiftCard) GetExpirationDate() *time.Time {
-	if o == nil {
+func (g *GiftCard) GetExpirationDate() *time.Time {
+	if g == nil {
 		return nil
 	}
-	return o.ExpirationDate
+	return g.ExpirationDate
 }
 
-func (o *GiftCard) GetBuyer() *Buyer {
-	if o == nil {
+func (g *GiftCard) GetBuyer() *Buyer {
+	if g == nil {
 		return nil
 	}
-	return o.Buyer
+	return g.Buyer
 }
 
-func (o *GiftCard) GetCreatedAt() time.Time {
-	if o == nil {
+func (g *GiftCard) GetCreatedAt() time.Time {
+	if g == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return g.CreatedAt
 }
 
-func (o *GiftCard) GetUpdatedAt() time.Time {
-	if o == nil {
+func (g *GiftCard) GetUpdatedAt() time.Time {
+	if g == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return g.UpdatedAt
 }

@@ -11,23 +11,23 @@ type CybersourceAntiFraudOptions struct {
 	ShippingMethod *string `json:"shipping_method,omitempty"`
 }
 
-func (o *CybersourceAntiFraudOptions) GetMerchantDefinedData() map[string]string {
-	if o == nil {
+func (c *CybersourceAntiFraudOptions) GetMerchantDefinedData() map[string]string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantDefinedData
+	return c.MerchantDefinedData
 }
 
-func (o *CybersourceAntiFraudOptions) GetMetaKeyMerchantID() *string {
-	if o == nil {
+func (c *CybersourceAntiFraudOptions) GetMetaKeyMerchantID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MetaKeyMerchantID
+	return c.MetaKeyMerchantID
 }
 
-func (o *CybersourceAntiFraudOptions) GetShippingMethod() *string {
-	if o == nil {
+func (c *CybersourceAntiFraudOptions) GetShippingMethod() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ShippingMethod
+	return c.ShippingMethod
 }

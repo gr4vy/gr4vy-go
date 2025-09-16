@@ -35,45 +35,45 @@ func (c *CheckoutSessionPaymentMethod) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *CheckoutSessionPaymentMethod) GetType() *string {
-	return types.String("payment-method")
+func (c *CheckoutSessionPaymentMethod) GetType() *string {
+	return types.Pointer("payment-method")
 }
 
-func (o *CheckoutSessionPaymentMethod) GetID() *string {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethod) GetID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *CheckoutSessionPaymentMethod) GetDetails() *CheckoutSessionPaymentMethodDetails {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethod) GetDetails() *CheckoutSessionPaymentMethodDetails {
+	if c == nil {
 		return nil
 	}
-	return o.Details
+	return c.Details
 }
 
-func (o *CheckoutSessionPaymentMethod) GetLabel() *string {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethod) GetLabel() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Label
+	return c.Label
 }
 
-func (o *CheckoutSessionPaymentMethod) GetMethod() *string {
-	return types.String("card")
+func (c *CheckoutSessionPaymentMethod) GetMethod() *string {
+	return types.Pointer("card")
 }
 
-func (o *CheckoutSessionPaymentMethod) GetScheme() *CardScheme {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethod) GetScheme() *CardScheme {
+	if c == nil {
 		return nil
 	}
-	return o.Scheme
+	return c.Scheme
 }
 
-func (o *CheckoutSessionPaymentMethod) GetFingerprint() *string {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethod) GetFingerprint() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Fingerprint
+	return c.Fingerprint
 }

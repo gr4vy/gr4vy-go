@@ -10,16 +10,16 @@ type RequiredCheckoutFields struct {
 	Conditions map[string]any `json:"conditions,omitempty"`
 }
 
-func (o *RequiredCheckoutFields) GetRequiredFields() []string {
-	if o == nil {
+func (r *RequiredCheckoutFields) GetRequiredFields() []string {
+	if r == nil {
 		return []string{}
 	}
-	return o.RequiredFields
+	return r.RequiredFields
 }
 
-func (o *RequiredCheckoutFields) GetConditions() map[string]any {
-	if o == nil {
+func (r *RequiredCheckoutFields) GetConditions() map[string]any {
+	if r == nil {
 		return nil
 	}
-	return o.Conditions
+	return r.Conditions
 }

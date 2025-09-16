@@ -7,9 +7,9 @@ type ForterAntiFraudOptionsCartItemBeneficiaryPhone struct {
 	Phone string `json:"phone"`
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryPhone) GetPhone() string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryPhone) GetPhone() string {
+	if f == nil {
 		return ""
 	}
-	return o.Phone
+	return f.Phone
 }

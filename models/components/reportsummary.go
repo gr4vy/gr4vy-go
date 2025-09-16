@@ -35,48 +35,48 @@ func (r *ReportSummary) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ReportSummary) GetType() *string {
-	return types.String("report")
+func (r *ReportSummary) GetType() *string {
+	return types.Pointer("report")
 }
 
-func (o *ReportSummary) GetID() string {
-	if o == nil {
+func (r *ReportSummary) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return o.ID
+	return r.ID
 }
 
-func (o *ReportSummary) GetMerchantAccountID() string {
-	if o == nil {
+func (r *ReportSummary) GetMerchantAccountID() string {
+	if r == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return r.MerchantAccountID
 }
 
-func (o *ReportSummary) GetName() string {
-	if o == nil {
+func (r *ReportSummary) GetName() string {
+	if r == nil {
 		return ""
 	}
-	return o.Name
+	return r.Name
 }
 
-func (o *ReportSummary) GetCreatorID() *string {
-	if o == nil {
+func (r *ReportSummary) GetCreatorID() *string {
+	if r == nil {
 		return nil
 	}
-	return o.CreatorID
+	return r.CreatorID
 }
 
-func (o *ReportSummary) GetCreatorDisplayName() *string {
-	if o == nil {
+func (r *ReportSummary) GetCreatorDisplayName() *string {
+	if r == nil {
 		return nil
 	}
-	return o.CreatorDisplayName
+	return r.CreatorDisplayName
 }
 
-func (o *ReportSummary) GetCreatorType() *ReportCreatorType {
-	if o == nil {
+func (r *ReportSummary) GetCreatorType() *ReportCreatorType {
+	if r == nil {
 		return nil
 	}
-	return o.CreatorType
+	return r.CreatorType
 }

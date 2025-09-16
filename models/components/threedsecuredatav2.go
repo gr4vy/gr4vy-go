@@ -34,51 +34,51 @@ func (t *ThreeDSecureDataV2) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ThreeDSecureDataV2) GetCavv() string {
-	if o == nil {
+func (t *ThreeDSecureDataV2) GetCavv() string {
+	if t == nil {
 		return ""
 	}
-	return o.Cavv
+	return t.Cavv
 }
 
-func (o *ThreeDSecureDataV2) GetEci() string {
-	if o == nil {
+func (t *ThreeDSecureDataV2) GetEci() string {
+	if t == nil {
 		return ""
 	}
-	return o.Eci
+	return t.Eci
 }
 
-func (o *ThreeDSecureDataV2) GetVersion() string {
-	if o == nil {
+func (t *ThreeDSecureDataV2) GetVersion() string {
+	if t == nil {
 		return ""
 	}
-	return o.Version
+	return t.Version
 }
 
-func (o *ThreeDSecureDataV2) GetDirectoryResponse() string {
-	if o == nil {
+func (t *ThreeDSecureDataV2) GetDirectoryResponse() string {
+	if t == nil {
 		return ""
 	}
-	return o.DirectoryResponse
+	return t.DirectoryResponse
 }
 
-func (o *ThreeDSecureDataV2) GetScheme() *CardScheme {
-	if o == nil {
+func (t *ThreeDSecureDataV2) GetScheme() *CardScheme {
+	if t == nil {
 		return nil
 	}
-	return o.Scheme
+	return t.Scheme
 }
 
-func (o *ThreeDSecureDataV2) GetAuthenticationResponse() *string {
-	if o == nil {
+func (t *ThreeDSecureDataV2) GetAuthenticationResponse() *string {
+	if t == nil {
 		return nil
 	}
-	return o.AuthenticationResponse
+	return t.AuthenticationResponse
 }
 
-func (o *ThreeDSecureDataV2) GetDirectoryTransactionID() string {
-	if o == nil {
+func (t *ThreeDSecureDataV2) GetDirectoryTransactionID() string {
+	if t == nil {
 		return ""
 	}
-	return o.DirectoryTransactionID
+	return t.DirectoryTransactionID
 }

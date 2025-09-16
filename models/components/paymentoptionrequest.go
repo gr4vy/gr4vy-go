@@ -32,44 +32,44 @@ func (p *PaymentOptionRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentOptionRequest) GetMetadata() map[string]string {
-	if o == nil {
+func (p *PaymentOptionRequest) GetMetadata() map[string]string {
+	if p == nil {
 		return nil
 	}
-	return o.Metadata
+	return p.Metadata
 }
 
-func (o *PaymentOptionRequest) GetCountry() *string {
-	if o == nil {
+func (p *PaymentOptionRequest) GetCountry() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Country
+	return p.Country
 }
 
-func (o *PaymentOptionRequest) GetCurrency() *string {
-	if o == nil {
+func (p *PaymentOptionRequest) GetCurrency() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Currency
+	return p.Currency
 }
 
-func (o *PaymentOptionRequest) GetAmount() *int64 {
-	if o == nil {
+func (p *PaymentOptionRequest) GetAmount() *int64 {
+	if p == nil {
 		return nil
 	}
-	return o.Amount
+	return p.Amount
 }
 
-func (o *PaymentOptionRequest) GetLocale() *string {
-	if o == nil {
+func (p *PaymentOptionRequest) GetLocale() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Locale
+	return p.Locale
 }
 
-func (o *PaymentOptionRequest) GetCartItems() []CartItem {
-	if o == nil {
+func (p *PaymentOptionRequest) GetCartItems() []CartItem {
+	if p == nil {
 		return nil
 	}
-	return o.CartItems
+	return p.CartItems
 }

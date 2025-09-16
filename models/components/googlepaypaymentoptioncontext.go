@@ -24,30 +24,30 @@ func (g *GooglePayPaymentOptionContext) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GooglePayPaymentOptionContext) GetMerchantName() string {
-	if o == nil {
+func (g *GooglePayPaymentOptionContext) GetMerchantName() string {
+	if g == nil {
 		return ""
 	}
-	return o.MerchantName
+	return g.MerchantName
 }
 
-func (o *GooglePayPaymentOptionContext) GetSupportedSchemes() []string {
-	if o == nil {
+func (g *GooglePayPaymentOptionContext) GetSupportedSchemes() []string {
+	if g == nil {
 		return []string{}
 	}
-	return o.SupportedSchemes
+	return g.SupportedSchemes
 }
 
-func (o *GooglePayPaymentOptionContext) GetGateway() string {
-	if o == nil {
+func (g *GooglePayPaymentOptionContext) GetGateway() string {
+	if g == nil {
 		return ""
 	}
-	return o.Gateway
+	return g.Gateway
 }
 
-func (o *GooglePayPaymentOptionContext) GetGatewayMerchantID() string {
-	if o == nil {
+func (g *GooglePayPaymentOptionContext) GetGatewayMerchantID() string {
+	if g == nil {
 		return ""
 	}
-	return o.GatewayMerchantID
+	return g.GatewayMerchantID
 }

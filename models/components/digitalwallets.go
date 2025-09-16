@@ -7,9 +7,9 @@ type DigitalWallets struct {
 	Items []DigitalWallet `json:"items"`
 }
 
-func (o *DigitalWallets) GetItems() []DigitalWallet {
-	if o == nil {
+func (d *DigitalWallets) GetItems() []DigitalWallet {
+	if d == nil {
 		return []DigitalWallet{}
 	}
-	return o.Items
+	return d.Items
 }

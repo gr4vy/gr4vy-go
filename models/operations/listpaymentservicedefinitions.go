@@ -25,18 +25,18 @@ func (l *ListPaymentServiceDefinitionsRequest) UnmarshalJSON(data []byte) error 
 	return nil
 }
 
-func (o *ListPaymentServiceDefinitionsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListPaymentServiceDefinitionsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListPaymentServiceDefinitionsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListPaymentServiceDefinitionsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
 type ListPaymentServiceDefinitionsResponse struct {
@@ -45,9 +45,9 @@ type ListPaymentServiceDefinitionsResponse struct {
 	Next func() (*ListPaymentServiceDefinitionsResponse, error)
 }
 
-func (o *ListPaymentServiceDefinitionsResponse) GetResult() components.PaymentServiceDefinitions {
-	if o == nil {
+func (l *ListPaymentServiceDefinitionsResponse) GetResult() components.PaymentServiceDefinitions {
+	if l == nil {
 		return components.PaymentServiceDefinitions{}
 	}
-	return o.Result
+	return l.Result
 }

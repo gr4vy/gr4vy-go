@@ -107,69 +107,69 @@ func (g *GooglePayPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GooglePayPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (g *GooglePayPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
+	if g == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return g.BuyerExternalIdentifier
 }
 
-func (o *GooglePayPaymentMethodCreate) GetBuyerID() *string {
-	if o == nil {
+func (g *GooglePayPaymentMethodCreate) GetBuyerID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.BuyerID
+	return g.BuyerID
 }
 
-func (o *GooglePayPaymentMethodCreate) GetCardholderName() *string {
-	if o == nil {
+func (g *GooglePayPaymentMethodCreate) GetCardholderName() *string {
+	if g == nil {
 		return nil
 	}
-	return o.CardholderName
+	return g.CardholderName
 }
 
-func (o *GooglePayPaymentMethodCreate) GetRedirectURL() *string {
-	if o == nil {
+func (g *GooglePayPaymentMethodCreate) GetRedirectURL() *string {
+	if g == nil {
 		return nil
 	}
-	return o.RedirectURL
+	return g.RedirectURL
 }
 
-func (o *GooglePayPaymentMethodCreate) GetCardSuffix() *string {
-	if o == nil {
+func (g *GooglePayPaymentMethodCreate) GetCardSuffix() *string {
+	if g == nil {
 		return nil
 	}
-	return o.CardSuffix
+	return g.CardSuffix
 }
 
-func (o *GooglePayPaymentMethodCreate) GetCardScheme() *string {
-	if o == nil {
+func (g *GooglePayPaymentMethodCreate) GetCardScheme() *string {
+	if g == nil {
 		return nil
 	}
-	return o.CardScheme
+	return g.CardScheme
 }
 
-func (o *GooglePayPaymentMethodCreate) GetCardType() *string {
-	if o == nil {
+func (g *GooglePayPaymentMethodCreate) GetCardType() *string {
+	if g == nil {
 		return nil
 	}
-	return o.CardType
+	return g.CardType
 }
 
-func (o *GooglePayPaymentMethodCreate) GetMethod() string {
+func (g *GooglePayPaymentMethodCreate) GetMethod() string {
 	return "googlepay"
 }
 
-func (o *GooglePayPaymentMethodCreate) GetToken() Token {
-	if o == nil {
+func (g *GooglePayPaymentMethodCreate) GetToken() Token {
+	if g == nil {
 		return Token{}
 	}
-	return o.Token
+	return g.Token
 }
 
-func (o *GooglePayPaymentMethodCreate) GetAssuranceDetails() *GooglePayAssuranceDetails {
-	if o == nil {
+func (g *GooglePayPaymentMethodCreate) GetAssuranceDetails() *GooglePayAssuranceDetails {
+	if g == nil {
 		return nil
 	}
-	return o.AssuranceDetails
+	return g.AssuranceDetails
 }

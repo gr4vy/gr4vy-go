@@ -37,10 +37,10 @@ func main() {
     )
 
     res, err := s.PaymentMethods.List(ctx, operations.ListPaymentMethodsRequest{
-        Cursor: gr4vygo.String("ZXhhbXBsZTE"),
-        BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
-        BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
-        ExternalIdentifier: gr4vygo.String("payment-method-12345"),
+        Cursor: gr4vygo.Pointer("ZXhhbXBsZTE"),
+        BuyerID: gr4vygo.Pointer("fe26475d-ec3e-4884-9553-f7356683f7f9"),
+        BuyerExternalIdentifier: gr4vygo.Pointer("buyer-12345"),
+        ExternalIdentifier: gr4vygo.Pointer("payment-method-12345"),
     })
     if err != nil {
         log.Fatal(err)

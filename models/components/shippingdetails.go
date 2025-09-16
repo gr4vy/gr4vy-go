@@ -37,55 +37,55 @@ func (s *ShippingDetails) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ShippingDetails) GetFirstName() *string {
-	if o == nil {
+func (s *ShippingDetails) GetFirstName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.FirstName
+	return s.FirstName
 }
 
-func (o *ShippingDetails) GetLastName() *string {
-	if o == nil {
+func (s *ShippingDetails) GetLastName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.LastName
+	return s.LastName
 }
 
-func (o *ShippingDetails) GetEmailAddress() *string {
-	if o == nil {
+func (s *ShippingDetails) GetEmailAddress() *string {
+	if s == nil {
 		return nil
 	}
-	return o.EmailAddress
+	return s.EmailAddress
 }
 
-func (o *ShippingDetails) GetPhoneNumber() *string {
-	if o == nil {
+func (s *ShippingDetails) GetPhoneNumber() *string {
+	if s == nil {
 		return nil
 	}
-	return o.PhoneNumber
+	return s.PhoneNumber
 }
 
-func (o *ShippingDetails) GetAddress() *Address {
-	if o == nil {
+func (s *ShippingDetails) GetAddress() *Address {
+	if s == nil {
 		return nil
 	}
-	return o.Address
+	return s.Address
 }
 
-func (o *ShippingDetails) GetID() *string {
-	if o == nil {
+func (s *ShippingDetails) GetID() *string {
+	if s == nil {
 		return nil
 	}
-	return o.ID
+	return s.ID
 }
 
-func (o *ShippingDetails) GetBuyerID() *string {
-	if o == nil {
+func (s *ShippingDetails) GetBuyerID() *string {
+	if s == nil {
 		return nil
 	}
-	return o.BuyerID
+	return s.BuyerID
 }
 
-func (o *ShippingDetails) GetType() *string {
-	return types.String("shipping-details")
+func (s *ShippingDetails) GetType() *string {
+	return types.Pointer("shipping-details")
 }

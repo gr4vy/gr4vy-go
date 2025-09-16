@@ -52,104 +52,104 @@ func (p *PayoutSummary) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PayoutSummary) GetType() *string {
-	return types.String("payout")
+func (p *PayoutSummary) GetType() *string {
+	return types.Pointer("payout")
 }
 
-func (o *PayoutSummary) GetID() *string {
-	if o == nil {
+func (p *PayoutSummary) GetID() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *PayoutSummary) GetAmount() int64 {
-	if o == nil {
+func (p *PayoutSummary) GetAmount() int64 {
+	if p == nil {
 		return 0
 	}
-	return o.Amount
+	return p.Amount
 }
 
-func (o *PayoutSummary) GetBuyer() *TransactionBuyer {
-	if o == nil {
+func (p *PayoutSummary) GetBuyer() *TransactionBuyer {
+	if p == nil {
 		return nil
 	}
-	return o.Buyer
+	return p.Buyer
 }
 
-func (o *PayoutSummary) GetCategory() *PayoutCategory {
-	if o == nil {
+func (p *PayoutSummary) GetCategory() *PayoutCategory {
+	if p == nil {
 		return nil
 	}
-	return o.Category
+	return p.Category
 }
 
-func (o *PayoutSummary) GetCreatedAt() time.Time {
-	if o == nil {
+func (p *PayoutSummary) GetCreatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return p.CreatedAt
 }
 
-func (o *PayoutSummary) GetCurrency() string {
-	if o == nil {
+func (p *PayoutSummary) GetCurrency() string {
+	if p == nil {
 		return ""
 	}
-	return o.Currency
+	return p.Currency
 }
 
-func (o *PayoutSummary) GetExternalIdentifier() *string {
-	if o == nil {
+func (p *PayoutSummary) GetExternalIdentifier() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return p.ExternalIdentifier
 }
 
-func (o *PayoutSummary) GetMerchant() *PayoutMerchantSummary {
-	if o == nil {
+func (p *PayoutSummary) GetMerchant() *PayoutMerchantSummary {
+	if p == nil {
 		return nil
 	}
-	return o.Merchant
+	return p.Merchant
 }
 
-func (o *PayoutSummary) GetMerchantAccountID() *string {
-	if o == nil {
+func (p *PayoutSummary) GetMerchantAccountID() *string {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return p.MerchantAccountID
 }
 
-func (o *PayoutSummary) GetPaymentMethod() TransactionPaymentMethod {
-	if o == nil {
+func (p *PayoutSummary) GetPaymentMethod() TransactionPaymentMethod {
+	if p == nil {
 		return TransactionPaymentMethod{}
 	}
-	return o.PaymentMethod
+	return p.PaymentMethod
 }
 
-func (o *PayoutSummary) GetPaymentService() PayoutPaymentService {
-	if o == nil {
+func (p *PayoutSummary) GetPaymentService() PayoutPaymentService {
+	if p == nil {
 		return PayoutPaymentService{}
 	}
-	return o.PaymentService
+	return p.PaymentService
 }
 
-func (o *PayoutSummary) GetPaymentServicePayoutID() *string {
-	if o == nil {
+func (p *PayoutSummary) GetPaymentServicePayoutID() *string {
+	if p == nil {
 		return nil
 	}
-	return o.PaymentServicePayoutID
+	return p.PaymentServicePayoutID
 }
 
-func (o *PayoutSummary) GetStatus() PayoutStatus {
-	if o == nil {
+func (p *PayoutSummary) GetStatus() PayoutStatus {
+	if p == nil {
 		return PayoutStatus("")
 	}
-	return o.Status
+	return p.Status
 }
 
-func (o *PayoutSummary) GetUpdatedAt() time.Time {
-	if o == nil {
+func (p *PayoutSummary) GetUpdatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return p.UpdatedAt
 }

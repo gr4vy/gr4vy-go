@@ -9,16 +9,16 @@ type TrustlyOptions struct {
 	URLScheme *string `json:"urlScheme,omitempty"`
 }
 
-func (o *TrustlyOptions) GetRefreshSplitToken() *bool {
-	if o == nil {
+func (t *TrustlyOptions) GetRefreshSplitToken() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.RefreshSplitToken
+	return t.RefreshSplitToken
 }
 
-func (o *TrustlyOptions) GetURLScheme() *string {
-	if o == nil {
+func (t *TrustlyOptions) GetURLScheme() *string {
+	if t == nil {
 		return nil
 	}
-	return o.URLScheme
+	return t.URLScheme
 }

@@ -10,11 +10,11 @@ type UpdateBuyerShippingDetailsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *UpdateBuyerShippingDetailsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdateBuyerShippingDetailsGlobals) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
 type UpdateBuyerShippingDetailsRequest struct {
@@ -27,30 +27,30 @@ type UpdateBuyerShippingDetailsRequest struct {
 	ShippingDetailsUpdate components.ShippingDetailsUpdate `request:"mediaType=application/json"`
 }
 
-func (o *UpdateBuyerShippingDetailsRequest) GetBuyerID() string {
-	if o == nil {
+func (u *UpdateBuyerShippingDetailsRequest) GetBuyerID() string {
+	if u == nil {
 		return ""
 	}
-	return o.BuyerID
+	return u.BuyerID
 }
 
-func (o *UpdateBuyerShippingDetailsRequest) GetShippingDetailsID() string {
-	if o == nil {
+func (u *UpdateBuyerShippingDetailsRequest) GetShippingDetailsID() string {
+	if u == nil {
 		return ""
 	}
-	return o.ShippingDetailsID
+	return u.ShippingDetailsID
 }
 
-func (o *UpdateBuyerShippingDetailsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdateBuyerShippingDetailsRequest) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
-func (o *UpdateBuyerShippingDetailsRequest) GetShippingDetailsUpdate() components.ShippingDetailsUpdate {
-	if o == nil {
+func (u *UpdateBuyerShippingDetailsRequest) GetShippingDetailsUpdate() components.ShippingDetailsUpdate {
+	if u == nil {
 		return components.ShippingDetailsUpdate{}
 	}
-	return o.ShippingDetailsUpdate
+	return u.ShippingDetailsUpdate
 }

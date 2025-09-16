@@ -39,62 +39,62 @@ func (c *ClickToPayFPANPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ClickToPayFPANPaymentMethodCreate) GetExpirationDate() string {
-	if o == nil {
+func (c *ClickToPayFPANPaymentMethodCreate) GetExpirationDate() string {
+	if c == nil {
 		return ""
 	}
-	return o.ExpirationDate
+	return c.ExpirationDate
 }
 
-func (o *ClickToPayFPANPaymentMethodCreate) GetNumber() string {
-	if o == nil {
+func (c *ClickToPayFPANPaymentMethodCreate) GetNumber() string {
+	if c == nil {
 		return ""
 	}
-	return o.Number
+	return c.Number
 }
 
-func (o *ClickToPayFPANPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (c *ClickToPayFPANPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return c.BuyerExternalIdentifier
 }
 
-func (o *ClickToPayFPANPaymentMethodCreate) GetBuyerID() *string {
-	if o == nil {
+func (c *ClickToPayFPANPaymentMethodCreate) GetBuyerID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerID
+	return c.BuyerID
 }
 
-func (o *ClickToPayFPANPaymentMethodCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (c *ClickToPayFPANPaymentMethodCreate) GetExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return c.ExternalIdentifier
 }
 
-func (o *ClickToPayFPANPaymentMethodCreate) GetCardType() *string {
-	if o == nil {
+func (c *ClickToPayFPANPaymentMethodCreate) GetCardType() *string {
+	if c == nil {
 		return nil
 	}
-	return o.CardType
+	return c.CardType
 }
 
-func (o *ClickToPayFPANPaymentMethodCreate) GetMethod() string {
+func (c *ClickToPayFPANPaymentMethodCreate) GetMethod() string {
 	return "click-to-pay"
 }
 
-func (o *ClickToPayFPANPaymentMethodCreate) GetRedirectURL() *string {
-	if o == nil {
+func (c *ClickToPayFPANPaymentMethodCreate) GetRedirectURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.RedirectURL
+	return c.RedirectURL
 }
 
-func (o *ClickToPayFPANPaymentMethodCreate) GetSecurityCode() any {
-	if o == nil {
+func (c *ClickToPayFPANPaymentMethodCreate) GetSecurityCode() any {
+	if c == nil {
 		return nil
 	}
-	return o.SecurityCode
+	return c.SecurityCode
 }

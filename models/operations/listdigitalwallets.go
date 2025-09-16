@@ -6,11 +6,11 @@ type ListDigitalWalletsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListDigitalWalletsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListDigitalWalletsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListDigitalWalletsRequest struct {
@@ -18,9 +18,9 @@ type ListDigitalWalletsRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListDigitalWalletsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListDigitalWalletsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }

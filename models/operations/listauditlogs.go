@@ -11,11 +11,11 @@ type ListAuditLogsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListAuditLogsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListAuditLogsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListAuditLogsRequest struct {
@@ -44,46 +44,46 @@ func (l *ListAuditLogsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListAuditLogsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListAuditLogsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListAuditLogsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListAuditLogsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListAuditLogsRequest) GetAction() *components.AuditLogAction {
-	if o == nil {
+func (l *ListAuditLogsRequest) GetAction() *components.AuditLogAction {
+	if l == nil {
 		return nil
 	}
-	return o.Action
+	return l.Action
 }
 
-func (o *ListAuditLogsRequest) GetUserID() *string {
-	if o == nil {
+func (l *ListAuditLogsRequest) GetUserID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.UserID
+	return l.UserID
 }
 
-func (o *ListAuditLogsRequest) GetResourceType() *string {
-	if o == nil {
+func (l *ListAuditLogsRequest) GetResourceType() *string {
+	if l == nil {
 		return nil
 	}
-	return o.ResourceType
+	return l.ResourceType
 }
 
-func (o *ListAuditLogsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListAuditLogsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListAuditLogsResponse struct {
@@ -92,9 +92,9 @@ type ListAuditLogsResponse struct {
 	Next func() (*ListAuditLogsResponse, error)
 }
 
-func (o *ListAuditLogsResponse) GetResult() components.AuditLogEntries {
-	if o == nil {
+func (l *ListAuditLogsResponse) GetResult() components.AuditLogEntries {
+	if l == nil {
 		return components.AuditLogEntries{}
 	}
-	return o.Result
+	return l.Result
 }

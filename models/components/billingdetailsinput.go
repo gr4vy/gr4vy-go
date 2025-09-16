@@ -17,44 +17,44 @@ type BillingDetailsInput struct {
 	TaxID *TaxID `json:"tax_id,omitempty"`
 }
 
-func (o *BillingDetailsInput) GetFirstName() *string {
-	if o == nil {
+func (b *BillingDetailsInput) GetFirstName() *string {
+	if b == nil {
 		return nil
 	}
-	return o.FirstName
+	return b.FirstName
 }
 
-func (o *BillingDetailsInput) GetLastName() *string {
-	if o == nil {
+func (b *BillingDetailsInput) GetLastName() *string {
+	if b == nil {
 		return nil
 	}
-	return o.LastName
+	return b.LastName
 }
 
-func (o *BillingDetailsInput) GetEmailAddress() *string {
-	if o == nil {
+func (b *BillingDetailsInput) GetEmailAddress() *string {
+	if b == nil {
 		return nil
 	}
-	return o.EmailAddress
+	return b.EmailAddress
 }
 
-func (o *BillingDetailsInput) GetPhoneNumber() *string {
-	if o == nil {
+func (b *BillingDetailsInput) GetPhoneNumber() *string {
+	if b == nil {
 		return nil
 	}
-	return o.PhoneNumber
+	return b.PhoneNumber
 }
 
-func (o *BillingDetailsInput) GetAddress() *Address {
-	if o == nil {
+func (b *BillingDetailsInput) GetAddress() *Address {
+	if b == nil {
 		return nil
 	}
-	return o.Address
+	return b.Address
 }
 
-func (o *BillingDetailsInput) GetTaxID() *TaxID {
-	if o == nil {
+func (b *BillingDetailsInput) GetTaxID() *TaxID {
+	if b == nil {
 		return nil
 	}
-	return o.TaxID
+	return b.TaxID
 }

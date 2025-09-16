@@ -7,9 +7,9 @@ type MattildaTapiOptions struct {
 	PaymentMethodExpiresAt *string `json:"payment_method_expires_at,omitempty"`
 }
 
-func (o *MattildaTapiOptions) GetPaymentMethodExpiresAt() *string {
-	if o == nil {
+func (m *MattildaTapiOptions) GetPaymentMethodExpiresAt() *string {
+	if m == nil {
 		return nil
 	}
-	return o.PaymentMethodExpiresAt
+	return m.PaymentMethodExpiresAt
 }

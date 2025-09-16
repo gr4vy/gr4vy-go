@@ -6,11 +6,11 @@ type ListBuyerGiftCardsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListBuyerGiftCardsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListBuyerGiftCardsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListBuyerGiftCardsRequest struct {
@@ -20,23 +20,23 @@ type ListBuyerGiftCardsRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListBuyerGiftCardsRequest) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (l *ListBuyerGiftCardsRequest) GetBuyerExternalIdentifier() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return l.BuyerExternalIdentifier
 }
 
-func (o *ListBuyerGiftCardsRequest) GetBuyerID() *string {
-	if o == nil {
+func (l *ListBuyerGiftCardsRequest) GetBuyerID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerID
+	return l.BuyerID
 }
 
-func (o *ListBuyerGiftCardsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListBuyerGiftCardsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }

@@ -25,13 +25,13 @@ func (d *DetailedSettlementReportSpec) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *DetailedSettlementReportSpec) GetModel() *string {
-	return types.String("detailed_settlement")
+func (d *DetailedSettlementReportSpec) GetModel() *string {
+	return types.Pointer("detailed_settlement")
 }
 
-func (o *DetailedSettlementReportSpec) GetParams() map[string]any {
-	if o == nil {
+func (d *DetailedSettlementReportSpec) GetParams() map[string]any {
+	if d == nil {
 		return map[string]any{}
 	}
-	return o.Params
+	return d.Params
 }

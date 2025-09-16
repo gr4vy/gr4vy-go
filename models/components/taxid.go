@@ -23,16 +23,16 @@ func (t *TaxID) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TaxID) GetValue() string {
-	if o == nil {
+func (t *TaxID) GetValue() string {
+	if t == nil {
 		return ""
 	}
-	return o.Value
+	return t.Value
 }
 
-func (o *TaxID) GetKind() TaxIDKind {
-	if o == nil {
+func (t *TaxID) GetKind() TaxIDKind {
+	if t == nil {
 		return TaxIDKind("")
 	}
-	return o.Kind
+	return t.Kind
 }

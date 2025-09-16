@@ -116,55 +116,55 @@ func (p *PaymentOption) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentOption) GetType() *string {
-	return types.String("payment-option")
+func (p *PaymentOption) GetType() *string {
+	return types.Pointer("payment-option")
 }
 
-func (o *PaymentOption) GetMethod() string {
-	if o == nil {
+func (p *PaymentOption) GetMethod() string {
+	if p == nil {
 		return ""
 	}
-	return o.Method
+	return p.Method
 }
 
-func (o *PaymentOption) GetIconURL() *string {
-	if o == nil {
+func (p *PaymentOption) GetIconURL() *string {
+	if p == nil {
 		return nil
 	}
-	return o.IconURL
+	return p.IconURL
 }
 
-func (o *PaymentOption) GetMode() Mode {
-	if o == nil {
+func (p *PaymentOption) GetMode() Mode {
+	if p == nil {
 		return Mode("")
 	}
-	return o.Mode
+	return p.Mode
 }
 
-func (o *PaymentOption) GetLabel() *string {
-	if o == nil {
+func (p *PaymentOption) GetLabel() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Label
+	return p.Label
 }
 
-func (o *PaymentOption) GetCanStorePaymentMethod() bool {
-	if o == nil {
+func (p *PaymentOption) GetCanStorePaymentMethod() bool {
+	if p == nil {
 		return false
 	}
-	return o.CanStorePaymentMethod
+	return p.CanStorePaymentMethod
 }
 
-func (o *PaymentOption) GetCanDelayCapture() bool {
-	if o == nil {
+func (p *PaymentOption) GetCanDelayCapture() bool {
+	if p == nil {
 		return false
 	}
-	return o.CanDelayCapture
+	return p.CanDelayCapture
 }
 
-func (o *PaymentOption) GetContext() *Context {
-	if o == nil {
+func (p *PaymentOption) GetContext() *Context {
+	if p == nil {
 		return nil
 	}
-	return o.Context
+	return p.Context
 }

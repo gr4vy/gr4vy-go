@@ -25,16 +25,16 @@ func (r *ReportExecutionContext) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ReportExecutionContext) GetReferenceTimestamp() time.Time {
-	if o == nil {
+func (r *ReportExecutionContext) GetReferenceTimestamp() time.Time {
+	if r == nil {
 		return time.Time{}
 	}
-	return o.ReferenceTimestamp
+	return r.ReferenceTimestamp
 }
 
-func (o *ReportExecutionContext) GetReferenceTimezone() string {
-	if o == nil {
+func (r *ReportExecutionContext) GetReferenceTimezone() string {
+	if r == nil {
 		return ""
 	}
-	return o.ReferenceTimezone
+	return r.ReferenceTimezone
 }

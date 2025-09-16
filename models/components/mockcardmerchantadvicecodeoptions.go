@@ -9,16 +9,16 @@ type MockCardMerchantAdviceCodeOptions struct {
 	AccountNumber *string `json:"account_number"`
 }
 
-func (o *MockCardMerchantAdviceCodeOptions) GetResult() *string {
-	if o == nil {
+func (m *MockCardMerchantAdviceCodeOptions) GetResult() *string {
+	if m == nil {
 		return nil
 	}
-	return o.Result
+	return m.Result
 }
 
-func (o *MockCardMerchantAdviceCodeOptions) GetAccountNumber() *string {
-	if o == nil {
+func (m *MockCardMerchantAdviceCodeOptions) GetAccountNumber() *string {
+	if m == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return m.AccountNumber
 }

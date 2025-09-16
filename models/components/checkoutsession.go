@@ -38,55 +38,55 @@ func (c *CheckoutSession) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *CheckoutSession) GetCartItems() []CartItem {
-	if o == nil {
+func (c *CheckoutSession) GetCartItems() []CartItem {
+	if c == nil {
 		return nil
 	}
-	return o.CartItems
+	return c.CartItems
 }
 
-func (o *CheckoutSession) GetMetadata() map[string]string {
-	if o == nil {
+func (c *CheckoutSession) GetMetadata() map[string]string {
+	if c == nil {
 		return nil
 	}
-	return o.Metadata
+	return c.Metadata
 }
 
-func (o *CheckoutSession) GetBuyer() *GuestBuyerOutput {
-	if o == nil {
+func (c *CheckoutSession) GetBuyer() *GuestBuyerOutput {
+	if c == nil {
 		return nil
 	}
-	return o.Buyer
+	return c.Buyer
 }
 
-func (o *CheckoutSession) GetAirline() *Airline {
-	if o == nil {
+func (c *CheckoutSession) GetAirline() *Airline {
+	if c == nil {
 		return nil
 	}
-	return o.Airline
+	return c.Airline
 }
 
-func (o *CheckoutSession) GetType() *string {
-	return types.String("checkout-session")
+func (c *CheckoutSession) GetType() *string {
+	return types.Pointer("checkout-session")
 }
 
-func (o *CheckoutSession) GetID() string {
-	if o == nil {
+func (c *CheckoutSession) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *CheckoutSession) GetExpiresAt() time.Time {
-	if o == nil {
+func (c *CheckoutSession) GetExpiresAt() time.Time {
+	if c == nil {
 		return time.Time{}
 	}
-	return o.ExpiresAt
+	return c.ExpiresAt
 }
 
-func (o *CheckoutSession) GetPaymentMethod() *CheckoutSessionPaymentMethod {
-	if o == nil {
+func (c *CheckoutSession) GetPaymentMethod() *CheckoutSessionPaymentMethod {
+	if c == nil {
 		return nil
 	}
-	return o.PaymentMethod
+	return c.PaymentMethod
 }

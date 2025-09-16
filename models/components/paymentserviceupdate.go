@@ -47,93 +47,93 @@ func (p *PaymentServiceUpdate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentServiceUpdate) GetDisplayName() *string {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetDisplayName() *string {
+	if p == nil {
 		return nil
 	}
-	return o.DisplayName
+	return p.DisplayName
 }
 
-func (o *PaymentServiceUpdate) GetFields() []VoidableField {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetFields() []VoidableField {
+	if p == nil {
 		return nil
 	}
-	return o.Fields
+	return p.Fields
 }
 
-func (o *PaymentServiceUpdate) GetReportingFields() []VoidableField {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetReportingFields() []VoidableField {
+	if p == nil {
 		return nil
 	}
-	return o.ReportingFields
+	return p.ReportingFields
 }
 
-func (o *PaymentServiceUpdate) GetPosition() *int64 {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetPosition() *int64 {
+	if p == nil {
 		return nil
 	}
-	return o.Position
+	return p.Position
 }
 
-func (o *PaymentServiceUpdate) GetAcceptedCurrencies() []string {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetAcceptedCurrencies() []string {
+	if p == nil {
 		return nil
 	}
-	return o.AcceptedCurrencies
+	return p.AcceptedCurrencies
 }
 
-func (o *PaymentServiceUpdate) GetAcceptedCountries() []string {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetAcceptedCountries() []string {
+	if p == nil {
 		return nil
 	}
-	return o.AcceptedCountries
+	return p.AcceptedCountries
 }
 
-func (o *PaymentServiceUpdate) GetActive() *bool {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetActive() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Active
+	return p.Active
 }
 
-func (o *PaymentServiceUpdate) GetThreeDSecureEnabled() *bool {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetThreeDSecureEnabled() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.ThreeDSecureEnabled
+	return p.ThreeDSecureEnabled
 }
 
-func (o *PaymentServiceUpdate) GetMerchantProfile() map[string]*MerchantProfileScheme {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetMerchantProfile() map[string]*MerchantProfileScheme {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantProfile
+	return p.MerchantProfile
 }
 
-func (o *PaymentServiceUpdate) GetPaymentMethodTokenizationEnabled() *bool {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetPaymentMethodTokenizationEnabled() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.PaymentMethodTokenizationEnabled
+	return p.PaymentMethodTokenizationEnabled
 }
 
-func (o *PaymentServiceUpdate) GetNetworkTokensEnabled() *bool {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetNetworkTokensEnabled() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.NetworkTokensEnabled
+	return p.NetworkTokensEnabled
 }
 
-func (o *PaymentServiceUpdate) GetOpenLoop() *bool {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetOpenLoop() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.OpenLoop
+	return p.OpenLoop
 }
 
-func (o *PaymentServiceUpdate) GetSettlementReportingEnabled() *bool {
-	if o == nil {
+func (p *PaymentServiceUpdate) GetSettlementReportingEnabled() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.SettlementReportingEnabled
+	return p.SettlementReportingEnabled
 }

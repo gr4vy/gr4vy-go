@@ -31,34 +31,34 @@ func (p *PaymentMethodCard) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentMethodCard) GetMethod() *string {
-	return types.String("card")
+func (p *PaymentMethodCard) GetMethod() *string {
+	return types.Pointer("card")
 }
 
-func (o *PaymentMethodCard) GetNumber() string {
-	if o == nil {
+func (p *PaymentMethodCard) GetNumber() string {
+	if p == nil {
 		return ""
 	}
-	return o.Number
+	return p.Number
 }
 
-func (o *PaymentMethodCard) GetExpirationDate() string {
-	if o == nil {
+func (p *PaymentMethodCard) GetExpirationDate() string {
+	if p == nil {
 		return ""
 	}
-	return o.ExpirationDate
+	return p.ExpirationDate
 }
 
-func (o *PaymentMethodCard) GetCardScheme() *CardScheme {
-	if o == nil {
+func (p *PaymentMethodCard) GetCardScheme() *CardScheme {
+	if p == nil {
 		return nil
 	}
-	return o.CardScheme
+	return p.CardScheme
 }
 
-func (o *PaymentMethodCard) GetExternalIdentifier() *string {
-	if o == nil {
+func (p *PaymentMethodCard) GetExternalIdentifier() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return p.ExternalIdentifier
 }

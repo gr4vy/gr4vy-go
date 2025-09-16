@@ -18,9 +18,9 @@ type ForterAntiFraudOptionsCartItemBasicItemData struct {
 	Type *Type `json:"type,omitempty"`
 }
 
-func (o *ForterAntiFraudOptionsCartItemBasicItemData) GetType() *Type {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBasicItemData) GetType() *Type {
+	if f == nil {
 		return nil
 	}
-	return o.Type
+	return f.Type
 }

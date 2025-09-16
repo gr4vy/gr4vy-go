@@ -7,9 +7,9 @@ type GiftCardSummaries struct {
 	Items []GiftCardSummary `json:"items"`
 }
 
-func (o *GiftCardSummaries) GetItems() []GiftCardSummary {
-	if o == nil {
+func (g *GiftCardSummaries) GetItems() []GiftCardSummary {
+	if g == nil {
 		return []GiftCardSummary{}
 	}
-	return o.Items
+	return g.Items
 }

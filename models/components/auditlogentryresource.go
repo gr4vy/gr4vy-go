@@ -11,23 +11,23 @@ type AuditLogEntryResource struct {
 	Name string `json:"name"`
 }
 
-func (o *AuditLogEntryResource) GetType() string {
-	if o == nil {
+func (a *AuditLogEntryResource) GetType() string {
+	if a == nil {
 		return ""
 	}
-	return o.Type
+	return a.Type
 }
 
-func (o *AuditLogEntryResource) GetID() string {
-	if o == nil {
+func (a *AuditLogEntryResource) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *AuditLogEntryResource) GetName() string {
-	if o == nil {
+func (a *AuditLogEntryResource) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return o.Name
+	return a.Name
 }

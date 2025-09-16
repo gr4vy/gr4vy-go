@@ -8,9 +8,9 @@ type Settlements struct {
 	Items []Settlement `json:"items"`
 }
 
-func (o *Settlements) GetItems() []Settlement {
-	if o == nil {
+func (s *Settlements) GetItems() []Settlement {
+	if s == nil {
 		return []Settlement{}
 	}
-	return o.Items
+	return s.Items
 }

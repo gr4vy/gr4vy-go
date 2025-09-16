@@ -7,9 +7,9 @@ type DlocalOptions struct {
 	Wallet *DlocalWalletOptions `json:"wallet,omitempty"`
 }
 
-func (o *DlocalOptions) GetWallet() *DlocalWalletOptions {
-	if o == nil {
+func (d *DlocalOptions) GetWallet() *DlocalWalletOptions {
+	if d == nil {
 		return nil
 	}
-	return o.Wallet
+	return d.Wallet
 }

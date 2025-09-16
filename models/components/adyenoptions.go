@@ -7,9 +7,9 @@ type AdyenOptions struct {
 	AdditionalData map[string]string `json:"additionalData,omitempty"`
 }
 
-func (o *AdyenOptions) GetAdditionalData() map[string]string {
-	if o == nil {
+func (a *AdyenOptions) GetAdditionalData() map[string]string {
+	if a == nil {
 		return nil
 	}
-	return o.AdditionalData
+	return a.AdditionalData
 }

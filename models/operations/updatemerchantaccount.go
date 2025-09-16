@@ -12,16 +12,16 @@ type UpdateMerchantAccountRequest struct {
 	MerchantAccountUpdate components.MerchantAccountUpdate `request:"mediaType=application/json"`
 }
 
-func (o *UpdateMerchantAccountRequest) GetMerchantAccountID() string {
-	if o == nil {
+func (u *UpdateMerchantAccountRequest) GetMerchantAccountID() string {
+	if u == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
-func (o *UpdateMerchantAccountRequest) GetMerchantAccountUpdate() components.MerchantAccountUpdate {
-	if o == nil {
+func (u *UpdateMerchantAccountRequest) GetMerchantAccountUpdate() components.MerchantAccountUpdate {
+	if u == nil {
 		return components.MerchantAccountUpdate{}
 	}
-	return o.MerchantAccountUpdate
+	return u.MerchantAccountUpdate
 }

@@ -10,11 +10,11 @@ type AddReportGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *AddReportGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (a *AddReportGlobals) GetMerchantAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return a.MerchantAccountID
 }
 
 type AddReportRequest struct {
@@ -23,16 +23,16 @@ type AddReportRequest struct {
 	ReportCreate      components.ReportCreate `request:"mediaType=application/json"`
 }
 
-func (o *AddReportRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (a *AddReportRequest) GetMerchantAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return a.MerchantAccountID
 }
 
-func (o *AddReportRequest) GetReportCreate() components.ReportCreate {
-	if o == nil {
+func (a *AddReportRequest) GetReportCreate() components.ReportCreate {
+	if a == nil {
 		return components.ReportCreate{}
 	}
-	return o.ReportCreate
+	return a.ReportCreate
 }

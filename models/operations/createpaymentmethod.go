@@ -13,11 +13,11 @@ type CreatePaymentMethodGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreatePaymentMethodGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreatePaymentMethodGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type BodyType string
@@ -111,16 +111,16 @@ type CreatePaymentMethodRequest struct {
 	RequestBody       Body    `request:"mediaType=application/json"`
 }
 
-func (o *CreatePaymentMethodRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreatePaymentMethodRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreatePaymentMethodRequest) GetRequestBody() Body {
-	if o == nil {
+func (c *CreatePaymentMethodRequest) GetRequestBody() Body {
+	if c == nil {
 		return Body{}
 	}
-	return o.RequestBody
+	return c.RequestBody
 }

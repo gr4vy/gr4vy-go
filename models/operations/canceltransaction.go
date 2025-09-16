@@ -6,11 +6,11 @@ type CancelTransactionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CancelTransactionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CancelTransactionGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CancelTransactionRequest struct {
@@ -20,16 +20,16 @@ type CancelTransactionRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CancelTransactionRequest) GetTransactionID() string {
-	if o == nil {
+func (c *CancelTransactionRequest) GetTransactionID() string {
+	if c == nil {
 		return ""
 	}
-	return o.TransactionID
+	return c.TransactionID
 }
 
-func (o *CancelTransactionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CancelTransactionRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }

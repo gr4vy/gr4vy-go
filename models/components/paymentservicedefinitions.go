@@ -28,30 +28,30 @@ func (p *PaymentServiceDefinitions) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentServiceDefinitions) GetItems() []PaymentServiceDefinition {
-	if o == nil {
+func (p *PaymentServiceDefinitions) GetItems() []PaymentServiceDefinition {
+	if p == nil {
 		return []PaymentServiceDefinition{}
 	}
-	return o.Items
+	return p.Items
 }
 
-func (o *PaymentServiceDefinitions) GetLimit() *int64 {
-	if o == nil {
+func (p *PaymentServiceDefinitions) GetLimit() *int64 {
+	if p == nil {
 		return nil
 	}
-	return o.Limit
+	return p.Limit
 }
 
-func (o *PaymentServiceDefinitions) GetNextCursor() *string {
-	if o == nil {
+func (p *PaymentServiceDefinitions) GetNextCursor() *string {
+	if p == nil {
 		return nil
 	}
-	return o.NextCursor
+	return p.NextCursor
 }
 
-func (o *PaymentServiceDefinitions) GetPreviousCursor() *string {
-	if o == nil {
+func (p *PaymentServiceDefinitions) GetPreviousCursor() *string {
+	if p == nil {
 		return nil
 	}
-	return o.PreviousCursor
+	return p.PreviousCursor
 }

@@ -106,7 +106,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentLinks.List(ctx, nil, gr4vygo.Int64(20), nil)
+    res, err := s.PaymentLinks.List(ctx, nil, gr4vygo.Pointer[int64](20), nil)
     if err != nil {
         log.Fatal(err)
     }

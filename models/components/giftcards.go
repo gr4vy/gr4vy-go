@@ -28,30 +28,30 @@ func (g *GiftCards) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GiftCards) GetItems() []GiftCard {
-	if o == nil {
+func (g *GiftCards) GetItems() []GiftCard {
+	if g == nil {
 		return []GiftCard{}
 	}
-	return o.Items
+	return g.Items
 }
 
-func (o *GiftCards) GetLimit() *int64 {
-	if o == nil {
+func (g *GiftCards) GetLimit() *int64 {
+	if g == nil {
 		return nil
 	}
-	return o.Limit
+	return g.Limit
 }
 
-func (o *GiftCards) GetNextCursor() *string {
-	if o == nil {
+func (g *GiftCards) GetNextCursor() *string {
+	if g == nil {
 		return nil
 	}
-	return o.NextCursor
+	return g.NextCursor
 }
 
-func (o *GiftCards) GetPreviousCursor() *string {
-	if o == nil {
+func (g *GiftCards) GetPreviousCursor() *string {
+	if g == nil {
 		return nil
 	}
-	return o.PreviousCursor
+	return g.PreviousCursor
 }

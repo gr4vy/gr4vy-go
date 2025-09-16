@@ -29,27 +29,27 @@ func (c *CardSchemeDefinition) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *CardSchemeDefinition) GetType() *string {
-	return types.String("card-scheme-definition")
+func (c *CardSchemeDefinition) GetType() *string {
+	return types.Pointer("card-scheme-definition")
 }
 
-func (o *CardSchemeDefinition) GetID() string {
-	if o == nil {
+func (c *CardSchemeDefinition) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *CardSchemeDefinition) GetIconURL() string {
-	if o == nil {
+func (c *CardSchemeDefinition) GetIconURL() string {
+	if c == nil {
 		return ""
 	}
-	return o.IconURL
+	return c.IconURL
 }
 
-func (o *CardSchemeDefinition) GetDisplayName() string {
-	if o == nil {
+func (c *CardSchemeDefinition) GetDisplayName() string {
+	if c == nil {
 		return ""
 	}
-	return o.DisplayName
+	return c.DisplayName
 }
