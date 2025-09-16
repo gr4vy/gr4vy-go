@@ -47,6 +47,8 @@ type MerchantAccount struct {
 	MastercardNetworkTokensRequestorID *string `json:"mastercard_network_tokens_requestor_id,omitempty"`
 	// Application ID provided for Mastercard after onboarding to use Network Tokens.
 	MastercardNetworkTokensAppID *string `json:"mastercard_network_tokens_app_id,omitempty"`
+	// When enabled network tokens will be generated asynchronously and only used on subsequent transactions to speed up transaction processing.
+	AsyncNetworkTokensEnabled *bool `default:"false" json:"async_network_tokens_enabled"`
 	// The date this merchant account was created at.
 	CreatedAt time.Time `json:"created_at"`
 	// The date this merchant account was last updated at.
@@ -192,6 +194,13 @@ func (o *MerchantAccount) GetMastercardNetworkTokensAppID() *string {
 		return nil
 	}
 	return o.MastercardNetworkTokensAppID
+}
+
+func (o *MerchantAccount) GetAsyncNetworkTokensEnabled() *bool {
+	if o == nil {
+		return nil
+	}
+	return o.AsyncNetworkTokensEnabled
 }
 
 func (o *MerchantAccount) GetCreatedAt() time.Time {
