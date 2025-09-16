@@ -11,23 +11,23 @@ type ForterAntiFraudOptionsCartItemBeneficiaryComments struct {
 	MerchantComments *string `json:"merchant_comments,omitempty"`
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryComments) GetUserCommentsToMerchant() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryComments) GetUserCommentsToMerchant() *string {
+	if f == nil {
 		return nil
 	}
-	return o.UserCommentsToMerchant
+	return f.UserCommentsToMerchant
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryComments) GetMessageToBeneficiary() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryComments) GetMessageToBeneficiary() *string {
+	if f == nil {
 		return nil
 	}
-	return o.MessageToBeneficiary
+	return f.MessageToBeneficiary
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryComments) GetMerchantComments() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryComments) GetMerchantComments() *string {
+	if f == nil {
 		return nil
 	}
-	return o.MerchantComments
+	return f.MerchantComments
 }

@@ -11,11 +11,11 @@ type ListBuyersGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListBuyersGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListBuyersGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListBuyersRequest struct {
@@ -42,39 +42,39 @@ func (l *ListBuyersRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListBuyersRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListBuyersRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListBuyersRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListBuyersRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListBuyersRequest) GetSearch() *string {
-	if o == nil {
+func (l *ListBuyersRequest) GetSearch() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Search
+	return l.Search
 }
 
-func (o *ListBuyersRequest) GetExternalIdentifier() *string {
-	if o == nil {
+func (l *ListBuyersRequest) GetExternalIdentifier() *string {
+	if l == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return l.ExternalIdentifier
 }
 
-func (o *ListBuyersRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListBuyersRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListBuyersResponse struct {
@@ -83,9 +83,9 @@ type ListBuyersResponse struct {
 	Next func() (*ListBuyersResponse, error)
 }
 
-func (o *ListBuyersResponse) GetResult() components.Buyers {
-	if o == nil {
+func (l *ListBuyersResponse) GetResult() components.Buyers {
+	if l == nil {
 		return components.Buyers{}
 	}
-	return o.Result
+	return l.Result
 }

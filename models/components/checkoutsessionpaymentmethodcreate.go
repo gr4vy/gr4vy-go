@@ -31,34 +31,34 @@ func (c *CheckoutSessionPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *CheckoutSessionPaymentMethodCreate) GetMethod() *string {
-	return types.String("checkout-session")
+func (c *CheckoutSessionPaymentMethodCreate) GetMethod() *string {
+	return types.Pointer("checkout-session")
 }
 
-func (o *CheckoutSessionPaymentMethodCreate) GetID() string {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethodCreate) GetID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ID
+	return c.ID
 }
 
-func (o *CheckoutSessionPaymentMethodCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethodCreate) GetExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return c.ExternalIdentifier
 }
 
-func (o *CheckoutSessionPaymentMethodCreate) GetBuyerID() *string {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethodCreate) GetBuyerID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerID
+	return c.BuyerID
 }
 
-func (o *CheckoutSessionPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return c.BuyerExternalIdentifier
 }

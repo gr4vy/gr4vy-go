@@ -91,34 +91,34 @@ func (t *TransactionEvent) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionEvent) GetType() *string {
-	return types.String("transaction-event")
+func (t *TransactionEvent) GetType() *string {
+	return types.Pointer("transaction-event")
 }
 
-func (o *TransactionEvent) GetID() string {
-	if o == nil {
+func (t *TransactionEvent) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TransactionEvent) GetName() Name {
-	if o == nil {
+func (t *TransactionEvent) GetName() Name {
+	if t == nil {
 		return Name("")
 	}
-	return o.Name
+	return t.Name
 }
 
-func (o *TransactionEvent) GetCreatedAt() time.Time {
-	if o == nil {
+func (t *TransactionEvent) GetCreatedAt() time.Time {
+	if t == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return t.CreatedAt
 }
 
-func (o *TransactionEvent) GetContext() map[string]any {
-	if o == nil {
+func (t *TransactionEvent) GetContext() map[string]any {
+	if t == nil {
 		return map[string]any{}
 	}
-	return o.Context
+	return t.Context
 }

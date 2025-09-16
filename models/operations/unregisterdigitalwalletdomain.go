@@ -10,11 +10,11 @@ type UnregisterDigitalWalletDomainGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *UnregisterDigitalWalletDomainGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UnregisterDigitalWalletDomainGlobals) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
 type UnregisterDigitalWalletDomainRequest struct {
@@ -24,23 +24,23 @@ type UnregisterDigitalWalletDomainRequest struct {
 	DigitalWalletDomain components.DigitalWalletDomain `request:"mediaType=application/json"`
 }
 
-func (o *UnregisterDigitalWalletDomainRequest) GetDigitalWalletID() string {
-	if o == nil {
+func (u *UnregisterDigitalWalletDomainRequest) GetDigitalWalletID() string {
+	if u == nil {
 		return ""
 	}
-	return o.DigitalWalletID
+	return u.DigitalWalletID
 }
 
-func (o *UnregisterDigitalWalletDomainRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UnregisterDigitalWalletDomainRequest) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
-func (o *UnregisterDigitalWalletDomainRequest) GetDigitalWalletDomain() components.DigitalWalletDomain {
-	if o == nil {
+func (u *UnregisterDigitalWalletDomainRequest) GetDigitalWalletDomain() components.DigitalWalletDomain {
+	if u == nil {
 		return components.DigitalWalletDomain{}
 	}
-	return o.DigitalWalletDomain
+	return u.DigitalWalletDomain
 }

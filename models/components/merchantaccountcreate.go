@@ -58,135 +58,135 @@ func (m *MerchantAccountCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *MerchantAccountCreate) GetAccountUpdaterEnabled() *bool {
-	if o == nil {
+func (m *MerchantAccountCreate) GetAccountUpdaterEnabled() *bool {
+	if m == nil {
 		return nil
 	}
-	return o.AccountUpdaterEnabled
+	return m.AccountUpdaterEnabled
 }
 
-func (o *MerchantAccountCreate) GetAccountUpdaterRequestEncryptionKey() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetAccountUpdaterRequestEncryptionKey() *string {
+	if m == nil {
 		return nil
 	}
-	return o.AccountUpdaterRequestEncryptionKey
+	return m.AccountUpdaterRequestEncryptionKey
 }
 
-func (o *MerchantAccountCreate) GetAccountUpdaterRequestEncryptionKeyID() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetAccountUpdaterRequestEncryptionKeyID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.AccountUpdaterRequestEncryptionKeyID
+	return m.AccountUpdaterRequestEncryptionKeyID
 }
 
-func (o *MerchantAccountCreate) GetAccountUpdaterResponseDecryptionKey() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetAccountUpdaterResponseDecryptionKey() *string {
+	if m == nil {
 		return nil
 	}
-	return o.AccountUpdaterResponseDecryptionKey
+	return m.AccountUpdaterResponseDecryptionKey
 }
 
-func (o *MerchantAccountCreate) GetAccountUpdaterResponseDecryptionKeyID() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetAccountUpdaterResponseDecryptionKeyID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.AccountUpdaterResponseDecryptionKeyID
+	return m.AccountUpdaterResponseDecryptionKeyID
 }
 
-func (o *MerchantAccountCreate) GetOverCaptureAmount() *int64 {
-	if o == nil {
+func (m *MerchantAccountCreate) GetOverCaptureAmount() *int64 {
+	if m == nil {
 		return nil
 	}
-	return o.OverCaptureAmount
+	return m.OverCaptureAmount
 }
 
-func (o *MerchantAccountCreate) GetOverCapturePercentage() *int64 {
-	if o == nil {
+func (m *MerchantAccountCreate) GetOverCapturePercentage() *int64 {
+	if m == nil {
 		return nil
 	}
-	return o.OverCapturePercentage
+	return m.OverCapturePercentage
 }
 
-func (o *MerchantAccountCreate) GetLoonClientKey() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetLoonClientKey() *string {
+	if m == nil {
 		return nil
 	}
-	return o.LoonClientKey
+	return m.LoonClientKey
 }
 
-func (o *MerchantAccountCreate) GetLoonSecretKey() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetLoonSecretKey() *string {
+	if m == nil {
 		return nil
 	}
-	return o.LoonSecretKey
+	return m.LoonSecretKey
 }
 
-func (o *MerchantAccountCreate) GetLoonAcceptedSchemes() []CardScheme {
-	if o == nil {
+func (m *MerchantAccountCreate) GetLoonAcceptedSchemes() []CardScheme {
+	if m == nil {
 		return nil
 	}
-	return o.LoonAcceptedSchemes
+	return m.LoonAcceptedSchemes
 }
 
-func (o *MerchantAccountCreate) GetVisaNetworkTokensRequestorID() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetVisaNetworkTokensRequestorID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.VisaNetworkTokensRequestorID
+	return m.VisaNetworkTokensRequestorID
 }
 
-func (o *MerchantAccountCreate) GetVisaNetworkTokensAppID() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetVisaNetworkTokensAppID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.VisaNetworkTokensAppID
+	return m.VisaNetworkTokensAppID
 }
 
-func (o *MerchantAccountCreate) GetAmexNetworkTokensRequestorID() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetAmexNetworkTokensRequestorID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.AmexNetworkTokensRequestorID
+	return m.AmexNetworkTokensRequestorID
 }
 
-func (o *MerchantAccountCreate) GetAmexNetworkTokensAppID() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetAmexNetworkTokensAppID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.AmexNetworkTokensAppID
+	return m.AmexNetworkTokensAppID
 }
 
-func (o *MerchantAccountCreate) GetMastercardNetworkTokensRequestorID() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetMastercardNetworkTokensRequestorID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.MastercardNetworkTokensRequestorID
+	return m.MastercardNetworkTokensRequestorID
 }
 
-func (o *MerchantAccountCreate) GetMastercardNetworkTokensAppID() *string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetMastercardNetworkTokensAppID() *string {
+	if m == nil {
 		return nil
 	}
-	return o.MastercardNetworkTokensAppID
+	return m.MastercardNetworkTokensAppID
 }
 
-func (o *MerchantAccountCreate) GetAsyncNetworkTokensEnabled() *bool {
-	if o == nil {
+func (m *MerchantAccountCreate) GetAsyncNetworkTokensEnabled() *bool {
+	if m == nil {
 		return nil
 	}
-	return o.AsyncNetworkTokensEnabled
+	return m.AsyncNetworkTokensEnabled
 }
 
-func (o *MerchantAccountCreate) GetID() string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetID() string {
+	if m == nil {
 		return ""
 	}
-	return o.ID
+	return m.ID
 }
 
-func (o *MerchantAccountCreate) GetDisplayName() string {
-	if o == nil {
+func (m *MerchantAccountCreate) GetDisplayName() string {
+	if m == nil {
 		return ""
 	}
-	return o.DisplayName
+	return m.DisplayName
 }

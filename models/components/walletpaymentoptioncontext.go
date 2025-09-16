@@ -22,16 +22,16 @@ func (w *WalletPaymentOptionContext) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *WalletPaymentOptionContext) GetMerchantName() string {
-	if o == nil {
+func (w *WalletPaymentOptionContext) GetMerchantName() string {
+	if w == nil {
 		return ""
 	}
-	return o.MerchantName
+	return w.MerchantName
 }
 
-func (o *WalletPaymentOptionContext) GetSupportedSchemes() []string {
-	if o == nil {
+func (w *WalletPaymentOptionContext) GetSupportedSchemes() []string {
+	if w == nil {
 		return []string{}
 	}
-	return o.SupportedSchemes
+	return w.SupportedSchemes
 }

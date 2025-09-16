@@ -10,16 +10,16 @@ type TransactionCaptureCreate struct {
 	Airline *Airline `json:"airline,omitempty"`
 }
 
-func (o *TransactionCaptureCreate) GetAmount() *int64 {
-	if o == nil {
+func (t *TransactionCaptureCreate) GetAmount() *int64 {
+	if t == nil {
 		return nil
 	}
-	return o.Amount
+	return t.Amount
 }
 
-func (o *TransactionCaptureCreate) GetAirline() *Airline {
-	if o == nil {
+func (t *TransactionCaptureCreate) GetAirline() *Airline {
+	if t == nil {
 		return nil
 	}
-	return o.Airline
+	return t.Airline
 }

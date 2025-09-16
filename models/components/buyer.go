@@ -40,62 +40,62 @@ func (b *Buyer) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Buyer) GetType() *string {
-	return types.String("buyer")
+func (b *Buyer) GetType() *string {
+	return types.Pointer("buyer")
 }
 
-func (o *Buyer) GetID() *string {
-	if o == nil {
+func (b *Buyer) GetID() *string {
+	if b == nil {
 		return nil
 	}
-	return o.ID
+	return b.ID
 }
 
-func (o *Buyer) GetMerchantAccountID() string {
-	if o == nil {
+func (b *Buyer) GetMerchantAccountID() string {
+	if b == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return b.MerchantAccountID
 }
 
-func (o *Buyer) GetDisplayName() *string {
-	if o == nil {
+func (b *Buyer) GetDisplayName() *string {
+	if b == nil {
 		return nil
 	}
-	return o.DisplayName
+	return b.DisplayName
 }
 
-func (o *Buyer) GetExternalIdentifier() *string {
-	if o == nil {
+func (b *Buyer) GetExternalIdentifier() *string {
+	if b == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return b.ExternalIdentifier
 }
 
-func (o *Buyer) GetBillingDetails() *BillingDetailsOutput {
-	if o == nil {
+func (b *Buyer) GetBillingDetails() *BillingDetailsOutput {
+	if b == nil {
 		return nil
 	}
-	return o.BillingDetails
+	return b.BillingDetails
 }
 
-func (o *Buyer) GetAccountNumber() *string {
-	if o == nil {
+func (b *Buyer) GetAccountNumber() *string {
+	if b == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return b.AccountNumber
 }
 
-func (o *Buyer) GetCreatedAt() time.Time {
-	if o == nil {
+func (b *Buyer) GetCreatedAt() time.Time {
+	if b == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return b.CreatedAt
 }
 
-func (o *Buyer) GetUpdatedAt() time.Time {
-	if o == nil {
+func (b *Buyer) GetUpdatedAt() time.Time {
+	if b == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return b.UpdatedAt
 }

@@ -9,16 +9,16 @@ type ApplePaySessionRequest struct {
 	DomainName string `json:"domain_name"`
 }
 
-func (o *ApplePaySessionRequest) GetValidationURL() string {
-	if o == nil {
+func (a *ApplePaySessionRequest) GetValidationURL() string {
+	if a == nil {
 		return ""
 	}
-	return o.ValidationURL
+	return a.ValidationURL
 }
 
-func (o *ApplePaySessionRequest) GetDomainName() string {
-	if o == nil {
+func (a *ApplePaySessionRequest) GetDomainName() string {
+	if a == nil {
 		return ""
 	}
-	return o.DomainName
+	return a.DomainName
 }

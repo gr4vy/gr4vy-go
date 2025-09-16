@@ -15,37 +15,37 @@ type GuestBuyerOutput struct {
 	ShippingDetails *ShippingDetailsCreate `json:"shipping_details,omitempty"`
 }
 
-func (o *GuestBuyerOutput) GetDisplayName() *string {
-	if o == nil {
+func (g *GuestBuyerOutput) GetDisplayName() *string {
+	if g == nil {
 		return nil
 	}
-	return o.DisplayName
+	return g.DisplayName
 }
 
-func (o *GuestBuyerOutput) GetExternalIdentifier() *string {
-	if o == nil {
+func (g *GuestBuyerOutput) GetExternalIdentifier() *string {
+	if g == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return g.ExternalIdentifier
 }
 
-func (o *GuestBuyerOutput) GetBillingDetails() *BillingDetailsOutput {
-	if o == nil {
+func (g *GuestBuyerOutput) GetBillingDetails() *BillingDetailsOutput {
+	if g == nil {
 		return nil
 	}
-	return o.BillingDetails
+	return g.BillingDetails
 }
 
-func (o *GuestBuyerOutput) GetAccountNumber() *string {
-	if o == nil {
+func (g *GuestBuyerOutput) GetAccountNumber() *string {
+	if g == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return g.AccountNumber
 }
 
-func (o *GuestBuyerOutput) GetShippingDetails() *ShippingDetailsCreate {
-	if o == nil {
+func (g *GuestBuyerOutput) GetShippingDetails() *ShippingDetailsCreate {
+	if g == nil {
 		return nil
 	}
-	return o.ShippingDetails
+	return g.ShippingDetails
 }

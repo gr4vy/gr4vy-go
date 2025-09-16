@@ -11,23 +11,23 @@ type NetworkTokenCreate struct {
 	IsSubsequentPayment bool `json:"is_subsequent_payment"`
 }
 
-func (o *NetworkTokenCreate) GetSecurityCode() *string {
-	if o == nil {
+func (n *NetworkTokenCreate) GetSecurityCode() *string {
+	if n == nil {
 		return nil
 	}
-	return o.SecurityCode
+	return n.SecurityCode
 }
 
-func (o *NetworkTokenCreate) GetMerchantInitiated() bool {
-	if o == nil {
+func (n *NetworkTokenCreate) GetMerchantInitiated() bool {
+	if n == nil {
 		return false
 	}
-	return o.MerchantInitiated
+	return n.MerchantInitiated
 }
 
-func (o *NetworkTokenCreate) GetIsSubsequentPayment() bool {
-	if o == nil {
+func (n *NetworkTokenCreate) GetIsSubsequentPayment() bool {
+	if n == nil {
 		return false
 	}
-	return o.IsSubsequentPayment
+	return n.IsSubsequentPayment
 }

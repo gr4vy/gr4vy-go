@@ -33,48 +33,48 @@ func (a *AuditLogEntry) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *AuditLogEntry) GetType() *string {
-	return types.String("audit-log")
+func (a *AuditLogEntry) GetType() *string {
+	return types.Pointer("audit-log")
 }
 
-func (o *AuditLogEntry) GetID() *string {
-	if o == nil {
+func (a *AuditLogEntry) GetID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *AuditLogEntry) GetMerchantAccountID() *string {
-	if o == nil {
+func (a *AuditLogEntry) GetMerchantAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return a.MerchantAccountID
 }
 
-func (o *AuditLogEntry) GetResource() AuditLogEntryResource {
-	if o == nil {
+func (a *AuditLogEntry) GetResource() AuditLogEntryResource {
+	if a == nil {
 		return AuditLogEntryResource{}
 	}
-	return o.Resource
+	return a.Resource
 }
 
-func (o *AuditLogEntry) GetAction() AuditLogAction {
-	if o == nil {
+func (a *AuditLogEntry) GetAction() AuditLogAction {
+	if a == nil {
 		return AuditLogAction("")
 	}
-	return o.Action
+	return a.Action
 }
 
-func (o *AuditLogEntry) GetUser() AuditLogEntryUser {
-	if o == nil {
+func (a *AuditLogEntry) GetUser() AuditLogEntryUser {
+	if a == nil {
 		return AuditLogEntryUser{}
 	}
-	return o.User
+	return a.User
 }
 
-func (o *AuditLogEntry) GetTimestamp() time.Time {
-	if o == nil {
+func (a *AuditLogEntry) GetTimestamp() time.Time {
+	if a == nil {
 		return time.Time{}
 	}
-	return o.Timestamp
+	return a.Timestamp
 }

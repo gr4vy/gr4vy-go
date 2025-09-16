@@ -31,34 +31,34 @@ func (a *AccountUpdaterOptions) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *AccountUpdaterOptions) GetResponseCode() *string {
-	return types.String("updated")
+func (a *AccountUpdaterOptions) GetResponseCode() *string {
+	return types.Pointer("updated")
 }
 
-func (o *AccountUpdaterOptions) GetAccountNumber() *string {
-	if o == nil {
+func (a *AccountUpdaterOptions) GetAccountNumber() *string {
+	if a == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return a.AccountNumber
 }
 
-func (o *AccountUpdaterOptions) GetExpirationMonth() *string {
-	if o == nil {
+func (a *AccountUpdaterOptions) GetExpirationMonth() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ExpirationMonth
+	return a.ExpirationMonth
 }
 
-func (o *AccountUpdaterOptions) GetExpirationYear() *string {
-	if o == nil {
+func (a *AccountUpdaterOptions) GetExpirationYear() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ExpirationYear
+	return a.ExpirationYear
 }
 
-func (o *AccountUpdaterOptions) GetErrorCode() *string {
-	if o == nil {
+func (a *AccountUpdaterOptions) GetErrorCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ErrorCode
+	return a.ErrorCode
 }

@@ -11,23 +11,23 @@ type VerifyCredentials struct {
 	Fields []Field `json:"fields"`
 }
 
-func (o *VerifyCredentials) GetPaymentServiceDefinitionID() string {
-	if o == nil {
+func (v *VerifyCredentials) GetPaymentServiceDefinitionID() string {
+	if v == nil {
 		return ""
 	}
-	return o.PaymentServiceDefinitionID
+	return v.PaymentServiceDefinitionID
 }
 
-func (o *VerifyCredentials) GetPaymentServiceID() *string {
-	if o == nil {
+func (v *VerifyCredentials) GetPaymentServiceID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.PaymentServiceID
+	return v.PaymentServiceID
 }
 
-func (o *VerifyCredentials) GetFields() []Field {
-	if o == nil {
+func (v *VerifyCredentials) GetFields() []Field {
+	if v == nil {
 		return []Field{}
 	}
-	return o.Fields
+	return v.Fields
 }

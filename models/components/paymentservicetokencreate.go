@@ -11,23 +11,23 @@ type PaymentServiceTokenCreate struct {
 	RedirectURL string `json:"redirect_url"`
 }
 
-func (o *PaymentServiceTokenCreate) GetSecurityCode() *string {
-	if o == nil {
+func (p *PaymentServiceTokenCreate) GetSecurityCode() *string {
+	if p == nil {
 		return nil
 	}
-	return o.SecurityCode
+	return p.SecurityCode
 }
 
-func (o *PaymentServiceTokenCreate) GetPaymentServiceID() string {
-	if o == nil {
+func (p *PaymentServiceTokenCreate) GetPaymentServiceID() string {
+	if p == nil {
 		return ""
 	}
-	return o.PaymentServiceID
+	return p.PaymentServiceID
 }
 
-func (o *PaymentServiceTokenCreate) GetRedirectURL() string {
-	if o == nil {
+func (p *PaymentServiceTokenCreate) GetRedirectURL() string {
+	if p == nil {
 		return ""
 	}
-	return o.RedirectURL
+	return p.RedirectURL
 }

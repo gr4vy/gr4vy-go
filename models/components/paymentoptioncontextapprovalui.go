@@ -22,16 +22,16 @@ func (p *PaymentOptionContextApprovalUI) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentOptionContextApprovalUI) GetHeight() *string {
-	if o == nil {
+func (p *PaymentOptionContextApprovalUI) GetHeight() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Height
+	return p.Height
 }
 
-func (o *PaymentOptionContextApprovalUI) GetWidth() *string {
-	if o == nil {
+func (p *PaymentOptionContextApprovalUI) GetWidth() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Width
+	return p.Width
 }

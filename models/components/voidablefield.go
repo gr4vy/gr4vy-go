@@ -7,16 +7,16 @@ type VoidableField struct {
 	Value string `json:"value"`
 }
 
-func (o *VoidableField) GetKey() string {
-	if o == nil {
+func (v *VoidableField) GetKey() string {
+	if v == nil {
 		return ""
 	}
-	return o.Key
+	return v.Key
 }
 
-func (o *VoidableField) GetValue() string {
-	if o == nil {
+func (v *VoidableField) GetValue() string {
+	if v == nil {
 		return ""
 	}
-	return o.Value
+	return v.Value
 }

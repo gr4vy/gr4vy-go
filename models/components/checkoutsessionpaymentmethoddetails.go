@@ -13,30 +13,30 @@ type CheckoutSessionPaymentMethodDetails struct {
 	CardIssuerName *string `json:"card_issuer_name,omitempty"`
 }
 
-func (o *CheckoutSessionPaymentMethodDetails) GetBin() *string {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethodDetails) GetBin() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Bin
+	return c.Bin
 }
 
-func (o *CheckoutSessionPaymentMethodDetails) GetCardCountry() *string {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethodDetails) GetCardCountry() *string {
+	if c == nil {
 		return nil
 	}
-	return o.CardCountry
+	return c.CardCountry
 }
 
-func (o *CheckoutSessionPaymentMethodDetails) GetCardType() *CardType {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethodDetails) GetCardType() *CardType {
+	if c == nil {
 		return nil
 	}
-	return o.CardType
+	return c.CardType
 }
 
-func (o *CheckoutSessionPaymentMethodDetails) GetCardIssuerName() *string {
-	if o == nil {
+func (c *CheckoutSessionPaymentMethodDetails) GetCardIssuerName() *string {
+	if c == nil {
 		return nil
 	}
-	return o.CardIssuerName
+	return c.CardIssuerName
 }

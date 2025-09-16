@@ -10,11 +10,11 @@ type ListPaymentOptionsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListPaymentOptionsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPaymentOptionsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListPaymentOptionsRequest struct {
@@ -23,16 +23,16 @@ type ListPaymentOptionsRequest struct {
 	PaymentOptionRequest components.PaymentOptionRequest `request:"mediaType=application/json"`
 }
 
-func (o *ListPaymentOptionsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPaymentOptionsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
-func (o *ListPaymentOptionsRequest) GetPaymentOptionRequest() components.PaymentOptionRequest {
-	if o == nil {
+func (l *ListPaymentOptionsRequest) GetPaymentOptionRequest() components.PaymentOptionRequest {
+	if l == nil {
 		return components.PaymentOptionRequest{}
 	}
-	return o.PaymentOptionRequest
+	return l.PaymentOptionRequest
 }

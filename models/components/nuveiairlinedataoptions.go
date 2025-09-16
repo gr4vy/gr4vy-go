@@ -9,16 +9,16 @@ type NuveiAirlineDataOptions struct {
 	IsCardholderTraveling *bool `json:"isCardholderTraveling,omitempty"`
 }
 
-func (o *NuveiAirlineDataOptions) GetSeatClass() *string {
-	if o == nil {
+func (n *NuveiAirlineDataOptions) GetSeatClass() *string {
+	if n == nil {
 		return nil
 	}
-	return o.SeatClass
+	return n.SeatClass
 }
 
-func (o *NuveiAirlineDataOptions) GetIsCardholderTraveling() *bool {
-	if o == nil {
+func (n *NuveiAirlineDataOptions) GetIsCardholderTraveling() *bool {
+	if n == nil {
 		return nil
 	}
-	return o.IsCardholderTraveling
+	return n.IsCardholderTraveling
 }

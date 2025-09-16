@@ -11,11 +11,11 @@ type ListPayoutsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListPayoutsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPayoutsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListPayoutsRequest struct {
@@ -38,25 +38,25 @@ func (l *ListPayoutsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListPayoutsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListPayoutsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListPayoutsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListPayoutsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListPayoutsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPayoutsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListPayoutsResponse struct {
@@ -65,9 +65,9 @@ type ListPayoutsResponse struct {
 	Next func() (*ListPayoutsResponse, error)
 }
 
-func (o *ListPayoutsResponse) GetResult() components.PayoutSummaries {
-	if o == nil {
+func (l *ListPayoutsResponse) GetResult() components.PayoutSummaries {
+	if l == nil {
 		return components.PayoutSummaries{}
 	}
-	return o.Result
+	return l.Result
 }

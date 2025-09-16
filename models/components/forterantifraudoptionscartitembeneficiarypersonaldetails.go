@@ -11,23 +11,23 @@ type ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails struct {
 	Email *string `json:"email,omitempty"`
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails) GetFirstName() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails) GetFirstName() *string {
+	if f == nil {
 		return nil
 	}
-	return o.FirstName
+	return f.FirstName
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails) GetLastName() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails) GetLastName() *string {
+	if f == nil {
 		return nil
 	}
-	return o.LastName
+	return f.LastName
 }
 
-func (o *ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails) GetEmail() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemBeneficiaryPersonalDetails) GetEmail() *string {
+	if f == nil {
 		return nil
 	}
-	return o.Email
+	return f.Email
 }

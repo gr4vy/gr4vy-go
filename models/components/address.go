@@ -38,65 +38,65 @@ func (a *Address) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Address) GetCity() *string {
-	if o == nil {
+func (a *Address) GetCity() *string {
+	if a == nil {
 		return nil
 	}
-	return o.City
+	return a.City
 }
 
-func (o *Address) GetCountry() *string {
-	if o == nil {
+func (a *Address) GetCountry() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Country
+	return a.Country
 }
 
-func (o *Address) GetPostalCode() *string {
-	if o == nil {
+func (a *Address) GetPostalCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.PostalCode
+	return a.PostalCode
 }
 
-func (o *Address) GetState() *string {
-	if o == nil {
+func (a *Address) GetState() *string {
+	if a == nil {
 		return nil
 	}
-	return o.State
+	return a.State
 }
 
-func (o *Address) GetStateCode() *string {
-	if o == nil {
+func (a *Address) GetStateCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.StateCode
+	return a.StateCode
 }
 
-func (o *Address) GetHouseNumberOrName() *string {
-	if o == nil {
+func (a *Address) GetHouseNumberOrName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.HouseNumberOrName
+	return a.HouseNumberOrName
 }
 
-func (o *Address) GetLine1() *string {
-	if o == nil {
+func (a *Address) GetLine1() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Line1
+	return a.Line1
 }
 
-func (o *Address) GetLine2() *string {
-	if o == nil {
+func (a *Address) GetLine2() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Line2
+	return a.Line2
 }
 
-func (o *Address) GetOrganization() *string {
-	if o == nil {
+func (a *Address) GetOrganization() *string {
+	if a == nil {
 		return nil
 	}
-	return o.Organization
+	return a.Organization
 }

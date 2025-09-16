@@ -24,16 +24,16 @@ func (g *GiftCardTokenTransactionCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GiftCardTokenTransactionCreate) GetID() string {
-	if o == nil {
+func (g *GiftCardTokenTransactionCreate) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return o.ID
+	return g.ID
 }
 
-func (o *GiftCardTokenTransactionCreate) GetAmount() int64 {
-	if o == nil {
+func (g *GiftCardTokenTransactionCreate) GetAmount() int64 {
+	if g == nil {
 		return 0
 	}
-	return o.Amount
+	return g.Amount
 }

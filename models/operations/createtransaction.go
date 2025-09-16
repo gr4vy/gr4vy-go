@@ -10,11 +10,11 @@ type CreateTransactionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreateTransactionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateTransactionGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreateTransactionRequest struct {
@@ -29,30 +29,30 @@ type CreateTransactionRequest struct {
 	TransactionCreate components.TransactionCreate `request:"mediaType=application/json"`
 }
 
-func (o *CreateTransactionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateTransactionRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreateTransactionRequest) GetIdempotencyKey() *string {
-	if o == nil {
+func (c *CreateTransactionRequest) GetIdempotencyKey() *string {
+	if c == nil {
 		return nil
 	}
-	return o.IdempotencyKey
+	return c.IdempotencyKey
 }
 
-func (o *CreateTransactionRequest) GetXForwardedFor() *string {
-	if o == nil {
+func (c *CreateTransactionRequest) GetXForwardedFor() *string {
+	if c == nil {
 		return nil
 	}
-	return o.XForwardedFor
+	return c.XForwardedFor
 }
 
-func (o *CreateTransactionRequest) GetTransactionCreate() components.TransactionCreate {
-	if o == nil {
+func (c *CreateTransactionRequest) GetTransactionCreate() components.TransactionCreate {
+	if c == nil {
 		return components.TransactionCreate{}
 	}
-	return o.TransactionCreate
+	return c.TransactionCreate
 }

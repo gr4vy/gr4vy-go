@@ -31,34 +31,34 @@ func (t *TransactionGiftCard) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionGiftCard) GetType() *string {
-	return types.String("gift-card")
+func (t *TransactionGiftCard) GetType() *string {
+	return types.Pointer("gift-card")
 }
 
-func (o *TransactionGiftCard) GetID() *string {
-	if o == nil {
+func (t *TransactionGiftCard) GetID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TransactionGiftCard) GetBin() string {
-	if o == nil {
+func (t *TransactionGiftCard) GetBin() string {
+	if t == nil {
 		return ""
 	}
-	return o.Bin
+	return t.Bin
 }
 
-func (o *TransactionGiftCard) GetSubBin() string {
-	if o == nil {
+func (t *TransactionGiftCard) GetSubBin() string {
+	if t == nil {
 		return ""
 	}
-	return o.SubBin
+	return t.SubBin
 }
 
-func (o *TransactionGiftCard) GetLast4() string {
-	if o == nil {
+func (t *TransactionGiftCard) GetLast4() string {
+	if t == nil {
 		return ""
 	}
-	return o.Last4
+	return t.Last4
 }

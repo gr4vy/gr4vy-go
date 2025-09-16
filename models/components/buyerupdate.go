@@ -14,30 +14,30 @@ type BuyerUpdate struct {
 	BillingDetails *BillingDetailsInput `json:"billing_details,omitempty"`
 }
 
-func (o *BuyerUpdate) GetDisplayName() *string {
-	if o == nil {
+func (b *BuyerUpdate) GetDisplayName() *string {
+	if b == nil {
 		return nil
 	}
-	return o.DisplayName
+	return b.DisplayName
 }
 
-func (o *BuyerUpdate) GetExternalIdentifier() *string {
-	if o == nil {
+func (b *BuyerUpdate) GetExternalIdentifier() *string {
+	if b == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return b.ExternalIdentifier
 }
 
-func (o *BuyerUpdate) GetAccountNumber() *string {
-	if o == nil {
+func (b *BuyerUpdate) GetAccountNumber() *string {
+	if b == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return b.AccountNumber
 }
 
-func (o *BuyerUpdate) GetBillingDetails() *BillingDetailsInput {
-	if o == nil {
+func (b *BuyerUpdate) GetBillingDetails() *BillingDetailsInput {
+	if b == nil {
 		return nil
 	}
-	return o.BillingDetails
+	return b.BillingDetails
 }

@@ -9,16 +9,16 @@ type CheckoutPayoutOptions struct {
 	SourceID string `json:"source_id"`
 }
 
-func (o *CheckoutPayoutOptions) GetProcessingChannelID() string {
-	if o == nil {
+func (c *CheckoutPayoutOptions) GetProcessingChannelID() string {
+	if c == nil {
 		return ""
 	}
-	return o.ProcessingChannelID
+	return c.ProcessingChannelID
 }
 
-func (o *CheckoutPayoutOptions) GetSourceID() string {
-	if o == nil {
+func (c *CheckoutPayoutOptions) GetSourceID() string {
+	if c == nil {
 		return ""
 	}
-	return o.SourceID
+	return c.SourceID
 }

@@ -10,11 +10,11 @@ type CreatePayoutGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreatePayoutGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreatePayoutGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreatePayoutRequest struct {
@@ -23,16 +23,16 @@ type CreatePayoutRequest struct {
 	PayoutCreate      components.PayoutCreate `request:"mediaType=application/json"`
 }
 
-func (o *CreatePayoutRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreatePayoutRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreatePayoutRequest) GetPayoutCreate() components.PayoutCreate {
-	if o == nil {
+func (c *CreatePayoutRequest) GetPayoutCreate() components.PayoutCreate {
+	if c == nil {
 		return components.PayoutCreate{}
 	}
-	return o.PayoutCreate
+	return c.PayoutCreate
 }

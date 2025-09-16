@@ -14,30 +14,30 @@ type BuyerCreate struct {
 	AccountNumber *string `json:"account_number,omitempty"`
 }
 
-func (o *BuyerCreate) GetDisplayName() *string {
-	if o == nil {
+func (b *BuyerCreate) GetDisplayName() *string {
+	if b == nil {
 		return nil
 	}
-	return o.DisplayName
+	return b.DisplayName
 }
 
-func (o *BuyerCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (b *BuyerCreate) GetExternalIdentifier() *string {
+	if b == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return b.ExternalIdentifier
 }
 
-func (o *BuyerCreate) GetBillingDetails() *BillingDetailsInput {
-	if o == nil {
+func (b *BuyerCreate) GetBillingDetails() *BillingDetailsInput {
+	if b == nil {
 		return nil
 	}
-	return o.BillingDetails
+	return b.BillingDetails
 }
 
-func (o *BuyerCreate) GetAccountNumber() *string {
-	if o == nil {
+func (b *BuyerCreate) GetAccountNumber() *string {
+	if b == nil {
 		return nil
 	}
-	return o.AccountNumber
+	return b.AccountNumber
 }

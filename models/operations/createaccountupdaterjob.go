@@ -10,11 +10,11 @@ type CreateAccountUpdaterJobGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreateAccountUpdaterJobGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateAccountUpdaterJobGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreateAccountUpdaterJobRequest struct {
@@ -23,16 +23,16 @@ type CreateAccountUpdaterJobRequest struct {
 	AccountUpdaterJobCreate components.AccountUpdaterJobCreate `request:"mediaType=application/json"`
 }
 
-func (o *CreateAccountUpdaterJobRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateAccountUpdaterJobRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreateAccountUpdaterJobRequest) GetAccountUpdaterJobCreate() components.AccountUpdaterJobCreate {
-	if o == nil {
+func (c *CreateAccountUpdaterJobRequest) GetAccountUpdaterJobCreate() components.AccountUpdaterJobCreate {
+	if c == nil {
 		return components.AccountUpdaterJobCreate{}
 	}
-	return o.AccountUpdaterJobCreate
+	return c.AccountUpdaterJobCreate
 }

@@ -32,41 +32,41 @@ func (a *AuditLogEntryUser) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *AuditLogEntryUser) GetType() *string {
-	return types.String("user")
+func (a *AuditLogEntryUser) GetType() *string {
+	return types.Pointer("user")
 }
 
-func (o *AuditLogEntryUser) GetID() *string {
-	if o == nil {
+func (a *AuditLogEntryUser) GetID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *AuditLogEntryUser) GetName() string {
-	if o == nil {
+func (a *AuditLogEntryUser) GetName() string {
+	if a == nil {
 		return ""
 	}
-	return o.Name
+	return a.Name
 }
 
-func (o *AuditLogEntryUser) GetEmailAddress() *string {
-	if o == nil {
+func (a *AuditLogEntryUser) GetEmailAddress() *string {
+	if a == nil {
 		return nil
 	}
-	return o.EmailAddress
+	return a.EmailAddress
 }
 
-func (o *AuditLogEntryUser) GetIsStaff() bool {
-	if o == nil {
+func (a *AuditLogEntryUser) GetIsStaff() bool {
+	if a == nil {
 		return false
 	}
-	return o.IsStaff
+	return a.IsStaff
 }
 
-func (o *AuditLogEntryUser) GetStatus() UserStatus {
-	if o == nil {
+func (a *AuditLogEntryUser) GetStatus() UserStatus {
+	if a == nil {
 		return UserStatus("")
 	}
-	return o.Status
+	return a.Status
 }

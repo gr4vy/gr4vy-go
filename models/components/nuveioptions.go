@@ -9,16 +9,16 @@ type NuveiOptions struct {
 	AirlineData *NuveiAirlineDataOptions `json:"airlineData,omitempty"`
 }
 
-func (o *NuveiOptions) GetCustomData() *string {
-	if o == nil {
+func (n *NuveiOptions) GetCustomData() *string {
+	if n == nil {
 		return nil
 	}
-	return o.CustomData
+	return n.CustomData
 }
 
-func (o *NuveiOptions) GetAirlineData() *NuveiAirlineDataOptions {
-	if o == nil {
+func (n *NuveiOptions) GetAirlineData() *NuveiAirlineDataOptions {
+	if n == nil {
 		return nil
 	}
-	return o.AirlineData
+	return n.AirlineData
 }

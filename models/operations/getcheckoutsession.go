@@ -6,11 +6,11 @@ type GetCheckoutSessionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *GetCheckoutSessionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *GetCheckoutSessionGlobals) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }
 
 type GetCheckoutSessionRequest struct {
@@ -20,16 +20,16 @@ type GetCheckoutSessionRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *GetCheckoutSessionRequest) GetSessionID() string {
-	if o == nil {
+func (g *GetCheckoutSessionRequest) GetSessionID() string {
+	if g == nil {
 		return ""
 	}
-	return o.SessionID
+	return g.SessionID
 }
 
-func (o *GetCheckoutSessionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *GetCheckoutSessionRequest) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }

@@ -7,9 +7,9 @@ type GivingBlockOptions struct {
 	DefaultCryptocurrency *string `json:"defaultCryptocurrency,omitempty"`
 }
 
-func (o *GivingBlockOptions) GetDefaultCryptocurrency() *string {
-	if o == nil {
+func (g *GivingBlockOptions) GetDefaultCryptocurrency() *string {
+	if g == nil {
 		return nil
 	}
-	return o.DefaultCryptocurrency
+	return g.DefaultCryptocurrency
 }

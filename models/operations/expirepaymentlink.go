@@ -6,11 +6,11 @@ type ExpirePaymentLinkGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ExpirePaymentLinkGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (e *ExpirePaymentLinkGlobals) GetMerchantAccountID() *string {
+	if e == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return e.MerchantAccountID
 }
 
 type ExpirePaymentLinkRequest struct {
@@ -20,16 +20,16 @@ type ExpirePaymentLinkRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ExpirePaymentLinkRequest) GetPaymentLinkID() string {
-	if o == nil {
+func (e *ExpirePaymentLinkRequest) GetPaymentLinkID() string {
+	if e == nil {
 		return ""
 	}
-	return o.PaymentLinkID
+	return e.PaymentLinkID
 }
 
-func (o *ExpirePaymentLinkRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (e *ExpirePaymentLinkRequest) GetMerchantAccountID() *string {
+	if e == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return e.MerchantAccountID
 }

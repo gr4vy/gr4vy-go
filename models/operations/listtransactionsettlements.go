@@ -6,11 +6,11 @@ type ListTransactionSettlementsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListTransactionSettlementsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListTransactionSettlementsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListTransactionSettlementsRequest struct {
@@ -20,16 +20,16 @@ type ListTransactionSettlementsRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListTransactionSettlementsRequest) GetTransactionID() string {
-	if o == nil {
+func (l *ListTransactionSettlementsRequest) GetTransactionID() string {
+	if l == nil {
 		return ""
 	}
-	return o.TransactionID
+	return l.TransactionID
 }
 
-func (o *ListTransactionSettlementsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListTransactionSettlementsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }

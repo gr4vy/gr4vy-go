@@ -28,30 +28,30 @@ func (t *ThreeDSecureError) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ThreeDSecureError) GetCode() *string {
-	if o == nil {
+func (t *ThreeDSecureError) GetCode() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Code
+	return t.Code
 }
 
-func (o *ThreeDSecureError) GetDescription() *string {
-	if o == nil {
+func (t *ThreeDSecureError) GetDescription() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Description
+	return t.Description
 }
 
-func (o *ThreeDSecureError) GetDetail() *string {
-	if o == nil {
+func (t *ThreeDSecureError) GetDetail() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Detail
+	return t.Detail
 }
 
-func (o *ThreeDSecureError) GetComponent() *string {
-	if o == nil {
+func (t *ThreeDSecureError) GetComponent() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Component
+	return t.Component
 }

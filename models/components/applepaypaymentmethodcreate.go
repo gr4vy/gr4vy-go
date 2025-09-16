@@ -39,62 +39,62 @@ func (a *ApplePayPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ApplePayPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (a *ApplePayPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
+	if a == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return a.BuyerExternalIdentifier
 }
 
-func (o *ApplePayPaymentMethodCreate) GetBuyerID() *string {
-	if o == nil {
+func (a *ApplePayPaymentMethodCreate) GetBuyerID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.BuyerID
+	return a.BuyerID
 }
 
-func (o *ApplePayPaymentMethodCreate) GetCardholderName() *string {
-	if o == nil {
+func (a *ApplePayPaymentMethodCreate) GetCardholderName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.CardholderName
+	return a.CardholderName
 }
 
-func (o *ApplePayPaymentMethodCreate) GetRedirectURL() *string {
-	if o == nil {
+func (a *ApplePayPaymentMethodCreate) GetRedirectURL() *string {
+	if a == nil {
 		return nil
 	}
-	return o.RedirectURL
+	return a.RedirectURL
 }
 
-func (o *ApplePayPaymentMethodCreate) GetCardSuffix() *string {
-	if o == nil {
+func (a *ApplePayPaymentMethodCreate) GetCardSuffix() *string {
+	if a == nil {
 		return nil
 	}
-	return o.CardSuffix
+	return a.CardSuffix
 }
 
-func (o *ApplePayPaymentMethodCreate) GetCardScheme() *string {
-	if o == nil {
+func (a *ApplePayPaymentMethodCreate) GetCardScheme() *string {
+	if a == nil {
 		return nil
 	}
-	return o.CardScheme
+	return a.CardScheme
 }
 
-func (o *ApplePayPaymentMethodCreate) GetCardType() *string {
-	if o == nil {
+func (a *ApplePayPaymentMethodCreate) GetCardType() *string {
+	if a == nil {
 		return nil
 	}
-	return o.CardType
+	return a.CardType
 }
 
-func (o *ApplePayPaymentMethodCreate) GetMethod() string {
+func (a *ApplePayPaymentMethodCreate) GetMethod() string {
 	return "applepay"
 }
 
-func (o *ApplePayPaymentMethodCreate) GetToken() map[string]any {
-	if o == nil {
+func (a *ApplePayPaymentMethodCreate) GetToken() map[string]any {
+	if a == nil {
 		return map[string]any{}
 	}
-	return o.Token
+	return a.Token
 }

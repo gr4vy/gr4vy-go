@@ -6,11 +6,11 @@ type ListPaymentMethodNetworkTokensGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListPaymentMethodNetworkTokensGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPaymentMethodNetworkTokensGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListPaymentMethodNetworkTokensRequest struct {
@@ -20,16 +20,16 @@ type ListPaymentMethodNetworkTokensRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListPaymentMethodNetworkTokensRequest) GetPaymentMethodID() string {
-	if o == nil {
+func (l *ListPaymentMethodNetworkTokensRequest) GetPaymentMethodID() string {
+	if l == nil {
 		return ""
 	}
-	return o.PaymentMethodID
+	return l.PaymentMethodID
 }
 
-func (o *ListPaymentMethodNetworkTokensRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPaymentMethodNetworkTokensRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }

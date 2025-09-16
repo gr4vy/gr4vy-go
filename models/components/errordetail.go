@@ -12,30 +12,30 @@ type ErrorDetail struct {
 	Type string `json:"type"`
 }
 
-func (o *ErrorDetail) GetLocation() ErrorLocation {
-	if o == nil {
+func (e *ErrorDetail) GetLocation() ErrorLocation {
+	if e == nil {
 		return ErrorLocation("")
 	}
-	return o.Location
+	return e.Location
 }
 
-func (o *ErrorDetail) GetPointer() string {
-	if o == nil {
+func (e *ErrorDetail) GetPointer() string {
+	if e == nil {
 		return ""
 	}
-	return o.Pointer
+	return e.Pointer
 }
 
-func (o *ErrorDetail) GetMessage() string {
-	if o == nil {
+func (e *ErrorDetail) GetMessage() string {
+	if e == nil {
 		return ""
 	}
-	return o.Message
+	return e.Message
 }
 
-func (o *ErrorDetail) GetType() string {
-	if o == nil {
+func (e *ErrorDetail) GetType() string {
+	if e == nil {
 		return ""
 	}
-	return o.Type
+	return e.Type
 }

@@ -13,30 +13,30 @@ type ForterAntiFraudOptionsDiscount struct {
 	CouponDiscountPercent *string `json:"coupon_discount_percent,omitempty"`
 }
 
-func (o *ForterAntiFraudOptionsDiscount) GetCouponCodeUsed() string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsDiscount) GetCouponCodeUsed() string {
+	if f == nil {
 		return ""
 	}
-	return o.CouponCodeUsed
+	return f.CouponCodeUsed
 }
 
-func (o *ForterAntiFraudOptionsDiscount) GetDiscountType() string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsDiscount) GetDiscountType() string {
+	if f == nil {
 		return ""
 	}
-	return o.DiscountType
+	return f.DiscountType
 }
 
-func (o *ForterAntiFraudOptionsDiscount) GetCouponDiscountAmount() *ForterAntiFraudOptionsDiscountCouponDiscountAmount {
-	if o == nil {
+func (f *ForterAntiFraudOptionsDiscount) GetCouponDiscountAmount() *ForterAntiFraudOptionsDiscountCouponDiscountAmount {
+	if f == nil {
 		return nil
 	}
-	return o.CouponDiscountAmount
+	return f.CouponDiscountAmount
 }
 
-func (o *ForterAntiFraudOptionsDiscount) GetCouponDiscountPercent() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsDiscount) GetCouponDiscountPercent() *string {
+	if f == nil {
 		return nil
 	}
-	return o.CouponDiscountPercent
+	return f.CouponDiscountPercent
 }

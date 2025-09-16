@@ -13,30 +13,30 @@ type FiservInstallmentOptions struct {
 	MerchantAdviceCodeSupported *bool `json:"merchantAdviceCodeSupported,omitempty"`
 }
 
-func (o *FiservInstallmentOptions) GetNumberOfInstallments() *int64 {
-	if o == nil {
+func (f *FiservInstallmentOptions) GetNumberOfInstallments() *int64 {
+	if f == nil {
 		return nil
 	}
-	return o.NumberOfInstallments
+	return f.NumberOfInstallments
 }
 
-func (o *FiservInstallmentOptions) GetInstallmentsInterest() *bool {
-	if o == nil {
+func (f *FiservInstallmentOptions) GetInstallmentsInterest() *bool {
+	if f == nil {
 		return nil
 	}
-	return o.InstallmentsInterest
+	return f.InstallmentsInterest
 }
 
-func (o *FiservInstallmentOptions) GetInstallmentDelayMonths() *int64 {
-	if o == nil {
+func (f *FiservInstallmentOptions) GetInstallmentDelayMonths() *int64 {
+	if f == nil {
 		return nil
 	}
-	return o.InstallmentDelayMonths
+	return f.InstallmentDelayMonths
 }
 
-func (o *FiservInstallmentOptions) GetMerchantAdviceCodeSupported() *bool {
-	if o == nil {
+func (f *FiservInstallmentOptions) GetMerchantAdviceCodeSupported() *bool {
+	if f == nil {
 		return nil
 	}
-	return o.MerchantAdviceCodeSupported
+	return f.MerchantAdviceCodeSupported
 }

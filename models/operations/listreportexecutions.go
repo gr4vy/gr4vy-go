@@ -11,11 +11,11 @@ type ListReportExecutionsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListReportExecutionsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListReportExecutionsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListReportExecutionsRequest struct {
@@ -40,32 +40,32 @@ func (l *ListReportExecutionsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListReportExecutionsRequest) GetReportID() string {
-	if o == nil {
+func (l *ListReportExecutionsRequest) GetReportID() string {
+	if l == nil {
 		return ""
 	}
-	return o.ReportID
+	return l.ReportID
 }
 
-func (o *ListReportExecutionsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListReportExecutionsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListReportExecutionsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListReportExecutionsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListReportExecutionsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListReportExecutionsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListReportExecutionsResponse struct {
@@ -74,9 +74,9 @@ type ListReportExecutionsResponse struct {
 	Next func() (*ListReportExecutionsResponse, error)
 }
 
-func (o *ListReportExecutionsResponse) GetResult() components.ReportExecutions {
-	if o == nil {
+func (l *ListReportExecutionsResponse) GetResult() components.ReportExecutions {
+	if l == nil {
 		return components.ReportExecutions{}
 	}
-	return o.Result
+	return l.Result
 }

@@ -37,55 +37,55 @@ func (c *CardPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *CardPaymentMethodCreate) GetExpirationDate() string {
-	if o == nil {
+func (c *CardPaymentMethodCreate) GetExpirationDate() string {
+	if c == nil {
 		return ""
 	}
-	return o.ExpirationDate
+	return c.ExpirationDate
 }
 
-func (o *CardPaymentMethodCreate) GetNumber() string {
-	if o == nil {
+func (c *CardPaymentMethodCreate) GetNumber() string {
+	if c == nil {
 		return ""
 	}
-	return o.Number
+	return c.Number
 }
 
-func (o *CardPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (c *CardPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return c.BuyerExternalIdentifier
 }
 
-func (o *CardPaymentMethodCreate) GetBuyerID() *string {
-	if o == nil {
+func (c *CardPaymentMethodCreate) GetBuyerID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerID
+	return c.BuyerID
 }
 
-func (o *CardPaymentMethodCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (c *CardPaymentMethodCreate) GetExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return c.ExternalIdentifier
 }
 
-func (o *CardPaymentMethodCreate) GetCardType() *string {
-	if o == nil {
+func (c *CardPaymentMethodCreate) GetCardType() *string {
+	if c == nil {
 		return nil
 	}
-	return o.CardType
+	return c.CardType
 }
 
-func (o *CardPaymentMethodCreate) GetMethod() *string {
-	return types.String("card")
+func (c *CardPaymentMethodCreate) GetMethod() *string {
+	return types.Pointer("card")
 }
 
-func (o *CardPaymentMethodCreate) GetSecurityCode() *string {
-	if o == nil {
+func (c *CardPaymentMethodCreate) GetSecurityCode() *string {
+	if c == nil {
 		return nil
 	}
-	return o.SecurityCode
+	return c.SecurityCode
 }

@@ -10,11 +10,11 @@ type CreateCheckoutSessionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreateCheckoutSessionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateCheckoutSessionGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreateCheckoutSessionRequest struct {
@@ -23,16 +23,16 @@ type CreateCheckoutSessionRequest struct {
 	CheckoutSessionCreate *components.CheckoutSessionCreate `request:"mediaType=application/json"`
 }
 
-func (o *CreateCheckoutSessionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateCheckoutSessionRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreateCheckoutSessionRequest) GetCheckoutSessionCreate() *components.CheckoutSessionCreate {
-	if o == nil {
+func (c *CreateCheckoutSessionRequest) GetCheckoutSessionCreate() *components.CheckoutSessionCreate {
+	if c == nil {
 		return nil
 	}
-	return o.CheckoutSessionCreate
+	return c.CheckoutSessionCreate
 }

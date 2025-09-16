@@ -10,11 +10,11 @@ type CreatePaymentMethodNetworkTokenCryptogramGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreatePaymentMethodNetworkTokenCryptogramGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreatePaymentMethodNetworkTokenCryptogramGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreatePaymentMethodNetworkTokenCryptogramRequest struct {
@@ -27,30 +27,30 @@ type CreatePaymentMethodNetworkTokenCryptogramRequest struct {
 	CryptogramCreate  components.CryptogramCreate `request:"mediaType=application/json"`
 }
 
-func (o *CreatePaymentMethodNetworkTokenCryptogramRequest) GetPaymentMethodID() string {
-	if o == nil {
+func (c *CreatePaymentMethodNetworkTokenCryptogramRequest) GetPaymentMethodID() string {
+	if c == nil {
 		return ""
 	}
-	return o.PaymentMethodID
+	return c.PaymentMethodID
 }
 
-func (o *CreatePaymentMethodNetworkTokenCryptogramRequest) GetNetworkTokenID() string {
-	if o == nil {
+func (c *CreatePaymentMethodNetworkTokenCryptogramRequest) GetNetworkTokenID() string {
+	if c == nil {
 		return ""
 	}
-	return o.NetworkTokenID
+	return c.NetworkTokenID
 }
 
-func (o *CreatePaymentMethodNetworkTokenCryptogramRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreatePaymentMethodNetworkTokenCryptogramRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreatePaymentMethodNetworkTokenCryptogramRequest) GetCryptogramCreate() components.CryptogramCreate {
-	if o == nil {
+func (c *CreatePaymentMethodNetworkTokenCryptogramRequest) GetCryptogramCreate() components.CryptogramCreate {
+	if c == nil {
 		return components.CryptogramCreate{}
 	}
-	return o.CryptogramCreate
+	return c.CryptogramCreate
 }

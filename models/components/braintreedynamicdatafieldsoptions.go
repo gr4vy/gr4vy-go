@@ -22,23 +22,23 @@ type BraintreeDynamicDataFieldsOptions struct {
 	VaultPaymentMethodCriteria *VaultPaymentMethodCriteria `json:"vault_payment_method_criteria,omitempty"`
 }
 
-func (o *BraintreeDynamicDataFieldsOptions) GetThreeDsAuthStatus() *string {
-	if o == nil {
+func (b *BraintreeDynamicDataFieldsOptions) GetThreeDsAuthStatus() *string {
+	if b == nil {
 		return nil
 	}
-	return o.ThreeDsAuthStatus
+	return b.ThreeDsAuthStatus
 }
 
-func (o *BraintreeDynamicDataFieldsOptions) GetPurchaseOrderNumber() *string {
-	if o == nil {
+func (b *BraintreeDynamicDataFieldsOptions) GetPurchaseOrderNumber() *string {
+	if b == nil {
 		return nil
 	}
-	return o.PurchaseOrderNumber
+	return b.PurchaseOrderNumber
 }
 
-func (o *BraintreeDynamicDataFieldsOptions) GetVaultPaymentMethodCriteria() *VaultPaymentMethodCriteria {
-	if o == nil {
+func (b *BraintreeDynamicDataFieldsOptions) GetVaultPaymentMethodCriteria() *VaultPaymentMethodCriteria {
+	if b == nil {
 		return nil
 	}
-	return o.VaultPaymentMethodCriteria
+	return b.VaultPaymentMethodCriteria
 }

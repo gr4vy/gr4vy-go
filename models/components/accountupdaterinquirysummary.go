@@ -27,20 +27,20 @@ func (a *AccountUpdaterInquirySummary) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *AccountUpdaterInquirySummary) GetType() *string {
-	return types.String("account-updater-inquiry")
+func (a *AccountUpdaterInquirySummary) GetType() *string {
+	return types.Pointer("account-updater-inquiry")
 }
 
-func (o *AccountUpdaterInquirySummary) GetID() string {
-	if o == nil {
+func (a *AccountUpdaterInquirySummary) GetID() string {
+	if a == nil {
 		return ""
 	}
-	return o.ID
+	return a.ID
 }
 
-func (o *AccountUpdaterInquirySummary) GetPaymentMethodID() string {
-	if o == nil {
+func (a *AccountUpdaterInquirySummary) GetPaymentMethodID() string {
+	if a == nil {
 		return ""
 	}
-	return o.PaymentMethodID
+	return a.PaymentMethodID
 }

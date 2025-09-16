@@ -11,23 +11,23 @@ type AdyenSplitsOptions struct {
 	Refund []map[string]any `json:"refund,omitempty"`
 }
 
-func (o *AdyenSplitsOptions) GetAuthorization() []map[string]any {
-	if o == nil {
+func (a *AdyenSplitsOptions) GetAuthorization() []map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.Authorization
+	return a.Authorization
 }
 
-func (o *AdyenSplitsOptions) GetCapture() []map[string]any {
-	if o == nil {
+func (a *AdyenSplitsOptions) GetCapture() []map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.Capture
+	return a.Capture
 }
 
-func (o *AdyenSplitsOptions) GetRefund() []map[string]any {
-	if o == nil {
+func (a *AdyenSplitsOptions) GetRefund() []map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.Refund
+	return a.Refund
 }

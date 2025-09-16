@@ -28,30 +28,30 @@ func (p *PaymentLinks) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentLinks) GetItems() []PaymentLink {
-	if o == nil {
+func (p *PaymentLinks) GetItems() []PaymentLink {
+	if p == nil {
 		return []PaymentLink{}
 	}
-	return o.Items
+	return p.Items
 }
 
-func (o *PaymentLinks) GetLimit() *int64 {
-	if o == nil {
+func (p *PaymentLinks) GetLimit() *int64 {
+	if p == nil {
 		return nil
 	}
-	return o.Limit
+	return p.Limit
 }
 
-func (o *PaymentLinks) GetNextCursor() *string {
-	if o == nil {
+func (p *PaymentLinks) GetNextCursor() *string {
+	if p == nil {
 		return nil
 	}
-	return o.NextCursor
+	return p.NextCursor
 }
 
-func (o *PaymentLinks) GetPreviousCursor() *string {
-	if o == nil {
+func (p *PaymentLinks) GetPreviousCursor() *string {
+	if p == nil {
 		return nil
 	}
-	return o.PreviousCursor
+	return p.PreviousCursor
 }

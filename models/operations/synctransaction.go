@@ -6,11 +6,11 @@ type SyncTransactionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *SyncTransactionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (s *SyncTransactionGlobals) GetMerchantAccountID() *string {
+	if s == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return s.MerchantAccountID
 }
 
 type SyncTransactionRequest struct {
@@ -19,16 +19,16 @@ type SyncTransactionRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *SyncTransactionRequest) GetTransactionID() string {
-	if o == nil {
+func (s *SyncTransactionRequest) GetTransactionID() string {
+	if s == nil {
 		return ""
 	}
-	return o.TransactionID
+	return s.TransactionID
 }
 
-func (o *SyncTransactionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (s *SyncTransactionRequest) GetMerchantAccountID() *string {
+	if s == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return s.MerchantAccountID
 }

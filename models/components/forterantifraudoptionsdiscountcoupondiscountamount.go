@@ -11,23 +11,23 @@ type ForterAntiFraudOptionsDiscountCouponDiscountAmount struct {
 	Currency *string `json:"currency,omitempty"`
 }
 
-func (o *ForterAntiFraudOptionsDiscountCouponDiscountAmount) GetAmountUsd() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsDiscountCouponDiscountAmount) GetAmountUsd() *string {
+	if f == nil {
 		return nil
 	}
-	return o.AmountUsd
+	return f.AmountUsd
 }
 
-func (o *ForterAntiFraudOptionsDiscountCouponDiscountAmount) GetAmountLocalCurrency() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsDiscountCouponDiscountAmount) GetAmountLocalCurrency() *string {
+	if f == nil {
 		return nil
 	}
-	return o.AmountLocalCurrency
+	return f.AmountLocalCurrency
 }
 
-func (o *ForterAntiFraudOptionsDiscountCouponDiscountAmount) GetCurrency() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsDiscountCouponDiscountAmount) GetCurrency() *string {
+	if f == nil {
 		return nil
 	}
-	return o.Currency
+	return f.Currency
 }

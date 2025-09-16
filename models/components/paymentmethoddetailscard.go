@@ -23,23 +23,23 @@ func (p *PaymentMethodDetailsCard) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentMethodDetailsCard) GetBin() *string {
-	if o == nil {
+func (p *PaymentMethodDetailsCard) GetBin() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Bin
+	return p.Bin
 }
 
-func (o *PaymentMethodDetailsCard) GetCardType() *CardType {
-	if o == nil {
+func (p *PaymentMethodDetailsCard) GetCardType() *CardType {
+	if p == nil {
 		return nil
 	}
-	return o.CardType
+	return p.CardType
 }
 
-func (o *PaymentMethodDetailsCard) GetCardIssuerName() *string {
-	if o == nil {
+func (p *PaymentMethodDetailsCard) GetCardIssuerName() *string {
+	if p == nil {
 		return nil
 	}
-	return o.CardIssuerName
+	return p.CardIssuerName
 }

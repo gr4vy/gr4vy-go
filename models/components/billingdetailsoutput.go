@@ -32,44 +32,44 @@ func (b *BillingDetailsOutput) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *BillingDetailsOutput) GetFirstName() *string {
-	if o == nil {
+func (b *BillingDetailsOutput) GetFirstName() *string {
+	if b == nil {
 		return nil
 	}
-	return o.FirstName
+	return b.FirstName
 }
 
-func (o *BillingDetailsOutput) GetLastName() *string {
-	if o == nil {
+func (b *BillingDetailsOutput) GetLastName() *string {
+	if b == nil {
 		return nil
 	}
-	return o.LastName
+	return b.LastName
 }
 
-func (o *BillingDetailsOutput) GetEmailAddress() *string {
-	if o == nil {
+func (b *BillingDetailsOutput) GetEmailAddress() *string {
+	if b == nil {
 		return nil
 	}
-	return o.EmailAddress
+	return b.EmailAddress
 }
 
-func (o *BillingDetailsOutput) GetPhoneNumber() *string {
-	if o == nil {
+func (b *BillingDetailsOutput) GetPhoneNumber() *string {
+	if b == nil {
 		return nil
 	}
-	return o.PhoneNumber
+	return b.PhoneNumber
 }
 
-func (o *BillingDetailsOutput) GetAddress() *Address {
-	if o == nil {
+func (b *BillingDetailsOutput) GetAddress() *Address {
+	if b == nil {
 		return nil
 	}
-	return o.Address
+	return b.Address
 }
 
-func (o *BillingDetailsOutput) GetTaxID() *TaxID {
-	if o == nil {
+func (b *BillingDetailsOutput) GetTaxID() *TaxID {
+	if b == nil {
 		return nil
 	}
-	return o.TaxID
+	return b.TaxID
 }

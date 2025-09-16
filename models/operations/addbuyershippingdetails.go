@@ -10,11 +10,11 @@ type AddBuyerShippingDetailsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *AddBuyerShippingDetailsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (a *AddBuyerShippingDetailsGlobals) GetMerchantAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return a.MerchantAccountID
 }
 
 type AddBuyerShippingDetailsRequest struct {
@@ -25,23 +25,23 @@ type AddBuyerShippingDetailsRequest struct {
 	ShippingDetailsCreate components.ShippingDetailsCreate `request:"mediaType=application/json"`
 }
 
-func (o *AddBuyerShippingDetailsRequest) GetBuyerID() string {
-	if o == nil {
+func (a *AddBuyerShippingDetailsRequest) GetBuyerID() string {
+	if a == nil {
 		return ""
 	}
-	return o.BuyerID
+	return a.BuyerID
 }
 
-func (o *AddBuyerShippingDetailsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (a *AddBuyerShippingDetailsRequest) GetMerchantAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return a.MerchantAccountID
 }
 
-func (o *AddBuyerShippingDetailsRequest) GetShippingDetailsCreate() components.ShippingDetailsCreate {
-	if o == nil {
+func (a *AddBuyerShippingDetailsRequest) GetShippingDetailsCreate() components.ShippingDetailsCreate {
+	if a == nil {
 		return components.ShippingDetailsCreate{}
 	}
-	return o.ShippingDetailsCreate
+	return a.ShippingDetailsCreate
 }

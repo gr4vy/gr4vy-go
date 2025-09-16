@@ -11,23 +11,23 @@ type CybersourceOptions struct {
 	ShipToMethod *string `json:"ship_to_method,omitempty"`
 }
 
-func (o *CybersourceOptions) GetMetaKeyMerchantID() *string {
-	if o == nil {
+func (c *CybersourceOptions) GetMetaKeyMerchantID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MetaKeyMerchantID
+	return c.MetaKeyMerchantID
 }
 
-func (o *CybersourceOptions) GetMerchantDefinedInformation() map[string]string {
-	if o == nil {
+func (c *CybersourceOptions) GetMerchantDefinedInformation() map[string]string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantDefinedInformation
+	return c.MerchantDefinedInformation
 }
 
-func (o *CybersourceOptions) GetShipToMethod() *string {
-	if o == nil {
+func (c *CybersourceOptions) GetShipToMethod() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ShipToMethod
+	return c.ShipToMethod
 }

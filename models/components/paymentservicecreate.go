@@ -49,100 +49,100 @@ func (p *PaymentServiceCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentServiceCreate) GetDisplayName() string {
-	if o == nil {
+func (p *PaymentServiceCreate) GetDisplayName() string {
+	if p == nil {
 		return ""
 	}
-	return o.DisplayName
+	return p.DisplayName
 }
 
-func (o *PaymentServiceCreate) GetPaymentServiceDefinitionID() string {
-	if o == nil {
+func (p *PaymentServiceCreate) GetPaymentServiceDefinitionID() string {
+	if p == nil {
 		return ""
 	}
-	return o.PaymentServiceDefinitionID
+	return p.PaymentServiceDefinitionID
 }
 
-func (o *PaymentServiceCreate) GetFields() []Field {
-	if o == nil {
+func (p *PaymentServiceCreate) GetFields() []Field {
+	if p == nil {
 		return []Field{}
 	}
-	return o.Fields
+	return p.Fields
 }
 
-func (o *PaymentServiceCreate) GetReportingFields() []Field {
-	if o == nil {
+func (p *PaymentServiceCreate) GetReportingFields() []Field {
+	if p == nil {
 		return nil
 	}
-	return o.ReportingFields
+	return p.ReportingFields
 }
 
-func (o *PaymentServiceCreate) GetPosition() *int64 {
-	if o == nil {
+func (p *PaymentServiceCreate) GetPosition() *int64 {
+	if p == nil {
 		return nil
 	}
-	return o.Position
+	return p.Position
 }
 
-func (o *PaymentServiceCreate) GetAcceptedCurrencies() []string {
-	if o == nil {
+func (p *PaymentServiceCreate) GetAcceptedCurrencies() []string {
+	if p == nil {
 		return []string{}
 	}
-	return o.AcceptedCurrencies
+	return p.AcceptedCurrencies
 }
 
-func (o *PaymentServiceCreate) GetAcceptedCountries() []string {
-	if o == nil {
+func (p *PaymentServiceCreate) GetAcceptedCountries() []string {
+	if p == nil {
 		return []string{}
 	}
-	return o.AcceptedCountries
+	return p.AcceptedCountries
 }
 
-func (o *PaymentServiceCreate) GetActive() *bool {
-	if o == nil {
+func (p *PaymentServiceCreate) GetActive() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Active
+	return p.Active
 }
 
-func (o *PaymentServiceCreate) GetThreeDSecureEnabled() *bool {
-	if o == nil {
+func (p *PaymentServiceCreate) GetThreeDSecureEnabled() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.ThreeDSecureEnabled
+	return p.ThreeDSecureEnabled
 }
 
-func (o *PaymentServiceCreate) GetMerchantProfile() map[string]*MerchantProfileScheme {
-	if o == nil {
+func (p *PaymentServiceCreate) GetMerchantProfile() map[string]*MerchantProfileScheme {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantProfile
+	return p.MerchantProfile
 }
 
-func (o *PaymentServiceCreate) GetPaymentMethodTokenizationEnabled() *bool {
-	if o == nil {
+func (p *PaymentServiceCreate) GetPaymentMethodTokenizationEnabled() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.PaymentMethodTokenizationEnabled
+	return p.PaymentMethodTokenizationEnabled
 }
 
-func (o *PaymentServiceCreate) GetNetworkTokensEnabled() *bool {
-	if o == nil {
+func (p *PaymentServiceCreate) GetNetworkTokensEnabled() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.NetworkTokensEnabled
+	return p.NetworkTokensEnabled
 }
 
-func (o *PaymentServiceCreate) GetOpenLoop() *bool {
-	if o == nil {
+func (p *PaymentServiceCreate) GetOpenLoop() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.OpenLoop
+	return p.OpenLoop
 }
 
-func (o *PaymentServiceCreate) GetSettlementReportingEnabled() *bool {
-	if o == nil {
+func (p *PaymentServiceCreate) GetSettlementReportingEnabled() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.SettlementReportingEnabled
+	return p.SettlementReportingEnabled
 }

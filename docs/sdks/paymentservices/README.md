@@ -40,8 +40,8 @@ func main() {
     )
 
     res, err := s.PaymentServices.List(ctx, operations.ListPaymentServicesRequest{
-        Cursor: gr4vygo.String("ZXhhbXBsZTE"),
-        Deleted: gr4vygo.Bool(true),
+        Cursor: gr4vygo.Pointer("ZXhhbXBsZTE"),
+        Deleted: gr4vygo.Pointer(true),
     })
     if err != nil {
         log.Fatal(err)
@@ -143,8 +143,8 @@ func main() {
             "DE",
             "GB",
         },
-        ThreeDSecureEnabled: gr4vygo.Bool(true),
-        SettlementReportingEnabled: gr4vygo.Bool(true),
+        ThreeDSecureEnabled: gr4vygo.Pointer(true),
+        SettlementReportingEnabled: gr4vygo.Pointer(true),
     })
     if err != nil {
         log.Fatal(err)
@@ -279,7 +279,7 @@ func main() {
     )
 
     res, err := s.PaymentServices.Update(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", components.PaymentServiceUpdate{
-        SettlementReportingEnabled: gr4vygo.Bool(true),
+        SettlementReportingEnabled: gr4vygo.Pointer(true),
     })
     if err != nil {
         log.Fatal(err)

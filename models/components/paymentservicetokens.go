@@ -7,9 +7,9 @@ type PaymentServiceTokens struct {
 	Items []PaymentServiceToken `json:"items"`
 }
 
-func (o *PaymentServiceTokens) GetItems() []PaymentServiceToken {
-	if o == nil {
+func (p *PaymentServiceTokens) GetItems() []PaymentServiceToken {
+	if p == nil {
 		return []PaymentServiceToken{}
 	}
-	return o.Items
+	return p.Items
 }

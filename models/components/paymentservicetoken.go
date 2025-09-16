@@ -39,62 +39,62 @@ func (p *PaymentServiceToken) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentServiceToken) GetType() *string {
-	return types.String("payment-service-token")
+func (p *PaymentServiceToken) GetType() *string {
+	return types.Pointer("payment-service-token")
 }
 
-func (o *PaymentServiceToken) GetID() string {
-	if o == nil {
+func (p *PaymentServiceToken) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *PaymentServiceToken) GetApprovalURL() *string {
-	if o == nil {
+func (p *PaymentServiceToken) GetApprovalURL() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ApprovalURL
+	return p.ApprovalURL
 }
 
-func (o *PaymentServiceToken) GetPaymentMethodID() string {
-	if o == nil {
+func (p *PaymentServiceToken) GetPaymentMethodID() string {
+	if p == nil {
 		return ""
 	}
-	return o.PaymentMethodID
+	return p.PaymentMethodID
 }
 
-func (o *PaymentServiceToken) GetPaymentServiceID() string {
-	if o == nil {
+func (p *PaymentServiceToken) GetPaymentServiceID() string {
+	if p == nil {
 		return ""
 	}
-	return o.PaymentServiceID
+	return p.PaymentServiceID
 }
 
-func (o *PaymentServiceToken) GetStatus() PaymentMethodStatus {
-	if o == nil {
+func (p *PaymentServiceToken) GetStatus() PaymentMethodStatus {
+	if p == nil {
 		return PaymentMethodStatus("")
 	}
-	return o.Status
+	return p.Status
 }
 
-func (o *PaymentServiceToken) GetToken() *string {
-	if o == nil {
+func (p *PaymentServiceToken) GetToken() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Token
+	return p.Token
 }
 
-func (o *PaymentServiceToken) GetCreatedAt() time.Time {
-	if o == nil {
+func (p *PaymentServiceToken) GetCreatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return p.CreatedAt
 }
 
-func (o *PaymentServiceToken) GetUpdatedAt() time.Time {
-	if o == nil {
+func (p *PaymentServiceToken) GetUpdatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return p.UpdatedAt
 }

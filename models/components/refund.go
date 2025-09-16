@@ -60,139 +60,139 @@ func (r *Refund) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Refund) GetType() *string {
-	return types.String("refund")
+func (r *Refund) GetType() *string {
+	return types.Pointer("refund")
 }
 
-func (o *Refund) GetID() string {
-	if o == nil {
+func (r *Refund) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return o.ID
+	return r.ID
 }
 
-func (o *Refund) GetTransactionID() string {
-	if o == nil {
+func (r *Refund) GetTransactionID() string {
+	if r == nil {
 		return ""
 	}
-	return o.TransactionID
+	return r.TransactionID
 }
 
-func (o *Refund) GetPaymentServiceRefundID() *string {
-	if o == nil {
+func (r *Refund) GetPaymentServiceRefundID() *string {
+	if r == nil {
 		return nil
 	}
-	return o.PaymentServiceRefundID
+	return r.PaymentServiceRefundID
 }
 
-func (o *Refund) GetStatus() RefundStatus {
-	if o == nil {
+func (r *Refund) GetStatus() RefundStatus {
+	if r == nil {
 		return RefundStatus("")
 	}
-	return o.Status
+	return r.Status
 }
 
-func (o *Refund) GetCurrency() string {
-	if o == nil {
+func (r *Refund) GetCurrency() string {
+	if r == nil {
 		return ""
 	}
-	return o.Currency
+	return r.Currency
 }
 
-func (o *Refund) GetAmount() int64 {
-	if o == nil {
+func (r *Refund) GetAmount() int64 {
+	if r == nil {
 		return 0
 	}
-	return o.Amount
+	return r.Amount
 }
 
-func (o *Refund) GetReason() *string {
-	if o == nil {
+func (r *Refund) GetReason() *string {
+	if r == nil {
 		return nil
 	}
-	return o.Reason
+	return r.Reason
 }
 
-func (o *Refund) GetTargetType() RefundTargetType {
-	if o == nil {
+func (r *Refund) GetTargetType() RefundTargetType {
+	if r == nil {
 		return RefundTargetType("")
 	}
-	return o.TargetType
+	return r.TargetType
 }
 
-func (o *Refund) GetTargetID() *string {
-	if o == nil {
+func (r *Refund) GetTargetID() *string {
+	if r == nil {
 		return nil
 	}
-	return o.TargetID
+	return r.TargetID
 }
 
-func (o *Refund) GetReconciliationID() string {
-	if o == nil {
+func (r *Refund) GetReconciliationID() string {
+	if r == nil {
 		return ""
 	}
-	return o.ReconciliationID
+	return r.ReconciliationID
 }
 
-func (o *Refund) GetExternalIdentifier() *string {
-	if o == nil {
+func (r *Refund) GetExternalIdentifier() *string {
+	if r == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return r.ExternalIdentifier
 }
 
-func (o *Refund) GetTransactionReconciliationID() string {
-	if o == nil {
+func (r *Refund) GetTransactionReconciliationID() string {
+	if r == nil {
 		return ""
 	}
-	return o.TransactionReconciliationID
+	return r.TransactionReconciliationID
 }
 
-func (o *Refund) GetTransactionExternalIdentifier() *string {
-	if o == nil {
+func (r *Refund) GetTransactionExternalIdentifier() *string {
+	if r == nil {
 		return nil
 	}
-	return o.TransactionExternalIdentifier
+	return r.TransactionExternalIdentifier
 }
 
-func (o *Refund) GetCreatedAt() time.Time {
-	if o == nil {
+func (r *Refund) GetCreatedAt() time.Time {
+	if r == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return r.CreatedAt
 }
 
-func (o *Refund) GetUpdatedAt() time.Time {
-	if o == nil {
+func (r *Refund) GetUpdatedAt() time.Time {
+	if r == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return r.UpdatedAt
 }
 
-func (o *Refund) GetCreator() *Creator {
-	if o == nil {
+func (r *Refund) GetCreator() *Creator {
+	if r == nil {
 		return nil
 	}
-	return o.Creator
+	return r.Creator
 }
 
-func (o *Refund) GetErrorCode() *string {
-	if o == nil {
+func (r *Refund) GetErrorCode() *string {
+	if r == nil {
 		return nil
 	}
-	return o.ErrorCode
+	return r.ErrorCode
 }
 
-func (o *Refund) GetRawResponseCode() *string {
-	if o == nil {
+func (r *Refund) GetRawResponseCode() *string {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponseCode
+	return r.RawResponseCode
 }
 
-func (o *Refund) GetRawResponseDescription() *string {
-	if o == nil {
+func (r *Refund) GetRawResponseDescription() *string {
+	if r == nil {
 		return nil
 	}
-	return o.RawResponseDescription
+	return r.RawResponseDescription
 }

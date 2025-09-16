@@ -7,9 +7,9 @@ type AccountUpdaterJobCreate struct {
 	PaymentMethodIds []string `json:"payment_method_ids"`
 }
 
-func (o *AccountUpdaterJobCreate) GetPaymentMethodIds() []string {
-	if o == nil {
+func (a *AccountUpdaterJobCreate) GetPaymentMethodIds() []string {
+	if a == nil {
 		return []string{}
 	}
-	return o.PaymentMethodIds
+	return a.PaymentMethodIds
 }

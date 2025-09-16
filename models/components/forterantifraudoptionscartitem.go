@@ -11,23 +11,23 @@ type ForterAntiFraudOptionsCartItem struct {
 	Beneficiaries []ForterAntiFraudOptionsCartItemBeneficiary `json:"beneficiaries,omitempty"`
 }
 
-func (o *ForterAntiFraudOptionsCartItem) GetBasicItemData() *ForterAntiFraudOptionsCartItemBasicItemData {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItem) GetBasicItemData() *ForterAntiFraudOptionsCartItemBasicItemData {
+	if f == nil {
 		return nil
 	}
-	return o.BasicItemData
+	return f.BasicItemData
 }
 
-func (o *ForterAntiFraudOptionsCartItem) GetDeliveryDetails() *ForterAntiFraudOptionsCartItemDeliveryDetails {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItem) GetDeliveryDetails() *ForterAntiFraudOptionsCartItemDeliveryDetails {
+	if f == nil {
 		return nil
 	}
-	return o.DeliveryDetails
+	return f.DeliveryDetails
 }
 
-func (o *ForterAntiFraudOptionsCartItem) GetBeneficiaries() []ForterAntiFraudOptionsCartItemBeneficiary {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItem) GetBeneficiaries() []ForterAntiFraudOptionsCartItemBeneficiary {
+	if f == nil {
 		return nil
 	}
-	return o.Beneficiaries
+	return f.Beneficiaries
 }

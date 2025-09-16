@@ -21,16 +21,16 @@ type ForterAntiFraudOptionsCartItemDeliveryDetails struct {
 	DeliveryMethod *string `json:"delivery_method,omitempty"`
 }
 
-func (o *ForterAntiFraudOptionsCartItemDeliveryDetails) GetDeliveryType() *ForterAntiFraudOptionsCartItemDeliveryDetailsDeliveryType {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemDeliveryDetails) GetDeliveryType() *ForterAntiFraudOptionsCartItemDeliveryDetailsDeliveryType {
+	if f == nil {
 		return nil
 	}
-	return o.DeliveryType
+	return f.DeliveryType
 }
 
-func (o *ForterAntiFraudOptionsCartItemDeliveryDetails) GetDeliveryMethod() *string {
-	if o == nil {
+func (f *ForterAntiFraudOptionsCartItemDeliveryDetails) GetDeliveryMethod() *string {
+	if f == nil {
 		return nil
 	}
-	return o.DeliveryMethod
+	return f.DeliveryMethod
 }

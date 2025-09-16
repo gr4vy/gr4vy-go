@@ -14,37 +14,37 @@ type TransactionRefundCreate struct {
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 }
 
-func (o *TransactionRefundCreate) GetAmount() *int64 {
-	if o == nil {
+func (t *TransactionRefundCreate) GetAmount() *int64 {
+	if t == nil {
 		return nil
 	}
-	return o.Amount
+	return t.Amount
 }
 
-func (o *TransactionRefundCreate) GetTargetType() *RefundTargetType {
-	if o == nil {
+func (t *TransactionRefundCreate) GetTargetType() *RefundTargetType {
+	if t == nil {
 		return nil
 	}
-	return o.TargetType
+	return t.TargetType
 }
 
-func (o *TransactionRefundCreate) GetTargetID() *string {
-	if o == nil {
+func (t *TransactionRefundCreate) GetTargetID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.TargetID
+	return t.TargetID
 }
 
-func (o *TransactionRefundCreate) GetReason() *string {
-	if o == nil {
+func (t *TransactionRefundCreate) GetReason() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Reason
+	return t.Reason
 }
 
-func (o *TransactionRefundCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (t *TransactionRefundCreate) GetExternalIdentifier() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return t.ExternalIdentifier
 }

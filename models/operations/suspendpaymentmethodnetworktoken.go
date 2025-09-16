@@ -6,11 +6,11 @@ type SuspendPaymentMethodNetworkTokenGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *SuspendPaymentMethodNetworkTokenGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (s *SuspendPaymentMethodNetworkTokenGlobals) GetMerchantAccountID() *string {
+	if s == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return s.MerchantAccountID
 }
 
 type SuspendPaymentMethodNetworkTokenRequest struct {
@@ -22,23 +22,23 @@ type SuspendPaymentMethodNetworkTokenRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *SuspendPaymentMethodNetworkTokenRequest) GetPaymentMethodID() string {
-	if o == nil {
+func (s *SuspendPaymentMethodNetworkTokenRequest) GetPaymentMethodID() string {
+	if s == nil {
 		return ""
 	}
-	return o.PaymentMethodID
+	return s.PaymentMethodID
 }
 
-func (o *SuspendPaymentMethodNetworkTokenRequest) GetNetworkTokenID() string {
-	if o == nil {
+func (s *SuspendPaymentMethodNetworkTokenRequest) GetNetworkTokenID() string {
+	if s == nil {
 		return ""
 	}
-	return o.NetworkTokenID
+	return s.NetworkTokenID
 }
 
-func (o *SuspendPaymentMethodNetworkTokenRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (s *SuspendPaymentMethodNetworkTokenRequest) GetMerchantAccountID() *string {
+	if s == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return s.MerchantAccountID
 }

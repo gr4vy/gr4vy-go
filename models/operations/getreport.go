@@ -6,11 +6,11 @@ type GetReportGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *GetReportGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *GetReportGlobals) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }
 
 type GetReportRequest struct {
@@ -20,16 +20,16 @@ type GetReportRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *GetReportRequest) GetReportID() string {
-	if o == nil {
+func (g *GetReportRequest) GetReportID() string {
+	if g == nil {
 		return ""
 	}
-	return o.ReportID
+	return g.ReportID
 }
 
-func (o *GetReportRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *GetReportRequest) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }

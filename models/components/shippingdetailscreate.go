@@ -15,37 +15,37 @@ type ShippingDetailsCreate struct {
 	Address *Address `json:"address,omitempty"`
 }
 
-func (o *ShippingDetailsCreate) GetFirstName() *string {
-	if o == nil {
+func (s *ShippingDetailsCreate) GetFirstName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.FirstName
+	return s.FirstName
 }
 
-func (o *ShippingDetailsCreate) GetLastName() *string {
-	if o == nil {
+func (s *ShippingDetailsCreate) GetLastName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.LastName
+	return s.LastName
 }
 
-func (o *ShippingDetailsCreate) GetEmailAddress() *string {
-	if o == nil {
+func (s *ShippingDetailsCreate) GetEmailAddress() *string {
+	if s == nil {
 		return nil
 	}
-	return o.EmailAddress
+	return s.EmailAddress
 }
 
-func (o *ShippingDetailsCreate) GetPhoneNumber() *string {
-	if o == nil {
+func (s *ShippingDetailsCreate) GetPhoneNumber() *string {
+	if s == nil {
 		return nil
 	}
-	return o.PhoneNumber
+	return s.PhoneNumber
 }
 
-func (o *ShippingDetailsCreate) GetAddress() *Address {
-	if o == nil {
+func (s *ShippingDetailsCreate) GetAddress() *Address {
+	if s == nil {
 		return nil
 	}
-	return o.Address
+	return s.Address
 }

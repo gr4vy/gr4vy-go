@@ -12,11 +12,11 @@ type ListTransactionsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListTransactionsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListTransactionsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListTransactionsRequest struct {
@@ -112,319 +112,319 @@ func (l *ListTransactionsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListTransactionsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListTransactionsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListTransactionsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListTransactionsRequest) GetCreatedAtLte() *time.Time {
-	if o == nil {
+func (l *ListTransactionsRequest) GetCreatedAtLte() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return o.CreatedAtLte
+	return l.CreatedAtLte
 }
 
-func (o *ListTransactionsRequest) GetCreatedAtGte() *time.Time {
-	if o == nil {
+func (l *ListTransactionsRequest) GetCreatedAtGte() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return o.CreatedAtGte
+	return l.CreatedAtGte
 }
 
-func (o *ListTransactionsRequest) GetUpdatedAtLte() *time.Time {
-	if o == nil {
+func (l *ListTransactionsRequest) GetUpdatedAtLte() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return o.UpdatedAtLte
+	return l.UpdatedAtLte
 }
 
-func (o *ListTransactionsRequest) GetUpdatedAtGte() *time.Time {
-	if o == nil {
+func (l *ListTransactionsRequest) GetUpdatedAtGte() *time.Time {
+	if l == nil {
 		return nil
 	}
-	return o.UpdatedAtGte
+	return l.UpdatedAtGte
 }
 
-func (o *ListTransactionsRequest) GetSearch() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetSearch() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Search
+	return l.Search
 }
 
-func (o *ListTransactionsRequest) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetBuyerExternalIdentifier() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return l.BuyerExternalIdentifier
 }
 
-func (o *ListTransactionsRequest) GetBuyerID() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetBuyerID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerID
+	return l.BuyerID
 }
 
-func (o *ListTransactionsRequest) GetBuyerEmailAddress() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetBuyerEmailAddress() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerEmailAddress
+	return l.BuyerEmailAddress
 }
 
-func (o *ListTransactionsRequest) GetIPAddress() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetIPAddress() *string {
+	if l == nil {
 		return nil
 	}
-	return o.IPAddress
+	return l.IPAddress
 }
 
-func (o *ListTransactionsRequest) GetStatus() []components.TransactionStatus {
-	if o == nil {
+func (l *ListTransactionsRequest) GetStatus() []components.TransactionStatus {
+	if l == nil {
 		return nil
 	}
-	return o.Status
+	return l.Status
 }
 
-func (o *ListTransactionsRequest) GetID() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.ID
+	return l.ID
 }
 
-func (o *ListTransactionsRequest) GetPaymentServiceTransactionID() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPaymentServiceTransactionID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.PaymentServiceTransactionID
+	return l.PaymentServiceTransactionID
 }
 
-func (o *ListTransactionsRequest) GetExternalIdentifier() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetExternalIdentifier() *string {
+	if l == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return l.ExternalIdentifier
 }
 
-func (o *ListTransactionsRequest) GetMetadata() []string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetMetadata() []string {
+	if l == nil {
 		return nil
 	}
-	return o.Metadata
+	return l.Metadata
 }
 
-func (o *ListTransactionsRequest) GetAmountEq() *int64 {
-	if o == nil {
+func (l *ListTransactionsRequest) GetAmountEq() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.AmountEq
+	return l.AmountEq
 }
 
-func (o *ListTransactionsRequest) GetAmountLte() *int64 {
-	if o == nil {
+func (l *ListTransactionsRequest) GetAmountLte() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.AmountLte
+	return l.AmountLte
 }
 
-func (o *ListTransactionsRequest) GetAmountGte() *int64 {
-	if o == nil {
+func (l *ListTransactionsRequest) GetAmountGte() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.AmountGte
+	return l.AmountGte
 }
 
-func (o *ListTransactionsRequest) GetCurrency() []string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetCurrency() []string {
+	if l == nil {
 		return nil
 	}
-	return o.Currency
+	return l.Currency
 }
 
-func (o *ListTransactionsRequest) GetCountry() []string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetCountry() []string {
+	if l == nil {
 		return nil
 	}
-	return o.Country
+	return l.Country
 }
 
-func (o *ListTransactionsRequest) GetPaymentServiceID() []string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPaymentServiceID() []string {
+	if l == nil {
 		return nil
 	}
-	return o.PaymentServiceID
+	return l.PaymentServiceID
 }
 
-func (o *ListTransactionsRequest) GetPaymentMethodID() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPaymentMethodID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.PaymentMethodID
+	return l.PaymentMethodID
 }
 
-func (o *ListTransactionsRequest) GetPaymentMethodLabel() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPaymentMethodLabel() *string {
+	if l == nil {
 		return nil
 	}
-	return o.PaymentMethodLabel
+	return l.PaymentMethodLabel
 }
 
-func (o *ListTransactionsRequest) GetPaymentMethodScheme() []string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPaymentMethodScheme() []string {
+	if l == nil {
 		return nil
 	}
-	return o.PaymentMethodScheme
+	return l.PaymentMethodScheme
 }
 
-func (o *ListTransactionsRequest) GetPaymentMethodCountry() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPaymentMethodCountry() *string {
+	if l == nil {
 		return nil
 	}
-	return o.PaymentMethodCountry
+	return l.PaymentMethodCountry
 }
 
-func (o *ListTransactionsRequest) GetPaymentMethodFingerprint() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPaymentMethodFingerprint() *string {
+	if l == nil {
 		return nil
 	}
-	return o.PaymentMethodFingerprint
+	return l.PaymentMethodFingerprint
 }
 
-func (o *ListTransactionsRequest) GetMethod() []components.Method {
-	if o == nil {
+func (l *ListTransactionsRequest) GetMethod() []components.Method {
+	if l == nil {
 		return nil
 	}
-	return o.Method
+	return l.Method
 }
 
-func (o *ListTransactionsRequest) GetErrorCode() []string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetErrorCode() []string {
+	if l == nil {
 		return nil
 	}
-	return o.ErrorCode
+	return l.ErrorCode
 }
 
-func (o *ListTransactionsRequest) GetHasRefunds() *bool {
-	if o == nil {
+func (l *ListTransactionsRequest) GetHasRefunds() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.HasRefunds
+	return l.HasRefunds
 }
 
-func (o *ListTransactionsRequest) GetPendingReview() *bool {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPendingReview() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.PendingReview
+	return l.PendingReview
 }
 
-func (o *ListTransactionsRequest) GetCheckoutSessionID() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetCheckoutSessionID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.CheckoutSessionID
+	return l.CheckoutSessionID
 }
 
-func (o *ListTransactionsRequest) GetReconciliationID() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetReconciliationID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.ReconciliationID
+	return l.ReconciliationID
 }
 
-func (o *ListTransactionsRequest) GetHasGiftCardRedemptions() *bool {
-	if o == nil {
+func (l *ListTransactionsRequest) GetHasGiftCardRedemptions() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.HasGiftCardRedemptions
+	return l.HasGiftCardRedemptions
 }
 
-func (o *ListTransactionsRequest) GetGiftCardID() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetGiftCardID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.GiftCardID
+	return l.GiftCardID
 }
 
-func (o *ListTransactionsRequest) GetGiftCardLast4() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetGiftCardLast4() *string {
+	if l == nil {
 		return nil
 	}
-	return o.GiftCardLast4
+	return l.GiftCardLast4
 }
 
-func (o *ListTransactionsRequest) GetHasSettlements() *bool {
-	if o == nil {
+func (l *ListTransactionsRequest) GetHasSettlements() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.HasSettlements
+	return l.HasSettlements
 }
 
-func (o *ListTransactionsRequest) GetPaymentMethodBin() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPaymentMethodBin() *string {
+	if l == nil {
 		return nil
 	}
-	return o.PaymentMethodBin
+	return l.PaymentMethodBin
 }
 
-func (o *ListTransactionsRequest) GetPaymentSource() []components.TransactionPaymentSource {
-	if o == nil {
+func (l *ListTransactionsRequest) GetPaymentSource() []components.TransactionPaymentSource {
+	if l == nil {
 		return nil
 	}
-	return o.PaymentSource
+	return l.PaymentSource
 }
 
-func (o *ListTransactionsRequest) GetIsSubsequentPayment() *bool {
-	if o == nil {
+func (l *ListTransactionsRequest) GetIsSubsequentPayment() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.IsSubsequentPayment
+	return l.IsSubsequentPayment
 }
 
-func (o *ListTransactionsRequest) GetMerchantInitiated() *bool {
-	if o == nil {
+func (l *ListTransactionsRequest) GetMerchantInitiated() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantInitiated
+	return l.MerchantInitiated
 }
 
-func (o *ListTransactionsRequest) GetUsed3ds() *bool {
-	if o == nil {
+func (l *ListTransactionsRequest) GetUsed3ds() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.Used3ds
+	return l.Used3ds
 }
 
-func (o *ListTransactionsRequest) GetDisputed() *bool {
-	if o == nil {
+func (l *ListTransactionsRequest) GetDisputed() *bool {
+	if l == nil {
 		return nil
 	}
-	return o.Disputed
+	return l.Disputed
 }
 
-func (o *ListTransactionsRequest) GetBuyerSearch() []string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetBuyerSearch() []string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerSearch
+	return l.BuyerSearch
 }
 
-func (o *ListTransactionsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListTransactionsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListTransactionsResponse struct {
@@ -433,9 +433,9 @@ type ListTransactionsResponse struct {
 	Next func() (*ListTransactionsResponse, error)
 }
 
-func (o *ListTransactionsResponse) GetResult() components.TransactionSummaries {
-	if o == nil {
+func (l *ListTransactionsResponse) GetResult() components.TransactionSummaries {
+	if l == nil {
 		return components.TransactionSummaries{}
 	}
-	return o.Result
+	return l.Result
 }

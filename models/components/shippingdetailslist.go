@@ -7,9 +7,9 @@ type ShippingDetailsList struct {
 	Items []ShippingDetails `json:"items"`
 }
 
-func (o *ShippingDetailsList) GetItems() []ShippingDetails {
-	if o == nil {
+func (s *ShippingDetailsList) GetItems() []ShippingDetails {
+	if s == nil {
 		return []ShippingDetails{}
 	}
-	return o.Items
+	return s.Items
 }

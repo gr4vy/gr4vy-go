@@ -28,30 +28,30 @@ func (b *Buyers) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Buyers) GetItems() []Buyer {
-	if o == nil {
+func (b *Buyers) GetItems() []Buyer {
+	if b == nil {
 		return []Buyer{}
 	}
-	return o.Items
+	return b.Items
 }
 
-func (o *Buyers) GetLimit() *int64 {
-	if o == nil {
+func (b *Buyers) GetLimit() *int64 {
+	if b == nil {
 		return nil
 	}
-	return o.Limit
+	return b.Limit
 }
 
-func (o *Buyers) GetNextCursor() *string {
-	if o == nil {
+func (b *Buyers) GetNextCursor() *string {
+	if b == nil {
 		return nil
 	}
-	return o.NextCursor
+	return b.NextCursor
 }
 
-func (o *Buyers) GetPreviousCursor() *string {
-	if o == nil {
+func (b *Buyers) GetPreviousCursor() *string {
+	if b == nil {
 		return nil
 	}
-	return o.PreviousCursor
+	return b.PreviousCursor
 }

@@ -10,11 +10,11 @@ type CreateTransactionRefundGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreateTransactionRefundGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateTransactionRefundGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreateTransactionRefundRequest struct {
@@ -25,23 +25,23 @@ type CreateTransactionRefundRequest struct {
 	TransactionRefundCreate components.TransactionRefundCreate `request:"mediaType=application/json"`
 }
 
-func (o *CreateTransactionRefundRequest) GetTransactionID() string {
-	if o == nil {
+func (c *CreateTransactionRefundRequest) GetTransactionID() string {
+	if c == nil {
 		return ""
 	}
-	return o.TransactionID
+	return c.TransactionID
 }
 
-func (o *CreateTransactionRefundRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateTransactionRefundRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreateTransactionRefundRequest) GetTransactionRefundCreate() components.TransactionRefundCreate {
-	if o == nil {
+func (c *CreateTransactionRefundRequest) GetTransactionRefundCreate() components.TransactionRefundCreate {
+	if c == nil {
 		return components.TransactionRefundCreate{}
 	}
-	return o.TransactionRefundCreate
+	return c.TransactionRefundCreate
 }

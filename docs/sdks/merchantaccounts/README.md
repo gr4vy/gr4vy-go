@@ -34,7 +34,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.MerchantAccounts.List(ctx, gr4vygo.String("ZXhhbXBsZTE"), gr4vygo.Int64(20), gr4vygo.String("merchant-12345"))
+    res, err := s.MerchantAccounts.List(ctx, gr4vygo.Pointer("ZXhhbXBsZTE"), gr4vygo.Pointer[int64](20), gr4vygo.Pointer("merchant-12345"))
     if err != nil {
         log.Fatal(err)
     }
@@ -114,8 +114,8 @@ func main() {
     )
 
     res, err := s.MerchantAccounts.Create(ctx, components.MerchantAccountCreate{
-        AccountUpdaterEnabled: gr4vygo.Bool(true),
-        AsyncNetworkTokensEnabled: gr4vygo.Bool(true),
+        AccountUpdaterEnabled: gr4vygo.Pointer(true),
+        AsyncNetworkTokensEnabled: gr4vygo.Pointer(true),
         ID: "merchant-12345",
         DisplayName: "Example",
     })
@@ -248,8 +248,8 @@ func main() {
     )
 
     res, err := s.MerchantAccounts.Update(ctx, "merchant-12345", components.MerchantAccountUpdate{
-        AccountUpdaterEnabled: gr4vygo.Bool(true),
-        AsyncNetworkTokensEnabled: gr4vygo.Bool(true),
+        AccountUpdaterEnabled: gr4vygo.Pointer(true),
+        AsyncNetworkTokensEnabled: gr4vygo.Pointer(true),
     })
     if err != nil {
         log.Fatal(err)

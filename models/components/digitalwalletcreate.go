@@ -13,51 +13,51 @@ type DigitalWalletCreate struct {
 	AcceptTermsAndConditions bool                  `json:"accept_terms_and_conditions"`
 }
 
-func (o *DigitalWalletCreate) GetProvider() DigitalWalletProvider {
-	if o == nil {
+func (d *DigitalWalletCreate) GetProvider() DigitalWalletProvider {
+	if d == nil {
 		return DigitalWalletProvider("")
 	}
-	return o.Provider
+	return d.Provider
 }
 
-func (o *DigitalWalletCreate) GetMerchantName() string {
-	if o == nil {
+func (d *DigitalWalletCreate) GetMerchantName() string {
+	if d == nil {
 		return ""
 	}
-	return o.MerchantName
+	return d.MerchantName
 }
 
-func (o *DigitalWalletCreate) GetMerchantDisplayName() *string {
-	if o == nil {
+func (d *DigitalWalletCreate) GetMerchantDisplayName() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantDisplayName
+	return d.MerchantDisplayName
 }
 
-func (o *DigitalWalletCreate) GetMerchantURL() *string {
-	if o == nil {
+func (d *DigitalWalletCreate) GetMerchantURL() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantURL
+	return d.MerchantURL
 }
 
-func (o *DigitalWalletCreate) GetMerchantCountryCode() *string {
-	if o == nil {
+func (d *DigitalWalletCreate) GetMerchantCountryCode() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantCountryCode
+	return d.MerchantCountryCode
 }
 
-func (o *DigitalWalletCreate) GetDomainNames() []string {
-	if o == nil {
+func (d *DigitalWalletCreate) GetDomainNames() []string {
+	if d == nil {
 		return nil
 	}
-	return o.DomainNames
+	return d.DomainNames
 }
 
-func (o *DigitalWalletCreate) GetAcceptTermsAndConditions() bool {
-	if o == nil {
+func (d *DigitalWalletCreate) GetAcceptTermsAndConditions() bool {
+	if d == nil {
 		return false
 	}
-	return o.AcceptTermsAndConditions
+	return d.AcceptTermsAndConditions
 }

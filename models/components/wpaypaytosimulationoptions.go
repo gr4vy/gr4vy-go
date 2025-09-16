@@ -9,16 +9,16 @@ type WpayPaytoSimulationOptions struct {
 	Delay *int64 `json:"delay,omitempty"`
 }
 
-func (o *WpayPaytoSimulationOptions) GetSimulate() *string {
-	if o == nil {
+func (w *WpayPaytoSimulationOptions) GetSimulate() *string {
+	if w == nil {
 		return nil
 	}
-	return o.Simulate
+	return w.Simulate
 }
 
-func (o *WpayPaytoSimulationOptions) GetDelay() *int64 {
-	if o == nil {
+func (w *WpayPaytoSimulationOptions) GetDelay() *int64 {
+	if w == nil {
 		return nil
 	}
-	return o.Delay
+	return w.Delay
 }

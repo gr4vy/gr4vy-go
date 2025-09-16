@@ -10,11 +10,11 @@ type CreateGooglePayDigitalWalletSessionGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreateGooglePayDigitalWalletSessionGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateGooglePayDigitalWalletSessionGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreateGooglePayDigitalWalletSessionRequest struct {
@@ -23,16 +23,16 @@ type CreateGooglePayDigitalWalletSessionRequest struct {
 	GooglePaySessionRequest components.GooglePaySessionRequest `request:"mediaType=application/json"`
 }
 
-func (o *CreateGooglePayDigitalWalletSessionRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateGooglePayDigitalWalletSessionRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreateGooglePayDigitalWalletSessionRequest) GetGooglePaySessionRequest() components.GooglePaySessionRequest {
-	if o == nil {
+func (c *CreateGooglePayDigitalWalletSessionRequest) GetGooglePaySessionRequest() components.GooglePaySessionRequest {
+	if c == nil {
 		return components.GooglePaySessionRequest{}
 	}
-	return o.GooglePaySessionRequest
+	return c.GooglePaySessionRequest
 }

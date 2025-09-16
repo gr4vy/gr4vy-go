@@ -40,62 +40,62 @@ func (c *CardWithURLPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *CardWithURLPaymentMethodCreate) GetExpirationDate() string {
-	if o == nil {
+func (c *CardWithURLPaymentMethodCreate) GetExpirationDate() string {
+	if c == nil {
 		return ""
 	}
-	return o.ExpirationDate
+	return c.ExpirationDate
 }
 
-func (o *CardWithURLPaymentMethodCreate) GetNumber() string {
-	if o == nil {
+func (c *CardWithURLPaymentMethodCreate) GetNumber() string {
+	if c == nil {
 		return ""
 	}
-	return o.Number
+	return c.Number
 }
 
-func (o *CardWithURLPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (c *CardWithURLPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return c.BuyerExternalIdentifier
 }
 
-func (o *CardWithURLPaymentMethodCreate) GetBuyerID() *string {
-	if o == nil {
+func (c *CardWithURLPaymentMethodCreate) GetBuyerID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.BuyerID
+	return c.BuyerID
 }
 
-func (o *CardWithURLPaymentMethodCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (c *CardWithURLPaymentMethodCreate) GetExternalIdentifier() *string {
+	if c == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return c.ExternalIdentifier
 }
 
-func (o *CardWithURLPaymentMethodCreate) GetCardType() *string {
-	if o == nil {
+func (c *CardWithURLPaymentMethodCreate) GetCardType() *string {
+	if c == nil {
 		return nil
 	}
-	return o.CardType
+	return c.CardType
 }
 
-func (o *CardWithURLPaymentMethodCreate) GetMethod() *string {
-	return types.String("card")
+func (c *CardWithURLPaymentMethodCreate) GetMethod() *string {
+	return types.Pointer("card")
 }
 
-func (o *CardWithURLPaymentMethodCreate) GetSecurityCode() *string {
-	if o == nil {
+func (c *CardWithURLPaymentMethodCreate) GetSecurityCode() *string {
+	if c == nil {
 		return nil
 	}
-	return o.SecurityCode
+	return c.SecurityCode
 }
 
-func (o *CardWithURLPaymentMethodCreate) GetRedirectURL() *string {
-	if o == nil {
+func (c *CardWithURLPaymentMethodCreate) GetRedirectURL() *string {
+	if c == nil {
 		return nil
 	}
-	return o.RedirectURL
+	return c.RedirectURL
 }

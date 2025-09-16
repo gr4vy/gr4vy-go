@@ -6,11 +6,11 @@ type ListTransactionRefundsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListTransactionRefundsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListTransactionRefundsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListTransactionRefundsRequest struct {
@@ -20,16 +20,16 @@ type ListTransactionRefundsRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListTransactionRefundsRequest) GetTransactionID() string {
-	if o == nil {
+func (l *ListTransactionRefundsRequest) GetTransactionID() string {
+	if l == nil {
 		return ""
 	}
-	return o.TransactionID
+	return l.TransactionID
 }
 
-func (o *ListTransactionRefundsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListTransactionRefundsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }

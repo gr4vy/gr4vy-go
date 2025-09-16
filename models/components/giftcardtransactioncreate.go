@@ -27,23 +27,23 @@ func (g *GiftCardTransactionCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GiftCardTransactionCreate) GetNumber() string {
-	if o == nil {
+func (g *GiftCardTransactionCreate) GetNumber() string {
+	if g == nil {
 		return ""
 	}
-	return o.Number
+	return g.Number
 }
 
-func (o *GiftCardTransactionCreate) GetPin() string {
-	if o == nil {
+func (g *GiftCardTransactionCreate) GetPin() string {
+	if g == nil {
 		return ""
 	}
-	return o.Pin
+	return g.Pin
 }
 
-func (o *GiftCardTransactionCreate) GetAmount() int64 {
-	if o == nil {
+func (g *GiftCardTransactionCreate) GetAmount() int64 {
+	if g == nil {
 		return 0
 	}
-	return o.Amount
+	return g.Amount
 }

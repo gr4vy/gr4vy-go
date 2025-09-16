@@ -37,55 +37,55 @@ func (n *NetworkToken) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *NetworkToken) GetType() *string {
-	return types.String("network-token")
+func (n *NetworkToken) GetType() *string {
+	return types.Pointer("network-token")
 }
 
-func (o *NetworkToken) GetID() string {
-	if o == nil {
+func (n *NetworkToken) GetID() string {
+	if n == nil {
 		return ""
 	}
-	return o.ID
+	return n.ID
 }
 
-func (o *NetworkToken) GetExpirationDate() string {
-	if o == nil {
+func (n *NetworkToken) GetExpirationDate() string {
+	if n == nil {
 		return ""
 	}
-	return o.ExpirationDate
+	return n.ExpirationDate
 }
 
-func (o *NetworkToken) GetPaymentMethodID() string {
-	if o == nil {
+func (n *NetworkToken) GetPaymentMethodID() string {
+	if n == nil {
 		return ""
 	}
-	return o.PaymentMethodID
+	return n.PaymentMethodID
 }
 
-func (o *NetworkToken) GetStatus() NetworkTokenStatus {
-	if o == nil {
+func (n *NetworkToken) GetStatus() NetworkTokenStatus {
+	if n == nil {
 		return NetworkTokenStatus("")
 	}
-	return o.Status
+	return n.Status
 }
 
-func (o *NetworkToken) GetToken() string {
-	if o == nil {
+func (n *NetworkToken) GetToken() string {
+	if n == nil {
 		return ""
 	}
-	return o.Token
+	return n.Token
 }
 
-func (o *NetworkToken) GetCreatedAt() time.Time {
-	if o == nil {
+func (n *NetworkToken) GetCreatedAt() time.Time {
+	if n == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return n.CreatedAt
 }
 
-func (o *NetworkToken) GetUpdatedAt() time.Time {
-	if o == nil {
+func (n *NetworkToken) GetUpdatedAt() time.Time {
+	if n == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return n.UpdatedAt
 }

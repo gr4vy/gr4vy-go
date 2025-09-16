@@ -9,16 +9,16 @@ type AffirmOptions struct {
 	Itinerary *AffirmItineraryOptions `json:"itinerary,omitempty"`
 }
 
-func (o *AffirmOptions) GetDiscounts() map[string]map[string]any {
-	if o == nil {
+func (a *AffirmOptions) GetDiscounts() map[string]map[string]any {
+	if a == nil {
 		return nil
 	}
-	return o.Discounts
+	return a.Discounts
 }
 
-func (o *AffirmOptions) GetItinerary() *AffirmItineraryOptions {
-	if o == nil {
+func (a *AffirmOptions) GetItinerary() *AffirmItineraryOptions {
+	if a == nil {
 		return nil
 	}
-	return o.Itinerary
+	return a.Itinerary
 }

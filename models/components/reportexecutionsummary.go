@@ -32,41 +32,41 @@ func (r *ReportExecutionSummary) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ReportExecutionSummary) GetType() *string {
-	return types.String("report-execution")
+func (r *ReportExecutionSummary) GetType() *string {
+	return types.Pointer("report-execution")
 }
 
-func (o *ReportExecutionSummary) GetID() string {
-	if o == nil {
+func (r *ReportExecutionSummary) GetID() string {
+	if r == nil {
 		return ""
 	}
-	return o.ID
+	return r.ID
 }
 
-func (o *ReportExecutionSummary) GetCreatedAt() time.Time {
-	if o == nil {
+func (r *ReportExecutionSummary) GetCreatedAt() time.Time {
+	if r == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return r.CreatedAt
 }
 
-func (o *ReportExecutionSummary) GetUpdatedAt() time.Time {
-	if o == nil {
+func (r *ReportExecutionSummary) GetUpdatedAt() time.Time {
+	if r == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return r.UpdatedAt
 }
 
-func (o *ReportExecutionSummary) GetStatus() ReportExecutionStatus {
-	if o == nil {
+func (r *ReportExecutionSummary) GetStatus() ReportExecutionStatus {
+	if r == nil {
 		return ReportExecutionStatus("")
 	}
-	return o.Status
+	return r.Status
 }
 
-func (o *ReportExecutionSummary) GetContext() ReportExecutionContext {
-	if o == nil {
+func (r *ReportExecutionSummary) GetContext() ReportExecutionContext {
+	if r == nil {
 		return ReportExecutionContext{}
 	}
-	return o.Context
+	return r.Context
 }

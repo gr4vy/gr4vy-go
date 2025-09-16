@@ -39,69 +39,69 @@ func (g *GiftCardRedemption) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GiftCardRedemption) GetType() *string {
-	return types.String("gift-card-redemption")
+func (g *GiftCardRedemption) GetType() *string {
+	return types.Pointer("gift-card-redemption")
 }
 
-func (o *GiftCardRedemption) GetID() string {
-	if o == nil {
+func (g *GiftCardRedemption) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return o.ID
+	return g.ID
 }
 
-func (o *GiftCardRedemption) GetStatus() GiftCardRedemptionStatus {
-	if o == nil {
+func (g *GiftCardRedemption) GetStatus() GiftCardRedemptionStatus {
+	if g == nil {
 		return GiftCardRedemptionStatus("")
 	}
-	return o.Status
+	return g.Status
 }
 
-func (o *GiftCardRedemption) GetAmount() int64 {
-	if o == nil {
+func (g *GiftCardRedemption) GetAmount() int64 {
+	if g == nil {
 		return 0
 	}
-	return o.Amount
+	return g.Amount
 }
 
-func (o *GiftCardRedemption) GetRefundedAmount() int64 {
-	if o == nil {
+func (g *GiftCardRedemption) GetRefundedAmount() int64 {
+	if g == nil {
 		return 0
 	}
-	return o.RefundedAmount
+	return g.RefundedAmount
 }
 
-func (o *GiftCardRedemption) GetGiftCardServiceRedemptionID() *string {
-	if o == nil {
+func (g *GiftCardRedemption) GetGiftCardServiceRedemptionID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.GiftCardServiceRedemptionID
+	return g.GiftCardServiceRedemptionID
 }
 
-func (o *GiftCardRedemption) GetErrorCode() *GiftCardErrorCode {
-	if o == nil {
+func (g *GiftCardRedemption) GetErrorCode() *GiftCardErrorCode {
+	if g == nil {
 		return nil
 	}
-	return o.ErrorCode
+	return g.ErrorCode
 }
 
-func (o *GiftCardRedemption) GetRawErrorCode() *string {
-	if o == nil {
+func (g *GiftCardRedemption) GetRawErrorCode() *string {
+	if g == nil {
 		return nil
 	}
-	return o.RawErrorCode
+	return g.RawErrorCode
 }
 
-func (o *GiftCardRedemption) GetRawErrorMessage() *string {
-	if o == nil {
+func (g *GiftCardRedemption) GetRawErrorMessage() *string {
+	if g == nil {
 		return nil
 	}
-	return o.RawErrorMessage
+	return g.RawErrorMessage
 }
 
-func (o *GiftCardRedemption) GetGiftCard() TransactionGiftCard {
-	if o == nil {
+func (g *GiftCardRedemption) GetGiftCard() TransactionGiftCard {
+	if g == nil {
 		return TransactionGiftCard{}
 	}
-	return o.GiftCard
+	return g.GiftCard
 }

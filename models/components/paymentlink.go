@@ -74,188 +74,188 @@ func (p *PaymentLink) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentLink) GetID() string {
-	if o == nil {
+func (p *PaymentLink) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *PaymentLink) GetType() *string {
-	return types.String("payment-link")
+func (p *PaymentLink) GetType() *string {
+	return types.Pointer("payment-link")
 }
 
-func (o *PaymentLink) GetURL() string {
-	if o == nil {
+func (p *PaymentLink) GetURL() string {
+	if p == nil {
 		return ""
 	}
-	return o.URL
+	return p.URL
 }
 
-func (o *PaymentLink) GetExpiresAt() *time.Time {
-	if o == nil {
+func (p *PaymentLink) GetExpiresAt() *time.Time {
+	if p == nil {
 		return nil
 	}
-	return o.ExpiresAt
+	return p.ExpiresAt
 }
 
-func (o *PaymentLink) GetExternalIdentifier() *string {
-	if o == nil {
+func (p *PaymentLink) GetExternalIdentifier() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return p.ExternalIdentifier
 }
 
-func (o *PaymentLink) GetStatementDescriptor() *StatementDescriptor {
-	if o == nil {
+func (p *PaymentLink) GetStatementDescriptor() *StatementDescriptor {
+	if p == nil {
 		return nil
 	}
-	return o.StatementDescriptor
+	return p.StatementDescriptor
 }
 
-func (o *PaymentLink) GetLocale() *string {
-	if o == nil {
+func (p *PaymentLink) GetLocale() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Locale
+	return p.Locale
 }
 
-func (o *PaymentLink) GetMerchantName() *string {
-	if o == nil {
+func (p *PaymentLink) GetMerchantName() *string {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantName
+	return p.MerchantName
 }
 
-func (o *PaymentLink) GetMerchantURL() *string {
-	if o == nil {
+func (p *PaymentLink) GetMerchantURL() *string {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantURL
+	return p.MerchantURL
 }
 
-func (o *PaymentLink) GetMerchantBannerURL() *string {
-	if o == nil {
+func (p *PaymentLink) GetMerchantBannerURL() *string {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantBannerURL
+	return p.MerchantBannerURL
 }
 
-func (o *PaymentLink) GetMerchantColor() *string {
-	if o == nil {
+func (p *PaymentLink) GetMerchantColor() *string {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantColor
+	return p.MerchantColor
 }
 
-func (o *PaymentLink) GetMerchantMessage() *string {
-	if o == nil {
+func (p *PaymentLink) GetMerchantMessage() *string {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantMessage
+	return p.MerchantMessage
 }
 
-func (o *PaymentLink) GetMerchantTermsAndConditionsURL() *string {
-	if o == nil {
+func (p *PaymentLink) GetMerchantTermsAndConditionsURL() *string {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantTermsAndConditionsURL
+	return p.MerchantTermsAndConditionsURL
 }
 
-func (o *PaymentLink) GetMerchantFaviconURL() *string {
-	if o == nil {
+func (p *PaymentLink) GetMerchantFaviconURL() *string {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantFaviconURL
+	return p.MerchantFaviconURL
 }
 
-func (o *PaymentLink) GetAmount() int64 {
-	if o == nil {
+func (p *PaymentLink) GetAmount() int64 {
+	if p == nil {
 		return 0
 	}
-	return o.Amount
+	return p.Amount
 }
 
-func (o *PaymentLink) GetCountry() string {
-	if o == nil {
+func (p *PaymentLink) GetCountry() string {
+	if p == nil {
 		return ""
 	}
-	return o.Country
+	return p.Country
 }
 
-func (o *PaymentLink) GetCurrency() string {
-	if o == nil {
+func (p *PaymentLink) GetCurrency() string {
+	if p == nil {
 		return ""
 	}
-	return o.Currency
+	return p.Currency
 }
 
-func (o *PaymentLink) GetIntent() TransactionIntent {
-	if o == nil {
+func (p *PaymentLink) GetIntent() TransactionIntent {
+	if p == nil {
 		return TransactionIntent("")
 	}
-	return o.Intent
+	return p.Intent
 }
 
-func (o *PaymentLink) GetReturnURL() *string {
-	if o == nil {
+func (p *PaymentLink) GetReturnURL() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ReturnURL
+	return p.ReturnURL
 }
 
-func (o *PaymentLink) GetCartItems() []CartItem {
-	if o == nil {
+func (p *PaymentLink) GetCartItems() []CartItem {
+	if p == nil {
 		return nil
 	}
-	return o.CartItems
+	return p.CartItems
 }
 
-func (o *PaymentLink) GetMetadata() map[string]any {
-	if o == nil {
+func (p *PaymentLink) GetMetadata() map[string]any {
+	if p == nil {
 		return nil
 	}
-	return o.Metadata
+	return p.Metadata
 }
 
-func (o *PaymentLink) GetPaymentSource() TransactionPaymentSource {
-	if o == nil {
+func (p *PaymentLink) GetPaymentSource() TransactionPaymentSource {
+	if p == nil {
 		return TransactionPaymentSource("")
 	}
-	return o.PaymentSource
+	return p.PaymentSource
 }
 
-func (o *PaymentLink) GetCreatedAt() time.Time {
-	if o == nil {
+func (p *PaymentLink) GetCreatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return p.CreatedAt
 }
 
-func (o *PaymentLink) GetUpdatedAt() time.Time {
-	if o == nil {
+func (p *PaymentLink) GetUpdatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return p.UpdatedAt
 }
 
-func (o *PaymentLink) GetStatus() PaymentLinkStatus {
-	if o == nil {
+func (p *PaymentLink) GetStatus() PaymentLinkStatus {
+	if p == nil {
 		return PaymentLinkStatus("")
 	}
-	return o.Status
+	return p.Status
 }
 
-func (o *PaymentLink) GetBuyer() *TransactionBuyer {
-	if o == nil {
+func (p *PaymentLink) GetBuyer() *TransactionBuyer {
+	if p == nil {
 		return nil
 	}
-	return o.Buyer
+	return p.Buyer
 }
 
-func (o *PaymentLink) GetShippingDetails() *ShippingDetails {
-	if o == nil {
+func (p *PaymentLink) GetShippingDetails() *ShippingDetails {
+	if p == nil {
 		return nil
 	}
-	return o.ShippingDetails
+	return p.ShippingDetails
 }

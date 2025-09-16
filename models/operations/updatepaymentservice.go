@@ -10,11 +10,11 @@ type UpdatePaymentServiceGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *UpdatePaymentServiceGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdatePaymentServiceGlobals) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
 type UpdatePaymentServiceRequest struct {
@@ -23,16 +23,16 @@ type UpdatePaymentServiceRequest struct {
 	PaymentServiceCreate components.PaymentServiceCreate `request:"mediaType=application/json"`
 }
 
-func (o *UpdatePaymentServiceRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (u *UpdatePaymentServiceRequest) GetMerchantAccountID() *string {
+	if u == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return u.MerchantAccountID
 }
 
-func (o *UpdatePaymentServiceRequest) GetPaymentServiceCreate() components.PaymentServiceCreate {
-	if o == nil {
+func (u *UpdatePaymentServiceRequest) GetPaymentServiceCreate() components.PaymentServiceCreate {
+	if u == nil {
 		return components.PaymentServiceCreate{}
 	}
-	return o.PaymentServiceCreate
+	return u.PaymentServiceCreate
 }

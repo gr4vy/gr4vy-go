@@ -10,11 +10,11 @@ type CreateGiftCardGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreateGiftCardGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateGiftCardGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreateGiftCardRequest struct {
@@ -23,16 +23,16 @@ type CreateGiftCardRequest struct {
 	GiftCardCreate    components.GiftCardCreate `request:"mediaType=application/json"`
 }
 
-func (o *CreateGiftCardRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreateGiftCardRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreateGiftCardRequest) GetGiftCardCreate() components.GiftCardCreate {
-	if o == nil {
+func (c *CreateGiftCardRequest) GetGiftCardCreate() components.GiftCardCreate {
+	if c == nil {
 		return components.GiftCardCreate{}
 	}
-	return o.GiftCardCreate
+	return c.GiftCardCreate
 }

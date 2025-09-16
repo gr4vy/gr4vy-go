@@ -65,160 +65,160 @@ func (p *PaymentService) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentService) GetType() *string {
-	return types.String("payment-service")
+func (p *PaymentService) GetType() *string {
+	return types.Pointer("payment-service")
 }
 
-func (o *PaymentService) GetID() *string {
-	if o == nil {
+func (p *PaymentService) GetID() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *PaymentService) GetMerchantAccountID() string {
-	if o == nil {
+func (p *PaymentService) GetMerchantAccountID() string {
+	if p == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return p.MerchantAccountID
 }
 
-func (o *PaymentService) GetPaymentServiceDefinitionID() string {
-	if o == nil {
+func (p *PaymentService) GetPaymentServiceDefinitionID() string {
+	if p == nil {
 		return ""
 	}
-	return o.PaymentServiceDefinitionID
+	return p.PaymentServiceDefinitionID
 }
 
-func (o *PaymentService) GetActive() *bool {
-	if o == nil {
+func (p *PaymentService) GetActive() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.Active
+	return p.Active
 }
 
-func (o *PaymentService) GetMethod() Method {
-	if o == nil {
+func (p *PaymentService) GetMethod() Method {
+	if p == nil {
 		return Method("")
 	}
-	return o.Method
+	return p.Method
 }
 
-func (o *PaymentService) GetDisplayName() string {
-	if o == nil {
+func (p *PaymentService) GetDisplayName() string {
+	if p == nil {
 		return ""
 	}
-	return o.DisplayName
+	return p.DisplayName
 }
 
-func (o *PaymentService) GetPosition() int64 {
-	if o == nil {
+func (p *PaymentService) GetPosition() int64 {
+	if p == nil {
 		return 0
 	}
-	return o.Position
+	return p.Position
 }
 
-func (o *PaymentService) GetStatus() *PaymentServiceStatus {
-	if o == nil {
+func (p *PaymentService) GetStatus() *PaymentServiceStatus {
+	if p == nil {
 		return nil
 	}
-	return o.Status
+	return p.Status
 }
 
-func (o *PaymentService) GetAcceptedCurrencies() []string {
-	if o == nil {
+func (p *PaymentService) GetAcceptedCurrencies() []string {
+	if p == nil {
 		return []string{}
 	}
-	return o.AcceptedCurrencies
+	return p.AcceptedCurrencies
 }
 
-func (o *PaymentService) GetAcceptedCountries() []string {
-	if o == nil {
+func (p *PaymentService) GetAcceptedCountries() []string {
+	if p == nil {
 		return []string{}
 	}
-	return o.AcceptedCountries
+	return p.AcceptedCountries
 }
 
-func (o *PaymentService) GetPaymentMethodTokenizationEnabled() bool {
-	if o == nil {
+func (p *PaymentService) GetPaymentMethodTokenizationEnabled() bool {
+	if p == nil {
 		return false
 	}
-	return o.PaymentMethodTokenizationEnabled
+	return p.PaymentMethodTokenizationEnabled
 }
 
-func (o *PaymentService) GetNetworkTokensEnabled() bool {
-	if o == nil {
+func (p *PaymentService) GetNetworkTokensEnabled() bool {
+	if p == nil {
 		return false
 	}
-	return o.NetworkTokensEnabled
+	return p.NetworkTokensEnabled
 }
 
-func (o *PaymentService) GetOpenLoop() bool {
-	if o == nil {
+func (p *PaymentService) GetOpenLoop() bool {
+	if p == nil {
 		return false
 	}
-	return o.OpenLoop
+	return p.OpenLoop
 }
 
-func (o *PaymentService) GetSettlementReportingEnabled() bool {
-	if o == nil {
+func (p *PaymentService) GetSettlementReportingEnabled() bool {
+	if p == nil {
 		return false
 	}
-	return o.SettlementReportingEnabled
+	return p.SettlementReportingEnabled
 }
 
-func (o *PaymentService) GetThreeDSecureEnabled() *bool {
-	if o == nil {
+func (p *PaymentService) GetThreeDSecureEnabled() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.ThreeDSecureEnabled
+	return p.ThreeDSecureEnabled
 }
 
-func (o *PaymentService) GetMerchantProfile() map[string]*MerchantProfileSchemeSummary {
-	if o == nil {
+func (p *PaymentService) GetMerchantProfile() map[string]*MerchantProfileSchemeSummary {
+	if p == nil {
 		return nil
 	}
-	return o.MerchantProfile
+	return p.MerchantProfile
 }
 
-func (o *PaymentService) GetWebhookURL() *string {
-	if o == nil {
+func (p *PaymentService) GetWebhookURL() *string {
+	if p == nil {
 		return nil
 	}
-	return o.WebhookURL
+	return p.WebhookURL
 }
 
-func (o *PaymentService) GetFields() []Field {
-	if o == nil {
+func (p *PaymentService) GetFields() []Field {
+	if p == nil {
 		return nil
 	}
-	return o.Fields
+	return p.Fields
 }
 
-func (o *PaymentService) GetReportingFields() []Field {
-	if o == nil {
+func (p *PaymentService) GetReportingFields() []Field {
+	if p == nil {
 		return nil
 	}
-	return o.ReportingFields
+	return p.ReportingFields
 }
 
-func (o *PaymentService) GetIsDeleted() *bool {
-	if o == nil {
+func (p *PaymentService) GetIsDeleted() *bool {
+	if p == nil {
 		return nil
 	}
-	return o.IsDeleted
+	return p.IsDeleted
 }
 
-func (o *PaymentService) GetCreatedAt() time.Time {
-	if o == nil {
+func (p *PaymentService) GetCreatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return p.CreatedAt
 }
 
-func (o *PaymentService) GetUpdatedAt() time.Time {
-	if o == nil {
+func (p *PaymentService) GetUpdatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return p.UpdatedAt
 }

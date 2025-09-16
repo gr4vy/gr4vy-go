@@ -51,104 +51,104 @@ func (d *DigitalWallet) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *DigitalWallet) GetType() *string {
-	return types.String("digital-wallet")
+func (d *DigitalWallet) GetType() *string {
+	return types.Pointer("digital-wallet")
 }
 
-func (o *DigitalWallet) GetID() string {
-	if o == nil {
+func (d *DigitalWallet) GetID() string {
+	if d == nil {
 		return ""
 	}
-	return o.ID
+	return d.ID
 }
 
-func (o *DigitalWallet) GetMerchantAccountID() string {
-	if o == nil {
+func (d *DigitalWallet) GetMerchantAccountID() string {
+	if d == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return d.MerchantAccountID
 }
 
-func (o *DigitalWallet) GetProvider() DigitalWalletProvider {
-	if o == nil {
+func (d *DigitalWallet) GetProvider() DigitalWalletProvider {
+	if d == nil {
 		return DigitalWalletProvider("")
 	}
-	return o.Provider
+	return d.Provider
 }
 
-func (o *DigitalWallet) GetMerchantName() string {
-	if o == nil {
+func (d *DigitalWallet) GetMerchantName() string {
+	if d == nil {
 		return ""
 	}
-	return o.MerchantName
+	return d.MerchantName
 }
 
-func (o *DigitalWallet) GetMerchantDisplayName() *string {
-	if o == nil {
+func (d *DigitalWallet) GetMerchantDisplayName() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantDisplayName
+	return d.MerchantDisplayName
 }
 
-func (o *DigitalWallet) GetMerchantURL() *string {
-	if o == nil {
+func (d *DigitalWallet) GetMerchantURL() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantURL
+	return d.MerchantURL
 }
 
-func (o *DigitalWallet) GetMerchantCountryCode() *string {
-	if o == nil {
+func (d *DigitalWallet) GetMerchantCountryCode() *string {
+	if d == nil {
 		return nil
 	}
-	return o.MerchantCountryCode
+	return d.MerchantCountryCode
 }
 
-func (o *DigitalWallet) GetDomainNames() []string {
-	if o == nil {
+func (d *DigitalWallet) GetDomainNames() []string {
+	if d == nil {
 		return []string{}
 	}
-	return o.DomainNames
+	return d.DomainNames
 }
 
-func (o *DigitalWallet) GetActiveCertificateCount() *int64 {
-	if o == nil {
+func (d *DigitalWallet) GetActiveCertificateCount() *int64 {
+	if d == nil {
 		return nil
 	}
-	return o.ActiveCertificateCount
+	return d.ActiveCertificateCount
 }
 
-func (o *DigitalWallet) GetPendingCertificateCount() *int64 {
-	if o == nil {
+func (d *DigitalWallet) GetPendingCertificateCount() *int64 {
+	if d == nil {
 		return nil
 	}
-	return o.PendingCertificateCount
+	return d.PendingCertificateCount
 }
 
-func (o *DigitalWallet) GetExpiredCertificateCount() *int64 {
-	if o == nil {
+func (d *DigitalWallet) GetExpiredCertificateCount() *int64 {
+	if d == nil {
 		return nil
 	}
-	return o.ExpiredCertificateCount
+	return d.ExpiredCertificateCount
 }
 
-func (o *DigitalWallet) GetFields() map[string]any {
-	if o == nil {
+func (d *DigitalWallet) GetFields() map[string]any {
+	if d == nil {
 		return nil
 	}
-	return o.Fields
+	return d.Fields
 }
 
-func (o *DigitalWallet) GetCreatedAt() time.Time {
-	if o == nil {
+func (d *DigitalWallet) GetCreatedAt() time.Time {
+	if d == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return d.CreatedAt
 }
 
-func (o *DigitalWallet) GetUpdatedAt() time.Time {
-	if o == nil {
+func (d *DigitalWallet) GetUpdatedAt() time.Time {
+	if d == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return d.UpdatedAt
 }

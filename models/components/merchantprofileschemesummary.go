@@ -34,51 +34,51 @@ func (m *MerchantProfileSchemeSummary) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *MerchantProfileSchemeSummary) GetMerchantAcquirerBin() string {
-	if o == nil {
+func (m *MerchantProfileSchemeSummary) GetMerchantAcquirerBin() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantAcquirerBin
+	return m.MerchantAcquirerBin
 }
 
-func (o *MerchantProfileSchemeSummary) GetMerchantURL() string {
-	if o == nil {
+func (m *MerchantProfileSchemeSummary) GetMerchantURL() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantURL
+	return m.MerchantURL
 }
 
-func (o *MerchantProfileSchemeSummary) GetMerchantAcquirerID() string {
-	if o == nil {
+func (m *MerchantProfileSchemeSummary) GetMerchantAcquirerID() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantAcquirerID
+	return m.MerchantAcquirerID
 }
 
-func (o *MerchantProfileSchemeSummary) GetMerchantName() string {
-	if o == nil {
+func (m *MerchantProfileSchemeSummary) GetMerchantName() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantName
+	return m.MerchantName
 }
 
-func (o *MerchantProfileSchemeSummary) GetMerchantCountryCode() string {
-	if o == nil {
+func (m *MerchantProfileSchemeSummary) GetMerchantCountryCode() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantCountryCode
+	return m.MerchantCountryCode
 }
 
-func (o *MerchantProfileSchemeSummary) GetMerchantCategoryCode() string {
-	if o == nil {
+func (m *MerchantProfileSchemeSummary) GetMerchantCategoryCode() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantCategoryCode
+	return m.MerchantCategoryCode
 }
 
-func (o *MerchantProfileSchemeSummary) GetCreatedAt() time.Time {
-	if o == nil {
+func (m *MerchantProfileSchemeSummary) GetCreatedAt() time.Time {
+	if m == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return m.CreatedAt
 }

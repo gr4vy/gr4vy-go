@@ -7,9 +7,9 @@ type WpayPaytoResourceOptions struct {
 	Simulation *WpayPaytoSimulationOptions `json:"simulation,omitempty"`
 }
 
-func (o *WpayPaytoResourceOptions) GetSimulation() *WpayPaytoSimulationOptions {
-	if o == nil {
+func (w *WpayPaytoResourceOptions) GetSimulation() *WpayPaytoSimulationOptions {
+	if w == nil {
 		return nil
 	}
-	return o.Simulation
+	return w.Simulation
 }

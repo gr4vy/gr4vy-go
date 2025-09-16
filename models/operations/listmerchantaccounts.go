@@ -27,25 +27,25 @@ func (l *ListMerchantAccountsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListMerchantAccountsRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListMerchantAccountsRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListMerchantAccountsRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListMerchantAccountsRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListMerchantAccountsRequest) GetSearch() *string {
-	if o == nil {
+func (l *ListMerchantAccountsRequest) GetSearch() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Search
+	return l.Search
 }
 
 type ListMerchantAccountsResponse struct {
@@ -54,9 +54,9 @@ type ListMerchantAccountsResponse struct {
 	Next func() (*ListMerchantAccountsResponse, error)
 }
 
-func (o *ListMerchantAccountsResponse) GetResult() components.MerchantAccounts {
-	if o == nil {
+func (l *ListMerchantAccountsResponse) GetResult() components.MerchantAccounts {
+	if l == nil {
 		return components.MerchantAccounts{}
 	}
-	return o.Result
+	return l.Result
 }

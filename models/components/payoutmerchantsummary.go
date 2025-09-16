@@ -40,55 +40,55 @@ func (p *PayoutMerchantSummary) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PayoutMerchantSummary) GetType() *string {
-	return types.String("merchant")
+func (p *PayoutMerchantSummary) GetType() *string {
+	return types.Pointer("merchant")
 }
 
-func (o *PayoutMerchantSummary) GetName() string {
-	if o == nil {
+func (p *PayoutMerchantSummary) GetName() string {
+	if p == nil {
 		return ""
 	}
-	return o.Name
+	return p.Name
 }
 
-func (o *PayoutMerchantSummary) GetIdentificationNumber() string {
-	if o == nil {
+func (p *PayoutMerchantSummary) GetIdentificationNumber() string {
+	if p == nil {
 		return ""
 	}
-	return o.IdentificationNumber
+	return p.IdentificationNumber
 }
 
-func (o *PayoutMerchantSummary) GetPhoneNumber() string {
-	if o == nil {
+func (p *PayoutMerchantSummary) GetPhoneNumber() string {
+	if p == nil {
 		return ""
 	}
-	return o.PhoneNumber
+	return p.PhoneNumber
 }
 
-func (o *PayoutMerchantSummary) GetURL() string {
-	if o == nil {
+func (p *PayoutMerchantSummary) GetURL() string {
+	if p == nil {
 		return ""
 	}
-	return o.URL
+	return p.URL
 }
 
-func (o *PayoutMerchantSummary) GetStatementDescriptor() *string {
-	if o == nil {
+func (p *PayoutMerchantSummary) GetStatementDescriptor() *string {
+	if p == nil {
 		return nil
 	}
-	return o.StatementDescriptor
+	return p.StatementDescriptor
 }
 
-func (o *PayoutMerchantSummary) GetMerchantCategoryCode() string {
-	if o == nil {
+func (p *PayoutMerchantSummary) GetMerchantCategoryCode() string {
+	if p == nil {
 		return ""
 	}
-	return o.MerchantCategoryCode
+	return p.MerchantCategoryCode
 }
 
-func (o *PayoutMerchantSummary) GetAddress() *Address {
-	if o == nil {
+func (p *PayoutMerchantSummary) GetAddress() *Address {
+	if p == nil {
 		return nil
 	}
-	return o.Address
+	return p.Address
 }

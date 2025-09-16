@@ -11,23 +11,23 @@ type TransactionUpdate struct {
 	ConnectionOptions *TransactionConnectionOptions `json:"connection_options,omitempty"`
 }
 
-func (o *TransactionUpdate) GetExternalIdentifier() *string {
-	if o == nil {
+func (t *TransactionUpdate) GetExternalIdentifier() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return t.ExternalIdentifier
 }
 
-func (o *TransactionUpdate) GetMetadata() map[string]string {
-	if o == nil {
+func (t *TransactionUpdate) GetMetadata() map[string]string {
+	if t == nil {
 		return nil
 	}
-	return o.Metadata
+	return t.Metadata
 }
 
-func (o *TransactionUpdate) GetConnectionOptions() *TransactionConnectionOptions {
-	if o == nil {
+func (t *TransactionUpdate) GetConnectionOptions() *TransactionConnectionOptions {
+	if t == nil {
 		return nil
 	}
-	return o.ConnectionOptions
+	return t.ConnectionOptions
 }

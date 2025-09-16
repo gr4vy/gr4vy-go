@@ -7,9 +7,9 @@ type PayoutConnectionOptions struct {
 	CheckoutCard *CheckoutPayoutOptions `json:"checkout-card,omitempty"`
 }
 
-func (o *PayoutConnectionOptions) GetCheckoutCard() *CheckoutPayoutOptions {
-	if o == nil {
+func (p *PayoutConnectionOptions) GetCheckoutCard() *CheckoutPayoutOptions {
+	if p == nil {
 		return nil
 	}
-	return o.CheckoutCard
+	return p.CheckoutCard
 }

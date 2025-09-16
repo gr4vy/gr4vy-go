@@ -11,11 +11,11 @@ type ListPaymentLinksGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListPaymentLinksGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPaymentLinksGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListPaymentLinksRequest struct {
@@ -40,32 +40,32 @@ func (l *ListPaymentLinksRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListPaymentLinksRequest) GetCursor() *string {
-	if o == nil {
+func (l *ListPaymentLinksRequest) GetCursor() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Cursor
+	return l.Cursor
 }
 
-func (o *ListPaymentLinksRequest) GetLimit() *int64 {
-	if o == nil {
+func (l *ListPaymentLinksRequest) GetLimit() *int64 {
+	if l == nil {
 		return nil
 	}
-	return o.Limit
+	return l.Limit
 }
 
-func (o *ListPaymentLinksRequest) GetBuyerSearch() []string {
-	if o == nil {
+func (l *ListPaymentLinksRequest) GetBuyerSearch() []string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerSearch
+	return l.BuyerSearch
 }
 
-func (o *ListPaymentLinksRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListPaymentLinksRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 type ListPaymentLinksResponse struct {
@@ -74,9 +74,9 @@ type ListPaymentLinksResponse struct {
 	Next func() (*ListPaymentLinksResponse, error)
 }
 
-func (o *ListPaymentLinksResponse) GetResult() components.PaymentLinks {
-	if o == nil {
+func (l *ListPaymentLinksResponse) GetResult() components.PaymentLinks {
+	if l == nil {
 		return components.PaymentLinks{}
 	}
-	return o.Result
+	return l.Result
 }

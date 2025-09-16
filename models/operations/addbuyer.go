@@ -10,11 +10,11 @@ type AddBuyerGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *AddBuyerGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (a *AddBuyerGlobals) GetMerchantAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return a.MerchantAccountID
 }
 
 type AddBuyerRequest struct {
@@ -23,16 +23,16 @@ type AddBuyerRequest struct {
 	BuyerCreate       components.BuyerCreate `request:"mediaType=application/json"`
 }
 
-func (o *AddBuyerRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (a *AddBuyerRequest) GetMerchantAccountID() *string {
+	if a == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return a.MerchantAccountID
 }
 
-func (o *AddBuyerRequest) GetBuyerCreate() components.BuyerCreate {
-	if o == nil {
+func (a *AddBuyerRequest) GetBuyerCreate() components.BuyerCreate {
+	if a == nil {
 		return components.BuyerCreate{}
 	}
-	return o.BuyerCreate
+	return a.BuyerCreate
 }

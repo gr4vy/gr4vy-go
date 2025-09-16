@@ -16,44 +16,44 @@ type MerchantProfileScheme struct {
 	MerchantCategoryCode string `json:"merchant_category_code"`
 }
 
-func (o *MerchantProfileScheme) GetMerchantAcquirerBin() string {
-	if o == nil {
+func (m *MerchantProfileScheme) GetMerchantAcquirerBin() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantAcquirerBin
+	return m.MerchantAcquirerBin
 }
 
-func (o *MerchantProfileScheme) GetMerchantURL() string {
-	if o == nil {
+func (m *MerchantProfileScheme) GetMerchantURL() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantURL
+	return m.MerchantURL
 }
 
-func (o *MerchantProfileScheme) GetMerchantAcquirerID() string {
-	if o == nil {
+func (m *MerchantProfileScheme) GetMerchantAcquirerID() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantAcquirerID
+	return m.MerchantAcquirerID
 }
 
-func (o *MerchantProfileScheme) GetMerchantName() string {
-	if o == nil {
+func (m *MerchantProfileScheme) GetMerchantName() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantName
+	return m.MerchantName
 }
 
-func (o *MerchantProfileScheme) GetMerchantCountryCode() string {
-	if o == nil {
+func (m *MerchantProfileScheme) GetMerchantCountryCode() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantCountryCode
+	return m.MerchantCountryCode
 }
 
-func (o *MerchantProfileScheme) GetMerchantCategoryCode() string {
-	if o == nil {
+func (m *MerchantProfileScheme) GetMerchantCategoryCode() string {
+	if m == nil {
 		return ""
 	}
-	return o.MerchantCategoryCode
+	return m.MerchantCategoryCode
 }

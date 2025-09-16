@@ -10,11 +10,11 @@ type VerifyPaymentServiceCredentialsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *VerifyPaymentServiceCredentialsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (v *VerifyPaymentServiceCredentialsGlobals) GetMerchantAccountID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return v.MerchantAccountID
 }
 
 type VerifyPaymentServiceCredentialsRequest struct {
@@ -23,16 +23,16 @@ type VerifyPaymentServiceCredentialsRequest struct {
 	VerifyCredentials components.VerifyCredentials `request:"mediaType=application/json"`
 }
 
-func (o *VerifyPaymentServiceCredentialsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (v *VerifyPaymentServiceCredentialsRequest) GetMerchantAccountID() *string {
+	if v == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return v.MerchantAccountID
 }
 
-func (o *VerifyPaymentServiceCredentialsRequest) GetVerifyCredentials() components.VerifyCredentials {
-	if o == nil {
+func (v *VerifyPaymentServiceCredentialsRequest) GetVerifyCredentials() components.VerifyCredentials {
+	if v == nil {
 		return components.VerifyCredentials{}
 	}
-	return o.VerifyCredentials
+	return v.VerifyCredentials
 }

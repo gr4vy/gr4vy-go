@@ -31,31 +31,31 @@ func (p *PayoutPaymentService) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PayoutPaymentService) GetType() *string {
-	return types.String("payment-service")
+func (p *PayoutPaymentService) GetType() *string {
+	return types.Pointer("payment-service")
 }
 
-func (o *PayoutPaymentService) GetID() *string {
-	if o == nil {
+func (p *PayoutPaymentService) GetID() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *PayoutPaymentService) GetMethod() *string {
-	return types.String("card")
+func (p *PayoutPaymentService) GetMethod() *string {
+	return types.Pointer("card")
 }
 
-func (o *PayoutPaymentService) GetPaymentServiceDefinitionID() string {
-	if o == nil {
+func (p *PayoutPaymentService) GetPaymentServiceDefinitionID() string {
+	if p == nil {
 		return ""
 	}
-	return o.PaymentServiceDefinitionID
+	return p.PaymentServiceDefinitionID
 }
 
-func (o *PayoutPaymentService) GetDisplayName() *string {
-	if o == nil {
+func (p *PayoutPaymentService) GetDisplayName() *string {
+	if p == nil {
 		return nil
 	}
-	return o.DisplayName
+	return p.DisplayName
 }

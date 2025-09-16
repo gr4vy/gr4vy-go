@@ -7,9 +7,9 @@ type FiservOptions struct {
 	InstallmentOptions *FiservInstallmentOptions `json:"installmentOptions,omitempty"`
 }
 
-func (o *FiservOptions) GetInstallmentOptions() *FiservInstallmentOptions {
-	if o == nil {
+func (f *FiservOptions) GetInstallmentOptions() *FiservInstallmentOptions {
+	if f == nil {
 		return nil
 	}
-	return o.InstallmentOptions
+	return f.InstallmentOptions
 }

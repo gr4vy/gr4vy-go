@@ -73,174 +73,174 @@ func (p *PaymentMethod) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentMethod) GetType() *string {
-	return types.String("payment-method")
+func (p *PaymentMethod) GetType() *string {
+	return types.Pointer("payment-method")
 }
 
-func (o *PaymentMethod) GetApprovalURL() *string {
-	if o == nil {
+func (p *PaymentMethod) GetApprovalURL() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ApprovalURL
+	return p.ApprovalURL
 }
 
-func (o *PaymentMethod) GetCountry() *string {
-	if o == nil {
+func (p *PaymentMethod) GetCountry() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Country
+	return p.Country
 }
 
-func (o *PaymentMethod) GetCurrency() *string {
-	if o == nil {
+func (p *PaymentMethod) GetCurrency() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Currency
+	return p.Currency
 }
 
-func (o *PaymentMethod) GetDetails() *PaymentMethodDetailsCard {
-	if o == nil {
+func (p *PaymentMethod) GetDetails() *PaymentMethodDetailsCard {
+	if p == nil {
 		return nil
 	}
-	return o.Details
+	return p.Details
 }
 
-func (o *PaymentMethod) GetExpirationDate() *string {
-	if o == nil {
+func (p *PaymentMethod) GetExpirationDate() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ExpirationDate
+	return p.ExpirationDate
 }
 
-func (o *PaymentMethod) GetFingerprint() *string {
-	if o == nil {
+func (p *PaymentMethod) GetFingerprint() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Fingerprint
+	return p.Fingerprint
 }
 
-func (o *PaymentMethod) GetLabel() *string {
-	if o == nil {
+func (p *PaymentMethod) GetLabel() *string {
+	if p == nil {
 		return nil
 	}
-	return o.Label
+	return p.Label
 }
 
-func (o *PaymentMethod) GetLastReplacedAt() *time.Time {
-	if o == nil {
+func (p *PaymentMethod) GetLastReplacedAt() *time.Time {
+	if p == nil {
 		return nil
 	}
-	return o.LastReplacedAt
+	return p.LastReplacedAt
 }
 
-func (o *PaymentMethod) GetMethod() Method {
-	if o == nil {
+func (p *PaymentMethod) GetMethod() Method {
+	if p == nil {
 		return Method("")
 	}
-	return o.Method
+	return p.Method
 }
 
-func (o *PaymentMethod) GetMode() *Mode {
-	if o == nil {
+func (p *PaymentMethod) GetMode() *Mode {
+	if p == nil {
 		return nil
 	}
-	return o.Mode
+	return p.Mode
 }
 
-func (o *PaymentMethod) GetScheme() *CardScheme {
-	if o == nil {
+func (p *PaymentMethod) GetScheme() *CardScheme {
+	if p == nil {
 		return nil
 	}
-	return o.Scheme
+	return p.Scheme
 }
 
-func (o *PaymentMethod) GetID() string {
-	if o == nil {
+func (p *PaymentMethod) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *PaymentMethod) GetMerchantAccountID() string {
-	if o == nil {
+func (p *PaymentMethod) GetMerchantAccountID() string {
+	if p == nil {
 		return ""
 	}
-	return o.MerchantAccountID
+	return p.MerchantAccountID
 }
 
-func (o *PaymentMethod) GetAdditionalSchemes() []CardScheme {
-	if o == nil {
+func (p *PaymentMethod) GetAdditionalSchemes() []CardScheme {
+	if p == nil {
 		return nil
 	}
-	return o.AdditionalSchemes
+	return p.AdditionalSchemes
 }
 
-func (o *PaymentMethod) GetCitLastUsedAt() *time.Time {
-	if o == nil {
+func (p *PaymentMethod) GetCitLastUsedAt() *time.Time {
+	if p == nil {
 		return nil
 	}
-	return o.CitLastUsedAt
+	return p.CitLastUsedAt
 }
 
-func (o *PaymentMethod) GetCitUsageCount() int64 {
-	if o == nil {
+func (p *PaymentMethod) GetCitUsageCount() int64 {
+	if p == nil {
 		return 0
 	}
-	return o.CitUsageCount
+	return p.CitUsageCount
 }
 
-func (o *PaymentMethod) GetHasReplacement() bool {
-	if o == nil {
+func (p *PaymentMethod) GetHasReplacement() bool {
+	if p == nil {
 		return false
 	}
-	return o.HasReplacement
+	return p.HasReplacement
 }
 
-func (o *PaymentMethod) GetLastUsedAt() *time.Time {
-	if o == nil {
+func (p *PaymentMethod) GetLastUsedAt() *time.Time {
+	if p == nil {
 		return nil
 	}
-	return o.LastUsedAt
+	return p.LastUsedAt
 }
 
-func (o *PaymentMethod) GetUsageCount() int64 {
-	if o == nil {
+func (p *PaymentMethod) GetUsageCount() int64 {
+	if p == nil {
 		return 0
 	}
-	return o.UsageCount
+	return p.UsageCount
 }
 
-func (o *PaymentMethod) GetBuyer() *Buyer {
-	if o == nil {
+func (p *PaymentMethod) GetBuyer() *Buyer {
+	if p == nil {
 		return nil
 	}
-	return o.Buyer
+	return p.Buyer
 }
 
-func (o *PaymentMethod) GetExternalIdentifier() *string {
-	if o == nil {
+func (p *PaymentMethod) GetExternalIdentifier() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return p.ExternalIdentifier
 }
 
-func (o *PaymentMethod) GetStatus() PaymentMethodStatus {
-	if o == nil {
+func (p *PaymentMethod) GetStatus() PaymentMethodStatus {
+	if p == nil {
 		return PaymentMethodStatus("")
 	}
-	return o.Status
+	return p.Status
 }
 
-func (o *PaymentMethod) GetCreatedAt() time.Time {
-	if o == nil {
+func (p *PaymentMethod) GetCreatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.CreatedAt
+	return p.CreatedAt
 }
 
-func (o *PaymentMethod) GetUpdatedAt() time.Time {
-	if o == nil {
+func (p *PaymentMethod) GetUpdatedAt() time.Time {
+	if p == nil {
 		return time.Time{}
 	}
-	return o.UpdatedAt
+	return p.UpdatedAt
 }

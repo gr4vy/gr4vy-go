@@ -32,41 +32,41 @@ func (t *TransactionCapture) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionCapture) GetType() *string {
-	return types.String("transaction-capture")
+func (t *TransactionCapture) GetType() *string {
+	return types.Pointer("transaction-capture")
 }
 
-func (o *TransactionCapture) GetStatus() CaptureStatus {
-	if o == nil {
+func (t *TransactionCapture) GetStatus() CaptureStatus {
+	if t == nil {
 		return CaptureStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TransactionCapture) GetCode() *string {
-	if o == nil {
+func (t *TransactionCapture) GetCode() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Code
+	return t.Code
 }
 
-func (o *TransactionCapture) GetRawResponseCode() *string {
-	if o == nil {
+func (t *TransactionCapture) GetRawResponseCode() *string {
+	if t == nil {
 		return nil
 	}
-	return o.RawResponseCode
+	return t.RawResponseCode
 }
 
-func (o *TransactionCapture) GetRawResponseDescription() *string {
-	if o == nil {
+func (t *TransactionCapture) GetRawResponseDescription() *string {
+	if t == nil {
 		return nil
 	}
-	return o.RawResponseDescription
+	return t.RawResponseDescription
 }
 
-func (o *TransactionCapture) GetTransaction() Transaction {
-	if o == nil {
+func (t *TransactionCapture) GetTransaction() Transaction {
+	if t == nil {
 		return Transaction{}
 	}
-	return o.Transaction
+	return t.Transaction
 }

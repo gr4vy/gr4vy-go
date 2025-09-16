@@ -7,9 +7,9 @@ type CardSchemeDefinitions struct {
 	Items []CardSchemeDefinition `json:"items"`
 }
 
-func (o *CardSchemeDefinitions) GetItems() []CardSchemeDefinition {
-	if o == nil {
+func (c *CardSchemeDefinitions) GetItems() []CardSchemeDefinition {
+	if c == nil {
 		return []CardSchemeDefinition{}
 	}
-	return o.Items
+	return c.Items
 }

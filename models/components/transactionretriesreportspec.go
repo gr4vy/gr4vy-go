@@ -25,13 +25,13 @@ func (t *TransactionRetriesReportSpec) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionRetriesReportSpec) GetModel() *string {
-	return types.String("transaction_retries")
+func (t *TransactionRetriesReportSpec) GetModel() *string {
+	return types.Pointer("transaction_retries")
 }
 
-func (o *TransactionRetriesReportSpec) GetParams() map[string]any {
-	if o == nil {
+func (t *TransactionRetriesReportSpec) GetParams() map[string]any {
+	if t == nil {
 		return map[string]any{}
 	}
-	return o.Params
+	return t.Params
 }

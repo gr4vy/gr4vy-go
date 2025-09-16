@@ -30,27 +30,27 @@ func (t *TokenPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TokenPaymentMethodCreate) GetID() string {
-	if o == nil {
+func (t *TokenPaymentMethodCreate) GetID() string {
+	if t == nil {
 		return ""
 	}
-	return o.ID
+	return t.ID
 }
 
-func (o *TokenPaymentMethodCreate) GetMethod() *string {
-	return types.String("id")
+func (t *TokenPaymentMethodCreate) GetMethod() *string {
+	return types.Pointer("id")
 }
 
-func (o *TokenPaymentMethodCreate) GetSecurityCode() *string {
-	if o == nil {
+func (t *TokenPaymentMethodCreate) GetSecurityCode() *string {
+	if t == nil {
 		return nil
 	}
-	return o.SecurityCode
+	return t.SecurityCode
 }
 
-func (o *TokenPaymentMethodCreate) GetRedirectURL() *string {
-	if o == nil {
+func (t *TokenPaymentMethodCreate) GetRedirectURL() *string {
+	if t == nil {
 		return nil
 	}
-	return o.RedirectURL
+	return t.RedirectURL
 }

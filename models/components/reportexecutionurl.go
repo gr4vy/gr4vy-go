@@ -25,16 +25,16 @@ func (r *ReportExecutionURL) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ReportExecutionURL) GetURL() string {
-	if o == nil {
+func (r *ReportExecutionURL) GetURL() string {
+	if r == nil {
 		return ""
 	}
-	return o.URL
+	return r.URL
 }
 
-func (o *ReportExecutionURL) GetExpiresAt() time.Time {
-	if o == nil {
+func (r *ReportExecutionURL) GetExpiresAt() time.Time {
+	if r == nil {
 		return time.Time{}
 	}
-	return o.ExpiresAt
+	return r.ExpiresAt
 }

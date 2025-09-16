@@ -39,62 +39,62 @@ func (g *GooglePayFPANPaymentMethodCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GooglePayFPANPaymentMethodCreate) GetExpirationDate() string {
-	if o == nil {
+func (g *GooglePayFPANPaymentMethodCreate) GetExpirationDate() string {
+	if g == nil {
 		return ""
 	}
-	return o.ExpirationDate
+	return g.ExpirationDate
 }
 
-func (o *GooglePayFPANPaymentMethodCreate) GetNumber() string {
-	if o == nil {
+func (g *GooglePayFPANPaymentMethodCreate) GetNumber() string {
+	if g == nil {
 		return ""
 	}
-	return o.Number
+	return g.Number
 }
 
-func (o *GooglePayFPANPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (g *GooglePayFPANPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
+	if g == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return g.BuyerExternalIdentifier
 }
 
-func (o *GooglePayFPANPaymentMethodCreate) GetBuyerID() *string {
-	if o == nil {
+func (g *GooglePayFPANPaymentMethodCreate) GetBuyerID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.BuyerID
+	return g.BuyerID
 }
 
-func (o *GooglePayFPANPaymentMethodCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (g *GooglePayFPANPaymentMethodCreate) GetExternalIdentifier() *string {
+	if g == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return g.ExternalIdentifier
 }
 
-func (o *GooglePayFPANPaymentMethodCreate) GetCardType() *string {
-	if o == nil {
+func (g *GooglePayFPANPaymentMethodCreate) GetCardType() *string {
+	if g == nil {
 		return nil
 	}
-	return o.CardType
+	return g.CardType
 }
 
-func (o *GooglePayFPANPaymentMethodCreate) GetMethod() string {
+func (g *GooglePayFPANPaymentMethodCreate) GetMethod() string {
 	return "googlepay_pan_only"
 }
 
-func (o *GooglePayFPANPaymentMethodCreate) GetRedirectURL() *string {
-	if o == nil {
+func (g *GooglePayFPANPaymentMethodCreate) GetRedirectURL() *string {
+	if g == nil {
 		return nil
 	}
-	return o.RedirectURL
+	return g.RedirectURL
 }
 
-func (o *GooglePayFPANPaymentMethodCreate) GetSecurityCode() any {
-	if o == nil {
+func (g *GooglePayFPANPaymentMethodCreate) GetSecurityCode() any {
+	if g == nil {
 		return nil
 	}
-	return o.SecurityCode
+	return g.SecurityCode
 }

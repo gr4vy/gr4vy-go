@@ -7,9 +7,9 @@ type ClickToPaySessionRequest struct {
 	CheckoutSessionID string `json:"checkout_session_id"`
 }
 
-func (o *ClickToPaySessionRequest) GetCheckoutSessionID() string {
-	if o == nil {
+func (c *ClickToPaySessionRequest) GetCheckoutSessionID() string {
+	if c == nil {
 		return ""
 	}
-	return o.CheckoutSessionID
+	return c.CheckoutSessionID
 }

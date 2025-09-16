@@ -25,13 +25,13 @@ func (c *Cryptogram) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Cryptogram) GetType() *string {
-	return types.String("network-token-cryptogram")
+func (c *Cryptogram) GetType() *string {
+	return types.Pointer("network-token-cryptogram")
 }
 
-func (o *Cryptogram) GetCryptogram() string {
-	if o == nil {
+func (c *Cryptogram) GetCryptogram() string {
+	if c == nil {
 		return ""
 	}
-	return o.Cryptogram
+	return c.Cryptogram
 }

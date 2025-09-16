@@ -480,261 +480,261 @@ func (t *TransactionCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionCreate) GetAmount() int64 {
-	if o == nil {
+func (t *TransactionCreate) GetAmount() int64 {
+	if t == nil {
 		return 0
 	}
-	return o.Amount
+	return t.Amount
 }
 
-func (o *TransactionCreate) GetCurrency() string {
-	if o == nil {
+func (t *TransactionCreate) GetCurrency() string {
+	if t == nil {
 		return ""
 	}
-	return o.Currency
+	return t.Currency
 }
 
-func (o *TransactionCreate) GetCountry() *string {
-	if o == nil {
+func (t *TransactionCreate) GetCountry() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Country
+	return t.Country
 }
 
-func (o *TransactionCreate) GetPaymentMethod() *TransactionCreatePaymentMethod {
-	if o == nil {
+func (t *TransactionCreate) GetPaymentMethod() *TransactionCreatePaymentMethod {
+	if t == nil {
 		return nil
 	}
-	return o.PaymentMethod
+	return t.PaymentMethod
 }
 
-func (o *TransactionCreate) GetBuyer() *GuestBuyerInput {
-	if o == nil {
+func (t *TransactionCreate) GetBuyer() *GuestBuyerInput {
+	if t == nil {
 		return nil
 	}
-	return o.Buyer
+	return t.Buyer
 }
 
-func (o *TransactionCreate) GetBuyerID() *string {
-	if o == nil {
+func (t *TransactionCreate) GetBuyerID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.BuyerID
+	return t.BuyerID
 }
 
-func (o *TransactionCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (t *TransactionCreate) GetBuyerExternalIdentifier() *string {
+	if t == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return t.BuyerExternalIdentifier
 }
 
-func (o *TransactionCreate) GetGiftCards() []GiftCardUnion {
-	if o == nil {
+func (t *TransactionCreate) GetGiftCards() []GiftCardUnion {
+	if t == nil {
 		return nil
 	}
-	return o.GiftCards
+	return t.GiftCards
 }
 
-func (o *TransactionCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (t *TransactionCreate) GetExternalIdentifier() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return t.ExternalIdentifier
 }
 
-func (o *TransactionCreate) GetIntent() *TransactionIntent {
-	if o == nil {
+func (t *TransactionCreate) GetIntent() *TransactionIntent {
+	if t == nil {
 		return nil
 	}
-	return o.Intent
+	return t.Intent
 }
 
-func (o *TransactionCreate) GetStore() *bool {
-	if o == nil {
+func (t *TransactionCreate) GetStore() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.Store
+	return t.Store
 }
 
-func (o *TransactionCreate) GetThreeDSecureData() *ThreeDSecureData {
-	if o == nil {
+func (t *TransactionCreate) GetThreeDSecureData() *ThreeDSecureData {
+	if t == nil {
 		return nil
 	}
-	return o.ThreeDSecureData
+	return t.ThreeDSecureData
 }
 
-func (o *TransactionCreate) GetMetadata() map[string]string {
-	if o == nil {
+func (t *TransactionCreate) GetMetadata() map[string]string {
+	if t == nil {
 		return nil
 	}
-	return o.Metadata
+	return t.Metadata
 }
 
-func (o *TransactionCreate) GetIsSubsequentPayment() *bool {
-	if o == nil {
+func (t *TransactionCreate) GetIsSubsequentPayment() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.IsSubsequentPayment
+	return t.IsSubsequentPayment
 }
 
-func (o *TransactionCreate) GetMerchantInitiated() *bool {
-	if o == nil {
+func (t *TransactionCreate) GetMerchantInitiated() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.MerchantInitiated
+	return t.MerchantInitiated
 }
 
-func (o *TransactionCreate) GetPaymentSource() *TransactionPaymentSource {
-	if o == nil {
+func (t *TransactionCreate) GetPaymentSource() *TransactionPaymentSource {
+	if t == nil {
 		return nil
 	}
-	return o.PaymentSource
+	return t.PaymentSource
 }
 
-func (o *TransactionCreate) GetAirline() *Airline {
-	if o == nil {
+func (t *TransactionCreate) GetAirline() *Airline {
+	if t == nil {
 		return nil
 	}
-	return o.Airline
+	return t.Airline
 }
 
-func (o *TransactionCreate) GetCartItems() []CartItem {
-	if o == nil {
+func (t *TransactionCreate) GetCartItems() []CartItem {
+	if t == nil {
 		return nil
 	}
-	return o.CartItems
+	return t.CartItems
 }
 
-func (o *TransactionCreate) GetStatementDescriptor() *StatementDescriptor {
-	if o == nil {
+func (t *TransactionCreate) GetStatementDescriptor() *StatementDescriptor {
+	if t == nil {
 		return nil
 	}
-	return o.StatementDescriptor
+	return t.StatementDescriptor
 }
 
-func (o *TransactionCreate) GetPreviousSchemeTransactionID() *string {
-	if o == nil {
+func (t *TransactionCreate) GetPreviousSchemeTransactionID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.PreviousSchemeTransactionID
+	return t.PreviousSchemeTransactionID
 }
 
-func (o *TransactionCreate) GetBrowserInfo() *BrowserInfo {
-	if o == nil {
+func (t *TransactionCreate) GetBrowserInfo() *BrowserInfo {
+	if t == nil {
 		return nil
 	}
-	return o.BrowserInfo
+	return t.BrowserInfo
 }
 
-func (o *TransactionCreate) GetShippingDetailsID() *string {
-	if o == nil {
+func (t *TransactionCreate) GetShippingDetailsID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ShippingDetailsID
+	return t.ShippingDetailsID
 }
 
-func (o *TransactionCreate) GetConnectionOptions() *TransactionConnectionOptions {
-	if o == nil {
+func (t *TransactionCreate) GetConnectionOptions() *TransactionConnectionOptions {
+	if t == nil {
 		return nil
 	}
-	return o.ConnectionOptions
+	return t.ConnectionOptions
 }
 
-func (o *TransactionCreate) GetAsyncCapture() *bool {
-	if o == nil {
+func (t *TransactionCreate) GetAsyncCapture() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.AsyncCapture
+	return t.AsyncCapture
 }
 
-func (o *TransactionCreate) GetAntiFraudFingerprint() *string {
-	if o == nil {
+func (t *TransactionCreate) GetAntiFraudFingerprint() *string {
+	if t == nil {
 		return nil
 	}
-	return o.AntiFraudFingerprint
+	return t.AntiFraudFingerprint
 }
 
-func (o *TransactionCreate) GetPaymentServiceID() *string {
-	if o == nil {
+func (t *TransactionCreate) GetPaymentServiceID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.PaymentServiceID
+	return t.PaymentServiceID
 }
 
-func (o *TransactionCreate) GetAccountFundingTransaction() *bool {
-	if o == nil {
+func (t *TransactionCreate) GetAccountFundingTransaction() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.AccountFundingTransaction
+	return t.AccountFundingTransaction
 }
 
-func (o *TransactionCreate) GetAllowPartialAuthorization() *bool {
-	if o == nil {
+func (t *TransactionCreate) GetAllowPartialAuthorization() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.AllowPartialAuthorization
+	return t.AllowPartialAuthorization
 }
 
-func (o *TransactionCreate) GetRecipient() *Recipient {
-	if o == nil {
+func (t *TransactionCreate) GetRecipient() *Recipient {
+	if t == nil {
 		return nil
 	}
-	return o.Recipient
+	return t.Recipient
 }
 
-func (o *TransactionCreate) GetInstallmentCount() *int64 {
-	if o == nil {
+func (t *TransactionCreate) GetInstallmentCount() *int64 {
+	if t == nil {
 		return nil
 	}
-	return o.InstallmentCount
+	return t.InstallmentCount
 }
 
-func (o *TransactionCreate) GetTaxAmount() *int64 {
-	if o == nil {
+func (t *TransactionCreate) GetTaxAmount() *int64 {
+	if t == nil {
 		return nil
 	}
-	return o.TaxAmount
+	return t.TaxAmount
 }
 
-func (o *TransactionCreate) GetMerchantTaxID() *string {
-	if o == nil {
+func (t *TransactionCreate) GetMerchantTaxID() *string {
+	if t == nil {
 		return nil
 	}
-	return o.MerchantTaxID
+	return t.MerchantTaxID
 }
 
-func (o *TransactionCreate) GetCustomerReferenceNumber() *string {
-	if o == nil {
+func (t *TransactionCreate) GetCustomerReferenceNumber() *string {
+	if t == nil {
 		return nil
 	}
-	return o.CustomerReferenceNumber
+	return t.CustomerReferenceNumber
 }
 
-func (o *TransactionCreate) GetAmountIncludesTax() *bool {
-	if o == nil {
+func (t *TransactionCreate) GetAmountIncludesTax() *bool {
+	if t == nil {
 		return nil
 	}
-	return o.AmountIncludesTax
+	return t.AmountIncludesTax
 }
 
-func (o *TransactionCreate) GetSupplierOrderNumber() *string {
-	if o == nil {
+func (t *TransactionCreate) GetSupplierOrderNumber() *string {
+	if t == nil {
 		return nil
 	}
-	return o.SupplierOrderNumber
+	return t.SupplierOrderNumber
 }
 
-func (o *TransactionCreate) GetDutyAmount() *int64 {
-	if o == nil {
+func (t *TransactionCreate) GetDutyAmount() *int64 {
+	if t == nil {
 		return nil
 	}
-	return o.DutyAmount
+	return t.DutyAmount
 }
 
-func (o *TransactionCreate) GetShippingAmount() *int64 {
-	if o == nil {
+func (t *TransactionCreate) GetShippingAmount() *int64 {
+	if t == nil {
 		return nil
 	}
-	return o.ShippingAmount
+	return t.ShippingAmount
 }

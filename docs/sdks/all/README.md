@@ -34,8 +34,8 @@ func main() {
     )
 
     res, err := s.Transactions.Refunds.All.Create(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", &components.TransactionRefundAllCreate{
-        Reason: gr4vygo.String("Refund due to user request."),
-        ExternalIdentifier: gr4vygo.String("refund-12345"),
+        Reason: gr4vygo.Pointer("Refund due to user request."),
+        ExternalIdentifier: gr4vygo.Pointer("refund-12345"),
     })
     if err != nil {
         log.Fatal(err)

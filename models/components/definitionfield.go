@@ -15,37 +15,37 @@ type DefinitionField struct {
 	Secret bool `json:"secret"`
 }
 
-func (o *DefinitionField) GetKey() string {
-	if o == nil {
+func (d *DefinitionField) GetKey() string {
+	if d == nil {
 		return ""
 	}
-	return o.Key
+	return d.Key
 }
 
-func (o *DefinitionField) GetDisplayName() string {
-	if o == nil {
+func (d *DefinitionField) GetDisplayName() string {
+	if d == nil {
 		return ""
 	}
-	return o.DisplayName
+	return d.DisplayName
 }
 
-func (o *DefinitionField) GetRequired() bool {
-	if o == nil {
+func (d *DefinitionField) GetRequired() bool {
+	if d == nil {
 		return false
 	}
-	return o.Required
+	return d.Required
 }
 
-func (o *DefinitionField) GetFormat() DefinitionFieldFormat {
-	if o == nil {
+func (d *DefinitionField) GetFormat() DefinitionFieldFormat {
+	if d == nil {
 		return DefinitionFieldFormat("")
 	}
-	return o.Format
+	return d.Format
 }
 
-func (o *DefinitionField) GetSecret() bool {
-	if o == nil {
+func (d *DefinitionField) GetSecret() bool {
+	if d == nil {
 		return false
 	}
-	return o.Secret
+	return d.Secret
 }

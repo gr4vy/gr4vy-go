@@ -9,16 +9,16 @@ type TransactionRefundAllCreate struct {
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 }
 
-func (o *TransactionRefundAllCreate) GetReason() *string {
-	if o == nil {
+func (t *TransactionRefundAllCreate) GetReason() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Reason
+	return t.Reason
 }
 
-func (o *TransactionRefundAllCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (t *TransactionRefundAllCreate) GetExternalIdentifier() *string {
+	if t == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return t.ExternalIdentifier
 }

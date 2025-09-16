@@ -34,10 +34,10 @@ func main() {
     )
 
     res, err := s.Buyers.PaymentMethods.List(ctx, operations.ListBuyerPaymentMethodsRequest{
-        BuyerID: gr4vygo.String("fe26475d-ec3e-4884-9553-f7356683f7f9"),
-        BuyerExternalIdentifier: gr4vygo.String("buyer-12345"),
-        Country: gr4vygo.String("US"),
-        Currency: gr4vygo.String("USD"),
+        BuyerID: gr4vygo.Pointer("fe26475d-ec3e-4884-9553-f7356683f7f9"),
+        BuyerExternalIdentifier: gr4vygo.Pointer("buyer-12345"),
+        Country: gr4vygo.Pointer("US"),
+        Currency: gr4vygo.Pointer("USD"),
     })
     if err != nil {
         log.Fatal(err)

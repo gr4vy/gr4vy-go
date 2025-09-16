@@ -15,37 +15,37 @@ type ShippingDetailsUpdate struct {
 	Address *Address `json:"address,omitempty"`
 }
 
-func (o *ShippingDetailsUpdate) GetFirstName() *string {
-	if o == nil {
+func (s *ShippingDetailsUpdate) GetFirstName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.FirstName
+	return s.FirstName
 }
 
-func (o *ShippingDetailsUpdate) GetLastName() *string {
-	if o == nil {
+func (s *ShippingDetailsUpdate) GetLastName() *string {
+	if s == nil {
 		return nil
 	}
-	return o.LastName
+	return s.LastName
 }
 
-func (o *ShippingDetailsUpdate) GetEmailAddress() *string {
-	if o == nil {
+func (s *ShippingDetailsUpdate) GetEmailAddress() *string {
+	if s == nil {
 		return nil
 	}
-	return o.EmailAddress
+	return s.EmailAddress
 }
 
-func (o *ShippingDetailsUpdate) GetPhoneNumber() *string {
-	if o == nil {
+func (s *ShippingDetailsUpdate) GetPhoneNumber() *string {
+	if s == nil {
 		return nil
 	}
-	return o.PhoneNumber
+	return s.PhoneNumber
 }
 
-func (o *ShippingDetailsUpdate) GetAddress() *Address {
-	if o == nil {
+func (s *ShippingDetailsUpdate) GetAddress() *Address {
+	if s == nil {
 		return nil
 	}
-	return o.Address
+	return s.Address
 }

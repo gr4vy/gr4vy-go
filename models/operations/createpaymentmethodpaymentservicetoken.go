@@ -10,11 +10,11 @@ type CreatePaymentMethodPaymentServiceTokenGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *CreatePaymentMethodPaymentServiceTokenGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreatePaymentMethodPaymentServiceTokenGlobals) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
 type CreatePaymentMethodPaymentServiceTokenRequest struct {
@@ -25,23 +25,23 @@ type CreatePaymentMethodPaymentServiceTokenRequest struct {
 	PaymentServiceTokenCreate components.PaymentServiceTokenCreate `request:"mediaType=application/json"`
 }
 
-func (o *CreatePaymentMethodPaymentServiceTokenRequest) GetPaymentMethodID() string {
-	if o == nil {
+func (c *CreatePaymentMethodPaymentServiceTokenRequest) GetPaymentMethodID() string {
+	if c == nil {
 		return ""
 	}
-	return o.PaymentMethodID
+	return c.PaymentMethodID
 }
 
-func (o *CreatePaymentMethodPaymentServiceTokenRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (c *CreatePaymentMethodPaymentServiceTokenRequest) GetMerchantAccountID() *string {
+	if c == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return c.MerchantAccountID
 }
 
-func (o *CreatePaymentMethodPaymentServiceTokenRequest) GetPaymentServiceTokenCreate() components.PaymentServiceTokenCreate {
-	if o == nil {
+func (c *CreatePaymentMethodPaymentServiceTokenRequest) GetPaymentServiceTokenCreate() components.PaymentServiceTokenCreate {
+	if c == nil {
 		return components.PaymentServiceTokenCreate{}
 	}
-	return o.PaymentServiceTokenCreate
+	return c.PaymentServiceTokenCreate
 }

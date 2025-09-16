@@ -31,34 +31,34 @@ func (c *CreateSession) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *CreateSession) GetType() *string {
-	return types.String("payment-service-session")
+func (c *CreateSession) GetType() *string {
+	return types.Pointer("payment-service-session")
 }
 
-func (o *CreateSession) GetStatus() CreateSessionStatus {
-	if o == nil {
+func (c *CreateSession) GetStatus() CreateSessionStatus {
+	if c == nil {
 		return CreateSessionStatus("")
 	}
-	return o.Status
+	return c.Status
 }
 
-func (o *CreateSession) GetCode() *string {
-	if o == nil {
+func (c *CreateSession) GetCode() *string {
+	if c == nil {
 		return nil
 	}
-	return o.Code
+	return c.Code
 }
 
-func (o *CreateSession) GetStatusCode() *int64 {
-	if o == nil {
+func (c *CreateSession) GetStatusCode() *int64 {
+	if c == nil {
 		return nil
 	}
-	return o.StatusCode
+	return c.StatusCode
 }
 
-func (o *CreateSession) GetResponseBody() map[string]any {
-	if o == nil {
+func (c *CreateSession) GetResponseBody() map[string]any {
+	if c == nil {
 		return nil
 	}
-	return o.ResponseBody
+	return c.ResponseBody
 }

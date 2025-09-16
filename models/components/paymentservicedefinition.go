@@ -44,90 +44,90 @@ func (p *PaymentServiceDefinition) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentServiceDefinition) GetID() string {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetID() string {
+	if p == nil {
 		return ""
 	}
-	return o.ID
+	return p.ID
 }
 
-func (o *PaymentServiceDefinition) GetType() *string {
-	return types.String("payment-service-definition")
+func (p *PaymentServiceDefinition) GetType() *string {
+	return types.Pointer("payment-service-definition")
 }
 
-func (o *PaymentServiceDefinition) GetDisplayName() string {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetDisplayName() string {
+	if p == nil {
 		return ""
 	}
-	return o.DisplayName
+	return p.DisplayName
 }
 
-func (o *PaymentServiceDefinition) GetMethod() Method {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetMethod() Method {
+	if p == nil {
 		return Method("")
 	}
-	return o.Method
+	return p.Method
 }
 
-func (o *PaymentServiceDefinition) GetFields() []DefinitionField {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetFields() []DefinitionField {
+	if p == nil {
 		return []DefinitionField{}
 	}
-	return o.Fields
+	return p.Fields
 }
 
-func (o *PaymentServiceDefinition) GetReportingFields() []DefinitionField {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetReportingFields() []DefinitionField {
+	if p == nil {
 		return []DefinitionField{}
 	}
-	return o.ReportingFields
+	return p.ReportingFields
 }
 
-func (o *PaymentServiceDefinition) GetSupportedCurrencies() []string {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetSupportedCurrencies() []string {
+	if p == nil {
 		return []string{}
 	}
-	return o.SupportedCurrencies
+	return p.SupportedCurrencies
 }
 
-func (o *PaymentServiceDefinition) GetSupportedCountries() []string {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetSupportedCountries() []string {
+	if p == nil {
 		return []string{}
 	}
-	return o.SupportedCountries
+	return p.SupportedCountries
 }
 
-func (o *PaymentServiceDefinition) GetMode() Mode {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetMode() Mode {
+	if p == nil {
 		return Mode("")
 	}
-	return o.Mode
+	return p.Mode
 }
 
-func (o *PaymentServiceDefinition) GetIconURL() *string {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetIconURL() *string {
+	if p == nil {
 		return nil
 	}
-	return o.IconURL
+	return p.IconURL
 }
 
-func (o *PaymentServiceDefinition) GetSupportedFeatures() map[string]bool {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetSupportedFeatures() map[string]bool {
+	if p == nil {
 		return map[string]bool{}
 	}
-	return o.SupportedFeatures
+	return p.SupportedFeatures
 }
 
-func (o *PaymentServiceDefinition) GetRequiredCheckoutFields() []RequiredCheckoutFields {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetRequiredCheckoutFields() []RequiredCheckoutFields {
+	if p == nil {
 		return []RequiredCheckoutFields{}
 	}
-	return o.RequiredCheckoutFields
+	return p.RequiredCheckoutFields
 }
 
-func (o *PaymentServiceDefinition) GetConfiguration() PaymentServiceConfiguration {
-	if o == nil {
+func (p *PaymentServiceDefinition) GetConfiguration() PaymentServiceConfiguration {
+	if p == nil {
 		return PaymentServiceConfiguration{}
 	}
-	return o.Configuration
+	return p.Configuration
 }

@@ -100,79 +100,79 @@ type PayoutCreate struct {
 	ConnectionOptions *PayoutConnectionOptions `json:"connection_options,omitempty"`
 }
 
-func (o *PayoutCreate) GetAmount() int64 {
-	if o == nil {
+func (p *PayoutCreate) GetAmount() int64 {
+	if p == nil {
 		return 0
 	}
-	return o.Amount
+	return p.Amount
 }
 
-func (o *PayoutCreate) GetCurrency() string {
-	if o == nil {
+func (p *PayoutCreate) GetCurrency() string {
+	if p == nil {
 		return ""
 	}
-	return o.Currency
+	return p.Currency
 }
 
-func (o *PayoutCreate) GetPaymentServiceID() string {
-	if o == nil {
+func (p *PayoutCreate) GetPaymentServiceID() string {
+	if p == nil {
 		return ""
 	}
-	return o.PaymentServiceID
+	return p.PaymentServiceID
 }
 
-func (o *PayoutCreate) GetPaymentMethod() PayoutCreatePaymentMethod {
-	if o == nil {
+func (p *PayoutCreate) GetPaymentMethod() PayoutCreatePaymentMethod {
+	if p == nil {
 		return PayoutCreatePaymentMethod{}
 	}
-	return o.PaymentMethod
+	return p.PaymentMethod
 }
 
-func (o *PayoutCreate) GetCategory() *PayoutCategory {
-	if o == nil {
+func (p *PayoutCreate) GetCategory() *PayoutCategory {
+	if p == nil {
 		return nil
 	}
-	return o.Category
+	return p.Category
 }
 
-func (o *PayoutCreate) GetExternalIdentifier() *string {
-	if o == nil {
+func (p *PayoutCreate) GetExternalIdentifier() *string {
+	if p == nil {
 		return nil
 	}
-	return o.ExternalIdentifier
+	return p.ExternalIdentifier
 }
 
-func (o *PayoutCreate) GetBuyerID() *string {
-	if o == nil {
+func (p *PayoutCreate) GetBuyerID() *string {
+	if p == nil {
 		return nil
 	}
-	return o.BuyerID
+	return p.BuyerID
 }
 
-func (o *PayoutCreate) GetBuyer() *GuestBuyerInput {
-	if o == nil {
+func (p *PayoutCreate) GetBuyer() *GuestBuyerInput {
+	if p == nil {
 		return nil
 	}
-	return o.Buyer
+	return p.Buyer
 }
 
-func (o *PayoutCreate) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (p *PayoutCreate) GetBuyerExternalIdentifier() *string {
+	if p == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return p.BuyerExternalIdentifier
 }
 
-func (o *PayoutCreate) GetMerchant() *PayoutMerchant {
-	if o == nil {
+func (p *PayoutCreate) GetMerchant() *PayoutMerchant {
+	if p == nil {
 		return nil
 	}
-	return o.Merchant
+	return p.Merchant
 }
 
-func (o *PayoutCreate) GetConnectionOptions() *PayoutConnectionOptions {
-	if o == nil {
+func (p *PayoutCreate) GetConnectionOptions() *PayoutConnectionOptions {
+	if p == nil {
 		return nil
 	}
-	return o.ConnectionOptions
+	return p.ConnectionOptions
 }

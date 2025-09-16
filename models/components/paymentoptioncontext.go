@@ -152,30 +152,30 @@ func (p *PaymentOptionContext) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *PaymentOptionContext) GetApprovalUI() *PaymentOptionContextApprovalUI {
-	if o == nil {
+func (p *PaymentOptionContext) GetApprovalUI() *PaymentOptionContextApprovalUI {
+	if p == nil {
 		return nil
 	}
-	return o.ApprovalUI
+	return p.ApprovalUI
 }
 
-func (o *PaymentOptionContext) GetRequiredFields() map[string]RequiredFields2 {
-	if o == nil {
+func (p *PaymentOptionContext) GetRequiredFields() map[string]RequiredFields2 {
+	if p == nil {
 		return nil
 	}
-	return o.RequiredFields
+	return p.RequiredFields
 }
 
-func (o *PaymentOptionContext) GetRedirectRequiresPopup() bool {
-	if o == nil {
+func (p *PaymentOptionContext) GetRedirectRequiresPopup() bool {
+	if p == nil {
 		return false
 	}
-	return o.RedirectRequiresPopup
+	return p.RedirectRequiresPopup
 }
 
-func (o *PaymentOptionContext) GetRequiresTokenizedRedirectPopup() bool {
-	if o == nil {
+func (p *PaymentOptionContext) GetRequiresTokenizedRedirectPopup() bool {
+	if p == nil {
 		return false
 	}
-	return o.RequiresTokenizedRedirectPopup
+	return p.RequiresTokenizedRedirectPopup
 }

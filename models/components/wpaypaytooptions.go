@@ -11,23 +11,23 @@ type WpayPaytoOptions struct {
 	Refund *WpayPaytoResourceOptions `json:"refund,omitempty"`
 }
 
-func (o *WpayPaytoOptions) GetInstrument() *WpayPaytoResourceOptions {
-	if o == nil {
+func (w *WpayPaytoOptions) GetInstrument() *WpayPaytoResourceOptions {
+	if w == nil {
 		return nil
 	}
-	return o.Instrument
+	return w.Instrument
 }
 
-func (o *WpayPaytoOptions) GetPayment() *WpayPaytoResourceOptions {
-	if o == nil {
+func (w *WpayPaytoOptions) GetPayment() *WpayPaytoResourceOptions {
+	if w == nil {
 		return nil
 	}
-	return o.Payment
+	return w.Payment
 }
 
-func (o *WpayPaytoOptions) GetRefund() *WpayPaytoResourceOptions {
-	if o == nil {
+func (w *WpayPaytoOptions) GetRefund() *WpayPaytoResourceOptions {
+	if w == nil {
 		return nil
 	}
-	return o.Refund
+	return w.Refund
 }

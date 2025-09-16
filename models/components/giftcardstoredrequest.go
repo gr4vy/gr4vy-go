@@ -23,9 +23,9 @@ func (g *GiftCardStoredRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *GiftCardStoredRequest) GetID() string {
-	if o == nil {
+func (g *GiftCardStoredRequest) GetID() string {
+	if g == nil {
 		return ""
 	}
-	return o.ID
+	return g.ID
 }

@@ -6,11 +6,11 @@ type GetBuyerShippingDetailsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *GetBuyerShippingDetailsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *GetBuyerShippingDetailsGlobals) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }
 
 type GetBuyerShippingDetailsRequest struct {
@@ -22,23 +22,23 @@ type GetBuyerShippingDetailsRequest struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *GetBuyerShippingDetailsRequest) GetBuyerID() string {
-	if o == nil {
+func (g *GetBuyerShippingDetailsRequest) GetBuyerID() string {
+	if g == nil {
 		return ""
 	}
-	return o.BuyerID
+	return g.BuyerID
 }
 
-func (o *GetBuyerShippingDetailsRequest) GetShippingDetailsID() string {
-	if o == nil {
+func (g *GetBuyerShippingDetailsRequest) GetShippingDetailsID() string {
+	if g == nil {
 		return ""
 	}
-	return o.ShippingDetailsID
+	return g.ShippingDetailsID
 }
 
-func (o *GetBuyerShippingDetailsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (g *GetBuyerShippingDetailsRequest) GetMerchantAccountID() *string {
+	if g == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return g.MerchantAccountID
 }

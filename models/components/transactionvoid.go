@@ -32,41 +32,41 @@ func (t *TransactionVoid) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *TransactionVoid) GetType() *string {
-	return types.String("transaction-void")
+func (t *TransactionVoid) GetType() *string {
+	return types.Pointer("transaction-void")
 }
 
-func (o *TransactionVoid) GetStatus() VoidStatus {
-	if o == nil {
+func (t *TransactionVoid) GetStatus() VoidStatus {
+	if t == nil {
 		return VoidStatus("")
 	}
-	return o.Status
+	return t.Status
 }
 
-func (o *TransactionVoid) GetCode() *string {
-	if o == nil {
+func (t *TransactionVoid) GetCode() *string {
+	if t == nil {
 		return nil
 	}
-	return o.Code
+	return t.Code
 }
 
-func (o *TransactionVoid) GetRawResponseCode() *string {
-	if o == nil {
+func (t *TransactionVoid) GetRawResponseCode() *string {
+	if t == nil {
 		return nil
 	}
-	return o.RawResponseCode
+	return t.RawResponseCode
 }
 
-func (o *TransactionVoid) GetRawResponseDescription() *string {
-	if o == nil {
+func (t *TransactionVoid) GetRawResponseDescription() *string {
+	if t == nil {
 		return nil
 	}
-	return o.RawResponseDescription
+	return t.RawResponseDescription
 }
 
-func (o *TransactionVoid) GetTransaction() Transaction {
-	if o == nil {
+func (t *TransactionVoid) GetTransaction() Transaction {
+	if t == nil {
 		return Transaction{}
 	}
-	return o.Transaction
+	return t.Transaction
 }

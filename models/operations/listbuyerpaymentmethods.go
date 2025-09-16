@@ -11,11 +11,11 @@ type ListBuyerPaymentMethodsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
 
-func (o *ListBuyerPaymentMethodsGlobals) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListBuyerPaymentMethodsGlobals) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }
 
 // OrderBy - The direction to sort the payment methods in.
@@ -58,48 +58,48 @@ func (l *ListBuyerPaymentMethodsRequest) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *ListBuyerPaymentMethodsRequest) GetBuyerID() *string {
-	if o == nil {
+func (l *ListBuyerPaymentMethodsRequest) GetBuyerID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerID
+	return l.BuyerID
 }
 
-func (o *ListBuyerPaymentMethodsRequest) GetBuyerExternalIdentifier() *string {
-	if o == nil {
+func (l *ListBuyerPaymentMethodsRequest) GetBuyerExternalIdentifier() *string {
+	if l == nil {
 		return nil
 	}
-	return o.BuyerExternalIdentifier
+	return l.BuyerExternalIdentifier
 }
 
-func (o *ListBuyerPaymentMethodsRequest) GetSortBy() *string {
-	return types.String("last_used_at")
+func (l *ListBuyerPaymentMethodsRequest) GetSortBy() *string {
+	return types.Pointer("last_used_at")
 }
 
-func (o *ListBuyerPaymentMethodsRequest) GetOrderBy() *OrderBy {
-	if o == nil {
+func (l *ListBuyerPaymentMethodsRequest) GetOrderBy() *OrderBy {
+	if l == nil {
 		return nil
 	}
-	return o.OrderBy
+	return l.OrderBy
 }
 
-func (o *ListBuyerPaymentMethodsRequest) GetCountry() *string {
-	if o == nil {
+func (l *ListBuyerPaymentMethodsRequest) GetCountry() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Country
+	return l.Country
 }
 
-func (o *ListBuyerPaymentMethodsRequest) GetCurrency() *string {
-	if o == nil {
+func (l *ListBuyerPaymentMethodsRequest) GetCurrency() *string {
+	if l == nil {
 		return nil
 	}
-	return o.Currency
+	return l.Currency
 }
 
-func (o *ListBuyerPaymentMethodsRequest) GetMerchantAccountID() *string {
-	if o == nil {
+func (l *ListBuyerPaymentMethodsRequest) GetMerchantAccountID() *string {
+	if l == nil {
 		return nil
 	}
-	return o.MerchantAccountID
+	return l.MerchantAccountID
 }

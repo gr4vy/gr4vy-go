@@ -71,135 +71,135 @@ func (a *Airline) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (o *Airline) GetBookingCode() *string {
-	if o == nil {
+func (a *Airline) GetBookingCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.BookingCode
+	return a.BookingCode
 }
 
-func (o *Airline) GetIsCardholderTraveling() *bool {
-	if o == nil {
+func (a *Airline) GetIsCardholderTraveling() *bool {
+	if a == nil {
 		return nil
 	}
-	return o.IsCardholderTraveling
+	return a.IsCardholderTraveling
 }
 
-func (o *Airline) GetIssuedAddress() *string {
-	if o == nil {
+func (a *Airline) GetIssuedAddress() *string {
+	if a == nil {
 		return nil
 	}
-	return o.IssuedAddress
+	return a.IssuedAddress
 }
 
-func (o *Airline) GetIssuedAt() *time.Time {
-	if o == nil {
+func (a *Airline) GetIssuedAt() *time.Time {
+	if a == nil {
 		return nil
 	}
-	return o.IssuedAt
+	return a.IssuedAt
 }
 
-func (o *Airline) GetIssuingCarrierCode() *string {
-	if o == nil {
+func (a *Airline) GetIssuingCarrierCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.IssuingCarrierCode
+	return a.IssuingCarrierCode
 }
 
-func (o *Airline) GetIssuingCarrierName() *string {
-	if o == nil {
+func (a *Airline) GetIssuingCarrierName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.IssuingCarrierName
+	return a.IssuingCarrierName
 }
 
-func (o *Airline) GetIssuingIataDesignator() *string {
-	if o == nil {
+func (a *Airline) GetIssuingIataDesignator() *string {
+	if a == nil {
 		return nil
 	}
-	return o.IssuingIataDesignator
+	return a.IssuingIataDesignator
 }
 
-func (o *Airline) GetIssuingIcaoCode() *string {
-	if o == nil {
+func (a *Airline) GetIssuingIcaoCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.IssuingIcaoCode
+	return a.IssuingIcaoCode
 }
 
-func (o *Airline) GetLegs() []AirlineLeg {
-	if o == nil {
+func (a *Airline) GetLegs() []AirlineLeg {
+	if a == nil {
 		return nil
 	}
-	return o.Legs
+	return a.Legs
 }
 
-func (o *Airline) GetPassengerNameRecord() *string {
-	if o == nil {
+func (a *Airline) GetPassengerNameRecord() *string {
+	if a == nil {
 		return nil
 	}
-	return o.PassengerNameRecord
+	return a.PassengerNameRecord
 }
 
-func (o *Airline) GetPassengers() []AirlinePassenger {
-	if o == nil {
+func (a *Airline) GetPassengers() []AirlinePassenger {
+	if a == nil {
 		return nil
 	}
-	return o.Passengers
+	return a.Passengers
 }
 
-func (o *Airline) GetReservationSystem() *string {
-	if o == nil {
+func (a *Airline) GetReservationSystem() *string {
+	if a == nil {
 		return nil
 	}
-	return o.ReservationSystem
+	return a.ReservationSystem
 }
 
-func (o *Airline) GetRestrictedTicket() *bool {
-	if o == nil {
+func (a *Airline) GetRestrictedTicket() *bool {
+	if a == nil {
 		return nil
 	}
-	return o.RestrictedTicket
+	return a.RestrictedTicket
 }
 
-func (o *Airline) GetTicketDeliveryMethod() *TicketDeliveryMethod {
-	if o == nil {
+func (a *Airline) GetTicketDeliveryMethod() *TicketDeliveryMethod {
+	if a == nil {
 		return nil
 	}
-	return o.TicketDeliveryMethod
+	return a.TicketDeliveryMethod
 }
 
-func (o *Airline) GetTicketNumber() *string {
-	if o == nil {
+func (a *Airline) GetTicketNumber() *string {
+	if a == nil {
 		return nil
 	}
-	return o.TicketNumber
+	return a.TicketNumber
 }
 
-func (o *Airline) GetTravelAgencyCode() *string {
-	if o == nil {
+func (a *Airline) GetTravelAgencyCode() *string {
+	if a == nil {
 		return nil
 	}
-	return o.TravelAgencyCode
+	return a.TravelAgencyCode
 }
 
-func (o *Airline) GetTravelAgencyInvoiceNumber() *string {
-	if o == nil {
+func (a *Airline) GetTravelAgencyInvoiceNumber() *string {
+	if a == nil {
 		return nil
 	}
-	return o.TravelAgencyInvoiceNumber
+	return a.TravelAgencyInvoiceNumber
 }
 
-func (o *Airline) GetTravelAgencyName() *string {
-	if o == nil {
+func (a *Airline) GetTravelAgencyName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.TravelAgencyName
+	return a.TravelAgencyName
 }
 
-func (o *Airline) GetTravelAgencyPlanName() *string {
-	if o == nil {
+func (a *Airline) GetTravelAgencyPlanName() *string {
+	if a == nil {
 		return nil
 	}
-	return o.TravelAgencyPlanName
+	return a.TravelAgencyPlanName
 }
