@@ -101,12 +101,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.GiftCards.Delete(ctx, "356d56e5-fe16-42ae-97ee-8d55d846ae2e")
+    err := s.GiftCards.Delete(ctx, "356d56e5-fe16-42ae-97ee-8d55d846ae2e")
     if err != nil {
         log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
     }
 }
 ```
@@ -122,7 +119,7 @@ func main() {
 
 ### Response
 
-**[any](../../.md), error**
+**error**
 
 ### Errors
 

@@ -1906,7 +1906,7 @@ func (s *ShippingDetails) Update(ctx context.Context, buyerID string, shippingDe
 
 // Delete a buyer's shipping details
 // Delete the shipping details associated to a specific buyer.
-func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDetailsID string, merchantAccountID *string, opts ...operations.Option) (any, error) {
+func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDetailsID string, merchantAccountID *string, opts ...operations.Option) error {
 	request := operations.DeleteBuyerShippingDetailsRequest{
 		BuyerID:           buyerID,
 		ShippingDetailsID: shippingDetailsID,
@@ -1925,7 +1925,7 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 
 	for _, opt := range opts {
 		if err := opt(&o, supportedOptions...); err != nil {
-			return nil, fmt.Errorf("error applying option: %w", err)
+			return fmt.Errorf("error applying option: %w", err)
 		}
 	}
 
@@ -1937,7 +1937,7 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 	}
 	opURL, err := utils.GenerateURL(ctx, baseURL, "/buyers/{buyer_id}/shipping-details/{shipping_details_id}", request, globals)
 	if err != nil {
-		return nil, fmt.Errorf("error generating URL: %w", err)
+		return fmt.Errorf("error generating URL: %w", err)
 	}
 
 	hookCtx := hooks.HookContext{
@@ -1962,7 +1962,7 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 
 	req, err := http.NewRequestWithContext(ctx, "DELETE", opURL, nil)
 	if err != nil {
-		return nil, fmt.Errorf("error creating request: %w", err)
+		return fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
@@ -1970,7 +1970,7 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 	utils.PopulateHeaders(ctx, req, request, globals)
 
 	if err := utils.PopulateSecurity(ctx, req, s.sdkConfiguration.Security); err != nil {
-		return nil, err
+		return err
 	}
 
 	for k, v := range o.SetHeaders {
@@ -2030,17 +2030,17 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 		})
 
 		if err != nil {
-			return nil, err
+			return err
 		} else {
 			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 		}
 	} else {
 		req, err = s.hooks.BeforeRequest(hooks.BeforeRequestContext{HookContext: hookCtx}, req)
 		if err != nil {
-			return nil, err
+			return err
 		}
 
 		httpRes, err = s.sdkConfiguration.Client.Do(req)
@@ -2052,316 +2052,295 @@ func (s *ShippingDetails) Delete(ctx context.Context, buyerID string, shippingDe
 			}
 
 			_, err = s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, nil, err)
-			return nil, err
+			return err
 		} else if utils.MatchStatusCodes([]string{"400", "401", "403", "404", "405", "409", "422", "425", "429", "4XX", "500", "502", "504", "5XX"}, httpRes.StatusCode) {
 			_httpRes, err := s.hooks.AfterError(hooks.AfterErrorContext{HookContext: hookCtx}, httpRes, nil)
 			if err != nil {
-				return nil, err
+				return err
 			} else if _httpRes != nil {
 				httpRes = _httpRes
 			}
 		} else {
 			httpRes, err = s.hooks.AfterSuccess(hooks.AfterSuccessContext{HookContext: hookCtx}, httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 		}
 	}
 
 	switch {
-	case httpRes.StatusCode == 200:
-		switch {
-		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-
-			var out any
-			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
-			}
-
-			return out, nil
-		default:
-			rawBody, err := utils.ConsumeRawBody(httpRes)
-			if err != nil {
-				return nil, err
-			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
-		}
+	case httpRes.StatusCode == 204:
 	case httpRes.StatusCode == 400:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error400
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 401:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error401
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 403:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 404:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error404
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 405:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error405
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 409:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error409
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 422:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.HTTPValidationError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 425:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error425
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 429:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error429
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 500:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error500
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 502:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error502
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode == 504:
 		switch {
 		case utils.MatchContentType(httpRes.Header.Get("Content-Type"), `application/json`):
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
 
 			var out apierrors.Error504
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return err
 			}
 
-			return nil, &out
+			return &out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
-				return nil, err
+				return err
 			}
-			return nil, apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
+			return apierrors.NewAPIError(fmt.Sprintf("unknown content-type received: %s", httpRes.Header.Get("Content-Type")), httpRes.StatusCode, string(rawBody), httpRes)
 		}
 	case httpRes.StatusCode >= 400 && httpRes.StatusCode < 500:
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
-			return nil, err
+			return err
 		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	case httpRes.StatusCode >= 500 && httpRes.StatusCode < 600:
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
-			return nil, err
+			return err
 		}
-		return nil, apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
+		return apierrors.NewAPIError("API error occurred", httpRes.StatusCode, string(rawBody), httpRes)
 	default:
 		rawBody, err := utils.ConsumeRawBody(httpRes)
 		if err != nil {
-			return nil, err
+			return err
 		}
-		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
+		return apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return nil, nil
-
+	return nil
 }

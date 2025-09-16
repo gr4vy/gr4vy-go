@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 5f16d6e3505573b7691975388b01f1d9
+  docChecksum: f623e304db531621bfda4b547f2db743
   docVersion: 1.0.0
   speakeasyVersion: 1.615.2
   generationVersion: 2.698.4
-  releaseVersion: 1.3.22
-  configChecksum: 7e6d0cf82ff43239500a3c53b7a54b4d
+  releaseVersion: 1.3.23
+  configChecksum: bf692fcaf62a7ff6791834a84b540f4f
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -4308,4 +4308,10 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.CartItems.[]` **Changed**\n  *  `response.CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Get()`:  `response.CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Update()`:  `response.CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Capture()`:  `response.[transaction].CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Void()`:  `response.[transactionVoid].Transaction.CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.CartItems.[]` **Changed**\n* `Gr4vy.Transactions.Sync()`:  `response.CartItems.[]` **Changed**\n* `Gr4vy.Payment-Options.List()`: \n  *  `request.PaymentOptionRequest.CartItems.[]` **Changed**\n* `Gr4vy.Checkout-Sessions.Create()`: \n  *  `request.CheckoutSessionCreate.CartItems.[]` **Changed**\n  *  `response.CartItems.[]` **Changed**\n* `Gr4vy.Checkout-Sessions.Get()`:  `response.CartItems.[]` **Changed**\n* `Gr4vy.Checkout-Sessions.Update()`: \n  *  `request.CheckoutSessionCreate.CartItems.[]` **Changed**\n  *  `response.CartItems.[]` **Changed**\n* `Gr4vy.Payment-Links.List()`:  `response.Items.[].CartItems.[]` **Changed**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.CartItems.[]` **Changed**\n  *  `response.CartItems.[]` **Changed**\n* `Gr4vy.Payment-Links.Get()`:  `response.CartItems.[]` **Changed**\n"
+releaseNotes: |
+  ## Go SDK Changes Detected:
+  * `Gr4vy.Buyers.Shipping-Details.Delete()`:  `response` **Changed** **Breaking** :warning:
+  * `Gr4vy.Gift-Cards.Delete()`:  `response` **Changed** **Breaking** :warning:
+  * `Gr4vy.Digital-Wallets.Delete()`:  `response` **Changed** **Breaking** :warning:
+  * `Gr4vy.Digital-Wallets.Domains.Delete()`:  `response` **Changed** **Breaking** :warning:
+  * `Gr4vy.Payment-Services.Delete()`:  `response` **Changed** **Breaking** :warning:

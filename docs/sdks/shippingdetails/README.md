@@ -306,12 +306,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341")
+    err := s.Buyers.ShippingDetails.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341")
     if err != nil {
         log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
     }
 }
 ```
@@ -328,7 +325,7 @@ func main() {
 
 ### Response
 
-**[any](../../.md), error**
+**error**
 
 ### Errors
 
