@@ -347,12 +347,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentServices.Delete(ctx, "fffd152a-9532-4087-9a4f-de58754210f0")
+    err := s.PaymentServices.Delete(ctx, "fffd152a-9532-4087-9a4f-de58754210f0")
     if err != nil {
         log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
     }
 }
 ```
@@ -368,7 +365,7 @@ func main() {
 
 ### Response
 
-**[any](../../.md), error**
+**error**
 
 ### Errors
 

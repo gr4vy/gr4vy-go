@@ -104,14 +104,11 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Domains.Delete(ctx, "", components.DigitalWalletDomain{
+    err := s.DigitalWallets.Domains.Delete(ctx, "", components.DigitalWalletDomain{
         DomainName: "example.com",
     })
     if err != nil {
         log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
     }
 }
 ```
@@ -128,7 +125,7 @@ func main() {
 
 ### Response
 
-**[any](../../.md), error**
+**error**
 
 ### Errors
 

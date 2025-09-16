@@ -238,12 +238,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Delete(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5")
+    err := s.DigitalWallets.Delete(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5")
     if err != nil {
         log.Fatal(err)
-    }
-    if res != nil {
-        // handle response
     }
 }
 ```
@@ -259,7 +256,7 @@ func main() {
 
 ### Response
 
-**[any](../../.md), error**
+**error**
 
 ### Errors
 
