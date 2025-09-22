@@ -11,6 +11,7 @@ const (
 	AntiFraudDecisionReject    AntiFraudDecision = "reject"
 	AntiFraudDecisionReview    AntiFraudDecision = "review"
 	AntiFraudDecisionSkipped   AntiFraudDecision = "skipped"
+	AntiFraudDecisionPending   AntiFraudDecision = "pending"
 )
 
 func (e AntiFraudDecision) ToPointer() *AntiFraudDecision {
