@@ -11,3 +11,4 @@
 | `AntiFraudDecisionReject`    | reject                       |
 | `AntiFraudDecisionReview`    | review                       |
 | `AntiFraudDecisionSkipped`   | skipped                      |
+| `AntiFraudDecisionPending`   | pending                      |
