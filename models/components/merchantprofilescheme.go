@@ -5,15 +5,15 @@ package components
 type MerchantProfileScheme struct {
 	// Acquirer BIN to use when calling 3DS through this scheme.
 	MerchantAcquirerBin string `json:"merchant_acquirer_bin"`
-	// URL to send when calling 3DS through this scheme.
-	MerchantURL string `json:"merchant_url"`
 	// Merchant ID to use when calling 3DS through this scheme.
 	MerchantAcquirerID string `json:"merchant_acquirer_id"`
 	MerchantName       string `json:"merchant_name"`
-	// Merchant country code to use when calling 3DS through this scheme.
+	// The merchant's ISO 3166-1 numeric country code.
 	MerchantCountryCode string `json:"merchant_country_code"`
 	// Merchant category code to use when calling 3DS through this scheme.
 	MerchantCategoryCode string `json:"merchant_category_code"`
+	// URL to send when calling 3DS through this scheme.
+	MerchantURL string `json:"merchant_url"`
 }
 
 func (m *MerchantProfileScheme) GetMerchantAcquirerBin() string {
@@ -21,13 +21,6 @@ func (m *MerchantProfileScheme) GetMerchantAcquirerBin() string {
 		return ""
 	}
 	return m.MerchantAcquirerBin
-}
-
-func (m *MerchantProfileScheme) GetMerchantURL() string {
-	if m == nil {
-		return ""
-	}
-	return m.MerchantURL
 }
 
 func (m *MerchantProfileScheme) GetMerchantAcquirerID() string {
@@ -56,4 +49,11 @@ func (m *MerchantProfileScheme) GetMerchantCategoryCode() string {
 		return ""
 	}
 	return m.MerchantCategoryCode
+}
+
+func (m *MerchantProfileScheme) GetMerchantURL() string {
+	if m == nil {
+		return ""
+	}
+	return m.MerchantURL
 }

@@ -10,15 +10,15 @@ import (
 type MerchantProfileSchemeSummary struct {
 	// Acquirer BIN to use when calling 3DS through this scheme.
 	MerchantAcquirerBin string `json:"merchant_acquirer_bin"`
-	// URL to send when calling 3DS through this scheme.
-	MerchantURL string `json:"merchant_url"`
 	// Merchant ID to use when calling 3DS through this scheme.
 	MerchantAcquirerID string `json:"merchant_acquirer_id"`
 	MerchantName       string `json:"merchant_name"`
-	// Merchant country code to use when calling 3DS through this scheme.
+	// The merchant's ISO 3166-1 numeric country code.
 	MerchantCountryCode string `json:"merchant_country_code"`
 	// Merchant category code to use when calling 3DS through this scheme.
 	MerchantCategoryCode string `json:"merchant_category_code"`
+	// URL to send when calling 3DS through this scheme.
+	MerchantURL string `json:"merchant_url"`
 	// The date and time when this profile was first created in our system.
 	CreatedAt time.Time `json:"created_at"`
 }
@@ -28,7 +28,7 @@ func (m MerchantProfileSchemeSummary) MarshalJSON() ([]byte, error) {
 }
 
 func (m *MerchantProfileSchemeSummary) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, []string{"merchant_acquirer_bin", "merchant_url", "merchant_acquirer_id", "merchant_name", "merchant_country_code", "merchant_category_code", "created_at"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, []string{"merchant_acquirer_bin", "merchant_acquirer_id", "merchant_name", "merchant_country_code", "merchant_category_code", "merchant_url", "created_at"}); err != nil {
 		return err
 	}
 	return nil
@@ -39,13 +39,6 @@ func (m *MerchantProfileSchemeSummary) GetMerchantAcquirerBin() string {
 		return ""
 	}
 	return m.MerchantAcquirerBin
-}
-
-func (m *MerchantProfileSchemeSummary) GetMerchantURL() string {
-	if m == nil {
-		return ""
-	}
-	return m.MerchantURL
 }
 
 func (m *MerchantProfileSchemeSummary) GetMerchantAcquirerID() string {
@@ -74,6 +67,13 @@ func (m *MerchantProfileSchemeSummary) GetMerchantCategoryCode() string {
 		return ""
 	}
 	return m.MerchantCategoryCode
+}
+
+func (m *MerchantProfileSchemeSummary) GetMerchantURL() string {
+	if m == nil {
+		return ""
+	}
+	return m.MerchantURL
 }
 
 func (m *MerchantProfileSchemeSummary) GetCreatedAt() time.Time {
