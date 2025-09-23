@@ -29,9 +29,9 @@ const (
 )
 
 type Body struct {
-	CardPaymentMethodCreate            *components.CardPaymentMethodCreate            `queryParam:"inline" name:"Body"`
-	RedirectPaymentMethodCreate        *components.RedirectPaymentMethodCreate        `queryParam:"inline" name:"Body"`
-	CheckoutSessionPaymentMethodCreate *components.CheckoutSessionPaymentMethodCreate `queryParam:"inline" name:"Body"`
+	CardPaymentMethodCreate            *components.CardPaymentMethodCreate            `queryParam:"inline,name=Body"`
+	RedirectPaymentMethodCreate        *components.RedirectPaymentMethodCreate        `queryParam:"inline,name=Body"`
+	CheckoutSessionPaymentMethodCreate *components.CheckoutSessionPaymentMethodCreate `queryParam:"inline,name=Body"`
 
 	Type BodyType
 }

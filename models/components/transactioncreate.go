@@ -25,16 +25,16 @@ const (
 
 // TransactionCreatePaymentMethod - The optional payment method to use for this transaction. This field is required if no `gift_cards` have been added.
 type TransactionCreatePaymentMethod struct {
-	CardWithURLPaymentMethodCreate            *CardWithURLPaymentMethodCreate            `queryParam:"inline" name:"Payment_Method"`
-	RedirectPaymentMethodCreate               *RedirectPaymentMethodCreate               `queryParam:"inline" name:"Payment_Method"`
-	TokenPaymentMethodCreate                  *TokenPaymentMethodCreate                  `queryParam:"inline" name:"Payment_Method"`
-	ApplePayPaymentMethodCreate               *ApplePayPaymentMethodCreate               `queryParam:"inline" name:"Payment_Method"`
-	ClickToPayPaymentMethodCreate             *ClickToPayPaymentMethodCreate             `queryParam:"inline" name:"Payment_Method"`
-	ClickToPayFPANPaymentMethodCreate         *ClickToPayFPANPaymentMethodCreate         `queryParam:"inline" name:"Payment_Method"`
-	GooglePayPaymentMethodCreate              *GooglePayPaymentMethodCreate              `queryParam:"inline" name:"Payment_Method"`
-	GooglePayFPANPaymentMethodCreate          *GooglePayFPANPaymentMethodCreate          `queryParam:"inline" name:"Payment_Method"`
-	NetworkTokenPaymentMethodCreate           *NetworkTokenPaymentMethodCreate           `queryParam:"inline" name:"Payment_Method"`
-	CheckoutSessionWithURLPaymentMethodCreate *CheckoutSessionWithURLPaymentMethodCreate `queryParam:"inline" name:"Payment_Method"`
+	CardWithURLPaymentMethodCreate            *CardWithURLPaymentMethodCreate            `queryParam:"inline,name=Payment_Method"`
+	RedirectPaymentMethodCreate               *RedirectPaymentMethodCreate               `queryParam:"inline,name=Payment_Method"`
+	TokenPaymentMethodCreate                  *TokenPaymentMethodCreate                  `queryParam:"inline,name=Payment_Method"`
+	ApplePayPaymentMethodCreate               *ApplePayPaymentMethodCreate               `queryParam:"inline,name=Payment_Method"`
+	ClickToPayPaymentMethodCreate             *ClickToPayPaymentMethodCreate             `queryParam:"inline,name=Payment_Method"`
+	ClickToPayFPANPaymentMethodCreate         *ClickToPayFPANPaymentMethodCreate         `queryParam:"inline,name=Payment_Method"`
+	GooglePayPaymentMethodCreate              *GooglePayPaymentMethodCreate              `queryParam:"inline,name=Payment_Method"`
+	GooglePayFPANPaymentMethodCreate          *GooglePayFPANPaymentMethodCreate          `queryParam:"inline,name=Payment_Method"`
+	NetworkTokenPaymentMethodCreate           *NetworkTokenPaymentMethodCreate           `queryParam:"inline,name=Payment_Method"`
+	CheckoutSessionWithURLPaymentMethodCreate *CheckoutSessionWithURLPaymentMethodCreate `queryParam:"inline,name=Payment_Method"`
 
 	Type TransactionCreatePaymentMethodType
 }
@@ -256,8 +256,8 @@ const (
 )
 
 type GiftCardUnion struct {
-	GiftCardTransactionCreate      *GiftCardTransactionCreate      `queryParam:"inline" name:"gift_card"`
-	GiftCardTokenTransactionCreate *GiftCardTokenTransactionCreate `queryParam:"inline" name:"gift_card"`
+	GiftCardTransactionCreate      *GiftCardTransactionCreate      `queryParam:"inline,name=gift_card"`
+	GiftCardTokenTransactionCreate *GiftCardTokenTransactionCreate `queryParam:"inline,name=gift_card"`
 
 	Type GiftCardUnionType
 }
@@ -320,8 +320,8 @@ const (
 
 // ThreeDSecureData - Pass through 3-D Secure data to support external 3-D Secure authorisation. If using an external 3-D Secure provider, you should not pass a `redirect_url` in the `payment_method` object for a transaction.
 type ThreeDSecureData struct {
-	ThreeDSecureDataV1 *ThreeDSecureDataV1 `queryParam:"inline" name:"Three_D_Secure_Data"`
-	ThreeDSecureDataV2 *ThreeDSecureDataV2 `queryParam:"inline" name:"Three_D_Secure_Data"`
+	ThreeDSecureDataV1 *ThreeDSecureDataV1 `queryParam:"inline,name=Three_D_Secure_Data"`
+	ThreeDSecureDataV2 *ThreeDSecureDataV2 `queryParam:"inline,name=Three_D_Secure_Data"`
 
 	Type ThreeDSecureDataType
 }
