@@ -59,8 +59,8 @@ const (
 
 // ResponseVoidTransaction - Successful Response
 type ResponseVoidTransaction struct {
-	Transaction     *components.Transaction     `queryParam:"inline" name:"Response_Void_Transaction"`
-	TransactionVoid *components.TransactionVoid `queryParam:"inline" name:"Response_Void_Transaction"`
+	Transaction     *components.Transaction     `queryParam:"inline,name=Response_Void_Transaction"`
+	TransactionVoid *components.TransactionVoid `queryParam:"inline,name=Response_Void_Transaction"`
 
 	Type ResponseVoidTransactionType
 }
