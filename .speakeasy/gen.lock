@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 5edcc0d0e88096bddcd2fbf8a0f0b260
+  docChecksum: a570c35eeb284cd7c828bfb9c0e7947d
   docVersion: 1.0.0
-  speakeasyVersion: 1.622.2
-  generationVersion: 2.711.4
-  releaseVersion: 1.5.2
-  configChecksum: 8e908a5dfefc8e0735b6ed0120e35fe3
+  speakeasyVersion: 1.628.6
+  generationVersion: 2.716.7
+  releaseVersion: 1.5.3
+  configChecksum: d4abc59826c5245c3026175ae283b622
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -978,7 +978,6 @@ generatedFiles:
   - types/bigint.go
   - types/date.go
   - types/datetime.go
-  - types/decimal.go
   - types/pointers.go
 examples:
   create_account_updater_job:
