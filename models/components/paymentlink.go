@@ -61,6 +61,8 @@ type PaymentLink struct {
 	Buyer *TransactionBuyer `json:"buyer,omitempty"`
 	// The shipping details for the payment link.
 	ShippingDetails *ShippingDetails `json:"shipping_details,omitempty"`
+	// The connection options for the payment link.
+	ConnectionOptions map[string]map[string]any `json:"connection_options,omitempty"`
 }
 
 func (p PaymentLink) MarshalJSON() ([]byte, error) {
@@ -258,4 +260,11 @@ func (p *PaymentLink) GetShippingDetails() *ShippingDetails {
 		return nil
 	}
 	return p.ShippingDetails
+}
+
+func (p *PaymentLink) GetConnectionOptions() map[string]map[string]any {
+	if p == nil {
+		return nil
+	}
+	return p.ConnectionOptions
 }
