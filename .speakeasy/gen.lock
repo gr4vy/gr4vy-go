@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 790d3d55cda02ab87e4c09145dac3f43
+  docChecksum: 7a17dc735eeac30cf5ad8f4619e64d2d
   docVersion: 1.0.0
-  speakeasyVersion: 1.631.4
+  speakeasyVersion: 1.631.5
   generationVersion: 2.716.16
-  releaseVersion: 1.5.4
-  configChecksum: 0672de0240c78ddf6290309f7fb0a5cc
+  releaseVersion: 1.5.5
+  configChecksum: b15ba22bb9ed83791525108984dc1f08
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -4311,8 +4311,3 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes Detected:
-  * `Gr4vy.Payment-Links.List()`:  `response.Items.[].ConnectionOptions` **Added**
-  * `Gr4vy.Payment-Links.Create()`:  `response.ConnectionOptions` **Added**
-  * `Gr4vy.Payment-Links.Get()`:  `response.ConnectionOptions` **Added**
