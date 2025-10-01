@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 7a17dc735eeac30cf5ad8f4619e64d2d
+  docChecksum: 3fa74714ca9159a06cce4fe9a836a94a
   docVersion: 1.0.0
   speakeasyVersion: 1.631.5
   generationVersion: 2.716.16
-  releaseVersion: 1.5.5
-  configChecksum: b15ba22bb9ed83791525108984dc1f08
+  releaseVersion: 1.5.6
+  configChecksum: 041142c858a058658476f2640b232ae0
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -126,6 +126,9 @@ generatedFiles:
   - /models/components/digitalwallets.go
   - /models/components/digitalwalletupdate.go
   - /models/components/dlocaloptions.go
+  - /models/components/dlocalupioptions.go
+  - /models/components/dlocalupirecurringinfooptions.go
+  - /models/components/dlocalupiwalletoptions.go
   - /models/components/dlocalwalletoptions.go
   - /models/components/errordetail.go
   - /models/components/errorlocation.go
@@ -500,6 +503,9 @@ generatedFiles:
   - docs/models/components/digitalwallets.md
   - docs/models/components/digitalwalletupdate.md
   - docs/models/components/dlocaloptions.md
+  - docs/models/components/dlocalupioptions.md
+  - docs/models/components/dlocalupirecurringinfooptions.md
+  - docs/models/components/dlocalupiwalletoptions.md
   - docs/models/components/dlocalwalletoptions.md
   - docs/models/components/errordetail.md
   - docs/models/components/errorlocation.md
@@ -649,6 +655,7 @@ generatedFiles:
   - docs/models/components/statementdescriptor.md
   - docs/models/components/stripeconnectoptions.md
   - docs/models/components/stripeoptions.md
+  - docs/models/components/subscriptionfrequencyunit.md
   - docs/models/components/taxid.md
   - docs/models/components/taxidkind.md
   - docs/models/components/threedsecuredata.md
@@ -4311,3 +4318,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.Dlocal-Upi` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.Dlocal-Upi` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.Dlocal-Upi` **Added**\n"

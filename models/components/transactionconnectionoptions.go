@@ -37,6 +37,8 @@ type TransactionConnectionOptions struct {
 	CybersourceKcp *CybersourceOptions `json:"cybersource-kcp,omitempty"`
 	// Custom options to be passed to the `dlocal-nequi` connector.
 	DlocalNequi *DlocalOptions `json:"dlocal-nequi,omitempty"`
+	// Custom options to be passed to the `dlocal-upi` connector.
+	DlocalUpi *DlocalUPIOptions `json:"dlocal-upi,omitempty"`
 	// Custom options to be passed to the `fiserv-card` connector.
 	FiservCard *FiservOptions `json:"fiserv-card,omitempty"`
 	// Custom options to be passed to the `forter-anti-fraud` connector.
@@ -198,6 +200,13 @@ func (t *TransactionConnectionOptions) GetDlocalNequi() *DlocalOptions {
 		return nil
 	}
 	return t.DlocalNequi
+}
+
+func (t *TransactionConnectionOptions) GetDlocalUpi() *DlocalUPIOptions {
+	if t == nil {
+		return nil
+	}
+	return t.DlocalUpi
 }
 
 func (t *TransactionConnectionOptions) GetFiservCard() *FiservOptions {
