@@ -29,6 +29,7 @@ const (
 	TaxIDKindIDNik    TaxIDKind = "id.nik"
 	TaxIDKindIDNpwp   TaxIDKind = "id.npwp"
 	TaxIDKindInGst    TaxIDKind = "in.gst"
+	TaxIDKindInPan    TaxIDKind = "in.pan"
 	TaxIDKindJpCn     TaxIDKind = "jp.cn"
 	TaxIDKindJpRn     TaxIDKind = "jp.rn"
 	TaxIDKindKrBrn    TaxIDKind = "kr.brn"
