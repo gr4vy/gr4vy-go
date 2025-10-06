@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: b968799f765548ca9332528ebeed20db
+  docChecksum: fed2a8fc4a595d3f1ca41177805bbfd9
   docVersion: 1.0.0
-  speakeasyVersion: 1.633.2
-  generationVersion: 2.720.5
-  releaseVersion: 1.5.7
-  configChecksum: df129a5d5678322ca1397e83de31d94d
+  speakeasyVersion: 1.634.2
+  generationVersion: 2.721.3
+  releaseVersion: 1.6.0
+  configChecksum: 79065f5039a23b2c6d21e053d14d038a
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -34,7 +34,7 @@ features:
     retries: 2.84.2
     sdkHooks: 0.2.0
     serverIDs: 2.81.1
-    unions: 2.85.14
+    unions: 2.86.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -247,6 +247,7 @@ generatedFiles:
   - /models/components/reportexecutionstatus.go
   - /models/components/reportexecutionsummary.go
   - /models/components/reportexecutionurl.go
+  - /models/components/reportexecutionurlgenerate.go
   - /models/components/reports.go
   - /models/components/reportschedule.go
   - /models/components/reportspec.go
@@ -633,6 +634,7 @@ generatedFiles:
   - docs/models/components/reportexecutionstatus.md
   - docs/models/components/reportexecutionsummary.md
   - docs/models/components/reportexecutionurl.md
+  - docs/models/components/reportexecutionurlgenerate.md
   - docs/models/components/reports.md
   - docs/models/components/reportschedule.md
   - docs/models/components/reportspec.md
@@ -4318,3 +4320,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Go SDK Changes Detected:
+  * `Gr4vy.Reports.Executions.Url()`:  `request.ReportExecutionUrlGenerate` **Added**

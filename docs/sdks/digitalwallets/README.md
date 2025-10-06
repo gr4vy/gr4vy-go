@@ -23,8 +23,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )
@@ -94,8 +94,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -159,8 +159,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -225,8 +225,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -288,8 +288,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"log"
 )

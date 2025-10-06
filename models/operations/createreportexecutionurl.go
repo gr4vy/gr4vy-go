@@ -2,6 +2,10 @@
 
 package operations
 
+import (
+	"github.com/gr4vy/gr4vy-go/models/components"
+)
+
 type CreateReportExecutionURLGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -19,7 +23,8 @@ type CreateReportExecutionURLRequest struct {
 	// The ID of the execution of a report to retrieve a URL for.
 	ReportExecutionID string `pathParam:"style=simple,explode=false,name=report_execution_id"`
 	// The ID of the merchant account to use for this request.
-	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID          *string                                `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	ReportExecutionURLGenerate *components.ReportExecutionURLGenerate `request:"mediaType=application/json"`
 }
 
 func (c *CreateReportExecutionURLRequest) GetReportID() string {
@@ -41,4 +46,11 @@ func (c *CreateReportExecutionURLRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return c.MerchantAccountID
+}
+
+func (c *CreateReportExecutionURLRequest) GetReportExecutionURLGenerate() *components.ReportExecutionURLGenerate {
+	if c == nil {
+		return nil
+	}
+	return c.ReportExecutionURLGenerate
 }

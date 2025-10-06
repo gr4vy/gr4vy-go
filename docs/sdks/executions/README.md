@@ -21,8 +21,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -101,8 +101,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
@@ -114,7 +114,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Reports.Executions.URL(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", "003bc416-f32a-420c-8eb2-062a386e1fb0")
+    res, err := s.Reports.Executions.URL(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", "003bc416-f32a-420c-8eb2-062a386e1fb0", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -126,13 +126,14 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                  | Type                                                       | Required                                                   | Description                                                | Example                                                    |
-| ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- | ---------------------------------------------------------- |
-| `ctx`                                                      | [context.Context](https://pkg.go.dev/context#Context)      | :heavy_check_mark:                                         | The context to use for the request.                        |                                                            |
-| `reportID`                                                 | *string*                                                   | :heavy_check_mark:                                         | The ID of the report to retrieve a URL for.                | 4d4c7123-b794-4fad-b1b9-5ab2606e6bbe                       |
-| `reportExecutionID`                                        | *string*                                                   | :heavy_check_mark:                                         | The ID of the execution of a report to retrieve a URL for. | 003bc416-f32a-420c-8eb2-062a386e1fb0                       |
-| `merchantAccountID`                                        | **string*                                                  | :heavy_minus_sign:                                         | The ID of the merchant account to use for this request.    |                                                            |
-| `opts`                                                     | [][operations.Option](../../models/operations/option.md)   | :heavy_minus_sign:                                         | The options for this request.                              |                                                            |
+| Parameter                                                                                       | Type                                                                                            | Required                                                                                        | Description                                                                                     | Example                                                                                         |
+| ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                           | [context.Context](https://pkg.go.dev/context#Context)                                           | :heavy_check_mark:                                                                              | The context to use for the request.                                                             |                                                                                                 |
+| `reportID`                                                                                      | *string*                                                                                        | :heavy_check_mark:                                                                              | The ID of the report to retrieve a URL for.                                                     | 4d4c7123-b794-4fad-b1b9-5ab2606e6bbe                                                            |
+| `reportExecutionID`                                                                             | *string*                                                                                        | :heavy_check_mark:                                                                              | The ID of the execution of a report to retrieve a URL for.                                      | 003bc416-f32a-420c-8eb2-062a386e1fb0                                                            |
+| `merchantAccountID`                                                                             | **string*                                                                                       | :heavy_minus_sign:                                                                              | The ID of the merchant account to use for this request.                                         |                                                                                                 |
+| `reportExecutionURLGenerate`                                                                    | [*components.ReportExecutionURLGenerate](../../models/components/reportexecutionurlgenerate.md) | :heavy_minus_sign:                                                                              | N/A                                                                                             |                                                                                                 |
+| `opts`                                                                                          | [][operations.Option](../../models/operations/option.md)                                        | :heavy_minus_sign:                                                                              | The options for this request.                                                                   |                                                                                                 |
 
 ### Response
 
@@ -168,8 +169,8 @@ package main
 
 import(
 	"context"
-	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
 )
 
