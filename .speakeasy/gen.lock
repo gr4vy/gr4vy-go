@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: fed2a8fc4a595d3f1ca41177805bbfd9
+  docChecksum: a26196925771423add8993e189e56821
   docVersion: 1.0.0
   speakeasyVersion: 1.634.2
   generationVersion: 2.721.3
-  releaseVersion: 1.6.0
-  configChecksum: 79065f5039a23b2c6d21e053d14d038a
+  releaseVersion: 1.6.1
+  configChecksum: ca0df6b8494c92da1cf4069bc1a4067e
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -4320,6 +4320,3 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes Detected:
-  * `Gr4vy.Reports.Executions.Url()`:  `request.ReportExecutionUrlGenerate` **Added**
