@@ -556,11 +556,12 @@ func (s *Executions) List(ctx context.Context, reportID string, cursor *string, 
 
 // Create URL for executed report
 // Creates a download URL for a specific execution of a report.
-func (s *Executions) URL(ctx context.Context, reportID string, reportExecutionID string, merchantAccountID *string, opts ...operations.Option) (*components.ReportExecutionURL, error) {
+func (s *Executions) URL(ctx context.Context, reportID string, reportExecutionID string, merchantAccountID *string, reportExecutionURLGenerate *components.ReportExecutionURLGenerate, opts ...operations.Option) (*components.ReportExecutionURL, error) {
 	request := operations.CreateReportExecutionURLRequest{
-		ReportID:          reportID,
-		ReportExecutionID: reportExecutionID,
-		MerchantAccountID: merchantAccountID,
+		ReportID:                   reportID,
+		ReportExecutionID:          reportExecutionID,
+		MerchantAccountID:          merchantAccountID,
+		ReportExecutionURLGenerate: reportExecutionURLGenerate,
 	}
 
 	globals := operations.CreateReportExecutionURLGlobals{
@@ -598,6 +599,10 @@ func (s *Executions) URL(ctx context.Context, reportID string, reportExecutionID
 		OperationID:      "create_report_execution_url",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
+	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, true, "ReportExecutionURLGenerate", "json", `request:"mediaType=application/json"`)
+	if err != nil {
+		return nil, err
+	}
 
 	timeout := o.Timeout
 	if timeout == nil {
@@ -610,12 +615,15 @@ func (s *Executions) URL(ctx context.Context, reportID string, reportExecutionID
 		defer cancel()
 	}
 
-	req, err := http.NewRequestWithContext(ctx, "POST", opURL, nil)
+	req, err := http.NewRequestWithContext(ctx, "POST", opURL, bodyReader)
 	if err != nil {
 		return nil, fmt.Errorf("error creating request: %w", err)
 	}
 	req.Header.Set("Accept", "application/json")
 	req.Header.Set("User-Agent", s.sdkConfiguration.UserAgent)
+	if reqContentType != "" {
+		req.Header.Set("Content-Type", reqContentType)
+	}
 
 	utils.PopulateHeaders(ctx, req, request, globals)
 
