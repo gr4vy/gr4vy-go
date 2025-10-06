@@ -29,6 +29,7 @@
 | `TaxIDKindIDNik`    | id.nik              |
 | `TaxIDKindIDNpwp`   | id.npwp             |
 | `TaxIDKindInGst`    | in.gst              |
+| `TaxIDKindInPan`    | in.pan              |
 | `TaxIDKindJpCn`     | jp.cn               |
 | `TaxIDKindJpRn`     | jp.rn               |
 | `TaxIDKindKrBrn`    | kr.brn              |
