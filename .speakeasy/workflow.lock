@@ -1,4 +1,4 @@
-speakeasyVersion: 1.634.2
+speakeasyVersion: 1.635.1
 sources:
     Gr4vy:
         sourceNamespace: gr-4-vy
@@ -13,7 +13,7 @@ sources:
         sourceBlobDigest: sha256:7c287710c330cff055c4fbc297a2c99a98c6d798bbb3f93ee62c1b9f1f79e28d
         tags:
             - latest
-            - speakeasy-sdk-regen-1759768973
+            - speakeasy-sdk-regen-1759796850
             - 1.0.0
 targets:
     go:
@@ -22,7 +22,7 @@ targets:
         sourceRevisionDigest: sha256:2d241bab0a20166852678e8e36e454febc942461f80bf35114e77638bf7b2f18
         sourceBlobDigest: sha256:7c287710c330cff055c4fbc297a2c99a98c6d798bbb3f93ee62c1b9f1f79e28d
         codeSamplesNamespace: openapi-go-code-samples
-        codeSamplesRevisionDigest: sha256:28bd0fc7695ae8d6eb28ffe96848035def7d78198df5649c365caaf7cbad0dc2
+        codeSamplesRevisionDigest: sha256:36cbfbf5d7b13e552576ec62124947b56c2c7407abbf729c5c595abdbbabaeec
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest

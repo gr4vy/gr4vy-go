@@ -3,10 +3,10 @@ id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
   docChecksum: 7ca1278e8eadb3bc6225ff999fd19945
   docVersion: 1.0.0
-  speakeasyVersion: 1.634.2
-  generationVersion: 2.721.3
-  releaseVersion: 1.6.2
-  configChecksum: 3f8b5b41927275d8f591fb88502c2310
+  speakeasyVersion: 1.635.1
+  generationVersion: 2.722.2
+  releaseVersion: 1.6.3
+  configChecksum: 179b8778de1dddb996042d2d266e9d46
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -27,7 +27,7 @@ features:
     ignores: 2.81.1
     intellisenseMarkdownSupport: 0.1.0
     nameOverrides: 2.81.2
-    nullables: 0.2.0
+    nullables: 0.2.1
     openEnums: 0.1.0
     pagination: 2.82.4
     responseFormat: 0.1.2
