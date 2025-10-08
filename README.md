@@ -240,9 +240,6 @@ func main() {
 <details open>
 <summary>Available methods</summary>
 
-### [AccountUpdater](docs/sdks/accountupdater/README.md)
-
-
 #### [AccountUpdater.Jobs](docs/sdks/jobs/README.md)
 
 * [Create](docs/sdks/jobs/README.md#create) - Create account updater job
@@ -315,7 +312,6 @@ func main() {
 #### [GiftCards.Balances](docs/sdks/balances/README.md)
 
 * [List](docs/sdks/balances/README.md#list) - List gift card balances
-
 
 ### [MerchantAccounts](docs/sdks/merchantaccounts/README.md)
 
