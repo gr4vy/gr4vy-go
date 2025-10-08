@@ -2,16 +2,18 @@
 
 package components
 
-// SubscriptionFrequencyUnit - Indicates the frequency unit for the subscription. Allowed values are: `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, `SEMI_ANNUAL`, and `ANNUAL`.
+// SubscriptionFrequencyUnit - Indicates the frequency unit for the subscription. Allowed values are: `DAY`, `WEEK`, `MONTH`, `BI_MONTHLY`, `QUARTER`, `SEMI_ANNUALLY`, `YEAR`, `ONDEMAND`.
 type SubscriptionFrequencyUnit string
 
 const (
-	SubscriptionFrequencyUnitDaily      SubscriptionFrequencyUnit = "DAILY"
-	SubscriptionFrequencyUnitWeekly     SubscriptionFrequencyUnit = "WEEKLY"
-	SubscriptionFrequencyUnitMonthly    SubscriptionFrequencyUnit = "MONTHLY"
-	SubscriptionFrequencyUnitQuarterly  SubscriptionFrequencyUnit = "QUARTERLY"
-	SubscriptionFrequencyUnitSemiAnnual SubscriptionFrequencyUnit = "SEMI_ANNUAL"
-	SubscriptionFrequencyUnitAnnual     SubscriptionFrequencyUnit = "ANNUAL"
+	SubscriptionFrequencyUnitMonth        SubscriptionFrequencyUnit = "MONTH"
+	SubscriptionFrequencyUnitWeek         SubscriptionFrequencyUnit = "WEEK"
+	SubscriptionFrequencyUnitBiMonthly    SubscriptionFrequencyUnit = "BI_MONTHLY"
+	SubscriptionFrequencyUnitOndemand     SubscriptionFrequencyUnit = "ONDEMAND"
+	SubscriptionFrequencyUnitQuarter      SubscriptionFrequencyUnit = "QUARTER"
+	SubscriptionFrequencyUnitYear         SubscriptionFrequencyUnit = "YEAR"
+	SubscriptionFrequencyUnitSemiAnnually SubscriptionFrequencyUnit = "SEMI_ANNUALLY"
+	SubscriptionFrequencyUnitDay          SubscriptionFrequencyUnit = "DAY"
 )
 
 func (e SubscriptionFrequencyUnit) ToPointer() *SubscriptionFrequencyUnit {
@@ -19,7 +21,7 @@ func (e SubscriptionFrequencyUnit) ToPointer() *SubscriptionFrequencyUnit {
 }
 
 type DlocalUPIRecurringInfoOptions struct {
-	// Indicates the frequency unit for the subscription. Allowed values are: `DAILY`, `WEEKLY`, `MONTHLY`, `QUARTERLY`, `SEMI_ANNUAL`, and `ANNUAL`.
+	// Indicates the frequency unit for the subscription. Allowed values are: `DAY`, `WEEK`, `MONTH`, `BI_MONTHLY`, `QUARTER`, `SEMI_ANNUALLY`, `YEAR`, `ONDEMAND`.
 	SubscriptionFrequencyUnit SubscriptionFrequencyUnit `json:"subscription_frequency_unit"`
 	// Indicates the frequency for the subscription.
 	SubscriptionFrequency int64 `json:"subscription_frequency"`

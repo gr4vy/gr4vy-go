@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 89e69d11b51ea74dd6e6a8ab31607ee4
+  docChecksum: 4f8b89c5b5ffa168e671d655a8271c68
   docVersion: 1.0.0
   speakeasyVersion: 1.636.1
   generationVersion: 2.723.4
-  releaseVersion: 1.6.4
-  configChecksum: 0cf6592043e04d24ae27a80fa9887cfd
+  releaseVersion: 1.6.5
+  configChecksum: b75bb265594210a4595295948aa9eb38
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -4318,12 +4318,3 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes Detected:
-  * `Gr4vy.Transactions.Create()`:  `response` **Changed**
-  * `Gr4vy.Transactions.Get()`:  `response` **Changed**
-  * `Gr4vy.Transactions.Update()`:  `response` **Changed**
-  * `Gr4vy.Transactions.Capture()`:  `response.[transaction]` **Changed**
-  * `Gr4vy.Transactions.Void()`:  `response.[transaction]` **Changed**
-  * `Gr4vy.Transactions.Cancel()`:  `response.Transaction` **Changed**
-  * `Gr4vy.Transactions.Sync()`:  `response` **Changed**
