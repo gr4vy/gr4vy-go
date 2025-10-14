@@ -12,6 +12,7 @@ const (
 	ModeCheckoutSession Mode = "checkout-session"
 	ModeClickToPay      Mode = "click-to-pay"
 	ModeGiftCard        Mode = "gift-card"
+	ModeBank            Mode = "bank"
 )
 
 func (e Mode) ToPointer() *Mode {

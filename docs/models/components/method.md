@@ -14,6 +14,7 @@
 | `MethodArcuspaynetwork`  | arcuspaynetwork          |
 | `MethodBacs`             | bacs                     |
 | `MethodBancontact`       | bancontact               |
+| `MethodBank`             | bank                     |
 | `MethodBanked`           | banked                   |
 | `MethodBcp`              | bcp                      |
 | `MethodBecs`             | becs                     |
@@ -79,6 +80,7 @@
 | `MethodPayvalida`        | payvalida                |
 | `MethodPicpay`           | picpay                   |
 | `MethodPix`              | pix                      |
+| `MethodPlaid`            | plaid                    |
 | `MethodPse`              | pse                      |
 | `MethodRabbitlinepay`    | rabbitlinepay            |
 | `MethodRazorpay`         | razorpay                 |

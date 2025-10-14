@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 4f8b89c5b5ffa168e671d655a8271c68
+  docChecksum: 0b236dc879fbbb585339bc8fc3fff499
   docVersion: 1.0.0
-  speakeasyVersion: 1.636.1
-  generationVersion: 2.723.4
-  releaseVersion: 1.6.5
-  configChecksum: b75bb265594210a4595295948aa9eb38
+  speakeasyVersion: 1.636.3
+  generationVersion: 2.723.11
+  releaseVersion: 1.6.6
+  configChecksum: fea0114718909270621d8addc358b0ca
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -555,7 +555,6 @@ generatedFiles:
   - docs/models/components/item.md
   - docs/models/components/latitudeoptions.md
   - docs/models/components/loc.md
-  - docs/models/components/locale.md
   - docs/models/components/mattildatapioptions.md
   - docs/models/components/merchantaccount.md
   - docs/models/components/merchantaccountcreate.md
@@ -4318,3 +4317,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.Locale` **Changed** **Breaking** :warning:\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n* `Gr4vy.Payment-Services.List()`: \n  *  `request.Request.Method` **Changed**\n"

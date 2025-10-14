@@ -7,20 +7,6 @@ import (
 	"time"
 )
 
-type Locale string
-
-const (
-	LocaleEn   Locale = "en"
-	LocaleEnGb Locale = "en-GB"
-	LocalePt   Locale = "pt"
-	LocalePtBr Locale = "pt-BR"
-	LocaleEs   Locale = "es"
-)
-
-func (e Locale) ToPointer() *Locale {
-	return &e
-}
-
 type PaymentLinkCreate struct {
 	// The guest buyer for the payment link.
 	Buyer *GuestBuyerInput `json:"buyer,omitempty"`
@@ -33,7 +19,7 @@ type PaymentLinkCreate struct {
 	// The statement descriptor for the payment link.
 	StatementDescriptor *StatementDescriptor `json:"statement_descriptor,omitempty"`
 	// The locale for the payment link.
-	Locale *Locale `json:"locale,omitempty"`
+	Locale *string `json:"locale,omitempty"`
 	// The merchant's display name.
 	MerchantName *string `json:"merchant_name,omitempty"`
 	// The merchant's website URL.
@@ -111,7 +97,7 @@ func (p *PaymentLinkCreate) GetStatementDescriptor() *StatementDescriptor {
 	return p.StatementDescriptor
 }
 
-func (p *PaymentLinkCreate) GetLocale() *Locale {
+func (p *PaymentLinkCreate) GetLocale() *string {
 	if p == nil {
 		return nil
 	}
