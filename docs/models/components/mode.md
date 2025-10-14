@@ -12,3 +12,4 @@
 | `ModeCheckoutSession` | checkout-session      |
 | `ModeClickToPay`      | click-to-pay          |
 | `ModeGiftCard`        | gift-card             |
+| `ModeBank`            | bank                  |
