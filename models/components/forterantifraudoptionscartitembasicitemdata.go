@@ -2,23 +2,23 @@
 
 package components
 
-type Type string
+type ForterAntiFraudOptionsCartItemBasicItemDataType string
 
 const (
-	TypeTangible    Type = "TANGIBLE"
-	TypeNonTangible Type = "NON_TANGIBLE"
+	ForterAntiFraudOptionsCartItemBasicItemDataTypeTangible    ForterAntiFraudOptionsCartItemBasicItemDataType = "TANGIBLE"
+	ForterAntiFraudOptionsCartItemBasicItemDataTypeNonTangible ForterAntiFraudOptionsCartItemBasicItemDataType = "NON_TANGIBLE"
 )
 
-func (e Type) ToPointer() *Type {
+func (e ForterAntiFraudOptionsCartItemBasicItemDataType) ToPointer() *ForterAntiFraudOptionsCartItemBasicItemDataType {
 	return &e
 }
 
 type ForterAntiFraudOptionsCartItemBasicItemData struct {
 	// Indicates whether the item is a physical good or a service/digital item.
-	Type *Type `json:"type,omitempty"`
+	Type *ForterAntiFraudOptionsCartItemBasicItemDataType `json:"type,omitempty"`
 }
 
-func (f *ForterAntiFraudOptionsCartItemBasicItemData) GetType() *Type {
+func (f *ForterAntiFraudOptionsCartItemBasicItemData) GetType() *ForterAntiFraudOptionsCartItemBasicItemDataType {
 	if f == nil {
 		return nil
 	}
