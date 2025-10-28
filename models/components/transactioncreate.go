@@ -467,6 +467,8 @@ type TransactionCreate struct {
 	DutyAmount *int64 `json:"duty_amount,omitempty"`
 	// Total shipping amount.
 	ShippingAmount *int64 `json:"shipping_amount,omitempty"`
+	// Defines the client where the session for this transaction is going to be used. Please refer to the connections documentation for more guidance.
+	IntegrationClient *IntegrationClient `json:"integration_client,omitempty"`
 }
 
 func (t TransactionCreate) MarshalJSON() ([]byte, error) {
@@ -737,4 +739,11 @@ func (t *TransactionCreate) GetShippingAmount() *int64 {
 		return nil
 	}
 	return t.ShippingAmount
+}
+
+func (t *TransactionCreate) GetIntegrationClient() *IntegrationClient {
+	if t == nil {
+		return nil
+	}
+	return t.IntegrationClient
 }
