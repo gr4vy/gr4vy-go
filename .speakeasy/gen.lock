@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 918819806bcac429ce3a272b9356fa97
+  docChecksum: 085ce9a028a2218db87b4b1627c55769
   docVersion: 1.0.0
-  speakeasyVersion: 1.638.0
-  generationVersion: 2.728.0
-  releaseVersion: 1.7.1
-  configChecksum: fe5f27ee81dbe2be61bde001c70b489a
+  speakeasyVersion: 1.640.0
+  generationVersion: 2.730.5
+  releaseVersion: 1.8.0
+  configChecksum: 07b8c50d8af36db8fa64a6ed7f155277
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -34,7 +34,7 @@ features:
     retries: 2.84.2
     sdkHooks: 0.2.0
     serverIDs: 2.81.1
-    unions: 2.86.0
+    unions: 2.87.0
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -171,6 +171,7 @@ generatedFiles:
   - /models/components/guestbuyerinput.go
   - /models/components/guestbuyeroutput.go
   - /models/components/instrumenttype.go
+  - /models/components/integrationclient.go
   - /models/components/latitudeoptions.go
   - /models/components/mattildatapioptions.go
   - /models/components/merchantaccount.go
@@ -552,6 +553,7 @@ generatedFiles:
   - docs/models/components/guestbuyerinput.md
   - docs/models/components/guestbuyeroutput.md
   - docs/models/components/instrumenttype.md
+  - docs/models/components/integrationclient.md
   - docs/models/components/item.md
   - docs/models/components/latitudeoptions.md
   - docs/models/components/loc.md
@@ -3029,7 +3031,7 @@ examples:
           payment_service_definition_id: "adyen-ideal"
       responses:
         "200":
-          application/json: {"id": "adyen-ideal", "type": "payment-service-definition", "display_name": "iDEAL", "method": "multibanco", "fields": [{"key": "private_api_key", "display_name": "Private API key", "required": true, "format": "boolean", "secret": true}], "reporting_fields": [{"key": "private_api_key", "display_name": "Private API key", "required": true, "format": "multiline", "secret": true}, {"key": "private_api_key", "display_name": "Private API key", "required": true, "format": "multiline", "secret": true}], "supported_currencies": ["USD", "GBP", "EUR", "AUD"], "supported_countries": ["US"], "mode": "card", "supported_features": {"key": true, "key1": false}, "required_checkout_fields": [{"required_fields": ["address.line1", "address.country", "address.city", "address.postal_code"]}, {"required_fields": ["address.line1", "address.country", "address.city", "address.postal_code"]}, {"required_fields": ["address.line1", "address.country", "address.city", "address.postal_code"]}], "configuration": {"approval_ui_target": "any", "approval_ui_height": "100px", "approval_ui_width": "100px", "cart_items_limit": 100, "cart_items_required": true, "cart_items_should_match_amount": true}}
+          application/json: {"id": "adyen-ideal", "type": "payment-service-definition", "display_name": "iDEAL", "method": "multibanco", "fields": [{"key": "private_api_key", "display_name": "Private API key", "required": true, "format": "boolean", "secret": true}], "reporting_fields": [{"key": "private_api_key", "display_name": "Private API key", "required": true, "format": "multiline", "secret": true}, {"key": "private_api_key", "display_name": "Private API key", "required": true, "format": "multiline", "secret": true}], "supported_currencies": ["USD", "GBP", "EUR", "AUD"], "supported_countries": ["US"], "mode": "card", "supported_features": {"key": true, "key1": false}, "required_checkout_fields": [{"required_fields": ["address.line1", "address.country", "address.city", "address.postal_code"]}, {"required_fields": ["address.line1", "address.country", "address.city", "address.postal_code"]}, {"required_fields": ["address.line1", "address.country", "address.city", "address.postal_code"]}], "configuration": {"approval_ui_target": "any", "approval_ui_height": "100px", "approval_ui_width": "100px", "cart_items_limit": 100, "cart_items_required": true, "cart_items_should_match_amount": true}, "supported_integration_clients": ["redirect"]}
         "400":
           application/json: {"type": "error", "code": "bad_request", "status": 400, "message": "Request failed validation"}
         "401":
@@ -4317,3 +4319,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.IntegrationClient` **Added**\n  *  `response.SessionToken` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.SessionToken` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.SessionToken` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.[transactionCapture].Transaction.SessionToken` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.[transaction].SessionToken` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.SessionToken` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.SessionToken` **Added**\n* `Gr4vy.Payment-Service-Definitions.List()`:  `response.Items.[].SupportedIntegrationClients` **Added**\n* `Gr4vy.Payment-Service-Definitions.Get()`:  `response.SupportedIntegrationClients` **Added**\n"

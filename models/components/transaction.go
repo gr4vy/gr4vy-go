@@ -125,6 +125,8 @@ type Transaction struct {
 	MerchantAdviceCode *string `json:"merchant_advice_code,omitempty"`
 	// The number of installments for this transaction, if applicable.
 	InstallmentCount *int64 `json:"installment_count,omitempty"`
+	// A session token that can be used to fetch session data for direct client integrations.
+	SessionToken *string `json:"session_token,omitempty"`
 	// The sales tax amount for this transaction, represented as a monetary amount in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for `$12.99`
 	TaxAmount *int64 `json:"tax_amount,omitempty"`
 	// Merchant tax ID (for example, EIN or VAT number).
@@ -560,6 +562,13 @@ func (t *Transaction) GetInstallmentCount() *int64 {
 		return nil
 	}
 	return t.InstallmentCount
+}
+
+func (t *Transaction) GetSessionToken() *string {
+	if t == nil {
+		return nil
+	}
+	return t.SessionToken
 }
 
 func (t *Transaction) GetTaxAmount() *int64 {

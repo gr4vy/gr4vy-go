@@ -31,6 +31,8 @@ type PaymentServiceDefinition struct {
 	// A list of condition that define when some fields must be provided with a transaction request.
 	RequiredCheckoutFields []RequiredCheckoutFields    `json:"required_checkout_fields"`
 	Configuration          PaymentServiceConfiguration `json:"configuration"`
+	// List of supported integration clients. Defaults to redirect for most redirect connectors.
+	SupportedIntegrationClients []IntegrationClient `json:"supported_integration_clients"`
 }
 
 func (p PaymentServiceDefinition) MarshalJSON() ([]byte, error) {
@@ -130,4 +132,11 @@ func (p *PaymentServiceDefinition) GetConfiguration() PaymentServiceConfiguratio
 		return PaymentServiceConfiguration{}
 	}
 	return p.Configuration
+}
+
+func (p *PaymentServiceDefinition) GetSupportedIntegrationClients() []IntegrationClient {
+	if p == nil {
+		return nil
+	}
+	return p.SupportedIntegrationClients
 }
