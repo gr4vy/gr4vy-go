@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 085ce9a028a2218db87b4b1627c55769
+  docChecksum: 6bf668ec30ae80aa2267f0399e3cf6a2
   docVersion: 1.0.0
-  speakeasyVersion: 1.640.0
-  generationVersion: 2.730.5
-  releaseVersion: 1.8.0
-  configChecksum: 07b8c50d8af36db8fa64a6ed7f155277
+  speakeasyVersion: 1.642.0
+  generationVersion: 2.731.4
+  releaseVersion: 1.8.1
+  configChecksum: 459ea04e4f8b48ec77e8cb0b743fd7a8
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -231,6 +231,9 @@ generatedFiles:
   - /models/components/payoutsummaries.go
   - /models/components/payoutsummary.go
   - /models/components/paypaloptions.go
+  - /models/components/paypalshippingoptions.go
+  - /models/components/paypalshippingoptionsitem.go
+  - /models/components/paypalshippingoptionsitemamount.go
   - /models/components/powertranzoptions.go
   - /models/components/producttype.go
   - /models/components/recipient.go
@@ -517,6 +520,7 @@ generatedFiles:
   - docs/models/components/forterantifraudoptions.md
   - docs/models/components/forterantifraudoptionscartitem.md
   - docs/models/components/forterantifraudoptionscartitembasicitemdata.md
+  - docs/models/components/forterantifraudoptionscartitembasicitemdatatype.md
   - docs/models/components/forterantifraudoptionscartitembeneficiary.md
   - docs/models/components/forterantifraudoptionscartitembeneficiaryaddress.md
   - docs/models/components/forterantifraudoptionscartitembeneficiarycomments.md
@@ -617,6 +621,10 @@ generatedFiles:
   - docs/models/components/payoutsummaries.md
   - docs/models/components/payoutsummary.md
   - docs/models/components/paypaloptions.md
+  - docs/models/components/paypalshippingoptions.md
+  - docs/models/components/paypalshippingoptionsitem.md
+  - docs/models/components/paypalshippingoptionsitemamount.md
+  - docs/models/components/paypalshippingoptionsitemtype.md
   - docs/models/components/powertranzoptions.md
   - docs/models/components/producttype.md
   - docs/models/components/recipient.md
@@ -700,7 +708,6 @@ generatedFiles:
   - docs/models/components/travelhubcustomdata.md
   - docs/models/components/travelhuboptions.md
   - docs/models/components/trustlyoptions.md
-  - docs/models/components/type.md
   - docs/models/components/userdevice.md
   - docs/models/components/userstatus.md
   - docs/models/components/validationerror.md
@@ -4319,4 +4326,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.IntegrationClient` **Added**\n  *  `response.SessionToken` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.SessionToken` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.SessionToken` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.[transactionCapture].Transaction.SessionToken` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.[transaction].SessionToken` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.SessionToken` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.SessionToken` **Added**\n* `Gr4vy.Payment-Service-Definitions.List()`:  `response.Items.[].SupportedIntegrationClients` **Added**\n* `Gr4vy.Payment-Service-Definitions.Get()`:  `response.SupportedIntegrationClients` **Added**\n"
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.Paypal-Paypal.Shipping` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.Paypal-Paypal.Shipping` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.Paypal-Paypal.Shipping` **Added**\n"
