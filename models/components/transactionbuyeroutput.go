@@ -7,7 +7,7 @@ import (
 	"github.com/gr4vy/gr4vy-go/types"
 )
 
-type TransactionBuyer struct {
+type TransactionBuyerOutput struct {
 	// Always `buyer`.
 	type_ *string `const:"buyer" json:"type"`
 	// The ID for the buyer.
@@ -22,50 +22,50 @@ type TransactionBuyer struct {
 	AccountNumber *string `json:"account_number,omitempty"`
 }
 
-func (t TransactionBuyer) MarshalJSON() ([]byte, error) {
+func (t TransactionBuyerOutput) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(t, "", false)
 }
 
-func (t *TransactionBuyer) UnmarshalJSON(data []byte) error {
+func (t *TransactionBuyerOutput) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *TransactionBuyer) GetType() *string {
+func (t *TransactionBuyerOutput) GetType() *string {
 	return types.Pointer("buyer")
 }
 
-func (t *TransactionBuyer) GetID() *string {
+func (t *TransactionBuyerOutput) GetID() *string {
 	if t == nil {
 		return nil
 	}
 	return t.ID
 }
 
-func (t *TransactionBuyer) GetDisplayName() *string {
+func (t *TransactionBuyerOutput) GetDisplayName() *string {
 	if t == nil {
 		return nil
 	}
 	return t.DisplayName
 }
 
-func (t *TransactionBuyer) GetExternalIdentifier() *string {
+func (t *TransactionBuyerOutput) GetExternalIdentifier() *string {
 	if t == nil {
 		return nil
 	}
 	return t.ExternalIdentifier
 }
 
-func (t *TransactionBuyer) GetBillingDetails() *BillingDetailsOutput {
+func (t *TransactionBuyerOutput) GetBillingDetails() *BillingDetailsOutput {
 	if t == nil {
 		return nil
 	}
 	return t.BillingDetails
 }
 
-func (t *TransactionBuyer) GetAccountNumber() *string {
+func (t *TransactionBuyerOutput) GetAccountNumber() *string {
 	if t == nil {
 		return nil
 	}

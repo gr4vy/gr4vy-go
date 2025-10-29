@@ -4,12 +4,12 @@ package components
 
 type PaymentOptions struct {
 	// A list of items returned for this request.
-	Items []PaymentOption `json:"items"`
+	Items []PaymentOptionOutput `json:"items"`
 }
 
-func (p *PaymentOptions) GetItems() []PaymentOption {
+func (p *PaymentOptions) GetItems() []PaymentOptionOutput {
 	if p == nil {
-		return []PaymentOption{}
+		return []PaymentOptionOutput{}
 	}
 	return p.Items
 }

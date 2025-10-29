@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-type AuditLogEntry struct {
+type AuditLogEntryOutput struct {
 	// Always `audit-log`.
 	type_ *string `const:"audit-log" json:"type"`
 	// The ID for the audit log entry.
@@ -22,57 +22,57 @@ type AuditLogEntry struct {
 	Timestamp time.Time `json:"timestamp"`
 }
 
-func (a AuditLogEntry) MarshalJSON() ([]byte, error) {
+func (a AuditLogEntryOutput) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(a, "", false)
 }
 
-func (a *AuditLogEntry) UnmarshalJSON(data []byte) error {
+func (a *AuditLogEntryOutput) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"resource", "action", "user", "timestamp"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (a *AuditLogEntry) GetType() *string {
+func (a *AuditLogEntryOutput) GetType() *string {
 	return types.Pointer("audit-log")
 }
 
-func (a *AuditLogEntry) GetID() *string {
+func (a *AuditLogEntryOutput) GetID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.ID
 }
 
-func (a *AuditLogEntry) GetMerchantAccountID() *string {
+func (a *AuditLogEntryOutput) GetMerchantAccountID() *string {
 	if a == nil {
 		return nil
 	}
 	return a.MerchantAccountID
 }
 
-func (a *AuditLogEntry) GetResource() AuditLogEntryResource {
+func (a *AuditLogEntryOutput) GetResource() AuditLogEntryResource {
 	if a == nil {
 		return AuditLogEntryResource{}
 	}
 	return a.Resource
 }
 
-func (a *AuditLogEntry) GetAction() AuditLogAction {
+func (a *AuditLogEntryOutput) GetAction() AuditLogAction {
 	if a == nil {
 		return AuditLogAction("")
 	}
 	return a.Action
 }
 
-func (a *AuditLogEntry) GetUser() AuditLogEntryUser {
+func (a *AuditLogEntryOutput) GetUser() AuditLogEntryUser {
 	if a == nil {
 		return AuditLogEntryUser{}
 	}
 	return a.User
 }
 
-func (a *AuditLogEntry) GetTimestamp() time.Time {
+func (a *AuditLogEntryOutput) GetTimestamp() time.Time {
 	if a == nil {
 		return time.Time{}
 	}

@@ -8,10 +8,10 @@ import (
 	"time"
 )
 
-// PaymentMethodSummary - Payment Method
+// PaymentMethodSummaryOutput - Payment Method
 //
 // A summary of a payment method.
-type PaymentMethodSummary struct {
+type PaymentMethodSummaryOutput struct {
 	// Always `payment-method`.
 	type_ *string `const:"payment-method" json:"type"`
 	// The optional URL that the buyer needs to be redirected to to further authorize their payment.
@@ -53,148 +53,148 @@ type PaymentMethodSummary struct {
 	UsageCount int64 `json:"usage_count"`
 }
 
-func (p PaymentMethodSummary) MarshalJSON() ([]byte, error) {
+func (p PaymentMethodSummaryOutput) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(p, "", false)
 }
 
-func (p *PaymentMethodSummary) UnmarshalJSON(data []byte) error {
+func (p *PaymentMethodSummaryOutput) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"method", "id", "merchant_account_id", "cit_usage_count", "has_replacement", "usage_count"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (p *PaymentMethodSummary) GetType() *string {
+func (p *PaymentMethodSummaryOutput) GetType() *string {
 	return types.Pointer("payment-method")
 }
 
-func (p *PaymentMethodSummary) GetApprovalURL() *string {
+func (p *PaymentMethodSummaryOutput) GetApprovalURL() *string {
 	if p == nil {
 		return nil
 	}
 	return p.ApprovalURL
 }
 
-func (p *PaymentMethodSummary) GetCountry() *string {
+func (p *PaymentMethodSummaryOutput) GetCountry() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Country
 }
 
-func (p *PaymentMethodSummary) GetCurrency() *string {
+func (p *PaymentMethodSummaryOutput) GetCurrency() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Currency
 }
 
-func (p *PaymentMethodSummary) GetDetails() *PaymentMethodDetailsCard {
+func (p *PaymentMethodSummaryOutput) GetDetails() *PaymentMethodDetailsCard {
 	if p == nil {
 		return nil
 	}
 	return p.Details
 }
 
-func (p *PaymentMethodSummary) GetExpirationDate() *string {
+func (p *PaymentMethodSummaryOutput) GetExpirationDate() *string {
 	if p == nil {
 		return nil
 	}
 	return p.ExpirationDate
 }
 
-func (p *PaymentMethodSummary) GetFingerprint() *string {
+func (p *PaymentMethodSummaryOutput) GetFingerprint() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Fingerprint
 }
 
-func (p *PaymentMethodSummary) GetLabel() *string {
+func (p *PaymentMethodSummaryOutput) GetLabel() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Label
 }
 
-func (p *PaymentMethodSummary) GetLastReplacedAt() *time.Time {
+func (p *PaymentMethodSummaryOutput) GetLastReplacedAt() *time.Time {
 	if p == nil {
 		return nil
 	}
 	return p.LastReplacedAt
 }
 
-func (p *PaymentMethodSummary) GetMethod() Method {
+func (p *PaymentMethodSummaryOutput) GetMethod() Method {
 	if p == nil {
 		return Method("")
 	}
 	return p.Method
 }
 
-func (p *PaymentMethodSummary) GetMode() *Mode {
+func (p *PaymentMethodSummaryOutput) GetMode() *Mode {
 	if p == nil {
 		return nil
 	}
 	return p.Mode
 }
 
-func (p *PaymentMethodSummary) GetScheme() *CardScheme {
+func (p *PaymentMethodSummaryOutput) GetScheme() *CardScheme {
 	if p == nil {
 		return nil
 	}
 	return p.Scheme
 }
 
-func (p *PaymentMethodSummary) GetID() string {
+func (p *PaymentMethodSummaryOutput) GetID() string {
 	if p == nil {
 		return ""
 	}
 	return p.ID
 }
 
-func (p *PaymentMethodSummary) GetMerchantAccountID() string {
+func (p *PaymentMethodSummaryOutput) GetMerchantAccountID() string {
 	if p == nil {
 		return ""
 	}
 	return p.MerchantAccountID
 }
 
-func (p *PaymentMethodSummary) GetAdditionalSchemes() []CardScheme {
+func (p *PaymentMethodSummaryOutput) GetAdditionalSchemes() []CardScheme {
 	if p == nil {
 		return nil
 	}
 	return p.AdditionalSchemes
 }
 
-func (p *PaymentMethodSummary) GetCitLastUsedAt() *time.Time {
+func (p *PaymentMethodSummaryOutput) GetCitLastUsedAt() *time.Time {
 	if p == nil {
 		return nil
 	}
 	return p.CitLastUsedAt
 }
 
-func (p *PaymentMethodSummary) GetCitUsageCount() int64 {
+func (p *PaymentMethodSummaryOutput) GetCitUsageCount() int64 {
 	if p == nil {
 		return 0
 	}
 	return p.CitUsageCount
 }
 
-func (p *PaymentMethodSummary) GetHasReplacement() bool {
+func (p *PaymentMethodSummaryOutput) GetHasReplacement() bool {
 	if p == nil {
 		return false
 	}
 	return p.HasReplacement
 }
 
-func (p *PaymentMethodSummary) GetLastUsedAt() *time.Time {
+func (p *PaymentMethodSummaryOutput) GetLastUsedAt() *time.Time {
 	if p == nil {
 		return nil
 	}
 	return p.LastUsedAt
 }
 
-func (p *PaymentMethodSummary) GetUsageCount() int64 {
+func (p *PaymentMethodSummaryOutput) GetUsageCount() int64 {
 	if p == nil {
 		return 0
 	}

@@ -58,7 +58,7 @@ type PaymentLink struct {
 	UpdatedAt time.Time         `json:"updated_at"`
 	Status    PaymentLinkStatus `json:"status"`
 	// The buyer associated with the payment link.
-	Buyer *TransactionBuyer `json:"buyer,omitempty"`
+	Buyer *TransactionBuyerOutput `json:"buyer,omitempty"`
 	// The shipping details for the payment link.
 	ShippingDetails *ShippingDetails `json:"shipping_details,omitempty"`
 	// The connection options for the payment link.
@@ -248,7 +248,7 @@ func (p *PaymentLink) GetStatus() PaymentLinkStatus {
 	return p.Status
 }
 
-func (p *PaymentLink) GetBuyer() *TransactionBuyer {
+func (p *PaymentLink) GetBuyer() *TransactionBuyerOutput {
 	if p == nil {
 		return nil
 	}

@@ -68,7 +68,7 @@ func (e Name) ToPointer() *Name {
 	return &e
 }
 
-type TransactionEvent struct {
+type TransactionEventOutput struct {
 	// Always `transaction-event`.
 	type_ *string `const:"transaction-event" json:"type"`
 	// The ID for the event.
@@ -80,43 +80,43 @@ type TransactionEvent struct {
 	Context   map[string]any `json:"context"`
 }
 
-func (t TransactionEvent) MarshalJSON() ([]byte, error) {
+func (t TransactionEventOutput) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(t, "", false)
 }
 
-func (t *TransactionEvent) UnmarshalJSON(data []byte) error {
+func (t *TransactionEventOutput) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "name", "created_at", "context"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *TransactionEvent) GetType() *string {
+func (t *TransactionEventOutput) GetType() *string {
 	return types.Pointer("transaction-event")
 }
 
-func (t *TransactionEvent) GetID() string {
+func (t *TransactionEventOutput) GetID() string {
 	if t == nil {
 		return ""
 	}
 	return t.ID
 }
 
-func (t *TransactionEvent) GetName() Name {
+func (t *TransactionEventOutput) GetName() Name {
 	if t == nil {
 		return Name("")
 	}
 	return t.Name
 }
 
-func (t *TransactionEvent) GetCreatedAt() time.Time {
+func (t *TransactionEventOutput) GetCreatedAt() time.Time {
 	if t == nil {
 		return time.Time{}
 	}
 	return t.CreatedAt
 }
 
-func (t *TransactionEvent) GetContext() map[string]any {
+func (t *TransactionEventOutput) GetContext() map[string]any {
 	if t == nil {
 		return map[string]any{}
 	}

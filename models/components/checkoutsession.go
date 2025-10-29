@@ -24,7 +24,7 @@ type CheckoutSession struct {
 	// The date and time when this checkout session expires.
 	ExpiresAt time.Time `json:"expires_at"`
 	// Information about the payment method stored on the checkout session.
-	PaymentMethod *CheckoutSessionPaymentMethod `json:"payment_method,omitempty"`
+	PaymentMethod *CheckoutSessionPaymentMethodOutput `json:"payment_method,omitempty"`
 }
 
 func (c CheckoutSession) MarshalJSON() ([]byte, error) {
@@ -84,7 +84,7 @@ func (c *CheckoutSession) GetExpiresAt() time.Time {
 	return c.ExpiresAt
 }
 
-func (c *CheckoutSession) GetPaymentMethod() *CheckoutSessionPaymentMethod {
+func (c *CheckoutSession) GetPaymentMethod() *CheckoutSessionPaymentMethodOutput {
 	if c == nil {
 		return nil
 	}

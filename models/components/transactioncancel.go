@@ -18,7 +18,7 @@ type TransactionCancel struct {
 	// This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
 	RawResponseDescription *string `json:"raw_response_description"`
 	// A full transaction resource.
-	Transaction Transaction `json:"transaction"`
+	Transaction TransactionOutput `json:"transaction"`
 }
 
 func (t TransactionCancel) MarshalJSON() ([]byte, error) {
@@ -64,9 +64,9 @@ func (t *TransactionCancel) GetRawResponseDescription() *string {
 	return t.RawResponseDescription
 }
 
-func (t *TransactionCancel) GetTransaction() Transaction {
+func (t *TransactionCancel) GetTransaction() TransactionOutput {
 	if t == nil {
-		return Transaction{}
+		return TransactionOutput{}
 	}
 	return t.Transaction
 }
