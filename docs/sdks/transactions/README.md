@@ -224,7 +224,7 @@ func main() {
 
 ### Response
 
-**[*components.Transaction](../../models/components/transaction.md), error**
+**[*components.TransactionOutput](../../models/components/transactionoutput.md), error**
 
 ### Errors
 
@@ -290,7 +290,7 @@ func main() {
 
 ### Response
 
-**[*components.Transaction](../../models/components/transaction.md), error**
+**[*components.TransactionOutput](../../models/components/transactionoutput.md), error**
 
 ### Errors
 
@@ -358,7 +358,7 @@ func main() {
 
 ### Response
 
-**[*components.Transaction](../../models/components/transaction.md), error**
+**[*components.TransactionOutput](../../models/components/transactionoutput.md), error**
 
 ### Errors
 
@@ -626,7 +626,7 @@ func main() {
 
 ### Response
 
-**[*components.Transaction](../../models/components/transaction.md), error**
+**[*components.TransactionOutput](../../models/components/transactionoutput.md), error**
 
 ### Errors
 

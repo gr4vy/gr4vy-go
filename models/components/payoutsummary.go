@@ -19,7 +19,7 @@ type PayoutSummary struct {
 	// The monetary amount for this payout, in the smallest currency unit for the given currency, for example `1299` cents to create an authorization for $12.99.
 	Amount int64 `json:"amount"`
 	// The buyer used for this payout.
-	Buyer *TransactionBuyer `json:"buyer,omitempty"`
+	Buyer *TransactionBuyerOutput `json:"buyer,omitempty"`
 	// The type of payout to process.
 	Category *PayoutCategory `json:"category,omitempty"`
 	// The date this payout was created at.
@@ -31,9 +31,9 @@ type PayoutSummary struct {
 	// The merchant details associated to this payout.
 	Merchant *PayoutMerchantSummary `json:"merchant,omitempty"`
 	// The ID of the merchant account this payout was created for.
-	MerchantAccountID *string                  `json:"merchant_account_id,omitempty"`
-	PaymentMethod     TransactionPaymentMethod `json:"payment_method"`
-	PaymentService    PayoutPaymentService     `json:"payment_service"`
+	MerchantAccountID *string                        `json:"merchant_account_id,omitempty"`
+	PaymentMethod     TransactionPaymentMethodOutput `json:"payment_method"`
+	PaymentService    PayoutPaymentService           `json:"payment_service"`
 	// The ID of the payout in the underlying payment service.
 	PaymentServicePayoutID *string      `json:"payment_service_payout_id,omitempty"`
 	Status                 PayoutStatus `json:"status"`
@@ -70,7 +70,7 @@ func (p *PayoutSummary) GetAmount() int64 {
 	return p.Amount
 }
 
-func (p *PayoutSummary) GetBuyer() *TransactionBuyer {
+func (p *PayoutSummary) GetBuyer() *TransactionBuyerOutput {
 	if p == nil {
 		return nil
 	}
@@ -119,9 +119,9 @@ func (p *PayoutSummary) GetMerchantAccountID() *string {
 	return p.MerchantAccountID
 }
 
-func (p *PayoutSummary) GetPaymentMethod() TransactionPaymentMethod {
+func (p *PayoutSummary) GetPaymentMethod() TransactionPaymentMethodOutput {
 	if p == nil {
-		return TransactionPaymentMethod{}
+		return TransactionPaymentMethodOutput{}
 	}
 	return p.PaymentMethod
 }

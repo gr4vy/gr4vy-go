@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 6bf668ec30ae80aa2267f0399e3cf6a2
+  docChecksum: d9ab1173f6d2274312c583674adcb4d0
   docVersion: 1.0.0
-  speakeasyVersion: 1.642.0
-  generationVersion: 2.731.4
-  releaseVersion: 1.8.1
-  configChecksum: 459ea04e4f8b48ec77e8cb0b743fd7a8
+  speakeasyVersion: 1.642.2
+  generationVersion: 2.731.6
+  releaseVersion: 1.8.2
+  configChecksum: e75eb670036a0e51c0c637ab9694495c
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -75,7 +75,7 @@ generatedFiles:
   - /models/components/approvaltarget.go
   - /models/components/auditlogaction.go
   - /models/components/auditlogentries.go
-  - /models/components/auditlogentry.go
+  - /models/components/auditlogentryoutput.go
   - /models/components/auditlogentryresource.go
   - /models/components/auditlogentryuser.go
   - /models/components/avsresponsecode.go
@@ -100,9 +100,9 @@ generatedFiles:
   - /models/components/checkoutpayoutoptions.go
   - /models/components/checkoutsession.go
   - /models/components/checkoutsessioncreate.go
-  - /models/components/checkoutsessionpaymentmethod.go
   - /models/components/checkoutsessionpaymentmethodcreate.go
   - /models/components/checkoutsessionpaymentmethoddetails.go
+  - /models/components/checkoutsessionpaymentmethodoutput.go
   - /models/components/checkoutsessionwithurlpaymentmethodcreate.go
   - /models/components/clicktopayfpanpaymentmethodcreate.go
   - /models/components/clicktopaypaymentmethodcreate.go
@@ -204,10 +204,10 @@ generatedFiles:
   - /models/components/paymentmethodstatus.go
   - /models/components/paymentmethodstoredcard.go
   - /models/components/paymentmethodsummaries.go
-  - /models/components/paymentmethodsummary.go
-  - /models/components/paymentoption.go
+  - /models/components/paymentmethodsummaryoutput.go
   - /models/components/paymentoptioncontext.go
   - /models/components/paymentoptioncontextapprovalui.go
+  - /models/components/paymentoptionoutput.go
   - /models/components/paymentoptionrequest.go
   - /models/components/paymentoptions.go
   - /models/components/paymentservice.go
@@ -278,19 +278,19 @@ generatedFiles:
   - /models/components/threedsecurestatus.go
   - /models/components/threedsecurev2.go
   - /models/components/tokenpaymentmethodcreate.go
-  - /models/components/transaction.go
-  - /models/components/transactionbuyer.go
+  - /models/components/transactionbuyeroutput.go
   - /models/components/transactioncancel.go
-  - /models/components/transactioncapture.go
   - /models/components/transactioncapturecreate.go
+  - /models/components/transactioncaptureoutput.go
   - /models/components/transactionconnectionoptions.go
   - /models/components/transactioncreate.go
-  - /models/components/transactionevent.go
+  - /models/components/transactioneventoutput.go
   - /models/components/transactionevents.go
   - /models/components/transactiongiftcard.go
   - /models/components/transactionintent.go
   - /models/components/transactionintentoutcome.go
-  - /models/components/transactionpaymentmethod.go
+  - /models/components/transactionoutput.go
+  - /models/components/transactionpaymentmethodoutput.go
   - /models/components/transactionpaymentservice.go
   - /models/components/transactionpaymentsource.go
   - /models/components/transactionrefundallcreate.go
@@ -299,10 +299,10 @@ generatedFiles:
   - /models/components/transactionsreportspec.go
   - /models/components/transactionstatus.go
   - /models/components/transactionsummaries.go
-  - /models/components/transactionsummary.go
-  - /models/components/transactionthreedsecuresummary.go
+  - /models/components/transactionsummaryoutput.go
+  - /models/components/transactionthreedsecuresummaryoutput.go
   - /models/components/transactionupdate.go
-  - /models/components/transactionvoid.go
+  - /models/components/transactionvoidoutput.go
   - /models/components/travelhubcustomdata.go
   - /models/components/travelhuboptions.go
   - /models/components/trustlyoptions.go
@@ -455,7 +455,7 @@ generatedFiles:
   - docs/models/components/approvaltarget.md
   - docs/models/components/auditlogaction.md
   - docs/models/components/auditlogentries.md
-  - docs/models/components/auditlogentry.md
+  - docs/models/components/auditlogentryoutput.md
   - docs/models/components/auditlogentryresource.md
   - docs/models/components/auditlogentryuser.md
   - docs/models/components/avsresponsecode.md
@@ -481,9 +481,9 @@ generatedFiles:
   - docs/models/components/checkoutpayoutoptions.md
   - docs/models/components/checkoutsession.md
   - docs/models/components/checkoutsessioncreate.md
-  - docs/models/components/checkoutsessionpaymentmethod.md
   - docs/models/components/checkoutsessionpaymentmethodcreate.md
   - docs/models/components/checkoutsessionpaymentmethoddetails.md
+  - docs/models/components/checkoutsessionpaymentmethodoutput.md
   - docs/models/components/checkoutsessionwithurlpaymentmethodcreate.md
   - docs/models/components/clicktopayfpanpaymentmethodcreate.md
   - docs/models/components/clicktopaypaymentmethodcreate.md
@@ -593,10 +593,10 @@ generatedFiles:
   - docs/models/components/paymentmethodstatus.md
   - docs/models/components/paymentmethodstoredcard.md
   - docs/models/components/paymentmethodsummaries.md
-  - docs/models/components/paymentmethodsummary.md
-  - docs/models/components/paymentoption.md
+  - docs/models/components/paymentmethodsummaryoutput.md
   - docs/models/components/paymentoptioncontext.md
   - docs/models/components/paymentoptioncontextapprovalui.md
+  - docs/models/components/paymentoptionoutput.md
   - docs/models/components/paymentoptionrequest.md
   - docs/models/components/paymentoptions.md
   - docs/models/components/paymentservice.md
@@ -679,20 +679,20 @@ generatedFiles:
   - docs/models/components/ticketdeliverymethod.md
   - docs/models/components/token.md
   - docs/models/components/tokenpaymentmethodcreate.md
-  - docs/models/components/transaction.md
-  - docs/models/components/transactionbuyer.md
+  - docs/models/components/transactionbuyeroutput.md
   - docs/models/components/transactioncancel.md
-  - docs/models/components/transactioncapture.md
   - docs/models/components/transactioncapturecreate.md
+  - docs/models/components/transactioncaptureoutput.md
   - docs/models/components/transactionconnectionoptions.md
   - docs/models/components/transactioncreate.md
   - docs/models/components/transactioncreatepaymentmethod.md
-  - docs/models/components/transactionevent.md
+  - docs/models/components/transactioneventoutput.md
   - docs/models/components/transactionevents.md
   - docs/models/components/transactiongiftcard.md
   - docs/models/components/transactionintent.md
   - docs/models/components/transactionintentoutcome.md
-  - docs/models/components/transactionpaymentmethod.md
+  - docs/models/components/transactionoutput.md
+  - docs/models/components/transactionpaymentmethodoutput.md
   - docs/models/components/transactionpaymentservice.md
   - docs/models/components/transactionpaymentsource.md
   - docs/models/components/transactionrefundallcreate.md
@@ -701,10 +701,10 @@ generatedFiles:
   - docs/models/components/transactionsreportspec.md
   - docs/models/components/transactionstatus.md
   - docs/models/components/transactionsummaries.md
-  - docs/models/components/transactionsummary.md
-  - docs/models/components/transactionthreedsecuresummary.md
+  - docs/models/components/transactionsummaryoutput.md
+  - docs/models/components/transactionthreedsecuresummaryoutput.md
   - docs/models/components/transactionupdate.md
-  - docs/models/components/transactionvoid.md
+  - docs/models/components/transactionvoidoutput.md
   - docs/models/components/travelhubcustomdata.md
   - docs/models/components/travelhuboptions.md
   - docs/models/components/trustlyoptions.md
@@ -4326,4 +4326,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.Paypal-Paypal.Shipping` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.Paypal-Paypal.Shipping` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.Paypal-Paypal.Shipping` **Added**\n"
+releaseNotes: |
+  ## Go SDK Changes Detected:
+  * `Gr4vy.Transactions.Capture()`:  `response` **Changed**
+  * `Gr4vy.Transactions.Void()`:  `response` **Changed**

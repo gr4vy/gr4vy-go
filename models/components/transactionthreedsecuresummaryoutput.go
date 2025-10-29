@@ -72,7 +72,7 @@ func (u ResponseData) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type ResponseData: all fields are null")
 }
 
-type TransactionThreeDSecureSummary struct {
+type TransactionThreeDSecureSummaryOutput struct {
 	// The version of 3DS used for this transaction.
 	Version *string `json:"version,omitempty"`
 	// The status of the 3DS challenge for this transaction.
@@ -85,46 +85,46 @@ type TransactionThreeDSecureSummary struct {
 	ErrorData *ThreeDSecureError `json:"error_data,omitempty"`
 }
 
-func (t TransactionThreeDSecureSummary) MarshalJSON() ([]byte, error) {
+func (t TransactionThreeDSecureSummaryOutput) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(t, "", false)
 }
 
-func (t *TransactionThreeDSecureSummary) UnmarshalJSON(data []byte) error {
+func (t *TransactionThreeDSecureSummaryOutput) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *TransactionThreeDSecureSummary) GetVersion() *string {
+func (t *TransactionThreeDSecureSummaryOutput) GetVersion() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Version
 }
 
-func (t *TransactionThreeDSecureSummary) GetStatus() *ThreeDSecureStatus {
+func (t *TransactionThreeDSecureSummaryOutput) GetStatus() *ThreeDSecureStatus {
 	if t == nil {
 		return nil
 	}
 	return t.Status
 }
 
-func (t *TransactionThreeDSecureSummary) GetMethod() *ThreeDSecureMethod {
+func (t *TransactionThreeDSecureSummaryOutput) GetMethod() *ThreeDSecureMethod {
 	if t == nil {
 		return nil
 	}
 	return t.Method
 }
 
-func (t *TransactionThreeDSecureSummary) GetResponseData() *ResponseData {
+func (t *TransactionThreeDSecureSummaryOutput) GetResponseData() *ResponseData {
 	if t == nil {
 		return nil
 	}
 	return t.ResponseData
 }
 
-func (t *TransactionThreeDSecureSummary) GetErrorData() *ThreeDSecureError {
+func (t *TransactionThreeDSecureSummaryOutput) GetErrorData() *ThreeDSecureError {
 	if t == nil {
 		return nil
 	}

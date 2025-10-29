@@ -5,15 +5,15 @@ Successful Response
 
 ## Supported Types
 
-### Transaction
+### TransactionOutput
 
 ```go
-responseCaptureTransaction := operations.CreateResponseCaptureTransactionTransaction(components.Transaction{/* values here */})
+responseCaptureTransaction := operations.CreateResponseCaptureTransactionTransactionOutput(components.TransactionOutput{/* values here */})
 ```
 
-### TransactionCapture
+### TransactionCaptureOutput
 
 ```go
-responseCaptureTransaction := operations.CreateResponseCaptureTransactionTransactionCapture(components.TransactionCapture{/* values here */})
+responseCaptureTransaction := operations.CreateResponseCaptureTransactionTransactionCaptureOutput(components.TransactionCaptureOutput{/* values here */})
 ```
 

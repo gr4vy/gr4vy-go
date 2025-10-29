@@ -8,7 +8,7 @@ import (
 	"time"
 )
 
-type TransactionPaymentMethod struct {
+type TransactionPaymentMethodOutput struct {
 	// Always `payment-method`.
 	type_ *string `const:"payment-method" json:"type"`
 	// The optional URL that the buyer needs to be redirected to to further authorize their payment.
@@ -42,120 +42,120 @@ type TransactionPaymentMethod struct {
 	PaymentAccountReference *string `json:"payment_account_reference,omitempty"`
 }
 
-func (t TransactionPaymentMethod) MarshalJSON() ([]byte, error) {
+func (t TransactionPaymentMethodOutput) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(t, "", false)
 }
 
-func (t *TransactionPaymentMethod) UnmarshalJSON(data []byte) error {
+func (t *TransactionPaymentMethodOutput) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"method"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *TransactionPaymentMethod) GetType() *string {
+func (t *TransactionPaymentMethodOutput) GetType() *string {
 	return types.Pointer("payment-method")
 }
 
-func (t *TransactionPaymentMethod) GetApprovalURL() *string {
+func (t *TransactionPaymentMethodOutput) GetApprovalURL() *string {
 	if t == nil {
 		return nil
 	}
 	return t.ApprovalURL
 }
 
-func (t *TransactionPaymentMethod) GetCountry() *string {
+func (t *TransactionPaymentMethodOutput) GetCountry() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Country
 }
 
-func (t *TransactionPaymentMethod) GetCurrency() *string {
+func (t *TransactionPaymentMethodOutput) GetCurrency() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Currency
 }
 
-func (t *TransactionPaymentMethod) GetDetails() *PaymentMethodDetailsCard {
+func (t *TransactionPaymentMethodOutput) GetDetails() *PaymentMethodDetailsCard {
 	if t == nil {
 		return nil
 	}
 	return t.Details
 }
 
-func (t *TransactionPaymentMethod) GetExpirationDate() *string {
+func (t *TransactionPaymentMethodOutput) GetExpirationDate() *string {
 	if t == nil {
 		return nil
 	}
 	return t.ExpirationDate
 }
 
-func (t *TransactionPaymentMethod) GetFingerprint() *string {
+func (t *TransactionPaymentMethodOutput) GetFingerprint() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Fingerprint
 }
 
-func (t *TransactionPaymentMethod) GetLabel() *string {
+func (t *TransactionPaymentMethodOutput) GetLabel() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Label
 }
 
-func (t *TransactionPaymentMethod) GetLastReplacedAt() *time.Time {
+func (t *TransactionPaymentMethodOutput) GetLastReplacedAt() *time.Time {
 	if t == nil {
 		return nil
 	}
 	return t.LastReplacedAt
 }
 
-func (t *TransactionPaymentMethod) GetMethod() Method {
+func (t *TransactionPaymentMethodOutput) GetMethod() Method {
 	if t == nil {
 		return Method("")
 	}
 	return t.Method
 }
 
-func (t *TransactionPaymentMethod) GetMode() *Mode {
+func (t *TransactionPaymentMethodOutput) GetMode() *Mode {
 	if t == nil {
 		return nil
 	}
 	return t.Mode
 }
 
-func (t *TransactionPaymentMethod) GetScheme() *CardScheme {
+func (t *TransactionPaymentMethodOutput) GetScheme() *CardScheme {
 	if t == nil {
 		return nil
 	}
 	return t.Scheme
 }
 
-func (t *TransactionPaymentMethod) GetID() *string {
+func (t *TransactionPaymentMethodOutput) GetID() *string {
 	if t == nil {
 		return nil
 	}
 	return t.ID
 }
 
-func (t *TransactionPaymentMethod) GetApprovalTarget() *ApprovalTarget {
+func (t *TransactionPaymentMethodOutput) GetApprovalTarget() *ApprovalTarget {
 	if t == nil {
 		return nil
 	}
 	return t.ApprovalTarget
 }
 
-func (t *TransactionPaymentMethod) GetExternalIdentifier() *string {
+func (t *TransactionPaymentMethodOutput) GetExternalIdentifier() *string {
 	if t == nil {
 		return nil
 	}
 	return t.ExternalIdentifier
 }
 
-func (t *TransactionPaymentMethod) GetPaymentAccountReference() *string {
+func (t *TransactionPaymentMethodOutput) GetPaymentAccountReference() *string {
 	if t == nil {
 		return nil
 	}

@@ -8,8 +8,8 @@ import (
 	"time"
 )
 
-// TransactionSummary - A transaction, summarised
-type TransactionSummary struct {
+// TransactionSummaryOutput - A transaction, summarised
+type TransactionSummaryOutput struct {
 	// Always `transaction`.
 	type_ *string `const:"transaction" json:"type"`
 	// The ID for the transaction.
@@ -41,7 +41,7 @@ type TransactionSummary struct {
 	ExternalIdentifier *string           `json:"external_identifier,omitempty"`
 	Intent             TransactionIntent `json:"intent"`
 	// The payment method used for this transaction.
-	PaymentMethod *TransactionPaymentMethod `json:"payment_method,omitempty"`
+	PaymentMethod *TransactionPaymentMethodOutput `json:"payment_method,omitempty"`
 	// The method used for the transaction.
 	Method *Method `json:"method,omitempty"`
 	// The name of the instrument used to process the transaction.
@@ -53,7 +53,7 @@ type TransactionSummary struct {
 	// Whether a manual anti fraud review is pending with an anti fraud service.
 	PendingReview *bool `default:"false" json:"pending_review"`
 	// The buyer used for this transaction.
-	Buyer *TransactionBuyer `json:"buyer,omitempty"`
+	Buyer *TransactionBuyerOutput `json:"buyer,omitempty"`
 	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
 	RawResponseCode *string `json:"raw_response_code,omitempty"`
 	//  This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
@@ -74,232 +74,232 @@ type TransactionSummary struct {
 	Disputed bool `json:"disputed"`
 }
 
-func (t TransactionSummary) MarshalJSON() ([]byte, error) {
+func (t TransactionSummaryOutput) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(t, "", false)
 }
 
-func (t *TransactionSummary) UnmarshalJSON(data []byte) error {
+func (t *TransactionSummaryOutput) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "reconciliation_id", "merchant_account_id", "currency", "amount", "status", "authorized_amount", "captured_amount", "refunded_amount", "settled_amount", "settled", "intent", "gift_card_redemptions", "created_at", "updated_at", "disputed"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *TransactionSummary) GetType() *string {
+func (t *TransactionSummaryOutput) GetType() *string {
 	return types.Pointer("transaction")
 }
 
-func (t *TransactionSummary) GetID() string {
+func (t *TransactionSummaryOutput) GetID() string {
 	if t == nil {
 		return ""
 	}
 	return t.ID
 }
 
-func (t *TransactionSummary) GetReconciliationID() string {
+func (t *TransactionSummaryOutput) GetReconciliationID() string {
 	if t == nil {
 		return ""
 	}
 	return t.ReconciliationID
 }
 
-func (t *TransactionSummary) GetMerchantAccountID() string {
+func (t *TransactionSummaryOutput) GetMerchantAccountID() string {
 	if t == nil {
 		return ""
 	}
 	return t.MerchantAccountID
 }
 
-func (t *TransactionSummary) GetCurrency() string {
+func (t *TransactionSummaryOutput) GetCurrency() string {
 	if t == nil {
 		return ""
 	}
 	return t.Currency
 }
 
-func (t *TransactionSummary) GetAmount() int64 {
+func (t *TransactionSummaryOutput) GetAmount() int64 {
 	if t == nil {
 		return 0
 	}
 	return t.Amount
 }
 
-func (t *TransactionSummary) GetStatus() TransactionStatus {
+func (t *TransactionSummaryOutput) GetStatus() TransactionStatus {
 	if t == nil {
 		return TransactionStatus("")
 	}
 	return t.Status
 }
 
-func (t *TransactionSummary) GetAuthorizedAmount() int64 {
+func (t *TransactionSummaryOutput) GetAuthorizedAmount() int64 {
 	if t == nil {
 		return 0
 	}
 	return t.AuthorizedAmount
 }
 
-func (t *TransactionSummary) GetCapturedAmount() int64 {
+func (t *TransactionSummaryOutput) GetCapturedAmount() int64 {
 	if t == nil {
 		return 0
 	}
 	return t.CapturedAmount
 }
 
-func (t *TransactionSummary) GetRefundedAmount() int64 {
+func (t *TransactionSummaryOutput) GetRefundedAmount() int64 {
 	if t == nil {
 		return 0
 	}
 	return t.RefundedAmount
 }
 
-func (t *TransactionSummary) GetSettledCurrency() *string {
+func (t *TransactionSummaryOutput) GetSettledCurrency() *string {
 	if t == nil {
 		return nil
 	}
 	return t.SettledCurrency
 }
 
-func (t *TransactionSummary) GetSettledAmount() int64 {
+func (t *TransactionSummaryOutput) GetSettledAmount() int64 {
 	if t == nil {
 		return 0
 	}
 	return t.SettledAmount
 }
 
-func (t *TransactionSummary) GetSettled() bool {
+func (t *TransactionSummaryOutput) GetSettled() bool {
 	if t == nil {
 		return false
 	}
 	return t.Settled
 }
 
-func (t *TransactionSummary) GetCountry() *string {
+func (t *TransactionSummaryOutput) GetCountry() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Country
 }
 
-func (t *TransactionSummary) GetExternalIdentifier() *string {
+func (t *TransactionSummaryOutput) GetExternalIdentifier() *string {
 	if t == nil {
 		return nil
 	}
 	return t.ExternalIdentifier
 }
 
-func (t *TransactionSummary) GetIntent() TransactionIntent {
+func (t *TransactionSummaryOutput) GetIntent() TransactionIntent {
 	if t == nil {
 		return TransactionIntent("")
 	}
 	return t.Intent
 }
 
-func (t *TransactionSummary) GetPaymentMethod() *TransactionPaymentMethod {
+func (t *TransactionSummaryOutput) GetPaymentMethod() *TransactionPaymentMethodOutput {
 	if t == nil {
 		return nil
 	}
 	return t.PaymentMethod
 }
 
-func (t *TransactionSummary) GetMethod() *Method {
+func (t *TransactionSummaryOutput) GetMethod() *Method {
 	if t == nil {
 		return nil
 	}
 	return t.Method
 }
 
-func (t *TransactionSummary) GetInstrumentType() *InstrumentType {
+func (t *TransactionSummaryOutput) GetInstrumentType() *InstrumentType {
 	if t == nil {
 		return nil
 	}
 	return t.InstrumentType
 }
 
-func (t *TransactionSummary) GetErrorCode() *string {
+func (t *TransactionSummaryOutput) GetErrorCode() *string {
 	if t == nil {
 		return nil
 	}
 	return t.ErrorCode
 }
 
-func (t *TransactionSummary) GetPaymentService() *TransactionPaymentService {
+func (t *TransactionSummaryOutput) GetPaymentService() *TransactionPaymentService {
 	if t == nil {
 		return nil
 	}
 	return t.PaymentService
 }
 
-func (t *TransactionSummary) GetPendingReview() *bool {
+func (t *TransactionSummaryOutput) GetPendingReview() *bool {
 	if t == nil {
 		return nil
 	}
 	return t.PendingReview
 }
 
-func (t *TransactionSummary) GetBuyer() *TransactionBuyer {
+func (t *TransactionSummaryOutput) GetBuyer() *TransactionBuyerOutput {
 	if t == nil {
 		return nil
 	}
 	return t.Buyer
 }
 
-func (t *TransactionSummary) GetRawResponseCode() *string {
+func (t *TransactionSummaryOutput) GetRawResponseCode() *string {
 	if t == nil {
 		return nil
 	}
 	return t.RawResponseCode
 }
 
-func (t *TransactionSummary) GetRawResponseDescription() *string {
+func (t *TransactionSummaryOutput) GetRawResponseDescription() *string {
 	if t == nil {
 		return nil
 	}
 	return t.RawResponseDescription
 }
 
-func (t *TransactionSummary) GetShippingDetails() *ShippingDetails {
+func (t *TransactionSummaryOutput) GetShippingDetails() *ShippingDetails {
 	if t == nil {
 		return nil
 	}
 	return t.ShippingDetails
 }
 
-func (t *TransactionSummary) GetCheckoutSessionID() *string {
+func (t *TransactionSummaryOutput) GetCheckoutSessionID() *string {
 	if t == nil {
 		return nil
 	}
 	return t.CheckoutSessionID
 }
 
-func (t *TransactionSummary) GetGiftCardRedemptions() []GiftCardRedemption {
+func (t *TransactionSummaryOutput) GetGiftCardRedemptions() []GiftCardRedemption {
 	if t == nil {
 		return []GiftCardRedemption{}
 	}
 	return t.GiftCardRedemptions
 }
 
-func (t *TransactionSummary) GetGiftCardService() *GiftCardService {
+func (t *TransactionSummaryOutput) GetGiftCardService() *GiftCardService {
 	if t == nil {
 		return nil
 	}
 	return t.GiftCardService
 }
 
-func (t *TransactionSummary) GetCreatedAt() time.Time {
+func (t *TransactionSummaryOutput) GetCreatedAt() time.Time {
 	if t == nil {
 		return time.Time{}
 	}
 	return t.CreatedAt
 }
 
-func (t *TransactionSummary) GetUpdatedAt() time.Time {
+func (t *TransactionSummaryOutput) GetUpdatedAt() time.Time {
 	if t == nil {
 		return time.Time{}
 	}
 	return t.UpdatedAt
 }
 
-func (t *TransactionSummary) GetDisputed() bool {
+func (t *TransactionSummaryOutput) GetDisputed() bool {
 	if t == nil {
 		return false
 	}
