@@ -12,3 +12,4 @@
 | `InstrumentTypeGooglepay`     | googlepay                     |
 | `InstrumentTypeApplepay`      | applepay                      |
 | `InstrumentTypeNetworkToken`  | network_token                 |
+| `InstrumentTypePlaid`         | plaid                         |

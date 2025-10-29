@@ -12,6 +12,7 @@ const (
 	InstrumentTypeGooglepay     InstrumentType = "googlepay"
 	InstrumentTypeApplepay      InstrumentType = "applepay"
 	InstrumentTypeNetworkToken  InstrumentType = "network_token"
+	InstrumentTypePlaid         InstrumentType = "plaid"
 )
 
 func (e InstrumentType) ToPointer() *InstrumentType {
