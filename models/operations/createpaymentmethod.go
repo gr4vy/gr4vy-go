@@ -26,12 +26,14 @@ const (
 	BodyTypeCardPaymentMethodCreate            BodyType = "CardPaymentMethodCreate"
 	BodyTypeRedirectPaymentMethodCreate        BodyType = "RedirectPaymentMethodCreate"
 	BodyTypeCheckoutSessionPaymentMethodCreate BodyType = "CheckoutSessionPaymentMethodCreate"
+	BodyTypePlaidPaymentMethodCreate           BodyType = "PlaidPaymentMethodCreate"
 )
 
 type Body struct {
 	CardPaymentMethodCreate            *components.CardPaymentMethodCreate            `queryParam:"inline,name=Body"`
 	RedirectPaymentMethodCreate        *components.RedirectPaymentMethodCreate        `queryParam:"inline,name=Body"`
 	CheckoutSessionPaymentMethodCreate *components.CheckoutSessionPaymentMethodCreate `queryParam:"inline,name=Body"`
+	PlaidPaymentMethodCreate           *components.PlaidPaymentMethodCreate           `queryParam:"inline,name=Body"`
 
 	Type BodyType
 }
@@ -63,6 +65,15 @@ func CreateBodyCheckoutSessionPaymentMethodCreate(checkoutSessionPaymentMethodCr
 	}
 }
 
+func CreateBodyPlaidPaymentMethodCreate(plaidPaymentMethodCreate components.PlaidPaymentMethodCreate) Body {
+	typ := BodyTypePlaidPaymentMethodCreate
+
+	return Body{
+		PlaidPaymentMethodCreate: &plaidPaymentMethodCreate,
+		Type:                     typ,
+	}
+}
+
 func (u *Body) UnmarshalJSON(data []byte) error {
 
 	var redirectPaymentMethodCreate components.RedirectPaymentMethodCreate = components.RedirectPaymentMethodCreate{}
@@ -86,6 +97,13 @@ func (u *Body) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	var plaidPaymentMethodCreate components.PlaidPaymentMethodCreate = components.PlaidPaymentMethodCreate{}
+	if err := utils.UnmarshalJSON(data, &plaidPaymentMethodCreate, "", true, nil); err == nil {
+		u.PlaidPaymentMethodCreate = &plaidPaymentMethodCreate
+		u.Type = BodyTypePlaidPaymentMethodCreate
+		return nil
+	}
+
 	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Body", string(data))
 }
 
@@ -100,6 +118,10 @@ func (u Body) MarshalJSON() ([]byte, error) {
 
 	if u.CheckoutSessionPaymentMethodCreate != nil {
 		return utils.MarshalJSON(u.CheckoutSessionPaymentMethodCreate, "", true)
+	}
+
+	if u.PlaidPaymentMethodCreate != nil {
+		return utils.MarshalJSON(u.PlaidPaymentMethodCreate, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type Body: all fields are null")

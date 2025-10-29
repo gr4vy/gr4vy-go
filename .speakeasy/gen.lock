@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: d9ab1173f6d2274312c583674adcb4d0
+  docChecksum: c5d0d05eb391fe65b34e2470917aee83
   docVersion: 1.0.0
   speakeasyVersion: 1.642.2
   generationVersion: 2.731.6
-  releaseVersion: 1.8.2
-  configChecksum: e75eb670036a0e51c0c637ab9694495c
+  releaseVersion: 1.8.3
+  configChecksum: 5ab78a58115e3e270549076ba6284fd4
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -234,6 +234,7 @@ generatedFiles:
   - /models/components/paypalshippingoptions.go
   - /models/components/paypalshippingoptionsitem.go
   - /models/components/paypalshippingoptionsitemamount.go
+  - /models/components/plaidpaymentmethodcreate.go
   - /models/components/powertranzoptions.go
   - /models/components/producttype.go
   - /models/components/recipient.go
@@ -625,6 +626,7 @@ generatedFiles:
   - docs/models/components/paypalshippingoptionsitem.md
   - docs/models/components/paypalshippingoptionsitemamount.md
   - docs/models/components/paypalshippingoptionsitemtype.md
+  - docs/models/components/plaidpaymentmethodcreate.md
   - docs/models/components/powertranzoptions.md
   - docs/models/components/producttype.md
   - docs/models/components/recipient.md
@@ -4326,7 +4328,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes Detected:
-  * `Gr4vy.Transactions.Capture()`:  `response` **Changed**
-  * `Gr4vy.Transactions.Void()`:  `response` **Changed**
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Payment-Methods.Create()`: \n  *  `request.RequestBody.[plaidPaymentMethodCreate]` **Added**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PaymentMethod.[plaidPaymentMethodCreate]` **Added**\n"

@@ -21,3 +21,9 @@ body := operations.CreateBodyRedirectPaymentMethodCreate(components.RedirectPaym
 body := operations.CreateBodyCheckoutSessionPaymentMethodCreate(components.CheckoutSessionPaymentMethodCreate{/* values here */})
 ```
 
+### PlaidPaymentMethodCreate
+
+```go
+body := operations.CreateBodyPlaidPaymentMethodCreate(components.PlaidPaymentMethodCreate{/* values here */})
+```
+

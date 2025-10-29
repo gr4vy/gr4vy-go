@@ -59,6 +59,12 @@ transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMetho
 transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMethodNetworkTokenPaymentMethodCreate(components.NetworkTokenPaymentMethodCreate{/* values here */})
 ```
 
+### PlaidPaymentMethodCreate
+
+```go
+transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMethodPlaidPaymentMethodCreate(components.PlaidPaymentMethodCreate{/* values here */})
+```
+
 ### CheckoutSessionWithURLPaymentMethodCreate
 
 ```go
