@@ -14,7 +14,8 @@ type CheckoutSessionCreate struct {
 	// Provide buyer details for the transaction. No buyer resource will be created on Gr4vy when used.
 	Buyer *GuestBuyerInput `json:"buyer,omitempty"`
 	// The airline addendum data which describes the airline booking associated with this transaction.
-	Airline   *Airline `json:"airline,omitempty"`
+	Airline *Airline `json:"airline,omitempty"`
+	// The time in seconds when this checkout session expires.
 	ExpiresIn *float64 `default:"3600" json:"expires_in"`
 }
 
