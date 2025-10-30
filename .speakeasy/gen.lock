@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: b84f2221756c0aaa1f7ea2b4724bc056
+  docChecksum: 34b130767f3a96203e73dc4eb073dc8f
   docVersion: 1.0.0
-  speakeasyVersion: 1.643.0
+  speakeasyVersion: 1.643.2
   generationVersion: 2.731.6
-  releaseVersion: 1.8.5
-  configChecksum: 146e15015e11ce0785db13b14f9826fc
+  releaseVersion: 1.8.6
+  configChecksum: 3ac12ed87e7c4f9d10b8b2e16ee79f99
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -184,6 +184,7 @@ generatedFiles:
   - /models/components/mockcardmerchantadvicecodeoptions.go
   - /models/components/mockcardoptions.go
   - /models/components/mode.go
+  - /models/components/monatospeioptions.go
   - /models/components/networktoken.go
   - /models/components/networktokencreate.go
   - /models/components/networktokenpaymentmethodcreate.go
@@ -573,6 +574,7 @@ generatedFiles:
   - docs/models/components/mockcardmerchantadvicecodeoptions.md
   - docs/models/components/mockcardoptions.md
   - docs/models/components/mode.md
+  - docs/models/components/monatospeioptions.md
   - docs/models/components/name.md
   - docs/models/components/networktoken.md
   - docs/models/components/networktokencreate.md
@@ -4328,3 +4330,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.Monato-Spei` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.Monato-Spei` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.Monato-Spei` **Added**\n"
