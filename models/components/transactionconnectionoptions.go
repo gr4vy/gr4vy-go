@@ -57,6 +57,8 @@ type TransactionConnectionOptions struct {
 	MattildaTapi *MattildaTapiOptions `json:"mattilda-tapi,omitempty"`
 	// Custom options to be passed to the `mattilda-tapifintechs` connector.
 	MattildaTapifintechs *MattildaTapiOptions `json:"mattilda-tapifintechs,omitempty"`
+	// Custom options to be passed to the `monato-spei` connector.
+	MonatoSpei *MonatoSpeiOptions `json:"monato-spei,omitempty"`
 	// Custom options to be passed to the `mock-card` connector.
 	MockCard *MockCardOptions `json:"mock-card,omitempty"`
 	// Custom options to be passed to the `nuvei-card` connector.
@@ -270,6 +272,13 @@ func (t *TransactionConnectionOptions) GetMattildaTapifintechs() *MattildaTapiOp
 		return nil
 	}
 	return t.MattildaTapifintechs
+}
+
+func (t *TransactionConnectionOptions) GetMonatoSpei() *MonatoSpeiOptions {
+	if t == nil {
+		return nil
+	}
+	return t.MonatoSpei
 }
 
 func (t *TransactionConnectionOptions) GetMockCard() *MockCardOptions {
