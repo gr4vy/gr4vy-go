@@ -763,8 +763,8 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		gr4vygo.WithServer("production"),
-		gr4vygo.WithID("<id>"),
+		gr4vygo.WithServer("sandbox"),
+		gr4vygo.WithID("example"),
 		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)

@@ -1,19 +1,19 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 34b130767f3a96203e73dc4eb073dc8f
+  docChecksum: 8b1a6565789082a98555813bae98ff43
   docVersion: 1.0.0
-  speakeasyVersion: 1.643.2
-  generationVersion: 2.731.6
-  releaseVersion: 1.8.6
-  configChecksum: 3ac12ed87e7c4f9d10b8b2e16ee79f99
+  speakeasyVersion: 1.648.0
+  generationVersion: 2.737.0
+  releaseVersion: 1.9.0
+  configChecksum: aec8101d2390c2e09b2b3d73267a8c06
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.12
-    core: 3.12.0
+    core: 3.13.0
     defaultEnabledRetries: 0.2.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.3.2
@@ -21,7 +21,7 @@ features:
     globalSecurity: 2.82.12
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.82.3
+    globalServerURLs: 2.83.0
     globals: 2.82.2
     groups: 2.81.3
     ignores: 2.81.1
@@ -4330,4 +4330,3 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.Monato-Spei` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.Monato-Spei` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.Monato-Spei` **Added**\n"

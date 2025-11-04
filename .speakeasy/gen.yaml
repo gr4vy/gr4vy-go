@@ -28,7 +28,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 1.8.6
+  version: 1.9.0
   additionalDependencies:
     github.com/golang-jwt/jwt/v5: v5.2.2
     github.com/google/uuid: v1.6.0
@@ -46,6 +46,7 @@ go:
       operations: models/operations
       shared: models/components
       webhooks: models/webhooks
+  includeEmptyObjects: false
   inputModelSuffix: input
   maxMethodParams: 4
   methodArguments: require-security-and-request
