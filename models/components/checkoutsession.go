@@ -17,6 +17,12 @@ type CheckoutSession struct {
 	Buyer *GuestBuyerOutput `json:"buyer,omitempty"`
 	// The airline addendum data which describes the airline booking associated with this transaction.
 	Airline *Airline `json:"airline,omitempty"`
+	// The total amount for this transaction.
+	Amount *int64 `json:"amount,omitempty"`
+	// The currency code for this transaction.
+	Currency *string `json:"currency,omitempty"`
+	// The unique identifier of an existing payment service. When provided, the created transaction will be processed by the given payment service and any routing rules will be skipped.
+	PaymentServiceID *string `json:"payment_service_id,omitempty"`
 	// Always `checkout-session`
 	type_ *string `const:"checkout-session" json:"type"`
 	// The ID for the checkout session.
@@ -64,6 +70,27 @@ func (c *CheckoutSession) GetAirline() *Airline {
 		return nil
 	}
 	return c.Airline
+}
+
+func (c *CheckoutSession) GetAmount() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.Amount
+}
+
+func (c *CheckoutSession) GetCurrency() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Currency
+}
+
+func (c *CheckoutSession) GetPaymentServiceID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.PaymentServiceID
 }
 
 func (c *CheckoutSession) GetType() *string {
