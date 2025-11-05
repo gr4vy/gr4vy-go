@@ -15,6 +15,12 @@ type CheckoutSessionCreate struct {
 	Buyer *GuestBuyerInput `json:"buyer,omitempty"`
 	// The airline addendum data which describes the airline booking associated with this transaction.
 	Airline *Airline `json:"airline,omitempty"`
+	// The total amount for this transaction.
+	Amount *int64 `json:"amount,omitempty"`
+	// The currency code for this transaction.
+	Currency *string `json:"currency,omitempty"`
+	// The unique identifier of an existing payment service. When provided, the created transaction will be processed by the given payment service and any routing rules will be skipped.
+	PaymentServiceID *string `json:"payment_service_id,omitempty"`
 	// The time in seconds when this checkout session expires.
 	ExpiresIn *float64 `default:"3600" json:"expires_in"`
 }
@@ -56,6 +62,27 @@ func (c *CheckoutSessionCreate) GetAirline() *Airline {
 		return nil
 	}
 	return c.Airline
+}
+
+func (c *CheckoutSessionCreate) GetAmount() *int64 {
+	if c == nil {
+		return nil
+	}
+	return c.Amount
+}
+
+func (c *CheckoutSessionCreate) GetCurrency() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Currency
+}
+
+func (c *CheckoutSessionCreate) GetPaymentServiceID() *string {
+	if c == nil {
+		return nil
+	}
+	return c.PaymentServiceID
 }
 
 func (c *CheckoutSessionCreate) GetExpiresIn() *float64 {
