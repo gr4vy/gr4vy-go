@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: efa07284f8cbf57dd9f8290765f64cf2
+  docChecksum: 36df3bbd24de2e63acdef0069639bbf4
   docVersion: 1.0.0
   speakeasyVersion: 1.649.0
   generationVersion: 2.739.1
-  releaseVersion: 1.9.1
-  configChecksum: d2a63e82e80754e87b8608e51d73e2e4
+  releaseVersion: 1.9.2
+  configChecksum: 1c088550e3be320ab52b2e0e8079ba5d
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -4330,4 +4330,3 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Checkout-Sessions.Create()`: \n  *  `request.CheckoutSessionCreate` **Changed**\n  *  `response` **Changed**\n* `Gr4vy.Checkout-Sessions.Get()`:  `response` **Changed**\n* `Gr4vy.Checkout-Sessions.Update()`: \n  *  `request.CheckoutSessionCreate` **Changed**\n  *  `response` **Changed**\n"
