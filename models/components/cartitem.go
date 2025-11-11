@@ -21,6 +21,8 @@ type CartItem struct {
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 	// The SKU or product code for the item.
 	Sku *string `json:"sku,omitempty"`
+	// The UPC for the item.
+	Upc *string `json:"upc,omitempty"`
 	// The product URL for the item.
 	ProductURL *string `json:"product_url,omitempty"`
 	// The URL for the image of the item.
@@ -103,6 +105,13 @@ func (c *CartItem) GetSku() *string {
 		return nil
 	}
 	return c.Sku
+}
+
+func (c *CartItem) GetUpc() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Upc
 }
 
 func (c *CartItem) GetProductURL() *string {
