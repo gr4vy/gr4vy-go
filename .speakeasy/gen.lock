@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: c8aa06c5240297604697c8a23eaf4fcf
+  docChecksum: 6c5a7f34c7c327d247015fdaa2628fa8
   docVersion: 1.0.0
-  speakeasyVersion: 1.653.0
-  generationVersion: 2.748.0
-  releaseVersion: 1.9.3
-  configChecksum: 0a4645a86405053a07b7b3099e4ccedc
+  speakeasyVersion: 1.654.0
+  generationVersion: 2.750.0
+  releaseVersion: 1.9.4
+  configChecksum: d1625497da82099ad45f5a754751c306
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -34,7 +34,7 @@ features:
     retries: 2.84.2
     sdkHooks: 0.2.0
     serverIDs: 2.81.1
-    unions: 2.87.0
+    unions: 2.87.1
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
@@ -4330,4 +4330,3 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.CartItems.[].Upc` **Added**\n  *  `response.CartItems.[].Upc` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.CartItems.[].Upc` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.CartItems.[].Upc` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.[transaction-Output].CartItems.[].Upc` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.[transaction-Output].CartItems.[].Upc` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.CartItems.[].Upc` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.CartItems.[].Upc` **Added**\n* `Gr4vy.Payment-Options.List()`: \n  *  `request.PaymentOptionRequest.CartItems.[].Upc` **Added**\n* `Gr4vy.Checkout-Sessions.Create()`: \n  *  `request.CheckoutSessionCreate.CartItems.[].Upc` **Added**\n  *  `response.CartItems.[].Upc` **Added**\n* `Gr4vy.Checkout-Sessions.Get()`:  `response.CartItems.[].Upc` **Added**\n* `Gr4vy.Checkout-Sessions.Update()`: \n  *  `request.CheckoutSessionCreate.CartItems.[].Upc` **Added**\n  *  `response.CartItems.[].Upc` **Added**\n* `Gr4vy.Payment-Links.List()`:  `response.Items.[].CartItems.[].Upc` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.CartItems.[].Upc` **Added**\n  *  `response.CartItems.[].Upc` **Added**\n* `Gr4vy.Payment-Links.Get()`:  `response.CartItems.[].Upc` **Added**\n"
