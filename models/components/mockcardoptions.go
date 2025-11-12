@@ -5,6 +5,8 @@ package components
 type MockCardOptions struct {
 	// Allows for mocking the merchant advice code.
 	MerchantAdviceCode *MockCardMerchantAdviceCodeOptions `json:"merchant_advice_code,omitempty"`
+	// When set to true, prevents retries on failed transactions.
+	SkipRetry *bool `json:"skip_retry,omitempty"`
 }
 
 func (m *MockCardOptions) GetMerchantAdviceCode() *MockCardMerchantAdviceCodeOptions {
@@ -12,4 +14,11 @@ func (m *MockCardOptions) GetMerchantAdviceCode() *MockCardMerchantAdviceCodeOpt
 		return nil
 	}
 	return m.MerchantAdviceCode
+}
+
+func (m *MockCardOptions) GetSkipRetry() *bool {
+	if m == nil {
+		return nil
+	}
+	return m.SkipRetry
 }
