@@ -62,6 +62,7 @@ const (
 	NameNetworkTokenCryptogramProvisionFailed                     Name = "network-token-cryptogram-provision-failed"
 	NameTheGivingBlockTransactionConversionSucceeded              Name = "the-giving-block-transaction-conversion-succeeded"
 	NameRealTimeAccountUpdate                                     Name = "real-time-account-update"
+	NamePlaidRequestEvent                                         Name = "plaid-request-event"
 )
 
 func (e Name) ToPointer() *Name {
