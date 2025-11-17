@@ -23,6 +23,8 @@ type PlaidPaymentMethodCreate struct {
 	BuyerID *string `json:"buyer_id,omitempty"`
 	// The merchant reference for this payment method.
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
+	// The merchant identifier for this payment method.
+	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 }
 
 func (p PlaidPaymentMethodCreate) MarshalJSON() ([]byte, error) {
@@ -73,4 +75,11 @@ func (p *PlaidPaymentMethodCreate) GetBuyerExternalIdentifier() *string {
 		return nil
 	}
 	return p.BuyerExternalIdentifier
+}
+
+func (p *PlaidPaymentMethodCreate) GetExternalIdentifier() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ExternalIdentifier
 }
