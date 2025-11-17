@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 5a4084ba169302063d953900f7fd03a2
+  docChecksum: cfe19b0aac9798c544256d18c617546e
   docVersion: 1.0.0
-  speakeasyVersion: 1.656.1
-  generationVersion: 2.753.1
-  releaseVersion: 1.9.6
-  configChecksum: 367e88937b2e47218de3d3ef2cc44953
+  speakeasyVersion: 1.658.1
+  generationVersion: 2.755.6
+  releaseVersion: 1.9.7
+  configChecksum: d1a0916719b91c1338bc11ba84ce58dc
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -4330,3 +4330,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Payment-Methods.Create()`: \n  *  `request.RequestBody.[plaidPaymentMethodCreate].ExternalIdentifier` **Added**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PaymentMethod.[plaidPaymentMethodCreate].ExternalIdentifier` **Added**\n"
