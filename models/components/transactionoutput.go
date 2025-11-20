@@ -131,6 +131,8 @@ type TransactionOutput struct {
 	TaxAmount *int64 `json:"tax_amount,omitempty"`
 	// Merchant tax ID (for example, EIN or VAT number).
 	MerchantTaxID *string `json:"merchant_tax_id,omitempty"`
+	// Invoice number or Purchase Order number.
+	PurchaseOrderNumber *string `json:"purchase_order_number,omitempty"`
 	// Customer code or reference.
 	CustomerReferenceNumber *string `json:"customer_reference_number,omitempty"`
 	// Whether the tax is included in the amount.
@@ -583,6 +585,13 @@ func (t *TransactionOutput) GetMerchantTaxID() *string {
 		return nil
 	}
 	return t.MerchantTaxID
+}
+
+func (t *TransactionOutput) GetPurchaseOrderNumber() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PurchaseOrderNumber
 }
 
 func (t *TransactionOutput) GetCustomerReferenceNumber() *string {
