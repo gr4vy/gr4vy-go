@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: cfe19b0aac9798c544256d18c617546e
+  docChecksum: b9986659b4bc5370b0896ee9c9fc1c90
   docVersion: 1.0.0
-  speakeasyVersion: 1.658.1
-  generationVersion: 2.755.6
-  releaseVersion: 1.9.7
-  configChecksum: d1a0916719b91c1338bc11ba84ce58dc
+  speakeasyVersion: 1.658.2
+  generationVersion: 2.755.9
+  releaseVersion: 1.9.8
+  configChecksum: 42261a5f2aac3af7c68ce59ebbdb912d
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -4330,4 +4330,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Payment-Methods.Create()`: \n  *  `request.RequestBody.[plaidPaymentMethodCreate].ExternalIdentifier` **Added**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PaymentMethod.[plaidPaymentMethodCreate].ExternalIdentifier` **Added**\n"
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PurchaseOrderNumber` **Added**\n  *  `response.PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.[transaction-Output].PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.[transaction-Output].PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.PurchaseOrderNumber` **Added**\n"
