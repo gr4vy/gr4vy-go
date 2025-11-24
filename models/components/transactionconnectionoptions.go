@@ -63,6 +63,8 @@ type TransactionConnectionOptions struct {
 	MockCard *MockCardOptions `json:"mock-card,omitempty"`
 	// Custom options to be passed to the `nuvei-card` connector.
 	NuveiCard *NuveiOptions `json:"nuvei-card,omitempty"`
+	// Custom options to be passed to the `nuvei-ideal` connector.
+	NuveiIdeal *NuveiIDealOptions `json:"nuvei-ideal,omitempty"`
 	// Custom options to be passed to the `nuvei-pse` connector.
 	NuveiPse *NuveiPSEOptions `json:"nuvei-pse,omitempty"`
 	// Custom options to be passed to the `oxxo-oxxo` connector.
@@ -293,6 +295,13 @@ func (t *TransactionConnectionOptions) GetNuveiCard() *NuveiOptions {
 		return nil
 	}
 	return t.NuveiCard
+}
+
+func (t *TransactionConnectionOptions) GetNuveiIdeal() *NuveiIDealOptions {
+	if t == nil {
+		return nil
+	}
+	return t.NuveiIdeal
 }
 
 func (t *TransactionConnectionOptions) GetNuveiPse() *NuveiPSEOptions {
