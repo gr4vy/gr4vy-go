@@ -1,12 +1,12 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: b9986659b4bc5370b0896ee9c9fc1c90
+  docChecksum: fc2b10a1ce95947bfe8d163e5e870f29
   docVersion: 1.0.0
-  speakeasyVersion: 1.658.2
-  generationVersion: 2.755.9
-  releaseVersion: 1.9.8
-  configChecksum: 42261a5f2aac3af7c68ce59ebbdb912d
+  speakeasyVersion: 1.660.0
+  generationVersion: 2.760.2
+  releaseVersion: 1.9.9
+  configChecksum: 6e8fce4e999c8c27ebce6d2c72f4a8fa
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
@@ -191,6 +191,7 @@ generatedFiles:
   - /models/components/networktokens.go
   - /models/components/networktokenstatus.go
   - /models/components/nuveiairlinedataoptions.go
+  - /models/components/nuveiidealoptions.go
   - /models/components/nuveioptions.go
   - /models/components/nuveipseoptions.go
   - /models/components/oxxooptions.go
@@ -582,6 +583,7 @@ generatedFiles:
   - docs/models/components/networktokens.md
   - docs/models/components/networktokenstatus.md
   - docs/models/components/nuveiairlinedataoptions.md
+  - docs/models/components/nuveiidealoptions.md
   - docs/models/components/nuveioptions.md
   - docs/models/components/nuveipseoptions.md
   - docs/models/components/oxxooptions.md
@@ -4330,4 +4332,4 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PurchaseOrderNumber` **Added**\n  *  `response.PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.[transaction-Output].PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.[transaction-Output].PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PurchaseOrderNumber` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.PurchaseOrderNumber` **Added**\n"
+releaseNotes: "## Go SDK Changes Detected:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.Nuvei-Ideal` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.Nuvei-Ideal` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.Nuvei-Ideal` **Added**\n"
