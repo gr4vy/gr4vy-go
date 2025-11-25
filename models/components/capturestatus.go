@@ -14,3 +14,14 @@ const (
 func (e CaptureStatus) ToPointer() *CaptureStatus {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *CaptureStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "succeeded", "pending", "declined", "failed":
+			return true
+		}
+	}
+	return false
+}

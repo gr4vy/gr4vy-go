@@ -14,6 +14,17 @@ func (e UserDevice) ToPointer() *UserDevice {
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *UserDevice) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "desktop", "mobile":
+			return true
+		}
+	}
+	return false
+}
+
 // BrowserInfo - Merchant provided browser info
 type BrowserInfo struct {
 	JavascriptEnabled bool   `json:"javascript_enabled"`

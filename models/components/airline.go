@@ -18,6 +18,17 @@ func (e TicketDeliveryMethod) ToPointer() *TicketDeliveryMethod {
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TicketDeliveryMethod) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "electronic", "other":
+			return true
+		}
+	}
+	return false
+}
+
 // Airline - Information about an airline travel.
 type Airline struct {
 	// The unique identifier of the reservation in the global distribution system.

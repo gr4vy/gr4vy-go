@@ -30,6 +30,17 @@ func (e OrderBy) ToPointer() *OrderBy {
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *OrderBy) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "asc", "desc":
+			return true
+		}
+	}
+	return false
+}
+
 type ListBuyerPaymentMethodsRequest struct {
 	// The ID of the buyer to query payment methods for.
 	BuyerID *string `queryParam:"style=form,explode=true,name=buyer_id"`

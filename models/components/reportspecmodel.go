@@ -14,3 +14,14 @@ const (
 func (e ReportSpecModel) ToPointer() *ReportSpecModel {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ReportSpecModel) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "transactions", "transaction_retries", "detailed_settlement", "accounts_receivables":
+			return true
+		}
+	}
+	return false
+}

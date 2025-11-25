@@ -13,3 +13,14 @@ const (
 func (e CancelStatus) ToPointer() *CancelStatus {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *CancelStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "succeeded", "pending", "failed":
+			return true
+		}
+	}
+	return false
+}

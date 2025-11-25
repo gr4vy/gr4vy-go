@@ -12,3 +12,14 @@ const (
 func (e ReportCreatorType) ToPointer() *ReportCreatorType {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ReportCreatorType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "user", "private_key":
+			return true
+		}
+	}
+	return false
+}

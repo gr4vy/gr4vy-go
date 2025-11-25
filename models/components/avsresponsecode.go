@@ -16,3 +16,14 @@ const (
 func (e AVSResponseCode) ToPointer() *AVSResponseCode {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AVSResponseCode) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "match", "no_match", "partial_match_address", "partial_match_postcode", "partial_match_name", "unavailable":
+			return true
+		}
+	}
+	return false
+}

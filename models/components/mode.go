@@ -18,3 +18,14 @@ const (
 func (e Mode) ToPointer() *Mode {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *Mode) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "card", "redirect", "applepay", "googlepay", "checkout-session", "click-to-pay", "gift-card", "bank":
+			return true
+		}
+	}
+	return false
+}

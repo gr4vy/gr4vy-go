@@ -13,6 +13,17 @@ func (e VaultPaymentMethodCriteria) ToPointer() *VaultPaymentMethodCriteria {
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *VaultPaymentMethodCriteria) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "ALWAYS", "ON_SUCCESSFUL_TRANSACTION":
+			return true
+		}
+	}
+	return false
+}
+
 type BraintreeDynamicDataFieldsOptions struct {
 	// Passes the 3DS status to the Braintree API using `customFields` with the key set to the value of `three_ds_auth_status`
 	ThreeDsAuthStatus *string `json:"three_ds_auth_status,omitempty"`

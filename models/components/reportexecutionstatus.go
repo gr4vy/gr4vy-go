@@ -15,3 +15,14 @@ const (
 func (e ReportExecutionStatus) ToPointer() *ReportExecutionStatus {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ReportExecutionStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "dispatched", "failed", "pending", "processing", "succeeded":
+			return true
+		}
+	}
+	return false
+}

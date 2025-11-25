@@ -14,3 +14,14 @@ const (
 func (e CVVResponseCode) ToPointer() *CVVResponseCode {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *CVVResponseCode) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "match", "no_match", "unavailable", "not_provided":
+			return true
+		}
+	}
+	return false
+}

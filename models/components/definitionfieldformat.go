@@ -15,3 +15,14 @@ const (
 func (e DefinitionFieldFormat) ToPointer() *DefinitionFieldFormat {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *DefinitionFieldFormat) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "text", "multiline", "number", "timezone", "boolean":
+			return true
+		}
+	}
+	return false
+}

@@ -20,6 +20,17 @@ func (e SubscriptionFrequencyUnit) ToPointer() *SubscriptionFrequencyUnit {
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *SubscriptionFrequencyUnit) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "MONTH", "WEEK", "BI_MONTHLY", "ONDEMAND", "QUARTER", "YEAR", "SEMI_ANNUALLY", "DAY":
+			return true
+		}
+	}
+	return false
+}
+
 type DlocalUPIRecurringInfoOptions struct {
 	// Indicates the frequency unit for the subscription. Allowed values are: `DAY`, `WEEK`, `MONTH`, `BI_MONTHLY`, `QUARTER`, `SEMI_ANNUALLY`, `YEAR`, `ONDEMAND`.
 	SubscriptionFrequencyUnit SubscriptionFrequencyUnit `json:"subscription_frequency_unit"`

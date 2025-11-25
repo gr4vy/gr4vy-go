@@ -34,3 +34,14 @@ const (
 func (e CardScheme) ToPointer() *CardScheme {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *CardScheme) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "accel", "amex", "bancontact", "carte-bancaire", "cirrus", "culiance", "dankort", "diners-club", "discover", "eftpos-australia", "elo", "hipercard", "jcb", "maestro", "mastercard", "mir", "nyce", "other", "pulse", "rupay", "star", "uatp", "unionpay", "visa":
+			return true
+		}
+	}
+	return false
+}

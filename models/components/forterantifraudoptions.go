@@ -14,6 +14,17 @@ func (e ForterAntiFraudOptionsDeliveryType) ToPointer() *ForterAntiFraudOptionsD
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ForterAntiFraudOptionsDeliveryType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "DIGITAL", "PHYSICAL", "HYBRID":
+			return true
+		}
+	}
+	return false
+}
+
 type ForterAntiFraudOptions struct {
 	// The delivery type
 	DeliveryType *ForterAntiFraudOptionsDeliveryType `json:"delivery_type,omitempty"`

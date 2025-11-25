@@ -19,3 +19,14 @@ const (
 func (e TransactionStatus) ToPointer() *TransactionStatus {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TransactionStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "processing", "authorization_succeeded", "authorization_declined", "authorization_failed", "authorization_voided", "authorization_void_pending", "capture_succeeded", "capture_pending", "buyer_approval_pending":
+			return true
+		}
+	}
+	return false
+}

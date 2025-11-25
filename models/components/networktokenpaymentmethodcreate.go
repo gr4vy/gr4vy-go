@@ -17,6 +17,17 @@ func (e CardSource) ToPointer() *CardSource {
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *CardSource) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "apple-pay", "google-pay":
+			return true
+		}
+	}
+	return false
+}
+
 type NetworkTokenPaymentMethodCreate struct {
 	// Always `network-token`.
 	method string `const:"network-token" json:"method"`

@@ -15,3 +15,14 @@ const (
 func (e ThreeDSecureStatus) ToPointer() *ThreeDSecureStatus {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ThreeDSecureStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "setup_error", "error", "declined", "cancelled", "complete":
+			return true
+		}
+	}
+	return false
+}

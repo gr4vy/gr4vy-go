@@ -9,6 +9,8 @@ type CybersourceOptions struct {
 	MerchantDefinedInformation map[string]string `json:"merchant_defined_information,omitempty"`
 	// The shipping method for this transaction.
 	ShipToMethod *string `json:"ship_to_method,omitempty"`
+	// Brief description of the order or any comment you wish to add to the order.
+	Comments *string `json:"comments,omitempty"`
 }
 
 func (c *CybersourceOptions) GetMetaKeyMerchantID() *string {
@@ -30,4 +32,11 @@ func (c *CybersourceOptions) GetShipToMethod() *string {
 		return nil
 	}
 	return c.ShipToMethod
+}
+
+func (c *CybersourceOptions) GetComments() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Comments
 }

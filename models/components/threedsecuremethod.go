@@ -12,3 +12,14 @@ const (
 func (e ThreeDSecureMethod) ToPointer() *ThreeDSecureMethod {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ThreeDSecureMethod) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "challenge", "frictionless":
+			return true
+		}
+	}
+	return false
+}

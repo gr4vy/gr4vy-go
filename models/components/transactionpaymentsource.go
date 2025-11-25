@@ -16,3 +16,14 @@ const (
 func (e TransactionPaymentSource) ToPointer() *TransactionPaymentSource {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TransactionPaymentSource) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "ecommerce", "moto", "recurring", "installment", "card_on_file":
+			return true
+		}
+	}
+	return false
+}
