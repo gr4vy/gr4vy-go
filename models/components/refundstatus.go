@@ -15,3 +15,14 @@ const (
 func (e RefundStatus) ToPointer() *RefundStatus {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *RefundStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "processing", "succeeded", "failed", "declined", "voided":
+			return true
+		}
+	}
+	return false
+}

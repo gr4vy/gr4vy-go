@@ -14,3 +14,14 @@ const (
 func (e AdyenCardAutoRescueScenariosEnum) ToPointer() *AdyenCardAutoRescueScenariosEnum {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AdyenCardAutoRescueScenariosEnum) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "AutoRescueSuccessfulFirst", "AutoRescueSuccessfulSecond", "AutoRescueFailed", "AutoRescueFraud":
+			return true
+		}
+	}
+	return false
+}

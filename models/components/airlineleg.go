@@ -18,6 +18,17 @@ func (e RouteType) ToPointer() *RouteType {
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *RouteType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "round_trip", "one_way":
+			return true
+		}
+	}
+	return false
+}
+
 type AirlineLeg struct {
 	// Arrival airport code of leg. 3-letter ISO code according to IATA official directory.
 	ArrivalAirport *string `json:"arrival_airport,omitempty"`

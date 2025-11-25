@@ -13,6 +13,17 @@ func (e ForterAntiFraudOptionsCartItemBasicItemDataType) ToPointer() *ForterAnti
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ForterAntiFraudOptionsCartItemBasicItemDataType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "TANGIBLE", "NON_TANGIBLE":
+			return true
+		}
+	}
+	return false
+}
+
 type ForterAntiFraudOptionsCartItemBasicItemData struct {
 	// Indicates whether the item is a physical good or a service/digital item.
 	Type *ForterAntiFraudOptionsCartItemBasicItemDataType `json:"type,omitempty"`

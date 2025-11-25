@@ -18,3 +18,14 @@ const (
 func (e InstrumentType) ToPointer() *InstrumentType {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *InstrumentType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "pan", "card_token", "redirect", "redirect_token", "googlepay", "applepay", "network_token", "plaid":
+			return true
+		}
+	}
+	return false
+}

@@ -18,6 +18,17 @@ func (e AgeGroup) ToPointer() *AgeGroup {
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AgeGroup) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "adult", "infant":
+			return true
+		}
+	}
+	return false
+}
+
 type AirlinePassenger struct {
 	// The age group for the passenger.
 	AgeGroup *AgeGroup `json:"age_group,omitempty"`

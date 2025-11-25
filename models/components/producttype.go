@@ -18,3 +18,14 @@ const (
 func (e ProductType) ToPointer() *ProductType {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ProductType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "physical", "discount", "shipping_fee", "sales_tax", "digital", "gift_card", "store_credit", "surcharge":
+			return true
+		}
+	}
+	return false
+}

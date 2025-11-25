@@ -14,3 +14,14 @@ const (
 func (e NetworkTokenStatus) ToPointer() *NetworkTokenStatus {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *NetworkTokenStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "active", "inactive", "suspended", "deleted":
+			return true
+		}
+	}
+	return false
+}

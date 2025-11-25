@@ -12,3 +12,14 @@ const (
 func (e ApprovalTarget) ToPointer() *ApprovalTarget {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ApprovalTarget) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "new_window", "any":
+			return true
+		}
+	}
+	return false
+}

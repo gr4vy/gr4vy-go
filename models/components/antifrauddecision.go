@@ -17,3 +17,14 @@ const (
 func (e AntiFraudDecision) ToPointer() *AntiFraudDecision {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AntiFraudDecision) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "accept", "error", "exception", "reject", "review", "skipped", "pending":
+			return true
+		}
+	}
+	return false
+}

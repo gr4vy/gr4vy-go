@@ -15,3 +15,14 @@ const (
 func (e ErrorLocation) ToPointer() *ErrorLocation {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ErrorLocation) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "query", "body", "path", "header", "unknown":
+			return true
+		}
+	}
+	return false
+}

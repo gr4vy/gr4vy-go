@@ -15,6 +15,17 @@ func (e PaypalShippingOptionsItemType) ToPointer() *PaypalShippingOptionsItemTyp
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *PaypalShippingOptionsItemType) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "SHIPPING", "PICKUP", "PICKUP_IN_STORE", "PICKUP_FROM_PERSON":
+			return true
+		}
+	}
+	return false
+}
+
 type PaypalShippingOptionsItem struct {
 	// A unique ID that identifies a payer-selected shipping option.
 	ID string `json:"id"`

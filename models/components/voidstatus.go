@@ -14,3 +14,14 @@ const (
 func (e VoidStatus) ToPointer() *VoidStatus {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *VoidStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "succeeded", "pending", "declined", "failed":
+			return true
+		}
+	}
+	return false
+}

@@ -16,3 +16,14 @@ const (
 func (e AuditLogAction) ToPointer() *AuditLogAction {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *AuditLogAction) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "created", "updated", "deleted", "voided", "canceled", "captured":
+			return true
+		}
+	}
+	return false
+}

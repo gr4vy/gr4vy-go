@@ -11,3 +11,14 @@ const (
 func (e PayoutCategory) ToPointer() *PayoutCategory {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *PayoutCategory) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "online_gambling":
+			return true
+		}
+	}
+	return false
+}

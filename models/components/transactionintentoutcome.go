@@ -13,3 +13,14 @@ const (
 func (e TransactionIntentOutcome) ToPointer() *TransactionIntentOutcome {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TransactionIntentOutcome) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "pending", "succeeded", "failed":
+			return true
+		}
+	}
+	return false
+}

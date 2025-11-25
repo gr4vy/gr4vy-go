@@ -14,3 +14,14 @@ const (
 func (e IntegrationClient) ToPointer() *IntegrationClient {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *IntegrationClient) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "redirect", "web", "android", "ios":
+			return true
+		}
+	}
+	return false
+}

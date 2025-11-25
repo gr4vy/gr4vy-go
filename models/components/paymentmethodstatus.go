@@ -15,3 +15,14 @@ const (
 func (e PaymentMethodStatus) ToPointer() *PaymentMethodStatus {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *PaymentMethodStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "processing", "buyer_approval_required", "succeeded", "failed", "paused":
+			return true
+		}
+	}
+	return false
+}

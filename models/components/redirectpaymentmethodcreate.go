@@ -113,6 +113,17 @@ func (e RedirectPaymentMethodCreateMethod) ToPointer() *RedirectPaymentMethodCre
 	return &e
 }
 
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *RedirectPaymentMethodCreateMethod) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "abitab", "affirm", "afterpay", "alipay", "alipayhk", "arcuspaynetwork", "bacs", "bancontact", "banked", "bcp", "becs", "bitpay", "blik", "boleto", "boost", "cashapp", "clearpay", "dana", "dcb", "dlocal", "ebanx", "efecty", "eps", "everydaypay", "gcash", "gem", "gemds", "giropay", "givingblock", "gocardless", "gopay", "grabpay", "ideal", "kakaopay", "kcp", "khipu", "klarna", "latitude", "latitudeds", "laybuy", "linepay", "linkaja", "maybankqrpay", "mercadopago", "multibanco", "multipago", "netbanking", "nupay", "nequi", "oney_10x", "oney_12x", "oney_3x", "oney_4x", "oney_6x", "ovo", "oxxo", "p24", "pagoefectivo", "payid", "paymaya", "paypal", "paypalpaylater", "payto", "payvalida", "picpay", "pix", "pse", "rabbitlinepay", "rapipago", "razorpay", "redpagos", "scalapay", "sepa", "servipag", "shopeepay", "singteldash", "smartpay", "sofort", "spei", "stitch", "stripedd", "stripetoken", "tapi", "tapifintechs", "thaiqr", "touchngo", "truemoney", "trustly", "trustlyeurope", "upi", "venmo", "vipps", "waave", "webpay", "wechat", "yape", "zippay":
+			return true
+		}
+	}
+	return false
+}
+
 // RedirectPaymentMethodCreate - Create a transaction for an APM/LPM that requires a redirect.
 type RedirectPaymentMethodCreate struct {
 	// The method to use, this can be any of the methods that support redirect requests.

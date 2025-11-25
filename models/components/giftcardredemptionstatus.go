@@ -14,3 +14,14 @@ const (
 func (e GiftCardRedemptionStatus) ToPointer() *GiftCardRedemptionStatus {
 	return &e
 }
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *GiftCardRedemptionStatus) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "created", "succeeded", "failed", "skipped":
+			return true
+		}
+	}
+	return false
+}
