@@ -37,7 +37,19 @@ func main() {
         log.Fatal(err)
     }
     if res != nil {
-        // handle response
+        for {
+            // handle items
+
+            res, err = res.Next()
+
+            if err != nil {
+                // handle error
+            }
+
+            if res == nil {
+                break
+            }
+        }
     }
 }
 ```
@@ -55,7 +67,7 @@ func main() {
 
 ### Response
 
-**[*components.TransactionEvents](../../models/components/transactionevents.md), error**
+**[*operations.ListTransactionEventsResponse](../../models/operations/listtransactioneventsresponse.md), error**
 
 ### Errors
 

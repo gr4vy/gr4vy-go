@@ -88,8 +88,8 @@ type TransactionEvent struct {
 	// The specific event name.
 	Name Name `json:"name"`
 	// The date this event was created at.
-	CreatedAt time.Time               `json:"created_at"`
-	Context   TransactionEventContext `json:"context"`
+	CreatedAt time.Time      `json:"created_at"`
+	Context   map[string]any `json:"context"`
 }
 
 func (t TransactionEvent) MarshalJSON() ([]byte, error) {
@@ -128,9 +128,9 @@ func (t *TransactionEvent) GetCreatedAt() time.Time {
 	return t.CreatedAt
 }
 
-func (t *TransactionEvent) GetContext() TransactionEventContext {
+func (t *TransactionEvent) GetContext() map[string]any {
 	if t == nil {
-		return TransactionEventContext{}
+		return map[string]any{}
 	}
 	return t.Context
 }

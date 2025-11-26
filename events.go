@@ -13,7 +13,10 @@ import (
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/models/operations"
 	"github.com/gr4vy/gr4vy-go/retry"
+	"github.com/spyzhov/ajson"
 	"net/http"
+	"strconv"
+	"strings"
 )
 
 type Events struct {
@@ -32,7 +35,7 @@ func newEvents(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hooks.H
 
 // List transaction events
 // Retrieve a paginated list of events related to processing a transaction, including status changes, API requests, and webhook delivery attempts. Events are listed in chronological order, with the most recent events first.
-func (s *Events) List(ctx context.Context, transactionID string, cursor *string, limit *int64, merchantAccountID *string, opts ...operations.Option) (*components.TransactionEvents, error) {
+func (s *Events) List(ctx context.Context, transactionID string, cursor *string, limit *int64, merchantAccountID *string, opts ...operations.Option) (*operations.ListTransactionEventsResponse, error) {
 	request := operations.ListTransactionEventsRequest{
 		TransactionID:     transactionID,
 		Cursor:            cursor,
@@ -205,6 +208,54 @@ func (s *Events) List(ctx context.Context, transactionID string, cursor *string,
 		}
 	}
 
+	res := &operations.ListTransactionEventsResponse{}
+	res.Next = func() (*operations.ListTransactionEventsResponse, error) {
+		rawBody, err := utils.ConsumeRawBody(httpRes)
+		if err != nil {
+			return nil, err
+		}
+
+		b, err := ajson.Unmarshal(rawBody)
+		if err != nil {
+			return nil, err
+		}
+		nC, err := ajson.Eval(b, "$.next_cursor")
+		if err != nil {
+			return nil, err
+		}
+		var nCVal string
+
+		if nC.IsNumeric() {
+			numVal, err := nC.GetNumeric()
+			if err != nil {
+				return nil, err
+			}
+			// GetNumeric returns as float64 so convert to the appropriate type.
+			nCVal = strconv.FormatFloat(numVal, 'f', 0, 64)
+		} else {
+			val, err := nC.Value()
+			if err != nil {
+				return nil, err
+			}
+			if val == nil {
+				return nil, nil
+			}
+			nCVal = val.(string)
+			if strings.TrimSpace(nCVal) == "" {
+				return nil, nil
+			}
+		}
+
+		return s.List(
+			ctx,
+			transactionID,
+			&nCVal,
+			limit,
+			merchantAccountID,
+			opts...,
+		)
+	}
+
 	switch {
 	case httpRes.StatusCode == 200:
 		switch {
@@ -219,7 +270,7 @@ func (s *Events) List(ctx context.Context, transactionID string, cursor *string,
 				return nil, err
 			}
 
-			return &out, nil
+			res.Result = out
 		default:
 			rawBody, err := utils.ConsumeRawBody(httpRes)
 			if err != nil {
@@ -499,6 +550,6 @@ func (s *Events) List(ctx context.Context, transactionID string, cursor *string,
 		return nil, apierrors.NewAPIError("unknown status code returned", httpRes.StatusCode, string(rawBody), httpRes)
 	}
 
-	return nil, nil
+	return res, nil
 
 }
