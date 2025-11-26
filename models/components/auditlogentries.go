@@ -8,7 +8,7 @@ import (
 
 type AuditLogEntries struct {
 	// A list of items returned for this request.
-	Items []AuditLogEntryOutput `json:"items"`
+	Items []AuditLogEntry `json:"items"`
 	// The number of items for this page.
 	Limit *int64 `default:"20" json:"limit"`
 	// The cursor pointing at the next page of items.
@@ -28,9 +28,9 @@ func (a *AuditLogEntries) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (a *AuditLogEntries) GetItems() []AuditLogEntryOutput {
+func (a *AuditLogEntries) GetItems() []AuditLogEntry {
 	if a == nil {
-		return []AuditLogEntryOutput{}
+		return []AuditLogEntry{}
 	}
 	return a.Items
 }

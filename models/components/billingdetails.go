@@ -2,7 +2,11 @@
 
 package components
 
-type BillingDetailsInput struct {
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
+type BillingDetails struct {
 	// The first name(s) or given name for the buyer.
 	FirstName *string `json:"first_name,omitempty"`
 	// The last name, or family name, of the buyer.
@@ -17,42 +21,53 @@ type BillingDetailsInput struct {
 	TaxID *TaxID `json:"tax_id,omitempty"`
 }
 
-func (b *BillingDetailsInput) GetFirstName() *string {
+func (b BillingDetails) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(b, "", false)
+}
+
+func (b *BillingDetails) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &b, "", false, nil); err != nil {
+		return err
+	}
+	return nil
+}
+
+func (b *BillingDetails) GetFirstName() *string {
 	if b == nil {
 		return nil
 	}
 	return b.FirstName
 }
 
-func (b *BillingDetailsInput) GetLastName() *string {
+func (b *BillingDetails) GetLastName() *string {
 	if b == nil {
 		return nil
 	}
 	return b.LastName
 }
 
-func (b *BillingDetailsInput) GetEmailAddress() *string {
+func (b *BillingDetails) GetEmailAddress() *string {
 	if b == nil {
 		return nil
 	}
 	return b.EmailAddress
 }
 
-func (b *BillingDetailsInput) GetPhoneNumber() *string {
+func (b *BillingDetails) GetPhoneNumber() *string {
 	if b == nil {
 		return nil
 	}
 	return b.PhoneNumber
 }
 
-func (b *BillingDetailsInput) GetAddress() *Address {
+func (b *BillingDetails) GetAddress() *Address {
 	if b == nil {
 		return nil
 	}
 	return b.Address
 }
 
-func (b *BillingDetailsInput) GetTaxID() *TaxID {
+func (b *BillingDetails) GetTaxID() *TaxID {
 	if b == nil {
 		return nil
 	}

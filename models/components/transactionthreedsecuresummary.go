@@ -72,7 +72,7 @@ func (u ResponseData) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type ResponseData: all fields are null")
 }
 
-type TransactionThreeDSecureSummaryOutput struct {
+type TransactionThreeDSecureSummary struct {
 	// The version of 3DS used for this transaction.
 	Version *string `json:"version,omitempty"`
 	// The status of the 3DS challenge for this transaction.
@@ -85,46 +85,46 @@ type TransactionThreeDSecureSummaryOutput struct {
 	ErrorData *ThreeDSecureError `json:"error_data,omitempty"`
 }
 
-func (t TransactionThreeDSecureSummaryOutput) MarshalJSON() ([]byte, error) {
+func (t TransactionThreeDSecureSummary) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(t, "", false)
 }
 
-func (t *TransactionThreeDSecureSummaryOutput) UnmarshalJSON(data []byte) error {
+func (t *TransactionThreeDSecureSummary) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *TransactionThreeDSecureSummaryOutput) GetVersion() *string {
+func (t *TransactionThreeDSecureSummary) GetVersion() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Version
 }
 
-func (t *TransactionThreeDSecureSummaryOutput) GetStatus() *ThreeDSecureStatus {
+func (t *TransactionThreeDSecureSummary) GetStatus() *ThreeDSecureStatus {
 	if t == nil {
 		return nil
 	}
 	return t.Status
 }
 
-func (t *TransactionThreeDSecureSummaryOutput) GetMethod() *ThreeDSecureMethod {
+func (t *TransactionThreeDSecureSummary) GetMethod() *ThreeDSecureMethod {
 	if t == nil {
 		return nil
 	}
 	return t.Method
 }
 
-func (t *TransactionThreeDSecureSummaryOutput) GetResponseData() *ResponseData {
+func (t *TransactionThreeDSecureSummary) GetResponseData() *ResponseData {
 	if t == nil {
 		return nil
 	}
 	return t.ResponseData
 }
 
-func (t *TransactionThreeDSecureSummaryOutput) GetErrorData() *ThreeDSecureError {
+func (t *TransactionThreeDSecureSummary) GetErrorData() *ThreeDSecureError {
 	if t == nil {
 		return nil
 	}

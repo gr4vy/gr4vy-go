@@ -53,49 +53,49 @@ func (v *VoidTransactionRequest) GetMerchantAccountID() *string {
 type ResponseVoidTransactionType string
 
 const (
-	ResponseVoidTransactionTypeTransactionOutput     ResponseVoidTransactionType = "Transaction-Output"
-	ResponseVoidTransactionTypeTransactionVoidOutput ResponseVoidTransactionType = "TransactionVoid-Output"
+	ResponseVoidTransactionTypeTransaction     ResponseVoidTransactionType = "Transaction"
+	ResponseVoidTransactionTypeTransactionVoid ResponseVoidTransactionType = "TransactionVoid"
 )
 
 // ResponseVoidTransaction - Successful Response
 type ResponseVoidTransaction struct {
-	TransactionOutput     *components.TransactionOutput     `queryParam:"inline,name=Response_Void_Transaction"`
-	TransactionVoidOutput *components.TransactionVoidOutput `queryParam:"inline,name=Response_Void_Transaction"`
+	Transaction     *components.Transaction     `queryParam:"inline,name=Response_Void_Transaction"`
+	TransactionVoid *components.TransactionVoid `queryParam:"inline,name=Response_Void_Transaction"`
 
 	Type ResponseVoidTransactionType
 }
 
-func CreateResponseVoidTransactionTransactionOutput(transactionOutput components.TransactionOutput) ResponseVoidTransaction {
-	typ := ResponseVoidTransactionTypeTransactionOutput
+func CreateResponseVoidTransactionTransaction(transaction components.Transaction) ResponseVoidTransaction {
+	typ := ResponseVoidTransactionTypeTransaction
 
 	return ResponseVoidTransaction{
-		TransactionOutput: &transactionOutput,
-		Type:              typ,
+		Transaction: &transaction,
+		Type:        typ,
 	}
 }
 
-func CreateResponseVoidTransactionTransactionVoidOutput(transactionVoidOutput components.TransactionVoidOutput) ResponseVoidTransaction {
-	typ := ResponseVoidTransactionTypeTransactionVoidOutput
+func CreateResponseVoidTransactionTransactionVoid(transactionVoid components.TransactionVoid) ResponseVoidTransaction {
+	typ := ResponseVoidTransactionTypeTransactionVoid
 
 	return ResponseVoidTransaction{
-		TransactionVoidOutput: &transactionVoidOutput,
-		Type:                  typ,
+		TransactionVoid: &transactionVoid,
+		Type:            typ,
 	}
 }
 
 func (u *ResponseVoidTransaction) UnmarshalJSON(data []byte) error {
 
-	var transactionOutput components.TransactionOutput = components.TransactionOutput{}
-	if err := utils.UnmarshalJSON(data, &transactionOutput, "", true, nil); err == nil {
-		u.TransactionOutput = &transactionOutput
-		u.Type = ResponseVoidTransactionTypeTransactionOutput
+	var transaction components.Transaction = components.Transaction{}
+	if err := utils.UnmarshalJSON(data, &transaction, "", true, nil); err == nil {
+		u.Transaction = &transaction
+		u.Type = ResponseVoidTransactionTypeTransaction
 		return nil
 	}
 
-	var transactionVoidOutput components.TransactionVoidOutput = components.TransactionVoidOutput{}
-	if err := utils.UnmarshalJSON(data, &transactionVoidOutput, "", true, nil); err == nil {
-		u.TransactionVoidOutput = &transactionVoidOutput
-		u.Type = ResponseVoidTransactionTypeTransactionVoidOutput
+	var transactionVoid components.TransactionVoid = components.TransactionVoid{}
+	if err := utils.UnmarshalJSON(data, &transactionVoid, "", true, nil); err == nil {
+		u.TransactionVoid = &transactionVoid
+		u.Type = ResponseVoidTransactionTypeTransactionVoid
 		return nil
 	}
 
@@ -103,12 +103,12 @@ func (u *ResponseVoidTransaction) UnmarshalJSON(data []byte) error {
 }
 
 func (u ResponseVoidTransaction) MarshalJSON() ([]byte, error) {
-	if u.TransactionOutput != nil {
-		return utils.MarshalJSON(u.TransactionOutput, "", true)
+	if u.Transaction != nil {
+		return utils.MarshalJSON(u.Transaction, "", true)
 	}
 
-	if u.TransactionVoidOutput != nil {
-		return utils.MarshalJSON(u.TransactionVoidOutput, "", true)
+	if u.TransactionVoid != nil {
+		return utils.MarshalJSON(u.TransactionVoid, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type ResponseVoidTransaction: all fields are null")

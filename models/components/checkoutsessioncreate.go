@@ -12,7 +12,7 @@ type CheckoutSessionCreate struct {
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Provide buyer details for the transaction. No buyer resource will be created on Gr4vy when used.
-	Buyer *GuestBuyerInput `json:"buyer,omitempty"`
+	Buyer *GuestBuyer `json:"buyer,omitempty"`
 	// The airline addendum data which describes the airline booking associated with this transaction.
 	Airline *Airline `json:"airline,omitempty"`
 	// The total amount for this transaction.
@@ -50,7 +50,7 @@ func (c *CheckoutSessionCreate) GetMetadata() map[string]string {
 	return c.Metadata
 }
 
-func (c *CheckoutSessionCreate) GetBuyer() *GuestBuyerInput {
+func (c *CheckoutSessionCreate) GetBuyer() *GuestBuyer {
 	if c == nil {
 		return nil
 	}

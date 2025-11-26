@@ -94,7 +94,7 @@ func (u Context) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type Context: all fields are null")
 }
 
-type PaymentOptionOutput struct {
+type PaymentOption struct {
 	type_                 *string  `const:"payment-option" json:"type"`
 	Method                string   `json:"method"`
 	IconURL               *string  `json:"icon_url,omitempty"`
@@ -105,64 +105,64 @@ type PaymentOptionOutput struct {
 	Context               *Context `json:"context,omitempty"`
 }
 
-func (p PaymentOptionOutput) MarshalJSON() ([]byte, error) {
+func (p PaymentOption) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(p, "", false)
 }
 
-func (p *PaymentOptionOutput) UnmarshalJSON(data []byte) error {
+func (p *PaymentOption) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"method", "mode", "can_store_payment_method", "can_delay_capture"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (p *PaymentOptionOutput) GetType() *string {
+func (p *PaymentOption) GetType() *string {
 	return types.Pointer("payment-option")
 }
 
-func (p *PaymentOptionOutput) GetMethod() string {
+func (p *PaymentOption) GetMethod() string {
 	if p == nil {
 		return ""
 	}
 	return p.Method
 }
 
-func (p *PaymentOptionOutput) GetIconURL() *string {
+func (p *PaymentOption) GetIconURL() *string {
 	if p == nil {
 		return nil
 	}
 	return p.IconURL
 }
 
-func (p *PaymentOptionOutput) GetMode() Mode {
+func (p *PaymentOption) GetMode() Mode {
 	if p == nil {
 		return Mode("")
 	}
 	return p.Mode
 }
 
-func (p *PaymentOptionOutput) GetLabel() *string {
+func (p *PaymentOption) GetLabel() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Label
 }
 
-func (p *PaymentOptionOutput) GetCanStorePaymentMethod() bool {
+func (p *PaymentOption) GetCanStorePaymentMethod() bool {
 	if p == nil {
 		return false
 	}
 	return p.CanStorePaymentMethod
 }
 
-func (p *PaymentOptionOutput) GetCanDelayCapture() bool {
+func (p *PaymentOption) GetCanDelayCapture() bool {
 	if p == nil {
 		return false
 	}
 	return p.CanDelayCapture
 }
 
-func (p *PaymentOptionOutput) GetContext() *Context {
+func (p *PaymentOption) GetContext() *Context {
 	if p == nil {
 		return nil
 	}

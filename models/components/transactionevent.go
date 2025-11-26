@@ -80,7 +80,7 @@ func (e *Name) IsExact() bool {
 	return false
 }
 
-type TransactionEventOutput struct {
+type TransactionEvent struct {
 	// Always `transaction-event`.
 	type_ *string `const:"transaction-event" json:"type"`
 	// The ID for the event.
@@ -88,49 +88,49 @@ type TransactionEventOutput struct {
 	// The specific event name.
 	Name Name `json:"name"`
 	// The date this event was created at.
-	CreatedAt time.Time      `json:"created_at"`
-	Context   map[string]any `json:"context"`
+	CreatedAt time.Time               `json:"created_at"`
+	Context   TransactionEventContext `json:"context"`
 }
 
-func (t TransactionEventOutput) MarshalJSON() ([]byte, error) {
+func (t TransactionEvent) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(t, "", false)
 }
 
-func (t *TransactionEventOutput) UnmarshalJSON(data []byte) error {
+func (t *TransactionEvent) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"id", "name", "created_at", "context"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *TransactionEventOutput) GetType() *string {
+func (t *TransactionEvent) GetType() *string {
 	return types.Pointer("transaction-event")
 }
 
-func (t *TransactionEventOutput) GetID() string {
+func (t *TransactionEvent) GetID() string {
 	if t == nil {
 		return ""
 	}
 	return t.ID
 }
 
-func (t *TransactionEventOutput) GetName() Name {
+func (t *TransactionEvent) GetName() Name {
 	if t == nil {
 		return Name("")
 	}
 	return t.Name
 }
 
-func (t *TransactionEventOutput) GetCreatedAt() time.Time {
+func (t *TransactionEvent) GetCreatedAt() time.Time {
 	if t == nil {
 		return time.Time{}
 	}
 	return t.CreatedAt
 }
 
-func (t *TransactionEventOutput) GetContext() map[string]any {
+func (t *TransactionEvent) GetContext() TransactionEventContext {
 	if t == nil {
-		return map[string]any{}
+		return TransactionEventContext{}
 	}
 	return t.Context
 }

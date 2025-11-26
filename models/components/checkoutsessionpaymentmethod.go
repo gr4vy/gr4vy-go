@@ -7,7 +7,7 @@ import (
 	"github.com/gr4vy/gr4vy-go/types"
 )
 
-type CheckoutSessionPaymentMethodOutput struct {
+type CheckoutSessionPaymentMethod struct {
 	// Always `payment-method`
 	type_ *string `const:"payment-method" json:"type"`
 	// The ID of the payment method.
@@ -24,54 +24,54 @@ type CheckoutSessionPaymentMethodOutput struct {
 	Fingerprint *string `json:"fingerprint,omitempty"`
 }
 
-func (c CheckoutSessionPaymentMethodOutput) MarshalJSON() ([]byte, error) {
+func (c CheckoutSessionPaymentMethod) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(c, "", false)
 }
 
-func (c *CheckoutSessionPaymentMethodOutput) UnmarshalJSON(data []byte) error {
+func (c *CheckoutSessionPaymentMethod) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (c *CheckoutSessionPaymentMethodOutput) GetType() *string {
+func (c *CheckoutSessionPaymentMethod) GetType() *string {
 	return types.Pointer("payment-method")
 }
 
-func (c *CheckoutSessionPaymentMethodOutput) GetID() *string {
+func (c *CheckoutSessionPaymentMethod) GetID() *string {
 	if c == nil {
 		return nil
 	}
 	return c.ID
 }
 
-func (c *CheckoutSessionPaymentMethodOutput) GetDetails() *CheckoutSessionPaymentMethodDetails {
+func (c *CheckoutSessionPaymentMethod) GetDetails() *CheckoutSessionPaymentMethodDetails {
 	if c == nil {
 		return nil
 	}
 	return c.Details
 }
 
-func (c *CheckoutSessionPaymentMethodOutput) GetLabel() *string {
+func (c *CheckoutSessionPaymentMethod) GetLabel() *string {
 	if c == nil {
 		return nil
 	}
 	return c.Label
 }
 
-func (c *CheckoutSessionPaymentMethodOutput) GetMethod() *string {
+func (c *CheckoutSessionPaymentMethod) GetMethod() *string {
 	return types.Pointer("card")
 }
 
-func (c *CheckoutSessionPaymentMethodOutput) GetScheme() *CardScheme {
+func (c *CheckoutSessionPaymentMethod) GetScheme() *CardScheme {
 	if c == nil {
 		return nil
 	}
 	return c.Scheme
 }
 
-func (c *CheckoutSessionPaymentMethodOutput) GetFingerprint() *string {
+func (c *CheckoutSessionPaymentMethod) GetFingerprint() *string {
 	if c == nil {
 		return nil
 	}

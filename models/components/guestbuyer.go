@@ -2,48 +2,48 @@
 
 package components
 
-type GuestBuyerOutput struct {
+type GuestBuyer struct {
 	// The display name for the buyer.
 	DisplayName *string `json:"display_name,omitempty"`
 	// The merchant identifier for this buyer.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 	// The billing name, address, email, and other fields for this buyer.
-	BillingDetails *BillingDetailsOutput `json:"billing_details,omitempty"`
+	BillingDetails *BillingDetails `json:"billing_details,omitempty"`
 	// The buyer account number
 	AccountNumber *string `json:"account_number,omitempty"`
 	// The optional shipping details for this buyer.
 	ShippingDetails *ShippingDetailsCreate `json:"shipping_details,omitempty"`
 }
 
-func (g *GuestBuyerOutput) GetDisplayName() *string {
+func (g *GuestBuyer) GetDisplayName() *string {
 	if g == nil {
 		return nil
 	}
 	return g.DisplayName
 }
 
-func (g *GuestBuyerOutput) GetExternalIdentifier() *string {
+func (g *GuestBuyer) GetExternalIdentifier() *string {
 	if g == nil {
 		return nil
 	}
 	return g.ExternalIdentifier
 }
 
-func (g *GuestBuyerOutput) GetBillingDetails() *BillingDetailsOutput {
+func (g *GuestBuyer) GetBillingDetails() *BillingDetails {
 	if g == nil {
 		return nil
 	}
 	return g.BillingDetails
 }
 
-func (g *GuestBuyerOutput) GetAccountNumber() *string {
+func (g *GuestBuyer) GetAccountNumber() *string {
 	if g == nil {
 		return nil
 	}
 	return g.AccountNumber
 }
 
-func (g *GuestBuyerOutput) GetShippingDetails() *ShippingDetailsCreate {
+func (g *GuestBuyer) GetShippingDetails() *ShippingDetailsCreate {
 	if g == nil {
 		return nil
 	}

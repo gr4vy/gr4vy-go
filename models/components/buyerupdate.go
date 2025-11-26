@@ -11,7 +11,7 @@ type BuyerUpdate struct {
 	// The buyer account number
 	AccountNumber *string `json:"account_number,omitempty"`
 	// The billing name, address, email, and other fields for this buyer.
-	BillingDetails *BillingDetailsInput `json:"billing_details,omitempty"`
+	BillingDetails *BillingDetails `json:"billing_details,omitempty"`
 }
 
 func (b *BuyerUpdate) GetDisplayName() *string {
@@ -35,7 +35,7 @@ func (b *BuyerUpdate) GetAccountNumber() *string {
 	return b.AccountNumber
 }
 
-func (b *BuyerUpdate) GetBillingDetails() *BillingDetailsInput {
+func (b *BuyerUpdate) GetBillingDetails() *BillingDetails {
 	if b == nil {
 		return nil
 	}

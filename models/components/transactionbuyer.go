@@ -7,7 +7,7 @@ import (
 	"github.com/gr4vy/gr4vy-go/types"
 )
 
-type TransactionBuyerOutput struct {
+type TransactionBuyer struct {
 	// Always `buyer`.
 	type_ *string `const:"buyer" json:"type"`
 	// The ID for the buyer.
@@ -17,55 +17,55 @@ type TransactionBuyerOutput struct {
 	// The merchant identifier for this buyer.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 	// The billing name, address, email, and other fields for this buyer.
-	BillingDetails *BillingDetailsOutput `json:"billing_details,omitempty"`
+	BillingDetails *BillingDetails `json:"billing_details,omitempty"`
 	// The buyer account number.
 	AccountNumber *string `json:"account_number,omitempty"`
 }
 
-func (t TransactionBuyerOutput) MarshalJSON() ([]byte, error) {
+func (t TransactionBuyer) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(t, "", false)
 }
 
-func (t *TransactionBuyerOutput) UnmarshalJSON(data []byte) error {
+func (t *TransactionBuyer) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *TransactionBuyerOutput) GetType() *string {
+func (t *TransactionBuyer) GetType() *string {
 	return types.Pointer("buyer")
 }
 
-func (t *TransactionBuyerOutput) GetID() *string {
+func (t *TransactionBuyer) GetID() *string {
 	if t == nil {
 		return nil
 	}
 	return t.ID
 }
 
-func (t *TransactionBuyerOutput) GetDisplayName() *string {
+func (t *TransactionBuyer) GetDisplayName() *string {
 	if t == nil {
 		return nil
 	}
 	return t.DisplayName
 }
 
-func (t *TransactionBuyerOutput) GetExternalIdentifier() *string {
+func (t *TransactionBuyer) GetExternalIdentifier() *string {
 	if t == nil {
 		return nil
 	}
 	return t.ExternalIdentifier
 }
 
-func (t *TransactionBuyerOutput) GetBillingDetails() *BillingDetailsOutput {
+func (t *TransactionBuyer) GetBillingDetails() *BillingDetails {
 	if t == nil {
 		return nil
 	}
 	return t.BillingDetails
 }
 
-func (t *TransactionBuyerOutput) GetAccountNumber() *string {
+func (t *TransactionBuyer) GetAccountNumber() *string {
 	if t == nil {
 		return nil
 	}
