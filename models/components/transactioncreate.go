@@ -407,7 +407,7 @@ type TransactionCreate struct {
 	// The optional payment method to use for this transaction. This field is required if no `gift_cards` have been added.
 	PaymentMethod *TransactionCreatePaymentMethod `json:"payment_method,omitempty"`
 	// Guest buyer details provided inline rather than creating a buyer resource beforehand and using the `buyer_id` or `buyer_external_identifier` keys. No buyer resource will be created on Gr4vy when used.
-	Buyer *GuestBuyerInput `json:"buyer,omitempty"`
+	Buyer *GuestBuyer `json:"buyer,omitempty"`
 	// The ID of the buyer to associate this payment method to. If this field is provided then the `buyer_external_identifier` field needs to be unset. If a stored payment method or gift card is provided, then the buyer for that payment method needs to match the buyer for this field.
 	BuyerID *string `json:"buyer_id,omitempty"`
 	// The `external_identifier` of the buyer to associate this payment method to. If this field is provided then the `buyer_id` field needs to be unset. If a stored payment method or gift card is provided, then the buyer for that payment method needs to match the buyer for this field.
@@ -534,7 +534,7 @@ func (t *TransactionCreate) GetPaymentMethod() *TransactionCreatePaymentMethod {
 	return t.PaymentMethod
 }
 
-func (t *TransactionCreate) GetBuyer() *GuestBuyerInput {
+func (t *TransactionCreate) GetBuyer() *GuestBuyer {
 	if t == nil {
 		return nil
 	}

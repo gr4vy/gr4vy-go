@@ -5,15 +5,15 @@ Successful Response
 
 ## Supported Types
 
-### TransactionOutput
+### Transaction
 
 ```go
-responseVoidTransaction := operations.CreateResponseVoidTransactionTransactionOutput(components.TransactionOutput{/* values here */})
+responseVoidTransaction := operations.CreateResponseVoidTransactionTransaction(components.Transaction{/* values here */})
 ```
 
-### TransactionVoidOutput
+### TransactionVoid
 
 ```go
-responseVoidTransaction := operations.CreateResponseVoidTransactionTransactionVoidOutput(components.TransactionVoidOutput{/* values here */})
+responseVoidTransaction := operations.CreateResponseVoidTransactionTransactionVoid(components.TransactionVoid{/* values here */})
 ```
 

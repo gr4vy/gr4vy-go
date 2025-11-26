@@ -14,7 +14,7 @@ type CheckoutSession struct {
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Provide buyer details for the transaction. No buyer resource will be created on Gr4vy when used.
-	Buyer *GuestBuyerOutput `json:"buyer,omitempty"`
+	Buyer *GuestBuyer `json:"buyer,omitempty"`
 	// The airline addendum data which describes the airline booking associated with this transaction.
 	Airline *Airline `json:"airline,omitempty"`
 	// The total amount for this transaction.
@@ -30,7 +30,7 @@ type CheckoutSession struct {
 	// The date and time when this checkout session expires.
 	ExpiresAt time.Time `json:"expires_at"`
 	// Information about the payment method stored on the checkout session.
-	PaymentMethod *CheckoutSessionPaymentMethodOutput `json:"payment_method,omitempty"`
+	PaymentMethod *CheckoutSessionPaymentMethod `json:"payment_method,omitempty"`
 }
 
 func (c CheckoutSession) MarshalJSON() ([]byte, error) {
@@ -58,7 +58,7 @@ func (c *CheckoutSession) GetMetadata() map[string]string {
 	return c.Metadata
 }
 
-func (c *CheckoutSession) GetBuyer() *GuestBuyerOutput {
+func (c *CheckoutSession) GetBuyer() *GuestBuyer {
 	if c == nil {
 		return nil
 	}
@@ -111,7 +111,7 @@ func (c *CheckoutSession) GetExpiresAt() time.Time {
 	return c.ExpiresAt
 }
 
-func (c *CheckoutSession) GetPaymentMethod() *CheckoutSessionPaymentMethodOutput {
+func (c *CheckoutSession) GetPaymentMethod() *CheckoutSessionPaymentMethod {
 	if c == nil {
 		return nil
 	}

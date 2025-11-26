@@ -61,49 +61,49 @@ func (c *CaptureTransactionRequest) GetTransactionCaptureCreate() components.Tra
 type ResponseCaptureTransactionType string
 
 const (
-	ResponseCaptureTransactionTypeTransactionOutput        ResponseCaptureTransactionType = "Transaction-Output"
-	ResponseCaptureTransactionTypeTransactionCaptureOutput ResponseCaptureTransactionType = "TransactionCapture-Output"
+	ResponseCaptureTransactionTypeTransaction        ResponseCaptureTransactionType = "Transaction"
+	ResponseCaptureTransactionTypeTransactionCapture ResponseCaptureTransactionType = "TransactionCapture"
 )
 
 // ResponseCaptureTransaction - Successful Response
 type ResponseCaptureTransaction struct {
-	TransactionOutput        *components.TransactionOutput        `queryParam:"inline,name=Response_Capture_Transaction"`
-	TransactionCaptureOutput *components.TransactionCaptureOutput `queryParam:"inline,name=Response_Capture_Transaction"`
+	Transaction        *components.Transaction        `queryParam:"inline,name=Response_Capture_Transaction"`
+	TransactionCapture *components.TransactionCapture `queryParam:"inline,name=Response_Capture_Transaction"`
 
 	Type ResponseCaptureTransactionType
 }
 
-func CreateResponseCaptureTransactionTransactionOutput(transactionOutput components.TransactionOutput) ResponseCaptureTransaction {
-	typ := ResponseCaptureTransactionTypeTransactionOutput
+func CreateResponseCaptureTransactionTransaction(transaction components.Transaction) ResponseCaptureTransaction {
+	typ := ResponseCaptureTransactionTypeTransaction
 
 	return ResponseCaptureTransaction{
-		TransactionOutput: &transactionOutput,
-		Type:              typ,
+		Transaction: &transaction,
+		Type:        typ,
 	}
 }
 
-func CreateResponseCaptureTransactionTransactionCaptureOutput(transactionCaptureOutput components.TransactionCaptureOutput) ResponseCaptureTransaction {
-	typ := ResponseCaptureTransactionTypeTransactionCaptureOutput
+func CreateResponseCaptureTransactionTransactionCapture(transactionCapture components.TransactionCapture) ResponseCaptureTransaction {
+	typ := ResponseCaptureTransactionTypeTransactionCapture
 
 	return ResponseCaptureTransaction{
-		TransactionCaptureOutput: &transactionCaptureOutput,
-		Type:                     typ,
+		TransactionCapture: &transactionCapture,
+		Type:               typ,
 	}
 }
 
 func (u *ResponseCaptureTransaction) UnmarshalJSON(data []byte) error {
 
-	var transactionOutput components.TransactionOutput = components.TransactionOutput{}
-	if err := utils.UnmarshalJSON(data, &transactionOutput, "", true, nil); err == nil {
-		u.TransactionOutput = &transactionOutput
-		u.Type = ResponseCaptureTransactionTypeTransactionOutput
+	var transaction components.Transaction = components.Transaction{}
+	if err := utils.UnmarshalJSON(data, &transaction, "", true, nil); err == nil {
+		u.Transaction = &transaction
+		u.Type = ResponseCaptureTransactionTypeTransaction
 		return nil
 	}
 
-	var transactionCaptureOutput components.TransactionCaptureOutput = components.TransactionCaptureOutput{}
-	if err := utils.UnmarshalJSON(data, &transactionCaptureOutput, "", true, nil); err == nil {
-		u.TransactionCaptureOutput = &transactionCaptureOutput
-		u.Type = ResponseCaptureTransactionTypeTransactionCaptureOutput
+	var transactionCapture components.TransactionCapture = components.TransactionCapture{}
+	if err := utils.UnmarshalJSON(data, &transactionCapture, "", true, nil); err == nil {
+		u.TransactionCapture = &transactionCapture
+		u.Type = ResponseCaptureTransactionTypeTransactionCapture
 		return nil
 	}
 
@@ -111,12 +111,12 @@ func (u *ResponseCaptureTransaction) UnmarshalJSON(data []byte) error {
 }
 
 func (u ResponseCaptureTransaction) MarshalJSON() ([]byte, error) {
-	if u.TransactionOutput != nil {
-		return utils.MarshalJSON(u.TransactionOutput, "", true)
+	if u.Transaction != nil {
+		return utils.MarshalJSON(u.Transaction, "", true)
 	}
 
-	if u.TransactionCaptureOutput != nil {
-		return utils.MarshalJSON(u.TransactionCaptureOutput, "", true)
+	if u.TransactionCapture != nil {
+		return utils.MarshalJSON(u.TransactionCapture, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type ResponseCaptureTransaction: all fields are null")

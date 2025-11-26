@@ -4,12 +4,12 @@ package components
 
 type PaymentMethodSummaries struct {
 	// A list of items returned for this request.
-	Items []PaymentMethodSummaryOutput `json:"items"`
+	Items []PaymentMethodSummary `json:"items"`
 }
 
-func (p *PaymentMethodSummaries) GetItems() []PaymentMethodSummaryOutput {
+func (p *PaymentMethodSummaries) GetItems() []PaymentMethodSummary {
 	if p == nil {
-		return []PaymentMethodSummaryOutput{}
+		return []PaymentMethodSummary{}
 	}
 	return p.Items
 }

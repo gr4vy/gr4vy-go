@@ -91,7 +91,7 @@ type PayoutCreate struct {
 	// The `id` of a stored buyer to use for this payout Use this instead of the `buyer` or `buyer_external_identifier`.
 	BuyerID *string `json:"buyer_id,omitempty"`
 	// Inline buyer details for the payout. Use this instead of the `buyer_id` or `buyer_external_identifier`.
-	Buyer *GuestBuyerInput `json:"buyer,omitempty"`
+	Buyer *GuestBuyer `json:"buyer,omitempty"`
 	// The `external_identifier` of a stored buyer to use for this payout. Use this instead of the `buyer_id` or `buyer`.
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 	// Merchant information for the source of the payout.
@@ -149,7 +149,7 @@ func (p *PayoutCreate) GetBuyerID() *string {
 	return p.BuyerID
 }
 
-func (p *PayoutCreate) GetBuyer() *GuestBuyerInput {
+func (p *PayoutCreate) GetBuyer() *GuestBuyer {
 	if p == nil {
 		return nil
 	}

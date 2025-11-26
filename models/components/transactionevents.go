@@ -8,7 +8,7 @@ import (
 
 type TransactionEvents struct {
 	// A list of items returned for this request.
-	Items []TransactionEventOutput `json:"items"`
+	Items []TransactionEvent `json:"items"`
 	// The number of items for this page.
 	Limit *int64 `default:"20" json:"limit"`
 	// The cursor pointing at the next page of items.
@@ -28,9 +28,9 @@ func (t *TransactionEvents) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (t *TransactionEvents) GetItems() []TransactionEventOutput {
+func (t *TransactionEvents) GetItems() []TransactionEvent {
 	if t == nil {
-		return []TransactionEventOutput{}
+		return []TransactionEvent{}
 	}
 	return t.Items
 }

@@ -7,10 +7,10 @@ import (
 	"github.com/gr4vy/gr4vy-go/types"
 )
 
-type TransactionCaptureOutput struct {
-	// Always `transaction-capture`.
-	type_  *string       `const:"transaction-capture" json:"type"`
-	Status CaptureStatus `json:"status"`
+type TransactionVoid struct {
+	// Always `transaction-void`.
+	type_  *string    `const:"transaction-void" json:"type"`
+	Status VoidStatus `json:"status"`
 	// The standardized error code set by Gr4vy.
 	Code *string `json:"code"`
 	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
@@ -18,55 +18,55 @@ type TransactionCaptureOutput struct {
 	// This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
 	RawResponseDescription *string `json:"raw_response_description"`
 	// A full transaction resource.
-	Transaction TransactionOutput `json:"transaction"`
+	Transaction Transaction `json:"transaction"`
 }
 
-func (t TransactionCaptureOutput) MarshalJSON() ([]byte, error) {
+func (t TransactionVoid) MarshalJSON() ([]byte, error) {
 	return utils.MarshalJSON(t, "", false)
 }
 
-func (t *TransactionCaptureOutput) UnmarshalJSON(data []byte) error {
+func (t *TransactionVoid) UnmarshalJSON(data []byte) error {
 	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"status", "transaction"}); err != nil {
 		return err
 	}
 	return nil
 }
 
-func (t *TransactionCaptureOutput) GetType() *string {
-	return types.Pointer("transaction-capture")
+func (t *TransactionVoid) GetType() *string {
+	return types.Pointer("transaction-void")
 }
 
-func (t *TransactionCaptureOutput) GetStatus() CaptureStatus {
+func (t *TransactionVoid) GetStatus() VoidStatus {
 	if t == nil {
-		return CaptureStatus("")
+		return VoidStatus("")
 	}
 	return t.Status
 }
 
-func (t *TransactionCaptureOutput) GetCode() *string {
+func (t *TransactionVoid) GetCode() *string {
 	if t == nil {
 		return nil
 	}
 	return t.Code
 }
 
-func (t *TransactionCaptureOutput) GetRawResponseCode() *string {
+func (t *TransactionVoid) GetRawResponseCode() *string {
 	if t == nil {
 		return nil
 	}
 	return t.RawResponseCode
 }
 
-func (t *TransactionCaptureOutput) GetRawResponseDescription() *string {
+func (t *TransactionVoid) GetRawResponseDescription() *string {
 	if t == nil {
 		return nil
 	}
 	return t.RawResponseDescription
 }
 
-func (t *TransactionCaptureOutput) GetTransaction() TransactionOutput {
+func (t *TransactionVoid) GetTransaction() Transaction {
 	if t == nil {
-		return TransactionOutput{}
+		return Transaction{}
 	}
 	return t.Transaction
 }

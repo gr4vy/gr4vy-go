@@ -20,7 +20,7 @@ type Buyer struct {
 	// The merchant identifier for this buyer.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 	// The billing name, address, email, and other fields for this buyer.
-	BillingDetails *BillingDetailsOutput `json:"billing_details,omitempty"`
+	BillingDetails *BillingDetails `json:"billing_details,omitempty"`
 	// The buyer account number
 	AccountNumber *string `json:"account_number,omitempty"`
 	// The date this buyer was created at.
@@ -72,7 +72,7 @@ func (b *Buyer) GetExternalIdentifier() *string {
 	return b.ExternalIdentifier
 }
 
-func (b *Buyer) GetBillingDetails() *BillingDetailsOutput {
+func (b *Buyer) GetBillingDetails() *BillingDetails {
 	if b == nil {
 		return nil
 	}

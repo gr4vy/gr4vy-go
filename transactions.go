@@ -600,7 +600,7 @@ func (s *Transactions) List(ctx context.Context, request operations.ListTransact
 
 // Create transaction
 // Create a new transaction using a supported payment method. If additional buyer authorization is required, an approval URL will be returned. Duplicated gift card numbers are not supported.
-func (s *Transactions) Create(ctx context.Context, transactionCreate components.TransactionCreate, merchantAccountID *string, idempotencyKey *string, xForwardedFor *string, opts ...operations.Option) (*components.TransactionOutput, error) {
+func (s *Transactions) Create(ctx context.Context, transactionCreate components.TransactionCreate, merchantAccountID *string, idempotencyKey *string, xForwardedFor *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.CreateTransactionRequest{
 		MerchantAccountID: merchantAccountID,
 		IdempotencyKey:    idempotencyKey,
@@ -779,7 +779,7 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 				return nil, err
 			}
 
-			var out components.TransactionOutput
+			var out components.Transaction
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1070,7 +1070,7 @@ func (s *Transactions) Create(ctx context.Context, transactionCreate components.
 
 // Get transaction
 // Retrieve the details of a transaction by its unique identifier.
-func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.TransactionOutput, error) {
+func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.GetTransactionRequest{
 		TransactionID:     transactionID,
 		MerchantAccountID: merchantAccountID,
@@ -1246,7 +1246,7 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 				return nil, err
 			}
 
-			var out components.TransactionOutput
+			var out components.Transaction
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -1537,7 +1537,7 @@ func (s *Transactions) Get(ctx context.Context, transactionID string, merchantAc
 
 // Update - Manually update a transaction
 // Manually updates a transaction.
-func (s *Transactions) Update(ctx context.Context, transactionID string, transactionUpdate components.TransactionUpdate, merchantAccountID *string, opts ...operations.Option) (*components.TransactionOutput, error) {
+func (s *Transactions) Update(ctx context.Context, transactionID string, transactionUpdate components.TransactionUpdate, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.UpdateTransactionRequest{
 		TransactionID:     transactionID,
 		MerchantAccountID: merchantAccountID,
@@ -1715,7 +1715,7 @@ func (s *Transactions) Update(ctx context.Context, transactionID string, transac
 				return nil, err
 			}
 
-			var out components.TransactionOutput
+			var out components.Transaction
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
@@ -3399,7 +3399,7 @@ func (s *Transactions) Cancel(ctx context.Context, transactionID string, merchan
 
 // Sync transaction
 // Synchronizes the status of a transaction with the underlying payment service provider. This is useful for transactions in a pending state to check if they've been completed or failed. Only available for some payment service providers.
-func (s *Transactions) Sync(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.TransactionOutput, error) {
+func (s *Transactions) Sync(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.Transaction, error) {
 	request := operations.SyncTransactionRequest{
 		TransactionID:     transactionID,
 		MerchantAccountID: merchantAccountID,
@@ -3569,7 +3569,7 @@ func (s *Transactions) Sync(ctx context.Context, transactionID string, merchantA
 				return nil, err
 			}
 
-			var out components.TransactionOutput
+			var out components.Transaction
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

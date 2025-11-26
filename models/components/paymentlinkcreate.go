@@ -9,7 +9,7 @@ import (
 
 type PaymentLinkCreate struct {
 	// The guest buyer for the payment link.
-	Buyer *GuestBuyerInput `json:"buyer,omitempty"`
+	Buyer *GuestBuyer `json:"buyer,omitempty"`
 	// The expiration date and time for the payment link.
 	ExpiresAt *time.Time `json:"expires_at,omitempty"`
 	// Connection options for the payment link.
@@ -62,7 +62,7 @@ func (p *PaymentLinkCreate) UnmarshalJSON(data []byte) error {
 	return nil
 }
 
-func (p *PaymentLinkCreate) GetBuyer() *GuestBuyerInput {
+func (p *PaymentLinkCreate) GetBuyer() *GuestBuyer {
 	if p == nil {
 		return nil
 	}
