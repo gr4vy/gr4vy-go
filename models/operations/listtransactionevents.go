@@ -4,6 +4,7 @@ package operations
 
 import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
+	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
 type ListTransactionEventsGlobals struct {
@@ -65,4 +66,17 @@ func (l *ListTransactionEventsRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return l.MerchantAccountID
+}
+
+type ListTransactionEventsResponse struct {
+	Result components.TransactionEvents
+
+	Next func() (*ListTransactionEventsResponse, error)
+}
+
+func (l *ListTransactionEventsResponse) GetResult() components.TransactionEvents {
+	if l == nil {
+		return components.TransactionEvents{}
+	}
+	return l.Result
 }

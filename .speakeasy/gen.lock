@@ -1,18 +1,17 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 386a35fe6cf0478f190e1bc732f26bb9
+  docChecksum: c359b777d9411155cb20e9d5dbb36c52
   docVersion: 1.0.0
-  speakeasyVersion: 1.661.4
+  speakeasyVersion: 1.662.0
   generationVersion: 2.763.3
-  releaseVersion: 1.10.0
-  configChecksum: 67088c0a1967941cd889a165cc117a62
+  releaseVersion: 1.11.0
+  configChecksum: 85b0a09fad6b0d2a5d377e63b0590971
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 features:
   go:
     additionalDependencies: 0.1.0
-    additionalProperties: 0.1.2
     constsAndDefaults: 0.1.12
     core: 3.13.3
     defaultEnabledRetries: 0.2.0
@@ -288,7 +287,6 @@ generatedFiles:
   - /models/components/transactionconnectionoptions.go
   - /models/components/transactioncreate.go
   - /models/components/transactionevent.go
-  - /models/components/transactioneventcontext.go
   - /models/components/transactionevents.go
   - /models/components/transactiongiftcard.go
   - /models/components/transactionintent.go
@@ -692,7 +690,6 @@ generatedFiles:
   - docs/models/components/transactioncreate.md
   - docs/models/components/transactioncreatepaymentmethod.md
   - docs/models/components/transactionevent.md
-  - docs/models/components/transactioneventcontext.md
   - docs/models/components/transactionevents.md
   - docs/models/components/transactiongiftcard.md
   - docs/models/components/transactionintent.md
@@ -879,6 +876,7 @@ generatedFiles:
   - docs/models/operations/listreportsresponse.md
   - docs/models/operations/listtransactioneventsglobals.md
   - docs/models/operations/listtransactioneventsrequest.md
+  - docs/models/operations/listtransactioneventsresponse.md
   - docs/models/operations/listtransactionrefundsglobals.md
   - docs/models/operations/listtransactionrefundsrequest.md
   - docs/models/operations/listtransactionsettlementsglobals.md
@@ -4334,5 +4332,3 @@ generatedTests: {}
 releaseNotes: |
   ## Go SDK Changes Detected:
   * `Gr4vy.Transactions.Events.List()`:  `response.Items.[].Context` **Changed** **Breaking** :warning:
-  * `Gr4vy.Transactions.Capture()`:  `response` **Changed**
-  * `Gr4vy.Transactions.Void()`:  `response` **Changed**
