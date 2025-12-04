@@ -63,6 +63,10 @@ type PaymentLink struct {
 	ShippingDetails *ShippingDetails `json:"shipping_details,omitempty"`
 	// The connection options for the payment link.
 	ConnectionOptions map[string]map[string]any `json:"connection_options,omitempty"`
+	// Whether the payment method was stored.
+	Store *bool `default:"false" json:"store"`
+	// The ID of the buyer to associate with the stored payment method.
+	BuyerID *string `json:"buyer_id,omitempty"`
 }
 
 func (p PaymentLink) MarshalJSON() ([]byte, error) {
@@ -267,4 +271,18 @@ func (p *PaymentLink) GetConnectionOptions() map[string]map[string]any {
 		return nil
 	}
 	return p.ConnectionOptions
+}
+
+func (p *PaymentLink) GetStore() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.Store
+}
+
+func (p *PaymentLink) GetBuyerID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BuyerID
 }

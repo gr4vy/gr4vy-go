@@ -49,6 +49,10 @@ type PaymentLinkCreate struct {
 	Metadata map[string]any `json:"metadata,omitempty"`
 	// The way payment method information made it to this transaction.
 	PaymentSource *TransactionPaymentSource `json:"payment_source,omitempty"`
+	// Whether to store the payment method for future use.
+	Store *bool `default:"false" json:"store"`
+	// The ID of the buyer to associate the payment method with. Note: When `buyer_id` is provided, the payment link should be treated as a secret as it will allow the user to manage payment methods for the associated buyer.
+	BuyerID *string `json:"buyer_id,omitempty"`
 }
 
 func (p PaymentLinkCreate) MarshalJSON() ([]byte, error) {
@@ -207,4 +211,18 @@ func (p *PaymentLinkCreate) GetPaymentSource() *TransactionPaymentSource {
 		return nil
 	}
 	return p.PaymentSource
+}
+
+func (p *PaymentLinkCreate) GetStore() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.Store
+}
+
+func (p *PaymentLinkCreate) GetBuyerID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BuyerID
 }
