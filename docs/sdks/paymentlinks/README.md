@@ -40,6 +40,7 @@ func main() {
         Amount: 1299,
         Country: "DE",
         Currency: "EUR",
+        Store: gr4vygo.Pointer(true),
     })
     if err != nil {
         log.Fatal(err)
