@@ -20,10 +20,10 @@ const (
 
 // Spec - The report specification.
 type Spec struct {
-	TransactionsReportSpec        *TransactionsReportSpec        `queryParam:"inline,name=Spec"`
-	TransactionRetriesReportSpec  *TransactionRetriesReportSpec  `queryParam:"inline,name=Spec"`
-	DetailedSettlementReportSpec  *DetailedSettlementReportSpec  `queryParam:"inline,name=Spec"`
-	AccountsReceivablesReportSpec *AccountsReceivablesReportSpec `queryParam:"inline,name=Spec"`
+	TransactionsReportSpec        *TransactionsReportSpec        `queryParam:"inline,name=Spec" union:"member"`
+	TransactionRetriesReportSpec  *TransactionRetriesReportSpec  `queryParam:"inline,name=Spec" union:"member"`
+	DetailedSettlementReportSpec  *DetailedSettlementReportSpec  `queryParam:"inline,name=Spec" union:"member"`
+	AccountsReceivablesReportSpec *AccountsReceivablesReportSpec `queryParam:"inline,name=Spec" union:"member"`
 
 	Type SpecType
 }
@@ -156,7 +156,7 @@ func (r ReportCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (r *ReportCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"name", "schedule", "schedule_enabled", "spec"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
 		return err
 	}
 	return nil

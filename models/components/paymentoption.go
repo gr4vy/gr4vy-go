@@ -18,9 +18,9 @@ const (
 )
 
 type Context struct {
-	WalletPaymentOptionContext    *WalletPaymentOptionContext    `queryParam:"inline,name=Context"`
-	GooglePayPaymentOptionContext *GooglePayPaymentOptionContext `queryParam:"inline,name=Context"`
-	PaymentOptionContext          *PaymentOptionContext          `queryParam:"inline,name=Context"`
+	WalletPaymentOptionContext    *WalletPaymentOptionContext    `queryParam:"inline,name=Context" union:"member"`
+	GooglePayPaymentOptionContext *GooglePayPaymentOptionContext `queryParam:"inline,name=Context" union:"member"`
+	PaymentOptionContext          *PaymentOptionContext          `queryParam:"inline,name=Context" union:"member"`
 
 	Type ContextType
 }
@@ -110,7 +110,7 @@ func (p PaymentOption) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PaymentOption) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"method", "mode", "can_store_payment_method", "can_delay_capture"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
 		return err
 	}
 	return nil

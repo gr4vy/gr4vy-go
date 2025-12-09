@@ -30,10 +30,10 @@ const (
 )
 
 type Body struct {
-	CardPaymentMethodCreate            *components.CardPaymentMethodCreate            `queryParam:"inline,name=Body"`
-	RedirectPaymentMethodCreate        *components.RedirectPaymentMethodCreate        `queryParam:"inline,name=Body"`
-	CheckoutSessionPaymentMethodCreate *components.CheckoutSessionPaymentMethodCreate `queryParam:"inline,name=Body"`
-	PlaidPaymentMethodCreate           *components.PlaidPaymentMethodCreate           `queryParam:"inline,name=Body"`
+	CardPaymentMethodCreate            *components.CardPaymentMethodCreate            `queryParam:"inline,name=Body" union:"member"`
+	RedirectPaymentMethodCreate        *components.RedirectPaymentMethodCreate        `queryParam:"inline,name=Body" union:"member"`
+	CheckoutSessionPaymentMethodCreate *components.CheckoutSessionPaymentMethodCreate `queryParam:"inline,name=Body" union:"member"`
+	PlaidPaymentMethodCreate           *components.PlaidPaymentMethodCreate           `queryParam:"inline,name=Body" union:"member"`
 
 	Type BodyType
 }

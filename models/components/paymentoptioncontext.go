@@ -16,8 +16,8 @@ const (
 )
 
 type RequiredFields1 struct {
-	Boolean *bool `queryParam:"inline,name="`
-	Any     any   `queryParam:"inline,name="`
+	Boolean *bool `queryParam:"inline,name=" union:"member"`
+	Any     any   `queryParam:"inline,name=" union:"member"`
 
 	Type RequiredFields1Type
 }
@@ -79,8 +79,8 @@ const (
 )
 
 type RequiredFields2 struct {
-	Boolean              *bool                      `queryParam:"inline,name=required_fields"`
-	MapOfRequiredFields1 map[string]RequiredFields1 `queryParam:"inline,name=required_fields"`
+	Boolean              *bool                      `queryParam:"inline,name=required_fields" union:"member"`
+	MapOfRequiredFields1 map[string]RequiredFields1 `queryParam:"inline,name=required_fields" union:"member"`
 
 	Type RequiredFields2Type
 }

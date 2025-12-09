@@ -19,7 +19,7 @@ func (r ReportExecutionURL) MarshalJSON() ([]byte, error) {
 }
 
 func (r *ReportExecutionURL) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"url", "expires_at"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
 		return err
 	}
 	return nil

@@ -22,7 +22,7 @@ func (p PaymentServiceDefinitions) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PaymentServiceDefinitions) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"items"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
 		return err
 	}
 	return nil

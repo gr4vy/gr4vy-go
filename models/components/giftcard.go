@@ -37,7 +37,7 @@ func (g GiftCard) MarshalJSON() ([]byte, error) {
 }
 
 func (g *GiftCard) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &g, "", false, []string{"id", "merchant_account_id", "gift_card_service", "bin", "sub_bin", "last4", "created_at", "updated_at"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &g, "", false, nil); err != nil {
 		return err
 	}
 	return nil

@@ -34,7 +34,7 @@ func (l ListTransactionEventsRequest) MarshalJSON() ([]byte, error) {
 }
 
 func (l *ListTransactionEventsRequest) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &l, "", false, []string{"transaction_id"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
 		return err
 	}
 	return nil

@@ -28,7 +28,7 @@ func (m MerchantProfileSchemeSummary) MarshalJSON() ([]byte, error) {
 }
 
 func (m *MerchantProfileSchemeSummary) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &m, "", false, []string{"merchant_acquirer_bin", "merchant_acquirer_id", "merchant_name", "merchant_country_code", "merchant_category_code", "merchant_url", "created_at"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &m, "", false, nil); err != nil {
 		return err
 	}
 	return nil

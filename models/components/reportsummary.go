@@ -29,7 +29,7 @@ func (r ReportSummary) MarshalJSON() ([]byte, error) {
 }
 
 func (r *ReportSummary) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &r, "", false, []string{"id", "merchant_account_id", "name"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &r, "", false, nil); err != nil {
 		return err
 	}
 	return nil

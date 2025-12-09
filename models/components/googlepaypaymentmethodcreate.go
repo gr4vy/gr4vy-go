@@ -17,8 +17,8 @@ const (
 
 // Token - The opaque token as received from the Google Pay JS library. This format may change between JS library versions.
 type Token struct {
-	Str      *string        `queryParam:"inline,name=Token"`
-	MapOfAny map[string]any `queryParam:"inline,name=Token"`
+	Str      *string        `queryParam:"inline,name=Token" union:"member"`
+	MapOfAny map[string]any `queryParam:"inline,name=Token" union:"member"`
 
 	Type TokenType
 }

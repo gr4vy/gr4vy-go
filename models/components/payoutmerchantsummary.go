@@ -34,7 +34,7 @@ func (p PayoutMerchantSummary) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PayoutMerchantSummary) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"name", "identification_number", "phone_number", "url", "merchant_category_code"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
 		return err
 	}
 	return nil
