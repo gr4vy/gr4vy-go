@@ -27,7 +27,7 @@ func (a AuditLogEntry) MarshalJSON() ([]byte, error) {
 }
 
 func (a *AuditLogEntry) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"resource", "action", "user", "timestamp"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, nil); err != nil {
 		return err
 	}
 	return nil

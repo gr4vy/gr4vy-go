@@ -60,7 +60,7 @@ func (p PaymentLinkCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (p *PaymentLinkCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &p, "", false, []string{"amount", "country", "currency"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &p, "", false, nil); err != nil {
 		return err
 	}
 	return nil

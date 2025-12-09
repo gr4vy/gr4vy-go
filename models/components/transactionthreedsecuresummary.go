@@ -17,8 +17,8 @@ const (
 
 // ResponseData - The 3DS data sent to the payment service for this transaction. This will only be populated if external 3DS data was passed in directly as part of the transaction API call, or if our 3DS server returned a status code of `Y` or `A`. In case of a failure to authenticate (status `N`, `R`, or `U`) this field will not be populated. To see full details about the 3DS calls please use our transaction events API.
 type ResponseData struct {
-	ThreeDSecureDataV1 *ThreeDSecureDataV1 `queryParam:"inline,name=Response_Data"`
-	ThreeDSecureV2     *ThreeDSecureV2     `queryParam:"inline,name=Response_Data"`
+	ThreeDSecureDataV1 *ThreeDSecureDataV1 `queryParam:"inline,name=Response_Data" union:"member"`
+	ThreeDSecureV2     *ThreeDSecureV2     `queryParam:"inline,name=Response_Data" union:"member"`
 
 	Type ResponseDataType
 }

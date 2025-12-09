@@ -31,7 +31,7 @@ func (n NetworkToken) MarshalJSON() ([]byte, error) {
 }
 
 func (n *NetworkToken) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &n, "", false, []string{"id", "expiration_date", "payment_method_id", "status", "token", "created_at", "updated_at"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &n, "", false, nil); err != nil {
 		return err
 	}
 	return nil

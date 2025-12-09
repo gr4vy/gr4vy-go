@@ -22,7 +22,7 @@ func (b Buyers) MarshalJSON() ([]byte, error) {
 }
 
 func (b *Buyers) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &b, "", false, []string{"items"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &b, "", false, nil); err != nil {
 		return err
 	}
 	return nil

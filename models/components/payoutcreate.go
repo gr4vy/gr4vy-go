@@ -17,8 +17,8 @@ const (
 
 // PayoutCreatePaymentMethod - The type of payment method to send funds too.
 type PayoutCreatePaymentMethod struct {
-	PaymentMethodCard       *PaymentMethodCard       `queryParam:"inline,name=Payment_Method"`
-	PaymentMethodStoredCard *PaymentMethodStoredCard `queryParam:"inline,name=Payment_Method"`
+	PaymentMethodCard       *PaymentMethodCard       `queryParam:"inline,name=Payment_Method" union:"member"`
+	PaymentMethodStoredCard *PaymentMethodStoredCard `queryParam:"inline,name=Payment_Method" union:"member"`
 
 	Type PayoutCreatePaymentMethodType
 }

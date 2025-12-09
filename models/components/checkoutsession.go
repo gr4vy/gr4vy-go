@@ -38,7 +38,7 @@ func (c CheckoutSession) MarshalJSON() ([]byte, error) {
 }
 
 func (c *CheckoutSession) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &c, "", false, []string{"id", "expires_at"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &c, "", false, nil); err != nil {
 		return err
 	}
 	return nil

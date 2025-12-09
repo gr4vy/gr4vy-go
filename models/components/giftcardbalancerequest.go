@@ -16,8 +16,8 @@ const (
 )
 
 type Item struct {
-	GiftCardRequest       *GiftCardRequest       `queryParam:"inline,name=item"`
-	GiftCardStoredRequest *GiftCardStoredRequest `queryParam:"inline,name=item"`
+	GiftCardRequest       *GiftCardRequest       `queryParam:"inline,name=item" union:"member"`
+	GiftCardStoredRequest *GiftCardStoredRequest `queryParam:"inline,name=item" union:"member"`
 
 	Type ItemType
 }
