@@ -102,5 +102,6 @@ The method to use, this can be any of the methods that support redirect requests
 | `RedirectPaymentMethodCreateMethodWaave`           | waave                                              |
 | `RedirectPaymentMethodCreateMethodWebpay`          | webpay                                             |
 | `RedirectPaymentMethodCreateMethodWechat`          | wechat                                             |
+| `RedirectPaymentMethodCreateMethodWero`            | wero                                               |
 | `RedirectPaymentMethodCreateMethodYape`            | yape                                               |
 | `RedirectPaymentMethodCreateMethodZippay`          | zippay                                             |

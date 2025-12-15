@@ -110,5 +110,6 @@
 | `MethodWaave`            | waave                    |
 | `MethodWebpay`           | webpay                   |
 | `MethodWechat`           | wechat                   |
+| `MethodWero`             | wero                     |
 | `MethodYape`             | yape                     |
 | `MethodZippay`           | zippay                   |
