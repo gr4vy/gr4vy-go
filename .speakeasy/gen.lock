@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 9a5f3e9a474c825a47491a6515c12737
+  docChecksum: 3fe951b3a94056102e5f56f1cf000d36
   docVersion: 1.0.0
-  speakeasyVersion: 1.676.1
-  generationVersion: 2.781.2
-  releaseVersion: 1.12.3
-  configChecksum: 3b18d8d2383208873afec89539526213
+  speakeasyVersion: 1.678.0
+  generationVersion: 2.787.2
+  releaseVersion: 1.12.4
+  configChecksum: ceffd72b32b9b2e02185d63297c1085c
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 24a24e63-f2d6-4535-ba89-b921b9fd2a76
-  pristine_commit_hash: a311776627eaf72641de1f3a7926f998570c2e36
-  pristine_tree_hash: e928e28c05f689db31934f2a2c940535108011b2
+  generation_id: a747e7fe-2f4d-498c-9893-21bde7eb1432
+  pristine_commit_hash: 48ac860d4160f257ec23bb3b0dfe0926071bc0f5
+  pristine_tree_hash: b58a838d38e7781a580313b821fe457f7f28274a
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1106,8 +1106,8 @@ trackedFiles:
     pristine_git_object: dd9206627f96975de8ce636e8e583c3c657f9499
   docs/models/components/taxidkind.md:
     id: dc33a25983a3
-    last_write_checksum: sha1:ce91449cddf74c648e4a5e4722da274d7fb83060
-    pristine_git_object: bef214ca27a5a3653666d4f07e862f6148685c34
+    last_write_checksum: sha1:ffe4e34fd0033492b150d51e3c56afe722b9d104
+    pristine_git_object: 9e41b9fd51996167035923e2d12f53cf8bd7129d
   docs/models/components/threedsecuredata.md:
     id: 4428f3b00058
     last_write_checksum: sha1:e8c2339e0bad7ea1220897bc2b5a35dcbb7d6401
@@ -2246,8 +2246,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:17b99d4a15e9dad3c78785427bd4f911ebb41a7b
-    pristine_git_object: 4155f6a73b7100d3ca96b4020081cd2492a93ede
+    last_write_checksum: sha1:f8a5527b021634c25d30afe013bd260a2c2701ab
+    pristine_git_object: ae331ed9b05eafb02fb98c959f993cc102ee0ba9
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3250,8 +3250,8 @@ trackedFiles:
     pristine_git_object: 1313bc5ee402e4320ff4376613f054acb7eecd87
   models/components/taxidkind.go:
     id: d17717f50c08
-    last_write_checksum: sha1:1b651afef0fe49be9909ff84ccb28e4538af41a4
-    pristine_git_object: 27628ab2a908e1d17e440c540313298f45a04de3
+    last_write_checksum: sha1:782ba100e52a357ce7bd47b960baacc887bd808b
+    pristine_git_object: 758c1b2d14194e49e4fa659bd7d0a50cb1d5a4e7
   models/components/threedsecuredatav1.go:
     id: c2b7087875d5
     last_write_checksum: sha1:f271b202ff13dd48c327e6c5117ed396ee58b548
@@ -7224,7 +7224,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n* `Gr4vy.Payment-Services.List()`: \n  *  `request.Request.Method` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
