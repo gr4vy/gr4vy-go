@@ -5,8 +5,6 @@ package components
 type TrustlyOptions struct {
 	// Indicates to Gr4vy whether or not the stored Trustly agreement needs refreshing.
 	RefreshSplitToken *bool `json:"refreshSplitToken,omitempty"`
-	// URL scheme for an app.
-	URLScheme *string `json:"urlScheme,omitempty"`
 }
 
 func (t *TrustlyOptions) GetRefreshSplitToken() *bool {
@@ -14,11 +12,4 @@ func (t *TrustlyOptions) GetRefreshSplitToken() *bool {
 		return nil
 	}
 	return t.RefreshSplitToken
-}
-
-func (t *TrustlyOptions) GetURLScheme() *string {
-	if t == nil {
-		return nil
-	}
-	return t.URLScheme
 }
