@@ -1,4 +1,4 @@
-speakeasyVersion: 1.678.1
+speakeasyVersion: 1.680.0
 sources:
     Gr4vy:
         sourceNamespace: gr-4-vy
@@ -9,20 +9,20 @@ sources:
             - 1.0.0
     openapi:
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:61351afc4db55f64cd4c77cb77d73a5d4f86fe913fcfa5ee03eae6f870d3f155
-        sourceBlobDigest: sha256:a0ba7bf52584b17b6ec5178408e54b94111145d2010b88d8afcb59dfdba11561
+        sourceRevisionDigest: sha256:c8b64bb4565e5e55f7507aa9617952c67ce881f76c58ffcc6d56e0aef9d8a4f3
+        sourceBlobDigest: sha256:30f6fe3311c6137cb56b0533c9fb288ef593983274a31df13abd12c404beb1a2
         tags:
             - latest
-            - speakeasy-sdk-regen-1765989282
+            - speakeasy-sdk-regen-1766017677
             - 1.0.0
 targets:
     go:
         source: openapi
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:61351afc4db55f64cd4c77cb77d73a5d4f86fe913fcfa5ee03eae6f870d3f155
-        sourceBlobDigest: sha256:a0ba7bf52584b17b6ec5178408e54b94111145d2010b88d8afcb59dfdba11561
+        sourceRevisionDigest: sha256:c8b64bb4565e5e55f7507aa9617952c67ce881f76c58ffcc6d56e0aef9d8a4f3
+        sourceBlobDigest: sha256:30f6fe3311c6137cb56b0533c9fb288ef593983274a31df13abd12c404beb1a2
         codeSamplesNamespace: openapi-go-code-samples
-        codeSamplesRevisionDigest: sha256:f593f54d50e4b08474fbfbc792e9d69e884a50042b9dae37e1c5a0125753cdc8
+        codeSamplesRevisionDigest: sha256:78d4ef52f82311746db1d3f326e05c44143056705640ed7368dbb11ba9e7e465
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
