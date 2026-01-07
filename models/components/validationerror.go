@@ -16,8 +16,8 @@ const (
 )
 
 type Loc struct {
-	Str     *string `queryParam:"inline,name=loc" union:"member"`
-	Integer *int64  `queryParam:"inline,name=loc" union:"member"`
+	Str     *string `queryParam:"inline" union:"member"`
+	Integer *int64  `queryParam:"inline" union:"member"`
 
 	Type LocType
 }

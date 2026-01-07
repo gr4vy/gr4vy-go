@@ -20,10 +20,10 @@ const (
 
 // Spec - The report specification.
 type Spec struct {
-	TransactionsReportSpec        *TransactionsReportSpec        `queryParam:"inline,name=Spec" union:"member"`
-	TransactionRetriesReportSpec  *TransactionRetriesReportSpec  `queryParam:"inline,name=Spec" union:"member"`
-	DetailedSettlementReportSpec  *DetailedSettlementReportSpec  `queryParam:"inline,name=Spec" union:"member"`
-	AccountsReceivablesReportSpec *AccountsReceivablesReportSpec `queryParam:"inline,name=Spec" union:"member"`
+	TransactionsReportSpec        *TransactionsReportSpec        `queryParam:"inline" union:"member"`
+	TransactionRetriesReportSpec  *TransactionRetriesReportSpec  `queryParam:"inline" union:"member"`
+	DetailedSettlementReportSpec  *DetailedSettlementReportSpec  `queryParam:"inline" union:"member"`
+	AccountsReceivablesReportSpec *AccountsReceivablesReportSpec `queryParam:"inline" union:"member"`
 
 	Type SpecType
 }
