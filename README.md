@@ -410,6 +410,10 @@ func main() {
 * [Cancel](docs/sdks/transactions/README.md#cancel) - Cancel transaction
 * [Sync](docs/sdks/transactions/README.md#sync) - Sync transaction
 
+#### [Transactions.Actions](docs/sdks/actions/README.md)
+
+* [List](docs/sdks/actions/README.md#list) - Get Flow actions for transaction
+
 #### [Transactions.Events](docs/sdks/events/README.md)
 
 * [List](docs/sdks/events/README.md#list) - List transaction events
