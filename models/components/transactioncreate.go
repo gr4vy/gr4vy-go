@@ -26,17 +26,17 @@ const (
 
 // TransactionCreatePaymentMethod - The optional payment method to use for this transaction. This field is required if no `gift_cards` have been added.
 type TransactionCreatePaymentMethod struct {
-	CardWithURLPaymentMethodCreate            *CardWithURLPaymentMethodCreate            `queryParam:"inline,name=Payment_Method" union:"member"`
-	RedirectPaymentMethodCreate               *RedirectPaymentMethodCreate               `queryParam:"inline,name=Payment_Method" union:"member"`
-	TokenPaymentMethodCreate                  *TokenPaymentMethodCreate                  `queryParam:"inline,name=Payment_Method" union:"member"`
-	ApplePayPaymentMethodCreate               *ApplePayPaymentMethodCreate               `queryParam:"inline,name=Payment_Method" union:"member"`
-	ClickToPayPaymentMethodCreate             *ClickToPayPaymentMethodCreate             `queryParam:"inline,name=Payment_Method" union:"member"`
-	ClickToPayFPANPaymentMethodCreate         *ClickToPayFPANPaymentMethodCreate         `queryParam:"inline,name=Payment_Method" union:"member"`
-	GooglePayPaymentMethodCreate              *GooglePayPaymentMethodCreate              `queryParam:"inline,name=Payment_Method" union:"member"`
-	GooglePayFPANPaymentMethodCreate          *GooglePayFPANPaymentMethodCreate          `queryParam:"inline,name=Payment_Method" union:"member"`
-	NetworkTokenPaymentMethodCreate           *NetworkTokenPaymentMethodCreate           `queryParam:"inline,name=Payment_Method" union:"member"`
-	PlaidPaymentMethodCreate                  *PlaidPaymentMethodCreate                  `queryParam:"inline,name=Payment_Method" union:"member"`
-	CheckoutSessionWithURLPaymentMethodCreate *CheckoutSessionWithURLPaymentMethodCreate `queryParam:"inline,name=Payment_Method" union:"member"`
+	CardWithURLPaymentMethodCreate            *CardWithURLPaymentMethodCreate            `queryParam:"inline" union:"member"`
+	RedirectPaymentMethodCreate               *RedirectPaymentMethodCreate               `queryParam:"inline" union:"member"`
+	TokenPaymentMethodCreate                  *TokenPaymentMethodCreate                  `queryParam:"inline" union:"member"`
+	ApplePayPaymentMethodCreate               *ApplePayPaymentMethodCreate               `queryParam:"inline" union:"member"`
+	ClickToPayPaymentMethodCreate             *ClickToPayPaymentMethodCreate             `queryParam:"inline" union:"member"`
+	ClickToPayFPANPaymentMethodCreate         *ClickToPayFPANPaymentMethodCreate         `queryParam:"inline" union:"member"`
+	GooglePayPaymentMethodCreate              *GooglePayPaymentMethodCreate              `queryParam:"inline" union:"member"`
+	GooglePayFPANPaymentMethodCreate          *GooglePayFPANPaymentMethodCreate          `queryParam:"inline" union:"member"`
+	NetworkTokenPaymentMethodCreate           *NetworkTokenPaymentMethodCreate           `queryParam:"inline" union:"member"`
+	PlaidPaymentMethodCreate                  *PlaidPaymentMethodCreate                  `queryParam:"inline" union:"member"`
+	CheckoutSessionWithURLPaymentMethodCreate *CheckoutSessionWithURLPaymentMethodCreate `queryParam:"inline" union:"member"`
 
 	Type TransactionCreatePaymentMethodType
 }
@@ -278,8 +278,8 @@ const (
 )
 
 type GiftCardUnion struct {
-	GiftCardTransactionCreate      *GiftCardTransactionCreate      `queryParam:"inline,name=gift_card" union:"member"`
-	GiftCardTokenTransactionCreate *GiftCardTokenTransactionCreate `queryParam:"inline,name=gift_card" union:"member"`
+	GiftCardTransactionCreate      *GiftCardTransactionCreate      `queryParam:"inline" union:"member"`
+	GiftCardTokenTransactionCreate *GiftCardTokenTransactionCreate `queryParam:"inline" union:"member"`
 
 	Type GiftCardUnionType
 }
@@ -342,8 +342,8 @@ const (
 
 // ThreeDSecureData - Pass through 3-D Secure data to support external 3-D Secure authorisation. If using an external 3-D Secure provider, you should not pass a `redirect_url` in the `payment_method` object for a transaction.
 type ThreeDSecureData struct {
-	ThreeDSecureDataV1 *ThreeDSecureDataV1 `queryParam:"inline,name=Three_D_Secure_Data" union:"member"`
-	ThreeDSecureDataV2 *ThreeDSecureDataV2 `queryParam:"inline,name=Three_D_Secure_Data" union:"member"`
+	ThreeDSecureDataV1 *ThreeDSecureDataV1 `queryParam:"inline" union:"member"`
+	ThreeDSecureDataV2 *ThreeDSecureDataV2 `queryParam:"inline" union:"member"`
 
 	Type ThreeDSecureDataType
 }

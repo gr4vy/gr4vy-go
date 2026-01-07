@@ -18,9 +18,9 @@ const (
 )
 
 type Context struct {
-	WalletPaymentOptionContext    *WalletPaymentOptionContext    `queryParam:"inline,name=Context" union:"member"`
-	GooglePayPaymentOptionContext *GooglePayPaymentOptionContext `queryParam:"inline,name=Context" union:"member"`
-	PaymentOptionContext          *PaymentOptionContext          `queryParam:"inline,name=Context" union:"member"`
+	WalletPaymentOptionContext    *WalletPaymentOptionContext    `queryParam:"inline" union:"member"`
+	GooglePayPaymentOptionContext *GooglePayPaymentOptionContext `queryParam:"inline" union:"member"`
+	PaymentOptionContext          *PaymentOptionContext          `queryParam:"inline" union:"member"`
 
 	Type ContextType
 }
