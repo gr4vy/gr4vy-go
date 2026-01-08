@@ -30,8 +30,8 @@ func newActions(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hooks.
 	}
 }
 
-// List - Get Flow actions for transaction
-// Retrieve the list of Flow actions that have been triggered for a transaction.
+// List transaction Flow rules
+// Retrieve the list of Flow rule actions that have been triggered for a transaction.
 func (s *Actions) List(ctx context.Context, transactionID string, merchantAccountID *string, opts ...operations.Option) (*components.TransactionActions, error) {
 	request := operations.ListTransactionActionsRequest{
 		TransactionID:     transactionID,
