@@ -48,6 +48,7 @@ The specific event name.
 | `NamePaymentConnectorReportTransactionSettled`                  | payment-connector-report-transaction-settled                    |
 | `NamePaymentConnectorReportChargebackPosted`                    | payment-connector-report-chargeback-posted                      |
 | `NamePaymentConnectorReportChargebackReversalPosted`            | payment-connector-report-chargeback-reversal-posted             |
+| `NamePaymentConnectorTransactionWebhookProcessed`               | payment-connector-transaction-webhook-processed                 |
 | `NameDigitalWalletApplePayTokenDecrypted`                       | digital-wallet-apple-pay-token-decrypted                        |
 | `NameDigitalWalletGooglePayTokenDecrypted`                      | digital-wallet-google-pay-token-decrypted                       |
 | `NameDigitalWalletClickToPayTokenDecrypted`                     | digital-wallet-click-to-pay-token-decrypted                     |
