@@ -67,6 +67,8 @@ type PaymentLink struct {
 	Store *bool `default:"false" json:"store"`
 	// The ID of the buyer to associate with the stored payment method.
 	BuyerID *string `json:"buyer_id,omitempty"`
+	// The number of installments a buyer is required to make.
+	InstallmentCount *int64 `json:"installment_count,omitempty"`
 }
 
 func (p PaymentLink) MarshalJSON() ([]byte, error) {
@@ -285,4 +287,11 @@ func (p *PaymentLink) GetBuyerID() *string {
 		return nil
 	}
 	return p.BuyerID
+}
+
+func (p *PaymentLink) GetInstallmentCount() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.InstallmentCount
 }

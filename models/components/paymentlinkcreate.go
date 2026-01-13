@@ -53,6 +53,8 @@ type PaymentLinkCreate struct {
 	Store *bool `default:"false" json:"store"`
 	// The ID of the buyer to associate the payment method with. Note: When `buyer_id` is provided, the payment link should be treated as a secret as it will allow the user to manage payment methods for the associated buyer.
 	BuyerID *string `json:"buyer_id,omitempty"`
+	// The number of installments a buyer is required to make.
+	InstallmentCount *int64 `json:"installment_count,omitempty"`
 }
 
 func (p PaymentLinkCreate) MarshalJSON() ([]byte, error) {
@@ -225,4 +227,11 @@ func (p *PaymentLinkCreate) GetBuyerID() *string {
 		return nil
 	}
 	return p.BuyerID
+}
+
+func (p *PaymentLinkCreate) GetInstallmentCount() *int64 {
+	if p == nil {
+		return nil
+	}
+	return p.InstallmentCount
 }
