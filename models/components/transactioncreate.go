@@ -424,6 +424,8 @@ type TransactionCreate struct {
 	Store *bool `default:"false" json:"store"`
 	// Pass through 3-D Secure data to support external 3-D Secure authorisation. If using an external 3-D Secure provider, you should not pass a `redirect_url` in the `payment_method` object for a transaction.
 	ThreeDSecureData *ThreeDSecureData `json:"three_d_secure_data,omitempty"`
+	// Optional 3-D Secure values to use during the authentication flow.
+	ThreeDSecure *ThreeDSecure `json:"three_d_secure,omitempty"`
 	// Any additional information about the transaction that you would like to store as key-value pairs. This data is passed to payment service providers that support it.
 	Metadata map[string]string `json:"metadata,omitempty"`
 	// Indicates whether the transaction represents a subsequent payment coming from a setup recurring payment. Please note there are some restrictions on how this flag may be used.
@@ -588,6 +590,13 @@ func (t *TransactionCreate) GetThreeDSecureData() *ThreeDSecureData {
 		return nil
 	}
 	return t.ThreeDSecureData
+}
+
+func (t *TransactionCreate) GetThreeDSecure() *ThreeDSecure {
+	if t == nil {
+		return nil
+	}
+	return t.ThreeDSecure
 }
 
 func (t *TransactionCreate) GetMetadata() map[string]string {

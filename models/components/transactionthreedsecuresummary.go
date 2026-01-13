@@ -83,6 +83,8 @@ type TransactionThreeDSecureSummary struct {
 	ResponseData *ResponseData `json:"response_data,omitempty"`
 	// The error data received from our 3DS server. This will not be populated if the customer failed the authentication with a status code of `N`, `R`, or `U`.  To see full details about the 3DS calls in those situations please use our transaction events API.
 	ErrorData *ThreeDSecureError `json:"error_data,omitempty"`
+	// The amount used for 3DS authentication.
+	Amount *int64 `json:"amount,omitempty"`
 }
 
 func (t TransactionThreeDSecureSummary) MarshalJSON() ([]byte, error) {
@@ -129,4 +131,11 @@ func (t *TransactionThreeDSecureSummary) GetErrorData() *ThreeDSecureError {
 		return nil
 	}
 	return t.ErrorData
+}
+
+func (t *TransactionThreeDSecureSummary) GetAmount() *int64 {
+	if t == nil {
+		return nil
+	}
+	return t.Amount
 }
