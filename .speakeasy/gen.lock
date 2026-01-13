@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 753446159771907b173c0de93f809053
+  docChecksum: 4c4186068d439f3013ffc10ca4c4ecb9
   docVersion: 1.0.0
   speakeasyVersion: 1.685.0
   generationVersion: 2.794.1
-  releaseVersion: 1.12.11
-  configChecksum: 13c2c700bcd693be86e4acd697e63e2b
+  releaseVersion: 1.12.12
+  configChecksum: ac72ac5df9185b288035ae335f0b55de
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 2df96e30-7db7-43e7-9f0b-6304ca79f904
-  pristine_commit_hash: 9efe0e25f688afd7e2b96dd8bb59fc6b1160088c
-  pristine_tree_hash: c4eae6d0840e6b2e068eecd2fb2467e5039a091c
+  generation_id: 5850a095-2e52-49e7-bd6f-996aaa39ea01
+  pristine_commit_hash: 21ae67522643b7d81a6f100b25934040e3bc49fe
+  pristine_tree_hash: c384e40ae5321b95393553fadd4cc61a988447b9
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1124,6 +1124,10 @@ trackedFiles:
     id: dc33a25983a3
     last_write_checksum: sha1:ffe4e34fd0033492b150d51e3c56afe722b9d104
     pristine_git_object: 9e41b9fd51996167035923e2d12f53cf8bd7129d
+  docs/models/components/threedsecure.md:
+    id: 35723103c439
+    last_write_checksum: sha1:4ef5af3e65dc22a56f0081bebad62d0dccb76a59
+    pristine_git_object: 6e692181c4073e0279aebd2e6c8cf7b5d9936d38
   docs/models/components/threedsecuredata.md:
     id: 4428f3b00058
     last_write_checksum: sha1:e8c2339e0bad7ea1220897bc2b5a35dcbb7d6401
@@ -1198,8 +1202,8 @@ trackedFiles:
     pristine_git_object: 5214a204b6d710a98de5f214307989e80c2c2ad4
   docs/models/components/transactioncreate.md:
     id: 652e84478e51
-    last_write_checksum: sha1:bc7e88ccbb3e519380e535c9b6cee73113ae04c1
-    pristine_git_object: 7fe1bbfe400940c44ca0d7396977728282f85f4b
+    last_write_checksum: sha1:d44221159e35ca23388c494a32b471f51eeff66c
+    pristine_git_object: cad07e221c57b83965a5d82a1dbda1a28c4a1597
   docs/models/components/transactioncreatepaymentmethod.md:
     id: 93cf87b3cd26
     last_write_checksum: sha1:c4a11329f83d7accb809704aba93c22310415585
@@ -1266,8 +1270,8 @@ trackedFiles:
     pristine_git_object: d20aad823dccee8c9b880c55735e73bc1598959d
   docs/models/components/transactionthreedsecuresummary.md:
     id: 84b37ae3b1bc
-    last_write_checksum: sha1:7c5a79e358daa4343e08f3d891af790f4edf9a3f
-    pristine_git_object: fce6fa32a99744c037084f716c236edacee1a113
+    last_write_checksum: sha1:99ad9eea7f9a9761f2431c2574d89cd305d58b15
+    pristine_git_object: 26fb2b0328030ab65599f5c669b5c9bdc57956aa
   docs/models/components/transactionupdate.md:
     id: 480ae42662da
     last_write_checksum: sha1:dec46baa7ccb1d411e5dde41fa1057a631f7108d
@@ -2282,8 +2286,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:543c9cb64ef9e6e760cb47c9dd1507e878484929
-    pristine_git_object: 3e467ac9f536f831bbd29e5adb0f5a716ba93ee2
+    last_write_checksum: sha1:9f1fe9546dfba3cf5613a4c5a0f99fc9d5d29f3a
+    pristine_git_object: 51586e32c3bc0fa4d9e050dff83fb00c6b7f2c60
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3300,6 +3304,10 @@ trackedFiles:
     id: d17717f50c08
     last_write_checksum: sha1:782ba100e52a357ce7bd47b960baacc887bd808b
     pristine_git_object: 758c1b2d14194e49e4fa659bd7d0a50cb1d5a4e7
+  models/components/threedsecure.go:
+    id: 9cb53ba626fd
+    last_write_checksum: sha1:5c9b9107bcc407d7e9ba00f7f80fed8bc5e1022f
+    pristine_git_object: 9ce9494ed635159b8e214e625013fba9c6d4509b
   models/components/threedsecuredatav1.go:
     id: c2b7087875d5
     last_write_checksum: sha1:f271b202ff13dd48c327e6c5117ed396ee58b548
@@ -3362,8 +3370,8 @@ trackedFiles:
     pristine_git_object: 2234bab0b45a0afb0d2dd1bc7b805316ff5d17a9
   models/components/transactioncreate.go:
     id: 2fed3feab426
-    last_write_checksum: sha1:6d0b4f489f4fbb0b5868737bb5f9c9d822bf5775
-    pristine_git_object: a16fb5b4c61da748ddeadbbe057d6af54ee2dc79
+    last_write_checksum: sha1:afeea41f127c0ae2e017d131b4941d1acb349d00
+    pristine_git_object: d8e100a72f6e750fe9510ea01fed7a7f3b850b42
   models/components/transactionevent.go:
     id: 03beaff04e48
     last_write_checksum: sha1:8d474c59cb99898191b16c314d7a751f0ec9e969
@@ -3426,8 +3434,8 @@ trackedFiles:
     pristine_git_object: e3fb35cea451c87c83ce4b911c90bc9c319b281d
   models/components/transactionthreedsecuresummary.go:
     id: 87d8127f50ae
-    last_write_checksum: sha1:f49626d940032794453509cc81daa770a901bc4e
-    pristine_git_object: 3583f5f1fa45fef793285471ea9c875e32b150dc
+    last_write_checksum: sha1:1986c246941c6f34e7101acbb97a0102b2bfe2ea
+    pristine_git_object: 3f76d3ebd5329bd9ed96f5cf7ee67157363ff304
   models/components/transactionupdate.go:
     id: bf001a12d028
     last_write_checksum: sha1:527d61dab427f0d4a007a454775e67490f9be473
@@ -7316,7 +7324,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Payment-Links.List()`:  `response.Items.[].InstallmentCount` **Added**\n* `Gr4vy.Payment-Links.Create()`: \n  *  `request.PaymentLinkCreate.InstallmentCount` **Added**\n  *  `response.InstallmentCount` **Added**\n* `Gr4vy.Payment-Links.Get()`:  `response.InstallmentCount` **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ThreeDSecure` **Added**\n  *  `response.ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.[transaction].ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.[transaction].ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.ThreeDSecure.Amount` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
