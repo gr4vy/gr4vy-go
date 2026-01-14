@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 4c4186068d439f3013ffc10ca4c4ecb9
+  docChecksum: b32e586c725423ba7c9340922c38b333
   docVersion: 1.0.0
   speakeasyVersion: 1.685.0
   generationVersion: 2.794.1
-  releaseVersion: 1.12.12
-  configChecksum: ac72ac5df9185b288035ae335f0b55de
+  releaseVersion: 1.12.13
+  configChecksum: 9aec4ccaf0b5ca2a4307218bc209ceb0
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 5850a095-2e52-49e7-bd6f-996aaa39ea01
-  pristine_commit_hash: 21ae67522643b7d81a6f100b25934040e3bc49fe
-  pristine_tree_hash: c384e40ae5321b95393553fadd4cc61a988447b9
+  generation_id: 010ed51b-9824-4e76-a65d-cd38cee5ce70
+  pristine_commit_hash: d430aefd019e078df4ca9bd406d873a0b3a06d53
+  pristine_tree_hash: 364b79f25f8dd31f23f634633ca85f055acdbdc3
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1170,8 +1170,8 @@ trackedFiles:
     pristine_git_object: 35fe61e8a40547407e0cd994431a5661348f5bcb
   docs/models/components/transaction.md:
     id: 8c92ca082bdd
-    last_write_checksum: sha1:4b20ae292f401bafad1cd18814060b94496c4aed
-    pristine_git_object: 8ec25b8157b677da585315cfdb2e6946d0d66c6e
+    last_write_checksum: sha1:dd7116eab965a0a3d5fb02831aa4381c0bbf0cb4
+    pristine_git_object: 30a2bbdb91caf228789a534d6acfccb393e92f92
   docs/models/components/transactionaction.md:
     id: 17bb2761d508
     last_write_checksum: sha1:afe7b8eb35978148bb93a2d3af2943b6cc7776a2
@@ -2286,8 +2286,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:9f1fe9546dfba3cf5613a4c5a0f99fc9d5d29f3a
-    pristine_git_object: 51586e32c3bc0fa4d9e050dff83fb00c6b7f2c60
+    last_write_checksum: sha1:4c1e58f1829d8380c857c6bb3ed4af4df9d42912
+    pristine_git_object: 2baa6c04826a59a6b02a8b549ff2c061145913f8
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3338,8 +3338,8 @@ trackedFiles:
     pristine_git_object: 671dab91ac2f974247f1840e6dace5028f8f8daf
   models/components/transaction.go:
     id: b5e609d96e9d
-    last_write_checksum: sha1:089d706eec9cad0f2db926eb90901f9ae30e4a8d
-    pristine_git_object: 9742b02f4786003aaa00e1a62194bc3f76d2ec75
+    last_write_checksum: sha1:7dcbeb32b0a0724e9c756be6b8df9f92971d1d8b
+    pristine_git_object: b70303ad008743ec10a26c72cf52fcb7786d74d0
   models/components/transactionaction.go:
     id: 8f9ece6343db
     last_write_checksum: sha1:7e231dd77290871a0e016540e75cbbd075173542
@@ -7324,7 +7324,15 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ThreeDSecure` **Added**\n  *  `response.ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.[transaction].ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.[transaction].ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.ThreeDSecure.Amount` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.ThreeDSecure.Amount` **Added**\n"
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Gr4vy.Transactions.Create()`:  `response.IsoResponseCode` **Added**
+  * `Gr4vy.Transactions.Get()`:  `response.IsoResponseCode` **Added**
+  * `Gr4vy.Transactions.Update()`:  `response.IsoResponseCode` **Added**
+  * `Gr4vy.Transactions.Capture()`:  `response.[transaction].IsoResponseCode` **Added**
+  * `Gr4vy.Transactions.Void()`:  `response.[transaction].IsoResponseCode` **Added**
+  * `Gr4vy.Transactions.Cancel()`:  `response.Transaction.IsoResponseCode` **Added**
+  * `Gr4vy.Transactions.Sync()`:  `response.IsoResponseCode` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

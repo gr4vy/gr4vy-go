@@ -143,6 +143,8 @@ type Transaction struct {
 	DutyAmount *int64 `json:"duty_amount,omitempty"`
 	// Total shipping amount.
 	ShippingAmount *int64 `json:"shipping_amount,omitempty"`
+	// This is the ISO8583 response code code received from the payment service.
+	IsoResponseCode *string `json:"iso_response_code,omitempty"`
 }
 
 func (t Transaction) MarshalJSON() ([]byte, error) {
@@ -627,4 +629,11 @@ func (t *Transaction) GetShippingAmount() *int64 {
 		return nil
 	}
 	return t.ShippingAmount
+}
+
+func (t *Transaction) GetIsoResponseCode() *string {
+	if t == nil {
+		return nil
+	}
+	return t.IsoResponseCode
 }
