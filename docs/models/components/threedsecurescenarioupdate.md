@@ -1,0 +1,9 @@
+# ThreeDSecureScenarioUpdate
+
+
+## Fields
+
+| Field                                                                                                   | Type                                                                                                    | Required                                                                                                | Description                                                                                             |
+| ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------- |
+| `Conditions`                                                                                            | [*components.ThreeDSecureScenarioConditions](../../models/components/threedsecurescenarioconditions.md) | :heavy_minus_sign:                                                                                      | Conditions for the scenario.                                                                            |
+| `Outcome`                                                                                               | [*components.ThreeDSecureScenarioOutcome](../../models/components/threedsecurescenariooutcome.md)       | :heavy_minus_sign:                                                                                      | Outcome for the scenario.                                                                               |
