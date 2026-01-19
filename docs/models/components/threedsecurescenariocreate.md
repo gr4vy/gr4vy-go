@@ -1,0 +1,9 @@
+# ThreeDSecureScenarioCreate
+
+
+## Fields
+
+| Field                                                                                                  | Type                                                                                                   | Required                                                                                               | Description                                                                                            |
+| ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------------------ |
+| `Conditions`                                                                                           | [components.ThreeDSecureScenarioConditions](../../models/components/threedsecurescenarioconditions.md) | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
+| `Outcome`                                                                                              | [components.ThreeDSecureScenarioOutcome](../../models/components/threedsecurescenariooutcome.md)       | :heavy_check_mark:                                                                                     | N/A                                                                                                    |
