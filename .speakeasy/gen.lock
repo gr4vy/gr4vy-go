@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 5533efd00e77d3fd0af0172ebf13f644
+  docChecksum: 26accdb231c6f6df4a2f6e06245f6078
   docVersion: 1.0.0
-  speakeasyVersion: 1.688.0
-  generationVersion: 2.796.4
-  releaseVersion: 1.12.14
-  configChecksum: 37b163ce71f68e3a06eafb5e9da17d38
+  speakeasyVersion: 1.690.0
+  generationVersion: 2.797.1
+  releaseVersion: 1.12.15
+  configChecksum: 8b2d712493d867d69d876e8aee16e1a3
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 27b127d6-7b48-484c-8ce8-43d9b4a090d9
-  pristine_commit_hash: 7a5ad3b66eef7110390af9f063f93d4bcc9e9acd
-  pristine_tree_hash: 76d5d7b21b6fbfc733b29f01319546754bb18f74
+  generation_id: f35ae81f-2d34-4175-83e1-28a605fa0c5d
+  pristine_commit_hash: ead0cada07a402344c1fa45c4b0199c63eeeb0aa
+  pristine_tree_hash: 2bc1d4a7fd25fa9aab15dc6438949c3917fdd121
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2366,8 +2366,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:15743219b61b986e6ef62efdf41ad9d69eb4d56b
-    pristine_git_object: 7ea558a744e5c8bed3594ffceb0116e895f7d3b6
+    last_write_checksum: sha1:71490dae462e1909f936f2ae3435de8b21d0bac4
+    pristine_git_object: 29652534c4af83788642920f998bd40cb922fa42
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -7583,12 +7583,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Gr4vy.Three-Ds-Scenarios.Create()`: **Added**
-  * `Gr4vy.Three-Ds-Scenarios.List()`: **Added**
-  * `Gr4vy.Three-Ds-Scenarios.Update()`: **Added**
-  * `Gr4vy.Three-Ds-Scenarios.Delete()`: **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
