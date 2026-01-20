@@ -61,6 +61,7 @@ The method to use, this can be any of the methods that support redirect requests
 | `RedirectPaymentMethodCreateMethodOney3x`          | oney_3x                                            |
 | `RedirectPaymentMethodCreateMethodOney4x`          | oney_4x                                            |
 | `RedirectPaymentMethodCreateMethodOney6x`          | oney_6x                                            |
+| `RedirectPaymentMethodCreateMethodOnlinebankingcz` | onlinebankingcz                                    |
 | `RedirectPaymentMethodCreateMethodOvo`             | ovo                                                |
 | `RedirectPaymentMethodCreateMethodOxxo`            | oxxo                                               |
 | `RedirectPaymentMethodCreateMethodP24`             | p24                                                |
