@@ -68,6 +68,7 @@
 | `MethodOney3x`           | oney_3x                  |
 | `MethodOney4x`           | oney_4x                  |
 | `MethodOney6x`           | oney_6x                  |
+| `MethodOnlinebankingcz`  | onlinebankingcz          |
 | `MethodOvo`              | ovo                      |
 | `MethodOxxo`             | oxxo                     |
 | `MethodP24`              | p24                      |
