@@ -76,6 +76,7 @@ type Gr4vy struct {
 	ThreeDsScenarios          *ThreeDsScenarios
 	Payouts                   *Payouts
 	PaymentLinks              *PaymentLinks
+	VaultForward              *VaultForward
 
 	sdkConfiguration config.SDKConfiguration
 	hooks            *hooks.Hooks
@@ -228,6 +229,7 @@ func New(opts ...SDKOption) *Gr4vy {
 	sdk.ThreeDsScenarios = newThreeDsScenarios(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Payouts = newPayouts(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.PaymentLinks = newPaymentLinks(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.VaultForward = newVaultForward(sdk, sdk.sdkConfiguration, sdk.hooks)
 
 	return sdk
 }
