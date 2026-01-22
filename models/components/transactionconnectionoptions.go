@@ -51,6 +51,8 @@ type TransactionConnectionOptions struct {
 	GemGemds *LatitudeOptions `json:"gem-gemds,omitempty"`
 	// Custom options to be passed to the `givingblock-givingblock` connector.
 	GivingblockGivingblock *GivingBlockOptions `json:"givingblock-givingblock,omitempty"`
+	// Custom options to be passed to the `gocardless-gocardless` connector.
+	GocardlessGocardless *GoCardlessOptions `json:"gocardless-gocardless,omitempty"`
 	// Custom options to be passed to the `latitude-latitude` connector.
 	LatitudeLatitude *LatitudeOptions `json:"latitude-latitude,omitempty"`
 	// Custom options to be passed to the `latitude-latitudeds` connector.
@@ -255,6 +257,13 @@ func (t *TransactionConnectionOptions) GetGivingblockGivingblock() *GivingBlockO
 		return nil
 	}
 	return t.GivingblockGivingblock
+}
+
+func (t *TransactionConnectionOptions) GetGocardlessGocardless() *GoCardlessOptions {
+	if t == nil {
+		return nil
+	}
+	return t.GocardlessGocardless
 }
 
 func (t *TransactionConnectionOptions) GetLatitudeLatitude() *LatitudeOptions {
