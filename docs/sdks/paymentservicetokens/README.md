@@ -103,7 +103,7 @@ func main() {
 
     res, err := s.PaymentMethods.PaymentServiceTokens.Create(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", components.PaymentServiceTokenCreate{
         PaymentServiceID: "fffd152a-9532-4087-9a4f-de58754210f0",
-        RedirectURL: "https://dual-futon.biz",
+        RedirectURL: "https://example.com/callback",
     })
     if err != nil {
         log.Fatal(err)
