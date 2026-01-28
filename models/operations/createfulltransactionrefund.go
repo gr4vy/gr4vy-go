@@ -21,7 +21,9 @@ type CreateFullTransactionRefundRequest struct {
 	// The ID of the transaction
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
 	// The ID of the merchant account to use for this request.
-	MerchantAccountID          *string                                `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	// A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions.
+	IdempotencyKey             *string                                `header:"style=simple,explode=false,name=idempotency-key"`
 	TransactionRefundAllCreate *components.TransactionRefundAllCreate `request:"mediaType=application/json"`
 }
 
@@ -37,6 +39,13 @@ func (c *CreateFullTransactionRefundRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return c.MerchantAccountID
+}
+
+func (c *CreateFullTransactionRefundRequest) GetIdempotencyKey() *string {
+	if c == nil {
+		return nil
+	}
+	return c.IdempotencyKey
 }
 
 func (c *CreateFullTransactionRefundRequest) GetTransactionRefundAllCreate() *components.TransactionRefundAllCreate {

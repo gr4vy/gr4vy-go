@@ -32,10 +32,11 @@ func newAll(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hooks.Hook
 
 // Create batch transaction refund
 // Create a refund for all instruments on a transaction.
-func (s *All) Create(ctx context.Context, transactionID string, merchantAccountID *string, transactionRefundAllCreate *components.TransactionRefundAllCreate, opts ...operations.Option) (*components.Refunds, error) {
+func (s *All) Create(ctx context.Context, transactionID string, merchantAccountID *string, idempotencyKey *string, transactionRefundAllCreate *components.TransactionRefundAllCreate, opts ...operations.Option) (*components.Refunds, error) {
 	request := operations.CreateFullTransactionRefundRequest{
 		TransactionID:              transactionID,
 		MerchantAccountID:          merchantAccountID,
+		IdempotencyKey:             idempotencyKey,
 		TransactionRefundAllCreate: transactionRefundAllCreate,
 	}
 

@@ -502,10 +502,11 @@ func (s *TransactionsRefunds) List(ctx context.Context, transactionID string, me
 
 // Create transaction refund
 // Create a refund for a transaction.
-func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, transactionRefundCreate components.TransactionRefundCreate, merchantAccountID *string, opts ...operations.Option) (*components.Refund, error) {
+func (s *TransactionsRefunds) Create(ctx context.Context, transactionID string, transactionRefundCreate components.TransactionRefundCreate, merchantAccountID *string, idempotencyKey *string, opts ...operations.Option) (*components.Refund, error) {
 	request := operations.CreateTransactionRefundRequest{
 		TransactionID:           transactionID,
 		MerchantAccountID:       merchantAccountID,
+		IdempotencyKey:          idempotencyKey,
 		TransactionRefundCreate: transactionRefundCreate,
 	}
 
