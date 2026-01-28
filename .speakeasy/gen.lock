@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 19188e8551350a983730d90744129e51
+  docChecksum: 30f7cee7bb83547988081b582c4da125
   docVersion: 1.0.0
-  speakeasyVersion: 1.697.2
-  generationVersion: 2.799.0
-  releaseVersion: 1.12.19
-  configChecksum: b7123476dcef6ed9633c79662e72be0c
+  speakeasyVersion: 1.700.2
+  generationVersion: 2.801.2
+  releaseVersion: 1.12.20
+  configChecksum: 5d314707c9dac4ba6ff4b00bb3b665ab
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 75c0bb64-2fa6-40be-8884-4b1cfdff1ee0
-  pristine_commit_hash: d193f3d366506cf74d5910f90b836839d6052adc
-  pristine_tree_hash: 8d6c4485504fe37b302545308b36a5dd06eed495
+  generation_id: f40623a3-bf8b-4997-be29-4b3e5ffdeeaf
+  pristine_commit_hash: 9241c021bc20a4cf53315fd494546156bb93ed8c
+  pristine_tree_hash: e8a4b160b6fd42057eb6fa4f64a2e232ba521cc2
 features:
   go:
     additionalDependencies: 0.1.0
@@ -70,8 +70,8 @@ trackedFiles:
     pristine_git_object: d13792e6379ff084fd69ce2fbbba2ce18ca73a16
   all.go:
     id: 83ab08b6931c
-    last_write_checksum: sha1:338202eff1180096e2c483de86b8d302d8fd3656
-    pristine_git_object: b0cecbae1af5d5a281b66550e70de0340f4d0817
+    last_write_checksum: sha1:1b4e9b020f45976ef629cc898af00845c1668b68
+    pristine_git_object: a5814a532509e9526f7e6ce7415331cc2f14f481
   auditlogs.go:
     id: 3a52892a9eca
     last_write_checksum: sha1:24a31fbe83d9a6035e2cedd0c5bc942d756f967b
@@ -1478,8 +1478,8 @@ trackedFiles:
     pristine_git_object: adec90fa88ec4bbe4d57a75792f5f7a34cc59f57
   docs/models/operations/createfulltransactionrefundrequest.md:
     id: 079440cde65a
-    last_write_checksum: sha1:7e33af3ca927dae75e6ab934911aa3439ba5ac2a
-    pristine_git_object: 0dca33c639f9b8d68019e359451ec89c99d0661a
+    last_write_checksum: sha1:dd97469cb84e3c1d216e73ac58563f5c9b67f2f7
+    pristine_git_object: 7289788c5f4dc59edb6fee725f9d4ef0d4a52353
   docs/models/operations/creategiftcardglobals.md:
     id: 05fb3a5bffd9
     last_write_checksum: sha1:122b74af294c8069a15cc9fcbfc87928605c0e2f
@@ -1582,8 +1582,8 @@ trackedFiles:
     pristine_git_object: 2bd5458573d7631bdba2e87dbc5187f330cb0e23
   docs/models/operations/createtransactionrefundrequest.md:
     id: d361c83b64aa
-    last_write_checksum: sha1:b657ea32e80d15a3c9396964a573c5841093edf6
-    pristine_git_object: e8de98dd6c0a05311975a0ea30d54fffb73a20db
+    last_write_checksum: sha1:b4e1a7a32362eee454e9ac7e7c3c1c7559ec79b0
+    pristine_git_object: 99cc40ae2e3fde1997b3f02dd46fd5bcbd6f9a88
   docs/models/operations/createtransactionrequest.md:
     id: cbbd329e3cc5
     last_write_checksum: sha1:ad796a173784be182ca0f5721dd7332a9955482c
@@ -2218,8 +2218,8 @@ trackedFiles:
     pristine_git_object: f557219143343315d3faedbdede6984c6f509722
   docs/sdks/all/README.md:
     id: 936653be5c4b
-    last_write_checksum: sha1:4fca4882b390977cf2edf049a39c27fc51235be9
-    pristine_git_object: 2f7657388f3633aa246dea06f95e6a10862bd2b8
+    last_write_checksum: sha1:265de6d5c6c08fccf88038acb27207eaa22e8d7b
+    pristine_git_object: 97d6e57b1ced4abd221c3fe517e8793538bc8edb
   docs/sdks/auditlogs/README.md:
     id: 4ed8509e422e
     last_write_checksum: sha1:f9ca9a29a61178217c5d7a3f8b0ff95bc716c827
@@ -2346,8 +2346,8 @@ trackedFiles:
     pristine_git_object: 450ff10641729eb7f66f7cc236d8761114649fbf
   docs/sdks/transactionsrefunds/README.md:
     id: c6a0400f5020
-    last_write_checksum: sha1:c0cc5bd5558557e13f05e978513b5323f1529a00
-    pristine_git_object: c5936f85309f748e889faad7099857a4fcb43ec2
+    last_write_checksum: sha1:8a83984297b161f1b23a187ca042b2fe30686718
+    pristine_git_object: 4b81f4c461b6ddb8aa3d3d456ffd1748db0ffad0
   docs/types/date.md:
     id: 3a10eb495943
     last_write_checksum: sha1:45ab0675ea1c52ce29e9b5c70c4ef5c0ae29f2bf
@@ -2374,8 +2374,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:3e4f92eaa63ec7301d4f573bdce8df3b233d31c2
-    pristine_git_object: 6e46d0566608c8ae9cccfbb60beeb42277374552
+    last_write_checksum: sha1:91c8af128aec891a69e74624503b612c57ce17e1
+    pristine_git_object: e422292db3f07231ab33bcc5d44d458e29e7cb53
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3662,8 +3662,8 @@ trackedFiles:
     pristine_git_object: 7c67a5760e887e33ac5157b2b561d286fc2b1423
   models/operations/createfulltransactionrefund.go:
     id: a9a1d0a77ee4
-    last_write_checksum: sha1:5cca15fd047cc8883b2d955b5278591aa9287b63
-    pristine_git_object: 8ec09761c9d3e51d4681f7b3381b7114515c36d7
+    last_write_checksum: sha1:001d9f05dabbc9001d1a7f1173aa70bbe8f3b8f4
+    pristine_git_object: a657945ec4e4ae1e4d1f084feb587dbb91c00924
   models/operations/creategiftcard.go:
     id: 37583a355c4e
     last_write_checksum: sha1:23143b295de045e60395a55c2175f8a54667ffb2
@@ -3718,8 +3718,8 @@ trackedFiles:
     pristine_git_object: 3de2d5741ff731eba2d3b67e8b2e07f5012352ae
   models/operations/createtransactionrefund.go:
     id: 0cb84ba15b80
-    last_write_checksum: sha1:3351d314387caf147d8ff33a175c25a9d0627adb
-    pristine_git_object: bb6eaa1fb9d95e54e877a09a35f056874223abf5
+    last_write_checksum: sha1:c71585e7b5dea34a2bec46c0856988bb1e8e0bdb
+    pristine_git_object: 76d1a9b4756b2fce05395a725711a245c3379ff4
   models/operations/deletebuyer.go:
     id: e6097c05d428
     last_write_checksum: sha1:7d7634b34fb01d2ffa43cfebd77c225a7bc33b5b
@@ -4086,8 +4086,8 @@ trackedFiles:
     pristine_git_object: 489442172772e0db2649412b0339384fd1996688
   transactionsrefunds.go:
     id: ff0263f7128c
-    last_write_checksum: sha1:b434530252e4e4310d61ea63352e7bc5679a544e
-    pristine_git_object: 1ea86b4f0dfdad26e920681ec52c17173c705177
+    last_write_checksum: sha1:b9923cdf8536febb8e09ae47ec4cf21a00999bf6
+    pristine_git_object: e980bcb9cb78d426a493d72d19395a906dc4ba3d
   types/bigint.go:
     id: 6f911e1a03c3
     last_write_checksum: sha1:49b004005d0461fb04b846eca062b070b0360b31
@@ -7595,6 +7595,10 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Gr4vy.Transactions.Refunds.Create()`:  `request.IdempotencyKey` **Added**
+  * `Gr4vy.Transactions.Refunds.All.Create()`:  `request.IdempotencyKey` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

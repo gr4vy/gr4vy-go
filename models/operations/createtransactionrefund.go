@@ -21,7 +21,9 @@ type CreateTransactionRefundRequest struct {
 	// The ID of the transaction
 	TransactionID string `pathParam:"style=simple,explode=false,name=transaction_id"`
 	// The ID of the merchant account to use for this request.
-	MerchantAccountID       *string                            `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	// A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions.
+	IdempotencyKey          *string                            `header:"style=simple,explode=false,name=idempotency-key"`
 	TransactionRefundCreate components.TransactionRefundCreate `request:"mediaType=application/json"`
 }
 
@@ -37,6 +39,13 @@ func (c *CreateTransactionRefundRequest) GetMerchantAccountID() *string {
 		return nil
 	}
 	return c.MerchantAccountID
+}
+
+func (c *CreateTransactionRefundRequest) GetIdempotencyKey() *string {
+	if c == nil {
+		return nil
+	}
+	return c.IdempotencyKey
 }
 
 func (c *CreateTransactionRefundRequest) GetTransactionRefundCreate() components.TransactionRefundCreate {
