@@ -2478,11 +2478,12 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 
 // Void transaction
 // Voids a previously authorized transaction. If the transaction was not yet successfully authorized, or was already captured, the void will not be processed. This operation releases the hold on the buyer's funds. Captured transactions can be refunded instead.
-func (s *Transactions) Void(ctx context.Context, transactionID string, prefer []string, merchantAccountID *string, opts ...operations.Option) (*operations.ResponseVoidTransaction, error) {
+func (s *Transactions) Void(ctx context.Context, transactionID string, prefer []string, merchantAccountID *string, idempotencyKey *string, opts ...operations.Option) (*operations.Response200VoidTransaction, error) {
 	request := operations.VoidTransactionRequest{
 		TransactionID:     transactionID,
 		Prefer:            prefer,
 		MerchantAccountID: merchantAccountID,
+		IdempotencyKey:    idempotencyKey,
 	}
 
 	globals := operations.VoidTransactionGlobals{
@@ -2649,7 +2650,7 @@ func (s *Transactions) Void(ctx context.Context, transactionID string, prefer []
 				return nil, err
 			}
 
-			var out operations.ResponseVoidTransaction
+			var out operations.Response200VoidTransaction
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}
