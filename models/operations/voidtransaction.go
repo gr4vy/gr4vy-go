@@ -27,6 +27,8 @@ type VoidTransactionRequest struct {
 	Prefer []string `header:"style=simple,explode=false,name=prefer"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	// A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions.
+	IdempotencyKey *string `header:"style=simple,explode=false,name=idempotency-key"`
 }
 
 func (v *VoidTransactionRequest) GetTransactionID() string {
@@ -50,59 +52,66 @@ func (v *VoidTransactionRequest) GetMerchantAccountID() *string {
 	return v.MerchantAccountID
 }
 
-type ResponseVoidTransactionType string
+func (v *VoidTransactionRequest) GetIdempotencyKey() *string {
+	if v == nil {
+		return nil
+	}
+	return v.IdempotencyKey
+}
+
+type Response200VoidTransactionType string
 
 const (
-	ResponseVoidTransactionTypeTransaction     ResponseVoidTransactionType = "Transaction"
-	ResponseVoidTransactionTypeTransactionVoid ResponseVoidTransactionType = "TransactionVoid"
+	Response200VoidTransactionTypeTransaction     Response200VoidTransactionType = "Transaction"
+	Response200VoidTransactionTypeTransactionVoid Response200VoidTransactionType = "TransactionVoid"
 )
 
-// ResponseVoidTransaction - Successful Response
-type ResponseVoidTransaction struct {
+// Response200VoidTransaction - Successful Response
+type Response200VoidTransaction struct {
 	Transaction     *components.Transaction     `queryParam:"inline" union:"member"`
 	TransactionVoid *components.TransactionVoid `queryParam:"inline" union:"member"`
 
-	Type ResponseVoidTransactionType
+	Type Response200VoidTransactionType
 }
 
-func CreateResponseVoidTransactionTransaction(transaction components.Transaction) ResponseVoidTransaction {
-	typ := ResponseVoidTransactionTypeTransaction
+func CreateResponse200VoidTransactionTransaction(transaction components.Transaction) Response200VoidTransaction {
+	typ := Response200VoidTransactionTypeTransaction
 
-	return ResponseVoidTransaction{
+	return Response200VoidTransaction{
 		Transaction: &transaction,
 		Type:        typ,
 	}
 }
 
-func CreateResponseVoidTransactionTransactionVoid(transactionVoid components.TransactionVoid) ResponseVoidTransaction {
-	typ := ResponseVoidTransactionTypeTransactionVoid
+func CreateResponse200VoidTransactionTransactionVoid(transactionVoid components.TransactionVoid) Response200VoidTransaction {
+	typ := Response200VoidTransactionTypeTransactionVoid
 
-	return ResponseVoidTransaction{
+	return Response200VoidTransaction{
 		TransactionVoid: &transactionVoid,
 		Type:            typ,
 	}
 }
 
-func (u *ResponseVoidTransaction) UnmarshalJSON(data []byte) error {
+func (u *Response200VoidTransaction) UnmarshalJSON(data []byte) error {
 
 	var transaction components.Transaction = components.Transaction{}
 	if err := utils.UnmarshalJSON(data, &transaction, "", true, nil); err == nil {
 		u.Transaction = &transaction
-		u.Type = ResponseVoidTransactionTypeTransaction
+		u.Type = Response200VoidTransactionTypeTransaction
 		return nil
 	}
 
 	var transactionVoid components.TransactionVoid = components.TransactionVoid{}
 	if err := utils.UnmarshalJSON(data, &transactionVoid, "", true, nil); err == nil {
 		u.TransactionVoid = &transactionVoid
-		u.Type = ResponseVoidTransactionTypeTransactionVoid
+		u.Type = Response200VoidTransactionTypeTransactionVoid
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseVoidTransaction", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Response200VoidTransaction", string(data))
 }
 
-func (u ResponseVoidTransaction) MarshalJSON() ([]byte, error) {
+func (u Response200VoidTransaction) MarshalJSON() ([]byte, error) {
 	if u.Transaction != nil {
 		return utils.MarshalJSON(u.Transaction, "", true)
 	}
@@ -111,5 +120,5 @@ func (u ResponseVoidTransaction) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.TransactionVoid, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type ResponseVoidTransaction: all fields are null")
+	return nil, errors.New("could not marshal union type Response200VoidTransaction: all fields are null")
 }
