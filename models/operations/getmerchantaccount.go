@@ -3,7 +3,7 @@
 package operations
 
 type GetMerchantAccountRequest struct {
-	// The ID of the merchant account
+	// The ID of the merchant account.
 	MerchantAccountID string `pathParam:"style=simple,explode=false,name=merchant_account_id"`
 }
 
