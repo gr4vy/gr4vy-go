@@ -392,6 +392,7 @@ import(
 	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"github.com/gr4vy/gr4vy-go/models/components"
+	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 )
 
@@ -403,7 +404,10 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Capture(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.TransactionCaptureCreate{}, nil)
+    res, err := s.Transactions.Capture(ctx, operations.CaptureTransactionRequest{
+        TransactionID: "7099948d-7286-47e4-aad8-b68f7eb44591",
+        TransactionCaptureCreate: components.TransactionCaptureCreate{},
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -415,18 +419,15 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                                                  | Type                                                                                       | Required                                                                                   | Description                                                                                | Example                                                                                    |
-| ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ | ------------------------------------------------------------------------------------------ |
-| `ctx`                                                                                      | [context.Context](https://pkg.go.dev/context#Context)                                      | :heavy_check_mark:                                                                         | The context to use for the request.                                                        |                                                                                            |
-| `transactionID`                                                                            | *string*                                                                                   | :heavy_check_mark:                                                                         | The ID of the transaction                                                                  | 7099948d-7286-47e4-aad8-b68f7eb44591                                                       |
-| `transactionCaptureCreate`                                                                 | [components.TransactionCaptureCreate](../../models/components/transactioncapturecreate.md) | :heavy_check_mark:                                                                         | N/A                                                                                        |                                                                                            |
-| `prefer`                                                                                   | []*string*                                                                                 | :heavy_minus_sign:                                                                         | The preferred resource type in the response.                                               |                                                                                            |
-| `merchantAccountID`                                                                        | **string*                                                                                  | :heavy_minus_sign:                                                                         | The ID of the merchant account to use for this request.                                    |                                                                                            |
-| `opts`                                                                                     | [][operations.Option](../../models/operations/option.md)                                   | :heavy_minus_sign:                                                                         | The options for this request.                                                              |                                                                                            |
+| Parameter                                                                                    | Type                                                                                         | Required                                                                                     | Description                                                                                  |
+| -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                        | [context.Context](https://pkg.go.dev/context#Context)                                        | :heavy_check_mark:                                                                           | The context to use for the request.                                                          |
+| `request`                                                                                    | [operations.CaptureTransactionRequest](../../models/operations/capturetransactionrequest.md) | :heavy_check_mark:                                                                           | The request object to use for the request.                                                   |
+| `opts`                                                                                       | [][operations.Option](../../models/operations/option.md)                                     | :heavy_minus_sign:                                                                           | The options for this request.                                                                |
 
 ### Response
 
-**[*operations.ResponseCaptureTransaction](../../models/operations/responsecapturetransaction.md), error**
+**[*operations.Response200CaptureTransaction](../../models/operations/response200capturetransaction.md), error**
 
 ### Errors
 

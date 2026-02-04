@@ -7,7 +7,7 @@ import (
 )
 
 type UpdateMerchantAccountRequest struct {
-	// The ID of the merchant account
+	// The ID of the merchant account.
 	MerchantAccountID     string                           `pathParam:"style=simple,explode=false,name=merchant_account_id"`
 	MerchantAccountUpdate components.MerchantAccountUpdate `request:"mediaType=application/json"`
 }

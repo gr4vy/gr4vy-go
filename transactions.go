@@ -2008,14 +2008,7 @@ func (s *Transactions) Update(ctx context.Context, transactionID string, transac
 
 // Capture transaction
 // Captures a previously authorized transaction. You can capture the full or a partial amount, as long as it does not exceed the authorized amount (unless over-capture is enabled).
-func (s *Transactions) Capture(ctx context.Context, transactionID string, transactionCaptureCreate components.TransactionCaptureCreate, prefer []string, merchantAccountID *string, opts ...operations.Option) (*operations.ResponseCaptureTransaction, error) {
-	request := operations.CaptureTransactionRequest{
-		TransactionID:            transactionID,
-		Prefer:                   prefer,
-		MerchantAccountID:        merchantAccountID,
-		TransactionCaptureCreate: transactionCaptureCreate,
-	}
-
+func (s *Transactions) Capture(ctx context.Context, request operations.CaptureTransactionRequest, opts ...operations.Option) (*operations.Response200CaptureTransaction, error) {
 	globals := operations.CaptureTransactionGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
@@ -2187,7 +2180,7 @@ func (s *Transactions) Capture(ctx context.Context, transactionID string, transa
 				return nil, err
 			}
 
-			var out operations.ResponseCaptureTransaction
+			var out operations.Response200CaptureTransaction
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
 				return nil, err
 			}

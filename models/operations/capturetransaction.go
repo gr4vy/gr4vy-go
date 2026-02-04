@@ -26,7 +26,9 @@ type CaptureTransactionRequest struct {
 	// The preferred resource type in the response.
 	Prefer []string `header:"style=simple,explode=false,name=prefer"`
 	// The ID of the merchant account to use for this request.
-	MerchantAccountID        *string                             `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+	// A unique key that identifies this request. Providing this header will make this an idempotent request. We recommend using V4 UUIDs, or another random string with enough entropy to avoid collisions.
+	IdempotencyKey           *string                             `header:"style=simple,explode=false,name=idempotency-key"`
 	TransactionCaptureCreate components.TransactionCaptureCreate `request:"mediaType=application/json"`
 }
 
@@ -51,6 +53,13 @@ func (c *CaptureTransactionRequest) GetMerchantAccountID() *string {
 	return c.MerchantAccountID
 }
 
+func (c *CaptureTransactionRequest) GetIdempotencyKey() *string {
+	if c == nil {
+		return nil
+	}
+	return c.IdempotencyKey
+}
+
 func (c *CaptureTransactionRequest) GetTransactionCaptureCreate() components.TransactionCaptureCreate {
 	if c == nil {
 		return components.TransactionCaptureCreate{}
@@ -58,59 +67,59 @@ func (c *CaptureTransactionRequest) GetTransactionCaptureCreate() components.Tra
 	return c.TransactionCaptureCreate
 }
 
-type ResponseCaptureTransactionType string
+type Response200CaptureTransactionType string
 
 const (
-	ResponseCaptureTransactionTypeTransaction        ResponseCaptureTransactionType = "Transaction"
-	ResponseCaptureTransactionTypeTransactionCapture ResponseCaptureTransactionType = "TransactionCapture"
+	Response200CaptureTransactionTypeTransaction        Response200CaptureTransactionType = "Transaction"
+	Response200CaptureTransactionTypeTransactionCapture Response200CaptureTransactionType = "TransactionCapture"
 )
 
-// ResponseCaptureTransaction - Successful Response
-type ResponseCaptureTransaction struct {
+// Response200CaptureTransaction - Successful Response
+type Response200CaptureTransaction struct {
 	Transaction        *components.Transaction        `queryParam:"inline" union:"member"`
 	TransactionCapture *components.TransactionCapture `queryParam:"inline" union:"member"`
 
-	Type ResponseCaptureTransactionType
+	Type Response200CaptureTransactionType
 }
 
-func CreateResponseCaptureTransactionTransaction(transaction components.Transaction) ResponseCaptureTransaction {
-	typ := ResponseCaptureTransactionTypeTransaction
+func CreateResponse200CaptureTransactionTransaction(transaction components.Transaction) Response200CaptureTransaction {
+	typ := Response200CaptureTransactionTypeTransaction
 
-	return ResponseCaptureTransaction{
+	return Response200CaptureTransaction{
 		Transaction: &transaction,
 		Type:        typ,
 	}
 }
 
-func CreateResponseCaptureTransactionTransactionCapture(transactionCapture components.TransactionCapture) ResponseCaptureTransaction {
-	typ := ResponseCaptureTransactionTypeTransactionCapture
+func CreateResponse200CaptureTransactionTransactionCapture(transactionCapture components.TransactionCapture) Response200CaptureTransaction {
+	typ := Response200CaptureTransactionTypeTransactionCapture
 
-	return ResponseCaptureTransaction{
+	return Response200CaptureTransaction{
 		TransactionCapture: &transactionCapture,
 		Type:               typ,
 	}
 }
 
-func (u *ResponseCaptureTransaction) UnmarshalJSON(data []byte) error {
+func (u *Response200CaptureTransaction) UnmarshalJSON(data []byte) error {
 
 	var transaction components.Transaction = components.Transaction{}
 	if err := utils.UnmarshalJSON(data, &transaction, "", true, nil); err == nil {
 		u.Transaction = &transaction
-		u.Type = ResponseCaptureTransactionTypeTransaction
+		u.Type = Response200CaptureTransactionTypeTransaction
 		return nil
 	}
 
 	var transactionCapture components.TransactionCapture = components.TransactionCapture{}
 	if err := utils.UnmarshalJSON(data, &transactionCapture, "", true, nil); err == nil {
 		u.TransactionCapture = &transactionCapture
-		u.Type = ResponseCaptureTransactionTypeTransactionCapture
+		u.Type = Response200CaptureTransactionTypeTransactionCapture
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for ResponseCaptureTransaction", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Response200CaptureTransaction", string(data))
 }
 
-func (u ResponseCaptureTransaction) MarshalJSON() ([]byte, error) {
+func (u Response200CaptureTransaction) MarshalJSON() ([]byte, error) {
 	if u.Transaction != nil {
 		return utils.MarshalJSON(u.Transaction, "", true)
 	}
@@ -119,5 +128,5 @@ func (u ResponseCaptureTransaction) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.TransactionCapture, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type ResponseCaptureTransaction: all fields are null")
+	return nil, errors.New("could not marshal union type Response200CaptureTransaction: all fields are null")
 }
