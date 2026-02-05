@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 3a41de9d78b9af5e9077cf410ad5494c
+  docChecksum: 7130a1bd7ed4b5c656da742f4b277ad4
   docVersion: 1.0.0
-  speakeasyVersion: 1.703.0
-  generationVersion: 2.803.3
-  releaseVersion: 1.12.23
-  configChecksum: 2e5532262735b196ee3e13160406e41c
+  speakeasyVersion: 1.704.0
+  generationVersion: 2.806.4
+  releaseVersion: 1.12.24
+  configChecksum: 39f614705a6a886aef6997878a114e64
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 01cbc8fe-32e5-4de3-a7e6-519498331afb
-  pristine_commit_hash: ccc4af073f56d5cb41b9c877573e4cd71a302935
-  pristine_tree_hash: bddeb90d47a631ae1077db76ed09a9d195e58429
+  generation_id: a5780bf7-258e-4a4b-bbce-e17c6b0886a8
+  pristine_commit_hash: 3f8148a2b73a96037b6adc53bb97713fdde7756c
+  pristine_tree_hash: 8eea0c6b669d0672b31f9e2c7213311a3545428d
 features:
   go:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.12
-    core: 3.13.10
+    constsAndDefaults: 0.1.13
+    core: 3.13.12
     defaultEnabledRetries: 0.2.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.3.2
@@ -38,7 +38,7 @@ features:
     retries: 2.84.2
     sdkHooks: 0.3.0
     serverIDs: 2.81.1
-    unions: 2.87.2
+    unions: 2.87.3
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
@@ -2410,8 +2410,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:a930ce7bdb80badf3edd42fbac09123fa5e87e83
-    pristine_git_object: 377c08ef05fd39440e31500d1fa60e3fa28852ce
+    last_write_checksum: sha1:7f17aea0a7dabe1ead3090eab1c7f1e7e9362b07
+    pristine_git_object: aafa4a76e0c5b99e09ca0066b6f5204209921653
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -7799,13 +7799,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Gr4vy.Transactions.Capture()`:  `request` **Changed** **Breaking** ⚠️
-  * `Gr4vy.MerchantAccounts.ThreeDsConfiguration.Create()`: **Added**
-  * `Gr4vy.MerchantAccounts.ThreeDsConfiguration.List()`: **Added**
-  * `Gr4vy.MerchantAccounts.ThreeDsConfiguration.Update()`: **Added**
-  * `Gr4vy.MerchantAccounts.ThreeDsConfiguration.Delete()`: **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
