@@ -24,6 +24,7 @@
 | `CardSchemeNyce`            | nyce                        |
 | `CardSchemeOther`           | other                       |
 | `CardSchemePulse`           | pulse                       |
+| `CardSchemeQcard`           | qcard                       |
 | `CardSchemeRupay`           | rupay                       |
 | `CardSchemeStar`            | star                        |
 | `CardSchemeUatp`            | uatp                        |

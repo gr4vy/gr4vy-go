@@ -32,7 +32,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 1.12.27
+  version: 1.12.28
   additionalDependencies:
     github.com/golang-jwt/jwt/v5: v5.2.2
     github.com/google/uuid: v1.6.0
@@ -43,6 +43,7 @@ go:
   envVarPrefix: GR4VY
   flattenGlobalSecurity: true
   forwardCompatibleEnumsByDefault: false
+  forwardCompatibleUnionsByDefault: "false"
   imports:
     option: openapi
     paths:
