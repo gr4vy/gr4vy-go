@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 3490e4717b123aafad5746f993d1d7af
+  docChecksum: 4419a0ab34e79e71f22aeac85821ac50
   docVersion: 1.0.0
-  speakeasyVersion: 1.710.0
-  generationVersion: 2.818.4
-  releaseVersion: 1.12.27
-  configChecksum: 22d1c9d182f5d417b5aff97839ad9908
+  speakeasyVersion: 1.718.0
+  generationVersion: 2.824.1
+  releaseVersion: 1.12.28
+  configChecksum: bb6bc31dc33a6b1f71bac522430855fe
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: d9f7a109-d7bb-4c4a-befd-57f277a1cda0
-  pristine_commit_hash: e950a1f6dc19914f503171843deb3ace5091bcc2
-  pristine_tree_hash: eff221118e122f813a2d76db14bd63f32f591e1c
+  generation_id: 885ab6e3-cf50-44ac-a7b3-9b0ad94004c3
+  pristine_commit_hash: 0c81681249358cb10ec6f6a42da45714690a72e4
+  pristine_tree_hash: f8553c240a4322fd0a01b1bf5a47f55c0f018eed
 features:
   go:
     additionalDependencies: 0.1.0
@@ -38,7 +38,7 @@ features:
     retries: 2.84.2
     sdkHooks: 0.3.0
     serverIDs: 2.81.1
-    unions: 2.87.3
+    unions: 2.87.4
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
@@ -314,8 +314,8 @@ trackedFiles:
     pristine_git_object: fa5aa6e8c0cc7d9ab7a1a02eb97fa7e343547893
   docs/models/components/cardscheme.md:
     id: 27d2a8b6a564
-    last_write_checksum: sha1:ee860304f24c83eb62ef1cd1a763a28aa44b2d10
-    pristine_git_object: 2d71a3711ec951195a1a575cf562a3ae6c54382c
+    last_write_checksum: sha1:f7eed27def81c2c47c8ddcf963d3f801740016ca
+    pristine_git_object: 78a0227441395aa85cc16083330b25f25e85d3ba
   docs/models/components/cardschemedefinition.md:
     id: b76de1a1cc48
     last_write_checksum: sha1:430898a8bb18346db4307713d1eef0be073ad5b4
@@ -2410,8 +2410,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:78355d0bcd273e4975058b81a305e9223c8942fb
-    pristine_git_object: 48f25494e1db3411e3c59c36d68e26170a753074
+    last_write_checksum: sha1:6941c5477518f1aacf81b5fecb25f1661701f142
+    pristine_git_object: b3cfd7d9dc4a007835c916af1ba536905cbcb711
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -2690,8 +2690,8 @@ trackedFiles:
     pristine_git_object: 6a8680ddcccd8dff719b8aff6cf5f0174111f241
   models/components/cardscheme.go:
     id: 5df671b6a6d1
-    last_write_checksum: sha1:b03f259a90a628588d92bc71638c6898b766d652
-    pristine_git_object: e71fba3e2be0e784bdf8d093e5fc9d5e59a5c82e
+    last_write_checksum: sha1:25d3cc4363c746b66bdf52eaeaa0d940eb46d84f
+    pristine_git_object: 2f8060f65d09876eee0a1276221dce56a8675b79
   models/components/cardschemedefinition.go:
     id: 4e3423cf7bfc
     last_write_checksum: sha1:57b18e153cdae9b6aa8c71bc0318c9f6c2e2b2eb
@@ -7799,6 +7799,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].Scheme.Enum(qcard)` **Added**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].Scheme.Enum(qcard)` **Added**\n* `Gr4vy.PaymentMethods.Create()`:  `response.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.PaymentMethods.Get()`:  `response.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Transactions.List()`:  `response.Items[].PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PaymentMethod.union(NetworkTokenPaymentMethodCreate).CardScheme.Enum(qcard)` **Added**\n  *  `response.PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.union(Transaction).PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.union(Transaction).PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.CheckoutSessions.Create()`:  `response.PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.CheckoutSessions.Update()`:  `response.PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.CheckoutSessions.Get()`:  `response.PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.MerchantAccounts.List()`:  `response.Items[].LoonAcceptedSchemes[].Enum(qcard)` **Added**\n* `Gr4vy.MerchantAccounts.Create()`: \n  *  `request.Request.LoonAcceptedSchemes[].Enum(qcard)` **Added**\n  *  `response.LoonAcceptedSchemes[].Enum(qcard)` **Added**\n* `Gr4vy.MerchantAccounts.Get()`:  `response.LoonAcceptedSchemes[].Enum(qcard)` **Added**\n* `Gr4vy.MerchantAccounts.Update()`: \n  *  `request.MerchantAccountUpdate.LoonAcceptedSchemes[].Enum(qcard)` **Added**\n  *  `response.LoonAcceptedSchemes[].Enum(qcard)` **Added**\n* `Gr4vy.MerchantAccounts.ThreeDsConfiguration.Create()`: \n  *  `request.MerchantAccountThreeDsConfigurationCreate.Scheme.Enum(qcard)` **Added**\n  *  `response.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.MerchantAccounts.ThreeDsConfiguration.List()`:  `response.Items[].Scheme.Enum(qcard)` **Added**\n* `Gr4vy.MerchantAccounts.ThreeDsConfiguration.Update()`: \n  *  `request.MerchantAccountThreeDsConfigurationUpdate.Scheme.Enum(qcard)` **Added**\n  *  `response.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Payouts.List()`:  `response.Items[].PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Payouts.Create()`: \n  *  `request.PayoutCreate.PaymentMethod.union(PaymentMethodCard).CardScheme.Enum(qcard)` **Added**\n  *  `response.PaymentMethod.Scheme.Enum(qcard)` **Added**\n* `Gr4vy.Payouts.Get()`:  `response.PaymentMethod.Scheme.Enum(qcard)` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

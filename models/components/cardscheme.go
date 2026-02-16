@@ -24,6 +24,7 @@ const (
 	CardSchemeNyce            CardScheme = "nyce"
 	CardSchemeOther           CardScheme = "other"
 	CardSchemePulse           CardScheme = "pulse"
+	CardSchemeQcard           CardScheme = "qcard"
 	CardSchemeRupay           CardScheme = "rupay"
 	CardSchemeStar            CardScheme = "star"
 	CardSchemeUatp            CardScheme = "uatp"
@@ -39,7 +40,7 @@ func (e CardScheme) ToPointer() *CardScheme {
 func (e *CardScheme) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "accel", "amex", "bancontact", "carte-bancaire", "cirrus", "culiance", "dankort", "diners-club", "discover", "eftpos-australia", "elo", "hipercard", "jcb", "maestro", "mastercard", "mir", "nyce", "other", "pulse", "rupay", "star", "uatp", "unionpay", "visa":
+		case "accel", "amex", "bancontact", "carte-bancaire", "cirrus", "culiance", "dankort", "diners-club", "discover", "eftpos-australia", "elo", "hipercard", "jcb", "maestro", "mastercard", "mir", "nyce", "other", "pulse", "qcard", "rupay", "star", "uatp", "unionpay", "visa":
 			return true
 		}
 	}
