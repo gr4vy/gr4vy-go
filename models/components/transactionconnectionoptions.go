@@ -69,6 +69,8 @@ type TransactionConnectionOptions struct {
 	NuveiCard *NuveiOptions `json:"nuvei-card,omitempty"`
 	// Custom options to be passed to the `nuvei-ideal` connector.
 	NuveiIdeal *NuveiIDealOptions `json:"nuvei-ideal,omitempty"`
+	// Custom options to be passed to the `nuvei-klarna` connector.
+	NuveiKlarna *NuveiKlarnaOptions `json:"nuvei-klarna,omitempty"`
 	// Custom options to be passed to the `nuvei-pse` connector.
 	NuveiPse *NuveiPSEOptions `json:"nuvei-pse,omitempty"`
 	// Custom options to be passed to the `oxxo-oxxo` connector.
@@ -320,6 +322,13 @@ func (t *TransactionConnectionOptions) GetNuveiIdeal() *NuveiIDealOptions {
 		return nil
 	}
 	return t.NuveiIdeal
+}
+
+func (t *TransactionConnectionOptions) GetNuveiKlarna() *NuveiKlarnaOptions {
+	if t == nil {
+		return nil
+	}
+	return t.NuveiKlarna
 }
 
 func (t *TransactionConnectionOptions) GetNuveiPse() *NuveiPSEOptions {
