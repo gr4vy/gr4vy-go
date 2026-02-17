@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 8539871906eebe76c772bfae14ede421
+  docChecksum: 19afd92e72ad48f72fb2f8670591916a
   docVersion: 1.0.0
-  speakeasyVersion: 1.719.0
-  generationVersion: 2.824.1
-  releaseVersion: 1.12.29
-  configChecksum: 3c4c700c7ada3cb0a99b0fb010e99c5d
+  speakeasyVersion: 1.721.0
+  generationVersion: 2.828.0
+  releaseVersion: 1.12.30
+  configChecksum: 4a6d9e48b0a21ccfda6c2c70cde01ebc
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 99259e93-4154-4190-bb78-c62375a78fbd
-  pristine_commit_hash: 186b93074b38d67ac1d4e3c399110e02348880d1
-  pristine_tree_hash: 2aa271f99d4e2b86c21722f239c1475343b3ead5
+  generation_id: 3d8dc633-f414-4b21-b9aa-79a448c08732
+  pristine_commit_hash: 5e1514cf5f9b209b5bbdf88e1e3ecd24cc4c53d0
+  pristine_tree_hash: db15dfa75905ecb528eb41b6231c36c15526302e
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2414,8 +2414,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:df15690a8f38b33e4d64e3051bb129b23c53e204
-    pristine_git_object: 68fadd9721c81630b8ea0f46bd146a6ae1ab4e2d
+    last_write_checksum: sha1:5ab1fae9d4e8c8cd22c65ac17a112280fd15f281
+    pristine_git_object: 25c7ea7ac12f0bc0992ab5bd193072ddaa954a72
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -7807,7 +7807,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.NuveiKlarna` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.NuveiKlarna` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.NuveiKlarna` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
