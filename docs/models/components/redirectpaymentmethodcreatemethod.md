@@ -22,6 +22,8 @@ The method to use, this can be any of the methods that support redirect requests
 | `RedirectPaymentMethodCreateMethodBlik`            | blik                                               |
 | `RedirectPaymentMethodCreateMethodBoleto`          | boleto                                             |
 | `RedirectPaymentMethodCreateMethodBoost`           | boost                                              |
+| `RedirectPaymentMethodCreateMethodBreb`            | breb                                               |
+| `RedirectPaymentMethodCreateMethodCapitec`         | capitec                                            |
 | `RedirectPaymentMethodCreateMethodCashapp`         | cashapp                                            |
 | `RedirectPaymentMethodCreateMethodClearpay`        | clearpay                                           |
 | `RedirectPaymentMethodCreateMethodDana`            | dana                                               |

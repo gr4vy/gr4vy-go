@@ -71,3 +71,33 @@ transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMetho
 transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMethodCheckoutSessionWithURLPaymentMethodCreate(components.CheckoutSessionWithURLPaymentMethodCreate{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch transactionCreatePaymentMethod.Type {
+	case components.TransactionCreatePaymentMethodTypeCardWithURLPaymentMethodCreate:
+		// transactionCreatePaymentMethod.CardWithURLPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypeRedirectPaymentMethodCreate:
+		// transactionCreatePaymentMethod.RedirectPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypeTokenPaymentMethodCreate:
+		// transactionCreatePaymentMethod.TokenPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypeApplePayPaymentMethodCreate:
+		// transactionCreatePaymentMethod.ApplePayPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypeClickToPayPaymentMethodCreate:
+		// transactionCreatePaymentMethod.ClickToPayPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypeClickToPayFPANPaymentMethodCreate:
+		// transactionCreatePaymentMethod.ClickToPayFPANPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypeGooglePayPaymentMethodCreate:
+		// transactionCreatePaymentMethod.GooglePayPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypeGooglePayFPANPaymentMethodCreate:
+		// transactionCreatePaymentMethod.GooglePayFPANPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypeNetworkTokenPaymentMethodCreate:
+		// transactionCreatePaymentMethod.NetworkTokenPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypePlaidPaymentMethodCreate:
+		// transactionCreatePaymentMethod.PlaidPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypeCheckoutSessionWithURLPaymentMethodCreate:
+		// transactionCreatePaymentMethod.CheckoutSessionWithURLPaymentMethodCreate is populated
+}
+```

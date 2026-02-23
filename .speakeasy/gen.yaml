@@ -17,6 +17,7 @@ generation:
     securityFeb2025: true
     sharedErrorComponentsApr2025: true
     sharedNestedComponentsJan2026: false
+    nameOverrideFeb2026: false
   auth:
     oAuth2ClientCredentialsEnabled: false
     oAuth2PasswordEnabled: false
@@ -32,7 +33,7 @@ generation:
     generateNewTests: false
     skipResponseBodyAssertions: false
 go:
-  version: 1.12.31
+  version: 1.12.32
   additionalDependencies:
     github.com/golang-jwt/jwt/v5: v5.2.2
     github.com/google/uuid: v1.6.0

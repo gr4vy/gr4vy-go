@@ -17,3 +17,15 @@ threeDSecureData := components.CreateThreeDSecureDataThreeDSecureDataV1(componen
 threeDSecureData := components.CreateThreeDSecureDataThreeDSecureDataV2(components.ThreeDSecureDataV2{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch threeDSecureData.Type {
+	case components.ThreeDSecureDataTypeThreeDSecureDataV1:
+		// threeDSecureData.ThreeDSecureDataV1 is populated
+	case components.ThreeDSecureDataTypeThreeDSecureDataV2:
+		// threeDSecureData.ThreeDSecureDataV2 is populated
+}
+```

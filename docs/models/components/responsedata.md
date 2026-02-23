@@ -17,3 +17,15 @@ responseData := components.CreateResponseDataThreeDSecureDataV1(components.Three
 responseData := components.CreateResponseDataThreeDSecureV2(components.ThreeDSecureV2{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch responseData.Type {
+	case components.ResponseDataTypeThreeDSecureDataV1:
+		// responseData.ThreeDSecureDataV1 is populated
+	case components.ResponseDataTypeThreeDSecureV2:
+		// responseData.ThreeDSecureV2 is populated
+}
+```

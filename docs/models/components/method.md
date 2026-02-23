@@ -22,6 +22,8 @@
 | `MethodBlik`             | blik                     |
 | `MethodBoleto`           | boleto                   |
 | `MethodBoost`            | boost                    |
+| `MethodBreb`             | breb                     |
+| `MethodCapitec`          | capitec                  |
 | `MethodCard`             | card                     |
 | `MethodCashapp`          | cashapp                  |
 | `MethodChaseorbital`     | chaseorbital             |
