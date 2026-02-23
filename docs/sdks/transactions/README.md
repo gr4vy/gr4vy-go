@@ -412,7 +412,13 @@ func main() {
         log.Fatal(err)
     }
     if res != nil {
-        // handle response
+        switch res.Type {
+            case operations.Response200CaptureTransactionTypeTransaction:
+                // res.Transaction is populated
+            case operations.Response200CaptureTransactionTypeTransactionCapture:
+                // res.TransactionCapture is populated
+        }
+
     }
 }
 ```
@@ -462,6 +468,7 @@ import(
 	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
 	"log"
+	"github.com/gr4vy/gr4vy-go/models/operations"
 )
 
 func main() {
@@ -477,7 +484,13 @@ func main() {
         log.Fatal(err)
     }
     if res != nil {
-        // handle response
+        switch res.Type {
+            case operations.Response200VoidTransactionTypeTransaction:
+                // res.Transaction is populated
+            case operations.Response200VoidTransactionTypeTransactionVoid:
+                // res.TransactionVoid is populated
+        }
+
     }
 }
 ```

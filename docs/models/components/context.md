@@ -21,3 +21,17 @@ context := components.CreateContextGooglePayPaymentOptionContext(components.Goog
 context := components.CreateContextPaymentOptionContext(components.PaymentOptionContext{/* values here */})
 ```
 
+## Union Discrimination
+
+Use the `Type` field to determine which variant is active, then access the corresponding field:
+
+```go
+switch context.Type {
+	case components.ContextTypeWalletPaymentOptionContext:
+		// context.WalletPaymentOptionContext is populated
+	case components.ContextTypeGooglePayPaymentOptionContext:
+		// context.GooglePayPaymentOptionContext is populated
+	case components.ContextTypePaymentOptionContext:
+		// context.PaymentOptionContext is populated
+}
+```
