@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: ceaf47539d8e51f6f5a99edb5b5aa17f
+  docChecksum: e7da1577de4f3032934212a2df1e33fa
   docVersion: 1.0.0
-  speakeasyVersion: 1.724.1
-  generationVersion: 2.836.5
-  releaseVersion: 1.12.32
-  configChecksum: 4979a16fe651ca09f4fdb41aec8dc208
+  speakeasyVersion: 1.726.0
+  generationVersion: 2.839.0
+  releaseVersion: 1.12.33
+  configChecksum: 52cd076085227f672d65b23dda5048a5
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: be7e3005-3a7b-4bec-a0d2-52d826521ca1
-  pristine_commit_hash: 5a317481a09b2b5d940c36d594a0a2279de26bd4
-  pristine_tree_hash: ef4ea85e6f3e1eb6bdea420071794334f00c8c63
+  generation_id: 595346c5-26a4-4fcd-892a-7e418bf8846c
+  pristine_commit_hash: 8db01a2481736c603aabfef105fbfc4933b2503a
+  pristine_tree_hash: d021815976dcf87af5535184ff0490a53b9b6df8
 features:
   go:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.13
-    core: 3.13.16
+    constsAndDefaults: 0.1.14
+    core: 3.13.17
     defaultEnabledRetries: 0.2.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.3.2
@@ -33,7 +33,7 @@ features:
     nameOverrides: 2.81.4
     nullables: 0.2.1
     openEnums: 0.1.0
-    pagination: 2.82.5
+    pagination: 2.82.6
     responseFormat: 0.1.2
     retries: 2.84.2
     sdkHooks: 0.3.0
@@ -464,6 +464,22 @@ trackedFiles:
     id: 773abe353aea
     last_write_checksum: sha1:d98a9a3cebf6096c6e6bdc0524cbb8d54a7cefd4
     pristine_git_object: 0b7a904e5064cfce7240630e3a996eedf7ea4f19
+  docs/models/components/dlocalpixoptions.md:
+    id: 7cc43c43fa67
+    last_write_checksum: sha1:d1fd5626632a7e6c8e76879eca73cf1ab1317b23
+    pristine_git_object: bcc96d7cbcef525613f518faa24d354b33dce26c
+  docs/models/components/dlocalpixsubscriptionamountoptions.md:
+    id: db1117307b81
+    last_write_checksum: sha1:a855ad34f4999cab8926adb1b5b1e0af1e43a47b
+    pristine_git_object: 7483b487ce561be6fcb4f4e24ea391e4a71c8ae0
+  docs/models/components/dlocalpixsubscriptionamountoptionstype.md:
+    id: d4bd91ea8a3b
+    last_write_checksum: sha1:c713d1bdbd25b9f49c51bdf73fede1d7b2d9b6c4
+    pristine_git_object: f476e5e02dd2e8256e0ec3c5d4de2241c73ab16d
+  docs/models/components/dlocalpixsubscriptionoptions.md:
+    id: e509acedce88
+    last_write_checksum: sha1:b21024740f16f58e119fe9fa64e88ed9416dc0fc
+    pristine_git_object: d699a671fe9329b8e3251f3d01263f0ca684be2f
   docs/models/components/dlocalupioptions.md:
     id: d86768a6ef70
     last_write_checksum: sha1:4f03c7fa9af09006c80e74137bf7af19842b54e5
@@ -564,6 +580,10 @@ trackedFiles:
     id: 4cd1b9a3963c
     last_write_checksum: sha1:88277f57079d179ae65dd5de70a02434ef5c9219
     pristine_git_object: 5236e766e3ac15f58efe0e4568a60337a2b9ec4d
+  docs/models/components/frequency.md:
+    id: 924b589b931a
+    last_write_checksum: sha1:f53dc4347ada813a56fe27162fbc7d5ec486ed4a
+    pristine_git_object: f99fe342f003e950a6e9af633a55aced1cb51ab6
   docs/models/components/giftcard.md:
     id: bcbf8debffcf
     last_write_checksum: sha1:e93386aca8944c6edac6bd965d027b6314f5f1e7
@@ -1266,8 +1286,8 @@ trackedFiles:
     pristine_git_object: f06939b4a179bb9131d37d0faa955e205b268d6d
   docs/models/components/transactionconnectionoptions.md:
     id: a4843e535547
-    last_write_checksum: sha1:6ceddbb62fb4a6021f030f4f09b99b9ff0fadca8
-    pristine_git_object: 4c55021fca0efb92f13bb93fa785ed89d65409d5
+    last_write_checksum: sha1:29d47b39f42a0d4f2de243382d3e78f259d9e601
+    pristine_git_object: 1a08e7658bd73010e2ec78c5ccfaac9d0c9d4552
   docs/models/components/transactioncreate.md:
     id: 652e84478e51
     last_write_checksum: sha1:86148dc12fe61f5e227961d4c8fe8ef7a5a2d61f
@@ -2414,8 +2434,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:90a20d584e2d7097930f75ace01da25bb72a3f2f
-    pristine_git_object: 74d6c161b642af5d42224347dd80953a0c34160b
+    last_write_checksum: sha1:0169ab1a8a369baf3677031e856528ee54c448ae
+    pristine_git_object: f61f057306b164aed861b5a7416f692c79da6fa4
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -2836,6 +2856,18 @@ trackedFiles:
     id: a880b33e61e8
     last_write_checksum: sha1:71e6ebf6e9a7bf118f7d6266c3237f1d1bbadd60
     pristine_git_object: 81a8750d5c852f33cb460d90b40598c680dec9f6
+  models/components/dlocalpixoptions.go:
+    id: db677540c594
+    last_write_checksum: sha1:5ca4bac70e2ebcb11534e62c45feffd53b1f2dcb
+    pristine_git_object: 5af960c72291e21d994e8c2b407b80a465142427
+  models/components/dlocalpixsubscriptionamountoptions.go:
+    id: d05f3e95d753
+    last_write_checksum: sha1:af12a2d15cf9db9b6bb1ca469fc43851f22d7942
+    pristine_git_object: 2739bc359603c650e93cd8e6f1df29e355235bd4
+  models/components/dlocalpixsubscriptionoptions.go:
+    id: 3f9f24268b8b
+    last_write_checksum: sha1:8831fff02e363317b29053d37c7a0ee756946872
+    pristine_git_object: c3ad011b93adf539d3908cd70a5569742b8e6f52
   models/components/dlocalupioptions.go:
     id: 95d603ff352c
     last_write_checksum: sha1:0300eae94268fd47833b62814287c0a4e40745ed
@@ -3550,8 +3582,8 @@ trackedFiles:
     pristine_git_object: 87d643cabba0bba362e9fc52361fa0a0d9ab2a1f
   models/components/transactionconnectionoptions.go:
     id: 5ce01894f53d
-    last_write_checksum: sha1:8aa96e16a4d12e3a22acc2fe4139914a7a60795e
-    pristine_git_object: c5e611f1b7260c298105289563408613bf332fb2
+    last_write_checksum: sha1:0533b3c4299730b995e14af93d2ea4e18e50425c
+    pristine_git_object: 09443343c03bfac565db6ff24573cbc0ceaf127e
   models/components/transactioncreate.go:
     id: 2fed3feab426
     last_write_checksum: sha1:afeea41f127c0ae2e017d131b4941d1acb349d00
@@ -7807,7 +7839,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(RedirectPaymentMethodCreate).Method` **Changed**\n  *  `response.Method` **Changed**\n* `Gr4vy.PaymentMethods.Get()`:  `response.Method` **Changed**\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PaymentMethod.union(RedirectPaymentMethodCreate).Method` **Changed**\n  *  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Get()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Update()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Capture()`:  `response.union(Transaction).PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Void()`:  `response.union(Transaction).PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Sync()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.PaymentServiceDefinitions.List()`:  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentServiceDefinitions.Get()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentServices.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentServices.Create()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentServices.Get()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentServices.Update()`:  `response.Method` **Changed**\n* `Gr4vy.Payouts.List()`:  `response.Items[].PaymentMethod.Method` **Changed**\n* `Gr4vy.Payouts.Create()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Payouts.Get()`:  `response.PaymentMethod.Method` **Changed**\n"
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.DlocalPix` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.DlocalPix` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.DlocalPix` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
