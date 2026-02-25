@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: e7da1577de4f3032934212a2df1e33fa
+  docChecksum: 4c09be15286b42159617679ca54f20ee
   docVersion: 1.0.0
-  speakeasyVersion: 1.726.0
-  generationVersion: 2.839.0
-  releaseVersion: 1.12.33
-  configChecksum: 52cd076085227f672d65b23dda5048a5
+  speakeasyVersion: 1.730.0
+  generationVersion: 2.844.2
+  releaseVersion: 1.12.34
+  configChecksum: fd6e531af29897c2f0b4f20962e91f81
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 595346c5-26a4-4fcd-892a-7e418bf8846c
-  pristine_commit_hash: 8db01a2481736c603aabfef105fbfc4933b2503a
-  pristine_tree_hash: d021815976dcf87af5535184ff0490a53b9b6df8
+  generation_id: 575f2737-dbfd-48d7-a42a-90f40cd95596
+  pristine_commit_hash: 58988ba9b01888b1aae5102d27c1d1385493f901
+  pristine_tree_hash: 3f6bd79c495a474fb011cbed8fcf2d1a7b909d85
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2434,8 +2434,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:0169ab1a8a369baf3677031e856528ee54c448ae
-    pristine_git_object: f61f057306b164aed861b5a7416f692c79da6fa4
+    last_write_checksum: sha1:513e94da2c30c8b5bffa33f7be077c284084c1b1
+    pristine_git_object: 5d91fc820ba9c047fd31eb828a3125b2ee0d3477
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -2862,8 +2862,8 @@ trackedFiles:
     pristine_git_object: 5af960c72291e21d994e8c2b407b80a465142427
   models/components/dlocalpixsubscriptionamountoptions.go:
     id: d05f3e95d753
-    last_write_checksum: sha1:af12a2d15cf9db9b6bb1ca469fc43851f22d7942
-    pristine_git_object: 2739bc359603c650e93cd8e6f1df29e355235bd4
+    last_write_checksum: sha1:0d8f138ddc6e5fd6868a354a957a35de2f5e771c
+    pristine_git_object: d9e6116c17593dcf56f62987e413612064373687
   models/components/dlocalpixsubscriptionoptions.go:
     id: 3f9f24268b8b
     last_write_checksum: sha1:8831fff02e363317b29053d37c7a0ee756946872
@@ -7839,7 +7839,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.DlocalPix` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.DlocalPix` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.DlocalPix` **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.DlocalPix.Subscription.Amount.MinValue` **Changed**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.DlocalPix.Subscription.Amount.MinValue` **Changed**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.DlocalPix.Subscription.Amount.MinValue` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
