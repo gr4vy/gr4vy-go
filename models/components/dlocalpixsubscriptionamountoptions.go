@@ -31,7 +31,7 @@ type DlocalPIXSubscriptionAmountOptions struct {
 	// Fixed subscription amount in local currency. Required only for fixed amount subscriptions depending on the payment method.
 	Value *string `json:"value,omitempty"`
 	// Minimum payer enrollment limit, not minimum recurring charge amount.
-	MinValue string `json:"min_value"`
+	MinValue *string `json:"min_value"`
 }
 
 func (d *DlocalPIXSubscriptionAmountOptions) GetType() DlocalPIXSubscriptionAmountOptionsType {
@@ -48,9 +48,9 @@ func (d *DlocalPIXSubscriptionAmountOptions) GetValue() *string {
 	return d.Value
 }
 
-func (d *DlocalPIXSubscriptionAmountOptions) GetMinValue() string {
+func (d *DlocalPIXSubscriptionAmountOptions) GetMinValue() *string {
 	if d == nil {
-		return ""
+		return nil
 	}
 	return d.MinValue
 }
