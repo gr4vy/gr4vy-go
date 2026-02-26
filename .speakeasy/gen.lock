@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 4c09be15286b42159617679ca54f20ee
+  docChecksum: 0609cc7914fb56e5a2832c88ea178444
   docVersion: 1.0.0
-  speakeasyVersion: 1.730.0
-  generationVersion: 2.844.2
-  releaseVersion: 1.12.34
-  configChecksum: fd6e531af29897c2f0b4f20962e91f81
+  speakeasyVersion: 1.730.1
+  generationVersion: 2.844.3
+  releaseVersion: 1.12.35
+  configChecksum: 52e5657aeca13a8e2cf02c17ab695d93
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 575f2737-dbfd-48d7-a42a-90f40cd95596
-  pristine_commit_hash: 58988ba9b01888b1aae5102d27c1d1385493f901
-  pristine_tree_hash: 3f6bd79c495a474fb011cbed8fcf2d1a7b909d85
+  generation_id: c02bedaa-e35c-4ce9-b723-5c05f8268e6a
+  pristine_commit_hash: 12cc6290cbb4c4d4dea09b2fb70985bd0e4b2c98
+  pristine_tree_hash: 5fde36399bb2a1de0135448e5be02f2b576fc882
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2434,8 +2434,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:513e94da2c30c8b5bffa33f7be077c284084c1b1
-    pristine_git_object: 5d91fc820ba9c047fd31eb828a3125b2ee0d3477
+    last_write_checksum: sha1:c3b3d3da79bf9052a9f925bdf1f0ef8348164e8c
+    pristine_git_object: 64921dd6ec13e3974502582c9ea57abaf1dbd832
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -7839,7 +7839,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.DlocalPix.Subscription.Amount.MinValue` **Changed**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.DlocalPix.Subscription.Amount.MinValue` **Changed**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.DlocalPix.Subscription.Amount.MinValue` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
