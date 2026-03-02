@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 0609cc7914fb56e5a2832c88ea178444
+  docChecksum: 5fc4ebb66d09feb091bab50726d68496
   docVersion: 1.0.0
-  speakeasyVersion: 1.730.1
-  generationVersion: 2.844.3
-  releaseVersion: 1.12.35
-  configChecksum: 52e5657aeca13a8e2cf02c17ab695d93
+  speakeasyVersion: 1.736.3
+  generationVersion: 2.845.15
+  releaseVersion: 1.12.36
+  configChecksum: ddc5b88432e2b233606fca547bbae178
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: c02bedaa-e35c-4ce9-b723-5c05f8268e6a
-  pristine_commit_hash: 12cc6290cbb4c4d4dea09b2fb70985bd0e4b2c98
-  pristine_tree_hash: 5fde36399bb2a1de0135448e5be02f2b576fc882
+  generation_id: c26c6a92-f576-4d94-a51a-f2b57cab887c
+  pristine_commit_hash: 1fce248607578e950b09f0614b79ba41aba1ac0b
+  pristine_tree_hash: 4b5bb86f1a5560c21c28a194376240614e942827
 features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.13.17
+    core: 3.13.20
     defaultEnabledRetries: 0.2.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.3.2
@@ -25,7 +25,7 @@ features:
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
-    globalServerURLs: 2.83.0
+    globalServerURLs: 2.83.1
     globals: 2.82.2
     groups: 2.81.3
     ignores: 2.81.1
@@ -2434,8 +2434,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:c3b3d3da79bf9052a9f925bdf1f0ef8348164e8c
-    pristine_git_object: 64921dd6ec13e3974502582c9ea57abaf1dbd832
+    last_write_checksum: sha1:ca5494806939711ea83551e725c7f63959bcc890
+    pristine_git_object: b03ca907f0651676961c744687a4104d32407f0d
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
