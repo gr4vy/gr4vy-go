@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 200a501173efa1ecc8edf14813101fe7
+  docChecksum: 872039c9d850936f2888651922551049
   docVersion: 1.0.0
-  speakeasyVersion: 1.739.0
+  speakeasyVersion: 1.739.1
   generationVersion: 2.846.1
-  releaseVersion: 1.12.37
-  configChecksum: bec0afa9a0a5a51c787d33ce0cfaebb1
+  releaseVersion: 1.12.38
+  configChecksum: f841527a362590af5428b07d09f5ddb9
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 43372f19-87e3-47fd-a6d1-75b9c5b9ee28
-  pristine_commit_hash: 27a8a8d303cb80f164d4538ea1a260929884d782
-  pristine_tree_hash: 9a4f24d4e43dc37921985ffd7370e285f3d0b64d
+  generation_id: dd07a177-aea1-43e1-9009-63a16d5d56e3
+  pristine_commit_hash: 0e5d278f8e435f6b7a6eb4bdae762f9a9a46f623
+  pristine_tree_hash: ae8ac7dfcb9c247e3fc41679752b7ec2c0d3a19f
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2434,8 +2434,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:6885de30cca973200d8f5249e4b7aa95a6184117
-    pristine_git_object: c06d1d89f9319f387247ad6588ad7625cdd2443e
+    last_write_checksum: sha1:74aae0bf97d383a516fc228cc1a084cec3a3c046
+    pristine_git_object: 072f95cc8a8f4e765ff4f04fbf90b0af86a6f157
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -7839,7 +7839,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(CardPaymentMethodCreate).CardType` **Changed** (Breaking ⚠️)\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PaymentMethod` **Changed** (Breaking ⚠️)\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
