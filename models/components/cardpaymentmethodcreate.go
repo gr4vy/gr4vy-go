@@ -19,7 +19,7 @@ type CardPaymentMethodCreate struct {
 	// The merchant reference for this payment method.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 	// The type of the card used
-	CardType *string `json:"card_type,omitempty"`
+	CardType *CardType `json:"card_type,omitempty"`
 	// Always `card`
 	method *string `const:"card" json:"method"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
@@ -72,7 +72,7 @@ func (c *CardPaymentMethodCreate) GetExternalIdentifier() *string {
 	return c.ExternalIdentifier
 }
 
-func (c *CardPaymentMethodCreate) GetCardType() *string {
+func (c *CardPaymentMethodCreate) GetCardType() *CardType {
 	if c == nil {
 		return nil
 	}

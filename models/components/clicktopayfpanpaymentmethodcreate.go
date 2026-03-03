@@ -19,7 +19,7 @@ type ClickToPayFPANPaymentMethodCreate struct {
 	// The merchant reference for this payment method.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 	// The type of the card used
-	CardType *string `json:"card_type,omitempty"`
+	CardType *CardType `json:"card_type,omitempty"`
 	// Aways `click-to-pay`.
 	method string `const:"click-to-pay" json:"method"`
 	// The URL to redirect a user back to after the complete 3DS in browser.
@@ -74,7 +74,7 @@ func (c *ClickToPayFPANPaymentMethodCreate) GetExternalIdentifier() *string {
 	return c.ExternalIdentifier
 }
 
-func (c *ClickToPayFPANPaymentMethodCreate) GetCardType() *string {
+func (c *ClickToPayFPANPaymentMethodCreate) GetCardType() *CardType {
 	if c == nil {
 		return nil
 	}
