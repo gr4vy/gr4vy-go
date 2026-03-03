@@ -19,7 +19,7 @@ type GooglePayFPANPaymentMethodCreate struct {
 	// The merchant reference for this payment method.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 	// The type of the card used
-	CardType *string `json:"card_type,omitempty"`
+	CardType *CardType `json:"card_type,omitempty"`
 	// Aways `googlepay_pan_only`.
 	method string `const:"googlepay_pan_only" json:"method"`
 	// The URL to redirect a user back to after the complete 3DS in browser.
@@ -74,7 +74,7 @@ func (g *GooglePayFPANPaymentMethodCreate) GetExternalIdentifier() *string {
 	return g.ExternalIdentifier
 }
 
-func (g *GooglePayFPANPaymentMethodCreate) GetCardType() *string {
+func (g *GooglePayFPANPaymentMethodCreate) GetCardType() *CardType {
 	if g == nil {
 		return nil
 	}
