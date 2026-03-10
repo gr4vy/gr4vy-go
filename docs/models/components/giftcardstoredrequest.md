@@ -7,4 +7,4 @@ The ID of a stored gift card to fetch a balance for.
 
 | Field                                       | Type                                        | Required                                    | Description                                 | Example                                     |
 | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- | ------------------------------------------- |
-| `ID`                                        | *string*                                    | :heavy_check_mark:                          | The ID of the field to fetch a balance for. | 356d56e5-fe16-42ae-97ee-8d55d846ae2e        |
+| `ID`                                        | `string`                                    | :heavy_check_mark:                          | The ID of the field to fetch a balance for. | 356d56e5-fe16-42ae-97ee-8d55d846ae2e        |

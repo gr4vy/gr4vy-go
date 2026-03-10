@@ -8,6 +8,19 @@ those in the connectors framework.
 If new codes are added, append them at the end or amend public simulator
 documentation: https://docs.gr4vy.com/guides/features/gift-cards/simulator
 
+## Example Usage
+
+```go
+import (
+	"github.com/gr4vy/gr4vy-go/models/components"
+)
+
+value := components.GiftCardErrorCodeInvalidGiftCard
+
+// Open enum: custom values can be created with a direct type cast
+custom := components.GiftCardErrorCode("custom_value")
+```
+
 
 ## Values
 
