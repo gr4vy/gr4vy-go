@@ -2,6 +2,19 @@
 
 The method to use, this can be any of the methods that support redirect requests.
 
+## Example Usage
+
+```go
+import (
+	"github.com/gr4vy/gr4vy-go/models/components"
+)
+
+value := components.RedirectPaymentMethodCreateMethodAbitab
+
+// Open enum: custom values can be created with a direct type cast
+custom := components.RedirectPaymentMethodCreateMethod("custom_value")
+```
+
 
 ## Values
 
