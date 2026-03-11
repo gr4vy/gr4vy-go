@@ -13,6 +13,7 @@ const (
 	InstrumentTypeApplepay      InstrumentType = "applepay"
 	InstrumentTypeNetworkToken  InstrumentType = "network_token"
 	InstrumentTypePlaid         InstrumentType = "plaid"
+	InstrumentTypeBankDetails   InstrumentType = "bank_details"
 )
 
 func (e InstrumentType) ToPointer() *InstrumentType {
@@ -23,7 +24,7 @@ func (e InstrumentType) ToPointer() *InstrumentType {
 func (e *InstrumentType) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "pan", "card_token", "redirect", "redirect_token", "googlepay", "applepay", "network_token", "plaid":
+		case "pan", "card_token", "redirect", "redirect_token", "googlepay", "applepay", "network_token", "plaid", "bank_details":
 			return true
 		}
 	}
