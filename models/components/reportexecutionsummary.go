@@ -10,6 +10,7 @@ import (
 
 type ReportExecutionSummary struct {
 	// Always `report-execution`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"report-execution" json:"type"`
 	// The unique ID for the report execution.
 	ID string `json:"id"`

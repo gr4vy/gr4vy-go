@@ -1618,16 +1618,11 @@ func (s *GiftCards) List(ctx context.Context, request operations.ListGiftCardsRe
 				return nil, nil
 			}
 		}
+		request.Cursor = &nCVal
 
 		return s.List(
 			ctx,
-			operations.ListGiftCardsRequest{
-				BuyerExternalIdentifier: request.BuyerExternalIdentifier,
-				BuyerID:                 request.BuyerID,
-				Cursor:                  &nCVal,
-				Limit:                   request.Limit,
-				MerchantAccountID:       request.MerchantAccountID,
-			},
+			request,
 			opts...,
 		)
 	}

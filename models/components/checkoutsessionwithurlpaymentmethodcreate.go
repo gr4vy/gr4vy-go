@@ -10,6 +10,7 @@ import (
 // CheckoutSessionWithURLPaymentMethodCreate - Create a payment with a checkout session ID (and an optional URL for 3DS).
 type CheckoutSessionWithURLPaymentMethodCreate struct {
 	// Always `checkout-session`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method *string `const:"checkout-session" json:"method"`
 	// The ID for the checkout session.
 	ID string `json:"id"`

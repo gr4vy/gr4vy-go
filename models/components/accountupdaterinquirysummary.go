@@ -9,6 +9,7 @@ import (
 
 type AccountUpdaterInquirySummary struct {
 	// Always `account-updater-inquiry`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"account-updater-inquiry" json:"type"`
 	// The ID for the account updater inquiry.
 	ID string `json:"id"`

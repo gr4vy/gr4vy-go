@@ -9,6 +9,7 @@ import (
 
 type TransactionsReportSpec struct {
 	// The report model type.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	model *string `const:"transactions" json:"model"`
 	// The parameters for the transactions report model.
 	Params map[string]any `json:"params"`

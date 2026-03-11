@@ -11,6 +11,7 @@ type PaymentServiceDefinition struct {
 	// The definition ID of the payment service that can be configured. This is the underlying provider followed by a dash followed by the method.
 	ID string `json:"id"`
 	// Always `payment-service-definition`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"payment-service-definition" json:"type"`
 	// A human friendly name for this service.
 	DisplayName string `json:"display_name"`

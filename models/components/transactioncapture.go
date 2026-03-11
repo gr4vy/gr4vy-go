@@ -9,6 +9,7 @@ import (
 
 type TransactionCapture struct {
 	// Always `transaction-capture`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_  *string       `const:"transaction-capture" json:"type"`
 	Status CaptureStatus `json:"status"`
 	// The standardized error code set by Gr4vy.

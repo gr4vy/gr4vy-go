@@ -83,3 +83,6 @@ func (t *ThreeDSecureV2) GetCardholderInfo() *string {
 	}
 	return t.CardholderInfo
 }
+
+// #region class-body-threedsecurev2
+// #endregion class-body-threedsecurev2

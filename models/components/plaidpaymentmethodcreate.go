@@ -12,6 +12,7 @@ import (
 // Plaid Payment Method to use in a transaction.
 type PlaidPaymentMethodCreate struct {
 	// Always `plaid`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method *string `const:"plaid" json:"method"`
 	// The public token obtained after using Plaid Link.
 	Token string `json:"token"`

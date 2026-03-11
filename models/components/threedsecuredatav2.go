@@ -82,3 +82,6 @@ func (t *ThreeDSecureDataV2) GetDirectoryTransactionID() string {
 	}
 	return t.DirectoryTransactionID
 }
+
+// #region class-body-threedsecuredatav2
+// #endregion class-body-threedsecuredatav2

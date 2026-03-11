@@ -9,6 +9,7 @@ import (
 
 type CheckoutSessionPaymentMethod struct {
 	// Always `payment-method`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"payment-method" json:"type"`
 	// The ID of the payment method.
 	ID *string `json:"id,omitempty"`
@@ -17,6 +18,7 @@ type CheckoutSessionPaymentMethod struct {
 	// The last 4 digits of the the card.
 	Label *string `json:"label,omitempty"`
 	// Always `card`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method *string `const:"card" json:"method"`
 	// The scheme of the card.
 	Scheme *CardScheme `json:"scheme,omitempty"`

@@ -9,6 +9,7 @@ import (
 
 type PaymentMethodCard struct {
 	// Set to `card` to use a new card.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method *string `const:"card" json:"method"`
 	// The 13-19 digit number for this card as it can be found on the front of the card.
 	Number string `json:"number"`

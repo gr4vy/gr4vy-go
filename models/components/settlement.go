@@ -43,6 +43,7 @@ type Settlement struct {
 	// The transaction this record is associated with.
 	TransactionID string `json:"transaction_id"`
 	// Always `settlement`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"settlement" json:"type"`
 }
 

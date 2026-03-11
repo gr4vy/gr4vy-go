@@ -10,6 +10,7 @@ import (
 
 type MerchantAccount struct {
 	// Always `merchant-account`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"merchant-account" json:"type"`
 	// The ID for the merchant account.
 	ID string `json:"id"`

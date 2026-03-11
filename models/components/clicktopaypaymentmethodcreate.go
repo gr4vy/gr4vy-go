@@ -11,6 +11,7 @@ import (
 // integration.
 type ClickToPayPaymentMethodCreate struct {
 	// Aways `click-to-pay`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method string `const:"click-to-pay" json:"method"`
 	// The device token.
 	Token string `json:"token"`

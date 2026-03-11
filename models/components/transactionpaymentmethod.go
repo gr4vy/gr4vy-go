@@ -10,6 +10,7 @@ import (
 
 type TransactionPaymentMethod struct {
 	// Always `payment-method`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"payment-method" json:"type"`
 	// The optional URL that the buyer needs to be redirected to to further authorize their payment.
 	ApprovalURL *string `json:"approval_url,omitempty"`

@@ -239,16 +239,11 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 				return nil, nil
 			}
 		}
+		request.Cursor = &nCVal
 
 		return s.List(
 			ctx,
-			operations.ListPaymentServicesRequest{
-				Method:            request.Method,
-				Cursor:            &nCVal,
-				Limit:             request.Limit,
-				Deleted:           request.Deleted,
-				MerchantAccountID: request.MerchantAccountID,
-			},
+			request,
 			opts...,
 		)
 	}

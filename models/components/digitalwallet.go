@@ -10,6 +10,7 @@ import (
 
 type DigitalWallet struct {
 	// Always `digital-wallet`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"digital-wallet" json:"type"`
 	// The ID for the digital wallet.
 	ID string `json:"id"`

@@ -10,6 +10,7 @@ import (
 
 type NetworkToken struct {
 	// Always `network-token`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"network-token" json:"type"`
 	// The ID for the network token.
 	ID string `json:"id"`

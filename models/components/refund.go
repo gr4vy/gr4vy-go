@@ -10,6 +10,7 @@ import (
 
 type Refund struct {
 	// Always `refund`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"refund" json:"type"`
 	// The unique identifier for the refund.
 	ID string `json:"id"`

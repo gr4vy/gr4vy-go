@@ -10,6 +10,7 @@ import (
 
 type AuditLogEntry struct {
 	// Always `audit-log`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"audit-log" json:"type"`
 	// The ID for the audit log entry.
 	ID *string `json:"id,omitempty"`

@@ -9,6 +9,7 @@ import (
 
 type GiftCardRedemption struct {
 	// Always `gift-card-redemption`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"gift-card-redemption" json:"type"`
 	// The ID for the gift card redemption.
 	ID     string                   `json:"id"`

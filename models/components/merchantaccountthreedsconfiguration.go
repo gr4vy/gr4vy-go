@@ -21,6 +21,7 @@ type MerchantAccountThreeDSConfiguration struct {
 	// URL to send when calling 3DS through this scheme.
 	MerchantURL string `json:"merchant_url"`
 	// Always `merchant-account.three-ds-configuration`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"merchant-account.three-ds-configuration" json:"type"`
 	// Unique identifier for the 3DS configuration
 	ID string `json:"id"`

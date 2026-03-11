@@ -9,6 +9,7 @@ import (
 
 type Cryptogram struct {
 	// Always `network-token-cryptogram`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"network-token-cryptogram" json:"type"`
 	// The cryptogram of the network token.
 	Cryptogram string `json:"cryptogram"`

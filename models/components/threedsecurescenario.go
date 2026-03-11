@@ -10,6 +10,7 @@ import (
 
 type ThreeDSecureScenario struct {
 	// Always `three-d-secure-scenario`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"three-d-secure-scenario" json:"type"`
 	// Unique identifier for the 3DS scenario
 	ID string `json:"id"`

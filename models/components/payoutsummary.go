@@ -13,6 +13,7 @@ import (
 // Represents a summary of a payout.
 type PayoutSummary struct {
 	// Always `payout`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"payout" json:"type"`
 	// The ID for the payout.
 	ID *string `json:"id,omitempty"`

@@ -244,18 +244,11 @@ func (s *PaymentMethods) List(ctx context.Context, request operations.ListPaymen
 				return nil, nil
 			}
 		}
+		request.Cursor = &nCVal
 
 		return s.List(
 			ctx,
-			operations.ListPaymentMethodsRequest{
-				Cursor:                  &nCVal,
-				Limit:                   request.Limit,
-				BuyerID:                 request.BuyerID,
-				BuyerExternalIdentifier: request.BuyerExternalIdentifier,
-				Status:                  request.Status,
-				ExternalIdentifier:      request.ExternalIdentifier,
-				MerchantAccountID:       request.MerchantAccountID,
-			},
+			request,
 			opts...,
 		)
 	}
