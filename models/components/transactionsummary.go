@@ -11,6 +11,7 @@ import (
 // TransactionSummary - A transaction, summarised
 type TransactionSummary struct {
 	// Always `transaction`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"transaction" json:"type"`
 	// The ID for the transaction.
 	ID string `json:"id"`

@@ -30,6 +30,7 @@ func (e *CardSource) IsExact() bool {
 
 type NetworkTokenPaymentMethodCreate struct {
 	// Always `network-token`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method string `const:"network-token" json:"method"`
 	// The scheme token.
 	Token string `json:"token"`

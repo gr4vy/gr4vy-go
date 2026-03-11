@@ -9,6 +9,7 @@ import (
 
 type CardSchemeDefinition struct {
 	// Always `card-scheme-definition`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"card-scheme-definition" json:"type"`
 	// The ID for the card scheme.
 	ID string `json:"id"`

@@ -21,6 +21,7 @@ type GooglePayFPANPaymentMethodCreate struct {
 	// The type of the card used
 	CardType *CardType `json:"card_type,omitempty"`
 	// Aways `googlepay_pan_only`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method string `const:"googlepay_pan_only" json:"method"`
 	// The URL to redirect a user back to after the complete 3DS in browser.
 	RedirectURL *string `json:"redirect_url,omitempty"`

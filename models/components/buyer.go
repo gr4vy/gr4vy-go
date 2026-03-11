@@ -10,6 +10,7 @@ import (
 
 type Buyer struct {
 	// Always `buyer`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"buyer" json:"type"`
 	// The ID for the buyer.
 	ID *string `json:"id,omitempty"`

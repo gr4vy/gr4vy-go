@@ -91,3 +91,6 @@ func (t *ThreeDSecureDataV1) GetXid() string {
 	}
 	return t.Xid
 }
+
+// #region class-body-threedsecuredatav1
+// #endregion class-body-threedsecuredatav1

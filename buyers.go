@@ -246,16 +246,11 @@ func (s *Buyers) List(ctx context.Context, request operations.ListBuyersRequest,
 				return nil, nil
 			}
 		}
+		request.Cursor = &nCVal
 
 		return s.List(
 			ctx,
-			operations.ListBuyersRequest{
-				Cursor:             &nCVal,
-				Limit:              request.Limit,
-				Search:             request.Search,
-				ExternalIdentifier: request.ExternalIdentifier,
-				MerchantAccountID:  request.MerchantAccountID,
-			},
+			request,
 			opts...,
 		)
 	}

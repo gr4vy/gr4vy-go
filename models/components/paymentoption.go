@@ -95,6 +95,7 @@ func (u Context) MarshalJSON() ([]byte, error) {
 }
 
 type PaymentOption struct {
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_                 *string  `const:"payment-option" json:"type"`
 	Method                string   `json:"method"`
 	IconURL               *string  `json:"icon_url,omitempty"`

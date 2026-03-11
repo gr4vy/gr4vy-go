@@ -10,6 +10,7 @@ import (
 
 type TransactionAction struct {
 	// Always `action`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string    `const:"action" json:"type"`
 	ID    FlowAction `json:"id"`
 	Flow  Flow       `json:"flow"`

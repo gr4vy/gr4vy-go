@@ -12,6 +12,7 @@ import (
 // Represents a summary of a merchant.
 type PayoutMerchantSummary struct {
 	// Always `merchant`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"merchant" json:"type"`
 	// The name of the merchant.
 	Name string `json:"name"`

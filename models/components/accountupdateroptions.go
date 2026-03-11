@@ -9,6 +9,7 @@ import (
 
 type AccountUpdaterOptions struct {
 	// The type of response to simulate.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	responseCode *string `const:"updated" json:"response_code,omitempty"`
 	// When the `response_code` is set to `updated`, the payment method's account number will be updated to this value.
 	AccountNumber *string `json:"account_number,omitempty"`

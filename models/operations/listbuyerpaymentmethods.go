@@ -47,6 +47,7 @@ type ListBuyerPaymentMethodsRequest struct {
 	// The external identifier of the buyer to query payment methods for.
 	BuyerExternalIdentifier *string `queryParam:"style=form,explode=true,name=buyer_external_identifier"`
 	// The field to sort the payment methods by.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	sortBy *string `const:"last_used_at" queryParam:"style=form,explode=true,name=sort_by"`
 	// The direction to sort the payment methods in.
 	OrderBy *OrderBy `default:"desc" queryParam:"style=form,explode=true,name=order_by"`

@@ -10,6 +10,7 @@ import (
 // CreateSession - The session data received from the payment service.
 type CreateSession struct {
 	// Always `payment-service-session`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_  *string             `const:"payment-service-session" json:"type"`
 	Status CreateSessionStatus `json:"status"`
 	// A generic error code that may be returned when the session could not be generated.

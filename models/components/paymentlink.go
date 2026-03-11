@@ -12,6 +12,7 @@ type PaymentLink struct {
 	// The unique identifier for the payment link.
 	ID string `json:"id"`
 	// Always `payment-link`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"payment-link" json:"type"`
 	// The URL for the payment link.
 	URL string `json:"url"`

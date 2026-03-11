@@ -83,6 +83,7 @@ func (e *Name) IsExact() bool {
 
 type TransactionEvent struct {
 	// Always `transaction-event`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"transaction-event" json:"type"`
 	// The ID for the event.
 	ID string `json:"id"`

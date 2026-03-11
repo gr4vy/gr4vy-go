@@ -9,6 +9,7 @@ import (
 
 type ReportSummary struct {
 	// Always `report`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"report" json:"type"`
 	// The unique ID for the report.
 	ID string `json:"id"`

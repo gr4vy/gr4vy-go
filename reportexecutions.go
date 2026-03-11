@@ -239,19 +239,11 @@ func (s *ReportExecutions) List(ctx context.Context, request operations.ListAllR
 				return nil, nil
 			}
 		}
+		request.Cursor = &nCVal
 
 		return s.List(
 			ctx,
-			operations.ListAllReportExecutionsRequest{
-				Cursor:            &nCVal,
-				Limit:             request.Limit,
-				ReportName:        request.ReportName,
-				CreatedAtLte:      request.CreatedAtLte,
-				CreatedAtGte:      request.CreatedAtGte,
-				Status:            request.Status,
-				CreatorID:         request.CreatorID,
-				MerchantAccountID: request.MerchantAccountID,
-			},
+			request,
 			opts...,
 		)
 	}

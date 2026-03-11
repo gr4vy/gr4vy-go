@@ -239,17 +239,11 @@ func (s *AuditLogs) List(ctx context.Context, request operations.ListAuditLogsRe
 				return nil, nil
 			}
 		}
+		request.Cursor = &nCVal
 
 		return s.List(
 			ctx,
-			operations.ListAuditLogsRequest{
-				Cursor:            &nCVal,
-				Limit:             request.Limit,
-				Action:            request.Action,
-				UserID:            request.UserID,
-				ResourceType:      request.ResourceType,
-				MerchantAccountID: request.MerchantAccountID,
-			},
+			request,
 			opts...,
 		)
 	}

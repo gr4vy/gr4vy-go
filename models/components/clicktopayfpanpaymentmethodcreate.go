@@ -21,6 +21,7 @@ type ClickToPayFPANPaymentMethodCreate struct {
 	// The type of the card used
 	CardType *CardType `json:"card_type,omitempty"`
 	// Aways `click-to-pay`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method string `const:"click-to-pay" json:"method"`
 	// The URL to redirect a user back to after the complete 3DS in browser.
 	RedirectURL *string `json:"redirect_url,omitempty"`

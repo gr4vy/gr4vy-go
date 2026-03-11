@@ -24,6 +24,7 @@ type CheckoutSession struct {
 	// The unique identifier of an existing payment service. When provided, the created transaction will be processed by the given payment service and any routing rules will be skipped.
 	PaymentServiceID *string `json:"payment_service_id,omitempty"`
 	// Always `checkout-session`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"checkout-session" json:"type"`
 	// The ID for the checkout session.
 	ID string `json:"id"`

@@ -9,6 +9,7 @@ import (
 
 type DetailedSettlementReportSpec struct {
 	// The report model type.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	model *string `const:"detailed_settlement" json:"model"`
 	// The parameters for the detailed settlement report model.
 	Params map[string]any `json:"params"`

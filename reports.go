@@ -242,17 +242,11 @@ func (s *Reports) List(ctx context.Context, request operations.ListReportsReques
 				return nil, nil
 			}
 		}
+		request.Cursor = &nCVal
 
 		return s.List(
 			ctx,
-			operations.ListReportsRequest{
-				Cursor:            &nCVal,
-				Limit:             request.Limit,
-				Schedule:          request.Schedule,
-				ScheduleEnabled:   request.ScheduleEnabled,
-				Name:              request.Name,
-				MerchantAccountID: request.MerchantAccountID,
-			},
+			request,
 			opts...,
 		)
 	}

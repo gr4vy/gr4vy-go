@@ -9,6 +9,7 @@ import (
 
 type TransactionCancel struct {
 	// Always `transaction-cancel`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_  *string      `const:"transaction-cancel" json:"type"`
 	Status CancelStatus `json:"status"`
 	// The standardized error code set by Gr4vy.

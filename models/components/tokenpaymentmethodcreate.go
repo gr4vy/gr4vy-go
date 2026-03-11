@@ -12,6 +12,7 @@ type TokenPaymentMethodCreate struct {
 	// The ID for the payment method.
 	ID string `json:"id"`
 	// Always `id`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method *string `const:"id" json:"method"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
 	SecurityCode *string `json:"security_code,omitempty"`

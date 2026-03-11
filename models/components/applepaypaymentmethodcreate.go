@@ -23,6 +23,7 @@ type ApplePayPaymentMethodCreate struct {
 	// The payment scheme of the card.
 	CardType *string `json:"card_type,omitempty"`
 	// Always `applepay`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method string `const:"applepay" json:"method"`
 	// The opaque token as received from the Apple Pay JS library. This format may change between JS library versions.
 	Token map[string]any `json:"token"`

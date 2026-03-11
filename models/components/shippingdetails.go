@@ -23,6 +23,7 @@ type ShippingDetails struct {
 	// The ID for the buyer.
 	BuyerID *string `json:"buyer_id,omitempty"`
 	// Always `shipping-details`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"shipping-details" json:"type"`
 }
 

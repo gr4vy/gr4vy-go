@@ -9,6 +9,7 @@ import (
 
 type PaymentMethodStoredCard struct {
 	// Set to `id` to use a stored card.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method *string `const:"id" json:"method"`
 	// The ID of the stored card to use.
 	ID string `json:"id"`

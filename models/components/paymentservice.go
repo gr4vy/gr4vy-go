@@ -10,6 +10,7 @@ import (
 
 type PaymentService struct {
 	// Always `payment-service`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"payment-service" json:"type"`
 	ID    *string `default:"The ID of the payment service" json:"id"`
 	// The ID of the merchant account this job belongs to.

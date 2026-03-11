@@ -9,6 +9,7 @@ import (
 
 type TransactionVoid struct {
 	// Always `transaction-void`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_  *string    `const:"transaction-void" json:"type"`
 	Status VoidStatus `json:"status"`
 	// The standardized error code set by Gr4vy.

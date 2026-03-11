@@ -10,6 +10,7 @@ import (
 
 type AccountUpdaterJob struct {
 	// Always `account-updater-job`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"account-updater-job" json:"type"`
 	// The ID for the account updater job.
 	ID string `json:"id"`

@@ -9,10 +9,12 @@ import (
 
 type PayoutPaymentService struct {
 	// Always `payment-service`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"payment-service" json:"type"`
 	// The ID for the payout service.
 	ID *string `json:"id,omitempty"`
 	// Always `card`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method *string `const:"card" json:"method"`
 	// The ID of the connection used for this payout.
 	PaymentServiceDefinitionID string `json:"payment_service_definition_id"`

@@ -89,6 +89,7 @@ type GooglePayPaymentMethodCreate struct {
 	// The payment scheme of the card.
 	CardType *string `json:"card_type,omitempty"`
 	// Always `googlepay`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method string `const:"googlepay" json:"method"`
 	// The opaque token as received from the Google Pay JS library. This format may change between JS library versions.
 	Token Token `json:"token"`

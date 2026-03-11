@@ -10,6 +10,7 @@ import (
 
 type PaymentServiceToken struct {
 	// Always `payment-service-token`.
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"payment-service-token" json:"type"`
 	// The ID for the payment service token.
 	ID string `json:"id"`

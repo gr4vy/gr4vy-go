@@ -22,6 +22,7 @@ type CardWithURLPaymentMethodCreate struct {
 	// The type of the card used
 	CardType *CardType `json:"card_type,omitempty"`
 	// Always `card`
+	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method *string `const:"card" json:"method"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
 	SecurityCode *string `json:"security_code,omitempty"`
