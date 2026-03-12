@@ -27,6 +27,9 @@ const (
 	BodyTypeRedirectPaymentMethodCreate        BodyType = "RedirectPaymentMethodCreate"
 	BodyTypeCheckoutSessionPaymentMethodCreate BodyType = "CheckoutSessionPaymentMethodCreate"
 	BodyTypePlaidPaymentMethodCreate           BodyType = "PlaidPaymentMethodCreate"
+	BodyTypeACHBankPaymentMethodCreate         BodyType = "ACHBankPaymentMethodCreate"
+	BodyTypeBACSBankPaymentMethodCreate        BodyType = "BACSBankPaymentMethodCreate"
+	BodyTypeSEPABankPaymentMethodCreate        BodyType = "SEPABankPaymentMethodCreate"
 )
 
 type Body struct {
@@ -34,6 +37,9 @@ type Body struct {
 	RedirectPaymentMethodCreate        *components.RedirectPaymentMethodCreate        `queryParam:"inline" union:"member"`
 	CheckoutSessionPaymentMethodCreate *components.CheckoutSessionPaymentMethodCreate `queryParam:"inline" union:"member"`
 	PlaidPaymentMethodCreate           *components.PlaidPaymentMethodCreate           `queryParam:"inline" union:"member"`
+	ACHBankPaymentMethodCreate         *components.ACHBankPaymentMethodCreate         `queryParam:"inline" union:"member"`
+	BACSBankPaymentMethodCreate        *components.BACSBankPaymentMethodCreate        `queryParam:"inline" union:"member"`
+	SEPABankPaymentMethodCreate        *components.SEPABankPaymentMethodCreate        `queryParam:"inline" union:"member"`
 
 	Type BodyType
 }
@@ -74,6 +80,33 @@ func CreateBodyPlaidPaymentMethodCreate(plaidPaymentMethodCreate components.Plai
 	}
 }
 
+func CreateBodyACHBankPaymentMethodCreate(achBankPaymentMethodCreate components.ACHBankPaymentMethodCreate) Body {
+	typ := BodyTypeACHBankPaymentMethodCreate
+
+	return Body{
+		ACHBankPaymentMethodCreate: &achBankPaymentMethodCreate,
+		Type:                       typ,
+	}
+}
+
+func CreateBodyBACSBankPaymentMethodCreate(bacsBankPaymentMethodCreate components.BACSBankPaymentMethodCreate) Body {
+	typ := BodyTypeBACSBankPaymentMethodCreate
+
+	return Body{
+		BACSBankPaymentMethodCreate: &bacsBankPaymentMethodCreate,
+		Type:                        typ,
+	}
+}
+
+func CreateBodySEPABankPaymentMethodCreate(sepaBankPaymentMethodCreate components.SEPABankPaymentMethodCreate) Body {
+	typ := BodyTypeSEPABankPaymentMethodCreate
+
+	return Body{
+		SEPABankPaymentMethodCreate: &sepaBankPaymentMethodCreate,
+		Type:                        typ,
+	}
+}
+
 func (u *Body) UnmarshalJSON(data []byte) error {
 
 	var redirectPaymentMethodCreate components.RedirectPaymentMethodCreate = components.RedirectPaymentMethodCreate{}
@@ -83,10 +116,31 @@ func (u *Body) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	var achBankPaymentMethodCreate components.ACHBankPaymentMethodCreate = components.ACHBankPaymentMethodCreate{}
+	if err := utils.UnmarshalJSON(data, &achBankPaymentMethodCreate, "", true, nil); err == nil {
+		u.ACHBankPaymentMethodCreate = &achBankPaymentMethodCreate
+		u.Type = BodyTypeACHBankPaymentMethodCreate
+		return nil
+	}
+
+	var bacsBankPaymentMethodCreate components.BACSBankPaymentMethodCreate = components.BACSBankPaymentMethodCreate{}
+	if err := utils.UnmarshalJSON(data, &bacsBankPaymentMethodCreate, "", true, nil); err == nil {
+		u.BACSBankPaymentMethodCreate = &bacsBankPaymentMethodCreate
+		u.Type = BodyTypeBACSBankPaymentMethodCreate
+		return nil
+	}
+
 	var cardPaymentMethodCreate components.CardPaymentMethodCreate = components.CardPaymentMethodCreate{}
 	if err := utils.UnmarshalJSON(data, &cardPaymentMethodCreate, "", true, nil); err == nil {
 		u.CardPaymentMethodCreate = &cardPaymentMethodCreate
 		u.Type = BodyTypeCardPaymentMethodCreate
+		return nil
+	}
+
+	var sepaBankPaymentMethodCreate components.SEPABankPaymentMethodCreate = components.SEPABankPaymentMethodCreate{}
+	if err := utils.UnmarshalJSON(data, &sepaBankPaymentMethodCreate, "", true, nil); err == nil {
+		u.SEPABankPaymentMethodCreate = &sepaBankPaymentMethodCreate
+		u.Type = BodyTypeSEPABankPaymentMethodCreate
 		return nil
 	}
 
@@ -122,6 +176,18 @@ func (u Body) MarshalJSON() ([]byte, error) {
 
 	if u.PlaidPaymentMethodCreate != nil {
 		return utils.MarshalJSON(u.PlaidPaymentMethodCreate, "", true)
+	}
+
+	if u.ACHBankPaymentMethodCreate != nil {
+		return utils.MarshalJSON(u.ACHBankPaymentMethodCreate, "", true)
+	}
+
+	if u.BACSBankPaymentMethodCreate != nil {
+		return utils.MarshalJSON(u.BACSBankPaymentMethodCreate, "", true)
+	}
+
+	if u.SEPABankPaymentMethodCreate != nil {
+		return utils.MarshalJSON(u.SEPABankPaymentMethodCreate, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type Body: all fields are null")
