@@ -27,6 +27,24 @@ body := operations.CreateBodyCheckoutSessionPaymentMethodCreate(components.Check
 body := operations.CreateBodyPlaidPaymentMethodCreate(components.PlaidPaymentMethodCreate{/* values here */})
 ```
 
+### ACHBankPaymentMethodCreate
+
+```go
+body := operations.CreateBodyACHBankPaymentMethodCreate(components.ACHBankPaymentMethodCreate{/* values here */})
+```
+
+### BACSBankPaymentMethodCreate
+
+```go
+body := operations.CreateBodyBACSBankPaymentMethodCreate(components.BACSBankPaymentMethodCreate{/* values here */})
+```
+
+### SEPABankPaymentMethodCreate
+
+```go
+body := operations.CreateBodySEPABankPaymentMethodCreate(components.SEPABankPaymentMethodCreate{/* values here */})
+```
+
 ## Union Discrimination
 
 Use the `Type` field to determine which variant is active, then access the corresponding field:
@@ -41,5 +59,11 @@ switch body.Type {
 		// body.CheckoutSessionPaymentMethodCreate is populated
 	case operations.BodyTypePlaidPaymentMethodCreate:
 		// body.PlaidPaymentMethodCreate is populated
+	case operations.BodyTypeACHBankPaymentMethodCreate:
+		// body.ACHBankPaymentMethodCreate is populated
+	case operations.BodyTypeBACSBankPaymentMethodCreate:
+		// body.BACSBankPaymentMethodCreate is populated
+	case operations.BodyTypeSEPABankPaymentMethodCreate:
+		// body.SEPABankPaymentMethodCreate is populated
 }
 ```
