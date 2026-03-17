@@ -4,15 +4,15 @@ package components
 
 type ThreeDSecureScenarioOutcome struct {
 	// The version of 3DS which will be simulated.
-	Version        string                                    `json:"version"`
+	Version        *string                                   `json:"version,omitempty"`
 	Authentication ThreeDSecureScenarioOutcomeAuthentication `json:"authentication"`
 	// 3DS result value. Required if authentication status is "C".
 	Result *ThreeDSecureScenarioOutcomeResult `json:"result,omitempty"`
 }
 
-func (t *ThreeDSecureScenarioOutcome) GetVersion() string {
+func (t *ThreeDSecureScenarioOutcome) GetVersion() *string {
 	if t == nil {
-		return ""
+		return nil
 	}
 	return t.Version
 }

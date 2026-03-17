@@ -1,27 +1,27 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: e30f7db487f59d5bbcc9dcee2ade471c
+  docChecksum: 13581808b64b1461bf4579b644050d9f
   docVersion: 1.0.0
-  speakeasyVersion: 1.752.0
-  generationVersion: 2.859.2
-  releaseVersion: 1.12.44
-  configChecksum: b9a0da1b098aaf384a2a0206e03da88b
+  speakeasyVersion: 1.755.1
+  generationVersion: 2.865.2
+  releaseVersion: 1.12.45
+  configChecksum: 0dcbe7bdbe849a0fb6c9ab0783272134
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: e3d228bc-6ce1-4b9f-bf46-ac0edab69cae
-  pristine_commit_hash: 9486506681eed76367307f43972c3704f8e4b1a5
-  pristine_tree_hash: b14d696add7a79cfcedb73ba4cb77eebcd4b1824
+  generation_id: dce52232-432e-4e4d-8da4-999eea762267
+  pristine_commit_hash: b1c0d9c14c9b367956975bdaaa5b968252c5aa70
+  pristine_tree_hash: 2a202c466fa98d2acfb68540d5a040cb1a989b50
 features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.13.23
+    core: 3.13.36
     defaultEnabledRetries: 0.2.0
     devContainers: 2.90.0
     envVarSecurityUsage: 0.3.2
-    flattening: 2.81.1
+    flattening: 2.81.2
     globalSecurity: 2.82.13
     globalSecurityCallbacks: 0.1.0
     globalSecurityFlattening: 0.1.0
@@ -38,7 +38,7 @@ features:
     retries: 2.84.2
     sdkHooks: 0.3.0
     serverIDs: 2.81.1
-    unions: 2.87.4
+    unions: 2.87.6
 trackedFiles:
   .devcontainer/README.md:
     id: b170c0f184ac
@@ -1242,8 +1242,8 @@ trackedFiles:
     pristine_git_object: 5e0cd954242b8b863dbd2d174f5ff5970e997a88
   docs/models/components/threedsecurescenariooutcome.md:
     id: "912435943930"
-    last_write_checksum: sha1:89b27df261996bcceb73ec7adae8202d201056fd
-    pristine_git_object: 0d6baf3823fc240de5a8b99d6afb79288051e64c
+    last_write_checksum: sha1:1f104a0362f8f93eacf880fc0973a51a58cf846c
+    pristine_git_object: 5028457ebd4c071964ffb4dda84cbe02da73e0f6
   docs/models/components/threedsecurescenariooutcomeauthentication.md:
     id: 961ce7c4b099
     last_write_checksum: sha1:0b0c67cdea50c0e3d1850588e681a5f56047bd70
@@ -1938,8 +1938,8 @@ trackedFiles:
     pristine_git_object: 37470ef969a22b9154da95e70f844b03983f0246
   docs/models/operations/listbuyerpaymentmethodsrequest.md:
     id: d17e367b14fe
-    last_write_checksum: sha1:dba9b17b093eae32028a806d349ed19973897974
-    pristine_git_object: e6a5faf191ab8266b2645c0abb0e9d1652d20190
+    last_write_checksum: sha1:a9cb1f607495635aa055be15f4a464f541de0516
+    pristine_git_object: 3c7eb4b5a669f08cc598ec3e2806804e5c85e87f
   docs/models/operations/listbuyersglobals.md:
     id: 900cfb84eebf
     last_write_checksum: sha1:c7b366d3f32a6c29328a8f39a86c83b1d22526ea
@@ -2192,6 +2192,10 @@ trackedFiles:
     id: 51a80bdd4ee7
     last_write_checksum: sha1:ac0885d4211ddb0235c8060c1520f501aea6f943
     pristine_git_object: 877cb5697d42cc1894716dd6b7aac7aebaaa3809
+  docs/models/operations/sortby.md:
+    id: 6e8a73340afa
+    last_write_checksum: sha1:0940f5f7852613413dfbed032874cedc880c3d7e
+    pristine_git_object: 6830e9bd24a46aaae682fe205299d9f7f01817d2
   docs/models/operations/suspendpaymentmethodnetworktokenglobals.md:
     id: d74821bd1eef
     last_write_checksum: sha1:9891a1a9181a6f33cfd7e04bd814576edf072a01
@@ -2326,8 +2330,8 @@ trackedFiles:
     pristine_git_object: 9445f128246b7761e514b52a0f435c2ff0e32d4a
   docs/sdks/buyerspaymentmethods/README.md:
     id: 4aff3957cf89
-    last_write_checksum: sha1:1b37793551a34ab03e180e8560fceb4f04c418db
-    pristine_git_object: 4addd491c64e8f747fb7aae02b5b51f7017b5505
+    last_write_checksum: sha1:989c2cdbc5afdbbb223cb8613840a8c93910a3dc
+    pristine_git_object: a55f6e2c9565fc66fbf49857736e1db4e465c9f3
   docs/sdks/cardschemedefinitions/README.md:
     id: a8ca8c2fbb07
     last_write_checksum: sha1:6fcd95a06bf5651eff793260d4bd2a8093a9f9dd
@@ -2430,8 +2434,8 @@ trackedFiles:
     pristine_git_object: 03f0c0240d56e51d524c446a6b07dcd55ad42db8
   docs/sdks/threedsscenarios/README.md:
     id: 81ff4c3f8215
-    last_write_checksum: sha1:928382f8a5c878be87ff7a7e5605173815c670ba
-    pristine_git_object: de0237097e22f516a900305bf4e72b19ae6ec2c8
+    last_write_checksum: sha1:2d2e0342758ab87e5620551c780dfcd86152ea57
+    pristine_git_object: b41956e7522e6c0792bafccae3d1d97435d1392e
   docs/sdks/transactions/README.md:
     id: 85592abe3c6b
     last_write_checksum: sha1:d53f1fe414c445e05bea590e2f113df99e2872ae
@@ -2466,8 +2470,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:a8baf20380228fd5db06c0f5ebb2324187931f1a
-    pristine_git_object: 6e4569986ee809aadde82ec2399b66daaf289e14
+    last_write_checksum: sha1:71247882df775bd0f093e0114764f8eed434a4e0
+    pristine_git_object: 592827e76817fc794b887ef29a0374d444b07f0b
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3578,8 +3582,8 @@ trackedFiles:
     pristine_git_object: 497d2f83cbc93086d27e59de8b0bc951428643f1
   models/components/threedsecurescenariooutcome.go:
     id: 382f37deb019
-    last_write_checksum: sha1:7e0a810cf6b3b722bd08c105a0496b767fa5efcc
-    pristine_git_object: 74228c1edf92b7c32d32a898d7bcb1ffdff8f7bf
+    last_write_checksum: sha1:f264a7c0b814e34649b9de3f9663075fac08035b
+    pristine_git_object: f2c7ae5942194427db2d3e3deb5933dc5426cede
   models/components/threedsecurescenariooutcomeauthentication.go:
     id: 8929a44585bf
     last_write_checksum: sha1:7b23428b1465c7d685855db69021459fe3ffa23c
@@ -4010,8 +4014,8 @@ trackedFiles:
     pristine_git_object: 239fc505e42c02b9fe0330127ed2da23bc09df18
   models/operations/listbuyerpaymentmethods.go:
     id: c4decb8c5e3d
-    last_write_checksum: sha1:7e920ad4392f3d3e689312e4e403d33a076f9f67
-    pristine_git_object: e575aefab37250d3cc9b4cb030e9ed382c1241c7
+    last_write_checksum: sha1:846ca98b487bf85e031c6e77ada85ce8bf627dbe
+    pristine_git_object: e6b55a9e2a5e00e039d01a9e1e6b5b4353bfe5c3
   models/operations/listbuyers.go:
     id: 781c6632fc5f
     last_write_checksum: sha1:c50b1c306cb209cade6b58e41d2119ee85ea077e
@@ -7637,10 +7641,10 @@ examples:
   create_three_ds_scenario:
     speakeasy-default-create-three-ds-scenario:
       requestBody:
-        application/json: {"conditions": {}, "outcome": {"version": "2.2.0", "authentication": {"transaction_status": "Y"}}}
+        application/json: {"conditions": {}, "outcome": {"authentication": {"transaction_status": "Y"}}}
       responses:
         "201":
-          application/json: {"type": "three-d-secure-scenario", "id": "550e8400-e29b-41d4-a716-446655440000", "merchant_account_id": "merchant-account-12345", "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00", "conditions": {}, "outcome": {"version": "2.2.0", "authentication": {"transaction_status": "Y"}}}
+          application/json: {"type": "three-d-secure-scenario", "id": "550e8400-e29b-41d4-a716-446655440000", "merchant_account_id": "merchant-account-12345", "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00", "conditions": {}, "outcome": {"authentication": {"transaction_status": "Y"}}}
         "400":
           application/json: {"type": "error", "code": "bad_request", "status": 400, "message": "Request failed validation"}
         "401":
@@ -7706,7 +7710,7 @@ examples:
         application/json: {}
       responses:
         "200":
-          application/json: {"type": "three-d-secure-scenario", "id": "550e8400-e29b-41d4-a716-446655440000", "merchant_account_id": "merchant-account-12345", "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00", "conditions": {}, "outcome": {"version": "2.2.0", "authentication": {"transaction_status": "Y"}}}
+          application/json: {"type": "three-d-secure-scenario", "id": "550e8400-e29b-41d4-a716-446655440000", "merchant_account_id": "merchant-account-12345", "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00", "conditions": {}, "outcome": {"authentication": {"transaction_status": "Y"}}}
         "400":
           application/json: {"type": "error", "code": "bad_request", "status": 400, "message": "Request failed validation"}
         "401":
@@ -7895,9 +7899,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Gr4vy.PaymentMethods.Create()`:  `request.RequestBody` **Changed**
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.ThreeDsScenarios.Create()`: \n  *  `request.ThreeDSecureScenarioCreate.Outcome.Version` **Changed**\n  *  `response.Outcome.Version` **Changed** (Breaking ⚠️)\n* `Gr4vy.ThreeDsScenarios.List()`:  `response.Items[].Outcome.Version` **Changed** (Breaking ⚠️)\n* `Gr4vy.ThreeDsScenarios.Update()`: \n  *  `request.ThreeDSecureScenarioUpdate.Outcome.Version` **Changed**\n  *  `response.Outcome.Version` **Changed** (Breaking ⚠️)\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

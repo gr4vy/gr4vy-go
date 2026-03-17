@@ -38,7 +38,6 @@ func main() {
     res, err := s.ThreeDsScenarios.Create(ctx, components.ThreeDSecureScenarioCreate{
         Conditions: components.ThreeDSecureScenarioConditions{},
         Outcome: components.ThreeDSecureScenarioOutcome{
-            Version: "2.2.0",
             Authentication: components.ThreeDSecureScenarioOutcomeAuthentication{
                 TransactionStatus: components.ThreeDSecureScenarioOutcomeAuthenticationTransactionStatusY,
             },
