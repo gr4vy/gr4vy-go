@@ -3,8 +3,9 @@
 package operations
 
 import (
+	"encoding/json"
+	"fmt"
 	"github.com/gr4vy/gr4vy-go/internal/utils"
-	"github.com/gr4vy/gr4vy-go/types"
 )
 
 type ListBuyerPaymentMethodsGlobals struct {
@@ -16,6 +17,39 @@ func (l *ListBuyerPaymentMethodsGlobals) GetMerchantAccountID() *string {
 		return nil
 	}
 	return l.MerchantAccountID
+}
+
+// SortBy - The field to sort the payment methods by.
+type SortBy string
+
+const (
+	SortByLastUsedAt    SortBy = "last_used_at"
+	SortByUsageCount    SortBy = "usage_count"
+	SortByCitLastUsedAt SortBy = "cit_last_used_at"
+	SortByCitUsageCount SortBy = "cit_usage_count"
+)
+
+func (e SortBy) ToPointer() *SortBy {
+	return &e
+}
+func (e *SortBy) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "last_used_at":
+		fallthrough
+	case "usage_count":
+		fallthrough
+	case "cit_last_used_at":
+		fallthrough
+	case "cit_usage_count":
+		*e = SortBy(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for SortBy: %v", v)
+	}
 }
 
 // OrderBy - The direction to sort the payment methods in.
@@ -47,8 +81,7 @@ type ListBuyerPaymentMethodsRequest struct {
 	// The external identifier of the buyer to query payment methods for.
 	BuyerExternalIdentifier *string `queryParam:"style=form,explode=true,name=buyer_external_identifier"`
 	// The field to sort the payment methods by.
-	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	sortBy *string `const:"last_used_at" queryParam:"style=form,explode=true,name=sort_by"`
+	SortBy *SortBy `queryParam:"style=form,explode=true,name=sort_by"`
 	// The direction to sort the payment methods in.
 	OrderBy *OrderBy `default:"desc" queryParam:"style=form,explode=true,name=order_by"`
 	// The country code to filter payment methods by. This only applies to payment methods with a `country` value.
@@ -84,8 +117,11 @@ func (l *ListBuyerPaymentMethodsRequest) GetBuyerExternalIdentifier() *string {
 	return l.BuyerExternalIdentifier
 }
 
-func (l *ListBuyerPaymentMethodsRequest) GetSortBy() *string {
-	return types.Pointer("last_used_at")
+func (l *ListBuyerPaymentMethodsRequest) GetSortBy() *SortBy {
+	if l == nil {
+		return nil
+	}
+	return l.SortBy
 }
 
 func (l *ListBuyerPaymentMethodsRequest) GetOrderBy() *OrderBy {
