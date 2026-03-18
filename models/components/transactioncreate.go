@@ -21,6 +21,7 @@ const (
 	TransactionCreatePaymentMethodTypeGooglePayFPANPaymentMethodCreate          TransactionCreatePaymentMethodType = "GooglePayFPANPaymentMethodCreate"
 	TransactionCreatePaymentMethodTypeNetworkTokenPaymentMethodCreate           TransactionCreatePaymentMethodType = "NetworkTokenPaymentMethodCreate"
 	TransactionCreatePaymentMethodTypePlaidPaymentMethodCreate                  TransactionCreatePaymentMethodType = "PlaidPaymentMethodCreate"
+	TransactionCreatePaymentMethodTypeBaseBankPaymentMethodCreate               TransactionCreatePaymentMethodType = "BaseBankPaymentMethodCreate"
 	TransactionCreatePaymentMethodTypeCheckoutSessionWithURLPaymentMethodCreate TransactionCreatePaymentMethodType = "CheckoutSessionWithUrlPaymentMethodCreate"
 )
 
@@ -36,6 +37,7 @@ type TransactionCreatePaymentMethod struct {
 	GooglePayFPANPaymentMethodCreate          *GooglePayFPANPaymentMethodCreate          `queryParam:"inline" union:"member"`
 	NetworkTokenPaymentMethodCreate           *NetworkTokenPaymentMethodCreate           `queryParam:"inline" union:"member"`
 	PlaidPaymentMethodCreate                  *PlaidPaymentMethodCreate                  `queryParam:"inline" union:"member"`
+	BaseBankPaymentMethodCreate               *BaseBankPaymentMethodCreate               `queryParam:"inline" union:"member"`
 	CheckoutSessionWithURLPaymentMethodCreate *CheckoutSessionWithURLPaymentMethodCreate `queryParam:"inline" union:"member"`
 
 	Type TransactionCreatePaymentMethodType
@@ -131,6 +133,15 @@ func CreateTransactionCreatePaymentMethodPlaidPaymentMethodCreate(plaidPaymentMe
 	}
 }
 
+func CreateTransactionCreatePaymentMethodBaseBankPaymentMethodCreate(baseBankPaymentMethodCreate BaseBankPaymentMethodCreate) TransactionCreatePaymentMethod {
+	typ := TransactionCreatePaymentMethodTypeBaseBankPaymentMethodCreate
+
+	return TransactionCreatePaymentMethod{
+		BaseBankPaymentMethodCreate: &baseBankPaymentMethodCreate,
+		Type:                        typ,
+	}
+}
+
 func CreateTransactionCreatePaymentMethodCheckoutSessionWithURLPaymentMethodCreate(checkoutSessionWithURLPaymentMethodCreate CheckoutSessionWithURLPaymentMethodCreate) TransactionCreatePaymentMethod {
 	typ := TransactionCreatePaymentMethodTypeCheckoutSessionWithURLPaymentMethodCreate
 
@@ -212,6 +223,13 @@ func (u *TransactionCreatePaymentMethod) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	var baseBankPaymentMethodCreate BaseBankPaymentMethodCreate = BaseBankPaymentMethodCreate{}
+	if err := utils.UnmarshalJSON(data, &baseBankPaymentMethodCreate, "", true, nil); err == nil {
+		u.BaseBankPaymentMethodCreate = &baseBankPaymentMethodCreate
+		u.Type = TransactionCreatePaymentMethodTypeBaseBankPaymentMethodCreate
+		return nil
+	}
+
 	var checkoutSessionWithURLPaymentMethodCreate CheckoutSessionWithURLPaymentMethodCreate = CheckoutSessionWithURLPaymentMethodCreate{}
 	if err := utils.UnmarshalJSON(data, &checkoutSessionWithURLPaymentMethodCreate, "", true, nil); err == nil {
 		u.CheckoutSessionWithURLPaymentMethodCreate = &checkoutSessionWithURLPaymentMethodCreate
@@ -261,6 +279,10 @@ func (u TransactionCreatePaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if u.PlaidPaymentMethodCreate != nil {
 		return utils.MarshalJSON(u.PlaidPaymentMethodCreate, "", true)
+	}
+
+	if u.BaseBankPaymentMethodCreate != nil {
+		return utils.MarshalJSON(u.BaseBankPaymentMethodCreate, "", true)
 	}
 
 	if u.CheckoutSessionWithURLPaymentMethodCreate != nil {

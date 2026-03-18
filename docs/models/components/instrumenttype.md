@@ -26,4 +26,4 @@ custom := components.InstrumentType("custom_value")
 | `InstrumentTypeApplepay`      | applepay                      |
 | `InstrumentTypeNetworkToken`  | network_token                 |
 | `InstrumentTypePlaid`         | plaid                         |
-| `InstrumentTypeBankDetails`   | bank_details                  |
+| `InstrumentTypeBank`          | bank                          |
