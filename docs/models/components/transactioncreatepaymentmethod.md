@@ -65,6 +65,12 @@ transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMetho
 transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMethodPlaidPaymentMethodCreate(components.PlaidPaymentMethodCreate{/* values here */})
 ```
 
+### BaseBankPaymentMethodCreate
+
+```go
+transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMethodBaseBankPaymentMethodCreate(components.BaseBankPaymentMethodCreate{/* values here */})
+```
+
 ### CheckoutSessionWithURLPaymentMethodCreate
 
 ```go
@@ -97,6 +103,8 @@ switch transactionCreatePaymentMethod.Type {
 		// transactionCreatePaymentMethod.NetworkTokenPaymentMethodCreate is populated
 	case components.TransactionCreatePaymentMethodTypePlaidPaymentMethodCreate:
 		// transactionCreatePaymentMethod.PlaidPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypeBaseBankPaymentMethodCreate:
+		// transactionCreatePaymentMethod.BaseBankPaymentMethodCreate is populated
 	case components.TransactionCreatePaymentMethodTypeCheckoutSessionWithURLPaymentMethodCreate:
 		// transactionCreatePaymentMethod.CheckoutSessionWithURLPaymentMethodCreate is populated
 }
