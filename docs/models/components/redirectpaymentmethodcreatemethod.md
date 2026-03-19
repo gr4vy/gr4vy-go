@@ -43,6 +43,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodDcb`             | dcb                                                |
 | `RedirectPaymentMethodCreateMethodDlocal`          | dlocal                                             |
 | `RedirectPaymentMethodCreateMethodEbanx`           | ebanx                                              |
+| `RedirectPaymentMethodCreateMethodEckoh`           | eckoh                                              |
 | `RedirectPaymentMethodCreateMethodEfecty`          | efecty                                             |
 | `RedirectPaymentMethodCreateMethodEps`             | eps                                                |
 | `RedirectPaymentMethodCreateMethodEverydaypay`     | everydaypay                                        |
