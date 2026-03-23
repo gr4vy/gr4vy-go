@@ -23,6 +23,8 @@ type TransactionConnectionOptions struct {
 	AdyenSepa *AdyenSepaOptions `json:"adyen-sepa,omitempty"`
 	// Custom options to be passed to the `adyen-sofort` connector.
 	AdyenSofort *AdyenOptions `json:"adyen-sofort,omitempty"`
+	// Custom options to be passed to the `adyen-swish` connector.
+	AdyenSwish *AdyenOptions `json:"adyen-swish,omitempty"`
 	// Custom options to be passed to the `adyen-vipps` connector.
 	AdyenVipps *AdyenOptions `json:"adyen-vipps,omitempty"`
 	// Custom options to be passed to the `affirm-affirm` connector.
@@ -167,6 +169,13 @@ func (t *TransactionConnectionOptions) GetAdyenSofort() *AdyenOptions {
 		return nil
 	}
 	return t.AdyenSofort
+}
+
+func (t *TransactionConnectionOptions) GetAdyenSwish() *AdyenOptions {
+	if t == nil {
+		return nil
+	}
+	return t.AdyenSwish
 }
 
 func (t *TransactionConnectionOptions) GetAdyenVipps() *AdyenOptions {
