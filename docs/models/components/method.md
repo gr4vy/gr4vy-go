@@ -112,6 +112,7 @@ custom := components.Method("custom_value")
 | `MethodSofort`           | sofort                   |
 | `MethodSpei`             | spei                     |
 | `MethodStitch`           | stitch                   |
+| `MethodSwish`            | swish                    |
 | `MethodStripedd`         | stripedd                 |
 | `MethodStripetoken`      | stripetoken              |
 | `MethodTapi`             | tapi                     |
