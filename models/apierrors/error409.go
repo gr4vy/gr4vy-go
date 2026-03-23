@@ -18,6 +18,8 @@ type Error409 struct {
 	Message *string `default:"Generic error" json:"message"`
 	// A list of details that further ellaborate on the error.
 	Details []components.ErrorDetail `json:"details,omitempty"`
+	// The ID of the conflicting resource.
+	ResourceID *string `json:"resource_id,omitempty"`
 }
 
 var _ error = &Error409{}
