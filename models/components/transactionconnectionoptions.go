@@ -89,8 +89,12 @@ type TransactionConnectionOptions struct {
 	PowertranzCard *PowertranzOptions `json:"powertranz-card,omitempty"`
 	// Custom options to be passed to the `riskified-anti-fraud` connector.
 	RiskifiedAntiFraud *RiskifiedAntiFraudOptions `json:"riskified-anti-fraud,omitempty"`
+	// Custom options to be passed to the `stripe-affirm` connector.
+	StripeAffirm *StripeOptions `json:"stripe-affirm,omitempty"`
 	// Custom options to be passed to the `stripe-card` connector.
-	StripeCard *StripeOptions `json:"stripe-card,omitempty"`
+	StripeCard *StripeCardOptions `json:"stripe-card,omitempty"`
+	// Custom options to be passed to the `stripe-klarna` connector.
+	StripeKlarna *StripeOptions `json:"stripe-klarna,omitempty"`
 	// Custom options to be passed to the `travelhub-card` connector.
 	TravelhubCard *TravelhubOptions `json:"travelhub-card,omitempty"`
 	// Custom options to be passed to the `trustly-trustly` connector.
@@ -402,11 +406,25 @@ func (t *TransactionConnectionOptions) GetRiskifiedAntiFraud() *RiskifiedAntiFra
 	return t.RiskifiedAntiFraud
 }
 
-func (t *TransactionConnectionOptions) GetStripeCard() *StripeOptions {
+func (t *TransactionConnectionOptions) GetStripeAffirm() *StripeOptions {
+	if t == nil {
+		return nil
+	}
+	return t.StripeAffirm
+}
+
+func (t *TransactionConnectionOptions) GetStripeCard() *StripeCardOptions {
 	if t == nil {
 		return nil
 	}
 	return t.StripeCard
+}
+
+func (t *TransactionConnectionOptions) GetStripeKlarna() *StripeOptions {
+	if t == nil {
+		return nil
+	}
+	return t.StripeKlarna
 }
 
 func (t *TransactionConnectionOptions) GetTravelhubCard() *TravelhubOptions {

@@ -3,17 +3,8 @@
 package components
 
 type StripeOptions struct {
-	// Passes the `error_on_requires_action` option to the Stripe API. Set to true to fail the payment attempt if it transitions into requires_action. Use this parameter for simpler integrations that don't handle customer actions, such as saving cards without authentication.
-	ErrorOnRequiresAction *bool `json:"error_on_requires_action,omitempty"`
 	// Stripe options to support Stripe Connect
 	StripeConnect *StripeConnectOptions `json:"stripe_connect,omitempty"`
-}
-
-func (s *StripeOptions) GetErrorOnRequiresAction() *bool {
-	if s == nil {
-		return nil
-	}
-	return s.ErrorOnRequiresAction
 }
 
 func (s *StripeOptions) GetStripeConnect() *StripeConnectOptions {
