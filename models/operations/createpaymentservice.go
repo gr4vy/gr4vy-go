@@ -18,18 +18,9 @@ func (c *CreatePaymentServiceGlobals) GetMerchantAccountID() *string {
 }
 
 type CreatePaymentServiceRequest struct {
-	// the ID of the payment service
-	PaymentServiceID string `pathParam:"style=simple,explode=false,name=payment_service_id"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID    *string                         `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
-	PaymentServiceUpdate components.PaymentServiceUpdate `request:"mediaType=application/json"`
-}
-
-func (c *CreatePaymentServiceRequest) GetPaymentServiceID() string {
-	if c == nil {
-		return ""
-	}
-	return c.PaymentServiceID
+	PaymentServiceCreate components.PaymentServiceCreate `request:"mediaType=application/json"`
 }
 
 func (c *CreatePaymentServiceRequest) GetMerchantAccountID() *string {
@@ -39,9 +30,9 @@ func (c *CreatePaymentServiceRequest) GetMerchantAccountID() *string {
 	return c.MerchantAccountID
 }
 
-func (c *CreatePaymentServiceRequest) GetPaymentServiceUpdate() components.PaymentServiceUpdate {
+func (c *CreatePaymentServiceRequest) GetPaymentServiceCreate() components.PaymentServiceCreate {
 	if c == nil {
-		return components.PaymentServiceUpdate{}
+		return components.PaymentServiceCreate{}
 	}
-	return c.PaymentServiceUpdate
+	return c.PaymentServiceCreate
 }

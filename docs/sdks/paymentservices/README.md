@@ -5,9 +5,9 @@
 ### Available Operations
 
 * [List](#list) - List payment services
-* [Create](#create) - Update a configured payment service
+* [Create](#create) - Configure a payment service
 * [Get](#get) - Get payment service
-* [Update](#update) - Configure a payment service
+* [Update](#update) - Update a configured payment service
 * [Delete](#delete) - Delete a configured payment service
 * [Verify](#verify) - Verify payment service credentials
 * [Session](#session) - Create a session for a payment service definition
@@ -95,11 +95,11 @@ func main() {
 
 ## Create
 
-Updates the configuration of a payment service.
+Configures a new payment service for use by merchants.
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="update_payment_service" method="post" path="/payment-services" -->
+<!-- UsageSnippet language="go" operationID="create_payment_service" method="post" path="/payment-services" -->
 ```go
 package main
 
@@ -123,10 +123,6 @@ func main() {
         DisplayName: "Stripe",
         PaymentServiceDefinitionID: "stripe-card",
         Fields: []components.Field{
-            components.Field{
-                Key: "api_key",
-                Value: "key-12345",
-            },
             components.Field{
                 Key: "api_key",
                 Value: "key-12345",
@@ -253,11 +249,11 @@ func main() {
 
 ## Update
 
-Configures a new payment service for use by merchants.
+Updates the configuration of a payment service.
 
 ### Example Usage
 
-<!-- UsageSnippet language="go" operationID="create_payment_service" method="put" path="/payment-services/{payment_service_id}" -->
+<!-- UsageSnippet language="go" operationID="update_payment_service" method="put" path="/payment-services/{payment_service_id}" -->
 ```go
 package main
 
