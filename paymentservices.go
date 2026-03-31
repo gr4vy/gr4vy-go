@@ -546,15 +546,15 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 }
 
-// Create - Update a configured payment service
-// Updates the configuration of a payment service.
+// Create - Configure a payment service
+// Configures a new payment service for use by merchants.
 func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate components.PaymentServiceCreate, merchantAccountID *string, opts ...operations.Option) (*components.PaymentService, error) {
-	request := operations.UpdatePaymentServiceRequest{
+	request := operations.CreatePaymentServiceRequest{
 		MerchantAccountID:    merchantAccountID,
 		PaymentServiceCreate: paymentServiceCreate,
 	}
 
-	globals := operations.UpdatePaymentServiceGlobals{
+	globals := operations.CreatePaymentServiceGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
@@ -586,7 +586,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "update_payment_service",
+		OperationID:      "create_payment_service",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "PaymentServiceCreate", "json", `request:"mediaType=application/json"`)
@@ -1481,16 +1481,16 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 }
 
-// Update - Configure a payment service
-// Configures a new payment service for use by merchants.
+// Update a configured payment service
+// Updates the configuration of a payment service.
 func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, paymentServiceUpdate components.PaymentServiceUpdate, merchantAccountID *string, opts ...operations.Option) (*components.PaymentService, error) {
-	request := operations.CreatePaymentServiceRequest{
+	request := operations.UpdatePaymentServiceRequest{
 		PaymentServiceID:     paymentServiceID,
 		MerchantAccountID:    merchantAccountID,
 		PaymentServiceUpdate: paymentServiceUpdate,
 	}
 
-	globals := operations.CreatePaymentServiceGlobals{
+	globals := operations.UpdatePaymentServiceGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
 
@@ -1522,7 +1522,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 		SDKConfiguration: s.sdkConfiguration,
 		BaseURL:          baseURL,
 		Context:          ctx,
-		OperationID:      "create_payment_service",
+		OperationID:      "update_payment_service",
 		SecuritySource:   s.sdkConfiguration.Security,
 	}
 	bodyReader, reqContentType, err := utils.SerializeRequestBody(ctx, request, false, false, "PaymentServiceUpdate", "json", `request:"mediaType=application/json"`)
