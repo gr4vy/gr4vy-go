@@ -6,6 +6,7 @@ import (
 	"errors"
 	"fmt"
 	"github.com/gr4vy/gr4vy-go/internal/utils"
+	"time"
 )
 
 type TransactionCreatePaymentMethodType string
@@ -517,6 +518,8 @@ type TransactionCreate struct {
 	ShippingAmount *int64 `json:"shipping_amount,omitempty"`
 	// Defines the client where the session for this transaction is going to be used. Please refer to the connections documentation for more guidance.
 	IntegrationClient *IntegrationClient `json:"integration_client,omitempty"`
+	// The date and time when the buyer's approval window for this transaction expires. If not provided, this is automatically computed from the connector's default expiration time. The value cannot exceed the connector's maximum approval window.
+	ApprovalExpiresAt *time.Time `json:"approval_expires_at,omitempty"`
 }
 
 func (t TransactionCreate) MarshalJSON() ([]byte, error) {
@@ -808,4 +811,11 @@ func (t *TransactionCreate) GetIntegrationClient() *IntegrationClient {
 		return nil
 	}
 	return t.IntegrationClient
+}
+
+func (t *TransactionCreate) GetApprovalExpiresAt() *time.Time {
+	if t == nil {
+		return nil
+	}
+	return t.ApprovalExpiresAt
 }
