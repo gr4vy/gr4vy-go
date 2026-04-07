@@ -71,6 +71,8 @@ type TransactionConnectionOptions struct {
 	MonatoSpei *MonatoSpeiOptions `json:"monato-spei,omitempty"`
 	// Custom options to be passed to the `mock-card` connector.
 	MockCard *MockCardOptions `json:"mock-card,omitempty"`
+	// Custom options to be passed to the `mockds-card` connector.
+	MockdsCard *MockCardOptions `json:"mockds-card,omitempty"`
 	// Custom options to be passed to the `nuvei-card` connector.
 	NuveiCard *NuveiOptions `json:"nuvei-card,omitempty"`
 	// Custom options to be passed to the `nuvei-ideal` connector.
@@ -341,6 +343,13 @@ func (t *TransactionConnectionOptions) GetMockCard() *MockCardOptions {
 		return nil
 	}
 	return t.MockCard
+}
+
+func (t *TransactionConnectionOptions) GetMockdsCard() *MockCardOptions {
+	if t == nil {
+		return nil
+	}
+	return t.MockdsCard
 }
 
 func (t *TransactionConnectionOptions) GetNuveiCard() *NuveiOptions {
