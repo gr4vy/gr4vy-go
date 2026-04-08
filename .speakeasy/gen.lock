@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: ad8ba63c3d7fd4cbc92f9d2ef1ca199c
+  docChecksum: 1ec3c274dc81c19186a861d2301153a1
   docVersion: 1.0.0
   speakeasyVersion: 1.761.1
   generationVersion: 2.879.6
-  releaseVersion: 1.12.59
-  configChecksum: 8a97b40cbf80b7d3a3a3dd422e410dd1
+  releaseVersion: 1.12.60
+  configChecksum: 20cd7a0687328e77e88756288096adde
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 5052c65f-c958-404f-8ca2-b01d88b48260
-  pristine_commit_hash: a27261d971339c636a819231881f44d9e9464c86
-  pristine_tree_hash: 431e382d71923cf0d855877be70b29cd274919c4
+  generation_id: 1b0221e9-054e-42d7-82d4-aa8401b6c479
+  pristine_commit_hash: 32e02e46aab3532af1e3c5bac0bf55057371fbd3
+  pristine_tree_hash: 8ca9ea01050faefc9fbc3caa2e4dbafb6388d410
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2478,8 +2478,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:5929a92c9ac8314f6166066408047fa3c4ae39dc
-    pristine_git_object: 02d63d7cc7d7d39428747aeb78bdf9b528d4fb27
+    last_write_checksum: sha1:58a182f9a869ff969c4f5635b12bf00e6886ec85
+    pristine_git_object: da092e515927614bbc79f51beb8119e7841d7030
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -7921,7 +7921,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].Method.Enum(paypay)` **Added**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].Method.Enum(paypay)` **Added**\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(RedirectPaymentMethodCreate).Method.Enum(paypay)` **Added**\n  *  `response.Method.Enum(paypay)` **Added**\n* `Gr4vy.PaymentMethods.Get()`:  `response.Method.Enum(paypay)` **Added**\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate` **Changed**\n  *  `response.PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.AdyenPaypay` **Added**\n  *  `response.PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.union(TransactionCapture).Transaction.PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.union(Transaction).PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.PaymentServiceDefinitions.List()`:  `response.Items[].Method.Enum(paypay)` **Added**\n* `Gr4vy.PaymentServiceDefinitions.Get()`:  `response.Method.Enum(paypay)` **Added**\n* `Gr4vy.PaymentServices.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].Method.Enum(paypay)` **Added**\n* `Gr4vy.PaymentServices.Create()`:  `response.Method.Enum(paypay)` **Added**\n* `Gr4vy.PaymentServices.Get()`:  `response.Method.Enum(paypay)` **Added**\n* `Gr4vy.PaymentServices.Update()`:  `response.Method.Enum(paypay)` **Added**\n* `Gr4vy.Payouts.List()`:  `response.Items[].PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.Payouts.Create()`:  `response.PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.Payouts.Get()`:  `response.PaymentMethod.Method.Enum(paypay)` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.AdyenPaypay` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
