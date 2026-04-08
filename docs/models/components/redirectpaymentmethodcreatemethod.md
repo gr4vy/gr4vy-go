@@ -86,6 +86,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodPaymaya`         | paymaya                                            |
 | `RedirectPaymentMethodCreateMethodPaypal`          | paypal                                             |
 | `RedirectPaymentMethodCreateMethodPaypalpaylater`  | paypalpaylater                                     |
+| `RedirectPaymentMethodCreateMethodPaypay`          | paypay                                             |
 | `RedirectPaymentMethodCreateMethodPayto`           | payto                                              |
 | `RedirectPaymentMethodCreateMethodPayvalida`       | payvalida                                          |
 | `RedirectPaymentMethodCreateMethodPicpay`          | picpay                                             |
