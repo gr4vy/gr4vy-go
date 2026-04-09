@@ -34,6 +34,14 @@ type GiftCardSummary struct {
 	BalanceRawErrorCode *string `json:"balance_raw_error_code,omitempty"`
 	// If the last balance update failed, this will contain the the raw error message received from the gift card provider.
 	BalanceRawErrorMessage *string `json:"balance_raw_error_message,omitempty"`
+	// The timestamp when this gift card was last used in a transaction.
+	LastUsedAt *time.Time `json:"last_used_at,omitempty"`
+	// The number of times this gift card has been used in transactions.
+	UsageCount int64 `json:"usage_count"`
+	// The timestamp when this gift card was last used in a transaction for client initiated transactions.
+	CitLastUsedAt *time.Time `json:"cit_last_used_at,omitempty"`
+	// The number of times this gift card has been used in transactions for client initiated transactions.
+	CitUsageCount int64 `json:"cit_usage_count"`
 }
 
 func (g GiftCardSummary) MarshalJSON() ([]byte, error) {
@@ -126,4 +134,32 @@ func (g *GiftCardSummary) GetBalanceRawErrorMessage() *string {
 		return nil
 	}
 	return g.BalanceRawErrorMessage
+}
+
+func (g *GiftCardSummary) GetLastUsedAt() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.LastUsedAt
+}
+
+func (g *GiftCardSummary) GetUsageCount() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.UsageCount
+}
+
+func (g *GiftCardSummary) GetCitLastUsedAt() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.CitLastUsedAt
+}
+
+func (g *GiftCardSummary) GetCitUsageCount() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.CitUsageCount
 }
