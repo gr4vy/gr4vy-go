@@ -31,6 +31,14 @@ type GiftCard struct {
 	CreatedAt time.Time `json:"created_at"`
 	// The date this gift card record was last updated at.
 	UpdatedAt time.Time `json:"updated_at"`
+	// The timestamp when this gift card was last used in a transaction.
+	LastUsedAt *time.Time `json:"last_used_at,omitempty"`
+	// The number of times this gift card has been used in transactions.
+	UsageCount int64 `json:"usage_count"`
+	// The timestamp when this gift card was last used in a transaction for client initiated transactions.
+	CitLastUsedAt *time.Time `json:"cit_last_used_at,omitempty"`
+	// The number of times this gift card has been used in transactions for client initiated transactions.
+	CitUsageCount int64 `json:"cit_usage_count"`
 }
 
 func (g GiftCard) MarshalJSON() ([]byte, error) {
@@ -116,4 +124,32 @@ func (g *GiftCard) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return g.UpdatedAt
+}
+
+func (g *GiftCard) GetLastUsedAt() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.LastUsedAt
+}
+
+func (g *GiftCard) GetUsageCount() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.UsageCount
+}
+
+func (g *GiftCard) GetCitLastUsedAt() *time.Time {
+	if g == nil {
+		return nil
+	}
+	return g.CitLastUsedAt
+}
+
+func (g *GiftCard) GetCitUsageCount() int64 {
+	if g == nil {
+		return 0
+	}
+	return g.CitUsageCount
 }
