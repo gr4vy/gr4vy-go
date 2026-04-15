@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 209ecf8326d6309466b20dd302c9b6a5
+  docChecksum: d59b88aec21e00d22633448f71a280c4
   docVersion: 1.0.0
-  speakeasyVersion: 1.761.1
-  generationVersion: 2.879.6
-  releaseVersion: 1.12.62
-  configChecksum: b65a57121e7aa3901e6301f126e8099a
+  speakeasyVersion: 1.761.5
+  generationVersion: 2.879.13
+  releaseVersion: 1.12.63
+  configChecksum: c978705d7b36c5368904cc427fb8d1cd
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 7d2e6d5a-92d8-447c-b17e-3d1b677c89b2
-  pristine_commit_hash: e29800ca568df7a2b6767eb8c29aec3584560652
-  pristine_tree_hash: a74316c79fcde4dbab747f2e94637351334f757a
+  generation_id: 076407a7-77a2-4371-962c-4077c4ea81f8
+  pristine_commit_hash: cd63c95d97018d68a67c3606f59c6f42353276d5
+  pristine_tree_hash: 92389451b7373c7593b1fd657ff0be845fb6f23f
 features:
   go:
     additionalDependencies: 0.1.0
@@ -86,8 +86,8 @@ trackedFiles:
     pristine_git_object: 99381db97a1863d5aa92a4ee2da53b8b24cbc3e9
   buyersgiftcards.go:
     id: e20c1aad9287
-    last_write_checksum: sha1:145ffbd905243893c4fa82629b3acaa1d883d2d3
-    pristine_git_object: 638749cf2d0ccaf8e0f79a51245b1b695f51e7b2
+    last_write_checksum: sha1:8e4f34175e58ccf81f24a74481ee92bb19a8155d
+    pristine_git_object: 3dfb4c49dc0e8232bfa8cbffdb4a56a1170604cf
   buyerspaymentmethods.go:
     id: 6bf555c984cc
     last_write_checksum: sha1:94c7c92b57439192377ec3f4b88113c1b791fe5e
@@ -1936,18 +1936,34 @@ trackedFiles:
     id: 73db8cb27b5a
     last_write_checksum: sha1:eee7d266796e58dd4f3668ed588eb476aac60e4d
     pristine_git_object: 6127dbca0fdcd60e3ae95a67352a4fe436314a78
+  docs/models/operations/listbuyergiftcardsorderby.md:
+    id: 178ac4b3c1c1
+    last_write_checksum: sha1:652826ad4b988719e2ee6d71e92ba7dd46bd68aa
+    pristine_git_object: 53ca44a7f78be6ad9eb80ba8531e4d7697e5f2e4
   docs/models/operations/listbuyergiftcardsrequest.md:
     id: d25c560b2db3
-    last_write_checksum: sha1:7799474eed2b5846eaeea5375d2e95273f789459
-    pristine_git_object: 0152e0d76fe2f1a54c985ddd5486472bdbcd9184
+    last_write_checksum: sha1:0f99a45f27541a29f8f8274698059cd45b5efb83
+    pristine_git_object: 43994635cf1d3d2b462416b0ce3a65e785bd5653
+  docs/models/operations/listbuyergiftcardssortby.md:
+    id: e1cb78e0f222
+    last_write_checksum: sha1:be2ef7bdd91737f56781b92c15a8ab4f0f305878
+    pristine_git_object: bb683983d7ab25fc284aec0ba014d9ff0f4c1b4b
   docs/models/operations/listbuyerpaymentmethodsglobals.md:
     id: aa0c83605efc
     last_write_checksum: sha1:59ee756dd452d530d6ec75e74dc3b6c2a7ea45e6
     pristine_git_object: 37470ef969a22b9154da95e70f844b03983f0246
+  docs/models/operations/listbuyerpaymentmethodsorderby.md:
+    id: c450d30683a6
+    last_write_checksum: sha1:808004bb1f7c1e871adf998ddba13157701adccf
+    pristine_git_object: de4692a2ed86c985eb3b7b5f9f566ff2b20cfe88
   docs/models/operations/listbuyerpaymentmethodsrequest.md:
     id: d17e367b14fe
-    last_write_checksum: sha1:a9cb1f607495635aa055be15f4a464f541de0516
-    pristine_git_object: 3c7eb4b5a669f08cc598ec3e2806804e5c85e87f
+    last_write_checksum: sha1:08effe00f74e956ebe40676254c117205d79cae0
+    pristine_git_object: f954c51e7707c7ccbccdb81dede3107463fed70b
+  docs/models/operations/listbuyerpaymentmethodssortby.md:
+    id: e447f66e8e64
+    last_write_checksum: sha1:7487cb2af80ba798feec50be18a52819ad7deea9
+    pristine_git_object: 967646ce40b781ef24d5f8401ed28b3ab13b39e9
   docs/models/operations/listbuyersglobals.md:
     id: 900cfb84eebf
     last_write_checksum: sha1:c7b366d3f32a6c29328a8f39a86c83b1d22526ea
@@ -2172,10 +2188,6 @@ trackedFiles:
     id: 2ac1bd52a5fb
     last_write_checksum: sha1:92b8761dec1a1194eaab7f91151157938af9f75a
     pristine_git_object: fdd6e67ab03fe16fd2039101c4ba1c556ee2367f
-  docs/models/operations/orderby.md:
-    id: 45cf0fb75be6
-    last_write_checksum: sha1:2faf2a8495054f801e5a07ed80aefd516de72afc
-    pristine_git_object: 0a108e10577d5454fa18de60fdfa2a6a2b1df82d
   docs/models/operations/registerdigitalwalletdomainglobals.md:
     id: "1909237824e2"
     last_write_checksum: sha1:f3fb5c62799e9ff1270f6d74ff150af9a3510c97
@@ -2200,10 +2212,6 @@ trackedFiles:
     id: 51a80bdd4ee7
     last_write_checksum: sha1:ac0885d4211ddb0235c8060c1520f501aea6f943
     pristine_git_object: 877cb5697d42cc1894716dd6b7aac7aebaaa3809
-  docs/models/operations/sortby.md:
-    id: 6e8a73340afa
-    last_write_checksum: sha1:0940f5f7852613413dfbed032874cedc880c3d7e
-    pristine_git_object: 6830e9bd24a46aaae682fe205299d9f7f01817d2
   docs/models/operations/suspendpaymentmethodnetworktokenglobals.md:
     id: d74821bd1eef
     last_write_checksum: sha1:9891a1a9181a6f33cfd7e04bd814576edf072a01
@@ -2334,12 +2342,12 @@ trackedFiles:
     pristine_git_object: 6d7da9ecb170b7565c6cdf81335d2adf9158675d
   docs/sdks/buyersgiftcards/README.md:
     id: b24dd6aa2092
-    last_write_checksum: sha1:e5d0000071ee696c30562a222801a6ee18ce7d3b
-    pristine_git_object: 9445f128246b7761e514b52a0f435c2ff0e32d4a
+    last_write_checksum: sha1:e6c5efbceab992d021dd26831882731bdd102781
+    pristine_git_object: 6ef5c2e4ae4e1060e7322c46b0bb33985d5c8072
   docs/sdks/buyerspaymentmethods/README.md:
     id: 4aff3957cf89
-    last_write_checksum: sha1:989c2cdbc5afdbbb223cb8613840a8c93910a3dc
-    pristine_git_object: a55f6e2c9565fc66fbf49857736e1db4e465c9f3
+    last_write_checksum: sha1:7177f9f02ff2dca03cd8ee106d629322fe9a1efc
+    pristine_git_object: 72c672bd584ced52812fd64af3f3ab943d20fd62
   docs/sdks/cardschemedefinitions/README.md:
     id: a8ca8c2fbb07
     last_write_checksum: sha1:6fcd95a06bf5651eff793260d4bd2a8093a9f9dd
@@ -2478,8 +2486,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:1990839290c9593d83821ddd072b0093c180ebe7
-    pristine_git_object: 101a2965b1b7388e710e00d3df7f6bea3943ecc4
+    last_write_checksum: sha1:370292b386becb63a2f47b97333a03e15c2f37ec
+    pristine_git_object: 6b7ca3ed4d96879576747f504b557d56ecc7ee9f
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -4026,12 +4034,12 @@ trackedFiles:
     pristine_git_object: 98e0d192f454f797e913c9107c6fdbb443e5cab0
   models/operations/listbuyergiftcards.go:
     id: afb210a3c783
-    last_write_checksum: sha1:16a5333713b6821e1e33d71e1f85791ba3e42b09
-    pristine_git_object: 239fc505e42c02b9fe0330127ed2da23bc09df18
+    last_write_checksum: sha1:cc7c3d40b0b5e3ce7ccb985ab5b4508b08a85e5d
+    pristine_git_object: 223b0c0020a5ec048c593a89b85cd71e860e5db1
   models/operations/listbuyerpaymentmethods.go:
     id: c4decb8c5e3d
-    last_write_checksum: sha1:846ca98b487bf85e031c6e77ada85ce8bf627dbe
-    pristine_git_object: e6b55a9e2a5e00e039d01a9e1e6b5b4353bfe5c3
+    last_write_checksum: sha1:ef2598e8ce6bf67607f61c0fb5cf6ce6ffc547ab
+    pristine_git_object: 07e27e2b540212a4e6490a6bafa59886d32517e2
   models/operations/listbuyers.go:
     id: 781c6632fc5f
     last_write_checksum: sha1:c50b1c306cb209cade6b58e41d2119ee85ea077e
@@ -4552,6 +4560,7 @@ examples:
       parameters:
         query:
           timeout_in_seconds: 1
+          order_by: "desc"
         header:
           x-gr4vy-merchant-account-id: "default"
       responses:
@@ -7923,11 +7932,7 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Go SDK Changes:
-  * `Gr4vy.Buyers.GiftCards.List()`:  `response.Items[]` **Changed**
-  * `Gr4vy.GiftCards.Get()`:  `response` **Changed**
-  * `Gr4vy.GiftCards.Create()`:  `response` **Changed**
-  * `Gr4vy.GiftCards.List()`:  `response.Items[]` **Changed**
-  * `Gr4vy.GiftCards.Balances.List()`:  `response.Items[]` **Changed**
+  * `Gr4vy.Buyers.GiftCards.List()`:  `request` **Changed** (Breaking ⚠️)
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
