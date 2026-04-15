@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: d59b88aec21e00d22633448f71a280c4
+  docChecksum: 2aff4ba4e30c58976f7b9082ce7ef65d
   docVersion: 1.0.0
   speakeasyVersion: 1.761.5
   generationVersion: 2.879.13
-  releaseVersion: 1.12.63
-  configChecksum: c978705d7b36c5368904cc427fb8d1cd
+  releaseVersion: 1.12.64
+  configChecksum: 64c4574110e7964eb605117aa1f548fb
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 076407a7-77a2-4371-962c-4077c4ea81f8
-  pristine_commit_hash: cd63c95d97018d68a67c3606f59c6f42353276d5
-  pristine_tree_hash: 92389451b7373c7593b1fd657ff0be845fb6f23f
+  generation_id: e943a41d-7b8a-44f7-94c4-ec9bff10186b
+  pristine_commit_hash: 0e64d5a9e18cd06836da833bde911fa5d42ea472
+  pristine_tree_hash: 1f3a88ccf72b547b1320e020c29ef6da70064089
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2486,8 +2486,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:370292b386becb63a2f47b97333a03e15c2f37ec
-    pristine_git_object: 6b7ca3ed4d96879576747f504b557d56ecc7ee9f
+    last_write_checksum: sha1:93c7b5b047f6eb661d6bf1125a220b61c0d3d0c3
+    pristine_git_object: f2ad84053c51ae50b2e40618bea978115783ba1e
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -7930,9 +7930,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Gr4vy.Buyers.GiftCards.List()`:  `request` **Changed** (Breaking ⚠️)
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
