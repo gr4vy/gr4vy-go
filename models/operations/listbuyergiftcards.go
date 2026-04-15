@@ -2,6 +2,12 @@
 
 package operations
 
+import (
+	"encoding/json"
+	"fmt"
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 type ListBuyerGiftCardsGlobals struct {
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -13,11 +19,82 @@ func (l *ListBuyerGiftCardsGlobals) GetMerchantAccountID() *string {
 	return l.MerchantAccountID
 }
 
+// ListBuyerGiftCardsSortBy - The field to sort the gift cards by.
+type ListBuyerGiftCardsSortBy string
+
+const (
+	ListBuyerGiftCardsSortByLastUsedAt    ListBuyerGiftCardsSortBy = "last_used_at"
+	ListBuyerGiftCardsSortByUsageCount    ListBuyerGiftCardsSortBy = "usage_count"
+	ListBuyerGiftCardsSortByCitLastUsedAt ListBuyerGiftCardsSortBy = "cit_last_used_at"
+	ListBuyerGiftCardsSortByCitUsageCount ListBuyerGiftCardsSortBy = "cit_usage_count"
+)
+
+func (e ListBuyerGiftCardsSortBy) ToPointer() *ListBuyerGiftCardsSortBy {
+	return &e
+}
+func (e *ListBuyerGiftCardsSortBy) UnmarshalJSON(data []byte) error {
+	var v string
+	if err := json.Unmarshal(data, &v); err != nil {
+		return err
+	}
+	switch v {
+	case "last_used_at":
+		fallthrough
+	case "usage_count":
+		fallthrough
+	case "cit_last_used_at":
+		fallthrough
+	case "cit_usage_count":
+		*e = ListBuyerGiftCardsSortBy(v)
+		return nil
+	default:
+		return fmt.Errorf("invalid value for ListBuyerGiftCardsSortBy: %v", v)
+	}
+}
+
+// ListBuyerGiftCardsOrderBy - The direction to sort the gift cards in.
+type ListBuyerGiftCardsOrderBy string
+
+const (
+	ListBuyerGiftCardsOrderByAsc  ListBuyerGiftCardsOrderBy = "asc"
+	ListBuyerGiftCardsOrderByDesc ListBuyerGiftCardsOrderBy = "desc"
+)
+
+func (e ListBuyerGiftCardsOrderBy) ToPointer() *ListBuyerGiftCardsOrderBy {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *ListBuyerGiftCardsOrderBy) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "asc", "desc":
+			return true
+		}
+	}
+	return false
+}
+
 type ListBuyerGiftCardsRequest struct {
 	BuyerExternalIdentifier *string `queryParam:"style=form,explode=true,name=buyer_external_identifier"`
 	BuyerID                 *string `queryParam:"style=form,explode=true,name=buyer_id"`
+	// The field to sort the gift cards by.
+	SortBy *ListBuyerGiftCardsSortBy `queryParam:"style=form,explode=true,name=sort_by"`
+	// The direction to sort the gift cards in.
+	OrderBy *ListBuyerGiftCardsOrderBy `default:"desc" queryParam:"style=form,explode=true,name=order_by"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
+}
+
+func (l ListBuyerGiftCardsRequest) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(l, "", false)
+}
+
+func (l *ListBuyerGiftCardsRequest) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &l, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (l *ListBuyerGiftCardsRequest) GetBuyerExternalIdentifier() *string {
@@ -32,6 +109,20 @@ func (l *ListBuyerGiftCardsRequest) GetBuyerID() *string {
 		return nil
 	}
 	return l.BuyerID
+}
+
+func (l *ListBuyerGiftCardsRequest) GetSortBy() *ListBuyerGiftCardsSortBy {
+	if l == nil {
+		return nil
+	}
+	return l.SortBy
+}
+
+func (l *ListBuyerGiftCardsRequest) GetOrderBy() *ListBuyerGiftCardsOrderBy {
+	if l == nil {
+		return nil
+	}
+	return l.OrderBy
 }
 
 func (l *ListBuyerGiftCardsRequest) GetMerchantAccountID() *string {

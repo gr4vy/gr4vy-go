@@ -19,20 +19,20 @@ func (l *ListBuyerPaymentMethodsGlobals) GetMerchantAccountID() *string {
 	return l.MerchantAccountID
 }
 
-// SortBy - The field to sort the payment methods by.
-type SortBy string
+// ListBuyerPaymentMethodsSortBy - The field to sort the payment methods by.
+type ListBuyerPaymentMethodsSortBy string
 
 const (
-	SortByLastUsedAt    SortBy = "last_used_at"
-	SortByUsageCount    SortBy = "usage_count"
-	SortByCitLastUsedAt SortBy = "cit_last_used_at"
-	SortByCitUsageCount SortBy = "cit_usage_count"
+	ListBuyerPaymentMethodsSortByLastUsedAt    ListBuyerPaymentMethodsSortBy = "last_used_at"
+	ListBuyerPaymentMethodsSortByUsageCount    ListBuyerPaymentMethodsSortBy = "usage_count"
+	ListBuyerPaymentMethodsSortByCitLastUsedAt ListBuyerPaymentMethodsSortBy = "cit_last_used_at"
+	ListBuyerPaymentMethodsSortByCitUsageCount ListBuyerPaymentMethodsSortBy = "cit_usage_count"
 )
 
-func (e SortBy) ToPointer() *SortBy {
+func (e ListBuyerPaymentMethodsSortBy) ToPointer() *ListBuyerPaymentMethodsSortBy {
 	return &e
 }
-func (e *SortBy) UnmarshalJSON(data []byte) error {
+func (e *ListBuyerPaymentMethodsSortBy) UnmarshalJSON(data []byte) error {
 	var v string
 	if err := json.Unmarshal(data, &v); err != nil {
 		return err
@@ -45,27 +45,27 @@ func (e *SortBy) UnmarshalJSON(data []byte) error {
 	case "cit_last_used_at":
 		fallthrough
 	case "cit_usage_count":
-		*e = SortBy(v)
+		*e = ListBuyerPaymentMethodsSortBy(v)
 		return nil
 	default:
-		return fmt.Errorf("invalid value for SortBy: %v", v)
+		return fmt.Errorf("invalid value for ListBuyerPaymentMethodsSortBy: %v", v)
 	}
 }
 
-// OrderBy - The direction to sort the payment methods in.
-type OrderBy string
+// ListBuyerPaymentMethodsOrderBy - The direction to sort the payment methods in.
+type ListBuyerPaymentMethodsOrderBy string
 
 const (
-	OrderByAsc  OrderBy = "asc"
-	OrderByDesc OrderBy = "desc"
+	ListBuyerPaymentMethodsOrderByAsc  ListBuyerPaymentMethodsOrderBy = "asc"
+	ListBuyerPaymentMethodsOrderByDesc ListBuyerPaymentMethodsOrderBy = "desc"
 )
 
-func (e OrderBy) ToPointer() *OrderBy {
+func (e ListBuyerPaymentMethodsOrderBy) ToPointer() *ListBuyerPaymentMethodsOrderBy {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *OrderBy) IsExact() bool {
+func (e *ListBuyerPaymentMethodsOrderBy) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "asc", "desc":
@@ -81,9 +81,9 @@ type ListBuyerPaymentMethodsRequest struct {
 	// The external identifier of the buyer to query payment methods for.
 	BuyerExternalIdentifier *string `queryParam:"style=form,explode=true,name=buyer_external_identifier"`
 	// The field to sort the payment methods by.
-	SortBy *SortBy `queryParam:"style=form,explode=true,name=sort_by"`
+	SortBy *ListBuyerPaymentMethodsSortBy `queryParam:"style=form,explode=true,name=sort_by"`
 	// The direction to sort the payment methods in.
-	OrderBy *OrderBy `default:"desc" queryParam:"style=form,explode=true,name=order_by"`
+	OrderBy *ListBuyerPaymentMethodsOrderBy `default:"desc" queryParam:"style=form,explode=true,name=order_by"`
 	// The country code to filter payment methods by. This only applies to payment methods with a `country` value.
 	Country *string `queryParam:"style=form,explode=true,name=country"`
 	// The currency code to filter payment methods by. This only applies to payment methods with a `currency` value.
@@ -117,14 +117,14 @@ func (l *ListBuyerPaymentMethodsRequest) GetBuyerExternalIdentifier() *string {
 	return l.BuyerExternalIdentifier
 }
 
-func (l *ListBuyerPaymentMethodsRequest) GetSortBy() *SortBy {
+func (l *ListBuyerPaymentMethodsRequest) GetSortBy() *ListBuyerPaymentMethodsSortBy {
 	if l == nil {
 		return nil
 	}
 	return l.SortBy
 }
 
-func (l *ListBuyerPaymentMethodsRequest) GetOrderBy() *OrderBy {
+func (l *ListBuyerPaymentMethodsRequest) GetOrderBy() *ListBuyerPaymentMethodsOrderBy {
 	if l == nil {
 		return nil
 	}
