@@ -52,6 +52,10 @@ type PaymentMethodSummary struct {
 	LastUsedAt *time.Time `json:"last_used_at,omitempty"`
 	// The number of times this payment method has been used in transactions.
 	UsageCount int64 `json:"usage_count"`
+	// The scheme transaction identifier stored against this payment method.
+	SchemeTransactionID *string `json:"scheme_transaction_id"`
+	// The scheme associated with scheme_transaction_id. Only applies to card payments.
+	SchemeTransactionIDScheme *CardScheme `json:"scheme_transaction_id_scheme"`
 }
 
 func (p PaymentMethodSummary) MarshalJSON() ([]byte, error) {
@@ -200,4 +204,18 @@ func (p *PaymentMethodSummary) GetUsageCount() int64 {
 		return 0
 	}
 	return p.UsageCount
+}
+
+func (p *PaymentMethodSummary) GetSchemeTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SchemeTransactionID
+}
+
+func (p *PaymentMethodSummary) GetSchemeTransactionIDScheme() *CardScheme {
+	if p == nil {
+		return nil
+	}
+	return p.SchemeTransactionIDScheme
 }
