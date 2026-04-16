@@ -52,6 +52,10 @@ type PaymentMethod struct {
 	LastUsedAt *time.Time `json:"last_used_at,omitempty"`
 	// The number of times this payment method has been used in transactions.
 	UsageCount int64 `json:"usage_count"`
+	// The scheme transaction identifier stored against this payment method.
+	SchemeTransactionID *string `json:"scheme_transaction_id"`
+	// The scheme associated with scheme_transaction_id. Only applies to card payments.
+	SchemeTransactionIDScheme *CardScheme `json:"scheme_transaction_id_scheme"`
 	// The optional buyer for which this payment method has been stored.
 	Buyer *Buyer `json:"buyer,omitempty"`
 	// The merchant reference that can be used to match the payment method against your own records.
@@ -209,6 +213,20 @@ func (p *PaymentMethod) GetUsageCount() int64 {
 		return 0
 	}
 	return p.UsageCount
+}
+
+func (p *PaymentMethod) GetSchemeTransactionID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.SchemeTransactionID
+}
+
+func (p *PaymentMethod) GetSchemeTransactionIDScheme() *CardScheme {
+	if p == nil {
+		return nil
+	}
+	return p.SchemeTransactionIDScheme
 }
 
 func (p *PaymentMethod) GetBuyer() *Buyer {
