@@ -51,6 +51,8 @@ type TransactionConnectionOptions struct {
 	DlocalPix *DlocalPIXOptions `json:"dlocal-pix,omitempty"`
 	// Custom options to be passed to the `dlocal-gcash` connector.
 	DlocalGcash *DlocalOptions `json:"dlocal-gcash,omitempty"`
+	// Custom options to be passed to the `ecommpay-card` connector.
+	EcommpayCard *EcommpayOptions `json:"ecommpay-card,omitempty"`
 	// Custom options to be passed to the `fiserv-card` connector.
 	FiservCard *FiservOptions `json:"fiserv-card,omitempty"`
 	// Custom options to be passed to the `forter-anti-fraud` connector.
@@ -277,6 +279,13 @@ func (t *TransactionConnectionOptions) GetDlocalGcash() *DlocalOptions {
 		return nil
 	}
 	return t.DlocalGcash
+}
+
+func (t *TransactionConnectionOptions) GetEcommpayCard() *EcommpayOptions {
+	if t == nil {
+		return nil
+	}
+	return t.EcommpayCard
 }
 
 func (t *TransactionConnectionOptions) GetFiservCard() *FiservOptions {
