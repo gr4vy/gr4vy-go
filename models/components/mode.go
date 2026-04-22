@@ -13,6 +13,7 @@ const (
 	ModeClickToPay      Mode = "click-to-pay"
 	ModeGiftCard        Mode = "gift-card"
 	ModeBank            Mode = "bank"
+	ModePaze            Mode = "paze"
 )
 
 func (e Mode) ToPointer() *Mode {
@@ -23,7 +24,7 @@ func (e Mode) ToPointer() *Mode {
 func (e *Mode) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "card", "redirect", "applepay", "googlepay", "checkout-session", "click-to-pay", "gift-card", "bank":
+		case "card", "redirect", "applepay", "googlepay", "checkout-session", "click-to-pay", "gift-card", "bank", "paze":
 			return true
 		}
 	}
