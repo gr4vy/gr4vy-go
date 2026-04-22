@@ -6,9 +6,9 @@ package components
 type PaymentMethodUpdate struct {
 	// The new expiration date for the payment method.
 	ExpirationDate *string `json:"expiration_date,omitempty"`
-	// A scheme transaction identifier to associate with this payment method.
+	// A scheme transaction identifier to associate with this payment method. Explicitly setting this field to `null` will also clear `scheme_transaction_id_scheme` as a side-effect. When setting a new value and `scheme_transaction_id_scheme` is both omitted from the payload and previously unset,`scheme_transaction_id_scheme` will be populated from the payment method's existing `scheme`.
 	SchemeTransactionID *string `json:"scheme_transaction_id,omitempty"`
-	// The scheme associated with scheme_transaction_id. Only applies to card payments.
+	// The scheme associated with `scheme_transaction_id`. Only applies to card payments. When setting a new value for `scheme_transaction_id`, if `scheme_transaction_id_scheme`is both omitted from the payload and previously unset, `scheme_transaction_id_scheme` will be populated from the payment method's existing `scheme`.
 	SchemeTransactionIDScheme *CardScheme `json:"scheme_transaction_id_scheme,omitempty"`
 }
 
