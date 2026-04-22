@@ -26,3 +26,4 @@ custom := components.Mode("custom_value")
 | `ModeClickToPay`      | click-to-pay          |
 | `ModeGiftCard`        | gift-card             |
 | `ModeBank`            | bank                  |
+| `ModePaze`            | paze                  |

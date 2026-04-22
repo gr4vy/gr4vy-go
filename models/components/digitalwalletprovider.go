@@ -8,6 +8,7 @@ const (
 	DigitalWalletProviderApple      DigitalWalletProvider = "apple"
 	DigitalWalletProviderGoogle     DigitalWalletProvider = "google"
 	DigitalWalletProviderClickToPay DigitalWalletProvider = "click-to-pay"
+	DigitalWalletProviderPaze       DigitalWalletProvider = "paze"
 )
 
 func (e DigitalWalletProvider) ToPointer() *DigitalWalletProvider {
@@ -18,7 +19,7 @@ func (e DigitalWalletProvider) ToPointer() *DigitalWalletProvider {
 func (e *DigitalWalletProvider) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "apple", "google", "click-to-pay":
+		case "apple", "google", "click-to-pay", "paze":
 			return true
 		}
 	}

@@ -21,3 +21,4 @@ custom := components.DigitalWalletProvider("custom_value")
 | `DigitalWalletProviderApple`      | apple                             |
 | `DigitalWalletProviderGoogle`     | google                            |
 | `DigitalWalletProviderClickToPay` | click-to-pay                      |
+| `DigitalWalletProviderPaze`       | paze                              |
