@@ -25,6 +25,12 @@ type DigitalWallet struct {
 	MerchantURL *string `json:"merchant_url,omitempty"`
 	// The country code where the merchant is registered.
 	MerchantCountryCode *string `json:"merchant_country_code,omitempty"`
+	// Merchant classification for the type of goods or services it provides.
+	MerchantCategoryCode *string `json:"merchant_category_code,omitempty"`
+	// The merchant address associated with the digital wallet.
+	Address *DigitalWalletAddress `json:"address,omitempty"`
+	// Provider-specific configuration. Currently only used by Paze.
+	ExtraConfiguration map[string]any `json:"extra_configuration,omitempty"`
 	// The list of domain names that a digital wallet can be used on (deprecated).
 	DomainNames []string `json:"domain_names"`
 	// The number of active custom certificates registered for this digital wallet (Apple Pay only).
@@ -103,6 +109,27 @@ func (d *DigitalWallet) GetMerchantCountryCode() *string {
 		return nil
 	}
 	return d.MerchantCountryCode
+}
+
+func (d *DigitalWallet) GetMerchantCategoryCode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.MerchantCategoryCode
+}
+
+func (d *DigitalWallet) GetAddress() *DigitalWalletAddress {
+	if d == nil {
+		return nil
+	}
+	return d.Address
+}
+
+func (d *DigitalWallet) GetExtraConfiguration() map[string]any {
+	if d == nil {
+		return nil
+	}
+	return d.ExtraConfiguration
 }
 
 func (d *DigitalWallet) GetDomainNames() []string {

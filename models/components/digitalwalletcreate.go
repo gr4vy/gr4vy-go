@@ -9,6 +9,9 @@ type DigitalWalletCreate struct {
 	MerchantDisplayName      *string               `json:"merchant_display_name,omitempty"`
 	MerchantURL              *string               `json:"merchant_url,omitempty"`
 	MerchantCountryCode      *string               `json:"merchant_country_code,omitempty"`
+	MerchantCategoryCode     *string               `json:"merchant_category_code,omitempty"`
+	Address                  *DigitalWalletAddress `json:"address,omitempty"`
+	ExtraConfiguration       map[string]any        `json:"extra_configuration,omitempty"`
 	DomainNames              []string              `json:"domain_names,omitempty"`
 	AcceptTermsAndConditions bool                  `json:"accept_terms_and_conditions"`
 }
@@ -46,6 +49,27 @@ func (d *DigitalWalletCreate) GetMerchantCountryCode() *string {
 		return nil
 	}
 	return d.MerchantCountryCode
+}
+
+func (d *DigitalWalletCreate) GetMerchantCategoryCode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.MerchantCategoryCode
+}
+
+func (d *DigitalWalletCreate) GetAddress() *DigitalWalletAddress {
+	if d == nil {
+		return nil
+	}
+	return d.Address
+}
+
+func (d *DigitalWalletCreate) GetExtraConfiguration() map[string]any {
+	if d == nil {
+		return nil
+	}
+	return d.ExtraConfiguration
 }
 
 func (d *DigitalWalletCreate) GetDomainNames() []string {
