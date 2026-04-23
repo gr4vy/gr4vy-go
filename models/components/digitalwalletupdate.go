@@ -4,11 +4,14 @@ package components
 
 // DigitalWalletUpdate - Request body for editing a registered digital wallet
 type DigitalWalletUpdate struct {
-	MerchantName        *string  `json:"merchant_name,omitempty"`
-	DomainNames         []string `json:"domain_names,omitempty"`
-	MerchantDisplayName *string  `json:"merchant_display_name,omitempty"`
-	MerchantURL         *string  `json:"merchant_url,omitempty"`
-	MerchantCountryCode *string  `json:"merchant_country_code,omitempty"`
+	MerchantName         *string               `json:"merchant_name,omitempty"`
+	DomainNames          []string              `json:"domain_names,omitempty"`
+	MerchantDisplayName  *string               `json:"merchant_display_name,omitempty"`
+	MerchantURL          *string               `json:"merchant_url,omitempty"`
+	MerchantCountryCode  *string               `json:"merchant_country_code,omitempty"`
+	MerchantCategoryCode *string               `json:"merchant_category_code,omitempty"`
+	Address              *DigitalWalletAddress `json:"address,omitempty"`
+	ExtraConfiguration   map[string]any        `json:"extra_configuration,omitempty"`
 }
 
 func (d *DigitalWalletUpdate) GetMerchantName() *string {
@@ -44,4 +47,25 @@ func (d *DigitalWalletUpdate) GetMerchantCountryCode() *string {
 		return nil
 	}
 	return d.MerchantCountryCode
+}
+
+func (d *DigitalWalletUpdate) GetMerchantCategoryCode() *string {
+	if d == nil {
+		return nil
+	}
+	return d.MerchantCategoryCode
+}
+
+func (d *DigitalWalletUpdate) GetAddress() *DigitalWalletAddress {
+	if d == nil {
+		return nil
+	}
+	return d.Address
+}
+
+func (d *DigitalWalletUpdate) GetExtraConfiguration() map[string]any {
+	if d == nil {
+		return nil
+	}
+	return d.ExtraConfiguration
 }
