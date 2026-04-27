@@ -28,7 +28,7 @@ type DigitalWallet struct {
 	// Merchant classification for the type of goods or services it provides.
 	MerchantCategoryCode *string `json:"merchant_category_code,omitempty"`
 	// The merchant address associated with the digital wallet.
-	Address *DigitalWalletAddress `json:"address,omitempty"`
+	Address *APITypesDigitalWalletAddress `json:"address,omitempty"`
 	// Provider-specific configuration. Currently only used by Paze.
 	ExtraConfiguration map[string]any `json:"extra_configuration,omitempty"`
 	// The list of domain names that a digital wallet can be used on (deprecated).
@@ -118,7 +118,7 @@ func (d *DigitalWallet) GetMerchantCategoryCode() *string {
 	return d.MerchantCategoryCode
 }
 
-func (d *DigitalWallet) GetAddress() *DigitalWalletAddress {
+func (d *DigitalWallet) GetAddress() *APITypesDigitalWalletAddress {
 	if d == nil {
 		return nil
 	}

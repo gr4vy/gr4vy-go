@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 8cdd725df0486cf963206f5728e439b8
+  docChecksum: 17581eecbd0b3a49293e257f517fc9aa
   docVersion: 1.0.0
   speakeasyVersion: 1.761.9
   generationVersion: 2.881.4
-  releaseVersion: 1.12.70
-  configChecksum: 3fc571404f988c284654c85f3a53d375
+  releaseVersion: 1.12.71
+  configChecksum: a7c3ea610f7269053d237228daf6de59
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 8575b603-c8b1-4364-9464-2da0f680a9b4
-  pristine_commit_hash: aa9aa2ac1fa044811cc8e5ebdb8a18ff4a43507b
-  pristine_tree_hash: 8857c6b572d6a38e9dbff4d4a3dadfe30a14812c
+  generation_id: 0ac182d3-f630-46c1-a02b-adfe1943023b
+  pristine_commit_hash: 965f0ce9e199e53b3ad9538ce2ea874bab97c02c
+  pristine_tree_hash: 083d597a430fcbd0a9c18e301f27a1648c73700f
 features:
   go:
     additionalDependencies: 0.1.0
@@ -204,6 +204,18 @@ trackedFiles:
     id: 0e52d909a032
     last_write_checksum: sha1:218f33efc69aa87b2faf8a8d236d087956e53fd1
     pristine_git_object: dfbf8c69b4bbeb0e613ce1ae0087fefec87595e8
+  docs/models/components/adyenpixoptions.md:
+    id: 5b6b79203a2e
+    last_write_checksum: sha1:c78271c0920f735664d7e60500b78799a5ce089f
+    pristine_git_object: d981eb6575cd7ed753a42c07a805c6741fb022ed
+  docs/models/components/adyenpixrecurringamount.md:
+    id: e0b67cc2fb4a
+    last_write_checksum: sha1:605e85da541d4b80d2ddbc1bf8cef2509b6db8f9
+    pristine_git_object: c030c304a3ff5b21b84a25719c232b813c70457f
+  docs/models/components/adyenpixrecurringoptions.md:
+    id: fca7100f9f46
+    last_write_checksum: sha1:9dd2f00773b95687de29fc0e8993db9acafed0fc
+    pristine_git_object: 9f0a0345690ff686697aa82993692275175bcdc5
   docs/models/components/adyensepaoptions.md:
     id: 7e7a90621b5b
     last_write_checksum: sha1:fccbe049d270c52e10da5fcb797b95ec02b64792
@@ -240,6 +252,10 @@ trackedFiles:
     id: 4430fa0e51d7
     last_write_checksum: sha1:0ecb5514ed862f2e0c3efbf5ebc679d0a3a66003
     pristine_git_object: d600edd65de46119a2c5315f088172282f5a469a
+  docs/models/components/apitypesdigitalwalletaddress.md:
+    id: e64a06ef1306
+    last_write_checksum: sha1:4f6cf0b8c5151761894e2987e26992f92aab072b
+    pristine_git_object: 7eb667f240595ffa74b3dea8ae0264b1637bcad1
   docs/models/components/applepaypaymentmethodcreate.md:
     id: 0312ae6b8d37
     last_write_checksum: sha1:75e44169d6a4227c07f6b943e4f747ff5c15b2b6
@@ -462,8 +478,8 @@ trackedFiles:
     pristine_git_object: 3b10f4ac02cf6cb8dc49ae3e810532eaf72308f5
   docs/models/components/digitalwallet.md:
     id: 857177c2dea3
-    last_write_checksum: sha1:cd5d90be6203cc68288db8f430d0423bc2784c0d
-    pristine_git_object: 7c577a67d9a92557af5619438569f3d1c1961c28
+    last_write_checksum: sha1:2a089d5a0247eb3ecaf25a9f4bc541675df915fd
+    pristine_git_object: 39be60830bf970b67959ccd945205d8f9441a52f
   docs/models/components/digitalwalletaddress.md:
     id: 9ae7757026ea
     last_write_checksum: sha1:efa50e929a0d51a7c1d0889ff23e3108eff0d794
@@ -1338,8 +1354,8 @@ trackedFiles:
     pristine_git_object: ddcc3166b640604eb177dbb38acb1feb7c1cbbfe
   docs/models/components/transactionconnectionoptions.md:
     id: a4843e535547
-    last_write_checksum: sha1:9b70498bbb77ffff096ff0b8ef2426ae1cc19796
-    pristine_git_object: 8fb5946b4c565575492187ebef1be448114ee92c
+    last_write_checksum: sha1:67c5b81e77317945136cf6d7d306ce42f86f0b84
+    pristine_git_object: 0f0c81dc635f31430fee2e7ab99e87b889bf8273
   docs/models/components/transactioncreate.md:
     id: 652e84478e51
     last_write_checksum: sha1:3e0391a80065e7f45d6a95e36051f45b35b3f022
@@ -2506,8 +2522,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:c6b55e83bc737a74fad322a3d4ec1b02cfbf6f41
-    pristine_git_object: fefd16cbea96bfea21562d0d5eaf46d9cdd20729
+    last_write_checksum: sha1:529dc8d636da6693ec34a6e3b2f34c479095a517
+    pristine_git_object: 163f629f9332c12bce5c92683bf3f6708fd0dfd8
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -2676,6 +2692,18 @@ trackedFiles:
     id: 3b894b6a95b1
     last_write_checksum: sha1:42d0d933cb0839b00dc4fd80cc043930c68093ce
     pristine_git_object: f0e9a276e6c3069d173b806f8ed5fefaa17f1d5e
+  models/components/adyenpixoptions.go:
+    id: 5a8986b28d28
+    last_write_checksum: sha1:73b543455cfc47852df30b76567e4ad5128e78d3
+    pristine_git_object: dbb8fa068f33a472526ac5f17fad4e13adc083e1
+  models/components/adyenpixrecurringamount.go:
+    id: 21bdd722a0f4
+    last_write_checksum: sha1:a98754b19cc4c1994a9ffa868fc2b639687b1057
+    pristine_git_object: 3e6dc8c21c069906f1f10322e3df4a61b2581997
+  models/components/adyenpixrecurringoptions.go:
+    id: 6cf20c2e17ae
+    last_write_checksum: sha1:dbc724c8dfb3f3abdb5c7e984d42ae6f32fafd21
+    pristine_git_object: d0d00e25909d528813721da5eb1f0f4ecafd30ba
   models/components/adyensepaoptions.go:
     id: 44d7a5430545
     last_write_checksum: sha1:26eb021e24dd6bf5c64d88a241c161580b1c032b
@@ -2708,6 +2736,10 @@ trackedFiles:
     id: 85addaee6b1f
     last_write_checksum: sha1:f94a6cf182aae4293f0e5086bc888e838b78d2b2
     pristine_git_object: 4e0f5b4a20ae994ab9f2e12fd10e5fb104fd4290
+  models/components/apitypesdigitalwalletaddress.go:
+    id: 121f73c4e19a
+    last_write_checksum: sha1:5f4055fe060b72da675244f06998a752fed84f6e
+    pristine_git_object: 4f7979c8d963220e75a388455fe7ee753bce9b3f
   models/components/applepaypaymentmethodcreate.go:
     id: 552274f7a623
     last_write_checksum: sha1:06bb7be928d5218a290f49336125de08e2259818
@@ -2918,8 +2950,8 @@ trackedFiles:
     pristine_git_object: dda23914af1d402c44df62db97bf15b7b5f404f1
   models/components/digitalwallet.go:
     id: abc8e0e9f7b1
-    last_write_checksum: sha1:616e7c751206a4d08bd17271d966c4b62e9442a4
-    pristine_git_object: d2b9d528a80b7c9c9da31fb741fe3901dc717b11
+    last_write_checksum: sha1:4cd3acadfcc8d2805863ea9dd0702fcdf1031c82
+    pristine_git_object: 7a612a3c94138d5ab7be7ecbaa33710e42880a81
   models/components/digitalwalletaddress.go:
     id: 2594fe924d4d
     last_write_checksum: sha1:c02b055e20db2b3f26ebe8cde16e0f37ebc131aa
@@ -3698,8 +3730,8 @@ trackedFiles:
     pristine_git_object: 87d643cabba0bba362e9fc52361fa0a0d9ab2a1f
   models/components/transactionconnectionoptions.go:
     id: 5ce01894f53d
-    last_write_checksum: sha1:fb3d3f5ebf81e1bbeb9c557d12b1128148916a65
-    pristine_git_object: 24e196bf36706bbe5faeeb1b0f2968a34828d4b9
+    last_write_checksum: sha1:94aa4e994b854396ecf47161ee8ef206bb7b211a
+    pristine_git_object: 8eb39ef911fa2a66c8d423e5b65662e080fc3b0a
   models/components/transactioncreate.go:
     id: 2fed3feab426
     last_write_checksum: sha1:2f0f59b0eb3e066f6cd8a32c41754c6cda33af3d
@@ -8000,7 +8032,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.DigitalWallets.Create()`: \n  *  `request.DigitalWalletCreate` **Changed**\n  *  `response` **Changed**\n* `Gr4vy.DigitalWallets.List()`:  `response.Items[]` **Changed**\n* `Gr4vy.DigitalWallets.Get()`:  `response` **Changed**\n* `Gr4vy.DigitalWallets.Update()`: \n  *  `request.DigitalWalletUpdate` **Changed**\n  *  `response` **Changed**\n"
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.DigitalWallets.Create()`:  `response.Address.Line2` **Changed**\n* `Gr4vy.DigitalWallets.List()`:  `response.Items[].Address.Line2` **Changed**\n* `Gr4vy.DigitalWallets.Get()`:  `response.Address.Line2` **Changed**\n* `Gr4vy.DigitalWallets.Update()`:  `response.Address.Line2` **Changed**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.AdyenPix.PixRecurring` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.AdyenPix.PixRecurring` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.AdyenPix.PixRecurring` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
