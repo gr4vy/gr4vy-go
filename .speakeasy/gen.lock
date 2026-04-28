@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 17581eecbd0b3a49293e257f517fc9aa
+  docChecksum: 48ef7afaa4b3ed4b92f68a14c5968e35
   docVersion: 1.0.0
   speakeasyVersion: 1.761.9
   generationVersion: 2.881.4
-  releaseVersion: 1.12.71
-  configChecksum: a7c3ea610f7269053d237228daf6de59
+  releaseVersion: 1.12.72
+  configChecksum: 5bd14b0c69635e164b2ac85158810960
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 0ac182d3-f630-46c1-a02b-adfe1943023b
-  pristine_commit_hash: 965f0ce9e199e53b3ad9538ce2ea874bab97c02c
-  pristine_tree_hash: 083d597a430fcbd0a9c18e301f27a1648c73700f
+  generation_id: 81856e54-9d25-41f9-83a4-7e580073775e
+  pristine_commit_hash: 4a7529d1cb87e082cdb07c2def5e423b3dfd02fa
+  pristine_tree_hash: ab365fbec97e7ae0b05daf92a63cb4ae8c82fc1b
 features:
   go:
     additionalDependencies: 0.1.0
@@ -818,8 +818,8 @@ trackedFiles:
     pristine_git_object: 7822176258ccabc8e3bbfea9521a89d8bee773fa
   docs/models/components/name.md:
     id: 817692a433a1
-    last_write_checksum: sha1:f5240adc816e89bef026cda4ba83db5ae2d1bb10
-    pristine_git_object: 3f10dde502812ca4be14a87c241bed26a2f90609
+    last_write_checksum: sha1:edbc1b362c30b25b392b54781d6170e2edf98e2d
+    pristine_git_object: 4b3b9ccbaa328a81ec36bf6711f9880b244ca732
   docs/models/components/networktoken.md:
     id: 19d1036d468a
     last_write_checksum: sha1:34973c759d46e6b369307c18da0a4c4a27a00889
@@ -2522,8 +2522,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:529dc8d636da6693ec34a6e3b2f34c479095a517
-    pristine_git_object: 163f629f9332c12bce5c92683bf3f6708fd0dfd8
+    last_write_checksum: sha1:303ddc442f5d856b6ba657bf9c74914c0ac7b6b4
+    pristine_git_object: a44e9f50be0fd52199f09a2b55552e18782e5e17
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3738,8 +3738,8 @@ trackedFiles:
     pristine_git_object: 0a4a86d28e23d6f7eb44455cdcbbb107d94232c3
   models/components/transactionevent.go:
     id: 03beaff04e48
-    last_write_checksum: sha1:4696b6f20782cc3f2041eafb31a34d6ba764f15a
-    pristine_git_object: b9d15579cfafa6258abfa8394a8446bb83947acb
+    last_write_checksum: sha1:7368f828a703d8e14b3ddaf5972e4b49b38860f3
+    pristine_git_object: fb9bafbbaf1cd5c52b88cd87c158f802d3a9b09f
   models/components/transactionevents.go:
     id: 7dd560a08645
     last_write_checksum: sha1:bd0394094f151482e5cfdfb416d3a41e3fad2b44
@@ -8032,7 +8032,9 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.DigitalWallets.Create()`:  `response.Address.Line2` **Changed**\n* `Gr4vy.DigitalWallets.List()`:  `response.Items[].Address.Line2` **Changed**\n* `Gr4vy.DigitalWallets.Get()`:  `response.Address.Line2` **Changed**\n* `Gr4vy.DigitalWallets.Update()`:  `response.Address.Line2` **Changed**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.AdyenPix.PixRecurring` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.AdyenPix.PixRecurring` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.AdyenPix.PixRecurring` **Added**\n"
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Gr4vy.Transactions.Events.List()`:  `response.Items[].Name.Enum(digitalWalletPazeTokenDecrypted)` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
