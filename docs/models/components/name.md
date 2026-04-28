@@ -65,6 +65,7 @@ custom := components.Name("custom_value")
 | `NameDigitalWalletApplePayTokenDecrypted`                       | digital-wallet-apple-pay-token-decrypted                        |
 | `NameDigitalWalletGooglePayTokenDecrypted`                      | digital-wallet-google-pay-token-decrypted                       |
 | `NameDigitalWalletClickToPayTokenDecrypted`                     | digital-wallet-click-to-pay-token-decrypted                     |
+| `NameDigitalWalletPazeTokenDecrypted`                           | digital-wallet-paze-token-decrypted                             |
 | `NameNetworkTokenProvisionSucceeded`                            | network-token-provision-succeeded                               |
 | `NameNetworkTokenProvisionFailed`                               | network-token-provision-failed                                  |
 | `NameNetworkTokenCryptogramProvisionSucceeded`                  | network-token-cryptogram-provision-succeeded                    |
