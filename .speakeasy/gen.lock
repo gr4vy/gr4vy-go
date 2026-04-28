@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 48ef7afaa4b3ed4b92f68a14c5968e35
+  docChecksum: 3a764eba83b3b8e2127b7a75d2cd57a5
   docVersion: 1.0.0
   speakeasyVersion: 1.761.9
   generationVersion: 2.881.4
-  releaseVersion: 1.12.72
-  configChecksum: 5bd14b0c69635e164b2ac85158810960
+  releaseVersion: 1.12.73
+  configChecksum: b9fb22327a322dc1349bc97455a22be4
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 81856e54-9d25-41f9-83a4-7e580073775e
-  pristine_commit_hash: 4a7529d1cb87e082cdb07c2def5e423b3dfd02fa
-  pristine_tree_hash: ab365fbec97e7ae0b05daf92a63cb4ae8c82fc1b
+  generation_id: b5478df5-86e2-4ba3-8791-1ccc522c101d
+  pristine_commit_hash: 22fb3b60678667b8ae58af2e97529981198d9b49
+  pristine_tree_hash: 8df2eeff768f03535071738f8ffddc64bc7f8308
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2522,8 +2522,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:303ddc442f5d856b6ba657bf9c74914c0ac7b6b4
-    pristine_git_object: a44e9f50be0fd52199f09a2b55552e18782e5e17
+    last_write_checksum: sha1:6049a5383dfc6ed4951100675ffbb9db3f09119b
+    pristine_git_object: c505294e396a97577613f1976fc1645f94182403
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -8032,9 +8032,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Gr4vy.Transactions.Events.List()`:  `response.Items[].Name.Enum(digitalWalletPazeTokenDecrypted)` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
