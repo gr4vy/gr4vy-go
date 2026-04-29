@@ -20,6 +20,7 @@ const (
 	TransactionCreatePaymentMethodTypeClickToPayFPANPaymentMethodCreate         TransactionCreatePaymentMethodType = "ClickToPayFPANPaymentMethodCreate"
 	TransactionCreatePaymentMethodTypeGooglePayPaymentMethodCreate              TransactionCreatePaymentMethodType = "GooglePayPaymentMethodCreate"
 	TransactionCreatePaymentMethodTypeGooglePayFPANPaymentMethodCreate          TransactionCreatePaymentMethodType = "GooglePayFPANPaymentMethodCreate"
+	TransactionCreatePaymentMethodTypePazePaymentMethodCreate                   TransactionCreatePaymentMethodType = "PazePaymentMethodCreate"
 	TransactionCreatePaymentMethodTypeNetworkTokenPaymentMethodCreate           TransactionCreatePaymentMethodType = "NetworkTokenPaymentMethodCreate"
 	TransactionCreatePaymentMethodTypePlaidPaymentMethodCreate                  TransactionCreatePaymentMethodType = "PlaidPaymentMethodCreate"
 	TransactionCreatePaymentMethodTypeBaseBankPaymentMethodCreate               TransactionCreatePaymentMethodType = "BaseBankPaymentMethodCreate"
@@ -36,6 +37,7 @@ type TransactionCreatePaymentMethod struct {
 	ClickToPayFPANPaymentMethodCreate         *ClickToPayFPANPaymentMethodCreate         `queryParam:"inline" union:"member"`
 	GooglePayPaymentMethodCreate              *GooglePayPaymentMethodCreate              `queryParam:"inline" union:"member"`
 	GooglePayFPANPaymentMethodCreate          *GooglePayFPANPaymentMethodCreate          `queryParam:"inline" union:"member"`
+	PazePaymentMethodCreate                   *PazePaymentMethodCreate                   `queryParam:"inline" union:"member"`
 	NetworkTokenPaymentMethodCreate           *NetworkTokenPaymentMethodCreate           `queryParam:"inline" union:"member"`
 	PlaidPaymentMethodCreate                  *PlaidPaymentMethodCreate                  `queryParam:"inline" union:"member"`
 	BaseBankPaymentMethodCreate               *BaseBankPaymentMethodCreate               `queryParam:"inline" union:"member"`
@@ -113,6 +115,15 @@ func CreateTransactionCreatePaymentMethodGooglePayFPANPaymentMethodCreate(google
 	return TransactionCreatePaymentMethod{
 		GooglePayFPANPaymentMethodCreate: &googlePayFPANPaymentMethodCreate,
 		Type:                             typ,
+	}
+}
+
+func CreateTransactionCreatePaymentMethodPazePaymentMethodCreate(pazePaymentMethodCreate PazePaymentMethodCreate) TransactionCreatePaymentMethod {
+	typ := TransactionCreatePaymentMethodTypePazePaymentMethodCreate
+
+	return TransactionCreatePaymentMethod{
+		PazePaymentMethodCreate: &pazePaymentMethodCreate,
+		Type:                    typ,
 	}
 }
 
@@ -210,6 +221,13 @@ func (u *TransactionCreatePaymentMethod) UnmarshalJSON(data []byte) error {
 		return nil
 	}
 
+	var pazePaymentMethodCreate PazePaymentMethodCreate = PazePaymentMethodCreate{}
+	if err := utils.UnmarshalJSON(data, &pazePaymentMethodCreate, "", true, nil); err == nil {
+		u.PazePaymentMethodCreate = &pazePaymentMethodCreate
+		u.Type = TransactionCreatePaymentMethodTypePazePaymentMethodCreate
+		return nil
+	}
+
 	var tokenPaymentMethodCreate TokenPaymentMethodCreate = TokenPaymentMethodCreate{}
 	if err := utils.UnmarshalJSON(data, &tokenPaymentMethodCreate, "", true, nil); err == nil {
 		u.TokenPaymentMethodCreate = &tokenPaymentMethodCreate
@@ -272,6 +290,10 @@ func (u TransactionCreatePaymentMethod) MarshalJSON() ([]byte, error) {
 
 	if u.GooglePayFPANPaymentMethodCreate != nil {
 		return utils.MarshalJSON(u.GooglePayFPANPaymentMethodCreate, "", true)
+	}
+
+	if u.PazePaymentMethodCreate != nil {
+		return utils.MarshalJSON(u.PazePaymentMethodCreate, "", true)
 	}
 
 	if u.NetworkTokenPaymentMethodCreate != nil {

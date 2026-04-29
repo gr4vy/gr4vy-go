@@ -53,6 +53,12 @@ transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMetho
 transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMethodGooglePayFPANPaymentMethodCreate(components.GooglePayFPANPaymentMethodCreate{/* values here */})
 ```
 
+### PazePaymentMethodCreate
+
+```go
+transactionCreatePaymentMethod := components.CreateTransactionCreatePaymentMethodPazePaymentMethodCreate(components.PazePaymentMethodCreate{/* values here */})
+```
+
 ### NetworkTokenPaymentMethodCreate
 
 ```go
@@ -99,6 +105,8 @@ switch transactionCreatePaymentMethod.Type {
 		// transactionCreatePaymentMethod.GooglePayPaymentMethodCreate is populated
 	case components.TransactionCreatePaymentMethodTypeGooglePayFPANPaymentMethodCreate:
 		// transactionCreatePaymentMethod.GooglePayFPANPaymentMethodCreate is populated
+	case components.TransactionCreatePaymentMethodTypePazePaymentMethodCreate:
+		// transactionCreatePaymentMethod.PazePaymentMethodCreate is populated
 	case components.TransactionCreatePaymentMethodTypeNetworkTokenPaymentMethodCreate:
 		// transactionCreatePaymentMethod.NetworkTokenPaymentMethodCreate is populated
 	case components.TransactionCreatePaymentMethodTypePlaidPaymentMethodCreate:
