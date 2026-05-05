@@ -3,74 +3,8 @@
 package components
 
 import (
-	"errors"
-	"fmt"
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 )
-
-type PazePaymentMethodCreateTokenType string
-
-const (
-	PazePaymentMethodCreateTokenTypeStr      PazePaymentMethodCreateTokenType = "str"
-	PazePaymentMethodCreateTokenTypeMapOfAny PazePaymentMethodCreateTokenType = "mapOfAny"
-)
-
-// PazePaymentMethodCreateToken - The opaque token as received from the Paze complete response.
-type PazePaymentMethodCreateToken struct {
-	Str      *string        `queryParam:"inline" union:"member"`
-	MapOfAny map[string]any `queryParam:"inline" union:"member"`
-
-	Type PazePaymentMethodCreateTokenType
-}
-
-func CreatePazePaymentMethodCreateTokenStr(str string) PazePaymentMethodCreateToken {
-	typ := PazePaymentMethodCreateTokenTypeStr
-
-	return PazePaymentMethodCreateToken{
-		Str:  &str,
-		Type: typ,
-	}
-}
-
-func CreatePazePaymentMethodCreateTokenMapOfAny(mapOfAny map[string]any) PazePaymentMethodCreateToken {
-	typ := PazePaymentMethodCreateTokenTypeMapOfAny
-
-	return PazePaymentMethodCreateToken{
-		MapOfAny: mapOfAny,
-		Type:     typ,
-	}
-}
-
-func (u *PazePaymentMethodCreateToken) UnmarshalJSON(data []byte) error {
-
-	var str string = ""
-	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
-		u.Str = &str
-		u.Type = PazePaymentMethodCreateTokenTypeStr
-		return nil
-	}
-
-	var mapOfAny map[string]any = map[string]any{}
-	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
-		u.MapOfAny = mapOfAny
-		u.Type = PazePaymentMethodCreateTokenTypeMapOfAny
-		return nil
-	}
-
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for PazePaymentMethodCreateToken", string(data))
-}
-
-func (u PazePaymentMethodCreateToken) MarshalJSON() ([]byte, error) {
-	if u.Str != nil {
-		return utils.MarshalJSON(u.Str, "", true)
-	}
-
-	if u.MapOfAny != nil {
-		return utils.MarshalJSON(u.MapOfAny, "", true)
-	}
-
-	return nil, errors.New("could not marshal union type PazePaymentMethodCreateToken: all fields are null")
-}
 
 // PazePaymentMethodCreate - Create a Paze transaction with a device token.
 type PazePaymentMethodCreate struct {
@@ -92,7 +26,7 @@ type PazePaymentMethodCreate struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method string `const:"paze" json:"method"`
 	// The opaque token as received from the Paze complete response.
-	Token PazePaymentMethodCreateToken `json:"token"`
+	Token string `json:"token"`
 }
 
 func (p PazePaymentMethodCreate) MarshalJSON() ([]byte, error) {
@@ -159,9 +93,9 @@ func (p *PazePaymentMethodCreate) GetMethod() string {
 	return "paze"
 }
 
-func (p *PazePaymentMethodCreate) GetToken() PazePaymentMethodCreateToken {
+func (p *PazePaymentMethodCreate) GetToken() string {
 	if p == nil {
-		return PazePaymentMethodCreateToken{}
+		return ""
 	}
 	return p.Token
 }
