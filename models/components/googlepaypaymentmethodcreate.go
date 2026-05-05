@@ -8,59 +8,59 @@ import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 )
 
-type GooglePayPaymentMethodCreateTokenType string
+type TokenType string
 
 const (
-	GooglePayPaymentMethodCreateTokenTypeStr      GooglePayPaymentMethodCreateTokenType = "str"
-	GooglePayPaymentMethodCreateTokenTypeMapOfAny GooglePayPaymentMethodCreateTokenType = "mapOfAny"
+	TokenTypeStr      TokenType = "str"
+	TokenTypeMapOfAny TokenType = "mapOfAny"
 )
 
-// GooglePayPaymentMethodCreateToken - The opaque token as received from the Google Pay JS library. This format may change between JS library versions.
-type GooglePayPaymentMethodCreateToken struct {
+// Token - The opaque token as received from the Google Pay JS library. This format may change between JS library versions.
+type Token struct {
 	Str      *string        `queryParam:"inline" union:"member"`
 	MapOfAny map[string]any `queryParam:"inline" union:"member"`
 
-	Type GooglePayPaymentMethodCreateTokenType
+	Type TokenType
 }
 
-func CreateGooglePayPaymentMethodCreateTokenStr(str string) GooglePayPaymentMethodCreateToken {
-	typ := GooglePayPaymentMethodCreateTokenTypeStr
+func CreateTokenStr(str string) Token {
+	typ := TokenTypeStr
 
-	return GooglePayPaymentMethodCreateToken{
+	return Token{
 		Str:  &str,
 		Type: typ,
 	}
 }
 
-func CreateGooglePayPaymentMethodCreateTokenMapOfAny(mapOfAny map[string]any) GooglePayPaymentMethodCreateToken {
-	typ := GooglePayPaymentMethodCreateTokenTypeMapOfAny
+func CreateTokenMapOfAny(mapOfAny map[string]any) Token {
+	typ := TokenTypeMapOfAny
 
-	return GooglePayPaymentMethodCreateToken{
+	return Token{
 		MapOfAny: mapOfAny,
 		Type:     typ,
 	}
 }
 
-func (u *GooglePayPaymentMethodCreateToken) UnmarshalJSON(data []byte) error {
+func (u *Token) UnmarshalJSON(data []byte) error {
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {
 		u.Str = &str
-		u.Type = GooglePayPaymentMethodCreateTokenTypeStr
+		u.Type = TokenTypeStr
 		return nil
 	}
 
 	var mapOfAny map[string]any = map[string]any{}
 	if err := utils.UnmarshalJSON(data, &mapOfAny, "", true, nil); err == nil {
 		u.MapOfAny = mapOfAny
-		u.Type = GooglePayPaymentMethodCreateTokenTypeMapOfAny
+		u.Type = TokenTypeMapOfAny
 		return nil
 	}
 
-	return fmt.Errorf("could not unmarshal `%s` into any supported union types for GooglePayPaymentMethodCreateToken", string(data))
+	return fmt.Errorf("could not unmarshal `%s` into any supported union types for Token", string(data))
 }
 
-func (u GooglePayPaymentMethodCreateToken) MarshalJSON() ([]byte, error) {
+func (u Token) MarshalJSON() ([]byte, error) {
 	if u.Str != nil {
 		return utils.MarshalJSON(u.Str, "", true)
 	}
@@ -69,7 +69,7 @@ func (u GooglePayPaymentMethodCreateToken) MarshalJSON() ([]byte, error) {
 		return utils.MarshalJSON(u.MapOfAny, "", true)
 	}
 
-	return nil, errors.New("could not marshal union type GooglePayPaymentMethodCreateToken: all fields are null")
+	return nil, errors.New("could not marshal union type Token: all fields are null")
 }
 
 // GooglePayPaymentMethodCreate - Create a Google Pay transaction with a device token.
@@ -92,7 +92,7 @@ type GooglePayPaymentMethodCreate struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	method string `const:"googlepay" json:"method"`
 	// The opaque token as received from the Google Pay JS library. This format may change between JS library versions.
-	Token GooglePayPaymentMethodCreateToken `json:"token"`
+	Token Token `json:"token"`
 	// The assurance details provided by Google Pay
 	AssuranceDetails *GooglePayAssuranceDetails `json:"assurance_details,omitempty"`
 }
@@ -161,9 +161,9 @@ func (g *GooglePayPaymentMethodCreate) GetMethod() string {
 	return "googlepay"
 }
 
-func (g *GooglePayPaymentMethodCreate) GetToken() GooglePayPaymentMethodCreateToken {
+func (g *GooglePayPaymentMethodCreate) GetToken() Token {
 	if g == nil {
-		return GooglePayPaymentMethodCreateToken{}
+		return Token{}
 	}
 	return g.Token
 }
