@@ -36,6 +36,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodBoleto`          | boleto                                             |
 | `RedirectPaymentMethodCreateMethodBoost`           | boost                                              |
 | `RedirectPaymentMethodCreateMethodBreb`            | breb                                               |
+| `RedirectPaymentMethodCreateMethodAch`             | ach                                                |
 | `RedirectPaymentMethodCreateMethodCapitec`         | capitec                                            |
 | `RedirectPaymentMethodCreateMethodCashapp`         | cashapp                                            |
 | `RedirectPaymentMethodCreateMethodClearpay`        | clearpay                                           |

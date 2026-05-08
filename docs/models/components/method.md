@@ -33,6 +33,7 @@ custom := components.Method("custom_value")
 | `MethodBecs`             | becs                     |
 | `MethodBitpay`           | bitpay                   |
 | `MethodBlik`             | blik                     |
+| `MethodAch`              | ach                      |
 | `MethodBoleto`           | boleto                   |
 | `MethodBoost`            | boost                    |
 | `MethodBreb`             | breb                     |
