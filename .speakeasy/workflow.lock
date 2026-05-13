@@ -9,8 +9,8 @@ sources:
             - 1.0.0
     openapi:
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:dd311e86ae9abfab708d820d89cfb504a3d7504e9f5a836b15ec96f28c2a8cf3
-        sourceBlobDigest: sha256:717a27e76d8231f4b7b6169d9e9901fcc22ce36bb555a518a87f71562729ff55
+        sourceRevisionDigest: sha256:1a9498d802d06f917739c1acf50faa671fae1d667edee26487fa90fa1c1699a0
+        sourceBlobDigest: sha256:707c6a3f102b38c656dea19fcbc40b566983bc5bf52668e4bc737987f3e7461e
         tags:
             - latest
             - 1.0.0
@@ -18,10 +18,10 @@ targets:
     go:
         source: openapi
         sourceNamespace: openapi
-        sourceRevisionDigest: sha256:dd311e86ae9abfab708d820d89cfb504a3d7504e9f5a836b15ec96f28c2a8cf3
-        sourceBlobDigest: sha256:717a27e76d8231f4b7b6169d9e9901fcc22ce36bb555a518a87f71562729ff55
+        sourceRevisionDigest: sha256:1a9498d802d06f917739c1acf50faa671fae1d667edee26487fa90fa1c1699a0
+        sourceBlobDigest: sha256:707c6a3f102b38c656dea19fcbc40b566983bc5bf52668e4bc737987f3e7461e
         codeSamplesNamespace: openapi-go-code-samples
-        codeSamplesRevisionDigest: sha256:15793fc6464c60a415affa35d7c25adef34b999f3fcfc28b47099b1030b128d8
+        codeSamplesRevisionDigest: sha256:d4b05e33f487b302c3fbcc7b4516366e887febcc84ce8eb9ab08fac57435865a
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
