@@ -92,6 +92,7 @@ custom := components.Method("custom_value")
 | `MethodPagoefectivo`     | pagoefectivo             |
 | `MethodPayid`            | payid                    |
 | `MethodPaymaya`          | paymaya                  |
+| `MethodPaysquad`         | paysquad                 |
 | `MethodPaypal`           | paypal                   |
 | `MethodPaypalpaylater`   | paypalpaylater           |
 | `MethodPaypay`           | paypay                   |
