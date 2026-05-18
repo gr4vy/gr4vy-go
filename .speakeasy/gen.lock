@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: d5699b8d133f75742116e6488eb41ca6
+  docChecksum: ceb875f3db6e1fbea97f2ebc07abe6c5
   docVersion: 1.0.0
   speakeasyVersion: 1.763.1
   generationVersion: 2.884.4
-  releaseVersion: 1.12.80
-  configChecksum: 5d539070af20701b63a769614698a76d
+  releaseVersion: 1.12.81
+  configChecksum: 315f88b911e50f9e106045db35b5d848
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 0d4451ef-2828-409d-aac0-08e833418a70
-  pristine_commit_hash: 74c67033f05a6526ec81cb4af392865c6bc69173
-  pristine_tree_hash: dc8891b162d39ec399eea62dcfd931a879480a32
+  generation_id: 4176997f-c9e9-4c25-86d0-6603a0d849d0
+  pristine_commit_hash: 5952862cb62c3de5fc2b8322f4a935cc712933b9
+  pristine_tree_hash: 9e49b191c927e1c0d781ed545fd6f4ee7a6fb52f
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2526,8 +2526,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:8dda9315a27b2db8bec908238b5680540373c435
-    pristine_git_object: 32e51d4a500434423b1ab2ff5434ab692761f421
+    last_write_checksum: sha1:36237573006749e2f5a0adc5c9f1b0d33fda849f
+    pristine_git_object: 4df48a751b274e7d53f63c1817daff173dfe4b3a
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -8040,7 +8040,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].Method.Enum(paysquad)` **Added**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].Method.Enum(paysquad)` **Added**\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(RedirectPaymentMethodCreate).Method.Enum(paysquad)` **Added**\n  *  `response.Method.Enum(paysquad)` **Added**\n* `Gr4vy.PaymentMethods.Get()`:  `response.Method.Enum(paysquad)` **Added**\n* `Gr4vy.PaymentMethods.Update()`:  `response.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].PaymentMethod.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PaymentMethod.union(RedirectPaymentMethodCreate).Method.Enum(paysquad)` **Added**\n  *  `response.PaymentMethod.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.PaymentMethod.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.PaymentMethod.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.union(Transaction).PaymentMethod.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.union(Transaction).PaymentMethod.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PaymentMethod.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.PaymentMethod.Method.Enum(paysquad)` **Added**\n* `Gr4vy.PaymentServiceDefinitions.List()`:  `response.Items[].Method.Enum(paysquad)` **Added**\n* `Gr4vy.PaymentServiceDefinitions.Get()`:  `response.Method.Enum(paysquad)` **Added**\n* `Gr4vy.PaymentServices.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].Method.Enum(paysquad)` **Added**\n* `Gr4vy.PaymentServices.Create()`:  `response.Method.Enum(paysquad)` **Added**\n* `Gr4vy.PaymentServices.Get()`:  `response.Method.Enum(paysquad)` **Added**\n* `Gr4vy.PaymentServices.Update()`:  `response.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Payouts.List()`:  `response.Items[].PaymentMethod.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Payouts.Create()`:  `response.PaymentMethod.Method.Enum(paysquad)` **Added**\n* `Gr4vy.Payouts.Get()`:  `response.PaymentMethod.Method.Enum(paysquad)` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
