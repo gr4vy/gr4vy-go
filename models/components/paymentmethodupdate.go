@@ -10,6 +10,8 @@ type PaymentMethodUpdate struct {
 	SchemeTransactionID *string `json:"scheme_transaction_id,omitempty"`
 	// The scheme associated with `scheme_transaction_id`. Only applies to card payments. When setting a new value for `scheme_transaction_id`, if `scheme_transaction_id_scheme`is both omitted from the payload and previously unset, `scheme_transaction_id_scheme` will be populated from the payment method's existing `scheme`.
 	SchemeTransactionIDScheme *CardScheme `json:"scheme_transaction_id_scheme,omitempty"`
+	// A transaction link identifier to associate with this payment method.
+	TransactionLinkID *string `json:"transaction_link_id,omitempty"`
 }
 
 func (p *PaymentMethodUpdate) GetExpirationDate() *string {
@@ -31,4 +33,11 @@ func (p *PaymentMethodUpdate) GetSchemeTransactionIDScheme() *CardScheme {
 		return nil
 	}
 	return p.SchemeTransactionIDScheme
+}
+
+func (p *PaymentMethodUpdate) GetTransactionLinkID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TransactionLinkID
 }
