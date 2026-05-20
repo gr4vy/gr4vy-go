@@ -6,6 +6,7 @@
 
 * [GooglePay](#googlepay) - Create a Google Pay session
 * [ApplePay](#applepay) - Create a Apple Pay session
+* [Paze](#paze) - Create a Paze session
 * [ClickToPay](#clicktopay) - Create a Click to Pay session
 
 ## GooglePay
@@ -128,6 +129,80 @@ func main() {
 ### Response
 
 **[map[string]any](../../.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.Error400            | 400                           | application/json              |
+| apierrors.Error401            | 401                           | application/json              |
+| apierrors.Error403            | 403                           | application/json              |
+| apierrors.Error404            | 404                           | application/json              |
+| apierrors.Error405            | 405                           | application/json              |
+| apierrors.Error409            | 409                           | application/json              |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.Error425            | 425                           | application/json              |
+| apierrors.Error429            | 429                           | application/json              |
+| apierrors.Error500            | 500                           | application/json              |
+| apierrors.Error502            | 502                           | application/json              |
+| apierrors.Error504            | 504                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## Paze
+
+Create a session for use with Paze.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="create_paze_digital_wallet_session" method="post" path="/digital-wallets/paze/session" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"log"
+	"github.com/gr4vy/gr4vy-go/models/operations"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("<id>"),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+    )
+
+    res, err := s.DigitalWallets.Sessions.Paze(ctx, components.PazeSessionRequest{})
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        switch res.Type {
+            case operations.ResponseCreatePazeDigitalWalletSessionTypePazeWebSession:
+                // res.PazeWebSession is populated
+            case operations.ResponseCreatePazeDigitalWalletSessionTypePazeMobileSession:
+                // res.PazeMobileSession is populated
+        }
+
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `pazeSessionRequest`                                                           | [components.PazeSessionRequest](../../models/components/pazesessionrequest.md) | :heavy_check_mark:                                                             | N/A                                                                            |
+| `merchantAccountID`                                                            | `*string`                                                                      | :heavy_minus_sign:                                                             | The ID of the merchant account to use for this request.                        |
+| `opts`                                                                         | [][operations.Option](../../models/operations/option.md)                       | :heavy_minus_sign:                                                             | The options for this request.                                                  |
+
+### Response
+
+**[*operations.ResponseCreatePazeDigitalWalletSession](../../models/operations/responsecreatepazedigitalwalletsession.md), error**
 
 ### Errors
 

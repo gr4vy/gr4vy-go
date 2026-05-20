@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 2e52662bac29375452d6d50ea70e79fc
+  docChecksum: eb45050d3641b4f8ab8d1fb078af2f20
   docVersion: 1.0.0
-  speakeasyVersion: 1.763.2
-  generationVersion: 2.884.4
-  releaseVersion: 1.12.83
-  configChecksum: ff7cfe98429a0de343ab3afaa705c028
+  speakeasyVersion: 1.763.3
+  generationVersion: 2.884.7
+  releaseVersion: 1.12.84
+  configChecksum: b4d76fd0d8e5954062391e69125b9ef5
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: c6d8091f-7bf5-47b2-9506-c52897434b43
-  pristine_commit_hash: 30d6be39ed2c099baa4e7aa7be76cd9b037a6574
-  pristine_tree_hash: 45007d6117119f62c13442695f371c1792f41f78
+  generation_id: 8d6a06fb-b843-4391-96b5-90f631b5b04b
+  pristine_commit_hash: b6e29d857c5771a2020a9d07a8f0d20aa64db08b
+  pristine_tree_hash: 40ca78faa6fb4ad3416af5d4bfdaec0d4b23d326
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1040,10 +1040,22 @@ trackedFiles:
     id: 6f021c9e8557
     last_write_checksum: sha1:e28e135be4bb6be4f87fe791281a656d6a88960f
     pristine_git_object: 56d6dd63adb39d1e6dd7cc8720147890c367d961
+  docs/models/components/pazemobilesession.md:
+    id: 239ecc5f052c
+    last_write_checksum: sha1:049595b3d95751e8c5f286889a5f9765d782fd1c
+    pristine_git_object: 357b83a9784015e151a0b5c7b6672cc7131248d4
   docs/models/components/pazepaymentmethodcreate.md:
     id: ebfc2151e85f
     last_write_checksum: sha1:94a9ba3b48006169ae37b9335e244cd3a0a12fe1
     pristine_git_object: 2f629f0dac7879a580481402d25952acbbcada42
+  docs/models/components/pazesessionrequest.md:
+    id: 9a1d768d6d87
+    last_write_checksum: sha1:c9416c18262f2613297c6cddbdad5cacb8ce52c4
+    pristine_git_object: 0f4d0cf24930db47ab6db9331171f3a69bbd9ab5
+  docs/models/components/pazewebsession.md:
+    id: 219f5de5a100
+    last_write_checksum: sha1:9785edaf91c6ebaf0093594f9a0e5bfb91c5f963
+    pristine_git_object: 5eed366a9fb094c9ab80a6bb2773a2fd4f0059fc
   docs/models/components/plaidpaymentmethodcreate.md:
     id: 78c11e55808c
     last_write_checksum: sha1:b75d47f3b0e2447bcfc28379032a7d4fe7ba54bd
@@ -1212,6 +1224,10 @@ trackedFiles:
     id: 27844f391590
     last_write_checksum: sha1:6b4351dae7cb97ff3ce069dd3c350a4493ecc318
     pristine_git_object: 787ad305badda573f11e59f31a4b634a04bd7347
+  docs/models/components/source.md:
+    id: 11d9227b9692
+    last_write_checksum: sha1:fbcbdaf03bcb1059d8c39c8348381cee4a50fc2c
+    pristine_git_object: 0736beed9bc094b7c530d5e2a77e923739c9ca4f
   docs/models/components/spec.md:
     id: 26cc364d1057
     last_write_checksum: sha1:dd57dd0450b6a6d9fb5a8a0c3586ac73cadcbbef
@@ -1668,6 +1684,14 @@ trackedFiles:
     id: b225c160c1a7
     last_write_checksum: sha1:e49805704869d1d1a0377dcd99c72bcecb6432de
     pristine_git_object: 31d51755982b47a7d3b31a0ed3203f0116b747c0
+  docs/models/operations/createpazedigitalwalletsessionglobals.md:
+    id: b2aaa7e6beb6
+    last_write_checksum: sha1:6cd0f77e73450375555a02ba6b264cc89927595b
+    pristine_git_object: 3c9b6aef43422e5d11e3c0b9e8c1d0eb5ba10838
+  docs/models/operations/createpazedigitalwalletsessionrequest.md:
+    id: 783a289651cf
+    last_write_checksum: sha1:e8d026d622ca867589c1053eef1e0ab9d91dc97f
+    pristine_git_object: 569bb1e668e08c08a9a4b0333484dc45cd0bf90f
   docs/models/operations/createreportexecutionurlglobals.md:
     id: 48b91c4c4341
     last_write_checksum: sha1:ed99018578d7594d9de80223914dbb1b3da15503
@@ -2236,6 +2260,10 @@ trackedFiles:
     id: 4b795d4a129c
     last_write_checksum: sha1:77c6bf04e4fd74714d32fbf026bbad02fc80a999
     pristine_git_object: 85fa4701c92ecf1afb77d27fdfa8b647d33e94af
+  docs/models/operations/responsecreatepazedigitalwalletsession.md:
+    id: 9d1d6533b583
+    last_write_checksum: sha1:d8afbdeb6b0d51e00fac51ae6e514468e3e21d31
+    pristine_git_object: 9ac2d02bda4aae6c9d9da294d135f196f559e43c
   docs/models/operations/resumepaymentmethodnetworktokenglobals.md:
     id: 8498b23c0d82
     last_write_checksum: sha1:d2a268a75e44ee175564b163f4f5239e7399a7db
@@ -2474,8 +2502,8 @@ trackedFiles:
     pristine_git_object: 6ad0dd8c1f6f2badf77710b07b81081d81bae424
   docs/sdks/sessions/README.md:
     id: 57ad62844f79
-    last_write_checksum: sha1:ab2418adff6f63de2033c399a3647dd701eae2b9
-    pristine_git_object: cdf4317d118c93efec223afcbd88cc2600aefe58
+    last_write_checksum: sha1:56a43db1c116170fff7f3d8349285b87db7cda56
+    pristine_git_object: 5cb07c406954f224a2822f857d94816d02ed744f
   docs/sdks/settlements/README.md:
     id: c0b0673bed80
     last_write_checksum: sha1:803fdb4ec70a7aa565396dad8f6e06c9d53f4b90
@@ -2526,8 +2554,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:14bc0016898b63985330125023dd116eee884615
-    pristine_git_object: 3f98ff261d8e7927bf2358ebb0174396c9e45d63
+    last_write_checksum: sha1:a7fdb865ae718f6edff1c3cd950bed362c8e4dc1
+    pristine_git_object: 6fc4f8f2fa790ea99957dcbb7bd30f4ee8d33479
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3472,10 +3500,22 @@ trackedFiles:
     id: e9da04580b89
     last_write_checksum: sha1:9e8918b823b16c9da957606ccc728f7298da8c82
     pristine_git_object: ca760e61671dce5562bdc1d627930e253582501d
+  models/components/pazemobilesession.go:
+    id: 97e44dde9427
+    last_write_checksum: sha1:77cc06b21821560eda37ceaad17144861a8a1d15
+    pristine_git_object: d67b0dbd48be503be4361497c0ae63c6607c7690
   models/components/pazepaymentmethodcreate.go:
     id: a5b3e822c3a3
     last_write_checksum: sha1:6b0a014c9e8bcaa91256768f90154ba8163d96ce
     pristine_git_object: 2211f9ebd9b2166baf48f81fd0da54e222e38447
+  models/components/pazesessionrequest.go:
+    id: b5799fe259e2
+    last_write_checksum: sha1:b11c68ab32563d5eda980b8f7964da5c3874c87c
+    pristine_git_object: 18dee89addbc6519666e6b94e510a75120baf5d5
+  models/components/pazewebsession.go:
+    id: 7e47ae9f6cd8
+    last_write_checksum: sha1:4c935a688dafc6cce8e2892777233fb5cdec23f5
+    pristine_git_object: 211989285675b606ecaf58f0c399b88efc8f6e1d
   models/components/plaidpaymentmethodcreate.go:
     id: a4101b24972e
     last_write_checksum: sha1:760760d59f18198b07c50613c959ceb23436a4be
@@ -3952,6 +3992,10 @@ trackedFiles:
     id: 96ed620d22b9
     last_write_checksum: sha1:5c42ce9cfed629462718aea1c728df3f56e16933
     pristine_git_object: 86f7239f49f31fa0e5852e352d93e7c25bc7919d
+  models/operations/createpazedigitalwalletsession.go:
+    id: 906e8389903d
+    last_write_checksum: sha1:2405cdef6bd34f5727b2901f7829e405d3494c4e
+    pristine_git_object: 2e05973e629c7ca67e88f637f2e0012246fc3087
   models/operations/createreportexecutionurl.go:
     id: bb2ccbb3a0f9
     last_write_checksum: sha1:13c553784ac2b76f652e4b8c43fc7817fd777752
@@ -4334,8 +4378,8 @@ trackedFiles:
     pristine_git_object: 5b3dc7c122d8ab08905485342d7474f8f163888d
   sessions.go:
     id: 8c9f6fb78f3e
-    last_write_checksum: sha1:252e65201c12f2626226b06be60634364a12d106
-    pristine_git_object: adf053015aca4cc6dc5ac8c1b08ccfa8e8d338c6
+    last_write_checksum: sha1:24d2b96f55ed89e5ce17c8bef7a220f9c56f2c14
+    pristine_git_object: b69284d7237313df13cc2107b85c89b61d2541c2
   settlements.go:
     id: b2d865202d0d
     last_write_checksum: sha1:302ecc008fa661c82e28b7eb3d98f25bf2fee9ad
@@ -8038,11 +8082,42 @@ examples:
           application/json: {"type": "error", "code": "bad_gateway", "status": 502, "message": "Request could not be processed"}
         "504":
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
+  create_paze_digital_wallet_session:
+    speakeasy-default-create-paze-digital-wallet-session:
+      requestBody:
+        application/json: {"source": "web"}
+      responses:
+        "200":
+          application/json: {"id": "W8GT9RLCNME754Z7025613H3PDM2T4HF2CSAOi9w2kkP3D4S0", "name": "ACME", "profileId": "550e8400-e29b-41d4-a716-446655440000", "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...", "sessionId": "550e8400-e29b-41d4-a716-446655440000"}
+        "400":
+          application/json: {"type": "error", "code": "bad_request", "status": 400, "message": "Request failed validation"}
+        "401":
+          application/json: {"type": "error", "code": "unauthorized", "status": 401, "message": "No valid API authentication found"}
+        "403":
+          application/json: {"type": "error", "code": "forbidden", "status": 403, "message": "Request failed validation"}
+        "404":
+          application/json: {"type": "error", "code": "not_found", "status": 404, "message": "The resource could not be found"}
+        "405":
+          application/json: {"type": "error", "code": "method_not_allowed", "status": 405, "message": "Method Not Allowed"}
+        "409":
+          application/json: {"type": "error", "code": "duplicate_record", "status": 409, "message": "Request failed validation"}
+        "422":
+          application/json: {}
+        "425":
+          application/json: {"type": "error", "code": "too_early", "status": 425, "message": "Request failed validation"}
+        "429":
+          application/json: {"type": "error", "code": "too_many_requests", "status": 429, "message": "Request failed validation"}
+        "500":
+          application/json: {"type": "error", "code": "server_error", "status": 500, "message": "Request could not be processed"}
+        "502":
+          application/json: {"type": "error", "code": "bad_gateway", "status": 502, "message": "Request could not be processed"}
+        "504":
+          application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Go SDK Changes:
-  * `Gr4vy.Transactions.Capture()`:  `response.union(TransactionCapture).ExternalIdentifier` **Added**
+  * `Gr4vy.DigitalWallets.Sessions.Paze()`: **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
