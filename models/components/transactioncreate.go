@@ -497,6 +497,8 @@ type TransactionCreate struct {
 	StatementDescriptor *StatementDescriptor `json:"statement_descriptor,omitempty"`
 	// A scheme's transaction identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction. If not provided, and a qualifying customer initiated transaction has been previously made with the stored payment method, then Gr4vy will populate this value with the identifier returned for that transaction. This field is also know as the Visa Transaction Identifier, or Mastercard Trace ID.
 	PreviousSchemeTransactionID *string `json:"previous_scheme_transaction_id,omitempty"`
+	// A scheme's transaction link identifier to use in connecting a merchant initiated transaction to a previous customer initiated transaction. If not provided, and a qualifying customer initiated transaction has been previously made with the stored payment method, then Gr4vy will populate this value with the identifier returned for that transaction. This field is also know as the Mastercard Transaction Link ID (TLID).
+	PreviousTransactionLinkID *string `json:"previous_transaction_link_id,omitempty"`
 	// Information about the browser used by the buyer. This can be used by anti-fraud services.
 	BrowserInfo *BrowserInfo `json:"browser_info,omitempty"`
 	// The unique identifier of a set of shipping details stored for the buyer. If provided, the created transaction will include a copy of the details at the point of transaction creation; i.e. it will not be affected by later changes to the detail in the database.
@@ -703,6 +705,13 @@ func (t *TransactionCreate) GetPreviousSchemeTransactionID() *string {
 		return nil
 	}
 	return t.PreviousSchemeTransactionID
+}
+
+func (t *TransactionCreate) GetPreviousTransactionLinkID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PreviousTransactionLinkID
 }
 
 func (t *TransactionCreate) GetBrowserInfo() *BrowserInfo {

@@ -95,6 +95,8 @@ type Transaction struct {
 	StatementDescriptor *StatementDescriptor `json:"statement_descriptor,omitempty"`
 	// An identifier for the transaction used by the scheme itself, when available.
 	SchemeTransactionID *string `json:"scheme_transaction_id,omitempty"`
+	// A transaction link identifier for the transaction used by the scheme itself, when available.
+	TransactionLinkID *string `json:"transaction_link_id,omitempty"`
 	// The 3-D Secure data that was sent to the payment service for the transaction.
 	ThreeDSecure *TransactionThreeDSecureSummary `json:"three_d_secure,omitempty"`
 	// The payment service's unique ID for the transaction.
@@ -455,6 +457,13 @@ func (t *Transaction) GetSchemeTransactionID() *string {
 		return nil
 	}
 	return t.SchemeTransactionID
+}
+
+func (t *Transaction) GetTransactionLinkID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.TransactionLinkID
 }
 
 func (t *Transaction) GetThreeDSecure() *TransactionThreeDSecureSummary {
