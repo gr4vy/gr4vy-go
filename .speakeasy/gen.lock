@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: c16c956710915880b98c55863acfaa87
+  docChecksum: 572af09842334b21dcfeabdab9334589
   docVersion: 1.0.0
   speakeasyVersion: 1.763.3
   generationVersion: 2.884.7
-  releaseVersion: 1.12.87
-  configChecksum: d4edff92005bc9e54cf48df7c8ae5541
+  releaseVersion: 1.12.88
+  configChecksum: 6307dec43b5d5fb7efa116171324a204
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 302ea116-6110-45d6-a3f1-d9fa7c3d8003
-  pristine_commit_hash: eebb48d8d7a1e1b7ba46d75bb2cbfb7eb43f0581
-  pristine_tree_hash: 68a01843b8fea1218bd9f39171fcad455c16db20
+  generation_id: 73f8b7c8-1b81-486d-864c-044bb741760f
+  pristine_commit_hash: 58d6c3d051e6b32fdce3167c2d3bd2fc8424082f
+  pristine_tree_hash: a78845c244d9937df45e58152d3885f3e4c2efc3
 features:
   go:
     additionalDependencies: 0.1.0
@@ -864,6 +864,18 @@ trackedFiles:
     id: 49ae7af24e14
     last_write_checksum: sha1:35c063fa8d648022f6e96685f87265daba6c7b64
     pristine_git_object: 2ab58786d938fef66bcf7e301e3fe61ce963f096
+  docs/models/components/paymentcardbrand.md:
+    id: f7b1e85be2d4
+    last_write_checksum: sha1:c0a1a4a4a644ef16bb7eaf41d2c95ccc23eaed96
+    pristine_git_object: 01f74b1c57c85fcd38966bef99c3fb7a71f6bc2d
+  docs/models/components/paymentcardnetwork.md:
+    id: 7d4e15ddbc53
+    last_write_checksum: sha1:d1e3a5251e7d74bcdbd85cc7d9f8e1acb8141157
+    pristine_git_object: 9f90df9d79be564e9983e39d4cb5865cc660e084
+  docs/models/components/paymentcardtype.md:
+    id: bfd34aa1dda1
+    last_write_checksum: sha1:4c536f0e368ddff2c97a574ea974a8a68614762c
+    pristine_git_object: 1df93be674e5210b14395aa7c690b09eeb9e49ef
   docs/models/components/paymentlink.md:
     id: 3701ae6243d3
     last_write_checksum: sha1:190df080ee622b0eebfd6e1b1d65305c2fca2a16
@@ -1040,6 +1052,30 @@ trackedFiles:
     id: 6f021c9e8557
     last_write_checksum: sha1:e28e135be4bb6be4f87fe791281a656d6a88960f
     pristine_git_object: 56d6dd63adb39d1e6dd7cc8720147890c367d961
+  docs/models/components/pazebillingaddress.md:
+    id: b5943124ad31
+    last_write_checksum: sha1:ab355d73d4fbe83e9bafc4ad31c7716bd0ff3f99
+    pristine_git_object: 73c468ca8a4af4a2c2a073ccc2333a237b09c8d9
+  docs/models/components/pazeconsumer.md:
+    id: f255e37b3cc3
+    last_write_checksum: sha1:e21d62d7295c034637aea5ce45f8118e22921a80
+    pristine_git_object: 17bbdc7a19877ee237b796241e559a6ea8b066bf
+  docs/models/components/pazedeliverycontactdetails.md:
+    id: a5314dcda836
+    last_write_checksum: sha1:29531cbcad8ebd6eeaa130da913386304a41b06e
+    pristine_git_object: c2b6b1968ed0213192036bfab479c4eb02142c0a
+  docs/models/components/pazedigitalcarddata.md:
+    id: 1c0ebd837869
+    last_write_checksum: sha1:dca2079d15e3c114b333fc7ae952664a2e13ed26
+    pristine_git_object: e3e9e3c2d8e010053722f3d9df5a0c3c5691bdf1
+  docs/models/components/pazemaskedcard.md:
+    id: 34fd8ba9dd3b
+    last_write_checksum: sha1:c544044e6045f28c89feccd94c5b5fe5d915064a
+    pristine_git_object: 38497455fdb3c70064e6ad9bc537c923b71d7512
+  docs/models/components/pazemobilenumber.md:
+    id: 1b28a993e928
+    last_write_checksum: sha1:7518edeacee7a8896047966b4563dd2e227fa901
+    pristine_git_object: 1a2914562a0dc30d4c45fb7996feb5d50d02b13d
   docs/models/components/pazemobilesession.md:
     id: 239ecc5f052c
     last_write_checksum: sha1:049595b3d95751e8c5f286889a5f9765d782fd1c
@@ -1052,6 +1088,22 @@ trackedFiles:
     id: 9a1d768d6d87
     last_write_checksum: sha1:c9416c18262f2613297c6cddbdad5cacb8ce52c4
     pristine_git_object: 0f4d0cf24930db47ab6db9331171f3a69bbd9ab5
+  docs/models/components/pazesessionreview.md:
+    id: 292a9295b6de
+    last_write_checksum: sha1:ce361402f2da94b45c010a8e9006f212f3cb51ad
+    pristine_git_object: 77851a9e143de68cb47661e8d60b597810e1f044
+  docs/models/components/pazesessionreviewlinks.md:
+    id: 9083e6dbc770
+    last_write_checksum: sha1:488721cfb9de20c84a8dac2ae66abd686c9b0f95
+    pristine_git_object: fa175fe1d8f7f580d5ec38dd0fdf956fa813c680
+  docs/models/components/pazesessionreviewrequest.md:
+    id: b18df585b7dc
+    last_write_checksum: sha1:0c42f0609d110b789129c27e27c837d502b91eaa
+    pristine_git_object: 1e8b63c0e0a33feacea04dd4c8a78b6aff15c68b
+  docs/models/components/pazeshippingaddress.md:
+    id: 1b3a8927bcf1
+    last_write_checksum: sha1:5d2a973d8be3a4867d8a31d42c62865c69d11cf4
+    pristine_git_object: e246c39dc5dc2715ae8e16de0335e5732127dfae
   docs/models/components/pazewebsession.md:
     id: 219f5de5a100
     last_write_checksum: sha1:9785edaf91c6ebaf0093594f9a0e5bfb91c5f963
@@ -2272,6 +2324,14 @@ trackedFiles:
     id: 51a80bdd4ee7
     last_write_checksum: sha1:ac0885d4211ddb0235c8060c1520f501aea6f943
     pristine_git_object: 877cb5697d42cc1894716dd6b7aac7aebaaa3809
+  docs/models/operations/reviewpazemobilesessionglobals.md:
+    id: 8de3f1891dfd
+    last_write_checksum: sha1:c752f171d8750bba0bcba27f391540ef01af5c1e
+    pristine_git_object: b9274db0d40e85a622b226c3fcabac66d4098aa1
+  docs/models/operations/reviewpazemobilesessionrequest.md:
+    id: e8dfdec3a3be
+    last_write_checksum: sha1:b1a57661f1e0de99414bd7e4e682d93a58e482fd
+    pristine_git_object: 8853ec2e60be01b225133fb0e2c2d67148f40133
   docs/models/operations/suspendpaymentmethodnetworktokenglobals.md:
     id: d74821bd1eef
     last_write_checksum: sha1:9891a1a9181a6f33cfd7e04bd814576edf072a01
@@ -2502,8 +2562,8 @@ trackedFiles:
     pristine_git_object: 6ad0dd8c1f6f2badf77710b07b81081d81bae424
   docs/sdks/sessions/README.md:
     id: 57ad62844f79
-    last_write_checksum: sha1:56a43db1c116170fff7f3d8349285b87db7cda56
-    pristine_git_object: 5cb07c406954f224a2822f857d94816d02ed744f
+    last_write_checksum: sha1:a765c2a648c806794b72a59b221761cfc50bf79b
+    pristine_git_object: d8607879a17515ecf044488315b45d16f3609a1d
   docs/sdks/settlements/README.md:
     id: c0b0673bed80
     last_write_checksum: sha1:803fdb4ec70a7aa565396dad8f6e06c9d53f4b90
@@ -2554,8 +2614,8 @@ trackedFiles:
     pristine_git_object: 99e8546fc00863fe5519bf5b0719ca2fced1f0dc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:b5a8d1cb90018e25e99bac3f42a085c5b4b5861e
-    pristine_git_object: 7021244692bd68ee5b91df6724f9cd10a1abc69e
+    last_write_checksum: sha1:ded6aa4dd0b650ebb13d42a816a1ae66b5d26178
+    pristine_git_object: 4d6532dc9e3a30bf55ff0e54439087246527a84a
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3500,6 +3560,30 @@ trackedFiles:
     id: e9da04580b89
     last_write_checksum: sha1:9e8918b823b16c9da957606ccc728f7298da8c82
     pristine_git_object: ca760e61671dce5562bdc1d627930e253582501d
+  models/components/pazebillingaddress.go:
+    id: ac53c915586a
+    last_write_checksum: sha1:ae2a8820aeebb85c764a9c10a1fc1693af6319ff
+    pristine_git_object: d62b2a29188c5757e9c9cf8163ad9aec35e423de
+  models/components/pazeconsumer.go:
+    id: d41b5c842878
+    last_write_checksum: sha1:796ba7c1b96ceb488aea79f5e6f18925879e1873
+    pristine_git_object: 3e6f9641492fad2364030c4517ce7e9982777588
+  models/components/pazedeliverycontactdetails.go:
+    id: ed5931f7147e
+    last_write_checksum: sha1:8644e5524f5df3445a9cf947f94f62fa2688ffe0
+    pristine_git_object: 3013c817e10740e1f7f4209d3e5fbdde9d39ea5c
+  models/components/pazedigitalcarddata.go:
+    id: d77667ba192e
+    last_write_checksum: sha1:c4e9876422adf27c0e177d6d0afe72d35ccd6b21
+    pristine_git_object: 3710f6acee2abd3506fb6b1748f1ad97bb8e551b
+  models/components/pazemaskedcard.go:
+    id: c6acdd5c54cc
+    last_write_checksum: sha1:fa08b5ef4f8d48dda78c648a23f8ee90b67bf90c
+    pristine_git_object: 22c73c557ed3f440967184d1aec9df56b570964c
+  models/components/pazemobilenumber.go:
+    id: 3d779a68e73a
+    last_write_checksum: sha1:fa7c0286477eaebfe1e4aa6e093b81bd6e4783db
+    pristine_git_object: 89ccb4eb451e25cdb80d122c04d9fb901a1becd4
   models/components/pazemobilesession.go:
     id: 97e44dde9427
     last_write_checksum: sha1:77cc06b21821560eda37ceaad17144861a8a1d15
@@ -3512,6 +3596,22 @@ trackedFiles:
     id: b5799fe259e2
     last_write_checksum: sha1:b11c68ab32563d5eda980b8f7964da5c3874c87c
     pristine_git_object: 18dee89addbc6519666e6b94e510a75120baf5d5
+  models/components/pazesessionreview.go:
+    id: 5c6c6568b535
+    last_write_checksum: sha1:5ad5b7b91fb8f88a7c7b997b9dff599b2f857486
+    pristine_git_object: 5124d0bf33fc7518a58b3930c647f35e3cc162b7
+  models/components/pazesessionreviewlinks.go:
+    id: d4aaf2135661
+    last_write_checksum: sha1:c1644be0173641af2c586aa18f37cab490b6aa21
+    pristine_git_object: a8116853561b6b87b6b3775386bb4cf77510d2de
+  models/components/pazesessionreviewrequest.go:
+    id: 6dc28344074e
+    last_write_checksum: sha1:8b70b4c2a28a9d46e5e18c9e2bac2a5ee7e83b4e
+    pristine_git_object: 7c0ccf9997d248e6b68ef555d3493e4d7af3600b
+  models/components/pazeshippingaddress.go:
+    id: e2a6eba32075
+    last_write_checksum: sha1:a9ba0354d5bdb7ac81763a52e6c78554b8d4f7af
+    pristine_git_object: d97c55a49cafaad9e5c931e44c88d2c764929333
   models/components/pazewebsession.go:
     id: 7e47ae9f6cd8
     last_write_checksum: sha1:4c935a688dafc6cce8e2892777233fb5cdec23f5
@@ -4260,6 +4360,10 @@ trackedFiles:
     id: d08141de376c
     last_write_checksum: sha1:b1c009ffa3b485df69a0269901857fe4921f722f
     pristine_git_object: 9a1f25a64b805118297b74b44a0c68e57f00cdba
+  models/operations/reviewpazemobilesession.go:
+    id: 16cf9ddcd8e1
+    last_write_checksum: sha1:8ed47b147009584278a89ff4bd5b7bbe6d1f5ce3
+    pristine_git_object: 1d4555b1f31eaff0ae6375f87a3b1eba7d7f67d3
   models/operations/suspendpaymentmethodnetworktoken.go:
     id: dbda97399be2
     last_write_checksum: sha1:b129b8e7b9913dc47d24fe7ca6c5230a08b0c209
@@ -4378,8 +4482,8 @@ trackedFiles:
     pristine_git_object: 5b3dc7c122d8ab08905485342d7474f8f163888d
   sessions.go:
     id: 8c9f6fb78f3e
-    last_write_checksum: sha1:24d2b96f55ed89e5ce17c8bef7a220f9c56f2c14
-    pristine_git_object: b69284d7237313df13cc2107b85c89b61d2541c2
+    last_write_checksum: sha1:2773ed54350db71b91a7590c070de9f55ae2c36c
+    pristine_git_object: 75373bc6d24a1423b13e87086e694ce8e45729a7
   settlements.go:
     id: b2d865202d0d
     last_write_checksum: sha1:302ecc008fa661c82e28b7eb3d98f25bf2fee9ad
@@ -8113,15 +8217,42 @@ examples:
           application/json: {"type": "error", "code": "bad_gateway", "status": 502, "message": "Request could not be processed"}
         "504":
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
+  review_paze_mobile_session:
+    speakeasy-default-review-paze-mobile-session:
+      requestBody:
+        application/json: {"sessionId": "7c1cba03-d20e-4a3f-9d77-e5dc23a39ac2", "code": "eyJhdWQiOm51bGwsImtpZCI6IjE3...", "accessToken": "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9..."}
+      responses:
+        "200":
+          application/json: {"consumer": {"firstName": "Team", "lastName": "Integrations", "fullName": "Team Integrations", "countryCode": "US", "languageCode": "EN", "emailAddress": "integrations@gr4vy.com", "mobileNumber": {"countryCode": "1", "phoneNumber": "3213213211"}}, "shippingAddress": null, "maskedCard": {"panLastFour": "2121", "paymentAccountReference": "V0010013023108318841413393850", "panExpirationMonth": "05", "panExpirationYear": "2032", "paymentCardDescriptor": "Visa Hero Card", "paymentCardType": "CREDIT", "paymentCardBrand": "VISA", "paymentCardNetwork": "VISA", "digitalCardData": {"artUri": "https://sandbox.assets.vims.visa.com/vims/cardart/8f64614def1a41d39ea8acae4616bf6f_imageC", "artHeight": 50, "artWidth": 80}, "billingAddress": {"name": "<value>", "line1": "<value>", "line2": "<value>", "line3": "<value>", "city": "Kutchmouth", "state": "Iowa", "zip": "23324-5917", "countryCode": "MU"}}, "links": {"CHANGE_CARD": "https://checkout.wallet.uat.earlywarning.io/...", "CHANGE_SHIPPING_ADDRESS": "https://checkout.wallet.uat.earlywarning.io/..."}, "code": "eyJhdWQiOm51bGwsImtpZCI6IjE3..."}
+        "400":
+          application/json: {"type": "error", "code": "bad_request", "status": 400, "message": "Request failed validation"}
+        "401":
+          application/json: {"type": "error", "code": "unauthorized", "status": 401, "message": "No valid API authentication found"}
+        "403":
+          application/json: {"type": "error", "code": "forbidden", "status": 403, "message": "Request failed validation"}
+        "404":
+          application/json: {"type": "error", "code": "not_found", "status": 404, "message": "The resource could not be found"}
+        "405":
+          application/json: {"type": "error", "code": "method_not_allowed", "status": 405, "message": "Method Not Allowed"}
+        "409":
+          application/json: {"type": "error", "code": "duplicate_record", "status": 409, "message": "Request failed validation"}
+        "422":
+          application/json: {}
+        "425":
+          application/json: {"type": "error", "code": "too_early", "status": 425, "message": "Request failed validation"}
+        "429":
+          application/json: {"type": "error", "code": "too_many_requests", "status": 429, "message": "Request failed validation"}
+        "500":
+          application/json: {"type": "error", "code": "server_error", "status": 500, "message": "Request could not be processed"}
+        "502":
+          application/json: {"type": "error", "code": "bad_gateway", "status": 502, "message": "Request could not be processed"}
+        "504":
+          application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Go SDK Changes:
-  * `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].TransactionLinkId` **Added**
-  * `Gr4vy.PaymentMethods.List()`:  `response.Items[].TransactionLinkId` **Added**
-  * `Gr4vy.PaymentMethods.Create()`:  `response.TransactionLinkId` **Added**
-  * `Gr4vy.PaymentMethods.Get()`:  `response.TransactionLinkId` **Added**
-  * `Gr4vy.PaymentMethods.Update()`:  `response.TransactionLinkId` **Added**
+  * `Gr4vy.DigitalWallets.Sessions.PazeMobileSessionReview()`: **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
