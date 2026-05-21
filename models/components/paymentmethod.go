@@ -56,6 +56,8 @@ type PaymentMethod struct {
 	SchemeTransactionID *string `json:"scheme_transaction_id"`
 	// The scheme associated with scheme_transaction_id. Only applies to card payments.
 	SchemeTransactionIDScheme *CardScheme `json:"scheme_transaction_id_scheme"`
+	// The transaction link identifier stored against this payment method.
+	TransactionLinkID *string `json:"transaction_link_id,omitempty"`
 	// The optional buyer for which this payment method has been stored.
 	Buyer *Buyer `json:"buyer,omitempty"`
 	// The merchant reference that can be used to match the payment method against your own records.
@@ -227,6 +229,13 @@ func (p *PaymentMethod) GetSchemeTransactionIDScheme() *CardScheme {
 		return nil
 	}
 	return p.SchemeTransactionIDScheme
+}
+
+func (p *PaymentMethod) GetTransactionLinkID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TransactionLinkID
 }
 
 func (p *PaymentMethod) GetBuyer() *Buyer {
