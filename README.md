@@ -300,6 +300,7 @@ func main() {
 
 * [GooglePay](docs/sdks/sessions/README.md#googlepay) - Create a Google Pay session
 * [ApplePay](docs/sdks/sessions/README.md#applepay) - Create a Apple Pay session
+* [PazeMobileSessionCreate](docs/sdks/sessions/README.md#pazemobilesessioncreate) - Create a Paze mobile session
 * [Paze](docs/sdks/sessions/README.md#paze) - Create a Paze session
 * [PazeMobileSessionReview](docs/sdks/sessions/README.md#pazemobilesessionreview) - Review a Paze session
 * [ClickToPay](docs/sdks/sessions/README.md#clicktopay) - Create a Click to Pay session
