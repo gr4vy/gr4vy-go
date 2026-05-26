@@ -13,6 +13,8 @@ type DefinitionField struct {
 	Format   DefinitionFieldFormat `json:"format"`
 	// Defines if this field is secret. When `true` the field's value is not returned when querying the payment service information.
 	Secret bool `json:"secret"`
+	// Defines if this field can be verified through the verify credentials button.
+	Verifiable bool `json:"verifiable"`
 }
 
 func (d *DefinitionField) GetKey() string {
@@ -48,4 +50,11 @@ func (d *DefinitionField) GetSecret() bool {
 		return false
 	}
 	return d.Secret
+}
+
+func (d *DefinitionField) GetVerifiable() bool {
+	if d == nil {
+		return false
+	}
+	return d.Verifiable
 }
