@@ -28,7 +28,6 @@ custom := components.Method("custom_value")
 | `MethodBacs`             | bacs                     |
 | `MethodBancontact`       | bancontact               |
 | `MethodBank`             | bank                     |
-| `MethodBanked`           | banked                   |
 | `MethodBcp`              | bcp                      |
 | `MethodBecs`             | becs                     |
 | `MethodBitpay`           | bitpay                   |
