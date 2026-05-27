@@ -28,7 +28,6 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodArcuspaynetwork` | arcuspaynetwork                                    |
 | `RedirectPaymentMethodCreateMethodBacs`            | bacs                                               |
 | `RedirectPaymentMethodCreateMethodBancontact`      | bancontact                                         |
-| `RedirectPaymentMethodCreateMethodBanked`          | banked                                             |
 | `RedirectPaymentMethodCreateMethodBcp`             | bcp                                                |
 | `RedirectPaymentMethodCreateMethodBecs`            | becs                                               |
 | `RedirectPaymentMethodCreateMethodBitpay`          | bitpay                                             |
