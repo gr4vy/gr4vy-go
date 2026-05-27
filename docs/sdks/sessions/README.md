@@ -9,6 +9,7 @@
 * [PazeMobileSessionCreate](#pazemobilesessioncreate) - Create a Paze mobile session
 * [Paze](#paze) - Create a Paze session
 * [PazeMobileSessionReview](#pazemobilesessionreview) - Review a Paze session
+* [PazeMobileSessionComplete](#pazemobilesessioncomplete) - Complete a Paze session
 * [ClickToPay](#clicktopay) - Create a Click to Pay session
 
 ## GooglePay
@@ -351,6 +352,78 @@ func main() {
 ### Response
 
 **[*components.PazeSessionReview](../../models/components/pazesessionreview.md), error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.Error400            | 400                           | application/json              |
+| apierrors.Error401            | 401                           | application/json              |
+| apierrors.Error403            | 403                           | application/json              |
+| apierrors.Error404            | 404                           | application/json              |
+| apierrors.Error405            | 405                           | application/json              |
+| apierrors.Error409            | 409                           | application/json              |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.Error425            | 425                           | application/json              |
+| apierrors.Error429            | 429                           | application/json              |
+| apierrors.Error500            | 500                           | application/json              |
+| apierrors.Error502            | 502                           | application/json              |
+| apierrors.Error504            | 504                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## PazeMobileSessionComplete
+
+Complete a Paze checkout session and retrieve the secure payload required to settle the payment.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="complete_paze_mobile_session" method="post" path="/digital-wallets/paze/session/complete" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/components"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("<id>"),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+    )
+
+    res, err := s.DigitalWallets.Sessions.PazeMobileSessionComplete(ctx, components.PazeSessionCompleteRequest{
+        SessionID: "7c1cba03-d20e-4a3f-9d77-e5dc23a39ac2",
+        Code: "eyJhdWQiOm51bGwsImtpZCI6IjE3...",
+        AccessToken: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
+        TransactionType: components.PazeSessionCompleteRequestTransactiontypePurchase,
+    })
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                                                      | Type                                                                                           | Required                                                                                       | Description                                                                                    |
+| ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- | ---------------------------------------------------------------------------------------------- |
+| `ctx`                                                                                          | [context.Context](https://pkg.go.dev/context#Context)                                          | :heavy_check_mark:                                                                             | The context to use for the request.                                                            |
+| `pazeSessionCompleteRequest`                                                                   | [components.PazeSessionCompleteRequest](../../models/components/pazesessioncompleterequest.md) | :heavy_check_mark:                                                                             | N/A                                                                                            |
+| `merchantAccountID`                                                                            | `*string`                                                                                      | :heavy_minus_sign:                                                                             | The ID of the merchant account to use for this request.                                        |
+| `opts`                                                                                         | [][operations.Option](../../models/operations/option.md)                                       | :heavy_minus_sign:                                                                             | The options for this request.                                                                  |
+
+### Response
+
+**[*components.PazeSessionComplete](../../models/components/pazesessioncomplete.md), error**
 
 ### Errors
 

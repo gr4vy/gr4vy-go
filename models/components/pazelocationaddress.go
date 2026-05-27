@@ -2,7 +2,9 @@
 
 package components
 
-type PazeShippingAddress struct {
+type PazeLocationAddress struct {
+	// Name of the organization or entity at the address.
+	Name *string `json:"name,omitempty"`
 	// Line 1 of the address.
 	Line1 string `json:"line1"`
 	// Line 2 of the address.
@@ -16,62 +18,61 @@ type PazeShippingAddress struct {
 	// Postal code.
 	Zip string `json:"zip"`
 	// ISO 3166-1 alpha-2 country code.
-	CountryCode            string                      `json:"countryCode"`
-	DeliveryContactDetails *PazeDeliveryContactDetails `json:"deliveryContactDetails"`
+	CountryCode string `json:"countryCode"`
 }
 
-func (p *PazeShippingAddress) GetLine1() string {
+func (p *PazeLocationAddress) GetName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Name
+}
+
+func (p *PazeLocationAddress) GetLine1() string {
 	if p == nil {
 		return ""
 	}
 	return p.Line1
 }
 
-func (p *PazeShippingAddress) GetLine2() *string {
+func (p *PazeLocationAddress) GetLine2() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Line2
 }
 
-func (p *PazeShippingAddress) GetLine3() *string {
+func (p *PazeLocationAddress) GetLine3() *string {
 	if p == nil {
 		return nil
 	}
 	return p.Line3
 }
 
-func (p *PazeShippingAddress) GetCity() string {
+func (p *PazeLocationAddress) GetCity() string {
 	if p == nil {
 		return ""
 	}
 	return p.City
 }
 
-func (p *PazeShippingAddress) GetState() string {
+func (p *PazeLocationAddress) GetState() string {
 	if p == nil {
 		return ""
 	}
 	return p.State
 }
 
-func (p *PazeShippingAddress) GetZip() string {
+func (p *PazeLocationAddress) GetZip() string {
 	if p == nil {
 		return ""
 	}
 	return p.Zip
 }
 
-func (p *PazeShippingAddress) GetCountryCode() string {
+func (p *PazeLocationAddress) GetCountryCode() string {
 	if p == nil {
 		return ""
 	}
 	return p.CountryCode
-}
-
-func (p *PazeShippingAddress) GetDeliveryContactDetails() *PazeDeliveryContactDetails {
-	if p == nil {
-		return nil
-	}
-	return p.DeliveryContactDetails
 }
