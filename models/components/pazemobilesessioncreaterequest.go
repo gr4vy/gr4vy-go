@@ -30,20 +30,20 @@ func (e *Intent) IsExact() bool {
 	return false
 }
 
-type TransactionType string
+type PazeMobileSessionCreateRequestTransactionType string
 
 const (
-	TransactionTypePurchase   TransactionType = "PURCHASE"
-	TransactionTypeCardOnFile TransactionType = "CARD_ON_FILE"
-	TransactionTypeBoth       TransactionType = "BOTH"
+	PazeMobileSessionCreateRequestTransactionTypePurchase   PazeMobileSessionCreateRequestTransactionType = "PURCHASE"
+	PazeMobileSessionCreateRequestTransactionTypeCardOnFile PazeMobileSessionCreateRequestTransactionType = "CARD_ON_FILE"
+	PazeMobileSessionCreateRequestTransactionTypeBoth       PazeMobileSessionCreateRequestTransactionType = "BOTH"
 )
 
-func (e TransactionType) ToPointer() *TransactionType {
+func (e PazeMobileSessionCreateRequestTransactionType) ToPointer() *PazeMobileSessionCreateRequestTransactionType {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *TransactionType) IsExact() bool {
+func (e *PazeMobileSessionCreateRequestTransactionType) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "PURCHASE", "CARD_ON_FILE", "BOTH":
@@ -75,20 +75,20 @@ func (e *ShippingPreference) IsExact() bool {
 	return false
 }
 
-type BillingPreference string
+type PazeMobileSessionCreateRequestBillingPreference string
 
 const (
-	BillingPreferenceAll        BillingPreference = "ALL"
-	BillingPreferenceZipCountry BillingPreference = "ZIP_COUNTRY"
-	BillingPreferenceNone       BillingPreference = "NONE"
+	PazeMobileSessionCreateRequestBillingPreferenceAll        PazeMobileSessionCreateRequestBillingPreference = "ALL"
+	PazeMobileSessionCreateRequestBillingPreferenceZipCountry PazeMobileSessionCreateRequestBillingPreference = "ZIP_COUNTRY"
+	PazeMobileSessionCreateRequestBillingPreferenceNone       PazeMobileSessionCreateRequestBillingPreference = "NONE"
 )
 
-func (e BillingPreference) ToPointer() *BillingPreference {
+func (e PazeMobileSessionCreateRequestBillingPreference) ToPointer() *PazeMobileSessionCreateRequestBillingPreference {
 	return &e
 }
 
 // IsExact returns true if the value matches a known enum value, false otherwise.
-func (e *BillingPreference) IsExact() bool {
+func (e *PazeMobileSessionCreateRequestBillingPreference) IsExact() bool {
 	if e != nil {
 		switch *e {
 		case "ALL", "ZIP_COUNTRY", "NONE":
@@ -133,11 +133,11 @@ type PazeMobileSessionCreateRequest struct {
 	// Currency and amount of the transaction. Required when intent is EXPRESS_CHECKOUT.
 	TransactionValue *PazeTransactionValue `json:"transactionValue,omitempty"`
 	// Type of transaction.
-	TransactionType *TransactionType `json:"transactionType,omitempty"`
+	TransactionType *PazeMobileSessionCreateRequestTransactionType `json:"transactionType,omitempty"`
 	// Whether to collect a shipping address from the consumer.
 	ShippingPreference *ShippingPreference `json:"shippingPreference,omitempty"`
 	// Verbosity of billing address required.
-	BillingPreference *BillingPreference `json:"billingPreference,omitempty"`
+	BillingPreference *PazeMobileSessionCreateRequestBillingPreference `json:"billingPreference,omitempty"`
 	// Consumer email address for checkout flow optimization.
 	EmailAddress *string `json:"emailAddress,omitempty"`
 	// Consumer phone number for checkout flow optimization.
@@ -205,7 +205,7 @@ func (p *PazeMobileSessionCreateRequest) GetTransactionValue() *PazeTransactionV
 	return p.TransactionValue
 }
 
-func (p *PazeMobileSessionCreateRequest) GetTransactionType() *TransactionType {
+func (p *PazeMobileSessionCreateRequest) GetTransactionType() *PazeMobileSessionCreateRequestTransactionType {
 	if p == nil {
 		return nil
 	}
@@ -219,7 +219,7 @@ func (p *PazeMobileSessionCreateRequest) GetShippingPreference() *ShippingPrefer
 	return p.ShippingPreference
 }
 
-func (p *PazeMobileSessionCreateRequest) GetBillingPreference() *BillingPreference {
+func (p *PazeMobileSessionCreateRequest) GetBillingPreference() *PazeMobileSessionCreateRequestBillingPreference {
 	if p == nil {
 		return nil
 	}

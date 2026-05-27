@@ -4,13 +4,13 @@ package components
 
 type PazeBillingAddress struct {
 	// Name of the organization or entity at the address.
-	Name *string `json:"name"`
+	Name *string `json:"name,omitempty"`
 	// Line 1 of the address.
 	Line1 string `json:"line1"`
 	// Line 2 of the address.
-	Line2 *string `json:"line2"`
+	Line2 *string `json:"line2,omitempty"`
 	// Line 3 of the address.
-	Line3 *string `json:"line3"`
+	Line3 *string `json:"line3,omitempty"`
 	// City.
 	City string `json:"city"`
 	// State or region.
@@ -18,7 +18,7 @@ type PazeBillingAddress struct {
 	// Postal code.
 	Zip string `json:"zip"`
 	// ISO 3166-1 alpha-2 country code.
-	CountryCode *string `json:"countryCode"`
+	CountryCode *string `json:"countryCode,omitempty"`
 }
 
 func (p *PazeBillingAddress) GetName() *string {
