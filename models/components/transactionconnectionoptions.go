@@ -19,12 +19,16 @@ type TransactionConnectionOptions struct {
 	AdyenGiropay *AdyenOptions `json:"adyen-giropay,omitempty"`
 	// Custom options to be passed to the `adyen-ideal` connector.
 	AdyenIdeal *AdyenOptions `json:"adyen-ideal,omitempty"`
+	// Custom options to be passed to the `adyen-konbini` connector.
+	AdyenKonbini *AdyenOptions `json:"adyen-konbini,omitempty"`
 	// Custom options to be passed to the `adyen-paypay` connector.
 	AdyenPaypay *AdyenOptions `json:"adyen-paypay,omitempty"`
 	// Custom options to be passed to the `adyen-pix` connector.
 	AdyenPix *AdyenPixOptions `json:"adyen-pix,omitempty"`
 	// Custom options to be passed to the `adyen-sepa` connector.
 	AdyenSepa *AdyenSepaOptions `json:"adyen-sepa,omitempty"`
+	// Custom options to be passed to the `adyen-seveneleven` connector.
+	AdyenSeveneleven *AdyenOptions `json:"adyen-seveneleven,omitempty"`
 	// Custom options to be passed to the `adyen-sofort` connector.
 	AdyenSofort *AdyenOptions `json:"adyen-sofort,omitempty"`
 	// Custom options to be passed to the `adyen-swish` connector.
@@ -171,6 +175,13 @@ func (t *TransactionConnectionOptions) GetAdyenIdeal() *AdyenOptions {
 	return t.AdyenIdeal
 }
 
+func (t *TransactionConnectionOptions) GetAdyenKonbini() *AdyenOptions {
+	if t == nil {
+		return nil
+	}
+	return t.AdyenKonbini
+}
+
 func (t *TransactionConnectionOptions) GetAdyenPaypay() *AdyenOptions {
 	if t == nil {
 		return nil
@@ -190,6 +201,13 @@ func (t *TransactionConnectionOptions) GetAdyenSepa() *AdyenSepaOptions {
 		return nil
 	}
 	return t.AdyenSepa
+}
+
+func (t *TransactionConnectionOptions) GetAdyenSeveneleven() *AdyenOptions {
+	if t == nil {
+		return nil
+	}
+	return t.AdyenSeveneleven
 }
 
 func (t *TransactionConnectionOptions) GetAdyenSofort() *AdyenOptions {
