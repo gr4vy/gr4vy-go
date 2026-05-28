@@ -60,6 +60,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodKcp`             | kcp                                                |
 | `RedirectPaymentMethodCreateMethodKhipu`           | khipu                                              |
 | `RedirectPaymentMethodCreateMethodKlarna`          | klarna                                             |
+| `RedirectPaymentMethodCreateMethodKonbini`         | konbini                                            |
 | `RedirectPaymentMethodCreateMethodLatitude`        | latitude                                           |
 | `RedirectPaymentMethodCreateMethodLatitudeds`      | latitudeds                                         |
 | `RedirectPaymentMethodCreateMethodLaybuy`          | laybuy                                             |
@@ -100,6 +101,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodScalapay`        | scalapay                                           |
 | `RedirectPaymentMethodCreateMethodSepa`            | sepa                                               |
 | `RedirectPaymentMethodCreateMethodServipag`        | servipag                                           |
+| `RedirectPaymentMethodCreateMethodSeveneleven`     | seveneleven                                        |
 | `RedirectPaymentMethodCreateMethodShopeepay`       | shopeepay                                          |
 | `RedirectPaymentMethodCreateMethodSingteldash`     | singteldash                                        |
 | `RedirectPaymentMethodCreateMethodSmartpay`        | smartpay                                           |

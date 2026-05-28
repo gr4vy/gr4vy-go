@@ -66,6 +66,7 @@ custom := components.Method("custom_value")
 | `MethodKcp`              | kcp                      |
 | `MethodKhipu`            | khipu                    |
 | `MethodKlarna`           | klarna                   |
+| `MethodKonbini`          | konbini                  |
 | `MethodLatitude`         | latitude                 |
 | `MethodLatitudeds`       | latitudeds               |
 | `MethodLaybuy`           | laybuy                   |
@@ -109,6 +110,7 @@ custom := components.Method("custom_value")
 | `MethodScalapay`         | scalapay                 |
 | `MethodSepa`             | sepa                     |
 | `MethodServipag`         | servipag                 |
+| `MethodSeveneleven`      | seveneleven              |
 | `MethodShopeepay`        | shopeepay                |
 | `MethodSingteldash`      | singteldash              |
 | `MethodSmartpay`         | smartpay                 |
