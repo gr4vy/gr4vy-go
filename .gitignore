@@ -6,9 +6,7 @@
 **/.speakeasy/logs/
 .speakeasy/reports
 *.pem
-
 # E2E endpoint-reach coverage output
 /coverage/
-
 # Stray compiled binaries from `go build`
 /endpoint_coverage
