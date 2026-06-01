@@ -101,8 +101,9 @@ func SetupMerchant() (*TestMerchant, error) {
 	_, err = merchant.PaymentServices.Create(ctx, components.PaymentServiceCreate{
 		DisplayName:                "E2E mock card",
 		PaymentServiceDefinitionID: "mock-card",
-		AcceptedCurrencies:         []string{"USD"},
-		AcceptedCountries:          []string{"US"},
+		// Cover every currency the property generator can emit (see gen.go).
+		AcceptedCurrencies: []string{"USD", "EUR", "GBP"},
+		AcceptedCountries:  []string{"US", "GB"},
 		Fields: []components.Field{
 			{Key: "merchant_id", Value: account.ID},
 		},

@@ -16,13 +16,13 @@ import (
 // checkout session. This endpoint is keyed by the session id (used from the
 // browser) rather than a bearer token, so it is exercised directly rather than
 // through the SDK, mirroring real front-end usage. It must return 204.
-func putCheckoutSessionFields(sessionID string, paymentMethod map[string]interface{}) error {
+func putCheckoutSessionFields(ctx context.Context, sessionID string, paymentMethod map[string]interface{}) error {
 	url := fmt.Sprintf("%s/checkout/sessions/%s/fields", APIBaseURL(), sessionID)
 	body, err := json.Marshal(map[string]interface{}{"payment_method": paymentMethod})
 	if err != nil {
 		return err
 	}
-	req, err := http.NewRequest(http.MethodPut, url, bytes.NewReader(body))
+	req, err := http.NewRequestWithContext(ctx, http.MethodPut, url, bytes.NewReader(body))
 	if err != nil {
 		return err
 	}
@@ -41,8 +41,8 @@ func putCheckoutSessionFields(sessionID string, paymentMethod map[string]interfa
 }
 
 // PutCard secures a raw card into the checkout session.
-func PutCard(sessionID string) error {
-	return putCheckoutSessionFields(sessionID, map[string]interface{}{
+func PutCard(ctx context.Context, sessionID string) error {
+	return putCheckoutSessionFields(ctx, sessionID, map[string]interface{}{
 		"method":          "card",
 		"number":          ApprovingCardNumber,
 		"expiration_date": CardExpirationDate,
@@ -51,8 +51,8 @@ func PutCard(sessionID string) error {
 }
 
 // PutStoredMethod secures a stored payment-method id into the checkout session.
-func PutStoredMethod(sessionID, paymentMethodID string) error {
-	return putCheckoutSessionFields(sessionID, map[string]interface{}{
+func PutStoredMethod(ctx context.Context, sessionID, paymentMethodID string) error {
+	return putCheckoutSessionFields(ctx, sessionID, map[string]interface{}{
 		"method":        "id",
 		"id":            paymentMethodID,
 		"security_code": CardSecurityCode,
@@ -71,7 +71,7 @@ func Authorize(t TestingT, m *TestMerchant, amount int64, currency string) *comp
 		t.Fatalf("create checkout session: %v", err)
 		return nil
 	}
-	if err := PutCard(session.ID); err != nil {
+	if err := PutCard(ctx, session.ID); err != nil {
 		t.Fatalf("put card fields: %v", err)
 		return nil
 	}

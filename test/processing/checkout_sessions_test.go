@@ -29,7 +29,7 @@ func TestCheckoutSessionLifecycle(t *testing.T) {
 	}
 
 	// Securing the approving card into the session must return 204.
-	if err := harness.PutCard(session.ID); err != nil {
+	if err := harness.PutCard(ctx, session.ID); err != nil {
 		t.Fatalf("put card: %v", err)
 	}
 

@@ -94,6 +94,9 @@ func buildCatalogue(root string) []operation {
 				pendingPath = ""
 			}
 		}
+		if err := scanner.Err(); err != nil {
+			fmt.Fprintf(os.Stderr, "warning: scanning %s stopped early: %v (catalogue may be incomplete)\n", name, err)
+		}
 	}
 	sort.Slice(ops, func(i, j int) bool {
 		if ops[i].Path != ops[j].Path {
@@ -128,6 +131,9 @@ func readCalls(dir string) []operation {
 			if err := json.Unmarshal([]byte(line), &c); err == nil && c.Path != "" {
 				calls = append(calls, operation{Method: strings.ToUpper(c.Method), Path: c.Path})
 			}
+		}
+		if err := scanner.Err(); err != nil {
+			fmt.Fprintf(os.Stderr, "warning: scanning %s stopped early: %v (calls may be dropped)\n", f, err)
 		}
 	}
 	return calls
