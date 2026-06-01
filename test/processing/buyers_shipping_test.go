@@ -22,6 +22,9 @@ func TestBuyerShippingDetailsCRUD(t *testing.T) {
 	if err != nil {
 		t.Fatalf("create buyer: %v", err)
 	}
+	if buyer.ID == nil || *buyer.ID == "" {
+		t.Fatal("buyer id empty")
+	}
 	buyerID := *buyer.ID
 
 	shipping, err := m.Client.Buyers.ShippingDetails.Create(ctx, buyerID, components.ShippingDetailsCreate{
@@ -31,6 +34,9 @@ func TestBuyerShippingDetailsCRUD(t *testing.T) {
 	}, nil)
 	if err != nil {
 		t.Fatalf("create shipping details: %v", err)
+	}
+	if shipping.ID == nil || *shipping.ID == "" {
+		t.Fatal("shipping details id empty")
 	}
 	shippingID := *shipping.ID
 
@@ -59,6 +65,9 @@ func TestBuyerGiftCardsList(t *testing.T) {
 	}, nil)
 	if err != nil {
 		t.Fatalf("create buyer: %v", err)
+	}
+	if buyer.ID == nil || *buyer.ID == "" {
+		t.Fatal("buyer id empty")
 	}
 
 	// GET /buyers/gift-cards — a 2xx even when the buyer has none.
