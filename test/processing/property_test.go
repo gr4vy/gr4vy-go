@@ -43,6 +43,7 @@ func TestPropertyPaymentLinkAmounts(t *testing.T) {
 		link, err := m.Client.PaymentLinks.Create(ctx, components.PaymentLinkCreate{
 			Amount:             harness.Amount(g),
 			Currency:           harness.Currency(g),
+			Country:            "US",
 			ExternalIdentifier: gr4vygo.String(harness.UniqueID("prop-link")),
 		}, nil)
 		if err != nil {

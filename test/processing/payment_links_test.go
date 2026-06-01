@@ -15,6 +15,7 @@ func TestPaymentLinkCRUD(t *testing.T) {
 	link, err := m.Client.PaymentLinks.Create(ctx, components.PaymentLinkCreate{
 		Amount:             1299,
 		Currency:           "USD",
+		Country:            "US",
 		ExternalIdentifier: strPtr(harness.UniqueID("link")),
 	}, nil)
 	if err != nil {
