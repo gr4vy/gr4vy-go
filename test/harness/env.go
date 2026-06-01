@@ -104,7 +104,7 @@ func SetupMerchant() (*TestMerchant, error) {
 		AcceptedCurrencies:         []string{"USD"},
 		AcceptedCountries:          []string{"US"},
 		Fields: []components.Field{
-			{Key: "merchant_id", Value: merchantAccountID},
+			{Key: "merchant_id", Value: account.ID},
 		},
 	}, &account.ID)
 	if err != nil {

@@ -20,6 +20,9 @@ func storeCard(t *testing.T, m *harness.TestMerchant) string {
 	if err != nil {
 		t.Fatalf("create payment method: %v", err)
 	}
+	if created.ID == "" {
+		t.Fatal("payment method id empty")
+	}
 	return created.ID
 }
 

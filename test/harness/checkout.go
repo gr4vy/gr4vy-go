@@ -17,7 +17,7 @@ import (
 // browser) rather than a bearer token, so it is exercised directly rather than
 // through the SDK, mirroring real front-end usage. It must return 204.
 func putCheckoutSessionFields(sessionID string, paymentMethod map[string]interface{}) error {
-	url := fmt.Sprintf("%s/checkout/sessions/%s/fields", apiBaseURL, sessionID)
+	url := fmt.Sprintf("%s/checkout/sessions/%s/fields", APIBaseURL(), sessionID)
 	body, err := json.Marshal(map[string]interface{}{"payment_method": paymentMethod})
 	if err != nil {
 		return err
