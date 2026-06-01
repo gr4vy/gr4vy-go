@@ -23,6 +23,9 @@ func TestAccountUpdaterJobIsReached(t *testing.T) {
 	if err != nil {
 		t.Fatalf("create payment method: %v", err)
 	}
+	if method.ID == "" {
+		t.Fatal("payment method id empty — cannot exercise account-updater submission")
+	}
 
 	harness.Reaches(t, "account_updater.jobs.create", func() error {
 		_, err := m.Client.AccountUpdater.Jobs.Create(ctx, components.AccountUpdaterJobCreate{
