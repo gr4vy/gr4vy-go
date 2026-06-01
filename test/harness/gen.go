@@ -28,7 +28,7 @@ func NewGen() *rand.Rand {
 
 // Amount returns a positive minor-unit amount in a realistic range.
 func Amount(g *rand.Rand) int64 {
-	return int64(g.Intn(99_900) + 100) // 100..100000
+	return int64(g.Intn(99_900) + 100) // 100..99999
 }
 
 // Currency returns one of the accepted ISO currency codes.
