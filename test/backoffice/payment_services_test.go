@@ -96,7 +96,7 @@ func TestPaymentServiceDefinitionSessionIsReached(t *testing.T) {
 	ctx := context.Background()
 
 	harness.Reaches(t, "payment_service_definitions.session", func() error {
-		_, err := m.Client.PaymentServiceDefinitions.Session(ctx, "mock-card", map[string]any{}, nil)
+		_, err := m.Client.PaymentServiceDefinitions.Session(ctx, "mock-card", map[string]any{})
 		return err
 	})
 }

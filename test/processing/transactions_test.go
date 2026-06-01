@@ -51,7 +51,9 @@ func TestTransactionSubResources(t *testing.T) {
 	ctx := context.Background()
 	tx := harness.Authorize(t, m, 1299, "USD")
 
-	updated, err := m.Client.Transactions.Update(ctx, tx.ID, components.TransactionUpdate{}, nil)
+	updated, err := m.Client.Transactions.Update(ctx, tx.ID, components.TransactionUpdate{
+		Metadata: map[string]string{"e2e": "1"},
+	}, nil)
 	if err != nil {
 		t.Fatalf("update transaction: %v", err)
 	}
