@@ -13,7 +13,7 @@ func TestGiftCardsListEndpoints(t *testing.T) {
 	m := harness.Merchant(t)
 	ctx := context.Background()
 
-	// Listing buyer gift cards is a 2xx even when empty.
+	// Listing gift cards is a 2xx even when empty.
 	if _, err := m.Client.GiftCards.List(ctx, operations.ListGiftCardsRequest{}); err != nil {
 		t.Fatalf("list gift cards: %v", err)
 	}

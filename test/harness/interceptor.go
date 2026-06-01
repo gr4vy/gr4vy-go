@@ -88,9 +88,10 @@ func randomToken() string {
 }
 
 // recordCall appends one {"method","path"} line to a per-process JSONL file
-// under coverage/http/. Each process writes its own file (keyed by pid + a
-// random suffix) so parallel shards never contend on the same file. Failures
-// are swallowed — coverage tracking must never break a test.
+// under the coverage dir. Each process writes a single file keyed by its pid —
+// distinct processes (the parallel CI shards) get distinct pids, so they never
+// contend, and within a process the mutex serialises the appends. Failures are
+// swallowed — coverage tracking must never break a test.
 var recordMu sync.Mutex
 
 func recordCall(method, path string) {
@@ -108,7 +109,7 @@ func recordCall(method, path string) {
 	if err := os.MkdirAll(dir, 0o755); err != nil {
 		return
 	}
-	file := filepath.Join(dir, fmt.Sprintf("calls-%d-%s.jsonl", os.Getpid(), randomToken()))
+	file := filepath.Join(dir, fmt.Sprintf("calls-%d.jsonl", os.Getpid()))
 	f, err := os.OpenFile(file, os.O_APPEND|os.O_CREATE|os.O_WRONLY, 0o644)
 	if err != nil {
 		return

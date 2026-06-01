@@ -34,7 +34,7 @@ func ApprovingCard() components.CardPaymentMethodCreate {
 	}
 }
 
-// SampleAddress is a complete, valid US address.
+// SampleAddress is a complete, valid GB address.
 func SampleAddress() *components.Address {
 	return &components.Address{
 		City:              gr4vygo.String("London"),
