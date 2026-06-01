@@ -56,6 +56,7 @@ func (i *jsonInterceptor) RoundTrip(req *http.Request) (*http.Response, error) {
 
 	originalBody, err := io.ReadAll(resp.Body)
 	if err != nil {
+		resp.Body.Close()
 		return nil, fmt.Errorf("failed to read original response body: %w", err)
 	}
 	resp.Body.Close()
