@@ -61,9 +61,11 @@ func (i *jsonInterceptor) RoundTrip(req *http.Request) (*http.Response, error) {
 	}
 	resp.Body.Close()
 
-	// Only inject into JSON objects; arrays/scalars are left as-is.
+	// Only inject into JSON objects; arrays/scalars are left as-is. Note the
+	// JSON scalar `null` unmarshals successfully into a nil map, so guard it
+	// explicitly — assigning to a nil map would panic.
 	var data map[string]interface{}
-	if err := json.Unmarshal(originalBody, &data); err != nil {
+	if err := json.Unmarshal(originalBody, &data); err != nil || data == nil {
 		resp.Body = io.NopCloser(bytes.NewReader(originalBody))
 		return resp, nil
 	}
