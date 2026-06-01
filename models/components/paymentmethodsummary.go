@@ -56,6 +56,8 @@ type PaymentMethodSummary struct {
 	SchemeTransactionID *string `json:"scheme_transaction_id"`
 	// The scheme associated with scheme_transaction_id. Only applies to card payments.
 	SchemeTransactionIDScheme *CardScheme `json:"scheme_transaction_id_scheme"`
+	// The transaction link identifier stored against this payment method.
+	TransactionLinkID *string `json:"transaction_link_id,omitempty"`
 }
 
 func (p PaymentMethodSummary) MarshalJSON() ([]byte, error) {
@@ -218,4 +220,11 @@ func (p *PaymentMethodSummary) GetSchemeTransactionIDScheme() *CardScheme {
 		return nil
 	}
 	return p.SchemeTransactionIDScheme
+}
+
+func (p *PaymentMethodSummary) GetTransactionLinkID() *string {
+	if p == nil {
+		return nil
+	}
+	return p.TransactionLinkID
 }

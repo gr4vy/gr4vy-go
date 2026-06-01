@@ -28,11 +28,11 @@ custom := components.Method("custom_value")
 | `MethodBacs`             | bacs                     |
 | `MethodBancontact`       | bancontact               |
 | `MethodBank`             | bank                     |
-| `MethodBanked`           | banked                   |
 | `MethodBcp`              | bcp                      |
 | `MethodBecs`             | becs                     |
 | `MethodBitpay`           | bitpay                   |
 | `MethodBlik`             | blik                     |
+| `MethodAch`              | ach                      |
 | `MethodBoleto`           | boleto                   |
 | `MethodBoost`            | boost                    |
 | `MethodBreb`             | breb                     |
@@ -66,6 +66,7 @@ custom := components.Method("custom_value")
 | `MethodKcp`              | kcp                      |
 | `MethodKhipu`            | khipu                    |
 | `MethodKlarna`           | klarna                   |
+| `MethodKonbini`          | konbini                  |
 | `MethodLatitude`         | latitude                 |
 | `MethodLatitudeds`       | latitudeds               |
 | `MethodLaybuy`           | laybuy                   |
@@ -91,6 +92,7 @@ custom := components.Method("custom_value")
 | `MethodPagoefectivo`     | pagoefectivo             |
 | `MethodPayid`            | payid                    |
 | `MethodPaymaya`          | paymaya                  |
+| `MethodPaysquad`         | paysquad                 |
 | `MethodPaypal`           | paypal                   |
 | `MethodPaypalpaylater`   | paypalpaylater           |
 | `MethodPaypay`           | paypay                   |
@@ -108,6 +110,7 @@ custom := components.Method("custom_value")
 | `MethodScalapay`         | scalapay                 |
 | `MethodSepa`             | sepa                     |
 | `MethodServipag`         | servipag                 |
+| `MethodSeveneleven`      | seveneleven              |
 | `MethodShopeepay`        | shopeepay                |
 | `MethodSingteldash`      | singteldash              |
 | `MethodSmartpay`         | smartpay                 |

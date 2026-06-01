@@ -1799,3 +1799,173 @@ Based on:
 - [go v1.12.77] .
 ### Releases
 - [Go v1.12.77] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.77 - .
+
+## 2026-05-08 00:55:04
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.762.0 (2.882.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.78] .
+### Releases
+- [Go v1.12.78] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.78 - .
+
+## 2026-05-13 08:35:59
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.762.0 (2.882.0) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.79] .
+### Releases
+- [Go v1.12.79] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.79 - .
+
+## 2026-05-15 08:47:16
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.1 (2.884.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.80] .
+### Releases
+- [Go v1.12.80] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.80 - .
+
+## 2026-05-18 10:37:10
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.1 (2.884.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.81] .
+### Releases
+- [Go v1.12.81] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.81 - .
+
+## 2026-05-19 14:58:50
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.1 (2.884.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.82] .
+### Releases
+- [Go v1.12.82] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.82 - .
+
+## 2026-05-19 18:18:24
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.2 (2.884.4) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.83] .
+### Releases
+- [Go v1.12.83] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.83 - .
+
+## 2026-05-20 08:29:01
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.84] .
+### Releases
+- [Go v1.12.84] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.84 - .
+
+## 2026-05-20 09:50:17
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.85] .
+### Releases
+- [Go v1.12.85] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.85 - .
+
+## 2026-05-21 08:17:40
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.86] .
+### Releases
+- [Go v1.12.86] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.86 - .
+
+## 2026-05-21 12:22:52
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.87] .
+### Releases
+- [Go v1.12.87] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.87 - .
+
+## 2026-05-21 13:51:12
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.88] .
+### Releases
+- [Go v1.12.88] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.88 - .
+
+## 2026-05-25 07:24:56
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.89] .
+### Releases
+- [Go v1.12.89] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.89 - .
+
+## 2026-05-26 14:16:39
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.90] .
+### Releases
+- [Go v1.12.90] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.90 - .
+
+## 2026-05-27 09:16:31
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.91] .
+### Releases
+- [Go v1.12.91] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.91 - .
+
+## 2026-05-27 15:31:44
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.92] .
+### Releases
+- [Go v1.12.92] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.92 - .
+
+## 2026-05-27 15:46:26
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.93] .
+### Releases
+- [Go v1.12.93] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.93 - .
+
+## 2026-05-28 12:34:11
+### Changes
+Based on:
+- OpenAPI Doc  
+- Speakeasy CLI 1.763.3 (2.884.7) https://github.com/speakeasy-api/speakeasy
+### Generated
+- [go v1.12.94] .
+### Releases
+- [Go v1.12.94] https://github.com/gr4vy/gr4vy-go/releases/tag/v1.12.94 - .

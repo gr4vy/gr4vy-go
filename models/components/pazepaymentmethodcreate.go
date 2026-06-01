@@ -27,6 +27,8 @@ type PazePaymentMethodCreate struct {
 	method string `const:"paze" json:"method"`
 	// The opaque token as received from the Paze complete response.
 	Token string `json:"token"`
+	// The signed checkout JWS as received from the Paze checkout response.
+	CheckoutToken *string `json:"checkout_token,omitempty"`
 }
 
 func (p PazePaymentMethodCreate) MarshalJSON() ([]byte, error) {
@@ -98,4 +100,11 @@ func (p *PazePaymentMethodCreate) GetToken() string {
 		return ""
 	}
 	return p.Token
+}
+
+func (p *PazePaymentMethodCreate) GetCheckoutToken() *string {
+	if p == nil {
+		return nil
+	}
+	return p.CheckoutToken
 }

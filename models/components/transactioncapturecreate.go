@@ -8,6 +8,8 @@ type TransactionCaptureCreate struct {
 	Amount *int64 `json:"amount,omitempty"`
 	// The airline data to submit to the payment service during the capture call.
 	Airline *Airline `json:"airline,omitempty"`
+	// An array of cart items that represents the line items of this capture.
+	CartItems []CartItem `json:"cart_items,omitempty"`
 }
 
 func (t *TransactionCaptureCreate) GetAmount() *int64 {
@@ -22,4 +24,11 @@ func (t *TransactionCaptureCreate) GetAirline() *Airline {
 		return nil
 	}
 	return t.Airline
+}
+
+func (t *TransactionCaptureCreate) GetCartItems() []CartItem {
+	if t == nil {
+		return nil
+	}
+	return t.CartItems
 }

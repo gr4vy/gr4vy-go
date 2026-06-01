@@ -28,7 +28,6 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodArcuspaynetwork` | arcuspaynetwork                                    |
 | `RedirectPaymentMethodCreateMethodBacs`            | bacs                                               |
 | `RedirectPaymentMethodCreateMethodBancontact`      | bancontact                                         |
-| `RedirectPaymentMethodCreateMethodBanked`          | banked                                             |
 | `RedirectPaymentMethodCreateMethodBcp`             | bcp                                                |
 | `RedirectPaymentMethodCreateMethodBecs`            | becs                                               |
 | `RedirectPaymentMethodCreateMethodBitpay`          | bitpay                                             |
@@ -36,6 +35,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodBoleto`          | boleto                                             |
 | `RedirectPaymentMethodCreateMethodBoost`           | boost                                              |
 | `RedirectPaymentMethodCreateMethodBreb`            | breb                                               |
+| `RedirectPaymentMethodCreateMethodAch`             | ach                                                |
 | `RedirectPaymentMethodCreateMethodCapitec`         | capitec                                            |
 | `RedirectPaymentMethodCreateMethodCashapp`         | cashapp                                            |
 | `RedirectPaymentMethodCreateMethodClearpay`        | clearpay                                           |
@@ -60,6 +60,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodKcp`             | kcp                                                |
 | `RedirectPaymentMethodCreateMethodKhipu`           | khipu                                              |
 | `RedirectPaymentMethodCreateMethodKlarna`          | klarna                                             |
+| `RedirectPaymentMethodCreateMethodKonbini`         | konbini                                            |
 | `RedirectPaymentMethodCreateMethodLatitude`        | latitude                                           |
 | `RedirectPaymentMethodCreateMethodLatitudeds`      | latitudeds                                         |
 | `RedirectPaymentMethodCreateMethodLaybuy`          | laybuy                                             |
@@ -84,6 +85,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodPagoefectivo`    | pagoefectivo                                       |
 | `RedirectPaymentMethodCreateMethodPayid`           | payid                                              |
 | `RedirectPaymentMethodCreateMethodPaymaya`         | paymaya                                            |
+| `RedirectPaymentMethodCreateMethodPaysquad`        | paysquad                                           |
 | `RedirectPaymentMethodCreateMethodPaypal`          | paypal                                             |
 | `RedirectPaymentMethodCreateMethodPaypalpaylater`  | paypalpaylater                                     |
 | `RedirectPaymentMethodCreateMethodPaypay`          | paypay                                             |
@@ -99,6 +101,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodScalapay`        | scalapay                                           |
 | `RedirectPaymentMethodCreateMethodSepa`            | sepa                                               |
 | `RedirectPaymentMethodCreateMethodServipag`        | servipag                                           |
+| `RedirectPaymentMethodCreateMethodSeveneleven`     | seveneleven                                        |
 | `RedirectPaymentMethodCreateMethodShopeepay`       | shopeepay                                          |
 | `RedirectPaymentMethodCreateMethodSingteldash`     | singteldash                                        |
 | `RedirectPaymentMethodCreateMethodSmartpay`        | smartpay                                           |

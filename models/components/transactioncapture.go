@@ -20,6 +20,12 @@ type TransactionCapture struct {
 	RawResponseDescription *string `json:"raw_response_description"`
 	// A full transaction resource.
 	Transaction Transaction `json:"transaction"`
+	// The ID of the capture resource created for this capture.
+	CaptureID *string `json:"capture_id,omitempty"`
+	// The payment service's unique ID for the capture.
+	PaymentServiceCaptureID *string `json:"payment_service_capture_id,omitempty"`
+	// The external identifier for the capture.
+	ExternalIdentifier *string `json:"external_identifier,omitempty"`
 }
 
 func (t TransactionCapture) MarshalJSON() ([]byte, error) {
@@ -70,4 +76,25 @@ func (t *TransactionCapture) GetTransaction() Transaction {
 		return Transaction{}
 	}
 	return t.Transaction
+}
+
+func (t *TransactionCapture) GetCaptureID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.CaptureID
+}
+
+func (t *TransactionCapture) GetPaymentServiceCaptureID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.PaymentServiceCaptureID
+}
+
+func (t *TransactionCapture) GetExternalIdentifier() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ExternalIdentifier
 }
