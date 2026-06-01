@@ -57,7 +57,46 @@ func TestPaymentServiceCreateAndDelete(t *testing.T) {
 		t.Fatal("payment service id empty")
 	}
 
+	// Exercise get / update / session against the real service before deleting.
+	if _, err := m.Client.PaymentServices.Get(ctx, *created.ID, nil); err != nil {
+		t.Fatalf("get payment service: %v", err)
+	}
+	if _, err := m.Client.PaymentServices.Update(ctx, *created.ID, components.PaymentServiceUpdate{
+		DisplayName: gr4vyStr("renamed"),
+	}, nil); err != nil {
+		t.Fatalf("update payment service: %v", err)
+	}
+	harness.Reaches(t, "payment_services.session", func() error {
+		_, err := m.Client.PaymentServices.Session(ctx, *created.ID, map[string]any{}, nil)
+		return err
+	})
+
 	if err := m.Client.PaymentServices.Delete(ctx, *created.ID, nil); err != nil {
 		t.Fatalf("delete payment service: %v", err)
 	}
+}
+
+func TestPaymentServiceVerifyIsReached(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+
+	harness.Reaches(t, "payment_services.verify", func() error {
+		_, err := m.Client.PaymentServices.Verify(ctx, components.VerifyCredentials{
+			PaymentServiceDefinitionID: "mock-card",
+			Fields: []components.Field{
+				{Key: "merchant_id", Value: m.MerchantAccountID},
+			},
+		}, nil)
+		return err
+	})
+}
+
+func TestPaymentServiceDefinitionSessionIsReached(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+
+	harness.Reaches(t, "payment_service_definitions.session", func() error {
+		_, err := m.Client.PaymentServiceDefinitions.Session(ctx, "mock-card", map[string]any{}, nil)
+		return err
+	})
 }

@@ -37,3 +37,16 @@ func TestThreeDsScenarioCreateIsReached(t *testing.T) {
 		return err
 	})
 }
+
+func TestThreeDsScenarioUpdateAndDeleteAreReached(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+
+	harness.Reaches(t, "three_ds_scenarios.update", func() error {
+		_, err := m.Client.ThreeDsScenarios.Update(ctx, harness.MissingID, components.ThreeDSecureScenarioUpdate{}, nil)
+		return err
+	})
+	harness.Reaches(t, "three_ds_scenarios.delete", func() error {
+		return m.Client.ThreeDsScenarios.Delete(ctx, harness.MissingID, nil)
+	})
+}

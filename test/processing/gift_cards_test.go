@@ -34,6 +34,20 @@ func TestGiftCardCreateIsReached(t *testing.T) {
 	})
 }
 
+func TestGiftCardByIDAreReached(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+
+	// No gift card can be created in the mock env, so these hit a missing id.
+	harness.Reaches(t, "gift_cards.get", func() error {
+		_, err := m.Client.GiftCards.Get(ctx, harness.MissingID, nil)
+		return err
+	})
+	harness.Reaches(t, "gift_cards.delete", func() error {
+		return m.Client.GiftCards.Delete(ctx, harness.MissingID, nil)
+	})
+}
+
 func TestGiftCardBalancesIsReached(t *testing.T) {
 	m := harness.Merchant(t)
 	ctx := context.Background()

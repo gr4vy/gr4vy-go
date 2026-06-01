@@ -4,6 +4,7 @@ import (
 	"context"
 	"testing"
 
+	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/test/harness"
 )
 
@@ -30,6 +31,11 @@ func TestCheckoutSessionLifecycle(t *testing.T) {
 	// Securing the approving card into the session must return 204.
 	if err := harness.PutCard(session.ID); err != nil {
 		t.Fatalf("put card: %v", err)
+	}
+
+	// Update the session via the SDK (PUT /checkout/sessions/{id}).
+	if _, err := m.Client.CheckoutSessions.Update(ctx, session.ID, components.CheckoutSessionCreate{}, nil); err != nil {
+		t.Fatalf("update checkout session: %v", err)
 	}
 
 	if err := m.Client.CheckoutSessions.Delete(ctx, session.ID, nil); err != nil {

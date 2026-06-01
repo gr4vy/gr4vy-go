@@ -62,4 +62,18 @@ func TestCaptureThenRefund(t *testing.T) {
 	}
 }
 
+// TestRefundAllIsReached exercises POST /transactions/{id}/refunds/all on a
+// freshly authorized (uncaptured) transaction. The connector may accept or
+// reject it; either way the endpoint is reached.
+func TestRefundAllIsReached(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+	tx := harness.Authorize(t, m, 1299, "USD")
+
+	harness.Reaches(t, "transactions.refunds.all", func() error {
+		_, err := m.Client.Transactions.Refunds.All.Create(ctx, tx.ID, nil, nil, nil)
+		return err
+	})
+}
+
 func ptrInt(i int64) *int64 { return &i }
