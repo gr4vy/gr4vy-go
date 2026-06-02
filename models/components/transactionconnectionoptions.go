@@ -5,6 +5,8 @@ package components
 type TransactionConnectionOptions struct {
 	// Custom options to be passed to the `account-updater` connector, allowing for simulating different account updater responses.
 	AccountUpdater *AccountUpdaterOptions `json:"account-updater,omitempty"`
+	// Custom options to be passed to the `adyen-ach` connector.
+	AdyenAch *AdyenOptions `json:"adyen-ach,omitempty"`
 	// Custom options to be passed to the `adyen-afterpay` connector.
 	AdyenAfterpay *AdyenOptions `json:"adyen-afterpay,omitempty"`
 	// Custom options to be passed to the `adyen-alipay` connector.
@@ -124,6 +126,13 @@ func (t *TransactionConnectionOptions) GetAccountUpdater() *AccountUpdaterOption
 		return nil
 	}
 	return t.AccountUpdater
+}
+
+func (t *TransactionConnectionOptions) GetAdyenAch() *AdyenOptions {
+	if t == nil {
+		return nil
+	}
+	return t.AdyenAch
 }
 
 func (t *TransactionConnectionOptions) GetAdyenAfterpay() *AdyenOptions {
