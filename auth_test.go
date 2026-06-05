@@ -89,6 +89,60 @@ func TestGetTokenCreatesValidSignedJWT(t *testing.T) {
 	}
 }
 
+// expectedKid is the RFC 7638 JWK thumbprint of testPrivateKeyPEM's public key,
+// computed independently (openssl + a standards-compliant JWK library) with the
+// EC coordinates zero-padded to the P-521 curve size. testPrivateKeyPEM's X
+// coordinate has a leading zero byte, so a thumbprint computed from the
+// unpadded big.Int.Bytes() representation would differ from this value — which
+// is exactly the bug that caused 401 "No valid API authentication found".
+const expectedKid = "va-SLs5AxJNfqKXD8LI5Y38BflpNvjZjY4RSWz66U1w"
+
+func TestGetTokenSetsCorrectKidHeader(t *testing.T) {
+	token, err := GetToken(testPrivateKeyPEM, []JWTScope{ReadAll, WriteAll}, 3600)
+	if err != nil {
+		t.Fatalf("Failed to create token: %v", err)
+	}
+
+	parsedToken, _, err := new(jwt.Parser).ParseUnverified(token, &TokenClaims{})
+	if err != nil {
+		t.Fatalf("Failed to parse token: %v", err)
+	}
+
+	kid, ok := parsedToken.Header["kid"].(string)
+	if !ok {
+		t.Fatalf("Expected kid header to be a string, got %v", parsedToken.Header["kid"])
+	}
+
+	if kid != expectedKid {
+		t.Errorf("Expected kid %q, got %q (EC coordinates must be zero-padded to the curve size)", expectedKid, kid)
+	}
+}
+
+func TestCalculateThumbprintZeroPadsCoordinates(t *testing.T) {
+	block, _ := pem.Decode([]byte(testPrivateKeyPEM))
+	privateKey, err := x509.ParsePKCS8PrivateKey(block.Bytes)
+	if err != nil {
+		t.Fatalf("Failed to parse private key: %v", err)
+	}
+	ecdsaKey := privateKey.(*ecdsa.PrivateKey)
+
+	// Sanity check: this fixture exercises the bug — its X coordinate is shorter
+	// than the curve byte size, so it must be left-padded for a correct thumbprint.
+	coordLen := (ecdsaKey.PublicKey.Curve.Params().BitSize + 7) / 8
+	if len(ecdsaKey.PublicKey.X.Bytes()) >= coordLen {
+		t.Fatalf("test fixture no longer exercises the padding case: X is %d bytes, curve size is %d", len(ecdsaKey.PublicKey.X.Bytes()), coordLen)
+	}
+
+	thumbprint, err := calculateThumbprint(ecdsaKey)
+	if err != nil {
+		t.Fatalf("Failed to calculate thumbprint: %v", err)
+	}
+
+	if thumbprint != expectedKid {
+		t.Errorf("Expected thumbprint %q, got %q", expectedKid, thumbprint)
+	}
+}
+
 func TestGetTokenAcceptsOptionalEmbedData(t *testing.T) {
 	token, err := GetTokenWithEmbedProperties(testPrivateKeyPEM, []JWTScope{Embed}, 3600, testEmbedParams, "")
 	if err != nil {

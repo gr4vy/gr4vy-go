@@ -284,14 +284,26 @@ func withToken(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedPara
 	}
 }
 
-// calculateThumbprint calculates the JWK thumbprint for the kid header
+// calculateThumbprint calculates the RFC 7638 JWK thumbprint for the kid header
 func calculateThumbprint(privateKey *ecdsa.PrivateKey) (string, error) {
+	// RFC 7638 / RFC 7518 require the EC coordinates to be encoded as fixed-length
+	// octet strings, left-padded with zeros to the curve's byte size (66 bytes for
+	// P-521). big.Int.Bytes() strips leading zero bytes, which yields a shorter
+	// encoding and therefore a different thumbprint whenever a coordinate's most
+	// significant byte is zero. That produced a kid the API could not match,
+	// resulting in 401 "No valid API authentication found". Pad with FillBytes.
+	coordLen := (privateKey.PublicKey.Curve.Params().BitSize + 7) / 8
+	xBytes := make([]byte, coordLen)
+	yBytes := make([]byte, coordLen)
+	privateKey.PublicKey.X.FillBytes(xBytes)
+	privateKey.PublicKey.Y.FillBytes(yBytes)
+
 	// Create JWK representation for ES512 (P-521 curve)
 	jwk := map[string]interface{}{
 		"kty": "EC",
 		"crv": "P-521",
-		"x":   base64.RawURLEncoding.EncodeToString(privateKey.PublicKey.X.Bytes()),
-		"y":   base64.RawURLEncoding.EncodeToString(privateKey.PublicKey.Y.Bytes()),
+		"x":   base64.RawURLEncoding.EncodeToString(xBytes),
+		"y":   base64.RawURLEncoding.EncodeToString(yBytes),
 	}
 
 	// Create canonical JSON (sorted keys, no spaces)
