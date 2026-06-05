@@ -3,16 +3,16 @@ id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
   docChecksum: a7b7c76693c8b78fad5d802d11950127
   docVersion: 1.0.0
-  speakeasyVersion: 1.769.2
-  generationVersion: 2.892.5
-  releaseVersion: 1.12.96
-  configChecksum: 12e7f485c3f3fa231d00baa51aabc2ab
+  speakeasyVersion: 1.770.1
+  generationVersion: 2.893.0
+  releaseVersion: 1.12.97
+  configChecksum: d62cc4072fe9c91735e5e684cd071e76
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 7dd4a0f0-cd9b-42bf-b7e9-5f1fa03c8738
-  pristine_commit_hash: 3880578356c726c5cfcf21cc2717a470c6d85d67
-  pristine_tree_hash: 9c1b5f50b5f4888f56d56d5d5357354053348093
+  generation_id: b17f4b41-2e57-4630-a3e1-259e223fca14
+  pristine_commit_hash: 5a0a9cf421c32abd53525fc29ad58fea8e2d3ce2
+  pristine_tree_hash: ee759acd55ecbf57cae4f31808a40d0d563b80aa
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2714,8 +2714,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:947d7667da64c47ab56f1de41e0267f2057ccf14
-    pristine_git_object: adaa544ef7138111aaf978acbce86b250583805e
+    last_write_checksum: sha1:b034c08f82a7a6d4b5dd55c3ca15a11306b84cd2
+    pristine_git_object: 17bcedddcfb5df7481e164efe08762a10338b55b
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -8468,7 +8468,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.AdyenAch` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.AdyenAch` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.AdyenAch` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
