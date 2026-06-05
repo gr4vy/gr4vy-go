@@ -120,11 +120,17 @@ func TestGetTokenSetsCorrectKidHeader(t *testing.T) {
 
 func TestCalculateThumbprintZeroPadsCoordinates(t *testing.T) {
 	block, _ := pem.Decode([]byte(testPrivateKeyPEM))
+	if block == nil {
+		t.Fatal("Failed to decode test PEM block")
+	}
 	privateKey, err := x509.ParsePKCS8PrivateKey(block.Bytes)
 	if err != nil {
 		t.Fatalf("Failed to parse private key: %v", err)
 	}
-	ecdsaKey := privateKey.(*ecdsa.PrivateKey)
+	ecdsaKey, ok := privateKey.(*ecdsa.PrivateKey)
+	if !ok {
+		t.Fatalf("Test key is not ECDSA: %T", privateKey)
+	}
 
 	// Sanity check: this fixture exercises the bug — its X coordinate is shorter
 	// than the curve byte size, so it must be left-padded for a correct thumbprint.

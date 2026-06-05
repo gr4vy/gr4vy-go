@@ -3,6 +3,7 @@ package gr4vygo
 import (
 	"context"
 	"crypto/ecdsa"
+	"crypto/elliptic"
 	"crypto/sha256"
 	"crypto/x509"
 	"encoding/base64"
@@ -286,6 +287,13 @@ func withToken(privateKeyPEM string, scopes []JWTScope, expiresIn int, embedPara
 
 // calculateThumbprint calculates the RFC 7638 JWK thumbprint for the kid header
 func calculateThumbprint(privateKey *ecdsa.PrivateKey) (string, error) {
+	// The SDK signs with ES512, which mandates the P-521 curve. The JWK below
+	// hard-codes "crv": "P-521", so reject any other curve up front rather than
+	// emit a malformed JWK (crv mismatching the x/y size) and an incorrect kid.
+	if privateKey.Curve != elliptic.P521() {
+		return "", fmt.Errorf("unsupported curve %q: ES512 requires P-521", privateKey.Curve.Params().Name)
+	}
+
 	// RFC 7638 / RFC 7518 require the EC coordinates to be encoded as fixed-length
 	// octet strings, left-padded with zeros to the curve's byte size (66 bytes for
 	// P-521). big.Int.Bytes() strips leading zero bytes, which yields a shorter
