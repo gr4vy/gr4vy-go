@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 0acc6a110892b0ac2a6c7be8ea55170e
+  docChecksum: 4f6598f83170a95661ac35f9a3345516
   docVersion: 1.0.0
   speakeasyVersion: 1.772.0
   generationVersion: 2.896.0
-  releaseVersion: 1.12.98
-  configChecksum: 47966ec50f179556ffe3bd892bf90eb2
+  releaseVersion: 1.12.99
+  configChecksum: f529598e5ae27ab7ed704d2dbbfe87b6
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: ce93f457-f9fd-403c-9715-dd608884399d
-  pristine_commit_hash: 8c33b7209cc0f14c4c956bc31c5ce398e6064d28
-  pristine_tree_hash: 92143abb882dfc3ee938e0ba52fbd55523c99024
+  generation_id: b1df4614-2885-42db-bb2a-2eeeccff506e
+  pristine_commit_hash: 5b4096762730ba548a48fe18a2f6884c75422376
+  pristine_tree_hash: a741c1b6594287a1e11c4628e3aba654fe6d5aca
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2714,8 +2714,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:76322c73d284edef89160df1485d034f8cb0d630
-    pristine_git_object: eda8c67179e69741a798327c30ca34f12f381fb3
+    last_write_checksum: sha1:7276a72ed0d629398acd66ae7e21788837b5a90d
+    pristine_git_object: d4e455093f2579932bad5f06431f3f3eba0a976b
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -8468,7 +8468,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(RedirectPaymentMethodCreate).Method` **Changed**\n  *  `response.Method` **Changed**\n* `Gr4vy.PaymentMethods.Get()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentMethods.Update()`:  `response.Method` **Changed**\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PaymentMethod.union(RedirectPaymentMethodCreate).Method` **Changed**\n  *  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Get()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Update()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Capture()`:  `response.union(Transaction).PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Void()`:  `response.union(Transaction).PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Sync()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.PaymentServiceDefinitions.List()`:  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentServiceDefinitions.Get()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentServices.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentServices.Create()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentServices.Get()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentServices.Update()`:  `response.Method` **Changed**\n* `Gr4vy.Payouts.List()`:  `response.Items[].PaymentMethod.Method` **Changed**\n* `Gr4vy.Payouts.Create()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Payouts.Get()`:  `response.PaymentMethod.Method` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
