@@ -42,6 +42,9 @@ custom := components.Method("custom_value")
 | `MethodChaseorbital`     | chaseorbital             |
 | `MethodClearpay`         | clearpay                 |
 | `MethodClickToPay`       | click-to-pay             |
+| `MethodCustomPush`       | custom_push              |
+| `MethodCustomRedirect`   | custom_redirect          |
+| `MethodCustomTokenize`   | custom_tokenize          |
 | `MethodDana`             | dana                     |
 | `MethodDcb`              | dcb                      |
 | `MethodDlocal`           | dlocal                   |

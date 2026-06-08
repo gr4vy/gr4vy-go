@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: a7b7c76693c8b78fad5d802d11950127
+  docChecksum: 0acc6a110892b0ac2a6c7be8ea55170e
   docVersion: 1.0.0
-  speakeasyVersion: 1.770.1
-  generationVersion: 2.893.0
-  releaseVersion: 1.12.97
-  configChecksum: d62cc4072fe9c91735e5e684cd071e76
+  speakeasyVersion: 1.772.0
+  generationVersion: 2.896.0
+  releaseVersion: 1.12.98
+  configChecksum: 47966ec50f179556ffe3bd892bf90eb2
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: b17f4b41-2e57-4630-a3e1-259e223fca14
-  pristine_commit_hash: 5a0a9cf421c32abd53525fc29ad58fea8e2d3ce2
-  pristine_tree_hash: ee759acd55ecbf57cae4f31808a40d0d563b80aa
+  generation_id: ce93f457-f9fd-403c-9715-dd608884399d
+  pristine_commit_hash: 8c33b7209cc0f14c4c956bc31c5ce398e6064d28
+  pristine_tree_hash: 92143abb882dfc3ee938e0ba52fbd55523c99024
 features:
   go:
     additionalDependencies: 0.1.0
@@ -806,8 +806,8 @@ trackedFiles:
     pristine_git_object: b5a8c70a918ae33746ad05b24dd3d2b1868d3c77
   docs/models/components/method.md:
     id: ed7b996a91be
-    last_write_checksum: sha1:641575cf10688bea4be57dfdbc2a964e7cb91769
-    pristine_git_object: d56b01af3455527cf3e26a8994132a7a06d41a82
+    last_write_checksum: sha1:fe09b9a44897dc1255b3e19c9ecddaf5999c34b7
+    pristine_git_object: 48655957d5604d719f491d522559bb83ba213596
   docs/models/components/mockcardmerchantadvicecodeoptions.md:
     id: 0d96c7e86e98
     last_write_checksum: sha1:263cf916f8a8b4dc9054ab28dbdcf457c401ded7
@@ -1214,8 +1214,8 @@ trackedFiles:
     pristine_git_object: c3a8cbff328039865fd481982688dd674e58701c
   docs/models/components/redirectpaymentmethodcreatemethod.md:
     id: 7dea7cd505c1
-    last_write_checksum: sha1:5eb58878962bbc140d584d67cce118cef0fac1a0
-    pristine_git_object: 2adc05a48ba6c9fbba40f733c21c24063939a156
+    last_write_checksum: sha1:69d21223d1ec252180333862017cd77c88d9716f
+    pristine_git_object: 2dc72427b68e1c69061fd41b19a7c97ce7da5f7a
   docs/models/components/refund.md:
     id: a9ba6686865f
     last_write_checksum: sha1:abfca5a7af198ffae833e940f9b71587e47a1cb1
@@ -2714,8 +2714,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:b034c08f82a7a6d4b5dd55c3ca15a11306b84cd2
-    pristine_git_object: 17bcedddcfb5df7481e164efe08762a10338b55b
+    last_write_checksum: sha1:76322c73d284edef89160df1485d034f8cb0d630
+    pristine_git_object: eda8c67179e69741a798327c30ca34f12f381fb3
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3430,8 +3430,8 @@ trackedFiles:
     pristine_git_object: d35ab589eef2077285d21ec4258dcfc2cfdbe18c
   models/components/method.go:
     id: 8c7abdd7dd0c
-    last_write_checksum: sha1:ce8f33dfa9754131f60654b73f56946b114a0bb7
-    pristine_git_object: 1a40a46c0a37e6dd3a9919b1ca4ed96129cb7e47
+    last_write_checksum: sha1:218aa7155375a204e15f5b289177bc23bbce1a0a
+    pristine_git_object: 4825558743145181722461c7692b08c0eeb430b8
   models/components/mockcardmerchantadvicecodeoptions.go:
     id: b2eaf35a7df5
     last_write_checksum: sha1:5d6fe4892523378f4a2e5e0d0d240962b51fb193
@@ -3782,8 +3782,8 @@ trackedFiles:
     pristine_git_object: 535d323d384db1cb0f7a119b15aac7ace889b089
   models/components/redirectpaymentmethodcreate.go:
     id: 9d495c3b3403
-    last_write_checksum: sha1:f30e95d92f16ebd693e78e4dd55c1213192e226b
-    pristine_git_object: 0b54897eb8d95167769ba89505c0518c3d8f51e1
+    last_write_checksum: sha1:13b6b8ded8c7b3a579c8671678e9addae00a54b3
+    pristine_git_object: 7695c00a453957c9ca53000c7b96ceea0caf010b
   models/components/refund.go:
     id: 6120ea17a7e7
     last_write_checksum: sha1:687a954562768a447b411a6e75b71489e76cb381
@@ -8468,6 +8468,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(RedirectPaymentMethodCreate).Method` **Changed**\n  *  `response.Method` **Changed**\n* `Gr4vy.PaymentMethods.Get()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentMethods.Update()`:  `response.Method` **Changed**\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PaymentMethod.union(RedirectPaymentMethodCreate).Method` **Changed**\n  *  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Get()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Update()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Capture()`:  `response.union(Transaction).PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Void()`:  `response.union(Transaction).PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PaymentMethod.Method` **Changed**\n* `Gr4vy.Transactions.Sync()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.PaymentServiceDefinitions.List()`:  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentServiceDefinitions.Get()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentServices.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].Method` **Changed**\n* `Gr4vy.PaymentServices.Create()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentServices.Get()`:  `response.Method` **Changed**\n* `Gr4vy.PaymentServices.Update()`:  `response.Method` **Changed**\n* `Gr4vy.Payouts.List()`:  `response.Items[].PaymentMethod.Method` **Changed**\n* `Gr4vy.Payouts.Create()`:  `response.PaymentMethod.Method` **Changed**\n* `Gr4vy.Payouts.Get()`:  `response.PaymentMethod.Method` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
