@@ -23,6 +23,8 @@ type TransactionConnectionOptions struct {
 	AdyenIdeal *AdyenOptions `json:"adyen-ideal,omitempty"`
 	// Custom options to be passed to the `adyen-konbini` connector.
 	AdyenKonbini *AdyenOptions `json:"adyen-konbini,omitempty"`
+	// Custom options to be passed to the `adyen-paybybank` connector.
+	AdyenPaybybank *AdyenOptions `json:"adyen-paybybank,omitempty"`
 	// Custom options to be passed to the `adyen-paypay` connector.
 	AdyenPaypay *AdyenOptions `json:"adyen-paypay,omitempty"`
 	// Custom options to be passed to the `adyen-pix` connector.
@@ -189,6 +191,13 @@ func (t *TransactionConnectionOptions) GetAdyenKonbini() *AdyenOptions {
 		return nil
 	}
 	return t.AdyenKonbini
+}
+
+func (t *TransactionConnectionOptions) GetAdyenPaybybank() *AdyenOptions {
+	if t == nil {
+		return nil
+	}
+	return t.AdyenPaybybank
 }
 
 func (t *TransactionConnectionOptions) GetAdyenPaypay() *AdyenOptions {
