@@ -93,6 +93,7 @@ custom := components.Method("custom_value")
 | `MethodOxxo`             | oxxo                     |
 | `MethodP24`              | p24                      |
 | `MethodPagoefectivo`     | pagoefectivo             |
+| `MethodPaybybank`        | paybybank                |
 | `MethodPayid`            | payid                    |
 | `MethodPaymaya`          | paymaya                  |
 | `MethodPaysquad`         | paysquad                 |

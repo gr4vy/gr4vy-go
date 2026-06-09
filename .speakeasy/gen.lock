@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 4f6598f83170a95661ac35f9a3345516
+  docChecksum: 5a80388ccb3b62fd6a5b4fd60839f7e5
   docVersion: 1.0.0
-  speakeasyVersion: 1.772.0
-  generationVersion: 2.896.0
-  releaseVersion: 1.12.99
-  configChecksum: f529598e5ae27ab7ed704d2dbbfe87b6
+  speakeasyVersion: 1.773.1
+  generationVersion: 2.897.1
+  releaseVersion: 1.12.100
+  configChecksum: d5a82fafc2a69a9fd2f4d1db2e8d30b3
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: b1df4614-2885-42db-bb2a-2eeeccff506e
-  pristine_commit_hash: 5b4096762730ba548a48fe18a2f6884c75422376
-  pristine_tree_hash: a741c1b6594287a1e11c4628e3aba654fe6d5aca
+  generation_id: 3547cad7-5cc1-4a4e-8416-3e0c202bdcb1
+  pristine_commit_hash: 32c720857d178a3b554a6967a62da5f833e25790
+  pristine_tree_hash: 52f64bcf51d20d6aeefb2897c70ae9452bf155cf
 features:
   go:
     additionalDependencies: 0.1.0
@@ -806,8 +806,8 @@ trackedFiles:
     pristine_git_object: b5a8c70a918ae33746ad05b24dd3d2b1868d3c77
   docs/models/components/method.md:
     id: ed7b996a91be
-    last_write_checksum: sha1:fe09b9a44897dc1255b3e19c9ecddaf5999c34b7
-    pristine_git_object: 48655957d5604d719f491d522559bb83ba213596
+    last_write_checksum: sha1:c6dd97e317e6c68ace97fc979f8cbbd34c75104a
+    pristine_git_object: 0a2366ff94b67e7f3d6de6464cd22df59ecc88f0
   docs/models/components/mockcardmerchantadvicecodeoptions.md:
     id: 0d96c7e86e98
     last_write_checksum: sha1:263cf916f8a8b4dc9054ab28dbdcf457c401ded7
@@ -1214,8 +1214,8 @@ trackedFiles:
     pristine_git_object: c3a8cbff328039865fd481982688dd674e58701c
   docs/models/components/redirectpaymentmethodcreatemethod.md:
     id: 7dea7cd505c1
-    last_write_checksum: sha1:69d21223d1ec252180333862017cd77c88d9716f
-    pristine_git_object: 2dc72427b68e1c69061fd41b19a7c97ce7da5f7a
+    last_write_checksum: sha1:5e8e2ffdf6d9e00e452d32b5560774b2880dc68b
+    pristine_git_object: 72f1f03e91181aa7e74900c1a4a5e6c9637beb1b
   docs/models/components/refund.md:
     id: a9ba6686865f
     last_write_checksum: sha1:abfca5a7af198ffae833e940f9b71587e47a1cb1
@@ -1510,8 +1510,8 @@ trackedFiles:
     pristine_git_object: 404abf65670cb82c2e640ec2ee1aa20116e72c1f
   docs/models/components/transactionconnectionoptions.md:
     id: a4843e535547
-    last_write_checksum: sha1:f33d2f946bb2aa2efe36e0ed44490870d7ae731b
-    pristine_git_object: 6147a04c31202ba506febd9c80d511356197e194
+    last_write_checksum: sha1:e9533fdf1b718b5c7d829a5adcf2b4d8469cdf17
+    pristine_git_object: b0ad67d1fc84f4269e800f52d89d9f4b7925b4e4
   docs/models/components/transactioncreate.md:
     id: 652e84478e51
     last_write_checksum: sha1:66e7e42d8fa631173fe8e1f30f573175b3b5528f
@@ -2714,8 +2714,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:7276a72ed0d629398acd66ae7e21788837b5a90d
-    pristine_git_object: d4e455093f2579932bad5f06431f3f3eba0a976b
+    last_write_checksum: sha1:44cd4dc2e35e593c0658353cba4b186d96c115df
+    pristine_git_object: 32d62448e92a46c975cee82f8a73407279c00b0a
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3430,8 +3430,8 @@ trackedFiles:
     pristine_git_object: d35ab589eef2077285d21ec4258dcfc2cfdbe18c
   models/components/method.go:
     id: 8c7abdd7dd0c
-    last_write_checksum: sha1:218aa7155375a204e15f5b289177bc23bbce1a0a
-    pristine_git_object: 4825558743145181722461c7692b08c0eeb430b8
+    last_write_checksum: sha1:687ad5ddec681c6ea6422dea59d8593c8ee05589
+    pristine_git_object: 8949125d3693a47f84239cce9faded6effdd0fa2
   models/components/mockcardmerchantadvicecodeoptions.go:
     id: b2eaf35a7df5
     last_write_checksum: sha1:5d6fe4892523378f4a2e5e0d0d240962b51fb193
@@ -3782,8 +3782,8 @@ trackedFiles:
     pristine_git_object: 535d323d384db1cb0f7a119b15aac7ace889b089
   models/components/redirectpaymentmethodcreate.go:
     id: 9d495c3b3403
-    last_write_checksum: sha1:13b6b8ded8c7b3a579c8671678e9addae00a54b3
-    pristine_git_object: 7695c00a453957c9ca53000c7b96ceea0caf010b
+    last_write_checksum: sha1:e337625386613248a5022d20a80629a97d2ffbd6
+    pristine_git_object: 271a7f04eb5f9d21f0862a348eb490b7995582c8
   models/components/refund.go:
     id: 6120ea17a7e7
     last_write_checksum: sha1:687a954562768a447b411a6e75b71489e76cb381
@@ -4026,8 +4026,8 @@ trackedFiles:
     pristine_git_object: 5cc70506216abd43c245db44f103154dd17ad16b
   models/components/transactionconnectionoptions.go:
     id: 5ce01894f53d
-    last_write_checksum: sha1:c290feebb7fb737310d57ca1e460a6b8296478a2
-    pristine_git_object: ddddf4f7ccbd9510ba6128cf75b8235b2848e587
+    last_write_checksum: sha1:bf959946ddd42a535b6c449af4e5c032ce0e5fe4
+    pristine_git_object: 4102f88ecf38e55c1cecaf10079984f50f1845c6
   models/components/transactioncreate.go:
     id: 2fed3feab426
     last_write_checksum: sha1:566c555967badef061d727212ab81a72523d3d46
@@ -8468,6 +8468,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(RedirectPaymentMethodCreate).Method.Enum(paybybank)` **Added**\n  *  `response.Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentMethods.Get()`:  `response.Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentMethods.Update()`:  `response.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate` **Changed**\n  *  `response.PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.AdyenPaybybank` **Added**\n  *  `response.PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.union(Transaction).PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.union(Transaction).PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentServiceDefinitions.List()`:  `response.Items[].Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentServiceDefinitions.Get()`:  `response.Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentServices.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentServices.Create()`:  `response.Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentServices.Get()`:  `response.Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentServices.Update()`:  `response.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Payouts.List()`:  `response.Items[].PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Payouts.Create()`:  `response.PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.Payouts.Get()`:  `response.PaymentMethod.Method.Enum(paybybank)` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.AdyenPaybybank` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

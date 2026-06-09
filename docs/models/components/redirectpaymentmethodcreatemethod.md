@@ -86,6 +86,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodOxxo`            | oxxo                                               |
 | `RedirectPaymentMethodCreateMethodP24`             | p24                                                |
 | `RedirectPaymentMethodCreateMethodPagoefectivo`    | pagoefectivo                                       |
+| `RedirectPaymentMethodCreateMethodPaybybank`       | paybybank                                          |
 | `RedirectPaymentMethodCreateMethodPayid`           | payid                                              |
 | `RedirectPaymentMethodCreateMethodPaymaya`         | paymaya                                            |
 | `RedirectPaymentMethodCreateMethodPaysquad`        | paysquad                                           |
