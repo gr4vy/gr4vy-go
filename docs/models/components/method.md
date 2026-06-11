@@ -65,6 +65,7 @@ custom := components.Method("custom_value")
 | `MethodGopay`            | gopay                    |
 | `MethodGrabpay`          | grabpay                  |
 | `MethodIdeal`            | ideal                    |
+| `MethodInterac`          | interac                  |
 | `MethodKakaopay`         | kakaopay                 |
 | `MethodKcp`              | kcp                      |
 | `MethodKhipu`            | khipu                    |
