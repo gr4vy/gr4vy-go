@@ -59,6 +59,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodGopay`           | gopay                                              |
 | `RedirectPaymentMethodCreateMethodGrabpay`         | grabpay                                            |
 | `RedirectPaymentMethodCreateMethodIdeal`           | ideal                                              |
+| `RedirectPaymentMethodCreateMethodInterac`         | interac                                            |
 | `RedirectPaymentMethodCreateMethodKakaopay`        | kakaopay                                           |
 | `RedirectPaymentMethodCreateMethodKcp`             | kcp                                                |
 | `RedirectPaymentMethodCreateMethodKhipu`           | khipu                                              |
