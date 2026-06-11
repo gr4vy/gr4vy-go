@@ -2,6 +2,10 @@
 
 package components
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 // TransactionCaptureCreate - Request body for capturing an authorized transaction.
 type TransactionCaptureCreate struct {
 	// The amount to capture, in the smallest currency unit (e.g., cents). This must be less than or equal to the authorized amount, unless over-capture is available.
@@ -10,6 +14,21 @@ type TransactionCaptureCreate struct {
 	Airline *Airline `json:"airline,omitempty"`
 	// An array of cart items that represents the line items of this capture.
 	CartItems []CartItem `json:"cart_items,omitempty"`
+	// Whether this is marked as the final capture for the associated transaction. Must be `true` or omitted when multi-capture is not enabled; a value of `false` is only valid when multi-capture is available on the connection.
+	Final *bool `default:"true" json:"final"`
+	// An external identifier that can be used to match the capture against your own records.
+	ExternalIdentifier *string `json:"external_identifier,omitempty"`
+}
+
+func (t TransactionCaptureCreate) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *TransactionCaptureCreate) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, nil); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (t *TransactionCaptureCreate) GetAmount() *int64 {
@@ -31,4 +50,18 @@ func (t *TransactionCaptureCreate) GetCartItems() []CartItem {
 		return nil
 	}
 	return t.CartItems
+}
+
+func (t *TransactionCaptureCreate) GetFinal() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.Final
+}
+
+func (t *TransactionCaptureCreate) GetExternalIdentifier() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ExternalIdentifier
 }
