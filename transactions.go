@@ -25,6 +25,7 @@ type Transactions struct {
 	Actions     *Actions
 	Events      *Events
 	Settlements *Settlements
+	Captures    *Captures
 
 	rootSDK          *Gr4vy
 	sdkConfiguration config.SDKConfiguration
@@ -40,6 +41,7 @@ func newTransactions(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *h
 		Actions:          newActions(rootSDK, sdkConfig, hooks),
 		Events:           newEvents(rootSDK, sdkConfig, hooks),
 		Settlements:      newSettlements(rootSDK, sdkConfig, hooks),
+		Captures:         newCaptures(rootSDK, sdkConfig, hooks),
 	}
 }
 
