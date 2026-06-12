@@ -5,6 +5,7 @@ package flows
 import (
 	"context"
 	"testing"
+	"time"
 
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/models/operations"
@@ -39,6 +40,61 @@ func TestAuthorizeCaptureRefund(t *testing.T) {
 	}
 	if refund.ID == "" {
 		t.Fatal("refund id is empty")
+	}
+}
+
+func TestCaptureListAndGet(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+
+	tx := harness.Authorize(t, m, 4500, "USD")
+	if tx.Status != components.TransactionStatusAuthorizationSucceeded {
+		t.Fatalf("expected authorization_succeeded, got %s", tx.Status)
+	}
+
+	captured, err := m.Client.Transactions.Capture(ctx, operations.CaptureTransactionRequest{
+		TransactionID:            tx.ID,
+		TransactionCaptureCreate: components.TransactionCaptureCreate{Amount: gr4vyInt(4500)},
+	})
+	if err != nil {
+		t.Fatalf("capture: %v", err)
+	}
+	if captured == nil {
+		t.Fatal("capture returned nil response")
+	}
+
+	// Captures are eventually consistent; poll until one appears.
+	var lastListErr error
+	captures, ok := harness.Until(30*time.Second, 2*time.Second,
+		func() (*components.CaptureCollection, error) {
+			c, err := m.Client.Transactions.Captures.List(ctx, tx.ID, nil)
+			if err != nil {
+				lastListErr = err
+			}
+			return c, err
+		},
+		func(c *components.CaptureCollection) bool { return c != nil && len(c.Items) >= 1 },
+	)
+	if !ok || captures == nil || len(captures.Items) == 0 {
+		if lastListErr != nil {
+			t.Fatalf("expected at least one capture for the transaction (last error: %v)", lastListErr)
+		}
+		t.Fatal("expected at least one capture for the transaction")
+	}
+
+	captureID := captures.Items[0].ID
+	if captureID == "" {
+		t.Fatal("capture item has an empty ID")
+	}
+	got, err := m.Client.Transactions.Captures.Get(ctx, tx.ID, captureID, nil)
+	if err != nil {
+		t.Fatalf("get capture: %v", err)
+	}
+	if got == nil {
+		t.Fatal("get capture returned nil response")
+	}
+	if got.ID != captureID {
+		t.Errorf("expected capture id %s, got %s", captureID, got.ID)
 	}
 }
 

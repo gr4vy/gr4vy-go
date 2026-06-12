@@ -144,8 +144,46 @@ if err != nil {
 }
 ```
 
-> **Note:** This will only create a token once. Use `withToken` to dynamically generate a token
-> for every request.
+> **Note:** This will only create a token once. Call `GetEmbedToken` again whenever you need a
+> fresh Embed token (for example, once per page load). `WithToken` is for SDK API requests, not
+> Embed JWTs.
+
+### Attaching a checkout session automatically
+
+For Embed, it is recommended to attach a checkout session to every transaction. The
+`GetEmbedTokenWithCheckoutSession` helper creates a checkout session using your SDK client and
+returns an Embed token with the resulting `checkout_session_id` already pinned, in a single call.
+
+```go
+import (
+	"context"
+	gr4vy "github.com/gr4vy/gr4vy-go"
+	"log"
+)
+
+privateKey := "...." // Private key loaded from disk or env var
+
+client := gr4vy.New(
+	gr4vy.WithID("example"),
+	gr4vy.WithServer(gr4vy.ServerSandbox),
+	gr4vy.WithSecuritySource(gr4vy.WithToken(privateKey, []gr4vy.JWTScope{gr4vy.CheckoutSessionsWrite}, 3600)),
+)
+
+embedParams := map[string]interface{}{
+	"amount":                    1299,
+	"currency":                  "USD",
+	"buyer_external_identifier": "user-1234",
+}
+
+token, err := gr4vy.GetEmbedTokenWithCheckoutSession(context.Background(), client, privateKey, embedParams, nil, nil)
+if err != nil {
+	log.Fatal(err)
+}
+```
+
+You can optionally pass a `*components.CheckoutSessionCreate` body to seed the session (for example
+with cart items or metadata), and a `*string` merchant account ID to override the client's
+configured merchant account.
 
 ## Merchant account ID selection
 

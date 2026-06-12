@@ -1,9 +1,12 @@
 package gr4vygo
 
 import (
+	"context"
 	"crypto/ecdsa"
 	"crypto/x509"
 	"encoding/pem"
+	"net/http"
+	"net/http/httptest"
 	"strings"
 	"testing"
 	"time"
@@ -258,6 +261,107 @@ func TestGetEmbedTokenTakesOptionalCheckoutSessionID(t *testing.T) {
 
 	if claims.CheckoutSessionID != testCheckoutSessionID {
 		t.Errorf("Expected checkout_session_id %s, got %s", testCheckoutSessionID, claims.CheckoutSessionID)
+	}
+}
+
+func TestGetEmbedTokenWithCheckoutSession(t *testing.T) {
+	var createCalls int
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Assert the SDK hits the intended endpoint, not just any request.
+		if r.Method != http.MethodPost || r.URL.Path != "/checkout/sessions" {
+			t.Errorf("expected POST /checkout/sessions, got %s %s", r.Method, r.URL.Path)
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		createCalls++
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated)
+		_, _ = w.Write([]byte(`{"type":"checkout-session","id":"` + testCheckoutSessionID + `"}`))
+	}))
+	defer server.Close()
+
+	client := New(
+		WithServerURL(server.URL),
+		WithSecurity("test-token"),
+	)
+
+	token, err := GetEmbedTokenWithCheckoutSession(context.Background(), client, testPrivateKeyPEM, testEmbedParams, nil, nil)
+	if err != nil {
+		t.Fatalf("Failed to create embed token with checkout session: %v", err)
+	}
+
+	if createCalls != 1 {
+		t.Errorf("Expected checkout session create to be called once, got %d", createCalls)
+	}
+
+	parsedToken, err := jwt.ParseWithClaims(token, &TokenClaims{}, func(token *jwt.Token) (interface{}, error) {
+		block, _ := pem.Decode([]byte(testPrivateKeyPEM))
+		privateKey, _ := x509.ParsePKCS8PrivateKey(block.Bytes)
+		ecdsaKey := privateKey.(*ecdsa.PrivateKey)
+		return &ecdsaKey.PublicKey, nil
+	})
+	if err != nil {
+		t.Fatalf("Failed to parse token: %v", err)
+	}
+
+	claims := parsedToken.Claims.(*TokenClaims)
+
+	if claims.CheckoutSessionID != testCheckoutSessionID {
+		t.Errorf("Expected checkout_session_id %s, got %s", testCheckoutSessionID, claims.CheckoutSessionID)
+	}
+
+	if len(claims.Scopes) != 1 || claims.Scopes[0] != string(Embed) {
+		t.Errorf("Expected embed scope, got %v", claims.Scopes)
+	}
+}
+
+func TestGetEmbedTokenWithCheckoutSessionNilClient(t *testing.T) {
+	_, err := GetEmbedTokenWithCheckoutSession(context.Background(), nil, testPrivateKeyPEM, nil, nil, nil)
+	if err == nil {
+		t.Fatal("expected error for nil client, got nil")
+	}
+}
+
+func TestGetEmbedTokenWithCheckoutSessionCreateFailure(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost || r.URL.Path != "/checkout/sessions" {
+			t.Errorf("expected POST /checkout/sessions, got %s %s", r.Method, r.URL.Path)
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(`{"type":"error","code":"internal_server_error","message":"boom"}`))
+	}))
+	defer server.Close()
+
+	client := New(WithServerURL(server.URL), WithSecurity("test-token"))
+	_, err := GetEmbedTokenWithCheckoutSession(context.Background(), client, testPrivateKeyPEM, nil, nil, nil)
+	if err == nil {
+		t.Fatal("expected error on create failure, got nil")
+	}
+}
+
+func TestGetEmbedTokenWithCheckoutSessionEmptyID(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost || r.URL.Path != "/checkout/sessions" {
+			t.Errorf("expected POST /checkout/sessions, got %s %s", r.Method, r.URL.Path)
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated)
+		_, _ = w.Write([]byte(`{"type":"checkout-session","id":""}`))
+	}))
+	defer server.Close()
+
+	client := New(WithServerURL(server.URL), WithSecurity("test-token"))
+	_, err := GetEmbedTokenWithCheckoutSession(context.Background(), client, testPrivateKeyPEM, nil, nil, nil)
+	if err == nil {
+		t.Fatal("expected error for empty session ID, got nil")
+	}
+	if !strings.Contains(err.Error(), "without an ID") {
+		t.Errorf("expected error to mention missing ID, got: %v", err)
 	}
 }
 

@@ -219,6 +219,37 @@ func GetEmbedToken(privateKeyPEM string, embedParams map[string]interface{}, che
 	return getToken(privateKeyPEM, []JWTScope{Embed}, 3600, embedParams, checkoutSessionID)
 }
 
+// GetEmbedTokenWithCheckoutSession creates a checkout session using the provided
+// authenticated SDK client and returns an Embed token with the resulting checkout
+// session ID pinned. This is a convenience wrapper around GetEmbedToken for the
+// common Embed flow where every transaction should be tied to a checkout session.
+//   - ctx: Request context.
+//   - client: An authenticated Gr4vy SDK client.
+//   - privateKeyPEM: PEM-encoded ECDSA private key string.
+//   - embedParams: Optional map of embed parameters to include in the token.
+//   - body: Optional checkout session body to seed cart items, metadata, and so on. Pass nil for an empty session.
+//   - merchantAccountID: Optional merchant account ID override. Pass nil to use the client's configured one.
+//
+// Returns the signed JWT token string or an error.
+func GetEmbedTokenWithCheckoutSession(ctx context.Context, client *Gr4vy, privateKeyPEM string, embedParams map[string]interface{}, body *components.CheckoutSessionCreate, merchantAccountID *string) (string, error) {
+	if client == nil {
+		return "", fmt.Errorf("client is required")
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+
+	session, err := client.CheckoutSessions.Create(ctx, merchantAccountID, body)
+	if err != nil {
+		return "", fmt.Errorf("failed to create checkout session: %w", err)
+	}
+	if session == nil || session.ID == "" {
+		return "", fmt.Errorf("checkout session was created without an ID")
+	}
+
+	return GetEmbedToken(privateKeyPEM, embedParams, session.ID)
+}
+
 // UpdateToken updates an existing JWT token with a new signature and optionally new data.
 //   - token: The existing JWT token string.
 //   - privateKeyPEM: PEM-encoded ECDSA private key string.
