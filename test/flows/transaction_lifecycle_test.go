@@ -64,13 +64,21 @@ func TestCaptureListAndGet(t *testing.T) {
 	}
 
 	// Captures are eventually consistent; poll until one appears.
+	var lastListErr error
 	captures, ok := harness.Until(30*time.Second, 2*time.Second,
 		func() (*components.CaptureCollection, error) {
-			return m.Client.Transactions.Captures.List(ctx, tx.ID, nil)
+			c, err := m.Client.Transactions.Captures.List(ctx, tx.ID, nil)
+			if err != nil {
+				lastListErr = err
+			}
+			return c, err
 		},
 		func(c *components.CaptureCollection) bool { return c != nil && len(c.Items) >= 1 },
 	)
 	if !ok || captures == nil || len(captures.Items) == 0 {
+		if lastListErr != nil {
+			t.Fatalf("expected at least one capture for the transaction (last error: %v)", lastListErr)
+		}
 		t.Fatal("expected at least one capture for the transaction")
 	}
 
