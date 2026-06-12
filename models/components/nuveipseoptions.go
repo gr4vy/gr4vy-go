@@ -5,9 +5,9 @@ package components
 type NuveiPSEOptions struct {
 	// Customer type ("N" for persona natural, "J" for persona jurídica)
 	UserType *string `json:"userType,omitempty"`
-	// Customer’s document type
+	// Customer's document type
 	UserFisNumber *string `json:"userFisNumber,omitempty"`
-	// Customer’s document number
+	// Customer's document number
 	FiscalNumber *string `json:"fiscalNumber,omitempty"`
 	// The bank code of the selected bank
 	BankCode *string `json:"bankCode,omitempty"`

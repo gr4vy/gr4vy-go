@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 00c2d6d9149dbfe996fba1dfa23a501a
+  docChecksum: d74270d9c866ea028d05f326bb962b5d
   docVersion: 1.0.0
-  speakeasyVersion: 1.776.0
-  generationVersion: 2.900.1
-  releaseVersion: 1.12.102
-  configChecksum: f2ec7141e52962bb45564f1371705e86
+  speakeasyVersion: 1.777.1
+  generationVersion: 2.903.2
+  releaseVersion: 1.12.103
+  configChecksum: fc65c6d52a3c1dc94c48035d9f362ca6
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: ee3eb06b-8a61-4c25-bfca-0a7c6602fa38
-  pristine_commit_hash: 862742bf8f8d9adb94fffa73a223b403c6224ac9
-  pristine_tree_hash: 7f146e1e56156891fdba9d40418080cbb1a8d3a7
+  generation_id: cbe008c6-aa99-44f2-8fcb-6a99e74452a1
+  pristine_commit_hash: c35a4738a4fd93eec05bb634a5eff09f5ba5e538
+  pristine_tree_hash: 99f25ae7d0fad986e063be744e31d9f63e669001
 features:
   go:
     additionalDependencies: 0.1.0
@@ -878,8 +878,8 @@ trackedFiles:
     pristine_git_object: 840260d2d1d1cbf3a626f7650f293f4c16d724b1
   docs/models/components/nuveipseoptions.md:
     id: 02921798d83c
-    last_write_checksum: sha1:063b8a0bca1faf0457c668c91ff9e91b251dd512
-    pristine_git_object: 281ce84428cf59709d10bed6944d59a8190d09f2
+    last_write_checksum: sha1:5bd261d0737be74f572aaa59c26e4ca5da0c1c5d
+    pristine_git_object: 61b69db09682e4901d6bafe6e1bdd5bf98327f2c
   docs/models/components/oxxooptions.md:
     id: 49ae7af24e14
     last_write_checksum: sha1:35c063fa8d648022f6e96685f87265daba6c7b64
@@ -2746,8 +2746,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:95632bd3d2692f6d7c79defdf82c4d26e70d3697
-    pristine_git_object: b71b40fcece6bc1045009e5e783d5f6036e81297
+    last_write_checksum: sha1:2dbb71a8c521a5c1026464386f1d0945055944aa
+    pristine_git_object: 2d7c149570ddbd4fdd1354c6dcaa26a66530aa35
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3526,8 +3526,8 @@ trackedFiles:
     pristine_git_object: 466f18917b02bdcb78caf8256fe8ca18412c50e2
   models/components/nuveipseoptions.go:
     id: 02e46d6d577c
-    last_write_checksum: sha1:a5ba60a6e49ca23b00e4ee8548f601cd59ef70e7
-    pristine_git_object: 3aa09f7af2038c94627236f06013f9bae15e3c8f
+    last_write_checksum: sha1:126e63925b7498aa1c5145abab6de9af2b46e793
+    pristine_git_object: 2d285d94abb666a7b959f32d147cc271e7eb4d7d
   models/components/oxxooptions.go:
     id: bd60d1209b3b
     last_write_checksum: sha1:ec3837351dcfb2e4f509e51078beb2544895bc74
@@ -8581,7 +8581,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Captures.List()`: **Added**\n* `Gr4vy.Transactions.Captures.Get()`: **Added**\n* `Gr4vy.Transactions.Capture()`: \n  *  `request.Request.TransactionCaptureCreate` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
