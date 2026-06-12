@@ -144,7 +144,7 @@ if err != nil {
 }
 ```
 
-> **Note:** This will only create a token once. Use `withToken` to dynamically generate a token
+> **Note:** This will only create a token once. Use `WithToken` to dynamically generate a token
 > for every request.
 
 ### Attaching a checkout session automatically

@@ -232,12 +232,22 @@ func GetEmbedToken(privateKeyPEM string, embedParams map[string]interface{}, che
 //
 // Returns the signed JWT token string or an error.
 func GetEmbedTokenWithCheckoutSession(ctx context.Context, client *Gr4vy, privateKeyPEM string, embedParams map[string]interface{}, body *components.CheckoutSessionCreate, merchantAccountID *string) (string, error) {
+	if client == nil {
+		return "", fmt.Errorf("client is required")
+	}
+	if ctx == nil {
+		ctx = context.Background()
+	}
+
 	session, err := client.CheckoutSessions.Create(ctx, merchantAccountID, body)
 	if err != nil {
 		return "", fmt.Errorf("failed to create checkout session: %w", err)
 	}
+	if session == nil || session.ID == "" {
+		return "", fmt.Errorf("checkout session was created without an ID")
+	}
 
-	return getToken(privateKeyPEM, []JWTScope{Embed}, 3600, embedParams, session.ID)
+	return GetEmbedToken(privateKeyPEM, embedParams, session.ID)
 }
 
 // UpdateToken updates an existing JWT token with a new signature and optionally new data.

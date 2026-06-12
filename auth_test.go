@@ -267,6 +267,12 @@ func TestGetEmbedTokenTakesOptionalCheckoutSessionID(t *testing.T) {
 func TestGetEmbedTokenWithCheckoutSession(t *testing.T) {
 	var createCalls int
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		// Assert the SDK hits the intended endpoint, not just any request.
+		if r.Method != http.MethodPost || r.URL.Path != "/checkout/sessions" {
+			t.Errorf("expected POST /checkout/sessions, got %s %s", r.Method, r.URL.Path)
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
 		createCalls++
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusCreated)
