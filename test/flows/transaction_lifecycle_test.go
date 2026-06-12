@@ -5,6 +5,7 @@ package flows
 import (
 	"context"
 	"testing"
+	"time"
 
 	"github.com/gr4vy/gr4vy-go/models/components"
 	"github.com/gr4vy/gr4vy-go/models/operations"
@@ -39,6 +40,43 @@ func TestAuthorizeCaptureRefund(t *testing.T) {
 	}
 	if refund.ID == "" {
 		t.Fatal("refund id is empty")
+	}
+}
+
+func TestCaptureListAndGet(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+
+	tx := harness.Authorize(t, m, 4500, "USD")
+	if tx.Status != components.TransactionStatusAuthorizationSucceeded {
+		t.Fatalf("expected authorization_succeeded, got %s", tx.Status)
+	}
+
+	if _, err := m.Client.Transactions.Capture(ctx, operations.CaptureTransactionRequest{
+		TransactionID:            tx.ID,
+		TransactionCaptureCreate: components.TransactionCaptureCreate{Amount: gr4vyInt(4500)},
+	}); err != nil {
+		t.Fatalf("capture: %v", err)
+	}
+
+	// Captures are eventually consistent; poll until one appears.
+	captures, ok := harness.Until(30*time.Second, 2*time.Second,
+		func() (*components.CaptureCollection, error) {
+			return m.Client.Transactions.Captures.List(ctx, tx.ID, nil)
+		},
+		func(c *components.CaptureCollection) bool { return c != nil && len(c.Items) >= 1 },
+	)
+	if !ok || captures == nil || len(captures.Items) == 0 {
+		t.Fatal("expected at least one capture for the transaction")
+	}
+
+	captureID := captures.Items[0].ID
+	got, err := m.Client.Transactions.Captures.Get(ctx, tx.ID, captureID, nil)
+	if err != nil {
+		t.Fatalf("get capture: %v", err)
+	}
+	if got.ID != captureID {
+		t.Errorf("expected capture id %s, got %s", captureID, got.ID)
 	}
 }
 
