@@ -166,7 +166,7 @@ privateKey := "...." // Private key loaded from disk or env var
 client := gr4vy.New(
 	gr4vy.WithID("example"),
 	gr4vy.WithServer(gr4vy.ServerSandbox),
-	gr4vy.WithSecuritySource(gr4vy.WithToken(privateKey, nil, 3600)),
+	gr4vy.WithSecuritySource(gr4vy.WithToken(privateKey, []gr4vy.JWTScope{gr4vy.CheckoutSessionsWrite}, 3600)),
 )
 
 embedParams := map[string]interface{}{

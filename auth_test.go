@@ -324,6 +324,12 @@ func TestGetEmbedTokenWithCheckoutSessionNilClient(t *testing.T) {
 
 func TestGetEmbedTokenWithCheckoutSessionCreateFailure(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost || r.URL.Path != "/checkout/sessions" {
+			t.Errorf("expected POST /checkout/sessions, got %s %s", r.Method, r.URL.Path)
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusInternalServerError)
 		_, _ = w.Write([]byte(`{"type":"error","code":"internal_server_error","message":"boom"}`))
 	}))
