@@ -144,8 +144,9 @@ if err != nil {
 }
 ```
 
-> **Note:** This will only create a token once. Use `WithToken` to dynamically generate a token
-> for every request.
+> **Note:** This will only create a token once. Call `GetEmbedToken` again whenever you need a
+> fresh Embed token (for example, once per page load). `WithToken` is for SDK API requests, not
+> Embed JWTs.
 
 ### Attaching a checkout session automatically
 

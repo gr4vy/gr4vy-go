@@ -75,9 +75,15 @@ func TestCaptureListAndGet(t *testing.T) {
 	}
 
 	captureID := captures.Items[0].ID
+	if captureID == "" {
+		t.Fatal("capture item has an empty ID")
+	}
 	got, err := m.Client.Transactions.Captures.Get(ctx, tx.ID, captureID, nil)
 	if err != nil {
 		t.Fatalf("get capture: %v", err)
+	}
+	if got == nil {
+		t.Fatal("get capture returned nil response")
 	}
 	if got.ID != captureID {
 		t.Errorf("expected capture id %s, got %s", captureID, got.ID)
