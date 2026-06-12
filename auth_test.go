@@ -345,6 +345,7 @@ func TestGetEmbedTokenWithCheckoutSessionCreateFailure(t *testing.T) {
 func TestGetEmbedTokenWithCheckoutSessionEmptyID(t *testing.T) {
 	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost || r.URL.Path != "/checkout/sessions" {
+			t.Errorf("expected POST /checkout/sessions, got %s %s", r.Method, r.URL.Path)
 			w.WriteHeader(http.StatusNotFound)
 			return
 		}
@@ -358,6 +359,9 @@ func TestGetEmbedTokenWithCheckoutSessionEmptyID(t *testing.T) {
 	_, err := GetEmbedTokenWithCheckoutSession(context.Background(), client, testPrivateKeyPEM, nil, nil, nil)
 	if err == nil {
 		t.Fatal("expected error for empty session ID, got nil")
+	}
+	if !strings.Contains(err.Error(), "without an ID") {
+		t.Errorf("expected error to mention missing ID, got: %v", err)
 	}
 }
 
