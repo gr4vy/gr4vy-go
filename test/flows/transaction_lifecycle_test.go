@@ -52,11 +52,15 @@ func TestCaptureListAndGet(t *testing.T) {
 		t.Fatalf("expected authorization_succeeded, got %s", tx.Status)
 	}
 
-	if _, err := m.Client.Transactions.Capture(ctx, operations.CaptureTransactionRequest{
+	captured, err := m.Client.Transactions.Capture(ctx, operations.CaptureTransactionRequest{
 		TransactionID:            tx.ID,
 		TransactionCaptureCreate: components.TransactionCaptureCreate{Amount: gr4vyInt(4500)},
-	}); err != nil {
+	})
+	if err != nil {
 		t.Fatalf("capture: %v", err)
+	}
+	if captured == nil {
+		t.Fatal("capture returned nil response")
 	}
 
 	// Captures are eventually consistent; poll until one appears.

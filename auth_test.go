@@ -315,6 +315,46 @@ func TestGetEmbedTokenWithCheckoutSession(t *testing.T) {
 	}
 }
 
+func TestGetEmbedTokenWithCheckoutSessionNilClient(t *testing.T) {
+	_, err := GetEmbedTokenWithCheckoutSession(context.Background(), nil, testPrivateKeyPEM, nil, nil, nil)
+	if err == nil {
+		t.Fatal("expected error for nil client, got nil")
+	}
+}
+
+func TestGetEmbedTokenWithCheckoutSessionCreateFailure(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.WriteHeader(http.StatusInternalServerError)
+		_, _ = w.Write([]byte(`{"type":"error","code":"internal_server_error","message":"boom"}`))
+	}))
+	defer server.Close()
+
+	client := New(WithServerURL(server.URL), WithSecurity("test-token"))
+	_, err := GetEmbedTokenWithCheckoutSession(context.Background(), client, testPrivateKeyPEM, nil, nil, nil)
+	if err == nil {
+		t.Fatal("expected error on create failure, got nil")
+	}
+}
+
+func TestGetEmbedTokenWithCheckoutSessionEmptyID(t *testing.T) {
+	server := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		if r.Method != http.MethodPost || r.URL.Path != "/checkout/sessions" {
+			w.WriteHeader(http.StatusNotFound)
+			return
+		}
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusCreated)
+		_, _ = w.Write([]byte(`{"type":"checkout-session","id":""}`))
+	}))
+	defer server.Close()
+
+	client := New(WithServerURL(server.URL), WithSecurity("test-token"))
+	_, err := GetEmbedTokenWithCheckoutSession(context.Background(), client, testPrivateKeyPEM, nil, nil, nil)
+	if err == nil {
+		t.Fatal("expected error for empty session ID, got nil")
+	}
+}
+
 func TestUpdateTokenResignsWithNewSignatureAndExpiration(t *testing.T) {
 	originalToken, err := GetToken(testPrivateKeyPEM, nil, 5)
 	if err != nil {
