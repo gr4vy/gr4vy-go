@@ -9,6 +9,8 @@ type TransactionConnectionOptions struct {
 	AdyenAch *AdyenOptions `json:"adyen-ach,omitempty"`
 	// Custom options to be passed to the `adyen-afterpay` connector.
 	AdyenAfterpay *AdyenOptions `json:"adyen-afterpay,omitempty"`
+	// Custom options to be passed to the `adyen-cashappafterpay` connector.
+	AdyenCashappafterpay *AdyenOptions `json:"adyen-cashappafterpay,omitempty"`
 	// Custom options to be passed to the `adyen-alipay` connector.
 	AdyenAlipay *AdyenOptions `json:"adyen-alipay,omitempty"`
 	// Custom options to be passed to the `adyen-card` connector.
@@ -142,6 +144,13 @@ func (t *TransactionConnectionOptions) GetAdyenAfterpay() *AdyenOptions {
 		return nil
 	}
 	return t.AdyenAfterpay
+}
+
+func (t *TransactionConnectionOptions) GetAdyenCashappafterpay() *AdyenOptions {
+	if t == nil {
+		return nil
+	}
+	return t.AdyenCashappafterpay
 }
 
 func (t *TransactionConnectionOptions) GetAdyenAlipay() *AdyenOptions {
