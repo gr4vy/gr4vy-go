@@ -26,6 +26,7 @@ const (
 	MethodCapitec          Method = "capitec"
 	MethodCard             Method = "card"
 	MethodCashapp          Method = "cashapp"
+	MethodCashappafterpay  Method = "cashappafterpay"
 	MethodChaseorbital     Method = "chaseorbital"
 	MethodClearpay         Method = "clearpay"
 	MethodClickToPay       Method = "click-to-pay"
@@ -138,7 +139,7 @@ func (e Method) ToPointer() *Method {
 func (e *Method) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "abitab", "affirm", "afterpay", "alipay", "alipayhk", "applepay", "arcuspaynetwork", "bacs", "bancontact", "bank", "bcp", "becs", "bitpay", "blik", "ach", "boleto", "boost", "breb", "capitec", "card", "cashapp", "chaseorbital", "clearpay", "click-to-pay", "custom_push", "custom_redirect", "custom_tokenize", "dana", "dcb", "dlocal", "ebanx", "eckoh", "efecty", "eps", "everydaypay", "gcash", "gem", "gemds", "gift-card", "giropay", "givingblock", "gocardless", "googlepay", "googlepay_pan_only", "gopay", "grabpay", "ideal", "interac", "kakaopay", "kcp", "khipu", "klarna", "konbini", "latitude", "latitudeds", "laybuy", "linepay", "linkaja", "maybankqrpay", "mercadopago", "multibanco", "multipago", "nequi", "netbanking", "network-token", "nupay", "oney_10x", "oney_12x", "oney_3x", "oney_4x", "oney_6x", "onlinebankingcz", "ovo", "oxxo", "p24", "pagoefectivo", "paybybank", "payid", "paymaya", "paysquad", "paypal", "paypalpaylater", "paypay", "payto", "payvalida", "paze", "picpay", "pix", "plaid", "pse", "rabbitlinepay", "razorpay", "rapipago", "redpagos", "scalapay", "sepa", "servipag", "seveneleven", "shopeepay", "singteldash", "smartpay", "sofort", "spei", "stitch", "swish", "stripedd", "stripetoken", "tapi", "tapifintechs", "thaiqr", "touchngo", "truemoney", "trustly", "trustlyeurope", "upi", "venmo", "vipps", "waave", "webpay", "wechat", "wero", "yape", "zippay":
+		case "abitab", "affirm", "afterpay", "alipay", "alipayhk", "applepay", "arcuspaynetwork", "bacs", "bancontact", "bank", "bcp", "becs", "bitpay", "blik", "ach", "boleto", "boost", "breb", "capitec", "card", "cashapp", "cashappafterpay", "chaseorbital", "clearpay", "click-to-pay", "custom_push", "custom_redirect", "custom_tokenize", "dana", "dcb", "dlocal", "ebanx", "eckoh", "efecty", "eps", "everydaypay", "gcash", "gem", "gemds", "gift-card", "giropay", "givingblock", "gocardless", "googlepay", "googlepay_pan_only", "gopay", "grabpay", "ideal", "interac", "kakaopay", "kcp", "khipu", "klarna", "konbini", "latitude", "latitudeds", "laybuy", "linepay", "linkaja", "maybankqrpay", "mercadopago", "multibanco", "multipago", "nequi", "netbanking", "network-token", "nupay", "oney_10x", "oney_12x", "oney_3x", "oney_4x", "oney_6x", "onlinebankingcz", "ovo", "oxxo", "p24", "pagoefectivo", "paybybank", "payid", "paymaya", "paysquad", "paypal", "paypalpaylater", "paypay", "payto", "payvalida", "paze", "picpay", "pix", "plaid", "pse", "rabbitlinepay", "razorpay", "rapipago", "redpagos", "scalapay", "sepa", "servipag", "seveneleven", "shopeepay", "singteldash", "smartpay", "sofort", "spei", "stitch", "swish", "stripedd", "stripetoken", "tapi", "tapifintechs", "thaiqr", "touchngo", "truemoney", "trustly", "trustlyeurope", "upi", "venmo", "vipps", "waave", "webpay", "wechat", "wero", "yape", "zippay":
 			return true
 		}
 	}

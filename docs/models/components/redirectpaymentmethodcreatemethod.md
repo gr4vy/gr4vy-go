@@ -38,6 +38,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodAch`             | ach                                                |
 | `RedirectPaymentMethodCreateMethodCapitec`         | capitec                                            |
 | `RedirectPaymentMethodCreateMethodCashapp`         | cashapp                                            |
+| `RedirectPaymentMethodCreateMethodCashappafterpay` | cashappafterpay                                    |
 | `RedirectPaymentMethodCreateMethodClearpay`        | clearpay                                           |
 | `RedirectPaymentMethodCreateMethodCustomPush`      | custom_push                                        |
 | `RedirectPaymentMethodCreateMethodCustomRedirect`  | custom_redirect                                    |

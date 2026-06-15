@@ -39,6 +39,7 @@ custom := components.Method("custom_value")
 | `MethodCapitec`          | capitec                  |
 | `MethodCard`             | card                     |
 | `MethodCashapp`          | cashapp                  |
+| `MethodCashappafterpay`  | cashappafterpay          |
 | `MethodChaseorbital`     | chaseorbital             |
 | `MethodClearpay`         | clearpay                 |
 | `MethodClickToPay`       | click-to-pay             |
