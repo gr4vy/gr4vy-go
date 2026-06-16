@@ -15,6 +15,16 @@ type AdyenCardOptions struct {
 	WindowOrigin *string `json:"window_origin,omitempty"`
 	// Passes information of splitting payment amounts to the Adyen API.
 	Splits *AdyenSplitsOptions `json:"splits,omitempty"`
+	// Passes `merchantRiskIndicator` data to Adyen.
+	MerchantRiskIndicator map[string]any `json:"merchantRiskIndicator,omitempty"`
+	// Passes `accountInfo` data to Adyen.
+	AccountInfo map[string]any `json:"accountInfo,omitempty"`
+	// Passes `riskData.customFields` to Adyen.
+	RiskData map[string]any `json:"riskData,omitempty"`
+	// Passes `threeDS2RequestData.threeDSRequestorChallengeInd` to Adyen.
+	ThreeDSRequestorChallengeInd *string `json:"threeDSRequestorChallengeInd,omitempty"`
+	// Passes `authenticationData.attemptAuthentication` to Adyen.
+	AttemptAuthentication *string `json:"attemptAuthentication,omitempty"`
 }
 
 func (a *AdyenCardOptions) GetAutoRescue() *bool {
@@ -57,4 +67,39 @@ func (a *AdyenCardOptions) GetSplits() *AdyenSplitsOptions {
 		return nil
 	}
 	return a.Splits
+}
+
+func (a *AdyenCardOptions) GetMerchantRiskIndicator() map[string]any {
+	if a == nil {
+		return nil
+	}
+	return a.MerchantRiskIndicator
+}
+
+func (a *AdyenCardOptions) GetAccountInfo() map[string]any {
+	if a == nil {
+		return nil
+	}
+	return a.AccountInfo
+}
+
+func (a *AdyenCardOptions) GetRiskData() map[string]any {
+	if a == nil {
+		return nil
+	}
+	return a.RiskData
+}
+
+func (a *AdyenCardOptions) GetThreeDSRequestorChallengeInd() *string {
+	if a == nil {
+		return nil
+	}
+	return a.ThreeDSRequestorChallengeInd
+}
+
+func (a *AdyenCardOptions) GetAttemptAuthentication() *string {
+	if a == nil {
+		return nil
+	}
+	return a.AttemptAuthentication
 }
