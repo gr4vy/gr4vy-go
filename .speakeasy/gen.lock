@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: b59d79d1d11dd84bb8e2e83c5ff9fa80
+  docChecksum: 8adc996cea464b151faab883bb9917e3
   docVersion: 1.0.0
-  speakeasyVersion: 1.778.0
-  generationVersion: 2.904.2
-  releaseVersion: 1.12.105
-  configChecksum: 6652455f9644a70d422b1ce478f7a205
+  speakeasyVersion: 1.780.0
+  generationVersion: 2.906.0
+  releaseVersion: 1.12.106
+  configChecksum: bd7ccfb59ae4945c621faa842ebce4c8
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 6061d306-942c-40d7-bf3e-d65dca9113cf
-  pristine_commit_hash: 85540dfda21a4f59c577436530361c5f969fa4e7
-  pristine_tree_hash: 936f4b439adbecf96d4ed5b2ad521856c91338a8
+  generation_id: c98330bf-f985-45bf-9635-95dd2651ced4
+  pristine_commit_hash: 13c432e26458510a7a4169b56a7bbd6354f7804b
+  pristine_tree_hash: ee35336a51c7cea68d264e15e6d6c90bc6c6fcdf
 features:
   go:
     additionalDependencies: 0.1.0
@@ -35,7 +35,7 @@ features:
     openEnums: 0.1.0
     pagination: 2.82.7
     responseFormat: 0.1.2
-    retries: 2.84.2
+    retries: 2.84.3
     sdkHooks: 0.3.0
     serverIDs: 2.81.1
     unions: 2.87.7
@@ -206,8 +206,8 @@ trackedFiles:
     pristine_git_object: 1caf3457eac574a12686ad700caad462d8ca77e4
   docs/models/components/adyencardoptions.md:
     id: c06a9296920b
-    last_write_checksum: sha1:df26dbcd23da242ce0bd978ab76ae2c9b71b7d85
-    pristine_git_object: a47187a9e2ad2e309d758bb6d5bb08edd9cce680
+    last_write_checksum: sha1:5b52e8c136666391ec6cf4d8328f321246889b85
+    pristine_git_object: b3658e9004190c2b3659efb28da4d57c1a5594c9
   docs/models/components/adyenoptions.md:
     id: 0e52d909a032
     last_write_checksum: sha1:218f33efc69aa87b2faf8a8d236d087956e53fd1
@@ -2746,8 +2746,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:c9f3ccb65c2484f7d710baa5df6865e593f2fc99
-    pristine_git_object: 8506f436ef746a7c770982eb450193b085279abd
+    last_write_checksum: sha1:89503b7285296d9f189a15c6d32d4ec00e993ccd
+    pristine_git_object: f6633009d95ddca29a1a3d8f477de2d5df88b3a3
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -2910,8 +2910,8 @@ trackedFiles:
     pristine_git_object: e403180ece17c68843f83b1aa22cde400d556f1a
   models/components/adyencardoptions.go:
     id: 3426187eb96e
-    last_write_checksum: sha1:c85f15668c1ccc9d5f66cf3d5e00f6b211153627
-    pristine_git_object: 87f0a19bd2f1be6a186073f37014b44c18bc0c35
+    last_write_checksum: sha1:15aa7e894e08515d3c9339e6519f17d7b4159d9a
+    pristine_git_object: b14af430b98bdef9b23e00161324cfa22208425b
   models/components/adyenoptions.go:
     id: 3b894b6a95b1
     last_write_checksum: sha1:42d0d933cb0839b00dc4fd80cc043930c68093ce
@@ -4682,8 +4682,8 @@ trackedFiles:
     pristine_git_object: 3409c99ef59f96fa5d221c28b42edb6270d7dc5b
   retry/config.go:
     id: 82d673cb0389
-    last_write_checksum: sha1:7f7d96b59a18e95bac847ae09c63bbd911ee8432
-    pristine_git_object: 5b3dc7c122d8ab08905485342d7474f8f163888d
+    last_write_checksum: sha1:102d1953fbd7e9f312c4442c71ccca2eaaeaa27d
+    pristine_git_object: 767002c7898128324d8741ce9c534bd466492169
   sessions.go:
     id: 8c9f6fb78f3e
     last_write_checksum: sha1:8651ee36037370dfca9c6a0fc2ef5a72c02b9ddf
@@ -8581,7 +8581,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(RedirectPaymentMethodCreate).Method.Enum(cashappafterpay)` **Added**\n  *  `response.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentMethods.Get()`:  `response.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentMethods.Update()`:  `response.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate` **Changed**\n  *  `response.PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.AdyenCashappafterpay` **Added**\n  *  `response.PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.union(Transaction).PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.union(Transaction).PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentServiceDefinitions.List()`:  `response.Items[].Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentServiceDefinitions.Get()`:  `response.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentServices.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentServices.Create()`:  `response.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentServices.Get()`:  `response.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentServices.Update()`:  `response.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Payouts.List()`:  `response.Items[].PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Payouts.Create()`:  `response.PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.Payouts.Get()`:  `response.PaymentMethod.Method.Enum(cashappafterpay)` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.AdyenCashappafterpay` **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.AdyenCard` **Changed**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.AdyenCard` **Changed**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.AdyenCard` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
