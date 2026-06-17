@@ -7,6 +7,7 @@ type DefinitionFieldFormat string
 const (
 	DefinitionFieldFormatText      DefinitionFieldFormat = "text"
 	DefinitionFieldFormatMultiline DefinitionFieldFormat = "multiline"
+	DefinitionFieldFormatFile      DefinitionFieldFormat = "file"
 	DefinitionFieldFormatNumber    DefinitionFieldFormat = "number"
 	DefinitionFieldFormatTimezone  DefinitionFieldFormat = "timezone"
 	DefinitionFieldFormatBoolean   DefinitionFieldFormat = "boolean"
@@ -20,7 +21,7 @@ func (e DefinitionFieldFormat) ToPointer() *DefinitionFieldFormat {
 func (e *DefinitionFieldFormat) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "text", "multiline", "number", "timezone", "boolean":
+		case "text", "multiline", "file", "number", "timezone", "boolean":
 			return true
 		}
 	}

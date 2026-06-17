@@ -20,6 +20,7 @@ custom := components.DefinitionFieldFormat("custom_value")
 | -------------------------------- | -------------------------------- |
 | `DefinitionFieldFormatText`      | text                             |
 | `DefinitionFieldFormatMultiline` | multiline                        |
+| `DefinitionFieldFormatFile`      | file                             |
 | `DefinitionFieldFormatNumber`    | number                           |
 | `DefinitionFieldFormatTimezone`  | timezone                         |
 | `DefinitionFieldFormatBoolean`   | boolean                          |
