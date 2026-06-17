@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: ac68814f7a80db100bcf4f0d6dbd1646
+  docChecksum: 95c9becfb3bd46cf8d0e07133b295b0a
   docVersion: 1.0.0
   speakeasyVersion: 1.781.0
   generationVersion: 2.907.0
-  releaseVersion: 1.12.107
-  configChecksum: 25a76704e2faf2d9eb91be73589695d4
+  releaseVersion: 1.12.108
+  configChecksum: 61e3f89ad4b3d922e904e6c3b230681c
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 42337d74-6f56-49d9-9232-58afa3ba296c
-  pristine_commit_hash: 19b5e141133fd6f75e6689e28fcd2ab36a8dff9e
-  pristine_tree_hash: 839b9151970309e8768089d2973f0cb6c0bff7ba
+  generation_id: 353b04ef-9fab-464f-8881-91030a2259ee
+  pristine_commit_hash: 66d371def14c00f94585460286e71abfa61350d4
+  pristine_tree_hash: cfa2f6f2a824bba6923d729767d9d6e805791b7b
 features:
   go:
     additionalDependencies: 0.1.0
@@ -344,6 +344,10 @@ trackedFiles:
     id: f766c9ece7a5
     last_write_checksum: sha1:baec3324205de82ab48dda21837689a0bb4c8e52
     pristine_git_object: 1e3bd18db6b2ce2f7927cb7f82c987343720a996
+  docs/models/components/callbackevent.md:
+    id: 4f601a41dfe2
+    last_write_checksum: sha1:c7ab6eb5bad44f7c4f85e05674714b2a1357bfa9
+    pristine_git_object: 2725033dc78899d82ad1daefee7ad13ec27e5e0f
   docs/models/components/cancelstatus.md:
     id: 7c61c43a374e
     last_write_checksum: sha1:25d5056102ff81208031385e8c13c3e788340fe0
@@ -1058,8 +1062,12 @@ trackedFiles:
     pristine_git_object: 851e9f82914e3a27e069a77915979c6738b76c1d
   docs/models/components/paypaloptions.md:
     id: 6316e429c883
-    last_write_checksum: sha1:10199f5d9df02fbd0e76597e8f1ca3a5287fea4f
-    pristine_git_object: b07ae287ad6a6ea737bb247fece06d769675a953
+    last_write_checksum: sha1:bc49fec37402f4ec861983105fac8f1e8081580a
+    pristine_git_object: f05526c43f2e1b5b782e452bed795da60e80bb56
+  docs/models/components/paypalorderupdatecallbackconfig.md:
+    id: 65fe14a433a7
+    last_write_checksum: sha1:3dec321ee01d1098c54b45769b2b98587a0863e4
+    pristine_git_object: 57d105586f4542ca9b66ee0be55725450c54346c
   docs/models/components/paypalshippingoptions.md:
     id: 413cf7d546ba
     last_write_checksum: sha1:06a4b6798e593a03902ec43bbac3c28163b77b1c
@@ -2746,8 +2754,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:5d5007604a43a59a7a9d92cd8dd68725af415d5e
-    pristine_git_object: de8f66b6bb69aedcc18297753446552845b1dc08
+    last_write_checksum: sha1:c78d2ae8ad58b93090eee5ec1447adc1658fc0d3
+    pristine_git_object: 89d41d1f9b6406cd24f3b67d2d757ba9b6182230
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3686,8 +3694,12 @@ trackedFiles:
     pristine_git_object: 0d0ce37aded029b27c284a229bf8f4d6ca35bf6e
   models/components/paypaloptions.go:
     id: 8811e7c4360a
-    last_write_checksum: sha1:ddf16670d688614bddaaf5f73caa98d992255473
-    pristine_git_object: 9e5e51a6f5dcb19573958e6d5d410580f640d283
+    last_write_checksum: sha1:01336ca071544d9616d1b83531ae94c98459ed41
+    pristine_git_object: c3953e33b62705840047a81aae2f7479573aa2ed
+  models/components/paypalorderupdatecallbackconfig.go:
+    id: 8fc683a6e568
+    last_write_checksum: sha1:66fc8cd6fe4036cf6adfe85191c5a6ef1a40639f
+    pristine_git_object: 8cb47c365b62b70d1c0bcab2437e9bd6c8dcacb9
   models/components/paypalshippingoptions.go:
     id: 35354527139d
     last_write_checksum: sha1:bfb5dd07c88bef36ac78c9c705e3368b2bd05766
@@ -8581,10 +8593,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Gr4vy.PaymentServiceDefinitions.List()`:  `response.Items[].Fields[].Format.Enum(file)` **Added**
-  * `Gr4vy.PaymentServiceDefinitions.Get()`:  `response.Fields[].Format.Enum(file)` **Added**
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.PaypalPaypal.OrderUpdateCallbackConfig` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.PaypalPaypal.OrderUpdateCallbackConfig` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.PaypalPaypal.OrderUpdateCallbackConfig` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
