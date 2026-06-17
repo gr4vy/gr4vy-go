@@ -3,10 +3,19 @@
 package components
 
 type PaypalOptions struct {
+	// Configuration for server-side callbacks during the PayPal checkout flow.
+	OrderUpdateCallbackConfig *PaypalOrderUpdateCallbackConfig `json:"order_update_callback_config,omitempty"`
 	// Additional Set Transaction Context Values (STC) to be sent to PayPal as part of the transaction.
 	AdditionalData []map[string]string `json:"additional_data,omitempty"`
 	// Shipping information to be passed to the PayPal API.
 	Shipping *PaypalShippingOptions `json:"shipping,omitempty"`
+}
+
+func (p *PaypalOptions) GetOrderUpdateCallbackConfig() *PaypalOrderUpdateCallbackConfig {
+	if p == nil {
+		return nil
+	}
+	return p.OrderUpdateCallbackConfig
 }
 
 func (p *PaypalOptions) GetAdditionalData() []map[string]string {
