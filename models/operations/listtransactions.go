@@ -95,6 +95,8 @@ type ListTransactionsRequest struct {
 	Used3ds *bool `queryParam:"style=form,explode=true,name=used_3ds"`
 	// Filters for transactions that have been disputed.
 	Disputed *bool `queryParam:"style=form,explode=true,name=disputed"`
+	// Filters for transactions that were reauthorized from the transaction with the provided ID.
+	ReauthorizedFromTransactionID *string `queryParam:"style=form,explode=true,name=reauthorized_from_transaction_id"`
 	// Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values.
 	BuyerSearch []string `queryParam:"style=form,explode=true,name=buyer_search"`
 	// The ID of the merchant account to use for this request.
@@ -411,6 +413,13 @@ func (l *ListTransactionsRequest) GetDisputed() *bool {
 		return nil
 	}
 	return l.Disputed
+}
+
+func (l *ListTransactionsRequest) GetReauthorizedFromTransactionID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.ReauthorizedFromTransactionID
 }
 
 func (l *ListTransactionsRequest) GetBuyerSearch() []string {
