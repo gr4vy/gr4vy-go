@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 95c9becfb3bd46cf8d0e07133b295b0a
+  docChecksum: 758f3e2b34643ee71c76988c2839d125
   docVersion: 1.0.0
-  speakeasyVersion: 1.781.0
-  generationVersion: 2.907.0
-  releaseVersion: 1.12.108
-  configChecksum: 61e3f89ad4b3d922e904e6c3b230681c
+  speakeasyVersion: 1.783.1
+  generationVersion: 2.910.1
+  releaseVersion: 1.12.109
+  configChecksum: e69d39e3ad8e3f764bcd85d31e9625a5
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 353b04ef-9fab-464f-8881-91030a2259ee
-  pristine_commit_hash: 66d371def14c00f94585460286e71abfa61350d4
-  pristine_tree_hash: cfa2f6f2a824bba6923d729767d9d6e805791b7b
+  generation_id: a038e337-4fff-4026-93c3-f89d37f8f900
+  pristine_commit_hash: d9e9e7bfd8e320b491e44365c083de62b5191b3d
+  pristine_tree_hash: d2dbade3f2a315106d4d4e6dee57fc9514500896
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2754,8 +2754,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:c78d2ae8ad58b93090eee5ec1447adc1658fc0d3
-    pristine_git_object: 89d41d1f9b6406cd24f3b67d2d757ba9b6182230
+    last_write_checksum: sha1:801997319a843ef6e8b8fa4cfc7fa101975dee3b
+    pristine_git_object: f4dd4af01edcf6b4556527cd21bcb20f5371d294
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -8593,7 +8593,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.PaypalPaypal.OrderUpdateCallbackConfig` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.PaypalPaypal.OrderUpdateCallbackConfig` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.PaypalPaypal.OrderUpdateCallbackConfig` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
