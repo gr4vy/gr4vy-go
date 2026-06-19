@@ -125,6 +125,7 @@ custom := components.Method("custom_value")
 | `MethodSpei`             | spei                     |
 | `MethodStitch`           | stitch                   |
 | `MethodSwish`            | swish                    |
+| `MethodStripe`           | stripe                   |
 | `MethodStripedd`         | stripedd                 |
 | `MethodStripetoken`      | stripetoken              |
 | `MethodTapi`             | tapi                     |

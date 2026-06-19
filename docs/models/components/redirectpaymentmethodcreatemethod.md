@@ -116,6 +116,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodSpei`            | spei                                               |
 | `RedirectPaymentMethodCreateMethodStitch`          | stitch                                             |
 | `RedirectPaymentMethodCreateMethodSwish`           | swish                                              |
+| `RedirectPaymentMethodCreateMethodStripe`          | stripe                                             |
 | `RedirectPaymentMethodCreateMethodStripedd`        | stripedd                                           |
 | `RedirectPaymentMethodCreateMethodStripetoken`     | stripetoken                                        |
 | `RedirectPaymentMethodCreateMethodTapi`            | tapi                                               |
