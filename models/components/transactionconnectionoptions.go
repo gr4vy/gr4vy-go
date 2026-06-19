@@ -115,6 +115,8 @@ type TransactionConnectionOptions struct {
 	StripeCard *StripeCardOptions `json:"stripe-card,omitempty"`
 	// Custom options to be passed to the `stripe-klarna` connector.
 	StripeKlarna *StripeOptions `json:"stripe-klarna,omitempty"`
+	// Custom options to be passed to the `stripe-onelink` connector.
+	StripeOnelink *StripeOptions `json:"stripe-onelink,omitempty"`
 	// Custom options to be passed to the `travelhub-card` connector.
 	TravelhubCard *TravelhubOptions `json:"travelhub-card,omitempty"`
 	// Custom options to be passed to the `trustly-trustly` connector.
@@ -515,6 +517,13 @@ func (t *TransactionConnectionOptions) GetStripeKlarna() *StripeOptions {
 		return nil
 	}
 	return t.StripeKlarna
+}
+
+func (t *TransactionConnectionOptions) GetStripeOnelink() *StripeOptions {
+	if t == nil {
+		return nil
+	}
+	return t.StripeOnelink
 }
 
 func (t *TransactionConnectionOptions) GetTravelhubCard() *TravelhubOptions {

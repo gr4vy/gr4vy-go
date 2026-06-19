@@ -84,6 +84,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodOney4x`          | oney_4x                                            |
 | `RedirectPaymentMethodCreateMethodOney6x`          | oney_6x                                            |
 | `RedirectPaymentMethodCreateMethodOnlinebankingcz` | onlinebankingcz                                    |
+| `RedirectPaymentMethodCreateMethodOnelink`         | onelink                                            |
 | `RedirectPaymentMethodCreateMethodOvo`             | ovo                                                |
 | `RedirectPaymentMethodCreateMethodOxxo`            | oxxo                                               |
 | `RedirectPaymentMethodCreateMethodP24`             | p24                                                |
