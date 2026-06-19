@@ -47,6 +47,7 @@ jobs:
       matrix:
         repo:
           - gr4vy/gr4vy-docs-mintlify
+          - gr4vy/gr4vy-cli
     runs-on: ubuntu-latest
     steps:
       - name: Notify SDKs
