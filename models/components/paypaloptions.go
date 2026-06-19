@@ -9,6 +9,16 @@ type PaypalOptions struct {
 	AdditionalData []map[string]string `json:"additional_data,omitempty"`
 	// Shipping information to be passed to the PayPal API.
 	Shipping *PaypalShippingOptions `json:"shipping,omitempty"`
+	// Customizes the PayPal Checkout button text. Use `PAY_NOW` to show a pay now button, or `CONTINUE` to show a continue button for deferred payments.
+	UserAction *string `json:"user_action,omitempty"`
+	// Controls the shipping address display in the PayPal Checkout flow. Use `GET_FROM_FILE` to use the shipping address from the PayPal account, `NO_SHIPPING` to hide shipping address fields, or `SET_PROVIDED_ADDRESS` to use the shipping address provided in the request.
+	ShippingPreference *string `json:"shipping_preference,omitempty"`
+	// The merchant brand name that appears in the PayPal Checkout flow. Maximum 127 characters.
+	BrandName *string `json:"brand_name,omitempty"`
+	// The type of landing page to display on the PayPal Checkout. Use `LOGIN` to show the PayPal login page, `GUEST_CHECKOUT` to show the guest checkout page, or `NO_PREFERENCE` to let PayPal decide.
+	LandingPage *string `json:"landing_page,omitempty"`
+	// The BCP 47 locale used to localize the PayPal Checkout page. For example, `en-US` or `fr-FR`.
+	Locale *string `json:"locale,omitempty"`
 }
 
 func (p *PaypalOptions) GetOrderUpdateCallbackConfig() *PaypalOrderUpdateCallbackConfig {
@@ -30,4 +40,39 @@ func (p *PaypalOptions) GetShipping() *PaypalShippingOptions {
 		return nil
 	}
 	return p.Shipping
+}
+
+func (p *PaypalOptions) GetUserAction() *string {
+	if p == nil {
+		return nil
+	}
+	return p.UserAction
+}
+
+func (p *PaypalOptions) GetShippingPreference() *string {
+	if p == nil {
+		return nil
+	}
+	return p.ShippingPreference
+}
+
+func (p *PaypalOptions) GetBrandName() *string {
+	if p == nil {
+		return nil
+	}
+	return p.BrandName
+}
+
+func (p *PaypalOptions) GetLandingPage() *string {
+	if p == nil {
+		return nil
+	}
+	return p.LandingPage
+}
+
+func (p *PaypalOptions) GetLocale() *string {
+	if p == nil {
+		return nil
+	}
+	return p.Locale
 }
