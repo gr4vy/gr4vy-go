@@ -91,6 +91,7 @@ custom := components.Method("custom_value")
 | `MethodOney4x`           | oney_4x                  |
 | `MethodOney6x`           | oney_6x                  |
 | `MethodOnlinebankingcz`  | onlinebankingcz          |
+| `MethodOnelink`          | onelink                  |
 | `MethodOvo`              | ovo                      |
 | `MethodOxxo`             | oxxo                     |
 | `MethodP24`              | p24                      |
