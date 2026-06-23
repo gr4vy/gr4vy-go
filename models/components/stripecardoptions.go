@@ -5,6 +5,8 @@ package components
 type StripeCardOptions struct {
 	// Stripe options to support Stripe Connect
 	StripeConnect *StripeConnectOptions `json:"stripe_connect,omitempty"`
+	// A Stripe customer ID (`cus_xxx`) to associate with the PaymentIntent for network token transactions. When provided, Stripe Radar can access the customer's payment history, dispute rate, and account age to improve risk scoring for returning customers.
+	CustomerID *string `json:"customer_id,omitempty"`
 	// Passes the `error_on_requires_action` option to the Stripe API. Set to true to fail the payment attempt if it transitions into requires_action. Use this parameter for simpler integrations that don't handle customer actions, such as saving cards without authentication.
 	ErrorOnRequiresAction *bool `json:"error_on_requires_action,omitempty"`
 }
@@ -14,6 +16,13 @@ func (s *StripeCardOptions) GetStripeConnect() *StripeConnectOptions {
 		return nil
 	}
 	return s.StripeConnect
+}
+
+func (s *StripeCardOptions) GetCustomerID() *string {
+	if s == nil {
+		return nil
+	}
+	return s.CustomerID
 }
 
 func (s *StripeCardOptions) GetErrorOnRequiresAction() *bool {
