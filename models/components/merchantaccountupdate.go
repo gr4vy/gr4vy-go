@@ -39,6 +39,10 @@ type MerchantAccountUpdate struct {
 	MastercardNetworkTokensRequestorID *string `json:"mastercard_network_tokens_requestor_id,omitempty"`
 	// Application ID provided for Mastercard after onboarding to use Network Tokens.
 	MastercardNetworkTokensAppID *string `json:"mastercard_network_tokens_app_id,omitempty"`
+	// Requestor ID provided for Discover after onboarding to use Network Tokens.
+	DiscoverNetworkTokensRequestorID *string `json:"discover_network_tokens_requestor_id,omitempty"`
+	// Application ID provided for Discover after onboarding to use Network Tokens.
+	DiscoverNetworkTokensAppID *string `json:"discover_network_tokens_app_id,omitempty"`
 	// When enabled network tokens will be generated asynchronously and only used on subsequent transactions to speed up transaction processing.
 	AsyncNetworkTokensEnabled *bool `default:"false" json:"async_network_tokens_enabled"`
 	// The display name for the merchant account.
@@ -166,6 +170,20 @@ func (m *MerchantAccountUpdate) GetMastercardNetworkTokensAppID() *string {
 		return nil
 	}
 	return m.MastercardNetworkTokensAppID
+}
+
+func (m *MerchantAccountUpdate) GetDiscoverNetworkTokensRequestorID() *string {
+	if m == nil {
+		return nil
+	}
+	return m.DiscoverNetworkTokensRequestorID
+}
+
+func (m *MerchantAccountUpdate) GetDiscoverNetworkTokensAppID() *string {
+	if m == nil {
+		return nil
+	}
+	return m.DiscoverNetworkTokensAppID
 }
 
 func (m *MerchantAccountUpdate) GetAsyncNetworkTokensEnabled() *bool {
