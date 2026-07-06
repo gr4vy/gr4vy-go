@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 61f1a9ae4371dee425b91d4c22a316c4
+  docChecksum: 25bdec1deb6a38cfa7c3e74165efc72b
   docVersion: 1.0.0
   speakeasyVersion: 1.788.1
   generationVersion: 2.915.1
-  releaseVersion: 1.12.116
-  configChecksum: 4ec8d9a1e53ad2e9fafba06b53426782
+  releaseVersion: 1.12.117
+  configChecksum: 0334e5324d35234022d8213179dd402a
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 5b7bfb55-6cf2-4524-ab80-8a18f6e6dfb5
-  pristine_commit_hash: 1db2fe43c7cb77ef17ed6b7fb4b13766be2b200b
-  pristine_tree_hash: 77103b56cc44fd43784979740f8c183166ab887c
+  generation_id: 57a395c3-a4f0-4603-9ff0-9acf24920208
+  pristine_commit_hash: 7e0c84123365943e1afa6e967cb671509a2ea907
+  pristine_tree_hash: db04f25d980b4594d900814e8fdd6c8b00753e55
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1570,8 +1570,8 @@ trackedFiles:
     pristine_git_object: 5966c288e293046e411e764dd4e75d39f5982dd9
   docs/models/components/transactioncapturecreate.md:
     id: f1fb39b47632
-    last_write_checksum: sha1:8e8c281875487531a62c57e961d6414c2b7552b0
-    pristine_git_object: 9fa1243cdd3f9fff4cd5d0203a80d8591e031775
+    last_write_checksum: sha1:8d377a2c7fcabc7288297590b70d3172f21f4155
+    pristine_git_object: 61abb32125289d0f1e89ab8a2d1b8f5c67f58410
   docs/models/components/transactionconnectionoptions.md:
     id: a4843e535547
     last_write_checksum: sha1:0266597e1cfc7e4b669d68f49e1d8cd47df9aee0
@@ -2822,8 +2822,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:dda205b99a731e88af4a367cf0c12f8c52507cbd
-    pristine_git_object: c8e8796ccbe286ea27997091911e50081e5c56f0
+    last_write_checksum: sha1:2f6ec44e82f8feaa6a98f02bd022f7d9f7fb7db9
+    pristine_git_object: 272e49b0c1409c1ce756da7b48c7f51949f5f28b
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -4182,8 +4182,8 @@ trackedFiles:
     pristine_git_object: ea7d96d993c843dcf40bc85a387050ac9a2c9aa1
   models/components/transactioncapturecreate.go:
     id: 1c0d322bbbab
-    last_write_checksum: sha1:48615cf45341f19edd46ec5567a47db0f90599a6
-    pristine_git_object: 64f891b00c3582c79d1aed6f2c2262385373d82b
+    last_write_checksum: sha1:c01eb89c67d66b9d240296b2be9af13f146f4ad1
+    pristine_git_object: 37a211d5e1bb809af517c82026ccf76f513745a9
   models/components/transactionconnectionoptions.go:
     id: 5ce01894f53d
     last_write_checksum: sha1:61a96261febf5ab66b542e4efdd6c9ebd238fc0e
@@ -8876,7 +8876,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Payouts.List()`:  `request` **Changed** (Breaking ⚠️)\n* `Gr4vy.PaymentLinks.List()`:  `request` **Changed** (Breaking ⚠️)\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.Reports.Get()`:  `response.Spec.Model.Enum(aiInsights)` **Added**\n* `Gr4vy.ApiKeyPairs.Delete()`: **Added**\n* `Gr4vy.GiftCards.Get()`:  `response.GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.GiftCards.Create()`:  `response.GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.GiftCards.List()`:  `response.Items[].GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.PaymentLinkId` **Added**\n  *  `response.Items[].GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.Transactions.Create()`:  `response.GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.Transactions.Update()`:  `response.GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.union(Transaction).GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.union(TransactionVoid).Transaction.GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.ApiKeyPairs.Update()`: **Added**\n* `Gr4vy.ApiKeyPairs.List()`: **Added**\n* `Gr4vy.Transactions.Events.List()`:  `response.Items[].Name.Enum(paymentConnectorReportRefundSettled)` **Added**\n* `Gr4vy.Transactions.Refunds.Create()`:  `response` **Changed**\n* `Gr4vy.Transactions.Refunds.Get()`:  `response` **Changed**\n* `Gr4vy.Transactions.Refunds.All.Create()`:  `response.Items[]` **Changed**\n* `Gr4vy.Transactions.Refunds.List()`:  `response.Items[]` **Changed**\n* `Gr4vy.Refunds.Get()`:  `response` **Changed**\n* `Gr4vy.Reports.List()`:  `response.Items[].Spec.Model.Enum(aiInsights)` **Added**\n* `Gr4vy.Reports.Create()`: \n  *  `request.ReportCreate.Spec.union(ai_insights)` **Added**\n  *  `response.Spec.Model.Enum(aiInsights)` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.GiftCardService.GiftCardServiceDefinitionId.Enum(valuelinkGiftCard)` **Added**\n* `Gr4vy.Reports.Put()`:  `response.Spec.Model.Enum(aiInsights)` **Added**\n* `Gr4vy.ApiKeyPairs.Get()`: **Added**\n* `Gr4vy.ApiKeyPairs.Create()`: **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Capture()`: \n  *  `request.Request.TransactionCaptureCreate.ReauthorizeIfAuthorizationExpired` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

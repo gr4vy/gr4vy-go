@@ -18,6 +18,8 @@ type TransactionCaptureCreate struct {
 	Final *bool `default:"true" json:"final"`
 	// An external identifier that can be used to match the capture against your own records.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
+	// Whether this capture request should re-authorize the transaction if it has expired.
+	ReauthorizeIfAuthorizationExpired *bool `json:"reauthorize_if_authorization_expired,omitempty"`
 }
 
 func (t TransactionCaptureCreate) MarshalJSON() ([]byte, error) {
@@ -64,4 +66,11 @@ func (t *TransactionCaptureCreate) GetExternalIdentifier() *string {
 		return nil
 	}
 	return t.ExternalIdentifier
+}
+
+func (t *TransactionCaptureCreate) GetReauthorizeIfAuthorizationExpired() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.ReauthorizeIfAuthorizationExpired
 }
