@@ -22,6 +22,7 @@ import(
 	"context"
 	"os"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 )
 
@@ -33,7 +34,9 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Payouts.List(ctx, gr4vygo.Pointer("ZXhhbXBsZTE"), gr4vygo.Pointer[int64](20))
+    res, err := s.Payouts.List(ctx, operations.ListPayoutsRequest{
+        Cursor: gr4vygo.Pointer("ZXhhbXBsZTE"),
+    })
     if err != nil {
         log.Fatal(err)
     }
@@ -57,13 +60,11 @@ func main() {
 
 ### Parameters
 
-| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
-| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
-| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
-| `cursor`                                                 | `*string`                                                | :heavy_minus_sign:                                       | A pointer to the page of results to return.              | ZXhhbXBsZTE                                              |
-| `limit`                                                  | `*int64`                                                 | :heavy_minus_sign:                                       | The maximum number of items that are at returned.        | 20                                                       |
-| `merchantAccountID`                                      | `*string`                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
-| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+| Parameter                                                                      | Type                                                                           | Required                                                                       | Description                                                                    |
+| ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ | ------------------------------------------------------------------------------ |
+| `ctx`                                                                          | [context.Context](https://pkg.go.dev/context#Context)                          | :heavy_check_mark:                                                             | The context to use for the request.                                            |
+| `request`                                                                      | [operations.ListPayoutsRequest](../../models/operations/listpayoutsrequest.md) | :heavy_check_mark:                                                             | The request object to use for the request.                                     |
+| `opts`                                                                         | [][operations.Option](../../models/operations/option.md)                       | :heavy_minus_sign:                                                             | The options for this request.                                                  |
 
 ### Response
 

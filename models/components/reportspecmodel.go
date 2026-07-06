@@ -9,6 +9,7 @@ const (
 	ReportSpecModelTransactionRetries  ReportSpecModel = "transaction_retries"
 	ReportSpecModelDetailedSettlement  ReportSpecModel = "detailed_settlement"
 	ReportSpecModelAccountsReceivables ReportSpecModel = "accounts_receivables"
+	ReportSpecModelAiInsights          ReportSpecModel = "ai_insights"
 )
 
 func (e ReportSpecModel) ToPointer() *ReportSpecModel {
@@ -19,7 +20,7 @@ func (e ReportSpecModel) ToPointer() *ReportSpecModel {
 func (e *ReportSpecModel) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "transactions", "transaction_retries", "detailed_settlement", "accounts_receivables":
+		case "transactions", "transaction_retries", "detailed_settlement", "accounts_receivables", "ai_insights":
 			return true
 		}
 	}

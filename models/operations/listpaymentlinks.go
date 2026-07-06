@@ -5,6 +5,7 @@ package operations
 import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
+	"time"
 )
 
 type ListPaymentLinksGlobals struct {
@@ -23,6 +24,24 @@ type ListPaymentLinksRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The maximum number of items that are returned.
 	Limit *int64 `default:"20" queryParam:"style=form,explode=true,name=limit"`
+	// Filters the results to only payment links created before this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.
+	CreatedAtLte *time.Time `queryParam:"style=form,explode=true,name=created_at_lte"`
+	// Filters the results to only payment links created after this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.
+	CreatedAtGte *time.Time `queryParam:"style=form,explode=true,name=created_at_gte"`
+	// Filters the results to only payment links updated before this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.
+	UpdatedAtLte *time.Time `queryParam:"style=form,explode=true,name=updated_at_lte"`
+	// Filters the results to only payment links updated after this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.
+	UpdatedAtGte *time.Time `queryParam:"style=form,explode=true,name=updated_at_gte"`
+	// Filters for payment links that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency codes.
+	Currency []string `queryParam:"style=form,explode=true,name=currency"`
+	// Filters for payment links that have an `amount` equal to this value.
+	AmountEq *int64 `queryParam:"style=form,explode=true,name=amount_eq"`
+	// Filters for payment links that have an `amount` greater than or equal to this value.
+	AmountGte *int64 `queryParam:"style=form,explode=true,name=amount_gte"`
+	// Filters for payment links that have an `amount` less than or equal to this value.
+	AmountLte *int64 `queryParam:"style=form,explode=true,name=amount_lte"`
+	// Filters the results to only the payment links that have a `status` that matches with any of the provided status values.
+	Status []components.PaymentLinkStatus `queryParam:"style=form,explode=true,name=status"`
 	// Filters the results to only get the items for which some of the buyer data contains exactly the provided `buyer_search` values.
 	BuyerSearch []string `queryParam:"style=form,explode=true,name=buyer_search"`
 	// The ID of the merchant account to use for this request.
@@ -52,6 +71,69 @@ func (l *ListPaymentLinksRequest) GetLimit() *int64 {
 		return nil
 	}
 	return l.Limit
+}
+
+func (l *ListPaymentLinksRequest) GetCreatedAtLte() *time.Time {
+	if l == nil {
+		return nil
+	}
+	return l.CreatedAtLte
+}
+
+func (l *ListPaymentLinksRequest) GetCreatedAtGte() *time.Time {
+	if l == nil {
+		return nil
+	}
+	return l.CreatedAtGte
+}
+
+func (l *ListPaymentLinksRequest) GetUpdatedAtLte() *time.Time {
+	if l == nil {
+		return nil
+	}
+	return l.UpdatedAtLte
+}
+
+func (l *ListPaymentLinksRequest) GetUpdatedAtGte() *time.Time {
+	if l == nil {
+		return nil
+	}
+	return l.UpdatedAtGte
+}
+
+func (l *ListPaymentLinksRequest) GetCurrency() []string {
+	if l == nil {
+		return nil
+	}
+	return l.Currency
+}
+
+func (l *ListPaymentLinksRequest) GetAmountEq() *int64 {
+	if l == nil {
+		return nil
+	}
+	return l.AmountEq
+}
+
+func (l *ListPaymentLinksRequest) GetAmountGte() *int64 {
+	if l == nil {
+		return nil
+	}
+	return l.AmountGte
+}
+
+func (l *ListPaymentLinksRequest) GetAmountLte() *int64 {
+	if l == nil {
+		return nil
+	}
+	return l.AmountLte
+}
+
+func (l *ListPaymentLinksRequest) GetStatus() []components.PaymentLinkStatus {
+	if l == nil {
+		return nil
+	}
+	return l.Status
 }
 
 func (l *ListPaymentLinksRequest) GetBuyerSearch() []string {

@@ -36,13 +36,7 @@ func newPayouts(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hooks.
 
 // List payouts created
 // Returns a list of payouts made.
-func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, merchantAccountID *string, opts ...operations.Option) (*operations.ListPayoutsResponse, error) {
-	request := operations.ListPayoutsRequest{
-		Cursor:            cursor,
-		Limit:             limit,
-		MerchantAccountID: merchantAccountID,
-	}
-
+func (s *Payouts) List(ctx context.Context, request operations.ListPayoutsRequest, opts ...operations.Option) (*operations.ListPayoutsResponse, error) {
 	globals := operations.ListPayoutsGlobals{
 		MerchantAccountID: s.sdkConfiguration.Globals.MerchantAccountID,
 	}
@@ -245,12 +239,11 @@ func (s *Payouts) List(ctx context.Context, cursor *string, limit *int64, mercha
 				return nil, nil
 			}
 		}
+		request.Cursor = &nCVal
 
 		return s.List(
 			ctx,
-			&nCVal,
-			limit,
-			merchantAccountID,
+			request,
 			opts...,
 		)
 	}

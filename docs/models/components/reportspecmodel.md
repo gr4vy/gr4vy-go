@@ -22,3 +22,4 @@ custom := components.ReportSpecModel("custom_value")
 | `ReportSpecModelTransactionRetries`  | transaction_retries                  |
 | `ReportSpecModelDetailedSettlement`  | detailed_settlement                  |
 | `ReportSpecModelAccountsReceivables` | accounts_receivables                 |
+| `ReportSpecModelAiInsights`          | ai_insights                          |
