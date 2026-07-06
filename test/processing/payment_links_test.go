@@ -5,6 +5,7 @@ import (
 	"testing"
 
 	"github.com/gr4vy/gr4vy-go/models/components"
+	"github.com/gr4vy/gr4vy-go/models/operations"
 	"github.com/gr4vy/gr4vy-go/test/harness"
 )
 
@@ -33,7 +34,7 @@ func TestPaymentLinkCRUD(t *testing.T) {
 		t.Fatalf("expected %s, got %s", link.ID, got.ID)
 	}
 
-	if _, err := m.Client.PaymentLinks.List(ctx, nil, nil, nil, nil); err != nil {
+	if _, err := m.Client.PaymentLinks.List(ctx, operations.ListPaymentLinksRequest{}); err != nil {
 		t.Fatalf("list payment links: %v", err)
 	}
 

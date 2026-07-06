@@ -5,12 +5,13 @@ import (
 	"testing"
 
 	"github.com/gr4vy/gr4vy-go/models/components"
+	"github.com/gr4vy/gr4vy-go/models/operations"
 	"github.com/gr4vy/gr4vy-go/test/harness"
 )
 
 func TestPayoutsList(t *testing.T) {
 	m := harness.Merchant(t)
-	if _, err := m.Client.Payouts.List(context.Background(), nil, nil, nil); err != nil {
+	if _, err := m.Client.Payouts.List(context.Background(), operations.ListPayoutsRequest{}); err != nil {
 		t.Fatalf("list payouts: %v", err)
 	}
 }
