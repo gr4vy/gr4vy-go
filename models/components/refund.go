@@ -41,13 +41,19 @@ type Refund struct {
 	// The date this refund was last updated at.
 	UpdatedAt time.Time `json:"updated_at"`
 	// The user that created this resource
-	Creator *Creator `json:"creator,omitempty"`
+	Creator *APICommonSchemasCreator `json:"creator,omitempty"`
 	// The standardized error code set by Gr4vy.
 	ErrorCode *string `json:"error_code,omitempty"`
 	// This is the response code received from the payment service. This can be set to any value and is not standardized across different payment services.
 	RawResponseCode *string `json:"raw_response_code,omitempty"`
 	//  This is the response description received from the payment service. This can be set to any value and is not standardized across different payment services.
 	RawResponseDescription *string `json:"raw_response_description,omitempty"`
+	// The ISO 4217 currency code of this refund's settlement.
+	SettledCurrency *string `json:"settled_currency,omitempty"`
+	// The net amount settled for this refund, in the smallest currency unit (for example, cents or pence).
+	SettledAmount *int64 `default:"0" json:"settled_amount"`
+	// Indicates whether this refund has been settled.
+	Settled bool `json:"settled"`
 }
 
 func (r Refund) MarshalJSON() ([]byte, error) {
@@ -170,7 +176,7 @@ func (r *Refund) GetUpdatedAt() time.Time {
 	return r.UpdatedAt
 }
 
-func (r *Refund) GetCreator() *Creator {
+func (r *Refund) GetCreator() *APICommonSchemasCreator {
 	if r == nil {
 		return nil
 	}
@@ -196,4 +202,25 @@ func (r *Refund) GetRawResponseDescription() *string {
 		return nil
 	}
 	return r.RawResponseDescription
+}
+
+func (r *Refund) GetSettledCurrency() *string {
+	if r == nil {
+		return nil
+	}
+	return r.SettledCurrency
+}
+
+func (r *Refund) GetSettledAmount() *int64 {
+	if r == nil {
+		return nil
+	}
+	return r.SettledAmount
+}
+
+func (r *Refund) GetSettled() bool {
+	if r == nil {
+		return false
+	}
+	return r.Settled
 }

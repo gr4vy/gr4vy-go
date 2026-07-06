@@ -59,6 +59,7 @@ custom := components.Name("custom_value")
 | `NamePaymentConnectorResponseTransactionVoidFailed`             | payment-connector-response-transaction-void-failed              |
 | `NamePaymentConnectorExternalTransactionRequest`                | payment-connector-external-transaction-request                  |
 | `NamePaymentConnectorReportTransactionSettled`                  | payment-connector-report-transaction-settled                    |
+| `NamePaymentConnectorReportRefundSettled`                       | payment-connector-report-refund-settled                         |
 | `NamePaymentConnectorReportChargebackPosted`                    | payment-connector-report-chargeback-posted                      |
 | `NamePaymentConnectorReportChargebackReversalPosted`            | payment-connector-report-chargeback-reversal-posted             |
 | `NamePaymentConnectorTransactionWebhookProcessed`               | payment-connector-transaction-webhook-processed                 |

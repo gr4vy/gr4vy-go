@@ -13,6 +13,7 @@ type SpecType string
 
 const (
 	SpecTypeAccountsReceivables SpecType = "accounts_receivables"
+	SpecTypeAiInsights          SpecType = "ai_insights"
 	SpecTypeDetailedSettlement  SpecType = "detailed_settlement"
 	SpecTypeTransactionRetries  SpecType = "transaction_retries"
 	SpecTypeTransactions        SpecType = "transactions"
@@ -24,6 +25,7 @@ type Spec struct {
 	TransactionRetriesReportSpec  *TransactionRetriesReportSpec  `queryParam:"inline" union:"member"`
 	DetailedSettlementReportSpec  *DetailedSettlementReportSpec  `queryParam:"inline" union:"member"`
 	AccountsReceivablesReportSpec *AccountsReceivablesReportSpec `queryParam:"inline" union:"member"`
+	AIInsightsReportSpec          *AIInsightsReportSpec          `queryParam:"inline" union:"member"`
 
 	Type SpecType
 }
@@ -34,6 +36,15 @@ func CreateSpecAccountsReceivables(accountsReceivables AccountsReceivablesReport
 	return Spec{
 		AccountsReceivablesReportSpec: &accountsReceivables,
 		Type:                          typ,
+	}
+}
+
+func CreateSpecAiInsights(aiInsights AIInsightsReportSpec) Spec {
+	typ := SpecTypeAiInsights
+
+	return Spec{
+		AIInsightsReportSpec: &aiInsights,
+		Type:                 typ,
 	}
 }
 
@@ -85,6 +96,15 @@ func (u *Spec) UnmarshalJSON(data []byte) error {
 		u.AccountsReceivablesReportSpec = accountsReceivablesReportSpec
 		u.Type = SpecTypeAccountsReceivables
 		return nil
+	case "ai_insights":
+		aiInsightsReportSpec := new(AIInsightsReportSpec)
+		if err := utils.UnmarshalJSON(data, &aiInsightsReportSpec, "", true, nil); err != nil {
+			return fmt.Errorf("could not unmarshal `%s` into expected (Model == ai_insights) type AIInsightsReportSpec within Spec: %w", string(data), err)
+		}
+
+		u.AIInsightsReportSpec = aiInsightsReportSpec
+		u.Type = SpecTypeAiInsights
+		return nil
 	case "detailed_settlement":
 		detailedSettlementReportSpec := new(DetailedSettlementReportSpec)
 		if err := utils.UnmarshalJSON(data, &detailedSettlementReportSpec, "", true, nil); err != nil {
@@ -132,6 +152,10 @@ func (u Spec) MarshalJSON() ([]byte, error) {
 
 	if u.AccountsReceivablesReportSpec != nil {
 		return utils.MarshalJSON(u.AccountsReceivablesReportSpec, "", true)
+	}
+
+	if u.AIInsightsReportSpec != nil {
+		return utils.MarshalJSON(u.AIInsightsReportSpec, "", true)
 	}
 
 	return nil, errors.New("could not marshal union type Spec: all fields are null")
@@ -206,6 +230,10 @@ func (r *ReportCreate) GetSpec() Spec {
 
 func (r *ReportCreate) GetSpecAccountsReceivables() *AccountsReceivablesReportSpec {
 	return r.GetSpec().AccountsReceivablesReportSpec
+}
+
+func (r *ReportCreate) GetSpecAiInsights() *AIInsightsReportSpec {
+	return r.GetSpec().AIInsightsReportSpec
 }
 
 func (r *ReportCreate) GetSpecDetailedSettlement() *DetailedSettlementReportSpec {

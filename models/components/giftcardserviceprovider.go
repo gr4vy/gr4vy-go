@@ -7,6 +7,7 @@ type GiftCardServiceProvider string
 const (
 	GiftCardServiceProviderMockGiftCard       GiftCardServiceProvider = "mock-gift-card"
 	GiftCardServiceProviderQwikcilverGiftCard GiftCardServiceProvider = "qwikcilver-gift-card"
+	GiftCardServiceProviderValuelinkGiftCard  GiftCardServiceProvider = "valuelink-gift-card"
 )
 
 func (e GiftCardServiceProvider) ToPointer() *GiftCardServiceProvider {
@@ -17,7 +18,7 @@ func (e GiftCardServiceProvider) ToPointer() *GiftCardServiceProvider {
 func (e *GiftCardServiceProvider) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "mock-gift-card", "qwikcilver-gift-card":
+		case "mock-gift-card", "qwikcilver-gift-card", "valuelink-gift-card":
 			return true
 		}
 	}

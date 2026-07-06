@@ -5,6 +5,7 @@ package operations
 import (
 	"github.com/gr4vy/gr4vy-go/internal/utils"
 	"github.com/gr4vy/gr4vy-go/models/components"
+	"time"
 )
 
 type ListPayoutsGlobals struct {
@@ -23,6 +24,20 @@ type ListPayoutsRequest struct {
 	Cursor *string `queryParam:"style=form,explode=true,name=cursor"`
 	// The maximum number of items that are at returned.
 	Limit *int64 `default:"20" queryParam:"style=form,explode=true,name=limit"`
+	// Filters the results to only payouts created before this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.
+	CreatedAtLte *time.Time `queryParam:"style=form,explode=true,name=created_at_lte"`
+	// Filters the results to only payouts created after this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.
+	CreatedAtGte *time.Time `queryParam:"style=form,explode=true,name=created_at_gte"`
+	// Filters the results to only payouts updated before this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.
+	UpdatedAtLte *time.Time `queryParam:"style=form,explode=true,name=updated_at_lte"`
+	// Filters the results to only payouts updated after this ISO date-time string. The time zone must be included. Ensure that the date-time string is URL encoded, e.g. `2022-01-01T12:00:00+08:00` must be encoded as `2022-01-01T12%3A00%3A00%2B08%3A00`.
+	UpdatedAtGte *time.Time `queryParam:"style=form,explode=true,name=updated_at_gte"`
+	// Filters the results to only the payouts that have an `external_identifier` that exactly matches this value.
+	ExternalIdentifier *string `queryParam:"style=form,explode=true,name=external_identifier"`
+	// Filters the results to only the payouts that have a `payment_service_payout_id` that exactly matches this value.
+	PaymentServicePayoutID *string `queryParam:"style=form,explode=true,name=payment_service_payout_id"`
+	// Filters the results to only the payouts that have a `status` that matches with any of the provided status values.
+	Status []components.PayoutStatus `queryParam:"style=form,explode=true,name=status"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -50,6 +65,55 @@ func (l *ListPayoutsRequest) GetLimit() *int64 {
 		return nil
 	}
 	return l.Limit
+}
+
+func (l *ListPayoutsRequest) GetCreatedAtLte() *time.Time {
+	if l == nil {
+		return nil
+	}
+	return l.CreatedAtLte
+}
+
+func (l *ListPayoutsRequest) GetCreatedAtGte() *time.Time {
+	if l == nil {
+		return nil
+	}
+	return l.CreatedAtGte
+}
+
+func (l *ListPayoutsRequest) GetUpdatedAtLte() *time.Time {
+	if l == nil {
+		return nil
+	}
+	return l.UpdatedAtLte
+}
+
+func (l *ListPayoutsRequest) GetUpdatedAtGte() *time.Time {
+	if l == nil {
+		return nil
+	}
+	return l.UpdatedAtGte
+}
+
+func (l *ListPayoutsRequest) GetExternalIdentifier() *string {
+	if l == nil {
+		return nil
+	}
+	return l.ExternalIdentifier
+}
+
+func (l *ListPayoutsRequest) GetPaymentServicePayoutID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.PaymentServicePayoutID
+}
+
+func (l *ListPayoutsRequest) GetStatus() []components.PayoutStatus {
+	if l == nil {
+		return nil
+	}
+	return l.Status
 }
 
 func (l *ListPayoutsRequest) GetMerchantAccountID() *string {

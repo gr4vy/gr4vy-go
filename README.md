@@ -282,6 +282,14 @@ func main() {
 
 * [Create](docs/sdks/jobs/README.md#create) - Create account updater job
 
+### [ApiKeyPairs](docs/sdks/apikeypairs/README.md)
+
+* [List](docs/sdks/apikeypairs/README.md#list) - List all API key pairs
+* [Create](docs/sdks/apikeypairs/README.md#create) - Create an API key pair
+* [Get](docs/sdks/apikeypairs/README.md#get) - Get an API key pair
+* [Update](docs/sdks/apikeypairs/README.md#update) - Update an API key pair
+* [Delete](docs/sdks/apikeypairs/README.md#delete) - Delete an API key pair
+
 ### [AuditLogs](docs/sdks/auditlogs/README.md)
 
 * [List](docs/sdks/auditlogs/README.md#list) - List audit log entries
@@ -512,7 +520,6 @@ package main
 import (
 	"context"
 	gr4vygo "github.com/gr4vy/gr4vy-go"
-	"github.com/gr4vy/gr4vy-go/models/operations"
 	"log"
 	"os"
 )
@@ -521,15 +528,10 @@ func main() {
 	ctx := context.Background()
 
 	s := gr4vygo.New(
-		gr4vygo.WithMerchantAccountID("default"),
 		gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
 	)
 
-	res, err := s.Buyers.List(ctx, operations.ListBuyersRequest{
-		Cursor:             gr4vygo.Pointer("ZXhhbXBsZTE"),
-		Search:             gr4vygo.Pointer("John"),
-		ExternalIdentifier: gr4vygo.Pointer("buyer-12345"),
-	})
+	res, err := s.APIKeyPairs.List(ctx, nil, gr4vygo.Pointer[int64](20))
 	if err != nil {
 		log.Fatal(err)
 	}

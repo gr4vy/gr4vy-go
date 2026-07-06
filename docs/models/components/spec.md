@@ -11,6 +11,12 @@ The report specification.
 spec := components.CreateSpecAccountsReceivables(components.AccountsReceivablesReportSpec{/* values here */})
 ```
 
+### AIInsightsReportSpec
+
+```go
+spec := components.CreateSpecAiInsights(components.AIInsightsReportSpec{/* values here */})
+```
+
 ### DetailedSettlementReportSpec
 
 ```go
@@ -37,6 +43,8 @@ Use the `Type` field to determine which variant is active, then access the corre
 switch spec.Type {
 	case components.SpecTypeAccountsReceivables:
 		// spec.AccountsReceivablesReportSpec is populated
+	case components.SpecTypeAiInsights:
+		// spec.AIInsightsReportSpec is populated
 	case components.SpecTypeDetailedSettlement:
 		// spec.DetailedSettlementReportSpec is populated
 	case components.SpecTypeTransactionRetries:

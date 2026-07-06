@@ -2,7 +2,7 @@
 
 package gr4vygo
 
-// Generated from OpenAPI doc version 1.0.0 and generator version 2.911.3
+// Generated from OpenAPI doc version 1.0.0 and generator version 2.915.1
 
 import (
 	"context"
@@ -58,6 +58,7 @@ func Pointer[T any](v T) *T { return &v }
 type Gr4vy struct {
 	SDKVersion                string
 	AccountUpdater            *AccountUpdater
+	APIKeyPairs               *APIKeyPairs
 	Buyers                    *Buyers
 	PaymentMethods            *PaymentMethods
 	GiftCards                 *GiftCards
@@ -173,9 +174,9 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Gr4vy {
 	sdk := &Gr4vy{
-		SDKVersion: "1.12.115",
+		SDKVersion: "1.12.116",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:  "speakeasy-sdk/go 1.12.115 2.911.3 1.0.0 github.com/gr4vy/gr4vy-go",
+			UserAgent:  "speakeasy-sdk/go 1.12.116 2.915.1 1.0.0 github.com/gr4vy/gr4vy-go",
 			Globals:    globals.Globals{},
 			ServerList: ServerList,
 			ServerVariables: map[string]map[string]string{
@@ -210,6 +211,7 @@ func New(opts ...SDKOption) *Gr4vy {
 	sdk.sdkConfiguration = sdk.hooks.SDKInit(sdk.sdkConfiguration)
 
 	sdk.AccountUpdater = newAccountUpdater(sdk, sdk.sdkConfiguration, sdk.hooks)
+	sdk.APIKeyPairs = newAPIKeyPairs(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.Buyers = newBuyers(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.PaymentMethods = newPaymentMethods(sdk, sdk.sdkConfiguration, sdk.hooks)
 	sdk.GiftCards = newGiftCards(sdk, sdk.sdkConfiguration, sdk.hooks)

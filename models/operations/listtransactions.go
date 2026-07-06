@@ -73,6 +73,8 @@ type ListTransactionsRequest struct {
 	PendingReview *bool `queryParam:"style=form,explode=true,name=pending_review"`
 	// Filters for transactions where the `checkout_session_id` matches the provided value.
 	CheckoutSessionID *string `queryParam:"style=form,explode=true,name=checkout_session_id"`
+	// Filters for transactions where the `payment_link_id` matches the provided value.
+	PaymentLinkID *string `queryParam:"style=form,explode=true,name=payment_link_id"`
 	// Filters for transactions where the `reconciliation_id` matches the provided value.
 	ReconciliationID *string `queryParam:"style=form,explode=true,name=reconciliation_id"`
 	// Filters for transactions with gift card redemptions.
@@ -336,6 +338,13 @@ func (l *ListTransactionsRequest) GetCheckoutSessionID() *string {
 		return nil
 	}
 	return l.CheckoutSessionID
+}
+
+func (l *ListTransactionsRequest) GetPaymentLinkID() *string {
+	if l == nil {
+		return nil
+	}
+	return l.PaymentLinkID
 }
 
 func (l *ListTransactionsRequest) GetReconciliationID() *string {

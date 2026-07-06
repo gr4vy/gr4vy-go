@@ -20,3 +20,4 @@ custom := components.GiftCardServiceProvider("custom_value")
 | ------------------------------------------- | ------------------------------------------- |
 | `GiftCardServiceProviderMockGiftCard`       | mock-gift-card                              |
 | `GiftCardServiceProviderQwikcilverGiftCard` | qwikcilver-gift-card                        |
+| `GiftCardServiceProviderValuelinkGiftCard`  | valuelink-gift-card                         |
