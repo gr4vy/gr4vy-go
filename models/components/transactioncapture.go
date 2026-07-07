@@ -26,6 +26,10 @@ type TransactionCapture struct {
 	PaymentServiceCaptureID *string `json:"payment_service_capture_id,omitempty"`
 	// The external identifier for the capture.
 	ExternalIdentifier *string `json:"external_identifier,omitempty"`
+	// The billing details associated with the capture.
+	BillingDetails *BillingDetails `json:"billing_details,omitempty"`
+	// The shipping details associated with the catpure.
+	ShippingDetails *ShippingDetails `json:"shipping_details,omitempty"`
 }
 
 func (t TransactionCapture) MarshalJSON() ([]byte, error) {
@@ -97,4 +101,18 @@ func (t *TransactionCapture) GetExternalIdentifier() *string {
 		return nil
 	}
 	return t.ExternalIdentifier
+}
+
+func (t *TransactionCapture) GetBillingDetails() *BillingDetails {
+	if t == nil {
+		return nil
+	}
+	return t.BillingDetails
+}
+
+func (t *TransactionCapture) GetShippingDetails() *ShippingDetails {
+	if t == nil {
+		return nil
+	}
+	return t.ShippingDetails
 }
