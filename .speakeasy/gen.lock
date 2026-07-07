@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 25bdec1deb6a38cfa7c3e74165efc72b
+  docChecksum: 10809e1ea44e6b5c49131f28048ec97a
   docVersion: 1.0.0
-  speakeasyVersion: 1.788.1
-  generationVersion: 2.915.1
-  releaseVersion: 1.12.117
-  configChecksum: 0334e5324d35234022d8213179dd402a
+  speakeasyVersion: 1.789.0
+  generationVersion: 2.916.2
+  releaseVersion: 1.12.118
+  configChecksum: f77837419fead9445b8009a53d13dc37
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 57a395c3-a4f0-4603-9ff0-9acf24920208
-  pristine_commit_hash: 7e0c84123365943e1afa6e967cb671509a2ea907
-  pristine_tree_hash: db04f25d980b4594d900814e8fdd6c8b00753e55
+  generation_id: 01ea2211-7148-4004-92b3-fe91d509c25e
+  pristine_commit_hash: dc8434201852a96fc7e19090fed5a2ee4dddf5ea
+  pristine_tree_hash: 4657314afc2ebdf42df71643874b034d0a3b7fe4
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1566,8 +1566,8 @@ trackedFiles:
     pristine_git_object: f1db86e9a79be2d1909aad47ead3daeb7eca9e20
   docs/models/components/transactioncapture.md:
     id: 6234f4354db0
-    last_write_checksum: sha1:5a512083b4189a1bd047d8dba8863212f16c2bb8
-    pristine_git_object: 5966c288e293046e411e764dd4e75d39f5982dd9
+    last_write_checksum: sha1:d75fb0c439a741313b0ca312046219f171c3821b
+    pristine_git_object: b07324579f3d2e7ad55bafc44873fe0a58541fb5
   docs/models/components/transactioncapturecreate.md:
     id: f1fb39b47632
     last_write_checksum: sha1:8d377a2c7fcabc7288297590b70d3172f21f4155
@@ -2822,8 +2822,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:2f6ec44e82f8feaa6a98f02bd022f7d9f7fb7db9
-    pristine_git_object: 272e49b0c1409c1ce756da7b48c7f51949f5f28b
+    last_write_checksum: sha1:1a8873769a8515ac0173e68e3ccc6deafb98b417
+    pristine_git_object: 228813c20568d46807194634daac1315629d6e9b
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -4178,8 +4178,8 @@ trackedFiles:
     pristine_git_object: 8d7155266a70055706b34166167a23e5dc7bfdd9
   models/components/transactioncapture.go:
     id: 5bf58fd91c44
-    last_write_checksum: sha1:c2f3969dc182de1259745a62063ae69aac91ea05
-    pristine_git_object: ea7d96d993c843dcf40bc85a387050ac9a2c9aa1
+    last_write_checksum: sha1:5477e0d966dc697cb2a1a832039a54e601500596
+    pristine_git_object: 542013c66d7ad00ed9db6b302e08a5b6b6668055
   models/components/transactioncapturecreate.go:
     id: 1c0d322bbbab
     last_write_checksum: sha1:c01eb89c67d66b9d240296b2be9af13f146f4ad1
@@ -8876,7 +8876,9 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Capture()`: \n  *  `request.Request.TransactionCaptureCreate.ReauthorizeIfAuthorizationExpired` **Added**\n"
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Gr4vy.Transactions.Capture()`:  `response.union(TransactionCapture)` **Changed**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
