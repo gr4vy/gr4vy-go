@@ -65,6 +65,8 @@ type TransactionConnectionOptions struct {
 	DlocalGcash *DlocalOptions `json:"dlocal-gcash,omitempty"`
 	// Custom options to be passed to the `ecommpay-card` connector.
 	EcommpayCard *EcommpayOptions `json:"ecommpay-card,omitempty"`
+	// Custom options to be passed to the `klarna-klarna` connector.
+	KlarnaKlarna *KlarnaOptions `json:"klarna-klarna,omitempty"`
 	// Custom options to be passed to the `fiserv-card` connector.
 	FiservCard *FiservOptions `json:"fiserv-card,omitempty"`
 	// Custom options to be passed to the `forter-anti-fraud` connector.
@@ -344,6 +346,13 @@ func (t *TransactionConnectionOptions) GetEcommpayCard() *EcommpayOptions {
 		return nil
 	}
 	return t.EcommpayCard
+}
+
+func (t *TransactionConnectionOptions) GetKlarnaKlarna() *KlarnaOptions {
+	if t == nil {
+		return nil
+	}
+	return t.KlarnaKlarna
 }
 
 func (t *TransactionConnectionOptions) GetFiservCard() *FiservOptions {
