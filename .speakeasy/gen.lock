@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: a5882f18166afd8b1a1f5c54784c54cc
+  docChecksum: 4824c624144a83d1b29d7218c6167c5a
   docVersion: 1.0.0
   speakeasyVersion: 1.789.0
   generationVersion: 2.916.2
-  releaseVersion: 1.12.119
-  configChecksum: 33d580d33dfa868925985c1dfdbfef68
+  releaseVersion: 1.12.120
+  configChecksum: 2d85588ca1ca0695f894de441afc93e8
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 538a44fc-67b1-45b1-8957-b597bbf2d633
-  pristine_commit_hash: 847f65c8328dc790959598685961dcf45e29160a
-  pristine_tree_hash: 855c3c05ab90ad5f02772e70ff86c366f94113e4
+  generation_id: 995e0edc-d703-477a-811a-68cd0a00f07c
+  pristine_commit_hash: fe4b69e9878d719cb2dbf8ba429f1f07a42fbd9d
+  pristine_tree_hash: 75c054e8acaceb0d5221c27e82fb21b4e098f08c
 features:
   go:
     additionalDependencies: 0.1.0
@@ -796,10 +796,22 @@ trackedFiles:
     id: 040bc6b151e6
     last_write_checksum: sha1:82b357fffb10ce0c3f8cd56c8addbec749b278f2
     pristine_git_object: 1b288d26918e943e0619cd0739c9263e322806c0
+  docs/models/components/interval.md:
+    id: 1f14281098d7
+    last_write_checksum: sha1:aeaa9f9faa1d7c2300b7de97c80d7dd21524dcc7
+    pristine_git_object: f72be3d7fb4c1b2a84adce00fcf2473c4481af4d
   docs/models/components/item.md:
     id: 58f562a6e9df
     last_write_checksum: sha1:86e5abcc75de65480c4ee4513ec70372c26f50b6
     pristine_git_object: 085286740e265848f44c34a7777d277df0aa2bbe
+  docs/models/components/klarnaoptions.md:
+    id: 15e054cf5676
+    last_write_checksum: sha1:9472b7eaed7035fc47a4474b19bd042bac700c60
+    pristine_git_object: 726c65be436459815b1232c3c335bf50a5d8cf03
+  docs/models/components/klarnasubscriptionoptions.md:
+    id: 269da2f3f57b
+    last_write_checksum: sha1:0f83a5b66e867548b69fca964157b26c4e2b473d
+    pristine_git_object: dc970d36b88884567523374aaa2194658250fa68
   docs/models/components/latitudeoptions.md:
     id: 7877b2f07445
     last_write_checksum: sha1:28ec471890c054b083008ea73b194d7e9c8295f6
@@ -1574,8 +1586,8 @@ trackedFiles:
     pristine_git_object: 61abb32125289d0f1e89ab8a2d1b8f5c67f58410
   docs/models/components/transactionconnectionoptions.md:
     id: a4843e535547
-    last_write_checksum: sha1:0266597e1cfc7e4b669d68f49e1d8cd47df9aee0
-    pristine_git_object: 801826aa1ebd5e4f5f02e3cdcf77ec81caff7a86
+    last_write_checksum: sha1:0c01b0551f025ff2e3b57a20989b2e521fb5b6f6
+    pristine_git_object: b0e80ca099d9b576878e33f9800cf04d3d335064
   docs/models/components/transactioncreate.md:
     id: 652e84478e51
     last_write_checksum: sha1:66e7e42d8fa631173fe8e1f30f573175b3b5528f
@@ -2822,8 +2834,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:24dca210fb5672eb86d3926da07c68f70048623d
-    pristine_git_object: c7fe8aa3033e6a40ad532f3da0928287ef51ba2c
+    last_write_checksum: sha1:b64f52ff454d036d6647388b7f326c53dc4a1d3c
+    pristine_git_object: ad965b0208dcf793184440f6fde26099f799fb60
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3524,6 +3536,14 @@ trackedFiles:
     id: e0d44e363d91
     last_write_checksum: sha1:a2e2902b4b6de221f3182ec26d8f944b7d82d1d1
     pristine_git_object: 35b9b0081a191922d6f890aac2d77b27a2abbd16
+  models/components/klarnaoptions.go:
+    id: eb2d04edf926
+    last_write_checksum: sha1:8fed4ac45d141b9d2c1d55612df715f74ea2071a
+    pristine_git_object: c799f9972085a50688cad1a774c065a4e2b4a486
+  models/components/klarnasubscriptionoptions.go:
+    id: 15552a0b9bb6
+    last_write_checksum: sha1:56d8d4d7602abd6f1fc0cb5f57d66dd85cfb1bcf
+    pristine_git_object: cc0b3b5115dc51c73c7316002e4d4c64e25c4e2f
   models/components/latitudeoptions.go:
     id: 07c4d122a0b3
     last_write_checksum: sha1:afdb5c5cd97ba611335ad3adee7019f231b564f4
@@ -4186,8 +4206,8 @@ trackedFiles:
     pristine_git_object: 37a211d5e1bb809af517c82026ccf76f513745a9
   models/components/transactionconnectionoptions.go:
     id: 5ce01894f53d
-    last_write_checksum: sha1:61a96261febf5ab66b542e4efdd6c9ebd238fc0e
-    pristine_git_object: ae96c24101b0e590c71eae946881b2f1fc957e1f
+    last_write_checksum: sha1:0a63922968bf3f7fef2b75c7a68839e4aefb2653
+    pristine_git_object: 4f223c3834dd28a9859dcd560a8439585c034077
   models/components/transactioncreate.go:
     id: 2fed3feab426
     last_write_checksum: sha1:566c555967badef061d727212ab81a72523d3d46
@@ -8876,6 +8896,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.KlarnaKlarna` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.KlarnaKlarna` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.KlarnaKlarna` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
