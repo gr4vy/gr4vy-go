@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 4824c624144a83d1b29d7218c6167c5a
+  docChecksum: 3e0ab4f58c893ee4cc75aa6c1da6dfc8
   docVersion: 1.0.0
-  speakeasyVersion: 1.789.0
-  generationVersion: 2.916.2
-  releaseVersion: 1.12.120
-  configChecksum: 2d85588ca1ca0695f894de441afc93e8
+  speakeasyVersion: 1.789.1
+  generationVersion: 2.916.4
+  releaseVersion: 1.12.121
+  configChecksum: 6e9f9743c723e5076132039d7180f21b
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 995e0edc-d703-477a-811a-68cd0a00f07c
-  pristine_commit_hash: fe4b69e9878d719cb2dbf8ba429f1f07a42fbd9d
-  pristine_tree_hash: 75c054e8acaceb0d5221c27e82fb21b4e098f08c
+  generation_id: 5c0d6bdd-c61c-4474-bdb9-38f0e7642c4e
+  pristine_commit_hash: d310e10ebd4267695f48f5d88feac071693bf748
+  pristine_tree_hash: 721e4de643222960f139838238b3b13254b449ae
 features:
   go:
     additionalDependencies: 0.1.0
@@ -826,12 +826,12 @@ trackedFiles:
     pristine_git_object: 49596d321333a8f7064fe6d9b6dd8aa1628ef65c
   docs/models/components/merchantaccount.md:
     id: ebf95e6d4bac
-    last_write_checksum: sha1:584ea6c0f4a919bb45badfb9b47ca870b774f2d8
-    pristine_git_object: c92bd5c4ad75fb134ef5125a8ddc06eb44f6f34e
+    last_write_checksum: sha1:9951ebb1e472c0981d4617d171e4e4e84f01245a
+    pristine_git_object: b95cce78fb722ca9ea9c40bb653f5f9d06883de2
   docs/models/components/merchantaccountcreate.md:
     id: 627f5ef1879f
-    last_write_checksum: sha1:cb00b2c27fc590df1a244aaa365aa5145e32d569
-    pristine_git_object: 9bd8a8a16d9d9a8afc09c5ebb4d6e0e1e4ece438
+    last_write_checksum: sha1:ded2d3a02f6dd21118d43823d596e66db8075a72
+    pristine_git_object: 4f071103ddc3545bfa3fc04092e741fd757c2a2a
   docs/models/components/merchantaccounts.md:
     id: bcf8077d73e0
     last_write_checksum: sha1:82a49370783f1e745088952dc73d5c59bd2e8769
@@ -858,8 +858,8 @@ trackedFiles:
     pristine_git_object: 604269131cb720fbbfe84222a971404b8a681d79
   docs/models/components/merchantaccountupdate.md:
     id: 18a8a5bb0434
-    last_write_checksum: sha1:65e9dbe05889bc16b312591a34515a4e1c0b9cca
-    pristine_git_object: 411cb682fcec72e84b8e2862dcfbd5c67b717bd2
+    last_write_checksum: sha1:e99807fe4478536e6ee0eaae024fc3e28980e8e1
+    pristine_git_object: 22f1aaaccb238e57ab4d3f07f7b92f84cdc79112
   docs/models/components/merchantprofilescheme.md:
     id: edf22212f2a4
     last_write_checksum: sha1:edb2af1929f2cd45b935ae224ed23983fe1e1b7f
@@ -2834,8 +2834,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:b64f52ff454d036d6647388b7f326c53dc4a1d3c
-    pristine_git_object: ad965b0208dcf793184440f6fde26099f799fb60
+    last_write_checksum: sha1:b948525d7c0a3d341b6415eeda811a03621b9bee
+    pristine_git_object: 1b85d4d5297b4215a6b12916389de302f752076f
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3554,12 +3554,12 @@ trackedFiles:
     pristine_git_object: 88a4d9b8e7418f6de064ed5d67eae113a085273d
   models/components/merchantaccount.go:
     id: 82c8e3af9571
-    last_write_checksum: sha1:252d7e621b98a3100e1d0d3aa9b97c104cfccd35
-    pristine_git_object: 3517bad6658913f97b6f776bf69d57f255347559
+    last_write_checksum: sha1:2a3585c2d38e59c633141d9f58b6100a4e86bf48
+    pristine_git_object: 6e82007fa70dbfe41d4bbb69f7fc08d420bd338c
   models/components/merchantaccountcreate.go:
     id: f1d62c7493dc
-    last_write_checksum: sha1:748f6aa702edb13a6346e04b089abe9505ed2bf9
-    pristine_git_object: 663b1ca9cf7a2e464da825f63a8de5e8bd0148e4
+    last_write_checksum: sha1:4e73e1e4da95804ce55b8e5c6b2c497650decbeb
+    pristine_git_object: 5ff50fa0b061a37d523f98a564b8e54d090da3ec
   models/components/merchantaccounts.go:
     id: d7a1c905bacc
     last_write_checksum: sha1:b54a972b4d65b8e8e8e98779d31ffa682dc89c45
@@ -3586,8 +3586,8 @@ trackedFiles:
     pristine_git_object: e3a15aa8854d114039a502922cb7b8dec2e455bd
   models/components/merchantaccountupdate.go:
     id: 2fb0eb692295
-    last_write_checksum: sha1:ceb0de5b5da2b46f742caec740138ca93670aa57
-    pristine_git_object: f70c352fd97d4bf572c6ada8237f1906ccdba841
+    last_write_checksum: sha1:0b96848df43018c1f4163e0e73bc21868258269c
+    pristine_git_object: c4ec29331b889925740cd5927f8131dbafefc583
   models/components/merchantprofilescheme.go:
     id: 7f3f7f606866
     last_write_checksum: sha1:d63c3251cd39f48a2938c6d1953732a78fce4ea0
@@ -8896,7 +8896,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.KlarnaKlarna` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.KlarnaKlarna` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.KlarnaKlarna` **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.MerchantAccounts.List()`:  `response.Items[].LoonMerchantAccountId` **Added**\n* `Gr4vy.MerchantAccounts.Create()`: \n  *  `request.Request.LoonMerchantAccountId` **Added**\n  *  `response.LoonMerchantAccountId` **Added**\n* `Gr4vy.MerchantAccounts.Get()`:  `response.LoonMerchantAccountId` **Added**\n* `Gr4vy.MerchantAccounts.Update()`: \n  *  `request.MerchantAccountUpdate.LoonMerchantAccountId` **Added**\n  *  `response.LoonMerchantAccountId` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
