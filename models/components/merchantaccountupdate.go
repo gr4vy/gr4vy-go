@@ -27,6 +27,8 @@ type MerchantAccountUpdate struct {
 	LoonSecretKey *string `json:"loon_secret_key,omitempty"`
 	// Card schemes accepted when creating jobs using this set of Loon API keys. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.
 	LoonAcceptedSchemes []CardScheme `json:"loon_accepted_schemes,omitempty"`
+	// Merchant account ID provided by Pagos to identify this merchant account on the Loon API. Loon is the Account Updater service we use and if the field is not set or if it's set to null, the Account Updater service doesn't get configured. If the field is set to `null`, the other `loon_*` fields must be set to null as well.
+	LoonMerchantAccountID *string `json:"loon_merchant_account_id,omitempty"`
 	// Requestor ID provided for Visa after onboarding to use Network Tokens.
 	VisaNetworkTokensRequestorID *string `json:"visa_network_tokens_requestor_id,omitempty"`
 	// Application ID provided for Visa after onboarding to use Network Tokens.
@@ -128,6 +130,13 @@ func (m *MerchantAccountUpdate) GetLoonAcceptedSchemes() []CardScheme {
 		return nil
 	}
 	return m.LoonAcceptedSchemes
+}
+
+func (m *MerchantAccountUpdate) GetLoonMerchantAccountID() *string {
+	if m == nil {
+		return nil
+	}
+	return m.LoonMerchantAccountID
 }
 
 func (m *MerchantAccountUpdate) GetVisaNetworkTokensRequestorID() *string {
