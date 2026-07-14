@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 3e0ab4f58c893ee4cc75aa6c1da6dfc8
+  docChecksum: 837772197407ce77c14d0d488ae99608
   docVersion: 1.0.0
-  speakeasyVersion: 1.789.1
-  generationVersion: 2.916.4
-  releaseVersion: 1.12.121
-  configChecksum: 6e9f9743c723e5076132039d7180f21b
+  speakeasyVersion: 1.790.1
+  generationVersion: 2.918.1
+  releaseVersion: 1.12.122
+  configChecksum: 86d43301b7a8f0417215efaf57cf4c2e
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 5c0d6bdd-c61c-4474-bdb9-38f0e7642c4e
-  pristine_commit_hash: d310e10ebd4267695f48f5d88feac071693bf748
-  pristine_tree_hash: 721e4de643222960f139838238b3b13254b449ae
+  generation_id: 8befd5d9-c3d3-404c-be2c-d49d87d2faa7
+  pristine_commit_hash: 26a413fc9c7d344fce8e7a3f75b74dea43a87f2a
+  pristine_tree_hash: b0934ac855dc16f5671f90e8092254850b89f425
 features:
   go:
     additionalDependencies: 0.1.0
@@ -698,8 +698,8 @@ trackedFiles:
     pristine_git_object: 47fdeb9093de150c722d0bc1a52a488c11495e8a
   docs/models/components/giftcarderrorcode.md:
     id: 5bc950b3514a
-    last_write_checksum: sha1:fa04081e2192e592fc5c232b9f570809d357728e
-    pristine_git_object: 24b4e3b07581cd6f1ed24b60b532d767946e4a3e
+    last_write_checksum: sha1:cb44960329824a70f5fc0aa49162880f8eda88f3
+    pristine_git_object: 32da76018b328325de71d65d6b9e103c49199b53
   docs/models/components/giftcardredemption.md:
     id: 7f3be40658c7
     last_write_checksum: sha1:ea856288a2abf482c550a99a97c7c30f323897b3
@@ -2802,8 +2802,8 @@ trackedFiles:
     pristine_git_object: b41956e7522e6c0792bafccae3d1d97435d1392e
   docs/sdks/transactions/README.md:
     id: 85592abe3c6b
-    last_write_checksum: sha1:d53f1fe414c445e05bea590e2f113df99e2872ae
-    pristine_git_object: 6e2dcfa130701d9b2520c052487e0407db13c7a0
+    last_write_checksum: sha1:1da67e55e49c2dc96074ca4a8440754bf98ed869
+    pristine_git_object: 9fb344a735b634f0feed500e990e479be11df86e
   docs/sdks/transactionsrefunds/README.md:
     id: c6a0400f5020
     last_write_checksum: sha1:d6a7ed6605281dd5bdacd35c1bc218d57b49c976
@@ -2834,8 +2834,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:b948525d7c0a3d341b6415eeda811a03621b9bee
-    pristine_git_object: 1b85d4d5297b4215a6b12916389de302f752076f
+    last_write_checksum: sha1:4f9449d5283b5e78636fee09533bb7cfa061256e
+    pristine_git_object: fbef7e883aa0f173af3c446694b9b0eae1f8c053
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3446,8 +3446,8 @@ trackedFiles:
     pristine_git_object: a34c53be75fe01bac61528c8f73e906b66aa82e2
   models/components/giftcarderrorcode.go:
     id: fa65e02daef3
-    last_write_checksum: sha1:c0451ca711ddd25bc8bdd410e54cbbe132258dd9
-    pristine_git_object: ab45e78af5bbe2a9e530e0b7c3a58b9f861a48d7
+    last_write_checksum: sha1:c8241165c9840a994ab90469b2672fc5be8b3b89
+    pristine_git_object: 168be80988fe6097dc73888d227654d3c0972276
   models/components/giftcardredemption.go:
     id: 3c62153205e6
     last_write_checksum: sha1:64f38785f0210cf302729a76bf92f517284818bd
@@ -4202,8 +4202,8 @@ trackedFiles:
     pristine_git_object: 542013c66d7ad00ed9db6b302e08a5b6b6668055
   models/components/transactioncapturecreate.go:
     id: 1c0d322bbbab
-    last_write_checksum: sha1:c01eb89c67d66b9d240296b2be9af13f146f4ad1
-    pristine_git_object: 37a211d5e1bb809af517c82026ccf76f513745a9
+    last_write_checksum: sha1:d7fb6dec1cc6d082aca5449dbc54d9a12cff96f1
+    pristine_git_object: c109b5e5d3f2a2d1bc23e923602914d3dc7565ed
   models/components/transactionconnectionoptions.go:
     id: 5ce01894f53d
     last_write_checksum: sha1:0a63922968bf3f7fef2b75c7a68839e4aefb2653
@@ -6542,7 +6542,7 @@ examples:
         header:
           x-gr4vy-merchant-account-id: "default"
       requestBody:
-        application/json: {"final": true}
+        application/json: {"final": true, "reauthorize_if_authorization_expired": true}
       responses:
         "200":
           application/json: {"type": "transaction-capture", "status": "pending", "code": "service_error", "raw_response_code": "E104", "raw_response_description": "Internal error", "transaction": {"type": "transaction", "id": "7099948d-7286-47e4-aad8-b68f7eb44591", "reconciliation_id": "default", "merchant_account_id": "default", "currency": "EUR", "amount": 1299, "status": "authorization_void_pending", "authorized_amount": 1299, "captured_amount": 1299, "refunded_amount": 1299, "settled_amount": 1100, "settled": true, "intent": "capture", "pending_review": false, "gift_card_redemptions": [], "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00", "disputed": true, "payment_source": "moto", "merchant_initiated": true, "is_subsequent_payment": false, "intent_outcome": "succeeded", "multi_tender": true, "account_funding_transaction": true}}
@@ -8896,7 +8896,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.MerchantAccounts.List()`:  `response.Items[].LoonMerchantAccountId` **Added**\n* `Gr4vy.MerchantAccounts.Create()`: \n  *  `request.Request.LoonMerchantAccountId` **Added**\n  *  `response.LoonMerchantAccountId` **Added**\n* `Gr4vy.MerchantAccounts.Get()`:  `response.LoonMerchantAccountId` **Added**\n* `Gr4vy.MerchantAccounts.Update()`: \n  *  `request.MerchantAccountUpdate.LoonMerchantAccountId` **Added**\n  *  `response.LoonMerchantAccountId` **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Capture()`: \n  *  `request.Request.TransactionCaptureCreate.ReauthorizeIfAuthorizationExpired` **Changed** (Breaking ⚠️)\n  *  `response.union(Transaction).GiftCardRedemptions[].ErrorCode` **Changed**\n* `Gr4vy.Buyers.GiftCards.List()`:  `response.Items[].BalanceErrorCode` **Changed**\n* `Gr4vy.GiftCards.Balances.List()`:  `response.Items[].BalanceErrorCode` **Changed**\n* `Gr4vy.Transactions.List()`:  `response.Items[].GiftCardRedemptions[].ErrorCode` **Changed**\n* `Gr4vy.Transactions.Create()`:  `response.GiftCardRedemptions[].ErrorCode` **Changed**\n* `Gr4vy.Transactions.Get()`:  `response.GiftCardRedemptions[].ErrorCode` **Changed**\n* `Gr4vy.Transactions.Update()`:  `response.GiftCardRedemptions[].ErrorCode` **Changed**\n* `Gr4vy.Transactions.Void()`:  `response.union(Transaction).GiftCardRedemptions[].ErrorCode` **Changed**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.GiftCardRedemptions[].ErrorCode` **Changed**\n* `Gr4vy.Transactions.Sync()`:  `response.GiftCardRedemptions[].ErrorCode` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

@@ -25,6 +25,10 @@ const (
 	GiftCardErrorCodeServiceNetworkError         GiftCardErrorCode = "service_network_error"
 	GiftCardErrorCodeUnknownError                GiftCardErrorCode = "unknown_error"
 	GiftCardErrorCodeMaxGiftCardsReached         GiftCardErrorCode = "max_gift_cards_reached"
+	GiftCardErrorCodeSuspectedFraud              GiftCardErrorCode = "suspected_fraud"
+	GiftCardErrorCodeCanceledPaymentMethod       GiftCardErrorCode = "canceled_payment_method"
+	GiftCardErrorCodeDuplicateTransaction        GiftCardErrorCode = "duplicate_transaction"
+	GiftCardErrorCodeUnexpectedState             GiftCardErrorCode = "unexpected_state"
 )
 
 func (e GiftCardErrorCode) ToPointer() *GiftCardErrorCode {
@@ -35,7 +39,7 @@ func (e GiftCardErrorCode) ToPointer() *GiftCardErrorCode {
 func (e *GiftCardErrorCode) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "invalid_gift_card", "expired_card", "inactive_card", "invalid_service_credentials", "invalid_amount", "incorrect_currency", "insufficient_funds", "invalid_service_configuration", "operation_canceled", "service_error", "service_network_error", "unknown_error", "max_gift_cards_reached":
+		case "invalid_gift_card", "expired_card", "inactive_card", "invalid_service_credentials", "invalid_amount", "incorrect_currency", "insufficient_funds", "invalid_service_configuration", "operation_canceled", "service_error", "service_network_error", "unknown_error", "max_gift_cards_reached", "suspected_fraud", "canceled_payment_method", "duplicate_transaction", "unexpected_state":
 			return true
 		}
 	}

@@ -39,3 +39,7 @@ custom := components.GiftCardErrorCode("custom_value")
 | `GiftCardErrorCodeServiceNetworkError`         | service_network_error                          |
 | `GiftCardErrorCodeUnknownError`                | unknown_error                                  |
 | `GiftCardErrorCodeMaxGiftCardsReached`         | max_gift_cards_reached                         |
+| `GiftCardErrorCodeSuspectedFraud`              | suspected_fraud                                |
+| `GiftCardErrorCodeCanceledPaymentMethod`       | canceled_payment_method                        |
+| `GiftCardErrorCodeDuplicateTransaction`        | duplicate_transaction                          |
+| `GiftCardErrorCodeUnexpectedState`             | unexpected_state                               |
