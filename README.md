@@ -488,6 +488,11 @@ func main() {
 
 * [List](docs/sdks/events/README.md#list) - List transaction events
 
+#### [Transactions.RefundSettlements](docs/sdks/refundsettlements/README.md)
+
+* [Get](docs/sdks/refundsettlements/README.md#get) - Get transaction refund settlement
+* [List](docs/sdks/refundsettlements/README.md#list) - List transaction refund settlements
+
 #### [Transactions.Refunds](docs/sdks/transactionsrefunds/README.md)
 
 * [List](docs/sdks/transactionsrefunds/README.md#list) - List transaction refunds
