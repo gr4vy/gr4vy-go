@@ -406,7 +406,9 @@ func main() {
 
     res, err := s.Transactions.Capture(ctx, operations.CaptureTransactionRequest{
         TransactionID: "7099948d-7286-47e4-aad8-b68f7eb44591",
-        TransactionCaptureCreate: components.TransactionCaptureCreate{},
+        TransactionCaptureCreate: components.TransactionCaptureCreate{
+            ReauthorizeIfAuthorizationExpired: gr4vygo.Pointer(true),
+        },
     })
     if err != nil {
         log.Fatal(err)
