@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 3748d7059c7bf56afd0b184715ed051b
+  docChecksum: ff9abb9b493ffc5098f7ff7a476366d4
   docVersion: 1.0.0
   speakeasyVersion: 1.790.1
   generationVersion: 2.918.1
-  releaseVersion: 1.12.123
-  configChecksum: 3ec471722d32dde412fa48c5b1b49816
+  releaseVersion: 1.12.124
+  configChecksum: 7469c16e67468d72f037152fb6ac3231
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: e0202972-68cd-46c4-ad79-5ad26870fa3c
-  pristine_commit_hash: 7321f747c415e6fa2a06db25a005df75e6c31159
-  pristine_tree_hash: 8a1495f422869a88908e3b2cd2c34b45791b27a5
+  generation_id: 27b88b2c-1638-4017-80e5-d0ec7ada2402
+  pristine_commit_hash: dbf56afed2a57f7471633e29a1d6c3a63b3ffb26
+  pristine_tree_hash: 4982e47d0618c3d3c053978092a931838c2bbd95
 features:
   go:
     additionalDependencies: 0.1.0
@@ -288,10 +288,6 @@ trackedFiles:
     id: "398447050044"
     last_write_checksum: sha1:4a009278f3d840b2a01b4841cab12ac82b00827f
     pristine_git_object: 775536b51ea0910aab2766e78a313a3695d37dd5
-  docs/models/components/apitypesdigitalwalletaddress.md:
-    id: e64a06ef1306
-    last_write_checksum: sha1:4f6cf0b8c5151761894e2987e26992f92aab072b
-    pristine_git_object: 7eb667f240595ffa74b3dea8ae0264b1637bcad1
   docs/models/components/applepaypaymentmethodcreate.md:
     id: 0312ae6b8d37
     last_write_checksum: sha1:75e44169d6a4227c07f6b943e4f747ff5c15b2b6
@@ -530,8 +526,8 @@ trackedFiles:
     pristine_git_object: 3b10f4ac02cf6cb8dc49ae3e810532eaf72308f5
   docs/models/components/digitalwallet.md:
     id: 857177c2dea3
-    last_write_checksum: sha1:2a089d5a0247eb3ecaf25a9f4bc541675df915fd
-    pristine_git_object: 39be60830bf970b67959ccd945205d8f9441a52f
+    last_write_checksum: sha1:cd5d90be6203cc68288db8f430d0423bc2784c0d
+    pristine_git_object: 7c577a67d9a92557af5619438569f3d1c1961c28
   docs/models/components/digitalwalletaddress.md:
     id: 9ae7757026ea
     last_write_checksum: sha1:efa50e929a0d51a7c1d0889ff23e3108eff0d794
@@ -2862,8 +2858,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:223ceea4eedd865dc9887c2b79cc12d056a62288
-    pristine_git_object: 482124a034399a6475f71dacce28bcfa6b379b52
+    last_write_checksum: sha1:fef0f99eeb3f615258862a209569cab4bf27a197
+    pristine_git_object: 235d391d53d162c633faa75f7f8b66cde4226124
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -3100,10 +3096,6 @@ trackedFiles:
     id: 4a14dc3f9bc5
     last_write_checksum: sha1:0c07e1092ef6a1eeefd915e0565a85e392661692
     pristine_git_object: 1c7904b315a65f4c263817ef3b09ef0f8145c514
-  models/components/apitypesdigitalwalletaddress.go:
-    id: 121f73c4e19a
-    last_write_checksum: sha1:5f4055fe060b72da675244f06998a752fed84f6e
-    pristine_git_object: 4f7979c8d963220e75a388455fe7ee753bce9b3f
   models/components/applepaypaymentmethodcreate.go:
     id: 552274f7a623
     last_write_checksum: sha1:06bb7be928d5218a290f49336125de08e2259818
@@ -3326,8 +3318,8 @@ trackedFiles:
     pristine_git_object: dda23914af1d402c44df62db97bf15b7b5f404f1
   models/components/digitalwallet.go:
     id: abc8e0e9f7b1
-    last_write_checksum: sha1:4cd3acadfcc8d2805863ea9dd0702fcdf1031c82
-    pristine_git_object: 7a612a3c94138d5ab7be7ecbaa33710e42880a81
+    last_write_checksum: sha1:616e7c751206a4d08bd17271d966c4b62e9442a4
+    pristine_git_object: d2b9d528a80b7c9c9da31fb741fe3901dc717b11
   models/components/digitalwalletaddress.go:
     id: 2594fe924d4d
     last_write_checksum: sha1:c02b055e20db2b3f26ebe8cde16e0f37ebc131aa
@@ -9011,8 +9003,10 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Go SDK Changes:
-  * `Gr4vy.Transactions.RefundSettlements.Get()`: **Added**
-  * `Gr4vy.Transactions.RefundSettlements.List()`: **Added**
+  * `Gr4vy.DigitalWallets.Create()`:  `response.Address.Line2` **Changed**
+  * `Gr4vy.DigitalWallets.List()`:  `response.Items[].Address.Line2` **Changed**
+  * `Gr4vy.DigitalWallets.Get()`:  `response.Address.Line2` **Changed**
+  * `Gr4vy.DigitalWallets.Update()`:  `response.Address.Line2` **Changed**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
