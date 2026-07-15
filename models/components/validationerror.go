@@ -71,10 +71,15 @@ func (u Loc) MarshalJSON() ([]byte, error) {
 	return nil, errors.New("could not marshal union type Loc: all fields are null")
 }
 
+type ValidationErrorContext struct {
+}
+
 type ValidationError struct {
-	Loc  []Loc  `json:"loc"`
-	Msg  string `json:"msg"`
-	Type string `json:"type"`
+	Loc   []Loc                   `json:"loc"`
+	Msg   string                  `json:"msg"`
+	Type  string                  `json:"type"`
+	Input any                     `json:"input,omitempty"`
+	Ctx   *ValidationErrorContext `json:"ctx,omitempty"`
 }
 
 func (v *ValidationError) GetLoc() []Loc {
@@ -96,4 +101,18 @@ func (v *ValidationError) GetType() string {
 		return ""
 	}
 	return v.Type
+}
+
+func (v *ValidationError) GetInput() any {
+	if v == nil {
+		return nil
+	}
+	return v.Input
+}
+
+func (v *ValidationError) GetCtx() *ValidationErrorContext {
+	if v == nil {
+		return nil
+	}
+	return v.Ctx
 }
