@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: ff9abb9b493ffc5098f7ff7a476366d4
+  docChecksum: b3ff03c1ce203e2b56d76b90a4ecc01b
   docVersion: 1.0.0
   speakeasyVersion: 1.790.1
   generationVersion: 2.918.1
-  releaseVersion: 1.12.124
-  configChecksum: 7469c16e67468d72f037152fb6ac3231
+  releaseVersion: 1.12.125
+  configChecksum: 3cf4faca44b4c3953ab7410cc3444fc9
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 27b88b2c-1638-4017-80e5-d0ec7ada2402
-  pristine_commit_hash: dbf56afed2a57f7471633e29a1d6c3a63b3ffb26
-  pristine_tree_hash: 4982e47d0618c3d3c053978092a931838c2bbd95
+  generation_id: 14bf625d-9c6f-4a02-9498-da0798fea46e
+  pristine_commit_hash: 4fbb127c9963685d886c855eb55b74177b0b7905
+  pristine_tree_hash: d7ed57ebebebd4bcf28250d61aec6abc707f8281
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1694,8 +1694,12 @@ trackedFiles:
     pristine_git_object: 49eecc883ae842be5997b378b512ad5616b10830
   docs/models/components/validationerror.md:
     id: 23910fc567b1
-    last_write_checksum: sha1:18f537af6cec05a97f62dede63880022cdfa4a90
-    pristine_git_object: 3421e828d4e35456e48de8c778cd02a8722766d8
+    last_write_checksum: sha1:5a11669514f669d69093723da9c2a80a73ae3d30
+    pristine_git_object: 1f81bfcceee5b85f850a29e6bfac787e686ed55e
+  docs/models/components/validationerrorcontext.md:
+    id: 1deb27dbccee
+    last_write_checksum: sha1:1be31d67cd0c414d0be6ad2f94d53e5b858e14cb
+    pristine_git_object: 1ae680d7e7224ec15680b53b92aac22152931608
   docs/models/components/vaultpaymentmethodcriteria.md:
     id: 5c286ec4009f
     last_write_checksum: sha1:0ff2eef2be7c79b1d4dfb3556e25a19f24474e99
@@ -2858,8 +2862,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:fef0f99eeb3f615258862a209569cab4bf27a197
-    pristine_git_object: 235d391d53d162c633faa75f7f8b66cde4226124
+    last_write_checksum: sha1:930e52539ea940f1a370178c917534d2e105066a
+    pristine_git_object: f4c3e8fc63d792d52f5f9cffb3e118b089a45df6
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -4330,8 +4334,8 @@ trackedFiles:
     pristine_git_object: 5a1398420af776d65e5241e72555a6e21329da09
   models/components/validationerror.go:
     id: f7f14895a76c
-    last_write_checksum: sha1:73efdaf8a179ddb76f13e2c8e51f3e08861310a1
-    pristine_git_object: ee35571e638e0c844d16654ab380c7392626d589
+    last_write_checksum: sha1:9a2f6ad54d1b02c7f83c25ebfe1aa058e6a8674e
+    pristine_git_object: fb39161e7254305d1c6d2f53a06e5a4468ced6b1
   models/components/verifycredentials.go:
     id: df5d2b8f408b
     last_write_checksum: sha1:5e1e4221238f0b0ee1a44ed5c2b0f46978031e82
@@ -9003,10 +9007,121 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Go SDK Changes:
-  * `Gr4vy.DigitalWallets.Create()`:  `response.Address.Line2` **Changed**
-  * `Gr4vy.DigitalWallets.List()`:  `response.Items[].Address.Line2` **Changed**
-  * `Gr4vy.DigitalWallets.Get()`:  `response.Address.Line2` **Changed**
-  * `Gr4vy.DigitalWallets.Update()`:  `response.Address.Line2` **Changed**
+  * `Gr4vy.AccountUpdater.Jobs.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.ApiKeyPairs.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.ApiKeyPairs.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.ApiKeyPairs.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.ApiKeyPairs.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.ApiKeyPairs.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.PaymentMethods.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.GiftCards.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.ShippingDetails.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.ShippingDetails.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.ShippingDetails.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.ShippingDetails.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Buyers.ShippingDetails.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.PaymentServiceTokens.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.PaymentServiceTokens.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.PaymentServiceTokens.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.NetworkTokens.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.NetworkTokens.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.NetworkTokens.Suspend()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.NetworkTokens.Resume()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.NetworkTokens.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentMethods.NetworkTokens.Cryptogram.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.GiftCards.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.GiftCards.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.GiftCards.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.GiftCards.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.GiftCards.Balances.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.CardSchemeDefinitions.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Sessions.GooglePay()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Sessions.ApplePay()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Sessions.PazeMobileSessionCreate()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Sessions.Paze()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Sessions.PazeMobileSessionReview()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Sessions.PazeMobileSessionComplete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Sessions.ClickToPay()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Domains.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.DigitalWallets.Domains.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Capture()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Void()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Cancel()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Sync()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Refunds.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Refunds.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Refunds.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Refunds.All.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Actions.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Events.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Settlements.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Settlements.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.RefundSettlements.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.RefundSettlements.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Captures.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Transactions.Captures.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Refunds.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentOptions.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentServiceDefinitions.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentServiceDefinitions.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentServiceDefinitions.Session()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentServices.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentServices.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentServices.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentServices.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentServices.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentServices.Verify()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentServices.Session()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.AuditLogs.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Reports.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Reports.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Reports.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Reports.Put()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Reports.Executions.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Reports.Executions.Url()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Reports.Executions.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.ReportExecutions.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.CheckoutSessions.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.CheckoutSessions.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.CheckoutSessions.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.MerchantAccounts.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.MerchantAccounts.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.MerchantAccounts.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.MerchantAccounts.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.MerchantAccounts.ThreeDsConfiguration.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.MerchantAccounts.ThreeDsConfiguration.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.MerchantAccounts.ThreeDsConfiguration.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.MerchantAccounts.ThreeDsConfiguration.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.ThreeDsScenarios.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.ThreeDsScenarios.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.ThreeDsScenarios.Update()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.ThreeDsScenarios.Delete()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Payouts.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Payouts.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.Payouts.Get()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentLinks.Create()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentLinks.List()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentLinks.Expire()`:  `error.Detail[]` **Changed**
+  * `Gr4vy.PaymentLinks.Get()`:  `error.Detail[]` **Changed**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
