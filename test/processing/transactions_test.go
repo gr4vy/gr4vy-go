@@ -74,6 +74,13 @@ func TestTransactionSubResources(t *testing.T) {
 		_, err := m.Client.Transactions.Settlements.Get(ctx, tx.ID, harness.MissingID, nil)
 		return err
 	})
+	if _, err := m.Client.Transactions.RefundSettlements.List(ctx, tx.ID, nil); err != nil {
+		t.Fatalf("list transaction refund settlements: %v", err)
+	}
+	harness.Reaches(t, "transactions.refund_settlements.get", func() error {
+		_, err := m.Client.Transactions.RefundSettlements.Get(ctx, tx.ID, harness.MissingID, nil)
+		return err
+	})
 }
 
 // TestTransactionCancelIsReached cancels a fresh authorization. Depending on
