@@ -125,6 +125,8 @@ type TransactionConnectionOptions struct {
 	TravelhubCard *TravelhubOptions `json:"travelhub-card,omitempty"`
 	// Custom options to be passed to the `trustly-trustly` connector.
 	TrustlyTrustly *TrustlyOptions `json:"trustly-trustly,omitempty"`
+	// Custom options to be passed to the `worldpayvap-card` connector.
+	WorldpayvapCard *WorldpayVapOptions `json:"worldpayvap-card,omitempty"`
 	// Custom options to be passed to the `wpay-everydaypay` connector.
 	WpayEverydaypay *WpayEverdaypayOptions `json:"wpay-everydaypay,omitempty"`
 	// Custom options to be passed to the `wpay-payto` connector.
@@ -556,6 +558,13 @@ func (t *TransactionConnectionOptions) GetTrustlyTrustly() *TrustlyOptions {
 		return nil
 	}
 	return t.TrustlyTrustly
+}
+
+func (t *TransactionConnectionOptions) GetWorldpayvapCard() *WorldpayVapOptions {
+	if t == nil {
+		return nil
+	}
+	return t.WorldpayvapCard
 }
 
 func (t *TransactionConnectionOptions) GetWpayEverydaypay() *WpayEverdaypayOptions {
