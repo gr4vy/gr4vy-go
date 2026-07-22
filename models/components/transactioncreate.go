@@ -491,6 +491,8 @@ type TransactionCreate struct {
 	PaymentSource *TransactionPaymentSource `json:"payment_source,omitempty"`
 	// The airline addendum data which describes the airline booking associated with this transaction.
 	Airline *Airline `json:"airline,omitempty"`
+	// An optional description for the transaction. Forwarded to the payment processor where supported. Unlike `statement_descriptor`, this field has no character limit and does not appear on the buyer's bank statement.
+	Description *string `json:"description,omitempty"`
 	// An array of cart items that represents the line items of a transaction.
 	CartItems []CartItem `json:"cart_items,omitempty"`
 	// Details about the payment and the merchant which may end up on the (bank) statement for the payment.
@@ -684,6 +686,13 @@ func (t *TransactionCreate) GetAirline() *Airline {
 		return nil
 	}
 	return t.Airline
+}
+
+func (t *TransactionCreate) GetDescription() *string {
+	if t == nil {
+		return nil
+	}
+	return t.Description
 }
 
 func (t *TransactionCreate) GetCartItems() []CartItem {
