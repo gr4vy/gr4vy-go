@@ -64,3 +64,40 @@ func TestGiftCardBalancesIsReached(t *testing.T) {
 		return err
 	})
 }
+
+// TestGiftCardActivationIsReached activates a gift card. Activation needs a
+// provisioned gift-card service, so we assert the endpoint is reached.
+func TestGiftCardActivationIsReached(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+
+	pin := "1234"
+	amount := int64(1299)
+	currency := "USD"
+
+	harness.Reaches(t, "gift_cards.activations.create", func() error {
+		_, err := m.Client.GiftCards.Activations.Create(ctx, components.GiftCardActivationCreate{
+			Number:   "4111111111111111",
+			Pin:      &pin,
+			Amount:   &amount,
+			Currency: &currency,
+		}, nil, nil)
+		return err
+	})
+}
+
+// TestGiftCardIssuanceIsReached issues a new gift card. Issuance needs a
+// provisioned gift-card service with a theme, so we assert reach.
+func TestGiftCardIssuanceIsReached(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+
+	harness.Reaches(t, "gift_cards.issuances.create", func() error {
+		_, err := m.Client.GiftCards.Issuances.Create(ctx, components.GiftCardIssuanceCreate{
+			Theme:    "default",
+			Amount:   1299,
+			Currency: "USD",
+		}, nil, nil)
+		return err
+	})
+}

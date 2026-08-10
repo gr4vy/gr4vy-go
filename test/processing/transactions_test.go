@@ -95,3 +95,19 @@ func TestTransactionCancelIsReached(t *testing.T) {
 		return err
 	})
 }
+
+// TestTransactionIncrementAuthorizationIsReached increments the authorization on
+// a fresh authorization. Incremental authorization is a PSP capability the mock
+// connector does not offer, so this may be cleanly rejected; either way it
+// reaches, and it is attempted against a genuinely authorized transaction.
+func TestTransactionIncrementAuthorizationIsReached(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+	tx := harness.Authorize(t, m, 1299, "USD")
+
+	harness.Reaches(t, "transactions.increment_authorization", func() error {
+		_, err := m.Client.Transactions.IncrementAuthorization(ctx, tx.ID,
+			components.TransactionAuthorizationIncrementCreate{Amount: 500}, nil, nil)
+		return err
+	})
+}
