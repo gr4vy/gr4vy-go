@@ -12,7 +12,7 @@ type APIKeyPairCreate struct {
 	Algorithm   *CertificateAlgorithm `json:"algorithm,omitempty"`
 	// Whether the API key pair should be active and usable once created.
 	Active *bool `default:"true" json:"active"`
-	// The ID of the role to assign to the API key pair. Exactly one role is supported. The caller can only assign a role whose scopes are a subset of its own.
+	// The IDs of the roles to assign to the API key pair. The caller can only assign roles whose scopes are a subset of its own.
 	RoleIds []string `json:"role_ids"`
 	// The IDs of the merchant accounts to associate with the API key pair. An empty list grants access to all merchant accounts. The caller can only assign merchant accounts it has access to.
 	MerchantAccountIds []string `json:"merchant_account_ids,omitempty"`

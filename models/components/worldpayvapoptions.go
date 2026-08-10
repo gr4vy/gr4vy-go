@@ -5,6 +5,8 @@ package components
 type WorldpayVapOptions struct {
 	// Overrides the default report group to pass to the Worldpay VAP API.
 	ReportGroup *string `json:"reportGroup,omitempty"`
+	// Overrides the `orderId` passed to the Worldpay VAP API, which defaults to the Gr4vy transaction ID.
+	OrderID *string `json:"orderId,omitempty"`
 }
 
 func (w *WorldpayVapOptions) GetReportGroup() *string {
@@ -12,4 +14,11 @@ func (w *WorldpayVapOptions) GetReportGroup() *string {
 		return nil
 	}
 	return w.ReportGroup
+}
+
+func (w *WorldpayVapOptions) GetOrderID() *string {
+	if w == nil {
+		return nil
+	}
+	return w.OrderID
 }

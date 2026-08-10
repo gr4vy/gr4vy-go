@@ -45,6 +45,8 @@ custom := components.Name("custom_value")
 | `NameGiftCardRefundSucceeded`                                            | gift-card-refund-succeeded                                               |
 | `NameGiftCardRefundFailed`                                               | gift-card-refund-failed                                                  |
 | `NameGiftCardReversalSucceeded`                                          | gift-card-reversal-succeeded                                             |
+| `NameReauthorizationAttempted`                                           | reauthorization-attempted                                                |
+| `NameReauthorizationCreated`                                             | reauthorization-created                                                  |
 | `NamePaymentConnectorResponseTransactionAuthorizationSucceeded`          | payment-connector-response-transaction-authorization-succeeded           |
 | `NamePaymentConnectorResponseTransactionCaptureSucceeded`                | payment-connector-response-transaction-capture-succeeded                 |
 | `NamePaymentConnectorResponseTransactionAuthorizationFailed`             | payment-connector-response-transaction-authorization-failed              |

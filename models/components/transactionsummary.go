@@ -73,6 +73,8 @@ type TransactionSummary struct {
 	UpdatedAt time.Time `json:"updated_at"`
 	// Indicates whether this transaction has been disputed.
 	Disputed bool `json:"disputed"`
+	// The identifier of the transaction from which this transaction was reauthorized.
+	ReauthorizedFromTransactionID *string `json:"reauthorized_from_transaction_id,omitempty"`
 }
 
 func (t TransactionSummary) MarshalJSON() ([]byte, error) {
@@ -305,4 +307,11 @@ func (t *TransactionSummary) GetDisputed() bool {
 		return false
 	}
 	return t.Disputed
+}
+
+func (t *TransactionSummary) GetReauthorizedFromTransactionID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ReauthorizedFromTransactionID
 }

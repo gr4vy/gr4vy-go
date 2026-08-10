@@ -22,10 +22,10 @@ func TestBuyerShippingDetailsCRUD(t *testing.T) {
 	if err != nil {
 		t.Fatalf("create buyer: %v", err)
 	}
-	if buyer.ID == nil || *buyer.ID == "" {
+	if buyer.ID == "" {
 		t.Fatal("buyer id empty")
 	}
-	buyerID := *buyer.ID
+	buyerID := buyer.ID
 
 	shipping, err := m.Client.Buyers.ShippingDetails.Create(ctx, buyerID, components.ShippingDetailsCreate{
 		FirstName: gr4vygo.String("Jane"),
@@ -66,13 +66,13 @@ func TestBuyerGiftCardsList(t *testing.T) {
 	if err != nil {
 		t.Fatalf("create buyer: %v", err)
 	}
-	if buyer.ID == nil || *buyer.ID == "" {
+	if buyer.ID == "" {
 		t.Fatal("buyer id empty")
 	}
 
 	// GET /buyers/gift-cards — a 2xx even when the buyer has none.
 	if _, err := m.Client.Buyers.GiftCards.List(ctx, operations.ListBuyerGiftCardsRequest{
-		BuyerID: buyer.ID,
+		BuyerID: gr4vygo.String(buyer.ID),
 	}); err != nil {
 		t.Fatalf("list buyer gift cards: %v", err)
 	}

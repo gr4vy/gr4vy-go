@@ -73,6 +73,8 @@ type Transaction struct {
 	UpdatedAt time.Time `json:"updated_at"`
 	// Indicates whether this transaction has been disputed.
 	Disputed bool `json:"disputed"`
+	// The identifier of the transaction from which this transaction was reauthorized.
+	ReauthorizedFromTransactionID *string `json:"reauthorized_from_transaction_id,omitempty"`
 	// Contains information about an airline travel, if applicable.
 	Airline *Airline `json:"airline,omitempty"`
 	// This is the response description received from the processor.
@@ -380,6 +382,13 @@ func (t *Transaction) GetDisputed() bool {
 		return false
 	}
 	return t.Disputed
+}
+
+func (t *Transaction) GetReauthorizedFromTransactionID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ReauthorizedFromTransactionID
 }
 
 func (t *Transaction) GetAirline() *Airline {

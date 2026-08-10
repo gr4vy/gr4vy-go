@@ -27,6 +27,8 @@ type APIKeyPair struct {
 	CreatedAt time.Time `json:"created_at"`
 	// The date and time when this API key pair was last updated.
 	UpdatedAt time.Time `json:"updated_at"`
+	// The date and time when this API key pair was last used to authenticate, or `null` if it has never been used.
+	LastUsedAt *time.Time `json:"last_used_at,omitempty"`
 	// The user or API key pair that created this API key pair.
 	Creator *APIRoutersAPIKeyPairsSchemasCreator `json:"creator,omitempty"`
 	// The merchant accounts this API key pair has access to. An empty list means it has access to all merchant accounts.
@@ -104,6 +106,13 @@ func (a *APIKeyPair) GetUpdatedAt() time.Time {
 		return time.Time{}
 	}
 	return a.UpdatedAt
+}
+
+func (a *APIKeyPair) GetLastUsedAt() *time.Time {
+	if a == nil {
+		return nil
+	}
+	return a.LastUsedAt
 }
 
 func (a *APIKeyPair) GetCreator() *APIRoutersAPIKeyPairsSchemasCreator {
