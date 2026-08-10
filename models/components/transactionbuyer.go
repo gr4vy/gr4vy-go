@@ -13,6 +13,8 @@ type TransactionBuyer struct {
 	type_ *string `const:"buyer" json:"type"`
 	// The ID for the buyer.
 	ID *string `json:"id,omitempty"`
+	// The base62 encoded buyer ID. This represents a shorter version of this buyer's `id` which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service's buyer against our system.
+	ReconciliationID *string `json:"reconciliation_id,omitempty"`
 	// The display name for the buyer.
 	DisplayName *string `json:"display_name,omitempty"`
 	// The merchant identifier for this buyer.
@@ -43,6 +45,13 @@ func (t *TransactionBuyer) GetID() *string {
 		return nil
 	}
 	return t.ID
+}
+
+func (t *TransactionBuyer) GetReconciliationID() *string {
+	if t == nil {
+		return nil
+	}
+	return t.ReconciliationID
 }
 
 func (t *TransactionBuyer) GetDisplayName() *string {

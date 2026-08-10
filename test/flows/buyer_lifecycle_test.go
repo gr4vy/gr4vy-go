@@ -23,10 +23,10 @@ func TestBuyerWithStoredMethodAndShipping(t *testing.T) {
 	if err != nil {
 		t.Fatalf("create buyer: %v", err)
 	}
-	if buyer.ID == nil || *buyer.ID == "" {
+	if buyer.ID == "" {
 		t.Fatal("buyer id is empty")
 	}
-	buyerID := *buyer.ID
+	buyerID := buyer.ID
 
 	// Store a card against the buyer.
 	card := harness.ApprovingCard()

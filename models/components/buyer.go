@@ -13,7 +13,9 @@ type Buyer struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"buyer" json:"type"`
 	// The ID for the buyer.
-	ID *string `json:"id,omitempty"`
+	ID string `json:"id"`
+	// The base62 encoded buyer ID. This represents a shorter version of this buyer's `id` which is sent to payment services, anti-fraud services, and other connectors. You can use this ID to reconcile a payment service's buyer against our system.
+	ReconciliationID string `json:"reconciliation_id"`
 	// The ID of the merchant account this buyer belongs to.
 	MerchantAccountID string `json:"merchant_account_id"`
 	// The display name for the buyer.
@@ -45,11 +47,18 @@ func (b *Buyer) GetType() *string {
 	return types.Pointer("buyer")
 }
 
-func (b *Buyer) GetID() *string {
+func (b *Buyer) GetID() string {
 	if b == nil {
-		return nil
+		return ""
 	}
 	return b.ID
+}
+
+func (b *Buyer) GetReconciliationID() string {
+	if b == nil {
+		return ""
+	}
+	return b.ReconciliationID
 }
 
 func (b *Buyer) GetMerchantAccountID() string {

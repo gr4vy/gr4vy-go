@@ -21,16 +21,16 @@ func TestBuyerCRUD(t *testing.T) {
 	if err != nil {
 		t.Fatalf("create buyer: %v", err)
 	}
-	if buyer.ID == nil || *buyer.ID == "" {
+	if buyer.ID == "" {
 		t.Fatal("buyer id empty")
 	}
-	id := *buyer.ID
+	id := buyer.ID
 
 	got, err := m.Client.Buyers.Get(ctx, id, nil)
 	if err != nil {
 		t.Fatalf("get buyer: %v", err)
 	}
-	if got.ID == nil || *got.ID != id {
+	if got.ID != id {
 		t.Fatal("get buyer mismatch")
 	}
 

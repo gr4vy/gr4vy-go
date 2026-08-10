@@ -1,0 +1,10 @@
+# IssueGiftCardRequest
+
+
+## Fields
+
+| Field                                                                                  | Type                                                                                   | Required                                                                               | Description                                                                            |
+| -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- | -------------------------------------------------------------------------------------- |
+| `IdempotencyKey`                                                                       | `*string`                                                                              | :heavy_minus_sign:                                                                     | A unique key forwarded to the gift card service to make the issuance idempotent.       |
+| `MerchantAccountID`                                                                    | `*string`                                                                              | :heavy_minus_sign:                                                                     | The ID of the merchant account to use for this request.                                |
+| `GiftCardIssuanceCreate`                                                               | [components.GiftCardIssuanceCreate](../../models/components/giftcardissuancecreate.md) | :heavy_check_mark:                                                                     | N/A                                                                                    |

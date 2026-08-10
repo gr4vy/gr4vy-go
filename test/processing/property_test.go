@@ -26,7 +26,7 @@ func TestPropertyBuyerCreate(t *testing.T) {
 		if err != nil {
 			t.Fatalf("run %d: create buyer: %v", i, err)
 		}
-		if buyer.ID == nil || *buyer.ID == "" {
+		if buyer.ID == "" {
 			t.Fatalf("run %d: buyer id empty", i)
 		}
 	}

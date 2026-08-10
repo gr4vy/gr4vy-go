@@ -359,9 +359,17 @@ func main() {
 * [Create](docs/sdks/giftcards/README.md#create) - Create gift card
 * [List](docs/sdks/giftcards/README.md#list) - List gift cards
 
+#### [GiftCards.Activations](docs/sdks/activations/README.md)
+
+* [Create](docs/sdks/activations/README.md#create) - Activate a gift card
+
 #### [GiftCards.Balances](docs/sdks/balances/README.md)
 
 * [List](docs/sdks/balances/README.md#list) - List gift card balances
+
+#### [GiftCards.Issuances](docs/sdks/issuances/README.md)
+
+* [Create](docs/sdks/issuances/README.md#create) - Issue a gift card
 
 ### [MerchantAccounts](docs/sdks/merchantaccounts/README.md)
 
@@ -474,6 +482,7 @@ func main() {
 * [Void](docs/sdks/transactions/README.md#void) - Void transaction
 * [Cancel](docs/sdks/transactions/README.md#cancel) - Cancel transaction
 * [Sync](docs/sdks/transactions/README.md#sync) - Sync transaction
+* [IncrementAuthorization](docs/sdks/transactions/README.md#incrementauthorization) - Increment transaction authorization
 
 #### [Transactions.Actions](docs/sdks/actions/README.md)
 

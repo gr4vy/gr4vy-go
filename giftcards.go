@@ -21,7 +21,9 @@ import (
 )
 
 type GiftCards struct {
-	Balances *Balances
+	Balances    *Balances
+	Activations *Activations
+	Issuances   *Issuances
 
 	rootSDK          *Gr4vy
 	sdkConfiguration config.SDKConfiguration
@@ -34,6 +36,8 @@ func newGiftCards(rootSDK *Gr4vy, sdkConfig config.SDKConfiguration, hooks *hook
 		sdkConfiguration: sdkConfig,
 		hooks:            hooks,
 		Balances:         newBalances(rootSDK, sdkConfig, hooks),
+		Activations:      newActivations(rootSDK, sdkConfig, hooks),
+		Issuances:        newIssuances(rootSDK, sdkConfig, hooks),
 	}
 }
 
