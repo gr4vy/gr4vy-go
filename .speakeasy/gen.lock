@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 98df55d3eb843d014722d29acd563b40
+  docChecksum: ba8b3d7858340ac2c4af7d4223fe7abd
   docVersion: 1.0.0
-  speakeasyVersion: 1.792.0
-  generationVersion: 2.927.0
-  releaseVersion: 1.13.0
-  configChecksum: e8e5b6f084be64e298154341624dcc1c
+  speakeasyVersion: 1.793.0
+  generationVersion: 2.928.0
+  releaseVersion: 1.13.1
+  configChecksum: d0315e2892e7a1c37aeebffdf0194154
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 56816aa2-d80a-4e01-bbbe-68e2a1f414fe
-  pristine_commit_hash: d046ae9cdeadfde2ede31e51f4f6e9c6ec2a7a20
-  pristine_tree_hash: 222afa9624ac9b4d63dad76881a63d9a33422674
+  generation_id: 19249e9b-5f05-492d-bcf5-86a1f4d9c832
+  pristine_commit_hash: 720e17e4dba0795f59251e0bf952fdca009d12b8
+  pristine_tree_hash: a4b96b97edd281b6354d4c760b116d921f304533
 features:
   go:
     additionalDependencies: 0.1.0
@@ -2931,8 +2931,8 @@ trackedFiles:
     pristine_git_object: 10c57861a9cb2827220e62bb0f0efd143933680c
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:5111c662cce1d55cbc1c0559c17db6045e167809
-    pristine_git_object: 059002316d88967b6278173547b92fff6fa260b0
+    last_write_checksum: sha1:a76a6e48cb611449ccefe8584d13e1db90053dc6
+    pristine_git_object: d4e7f9140f8eee7a61bac83691725562171c891d
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
