@@ -9,11 +9,19 @@ import (
 
 type Role struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
-	type_       *string       `const:"role" json:"type"`
-	ID          string        `json:"id"`
-	Name        string        `json:"name"`
+	type_ *string `const:"role" json:"type"`
+	ID    string  `json:"id"`
+	Name  string  `json:"name"`
+	// The unique, human-readable identifier for the role.
+	Slug        string        `json:"slug"`
 	Description string        `json:"description"`
 	Permissions PermissionSet `json:"permissions"`
+	// The types of resource this role can be assigned to.
+	AssignableTo []RoleAssigneeType `json:"assignable_to"`
+	// The slugs of the roles this role is an add-on of. Empty when this role is not an add-on.
+	AppliesTo []string `json:"applies_to"`
+	// Whether this role can be assigned on its own, without being combined with another role.
+	IsStandaloneAssignable bool `json:"is_standalone_assignable"`
 }
 
 func (r Role) MarshalJSON() ([]byte, error) {
@@ -45,6 +53,13 @@ func (r *Role) GetName() string {
 	return r.Name
 }
 
+func (r *Role) GetSlug() string {
+	if r == nil {
+		return ""
+	}
+	return r.Slug
+}
+
 func (r *Role) GetDescription() string {
 	if r == nil {
 		return ""
@@ -57,4 +72,25 @@ func (r *Role) GetPermissions() PermissionSet {
 		return PermissionSet{}
 	}
 	return r.Permissions
+}
+
+func (r *Role) GetAssignableTo() []RoleAssigneeType {
+	if r == nil {
+		return []RoleAssigneeType{}
+	}
+	return r.AssignableTo
+}
+
+func (r *Role) GetAppliesTo() []string {
+	if r == nil {
+		return []string{}
+	}
+	return r.AppliesTo
+}
+
+func (r *Role) GetIsStandaloneAssignable() bool {
+	if r == nil {
+		return false
+	}
+	return r.IsStandaloneAssignable
 }
