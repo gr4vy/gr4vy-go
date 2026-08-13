@@ -8,13 +8,18 @@ import (
 )
 
 type Role struct {
+	// Always `role`.
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_ *string `const:"role" json:"type"`
-	ID    string  `json:"id"`
-	Name  string  `json:"name"`
+	// The unique ID for the role.
+	ID string `json:"id"`
+	// The human-readable name of the role.
+	Name string `json:"name"`
 	// The unique, human-readable identifier for the role.
-	Slug        string        `json:"slug"`
-	Description string        `json:"description"`
+	Slug string `json:"slug"`
+	// A description of the access this role grants.
+	Description string `json:"description"`
+	// The permissions granted by a role.
 	Permissions PermissionSet `json:"permissions"`
 	// The types of resource this role can be assigned to.
 	AssignableTo []RoleAssigneeType `json:"assignable_to"`
