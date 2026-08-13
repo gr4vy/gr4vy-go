@@ -2,7 +2,9 @@
 
 package components
 
+// PermissionSet - The permissions granted by a role.
 type PermissionSet struct {
+	// The scopes granted by this role.
 	Allow []string `json:"allow"`
 }
 
