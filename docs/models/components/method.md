@@ -49,6 +49,7 @@ custom := components.Method("custom_value")
 | `MethodDana`             | dana                     |
 | `MethodDcb`              | dcb                      |
 | `MethodDlocal`           | dlocal                   |
+| `MethodDuitnow`          | duitnow                  |
 | `MethodEbanx`            | ebanx                    |
 | `MethodEckoh`            | eckoh                    |
 | `MethodEfecty`           | efecty                   |
