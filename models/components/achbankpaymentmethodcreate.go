@@ -7,7 +7,7 @@ import (
 	"github.com/gr4vy/gr4vy-go/types"
 )
 
-// AccountType - Specify whether this is a `checking` or `savings` account
+// AccountType - Specify whether this is a `checking` or `savings` account. Defaults to `checking`.
 type AccountType string
 
 const (
@@ -53,8 +53,8 @@ type ACHBankPaymentMethodCreate struct {
 	RoutingNumber string `json:"routing_number"`
 	// Whether the account number is tokenized
 	IsTokenized *bool `default:"false" json:"is_tokenized"`
-	// Specify whether this is a `checking` or `savings` account
-	AccountType AccountType `json:"account_type"`
+	// Specify whether this is a `checking` or `savings` account. Defaults to `checking`.
+	AccountType *AccountType `default:"checking" json:"account_type"`
 }
 
 func (a ACHBankPaymentMethodCreate) MarshalJSON() ([]byte, error) {
@@ -62,7 +62,7 @@ func (a ACHBankPaymentMethodCreate) MarshalJSON() ([]byte, error) {
 }
 
 func (a *ACHBankPaymentMethodCreate) UnmarshalJSON(data []byte) error {
-	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"account_holder", "account_number", "routing_number", "account_type"}); err != nil {
+	if err := utils.UnmarshalJSON(data, &a, "", false, []string{"account_holder", "account_number", "routing_number"}); err != nil {
 		return err
 	}
 	return nil
@@ -125,9 +125,9 @@ func (a *ACHBankPaymentMethodCreate) GetIsTokenized() *bool {
 	return a.IsTokenized
 }
 
-func (a *ACHBankPaymentMethodCreate) GetAccountType() AccountType {
+func (a *ACHBankPaymentMethodCreate) GetAccountType() *AccountType {
 	if a == nil {
-		return AccountType("")
+		return nil
 	}
 	return a.AccountType
 }
