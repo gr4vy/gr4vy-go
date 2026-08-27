@@ -27,6 +27,8 @@ type ListPaymentServicesRequest struct {
 	Limit *int64 `default:"20" queryParam:"style=form,explode=true,name=limit"`
 	// Return any deleted payment service.
 	Deleted *bool `queryParam:"style=form,explode=true,name=deleted"`
+	// Include the non-secret credential and reporting fields for each payment service. Disable this to reduce response time if you don't need them.
+	IncludeFields *bool `default:"true" queryParam:"style=form,explode=true,name=include_fields"`
 	// The ID of the merchant account to use for this request.
 	MerchantAccountID *string `header:"style=simple,explode=false,name=x-gr4vy-merchant-account-id"`
 }
@@ -68,6 +70,13 @@ func (l *ListPaymentServicesRequest) GetDeleted() *bool {
 		return nil
 	}
 	return l.Deleted
+}
+
+func (l *ListPaymentServicesRequest) GetIncludeFields() *bool {
+	if l == nil {
+		return nil
+	}
+	return l.IncludeFields
 }
 
 func (l *ListPaymentServicesRequest) GetMerchantAccountID() *string {
