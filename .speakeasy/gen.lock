@@ -1,23 +1,23 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 79f9c7db115f1c32f2c8da4e2ed86f6c
+  docChecksum: 4564960938f44fa95c836e97fdde0a16
   docVersion: 1.0.0
-  speakeasyVersion: 1.796.0
-  generationVersion: 2.932.15
-  releaseVersion: 1.13.7
-  configChecksum: 423351940ee559966597d4b12c419b40
+  speakeasyVersion: 1.796.2
+  generationVersion: 2.933.0
+  releaseVersion: 1.13.8
+  configChecksum: e4764bfd16d43a6b42b8ce614a2f1f44
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 7d77f541-d15b-489b-afb1-7f452a6eaaff
-  pristine_commit_hash: 54f1211b4c3a191da017bad4ef020781a21d47b3
-  pristine_tree_hash: bef7f21702be225f2c871183bd8cd6e0e420cef4
+  generation_id: fd389d96-10fd-4b65-8a11-25e9e616f1c2
+  pristine_commit_hash: f047998e8621f781b73e9ea769217f9accf52cd9
+  pristine_tree_hash: 651669c5040f7dfe9e3154ff78abd690883c486c
 features:
   go:
     additionalDependencies: 0.1.0
     constsAndDefaults: 0.1.14
-    core: 3.13.50
+    core: 3.13.51
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.3
     devContainers: 2.90.0
@@ -2951,8 +2951,8 @@ trackedFiles:
     pristine_git_object: 12129f771df8e74040663096aa45f82024b734c8
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:ab5aa38e3cca32bffecc52df052fb208de2890dd
-    pristine_git_object: c7c64e060f4ac314e2f32168ef3ead2459ce4e27
+    last_write_checksum: sha1:b081e85bd766a0471bbfd24d473457508712681b
+    pristine_git_object: da326cec3f6699b961c3cd1205f9215b65aa11c3
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:157e3662d1823e3ac53dd97cca63dc0b5b896064
@@ -9287,7 +9287,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(ACHBankPaymentMethodCreate).AccountType` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
