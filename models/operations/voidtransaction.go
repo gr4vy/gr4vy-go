@@ -92,7 +92,14 @@ func CreateResponse200VoidTransactionTransactionVoid(transactionVoid components.
 	}
 }
 
-func (u *Response200VoidTransaction) UnmarshalJSON(data []byte) error {
+func (u *Response200VoidTransaction) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Response200VoidTransaction{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var transaction components.Transaction = components.Transaction{}
 	if err := utils.UnmarshalJSON(data, &transaction, "", true, nil); err == nil {

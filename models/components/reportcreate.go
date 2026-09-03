@@ -75,7 +75,14 @@ func CreateSpecTransactions(transactions TransactionsReportSpec) Spec {
 	}
 }
 
-func (u *Spec) UnmarshalJSON(data []byte) error {
+func (u *Spec) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Spec{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	type discriminator struct {
 		Model string `json:"model"`

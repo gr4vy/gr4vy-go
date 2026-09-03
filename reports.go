@@ -80,6 +80,7 @@ func (s *Reports) List(ctx context.Context, request operations.ListReportsReques
 	if timeout == nil {
 		timeout = s.sdkConfiguration.Timeout
 	}
+	paginationCtx := ctx
 
 	if timeout != nil {
 		var cancel context.CancelFunc
@@ -245,7 +246,7 @@ func (s *Reports) List(ctx context.Context, request operations.ListReportsReques
 		request.Cursor = &nCVal
 
 		return s.List(
-			ctx,
+			paginationCtx,
 			request,
 			opts...,
 		)

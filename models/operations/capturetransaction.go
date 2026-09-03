@@ -100,7 +100,14 @@ func CreateResponse200CaptureTransactionTransactionCapture(transactionCapture co
 	}
 }
 
-func (u *Response200CaptureTransaction) UnmarshalJSON(data []byte) error {
+func (u *Response200CaptureTransaction) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Response200CaptureTransaction{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var transaction components.Transaction = components.Transaction{}
 	if err := utils.UnmarshalJSON(data, &transaction, "", true, nil); err == nil {

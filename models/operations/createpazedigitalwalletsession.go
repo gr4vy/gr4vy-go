@@ -73,7 +73,14 @@ func CreateResponseCreatePazeDigitalWalletSessionPazeMobileSession(pazeMobileSes
 	}
 }
 
-func (u *ResponseCreatePazeDigitalWalletSession) UnmarshalJSON(data []byte) error {
+func (u *ResponseCreatePazeDigitalWalletSession) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = ResponseCreatePazeDigitalWalletSession{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var pazeMobileSession components.PazeMobileSession = components.PazeMobileSession{}
 	if err := utils.UnmarshalJSON(data, &pazeMobileSession, "", true, nil); err == nil {
