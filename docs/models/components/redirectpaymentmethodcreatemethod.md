@@ -110,6 +110,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodSepa`            | sepa                                               |
 | `RedirectPaymentMethodCreateMethodServipag`        | servipag                                           |
 | `RedirectPaymentMethodCreateMethodSeveneleven`     | seveneleven                                        |
+| `RedirectPaymentMethodCreateMethodSezzle`          | sezzle                                             |
 | `RedirectPaymentMethodCreateMethodShopeepay`       | shopeepay                                          |
 | `RedirectPaymentMethodCreateMethodSingteldash`     | singteldash                                        |
 | `RedirectPaymentMethodCreateMethodSmartpay`        | smartpay                                           |

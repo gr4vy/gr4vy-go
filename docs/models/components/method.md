@@ -119,6 +119,7 @@ custom := components.Method("custom_value")
 | `MethodSepa`             | sepa                     |
 | `MethodServipag`         | servipag                 |
 | `MethodSeveneleven`      | seveneleven              |
+| `MethodSezzle`           | sezzle                   |
 | `MethodShopeepay`        | shopeepay                |
 | `MethodSingteldash`      | singteldash              |
 | `MethodSmartpay`         | smartpay                 |
