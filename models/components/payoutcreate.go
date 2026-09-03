@@ -41,7 +41,14 @@ func CreatePayoutCreatePaymentMethodPaymentMethodStoredCard(paymentMethodStoredC
 	}
 }
 
-func (u *PayoutCreatePaymentMethod) UnmarshalJSON(data []byte) error {
+func (u *PayoutCreatePaymentMethod) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = PayoutCreatePaymentMethod{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var paymentMethodCard PaymentMethodCard = PaymentMethodCard{}
 	if err := utils.UnmarshalJSON(data, &paymentMethodCard, "", true, nil); err == nil {

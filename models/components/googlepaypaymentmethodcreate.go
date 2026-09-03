@@ -41,7 +41,14 @@ func CreateTokenMapOfAny(mapOfAny map[string]any) Token {
 	}
 }
 
-func (u *Token) UnmarshalJSON(data []byte) error {
+func (u *Token) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Token{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var str string = ""
 	if err := utils.UnmarshalJSON(data, &str, "", true, nil); err == nil {

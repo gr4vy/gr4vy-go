@@ -40,7 +40,14 @@ func CreateItemGiftCardStoredRequest(giftCardStoredRequest GiftCardStoredRequest
 	}
 }
 
-func (u *Item) UnmarshalJSON(data []byte) error {
+func (u *Item) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Item{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var giftCardRequest GiftCardRequest = GiftCardRequest{}
 	if err := utils.UnmarshalJSON(data, &giftCardRequest, "", true, nil); err == nil {

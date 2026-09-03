@@ -52,7 +52,14 @@ func CreateContextPaymentOptionContext(paymentOptionContext PaymentOptionContext
 	}
 }
 
-func (u *Context) UnmarshalJSON(data []byte) error {
+func (u *Context) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Context{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var googlePayPaymentOptionContext GooglePayPaymentOptionContext = GooglePayPaymentOptionContext{}
 	if err := utils.UnmarshalJSON(data, &googlePayPaymentOptionContext, "", true, nil); err == nil {

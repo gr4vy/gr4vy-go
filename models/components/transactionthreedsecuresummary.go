@@ -41,7 +41,14 @@ func CreateResponseDataThreeDSecureV2(threeDSecureV2 ThreeDSecureV2) ResponseDat
 	}
 }
 
-func (u *ResponseData) UnmarshalJSON(data []byte) error {
+func (u *ResponseData) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = ResponseData{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var threeDSecureDataV1 ThreeDSecureDataV1 = ThreeDSecureDataV1{}
 	if err := utils.UnmarshalJSON(data, &threeDSecureDataV1, "", true, nil); err == nil {

@@ -27,6 +27,8 @@ type GooglePayFPANPaymentMethodCreate struct {
 	RedirectURL *string `json:"redirect_url,omitempty"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
 	SecurityCode any `json:"security_code,omitempty"`
+	// Expiry of the Google Pay token the PAN was decrypted from, as milliseconds since the epoch.
+	MessageExpiration *string `json:"message_expiration,omitempty"`
 }
 
 func (g GooglePayFPANPaymentMethodCreate) MarshalJSON() ([]byte, error) {
@@ -98,4 +100,11 @@ func (g *GooglePayFPANPaymentMethodCreate) GetSecurityCode() any {
 		return nil
 	}
 	return g.SecurityCode
+}
+
+func (g *GooglePayFPANPaymentMethodCreate) GetMessageExpiration() *string {
+	if g == nil {
+		return nil
+	}
+	return g.MessageExpiration
 }

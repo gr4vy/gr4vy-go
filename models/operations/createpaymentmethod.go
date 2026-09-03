@@ -107,7 +107,14 @@ func CreateBodySEPABankPaymentMethodCreate(sepaBankPaymentMethodCreate component
 	}
 }
 
-func (u *Body) UnmarshalJSON(data []byte) error {
+func (u *Body) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = Body{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var redirectPaymentMethodCreate components.RedirectPaymentMethodCreate = components.RedirectPaymentMethodCreate{}
 	if err := utils.UnmarshalJSON(data, &redirectPaymentMethodCreate, "", true, nil); err == nil {

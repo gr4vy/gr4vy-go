@@ -163,7 +163,14 @@ func CreateTransactionCreatePaymentMethodCheckoutSessionWithURLPaymentMethodCrea
 	}
 }
 
-func (u *TransactionCreatePaymentMethod) UnmarshalJSON(data []byte) error {
+func (u *TransactionCreatePaymentMethod) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = TransactionCreatePaymentMethod{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var redirectPaymentMethodCreate RedirectPaymentMethodCreate = RedirectPaymentMethodCreate{}
 	if err := utils.UnmarshalJSON(data, &redirectPaymentMethodCreate, "", true, nil); err == nil {
@@ -347,7 +354,14 @@ func CreateGiftCardUnionGiftCardTokenTransactionCreate(giftCardTokenTransactionC
 	}
 }
 
-func (u *GiftCardUnion) UnmarshalJSON(data []byte) error {
+func (u *GiftCardUnion) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = GiftCardUnion{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var giftCardTransactionCreate GiftCardTransactionCreate = GiftCardTransactionCreate{}
 	if err := utils.UnmarshalJSON(data, &giftCardTransactionCreate, "", true, nil); err == nil {
@@ -411,7 +425,14 @@ func CreateThreeDSecureDataThreeDSecureDataV2(threeDSecureDataV2 ThreeDSecureDat
 	}
 }
 
-func (u *ThreeDSecureData) UnmarshalJSON(data []byte) error {
+func (u *ThreeDSecureData) UnmarshalJSON(data []byte) (err error) {
+	previous := *u
+	*u = ThreeDSecureData{}
+	defer func() {
+		if err != nil {
+			*u = previous
+		}
+	}()
 
 	var threeDSecureDataV1 ThreeDSecureDataV1 = ThreeDSecureDataV1{}
 	if err := utils.UnmarshalJSON(data, &threeDSecureDataV1, "", true, nil); err == nil {
