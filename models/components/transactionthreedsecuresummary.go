@@ -88,7 +88,7 @@ type TransactionThreeDSecureSummary struct {
 	Method *ThreeDSecureMethod `json:"method,omitempty"`
 	// The 3DS data sent to the payment service for this transaction. This will only be populated if external 3DS data was passed in directly as part of the transaction API call, or if our 3DS server returned a status code of `Y` or `A`. In case of a failure to authenticate (status `N`, `R`, or `U`) this field will not be populated. To see full details about the 3DS calls please use our transaction events API.
 	ResponseData *ResponseData `json:"response_data,omitempty"`
-	// The error data received from our 3DS server. This will not be populated if the customer failed the authentication with a status code of `N`, `R`, or `U`.  To see full details about the 3DS calls in those situations please use our transaction events API.
+	// The error data received from our 3DS server. This will not be populated if the customer failed the authentication with a status code of `N`, `R`, or `U`. To see full details about the 3DS calls in those situations please use our transaction events API.
 	ErrorData *ThreeDSecureError `json:"error_data,omitempty"`
 	// The amount used for 3DS authentication.
 	Amount *int64 `json:"amount,omitempty"`
