@@ -107,6 +107,8 @@ type TransactionConnectionOptions struct {
 	OxxoOxxo *OxxoOptions `json:"oxxo-oxxo,omitempty"`
 	// Custom options to be passed to the `paypal-paypal` connector.
 	PaypalPaypal *PaypalOptions `json:"paypal-paypal,omitempty"`
+	// Custom options to be passed to the `paypal-paypaldirectorder` connector.
+	PaypalPaypaldirectorder *PaypalDirectOrderOptions `json:"paypal-paypaldirectorder,omitempty"`
 	// Custom options to be passed to the `paypal-paypalpaylater` connector.
 	PaypalPaypalpaylater *PaypalOptions `json:"paypal-paypalpaylater,omitempty"`
 	// Custom options to be passed to the `powertranz-card` connector.
@@ -497,6 +499,13 @@ func (t *TransactionConnectionOptions) GetPaypalPaypal() *PaypalOptions {
 		return nil
 	}
 	return t.PaypalPaypal
+}
+
+func (t *TransactionConnectionOptions) GetPaypalPaypaldirectorder() *PaypalDirectOrderOptions {
+	if t == nil {
+		return nil
+	}
+	return t.PaypalPaypaldirectorder
 }
 
 func (t *TransactionConnectionOptions) GetPaypalPaypalpaylater() *PaypalOptions {
