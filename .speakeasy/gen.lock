@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: f8f4b0734cd9340492d516d174ef90e0
+  docChecksum: b845cc273f74e259a9055327eb156ce2
   docVersion: 1.0.0
   speakeasyVersion: 1.797.0
   generationVersion: 2.937.18
-  releaseVersion: 1.13.13
-  configChecksum: b9f02161c1e9d675613263a0c084f938
+  releaseVersion: 1.13.14
+  configChecksum: d2ec052868bb8ec51ae015eb4a4e79a5
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 105379d0-15ca-436a-904e-1204e1f5f32b
-  pristine_commit_hash: 30026c246e579189e43938b064ec10979193e920
-  pristine_tree_hash: f598bf0d4835a606380a56bb0e30d8c6d25925e6
+  generation_id: 11a1df75-59a9-4b52-a395-99a17580cd4c
+  pristine_commit_hash: a007b4bdad0e3c6ca3282461e394dabb8b07ea74
+  pristine_tree_hash: 7db4bae418c89043de0a3c2e0e6b0a851ed22c1b
 features:
   go:
     additionalDependencies: 0.1.0
@@ -423,8 +423,8 @@ trackedFiles:
     pristine_git_object: e4288390df0d60a8005015cf6dacf2bfa9b70c93
   docs/models/components/cartitem.md:
     id: 96dbfa3c32dd
-    last_write_checksum: sha1:ce22d8a8ede629e701f4b81714c15b261b27b6eb
-    pristine_git_object: 9ea7d493bfa9ec2a38e4a98a1eedf4023842e719
+    last_write_checksum: sha1:2df6aac78d609725957520b7bcfbb0addce37dd1
+    pristine_git_object: 2ee617f176680bdae2ca70f57351ac5022697009
   docs/models/components/certificatealgorithm.md:
     id: ef3e8b3631ca
     last_write_checksum: sha1:fea90dd4c0f7cee6aa6b736a247a3c8d28adb795
@@ -2955,8 +2955,8 @@ trackedFiles:
     pristine_git_object: a6c09a4edf07738aa2ec23f6cb30677faffadbbc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:063dea0d2ec3c7c5d99bc8955a0c311607fc15c9
-    pristine_git_object: b6ffbcd42dbbab099ed8c87b0a1281009fc44e7b
+    last_write_checksum: sha1:20d6593cb5e81e5419f7193fc741aa3d8b6596e8
+    pristine_git_object: e7a32f565e06e673e4d20d228d8fe11e4c46f221
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -3319,8 +3319,8 @@ trackedFiles:
     pristine_git_object: 2e322deb008c74b7011037caef424d04afca14ed
   models/components/cartitem.go:
     id: 680779da2a38
-    last_write_checksum: sha1:6f9b7409682efc136147227c4959a4e48e8fa75d
-    pristine_git_object: e1d23789039f4407bd84681413657efe8b513d53
+    last_write_checksum: sha1:4ab01aaad4000da27091a4baa02040a33988df91
+    pristine_git_object: f2b184b51739bbb6bbb4409a38dac85f36172a32
   models/components/certificatealgorithm.go:
     id: ea9d5ce4bdac
     last_write_checksum: sha1:0483799d0e31b102c3a4d28713fd8e6b2fc70e9e
@@ -9295,7 +9295,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(RedirectPaymentMethodCreate).Method.Enum(paypaldirectorder)` **Added**\n  *  `response.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentMethods.Get()`:  `response.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentMethods.Update()`:  `response.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Transactions.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate` **Changed**\n  *  `response.PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Transactions.Get()`:  `response.PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.PaypalPaypaldirectorder` **Added**\n  *  `response.PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Transactions.Capture()`:  `response.union(Transaction).PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Transactions.Void()`:  `response.union(Transaction).PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Transactions.Sync()`:  `response.PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Transactions.IncrementAuthorization()`:  `response.Transaction.PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentServiceDefinitions.List()`:  `response.Items[].Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentServiceDefinitions.Get()`:  `response.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentServices.List()`: \n  *  `request.Request.Method` **Changed**\n  *  `response.Items[].Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentServices.Create()`:  `response.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentServices.Get()`:  `response.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentServices.Update()`:  `response.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Payouts.List()`:  `response.Items[].PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Payouts.Create()`:  `response.PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.Payouts.Get()`:  `response.PaymentMethod.Method.Enum(paypaldirectorder)` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.PaypalPaypaldirectorder` **Added**\n"
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.CartItems[]` **Changed**\n  *  `response.CartItems[]` **Changed**\n* `Gr4vy.Transactions.Get()`:  `response.CartItems[]` **Changed**\n* `Gr4vy.Transactions.Update()`:  `response.CartItems[]` **Changed**\n* `Gr4vy.Transactions.Capture()`: \n  *  `request.Request.TransactionCaptureCreate.CartItems[]` **Changed**\n  *  `response.union(Transaction).CartItems[]` **Changed**\n* `Gr4vy.Transactions.Void()`:  `response.union(TransactionVoid).Transaction.CartItems[]` **Changed**\n* `Gr4vy.Transactions.Cancel()`:  `response.Transaction.CartItems[]` **Changed**\n* `Gr4vy.Transactions.Sync()`:  `response.CartItems[]` **Changed**\n* `Gr4vy.Transactions.IncrementAuthorization()`:  `response.Transaction.CartItems[]` **Changed**\n* `Gr4vy.Transactions.Captures.List()`:  `response.Items[].CartItems[]` **Changed**\n* `Gr4vy.Transactions.Captures.Get()`:  `response.CartItems[]` **Changed**\n* `Gr4vy.PaymentOptions.List()`: \n  *  `request.PaymentOptionRequest.CartItems[]` **Changed**\n* `Gr4vy.CheckoutSessions.Create()`: \n  *  `request.CheckoutSessionCreate.CartItems[]` **Changed**\n  *  `response.CartItems[]` **Changed**\n* `Gr4vy.CheckoutSessions.Update()`: \n  *  `request.CheckoutSessionCreate.CartItems[]` **Changed**\n  *  `response.CartItems[]` **Changed**\n* `Gr4vy.CheckoutSessions.Get()`:  `response.CartItems[]` **Changed**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.CartItems[]` **Changed**\n  *  `response.CartItems[]` **Changed**\n* `Gr4vy.PaymentLinks.List()`:  `response.Items[].CartItems[]` **Changed**\n* `Gr4vy.PaymentLinks.Get()`:  `response.CartItems[]` **Changed**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

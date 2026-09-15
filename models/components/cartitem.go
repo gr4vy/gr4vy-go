@@ -29,6 +29,10 @@ type CartItem struct {
 	ImageURL *string `json:"image_url,omitempty"`
 	// A list of strings containing product categories for the item.
 	Categories []string `json:"categories,omitempty"`
+	// A list of strings containing product subcategories for the item.
+	Subcategories []string `json:"subcategories,omitempty"`
+	// The brand of the item.
+	Brand *string `json:"brand,omitempty"`
 	// The product type of the cart item.
 	ProductType *ProductType `json:"product_type,omitempty"`
 	// The seller country of the cart item.
@@ -133,6 +137,20 @@ func (c *CartItem) GetCategories() []string {
 		return nil
 	}
 	return c.Categories
+}
+
+func (c *CartItem) GetSubcategories() []string {
+	if c == nil {
+		return nil
+	}
+	return c.Subcategories
+}
+
+func (c *CartItem) GetBrand() *string {
+	if c == nil {
+		return nil
+	}
+	return c.Brand
 }
 
 func (c *CartItem) GetProductType() *ProductType {
