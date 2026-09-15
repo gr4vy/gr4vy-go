@@ -14,6 +14,8 @@ type TransactionCaptureCreate struct {
 	Airline *Airline `json:"airline,omitempty"`
 	// An array of cart items that represents the line items of this capture.
 	CartItems []CartItem `json:"cart_items,omitempty"`
+	// An array of shipment tracking details for this capture.
+	Tracking []Tracking `json:"tracking,omitempty"`
 	// Whether this is marked as the final capture for the associated transaction. Must be `true` or omitted when multi-capture is not enabled; a value of `false` is only valid when multi-capture is available on the connection.
 	Final *bool `default:"true" json:"final"`
 	// An external identifier that can be used to match the capture against your own records.
@@ -52,6 +54,13 @@ func (t *TransactionCaptureCreate) GetCartItems() []CartItem {
 		return nil
 	}
 	return t.CartItems
+}
+
+func (t *TransactionCaptureCreate) GetTracking() []Tracking {
+	if t == nil {
+		return nil
+	}
+	return t.Tracking
 }
 
 func (t *TransactionCaptureCreate) GetFinal() *bool {
