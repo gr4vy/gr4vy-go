@@ -30,6 +30,8 @@ type TransactionCapture struct {
 	BillingDetails *BillingDetails `json:"billing_details,omitempty"`
 	// The shipping details associated with the catpure.
 	ShippingDetails *ShippingDetails `json:"shipping_details,omitempty"`
+	// The shipment tracking details associated with the capture.
+	Tracking []Tracking `json:"tracking,omitempty"`
 }
 
 func (t TransactionCapture) MarshalJSON() ([]byte, error) {
@@ -115,4 +117,11 @@ func (t *TransactionCapture) GetShippingDetails() *ShippingDetails {
 		return nil
 	}
 	return t.ShippingDetails
+}
+
+func (t *TransactionCapture) GetTracking() []Tracking {
+	if t == nil {
+		return nil
+	}
+	return t.Tracking
 }

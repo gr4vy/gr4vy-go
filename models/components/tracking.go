@@ -2,12 +2,27 @@
 
 package components
 
+import (
+	"github.com/gr4vy/gr4vy-go/internal/utils"
+)
+
 type Tracking struct {
 	// The tracking number for the shipment.
 	Number  string          `json:"number"`
 	Carrier ShippingCarrier `json:"carrier"`
 	// The URL to track the shipment.
 	URL *string `json:"url,omitempty"`
+}
+
+func (t Tracking) MarshalJSON() ([]byte, error) {
+	return utils.MarshalJSON(t, "", false)
+}
+
+func (t *Tracking) UnmarshalJSON(data []byte) error {
+	if err := utils.UnmarshalJSON(data, &t, "", false, []string{"number", "carrier"}); err != nil {
+		return err
+	}
+	return nil
 }
 
 func (t *Tracking) GetNumber() string {
