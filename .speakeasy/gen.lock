@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: aefce22b5919c7cba7b0dbc7b7767671
+  docChecksum: e6d6175147a8dbef24fc91cc0b03055c
   docVersion: 1.0.0
   speakeasyVersion: 1.797.0
   generationVersion: 2.937.18
-  releaseVersion: 1.13.15
-  configChecksum: ac31717b0d29c9801fe7446930422164
+  releaseVersion: 1.13.16
+  configChecksum: 819cae9439fac89e0cbaee1ac3789738
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: e370afc0-56aa-41e7-be91-960f07321ec5
-  pristine_commit_hash: 78f8fcdf85fa9b8cbee93d8dba7d5a4aa77dec34
-  pristine_tree_hash: 41adceaa92fe70fb60025553d9229f1e50a312c4
+  generation_id: 9f1b010e-e556-4de5-83bb-ce5865a820b4
+  pristine_commit_hash: eb869c1d2181b26b17b2f61575f839c5986d5705
+  pristine_tree_hash: 40a9a025a1d0bd660c787a56e4709dae982c22c0
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1635,8 +1635,8 @@ trackedFiles:
     pristine_git_object: f1db86e9a79be2d1909aad47ead3daeb7eca9e20
   docs/models/components/transactioncapture.md:
     id: 6234f4354db0
-    last_write_checksum: sha1:d75fb0c439a741313b0ca312046219f171c3821b
-    pristine_git_object: b07324579f3d2e7ad55bafc44873fe0a58541fb5
+    last_write_checksum: sha1:eae394b04e781ab30c6fa887a07be75b6000e098
+    pristine_git_object: c60abea9e27faf31b68b776e97aa5379f004feb8
   docs/models/components/transactioncapturecreate.md:
     id: f1fb39b47632
     last_write_checksum: sha1:8c51208292c33f7b62bad92f590e2d2700091230
@@ -2963,8 +2963,8 @@ trackedFiles:
     pristine_git_object: a6c09a4edf07738aa2ec23f6cb30677faffadbbc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:54f0496c73e4cf9432203a486a8a2fed9c7fa994
-    pristine_git_object: 06a8438cbd1f38f44e43f4b4c3c2492d14fa2a54
+    last_write_checksum: sha1:60ba99d2b52acb7461de9d202b21fcc73600d45b
+    pristine_git_object: a5254e34e015c09b0aeda0246bbe7ae39698d94a
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -4351,8 +4351,8 @@ trackedFiles:
     pristine_git_object: d1d3d1571960a518becd4e7145d49400a36eafd3
   models/components/tracking.go:
     id: 45dbe3283320
-    last_write_checksum: sha1:46ee9a8c31e8e4fb35352c7d2340d0aff51c0fe4
-    pristine_git_object: 95ca55c40da30c8dba0e252d1929a9499ced955c
+    last_write_checksum: sha1:faebfa47755764813f55e297ddf1e1cdc6b4fc64
+    pristine_git_object: 97173d0fcb454375e5baaa99e051510e93954d7c
   models/components/transaction.go:
     id: b5e609d96e9d
     last_write_checksum: sha1:8eacdbdde811c38b0c4b309f823d53031056d23b
@@ -4383,8 +4383,8 @@ trackedFiles:
     pristine_git_object: 8d7155266a70055706b34166167a23e5dc7bfdd9
   models/components/transactioncapture.go:
     id: 5bf58fd91c44
-    last_write_checksum: sha1:5477e0d966dc697cb2a1a832039a54e601500596
-    pristine_git_object: 542013c66d7ad00ed9db6b302e08a5b6b6668055
+    last_write_checksum: sha1:98560e14875564f558b8ca5534a4476495df87a4
+    pristine_git_object: 35101783c9c3cbaadd0b4de6796fdfce595d677f
   models/components/transactioncapturecreate.go:
     id: 1c0d322bbbab
     last_write_checksum: sha1:9af51b5449786a8e8ff088f587b3a658a776c896
@@ -9311,7 +9311,9 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Capture()`: \n  *  `request.Request.TransactionCaptureCreate.Tracking` **Added**\n"
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Gr4vy.Transactions.Capture()`:  `response.union(TransactionCapture).Tracking` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
