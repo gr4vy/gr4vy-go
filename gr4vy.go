@@ -175,10 +175,10 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Gr4vy {
 	sdk := &Gr4vy{
-		SDKVersion: "1.13.16",
+		SDKVersion: "1.13.17",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 1.13.16 2.937.18 1.0.0 github.com/gr4vy/gr4vy-go",
-			SDKVersion:        "1.13.16",
+			UserAgent:         "speakeasy-sdk/go 1.13.17 2.937.18 1.0.0 github.com/gr4vy/gr4vy-go",
+			SDKVersion:        "1.13.17",
 			GenVersion:        "2.937.18",
 			OpenAPIDocVersion: "1.0.0",
 			Globals:           globals.Globals{},
