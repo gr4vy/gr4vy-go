@@ -113,6 +113,8 @@ type TransactionConnectionOptions struct {
 	PaypalPaypalpaylater *PaypalOptions `json:"paypal-paypalpaylater,omitempty"`
 	// Custom options to be passed to the `powertranz-card` connector.
 	PowertranzCard *PowertranzOptions `json:"powertranz-card,omitempty"`
+	// Custom options to be passed to the `repay-bank` connector.
+	RepayBank *RepayBankOptions `json:"repay-bank,omitempty"`
 	// Custom options to be passed to the `riskified-anti-fraud` connector.
 	RiskifiedAntiFraud *RiskifiedAntiFraudOptions `json:"riskified-anti-fraud,omitempty"`
 	// Custom options to be passed to the `stripe-affirm` connector.
@@ -520,6 +522,13 @@ func (t *TransactionConnectionOptions) GetPowertranzCard() *PowertranzOptions {
 		return nil
 	}
 	return t.PowertranzCard
+}
+
+func (t *TransactionConnectionOptions) GetRepayBank() *RepayBankOptions {
+	if t == nil {
+		return nil
+	}
+	return t.RepayBank
 }
 
 func (t *TransactionConnectionOptions) GetRiskifiedAntiFraud() *RiskifiedAntiFraudOptions {

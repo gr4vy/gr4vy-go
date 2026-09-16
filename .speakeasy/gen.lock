@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: e6d6175147a8dbef24fc91cc0b03055c
+  docChecksum: bac7f55d31e8132cbde4b82ba008c13c
   docVersion: 1.0.0
   speakeasyVersion: 1.797.0
   generationVersion: 2.937.18
-  releaseVersion: 1.13.16
-  configChecksum: 819cae9439fac89e0cbaee1ac3789738
+  releaseVersion: 1.13.17
+  configChecksum: 0874f43a9d63bc5f5c11f385f2549ded
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 9f1b010e-e556-4de5-83bb-ce5865a820b4
-  pristine_commit_hash: eb869c1d2181b26b17b2f61575f839c5986d5705
-  pristine_tree_hash: 40a9a025a1d0bd660c787a56e4709dae982c22c0
+  generation_id: 9f573db0-377b-4802-b30b-be59358c8009
+  pristine_commit_hash: a0e998e055d998c0404820a8b4a8953453a3fbfb
+  pristine_tree_hash: 4c1da2927dc26968d70edd566d6fa242f02c1bdc
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1341,6 +1341,10 @@ trackedFiles:
     id: fbb9633ba170
     last_write_checksum: sha1:d1ab32c77855903906fbcd19589ad7703a9083ec
     pristine_git_object: 691ed63904a61f2f8f8956182c94ee6b4c33bf2a
+  docs/models/components/repaybankoptions.md:
+    id: 665e33bfdb4c
+    last_write_checksum: sha1:1dc27d82b2fef5cb6becc251b90e44ae04ca80d0
+    pristine_git_object: a8a9022378648238a8d9a6e9321b020536b5f3b3
   docs/models/components/report.md:
     id: f581a3b24575
     last_write_checksum: sha1:d9bd84a7bc17718b3c28da0208794c903806e36e
@@ -1441,6 +1445,10 @@ trackedFiles:
     id: 7a4db37548b8
     last_write_checksum: sha1:ee2713e56a7bb26c276964abda487ddf46e657f5
     pristine_git_object: 592a63c82f54fd45e9f9cd3a6b3acd23e3b4bc9c
+  docs/models/components/seccode.md:
+    id: 2547c40afe60
+    last_write_checksum: sha1:a5971579f5b91f600437d063e380e6ea66f8ebc0
+    pristine_git_object: 40f6fd8cdc9efaf8be4114e020b3a02f4881e05e
   docs/models/components/security.md:
     id: 54906b49ea28
     last_write_checksum: sha1:3d20d8f28e0ecfee6550ce09129b5ec06e25c24d
@@ -1643,8 +1651,8 @@ trackedFiles:
     pristine_git_object: e2b2668c63aa5dfa474412355440587086860bfb
   docs/models/components/transactionconnectionoptions.md:
     id: a4843e535547
-    last_write_checksum: sha1:5e804f3ede5ac444c10c4408d58869e5a4f1587e
-    pristine_git_object: 5b3e6f49dad8fa1734ca23876cfa04aade1259f1
+    last_write_checksum: sha1:99589ba932834401efb895f4cdd99283aaa216e2
+    pristine_git_object: 206ce1070cbdb7f08910a9be6daac790ebb8f71f
   docs/models/components/transactioncreate.md:
     id: 652e84478e51
     last_write_checksum: sha1:44641db5d7f71b3edbe859664be3c5bc60991878
@@ -2963,8 +2971,8 @@ trackedFiles:
     pristine_git_object: a6c09a4edf07738aa2ec23f6cb30677faffadbbc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:60ba99d2b52acb7461de9d202b21fcc73600d45b
-    pristine_git_object: a5254e34e015c09b0aeda0246bbe7ae39698d94a
+    last_write_checksum: sha1:180f06a154c2439e18cf5f50c99c2ae81d57aa93
+    pristine_git_object: 2900c2c0e8100945db95f4aa66cea83087b32667
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -4141,6 +4149,10 @@ trackedFiles:
     id: 4ffde907c79d
     last_write_checksum: sha1:ebf23f521957c64f8e7e25ff36e2244cdc518908
     pristine_git_object: 7d2f11424eb07d84749e4a281a0447eb30c89555
+  models/components/repaybankoptions.go:
+    id: 5e50d292e639
+    last_write_checksum: sha1:9de1c2ed8202f92e98d8035e3add39fd3f81f227
+    pristine_git_object: afc6592e922aef844b6906b71ff0fc207bab73af
   models/components/report.go:
     id: 8b41b59ba049
     last_write_checksum: sha1:41847de755fba23731e157251091af5c3f2cb1d0
@@ -4391,8 +4403,8 @@ trackedFiles:
     pristine_git_object: 8e0dc84fd7ecaf1b1fc0bb8fe1dd06fbc27d7d81
   models/components/transactionconnectionoptions.go:
     id: 5ce01894f53d
-    last_write_checksum: sha1:0c16e0cc6e5542e5cd2f53d9a09fd7929c3f30df
-    pristine_git_object: bdd49a9a7e1109fcc42c933e6457231a2ed9201f
+    last_write_checksum: sha1:4a874053d6abcad29eb0895ea4bb7a7e44067cfd
+    pristine_git_object: 10bb001f56b6a1c26cf189b33fe73262baa3cddc
   models/components/transactioncreate.go:
     id: 2fed3feab426
     last_write_checksum: sha1:df15f77e479971d3dba230fbf752d55cd4e736e4
@@ -9311,9 +9323,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Gr4vy.Transactions.Capture()`:  `response.union(TransactionCapture).Tracking` **Added**
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.RepayBank` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.RepayBank` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.RepayBank` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
