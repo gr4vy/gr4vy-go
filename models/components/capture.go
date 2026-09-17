@@ -47,6 +47,8 @@ type Capture struct {
 	TransactionExternalIdentifier *string `json:"transaction_external_identifier,omitempty"`
 	// An array of cart items that represents the line items of this capture.
 	CartItems []CartItem `json:"cart_items,omitempty"`
+	// The shipment tracking details associated with the capture.
+	Tracking []Tracking `json:"tracking,omitempty"`
 }
 
 func (c Capture) MarshalJSON() ([]byte, error) {
@@ -188,4 +190,11 @@ func (c *Capture) GetCartItems() []CartItem {
 		return nil
 	}
 	return c.CartItems
+}
+
+func (c *Capture) GetTracking() []Tracking {
+	if c == nil {
+		return nil
+	}
+	return c.Tracking
 }
