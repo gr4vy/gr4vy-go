@@ -3,8 +3,12 @@
 package components
 
 type RiskifiedAntiFraudOptions struct {
-	// A list of line items details to override when passing to the Riskified API.
+	// A list of line items details to override when passing to the Riskified API. Entries are matched by position against the cart items sent to Riskified, which excludes `discount`, `shipping_fee`, `sales_tax` and `store_credit` items.
 	LineItems []RiskifiedAntiFraudOptionsLineItem `json:"line_items,omitempty"`
+	// A list of shipping lines details to override when passing to the Riskified API. Entries are matched by position against the `shipping_fee` cart items.
+	ShippingLines []RiskifiedAntiFraudOptionsShippingLine `json:"shipping_lines,omitempty"`
+	// Additional destinations for orders shipped to more than one address. The address derived from the transaction is always sent first; these are appended after it and may not use the reserved `base-shipping-address` id.
+	AdditionalShippingAddresses []RiskifiedAntiFraudOptionsShippingAddress `json:"additional_shipping_addresses,omitempty"`
 }
 
 func (r *RiskifiedAntiFraudOptions) GetLineItems() []RiskifiedAntiFraudOptionsLineItem {
@@ -12,4 +16,18 @@ func (r *RiskifiedAntiFraudOptions) GetLineItems() []RiskifiedAntiFraudOptionsLi
 		return nil
 	}
 	return r.LineItems
+}
+
+func (r *RiskifiedAntiFraudOptions) GetShippingLines() []RiskifiedAntiFraudOptionsShippingLine {
+	if r == nil {
+		return nil
+	}
+	return r.ShippingLines
+}
+
+func (r *RiskifiedAntiFraudOptions) GetAdditionalShippingAddresses() []RiskifiedAntiFraudOptionsShippingAddress {
+	if r == nil {
+		return nil
+	}
+	return r.AdditionalShippingAddresses
 }
