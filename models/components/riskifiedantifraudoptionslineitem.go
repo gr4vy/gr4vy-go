@@ -27,6 +27,8 @@ func (e *DeliveredTo) IsExact() bool {
 type RiskifiedAntiFraudOptionsLineItem struct {
 	// Indicates whether the item will be shipped or picked up.
 	DeliveredTo *DeliveredTo `json:"delivered_to,omitempty"`
+	// The shipping address this item is delivered to. Must be `base-shipping-address` for the address derived from the transaction, or the `id` of an `additional_shipping_addresses` entry. Must not be provided when `additional_shipping_addresses` is empty.
+	ShippingAddressID *string `json:"shipping_address_id,omitempty"`
 }
 
 func (r *RiskifiedAntiFraudOptionsLineItem) GetDeliveredTo() *DeliveredTo {
@@ -34,4 +36,11 @@ func (r *RiskifiedAntiFraudOptionsLineItem) GetDeliveredTo() *DeliveredTo {
 		return nil
 	}
 	return r.DeliveredTo
+}
+
+func (r *RiskifiedAntiFraudOptionsLineItem) GetShippingAddressID() *string {
+	if r == nil {
+		return nil
+	}
+	return r.ShippingAddressID
 }
