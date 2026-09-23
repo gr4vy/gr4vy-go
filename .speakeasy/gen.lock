@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 32949729c876ef77c851b5e263e9a7b7
+  docChecksum: c495a57f6b3d22c2287a989b75272b74
   docVersion: 1.0.0
   speakeasyVersion: 1.798.0
   generationVersion: 2.938.0
-  releaseVersion: 1.13.19
-  configChecksum: 2e1c6738063aa7dc41c016fbe0af1e94
+  releaseVersion: 1.13.20
+  configChecksum: 16fb313c7330d2743bad6457d34ed3ef
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 06e36724-ddc7-4d7c-a464-879b48799470
-  pristine_commit_hash: 3b62a39de162b8c8e63b972694bf62cb5851f6f8
-  pristine_tree_hash: 59f147a8e448e36d0328f9e3c1da760add4218c8
+  generation_id: 8f0c8ed4-f37a-4d89-a09b-0b0ae16abb08
+  pristine_commit_hash: ee698610aaf1db374bf4c4b151c54782dec31822
+  pristine_tree_hash: 99bd8216a1e38c71429b9717f31f1598a49aa2d8
 features:
   go:
     additionalDependencies: 0.1.0
@@ -391,8 +391,8 @@ trackedFiles:
     pristine_git_object: b1519463158bbed40873c9bd8961cbb00c7935f2
   docs/models/components/capturestatus.md:
     id: 056b77a41332
-    last_write_checksum: sha1:b01c8429e6b25d2fcd782c22a5131719138ea103
-    pristine_git_object: 6661fda2bf38f41d1bd269cbcbbbf5f961286f2e
+    last_write_checksum: sha1:b7726c566d0aee17d6ffd8d7beb59a363dbfddfb
+    pristine_git_object: e2f6a689ceeb72333ca82f0cb4dad4d437b9e584
   docs/models/components/cardpaymentmethodcreate.md:
     id: 26d05567b2cf
     last_write_checksum: sha1:defd27b8e655c051b12206c0f0eb23c7addb88fa
@@ -915,8 +915,8 @@ trackedFiles:
     pristine_git_object: 7822176258ccabc8e3bbfea9521a89d8bee773fa
   docs/models/components/name.md:
     id: 817692a433a1
-    last_write_checksum: sha1:2b62a08b5bff65cda96569bd66b6a788467a22f9
-    pristine_git_object: dd44422de83b7436557c9906cf8f6bb6ad0ef006
+    last_write_checksum: sha1:71b4914b3077281c1ab12ff905bde3b8f37214c1
+    pristine_git_object: b94378c8e46d0ca2182cb6c48c89a81200fec64e
   docs/models/components/networktoken.md:
     id: 19d1036d468a
     last_write_checksum: sha1:34973c759d46e6b369307c18da0a4c4a27a00889
@@ -1051,16 +1051,16 @@ trackedFiles:
     pristine_git_object: b1f0463ced4342648e8b02fd989f15dcbd0970e4
   docs/models/components/paymentservice.md:
     id: 739b70bec677
-    last_write_checksum: sha1:3a1ecf35477f8a1eb0667ba4d48ea9504f29e3a5
-    pristine_git_object: eb18c144f22849332cedfca2435861a5c014720d
+    last_write_checksum: sha1:7091342a1477ab7db6f9740df5132d6c86bb532d
+    pristine_git_object: 5c328fd4fcfabbef548ccead796d2d56180c8ad8
   docs/models/components/paymentserviceconfiguration.md:
     id: 20d98ce82c5f
     last_write_checksum: sha1:b2f43b4a5191fe244478680e64714485b71b982d
     pristine_git_object: 9f2a8c67c794362a4c68b4360eb6f00b07760b0f
   docs/models/components/paymentservicecreate.md:
     id: bf98a0980d88
-    last_write_checksum: sha1:1856a1a8b347826c937ae2d06ecbe7af259964c9
-    pristine_git_object: 2d2a110e9c8a4f1b3a6ff2b6b5614f5b020604c0
+    last_write_checksum: sha1:1314abfddb4ec2307f63870d2ac2ee56698e083b
+    pristine_git_object: 61a1f76be1f793605d63f3df5f5784604708bf7b
   docs/models/components/paymentservicedefinition.md:
     id: a0d10e1197c4
     last_write_checksum: sha1:6854c168eafc2b3fd8ac14b783c8679c7a9f4f16
@@ -1091,8 +1091,8 @@ trackedFiles:
     pristine_git_object: 95bfca1ac5141fe8e1788f11f88361a612f05e48
   docs/models/components/paymentserviceupdate.md:
     id: 1f3a42e37f86
-    last_write_checksum: sha1:d57257867101a9af7ce86594a435223a3e92bfa7
-    pristine_git_object: ab5eae6274b893fe370e691f33ae152d5be12be4
+    last_write_checksum: sha1:c4bc448e61455eb614971956a0045c7243b9fa25
+    pristine_git_object: 48924fa2a48e7e4a9fd088a5ed4624c444abdf5f
   docs/models/components/payoutcategory.md:
     id: c72c516c6fa5
     last_write_checksum: sha1:d63058fac797f4d4d754b3e0a1aa29e41240386b
@@ -2895,8 +2895,8 @@ trackedFiles:
     pristine_git_object: bee2a700e1a3e8195a8ef634a29530f66b8cbdc7
   docs/sdks/paymentservices/README.md:
     id: 90e778d338dd
-    last_write_checksum: sha1:74b5bda2d77f864c4f19de6502181ce7f4e58bc2
-    pristine_git_object: 3f3a23367fa0ce63ea60afb7a2c49abd7890b74a
+    last_write_checksum: sha1:1eafd1a1559dfa27f5b3b6fd50523edae6e683cf
+    pristine_git_object: 4dd9fbbc6186b6dc65ce1377ee024a3c7dd03d59
   docs/sdks/paymentservicetokens/README.md:
     id: 9404e9a864a9
     last_write_checksum: sha1:391fffefd7dc4f283d2e712761bc6e799146847f
@@ -2979,8 +2979,8 @@ trackedFiles:
     pristine_git_object: a6c09a4edf07738aa2ec23f6cb30677faffadbbc
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:94584d2b9b3a2da8a1a60bda75d18c869d36624f
-    pristine_git_object: 77fb340c079075e0d3949d0df1c67ce518fce0f6
+    last_write_checksum: sha1:1aafc10c5dd26b0de48b5da0ea45bd19236f39c6
+    pristine_git_object: e75f98112805c9603f34d35d9c95cf650a833372
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -3315,8 +3315,8 @@ trackedFiles:
     pristine_git_object: b64ec456171f27aa7a82baf50cfb682b746451e5
   models/components/capturestatus.go:
     id: 3601a66e8138
-    last_write_checksum: sha1:999fa5c1b1b99a47a7e48d4dad05b8e27c184f0c
-    pristine_git_object: 16717bc0f2f7b711fd81f353ad643825fa9402d1
+    last_write_checksum: sha1:f2151a232f3715ce744ba331e7db02800b7a12b6
+    pristine_git_object: 58f926633512ab0a3f69e69da1d11265c0164fd9
   models/components/cardpaymentmethodcreate.go:
     id: 0b9eb7eb3d56
     last_write_checksum: sha1:bc19c64de6a70bf55f325a19f47b6e0d95438158
@@ -3903,16 +3903,16 @@ trackedFiles:
     pristine_git_object: 8b51a184104e7306ce67f7917e92740388220158
   models/components/paymentservice.go:
     id: e1204f733089
-    last_write_checksum: sha1:6f56541ecd30f88725bfcf41332b14b30c9191cd
-    pristine_git_object: 5a2cfba589a4f50cc218afb8353507469ff03b54
+    last_write_checksum: sha1:5c1a4dac5f9e5ee81a91a3b36b3fa2947311166e
+    pristine_git_object: 2cd3cd7593b47ad0cc3ed7e6ece38db4f77c1223
   models/components/paymentserviceconfiguration.go:
     id: f9186d3681fd
     last_write_checksum: sha1:3123c66eed900de4106f8e9bb614909199864431
     pristine_git_object: 51827359239fa88cef57e72194c3de950f6d2f86
   models/components/paymentservicecreate.go:
     id: 48f6c2602754
-    last_write_checksum: sha1:a6eb09fff72cd0d5ad59c9d29a467b525e1cbc22
-    pristine_git_object: e16cb21233f570031d465d048cf852892f9d93c7
+    last_write_checksum: sha1:fe23da7191bcd1f8f4541b395d1a34fb532d7603
+    pristine_git_object: 1d37f341bed4351b322d148bcfed6f138be7dd8f
   models/components/paymentservicedefinition.go:
     id: 21c1beeeeed4
     last_write_checksum: sha1:612ed8705e552e6ebfa3aacb47a19c4bc8e7d5c3
@@ -3943,8 +3943,8 @@ trackedFiles:
     pristine_git_object: e8c885484173c797fe065a31d0a94a4ee74f1d24
   models/components/paymentserviceupdate.go:
     id: 179986d90ae6
-    last_write_checksum: sha1:1916906c65509569041de4061eab0cf23e81390e
-    pristine_git_object: 8c8f7c85ec47e7218c91f8c56948c2ab370ddc0a
+    last_write_checksum: sha1:155962812022c9764ba88ccb4b29ad20fba8f001
+    pristine_git_object: 6c947dd864e880ec9cdf46287173d104b9aa8c8b
   models/components/payoutcategory.go:
     id: 1e2b14933c7c
     last_write_checksum: sha1:7b9a5f3f03b67b4b9f741c8025e2ad895c09bad9
@@ -4427,8 +4427,8 @@ trackedFiles:
     pristine_git_object: 32351329073de8fc8deca9fa02b74d35ccd48287
   models/components/transactionevent.go:
     id: 03beaff04e48
-    last_write_checksum: sha1:49ee33f9d523ca70931fe6afb59e1dc988202111
-    pristine_git_object: 4c4d9eeca712cf79cbfed369c707c28460bf30b3
+    last_write_checksum: sha1:014eddca2c1e3d446fca70e21c5ae978076a9436
+    pristine_git_object: 3cbeb51e6550ec9c37fa2b2ca4467582c49597db
   models/components/transactionevents.go:
     id: 7dd560a08645
     last_write_checksum: sha1:bd0394094f151482e5cfdfb416d3a41e3fad2b44
@@ -7282,7 +7282,7 @@ examples:
         header:
           x-gr4vy-merchant-account-id: "default"
       requestBody:
-        application/json: {"settlement_reporting_enabled": true}
+        application/json: {"settlement_reporting_enabled": true, "refund_ingestion_enabled": true}
       responses:
         "201":
           application/json: {"type": "payment-service", "id": "fffd152a-9532-4087-9a4f-de58754210f0", "merchant_account_id": "default", "payment_service_definition_id": "stripe-card", "active": true, "method": "servipag", "display_name": "Stripe", "position": 1, "accepted_currencies": ["USD", "EUR", "GBP"], "accepted_countries": ["US", "DE", "GB"], "payment_method_tokenization_enabled": true, "network_tokens_enabled": true, "open_loop": true, "settlement_reporting_enabled": true, "is_deleted": false, "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00"}
@@ -7311,7 +7311,7 @@ examples:
         "504":
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
         "200":
-          application/json: {"type": "payment-service", "id": "fffd152a-9532-4087-9a4f-de58754210f0", "merchant_account_id": "default", "payment_service_definition_id": "stripe-card", "active": true, "method": "nupay", "display_name": "Stripe", "position": 1, "accepted_currencies": ["USD", "EUR", "GBP"], "accepted_countries": ["US", "DE", "GB"], "payment_method_tokenization_enabled": true, "network_tokens_enabled": true, "open_loop": true, "settlement_reporting_enabled": true, "is_deleted": false, "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00"}
+          application/json: {"type": "payment-service", "id": "fffd152a-9532-4087-9a4f-de58754210f0", "merchant_account_id": "default", "payment_service_definition_id": "stripe-card", "active": true, "method": "nupay", "display_name": "Stripe", "position": 1, "accepted_currencies": ["USD", "EUR", "GBP"], "accepted_countries": ["US", "DE", "GB"], "payment_method_tokenization_enabled": true, "network_tokens_enabled": true, "open_loop": true, "settlement_reporting_enabled": true, "refund_ingestion_enabled": true, "is_deleted": false, "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00"}
   get_payment_service:
     speakeasy-default-get-payment-service:
       parameters:
@@ -7321,7 +7321,7 @@ examples:
           x-gr4vy-merchant-account-id: "default"
       responses:
         "200":
-          application/json: {"type": "payment-service", "id": "fffd152a-9532-4087-9a4f-de58754210f0", "merchant_account_id": "default", "payment_service_definition_id": "stripe-card", "active": true, "method": "khipu", "display_name": "Stripe", "position": 1, "accepted_currencies": ["USD", "EUR", "GBP"], "accepted_countries": ["US", "DE", "GB"], "payment_method_tokenization_enabled": true, "network_tokens_enabled": true, "open_loop": true, "settlement_reporting_enabled": true, "is_deleted": false, "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00"}
+          application/json: {"type": "payment-service", "id": "fffd152a-9532-4087-9a4f-de58754210f0", "merchant_account_id": "default", "payment_service_definition_id": "stripe-card", "active": true, "method": "khipu", "display_name": "Stripe", "position": 1, "accepted_currencies": ["USD", "EUR", "GBP"], "accepted_countries": ["US", "DE", "GB"], "payment_method_tokenization_enabled": true, "network_tokens_enabled": true, "open_loop": true, "settlement_reporting_enabled": true, "refund_ingestion_enabled": true, "is_deleted": false, "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00"}
         "400":
           application/json: {"type": "error", "code": "bad_request", "status": 400, "message": "Request failed validation"}
         "401":
@@ -7354,7 +7354,7 @@ examples:
         header:
           x-gr4vy-merchant-account-id: "default"
       requestBody:
-        application/json: {"display_name": "Stripe", "payment_service_definition_id": "stripe-card", "fields": [{"key": "api_key", "value": "key-12345"}], "accepted_currencies": ["USD", "EUR", "GBP"], "accepted_countries": ["US", "DE", "GB"], "three_d_secure_enabled": true, "settlement_reporting_enabled": true}
+        application/json: {"display_name": "Stripe", "payment_service_definition_id": "stripe-card", "fields": [{"key": "api_key", "value": "key-12345"}], "accepted_currencies": ["USD", "EUR", "GBP"], "accepted_countries": ["US", "DE", "GB"], "three_d_secure_enabled": true, "settlement_reporting_enabled": true, "refund_ingestion_enabled": true}
       responses:
         "200":
           application/json: {"type": "payment-service", "id": "fffd152a-9532-4087-9a4f-de58754210f0", "merchant_account_id": "default", "payment_service_definition_id": "stripe-card", "active": true, "method": "linkaja", "display_name": "Stripe", "position": 1, "accepted_currencies": ["USD", "EUR", "GBP"], "accepted_countries": ["US", "DE", "GB"], "payment_method_tokenization_enabled": true, "network_tokens_enabled": true, "open_loop": true, "settlement_reporting_enabled": true, "is_deleted": false, "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00"}
@@ -7383,7 +7383,7 @@ examples:
         "504":
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
         "201":
-          application/json: {"type": "payment-service", "id": "fffd152a-9532-4087-9a4f-de58754210f0", "merchant_account_id": "default", "payment_service_definition_id": "stripe-card", "active": true, "method": "abitab", "display_name": "Stripe", "position": 1, "accepted_currencies": ["USD", "EUR", "GBP"], "accepted_countries": ["US", "DE", "GB"], "payment_method_tokenization_enabled": true, "network_tokens_enabled": true, "open_loop": true, "settlement_reporting_enabled": true, "is_deleted": false, "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00"}
+          application/json: {"type": "payment-service", "id": "fffd152a-9532-4087-9a4f-de58754210f0", "merchant_account_id": "default", "payment_service_definition_id": "stripe-card", "active": true, "method": "abitab", "display_name": "Stripe", "position": 1, "accepted_currencies": ["USD", "EUR", "GBP"], "accepted_countries": ["US", "DE", "GB"], "payment_method_tokenization_enabled": true, "network_tokens_enabled": true, "open_loop": true, "settlement_reporting_enabled": true, "refund_ingestion_enabled": true, "is_deleted": false, "created_at": "2013-07-16T19:23:00.000+00:00", "updated_at": "2013-07-16T19:23:00.000+00:00"}
   delete_payment_service:
     speakeasy-default-delete-payment-service:
       parameters:
@@ -9339,7 +9339,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.RiskifiedAntiFraud` **Changed**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.RiskifiedAntiFraud` **Changed**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.RiskifiedAntiFraud` **Changed**\n"
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Capture()`:  `response.union(TransactionCapture).Status.Enum(canceled)` **Added**\n* `Gr4vy.Transactions.Events.List()`:  `response.Items[].Name` **Changed**\n* `Gr4vy.Transactions.Captures.List()`:  `response.Items[].Status.Enum(canceled)` **Added**\n* `Gr4vy.Transactions.Captures.Get()`:  `response.Status.Enum(canceled)` **Added**\n* `Gr4vy.PaymentServices.List()`:  `response.Items[].RefundIngestionEnabled` **Added**\n* `Gr4vy.PaymentServices.Create()`: \n  *  `request.PaymentServiceCreate.RefundIngestionEnabled` **Added**\n  *  `response.RefundIngestionEnabled` **Added**\n* `Gr4vy.PaymentServices.Get()`:  `response.RefundIngestionEnabled` **Added**\n* `Gr4vy.PaymentServices.Update()`: \n  *  `request.PaymentServiceUpdate.RefundIngestionEnabled` **Added**\n  *  `response.RefundIngestionEnabled` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

@@ -9,6 +9,7 @@ const (
 	CaptureStatusPending   CaptureStatus = "pending"
 	CaptureStatusDeclined  CaptureStatus = "declined"
 	CaptureStatusFailed    CaptureStatus = "failed"
+	CaptureStatusCanceled  CaptureStatus = "canceled"
 )
 
 func (e CaptureStatus) ToPointer() *CaptureStatus {
@@ -19,7 +20,7 @@ func (e CaptureStatus) ToPointer() *CaptureStatus {
 func (e *CaptureStatus) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "succeeded", "pending", "declined", "failed":
+		case "succeeded", "pending", "declined", "failed", "canceled":
 			return true
 		}
 	}
