@@ -61,6 +61,10 @@ custom := components.Name("custom_value")
 | `NamePaymentConnectorResponseTransactionAuthorizationIncrementFailed`    | payment-connector-response-transaction-authorization-increment-failed    |
 | `NamePaymentConnectorResponseTransactionVoidDeclined`                    | payment-connector-response-transaction-void-declined                     |
 | `NamePaymentConnectorResponseTransactionVoidFailed`                      | payment-connector-response-transaction-void-failed                       |
+| `NamePaymentConnectorResponseTransactionCaptureReversalSucceeded`        | payment-connector-response-transaction-capture-reversal-succeeded        |
+| `NamePaymentConnectorResponseTransactionCaptureReversalDeclined`         | payment-connector-response-transaction-capture-reversal-declined         |
+| `NamePaymentConnectorResponseTransactionCaptureReversalFailed`           | payment-connector-response-transaction-capture-reversal-failed           |
+| `NamePaymentConnectorResponseTransactionCaptureReversalDelayed`          | payment-connector-response-transaction-capture-reversal-delayed          |
 | `NamePaymentConnectorExternalTransactionRequest`                         | payment-connector-external-transaction-request                           |
 | `NamePaymentConnectorReportTransactionSettled`                           | payment-connector-report-transaction-settled                             |
 | `NamePaymentConnectorReportRefundSettled`                                | payment-connector-report-refund-settled                                  |

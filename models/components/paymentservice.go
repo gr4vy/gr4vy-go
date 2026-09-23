@@ -37,6 +37,8 @@ type PaymentService struct {
 	OpenLoop bool `json:"open_loop"`
 	// Defines if this payment service has settlement reporting enabled.
 	SettlementReportingEnabled bool `json:"settlement_reporting_enabled"`
+	// Defines if this payment service has refund ingestion enabled.
+	RefundIngestionEnabled bool `json:"refund_ingestion_enabled"`
 	// Defines if this payment service has 3DS enabled.
 	ThreeDSecureEnabled *bool `json:"three_d_secure_enabled,omitempty"`
 	// An object containing a key for each supported card schemes, and for each key an object with the 3DS profile for this service for that scheme.
@@ -166,6 +168,13 @@ func (p *PaymentService) GetSettlementReportingEnabled() bool {
 		return false
 	}
 	return p.SettlementReportingEnabled
+}
+
+func (p *PaymentService) GetRefundIngestionEnabled() bool {
+	if p == nil {
+		return false
+	}
+	return p.RefundIngestionEnabled
 }
 
 func (p *PaymentService) GetThreeDSecureEnabled() *bool {

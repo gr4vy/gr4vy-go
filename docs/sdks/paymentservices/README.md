@@ -140,6 +140,7 @@ func main() {
         },
         ThreeDSecureEnabled: gr4vygo.Pointer(true),
         SettlementReportingEnabled: gr4vygo.Pointer(true),
+        RefundIngestionEnabled: gr4vygo.Pointer(true),
     })
     if err != nil {
         log.Fatal(err)
@@ -275,6 +276,7 @@ func main() {
 
     res, err := s.PaymentServices.Update(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", components.PaymentServiceUpdate{
         SettlementReportingEnabled: gr4vygo.Pointer(true),
+        RefundIngestionEnabled: gr4vygo.Pointer(true),
     })
     if err != nil {
         log.Fatal(err)

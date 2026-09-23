@@ -36,6 +36,8 @@ type PaymentServiceCreate struct {
 	OpenLoop *bool `json:"open_loop,omitempty"`
 	// Defines if this payment service has settlement reporting enabled.
 	SettlementReportingEnabled *bool `default:"false" json:"settlement_reporting_enabled"`
+	// Defines if this payment service has refund ingestion enabled.
+	RefundIngestionEnabled *bool `default:"false" json:"refund_ingestion_enabled"`
 }
 
 func (p PaymentServiceCreate) MarshalJSON() ([]byte, error) {
@@ -145,4 +147,11 @@ func (p *PaymentServiceCreate) GetSettlementReportingEnabled() *bool {
 		return nil
 	}
 	return p.SettlementReportingEnabled
+}
+
+func (p *PaymentServiceCreate) GetRefundIngestionEnabled() *bool {
+	if p == nil {
+		return nil
+	}
+	return p.RefundIngestionEnabled
 }

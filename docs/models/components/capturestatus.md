@@ -22,3 +22,4 @@ custom := components.CaptureStatus("custom_value")
 | `CaptureStatusPending`   | pending                  |
 | `CaptureStatusDeclined`  | declined                 |
 | `CaptureStatusFailed`    | failed                   |
+| `CaptureStatusCanceled`  | canceled                 |
