@@ -36,7 +36,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Create(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.ShippingDetailsCreate{})
+    res, err := s.Buyers.ShippingDetails.Create(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.ShippingDetailsCreate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -103,7 +103,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.List(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9")
+    res, err := s.Buyers.ShippingDetails.List(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -169,7 +169,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Get(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341")
+    res, err := s.Buyers.ShippingDetails.Get(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -237,7 +237,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.ShippingDetails.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", components.ShippingDetailsUpdate{})
+    res, err := s.Buyers.ShippingDetails.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", components.ShippingDetailsUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -305,7 +305,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.Buyers.ShippingDetails.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341")
+    err := s.Buyers.ShippingDetails.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", "bf8c36ad-02d9-4904-b0f9-a230b149e341", nil)
     if err != nil {
         log.Fatal(err)
     }

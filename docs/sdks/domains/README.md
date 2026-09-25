@@ -35,7 +35,7 @@ func main() {
 
     res, err := s.DigitalWallets.Domains.Create(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletDomain{
         DomainName: "example.com",
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -105,7 +105,7 @@ func main() {
 
     err := s.DigitalWallets.Domains.Delete(ctx, "", components.DigitalWalletDomain{
         DomainName: "example.com",
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }

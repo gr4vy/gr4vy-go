@@ -51,7 +51,7 @@ func main() {
                 },
             ),
         },
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }

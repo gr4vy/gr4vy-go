@@ -117,6 +117,8 @@ type TransactionConnectionOptions struct {
 	RepayBank *RepayBankOptions `json:"repay-bank,omitempty"`
 	// Custom options to be passed to the `riskified-anti-fraud` connector.
 	RiskifiedAntiFraud *RiskifiedAntiFraudOptions `json:"riskified-anti-fraud,omitempty"`
+	// Custom options to be passed to the `ryft-card` connector.
+	RyftCard *RyftCardOptions `json:"ryft-card,omitempty"`
 	// Custom options to be passed to the `stripe-affirm` connector.
 	StripeAffirm *StripeOptions `json:"stripe-affirm,omitempty"`
 	// Custom options to be passed to the `stripe-card` connector.
@@ -536,6 +538,13 @@ func (t *TransactionConnectionOptions) GetRiskifiedAntiFraud() *RiskifiedAntiFra
 		return nil
 	}
 	return t.RiskifiedAntiFraud
+}
+
+func (t *TransactionConnectionOptions) GetRyftCard() *RyftCardOptions {
+	if t == nil {
+		return nil
+	}
+	return t.RyftCard
 }
 
 func (t *TransactionConnectionOptions) GetStripeAffirm() *StripeOptions {

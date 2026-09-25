@@ -42,7 +42,7 @@ func main() {
                 TransactionStatus: components.ThreeDSecureScenarioOutcomeAuthenticationTransactionStatusY,
             },
         },
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -108,7 +108,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.ThreeDsScenarios.List(ctx, nil, gr4vygo.Pointer[int64](20))
+    res, err := s.ThreeDsScenarios.List(ctx, nil, gr4vygo.Pointer[int64](20), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -188,7 +188,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.ThreeDsScenarios.Update(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.ThreeDSecureScenarioUpdate{})
+    res, err := s.ThreeDsScenarios.Update(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.ThreeDSecureScenarioUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -255,7 +255,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.ThreeDsScenarios.Delete(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591")
+    err := s.ThreeDsScenarios.Delete(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil)
     if err != nil {
         log.Fatal(err)
     }

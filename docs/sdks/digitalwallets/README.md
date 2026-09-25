@@ -40,7 +40,7 @@ func main() {
         Provider: components.DigitalWalletProviderClickToPay,
         MerchantName: "<value>",
         AcceptTermsAndConditions: false,
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -106,7 +106,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.List(ctx)
+    res, err := s.DigitalWallets.List(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -171,7 +171,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Get(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5")
+    res, err := s.DigitalWallets.Get(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -237,7 +237,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.DigitalWallets.Delete(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5")
+    err := s.DigitalWallets.Delete(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -301,7 +301,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Update(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletUpdate{})
+    res, err := s.DigitalWallets.Update(ctx, "1808f5e6-b49c-4db9-94fa-22371ea352f5", components.DigitalWalletUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }

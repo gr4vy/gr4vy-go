@@ -33,7 +33,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Reports.Executions.List(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", nil, gr4vygo.Pointer[int64](20))
+    res, err := s.Reports.Executions.List(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", nil, gr4vygo.Pointer[int64](20), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -113,7 +113,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Reports.Executions.URL(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", "003bc416-f32a-420c-8eb2-062a386e1fb0", nil)
+    res, err := s.Reports.Executions.URL(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", "003bc416-f32a-420c-8eb2-062a386e1fb0", nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -181,7 +181,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Reports.Executions.Get(ctx, "003bc416-f32a-420c-8eb2-062a386e1fb0")
+    res, err := s.Reports.Executions.Get(ctx, "003bc416-f32a-420c-8eb2-062a386e1fb0", nil)
     if err != nil {
         log.Fatal(err)
     }

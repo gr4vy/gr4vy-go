@@ -34,7 +34,7 @@ func main() {
 
     res, err := s.GiftCards.Activations.Create(ctx, components.GiftCardActivationCreate{
         Number: "4123455541234561234",
-    }, nil)
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

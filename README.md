@@ -260,7 +260,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -605,7 +605,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	}, operations.WithRetries(
+	}, nil, operations.WithRetries(
 		retry.Config{
 			Strategy: "backoff",
 			Backoff: &retry.BackoffStrategy{
@@ -663,7 +663,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -728,7 +728,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	})
+	}, nil)
 	if err != nil {
 
 		var e *apierrors.Error400
@@ -860,7 +860,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}
@@ -899,7 +899,7 @@ func main() {
 			"ef9496d8-53a5-4aad-8ca2-00eb68334389",
 			"f29e886e-93cc-4714-b4a3-12b7a718e595",
 		},
-	})
+	}, nil)
 	if err != nil {
 		log.Fatal(err)
 	}

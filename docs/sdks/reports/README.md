@@ -130,7 +130,7 @@ func main() {
                 },
             },
         ),
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -196,7 +196,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Reports.Get(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe")
+    res, err := s.Reports.Get(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -263,7 +263,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Reports.Put(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", components.ReportUpdate{})
+    res, err := s.Reports.Put(ctx, "4d4c7123-b794-4fad-b1b9-5ab2606e6bbe", components.ReportUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }

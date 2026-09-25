@@ -201,7 +201,7 @@ func main() {
         MerchantInitiated: gr4vygo.Pointer(true),
         AsyncCapture: gr4vygo.Pointer(true),
         AccountFundingTransaction: gr4vygo.Pointer(true),
-    }, gr4vygo.Pointer("request-12345"), nil)
+    }, nil, gr4vygo.Pointer("request-12345"), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -269,7 +269,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Get(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591")
+    res, err := s.Transactions.Get(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -336,7 +336,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Update(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.TransactionUpdate{})
+    res, err := s.Transactions.Update(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.TransactionUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -482,7 +482,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Void(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil, nil)
+    res, err := s.Transactions.Void(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -556,7 +556,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Cancel(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591")
+    res, err := s.Transactions.Cancel(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -622,7 +622,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Sync(ctx, "2ee546e0-3b11-478e-afec-fdb362611e22")
+    res, err := s.Transactions.Sync(ctx, "2ee546e0-3b11-478e-afec-fdb362611e22", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -691,7 +691,7 @@ func main() {
 
     res, err := s.Transactions.IncrementAuthorization(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.TransactionAuthorizationIncrementCreate{
         Amount: 1299,
-    }, nil)
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }

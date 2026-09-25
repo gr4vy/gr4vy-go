@@ -31,7 +31,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CardSchemeDefinitions.List(ctx)
+    res, err := s.CardSchemeDefinitions.List(ctx, nil)
     if err != nil {
         log.Fatal(err)
     }
