@@ -281,7 +281,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error400
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -302,7 +302,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error401
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -323,7 +323,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -344,7 +344,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error404
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -365,7 +365,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error405
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -386,7 +386,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error409
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -407,7 +407,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.HTTPValidationError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -428,7 +428,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error425
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -449,7 +449,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error429
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -470,7 +470,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error500
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -491,7 +491,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error502
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -512,7 +512,7 @@ func (s *PaymentServices) List(ctx context.Context, request operations.ListPayme
 
 			var out apierrors.Error504
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -749,7 +749,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error400
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -770,7 +770,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error401
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -791,7 +791,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -812,7 +812,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error404
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -833,7 +833,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error405
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -854,7 +854,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error409
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -875,7 +875,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.HTTPValidationError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -896,7 +896,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error425
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -917,7 +917,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error429
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -938,7 +938,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error500
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -959,7 +959,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error502
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -980,7 +980,7 @@ func (s *PaymentServices) Create(ctx context.Context, paymentServiceCreate compo
 
 			var out apierrors.Error504
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1216,7 +1216,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error400
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1237,7 +1237,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error401
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1258,7 +1258,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1279,7 +1279,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error404
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1300,7 +1300,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error405
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1321,7 +1321,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error409
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1342,7 +1342,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.HTTPValidationError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1363,7 +1363,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error425
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1384,7 +1384,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error429
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1405,7 +1405,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error500
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1426,7 +1426,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error502
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1447,7 +1447,7 @@ func (s *PaymentServices) Get(ctx context.Context, paymentServiceID string, merc
 
 			var out apierrors.Error504
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1685,7 +1685,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error400
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1706,7 +1706,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error401
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1727,7 +1727,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1748,7 +1748,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error404
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1769,7 +1769,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error405
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1790,7 +1790,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error409
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1811,7 +1811,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.HTTPValidationError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1832,7 +1832,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error425
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1853,7 +1853,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error429
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1874,7 +1874,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error500
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1895,7 +1895,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error502
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -1916,7 +1916,7 @@ func (s *PaymentServices) Update(ctx context.Context, paymentServiceID string, p
 
 			var out apierrors.Error504
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2127,7 +2127,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error400
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2148,7 +2148,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error401
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2169,7 +2169,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2190,7 +2190,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error404
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2211,7 +2211,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error405
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2232,7 +2232,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error409
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2253,7 +2253,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.HTTPValidationError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2274,7 +2274,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error425
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2295,7 +2295,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error429
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2316,7 +2316,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error500
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2337,7 +2337,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error502
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2358,7 +2358,7 @@ func (s *PaymentServices) Delete(ctx context.Context, paymentServiceID string, m
 
 			var out apierrors.Error504
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return err
+				return apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return &out
@@ -2594,7 +2594,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error400
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2615,7 +2615,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error401
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2636,7 +2636,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2657,7 +2657,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error404
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2678,7 +2678,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error405
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2699,7 +2699,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error409
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2720,7 +2720,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.HTTPValidationError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2741,7 +2741,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error425
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2762,7 +2762,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error429
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2783,7 +2783,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error500
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2804,7 +2804,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error502
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -2825,7 +2825,7 @@ func (s *PaymentServices) Verify(ctx context.Context, verifyCredentials componen
 
 			var out apierrors.Error504
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3063,7 +3063,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error400
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3084,7 +3084,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error401
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3105,7 +3105,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error403
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3126,7 +3126,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error404
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3147,7 +3147,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error405
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3168,7 +3168,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error409
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3189,7 +3189,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.HTTPValidationError
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3210,7 +3210,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error425
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3231,7 +3231,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error429
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3252,7 +3252,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error500
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3273,7 +3273,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error502
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out
@@ -3294,7 +3294,7 @@ func (s *PaymentServices) Session(ctx context.Context, paymentServiceID string, 
 
 			var out apierrors.Error504
 			if err := utils.UnmarshalJsonFromResponseBody(bytes.NewBuffer(rawBody), &out, ""); err != nil {
-				return nil, err
+				return nil, apierrors.NewResponseValidationError("response did not match the declared error schema", httpRes.StatusCode, string(rawBody), httpRes, err)
 			}
 
 			return nil, &out

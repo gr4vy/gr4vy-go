@@ -31,7 +31,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Refunds.Get(ctx, "6a1d4e46-14ed-4fe1-a45f-eff4e025d211")
+    res, err := s.Refunds.Get(ctx, "6a1d4e46-14ed-4fe1-a45f-eff4e025d211", nil)
     if err != nil {
         log.Fatal(err)
     }

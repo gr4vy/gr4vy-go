@@ -40,7 +40,7 @@ func main() {
 
     res, err := s.DigitalWallets.Sessions.GooglePay(ctx, components.GooglePaySessionRequest{
         OriginDomain: "example.com",
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -110,7 +110,7 @@ func main() {
     res, err := s.DigitalWallets.Sessions.ApplePay(ctx, components.ApplePaySessionRequest{
         ValidationURL: "https://apple-pay-gateway-cert.apple.com",
         DomainName: "example.com",
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -185,7 +185,7 @@ func main() {
         AccessToken: "<value>",
         CallbackURLScheme: "Gr4vyCallback",
         Intent: components.IntentExpressCheckout,
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -253,7 +253,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.DigitalWallets.Sessions.Paze(ctx, components.PazeSessionRequest{})
+    res, err := s.DigitalWallets.Sessions.Paze(ctx, components.PazeSessionRequest{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -330,7 +330,7 @@ func main() {
         SessionID: "7c1cba03-d20e-4a3f-9d77-e5dc23a39ac2",
         Code: "eyJhdWQiOm51bGwsImtpZCI6IjE3...",
         AccessToken: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -402,7 +402,7 @@ func main() {
         Code: "eyJhdWQiOm51bGwsImtpZCI6IjE3...",
         AccessToken: "eyJhbGciOiJSUzI1NiIsInR5cCI6IkpXVCJ9...",
         TransactionType: components.PazeSessionCompleteRequestTransactiontypePurchase,
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }

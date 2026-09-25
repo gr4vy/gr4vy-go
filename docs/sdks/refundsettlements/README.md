@@ -32,7 +32,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.RefundSettlements.Get(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", "b1e2c3d4-5678-1234-9abc-1234567890ab")
+    res, err := s.Transactions.RefundSettlements.Get(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", "b1e2c3d4-5678-1234-9abc-1234567890ab", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -99,7 +99,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.RefundSettlements.List(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591")
+    res, err := s.Transactions.RefundSettlements.List(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil)
     if err != nil {
         log.Fatal(err)
     }

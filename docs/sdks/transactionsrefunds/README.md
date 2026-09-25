@@ -33,7 +33,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Refunds.List(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591")
+    res, err := s.Transactions.Refunds.List(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -100,7 +100,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Refunds.Create(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.TransactionRefundCreate{}, nil)
+    res, err := s.Transactions.Refunds.Create(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", components.TransactionRefundCreate{}, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -168,7 +168,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Transactions.Refunds.Get(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", "6a1d4e46-14ed-4fe1-a45f-eff4e025d211")
+    res, err := s.Transactions.Refunds.Get(ctx, "7099948d-7286-47e4-aad8-b68f7eb44591", "6a1d4e46-14ed-4fe1-a45f-eff4e025d211", nil)
     if err != nil {
         log.Fatal(err)
     }

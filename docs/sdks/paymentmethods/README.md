@@ -124,7 +124,7 @@ func main() {
         components.CheckoutSessionPaymentMethodCreate{
             ID: "4137b1cf-39ac-42a8-bad6-1c680d5dab6b",
         },
-    ))
+    ), nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -190,7 +190,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.Get(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389")
+    res, err := s.PaymentMethods.Get(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -257,7 +257,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.Update(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", components.PaymentMethodUpdate{})
+    res, err := s.PaymentMethods.Update(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", components.PaymentMethodUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -324,7 +324,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.PaymentMethods.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389")
+    err := s.PaymentMethods.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", nil)
     if err != nil {
         log.Fatal(err)
     }

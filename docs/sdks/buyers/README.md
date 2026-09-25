@@ -118,7 +118,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.Create(ctx, components.BuyerCreate{})
+    res, err := s.Buyers.Create(ctx, components.BuyerCreate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -184,7 +184,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.Get(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9")
+    res, err := s.Buyers.Get(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -251,7 +251,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.Buyers.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.BuyerUpdate{})
+    res, err := s.Buyers.Update(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", components.BuyerUpdate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -318,7 +318,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.Buyers.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9")
+    err := s.Buyers.Delete(ctx, "fe26475d-ec3e-4884-9553-f7356683f7f9", nil)
     if err != nil {
         log.Fatal(err)
     }

@@ -40,7 +40,7 @@ func main() {
         Country: "DE",
         Currency: "EUR",
         Store: gr4vygo.Pointer(true),
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -184,7 +184,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.PaymentLinks.Expire(ctx, "a1b2c3d4-5678-90ab-cdef-1234567890ab")
+    err := s.PaymentLinks.Expire(ctx, "a1b2c3d4-5678-90ab-cdef-1234567890ab", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -247,7 +247,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentLinks.Get(ctx, "a1b2c3d4-5678-90ab-cdef-1234567890ab")
+    res, err := s.PaymentLinks.Get(ctx, "a1b2c3d4-5678-90ab-cdef-1234567890ab", nil)
     if err != nil {
         log.Fatal(err)
     }

@@ -36,7 +36,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Create(ctx, &components.CheckoutSessionCreate{
+    res, err := s.CheckoutSessions.Create(ctx, nil, &components.CheckoutSessionCreate{
         CartItems: []components.CartItem{
             components.CartItem{
                 Name: "GoPro HD",
@@ -221,7 +221,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Update(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", components.CheckoutSessionCreate{})
+    res, err := s.CheckoutSessions.Update(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", components.CheckoutSessionCreate{}, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -288,7 +288,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.CheckoutSessions.Get(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b")
+    res, err := s.CheckoutSessions.Get(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -353,7 +353,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.CheckoutSessions.Delete(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b")
+    err := s.CheckoutSessions.Delete(ctx, "4137b1cf-39ac-42a8-bad6-1c680d5dab6b", nil)
     if err != nil {
         log.Fatal(err)
     }

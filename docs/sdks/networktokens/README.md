@@ -35,7 +35,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.NetworkTokens.List(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389")
+    res, err := s.PaymentMethods.NetworkTokens.List(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -105,7 +105,7 @@ func main() {
     res, err := s.PaymentMethods.NetworkTokens.Create(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", components.NetworkTokenCreate{
         MerchantInitiated: false,
         IsSubsequentPayment: false,
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -172,7 +172,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.NetworkTokens.Suspend(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "f8dd5cfc-7834-4847-95dc-f75a360e2298")
+    res, err := s.PaymentMethods.NetworkTokens.Suspend(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "f8dd5cfc-7834-4847-95dc-f75a360e2298", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -239,7 +239,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentMethods.NetworkTokens.Resume(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "f8dd5cfc-7834-4847-95dc-f75a360e2298")
+    res, err := s.PaymentMethods.NetworkTokens.Resume(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "f8dd5cfc-7834-4847-95dc-f75a360e2298", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -306,7 +306,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.PaymentMethods.NetworkTokens.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "f8dd5cfc-7834-4847-95dc-f75a360e2298")
+    err := s.PaymentMethods.NetworkTokens.Delete(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", "f8dd5cfc-7834-4847-95dc-f75a360e2298", nil)
     if err != nil {
         log.Fatal(err)
     }

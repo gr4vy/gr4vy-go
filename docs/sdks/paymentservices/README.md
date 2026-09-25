@@ -141,7 +141,7 @@ func main() {
         ThreeDSecureEnabled: gr4vygo.Pointer(true),
         SettlementReportingEnabled: gr4vygo.Pointer(true),
         RefundIngestionEnabled: gr4vygo.Pointer(true),
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -207,7 +207,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.PaymentServices.Get(ctx, "fffd152a-9532-4087-9a4f-de58754210f0")
+    res, err := s.PaymentServices.Get(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -277,7 +277,7 @@ func main() {
     res, err := s.PaymentServices.Update(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", components.PaymentServiceUpdate{
         SettlementReportingEnabled: gr4vygo.Pointer(true),
         RefundIngestionEnabled: gr4vygo.Pointer(true),
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -344,7 +344,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.PaymentServices.Delete(ctx, "fffd152a-9532-4087-9a4f-de58754210f0")
+    err := s.PaymentServices.Delete(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -411,7 +411,7 @@ func main() {
     res, err := s.PaymentServices.Verify(ctx, components.VerifyCredentials{
         PaymentServiceDefinitionID: "stripe-card",
         Fields: []components.Field{},
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -479,7 +479,7 @@ func main() {
 
     res, err := s.PaymentServices.Session(ctx, "fffd152a-9532-4087-9a4f-de58754210f0", map[string]any{
 
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }

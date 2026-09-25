@@ -34,7 +34,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    res, err := s.GiftCards.Get(ctx, "356d56e5-fe16-42ae-97ee-8d55d846ae2e")
+    res, err := s.GiftCards.Get(ctx, "356d56e5-fe16-42ae-97ee-8d55d846ae2e", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -100,7 +100,7 @@ func main() {
         gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
     )
 
-    err := s.GiftCards.Delete(ctx, "356d56e5-fe16-42ae-97ee-8d55d846ae2e")
+    err := s.GiftCards.Delete(ctx, "356d56e5-fe16-42ae-97ee-8d55d846ae2e", nil)
     if err != nil {
         log.Fatal(err)
     }
@@ -167,7 +167,7 @@ func main() {
     res, err := s.GiftCards.Create(ctx, components.GiftCardCreate{
         Number: "4123455541234561234",
         Pin: "1234",
-    })
+    }, nil)
     if err != nil {
         log.Fatal(err)
     }

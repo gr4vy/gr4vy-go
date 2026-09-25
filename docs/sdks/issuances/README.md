@@ -36,7 +36,7 @@ func main() {
         Theme: "031111372",
         Amount: 5000,
         Currency: "EUR",
-    }, nil)
+    }, nil, nil)
     if err != nil {
         log.Fatal(err)
     }
