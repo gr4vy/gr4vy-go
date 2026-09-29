@@ -570,6 +570,8 @@ type TransactionCreate struct {
 	IntegrationClient *IntegrationClient `json:"integration_client,omitempty"`
 	// The date and time when the buyer's approval window for this transaction expires. If not provided, this is automatically computed from the connector's default expiration time. The value cannot exceed the connector's maximum approval window.
 	ApprovalExpiresAt *time.Time `json:"approval_expires_at,omitempty"`
+	// Whether the authorization amount is expected to be modified in the future or not.
+	IsAmountEstimated *bool `json:"is_amount_estimated,omitempty"`
 }
 
 func (t TransactionCreate) MarshalJSON() ([]byte, error) {
@@ -882,4 +884,11 @@ func (t *TransactionCreate) GetApprovalExpiresAt() *time.Time {
 		return nil
 	}
 	return t.ApprovalExpiresAt
+}
+
+func (t *TransactionCreate) GetIsAmountEstimated() *bool {
+	if t == nil {
+		return nil
+	}
+	return t.IsAmountEstimated
 }
