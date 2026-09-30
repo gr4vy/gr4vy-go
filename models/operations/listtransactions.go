@@ -35,8 +35,11 @@ type ListTransactionsRequest struct {
 	Search                  *string    `queryParam:"style=form,explode=true,name=search"`
 	BuyerExternalIdentifier *string    `queryParam:"style=form,explode=true,name=buyer_external_identifier"`
 	BuyerID                 *string    `queryParam:"style=form,explode=true,name=buyer_id"`
-	BuyerEmailAddress       *string    `queryParam:"style=form,explode=true,name=buyer_email_address"`
-	IPAddress               *string    `queryParam:"style=form,explode=true,name=ip_address"`
+	// Deprecated. Filters the results to only the items for which the `buyer` has an `email_address` that matches this value. This filter can be slow and is not recommended for use in automated systems. Use `buyer_search`, `buyer_external_identifier` or `buyer_id` instead.
+	//
+	// Deprecated: This filter can be slow. Use `buyer_search`, `buyer_external_identifier` or `buyer_id` instead..
+	BuyerEmailAddress *string `queryParam:"style=form,explode=true,name=buyer_email_address"`
+	IPAddress         *string `queryParam:"style=form,explode=true,name=ip_address"`
 	// Filters the results to only the transactions that have a `status` that matches with any of the provided status values.
 	Status                      []components.TransactionStatus `queryParam:"style=form,explode=true,name=status"`
 	ID                          *string                        `queryParam:"style=form,explode=true,name=id"`
@@ -44,26 +47,26 @@ type ListTransactionsRequest struct {
 	ExternalIdentifier          *string                        `queryParam:"style=form,explode=true,name=external_identifier"`
 	// Filters for transactions where their `metadata` values contain all of the provided `metadata` keys. The value sent for `metadata` must be formatted as a JSON string, and all keys and values must be strings. This value should also be URL encoded.
 	Metadata []string `queryParam:"style=form,explode=true,name=metadata"`
-	// Filters for transactions that have an `amount` that is equal to the provided `amount_eq` value.
+	// Filters for transactions that have an `amount` that is equal to the provided `amount_eq` value. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	AmountEq *int64 `queryParam:"style=form,explode=true,name=amount_eq"`
-	// Filters for transactions that have an `amount` that is less than or equal to the `amount_lte` value.
+	// Filters for transactions that have an `amount` that is less than or equal to the `amount_lte` value. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	AmountLte *int64 `queryParam:"style=form,explode=true,name=amount_lte"`
-	// Filters for transactions that have an `amount` that is greater than or equal to the `amount_gte` value.
+	// Filters for transactions that have an `amount` that is greater than or equal to the `amount_gte` value. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	AmountGte *int64 `queryParam:"style=form,explode=true,name=amount_gte"`
-	// Filters for transactions that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency code.
+	// Filters for transactions that have matching `currency` values. The `currency` values provided must be formatted as 3-letter ISO currency code. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	Currency []string `queryParam:"style=form,explode=true,name=currency"`
-	// Filters for transactions that have matching `country` values.
+	// Filters for transactions that have matching `country` values. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	Country []string `queryParam:"style=form,explode=true,name=country"`
 	// Filters for transactions that were processed by the provided `payment_service_id` values.
 	PaymentServiceID   []string `queryParam:"style=form,explode=true,name=payment_service_id"`
 	PaymentMethodID    *string  `queryParam:"style=form,explode=true,name=payment_method_id"`
 	PaymentMethodLabel *string  `queryParam:"style=form,explode=true,name=payment_method_label"`
-	// Filters for transactions where the `payment_method_scheme` matches one of the provided values.
+	// Filters for transactions where the `payment_method_scheme` matches one of the provided values. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	PaymentMethodScheme []string `queryParam:"style=form,explode=true,name=payment_method_scheme"`
-	// Filters for transactions that have a payment method with a country that matches with the provided value.
+	// Filters for transactions that have a payment method with a country that matches with the provided value. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	PaymentMethodCountry     *string `queryParam:"style=form,explode=true,name=payment_method_country"`
 	PaymentMethodFingerprint *string `queryParam:"style=form,explode=true,name=payment_method_fingerprint"`
-	// Filters for transactions that have matching `method` values.
+	// Filters for transactions that have matching `method` values. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	Method []components.Method `queryParam:"style=form,explode=true,name=method"`
 	// Filters for transactions where the `error_code` matches one for the provided values.
 	ErrorCode []string `queryParam:"style=form,explode=true,name=error_code"`
@@ -81,19 +84,21 @@ type ListTransactionsRequest struct {
 	HasGiftCardRedemptions *bool `queryParam:"style=form,explode=true,name=has_gift_card_redemptions"`
 	// Filters for transactions where a gift card used has an `id` that matches the provided value.
 	GiftCardID *string `queryParam:"style=form,explode=true,name=gift_card_id"`
-	// Filters for transactions that have at least one gift card redemption where the last 4 digits of its gift card number matches exactly with the provided value.
+	// Deprecated. Filters for transactions that have at least one gift card redemption where the last 4 digits of its gift card number matches exactly with the provided value. This filter can be slow and is not recommended for use in automated systems. Use `gift_card_id` instead.
+	//
+	// Deprecated: This filter can be slow. Use `gift_card_id` instead..
 	GiftCardLast4 *string `queryParam:"style=form,explode=true,name=gift_card_last4"`
-	// Filters for transactions that have at least one associated settlement record.
+	// Filters for transactions that have at least one associated settlement record. When filtering on `false`, combine it with `created_at_gte` and `created_at_lte` for best performance.
 	HasSettlements *bool `queryParam:"style=form,explode=true,name=has_settlements"`
 	// Filter for transactions that have a card with a BIN that matches exactly with the provided value.
 	PaymentMethodBin *string `queryParam:"style=form,explode=true,name=payment_method_bin"`
-	// Filters the results to only the transactions that have a payment source that matches with any of the provided values.
+	// Filters the results to only the transactions that have a payment source that matches with any of the provided values. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	PaymentSource []components.TransactionPaymentSource `queryParam:"style=form,explode=true,name=payment_source"`
-	// Filters for transactions where the `is_subsequent_payment` matches the provided value.
+	// Filters for transactions where the `is_subsequent_payment` matches the provided value. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	IsSubsequentPayment *bool `queryParam:"style=form,explode=true,name=is_subsequent_payment"`
-	// Filters for transactions where the `merchant_initiated` matches the provided value.
+	// Filters for transactions where the `merchant_initiated` matches the provided value. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	MerchantInitiated *bool `queryParam:"style=form,explode=true,name=merchant_initiated"`
-	// Filters for transactions that attempted 3DS authentication or not.
+	// Filters for transactions that attempted 3DS authentication or not. For best performance, combine it with `created_at_gte` and `created_at_lte`.
 	Used3ds *bool `queryParam:"style=form,explode=true,name=used_3ds"`
 	// Filters for transactions that have been disputed.
 	Disputed *bool `queryParam:"style=form,explode=true,name=disputed"`
