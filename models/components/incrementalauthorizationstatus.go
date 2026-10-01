@@ -7,6 +7,7 @@ type IncrementalAuthorizationStatus string
 const (
 	IncrementalAuthorizationStatusSucceeded IncrementalAuthorizationStatus = "succeeded"
 	IncrementalAuthorizationStatusFailed    IncrementalAuthorizationStatus = "failed"
+	IncrementalAuthorizationStatusPending   IncrementalAuthorizationStatus = "pending"
 )
 
 func (e IncrementalAuthorizationStatus) ToPointer() *IncrementalAuthorizationStatus {
@@ -17,7 +18,7 @@ func (e IncrementalAuthorizationStatus) ToPointer() *IncrementalAuthorizationSta
 func (e *IncrementalAuthorizationStatus) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "succeeded", "failed":
+		case "succeeded", "failed", "pending":
 			return true
 		}
 	}
