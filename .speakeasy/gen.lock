@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 26711f1aa27cd1f2698f8fe5c9340f4a
+  docChecksum: 4268352ffe9e508d476038325874edf0
   docVersion: 1.0.0
   speakeasyVersion: 1.800.0
   generationVersion: 2.943.0
-  releaseVersion: 1.14.4
-  configChecksum: ec39101d0760d21fe37f2c6e7fbe2ac2
+  releaseVersion: 1.14.5
+  configChecksum: bbd3a19d4a6c8b3d9b9651f901eb73e3
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 0d7ed193-2e11-45be-a09d-057f6912f5e1
-  pristine_commit_hash: 0d97daf791c7a9f19e7416b892f5e62774e91cb3
-  pristine_tree_hash: 3492ea0d3f3d5bb711e3eece4a08f11333a9435f
+  generation_id: 53f3dae1-94a7-4c63-91f2-a6f147ec8faf
+  pristine_commit_hash: 522480e76a56825a163ea1e5a7e1f8aa4d8f939b
+  pristine_tree_hash: c0552e9105d10a6c1a6ce3eef320ace6cf091c15
 features:
   go:
     additionalDependencies: 0.1.0
@@ -915,8 +915,8 @@ trackedFiles:
     pristine_git_object: 7822176258ccabc8e3bbfea9521a89d8bee773fa
   docs/models/components/name.md:
     id: 817692a433a1
-    last_write_checksum: sha1:71b4914b3077281c1ab12ff905bde3b8f37214c1
-    pristine_git_object: b94378c8e46d0ca2182cb6c48c89a81200fec64e
+    last_write_checksum: sha1:a084d88a25b65e9dedc50669a30293f26c06d2ba
+    pristine_git_object: cd837901181498c8960c4c5c4b437874c1cf432b
   docs/models/components/networktoken.md:
     id: 19d1036d468a
     last_write_checksum: sha1:34973c759d46e6b369307c18da0a4c4a27a00889
@@ -2983,8 +2983,8 @@ trackedFiles:
     pristine_git_object: fc96b9d27553c3711eb459c5634415331316005e
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:79b21417cffcb88b636c9c6d98e7f83b204edd4e
-    pristine_git_object: 3b96f2d1ed610e72fbe2da211f6c723b8e56822f
+    last_write_checksum: sha1:3fdd4730706f17df2a380fbb1f9d5d89238e3e0c
+    pristine_git_object: 915d789cffafce0a816934f74db772b8887ad69b
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -4439,8 +4439,8 @@ trackedFiles:
     pristine_git_object: 8aa6c864f69adb9ef13ff49c4203691c62c539eb
   models/components/transactionevent.go:
     id: 03beaff04e48
-    last_write_checksum: sha1:014eddca2c1e3d446fca70e21c5ae978076a9436
-    pristine_git_object: 3cbeb51e6550ec9c37fa2b2ca4467582c49597db
+    last_write_checksum: sha1:0b60080d64a56d19b32a82ad989275bd8fc514ae
+    pristine_git_object: 33a42f77bf50fbceef5b28d7dbbeda7495253c18
   models/components/transactionevents.go:
     id: 7dd560a08645
     last_write_checksum: sha1:bd0394094f151482e5cfdfb416d3a41e3fad2b44
@@ -9353,7 +9353,7 @@ examplesVersion: 1.0.2
 generatedTests: {}
 releaseNotes: |
   ## Go SDK Changes:
-  * `Gr4vy.Transactions.IncrementAuthorization()`:  `response.Status.Enum(pending)` **Added**
+  * `Gr4vy.Transactions.Events.List()`:  `response.Items[].Name.Enum(networkTokenSkipped)` **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

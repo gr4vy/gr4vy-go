@@ -23,6 +23,7 @@ custom := components.Name("custom_value")
 | `NameTransactionUpdatedStatus`                                           | transaction-updated-status                                               |
 | `NameTransactionSyncEvent`                                               | transaction-sync-event                                                   |
 | `NameTransactionSyncFailedEvent`                                         | transaction-sync-failed-event                                            |
+| `NameNetworkTokenSkipped`                                                | network-token-skipped                                                    |
 | `NameTransactionModifiedEvent`                                           | transaction-modified-event                                               |
 | `NameTransactionAPIRequest`                                              | transaction-api-request                                                  |
 | `NameTransactionAPIResponse`                                             | transaction-api-response                                                 |
