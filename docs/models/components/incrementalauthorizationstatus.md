@@ -20,3 +20,4 @@ custom := components.IncrementalAuthorizationStatus("custom_value")
 | ----------------------------------------- | ----------------------------------------- |
 | `IncrementalAuthorizationStatusSucceeded` | succeeded                                 |
 | `IncrementalAuthorizationStatusFailed`    | failed                                    |
+| `IncrementalAuthorizationStatusPending`   | pending                                   |
