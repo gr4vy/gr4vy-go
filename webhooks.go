@@ -42,10 +42,11 @@ func VerifyWebhook(payload, secret, signatureHeader, timestampHeader string, tim
 	h.Write([]byte(message))
 	expectedSignature := hex.EncodeToString(h.Sum(nil))
 
-	// Check if expected signature matches any of the provided signatures
+	// Check if expected signature matches any of the provided signatures, in
+	// constant time, so the comparison doesn't leak how much of one matched.
 	signatureFound := false
 	for _, sig := range signatures {
-		if sig == expectedSignature {
+		if hmac.Equal([]byte(sig), []byte(expectedSignature)) {
 			signatureFound = true
 			break
 		}
