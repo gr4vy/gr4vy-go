@@ -25,6 +25,7 @@ custom := components.CardScheme("custom_value")
 | `CardSchemeCirrus`          | cirrus                      |
 | `CardSchemeCuliance`        | culiance                    |
 | `CardSchemeDankort`         | dankort                     |
+| `CardSchemeDinacard`        | dinacard                    |
 | `CardSchemeDinersClub`      | diners-club                 |
 | `CardSchemeDiscover`        | discover                    |
 | `CardSchemeEftposAustralia` | eftpos-australia            |

@@ -47,12 +47,12 @@ type ACHBankPaymentMethodCreate struct {
 	// Always `ach`.
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	scheme *string `const:"ach" json:"scheme"`
-	// The account number for this ACH bank account
-	AccountNumber string `json:"account_number"`
-	// The routing number for this ACH bank account
-	RoutingNumber string `json:"routing_number"`
 	// Whether the account number is tokenized
 	IsTokenized *bool `default:"false" json:"is_tokenized"`
+	// The account number for this ACH bank account, made up of at most 17 digits. Spaces and dashes are ignored. Any format is accepted when `is_tokenized` is `true`.
+	AccountNumber string `json:"account_number"`
+	// The routing number for this ACH bank account, made up of 9 digits. Spaces and dashes are ignored.
+	RoutingNumber string `json:"routing_number"`
 	// Specify whether this is a `checking` or `savings` account. Defaults to `checking`.
 	AccountType *AccountType `default:"checking" json:"account_type"`
 }
@@ -104,6 +104,13 @@ func (a *ACHBankPaymentMethodCreate) GetScheme() *string {
 	return types.Pointer("ach")
 }
 
+func (a *ACHBankPaymentMethodCreate) GetIsTokenized() *bool {
+	if a == nil {
+		return nil
+	}
+	return a.IsTokenized
+}
+
 func (a *ACHBankPaymentMethodCreate) GetAccountNumber() string {
 	if a == nil {
 		return ""
@@ -116,13 +123,6 @@ func (a *ACHBankPaymentMethodCreate) GetRoutingNumber() string {
 		return ""
 	}
 	return a.RoutingNumber
-}
-
-func (a *ACHBankPaymentMethodCreate) GetIsTokenized() *bool {
-	if a == nil {
-		return nil
-	}
-	return a.IsTokenized
 }
 
 func (a *ACHBankPaymentMethodCreate) GetAccountType() *AccountType {

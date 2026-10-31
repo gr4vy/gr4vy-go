@@ -10,14 +10,18 @@ const (
 	MethodAfterpay          Method = "afterpay"
 	MethodAlipay            Method = "alipay"
 	MethodAlipayhk          Method = "alipayhk"
+	MethodAlipayplus        Method = "alipayplus"
+	MethodAlma              Method = "alma"
 	MethodApplepay          Method = "applepay"
 	MethodArcuspaynetwork   Method = "arcuspaynetwork"
 	MethodBacs              Method = "bacs"
 	MethodBancontact        Method = "bancontact"
 	MethodBank              Method = "bank"
+	MethodBcmcmobile        Method = "bcmcmobile"
 	MethodBcp               Method = "bcp"
 	MethodBecs              Method = "becs"
 	MethodBitpay            Method = "bitpay"
+	MethodBizum             Method = "bizum"
 	MethodBlik              Method = "blik"
 	MethodAch               Method = "ach"
 	MethodBoleto            Method = "boleto"
@@ -37,9 +41,11 @@ const (
 	MethodDcb               Method = "dcb"
 	MethodDlocal            Method = "dlocal"
 	MethodDuitnow           Method = "duitnow"
+	MethodEbankingfi        Method = "ebankingfi"
 	MethodEbanx             Method = "ebanx"
 	MethodEckoh             Method = "eckoh"
 	MethodEfecty            Method = "efecty"
+	MethodEftpad            Method = "eftpad"
 	MethodEps               Method = "eps"
 	MethodEverydaypay       Method = "everydaypay"
 	MethodGcash             Method = "gcash"
@@ -66,7 +72,9 @@ const (
 	MethodLinepay           Method = "linepay"
 	MethodLinkaja           Method = "linkaja"
 	MethodMaybankqrpay      Method = "maybankqrpay"
+	MethodMbway             Method = "mbway"
 	MethodMercadopago       Method = "mercadopago"
+	MethodMobilepay         Method = "mobilepay"
 	MethodMultibanco        Method = "multibanco"
 	MethodMultipago         Method = "multipago"
 	MethodNequi             Method = "nequi"
@@ -85,6 +93,7 @@ const (
 	MethodP24               Method = "p24"
 	MethodPagoefectivo      Method = "pagoefectivo"
 	MethodPaybybank         Method = "paybybank"
+	MethodPaybybankeu       Method = "paybybankeu"
 	MethodPayid             Method = "payid"
 	MethodPaymaya           Method = "paymaya"
 	MethodPaysquad          Method = "paysquad"
@@ -103,6 +112,7 @@ const (
 	MethodRazorpay          Method = "razorpay"
 	MethodRapipago          Method = "rapipago"
 	MethodRedpagos          Method = "redpagos"
+	MethodRiverty           Method = "riverty"
 	MethodScalapay          Method = "scalapay"
 	MethodSepa              Method = "sepa"
 	MethodServipag          Method = "servipag"
@@ -125,6 +135,7 @@ const (
 	MethodTruemoney         Method = "truemoney"
 	MethodTrustly           Method = "trustly"
 	MethodTrustlyeurope     Method = "trustlyeurope"
+	MethodTwint             Method = "twint"
 	MethodUpi               Method = "upi"
 	MethodVenmo             Method = "venmo"
 	MethodVipps             Method = "vipps"
@@ -144,7 +155,7 @@ func (e Method) ToPointer() *Method {
 func (e *Method) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "abitab", "affirm", "afterpay", "alipay", "alipayhk", "applepay", "arcuspaynetwork", "bacs", "bancontact", "bank", "bcp", "becs", "bitpay", "blik", "ach", "boleto", "boost", "breb", "capitec", "card", "cashapp", "cashappafterpay", "chaseorbital", "clearpay", "click-to-pay", "custom_push", "custom_redirect", "custom_tokenize", "dana", "dcb", "dlocal", "duitnow", "ebanx", "eckoh", "efecty", "eps", "everydaypay", "gcash", "gem", "gemds", "gift-card", "giropay", "givingblock", "gocardless", "googlepay", "googlepay_pan_only", "gopay", "grabpay", "ideal", "interac", "kakaopay", "kcp", "khipu", "klarna", "konbini", "latitude", "latitudeds", "laybuy", "linepay", "linkaja", "maybankqrpay", "mercadopago", "multibanco", "multipago", "nequi", "netbanking", "network-token", "nupay", "oney_10x", "oney_12x", "oney_3x", "oney_4x", "oney_6x", "onlinebankingcz", "onelink", "ovo", "oxxo", "p24", "pagoefectivo", "paybybank", "payid", "paymaya", "paysquad", "paypal", "paypaldirectorder", "paypalpaylater", "paypay", "payto", "payvalida", "paze", "picpay", "pix", "plaid", "pse", "rabbitlinepay", "razorpay", "rapipago", "redpagos", "scalapay", "sepa", "servipag", "seveneleven", "sezzle", "shopeepay", "singteldash", "smartpay", "sofort", "spei", "stitch", "swish", "stripe", "stripedd", "stripetoken", "tapi", "tapifintechs", "thaiqr", "touchngo", "truemoney", "trustly", "trustlyeurope", "upi", "venmo", "vipps", "waave", "webpay", "wechat", "wero", "yape", "zippay":
+		case "abitab", "affirm", "afterpay", "alipay", "alipayhk", "alipayplus", "alma", "applepay", "arcuspaynetwork", "bacs", "bancontact", "bank", "bcmcmobile", "bcp", "becs", "bitpay", "bizum", "blik", "ach", "boleto", "boost", "breb", "capitec", "card", "cashapp", "cashappafterpay", "chaseorbital", "clearpay", "click-to-pay", "custom_push", "custom_redirect", "custom_tokenize", "dana", "dcb", "dlocal", "duitnow", "ebankingfi", "ebanx", "eckoh", "efecty", "eftpad", "eps", "everydaypay", "gcash", "gem", "gemds", "gift-card", "giropay", "givingblock", "gocardless", "googlepay", "googlepay_pan_only", "gopay", "grabpay", "ideal", "interac", "kakaopay", "kcp", "khipu", "klarna", "konbini", "latitude", "latitudeds", "laybuy", "linepay", "linkaja", "maybankqrpay", "mbway", "mercadopago", "mobilepay", "multibanco", "multipago", "nequi", "netbanking", "network-token", "nupay", "oney_10x", "oney_12x", "oney_3x", "oney_4x", "oney_6x", "onlinebankingcz", "onelink", "ovo", "oxxo", "p24", "pagoefectivo", "paybybank", "paybybankeu", "payid", "paymaya", "paysquad", "paypal", "paypaldirectorder", "paypalpaylater", "paypay", "payto", "payvalida", "paze", "picpay", "pix", "plaid", "pse", "rabbitlinepay", "razorpay", "rapipago", "redpagos", "riverty", "scalapay", "sepa", "servipag", "seveneleven", "sezzle", "shopeepay", "singteldash", "smartpay", "sofort", "spei", "stitch", "swish", "stripe", "stripedd", "stripetoken", "tapi", "tapifintechs", "thaiqr", "touchngo", "truemoney", "trustly", "trustlyeurope", "twint", "upi", "venmo", "vipps", "waave", "webpay", "wechat", "wero", "yape", "zippay":
 			return true
 		}
 	}

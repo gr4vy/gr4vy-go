@@ -25,12 +25,16 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodAfterpay`          | afterpay                                             |
 | `RedirectPaymentMethodCreateMethodAlipay`            | alipay                                               |
 | `RedirectPaymentMethodCreateMethodAlipayhk`          | alipayhk                                             |
+| `RedirectPaymentMethodCreateMethodAlipayplus`        | alipayplus                                           |
+| `RedirectPaymentMethodCreateMethodAlma`              | alma                                                 |
 | `RedirectPaymentMethodCreateMethodArcuspaynetwork`   | arcuspaynetwork                                      |
 | `RedirectPaymentMethodCreateMethodBacs`              | bacs                                                 |
 | `RedirectPaymentMethodCreateMethodBancontact`        | bancontact                                           |
+| `RedirectPaymentMethodCreateMethodBcmcmobile`        | bcmcmobile                                           |
 | `RedirectPaymentMethodCreateMethodBcp`               | bcp                                                  |
 | `RedirectPaymentMethodCreateMethodBecs`              | becs                                                 |
 | `RedirectPaymentMethodCreateMethodBitpay`            | bitpay                                               |
+| `RedirectPaymentMethodCreateMethodBizum`             | bizum                                                |
 | `RedirectPaymentMethodCreateMethodBlik`              | blik                                                 |
 | `RedirectPaymentMethodCreateMethodBoleto`            | boleto                                               |
 | `RedirectPaymentMethodCreateMethodBoost`             | boost                                                |
@@ -47,9 +51,11 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodDcb`               | dcb                                                  |
 | `RedirectPaymentMethodCreateMethodDlocal`            | dlocal                                               |
 | `RedirectPaymentMethodCreateMethodDuitnow`           | duitnow                                              |
+| `RedirectPaymentMethodCreateMethodEbankingfi`        | ebankingfi                                           |
 | `RedirectPaymentMethodCreateMethodEbanx`             | ebanx                                                |
 | `RedirectPaymentMethodCreateMethodEckoh`             | eckoh                                                |
 | `RedirectPaymentMethodCreateMethodEfecty`            | efecty                                               |
+| `RedirectPaymentMethodCreateMethodEftpad`            | eftpad                                               |
 | `RedirectPaymentMethodCreateMethodEps`               | eps                                                  |
 | `RedirectPaymentMethodCreateMethodEverydaypay`       | everydaypay                                          |
 | `RedirectPaymentMethodCreateMethodGcash`             | gcash                                                |
@@ -73,7 +79,9 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodLinepay`           | linepay                                              |
 | `RedirectPaymentMethodCreateMethodLinkaja`           | linkaja                                              |
 | `RedirectPaymentMethodCreateMethodMaybankqrpay`      | maybankqrpay                                         |
+| `RedirectPaymentMethodCreateMethodMbway`             | mbway                                                |
 | `RedirectPaymentMethodCreateMethodMercadopago`       | mercadopago                                          |
+| `RedirectPaymentMethodCreateMethodMobilepay`         | mobilepay                                            |
 | `RedirectPaymentMethodCreateMethodMultibanco`        | multibanco                                           |
 | `RedirectPaymentMethodCreateMethodMultipago`         | multipago                                            |
 | `RedirectPaymentMethodCreateMethodNetbanking`        | netbanking                                           |
@@ -91,6 +99,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodP24`               | p24                                                  |
 | `RedirectPaymentMethodCreateMethodPagoefectivo`      | pagoefectivo                                         |
 | `RedirectPaymentMethodCreateMethodPaybybank`         | paybybank                                            |
+| `RedirectPaymentMethodCreateMethodPaybybankeu`       | paybybankeu                                          |
 | `RedirectPaymentMethodCreateMethodPayid`             | payid                                                |
 | `RedirectPaymentMethodCreateMethodPaymaya`           | paymaya                                              |
 | `RedirectPaymentMethodCreateMethodPaysquad`          | paysquad                                             |
@@ -107,6 +116,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodRapipago`          | rapipago                                             |
 | `RedirectPaymentMethodCreateMethodRazorpay`          | razorpay                                             |
 | `RedirectPaymentMethodCreateMethodRedpagos`          | redpagos                                             |
+| `RedirectPaymentMethodCreateMethodRiverty`           | riverty                                              |
 | `RedirectPaymentMethodCreateMethodScalapay`          | scalapay                                             |
 | `RedirectPaymentMethodCreateMethodSepa`              | sepa                                                 |
 | `RedirectPaymentMethodCreateMethodServipag`          | servipag                                             |
@@ -129,6 +139,7 @@ custom := components.RedirectPaymentMethodCreateMethod("custom_value")
 | `RedirectPaymentMethodCreateMethodTruemoney`         | truemoney                                            |
 | `RedirectPaymentMethodCreateMethodTrustly`           | trustly                                              |
 | `RedirectPaymentMethodCreateMethodTrustlyeurope`     | trustlyeurope                                        |
+| `RedirectPaymentMethodCreateMethodTwint`             | twint                                                |
 | `RedirectPaymentMethodCreateMethodUpi`               | upi                                                  |
 | `RedirectPaymentMethodCreateMethodVenmo`             | venmo                                                |
 | `RedirectPaymentMethodCreateMethodVipps`             | vipps                                                |
