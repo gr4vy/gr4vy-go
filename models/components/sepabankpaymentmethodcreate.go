@@ -24,9 +24,9 @@ type SEPABankPaymentMethodCreate struct {
 	// Always `sepa`.
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	scheme *string `const:"sepa" json:"scheme"`
-	// The IBAN for this SEPA bank account
+	// The IBAN for this SEPA bank account. Spaces are ignored and it is not case sensitive.
 	AccountNumber string `json:"account_number"`
-	// The BIC for this SEPA bank account
+	// The BIC for this SEPA bank account, of 8 or 11 characters. Spaces are ignored and it is not case sensitive.
 	RoutingNumber *string `json:"routing_number,omitempty"`
 }
 

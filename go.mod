@@ -1,6 +1,6 @@
 module github.com/gr4vy/gr4vy-go
 
-go 1.26.8
+go 1.26.10
 
 require (
 	github.com/golang-jwt/jwt/v5 v5.2.2

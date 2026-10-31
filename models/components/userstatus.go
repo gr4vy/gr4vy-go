@@ -8,6 +8,7 @@ const (
 	UserStatusActive  UserStatus = "active"
 	UserStatusPending UserStatus = "pending"
 	UserStatusDeleted UserStatus = "deleted"
+	UserStatusReset   UserStatus = "reset"
 )
 
 func (e UserStatus) ToPointer() *UserStatus {
@@ -18,7 +19,7 @@ func (e UserStatus) ToPointer() *UserStatus {
 func (e *UserStatus) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "active", "pending", "deleted":
+		case "active", "pending", "deleted", "reset":
 			return true
 		}
 	}

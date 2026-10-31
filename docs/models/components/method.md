@@ -23,14 +23,18 @@ custom := components.Method("custom_value")
 | `MethodAfterpay`          | afterpay                  |
 | `MethodAlipay`            | alipay                    |
 | `MethodAlipayhk`          | alipayhk                  |
+| `MethodAlipayplus`        | alipayplus                |
+| `MethodAlma`              | alma                      |
 | `MethodApplepay`          | applepay                  |
 | `MethodArcuspaynetwork`   | arcuspaynetwork           |
 | `MethodBacs`              | bacs                      |
 | `MethodBancontact`        | bancontact                |
 | `MethodBank`              | bank                      |
+| `MethodBcmcmobile`        | bcmcmobile                |
 | `MethodBcp`               | bcp                       |
 | `MethodBecs`              | becs                      |
 | `MethodBitpay`            | bitpay                    |
+| `MethodBizum`             | bizum                     |
 | `MethodBlik`              | blik                      |
 | `MethodAch`               | ach                       |
 | `MethodBoleto`            | boleto                    |
@@ -50,9 +54,11 @@ custom := components.Method("custom_value")
 | `MethodDcb`               | dcb                       |
 | `MethodDlocal`            | dlocal                    |
 | `MethodDuitnow`           | duitnow                   |
+| `MethodEbankingfi`        | ebankingfi                |
 | `MethodEbanx`             | ebanx                     |
 | `MethodEckoh`             | eckoh                     |
 | `MethodEfecty`            | efecty                    |
+| `MethodEftpad`            | eftpad                    |
 | `MethodEps`               | eps                       |
 | `MethodEverydaypay`       | everydaypay               |
 | `MethodGcash`             | gcash                     |
@@ -79,7 +85,9 @@ custom := components.Method("custom_value")
 | `MethodLinepay`           | linepay                   |
 | `MethodLinkaja`           | linkaja                   |
 | `MethodMaybankqrpay`      | maybankqrpay              |
+| `MethodMbway`             | mbway                     |
 | `MethodMercadopago`       | mercadopago               |
+| `MethodMobilepay`         | mobilepay                 |
 | `MethodMultibanco`        | multibanco                |
 | `MethodMultipago`         | multipago                 |
 | `MethodNequi`             | nequi                     |
@@ -98,6 +106,7 @@ custom := components.Method("custom_value")
 | `MethodP24`               | p24                       |
 | `MethodPagoefectivo`      | pagoefectivo              |
 | `MethodPaybybank`         | paybybank                 |
+| `MethodPaybybankeu`       | paybybankeu               |
 | `MethodPayid`             | payid                     |
 | `MethodPaymaya`           | paymaya                   |
 | `MethodPaysquad`          | paysquad                  |
@@ -116,6 +125,7 @@ custom := components.Method("custom_value")
 | `MethodRazorpay`          | razorpay                  |
 | `MethodRapipago`          | rapipago                  |
 | `MethodRedpagos`          | redpagos                  |
+| `MethodRiverty`           | riverty                   |
 | `MethodScalapay`          | scalapay                  |
 | `MethodSepa`              | sepa                      |
 | `MethodServipag`          | servipag                  |
@@ -138,6 +148,7 @@ custom := components.Method("custom_value")
 | `MethodTruemoney`         | truemoney                 |
 | `MethodTrustly`           | trustly                   |
 | `MethodTrustlyeurope`     | trustlyeurope             |
+| `MethodTwint`             | twint                     |
 | `MethodUpi`               | upi                       |
 | `MethodVenmo`             | venmo                     |
 | `MethodVipps`             | vipps                     |
