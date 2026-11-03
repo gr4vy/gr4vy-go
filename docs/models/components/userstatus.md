@@ -21,3 +21,4 @@ custom := components.UserStatus("custom_value")
 | `UserStatusActive`  | active              |
 | `UserStatusPending` | pending             |
 | `UserStatusDeleted` | deleted             |
+| `UserStatusReset`   | reset               |
