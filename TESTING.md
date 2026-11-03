@@ -106,8 +106,9 @@ operation catalogue from the generated resource files (each
 `url.JoinPath`/`utils.GenerateURL` path paired with its
 `http.NewRequestWithContext` method) and reports how many operations were
 reached by a **real HTTP request** — newly generated (but untested) endpoints
-show up as "not reached". CI runs this once, un-sharded, and posts the result as
-a sticky PR comment. It is a **report, not a merge gate**.
+show up as "not reached". The daily CI run (or a manual one) runs this once,
+un-sharded, on `main`, writes the result to the run summary, and posts any
+unreached operations to Slack. It is a **report, not a gate**.
 
 Because each `go test` package runs in its own working directory, the recorder
 honours `GR4VY_COVERAGE_DIR` (an absolute path) so every shard writes to one
@@ -125,10 +126,15 @@ go run ./scripts/endpoint_coverage .
 - `lint` checks `gofmt`, builds the module, and vets the test suite + tooling.
   (It does not `go vet ./...`: the generated SDK trips vet's unreachable-code
   check, which is upstream's concern.)
-- `e2e` runs the three E2E shards on Go 1.24; `offline` runs the offline tests
-  on Go 1.22–1.24.
-- `ci-complete` is the single stable required check (it `needs` lint + every
-  shard) and performs the one-time auto-approve of SDK-regen PRs. Point branch
-  rulesets at **`ci-complete`**, not the per-shard matrix jobs.
-- `coverage` posts the endpoint-reach comment and is **not** a merge dependency.
-- `merge` (auto-merge of bot regen PRs) depends only on `ci-complete`.
+- `e2e` runs the three E2E shards on Go 1.24, on `main` only: the key lives in the
+  `e2e` Environment, which only `main` can use, so PRs never run it. A missing key
+  fails the shard rather than skipping it. `offline` runs the offline tests on
+  Go 1.22–1.24 everywhere.
+- `ci-complete` is the single stable check the branch ruleset requires. On a PR it
+  means lint and offline passed; on `main` it also means every E2E shard passed.
+  Point branch rulesets at **`ci-complete`**, not the per-shard matrix jobs.
+- `coverage` is the daily endpoint-reach report above and is **not** a gate.
+
+Speakeasy regen PRs are merged by the release bot (`sdk_merge.yaml`), and
+`sdk_publish.yaml` releases once `main` is green. See
+[gr4vy/sdk-release](https://github.com/gr4vy/sdk-release).
