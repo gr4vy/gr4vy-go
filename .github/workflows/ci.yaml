@@ -87,7 +87,12 @@ jobs:
         env:
           PRIVATE_KEY: ${{ secrets.PRIVATE_KEY }}
           SUITE_PATH: ${{ matrix.path }}
-        run: go test -count=1 "$SUITE_PATH"
+        run: |
+          if [ -z "$PRIVATE_KEY" ]; then
+            echo "::error::PRIVATE_KEY is not set in the e2e environment, so the live suite would skip."
+            exit 1
+          fi
+          go test -count=1 "$SUITE_PATH"
 
   # Offline tests (JWT + webhook signing + generated unit tests) across the
   # supported Go versions — fast cross-version sanity that needs no sandbox.
