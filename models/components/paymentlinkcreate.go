@@ -45,6 +45,8 @@ type PaymentLinkCreate struct {
 	ReturnURL *string `json:"return_url,omitempty"`
 	// The cart items for the payment link.
 	CartItems []CartItem `json:"cart_items,omitempty"`
+	// The airline addendum data which describes the airline booking associated with this payment link.
+	Airline *Airline `json:"airline,omitempty"`
 	// Arbitrary metadata for the payment link.
 	Metadata map[string]any `json:"metadata,omitempty"`
 	// The way payment method information made it to this transaction.
@@ -199,6 +201,13 @@ func (p *PaymentLinkCreate) GetCartItems() []CartItem {
 		return nil
 	}
 	return p.CartItems
+}
+
+func (p *PaymentLinkCreate) GetAirline() *Airline {
+	if p == nil {
+		return nil
+	}
+	return p.Airline
 }
 
 func (p *PaymentLinkCreate) GetMetadata() map[string]any {
