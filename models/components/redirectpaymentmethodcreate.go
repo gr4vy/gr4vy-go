@@ -15,12 +15,16 @@ const (
 	RedirectPaymentMethodCreateMethodAfterpay          RedirectPaymentMethodCreateMethod = "afterpay"
 	RedirectPaymentMethodCreateMethodAlipay            RedirectPaymentMethodCreateMethod = "alipay"
 	RedirectPaymentMethodCreateMethodAlipayhk          RedirectPaymentMethodCreateMethod = "alipayhk"
+	RedirectPaymentMethodCreateMethodAlipayplus        RedirectPaymentMethodCreateMethod = "alipayplus"
+	RedirectPaymentMethodCreateMethodAlma              RedirectPaymentMethodCreateMethod = "alma"
 	RedirectPaymentMethodCreateMethodArcuspaynetwork   RedirectPaymentMethodCreateMethod = "arcuspaynetwork"
 	RedirectPaymentMethodCreateMethodBacs              RedirectPaymentMethodCreateMethod = "bacs"
 	RedirectPaymentMethodCreateMethodBancontact        RedirectPaymentMethodCreateMethod = "bancontact"
+	RedirectPaymentMethodCreateMethodBcmcmobile        RedirectPaymentMethodCreateMethod = "bcmcmobile"
 	RedirectPaymentMethodCreateMethodBcp               RedirectPaymentMethodCreateMethod = "bcp"
 	RedirectPaymentMethodCreateMethodBecs              RedirectPaymentMethodCreateMethod = "becs"
 	RedirectPaymentMethodCreateMethodBitpay            RedirectPaymentMethodCreateMethod = "bitpay"
+	RedirectPaymentMethodCreateMethodBizum             RedirectPaymentMethodCreateMethod = "bizum"
 	RedirectPaymentMethodCreateMethodBlik              RedirectPaymentMethodCreateMethod = "blik"
 	RedirectPaymentMethodCreateMethodBoleto            RedirectPaymentMethodCreateMethod = "boleto"
 	RedirectPaymentMethodCreateMethodBoost             RedirectPaymentMethodCreateMethod = "boost"
@@ -37,9 +41,11 @@ const (
 	RedirectPaymentMethodCreateMethodDcb               RedirectPaymentMethodCreateMethod = "dcb"
 	RedirectPaymentMethodCreateMethodDlocal            RedirectPaymentMethodCreateMethod = "dlocal"
 	RedirectPaymentMethodCreateMethodDuitnow           RedirectPaymentMethodCreateMethod = "duitnow"
+	RedirectPaymentMethodCreateMethodEbankingfi        RedirectPaymentMethodCreateMethod = "ebankingfi"
 	RedirectPaymentMethodCreateMethodEbanx             RedirectPaymentMethodCreateMethod = "ebanx"
 	RedirectPaymentMethodCreateMethodEckoh             RedirectPaymentMethodCreateMethod = "eckoh"
 	RedirectPaymentMethodCreateMethodEfecty            RedirectPaymentMethodCreateMethod = "efecty"
+	RedirectPaymentMethodCreateMethodEftpad            RedirectPaymentMethodCreateMethod = "eftpad"
 	RedirectPaymentMethodCreateMethodEps               RedirectPaymentMethodCreateMethod = "eps"
 	RedirectPaymentMethodCreateMethodEverydaypay       RedirectPaymentMethodCreateMethod = "everydaypay"
 	RedirectPaymentMethodCreateMethodGcash             RedirectPaymentMethodCreateMethod = "gcash"
@@ -63,7 +69,9 @@ const (
 	RedirectPaymentMethodCreateMethodLinepay           RedirectPaymentMethodCreateMethod = "linepay"
 	RedirectPaymentMethodCreateMethodLinkaja           RedirectPaymentMethodCreateMethod = "linkaja"
 	RedirectPaymentMethodCreateMethodMaybankqrpay      RedirectPaymentMethodCreateMethod = "maybankqrpay"
+	RedirectPaymentMethodCreateMethodMbway             RedirectPaymentMethodCreateMethod = "mbway"
 	RedirectPaymentMethodCreateMethodMercadopago       RedirectPaymentMethodCreateMethod = "mercadopago"
+	RedirectPaymentMethodCreateMethodMobilepay         RedirectPaymentMethodCreateMethod = "mobilepay"
 	RedirectPaymentMethodCreateMethodMultibanco        RedirectPaymentMethodCreateMethod = "multibanco"
 	RedirectPaymentMethodCreateMethodMultipago         RedirectPaymentMethodCreateMethod = "multipago"
 	RedirectPaymentMethodCreateMethodNetbanking        RedirectPaymentMethodCreateMethod = "netbanking"
@@ -81,6 +89,7 @@ const (
 	RedirectPaymentMethodCreateMethodP24               RedirectPaymentMethodCreateMethod = "p24"
 	RedirectPaymentMethodCreateMethodPagoefectivo      RedirectPaymentMethodCreateMethod = "pagoefectivo"
 	RedirectPaymentMethodCreateMethodPaybybank         RedirectPaymentMethodCreateMethod = "paybybank"
+	RedirectPaymentMethodCreateMethodPaybybankeu       RedirectPaymentMethodCreateMethod = "paybybankeu"
 	RedirectPaymentMethodCreateMethodPayid             RedirectPaymentMethodCreateMethod = "payid"
 	RedirectPaymentMethodCreateMethodPaymaya           RedirectPaymentMethodCreateMethod = "paymaya"
 	RedirectPaymentMethodCreateMethodPaysquad          RedirectPaymentMethodCreateMethod = "paysquad"
@@ -97,6 +106,7 @@ const (
 	RedirectPaymentMethodCreateMethodRapipago          RedirectPaymentMethodCreateMethod = "rapipago"
 	RedirectPaymentMethodCreateMethodRazorpay          RedirectPaymentMethodCreateMethod = "razorpay"
 	RedirectPaymentMethodCreateMethodRedpagos          RedirectPaymentMethodCreateMethod = "redpagos"
+	RedirectPaymentMethodCreateMethodRiverty           RedirectPaymentMethodCreateMethod = "riverty"
 	RedirectPaymentMethodCreateMethodScalapay          RedirectPaymentMethodCreateMethod = "scalapay"
 	RedirectPaymentMethodCreateMethodSepa              RedirectPaymentMethodCreateMethod = "sepa"
 	RedirectPaymentMethodCreateMethodServipag          RedirectPaymentMethodCreateMethod = "servipag"
@@ -119,6 +129,7 @@ const (
 	RedirectPaymentMethodCreateMethodTruemoney         RedirectPaymentMethodCreateMethod = "truemoney"
 	RedirectPaymentMethodCreateMethodTrustly           RedirectPaymentMethodCreateMethod = "trustly"
 	RedirectPaymentMethodCreateMethodTrustlyeurope     RedirectPaymentMethodCreateMethod = "trustlyeurope"
+	RedirectPaymentMethodCreateMethodTwint             RedirectPaymentMethodCreateMethod = "twint"
 	RedirectPaymentMethodCreateMethodUpi               RedirectPaymentMethodCreateMethod = "upi"
 	RedirectPaymentMethodCreateMethodVenmo             RedirectPaymentMethodCreateMethod = "venmo"
 	RedirectPaymentMethodCreateMethodVipps             RedirectPaymentMethodCreateMethod = "vipps"
@@ -138,7 +149,7 @@ func (e RedirectPaymentMethodCreateMethod) ToPointer() *RedirectPaymentMethodCre
 func (e *RedirectPaymentMethodCreateMethod) IsExact() bool {
 	if e != nil {
 		switch *e {
-		case "abitab", "affirm", "afterpay", "alipay", "alipayhk", "arcuspaynetwork", "bacs", "bancontact", "bcp", "becs", "bitpay", "blik", "boleto", "boost", "breb", "ach", "capitec", "cashapp", "cashappafterpay", "clearpay", "custom_push", "custom_redirect", "custom_tokenize", "dana", "dcb", "dlocal", "duitnow", "ebanx", "eckoh", "efecty", "eps", "everydaypay", "gcash", "gem", "gemds", "giropay", "givingblock", "gocardless", "gopay", "grabpay", "ideal", "interac", "kakaopay", "kcp", "khipu", "klarna", "konbini", "latitude", "latitudeds", "laybuy", "linepay", "linkaja", "maybankqrpay", "mercadopago", "multibanco", "multipago", "netbanking", "nupay", "nequi", "oney_10x", "oney_12x", "oney_3x", "oney_4x", "oney_6x", "onlinebankingcz", "onelink", "ovo", "oxxo", "p24", "pagoefectivo", "paybybank", "payid", "paymaya", "paysquad", "paypal", "paypaldirectorder", "paypalpaylater", "paypay", "payto", "payvalida", "picpay", "pix", "pse", "rabbitlinepay", "rapipago", "razorpay", "redpagos", "scalapay", "sepa", "servipag", "seveneleven", "sezzle", "shopeepay", "singteldash", "smartpay", "sofort", "spei", "stitch", "swish", "stripe", "stripedd", "stripetoken", "tapi", "tapifintechs", "thaiqr", "touchngo", "truemoney", "trustly", "trustlyeurope", "upi", "venmo", "vipps", "waave", "webpay", "wechat", "wero", "yape", "zippay":
+		case "abitab", "affirm", "afterpay", "alipay", "alipayhk", "alipayplus", "alma", "arcuspaynetwork", "bacs", "bancontact", "bcmcmobile", "bcp", "becs", "bitpay", "bizum", "blik", "boleto", "boost", "breb", "ach", "capitec", "cashapp", "cashappafterpay", "clearpay", "custom_push", "custom_redirect", "custom_tokenize", "dana", "dcb", "dlocal", "duitnow", "ebankingfi", "ebanx", "eckoh", "efecty", "eftpad", "eps", "everydaypay", "gcash", "gem", "gemds", "giropay", "givingblock", "gocardless", "gopay", "grabpay", "ideal", "interac", "kakaopay", "kcp", "khipu", "klarna", "konbini", "latitude", "latitudeds", "laybuy", "linepay", "linkaja", "maybankqrpay", "mbway", "mercadopago", "mobilepay", "multibanco", "multipago", "netbanking", "nupay", "nequi", "oney_10x", "oney_12x", "oney_3x", "oney_4x", "oney_6x", "onlinebankingcz", "onelink", "ovo", "oxxo", "p24", "pagoefectivo", "paybybank", "paybybankeu", "payid", "paymaya", "paysquad", "paypal", "paypaldirectorder", "paypalpaylater", "paypay", "payto", "payvalida", "picpay", "pix", "pse", "rabbitlinepay", "rapipago", "razorpay", "redpagos", "riverty", "scalapay", "sepa", "servipag", "seveneleven", "sezzle", "shopeepay", "singteldash", "smartpay", "sofort", "spei", "stitch", "swish", "stripe", "stripedd", "stripetoken", "tapi", "tapifintechs", "thaiqr", "touchngo", "truemoney", "trustly", "trustlyeurope", "twint", "upi", "venmo", "vipps", "waave", "webpay", "wechat", "wero", "yape", "zippay":
 			return true
 		}
 	}
