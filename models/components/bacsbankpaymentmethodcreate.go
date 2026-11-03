@@ -24,9 +24,9 @@ type BACSBankPaymentMethodCreate struct {
 	// Always `bacs`.
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	scheme *string `const:"bacs" json:"scheme"`
-	// The account number for this BACS bank account
+	// The account number for this BACS bank account, made up of 8 digits. A 6 or 7 digit number is padded with leading zeros. Spaces and dashes are ignored.
 	AccountNumber string `json:"account_number"`
-	// The sort code for this BACS bank account
+	// The sort code for this BACS bank account, made up of 6 digits. Spaces and dashes are ignored.
 	RoutingNumber string `json:"routing_number"`
 }
 
