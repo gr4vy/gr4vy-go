@@ -21,7 +21,7 @@ targets:
         sourceRevisionDigest: sha256:92caf655f964a283a98a88f7df7631c25792283fe4bdfb4d1c665e6502731894
         sourceBlobDigest: sha256:5482ba8ad56343ea190f174b9c3658537dd03397345798cb58733f3c7a6b28ae
         codeSamplesNamespace: openapi-go-code-samples
-        codeSamplesRevisionDigest: sha256:04618515137b6002b72917a2c87ecd913ab07070b686ea2f436ad95ac0a299b3
+        codeSamplesRevisionDigest: sha256:6561092c4adb627af47e4ee47c75bc0ac5deb373c3a41a980baaa7a79967ee47
 workflow:
     workflowVersion: 1.0.0
     speakeasyVersion: latest
