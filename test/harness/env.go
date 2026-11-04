@@ -4,7 +4,9 @@ import (
 	"context"
 	"errors"
 	"fmt"
+	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"path/filepath"
 	"sync"
@@ -92,6 +94,7 @@ func SetupMerchant() (*TestMerchant, error) {
 		DisplayName: merchantAccountID,
 	})
 	if err != nil {
+		DeleteMerchantAccount(privateKey, merchantAccountID)
 		return nil, fmt.Errorf("create merchant account: %w", err)
 	}
 
@@ -109,6 +112,7 @@ func SetupMerchant() (*TestMerchant, error) {
 		},
 	}, &account.ID)
 	if err != nil {
+		DeleteMerchantAccount(privateKey, account.ID)
 		return nil, fmt.Errorf("create mock-card payment service: %w", err)
 	}
 
@@ -117,6 +121,32 @@ func SetupMerchant() (*TestMerchant, error) {
 		MerchantAccountID: account.ID,
 		PrivateKey:        privateKey,
 	}, nil
+}
+
+// DeleteMerchantAccount removes a merchant account a test created. The endpoint
+// is not in the public spec, so it is called directly. Failures are logged, never
+// returned: cleanup must not fail the run.
+func DeleteMerchantAccount(privateKey, merchantAccountID string) {
+	token, err := gr4vygo.GetToken(privateKey, defaultScopes, 60)
+	if err != nil {
+		log.Printf("delete merchant account %s: %v", merchantAccountID, err)
+		return
+	}
+	req, err := http.NewRequest(http.MethodDelete, apiBaseURL+"/merchant-accounts/"+url.PathEscape(merchantAccountID), nil)
+	if err != nil {
+		log.Printf("delete merchant account %s: %v", merchantAccountID, err)
+		return
+	}
+	req.Header.Set("Authorization", "Bearer "+token)
+	resp, err := (&http.Client{Timeout: 30 * time.Second}).Do(req)
+	if err != nil {
+		log.Printf("delete merchant account %s: %v", merchantAccountID, err)
+		return
+	}
+	defer resp.Body.Close()
+	if resp.StatusCode != http.StatusNoContent && resp.StatusCode != http.StatusNotFound {
+		log.Printf("delete merchant account %s: HTTP %d", merchantAccountID, resp.StatusCode)
+	}
 }
 
 // One merchant per test package (= per CI shard). Because `go test` runs each
@@ -141,6 +171,14 @@ func Merchant(t TestingT) *TestMerchant {
 		t.Fatalf("merchant setup failed: %v", sharedErr)
 	}
 	return sharedMerchant
+}
+
+// Cleanup deletes the shard's shared merchant, if one was provisioned. Call it
+// from TestMain after m.Run.
+func Cleanup() {
+	if sharedMerchant != nil {
+		DeleteMerchantAccount(sharedMerchant.PrivateKey, sharedMerchant.MerchantAccountID)
+	}
 }
 
 // TestingT is the subset of *testing.T the harness relies on, kept small so
