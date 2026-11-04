@@ -94,6 +94,7 @@ func SetupMerchant() (*TestMerchant, error) {
 		DisplayName: merchantAccountID,
 	})
 	if err != nil {
+		DeleteMerchantAccount(privateKey, merchantAccountID)
 		return nil, fmt.Errorf("create merchant account: %w", err)
 	}
 
