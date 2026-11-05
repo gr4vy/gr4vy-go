@@ -7,6 +7,32 @@ import (
 	"github.com/gr4vy/gr4vy-go/types"
 )
 
+type TokenPaymentMethodCreatePreferredScheme string
+
+const (
+	TokenPaymentMethodCreatePreferredSchemeBancontact      TokenPaymentMethodCreatePreferredScheme = "bancontact"
+	TokenPaymentMethodCreatePreferredSchemeCarteBancaire   TokenPaymentMethodCreatePreferredScheme = "carte-bancaire"
+	TokenPaymentMethodCreatePreferredSchemeDankort         TokenPaymentMethodCreatePreferredScheme = "dankort"
+	TokenPaymentMethodCreatePreferredSchemeMastercard      TokenPaymentMethodCreatePreferredScheme = "mastercard"
+	TokenPaymentMethodCreatePreferredSchemeVisa            TokenPaymentMethodCreatePreferredScheme = "visa"
+	TokenPaymentMethodCreatePreferredSchemeEftposAustralia TokenPaymentMethodCreatePreferredScheme = "eftpos-australia"
+)
+
+func (e TokenPaymentMethodCreatePreferredScheme) ToPointer() *TokenPaymentMethodCreatePreferredScheme {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *TokenPaymentMethodCreatePreferredScheme) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "bancontact", "carte-bancaire", "dankort", "mastercard", "visa", "eftpos-australia":
+			return true
+		}
+	}
+	return false
+}
+
 // TokenPaymentMethodCreate - Create a transaction with the ID (token) of a stored payment method (and an optional URL for approval)
 type TokenPaymentMethodCreate struct {
 	// The ID for the payment method.
@@ -16,6 +42,8 @@ type TokenPaymentMethodCreate struct {
 	method *string `const:"id" json:"method"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
 	SecurityCode *string `json:"security_code,omitempty"`
+	// The preferred card scheme to use when processing a co-badged card.
+	PreferredScheme *TokenPaymentMethodCreatePreferredScheme `json:"preferred_scheme,omitempty"`
 	// The URL to redirect a user back to after they approve the transaction in the browser.
 	RedirectURL *string `json:"redirect_url,omitempty"`
 }
@@ -47,6 +75,13 @@ func (t *TokenPaymentMethodCreate) GetSecurityCode() *string {
 		return nil
 	}
 	return t.SecurityCode
+}
+
+func (t *TokenPaymentMethodCreate) GetPreferredScheme() *TokenPaymentMethodCreatePreferredScheme {
+	if t == nil {
+		return nil
+	}
+	return t.PreferredScheme
 }
 
 func (t *TokenPaymentMethodCreate) GetRedirectURL() *string {
