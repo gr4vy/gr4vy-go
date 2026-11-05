@@ -7,6 +7,32 @@ import (
 	"github.com/gr4vy/gr4vy-go/types"
 )
 
+type CardPaymentMethodCreatePreferredScheme string
+
+const (
+	CardPaymentMethodCreatePreferredSchemeBancontact      CardPaymentMethodCreatePreferredScheme = "bancontact"
+	CardPaymentMethodCreatePreferredSchemeCarteBancaire   CardPaymentMethodCreatePreferredScheme = "carte-bancaire"
+	CardPaymentMethodCreatePreferredSchemeDankort         CardPaymentMethodCreatePreferredScheme = "dankort"
+	CardPaymentMethodCreatePreferredSchemeMastercard      CardPaymentMethodCreatePreferredScheme = "mastercard"
+	CardPaymentMethodCreatePreferredSchemeVisa            CardPaymentMethodCreatePreferredScheme = "visa"
+	CardPaymentMethodCreatePreferredSchemeEftposAustralia CardPaymentMethodCreatePreferredScheme = "eftpos-australia"
+)
+
+func (e CardPaymentMethodCreatePreferredScheme) ToPointer() *CardPaymentMethodCreatePreferredScheme {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *CardPaymentMethodCreatePreferredScheme) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "bancontact", "carte-bancaire", "dankort", "mastercard", "visa", "eftpos-australia":
+			return true
+		}
+	}
+	return false
+}
+
 type CardPaymentMethodCreate struct {
 	// The expiration date of the card, formatted `MM/YY`.
 	ExpirationDate string `json:"expiration_date"`
@@ -25,6 +51,8 @@ type CardPaymentMethodCreate struct {
 	method *string `const:"card" json:"method"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
 	SecurityCode *string `json:"security_code,omitempty"`
+	// The preferred card scheme to use when processing a co-badged card.
+	PreferredScheme *CardPaymentMethodCreatePreferredScheme `json:"preferred_scheme,omitempty"`
 }
 
 func (c CardPaymentMethodCreate) MarshalJSON() ([]byte, error) {
@@ -89,4 +117,11 @@ func (c *CardPaymentMethodCreate) GetSecurityCode() *string {
 		return nil
 	}
 	return c.SecurityCode
+}
+
+func (c *CardPaymentMethodCreate) GetPreferredScheme() *CardPaymentMethodCreatePreferredScheme {
+	if c == nil {
+		return nil
+	}
+	return c.PreferredScheme
 }

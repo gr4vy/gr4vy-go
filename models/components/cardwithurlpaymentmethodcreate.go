@@ -7,6 +7,32 @@ import (
 	"github.com/gr4vy/gr4vy-go/types"
 )
 
+type CardWithURLPaymentMethodCreatePreferredScheme string
+
+const (
+	CardWithURLPaymentMethodCreatePreferredSchemeBancontact      CardWithURLPaymentMethodCreatePreferredScheme = "bancontact"
+	CardWithURLPaymentMethodCreatePreferredSchemeCarteBancaire   CardWithURLPaymentMethodCreatePreferredScheme = "carte-bancaire"
+	CardWithURLPaymentMethodCreatePreferredSchemeDankort         CardWithURLPaymentMethodCreatePreferredScheme = "dankort"
+	CardWithURLPaymentMethodCreatePreferredSchemeMastercard      CardWithURLPaymentMethodCreatePreferredScheme = "mastercard"
+	CardWithURLPaymentMethodCreatePreferredSchemeVisa            CardWithURLPaymentMethodCreatePreferredScheme = "visa"
+	CardWithURLPaymentMethodCreatePreferredSchemeEftposAustralia CardWithURLPaymentMethodCreatePreferredScheme = "eftpos-australia"
+)
+
+func (e CardWithURLPaymentMethodCreatePreferredScheme) ToPointer() *CardWithURLPaymentMethodCreatePreferredScheme {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *CardWithURLPaymentMethodCreatePreferredScheme) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "bancontact", "carte-bancaire", "dankort", "mastercard", "visa", "eftpos-australia":
+			return true
+		}
+	}
+	return false
+}
+
 // CardWithURLPaymentMethodCreate - Create a transaction with raw card details
 type CardWithURLPaymentMethodCreate struct {
 	// The expiration date of the card, formatted `MM/YY`.
@@ -26,6 +52,8 @@ type CardWithURLPaymentMethodCreate struct {
 	method *string `const:"card" json:"method"`
 	// The 3 or 4 digit security code often found on the card. This often referred to as the CVV or CVD.
 	SecurityCode *string `json:"security_code,omitempty"`
+	// The preferred card scheme to use when processing a co-badged card.
+	PreferredScheme *CardWithURLPaymentMethodCreatePreferredScheme `json:"preferred_scheme,omitempty"`
 	// The URL to redirect a user back to after the complete 3DS in browser.
 	RedirectURL *string `json:"redirect_url,omitempty"`
 }
@@ -92,6 +120,13 @@ func (c *CardWithURLPaymentMethodCreate) GetSecurityCode() *string {
 		return nil
 	}
 	return c.SecurityCode
+}
+
+func (c *CardWithURLPaymentMethodCreate) GetPreferredScheme() *CardWithURLPaymentMethodCreatePreferredScheme {
+	if c == nil {
+		return nil
+	}
+	return c.PreferredScheme
 }
 
 func (c *CardWithURLPaymentMethodCreate) GetRedirectURL() *string {

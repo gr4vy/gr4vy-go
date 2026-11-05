@@ -7,6 +7,32 @@ import (
 	"github.com/gr4vy/gr4vy-go/types"
 )
 
+type CheckoutSessionWithURLPaymentMethodCreatePreferredScheme string
+
+const (
+	CheckoutSessionWithURLPaymentMethodCreatePreferredSchemeBancontact      CheckoutSessionWithURLPaymentMethodCreatePreferredScheme = "bancontact"
+	CheckoutSessionWithURLPaymentMethodCreatePreferredSchemeCarteBancaire   CheckoutSessionWithURLPaymentMethodCreatePreferredScheme = "carte-bancaire"
+	CheckoutSessionWithURLPaymentMethodCreatePreferredSchemeDankort         CheckoutSessionWithURLPaymentMethodCreatePreferredScheme = "dankort"
+	CheckoutSessionWithURLPaymentMethodCreatePreferredSchemeMastercard      CheckoutSessionWithURLPaymentMethodCreatePreferredScheme = "mastercard"
+	CheckoutSessionWithURLPaymentMethodCreatePreferredSchemeVisa            CheckoutSessionWithURLPaymentMethodCreatePreferredScheme = "visa"
+	CheckoutSessionWithURLPaymentMethodCreatePreferredSchemeEftposAustralia CheckoutSessionWithURLPaymentMethodCreatePreferredScheme = "eftpos-australia"
+)
+
+func (e CheckoutSessionWithURLPaymentMethodCreatePreferredScheme) ToPointer() *CheckoutSessionWithURLPaymentMethodCreatePreferredScheme {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *CheckoutSessionWithURLPaymentMethodCreatePreferredScheme) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "bancontact", "carte-bancaire", "dankort", "mastercard", "visa", "eftpos-australia":
+			return true
+		}
+	}
+	return false
+}
+
 // CheckoutSessionWithURLPaymentMethodCreate - Create a payment with a checkout session ID (and an optional URL for 3DS).
 type CheckoutSessionWithURLPaymentMethodCreate struct {
 	// Always `checkout-session`
@@ -22,6 +48,8 @@ type CheckoutSessionWithURLPaymentMethodCreate struct {
 	BuyerExternalIdentifier *string `json:"buyer_external_identifier,omitempty"`
 	// The URL to redirect a user back to after the complete 3DS in browser.
 	RedirectURL *string `json:"redirect_url,omitempty"`
+	// The preferred card scheme to use when processing a co-badged card.
+	PreferredScheme *CheckoutSessionWithURLPaymentMethodCreatePreferredScheme `json:"preferred_scheme,omitempty"`
 }
 
 func (c CheckoutSessionWithURLPaymentMethodCreate) MarshalJSON() ([]byte, error) {
@@ -72,4 +100,11 @@ func (c *CheckoutSessionWithURLPaymentMethodCreate) GetRedirectURL() *string {
 		return nil
 	}
 	return c.RedirectURL
+}
+
+func (c *CheckoutSessionWithURLPaymentMethodCreate) GetPreferredScheme() *CheckoutSessionWithURLPaymentMethodCreatePreferredScheme {
+	if c == nil {
+		return nil
+	}
+	return c.PreferredScheme
 }
