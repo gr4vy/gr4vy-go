@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: caf4b6c8ac7e6177a1fae381d47fd44c
+  docChecksum: 093977022ff2aac41048f60fd3d731b3
   docVersion: 1.0.0
   speakeasyVersion: 1.806.0
   generationVersion: 2.956.1
-  releaseVersion: 1.14.16
-  configChecksum: d433b6d9d2fa687e131b270d493a0082
+  releaseVersion: 1.14.17
+  configChecksum: 78112acce353fefa85d36ad134550a25
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: d26d759d-82c9-4b33-9f9e-fa76b0556dfe
-  pristine_commit_hash: 62db0f7d380d54fcb4a26373f7fd3961252c7817
-  pristine_tree_hash: 279984a497a1e5b768fc08f7fc4200d870774290
+  generation_id: f5fb8944-ab9c-4578-9cac-822fdc4a64e9
+  pristine_commit_hash: 50ff2b9057c29dd04e8cbc008d7044314763f4e5
+  pristine_tree_hash: f54e73c25f4003038927ecad727c8d5751ee8ce8
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1043,8 +1043,8 @@ trackedFiles:
     pristine_git_object: b82cd6a82de06717b645f618e1df443e959152c0
   docs/models/components/paymentoption.md:
     id: 7940dca2b1a8
-    last_write_checksum: sha1:a0e3e89ea6c2df3b59c2495fabc3be11f1ea73cc
-    pristine_git_object: 1a1fdc1f8ed3ae756b12b1dee532592b32ffec65
+    last_write_checksum: sha1:fc5c8ef57b7536a1006c271cbcdca1c70b1df74d
+    pristine_git_object: ee21eced62659854bcfd485f3c96e1b7baadaa84
   docs/models/components/paymentoptioncontext.md:
     id: 594130145ce3
     last_write_checksum: sha1:d6e504e8e50b0ceed810e19bebc33d9ba2458a61
@@ -2999,8 +2999,8 @@ trackedFiles:
     pristine_git_object: 2a1d27df6c505895fea99dcdf32bff555c3e60bf
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:e41cddf3c9d833abedc10b97e23dbebe405b5b35
-    pristine_git_object: 97f4768d50232160b87e981c2e66321369a22495
+    last_write_checksum: sha1:afc03f23a13bb18d06ee2f0976d98775bff8dbe0
+    pristine_git_object: 80a3344b675669f25d8873c3fb97abfa23172550
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -3907,8 +3907,8 @@ trackedFiles:
     pristine_git_object: 5a3f027c7b5008c2d071722bdee6add72a3ef5a3
   models/components/paymentoption.go:
     id: 363a7c830af4
-    last_write_checksum: sha1:df18460029ca167a2c9f258607c0e962a146bebc
-    pristine_git_object: fbe3e31bdd4ed03ed667638291e5731c3812c3a7
+    last_write_checksum: sha1:e17e7a996c251fa0f96f62c889669df2c2c2cfd0
+    pristine_git_object: 75a2dad276ce0cf98f32793daab4928c65760362
   models/components/paymentoptioncontext.go:
     id: 0aad1b42451c
     last_write_checksum: sha1:5b7068dec2dbbc4f6c160a0890dcc3c6507d16f9
@@ -7141,7 +7141,7 @@ examples:
         application/json: {"locale": "en"}
       responses:
         "200":
-          application/json: {"items": [{"type": "payment-option", "method": "<value>", "mode": "card", "can_store_payment_method": true, "can_delay_capture": false}]}
+          application/json: {"items": [{"type": "payment-option", "method": "<value>", "icon_url": "https://legal-fibre.com/", "mode": "card", "label": "<value>", "can_store_payment_method": true, "can_delay_capture": false}]}
         "400":
           application/json: {"type": "error", "code": "bad_request", "status": 400, "message": "Request failed validation"}
         "401":
@@ -9367,7 +9367,9 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.PaymentMethods.Create()`: \n  *  `request.RequestBody.union(CardPaymentMethodCreate).PreferredScheme` **Added**\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.PaymentMethod` **Changed**\n"
+releaseNotes: |
+  ## Go SDK Changes:
+  * `Gr4vy.PaymentOptions.List()`:  `response.Items[]` **Changed** (Breaking ⚠️)
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
