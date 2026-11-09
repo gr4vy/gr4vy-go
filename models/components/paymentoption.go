@@ -105,9 +105,9 @@ type PaymentOption struct {
 	//lint:ignore U1000 accessed via reflection for JSON marshaling
 	type_                 *string  `const:"payment-option" json:"type"`
 	Method                string   `json:"method"`
-	IconURL               *string  `json:"icon_url,omitempty"`
+	IconURL               string   `json:"icon_url"`
 	Mode                  Mode     `json:"mode"`
-	Label                 *string  `json:"label,omitempty"`
+	Label                 string   `json:"label"`
 	CanStorePaymentMethod bool     `json:"can_store_payment_method"`
 	CanDelayCapture       bool     `json:"can_delay_capture"`
 	Context               *Context `json:"context,omitempty"`
@@ -135,9 +135,9 @@ func (p *PaymentOption) GetMethod() string {
 	return p.Method
 }
 
-func (p *PaymentOption) GetIconURL() *string {
+func (p *PaymentOption) GetIconURL() string {
 	if p == nil {
-		return nil
+		return ""
 	}
 	return p.IconURL
 }
@@ -149,9 +149,9 @@ func (p *PaymentOption) GetMode() Mode {
 	return p.Mode
 }
 
-func (p *PaymentOption) GetLabel() *string {
+func (p *PaymentOption) GetLabel() string {
 	if p == nil {
-		return nil
+		return ""
 	}
 	return p.Label
 }
