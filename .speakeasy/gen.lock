@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: bd723d1d5b04f0c18531981d9009b260
+  docChecksum: c341cf69ad8720b3d1b9df4df740eae4
   docVersion: 1.0.0
   speakeasyVersion: 1.808.1
   generationVersion: 2.960.8
-  releaseVersion: 1.14.18
-  configChecksum: 33382407fb58cb980943ca4bddc50aa3
+  releaseVersion: 1.14.19
+  configChecksum: 445060d4a96e6ab06277b6cd08ea7a21
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: e9463598-0d04-48ac-8119-63349cd0a372
-  pristine_commit_hash: ea942d381cdc77852b2a42442f1c3fa86a72a9c3
-  pristine_tree_hash: 7efb37783ee74dc609a0511b680d8fdac3555f07
+  generation_id: d0c2cb6d-acab-4d0e-9318-1dc2abd56cff
+  pristine_commit_hash: 01684ec4c5766fddb4878d5d455bb028fc153226
+  pristine_tree_hash: 19df12d8debffd82c4fb3bc32beafb0df3a8289a
 features:
   go:
     additionalDependencies: 0.1.0
@@ -991,12 +991,16 @@ trackedFiles:
     pristine_git_object: 1df93be674e5210b14395aa7c690b09eeb9e49ef
   docs/models/components/paymentlink.md:
     id: 3701ae6243d3
-    last_write_checksum: sha1:e700b5f2be569335372c49da1872e7c683944e01
-    pristine_git_object: b87bea0fdd80ac75d0d1972477bb9a2eba255d2a
+    last_write_checksum: sha1:7cc047b68ad319f655e428377d315ddddd723bed
+    pristine_git_object: 0acba04fd59093fb337f1386980f429b9ce19230
   docs/models/components/paymentlinkcreate.md:
     id: 4f1e0f614f61
-    last_write_checksum: sha1:3edac2eebea00743a0a7d292c4be5a2e370d4604
-    pristine_git_object: d67b57e9bd8c3abc06de4f17a5c9c8d3d85bb2ca
+    last_write_checksum: sha1:8528602a72cf301197fdfd28167a6420ce017790
+    pristine_git_object: f448439606ccb075f577db94ac3a05ed07c10a18
+  docs/models/components/paymentlinkintent.md:
+    id: c3b5fe793a7c
+    last_write_checksum: sha1:8354037342cad1b423508ce152584c7a34a42155
+    pristine_git_object: 70cccc8780a6cf0b397656fea7a405546261bb76
   docs/models/components/paymentlinks.md:
     id: 32d54aa0d505
     last_write_checksum: sha1:e4115803fb1656782683cc2d4b3e79d0b3ff7a9b
@@ -2999,8 +3003,8 @@ trackedFiles:
     pristine_git_object: 2a1d27df6c505895fea99dcdf32bff555c3e60bf
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:5addabcd8c75d1698aebe596ba344fbd9a4b72ec
-    pristine_git_object: dc8fda1ced3556b564a18e9856d789f85b8a5557
+    last_write_checksum: sha1:ab28492c9a90f03f7aaa32d72219b711e6239080
+    pristine_git_object: 7e44f16867a3ae5ca764932bc8b91d3ce0e64fe3
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -3855,12 +3859,16 @@ trackedFiles:
     pristine_git_object: 5dd398855d60168ef55d07d0bd04c4474e52d8f4
   models/components/paymentlink.go:
     id: eaf4efc0c700
-    last_write_checksum: sha1:80358043198a8fb1fcbaa746df9e7c65c01b234c
-    pristine_git_object: 4ca0bc9ca3c8bb7310a75d1f37bf98eabad4b9a0
+    last_write_checksum: sha1:06eb765c13bcc06cad267a098349f12eb9da281c
+    pristine_git_object: df9978bffcc4a8c907ee588c35c6eccd16d7c281
   models/components/paymentlinkcreate.go:
     id: d75b2463cc91
-    last_write_checksum: sha1:eda42aafa417f739d06661a24294392357c904d4
-    pristine_git_object: d09e524217ba0836ecd404686b704922392dbb81
+    last_write_checksum: sha1:550805a4c69081813ad3323654713cd48297b264
+    pristine_git_object: 2fb9edfe14c99568e730e4e48e94a2a2f1c15070
+  models/components/paymentlinkintent.go:
+    id: bac42648fc00
+    last_write_checksum: sha1:f0c9ca304d8265a9b73544fb79b37956a8372359
+    pristine_git_object: 2bd195c3c3bf97bf2bfa54a19bbc4a5009995193
   models/components/paymentlinks.go:
     id: 9d3a24043e2c
     last_write_checksum: sha1:92de74bf1603e03ab3408bd778c0f97270323a94
@@ -9367,6 +9375,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.Intent.Enum(preferAuthorize)` **Added**\n  *  `response.Intent.Enum(preferAuthorize)` **Added**\n* `Gr4vy.PaymentLinks.List()`:  `response.Items[].Intent.Enum(preferAuthorize)` **Added**\n* `Gr4vy.PaymentLinks.Get()`:  `response.Intent.Enum(preferAuthorize)` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

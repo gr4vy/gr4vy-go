@@ -44,7 +44,7 @@ type PaymentLink struct {
 	Country string `json:"country"`
 	// The currency code for the payment link.
 	Currency string            `json:"currency"`
-	Intent   TransactionIntent `json:"intent"`
+	Intent   PaymentLinkIntent `json:"intent"`
 	// The return URL after payment completion.
 	ReturnURL *string `json:"return_url,omitempty"`
 	// The cart items for the payment link.
@@ -201,9 +201,9 @@ func (p *PaymentLink) GetCurrency() string {
 	return p.Currency
 }
 
-func (p *PaymentLink) GetIntent() TransactionIntent {
+func (p *PaymentLink) GetIntent() PaymentLinkIntent {
 	if p == nil {
-		return TransactionIntent("")
+		return PaymentLinkIntent("")
 	}
 	return p.Intent
 }
