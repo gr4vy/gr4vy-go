@@ -23,6 +23,12 @@ type Error401 struct {
 var _ error = &Error401{}
 
 func (e *Error401) Error() string {
+	if e != nil {
+		if e.Message != nil {
+			return *e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
