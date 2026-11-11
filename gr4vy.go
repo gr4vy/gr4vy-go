@@ -2,7 +2,7 @@
 
 package gr4vygo
 
-// Generated from OpenAPI doc version 1.0.0 and generator version 2.956.1
+// Generated from OpenAPI doc version 1.0.0 and generator version 2.960.8
 
 import (
 	"context"
@@ -175,11 +175,11 @@ func WithTimeout(timeout time.Duration) SDKOption {
 // New creates a new instance of the SDK with the provided options
 func New(opts ...SDKOption) *Gr4vy {
 	sdk := &Gr4vy{
-		SDKVersion: "1.14.17",
+		SDKVersion: "1.14.18",
 		sdkConfiguration: config.SDKConfiguration{
-			UserAgent:         "speakeasy-sdk/go 1.14.17 2.956.1 1.0.0 github.com/gr4vy/gr4vy-go",
-			SDKVersion:        "1.14.17",
-			GenVersion:        "2.956.1",
+			UserAgent:         "speakeasy-sdk/go 1.14.18 2.960.8 1.0.0 github.com/gr4vy/gr4vy-go",
+			SDKVersion:        "1.14.18",
+			GenVersion:        "2.960.8",
 			OpenAPIDocVersion: "1.0.0",
 			Globals:           globals.Globals{},
 			ServerList:        ServerList,

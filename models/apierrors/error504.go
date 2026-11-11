@@ -22,6 +22,12 @@ type Error504 struct {
 var _ error = &Error504{}
 
 func (e *Error504) Error() string {
+	if e != nil {
+		if e.Message != nil {
+			return *e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }

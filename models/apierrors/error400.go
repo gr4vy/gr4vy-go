@@ -23,6 +23,12 @@ type Error400 struct {
 var _ error = &Error400{}
 
 func (e *Error400) Error() string {
+	if e != nil {
+		if e.Message != nil {
+			return *e.Message
+		}
+	}
+
 	data, _ := json.Marshal(e)
 	return string(data)
 }
