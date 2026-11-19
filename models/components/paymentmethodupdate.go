@@ -2,6 +2,32 @@
 
 package components
 
+type PaymentMethodUpdatePreferredScheme string
+
+const (
+	PaymentMethodUpdatePreferredSchemeBancontact      PaymentMethodUpdatePreferredScheme = "bancontact"
+	PaymentMethodUpdatePreferredSchemeCarteBancaire   PaymentMethodUpdatePreferredScheme = "carte-bancaire"
+	PaymentMethodUpdatePreferredSchemeDankort         PaymentMethodUpdatePreferredScheme = "dankort"
+	PaymentMethodUpdatePreferredSchemeMastercard      PaymentMethodUpdatePreferredScheme = "mastercard"
+	PaymentMethodUpdatePreferredSchemeVisa            PaymentMethodUpdatePreferredScheme = "visa"
+	PaymentMethodUpdatePreferredSchemeEftposAustralia PaymentMethodUpdatePreferredScheme = "eftpos-australia"
+)
+
+func (e PaymentMethodUpdatePreferredScheme) ToPointer() *PaymentMethodUpdatePreferredScheme {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *PaymentMethodUpdatePreferredScheme) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "bancontact", "carte-bancaire", "dankort", "mastercard", "visa", "eftpos-australia":
+			return true
+		}
+	}
+	return false
+}
+
 // PaymentMethodUpdate - Request body for updating a stored payment method.
 type PaymentMethodUpdate struct {
 	// The new expiration date for the payment method.
@@ -12,6 +38,8 @@ type PaymentMethodUpdate struct {
 	SchemeTransactionIDScheme *CardScheme `json:"scheme_transaction_id_scheme,omitempty"`
 	// A transaction link identifier to associate with this payment method.
 	TransactionLinkID *string `json:"transaction_link_id,omitempty"`
+	// The preferred card scheme to use when processing a co-badged card.
+	PreferredScheme *PaymentMethodUpdatePreferredScheme `json:"preferred_scheme,omitempty"`
 }
 
 func (p *PaymentMethodUpdate) GetExpirationDate() *string {
@@ -40,4 +68,11 @@ func (p *PaymentMethodUpdate) GetTransactionLinkID() *string {
 		return nil
 	}
 	return p.TransactionLinkID
+}
+
+func (p *PaymentMethodUpdate) GetPreferredScheme() *PaymentMethodUpdatePreferredScheme {
+	if p == nil {
+		return nil
+	}
+	return p.PreferredScheme
 }

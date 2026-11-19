@@ -8,6 +8,32 @@ import (
 	"time"
 )
 
+type PaymentMethodPreferredScheme string
+
+const (
+	PaymentMethodPreferredSchemeBancontact      PaymentMethodPreferredScheme = "bancontact"
+	PaymentMethodPreferredSchemeCarteBancaire   PaymentMethodPreferredScheme = "carte-bancaire"
+	PaymentMethodPreferredSchemeDankort         PaymentMethodPreferredScheme = "dankort"
+	PaymentMethodPreferredSchemeMastercard      PaymentMethodPreferredScheme = "mastercard"
+	PaymentMethodPreferredSchemeVisa            PaymentMethodPreferredScheme = "visa"
+	PaymentMethodPreferredSchemeEftposAustralia PaymentMethodPreferredScheme = "eftpos-australia"
+)
+
+func (e PaymentMethodPreferredScheme) ToPointer() *PaymentMethodPreferredScheme {
+	return &e
+}
+
+// IsExact returns true if the value matches a known enum value, false otherwise.
+func (e *PaymentMethodPreferredScheme) IsExact() bool {
+	if e != nil {
+		switch *e {
+		case "bancontact", "carte-bancaire", "dankort", "mastercard", "visa", "eftpos-australia":
+			return true
+		}
+	}
+	return false
+}
+
 // PaymentMethod - Payment Method
 //
 // A stored payment method.
@@ -42,6 +68,8 @@ type PaymentMethod struct {
 	MerchantAccountID string `json:"merchant_account_id"`
 	// Additional schemes of the card besides the primary scheme. Only applies to card payment methods.
 	AdditionalSchemes []CardScheme `json:"additional_schemes,omitempty"`
+	// The preferred card scheme to use when processing a co-badged card.
+	PreferredScheme *PaymentMethodPreferredScheme `json:"preferred_scheme,omitempty"`
 	// The timestamp when this payment method was last used in a transaction for client initiated transactions.
 	CitLastUsedAt *time.Time `json:"cit_last_used_at,omitempty"`
 	// The number of times this payment method has been used in transactions for client initiated transactions.
@@ -180,6 +208,13 @@ func (p *PaymentMethod) GetAdditionalSchemes() []CardScheme {
 		return nil
 	}
 	return p.AdditionalSchemes
+}
+
+func (p *PaymentMethod) GetPreferredScheme() *PaymentMethodPreferredScheme {
+	if p == nil {
+		return nil
+	}
+	return p.PreferredScheme
 }
 
 func (p *PaymentMethod) GetCitLastUsedAt() *time.Time {

@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 41e700e27b70d76d9de179aad253897e
+  docChecksum: 59b89d8bab9cbb5667d4f6fb939849ac
   docVersion: 1.0.0
   speakeasyVersion: 1.810.0
   generationVersion: 2.961.1
-  releaseVersion: 1.14.20
-  configChecksum: 8520b8158a06259989547fdbc8d51c91
+  releaseVersion: 1.14.21
+  configChecksum: d2c231a6f0b13b05f3f74e6a3651df9e
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 1710e161-0dc9-4964-9ed3-335f69504b88
-  pristine_commit_hash: b894e72f79c1ffc503bef56faf56dd30862aad2b
-  pristine_tree_hash: ad7497ec80b6630e26b4697cd7dbfbfa28ddc236
+  generation_id: 0cd387de-114e-46f1-8e03-28d4ef35d2e4
+  pristine_commit_hash: 081a9af7772129e23ca6d4a3fd047245fc53b4b0
+  pristine_tree_hash: 595056e7e7737aa1b3b74827d34c7629319fef1d
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1011,8 +1011,8 @@ trackedFiles:
     pristine_git_object: 9785e41ff2a0d41557ade08e3980b6622aa23c1b
   docs/models/components/paymentmethod.md:
     id: 722f86eed889
-    last_write_checksum: sha1:1a7aabcc46461849260684cb011f0af0b80cf82a
-    pristine_git_object: 9a89e4c554995b57f682382538c64336ce9a78f5
+    last_write_checksum: sha1:6d9bfcbe7a0a771d2de5599bd5e915b323729940
+    pristine_git_object: 46426733ddf777d06fefb5858cc8af13beaa6b10
   docs/models/components/paymentmethodcard.md:
     id: 862f7e957546
     last_write_checksum: sha1:51c61c2961913307e9c9e3acd2d0f5263d18e3c4
@@ -1021,6 +1021,10 @@ trackedFiles:
     id: 340fd7c95959
     last_write_checksum: sha1:de49486ab3eda713d7564ffb94dd7b40f57627a7
     pristine_git_object: c263314244df623aa66e927af7569ab243b34629
+  docs/models/components/paymentmethodpreferredscheme.md:
+    id: 7dc2da1d1cd2
+    last_write_checksum: sha1:8f50666d14916ebb959456b3ce087c4c3197b2e6
+    pristine_git_object: d2ae99bc16e72d3005350522f93da73378b0ca06
   docs/models/components/paymentmethods.md:
     id: d66aaed41ca5
     last_write_checksum: sha1:bd751fb9e98964e1cffeccfb11a9d640bb2be721
@@ -1039,12 +1043,20 @@ trackedFiles:
     pristine_git_object: 2933d05986bb0c1a115e54158fa2663c36f95e40
   docs/models/components/paymentmethodsummary.md:
     id: f704c9f1f231
-    last_write_checksum: sha1:d2288abebb1772e64f44b02311db6b252daa870b
-    pristine_git_object: 39ba4f9a24f3eaa9254790cfdc2914e700ef7d73
+    last_write_checksum: sha1:908ac1eb745d201d34c6691e750327a2cde1ebb7
+    pristine_git_object: 9cd0b864ea07c93e021f6c7551c66fb17a5e633f
+  docs/models/components/paymentmethodsummarypreferredscheme.md:
+    id: 4c4ecbde502b
+    last_write_checksum: sha1:0e90bcf5f1b424d05ed7be98d9f99d3fd244689d
+    pristine_git_object: 15592ace0a3f482945610ff5b04b4cbfb21f4b61
   docs/models/components/paymentmethodupdate.md:
     id: d0576f1cf371
-    last_write_checksum: sha1:55d27dacc43643dad3e975831979c030f7a71858
-    pristine_git_object: b82cd6a82de06717b645f618e1df443e959152c0
+    last_write_checksum: sha1:86863c0287105d5229c9ca23ee8624c5d95d9ada
+    pristine_git_object: 15d13c8a89f166d376ee77637425b0b337975d42
+  docs/models/components/paymentmethodupdatepreferredscheme.md:
+    id: 9e394d08aeec
+    last_write_checksum: sha1:572c9f24c32794b7cf96daeac821ddc22be00c47
+    pristine_git_object: b4c8657acc0d7da2b20e3795b5fe1172d97c040a
   docs/models/components/paymentoption.md:
     id: 7940dca2b1a8
     last_write_checksum: sha1:fc5c8ef57b7536a1006c271cbcdca1c70b1df74d
@@ -3003,8 +3015,8 @@ trackedFiles:
     pristine_git_object: 2a1d27df6c505895fea99dcdf32bff555c3e60bf
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:a77e54230d793c51171866451b42482f735e0b0e
-    pristine_git_object: 3a347cd7bf036557105a36d07bed5f45adfb4f29
+    last_write_checksum: sha1:bb42a6df3dcf3a2fc4536d83012aab19c537fc0c
+    pristine_git_object: f96ad18e1b43612b8cff0dd3591f34f255bc5162
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -3879,8 +3891,8 @@ trackedFiles:
     pristine_git_object: b2c0c4b01501b5b64d9464dd82b473ed0e9bf757
   models/components/paymentmethod.go:
     id: ab87d70fce96
-    last_write_checksum: sha1:f2436f16f30eba027659ae9f42cd8ced33381ac8
-    pristine_git_object: adf91506a7ed805e04ed89463102e5b88f26d48c
+    last_write_checksum: sha1:2449fbbabacb28f4b0ed17aff23f2352423cbce5
+    pristine_git_object: 98df416241805392f8a20cd587a0d0fa0bb3e294
   models/components/paymentmethodcard.go:
     id: d5cfb6e85cba
     last_write_checksum: sha1:bb2f37541dcd01373a272380109195247d1bbb34
@@ -3907,12 +3919,12 @@ trackedFiles:
     pristine_git_object: 369a5420957d1106c33fe0c995a056164180adfe
   models/components/paymentmethodsummary.go:
     id: e10b51eb0fce
-    last_write_checksum: sha1:5d1fddcbc8d1541faf0dc556ee5a621446341844
-    pristine_git_object: e4d3719e59027a31cf03cbcd9ff80a2c308fdec5
+    last_write_checksum: sha1:69c7ebaf753f8bc85925c9c0c8a98c5d4e8d1bea
+    pristine_git_object: e0f81aae0cdcad82a4200ffc24e02495fcf97e6d
   models/components/paymentmethodupdate.go:
     id: 3648930e5f38
-    last_write_checksum: sha1:d12a0545b91571407fc8f89d09cd520c9a1777f2
-    pristine_git_object: 5a3f027c7b5008c2d071722bdee6add72a3ef5a3
+    last_write_checksum: sha1:2943f45f92048003ff778fd6301f0b30bf4f84bf
+    pristine_git_object: 705c806113d2fe347efdbf72df27cd1ffebfc16c
   models/components/paymentoption.go:
     id: 363a7c830af4
     last_write_checksum: sha1:e17e7a996c251fa0f96f62c889669df2c2c2cfd0
@@ -9375,6 +9387,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].PreferredScheme` **Added**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].PreferredScheme` **Added**\n* `Gr4vy.PaymentMethods.Create()`:  `response.PreferredScheme` **Added**\n* `Gr4vy.PaymentMethods.Get()`:  `response.PreferredScheme` **Added**\n* `Gr4vy.PaymentMethods.Update()`: \n  *  `request.PaymentMethodUpdate.PreferredScheme` **Added**\n  *  `response.PreferredScheme` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
