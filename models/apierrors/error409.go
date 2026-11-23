@@ -4,6 +4,7 @@ package apierrors
 
 import (
 	"encoding/json"
+	"fmt"
 	"github.com/gr4vy/gr4vy-go/models/components"
 )
 
@@ -26,7 +27,10 @@ var _ error = &Error409{}
 
 func (e *Error409) Error() string {
 	if e != nil {
-		if e.Message != nil {
+		if e.Message != nil && *e.Message != "" {
+			if e.Code != nil && *e.Code != "" {
+				return fmt.Sprintf("%v: %s", *e.Code, *e.Message)
+			}
 			return *e.Message
 		}
 	}
