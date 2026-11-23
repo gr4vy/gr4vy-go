@@ -1,22 +1,22 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 59b89d8bab9cbb5667d4f6fb939849ac
+  docChecksum: 0b94b72b4ea0b2d466c5c6de9c77831f
   docVersion: 1.0.0
-  speakeasyVersion: 1.810.0
-  generationVersion: 2.961.1
-  releaseVersion: 1.14.21
-  configChecksum: d2c231a6f0b13b05f3f74e6a3651df9e
+  speakeasyVersion: 1.811.0
+  generationVersion: 2.968.1
+  releaseVersion: 1.14.22
+  configChecksum: 5a842504526dc7b63ff9daea56a68c93
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 0cd387de-114e-46f1-8e03-28d4ef35d2e4
-  pristine_commit_hash: 081a9af7772129e23ca6d4a3fd047245fc53b4b0
-  pristine_tree_hash: 595056e7e7737aa1b3b74827d34c7629319fef1d
+  generation_id: 43f8dcd4-0bec-4afc-81a1-27d37bb2ef5d
+  pristine_commit_hash: 0b257bd2d3835a788023d1ded426f2a6772322d6
+  pristine_tree_hash: c32bacfb951d128c87655b13e3e898c2a1d6da8e
 features:
   go:
     additionalDependencies: 0.1.0
-    constsAndDefaults: 0.1.15
+    constsAndDefaults: 0.1.16
     core: 3.16.7
     defaultEnabledRetries: 0.2.0
     deprecations: 2.81.3
@@ -3015,8 +3015,8 @@ trackedFiles:
     pristine_git_object: 2a1d27df6c505895fea99dcdf32bff555c3e60bf
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:bb42a6df3dcf3a2fc4536d83012aab19c537fc0c
-    pristine_git_object: f96ad18e1b43612b8cff0dd3591f34f255bc5162
+    last_write_checksum: sha1:9d4d19f8642f6ccfb4a535b0de2e80a2e971b6ea
+    pristine_git_object: 30f12a2735dbf693187a97a1d9e0e9410e458f99
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -3047,8 +3047,8 @@ trackedFiles:
     pristine_git_object: 725633aeaa3e825eaf44b40eed452b945cba9159
   internal/utils/json.go:
     id: ad03e3c502d8
-    last_write_checksum: sha1:521f69654669130dfddd4bc9b7317d0b1526ec7c
-    pristine_git_object: 724647d82da426cf2efaf10c917cb3ed8903f5b8
+    last_write_checksum: sha1:1579cfe45a89838e1723c830999aa09a86331679
+    pristine_git_object: c41b91d3428dae2431eb9fe635cc72441e98733f
   internal/utils/pathparams.go:
     id: 1f3e0c30fd90
     last_write_checksum: sha1:dbdcde5d660580b4f2ce30d9bc72a259432d9a6e
@@ -3099,48 +3099,48 @@ trackedFiles:
     pristine_git_object: 61a9628a6533548245be5af929f1d4f96dd780b5
   models/apierrors/error400.go:
     id: 53384f92cb2f
-    last_write_checksum: sha1:9edd728d37d0c3d64cb9c62cfa17e7980314cb01
-    pristine_git_object: 79a971d845b310e2a639f4ac6c0b33100fc2f53f
+    last_write_checksum: sha1:9599c2703798376f918253dc42f8ac1ffae038dd
+    pristine_git_object: b1e9ef24363a264d872e71f1f4bb2931a4c91618
   models/apierrors/error401.go:
     id: 3707ee3e3df3
-    last_write_checksum: sha1:8322de6a7ea557dc77a331a8f9e81d317e9e4fb6
-    pristine_git_object: b15840f5a9d37862e695f59628f7f55471d2adb1
+    last_write_checksum: sha1:cb804b5d0c0c47e69eafc2fa74a81c77c2b5bdef
+    pristine_git_object: 49fd321a649edbe2aa59ac19266d04afd5c5e53e
   models/apierrors/error403.go:
     id: 58e62769f535
-    last_write_checksum: sha1:09579e511afd22dee8d2031a68b889ee30bbbc38
-    pristine_git_object: c2274d220ee773878e906866b6a3aaf44d726d96
+    last_write_checksum: sha1:98d579b7feaf26015eeb0f9115b6c5c1136c7411
+    pristine_git_object: 2184901f1b7c5e3d3bf7d2aa1a4b0749d403e266
   models/apierrors/error404.go:
     id: "531904374540"
-    last_write_checksum: sha1:972a3ec01d2acfa28815043a1dcc3c85cf7209fa
-    pristine_git_object: 54f236c0584de13b841c8c15d3c04e9e72bffaf7
+    last_write_checksum: sha1:c45be8d41cb57fe131eb05843b19afb4176de7f8
+    pristine_git_object: 4d0191d5d7da065e933f4f29c0c75c989b7e4fae
   models/apierrors/error405.go:
     id: 471e38199330
-    last_write_checksum: sha1:006c397c5e8df6db99ae5a604fb7a1fbbefea0ec
-    pristine_git_object: 7a67a046b1a80d7f16958ca5192ccbb60a7d3467
+    last_write_checksum: sha1:d93014fd3aa3cfd667981fdc3443fd28cb2ccf2d
+    pristine_git_object: 775de4aa1f17446e55924f3a3c2bda9077bfb76c
   models/apierrors/error409.go:
     id: f5b1ae76efcc
-    last_write_checksum: sha1:86e75226da6cb0d4f711531e8c0e2efdaf2a6e2a
-    pristine_git_object: e94eb41370cb37d1abf8cdb92b58f3efd75db383
+    last_write_checksum: sha1:8b149eceffac51c8bea92d3848308d42ad20ad51
+    pristine_git_object: 5fe2d0029fd84eca93aac00edbcf835118b3ff60
   models/apierrors/error425.go:
     id: 3cd8e275e527
-    last_write_checksum: sha1:54f699d5bdd11635de6e862ad2b74d38716b5dcf
-    pristine_git_object: e0179873eb9ed82e6c0f480b11e334b66f20ed67
+    last_write_checksum: sha1:f8dfc2c6fc139a4c1fe4cfe5ee83dc53b52d62f8
+    pristine_git_object: 22397532ed9969adcc4d07ac5403752709012374
   models/apierrors/error429.go:
     id: 701e167429f1
-    last_write_checksum: sha1:8475caa6fd7dd60c854b435eaaf7a4681d1e840c
-    pristine_git_object: 003a7e34d0a95882d740b898a42342d9309ed6c9
+    last_write_checksum: sha1:da70b2931b2a86771263dae5c5710cd85d429f1d
+    pristine_git_object: c309045f7020c52feddc0d495cfb07e860cff3b8
   models/apierrors/error500.go:
     id: c49c7fb5b056
-    last_write_checksum: sha1:fb371c2476335097490a4deeb60a605bede8d3ba
-    pristine_git_object: ab818df88073fd77c3632be15c1833a963e4187b
+    last_write_checksum: sha1:216f923e21981c2d9ec05fff3c110b4f60648c5a
+    pristine_git_object: d8cc03226ae8a8f913ffdd67a76c7494f195fb23
   models/apierrors/error502.go:
     id: 576704e09a4d
-    last_write_checksum: sha1:c7afbb0b1fec2755488a2c23a3cfbdd98399c1bc
-    pristine_git_object: 8a21d9694bd3f75df26d30d520f8774bf8f308b0
+    last_write_checksum: sha1:a9ed629d54d37a3b7ae73215fee79c3e622505d3
+    pristine_git_object: 1e89fff22ba9c4933bd0d3269173f1ed4ecd4b3c
   models/apierrors/error504.go:
     id: 024e8f5c5cd2
-    last_write_checksum: sha1:d39585036468a7eb47628935b604a62eccee6e2c
-    pristine_git_object: 6194a4d64f13d1717aede6834e4ab020daa68a1f
+    last_write_checksum: sha1:8b3e1a3154091a9750c3ec76aa6c0a2af4852e63
+    pristine_git_object: 03f23b36bae2459056382607fcbda173257b9f9b
   models/apierrors/httpvalidationerror.go:
     id: c21dcfd5df63
     last_write_checksum: sha1:7cad40ad86f15c716cb3d2d35917efbcbd8dc1c0
@@ -9387,7 +9387,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Buyers.PaymentMethods.List()`:  `response.Items[].PreferredScheme` **Added**\n* `Gr4vy.PaymentMethods.List()`:  `response.Items[].PreferredScheme` **Added**\n* `Gr4vy.PaymentMethods.Create()`:  `response.PreferredScheme` **Added**\n* `Gr4vy.PaymentMethods.Get()`:  `response.PreferredScheme` **Added**\n* `Gr4vy.PaymentMethods.Update()`: \n  *  `request.PaymentMethodUpdate.PreferredScheme` **Added**\n  *  `response.PreferredScheme` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
