@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 0b94b72b4ea0b2d466c5c6de9c77831f
+  docChecksum: e9758ab6532df676858416a3c5436faa
   docVersion: 1.0.0
   speakeasyVersion: 1.811.0
   generationVersion: 2.968.1
-  releaseVersion: 1.14.22
-  configChecksum: 5a842504526dc7b63ff9daea56a68c93
+  releaseVersion: 1.14.23
+  configChecksum: 06cc3e05179aa1e875a26f61b190eea2
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 43f8dcd4-0bec-4afc-81a1-27d37bb2ef5d
-  pristine_commit_hash: 0b257bd2d3835a788023d1ded426f2a6772322d6
-  pristine_tree_hash: c32bacfb951d128c87655b13e3e898c2a1d6da8e
+  generation_id: 69a682a3-8320-4df1-8e19-052e74cc79f3
+  pristine_commit_hash: ab0b786455844091130680a995a8735f5235f5f8
+  pristine_tree_hash: f7367493d78ce549713cfe37483c3d9157421d0f
 features:
   go:
     additionalDependencies: 0.1.0
@@ -1453,10 +1453,14 @@ trackedFiles:
     id: 2ebacc891b7d
     last_write_checksum: sha1:20a10143049bb177e7920b000be4fe72eda75f68
     pristine_git_object: 62903debcbb8636937927f10b8983fc9e3d7db30
+  docs/models/components/riskifiedaccounttype.md:
+    id: 0e0ffd62df5b
+    last_write_checksum: sha1:6125639da549000f5d5251846aa2fe0a1d62fad6
+    pristine_git_object: 7c97a560a509a2c59e82020064fcbf97a32c9e9d
   docs/models/components/riskifiedantifraudoptions.md:
     id: 28556f05794b
-    last_write_checksum: sha1:ff5d02b1065feac26c1c68bf92a7a7609392d11e
-    pristine_git_object: 4d03f59645ed6768dfeb26e13a68d4b1b862f5cd
+    last_write_checksum: sha1:5df5ae44f708e5eb6ceedf57005ab5d7e0ff4896
+    pristine_git_object: 7506a1c760befa5658ac9edb9963cef0bb8d4814
   docs/models/components/riskifiedantifraudoptionslineitem.md:
     id: 58c71eef34c3
     last_write_checksum: sha1:2453503ead69ee49a35b216d04b103eb55df454f
@@ -3015,8 +3019,8 @@ trackedFiles:
     pristine_git_object: 2a1d27df6c505895fea99dcdf32bff555c3e60bf
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:9d4d19f8642f6ccfb4a535b0de2e80a2e971b6ea
-    pristine_git_object: 30f12a2735dbf693187a97a1d9e0e9410e458f99
+    last_write_checksum: sha1:088f451f83a50b6e2c10f928958019afbf9722e7
+    pristine_git_object: c56bf77776602875243570b65be06af510abf641
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -4273,10 +4277,14 @@ trackedFiles:
     id: e50ca44a5a65
     last_write_checksum: sha1:946e927de745eabfb2ca4cb79c4775e29a21d61d
     pristine_git_object: a2cef24e88dcc19e963af7802d2233b5baac91b9
+  models/components/riskifiedaccounttype.go:
+    id: 8d8f283ef877
+    last_write_checksum: sha1:cbe2b9752981106fd9efabc33c97d04df3d207b4
+    pristine_git_object: 09375d8b1b3da18214261528a120e7c2d4997dfd
   models/components/riskifiedantifraudoptions.go:
     id: d64c578f4651
-    last_write_checksum: sha1:c4cc76d475ec458d235bb5efa11b44ad651aa2a0
-    pristine_git_object: bd52e852f74601857a1924cd2e22fdba48701fb5
+    last_write_checksum: sha1:f8b9b7b53fee6f64b911430f509af7e305625426
+    pristine_git_object: 60260858c1965edf7730615b76d4a6b47b6bd132
   models/components/riskifiedantifraudoptionslineitem.go:
     id: 9686b0295620
     last_write_checksum: sha1:2ad52466caf6d265903a523c5e01fda2dbc09c7f
@@ -9387,6 +9395,7 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
+releaseNotes: "## Go SDK Changes:\n* `Gr4vy.Transactions.Create()`: \n  *  `request.TransactionCreate.ConnectionOptions.RiskifiedAntiFraud.AccountType` **Added**\n* `Gr4vy.Transactions.Update()`: \n  *  `request.TransactionUpdate.ConnectionOptions.RiskifiedAntiFraud.AccountType` **Added**\n* `Gr4vy.PaymentLinks.Create()`: \n  *  `request.PaymentLinkCreate.ConnectionOptions.RiskifiedAntiFraud.AccountType` **Added**\n"
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json

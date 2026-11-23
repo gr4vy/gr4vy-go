@@ -9,6 +9,8 @@ type RiskifiedAntiFraudOptions struct {
 	ShippingLines []RiskifiedAntiFraudOptionsShippingLine `json:"shipping_lines,omitempty"`
 	// Additional destinations for orders shipped to more than one address. The address derived from the transaction is always sent first; these are appended after it and may not use the reserved `base-shipping-address` id.
 	AdditionalShippingAddresses []RiskifiedAntiFraudOptionsShippingAddress `json:"additional_shipping_addresses,omitempty"`
+	// Overrides the customer account type sent to Riskified. When not set, the customer is sent as `registered` if the transaction has a buyer, and as `guest` otherwise. When the account type is `guest`, the customer `id` and `created_at` are not sent to Riskified, even if the transaction has a buyer.
+	AccountType *RiskifiedAccountType `json:"account_type,omitempty"`
 }
 
 func (r *RiskifiedAntiFraudOptions) GetLineItems() []RiskifiedAntiFraudOptionsLineItem {
@@ -30,4 +32,11 @@ func (r *RiskifiedAntiFraudOptions) GetAdditionalShippingAddresses() []Riskified
 		return nil
 	}
 	return r.AdditionalShippingAddresses
+}
+
+func (r *RiskifiedAntiFraudOptions) GetAccountType() *RiskifiedAccountType {
+	if r == nil {
+		return nil
+	}
+	return r.AccountType
 }
