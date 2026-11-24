@@ -9,6 +9,7 @@
 * [Get](#get) - Get payment method
 * [Update](#update) - Update payment method
 * [Delete](#delete) - Delete payment method
+* [Detokenize](#detokenize) - Detokenize a payment method
 
 ## List
 
@@ -343,6 +344,72 @@ func main() {
 ### Response
 
 **error**
+
+### Errors
+
+| Error Type                    | Status Code                   | Content Type                  |
+| ----------------------------- | ----------------------------- | ----------------------------- |
+| apierrors.Error400            | 400                           | application/json              |
+| apierrors.Error401            | 401                           | application/json              |
+| apierrors.Error403            | 403                           | application/json              |
+| apierrors.Error404            | 404                           | application/json              |
+| apierrors.Error405            | 405                           | application/json              |
+| apierrors.Error409            | 409                           | application/json              |
+| apierrors.HTTPValidationError | 422                           | application/json              |
+| apierrors.Error425            | 425                           | application/json              |
+| apierrors.Error429            | 429                           | application/json              |
+| apierrors.Error500            | 500                           | application/json              |
+| apierrors.Error502            | 502                           | application/json              |
+| apierrors.Error504            | 504                           | application/json              |
+| apierrors.APIError            | 4XX, 5XX                      | \*/\*                         |
+
+## Detokenize
+
+Retrieve the card number and expiration date of a stored card, encrypted to the merchant account's public key. Requests are rate limited.
+
+### Example Usage
+
+<!-- UsageSnippet language="go" operationID="detokenize_payment_method" method="post" path="/payment-methods/{payment_method_id}/detokenization" -->
+```go
+package main
+
+import(
+	"context"
+	"os"
+	gr4vygo "github.com/gr4vy/gr4vy-go"
+	"log"
+)
+
+func main() {
+    ctx := context.Background()
+
+    s := gr4vygo.New(
+        gr4vygo.WithMerchantAccountID("<id>"),
+        gr4vygo.WithSecurity(os.Getenv("GR4VY_BEARER_AUTH")),
+    )
+
+    res, err := s.PaymentMethods.Detokenize(ctx, "ef9496d8-53a5-4aad-8ca2-00eb68334389", nil)
+    if err != nil {
+        log.Fatal(err)
+    }
+    if res != nil {
+        // handle response
+    }
+}
+```
+
+### Parameters
+
+| Parameter                                                | Type                                                     | Required                                                 | Description                                              | Example                                                  |
+| -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- | -------------------------------------------------------- |
+| `ctx`                                                    | [context.Context](https://pkg.go.dev/context#Context)    | :heavy_check_mark:                                       | The context to use for the request.                      |                                                          |
+| `paymentMethodID`                                        | `string`                                                 | :heavy_check_mark:                                       | The ID of the payment method                             | ef9496d8-53a5-4aad-8ca2-00eb68334389                     |
+| `merchantAccountID`                                      | `*string`                                                | :heavy_minus_sign:                                       | The ID of the merchant account to use for this request.  |                                                          |
+| `opts`                                                   | [][operations.Option](../../models/operations/option.md) | :heavy_minus_sign:                                       | The options for this request.                            |                                                          |
+
+### Response
+
+**[*components.Detokenization](../../models/components/detokenization.md), error**
 
 ### Errors
 
