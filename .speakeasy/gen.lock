@@ -1,18 +1,18 @@
 lockVersion: 2.0.0
 id: 287b5a97-80f3-4c24-a960-9e86d8d5e3db
 management:
-  docChecksum: 5b29ee6356992c0a565b6d6602f0e6f6
+  docChecksum: 560b032b36d8dc74b53d67cc92e5a2a0
   docVersion: 1.0.0
-  speakeasyVersion: 1.811.0
+  speakeasyVersion: 1.812.0
   generationVersion: 2.968.1
-  releaseVersion: 1.14.24
-  configChecksum: 5056cf90b90e896e93783b6f4b165aa9
+  releaseVersion: 1.14.25
+  configChecksum: e7a1277bae0078c56418489e6b6281be
   repoURL: https://github.com/gr4vy/gr4vy-go.git
   installationURL: https://github.com/gr4vy/gr4vy-go
 persistentEdits:
-  generation_id: 21f14bb6-5b7a-4f41-88fa-29822d2fb6ec
-  pristine_commit_hash: 4349b0021f5f2450bb7198732273104f5d3b9eae
-  pristine_tree_hash: fd152aed1fd57c30a6ddd805a8fb635c72c3bd96
+  generation_id: 15043de8-cba0-4581-a5e2-913b66baf3f0
+  pristine_commit_hash: e78cc834c92927be6efc0776cd2f021d164681c0
+  pristine_tree_hash: a3c66c6c96c97789a1065d7ad85716d1de75016e
 features:
   go:
     additionalDependencies: 0.1.0
@@ -3031,8 +3031,8 @@ trackedFiles:
     pristine_git_object: 2a1d27df6c505895fea99dcdf32bff555c3e60bf
   gr4vy.go:
     id: 8c61535dff53
-    last_write_checksum: sha1:53a11bbd3582283fec5f031f0e9fe06e899dca1e
-    pristine_git_object: 3f45966443b1eaa5594eda14c738c6d21c65a052
+    last_write_checksum: sha1:6617a93c71612714350884df2b4de38df1646229
+    pristine_git_object: d335b83d4094f917d676e72ad3d56e63ceff8ad9
   internal/config/sdkconfiguration.go:
     id: 33b8bfac5265
     last_write_checksum: sha1:49a61622a2ffe8cb3c0d6caa45441a496d9eb3fc
@@ -9447,9 +9447,6 @@ examples:
           application/json: {"type": "error", "code": "gateway_timeout", "status": 504, "message": "Request could not be processed"}
 examplesVersion: 1.0.2
 generatedTests: {}
-releaseNotes: |
-  ## Go SDK Changes:
-  * `Gr4vy.PaymentMethods.Detokenize()`: **Added**
 generatedFiles:
   - .devcontainer/README.md
   - .devcontainer/devcontainer.json
