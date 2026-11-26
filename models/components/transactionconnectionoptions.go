@@ -45,6 +45,8 @@ type TransactionConnectionOptions struct {
 	AffirmAffirm *AffirmOptions `json:"affirm-affirm,omitempty"`
 	// Custom options to be passed to the `braintree-card` connector.
 	BraintreeCard *BraintreeOptions `json:"braintree-card,omitempty"`
+	// Custom options to be passed to the `chaseorbital-bank` connector.
+	ChaseorbitalBank *ChaseBankOptions `json:"chaseorbital-bank,omitempty"`
 	// Custom options to be passed to the `chaseorbital-card` connector.
 	ChaseorbitalCard *ChaseOptions `json:"chaseorbital-card,omitempty"`
 	// Custom options to be passed to the `cybersource-anti-fraud` connector.
@@ -286,6 +288,13 @@ func (t *TransactionConnectionOptions) GetBraintreeCard() *BraintreeOptions {
 		return nil
 	}
 	return t.BraintreeCard
+}
+
+func (t *TransactionConnectionOptions) GetChaseorbitalBank() *ChaseBankOptions {
+	if t == nil {
+		return nil
+	}
+	return t.ChaseorbitalBank
 }
 
 func (t *TransactionConnectionOptions) GetChaseorbitalCard() *ChaseOptions {
