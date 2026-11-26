@@ -52,7 +52,7 @@ type TransactionConnectionOptions struct {
 	// Custom options to be passed to the `cybersource-anti-fraud` connector.
 	CybersourceAntiFraud *CybersourceAntiFraudOptions `json:"cybersource-anti-fraud,omitempty"`
 	// Custom options to be passed to the `cybersource-card` connector.
-	CybersourceCard *CybersourceOptions `json:"cybersource-card,omitempty"`
+	CybersourceCard *CybersourceCardOptions `json:"cybersource-card,omitempty"`
 	// Custom options to be passed to the `cybersource-ideal` connector.
 	CybersourceIdeal *CybersourceOptions `json:"cybersource-ideal,omitempty"`
 	// Custom options to be passed to the `cybersource-kcp` connector.
@@ -87,6 +87,8 @@ type TransactionConnectionOptions struct {
 	LatitudeLatitude *LatitudeOptions `json:"latitude-latitude,omitempty"`
 	// Custom options to be passed to the `latitude-latitudeds` connector.
 	LatitudeLatitudeds *LatitudeOptions `json:"latitude-latitudeds,omitempty"`
+	// Custom options to be passed to the `mastercard-card` connector.
+	MastercardCard *MastercardCardOptions `json:"mastercard-card,omitempty"`
 	// Custom options to be passed to the `mattilda-tapi` connector.
 	MattildaTapi *MattildaTapiOptions `json:"mattilda-tapi,omitempty"`
 	// Custom options to be passed to the `mattilda-tapifintechs` connector.
@@ -311,7 +313,7 @@ func (t *TransactionConnectionOptions) GetCybersourceAntiFraud() *CybersourceAnt
 	return t.CybersourceAntiFraud
 }
 
-func (t *TransactionConnectionOptions) GetCybersourceCard() *CybersourceOptions {
+func (t *TransactionConnectionOptions) GetCybersourceCard() *CybersourceCardOptions {
 	if t == nil {
 		return nil
 	}
@@ -435,6 +437,13 @@ func (t *TransactionConnectionOptions) GetLatitudeLatitudeds() *LatitudeOptions 
 		return nil
 	}
 	return t.LatitudeLatitudeds
+}
+
+func (t *TransactionConnectionOptions) GetMastercardCard() *MastercardCardOptions {
+	if t == nil {
+		return nil
+	}
+	return t.MastercardCard
 }
 
 func (t *TransactionConnectionOptions) GetMattildaTapi() *MattildaTapiOptions {
