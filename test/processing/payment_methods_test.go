@@ -145,3 +145,16 @@ func TestNetworkTokensListIsReached(t *testing.T) {
 		return err
 	})
 }
+
+func TestPaymentMethodDetokenizeIsReached(t *testing.T) {
+	m := harness.Merchant(t)
+	ctx := context.Background()
+	id := storeCard(t, m)
+
+	// Detokenization encrypts the card to the merchant account's public key,
+	// which the per-run merchant may lack, and is rate limited, so a 4xx counts.
+	harness.Reaches(t, "payment-methods.detokenize", func() error {
+		_, err := m.Client.PaymentMethods.Detokenize(ctx, id, nil)
+		return err
+	})
+}
