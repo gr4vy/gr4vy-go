@@ -153,7 +153,7 @@ func TestPaymentMethodDetokenizeIsReached(t *testing.T) {
 
 	// Detokenization encrypts the card to the merchant account's public key,
 	// which the per-run merchant may lack, and is rate limited, so a 4xx counts.
-	harness.Reaches(t, "payment-methods.detokenize", func() error {
+	harness.Reaches(t, "payment_methods.detokenize", func() error {
 		_, err := m.Client.PaymentMethods.Detokenize(ctx, id, nil)
 		return err
 	})
